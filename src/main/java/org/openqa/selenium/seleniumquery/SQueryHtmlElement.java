@@ -1,18 +1,11 @@
 package org.openqa.selenium.seleniumquery;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.google.common.base.Function;
 
 public class SQueryHtmlElement {
 	
@@ -33,6 +26,10 @@ public class SQueryHtmlElement {
 	WebElement getElement() {
 		return this.element;
 	}
+	
+	void setElement(WebElement webElement) {
+		this.element = webElement;
+	}
 
 	String getSelector() {
 		return this.selector;
@@ -50,15 +47,7 @@ public class SQueryHtmlElement {
 			this.by = By.cssSelector(selector);
 		}
 		
-		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
-			@Override
-			public WebElement apply(By selector) {
-				if (selector.toString().contains("labDescricaoAnexo")) {
-					System.out.println("CLLAED: "+by);
-				}
-				return ExpectedConditions.presenceOfElementLocated(by).apply(SQueryHtmlElement.this.driver);
-			}
-		});
+		this.waitUntil().isPresent();
 	}
 	
 	public SQueryHtmlElement val(String value) {
@@ -88,82 +77,49 @@ public class SQueryHtmlElement {
 	}
 	
 	public SQueryHtmlElement click() {
-		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
-			@Override
-			public WebElement apply(By selector) {
-				WebElement element = ExpectedConditions.visibilityOfElementLocated(by).apply(driver);
-				if (element != null && element.isEnabled()) {
-					return element;
-				}
-				return null;
-			}
-		});
+		this.waitUntil().isVisibleAndEnabled();
 		this.element.click();
 		return this;
 	}
 
-	public SQueryHtmlElement waitForSeconds(final int timeToWait) {
-		final Long finalTime = System.currentTimeMillis() + timeToWait * 1000;
-		new FluentWait<By>(by).withTimeout(timeToWait+2, TimeUnit.SECONDS)
-							  .pollingEvery(timeToWait*200, TimeUnit.MILLISECONDS)
-							  .until(new Function<By, Boolean>() {
-			@Override public Boolean apply(By selector) { return System.currentTimeMillis() > finalTime; }
-		});
-		return this;
-	}
-	
+	/**
+	 * Use <code>sQ('selector').waitUntil().isVisible()</code>
+	 */
+	@Deprecated
 	public SQueryHtmlElement waitUntilVisible() {
-		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
-			@Override
-			public WebElement apply(By selector) {
-				return ExpectedConditions.visibilityOfElementLocated(by).apply(driver); // can be null (will wait again), or the element
-			}
-		});
-		return this;
+		return this.waitUntil().isVisible();
 	}
 	
+	/**
+	 * Use <code>sQ('selector').waitUntil().isNotVisible()</code>
+	 */
+	@Deprecated
 	public SQueryHtmlElement waitUntilNotVisible() {
-		new WebDriverWait(driver, SQueryProperties.getTimeoutInSeconds()).until(ExpectedConditions.invisibilityOfElementLocated(by));
-		return this;
+		return this.waitUntil().isNotVisible();
 	}
 	
+	/**
+	 * Use <code>sQ('selector').waitUntil().containsText(text)</code>
+	 */
+	@Deprecated
 	public SQueryHtmlElement waitUntilContainsText(final String text) {
-		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
-			@Override
-			public WebElement apply(By selector) {
-				WebElement element = ExpectedConditions.presenceOfElementLocated(by).apply(driver);
-				if (element != null && element.getText().contains(text)) {
-					return element;
-				}
-				return null;
-			}
-		});
-		return this;
+		return this.waitUntil().containsText(text);
 	}
 	
+	/**
+	 * Use <code>sQ('selector').waitUntil().valueIsNot(value);</code>
+	 */
+	@Deprecated
 	public SQueryHtmlElement waitUntilValueIsNot(final String value) {
-		return waitUntilValueIsOrIsNot(value, false);
+		return this.waitUntil().valueIsNot(value);
 	}
 	
+	/**
+	 * Use <code>sQ('selector').waitUntil().valueIs(value);</code>
+	 */
+	@Deprecated
 	public SQueryHtmlElement waitUntilValueIs(final String value) {
-		return waitUntilValueIsOrIsNot(value, true);
-	}
-
-	private SQueryHtmlElement waitUntilValueIsOrIsNot(final String value, final boolean trueSeIgualFalseSeDiferente) {
-		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
-			@Override
-			public WebElement apply(By selector) {
-				SQueryHtmlElement.this.element = ExpectedConditions.presenceOfElementLocated(by).apply(driver);
-				if (SQueryHtmlElement.this.element != null) {
-					boolean textoEhIgual = SQueryHtmlElement.this.val().equals(value);
-					if ((trueSeIgualFalseSeDiferente && textoEhIgual) || (!trueSeIgualFalseSeDiferente && !textoEhIgual)) {
-						return element;
-					}
-				}
-				return null;
-			}
-		});
-		return this;
+		return this.waitUntil().valueIs(value);
 	}
 	
 	public String prop(String attributeName) {
@@ -196,8 +152,8 @@ public class SQueryHtmlElement {
 		return this.element.getText();
 	}
 	
-	private SQueryWait waitUntil() {
-		return new SQueryWait(driver, by, selector);
+	public SQueryWait waitUntil() {
+		return new SQueryWait(this);
 	}
 	
 }

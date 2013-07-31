@@ -13,7 +13,7 @@ public class SQueryProperties {
 	private static void loadProperties() {
 		try {
 			SQueryProperties.properties = new Properties();
-			InputStream in = SQueryProperties.class.getClassLoader().getResourceAsStream("tests.properties");
+			InputStream in = SQueryProperties.class.getClassLoader().getResourceAsStream("seleniumquery.properties");
 			SQueryProperties.properties.load(in);
 			in.close();
 			{
