@@ -4,6 +4,10 @@
 	<groupId>com.github.acdcjunior.seleniumquery</groupId>
 	<artifactId>SeleniumQuery</artifactId>
 	<version>0.0.1</version>
+	
+	<properties>
+		<createChecksum>true</createChecksum>
+	</properties>
 
 	<dependencies>
 		<dependency>

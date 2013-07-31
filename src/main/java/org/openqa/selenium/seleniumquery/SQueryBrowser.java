@@ -15,7 +15,7 @@ public class SQueryBrowser {
 	public WebDriver getDriver() {
 		return driver;
 	}
-	
+
 	public SQueryBrowser(WebDriver driver) {
 		this.driver = driver;
 		setDriverTimeout();

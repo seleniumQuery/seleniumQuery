@@ -1,16 +1,10 @@
 package org.openqa.selenium.seleniumquery;
 
-import java.io.File;
-import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,14 +14,30 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Function;
 
-
 public class SQueryHtmlElement {
 	
 	private By by;
+	
 	private WebDriver driver;
 	private WebElement element;
 	private String selector;
 	
+	By getBy() {
+		return this.by;
+	}
+	
+	WebDriver getDriver() {
+		return this.driver;
+	}
+
+	WebElement getElement() {
+		return this.element;
+	}
+
+	String getSelector() {
+		return this.selector;
+	}
+
 	public SQueryHtmlElement(WebDriver driver, String selector) {
 		this.driver = driver;
 		
@@ -40,7 +50,7 @@ public class SQueryHtmlElement {
 			this.by = By.cssSelector(selector);
 		}
 		
-		this.element = this.fluentWait(new Function<By, WebElement>() {
+		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
 			@Override
 			public WebElement apply(By selector) {
 				if (selector.toString().contains("labDescricaoAnexo")) {
@@ -78,7 +88,7 @@ public class SQueryHtmlElement {
 	}
 	
 	public SQueryHtmlElement click() {
-		this.element = fluentWait(new Function<By, WebElement>() {
+		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
 			@Override
 			public WebElement apply(By selector) {
 				WebElement element = ExpectedConditions.visibilityOfElementLocated(by).apply(driver);
@@ -92,30 +102,6 @@ public class SQueryHtmlElement {
 		return this;
 	}
 
-	private WebElement fluentWait(Function<By, WebElement> function) {
-		try {
-			return new FluentWait<By>(by)
-					.withTimeout(SQueryProperties.getTimeoutInSeconds(), TimeUnit.SECONDS)
-					.pollingEvery(SQueryProperties.getPollingInMillisseconds(), TimeUnit.MILLISECONDS)
-					.ignoring(org.openqa.selenium.StaleElementReferenceException.class)
-					.ignoring(org.openqa.selenium.NoSuchElementException.class)
-					.until(function);
-		} catch (TimeoutException te) {
-			try {
-				PrintWriter out = new PrintWriter(SQueryProperties.get("ERROR_PAGE_HTML_LOCATION"));
-				out.println(driver.getPageSource());
-				out.close();
-				if (this.driver instanceof TakesScreenshot) {
-					File srcFile = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.FILE);
-					FileUtils.copyFile(srcFile, new File(SQueryProperties.get("ERROR_PAGE_SCREENSHOT_LOCATION")));
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-			throw new RuntimeException("TimeoutException while waiting for selector: "+selector, te);
-		}
-	}
-	
 	public SQueryHtmlElement waitForSeconds(final int timeToWait) {
 		final Long finalTime = System.currentTimeMillis() + timeToWait * 1000;
 		new FluentWait<By>(by).withTimeout(timeToWait+2, TimeUnit.SECONDS)
@@ -127,7 +113,7 @@ public class SQueryHtmlElement {
 	}
 	
 	public SQueryHtmlElement waitUntilVisible() {
-		this.element = fluentWait(new Function<By, WebElement>() {
+		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
 			@Override
 			public WebElement apply(By selector) {
 				return ExpectedConditions.visibilityOfElementLocated(by).apply(driver); // can be null (will wait again), or the element
@@ -142,7 +128,7 @@ public class SQueryHtmlElement {
 	}
 	
 	public SQueryHtmlElement waitUntilContainsText(final String text) {
-		this.element = this.fluentWait(new Function<By, WebElement>() {
+		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
 			@Override
 			public WebElement apply(By selector) {
 				WebElement element = ExpectedConditions.presenceOfElementLocated(by).apply(driver);
@@ -164,7 +150,7 @@ public class SQueryHtmlElement {
 	}
 
 	private SQueryHtmlElement waitUntilValueIsOrIsNot(final String value, final boolean trueSeIgualFalseSeDiferente) {
-		this.element = this.fluentWait(new Function<By, WebElement>() {
+		this.element = this.waitUntil().fluentWait(new Function<By, WebElement>() {
 			@Override
 			public WebElement apply(By selector) {
 				SQueryHtmlElement.this.element = ExpectedConditions.presenceOfElementLocated(by).apply(driver);
@@ -208,6 +194,10 @@ public class SQueryHtmlElement {
 	
 	public String text() {
 		return this.element.getText();
+	}
+	
+	private SQueryWait waitUntil() {
+		return new SQueryWait(driver, by, selector);
 	}
 	
 }
