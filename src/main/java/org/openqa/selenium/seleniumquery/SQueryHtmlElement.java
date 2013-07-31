@@ -15,15 +15,15 @@ public class SQueryHtmlElement {
 	private WebElement element;
 	private String selector;
 	
-	By getBy() {
+	public By getBy() {
 		return this.by;
 	}
 	
-	WebDriver getDriver() {
+	public WebDriver getDriver() {
 		return this.driver;
 	}
 
-	WebElement getElement() {
+	public WebElement getElement() {
 		return this.element;
 	}
 	
@@ -31,7 +31,7 @@ public class SQueryHtmlElement {
 		this.element = webElement;
 	}
 
-	String getSelector() {
+	public String getSelector() {
 		return this.selector;
 	}
 
@@ -82,46 +82,6 @@ public class SQueryHtmlElement {
 		return this;
 	}
 
-	/**
-	 * Use <code>sQ('selector').waitUntil().isVisible()</code>
-	 */
-	@Deprecated
-	public SQueryHtmlElement waitUntilVisible() {
-		return this.waitUntil().isVisible();
-	}
-	
-	/**
-	 * Use <code>sQ('selector').waitUntil().isNotVisible()</code>
-	 */
-	@Deprecated
-	public SQueryHtmlElement waitUntilNotVisible() {
-		return this.waitUntil().isNotVisible();
-	}
-	
-	/**
-	 * Use <code>sQ('selector').waitUntil().containsText(text)</code>
-	 */
-	@Deprecated
-	public SQueryHtmlElement waitUntilContainsText(final String text) {
-		return this.waitUntil().containsText(text);
-	}
-	
-	/**
-	 * Use <code>sQ('selector').waitUntil().valueIsNot(value);</code>
-	 */
-	@Deprecated
-	public SQueryHtmlElement waitUntilValueIsNot(final String value) {
-		return this.waitUntil().valueIsNot(value);
-	}
-	
-	/**
-	 * Use <code>sQ('selector').waitUntil().valueIs(value);</code>
-	 */
-	@Deprecated
-	public SQueryHtmlElement waitUntilValueIs(final String value) {
-		return this.waitUntil().valueIs(value);
-	}
-	
 	public String prop(String attributeName) {
 		return element.getAttribute(attributeName);
 	}

@@ -1,17 +1,13 @@
 package org.openqa.selenium.seleniumquery;
 
-import java.io.File;
-import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.seleniumquery.exception.WaitUntilException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,7 +22,7 @@ public class SQueryWait {
 		this.htmlElement = htmlElement;
 	}
 
-	public <T> T fluentWait(Function<By, T> function) {
+	private <T> T fluentWait(Function<By, T> function, String reason) {
 		try {
 			return new FluentWait<By>(this.htmlElement.getBy())
 					.withTimeout(SQueryProperties.getTimeoutInSeconds(), TimeUnit.SECONDS)
@@ -34,19 +30,8 @@ public class SQueryWait {
 					.ignoring(StaleElementReferenceException.class)
 					.ignoring(NoSuchElementException.class)
 					.until(function);
-		} catch (TimeoutException te) {
-			try {
-				PrintWriter out = new PrintWriter(SQueryProperties.get("ERROR_PAGE_HTML_LOCATION"));
-				out.println(this.htmlElement.getDriver().getPageSource());
-				out.close();
-				if (this.htmlElement.getDriver() instanceof TakesScreenshot) {
-					File srcFile = ((TakesScreenshot) this.htmlElement.getDriver()).getScreenshotAs(OutputType.FILE);
-					FileUtils.copyFile(srcFile, new File(SQueryProperties.get("ERROR_PAGE_SCREENSHOT_LOCATION")));
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-			throw new RuntimeException("TimeoutException while waiting for selector: "+this.htmlElement.getSelector(), te);
+		} catch (TimeoutException sourceException) {
+			throw new WaitUntilException(sourceException, this.htmlElement, reason);
 		}
 	}
 	
@@ -56,7 +41,7 @@ public class SQueryWait {
 			public WebElement apply(By selector) {
 				return ExpectedConditions.presenceOfElementLocated(htmlElement.getBy()).apply(htmlElement.getDriver());
 			}
-		});
+		}, "to be present.");
 		htmlElement.setElement(element);
 		return htmlElement;
 	}
@@ -65,9 +50,9 @@ public class SQueryWait {
 		this.fluentWait(new Function<By, Boolean>() {
 			@Override
 			public Boolean apply(By selector) {
-				return ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(htmlElement.getBy())).apply(htmlElement.getDriver());
+				return htmlElement.getDriver().findElements(htmlElement.getBy()).size() == 0;
 			}
-		});
+		}, "to be not present.");
 		return htmlElement;
 	}
 	
@@ -81,7 +66,7 @@ public class SQueryWait {
 				}
 				return null;
 			}
-		});
+		}, "to be visible and enabled.");
 		htmlElement.setElement(element);
 		return htmlElement;
 	}
@@ -92,13 +77,24 @@ public class SQueryWait {
 			public WebElement apply(By selector) {
 				return ExpectedConditions.visibilityOfElementLocated(htmlElement.getBy()).apply(htmlElement.getDriver()); // can be null (will wait again), or the element
 			}
-		});
+		}, "to be visible.");
 		htmlElement.setElement(element);
 		return htmlElement;
 	}
 	
-	public SQueryHtmlElement isNotVisible() {
+	@Deprecated
+	public SQueryHtmlElement isInvisible() {
 		new WebDriverWait(htmlElement.getDriver(), SQueryProperties.getTimeoutInSeconds()).until(ExpectedConditions.invisibilityOfElementLocated(htmlElement.getBy()));
+		return htmlElement;
+	}
+	
+	public SQueryHtmlElement isNotVisible() {
+		this.fluentWait(new Function<By, Boolean>() {
+			@Override
+			public Boolean apply(By selector) {
+				return ExpectedConditions.invisibilityOfElementLocated(htmlElement.getBy()).apply(htmlElement.getDriver());
+			}
+		}, "to be not visible.");
 		return htmlElement;
 	}
 	
@@ -112,7 +108,7 @@ public class SQueryWait {
 				}
 				return null;
 			}
-		});
+		}, "to contain text \""+text+"\".");
 		htmlElement.setElement(element);
 		return htmlElement;
 	}
@@ -135,21 +131,21 @@ public class SQueryWait {
 		return this.valueIsOrIsNot(value, false);
 	}
 	
-	private SQueryHtmlElement valueIsOrIsNot(final String value, final boolean trueSeIgualFalseSeDiferente) {
+	private SQueryHtmlElement valueIsOrIsNot(final String value, final boolean shouldValueBeEqual) {
 		this.fluentWait(new Function<By, WebElement>() {
 			@Override
 			public WebElement apply(By selector) {
 				WebElement e = ExpectedConditions.presenceOfElementLocated(htmlElement.getBy()).apply(htmlElement.getDriver());
 				if (e != null) {
 					htmlElement.setElement(e); // notice the element is set here, thus not necessary at the end of fluentWait
-					boolean textoEhIgual = htmlElement.val().equals(value);
-					if ((trueSeIgualFalseSeDiferente && textoEhIgual) || (!trueSeIgualFalseSeDiferente && !textoEhIgual)) {
+					boolean valueEquals = htmlElement.val().equals(value);
+					if ((shouldValueBeEqual && valueEquals) || (!shouldValueBeEqual && !valueEquals)) {
 						return e;
 					}
 				}
 				return null;
 			}
-		});
+		}, "to"+ (shouldValueBeEqual ? "" : " not") + " have value \""+value+"\".");
 		return htmlElement;
 	}
 

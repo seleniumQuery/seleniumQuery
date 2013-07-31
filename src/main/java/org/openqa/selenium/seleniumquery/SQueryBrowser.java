@@ -48,10 +48,13 @@ public class SQueryBrowser {
 	}
 	
 	public void openUrl(String url) {
-		if (!"/".equals(url.substring(0, 1))) {
-			url = "/" + url;
+		String urlToOpen = url;
+		if (SQuery.getDefaultContext() != null && !SQuery.getDefaultContext().isEmpty()) {
+			if (!"/".equals(urlToOpen.substring(0, 1))) {
+				urlToOpen = "/" + urlToOpen;
+			}
+			urlToOpen = SQuery.getDefaultContext() + urlToOpen;
 		}
-		String urlToOpen = SQuery.getDefaultContext() + url;
 		System.out.println("Opening URL: "+urlToOpen);
 		this.driver.get(urlToOpen);
 	}

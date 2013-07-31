@@ -10,16 +10,27 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.seleniumquery.SQuery;
 
 public abstract class SeleniumQueryExample {
-  
-	public static void main(String[] args) {
-		SQuery.setDefaultDriver(new FirefoxDriver()); // the browser/driver used by sQ() calls
-		sQ().openUrl("http://www.google.com");
-		sQ("input[name='q']").val("selenium");
-		sQ("input[name='btnK']").click();
-		// optional (useful for Ajax clicks): sQ("input[name='q']").waitUntil().isNotPresent();
-		System.out.println(sQ("#resultStats").text());
-	}
-  
+
+    public static void main(String[] args) {
+        FirefoxDriver driver = new FirefoxDriver();
+        
+		SQuery.setDefaultDriver(driver); // the browser/driver used by sQ() calls
+        sQ().openUrl("http://www.google.com");
+        sQ("input[name='q']").val("selenium");
+        sQ("button[name='btnG']").click();
+        
+        String resultStats = sQ("#resultStats").text();
+		System.out.println(resultStats);
+        
+		/* Besides the short syntax and the useful assumptions, the best capabilities of
+		 * SeleniumQuery are the waitUntil() functions, especially useful for Ajax tests: */
+		// sQ("input[name='q']").waitUntil().isNotPresent();
+        /* The line above will throw an exception now because that input never goes away
+         * in google.com. */
+        
+		driver.quit();
+    }
+
 }
 `````
 
