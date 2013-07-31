@@ -6,16 +6,17 @@ Allows the use of a jQuery-like interface for Selenium WebDriver, built using Se
 `````java
 import static org.openqa.selenium.seleniumquery.SQuery.sQ; // this will allow the short syntax
 
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.seleniumquery.SQuery;
-import org.openqa.selenium.seleniumquery.SQueryDriverFactory;
 
 public abstract class SeleniumQueryExample {
   
 	public static void main(String[] args) {
-		SQuery.setDefaultDriver(SQueryDriverFactory.createFirefoxDriver()); // the browser used by any sQ() call
+		SQuery.setDefaultDriver(new FirefoxDriver()); // the browser/driver used by sQ() calls
 		sQ().openUrl("http://www.google.com");
 		sQ("input[name='q']").val("selenium");
-		sQ("input[name='btnK']").click().waitUntil().isNotPresent();
+		sQ("input[name='btnK']").click();
+		// optional (useful for Ajax clicks): sQ("input[name='q']").waitUntil().isNotPresent();
 		System.out.println(sQ("#resultStats").text());
 	}
   
