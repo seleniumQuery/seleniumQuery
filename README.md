@@ -99,3 +99,5 @@ To use **SeleniumQuery** right away, add this to your **`pom.xml`**:
 
 As testing usually involves interactions from the end-user point of view, the development currently focuses on
 interface operation commands (such as `.val()`, `.text()` and `.click()`) and waiting commands (such as ***wait until element with ID "#x" is not visible***: `sQ("#x").waitUntil().isNotVisible()`) rather than DOM manipulation (such as `.append()`) - for these, the usual `WebElement` functions are still available and easily accessible at any moment: `sQ("#x").getElement()`.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/acdcjunior/SeleniumQuery/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
