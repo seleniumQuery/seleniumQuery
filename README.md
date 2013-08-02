@@ -53,7 +53,7 @@ public abstract class SeleniumQueryExample {
     public static void main(String[] args) {
         FirefoxDriver driver = new FirefoxDriver();
 
-        SQuery.setDefaultDriver(driver); // a Selenium regular browser/driver - to used by sQ() calls
+        SQuery.setDefaultDriver(driver); // a regular Selenium browser/driver - used by sQ() calls
         sQ().openUrl("http://www.google.com");
         sQ("input[name='q']").val("selenium");
         sQ("button[name='btnG']").click();
