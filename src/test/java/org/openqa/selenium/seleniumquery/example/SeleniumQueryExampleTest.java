@@ -4,10 +4,15 @@ import static org.openqa.selenium.seleniumquery.SQuery.sQ; // this will allow th
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.seleniumquery.SQuery;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-public abstract class SeleniumQueryExample {
+@RunWith(JUnit4.class)
+public class SeleniumQueryExampleTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void mainTest() {
         FirefoxDriver driver = new FirefoxDriver();
         
 		SQuery.setDefaultDriver(driver); // the browser/driver used by sQ() calls
