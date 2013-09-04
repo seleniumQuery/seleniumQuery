@@ -1,21 +1,26 @@
 package org.openqa.selenium.seleniumquery.example;
 
-import static org.openqa.selenium.seleniumquery.SQuery.sQ; // this will allow the short syntax
+import static org.openqa.selenium.seleniumquery.SQuery.$; // this will allow the short syntax
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.seleniumquery.SQuery;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-public abstract class SeleniumQueryExample {
+@RunWith(JUnit4.class)
+public class SeleniumQueryExampleTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void mainTest() {
         FirefoxDriver driver = new FirefoxDriver();
         
 		SQuery.setDefaultDriver(driver); // the browser/driver used by sQ() calls
-        sQ().openUrl("http://www.google.com");
-        sQ("input[name='q']").val("selenium");
-        sQ("button[name='btnG']").click();
+        $().openUrl("http://www.google.com");
+        $("input[name='q']").val("selenium");
+        $("button[name='btnG']").click();
         
-        String resultStats = sQ("#resultStats").text();
+        String resultStats = $("#resultStats").text();
 		System.out.println(resultStats);
         
 		/* Besides the short syntax and the useful assumptions, the best capabilities of
