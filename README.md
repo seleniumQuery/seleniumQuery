@@ -1,7 +1,7 @@
 SeleniumQuery v0.2.0 - jQuery in Selenium
 ======
 
-Java library that allows the use of a **jQuery-like interface** for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
+Java library that allows the use of a **jQuery-like native interface** for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
 Example snippet:
 
@@ -37,7 +37,7 @@ public class SeleniumQueryExample {
         // Besides the short syntax and the useful assumptions, the most useful capabilities of
         // SeleniumQuery are the .waitUntil. functions, especially handy for Ajax handling:
         $("input[name='q']").waitUntil.isNotPresent();
-        // The line above will throw an exception now because that input never goes away in google.com.
+        // The line above throws an exception as that input never goes away in google.com.
 
         $.browser.quit();
     }
