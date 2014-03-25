@@ -5,21 +5,25 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.seleniumquery.by.SeleniumQueryBy;
-import org.openqa.selenium.seleniumquery.wait.SeleniumQueryElementListWait;
+import org.openqa.selenium.seleniumquery.element.single.SeleniumQueryHtmlElement;
+import org.openqa.selenium.seleniumquery.wait.SeleniumQueryElementListWait2;
 
 public class SeleniumQueryHtmlElementList implements Iterable<SeleniumQueryHtmlElement> {
 	
 	private SeleniumQueryBy by;
 	private WebDriver driver;
-	private List<SeleniumQueryHtmlElement> elements;
+	public List<SeleniumQueryHtmlElement> elements;
+	public List<WebElement> elementz;
 	private String selector;
 	
 	public final int length;
 	
-	public final SeleniumQueryElementListWait waitUntil = new SeleniumQueryElementListWait(this);
+	public final SeleniumQueryElementListWait2 waitUntil = new SeleniumQueryElementListWait2(this);
 		
 	public SeleniumQueryHtmlElementList(WebDriver driver, String selector) {
 		this(driver, selector, buildSeleniumQueryHtmlElements(driver, selector));
@@ -46,6 +50,26 @@ public class SeleniumQueryHtmlElementList implements Iterable<SeleniumQueryHtmlE
 		this.by = SeleniumQueryBy.byEnhancedSelector(selector);
 		this.elements = seleniumQueryHtmlElements;
 		this.length = this.elements.size();
+	}
+	
+	public SeleniumQueryHtmlElementList(WebDriver driver, List<SeleniumQueryHtmlElement> seleniumQueryHtmlElements) {
+		this.driver = driver;
+		
+		this.selector = null;
+		this.by = new SeleniumQueryBy(null) {
+			@Override
+			public List<WebElement> findElements(SearchContext context) {
+				throw new RuntimeException("This SeleniumQueryHtmlElement was instantiated without a selector,"
+						+ " thus this function is unavailable.");
+			}
+		};
+		
+		this.elements = seleniumQueryHtmlElements;
+		this.length = this.elements.size();
+	}
+	
+	public SeleniumQueryHtmlElementList(WebDriver driver, WebElement element) {
+		this(driver, new ArrayList<SeleniumQueryHtmlElement>(Arrays.asList(new SeleniumQueryHtmlElement(driver, element))));
 	}
 
 	public int size() {
@@ -91,12 +115,26 @@ public class SeleniumQueryHtmlElementList implements Iterable<SeleniumQueryHtmlE
 		if (this.elements.isEmpty()) {
 			return null;
 		}
-		return this.elements.get(0).val();
+		return SeleniumQueryHtmlElement.val(this.elements.get(0));
 	}
 
 	@Override
 	public Iterator<SeleniumQueryHtmlElement> iterator() {
 		return this.elements.iterator();
+	}
+
+	// for wait
+	public By getBy() {
+		return this.by;
+	}
+
+	// for wait
+	public WebDriver getWebDriver() {
+		return this.driver;
+	}
+
+	public void setElements(List<WebElement> element) {
+		//this.elements = element;
 	}
    
 }
