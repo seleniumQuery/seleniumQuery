@@ -1,4 +1,4 @@
-SeleniumQuery v0.2.0 - jQuery in Selenium
+seleniumQuery v0.2.0 - jQuery in Selenium
 ======
 
 Java library that allows the use of a **jQuery-like native interface** for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
@@ -38,29 +38,33 @@ public class SeleniumQueryExample {
         System.out.println($("#resultStats").text());
 
         // Besides the short syntax and the useful assumptions, the most useful capabilities of
-        // SeleniumQuery are the .waitUntil. functions, especially handy for Ajax handling:
+        // seleniumQuery are the .waitUntil. functions, especially handy for Ajax handling:
+        
+        /*
         $("input[name='q']").waitUntil.isNotPresent();
+        */
+        
         // The line above throws an exception as that input never goes away in google.com.
 
         $.browser.quit();
     }
 }
 `````
-To use **SeleniumQuery** right away, add this to your **`pom.xml`**:
+To get **seleniumQuery**'s latest snapshot, add this to your **`pom.xml`**:
 
 `````xml
 <!-- The project dependency -->
 <dependencies>
     <dependency>
-        <groupId>com.github.acdcjunior.seleniumquery</groupId>
-        <artifactId>SeleniumQuery</artifactId>
-        <version>0.0.1</version>
+        <groupId>com.github.acdcjunior</groupId>
+        <artifactId>seleniumquery</artifactId>
+        <version>0.2.0-SNAPSHOT</version>
     </dependency>
 </dependencies>
 <!-- The repository URL, so maven can download it directly -->
 <repositories>
     <repository>
-        <id>Repo for SeleniumQuery</id>
+        <id>Repo for seleniumQuery</id>
         <url>https://raw.github.com/acdcjunior/mvn-repo/master</url>
     </repository>
 </repositories>
