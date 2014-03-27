@@ -15,15 +15,15 @@ public class NotSelectorTest {
         
         $.location.href(TestInfrastructure.getHtmlTestFileUrl(getClass()));
         
-        assertThat($("div").length, is(3));
-        assertThat($("div.c1").length, is(1));
-        assertThat($("div.c2").length, is(1));
-        assertThat($("div.c3").length, is(1));
-        assertThat($("*:not(*)").length, is(0));
-        assertThat($("div:not(.c1)").length, is(2));
-        assertThat($("div:not(.c2)").length, is(2));
-        assertThat($("div:not(.c3)").length, is(2));
-        assertThat($("div:not(.w00t)").length, is(1));
+        assertThat($("div").size(), is(3));
+        assertThat($("div.c1").size(), is(1));
+        assertThat($("div.c2").size(), is(1));
+        assertThat($("div.c3").size(), is(1));
+        assertThat($("*:not(*)").size(), is(0));
+        assertThat($("div:not(.c1)").size(), is(2));
+        assertThat($("div:not(.c2)").size(), is(2));
+        assertThat($("div:not(.c3)").size(), is(2));
+        assertThat($("div:not(.w00t)").size(), is(1));
     }
 
 }

@@ -16,7 +16,7 @@ public class EqSelectorTest {
         
         $.location.href(TestInfrastructure.getHtmlTestFileUrl(getClass()));
         
-        assertThat($("div").length, is(3));
+        assertThat($("div").size(), is(3));
         assertThat($("div.c1:eq(0)").text(), is("Batman"));
         assertThat($("div.c2:eq(0)").text(), is("Spider Man"));
         assertThat($("div.c3:eq(0)").text(), is("Hulk"));
