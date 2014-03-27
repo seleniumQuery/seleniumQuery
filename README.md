@@ -29,9 +29,13 @@ Try it out now with the running example below:
 `````java
 import static org.openqa.selenium.seleniumquery.SeleniumQuery.$; // this will allow the short syntax
 
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 public class SeleniumQueryExample {
     public static void main(String[] args) {
-        $.location.href("http://www.google.com");
+        $.browser.setDefaultDriver(new FirefoxDriver()); // sets the driver used by $()
+        
+        $.location.href("http://www.google.com"); // opens a page
         
         $("input[name='q']").val("selenium");
         $("button[name='btnG']").click();
@@ -46,7 +50,7 @@ public class SeleniumQueryExample {
         
         // The line above throws an exception as that input never goes away in google.com.
 
-        $.browser.quit();
+        $.browser.quit(); // quits the default driver
     }
 }
 `````
