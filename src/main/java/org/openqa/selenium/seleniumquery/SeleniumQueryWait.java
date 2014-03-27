@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.seleniumquery.functions.ValFunction;
-import org.openqa.selenium.seleniumquery.wait.SeleniumQueryWaitException;
+import org.openqa.selenium.seleniumquery.waituntil.IsPresent;
+import org.openqa.selenium.seleniumquery.waituntil.SeleniumQueryFluentWait;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -26,32 +25,14 @@ public class SeleniumQueryWait {
 		this.seleniumQueryObject = seleniumQueryObject;
 	}
 
-	private <T> T fluentWait(Function<By, T> function, String reason) {
-		try {
-			return new FluentWait<By>(this.seleniumQueryObject.getBy())
-					.withTimeout(SeleniumQueryConfig.getWaitTimeoutInSeconds(), TimeUnit.SECONDS)
-					.pollingEvery(SeleniumQueryConfig.getWaitPollingInMillisseconds(), TimeUnit.MILLISECONDS)
-					.ignoring(StaleElementReferenceException.class)
-					.ignoring(NoSuchElementException.class)
-					.until(function);
-		} catch (TimeoutException sourceException) {
-			throw new SeleniumQueryWaitException(sourceException, this.seleniumQueryObject, reason);
-		}
-	}
-	
 	public SeleniumQueryObject isPresent() {
-		List<WebElement> element = this.fluentWait(new Function<By, List<WebElement>>() {
-			@Override
-			public List<WebElement> apply(By selector) {
-				return ExpectedConditions.presenceOfAllElementsLocatedBy(seleniumQueryObject.getBy()).apply(seleniumQueryObject.getWebDriver());
-			}
-		}, "to be present.");
-		seleniumQueryObject.setElements(element);
+		List<WebElement> presentElements = IsPresent.isPresent(this.seleniumQueryObject);
+		seleniumQueryObject.setElements(presentElements);
 		return seleniumQueryObject;
 	}
-	
+
 	public SeleniumQueryObject isNotPresent() {
-		this.fluentWait(new Function<By, Boolean>() {
+		SeleniumQueryFluentWait.fluentWait(this.seleniumQueryObject, new Function<By, Boolean>() {
 			@Override
 			public Boolean apply(By selector) {
 				return seleniumQueryObject.getWebDriver().findElements(seleniumQueryObject.getBy()).size() == 0;
@@ -61,7 +42,7 @@ public class SeleniumQueryWait {
 	}
 	
 	public SeleniumQueryObject isVisibleAndEnabled() {
-		List<WebElement> elements = this.fluentWait(new Function<By, List<WebElement>>() {
+		List<WebElement> elements = SeleniumQueryFluentWait.fluentWait(this.seleniumQueryObject, new Function<By, List<WebElement>>() {
 			@Override
 			public List<WebElement> apply(By selector) {
 				List<WebElement> elements = visibilityOfAllElementsLocatedBy(seleniumQueryObject.getBy()).apply(seleniumQueryObject.getWebDriver());
@@ -81,7 +62,7 @@ public class SeleniumQueryWait {
 	}
 	
 	public SeleniumQueryObject isVisible() {
-		List<WebElement> element = this.fluentWait(new Function<By, List<WebElement>>() {
+		List<WebElement> element = SeleniumQueryFluentWait.fluentWait(this.seleniumQueryObject, new Function<By, List<WebElement>>() {
 			@Override
 			public List<WebElement> apply(By selector) {
 				 // can be null (will wait again), or the element
@@ -93,7 +74,7 @@ public class SeleniumQueryWait {
 	}
 	
 	public SeleniumQueryObject isNotVisible() {
-		this.fluentWait(new Function<By, Boolean>() {
+		SeleniumQueryFluentWait.fluentWait(this.seleniumQueryObject, new Function<By, Boolean>() {
 			@Override
 			public Boolean apply(By selector) {
 				return ExpectedConditions.invisibilityOfElementLocated(seleniumQueryObject.getBy()).apply(seleniumQueryObject.getWebDriver());
@@ -103,7 +84,7 @@ public class SeleniumQueryWait {
 	}
 	
 	public SeleniumQueryObject containsText(final String text) {
-		List<WebElement> element = this.fluentWait(new Function<By, List<WebElement>>() {
+		List<WebElement> element = SeleniumQueryFluentWait.fluentWait(this.seleniumQueryObject, new Function<By, List<WebElement>>() {
 			@Override
 			public List<WebElement> apply(By selector) {
 				List<WebElement> elements = ExpectedConditions.presenceOfAllElementsLocatedBy(seleniumQueryObject.getBy()).apply(seleniumQueryObject.getWebDriver());
@@ -141,7 +122,7 @@ public class SeleniumQueryWait {
 	}
 	
 	private SeleniumQueryObject valueIsOrIsNot(final String value, final boolean shouldValueBeEqual) {
-		this.fluentWait(new Function<By, List<WebElement>>() {
+		SeleniumQueryFluentWait.fluentWait(this.seleniumQueryObject, new Function<By, List<WebElement>>() {
 			@Override
 			public List<WebElement> apply(By selector) {
 				List<WebElement> es = ExpectedConditions.presenceOfAllElementsLocatedBy(seleniumQueryObject.getBy()).apply(seleniumQueryObject.getWebDriver());

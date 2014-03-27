@@ -1,4 +1,4 @@
-package org.openqa.selenium.seleniumquery.wait;
+package org.openqa.selenium.seleniumquery.waituntil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
