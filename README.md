@@ -155,30 +155,43 @@ As seleniumQuery main goals are emulating user actions and "sensing" the pages, 
 
 Below you will find the list of current jQuery functions, by category, divided among supported and not supported by seleniumQuery.
 
-Looking for a function not listed below? The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil` property and its functions).
+Looking for a function not listed below? The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil` property and its functions).
 
 ##[Attributes](http://api.jquery.com/category/attributes/)
 
-- [`.addClass()`](http://api.jquery.com/addClass/) - Adds the specified class(es) to each of the set of matched elements.
+###Suported
+
+- [`.html()`](http://api.jquery.com/html/) - Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
+- [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
+
+###Soon (next snapshot roadmap)
+
 - [`.attr()`](http://api.jquery.com/attr/) - Get the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 - [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
-- [`.html()`](http://api.jquery.com/html/) - Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
+
+###Not supported
+
+- [`.addClass()`](http://api.jquery.com/addClass/) - Adds the specified class(es) to each of the set of matched elements.
 - [`.prop()`](http://api.jquery.com/prop/) - Get the value of a property for the first element in the set of matched elements or set one or more properties for every matched element.
 - [`.removeAttr()`](http://api.jquery.com/removeAttr/) - Remove an attribute from each element in the set of matched elements.
 - [`.removeClass()`](http://api.jquery.com/removeClass/) - Remove a single class, multiple classes, or all classes from each element in the set of matched elements.
 - [`.removeProp()`](http://api.jquery.com/removeProp/) - Remove a property for the set of matched elements.
 - [`.toggleClass()`](http://api.jquery.com/toggleClass/) - Add or remove one or more classes from each element in the set of matched elements, depending on either the class’s presence or the value of the switch argument.
-- [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
+
 
 ##[CSS](http://api.jquery.com/category/css/)
 
+###Soon
+
+- [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
+
+###Not Supported
+
 - [`.addClass()`](http://api.jquery.com/addClass/) - Adds the specified class(es) to each of the set of matched elements.
 - [`.css()`](http://api.jquery.com/css/) - Get the value of a style property for the first element in the set of matched elements or set one or more CSS properties for every matched element.
-- [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
 - [`.height()`](http://api.jquery.com/height/) - Get the current computed height for the first element in the set of matched elements or set the height of every matched element.
 - [`.innerHeight()`](http://api.jquery.com/innerHeight/) - Get the current computed height for the first element in the set of matched elements, including padding but not border.
 - [`.innerWidth()`](http://api.jquery.com/innerWidth/) - Get the current computed inner width (including padding but not border) for the first element in the set of matched elements or set the inner width of every matched element.
-- [`jQuery.cssHooks`](http://api.jquery.com/jQuery.cssHooks/) - Hook directly into jQuery to override how particular CSS properties are retrieved or set, normalize CSS property naming, or create custom properties.
 - [`.offset()`](http://api.jquery.com/offset/) - Get the current coordinates of the first element, or set the coordinates of every element, in the set of matched elements, relative to the document.
 - [`.outerHeight()`](http://api.jquery.com/outerHeight/) - Get the current computed height for the first element in the set of matched elements, including padding, border, and optionally margin. Returns a number (without “px”) representation of the value or null if called on an empty set of elements.
 - [`.outerWidth()`](http://api.jquery.com/outerWidth/) - Get the current computed width for the first element in the set of matched elements, including padding and border.
@@ -189,16 +202,25 @@ Looking for a function not listed below? The functions we did not add in the lis
 - [`.toggleClass()`](http://api.jquery.com/toggleClass/) - Add or remove one or more classes from each element in the set of matched elements, depending on either the class’s presence or the value of the switch argument.
 - [`.width()`](http://api.jquery.com/width/) - Get the current computed width for the first element in the set of matched elements or set the width of every matched element.
 
-##[Events]()
+##[Events](http://api.jquery.com/category/events/)
 
-- [`.blur()`](http://api.jquery.com/blur/) - Trigger the "blur" JavaScript event on the matched elements.
-- [`.change()`](http://api.jquery.com/change/) - Trigger the "change" JavaScript event on the matched elements.
+###Supported
+
+- [`.trigger()`](http://api.jquery.com/trigger/) - Execute all handlers and behaviors attached to the matched elements for the given event type.
 - [`.click()`](http://api.jquery.com/click/) - Trigger the "click" JavaScript event on the matched elements.
-- [`.dblclick()`](http://api.jquery.com/dblclick/) - Trigger the "dblclick" JavaScript event on the matched elements.
 - [`.focus()`](http://api.jquery.com/focus/) - Trigger the "focus" JavaScript event on the matched elements.
+
+###Soon
+
+- [`.keyup()`](http://api.jquery.com/keyup/) - Trigger the "keyup" JavaScript event on the matched elements.
+- [`.blur()`](http://api.jquery.com/blur/) - Trigger the "blur" JavaScript event on the matched elements.
+
+###Not supported
+
+- [`.change()`](http://api.jquery.com/change/) - Trigger the "change" JavaScript event on the matched elements.
+- [`.dblclick()`](http://api.jquery.com/dblclick/) - Trigger the "dblclick" JavaScript event on the matched elements.
 - [`.keydown()`](http://api.jquery.com/keydown/) - Trigger the "keydown" JavaScript event on the matched elements.
 - [`.keypress()`](http://api.jquery.com/keypress/) - Trigger the "keypress" JavaScript event on the matched elements.
-- [`.keyup()`](http://api.jquery.com/keyup/) - Trigger the "keyup" JavaScript event on the matched elements.
 - [`.mousedown()`](http://api.jquery.com/mousedown/) - Trigger the "mousedown" JavaScript event on the matched elements.
 - [`.mouseenter()`](http://api.jquery.com/mouseenter/) - Trigger the "mouseenter" JavaScript event on the matched elements.
 - [`.mouseleave()`](http://api.jquery.com/mouseleave/) -  Trigger the "mouseleave" JavaScript event on the matched elements.
@@ -210,36 +232,40 @@ Looking for a function not listed below? The functions we did not add in the lis
 - [`.scroll()`](http://api.jquery.com/scroll/) - Trigger the "scroll" JavaScript event on the matched elements.
 - [`.select()`](http://api.jquery.com/select/) - Trigger the "select" JavaScript event on the matched elements.
 - [`.submit()`](http://api.jquery.com/submit/) - Trigger the "submit" JavaScript event on the matched elements.
-- [`.trigger()`](http://api.jquery.com/trigger/) - Execute all handlers and behaviors attached to the matched elements for the given event type.
 
 ##[Forms](http://api.jquery.com/category/forms/)
 
-- [`.blur()`](http://api.jquery.com/blur/) - Bind an event handler to the “blur” JavaScript event, or trigger that event on an element.
-- [`.change()`](http://api.jquery.com/change/) - Bind an event handler to the “change” JavaScript event, or trigger that event on an element.
-- [`.focus()`](http://api.jquery.com/focus/) - Bind an event handler to the “focus” JavaScript event, or trigger that event on an element.
+###Supported
+
+- [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
+
+###Not Supported
+
 - [`jQuery.param()`](http://api.jquery.com/jQuery.param/) - Create a serialized representation of an array or object, suitable for use in a URL query string or Ajax request.
-- [`.select()`](http://api.jquery.com/select/) - Bind an event handler to the “select” JavaScript event, or trigger that event on an element.
 - [`.serialize()`](http://api.jquery.com/serialize/) - Encode a set of form elements as a string for submission.
 - [`.serializeArray()`](http://api.jquery.com/serializeArray/) - Encode a set of form elements as an array of names and values.
-- [`.submit()`](http://api.jquery.com/submit/) - Bind an event handler to the “submit” JavaScript event, or trigger that event on an element.
-- [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
+
 
 ##[Miscellaneous](http://api.jquery.com/category/miscellaneous/)
 
-- [`.data()`](http://api.jquery.com/data/) - Store arbitrary data associated with the matched elements or return the value at the named data store for the first element in the set of matched elements.
-- [`.each()`](http://api.jquery.com/each/) - Iterate over a jQuery object, executing a function for each matched element.
-- [`.get()`](http://api.jquery.com/get/) - Retrieve the DOM elements matched by the jQuery object.
-- [`.index()`](http://api.jquery.com/index/) - Search for a given element from among the matched elements.
-- [`jQuery.noConflict()`](http://api.jquery.com/jQuery.noConflict/) - Relinquish jQuery’s control of the $ variable.
-- [`jQuery.param()`](http://api.jquery.com/jQuery.param/) - Create a serialized representation of an array or object, suitable for use in a URL query string or Ajax request.
-- [`.removeData()`](http://api.jquery.com/removeData/) - Remove a previously-stored piece of data.
+###Supported
+
 - [`.size()`](http://api.jquery.com/size/) - Return the number of elements in the jQuery object.
+
+###Soon
+
+- [`.get()`](http://api.jquery.com/get/) - Retrieve the DOM elements matched by the jQuery object.
 - [`.toArray()`](http://api.jquery.com/toArray/) - Retrieve all the elements contained in the jQuery set, as an array.
+
+###Not Supported
+
+- [`.each()`](http://api.jquery.com/each/) - Iterate over a jQuery object, executing a function for each matched element.
+- [`.index()`](http://api.jquery.com/index/) - Search for a given element from among the matched elements.
+
 
 ##[Traversing functions](http://api.jquery.com/category/traversing/)
 
 ###Supported
-
 
 - [`.first()`](http://api.jquery.com/first/) - Reduce the set of matched elements to the first in the set.
 - [`.not()`](http://api.jquery.com/not/) - Remove elements from the set of matched elements.
@@ -277,11 +303,12 @@ Looking for a function not listed below? The functions we did not add in the lis
  - [`.siblings()`](http://api.jquery.com/siblings/) - Get the siblings of each element in the set of matched elements, optionally filtered by a selector.
  - [`.slice()`](http://api.jquery.com/slice/) - Reduce the set of matched elements to a subset specified by a range of indices.
 
-
 ##[Properties](http://api.jquery.com/category/properties/)
 
 - [`.length`](http://api.jquery.com/length/) - The number of elements in the jQuery object.
+    - This functionality is available through the `.size()` function.
 - [`.selector`](http://api.jquery.com/selector/) - A selector representing selector passed to jQuery(), if any, when creating the original set.
+    - This functionality is available through the `.getBy()` function and, as `.selector` was, depending on the context, is not always available.
 
 
 #jQuery Extension Selectors
@@ -316,10 +343,8 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 ###Not Supported
 - [`:animated` Selector](http://api.jquery.com/animated-selector/) -  Select all elements that are in the progress of an animation at the time the selector is run.
 - [Attribute Not Equal Selector `[name!="value"]`](http://api.jquery.com/attribute-not-equal-selector/) - Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.
-
 - [`:file` Selector](http://api.jquery.com/file-selector/) - Selects all elements of type file.
 - [`:has()` Selector](http://api.jquery.com/has-selector/) - Selects elements which contain at least one element that matches the specified selector.
-
 - [`:hidden` Selector](http://api.jquery.com/hidden-selector/) - Selects all elements that are hidden.
 - [`:image` Selector](http://api.jquery.com/image-selector/) -  Selects all elements of type image.
 - [`:parent` Selector](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text).
