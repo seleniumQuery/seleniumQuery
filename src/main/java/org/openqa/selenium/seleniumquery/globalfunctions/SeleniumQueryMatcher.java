@@ -1,4 +1,4 @@
-package org.openqa.selenium.seleniumquery.staticfunctions;
+package org.openqa.selenium.seleniumquery.globalfunctions;
 
 public class SeleniumQueryMatcher {
 

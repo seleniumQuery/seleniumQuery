@@ -1,8 +1,8 @@
 package org.openqa.selenium.seleniumquery;
 
-import org.openqa.selenium.seleniumquery.staticfunctions.SeleniumQueryBrowser;
-import org.openqa.selenium.seleniumquery.staticfunctions.SeleniumQueryLocation;
-import org.openqa.selenium.seleniumquery.staticfunctions.SeleniumQueryStaticWait;
+import org.openqa.selenium.seleniumquery.globalfunctions.SeleniumQueryBrowser;
+import org.openqa.selenium.seleniumquery.globalfunctions.SeleniumQueryLocation;
+import org.openqa.selenium.seleniumquery.globalfunctions.SeleniumQueryStaticWait;
 
 public class SeleniumQueryStatic {
 	

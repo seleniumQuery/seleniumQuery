@@ -29,7 +29,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * List of functions that will hold the flow until the specified condition is met.
 	 */
-	public final SeleniumQueryWait waitUntil = new SeleniumQueryWait(this);
+	public final SeleniumQueryWaitUntil waitUntil = new SeleniumQueryWaitUntil(this);
 		
 	public SeleniumQueryObject(WebDriver driver, String selector) {
 		this(driver, selector, driver.findElements(SeleniumQueryBy.byEnhancedSelector(selector)));

@@ -15,8 +15,19 @@ public class ValFunction {
 		if (elements.isEmpty()) {
 			return null;
 		}
-		WebElement element = elements.get(0);
-		
+		return val(elements.get(0));
+	}
+
+	/**
+	 * Gets the value of the given element.
+	 * 
+	 * @param element The element you want the value of.
+	 * @return The value of the element.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.3.0
+	 */
+	public static String val(WebElement element) {
 		if ("input".equals(element.getTagName())) {
 			return element.getAttribute("value");
 		} else if ("select".equals(element.getTagName())) {
@@ -38,12 +49,12 @@ public class ValFunction {
 	 */
 	public static SeleniumQueryObject val(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String value) {
 		for (WebElement element : elements) {
-			goVal(element, value);
+			val(element, value);
 		}
 		return seleniumQueryObject;
 	}
 	
-	private static void goVal(WebElement element, String value) {
+	private static void val(WebElement element, String value) {
 		if ("select".equals(element.getTagName())) {
 			new Select(element).selectByVisibleText(value);
 		} else if ("input".equals(element.getTagName()) && "file".equals(element.getAttribute("type"))) {
