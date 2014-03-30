@@ -155,7 +155,7 @@ As seleniumQuery main goals are emulating user actions and "sensing" the pages, 
 
 Below you will find the list of current jQuery functions, by category, divided among supported and not supported by seleniumQuery.
 
-Looking for a function not listed below? The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil` property and its functions).
+Looking for a function not listed below? The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function directly/explicitly through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil` and `.queryUntil` properties and their functions).
 
 ##[Attributes](http://api.jquery.com/category/attributes/)
 
@@ -250,11 +250,11 @@ Looking for a function not listed below? The functions we did not add in the lis
 
 ###Supported
 
+- [`.get()`](http://api.jquery.com/get/) - Retrieve the DOM elements matched by the jQuery object.
 - [`.size()`](http://api.jquery.com/size/) - Return the number of elements in the jQuery object.
 
 ###Soon
 
-- [`.get()`](http://api.jquery.com/get/) - Retrieve the DOM elements matched by the jQuery object.
 - [`.toArray()`](http://api.jquery.com/toArray/) - Retrieve all the elements contained in the jQuery set, as an array.
 
 ###Not Supported
