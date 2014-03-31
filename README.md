@@ -115,24 +115,28 @@ $("#ajaxDiv").click().waitUntil.isNotVisible();
 
 #API
 
-Currently implemented instance functions are:
+For the currently implemented jQuery functions check the [supported list below](#supported-jquery-functions).
 
-- `$(".selector").val()`: Gets the value for an input element.
-- `$(".selector").val("String")`: Sets the value of an input element.
-- `$(".selector").text()`: Gets the text of an element.
-- `$(".selector").text("String")`: Sets the text of an element.
-- `$(".selector").html()`: Gets the HTML of an element.
-- `$(".selector").parent()`: Returns the parent.
-- `$(".selector").click()`: Clicks!
+In order to handle Ajax, you can use the `.queryUntil` and `.waitUntil` functions.
 
-Available waiting functions:
+###The `.queryUntil` will requery for the elements until the given condition is met, returning a new seleniumQuery object when that happens:
+
+- `$(".myDivs").queryUntil.allAreNotPresent();`
+- `$(".myDivs").queryUntil.allAreNotVisible();`
+- `$(".myDivs").queryUntil.atLeastOneIsPresent();`
+- `$(".myDivs").queryUntil.atLeastOneIsVisible();`
+- `$(".myDivs").queryUntil.atLeastOneIsVisibleAndEnabled();`
+- `$(".enabledInputs").queryUntil.elementsValueAre("John");`
+- `$(".enabledInputs").queryUntil.elementsValueAreNot("Smith");`
+
+###The `.waitUntil` will act only on the elements matched when the seleniumQuery object was built (the `$()` was called):
 
 - `$(".selector").waitUntil.isEnabled()`
 - `$(".selector").waitUntil.isPresent()`
 - `$(".selector").waitUntil.isVisible()`
 - `$(".selector").waitUntil.isVisibleAndEnabled()`
 
-Static functions:
+Global object (static) functions:
 
 - `$.location.href("http://www.url.to.go.com");`: Opens a URL
 - `$.location.href(new File("path/to/localFile.html"));`: Opens a local file
