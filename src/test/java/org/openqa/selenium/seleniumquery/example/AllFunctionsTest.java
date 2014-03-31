@@ -45,5 +45,15 @@ public class AllFunctionsTest {
 	public void containsText() {
 		assertEquals("!visibleDiv!",		 $(".visibleDiv").waitUntil.containsText("isibleDi").val()	);
 	}
+	
+	public void queryUntil() {
+		$(".myDivs").queryUntil.allAreNotPresent();
+		$(".myDivs").queryUntil.allAreNotVisible();
+		$(".myDivs").queryUntil.atLeastOneIsPresent();
+		$(".myDivs").queryUntil.atLeastOneIsVisible();
+		$(".myDivs").queryUntil.atLeastOneIsVisibleAndEnabled();
+		$(".enabledInputs").queryUntil.elementsValuesAre("John");
+		$(".enabledInputs").queryUntil.elementsValuesAreNot("Smith");
+	}
 
 }

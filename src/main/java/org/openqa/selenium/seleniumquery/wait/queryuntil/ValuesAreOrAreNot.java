@@ -12,9 +12,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.google.common.base.Function;
 
-public class ValueIsOrIsNot {
+public class ValuesAreOrAreNot {
 
-	static SeleniumQueryObject valueIsOrIsNot(final SeleniumQueryObject seleniumQueryObject, final String value, final boolean shouldValueBeEqual) {
+	public static List<WebElement> queryUntilElementsValuesAre(final SeleniumQueryObject seleniumQueryObject, final String value) {
+		return valueIsOrIsNot(seleniumQueryObject, value, true);
+	}
+	
+	public static List<WebElement> queryUntilElementsValuesAreNot(final SeleniumQueryObject seleniumQueryObject, final String value) {
+		return valueIsOrIsNot(seleniumQueryObject, value, true);
+	}
+	
+	private static List<WebElement> valueIsOrIsNot(final SeleniumQueryObject seleniumQueryObject, final String value, final boolean shouldValueBeEqual) {
 		List<WebElement> es = SeleniumQueryFluentWait.fluentWait(seleniumQueryObject, new Function<By, List<WebElement>>() {
 			@Override
 			public List<WebElement> apply(By selector) {
@@ -33,7 +41,7 @@ public class ValueIsOrIsNot {
 				return null;
 			}
 		}, "to"+ (shouldValueBeEqual ? "" : " not") + " have value \""+value+"\".");
-		return new SeleniumQueryObject(seleniumQueryObject.getWebDriver(), es);
+		return es;
 	}
 	
 }

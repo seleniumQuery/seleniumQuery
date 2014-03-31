@@ -41,5 +41,9 @@ public class SeleniumQueryBrowser {
 	public void quit(WebDriver webDriver) {
 		webDriver.quit();
 	}
+	
+	public boolean screenContainsText(String texto) {
+		return this.getDefaultDriver().getPageSource().contains(texto);
+	}
 
 }

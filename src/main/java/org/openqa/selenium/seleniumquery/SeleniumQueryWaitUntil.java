@@ -1,8 +1,5 @@
 package org.openqa.selenium.seleniumquery;
 
-import java.util.List;
-
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.seleniumquery.wait.waituntil.ContainsText;
 import org.openqa.selenium.seleniumquery.wait.waituntil.IsNotPresent;
 import org.openqa.selenium.seleniumquery.wait.waituntil.IsNotVisible;
@@ -21,9 +18,16 @@ public class SeleniumQueryWaitUntil {
 		this.seleniumQueryObject = seleniumQueryObject;
 	}
 
+	/**
+	 * Waits until any element on the set is attached to the DOM.
+	 * 
+	 * @return the SeleniumQuery object.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.3.0
+	 */
 	public SeleniumQueryObject isPresent() {
-		List<WebElement> presentElements = IsPresent.waitUntilIsPresent(this.seleniumQueryObject);
-		seleniumQueryObject.setElements(presentElements);
+		IsPresent.waitUntilIsPresent(this.seleniumQueryObject);
 		return seleniumQueryObject;
 	}
 
@@ -88,7 +92,7 @@ public class SeleniumQueryWaitUntil {
 	 * @since 0.3.0
 	 */
 	public SeleniumQueryObject containsText(String text) {
-		seleniumQueryObject.setElements(ContainsText.containsText(seleniumQueryObject, text));
+		ContainsText.waitUntilcontainsText(seleniumQueryObject, text);
 		return seleniumQueryObject;
 	}
 	

@@ -9,19 +9,19 @@ import org.openqa.selenium.seleniumquery.wait.SeleniumQueryFluentWait;
 
 import com.google.common.base.Function;
 
-public class AllElementsAreNotVisibile {
+public class AllAreNotVisibile {
 	
-	public void allElementsAreNotVisible(final SeleniumQueryObject seleniumQueryObject) {
-		SeleniumQueryFluentWait.fluentWait(seleniumQueryObject, new Function<By, Boolean>() {
+	public static List<WebElement> queryUntilAllAreNotVisible(final SeleniumQueryObject seleniumQueryObject) {
+		return SeleniumQueryFluentWait.fluentWait(seleniumQueryObject, new Function<By, List<WebElement>>() {
 			@Override
-			public Boolean apply(By selector) {
+			public List<WebElement> apply(By selector) {
 				List<WebElement> elements = seleniumQueryObject.getWebDriver().findElements(seleniumQueryObject.getBy());
 				for (WebElement webElement : elements) {
 					if (webElement.isDisplayed()) {
-						return false;
+						return null;
 					}
 				}
-				return true;
+				return elements;
 			}
 		}, "to have all elements not be not visible.");
 	}

@@ -21,6 +21,19 @@ import org.openqa.selenium.seleniumquery.by.enhancements.SeleniumQueryEnhancemen
 public class SeleniumQueryBy extends By {
 	
 	/**
+	 * A By to be used in an element created with no By. Attempting to filter elements through this By
+	 * will throw a RuntimeException.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.3.0
+	 */
+	public static final SeleniumQueryBy NO_SELECTOR_INVALID_BY = new SeleniumQueryBy(null) {
+		@Override public List<WebElement> findElements(SearchContext context) {
+			throw new RuntimeException("This object was instantiated without a selector, this function is unavailable.");
+		}
+	};
+	
+	/**
 	 * Enhanced selector is not just the CSS selector, it also supports XPath expressions and some
 	 * Sizzle enhancements.
 	 * 
@@ -53,7 +66,7 @@ public class SeleniumQueryBy extends By {
 	 * @author acdcjunior
 	 * @since 0.2.0
 	 */
-	public SeleniumQueryBy(String selector) {
+	private SeleniumQueryBy(String selector) {
 		this.selector = selector;
 		this.selectorIsXPathExpression = isXPathExpression(selector);
 	}

@@ -8,11 +8,11 @@ import org.openqa.selenium.seleniumquery.SeleniumQueryConfig;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SeleniumQueryStaticWait {
+public class SeleniumQueryGlobalWait {
 	
 	private SeleniumQueryBrowser browser;
 	
-	public SeleniumQueryStaticWait(SeleniumQueryBrowser browser) {
+	public SeleniumQueryGlobalWait(SeleniumQueryBrowser browser) {
 		this.browser = browser;
 	}
 	

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
-public class EnhancedExpectedConditions {
+public class ExtraExpectedConditions {
 
 	public static ExpectedCondition<List<WebElement>> visibilityOfAllElementsLocatedBy(final By locator) {
 		return new ExpectedCondition<List<WebElement>>() {

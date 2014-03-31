@@ -1,5 +1,7 @@
 package org.openqa.selenium.seleniumquery.globalfunctions;
 
+import java.io.File;
+
 
 public class SeleniumQueryLocation {
 	
@@ -19,6 +21,12 @@ public class SeleniumQueryLocation {
 		this.defaultContext = defaultContext;
 	}
 	
+	/**
+	 * Sets the URL for the default browser.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.2.0
+	 */
 	public void href(String url) {
 		String urlToOpen = url;
 		if (this.getDefaultContext() != null && !this.getDefaultContext().isEmpty()) {
@@ -29,6 +37,29 @@ public class SeleniumQueryLocation {
 		}
 		System.out.println("Opening URL: "+urlToOpen);
 		browser.getDefaultDriver().get(urlToOpen);
+	}
+	
+	/**
+	 * Opens the given file in the browser.
+	 * 
+	 * @param file the file to open.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.3.0
+	 */
+	public void href(File file) {
+		this.href(file.toURI().toString());
+	}
+	
+	/**
+	 * Returns the current URL in the default browser.
+	 * @return the currently opened url.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.3.0
+	 */
+	public String href() {
+		return browser.getDefaultDriver().getCurrentUrl();
 	}
 
 }

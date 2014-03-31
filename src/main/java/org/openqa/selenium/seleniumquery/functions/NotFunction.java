@@ -9,11 +9,11 @@ import org.openqa.selenium.seleniumquery.by.SeleniumQueryBy;
 
 public class NotFunction {
 	
-	public static SeleniumQueryObject not(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String selector) {
-		List<WebElement> thisElements = new ArrayList<WebElement>(elements);
+	public static List<WebElement> not(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String selector) {
+		List<WebElement> staging = new ArrayList<WebElement>(elements);
 		List<WebElement> elementsToExclude = seleniumQueryObject.getWebDriver().findElements(SeleniumQueryBy.byEnhancedSelector(selector));
-		thisElements.removeAll(elementsToExclude);
-		return new SeleniumQueryObject(seleniumQueryObject.getWebDriver(), thisElements);
+		staging.removeAll(elementsToExclude);
+		return staging;
 	}
 
 }

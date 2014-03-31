@@ -6,9 +6,9 @@ import org.openqa.selenium.seleniumquery.wait.SeleniumQueryFluentWait;
 
 import com.google.common.base.Function;
 
-public class NoneArePresent {
+public class AllAreNotPresent {
 
-	public static void queryUntilNoneArePresent(final SeleniumQueryObject seleniumQueryObject) {
+	public static void queryUntilAllAreNotPresent(final SeleniumQueryObject seleniumQueryObject) {
 		SeleniumQueryFluentWait.fluentWait(seleniumQueryObject, new Function<By, Boolean>() {
 			@Override
 			public Boolean apply(By selector) {
