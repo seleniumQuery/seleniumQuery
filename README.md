@@ -1,4 +1,4 @@
-seleniumQuery v0.2.0 - jQuery in Selenium
+seleniumQuery v0.3.0 - jQuery in Selenium
 ======
 
 Java library that allows the use of a **jQuery-like native interface** for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
@@ -62,7 +62,7 @@ To get **seleniumQuery**'s latest snapshot, add this to your **`pom.xml`**:
     <dependency>
         <groupId>com.github.acdcjunior</groupId>
         <artifactId>seleniumquery</artifactId>
-        <version>0.2.0-SNAPSHOT</version>
+        <version>0.3.0-APLHA</version>
     </dependency>
 </dependencies>
 <!-- The repository URL, so maven can download it directly -->
