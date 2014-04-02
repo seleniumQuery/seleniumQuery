@@ -25,7 +25,7 @@ public class IsPresent {
 				// all elements threw a stale reference exception
 				return false;
 			}
-		}, "to be not present.");
+		}, "to be present.");
 	}
 
 }

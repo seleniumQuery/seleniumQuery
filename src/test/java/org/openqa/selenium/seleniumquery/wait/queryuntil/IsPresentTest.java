@@ -1,4 +1,4 @@
-package org.openqa.selenium.seleniumquery.waituntil;
+package org.openqa.selenium.seleniumquery.wait.queryuntil;
 
 import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.seleniumquery.SeleniumQuery.$;
@@ -22,7 +22,7 @@ public class IsPresentTest {
 		$("div.clickable").click();
 		// then
 		assertEquals(0, $("input.ball").size());
-		assertEquals("generated input starting value", $("input.ball").waitUntil.isPresent().val());
+		assertEquals("generated input starting value", $("input.ball").queryUntil.atLeastOneIsPresent().val());
 	}
 
 }
