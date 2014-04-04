@@ -13,6 +13,8 @@ import org.openqa.selenium.seleniumquery.functions.FirstFunction;
 import org.openqa.selenium.seleniumquery.functions.NotFunction;
 import org.openqa.selenium.seleniumquery.functions.TextFunction;
 import org.openqa.selenium.seleniumquery.functions.ValFunction;
+import org.openqa.selenium.seleniumquery.wait.SeleniumQueryQueryUntil;
+import org.openqa.selenium.seleniumquery.wait.SeleniumQueryWaitUntil;
 
 /**
  * Represents the SeleniumQuery Object: a list of WebElements with special methods.
@@ -66,18 +68,22 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * List of functions that will halt the execution until the specified condition is met.
 	 * 
 	 * @author acdcjunior
-	 * @since 0.2.0
+	 * @since 0.4.0
 	 */
-	public final SeleniumQueryWaitUntil waitUntil = new SeleniumQueryWaitUntil(this);
+	public final SeleniumQueryWaitUntil waitUntil() {
+		return new SeleniumQueryWaitUntil(this);
+	}
 	
 	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
 	 * a new seleniumQuery object at the end.
 	 * 
 	 * @author acdcjunior
-	 * @since 0.3.0
+	 * @since 0.4.0
 	 */
-	public final SeleniumQueryQueryUntil queryUntil = new SeleniumQueryQueryUntil(this);
+	public final SeleniumQueryQueryUntil queryUntil() {
+		return new SeleniumQueryQueryUntil(this);
+	}
 	
 	
 	

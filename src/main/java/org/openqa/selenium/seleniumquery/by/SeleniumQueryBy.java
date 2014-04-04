@@ -96,7 +96,7 @@ public class SeleniumQueryBy extends By {
 	 */
 	@Override
 	public String toString() {
-		return "SeleniumQueryBy.byEnhancedSelector: " + selector;
+		return "$(" + selector + ")";
 	}
 	
 	/**

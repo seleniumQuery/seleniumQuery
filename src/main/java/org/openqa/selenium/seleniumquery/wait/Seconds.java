@@ -1,8 +1,7 @@
-package org.openqa.selenium.seleniumquery.wait.waituntil;
+package org.openqa.selenium.seleniumquery.wait;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.seleniumquery.SeleniumQueryObject;
-import org.openqa.selenium.seleniumquery.wait.SeleniumQueryFluentWait;
 
 import com.google.common.base.Function;
 

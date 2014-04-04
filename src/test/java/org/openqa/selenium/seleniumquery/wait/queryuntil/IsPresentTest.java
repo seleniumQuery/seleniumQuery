@@ -22,7 +22,7 @@ public class IsPresentTest {
 		$("div.clickable").click();
 		// then
 		assertEquals(0, $("input.ball").size());
-		assertEquals("generated input starting value", $("input.ball").queryUntil.atLeastOneIsPresent().val());
+		assertEquals("generated input starting value", $("input.ball").queryUntil().is().present().val());
 	}
 
 }
