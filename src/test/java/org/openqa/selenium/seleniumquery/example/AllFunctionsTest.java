@@ -32,7 +32,7 @@ public class AllFunctionsTest {
 	
 	@Test
 	public void isNotVisible() {
-		assertEquals("!invisibleDiv!",	 $(".invisibleDiv").waitUntil().is().not().visible().text()			);
+		$(".invisibleDiv").waitUntil().is().not().visible();
 	}
 	
 	@Test
