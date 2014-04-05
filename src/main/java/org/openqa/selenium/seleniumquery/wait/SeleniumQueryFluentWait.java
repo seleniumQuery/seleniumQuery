@@ -17,8 +17,16 @@ import org.openqa.selenium.support.ui.FluentWait;
 
 import com.google.common.base.Function;
 
+/**
+ * @author acdcjunior
+ * @since 0.1.0
+ */
 public class SeleniumQueryFluentWait {
 
+	/**
+	 * @author acdcjunior
+	 * @since 0.1.0
+	 */
 	public static <T> T fluentWait(SeleniumQueryObject seleniumQueryObject, Function<By, T> function, String reason) {
 		try {
 			return new FluentWait<By>(seleniumQueryObject.getBy())
@@ -32,6 +40,10 @@ public class SeleniumQueryFluentWait {
 		}
 	}
 
+	/**
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
 	public static SeleniumQueryObject queryUntilIs(final Quantifier quantifier, final Restrictor restrictor, final SeleniumQueryObject seleniumQueryObject) {
 		List<WebElement> elements = fluentWait(seleniumQueryObject, new Function<By, List<WebElement>>() {
 			@Override
@@ -52,6 +64,10 @@ public class SeleniumQueryFluentWait {
 		return SeleniumQueryLocalFactory.getInstance().create(seleniumQueryObject, elements);
 	}
 	
+	/**
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
 	public static SeleniumQueryObject waitUntilIs(final Quantifier quantifier, final Restrictor restrictor, final SeleniumQueryObject seleniumQueryObject) {
 		SeleniumQueryFluentWait.fluentWait(seleniumQueryObject, new Function<By, Boolean>() {
 			@Override

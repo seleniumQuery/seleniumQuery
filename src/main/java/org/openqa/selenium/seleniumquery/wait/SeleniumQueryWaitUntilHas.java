@@ -1,47 +1,76 @@
 package org.openqa.selenium.seleniumquery.wait;
 
+import static org.openqa.selenium.seleniumquery.wait.Command.HAS;
+import static org.openqa.selenium.seleniumquery.wait.Command.HAS_NOT;
+
 import org.openqa.selenium.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.seleniumquery.wait.quantifier.And;
 import org.openqa.selenium.seleniumquery.wait.quantifier.AtLeast;
 import org.openqa.selenium.seleniumquery.wait.quantifier.Every;
 import org.openqa.selenium.seleniumquery.wait.quantifier.Quantifier;
 import org.openqa.selenium.seleniumquery.wait.restrictor.Is;
-import org.openqa.selenium.seleniumquery.wait.restrictor.RestrictorDecorator;
+import org.openqa.selenium.seleniumquery.wait.restrictor.Restrictor;
+import org.openqa.selenium.seleniumquery.wait.restrictor.has.TextContaining;
 
+/**
+ * @author acdcjunior
+ * @since 0.4.0
+ */
 public class SeleniumQueryWaitUntilHas {
 	
 	private SeleniumQueryObject seleniumQueryObject;
-
 	private Quantifier quantifier;
-	
-	private RestrictorDecorator restrictorDecorator;
+	private Command command;
 	
 	public SeleniumQueryWaitUntilHas(SeleniumQueryObject seleniumQueryObject) {
-		this(And.and(AtLeast.ONE, Every.EVERY), seleniumQueryObject);
+		this(Every.EVERY, seleniumQueryObject);
 	}
 	
 	public SeleniumQueryWaitUntilHas(Quantifier quantifier, SeleniumQueryObject seleniumQueryObject) {
-		this.quantifier = quantifier;
-		this.seleniumQueryObject = seleniumQueryObject;
-		this.restrictorDecorator = RestrictorDecorator.NO_DECORATION;
+		this(quantifier, seleniumQueryObject, HAS);
 	}
 	
-	public SeleniumQueryWaitUntilHas(Quantifier quantifier, SeleniumQueryObject seleniumQueryObject, RestrictorDecorator restrictorDecorator) {
+	private SeleniumQueryWaitUntilHas(Quantifier quantifier, SeleniumQueryObject seleniumQueryObject, Command command) {
 		this.quantifier = quantifier;
 		this.seleniumQueryObject = seleniumQueryObject;
-		this.restrictorDecorator = restrictorDecorator;
+		this.command = command;
 	}
 	
 	public SeleniumQueryWaitUntilHas not() {
-		return new SeleniumQueryWaitUntilHas(quantifier, seleniumQueryObject, RestrictorDecorator.NEGATION);
+		return new SeleniumQueryWaitUntilHas(quantifier, seleniumQueryObject, HAS_NOT);
 	}
 	
 	public SeleniumQueryObject value(String value) {
-		return SeleniumQueryFluentWait.waitUntilIs(quantifier, restrictorDecorator.decorate(Is.withValue(value)), seleniumQueryObject);
+		return SeleniumQueryFluentWait.waitUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.withValue(value)), seleniumQueryObject);
 	}
 	
 	public SeleniumQueryObject textContaining(String text) {
-		return SeleniumQueryFluentWait.waitUntilIs(quantifier, restrictorDecorator.decorate(Is.textContaining(text)), seleniumQueryObject);
+		return SeleniumQueryFluentWait.waitUntilIs(getDecoratedQuantifier(), decorateRestrictor(TextContaining.textContaining(text)), seleniumQueryObject);
+	}
+	
+	/**
+	 * If not a negation, the restrictor (VISIBLE/PRESENT/etc) should test if at least there is one element
+	 * otherwise they may be successful when no elements are VISIBLE/PRESENT but the element count is zero
+	 */
+	private Quantifier getDecoratedQuantifier() {
+		if (!isNegation()) {
+			return And.and(AtLeast.ONE, quantifier); 
+		}
+		return quantifier;
+	}
+	
+	/**
+	 * If this is a negation, will return the restrictor negated, otherwise does nothing.
+	 */
+	private Restrictor decorateRestrictor(Restrictor restrictor) {
+		if (isNegation()) {
+			return Is.not(restrictor);
+		}
+		return restrictor;
+	}
+
+	private boolean isNegation() {
+		return this.command == HAS_NOT;
 	}
 	
 }

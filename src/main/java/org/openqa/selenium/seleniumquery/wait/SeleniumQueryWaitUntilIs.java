@@ -1,39 +1,38 @@
 package org.openqa.selenium.seleniumquery.wait;
 
+import static org.openqa.selenium.seleniumquery.wait.Command.IS;
+import static org.openqa.selenium.seleniumquery.wait.Command.IS_NOT;
+
 import org.openqa.selenium.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.seleniumquery.wait.quantifier.And;
 import org.openqa.selenium.seleniumquery.wait.quantifier.AtLeast;
 import org.openqa.selenium.seleniumquery.wait.quantifier.Every;
 import org.openqa.selenium.seleniumquery.wait.quantifier.Quantifier;
 import org.openqa.selenium.seleniumquery.wait.restrictor.Is;
-import org.openqa.selenium.seleniumquery.wait.restrictor.RestrictorDecorator;
+import org.openqa.selenium.seleniumquery.wait.restrictor.Restrictor;
 
 public class SeleniumQueryWaitUntilIs {
 	
 	private SeleniumQueryObject seleniumQueryObject;
-
 	private Quantifier quantifier;
-	
-	private RestrictorDecorator restrictorDecorator;
+	private Command command;
 	
 	public SeleniumQueryWaitUntilIs(SeleniumQueryObject seleniumQueryObject) {
-		this(And.and(AtLeast.ONE, Every.EVERY), seleniumQueryObject);
+		this(Every.EVERY, seleniumQueryObject);
 	}
 	
 	public SeleniumQueryWaitUntilIs(Quantifier quantifier, SeleniumQueryObject seleniumQueryObject) {
-		this.quantifier = quantifier;
-		this.seleniumQueryObject = seleniumQueryObject;
-		this.restrictorDecorator = RestrictorDecorator.NO_DECORATION;
+		this(quantifier, seleniumQueryObject, IS);
 	}
 	
-	public SeleniumQueryWaitUntilIs(Quantifier quantifier, SeleniumQueryObject seleniumQueryObject, RestrictorDecorator restrictorDecorator) {
+	private SeleniumQueryWaitUntilIs(Quantifier quantifier, SeleniumQueryObject seleniumQueryObject, Command command) {
 		this.quantifier = quantifier;
 		this.seleniumQueryObject = seleniumQueryObject;
-		this.restrictorDecorator = restrictorDecorator;
+		this.command = command;
 	}
 	
 	public SeleniumQueryWaitUntilIs not() {
-		return new SeleniumQueryWaitUntilIs(quantifier, seleniumQueryObject, RestrictorDecorator.NEGATION);
+		return new SeleniumQueryWaitUntilIs(quantifier, seleniumQueryObject, IS_NOT);
 	}
 	
 	/**
@@ -45,19 +44,44 @@ public class SeleniumQueryWaitUntilIs {
 	 * @since 0.4.0
 	 */
 	public SeleniumQueryObject visible() {
-		return SeleniumQueryFluentWait.waitUntilIs(quantifier, restrictorDecorator.decorate(Is.VISIBLE), seleniumQueryObject);
+		return SeleniumQueryFluentWait.waitUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.VISIBLE), seleniumQueryObject);
 	}
 	
 	public SeleniumQueryObject enabled() {
-		return SeleniumQueryFluentWait.waitUntilIs(quantifier, restrictorDecorator.decorate(Is.ENABLED), seleniumQueryObject);
+		return SeleniumQueryFluentWait.waitUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.ENABLED), seleniumQueryObject);
 	}
 	
 	public SeleniumQueryObject present() {
-		return SeleniumQueryFluentWait.waitUntilIs(quantifier, restrictorDecorator.decorate(Is.PRESENT), seleniumQueryObject);
+		return SeleniumQueryFluentWait.waitUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.PRESENT), seleniumQueryObject);
 	}
 	
 	public SeleniumQueryObject visibleAndEnabled() {
-		return SeleniumQueryFluentWait.waitUntilIs(quantifier, restrictorDecorator.decorate(Is.VISIBLE_AND_ENABLED), seleniumQueryObject);
+		return SeleniumQueryFluentWait.waitUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.VISIBLE_AND_ENABLED), seleniumQueryObject);
+	}
+	
+	/**
+	 * If not a negation, the restrictor (VISIBLE/PRESENT/etc) should test if at least there is one element
+	 * otherwise they may be successful when no elements are VISIBLE/PRESENT but the element count is zero
+	 */
+	private Quantifier getDecoratedQuantifier() {
+		if (!isNegation()) {
+			return And.and(AtLeast.ONE, quantifier); 
+		}
+		return quantifier;
+	}
+	
+	/**
+	 * If this is a negation, will return the restrictor negated, otherwise does nothing.
+	 */
+	private Restrictor decorateRestrictor(Restrictor restrictor) {
+		if (isNegation()) {
+			return Is.not(restrictor);
+		}
+		return restrictor;
+	}
+
+	private boolean isNegation() {
+		return this.command == IS_NOT;
 	}
 	
 //	/**
