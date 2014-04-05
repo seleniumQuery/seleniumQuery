@@ -2,7 +2,6 @@ package org.openqa.selenium.seleniumquery;
 
 import org.openqa.selenium.seleniumquery.globalfunctions.SeleniumQueryBrowser;
 import org.openqa.selenium.seleniumquery.globalfunctions.SeleniumQueryLocation;
-import org.openqa.selenium.seleniumquery.globalfunctions.SeleniumQueryGlobalWait;
 
 /**
  * Represents the seleniumQuery global object.
@@ -31,19 +30,9 @@ public class SeleniumQueryStatic {
 	 */
 	public final SeleniumQueryLocation location;
 
-	/**
-	 * Series of functions that instruct the default browser of current thread to wait for a given condition
-	 * to be satisfied.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
-	 */
-	public final SeleniumQueryGlobalWait waitUntil;
-	
 	public SeleniumQueryStatic() {
 		this.browser = new SeleniumQueryBrowser();
 		this.location = new SeleniumQueryLocation(this.browser);
-		this.waitUntil = new SeleniumQueryGlobalWait(this.browser);
 	}
 
 }
