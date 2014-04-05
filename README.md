@@ -1,4 +1,4 @@
-seleniumQuery v0.3.0 - jQuery in Selenium
+seleniumQuery v0.4.0 - jQuery in Selenium
 ======
 
 Java library that allows the use of a **jQuery-like native interface** for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
@@ -45,12 +45,12 @@ public class SeleniumQueryExample {
         // seleniumQuery are the .waitUntil. functions, especially handy for Ajax handling:
         
         /*
-        $("input[name='q']").waitUntil.isNotPresent();
+        $("input[name='q']").waitUntil().is().not().present();
         */
         
         // The line above throws an exception as that input never goes away in google.com.
 
-        $.browser.quit(); // quits the default driver
+        $.browser.quitDefaultBrowser(); // quits the firefox driver
     }
 }
 `````
@@ -62,7 +62,7 @@ To get **seleniumQuery**'s latest snapshot, add this to your **`pom.xml`**:
     <dependency>
         <groupId>com.github.acdcjunior</groupId>
         <artifactId>seleniumquery</artifactId>
-        <version>0.3.0-APLHA</version>
+        <version>0.4.0-RC1</version>
     </dependency>
 </dependencies>
 <!-- The repository URL, so maven can download it directly -->
@@ -93,7 +93,7 @@ $("#mySelect").val("Ford");
 
 ###Waiting capabilities for improved Ajax testing
 
-Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element through the use of `.waitUntil`:
+Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element through the use of `.waitUntil()` and `.queryUntil()`:
 
 `````java
 /*
@@ -104,53 +104,71 @@ Other important feature is the leverage of `WebDriver`'s `FluentWait` capabiliti
  * The code will only continue after it is gone. If not, it will throw a timeout exception.
  */
 $("#ajaxDiv").click();
-$("#ajaxDiv").waitUntil.isNotVisible();
+$("#ajaxDiv").waitUntil().is().not().visible();
 
 // Or, fluently:
-$("#ajaxDiv").click().waitUntil.isNotVisible();
+$("#ajaxDiv").click().waitUntil().is().not().visible();
 `````
-
-
 
 
 #API
 
 For the currently implemented jQuery functions check the [supported list below](#supported-jquery-functions).
 
-In order to handle Ajax, you can use the `.queryUntil` and `.waitUntil` functions.
+In order to handle Ajax, you can use the `.queryUntil()` and `.waitUntil()` functions:
+- The `.queryUntil()` functions will requery for the elements until the given condition is met, returning a new seleniumQuery object when that happens.
+- The `.waitUntil()` will act only on the elements matched when the seleniumQuery object was built (the `$()` was called).
 
-###The `.queryUntil` will requery for the elements until the given condition is met, returning a new seleniumQuery object when that happens:
+`````java
+// .queryUntil() will requery the DOM every time until the matched set fulfills the requirements
 
-- `$(".myDivs").queryUntil.allAreNotPresent();`
-- `$(".myDivs").queryUntil.allAreNotVisible();`
-- `$(".myDivs").queryUntil.atLeastOneIsPresent();`
-- `$(".myDivs").queryUntil.atLeastOneIsVisible();`
-- `$(".myDivs").queryUntil.atLeastOneIsVisibleAndEnabled();`
-- `$(".enabledInputs").queryUntil.elementsValueAre("John");`
-- `$(".enabledInputs").queryUntil.elementsValueAreNot("Smith");`
+// .is() functions
+$(".aDivDiv").queryUntil().is().present();
+$(".myInput").queryUntil().is().enabled();
+$(".aDivDiv").queryUntil().is().visible();
+$(".myInput").queryUntil().is().visibleAndEnabled();
+// .has() functions
+$(".myInput").queryUntil().has().val("expectedValue");
+$(".aDivDiv").queryUntil().has().textContaining("expectedText");
+// both .is() and .has() can use .not()
+$(".myInput").queryUntil().is().not().enabled();
+$(".myInput").queryUntil().has().not().val("expectedValue");
 
-###The `.waitUntil` will act only on the elements matched when the seleniumQuery object was built (the `$()` was called):
+// .waitUntil() will work only on the already matched set, and have the exact same set of functions
 
-- `$(".selector").waitUntil.isEnabled()`
-- `$(".selector").waitUntil.isPresent()`
-- `$(".selector").waitUntil.isVisible()`
-- `$(".selector").waitUntil.isVisibleAndEnabled()`
+// .is() functions
+$(".aDivDiv").waitUntil().is().present();
+$(".myInput").waitUntil().is().enabled();
+$(".aDivDiv").waitUntil().is().visible();
+$(".myInput").waitUntil().is().visibleAndEnabled();
+// .has() functions
+$(".myInput").waitUntil().has().valEqualTo("expectedValue");
+$(".aDivDiv").waitUntil().has().textContaining("expectedText");
+// both .is() and .has() can use .not()
+$(".myInput").waitUntil().is().not().enabled();
+$(".myInput").waitUntil().has().not().valEqualTo("expectedValue");
+`````
 
 Global object (static) functions:
 
 - `$.location.href("http://www.url.to.go.com");`: Opens a URL
 - `$.location.href(new File("path/to/localFile.html"));`: Opens a local file
 - `$.browser.setDefaultBrowser(webDriver);`: Sets the browser to be used by `$(".selector")`
+- `$.browser.sleep(10, TimeUnit.SECONDS);`: Instructs the browser (thread) to wait (sleep) for the given time.
 
 ###Note on Java Convention
 
-If the dollar symbol `$` gives you the yikes, it is important to notice that the `$` used is not a class name, but a `static` method (and field) imported statically. Still, if you don't feel like using it, you can resort to `sQ()` and benefit from all the same effects:
+If the dollar symbol `$` gives you the yikes, it is important to notice that the `$` used is not a class name, but a `static` method (and field) imported statically. Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same functions:
 
 `````java
 import static org.openqa.selenium.seleniumquery.SeleniumQuery.sQ;
+import static org.openqa.selenium.seleniumquery.SeleniumQuery.jQuery;
 ...
 String oldStreet = sQ("input.street").val();
 sQ("input.street").val("4th St!");
+
+String oldStreetz = jQuery("input.street").val();
+jQuery("input.street").val("5th St!");
 `````
 
 #Supported jQuery Functions
@@ -159,7 +177,7 @@ As seleniumQuery main goals are emulating user actions and "sensing" the pages, 
 
 Below you will find the list of current jQuery functions, by category, divided among supported and not supported by seleniumQuery.
 
-Looking for a function not listed below? The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function directly/explicitly through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil` and `.queryUntil` properties and their functions).
+Looking for a function not listed below? The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function directly/explicitly through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil()` and `.queryUntil()`  functions).
 
 ##[Attributes](http://api.jquery.com/category/attributes/)
 
