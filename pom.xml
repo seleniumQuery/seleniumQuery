@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.acdcjunior</groupId>
 	<artifactId>seleniumquery</artifactId>
-	<version>0.3.0-ALPHA</version>
+	<version>0.4.0-RC1</version>
 
 	<name>seleniumQuery</name>
-	<url>https://github.com/acdcjunior/SeleniumQuery</url>
+	<url>https://github.com/acdcjunior/seleniumQuery</url>
 	<description>Java library that allows the use of a jQuery-like native interface for Selenium WebDriver.</description>
 
 	<properties>
