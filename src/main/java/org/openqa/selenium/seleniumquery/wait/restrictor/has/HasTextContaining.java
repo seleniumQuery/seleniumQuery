@@ -23,9 +23,10 @@ public final class HasTextContaining implements Restrictor {
 	public boolean fulfillsRestriction(WebElement webElement) {
 		return webElement.getText().contains(parameterValue);
 	}
+	
 	@Override
 	public String toString() {
-		return "text containing \""+this.parameterValue+"\"";
+		return "having text containing \""+this.parameterValue+"\"";
 	}
 
 }

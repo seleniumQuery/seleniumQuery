@@ -32,9 +32,9 @@ public final class HasValEqualTo<T> implements Restrictor {
 	@Override
 	public String toString() {
 		if (this.parameterValue instanceof Number) {
-			return "value equal to "+this.parameterValue;
+			return "having value equal to "+this.parameterValue;
 		}
-		return "value equal to \""+this.parameterValue+"\"";
+		return "having value equal to \""+this.parameterValue+"\"";
 	}
 
 }
