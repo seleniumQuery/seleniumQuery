@@ -53,18 +53,4 @@ public class SeleniumQueryWaitUntil {
 		return new SeleniumQueryWaitUntilQuantity(AtMost.ONE, seleniumQueryObject);
 	}
 	
-	/**
-	 * Waits for <code>timeToWait</code> seconds.
-	 * 
-	 * @param timeToWait Time to wait in seconds.
-	 * @return the SeleniumQuery object.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.3.0
-	 */
-	public SeleniumQueryObject seconds(int timeToWait) {
-		Seconds.seconds(seleniumQueryObject, timeToWait);
-		return seleniumQueryObject;
-	}
-	
 }
