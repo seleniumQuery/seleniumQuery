@@ -34,7 +34,7 @@ public class SeleniumQueryBrowser {
 		return this.defaultDriver;
 	}
 	
-	public void quit() {
+	public void quitDefaultBrowser() {
 		this.defaultDriver.quit();
 	}
 	
@@ -42,8 +42,37 @@ public class SeleniumQueryBrowser {
 		webDriver.quit();
 	}
 	
-	public boolean screenContainsText(String texto) {
-		return this.getDefaultDriver().getPageSource().contains(texto);
+	/**
+	 * Instructs the browser (thread) to wait (sleep) for the time passed as argument.<br>
+	 * <br>
+	 * Example: <code>$.browser.sleep(10, TimeUnit.SECONDS); // sleeps for 10 seconds</code>
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public void sleep(int timeToWait, TimeUnit timeUnit) {
+		try {
+			long secondsToWait = timeUnit.convert(timeToWait, TimeUnit.SECONDS) * 1000;
+			if (secondsToWait > Integer.MAX_VALUE) {
+				secondsToWait = Integer.MAX_VALUE;
+			}
+			System.out.println("Sleeping for "+secondsToWait+" seconds...");
+			Thread.sleep((int) secondsToWait);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * Instructs the browser (thread) to wait (sleep) for the time <b>in seconds</b> passed as argument.<br>
+	 * <br>
+	 * Example: <code>$.browser.sleep(10); // sleeps for 10 seconds</code>
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public void sleep(int timeToWaitInSeconds) {
+		sleep(timeToWaitInSeconds, TimeUnit.SECONDS);
 	}
 
 }

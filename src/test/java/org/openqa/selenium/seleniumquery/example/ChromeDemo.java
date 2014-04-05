@@ -33,7 +33,7 @@ public class ChromeDemo {
         
         // The line above throws an exception as that input never goes away in google.com.
 
-        $.browser.quit();
+        $.browser.quitDefaultBrowser();
     }
 
 }
