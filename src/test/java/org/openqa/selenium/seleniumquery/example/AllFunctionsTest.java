@@ -53,11 +53,33 @@ public class AllFunctionsTest {
 	}
 	
 	public void queryUntil() {
-		$(".myDivs").queryUntil().atLeastOneElement().is().present();
-		$(".myDivs").queryUntil().atLeastOneElement().is().enabled();
-		$(".myDivs").queryUntil().atLeastOneElement().is().visible();
-		$(".myDivs").queryUntil().atLeastOneElement().is().visibleAndEnabled();
-		$(".myDivs").queryUntil().atLeastOneElement().has().val("");
+		// .queryUntil() will requery the DOM every time
+		// .is() functions
+		$(".aDivDiv").queryUntil().is().present();
+		$(".myInput").queryUntil().is().enabled();
+		$(".aDivDiv").queryUntil().is().visible();
+		$(".myInput").queryUntil().is().visibleAndEnabled();
+		// .has() functions
+		$(".myInput").queryUntil().has().val("expectedValue");
+		$(".aDivDiv").queryUntil().has().textContaining("expectedText");
+		// both .is() and .has() can use .not()
+		$(".myInput").queryUntil().is().not().enabled();
+		$(".myInput").queryUntil().has().not().val("expectedValue");
+		
+		// .waitUntil() will work only on the already matched set, and have the exact same set of functions
+		
+		// .is() functions
+		$(".aDivDiv").waitUntil().is().present();
+		$(".myInput").waitUntil().is().enabled();
+		$(".aDivDiv").waitUntil().is().visible();
+		$(".myInput").waitUntil().is().visibleAndEnabled();
+		// .has() functions
+		$(".myInput").waitUntil().has().valEqualTo("expectedValue");
+		$(".aDivDiv").waitUntil().has().textContaining("expectedText");
+		// both .is() and .has() can use .not()
+		$(".myInput").waitUntil().is().not().enabled();
+		$(".myInput").waitUntil().has().not().valEqualTo("expectedValue");
+		
 		
 		$(".myDivs").queryUntil().atLeast(5).have().textContaining("yo!");
 
