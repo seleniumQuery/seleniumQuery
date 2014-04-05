@@ -41,7 +41,7 @@ public class SeleniumQueryWaitUntilHas {
 		return new SeleniumQueryWaitUntilHas(quantifier, seleniumQueryObject, HAS_NOT);
 	}
 	
-	public SeleniumQueryObject value(String value) {
+	public SeleniumQueryObject valEqualTo(String value) {
 		return SeleniumQueryFluentWait.waitUntilIs(getDecoratedQuantifier(), decorateRestrictor(HasValEqualTo.hasValEqualTo(value)), seleniumQueryObject);
 	}
 	
