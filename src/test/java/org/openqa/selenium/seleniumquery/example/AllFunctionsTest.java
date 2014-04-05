@@ -60,11 +60,11 @@ public class AllFunctionsTest {
 		$(".aDivDiv").queryUntil().is().visible();
 		$(".myInput").queryUntil().is().visibleAndEnabled();
 		// .has() functions
-		$(".myInput").queryUntil().has().val("expectedValue");
+		$(".myInput").queryUntil().has().valEqualTo("expectedValue");
 		$(".aDivDiv").queryUntil().has().textContaining("expectedText");
 		// both .is() and .has() can use .not()
 		$(".myInput").queryUntil().is().not().enabled();
-		$(".myInput").queryUntil().has().not().val("expectedValue");
+		$(".myInput").queryUntil().has().not().valEqualTo("expectedValue");
 		
 		// .waitUntil() will work only on the already matched set, and have the exact same set of functions
 		
@@ -99,8 +99,8 @@ public class AllFunctionsTest {
 		$(".myDivs").queryUntil().atLeastOneElement().is().present();
 		$(".myDivs").queryUntil().atLeastOneElement().is().visible();
 		$(".myDivs").queryUntil().atLeastOneElement().is().visibleAndEnabled();
-		$(".enabledInputs").queryUntil().has().val("John");
-		$(".enabledInputs").queryUntil().has().not().val("Smith");
+		$(".enabledInputs").queryUntil().has().valEqualTo("John");
+		$(".enabledInputs").queryUntil().has().not().valEqualTo("Smith");
 	}
 
 }
