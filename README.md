@@ -115,7 +115,7 @@ $("#ajaxDiv").click().waitUntil().is().not().visible();
 
 For the currently implemented jQuery functions check the [supported list below](#supported-jquery-functions).
 
-In order to handle Ajax, you can use the `.queryUntil()` and `.waitUntil()` functions:
+In order to handle interactions with Ajax-enabled pages, you can use the `.queryUntil()` and `.waitUntil()` functions:
 - The `.queryUntil()` functions will requery for the elements until the given condition is met, returning a new seleniumQuery object when that happens.
 - The `.waitUntil()` will act only on the elements matched when the seleniumQuery object was built (the `$()` was called).
 
@@ -128,11 +128,11 @@ $(".myInput").queryUntil().is().enabled();
 $(".aDivDiv").queryUntil().is().visible();
 $(".myInput").queryUntil().is().visibleAndEnabled();
 // .has() functions
-$(".myInput").queryUntil().has().val("expectedValue");
+$(".myInput").queryUntil().has().valEqualTo("expectedValue");
 $(".aDivDiv").queryUntil().has().textContaining("expectedText");
 // both .is() and .has() can use .not()
 $(".myInput").queryUntil().is().not().enabled();
-$(".myInput").queryUntil().has().not().val("expectedValue");
+$(".myInput").queryUntil().has().not().valEqualTo("expectedValue");
 
 // .waitUntil() will work only on the already matched set, and have the exact same set of functions
 
