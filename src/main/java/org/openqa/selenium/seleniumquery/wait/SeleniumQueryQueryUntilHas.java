@@ -8,9 +8,10 @@ import org.openqa.selenium.seleniumquery.wait.quantifier.And;
 import org.openqa.selenium.seleniumquery.wait.quantifier.AtLeast;
 import org.openqa.selenium.seleniumquery.wait.quantifier.Every;
 import org.openqa.selenium.seleniumquery.wait.quantifier.Quantifier;
-import org.openqa.selenium.seleniumquery.wait.restrictor.Is;
+import org.openqa.selenium.seleniumquery.wait.restrictor.Not;
 import org.openqa.selenium.seleniumquery.wait.restrictor.Restrictor;
-import org.openqa.selenium.seleniumquery.wait.restrictor.has.TextContaining;
+import org.openqa.selenium.seleniumquery.wait.restrictor.has.HasValEqualTo;
+import org.openqa.selenium.seleniumquery.wait.restrictor.has.HasTextContaining;
 
 /**
  * @author acdcjunior
@@ -41,11 +42,11 @@ public class SeleniumQueryQueryUntilHas {
 	}
 	
 	public SeleniumQueryObject val(String value) {
-		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.withValue(value)), seleniumQueryObject);
+		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(HasValEqualTo.hasValEqualTo(value)), seleniumQueryObject);
 	}
 	
 	public SeleniumQueryObject textContaining(String text) {
-		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(TextContaining.textContaining(text)), seleniumQueryObject);
+		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(HasTextContaining.hasTextContaining(text)), seleniumQueryObject);
 	}
 	
 	/**
@@ -64,7 +65,7 @@ public class SeleniumQueryQueryUntilHas {
 	 */
 	private Restrictor decorateRestrictor(Restrictor restrictor) {
 		if (isNegation()) {
-			return Is.not(restrictor);
+			return Not.not(restrictor);
 		}
 		return restrictor;
 	}

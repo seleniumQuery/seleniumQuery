@@ -8,8 +8,12 @@ import org.openqa.selenium.seleniumquery.wait.quantifier.And;
 import org.openqa.selenium.seleniumquery.wait.quantifier.AtLeast;
 import org.openqa.selenium.seleniumquery.wait.quantifier.Every;
 import org.openqa.selenium.seleniumquery.wait.quantifier.Quantifier;
-import org.openqa.selenium.seleniumquery.wait.restrictor.Is;
+import org.openqa.selenium.seleniumquery.wait.restrictor.Not;
 import org.openqa.selenium.seleniumquery.wait.restrictor.Restrictor;
+import org.openqa.selenium.seleniumquery.wait.restrictor.is.IsEnabled;
+import org.openqa.selenium.seleniumquery.wait.restrictor.is.IsPresent;
+import org.openqa.selenium.seleniumquery.wait.restrictor.is.IsVisible;
+import org.openqa.selenium.seleniumquery.wait.restrictor.is.IsVisibleAndEnabled;
 
 public class SeleniumQueryQueryUntilIs {
 	
@@ -44,19 +48,19 @@ public class SeleniumQueryQueryUntilIs {
 	 * @since 0.4.0
 	 */
 	public SeleniumQueryObject visible() {
-		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.VISIBLE), seleniumQueryObject);
+		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(IsVisible.IS_VISIBLE), seleniumQueryObject);
 	}
 	
 	public SeleniumQueryObject enabled() {
-		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.ENABLED), seleniumQueryObject);
+		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(IsEnabled.IS_ENABLED), seleniumQueryObject);
 	}
 	
 	public SeleniumQueryObject present() {
-		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.PRESENT), seleniumQueryObject);
+		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(IsPresent.IS_PRESENT), seleniumQueryObject);
 	}
 	
 	public SeleniumQueryObject visibleAndEnabled() {
-		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(Is.VISIBLE_AND_ENABLED), seleniumQueryObject);
+		return SeleniumQueryFluentWait.queryUntilIs(getDecoratedQuantifier(), decorateRestrictor(IsVisibleAndEnabled.IS_VISIBLE_AND_ENABLED), seleniumQueryObject);
 	}
 	
 	/**
@@ -75,7 +79,7 @@ public class SeleniumQueryQueryUntilIs {
 	 */
 	private Restrictor decorateRestrictor(Restrictor restrictor) {
 		if (isNegation()) {
-			return Is.not(restrictor);
+			return Not.not(restrictor);
 		}
 		return restrictor;
 	}
