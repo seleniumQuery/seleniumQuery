@@ -44,7 +44,7 @@ public class AllFunctionsTest {
 
 	@Test
 	public void containsText() {
-		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().has().textContaining("isibleDix").val());
+		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().has().textContaining("isibleDi").val());
 	}
 	
 	@Test(expected=SeleniumQueryWaitException.class)
