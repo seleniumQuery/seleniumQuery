@@ -60,16 +60,16 @@ To get **seleniumQuery**'s latest snapshot, add this to your **`pom.xml`**:
 <!-- The project dependency -->
 <dependencies>
     <dependency>
-        <groupId>com.github.acdcjunior</groupId>
+        <groupId>com.github.fervet</groupId>
         <artifactId>seleniumquery</artifactId>
-        <version>0.4.0-RC1</version>
+        <version>0.4.0-RC2</version>
     </dependency>
 </dependencies>
 <!-- The repository URL, so maven can download it directly -->
 <repositories>
     <repository>
         <id>Repo for seleniumQuery</id>
-        <url>https://raw.github.com/acdcjunior/mvn-repo/master</url>
+        <url>https://raw.github.com/fervet/snapshots-repository/master</url>
     </repository>
 </repositories>
 `````
