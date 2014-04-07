@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.seleniumquery.by.enhancements.ContainsSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.EqSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.NotSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.SeleniumQueryEnhancement;
@@ -53,7 +54,8 @@ public class SeleniumQueryBy extends By {
 	 * @author acdcjunior
 	 * @since 0.2.0
 	 */
-	private static List<? extends SeleniumQueryEnhancement> enhancements = Arrays.asList(new NotSelector(), new EqSelector());
+	private static List<? extends SeleniumQueryEnhancement> enhancements = Arrays.asList(new NotSelector(), new EqSelector(),
+			new ContainsSelector());
 
 	private final String selector;
 	private boolean selectorIsXPathExpression;
