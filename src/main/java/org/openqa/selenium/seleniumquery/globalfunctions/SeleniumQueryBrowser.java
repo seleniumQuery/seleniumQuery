@@ -8,17 +8,15 @@ import org.openqa.selenium.seleniumquery.SeleniumQueryConfig;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
+/**
+ * @author acdcjunior
+ * @since 0.2.0
+ */
 public class SeleniumQueryBrowser {
 	
 	private WebDriver defaultDriver;
 	
-	public SeleniumQueryBrowser() {
-		HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_17);
-		driver.setJavascriptEnabled(true);
-		
-		this.defaultDriver = driver;
-		this.setDriverTimeout();
-	}
+	public SeleniumQueryBrowser() { }
 	
 	public SeleniumQueryBrowser setDefaultDriver(WebDriver defaultDriver) {
 		this.defaultDriver = defaultDriver;
@@ -31,9 +29,21 @@ public class SeleniumQueryBrowser {
 	}
 	
 	public WebDriver getDefaultDriver() {
+		if (this.defaultDriver == null) {
+			initializeHtmlUnitDefaultDriver();
+		}
 		return this.defaultDriver;
 	}
 	
+	private void initializeHtmlUnitDefaultDriver() {
+		@SuppressWarnings("deprecation")
+		HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_3_6);
+		driver.setJavascriptEnabled(true);
+		
+		this.defaultDriver = driver;
+		this.setDriverTimeout();
+	}
+
 	public void quitDefaultBrowser() {
 		this.defaultDriver.quit();
 	}
