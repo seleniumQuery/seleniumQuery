@@ -1,12 +1,10 @@
 package org.openqa.selenium.seleniumquery.globalfunctions;
 
+import java.lang.reflect.Constructor;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.seleniumquery.SeleniumQueryConfig;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 /**
  * @author acdcjunior
@@ -34,12 +32,22 @@ public class SeleniumQueryBrowser {
 		}
 		return this.defaultDriver;
 	}
-	
+
+	/**
+	 * Attempts to initialize the default driver with a HtmlUnitDriver, whatever
+	 * version is available at the classpath.
+	 */
 	private void initializeHtmlUnitDefaultDriver() {
-		@SuppressWarnings("deprecation")
-		HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_3_6);
-		driver.setJavascriptEnabled(true);
-		
+		WebDriver driver = null;
+		try {
+			Class<?> clazz = Class.forName("org.openqa.selenium.htmlunit.HtmlUnitDriver");
+			Constructor<?> constructor = clazz.getConstructor(Boolean.TYPE);
+			driver = (WebDriver) constructor.newInstance(true);
+		} catch (Exception e) {
+			throw new RuntimeException("No HtmlUnitDriver was found on the classpath. Please set " +
+					"the global default driver for seleniumQuery -- the $() functions -- through " +
+					"$.browser.setDefaultDriver(YourDriverClassInstance) before using it.");
+		}
 		this.defaultDriver = driver;
 		this.setDriverTimeout();
 	}
