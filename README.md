@@ -335,7 +335,7 @@ Looking for a function not listed below? The functions we did not add in the lis
 
 #jQuery Extension Selectors
 
-Below the list of current supported jQuery Extension selectors and soon to be supported
+Below the list of current supported jQuery Extension selectors and soon to be supported.
 
 As expected, the note jQuery usually displays in their extensions applies to seleniumQuery as well: Queries using the extended selectors cannot take advantage of the performance boost provided by the native DOM `querySelectorAll()` method. This way, if your code has performance issues, you may achive faster results by using native CSS selectors.
 
