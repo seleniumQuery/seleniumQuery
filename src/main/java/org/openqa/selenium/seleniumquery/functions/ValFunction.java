@@ -31,7 +31,7 @@ public class ValFunction {
 		if ("input".equals(element.getTagName())) {
 			return element.getAttribute("value");
 		} else if ("select".equals(element.getTagName())) {
-			return new Select(element).getFirstSelectedOption().getText();
+			return new Select(element).getFirstSelectedOption().getAttribute("value");
 		} else {
 			return element.getText();
 		}
@@ -56,7 +56,7 @@ public class ValFunction {
 	
 	private static void val(WebElement element, String value) {
 		if ("select".equals(element.getTagName())) {
-			new Select(element).selectByVisibleText(value);
+			new Select(element).selectByValue(value);
 		} else if ("input".equals(element.getTagName()) && "file".equals(element.getAttribute("type"))) {
 			element.sendKeys(value);
 		} else {
