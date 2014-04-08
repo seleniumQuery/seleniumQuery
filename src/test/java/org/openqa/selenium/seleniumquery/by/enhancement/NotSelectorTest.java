@@ -30,6 +30,7 @@ public class NotSelectorTest {
         assertThat($("div:not(.w00t)").size(), is(1));
     }
     
+    // jQuery returns: http://jsbin.com/miludaqe/1/edit
     @Test
     public void nesting_up_to_two_levels() {
         assertThat($("div.c3").size(), is(1));
