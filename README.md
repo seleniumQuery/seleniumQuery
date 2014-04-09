@@ -62,7 +62,7 @@ To get **seleniumQuery**'s latest snapshot, add this to your **`pom.xml`**:
     <dependency>
         <groupId>com.github.fervet</groupId>
         <artifactId>seleniumquery</artifactId>
-        <version>0.4.0-RC2</version>
+        <version>0.4.0-RC3</version>
     </dependency>
 </dependencies>
 <!-- The repository URL, so maven can download it directly -->
