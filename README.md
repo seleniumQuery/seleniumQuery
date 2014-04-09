@@ -194,7 +194,7 @@ Looking for a function not listed below? The functions we did not add in the lis
 - [`.removeAttr()`](http://api.jquery.com/removeAttr/) - Remove an attribute from each element in the set of matched elements.
 - [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
 
-###Soon (next snapshot roadmap)
+###Soon (next release roadmap)
 
 - [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
 
@@ -347,10 +347,11 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 
 ###Supported
 
-- [`:eq()` Selector](http://api.jquery.com/eq-selector/) -  Select the element at index n within the matched set.
+- [`:contains()` Selector](http://api.jquery.com/contains-selector/) - Select all elements that contain the specified text.
+- [`:eq()` Selector](http://api.jquery.com/eq-selector/) - Select the element at index n within the matched set.
 - [`:selected` Selector](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
 
-###Soon (next snapshot roadmap)
+###Soon (next release roadmap)
 
 - [`:input` Selector](http://api.jquery.com/input-selector/) - Selects all input, textarea, select and button elements.
 - [`:button` Selector](http://api.jquery.com/button-selector/) - Selects all button elements and elements of type button.
