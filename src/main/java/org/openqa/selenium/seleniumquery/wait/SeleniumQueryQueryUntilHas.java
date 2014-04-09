@@ -24,7 +24,7 @@ public class SeleniumQueryQueryUntilHas {
 	private Command command;
 	
 	public SeleniumQueryQueryUntilHas(SeleniumQueryObject seleniumQueryObject) {
-		this(Every.EVERY, seleniumQueryObject);
+		this(Every.EVERY, seleniumQueryObject, HAS);
 	}
 	
 	public SeleniumQueryQueryUntilHas(Quantifier quantifier, SeleniumQueryObject seleniumQueryObject) {
