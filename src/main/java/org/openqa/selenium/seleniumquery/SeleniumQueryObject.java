@@ -8,9 +8,15 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.seleniumquery.by.SeleniumQueryBy;
+import org.openqa.selenium.seleniumquery.functions.AttrFunction;
 import org.openqa.selenium.seleniumquery.functions.ClickFunction;
+import org.openqa.selenium.seleniumquery.functions.FindFunction;
 import org.openqa.selenium.seleniumquery.functions.FirstFunction;
+import org.openqa.selenium.seleniumquery.functions.GetFunction;
+import org.openqa.selenium.seleniumquery.functions.HtmlFunction;
 import org.openqa.selenium.seleniumquery.functions.NotFunction;
+import org.openqa.selenium.seleniumquery.functions.PropFunction;
+import org.openqa.selenium.seleniumquery.functions.RemoveAttrFunction;
 import org.openqa.selenium.seleniumquery.functions.TextFunction;
 import org.openqa.selenium.seleniumquery.functions.ValFunction;
 import org.openqa.selenium.seleniumquery.wait.SeleniumQueryQueryUntil;
@@ -212,23 +218,12 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
+	 * Get the current value of the first element in the set of matched elements.
+	 * 
 	 * @since 0.2.0
 	 */
 	public String val() {
 		return ValFunction.val(this.elements);
-	}
-	
-	/**
-	 * Retrieve one of the {@link WebElement} matched by the seleniumQuery object.
-	 * 
-	 * @param index A zero-based integer indicating which element to retrieve.
-	 * @return the element at the specified index.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.3.0
-	 */
-	public WebElement get(int index) {
-		return this.elements.get(index);
 	}
 	
 	/**
@@ -240,6 +235,103 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 */
 	public SeleniumQueryObject end() {
 		return this.previous;
+	}
+	
+	/**
+	 * Get the descendants of each element in the current set of matched elements, filtered by a selector.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public SeleniumQueryObject find(String selector) {
+		return FindFunction.find(this, elements, selector);
+	}
+	
+	/**
+	 * Get the value of an attribute for the first element in the set of matched elements.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public String attr(String attributeName) {
+		return AttrFunction.attr(this, elements, attributeName);
+	}
+	
+	/**
+	 * Set one or more attributes for every matched element.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public SeleniumQueryObject attr(String attributeName, Object value) {
+		return AttrFunction.attr(this, elements, attributeName, value);
+	}
+	
+	/**
+	 * Get the value of a property for the first element in the set of matched elements.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public <T> T prop(String propertyName) {
+		return PropFunction.<T>prop(this, elements, propertyName);
+	}
+	
+	/**
+	 * Set one or more properties for every matched element
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public SeleniumQueryObject prop(String propertyName, Object value) {
+		return PropFunction.prop(this, elements, propertyName, value);
+	}
+	
+	/**
+	 * Retrieve one of the {@link WebElement} matched by the seleniumQuery object.
+	 * 
+	 * @param index A zero-based integer indicating which element to retrieve.
+	 * @return the element at the specified index.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public WebElement get(int index) {
+		return GetFunction.get(elements, index);
+	}
+	
+	/**
+	 * Retrieve the {@link WebElement}s matched by the seleniumQuery object.
+	 * 
+	 * @param index A zero-based integer indicating which element to retrieve.
+	 * @return the element at the specified index.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public List<WebElement> get() {
+		return GetFunction.get(elements);
+	}
+	
+	/**
+	 * Remove an attribute from each element in the set of matched elements.
+	 * It can be a space-separated list of attributes.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public SeleniumQueryObject removeAttr(String attributeNames) {
+		return RemoveAttrFunction.removeAttr(this, elements, attributeNames);
+	}
+	
+	/**
+	 * Get the HTML contents of the first element in the set of matched elements.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.4.0
+	 */
+	public String html() {
+		return HtmlFunction.html(this, elements);
 	}
    
 }

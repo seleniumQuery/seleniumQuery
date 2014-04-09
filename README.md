@@ -173,7 +173,12 @@ jQuery("input.street").val("5th St!");
 
 #Supported jQuery Functions
 
-As seleniumQuery main goals are emulating user actions and "sensing" the pages, currently our intention is to implement functions that read ("sense") the state of the page plus those that manipulate forms. By following this principle, functions like `.val()` and `.hasClass()` are among our priorities, whereas `.addClass()` is (very much) not.
+As seleniumQuery main goals are emulating user actions and "sensing" the pages, currently our intention is to implement functions that read ("sense") the state of the page plus those that manipulate forms.
+
+By following the principle above, supporting functions like `.val()` and `.find()` are among our priorities, whereas `.addClass()` and `.attr('attributeName', 'attributeValue')` are not.
+
+Some functions, specially those that require JavaScript enabled in the browser/driver, take the best-case approach, in the sense that it may or may not work for specific versions of some browsers.
+Adding cross-browser support is among our goals, but keep in mind that user-emulating functions (as stated before) are our priorities and would be fixed first.
 
 Below you will find the list of current jQuery functions, by category, divided among supported and not supported by seleniumQuery.
 
@@ -183,19 +188,19 @@ Looking for a function not listed below? The functions we did not add in the lis
 
 ###Suported
 
+- [`.attr()`](http://api.jquery.com/attr/) - Get the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 - [`.html()`](http://api.jquery.com/html/) - Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
+- [`.prop()`](http://api.jquery.com/prop/) - Get the value of a property for the first element in the set of matched elements or set one or more properties for every matched element.
+- [`.removeAttr()`](http://api.jquery.com/removeAttr/) - Remove an attribute from each element in the set of matched elements.
 - [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
 
 ###Soon (next snapshot roadmap)
 
-- [`.attr()`](http://api.jquery.com/attr/) - Get the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 - [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
 
 ###Not supported
 
 - [`.addClass()`](http://api.jquery.com/addClass/) - Adds the specified class(es) to each of the set of matched elements.
-- [`.prop()`](http://api.jquery.com/prop/) - Get the value of a property for the first element in the set of matched elements or set one or more properties for every matched element.
-- [`.removeAttr()`](http://api.jquery.com/removeAttr/) - Remove an attribute from each element in the set of matched elements.
 - [`.removeClass()`](http://api.jquery.com/removeClass/) - Remove a single class, multiple classes, or all classes from each element in the set of matched elements.
 - [`.removeProp()`](http://api.jquery.com/removeProp/) - Remove a property for the set of matched elements.
 - [`.toggleClass()`](http://api.jquery.com/toggleClass/) - Add or remove one or more classes from each element in the set of matched elements, depending on either the class’s presence or the value of the switch argument.
@@ -289,6 +294,7 @@ Looking for a function not listed below? The functions we did not add in the lis
 
 ###Supported
 
+- [`.find()`](http://api.jquery.com/find/) - Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
 - [`.first()`](http://api.jquery.com/first/) - Reduce the set of matched elements to the first in the set.
 - [`.not()`](http://api.jquery.com/not/) - Remove elements from the set of matched elements.
 - [`.parent()`](http://api.jquery.com/parent/) - Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
@@ -297,7 +303,7 @@ Looking for a function not listed below? The functions we did not add in the lis
 
 - [`.children()`](http://api.jquery.com/children/) - Get the children of each element in the set of matched elements, optionally filtered by a selector.
 - [`.eq()`](http://api.jquery.com/eq/) - Reduce the set of matched elements to the one at the specified index.
-- [`.find()`](http://api.jquery.com/find/) - Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
+
 
 ###Not supported
 
@@ -340,11 +346,12 @@ Below the list of current supported jQuery Extension selectors and soon to be su
 As expected, the note jQuery usually displays in their extensions applies to seleniumQuery as well: Queries using the extended selectors cannot take advantage of the performance boost provided by the native DOM `querySelectorAll()` method. This way, if your code has performance issues, you may achive faster results by using native CSS selectors.
 
 ###Supported
+
 - [`:eq()` Selector](http://api.jquery.com/eq-selector/) -  Select the element at index n within the matched set.
+- [`:selected` Selector](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
 
 ###Soon (next snapshot roadmap)
 
-- [`:selected` Selector](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
 - [`:input` Selector](http://api.jquery.com/input-selector/) - Selects all input, textarea, select and button elements.
 - [`:button` Selector](http://api.jquery.com/button-selector/) - Selects all button elements and elements of type button.
 - [`:checkbox` Selector](http://api.jquery.com/checkbox-selector/) - Selects all elements of type checkbox.
