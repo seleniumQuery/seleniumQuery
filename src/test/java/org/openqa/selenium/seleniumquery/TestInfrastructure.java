@@ -16,7 +16,6 @@ public class TestInfrastructure {
 	 * This method exists so we can, from time to time, run all tests in a different browser.
 	 */
 	public static WebDriver getDriver() {
-		@SuppressWarnings("deprecation")
 		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_3_6);
 		
 		htmlUnitDriver.setJavascriptEnabled(true);
