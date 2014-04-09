@@ -19,7 +19,8 @@ public class ValFunction {
 	}
 
 	/**
-	 * Gets the value of the given element.
+	 * <p>Gets the value of the given element, if its tag name is INPUT, OPTION, SELECT or TEXTAREA.</p>
+	 * Otherwise it returns an empty string.
 	 * 
 	 * @param element The element you want the value of.
 	 * @return The value of the element.
@@ -28,13 +29,15 @@ public class ValFunction {
 	 * @since 0.3.0
 	 */
 	public static String val(WebElement element) {
-		if ("input".equals(element.getTagName())) {
+		String tagName = element.getTagName();
+		if ("input".equals(tagName) || "option".equals(tagName)) {
 			return element.getAttribute("value");
-		} else if ("select".equals(element.getTagName())) {
+		} else if ("select".equals(tagName)) {
 			return new Select(element).getFirstSelectedOption().getAttribute("value");
-		} else {
+		} else if ("textarea".equals(tagName)) {
 			return element.getText();
 		}
+		return "";
 	}
 	
 	/**
