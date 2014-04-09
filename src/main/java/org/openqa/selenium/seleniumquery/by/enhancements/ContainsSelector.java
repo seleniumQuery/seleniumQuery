@@ -11,7 +11,10 @@ import org.openqa.selenium.seleniumquery.by.SeleniumQueryBy;
 
 public class ContainsSelector implements SeleniumQueryEnhancement {
 	
-	private static final String CONTAINS_PATTERN = "(.*)"+":contains"+"\\("+"([^)]+)"+"\\)";
+	/**
+	 * With lookbehind to allow escaping: http://regex101.com/r/rC1eZ5
+	 */
+	private static final String CONTAINS_PATTERN = "(.*)"+"(?<!\\\\):"+ "contains"+"\\((\"(?:\\\\.|[^\"])*\"|'(?:\\\\.|[^'])*'|[^)]+)\\)";
 
 	@Override
 	public boolean isApplicable(String selector) {
@@ -27,13 +30,9 @@ public class ContainsSelector implements SeleniumQueryEnhancement {
 		Matcher m = p.matcher(selector);
 		if (m.find()) {
 			effectiveSelector = m.group(1);
-			textToContain = m.group(2);
+			textToContain = removeQuotes(m.group(2));
 		}
 		
-		if (textToContain.matches("^['\"].*['\"]$")) {
-			textToContain = textToContain.substring(1, textToContain.length()-2);
-		}
-
 		List<WebElement> elementsFound = SeleniumQueryBy.byEnhancedSelector(effectiveSelector).findElements(context);
 		
 		for (Iterator<WebElement> iterator = elementsFound.iterator(); iterator.hasNext();) {
@@ -44,6 +43,13 @@ public class ContainsSelector implements SeleniumQueryEnhancement {
 		}
 
 		return elementsFound;
+	}
+
+	public String removeQuotes(String text) {
+		if (text.matches("^['\"].*['\"]$")) {
+			return text.substring(1, text.length()-1);
+		}
+		return text;
 	}
 
 }
