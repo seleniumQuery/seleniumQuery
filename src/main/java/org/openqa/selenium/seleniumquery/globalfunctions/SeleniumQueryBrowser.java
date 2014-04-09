@@ -2,8 +2,9 @@ package org.openqa.selenium.seleniumquery.globalfunctions;
 
 import java.lang.reflect.Constructor;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.seleniumquery.SeleniumQueryConfig;
 
@@ -13,7 +14,7 @@ import org.openqa.selenium.seleniumquery.SeleniumQueryConfig;
  */
 public class SeleniumQueryBrowser {
 	
-    private static final Logger logger = Logger.getLogger(SeleniumQueryBrowser.class.getName());
+    private static final Log LOGGER = LogFactory.getLog(SeleniumQueryBrowser.class);
 	
 	private WebDriver defaultDriver;
 	
@@ -42,12 +43,12 @@ public class SeleniumQueryBrowser {
 	 */
 	private void initializeHtmlUnitDefaultDriver() {
 		try {
-			logger.fine("No default browser was set. Attempting to initialize HtmlUnitDriver.");
+			LOGGER.debug("No default browser was set. Attempting to initialize HtmlUnitDriver.");
 			Class<?> clazz = Class.forName("org.openqa.selenium.htmlunit.HtmlUnitDriver");
 			Constructor<?> constructor = clazz.getConstructor(Boolean.TYPE);
 			WebDriver driver = (WebDriver) constructor.newInstance(true);
 			setDefaultDriver(driver);
-			logger.fine("Initialized HtmlUnitDriver as default driver.");
+			LOGGER.debug("Initialized HtmlUnitDriver as default driver.");
 		} catch (Exception e) {
 			throw new RuntimeException("No HtmlUnitDriver was found on the classpath. Please set " +
 					"the global default driver for seleniumQuery -- the $() functions -- through " +
@@ -77,7 +78,7 @@ public class SeleniumQueryBrowser {
 			if (secondsToWait > Integer.MAX_VALUE) {
 				secondsToWait = Integer.MAX_VALUE;
 			}
-			logger.fine("Sleeping for "+secondsToWait+" milliseconds.");
+			LOGGER.debug("Sleeping for "+secondsToWait+" milliseconds.");
 			Thread.sleep((int) secondsToWait);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
