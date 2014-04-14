@@ -8,9 +8,11 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.seleniumquery.by.enhancements.ContainsSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.EqSelector;
+import org.openqa.selenium.seleniumquery.by.enhancements.HiddenSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.NotSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.SelectedSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.SeleniumQueryEnhancement;
+import org.openqa.selenium.seleniumquery.by.enhancements.VisibleSelector;
 
 /**
  * This By is a combination of the By.xpath and By.css, where the css is also enhanced with some of
@@ -21,6 +23,15 @@ import org.openqa.selenium.seleniumquery.by.enhancements.SeleniumQueryEnhancemen
  * @since 0.2.0
  */
 public class SeleniumQueryBy extends By {
+	
+	/**
+	 * Enhancements to be applied to selector.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.2.0
+	 */
+	private static List<? extends SeleniumQueryEnhancement> enhancements = Arrays.asList(new NotSelector(), new EqSelector(),
+			new ContainsSelector(), new SelectedSelector(), new VisibleSelector(), new HiddenSelector());
 	
 	/**
 	 * A By to be used in an element created with no By. Attempting to filter elements through this By
@@ -48,15 +59,6 @@ public class SeleniumQueryBy extends By {
 		}
 		return new SeleniumQueryBy(selector);
 	}
-	
-	/**
-	 * Enhancements to be applied to selector.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
-	 */
-	private static List<? extends SeleniumQueryEnhancement> enhancements = Arrays.asList(new NotSelector(), new EqSelector(),
-			new ContainsSelector(), new SelectedSelector());
 
 	private final String selector;
 	private boolean selectorIsXPathExpression;
