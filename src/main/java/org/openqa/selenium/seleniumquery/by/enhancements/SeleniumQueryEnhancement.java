@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public interface SeleniumQueryEnhancement {
 
-	public abstract boolean isApplicable(String selector);
+	public abstract boolean isApplicable(String selector, SearchContext context);
 
 	public abstract List<WebElement> apply(String selector, SearchContext context);
 

@@ -17,7 +17,7 @@ public class ContainsSelector implements SeleniumQueryEnhancement {
 	private static final String CONTAINS_PATTERN = "(.*)"+"(?<!\\\\):"+"contains"+"\\((\"(?:\\\\.|[^\"])*\"|'(?:\\\\.|[^'])*'|[^)]+)\\)";
 
 	@Override
-	public boolean isApplicable(String selector) {
+	public boolean isApplicable(String selector, SearchContext context) {
 		return selector.matches(CONTAINS_PATTERN);
 	}
 

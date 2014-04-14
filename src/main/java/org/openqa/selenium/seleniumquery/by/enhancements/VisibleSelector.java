@@ -19,7 +19,7 @@ public class VisibleSelector implements SeleniumQueryEnhancement {
 	private static final String VISIBLE_PATTERN = "(.*)"+"(?<!\\\\):"+"visible";
 
 	@Override
-	public boolean isApplicable(String selector) {
+	public boolean isApplicable(String selector, SearchContext context) {
 		return selector.matches(VISIBLE_PATTERN);
 	}
 

@@ -1,5 +1,6 @@
 package org.openqa.selenium.seleniumquery.by.enhancements;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -14,20 +15,22 @@ import org.openqa.selenium.seleniumquery.by.SeleniumQueryBy;
  * @author acdcjunior
  * @since 0.5.0
  */
-public class HiddenSelector implements SeleniumQueryEnhancement {
+public class DisabledSelector implements SeleniumQueryEnhancement {
 	
-	private static final String HIDDEN_PATTERN = "(.*)"+"(?<!\\\\):"+"hidden";
+	private static final String DISABLED_PATTERN = "(.*)"+"(?<!\\\\):"+"disabled";
+	
+	private static final List<String> ALLOWED_TAGS = Arrays.asList("input", "button", "optgroup", "option", "select", "textarea");
 
 	@Override
 	public boolean isApplicable(String selector, SearchContext context) {
-		return selector.matches(HIDDEN_PATTERN);
+		return selector.matches(DISABLED_PATTERN) && !supportsEnabledNatively(context);
 	}
 
 	@Override
 	public List<WebElement> apply(String selector, SearchContext context) {
 		String effectiveSelector = selector;
 		
-		Pattern p = Pattern.compile(HIDDEN_PATTERN);
+		Pattern p = Pattern.compile(DISABLED_PATTERN);
 		Matcher m = p.matcher(selector);
 		
 		m.find(); // trigger regex matching so .group() is available
@@ -42,12 +45,21 @@ public class HiddenSelector implements SeleniumQueryEnhancement {
 		
 		for (Iterator<WebElement> iterator = elementsFound.iterator(); iterator.hasNext();) {
 			WebElement webElement = iterator.next();
-			if (webElement.isDisplayed()) {
+			if (webElement.isEnabled() || !ALLOWED_TAGS.contains(webElement.getTagName())) {
 				iterator.remove();
 			}
 		}
 
 		return elementsFound;
+	}
+	
+	private boolean supportsEnabledNatively(SearchContext context) {
+		try {
+			By.cssSelector("#AAA_SomeIdThatShouldNotExist:disabled").findElements(context);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

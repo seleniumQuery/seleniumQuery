@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.seleniumquery.by.enhancements.ContainsSelector;
+import org.openqa.selenium.seleniumquery.by.enhancements.DisabledSelector;
+import org.openqa.selenium.seleniumquery.by.enhancements.EnabledSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.EqSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.HiddenSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.NotSelector;
@@ -31,7 +33,8 @@ public class SeleniumQueryBy extends By {
 	 * @since 0.2.0
 	 */
 	private static List<? extends SeleniumQueryEnhancement> enhancements = Arrays.asList(new NotSelector(), new EqSelector(),
-			new ContainsSelector(), new SelectedSelector(), new VisibleSelector(), new HiddenSelector());
+			new ContainsSelector(), new SelectedSelector(), new VisibleSelector(), new HiddenSelector(), new EnabledSelector(),
+			new DisabledSelector());
 	
 	/**
 	 * A By to be used in an element created with no By. Attempting to filter elements through this By
@@ -137,7 +140,7 @@ public class SeleniumQueryBy extends By {
 	 */
 	private List<WebElement> enhancedCssFindElements(SearchContext context) {
 		for (SeleniumQueryEnhancement enhancement : enhancements) {
-			if (enhancement.isApplicable(this.selector)) {
+			if (enhancement.isApplicable(this.selector, context)) {
 				return enhancement.apply(this.selector, context);
 			}
 		}

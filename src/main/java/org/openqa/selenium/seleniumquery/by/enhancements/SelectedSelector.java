@@ -27,7 +27,7 @@ public class SelectedSelector implements SeleniumQueryEnhancement {
 	private static final String SELECTED_PATTERN = "(.*)"+"(?<!\\\\):"+"selected";
 
 	@Override
-	public boolean isApplicable(String selector) {
+	public boolean isApplicable(String selector, SearchContext context) {
 		return selector.matches(SELECTED_PATTERN);
 	}
 

@@ -14,7 +14,7 @@ public class EqSelector implements SeleniumQueryEnhancement {
 	private static final String EQ_PATTERN = "(.*)"+"(?<!\\\\):"+"eq\\(([0-9]+)\\)$";
 
 	@Override
-	public boolean isApplicable(String selector) {
+	public boolean isApplicable(String selector, SearchContext context) {
 		return selector.matches(EQ_PATTERN);
 	}
 

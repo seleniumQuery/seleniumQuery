@@ -22,7 +22,7 @@ public class NotSelector implements SeleniumQueryEnhancement {
 	private static final String NOT_PATTERN = "(.*?)"+"(?<!\\\\):"+"not"+"\\("+"((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*)"+"\\)";
 	
 	@Override
-	public boolean isApplicable(String selector) {
+	public boolean isApplicable(String selector, SearchContext context) {
 		return selector.matches(NOT_PATTERN);
 	}
 
