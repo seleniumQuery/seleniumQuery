@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.seleniumquery.by.SeleniumQueryBy;
@@ -23,7 +24,7 @@ import org.openqa.selenium.seleniumquery.by.SeleniumQueryBy;
 public class SelectedSelector implements SeleniumQueryEnhancement {
 	
 	private static final String OPTION_TAG = "option";
-	private static final String SELECTED_PATTERN = "(.*):selected";
+	private static final String SELECTED_PATTERN = "(.*)"+"(?<!\\\\):"+"selected";
 
 	@Override
 	public boolean isApplicable(String selector) {
@@ -39,8 +40,13 @@ public class SelectedSelector implements SeleniumQueryEnhancement {
 		
 		m.find(); // trigger regex matching so .group() is available
 		effectiveSelector = m.group(1);
-
-		List<WebElement> elementsFound = SeleniumQueryBy.byEnhancedSelector(effectiveSelector).findElements(context);
+		
+		List<WebElement> elementsFound = null;
+		if (effectiveSelector.isEmpty()) {
+			elementsFound = new By.ByCssSelector("*").findElements(context);
+		} else {
+			elementsFound = SeleniumQueryBy.byEnhancedSelector(effectiveSelector).findElements(context);
+		}
 		
 		for (Iterator<WebElement> iterator = elementsFound.iterator(); iterator.hasNext();) {
 			WebElement webElement = iterator.next();

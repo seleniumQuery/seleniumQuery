@@ -14,7 +14,7 @@ public class ContainsSelector implements SeleniumQueryEnhancement {
 	/**
 	 * With lookbehind to allow escaping: http://regex101.com/r/rC1eZ5
 	 */
-	private static final String CONTAINS_PATTERN = "(.*)"+"(?<!\\\\):"+ "contains"+"\\((\"(?:\\\\.|[^\"])*\"|'(?:\\\\.|[^'])*'|[^)]+)\\)";
+	private static final String CONTAINS_PATTERN = "(.*)"+"(?<!\\\\):"+"contains"+"\\((\"(?:\\\\.|[^\"])*\"|'(?:\\\\.|[^'])*'|[^)]+)\\)";
 
 	@Override
 	public boolean isApplicable(String selector) {

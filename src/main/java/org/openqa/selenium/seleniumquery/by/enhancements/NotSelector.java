@@ -19,7 +19,7 @@ public class NotSelector implements SeleniumQueryEnhancement {
 	 * 
 	 * In the future, the intention is to switch for a, hopefully, simple, lightweight parser approach.
 	 */
-	private static final String NOT_PATTERN = "(.*?)"+":not"+"\\("+"((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*)"+"\\)";
+	private static final String NOT_PATTERN = "(.*?)"+"(?<!\\\\):"+"not"+"\\("+"((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*)"+"\\)";
 	
 	@Override
 	public boolean isApplicable(String selector) {

@@ -11,9 +11,11 @@ import org.openqa.selenium.seleniumquery.by.SeleniumQueryBy;
 
 public class EqSelector implements SeleniumQueryEnhancement {
 	
+	private static final String EQ_PATTERN = "(.*)"+"(?<!\\\\):"+"eq\\(([0-9]+)\\)$";
+
 	@Override
 	public boolean isApplicable(String selector) {
-		return selector.matches(".*:eq\\([0-9]+\\)$");
+		return selector.matches(EQ_PATTERN);
 	}
 
 	@Override
@@ -21,7 +23,7 @@ public class EqSelector implements SeleniumQueryEnhancement {
 		String effectiveSelector = selector;
 		Integer eqIndex = null;
 		
-		Pattern p = Pattern.compile("(.*):eq\\(([0-9]+)\\)$");
+		Pattern p = Pattern.compile(EQ_PATTERN);
 		Matcher m = p.matcher(selector);
 		
 		m.find(); // trigger regex matching so .group() is available

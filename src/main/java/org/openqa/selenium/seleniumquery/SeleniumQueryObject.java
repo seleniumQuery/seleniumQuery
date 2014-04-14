@@ -14,6 +14,7 @@ import org.openqa.selenium.seleniumquery.functions.FindFunction;
 import org.openqa.selenium.seleniumquery.functions.FirstFunction;
 import org.openqa.selenium.seleniumquery.functions.GetFunction;
 import org.openqa.selenium.seleniumquery.functions.HtmlFunction;
+import org.openqa.selenium.seleniumquery.functions.IsFunction;
 import org.openqa.selenium.seleniumquery.functions.NotFunction;
 import org.openqa.selenium.seleniumquery.functions.PropFunction;
 import org.openqa.selenium.seleniumquery.functions.RemoveAttrFunction;
@@ -332,6 +333,14 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 */
 	public String html() {
 		return HtmlFunction.html(this, elements);
+	}
+	
+	/**
+	 * @author acdcjunior
+	 * @since 0.5.0
+	 */
+	public boolean is(String selector) {
+		return IsFunction.is(this, elements, selector);
 	}
    
 }
