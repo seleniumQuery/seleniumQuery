@@ -339,17 +339,22 @@ Looking for a function not listed below? The functions we did not add in the lis
     - This functionality is available through the `.getBy()` function and, as `.selector` was, depending on the context, is not always available.
 
 
-#jQuery Extension Selectors
+#CSS and jQuery Extension Selectors
 
-Below the list of current supported jQuery Extension selectors and soon to be supported.
+Below the list of current supported noteworthy CSS and jQuery Extension selectors.
 
 As expected, the note jQuery usually displays in their extensions applies to seleniumQuery as well: Queries using the extended selectors cannot take advantage of the performance boost provided by the native DOM `querySelectorAll()` method. This way, if your code has performance issues, you may achive faster results by using native CSS selectors.
 
 ###Supported
 
+- [`:checked` Selector](https://api.jquery.com/checked-selector/) - Matches all elements that are checked or selected.
 - [`:contains()` Selector](http://api.jquery.com/contains-selector/) - Select all elements that contain the specified text.
+- [`:disabled` Selector](http://api.jquery.com/disabled-selector/) - Selects all elements that are disabled.
+- [`:enabled` Selector](http://api.jquery.com/enabled-selector/) - Selects all elements that are enabled.
 - [`:eq()` Selector](http://api.jquery.com/eq-selector/) - Select the element at index n within the matched set.
+- [`:hidden` Selector](http://api.jquery.com/hidden-selector/) - Selects all elements that are hidden.
 - [`:selected` Selector](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
+- [`:visible` Selector](http://api.jquery.com/visible-selector/) - Selects all elements that are visible.
 
 ###Soon (next release roadmap)
 
@@ -374,8 +379,7 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - [`:animated` Selector](http://api.jquery.com/animated-selector/) -  Select all elements that are in the progress of an animation at the time the selector is run.
 - [Attribute Not Equal Selector `[name!="value"]`](http://api.jquery.com/attribute-not-equal-selector/) - Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.
 - [`:file` Selector](http://api.jquery.com/file-selector/) - Selects all elements of type file.
+- [`:focus` Selector](http://api.jquery.com/focus-selector/) - Selects element if it is currently focused.
 - [`:has()` Selector](http://api.jquery.com/has-selector/) - Selects elements which contain at least one element that matches the specified selector.
-- [`:hidden` Selector](http://api.jquery.com/hidden-selector/) - Selects all elements that are hidden.
 - [`:image` Selector](http://api.jquery.com/image-selector/) -  Selects all elements of type image.
 - [`:parent` Selector](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text).
-- [`:visible` Selector](http://api.jquery.com/visible-selector/) - Selects all elements that are visible.

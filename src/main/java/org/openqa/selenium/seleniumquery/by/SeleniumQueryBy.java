@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.seleniumquery.by.enhancements.CheckedSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.ContainsSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.DisabledSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.EnabledSelector;
@@ -34,7 +35,7 @@ public class SeleniumQueryBy extends By {
 	 */
 	private static List<? extends SeleniumQueryEnhancement> enhancements = Arrays.asList(new NotSelector(), new EqSelector(),
 			new ContainsSelector(), new SelectedSelector(), new VisibleSelector(), new HiddenSelector(), new EnabledSelector(),
-			new DisabledSelector());
+			new DisabledSelector(), new CheckedSelector());
 	
 	/**
 	 * A By to be used in an element created with no By. Attempting to filter elements through this By

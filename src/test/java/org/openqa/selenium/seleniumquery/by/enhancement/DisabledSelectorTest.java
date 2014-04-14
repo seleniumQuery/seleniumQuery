@@ -17,18 +17,18 @@ public class DisabledSelectorTest {
 	}
 
     @Test
-    public void enabled_selector() {
+    public void disabled_selector() {
     	assertThat($("*").size(), is(27));
     	assertThat($(":disabled").size(), is(8));
     }
     
     @Test
-    public void enabled_selector_with_not() {
+    public void  disabled_selector_with_not() {
     	assertThat($(":not(:disabled)").size(), is(19));
     }
 
     @Test
-    public void enabled_selector_with_others() {
+    public void  disabled_selector_with_IS() {
     	assertThat($("#enabledInput").is(":disabled"), is(false));
     	assertThat($("#disabledInput").is(":disabled"), is(true));
     	assertThat($("#enabledTextArea").is(":disabled"), is(false));

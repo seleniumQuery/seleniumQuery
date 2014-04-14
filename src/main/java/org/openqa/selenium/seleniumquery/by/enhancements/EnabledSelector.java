@@ -1,5 +1,7 @@
 package org.openqa.selenium.seleniumquery.by.enhancements;
 
+import static org.openqa.selenium.seleniumquery.by.enhancements.SeleniumQueryEnhancementUtils.supportsNatively;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -23,7 +25,7 @@ public class EnabledSelector implements SeleniumQueryEnhancement {
 
 	@Override
 	public boolean isApplicable(String selector, SearchContext context) {
-		return selector.matches(ENABLED_PATTERN) && !supportsEnabledNatively(context);
+		return selector.matches(ENABLED_PATTERN) && !supportsNatively(":enabled", context);
 	}
 
 	@Override
@@ -53,13 +55,4 @@ public class EnabledSelector implements SeleniumQueryEnhancement {
 		return elementsFound;
 	}
 	
-	private boolean supportsEnabledNatively(SearchContext context) {
-		try {
-			By.cssSelector("#AAA_SomeIdThatShouldNotExist:enabled").findElements(context);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
 }

@@ -28,7 +28,7 @@ public class EnabledSelectorTest {
     }
 
     @Test
-    public void enabled_selector_with_others() {
+    public void enabled_selector_with_IS() {
     	assertThat($("#enabledInput").is(":enabled"), is(true));
     	assertThat($("#disabledInput").is(":enabled"), is(false));
     	assertThat($("#enabledTextArea").is(":enabled"), is(true));

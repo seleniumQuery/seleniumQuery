@@ -1,5 +1,6 @@
 package org.openqa.selenium.seleniumquery.by.enhancements;
 
+import static org.openqa.selenium.seleniumquery.by.enhancements.SeleniumQueryEnhancementUtils.isNotHtmlUnitDriver;
 import static org.openqa.selenium.seleniumquery.by.enhancements.SeleniumQueryEnhancementUtils.supportsNatively;
 
 import java.util.Arrays;
@@ -17,22 +18,30 @@ import org.openqa.selenium.seleniumquery.by.SeleniumQueryBy;
  * @author acdcjunior
  * @since 0.5.0
  */
-public class DisabledSelector implements SeleniumQueryEnhancement {
+public class CheckedSelector implements SeleniumQueryEnhancement {
 	
-	private static final String DISABLED_PATTERN = "(.*)"+"(?<!\\\\):"+"disabled";
+	private static final String CHECKED_PATTERN = "(.*)"+"(?<!\\\\):"+"checked";
 	
-	private static final List<String> ALLOWED_TAGS = Arrays.asList("input", "button", "optgroup", "option", "select", "textarea");
+	private static final List<String> ALLOWED_TAGS = Arrays.asList("input", "option");
 
 	@Override
 	public boolean isApplicable(String selector, SearchContext context) {
-		return selector.matches(DISABLED_PATTERN) && !supportsNatively(":disabled", context);
+		if (!selector.matches(CHECKED_PATTERN)) {
+			return false;
+		}
+		
+		// HtmlUnit's :checked is not consistent across versions, so we do it ourselves
+		if (isNotHtmlUnitDriver(context) && supportsNatively(":checked", context)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public List<WebElement> apply(String selector, SearchContext context) {
 		String effectiveSelector = selector;
 		
-		Pattern p = Pattern.compile(DISABLED_PATTERN);
+		Pattern p = Pattern.compile(CHECKED_PATTERN);
 		Matcher m = p.matcher(selector);
 		
 		m.find(); // trigger regex matching so .group() is available
@@ -47,12 +56,12 @@ public class DisabledSelector implements SeleniumQueryEnhancement {
 		
 		for (Iterator<WebElement> iterator = elementsFound.iterator(); iterator.hasNext();) {
 			WebElement webElement = iterator.next();
-			if (webElement.isEnabled() || !ALLOWED_TAGS.contains(webElement.getTagName())) {
+			if (!ALLOWED_TAGS.contains(webElement.getTagName()) || !webElement.isSelected()) {
 				iterator.remove();
 			}
 		}
 
 		return elementsFound;
 	}
-	
+
 }
