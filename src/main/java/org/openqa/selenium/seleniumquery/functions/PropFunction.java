@@ -3,17 +3,22 @@ package org.openqa.selenium.seleniumquery.functions;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.seleniumquery.SeleniumQueryObject;
 
 public class PropFunction {
 	
-	@SuppressWarnings("unchecked")
 	public static <T> T prop(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String propertyName) {
+		return prop(seleniumQueryObject.getWebDriver(), elements, propertyName);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> T prop(WebDriver driver, List<WebElement> elements, String propertyName) {
 		if (elements.isEmpty()) {
 			return null;
 		}
-		JavascriptExecutor js = (JavascriptExecutor) seleniumQueryObject.getWebDriver();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		return (T) js.executeScript("return arguments[0][arguments[1]]", elements.get(0), propertyName);
 	}
 	

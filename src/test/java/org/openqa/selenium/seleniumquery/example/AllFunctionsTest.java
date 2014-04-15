@@ -19,88 +19,72 @@ public class AllFunctionsTest {
 	
 	@Test
 	public void isPresent() {
-		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().is().present().text());
+		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().is(":present").then().text());
 	}
 
 	@Test
 	public void isNotPresent() {
-		assertNull($(".nonExistingDiv").waitUntil().is().not().present().text());
+		assertNull($(".nonExistingDiv").waitUntil().is(":not(:present)").then().text());
 	}
 
 	@Test
 	public void isVisible() {
-		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().is().visible().text());
+		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().is(":visible").then().text());
 	}
 
 	@Test
 	public void isNotVisible() {
-		assertEquals("", $(".invisibleDiv").waitUntil().is().not().visible().text());
+		assertEquals("", $(".invisibleDiv").waitUntil().is(":not(:visible)").then().text());
 	}
 
 	@Test
 	public void isVisibleAndEnabled() {
-		assertEquals("!enabledInput!", $(".enabledInput").waitUntil().is().visibleAndEnabled().val());
+		assertEquals("!enabledInput!", $(".enabledInput").waitUntil().is(":visible:enabled").then().val());
 	}
 
 	@Test
 	public void containsText() {
-		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().has().textContaining("isibleDi").text());
+		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().contains("isibleDi").then().text());
 	}
 	
 	@Test(expected=SeleniumQueryWaitException.class)
 	public void waitUntil_has_textContaininig__should_throw_an_exception_after_waiting_for_div_without_the_desired_text() {
-		$(".visibleDiv").waitUntil().has().textContaining("CRAZY TEXT THAT IT DOES NOT CONTAIN");
+		$(".visibleDiv").waitUntil().text().contains("CRAZY TEXT THAT IT DOES NOT CONTAIN");
 	}
 	
 	public void queryUntil() {
+		
+		
 		// .queryUntil() will requery the DOM every time
-		// .is() functions
-		$(".aDivDiv").queryUntil().is().present();
-		$(".myInput").queryUntil().is().enabled();
-		$(".aDivDiv").queryUntil().is().visible();
-		$(".myInput").queryUntil().is().visibleAndEnabled();
-		// .has() functions
-		$(".myInput").queryUntil().has().valEqualTo("expectedValue");
-		$(".aDivDiv").queryUntil().has().textContaining("expectedText");
+		// you can use .is()
+		$(".aDivDiv").queryUntil().is(":present").then().click();
+		$(".myInput").queryUntil().is(":enabled");
+		$(".aDivDiv").queryUntil().is(":visible");
+		$(".myInput").queryUntil().is(":visible:enabled");
+		// .val()
+		$(".myInput").queryUntil().val().isEqualTo("expectedValue");
+		// text()
+		$(".aDivDiv").queryUntil().text().contains("expectedText");
 		// both .is() and .has() can use .not()
-		$(".myInput").queryUntil().is().not().enabled();
-		$(".myInput").queryUntil().has().not().valEqualTo("expectedValue");
+		$(".myInput").queryUntil().is(":not(:enabled)");
+//		$(".myInput").queryUntil().val().not().isEqualTo("expectedValue");
 		
 		// .waitUntil() will work only on the already matched set, and have the exact same set of functions
 		
+		$(".myDivs").queryUntil().is(":present").and().size().isGreaterThan(7).then().click();
+		
 		// .is() functions
-		$(".aDivDiv").waitUntil().is().present();
-		$(".myInput").waitUntil().is().enabled();
-		$(".aDivDiv").waitUntil().is().visible();
-		$(".myInput").waitUntil().is().visibleAndEnabled();
+		$(".aDivDiv").waitUntil().is(":present");
+		$(".myInput").waitUntil().is(":enabled");
+		$(".aDivDiv").waitUntil().is(":visible");
+		$(".myInput").waitUntil().is(":visible:enabled");
 		// .has() functions
-		$(".myInput").waitUntil().has().valEqualTo("expectedValue");
-		$(".aDivDiv").waitUntil().has().textContaining("expectedText");
-		// both .is() and .has() can use .not()
-		$(".myInput").waitUntil().is().not().enabled();
-		$(".myInput").waitUntil().has().not().valEqualTo("expectedValue");
+		$(".myInput").waitUntil().val().isEqualTo("expectedValue");
+//		$(".aDivDiv").waitUntil().has().textContaining("expectedText");
+//		// both .is() and .has() can use .not()
+//		$(".myInput").waitUntil().is().not().enabled();
+//		$(".myInput").waitUntil().has().not().valEqualTo("expectedValue");
 		
-		
-		$(".myDivs").queryUntil().atLeast(5).have().textContaining("yo!");
-
-		$(".myDivs").queryUntil().atLeastOneElement().is().not().visible();
-		$(".myDivs").queryUntil().atLeastOneElement().is().not().visible();
-		
-		$(".myDivs").queryUntil().everyElement().is().not().visible();
-		$(".myDivs").queryUntil().noElement().is().not().visible();
-		$(".myDivs").queryUntil().atLeast(7).is().not().visible();
-		$(".myDivs").queryUntil().atLeast(7).are().not().visible();
-		$(".myDivs").queryUntil().atMost(7).is().not().visible();
-		$(".myDivs").queryUntil().exactlyOneElement().is().not().visible();
-		$(".myDivs").queryUntil().exactly(7).is().not().visible();
-		$(".myDivs").queryUntil().atLeastOneElement().is().not().visible();
-		$(".myDivs").queryUntil().everyElement().is().not().present();
-		$(".myDivs").queryUntil().noElement().is().visible();
-		$(".myDivs").queryUntil().atLeastOneElement().is().present();
-		$(".myDivs").queryUntil().atLeastOneElement().is().visible();
-		$(".myDivs").queryUntil().atLeastOneElement().is().visibleAndEnabled();
-		$(".enabledInputs").queryUntil().has().valEqualTo("John");
-		$(".enabledInputs").queryUntil().has().not().valEqualTo("Smith");
 	}
 
 }

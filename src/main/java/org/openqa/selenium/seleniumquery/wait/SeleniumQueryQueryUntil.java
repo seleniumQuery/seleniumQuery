@@ -1,15 +1,18 @@
 package org.openqa.selenium.seleniumquery.wait;
 
 import org.openqa.selenium.seleniumquery.SeleniumQueryObject;
-import org.openqa.selenium.seleniumquery.wait.quantifier.AtLeast;
-import org.openqa.selenium.seleniumquery.wait.quantifier.AtMost;
-import org.openqa.selenium.seleniumquery.wait.quantifier.Every;
-import org.openqa.selenium.seleniumquery.wait.quantifier.Exactly;
-import org.openqa.selenium.seleniumquery.wait.quantifier.None;
+import org.openqa.selenium.seleniumquery.wait.SeleniumQueryFluentWait.WaitMethod;
+import org.openqa.selenium.seleniumquery.wait.evaluators.IsEvaluator;
+import org.openqa.selenium.seleniumquery.wait.getters.AttrGetter;
+import org.openqa.selenium.seleniumquery.wait.getters.HtmlGetter;
+import org.openqa.selenium.seleniumquery.wait.getters.PropGetter;
+import org.openqa.selenium.seleniumquery.wait.getters.SizeGetter;
+import org.openqa.selenium.seleniumquery.wait.getters.TextGetter;
+import org.openqa.selenium.seleniumquery.wait.getters.ValGetter;
 
 /**
  * @author acdcjunior
- * @since 0.4.0
+ * @since 0.5.0
  */
 public class SeleniumQueryQueryUntil {
 	
@@ -17,90 +20,49 @@ public class SeleniumQueryQueryUntil {
 	
 	/**
 	 * @author acdcjunior
-	 * @since 0.4.0
+	 * @since 0.5.0
 	 */
 	public SeleniumQueryQueryUntil(SeleniumQueryObject seleniumQueryObject) {
 		this.seleniumQueryObject = seleniumQueryObject;
 	}
 	
-	/**
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public SeleniumQueryQueryUntilIs is() {
-		return new SeleniumQueryQueryUntilIs(seleniumQueryObject);
+	protected WaitMethod getWaitMethod() {
+		return SeleniumQueryFluentWait.QUERY_UNTIL;
 	}
 	
 	/**
+	 * Requeries the DOM <strong>until at least one element returned</strong> by a query to the selector used
+	 * to construct this seleniumQuery object <strong>is matched by the selector given</strong>.
+	 * 
 	 * @author acdcjunior
-	 * @since 0.4.0
+	 * @since 0.5.0
 	 */
-	public SeleniumQueryQueryUntilHas has() {
-		return new SeleniumQueryQueryUntilHas(seleniumQueryObject);
+	public SeleniumQueryAndOrThen is(String selector) {
+		return new SeleniumQueryAndOrThen(getWaitMethod().evaluateUntil(IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject));
 	}
 	
-	/**
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public SeleniumQueryQueryUntilQuantity atLeast(int minNumberOfElementsExpected) {
-		return new SeleniumQueryQueryUntilQuantity(new AtLeast(minNumberOfElementsExpected), seleniumQueryObject);
+	public SeleniumQueryEvaluateUntil<String> val() {
+		return new SeleniumQueryEvaluateUntil<String>(getWaitMethod(), ValGetter.VAL_GETTER, seleniumQueryObject);
 	}
 	
-	/**
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public SeleniumQueryQueryUntilQuantity exactly(int exactNumberOfElementsExpected) {
-		return new SeleniumQueryQueryUntilQuantity(new Exactly(exactNumberOfElementsExpected), seleniumQueryObject);
+	public SeleniumQueryEvaluateUntil<String> text() {
+		return new SeleniumQueryEvaluateUntil<String>(getWaitMethod(), TextGetter.TEXT_GETTER, seleniumQueryObject);
 	}
 	
-	/**
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public SeleniumQueryQueryUntilQuantity atMost(int maxNumberOfElementsExpected) {
-		return new SeleniumQueryQueryUntilQuantity(new AtMost(maxNumberOfElementsExpected), seleniumQueryObject);
+	public SeleniumQueryEvaluateUntil<String> attr(String attributeName) {
+		return new SeleniumQueryEvaluateUntil<String>(getWaitMethod(), new AttrGetter(attributeName), seleniumQueryObject);
 	}
 	
-	/**
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public SeleniumQueryQueryUntilQuantity everyElement() {
-		return new SeleniumQueryQueryUntilQuantity(Every.EVERY, seleniumQueryObject);
+	public <T> SeleniumQueryEvaluateUntil<T> prop(String propertyName) {
+		return new SeleniumQueryEvaluateUntil<T>(getWaitMethod(), new PropGetter<T>(propertyName), seleniumQueryObject);
 	}
 	
-	/**
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public SeleniumQueryQueryUntilQuantity noElement() {
-		return new SeleniumQueryQueryUntilQuantity(None.NONE, seleniumQueryObject);
+	public SeleniumQueryEvaluateUntil<String> html() {
+		return new SeleniumQueryEvaluateUntil<String>(getWaitMethod(), HtmlGetter.HTML_GETTER, seleniumQueryObject);
 	}
 	
-	/**
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public SeleniumQueryQueryUntilQuantity atLeastOneElement() {
-		return new SeleniumQueryQueryUntilQuantity(AtLeast.ONE, seleniumQueryObject);
-	}
-	
-	/**
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public SeleniumQueryQueryUntilQuantity exactlyOneElement() {
-		return new SeleniumQueryQueryUntilQuantity(Exactly.ONE, seleniumQueryObject);
-	}
-	
-	/**
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public SeleniumQueryQueryUntilQuantity atMostOneElement() {
-		return new SeleniumQueryQueryUntilQuantity(AtMost.ONE, seleniumQueryObject);
+	public SeleniumQueryEvaluateUntil<Integer> size() {
+		return new SeleniumQueryEvaluateUntil<Integer>(getWaitMethod(), SizeGetter.SIZE_GETTER, seleniumQueryObject);
 	}
 	
 }
