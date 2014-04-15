@@ -13,6 +13,7 @@ import org.openqa.selenium.seleniumquery.by.enhancements.EnabledSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.EqSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.HiddenSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.NotSelector;
+import org.openqa.selenium.seleniumquery.by.enhancements.PresentSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.SelectedSelector;
 import org.openqa.selenium.seleniumquery.by.enhancements.SeleniumQueryEnhancement;
 import org.openqa.selenium.seleniumquery.by.enhancements.VisibleSelector;
@@ -35,7 +36,7 @@ public class SeleniumQueryBy extends By {
 	 */
 	private static List<? extends SeleniumQueryEnhancement> enhancements = Arrays.asList(new NotSelector(), new EqSelector(),
 			new ContainsSelector(), new SelectedSelector(), new VisibleSelector(), new HiddenSelector(), new EnabledSelector(),
-			new DisabledSelector(), new CheckedSelector());
+			new DisabledSelector(), new CheckedSelector(), new PresentSelector());
 	
 	/**
 	 * A By to be used in an element created with no By. Attempting to filter elements through this By

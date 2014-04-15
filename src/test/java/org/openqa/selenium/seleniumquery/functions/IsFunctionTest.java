@@ -34,4 +34,17 @@ public class IsFunctionTest {
         assertThat($("#o2").is(":selected"), is(true));
     }
     
+	@Test
+	public void is_with_no_matched_sets() {
+		assertThat($("#mothafocka").is("#moo"), is(false));
+	}
+	
+	@Test
+	public void is_with_very_permissive_sets() {
+		assertThat($("*").is("*"), is(true));
+		assertThat($("div").is("div"), is(true)); 
+		assertThat($("div").is("*"), is(true)); 
+		assertThat($("*").is("div"), is(false));
+	}
+    
 }
