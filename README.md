@@ -1,4 +1,4 @@
-seleniumQuery v0.4.0 - jQuery in Selenium
+seleniumQuery v0.5.0 - jQuery in Selenium
 ======
 
 Java library that allows the use of a **jQuery-like native interface** for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
@@ -45,7 +45,7 @@ public class SeleniumQueryExample {
         // seleniumQuery are the .waitUntil. functions, especially handy for Ajax handling:
         
         /*
-        $("input[name='q']").waitUntil().is().not().present();
+        $("input[name='q']").waitUntil().is(":not(:present)");
         */
         
         // The line above throws an exception as that input never goes away in google.com.
@@ -104,10 +104,10 @@ Other important feature is the leverage of `WebDriver`'s `FluentWait` capabiliti
  * The code will only continue after it is gone. If not, it will throw a timeout exception.
  */
 $("#ajaxDiv").click();
-$("#ajaxDiv").waitUntil().is().not().visible();
+$("#ajaxDiv").waitUntil().is(":not").visible();
 
 // Or, fluently:
-$("#ajaxDiv").click().waitUntil().is().not().visible();
+$("#ajaxDiv").click().waitUntil().is(":not").visible();
 `````
 
 
@@ -123,29 +123,29 @@ In order to handle interactions with Ajax-enabled pages, you can use the `.query
 // .queryUntil() will requery the DOM every time until the matched set fulfills the requirements
 
 // .is() functions
-$(".aDivDiv").queryUntil().is().present();
-$(".myInput").queryUntil().is().enabled();
-$(".aDivDiv").queryUntil().is().visible();
-$(".myInput").queryUntil().is().visibleAndEnabled();
+$(".aDivDiv").queryUntil().is(":present");
+$(".myInput").queryUntil().is(":enabled");
+$(".aDivDiv").queryUntil().is(":visible");
+$(".myInput").queryUntil().is(":visibleAndEnabled");
 // .has() functions
 $(".myInput").queryUntil().has().valEqualTo("expectedValue");
 $(".aDivDiv").queryUntil().has().textContaining("expectedText");
 // both .is() and .has() can use .not()
-$(".myInput").queryUntil().is().not().enabled();
+$(".myInput").queryUntil().is(":not").enabled();
 $(".myInput").queryUntil().has().not().valEqualTo("expectedValue");
 
 // .waitUntil() will work only on the already matched set, and have the exact same set of functions
 
 // .is() functions
-$(".aDivDiv").waitUntil().is().present();
-$(".myInput").waitUntil().is().enabled();
-$(".aDivDiv").waitUntil().is().visible();
-$(".myInput").waitUntil().is().visibleAndEnabled();
+$(".aDivDiv").waitUntil().is(":present");
+$(".myInput").waitUntil().is(":enabled");
+$(".aDivDiv").waitUntil().is(":visible");
+$(".myInput").waitUntil().is(":visibleAndEnabled");
 // .has() functions
 $(".myInput").waitUntil().has().valEqualTo("expectedValue");
 $(".aDivDiv").waitUntil().has().textContaining("expectedText");
 // both .is() and .has() can use .not()
-$(".myInput").waitUntil().is().not().enabled();
+$(".myInput").waitUntil().is(":not").enabled();
 $(".myInput").waitUntil().has().not().valEqualTo("expectedValue");
 `````
 
