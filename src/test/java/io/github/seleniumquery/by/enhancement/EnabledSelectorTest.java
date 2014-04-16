@@ -1,12 +1,12 @@
 package io.github.seleniumquery.by.enhancement;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static io.github.seleniumquery.SeleniumQuery.$;
+import io.github.seleniumquery.TestInfrastructure;
 
 import org.junit.Before;
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
 
 public class EnabledSelectorTest {
 
@@ -33,6 +33,11 @@ public class EnabledSelectorTest {
     	assertThat($("#disabledInput").is(":enabled"), is(false));
     	assertThat($("#enabledTextArea").is(":enabled"), is(true));
     	assertThat($("#disabledTextArea").is(":enabled"), is(false));
+    }
+    
+    @Test
+    public void enabled_selector_with_visible() {
+    	assertThat($("#enabledInput").is(":visible:enabled"), is(true));
     }
 
 }
