@@ -14,7 +14,7 @@ public class CombinationNotEqSelectorTest {
 	@Before
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.location.href(TestInfrastructure.getHtmlTestFileUrl(EqSelectorTest.class));
+		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(EqSelectorTest.class));
 	}
 	
 	@Test

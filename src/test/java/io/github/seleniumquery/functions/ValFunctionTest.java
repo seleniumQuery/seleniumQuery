@@ -14,7 +14,7 @@ public class ValFunctionTest {
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
 
-		$.location.href(TestInfrastructure.getHtmlTestFileUrl(getClass()));
+		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 
 	// http://jsbin.com/qoqoqugu/1/edit

@@ -14,7 +14,7 @@ public class SeleniumQueryQueryUntilIsTest {
 	@Before
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.location.href(TestInfrastructure.getHtmlTestFileUrl(AllFunctionsTest.class));
+		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(AllFunctionsTest.class));
 	}
 
 	@Test

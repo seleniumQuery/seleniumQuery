@@ -13,7 +13,7 @@ public class FindFunctionTest {
     public void test() throws Exception {
         $.browser.setDefaultDriver(TestInfrastructure.getDriver());
         
-        $.location.href(TestInfrastructure.getHtmlTestFileUrl(getClass()));
+        $.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
         
         assertThat($("#combo").find("option").size(), is(6));
         assertThat($("#combo").find("option:selected").size(), is(2));

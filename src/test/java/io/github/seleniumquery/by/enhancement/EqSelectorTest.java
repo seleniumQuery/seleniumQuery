@@ -14,7 +14,7 @@ public class EqSelectorTest {
     public void testEqSelector() throws Exception {
         $.browser.setDefaultDriver(TestInfrastructure.getDriver());
         
-        $.location.href(TestInfrastructure.getHtmlTestFileUrl(getClass()));
+        $.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
         
         assertThat($("div").size(), is(3));
         assertThat($("div.c1:eq(0)").text(), is("Batman"));

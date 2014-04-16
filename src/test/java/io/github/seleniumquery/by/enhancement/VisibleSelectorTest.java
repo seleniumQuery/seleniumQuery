@@ -13,7 +13,7 @@ public class VisibleSelectorTest {
 	@Before
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.location.href(TestInfrastructure.getHtmlTestFileUrl(getClass()));
+		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 
     @Test

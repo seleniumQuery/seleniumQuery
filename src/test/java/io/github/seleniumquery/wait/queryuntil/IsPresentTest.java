@@ -12,7 +12,7 @@ public class IsPresentTest {
 	@Before
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.location.href(TestInfrastructure.getHtmlTestFileUrl(IsPresentTest.class));
+		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(IsPresentTest.class));
 	}
 	
 	@Test

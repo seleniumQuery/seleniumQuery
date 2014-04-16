@@ -13,7 +13,7 @@ public class SelectedSelectorTest {
     public void test() throws Exception {
         $.browser.setDefaultDriver(TestInfrastructure.getDriver());
         
-        $.location.href(TestInfrastructure.getHtmlTestFileUrl(getClass()));
+        $.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
         
         assertThat($("option").size(), is(6));
         assertThat($("option:selected").size(), is(2));

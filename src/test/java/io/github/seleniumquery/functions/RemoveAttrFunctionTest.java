@@ -15,7 +15,7 @@ public class RemoveAttrFunctionTest {
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
 
-		$.location.href(TestInfrastructure.getHtmlTestFileUrl(getClass()));
+		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 
 	// http://jsbin.com/lexuyesu/1/edit

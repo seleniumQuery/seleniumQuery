@@ -18,7 +18,7 @@ public class ChromeDemo {
     	
         $.browser.setDefaultDriver(driver);
 		
-        $.location.href("http://www.google.com");
+        $.browser.openUrl("http://www.google.com");
 
         $("input[name='q']").val("selenium");
         $("button[name='btnG']").click();

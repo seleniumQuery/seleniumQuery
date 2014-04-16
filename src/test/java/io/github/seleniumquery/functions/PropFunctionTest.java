@@ -15,7 +15,7 @@ public class PropFunctionTest {
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
 
-		$.location.href(TestInfrastructure.getHtmlTestFileUrl(getClass()));
+		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 
 	// http://jsbin.com/zofekalo/1/edit

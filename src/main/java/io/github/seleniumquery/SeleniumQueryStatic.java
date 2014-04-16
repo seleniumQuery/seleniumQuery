@@ -1,7 +1,6 @@
 package io.github.seleniumquery;
 
-import io.github.seleniumquery.globalfunctions.SeleniumQueryBrowser;
-import io.github.seleniumquery.globalfunctions.SeleniumQueryLocation;
+import io.github.seleniumquery.globalfunctions.SeleniumQueryDefaultBrowser;
 
 /**
  * Represents the seleniumQuery global object.
@@ -20,19 +19,10 @@ public class SeleniumQueryStatic {
 	 * @author acdcjunior
 	 * @since 0.2.0
 	 */
-	public final SeleniumQueryBrowser browser;
+	public final SeleniumQueryDefaultBrowser browser;
 	
-	/**
-	 * Series of functions that get or change the current URL/page displayed by the browser.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
-	 */
-	public final SeleniumQueryLocation location;
-
 	public SeleniumQueryStatic() {
-		this.browser = new SeleniumQueryBrowser();
-		this.location = new SeleniumQueryLocation(this.browser);
+		this.browser = new SeleniumQueryDefaultBrowser();
 	}
 
 }

@@ -14,7 +14,7 @@ public class CombinationEqNotSelectorTest {
     public void testEqSelector() throws Exception {
         $.browser.setDefaultDriver(TestInfrastructure.getDriver());
         
-        $.location.href(TestInfrastructure.getHtmlTestFileUrl(EqSelectorTest.class));
+        $.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(EqSelectorTest.class));
         
         assertThat($("div:eq(0):not(span)").text(), is("Batman"));
         assertThat($("div:eq(1):not(div)").text(), is(nullValue()));
