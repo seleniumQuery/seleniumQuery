@@ -10,6 +10,34 @@
 	<url>http://seleniumquery.github.io/</url>
 	<description>Cross-Driver (Cross-Browser) jQuery-like interface in Java for Selenium WebDriver.</description>
 
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Antonio C. Carvalho Jr.</name>
+			<email>acdcjunior@gmail.com</email>
+			<organization>seleniumQuery</organization>
+			<organizationUrl>http://seleniumquery.github.io/</organizationUrl>
+		</developer>
+		<developer>
+			<name>Ricardo S. Carvalho</name>
+			<email>ricardosc@gmail.com</email>
+			<organization>seleniumQuery</organization>
+			<organizationUrl>http://seleniumquery.github.io/</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git@github.com:seleniumquery/seleniumQuery.git</connection>
+		<developerConnection>scm:git:git@github.com:seleniumquery/seleniumQuery.git</developerConnection>
+		<url>git@github.com:seleniumquery/seleniumQuery.git</url>
+	</scm>
+
 	<properties>
 		<createChecksum>true</createChecksum>
 	</properties>
