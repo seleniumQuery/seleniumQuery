@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.SeleniumQueryLocalFactory;
+import io.github.seleniumquery.SQLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
 
@@ -16,7 +16,7 @@ public class FindFunction {
 			final List<WebElement> elementsBelowThisElement = webElement.findElements(SeleniumQueryBy.byEnhancedSelector(selector));
 			allElementsBelow.addAll(elementsBelowThisElement);
 		}
-		return SeleniumQueryLocalFactory.getInstance().create(seleniumQueryObject, allElementsBelow);
+		return SQLocalFactory.getInstance().create(seleniumQueryObject, allElementsBelow);
 	}
 
 }
