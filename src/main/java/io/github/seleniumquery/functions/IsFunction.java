@@ -1,15 +1,15 @@
 package io.github.seleniumquery.functions;
 
 import static io.github.seleniumquery.functions.NotPresentParser.NOT_PRESENT_PARSER;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.by.enhancements.PresentSelector;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.SeleniumQueryBy;
-import io.github.seleniumquery.by.enhancements.PresentSelector;
 
 public class IsFunction {
 	
@@ -18,34 +18,100 @@ public class IsFunction {
 	}
 	
 	public static boolean is(WebDriver driver, List<WebElement> elements, String selector) {
-		// if there is not a ":not(:present)", the matched set can't be empty - there must be at least one matched element
-		boolean canElemensFoundBeEmpty = false;
-		// if it has a negated :present, such as ":not(:present)", the matched set can be empty
-		if (NOT_PRESENT_PARSER.hasNegatedPresentSelector(selector)) {
-			canElemensFoundBeEmpty = true;
+		if (selector.trim().equals(":present")) {
+			return areAllElementsPresent(elements);
 		}
-		return privateIs(driver, elements, selector, canElemensFoundBeEmpty);
+		if (selector.trim().equals(":not(:present)")) {
+			return areAllElementsPresent(elements);
+		}
+		if (selector.trim().equals(":visible")) {
+			return areAllElementsVisible(elements);
+		}
+		if (selector.trim().equals(":not(:visible)")) {
+			return areAllElementsNotVisible(elements);
+		}
+		if (selector.trim().equals(":enabled")) {
+			return areAllElementsEnabled(elements);
+		}
+		if (selector.trim().equals(":not(:enabled)")) {
+			return areAllElementsNotEnabled(elements);
+		}
+		if (selector.trim().equals(":visible:enabled")) {
+			return areAllElementsVisible(elements) && areAllElementsEnabled(elements);
+		}
+		
+		
+		boolean hasNegatedPresent = NOT_PRESENT_PARSER.hasNegatedPresentSelector(selector);
+		return privateIs(driver, elements, selector, hasNegatedPresent);
 	}
-	
-	private static boolean privateIs(WebDriver driver, List<WebElement> elements, String selector, boolean canElemensFoundBeEmpty) {
-		List<WebElement> selectorElements = driver.findElements(SeleniumQueryBy.byEnhancedSelector(selector));
-		if (selectorElements.isEmpty() && canElemensFoundBeEmpty && elements.isEmpty()) {
-			return true;
-		}
-		if (selectorElements.isEmpty() && canElemensFoundBeEmpty && !elements.isEmpty()) {
+
+
+	private static boolean privateIs(WebDriver driver, List<WebElement> elements, String selector, boolean hasNegatedPresent) {
+		// if there is a ":not(:present)" the .findElements() will always return no elements
+		if (hasNegatedPresent) {
+			if (elements.isEmpty()) {
+				return true;
+			}
 			return areAllElementsNotPresent(elements);
 		}
-		// because elements is empty, the containsAll will always return true.
-		// but if we must find an element (aka canElemensFoundBeEmpty is false), then we should return false!
 		if (elements.isEmpty()) {
-			return canElemensFoundBeEmpty;
+			// because "elements" is empty, the .containsAll() will always return true.
+			// but as we reached this code, we must find an element (because hasNegatedPresent is false),
+			// then we should return false (because there are no elements)!
+			return false;
 		}
+		List<WebElement> selectorElements = driver.findElements(SeleniumQueryBy.byEnhancedSelector(selector));
 		return selectorElements.containsAll(elements);
 	}
 
 	private static boolean areAllElementsNotPresent(List<WebElement> elements) {
 		for (WebElement webElement : elements) {
 			if (PresentSelector.isPresent(webElement)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private static boolean areAllElementsPresent(List<WebElement> elements) {
+		for (WebElement webElement : elements) {
+			if (!PresentSelector.isPresent(webElement)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private static boolean areAllElementsVisible(List<WebElement> elements) {
+		for (WebElement webElement : elements) {
+			if (!webElement.isDisplayed()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private static boolean areAllElementsNotVisible(List<WebElement> elements) {
+		for (WebElement webElement : elements) {
+			if (webElement.isDisplayed()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private static boolean areAllElementsEnabled(List<WebElement> elements) {
+		for (WebElement webElement : elements) {
+			if (!webElement.isEnabled()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private static boolean areAllElementsNotEnabled(List<WebElement> elements) {
+		for (WebElement webElement : elements) {
+			if (webElement.isEnabled()) {
 				return false;
 			}
 		}
