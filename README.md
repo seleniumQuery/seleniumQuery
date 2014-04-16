@@ -41,11 +41,12 @@ public class SeleniumQueryExample {
         $("button[name='btnG']").click();
         System.out.println($("#resultStats").text());
 
-        // Besides the short syntax and the useful assumptions, the most useful capabilities of
-        // seleniumQuery are the .waitUntil. functions, especially handy for Ajax handling:
+        // Besides the short syntax and the useful assumptions, other very useful capabilities of
+        // seleniumQuery are the .queryUntil() and .waitUntil() functions, especially handy for
+        // handling/testing Ajax enabled pages:
         
         /*
-        $("input[name='q']").waitUntil().is(":not(:present)");
+        $("input[name='q']").queryUntil().is(":not(:present)");
         */
         
         // The line above throws an exception as that input never goes away in google.com.
@@ -54,7 +55,7 @@ public class SeleniumQueryExample {
     }
 }
 `````
-To get **seleniumQuery**'s latest snapshot, add this to your **`pom.xml`**:
+To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 
 `````xml
 <!-- The project dependency -->
