@@ -67,10 +67,14 @@ To get **seleniumQuery**'s latest snapshot, add this to your **`pom.xml`**:
 </dependencies>
 <!-- The repository URL, so maven can download it directly -->
 <repositories>
-    <repository>
-        <id>Repo for seleniumQuery</id>
-        <url>https://raw.github.com/seleniumquery/snapshots-repository/master</url>
-    </repository>
+	<repository>
+		<id>Repo for seleniumQuery</id>
+		<url>https://raw.githubusercontent.com/seleniumquery/snapshots-repository/master</url>
+		<snapshots>
+			<enabled>true</enabled>
+			<updatePolicy>always</updatePolicy>
+		</snapshots>
+	</repository>
 </repositories>
 `````
 
