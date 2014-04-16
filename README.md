@@ -35,7 +35,7 @@ public class SeleniumQueryExample {
     public static void main(String[] args) {
         $.browser.setDefaultDriver(new FirefoxDriver()); // sets the driver used by $()
         
-        $.location.href("http://www.google.com"); // opens a page
+        $.browser.openUrl("http://www.google.com");
         
         $("input[name='q']").val("selenium");
         $("button[name='btnG']").click();
