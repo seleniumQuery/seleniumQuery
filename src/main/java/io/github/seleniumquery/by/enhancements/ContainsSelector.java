@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import io.github.seleniumquery.by.SeleniumQueryBy;
@@ -33,7 +34,12 @@ public class ContainsSelector implements SeleniumQueryEnhancement {
 			textToContain = removeQuotes(m.group(2));
 		}
 		
-		List<WebElement> elementsFound = SeleniumQueryBy.byEnhancedSelector(effectiveSelector).findElements(context);
+		List<WebElement> elementsFound = null;
+		if (effectiveSelector.isEmpty()) {
+			elementsFound = new By.ByCssSelector("*").findElements(context);
+		} else {
+			elementsFound = SeleniumQueryBy.byEnhancedSelector(effectiveSelector).findElements(context);
+		}
 		
 		for (Iterator<WebElement> iterator = elementsFound.iterator(); iterator.hasNext();) {
 			WebElement webElement = iterator.next();

@@ -19,7 +19,7 @@ public class ContainsSelectorTest {
 
 	// http://jsbin.com/siwapeqe/1/edit
     @Test
-    public void contains_pseudo() throws Exception {
+    public void contains_pseudo() {
     	assertThat($("div").size(), is(36));
 
     	assertThat($("div:contains(abc)").size(), is(12));
@@ -40,6 +40,14 @@ public class ContainsSelectorTest {
 
     	assertThat($("div:contains(\"a\\\"b)c\")").size(), is(2));
     	assertThat($("div:contains('a\\'b)c')").size(), is(2));
+    }
+    
+    @Test
+    public void contains_pseudo_alone() {
+    	assertThat($("div:contains(abc)").size(), is(12));
+    	assertThat($("body:contains(abc)").size(), is(1));
+    	assertThat($("html:contains(abc)").size(), is(1));
+    	assertThat($(":contains(abc)").size(), is(14));
     }
 
 }
