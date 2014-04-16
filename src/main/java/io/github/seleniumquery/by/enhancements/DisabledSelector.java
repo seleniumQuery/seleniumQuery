@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.enhancements;
 
-import static io.github.seleniumquery.by.enhancements.SeleniumQueryEnhancementUtils.supportsNatively;
+import static io.github.seleniumquery.by.enhancements.SeleniumQueryEnhancements.isNativeCss;
+import io.github.seleniumquery.by.SeleniumQueryBy;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -11,7 +12,6 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.by.SeleniumQueryBy;
 
 /**
  * @author acdcjunior
@@ -25,7 +25,7 @@ public class DisabledSelector implements SeleniumQueryEnhancement {
 
 	@Override
 	public boolean isApplicable(String selector, SearchContext context) {
-		return selector.matches(DISABLED_PATTERN) && !supportsNatively(":disabled", context);
+		return selector.matches(DISABLED_PATTERN) && !isNativeCss(":disabled", context);
 	}
 
 	@Override

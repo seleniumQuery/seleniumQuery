@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.enhancements;
 
-import java.util.Iterator;
+import io.github.seleniumquery.by.SeleniumQueryBy;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.by.SeleniumQueryBy;
 
 /**
  * @author acdcjunior
@@ -34,21 +34,10 @@ public class PresentSelector implements SeleniumQueryEnhancement {
 		m.find(); // trigger regex matching so .group() is available
 		effectiveSelector = m.group(1);
 		
-		List<WebElement> elementsFound = null;
 		if (effectiveSelector.isEmpty()) {
-			elementsFound = new By.ByCssSelector("*").findElements(context);
-		} else {
-			elementsFound = SeleniumQueryBy.byEnhancedSelector(effectiveSelector).findElements(context);
+			return new By.ByCssSelector("*").findElements(context);
 		}
-		
-		for (Iterator<WebElement> iterator = elementsFound.iterator(); iterator.hasNext();) {
-			WebElement webElement = iterator.next();
-			if (!isPresent(webElement)) {
-				iterator.remove();
-			}
-		}
-
-		return elementsFound;
+		return SeleniumQueryBy.byEnhancedSelector(effectiveSelector).findElements(context);
 	}
 
 	public static boolean isPresent(WebElement webElement) {

@@ -1,7 +1,8 @@
 package io.github.seleniumquery.by.enhancements;
 
 import static io.github.seleniumquery.by.enhancements.SeleniumQueryEnhancementUtils.isNotHtmlUnitDriver;
-import static io.github.seleniumquery.by.enhancements.SeleniumQueryEnhancementUtils.supportsNatively;
+import static io.github.seleniumquery.by.enhancements.SeleniumQueryEnhancements.isNativeCss;
+import io.github.seleniumquery.by.SeleniumQueryBy;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -12,7 +13,6 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.by.SeleniumQueryBy;
 
 /**
  * @author acdcjunior
@@ -31,7 +31,7 @@ public class CheckedSelector implements SeleniumQueryEnhancement {
 		}
 		
 		// HtmlUnit's :checked is not consistent across versions, so we do it ourselves
-		if (isNotHtmlUnitDriver(context) && supportsNatively(":checked", context)) {
+		if (isNotHtmlUnitDriver(context) && !isNativeCss(selector, context)) {
 			return false;
 		}
 		return true;
