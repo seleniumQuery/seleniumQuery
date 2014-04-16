@@ -10,7 +10,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import io.github.seleniumquery.SeleniumQueryConfig;
-import io.github.seleniumquery.SeleniumQueryLocalFactory;
+import io.github.seleniumquery.SQLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.wait.evaluators.Evaluator;
@@ -64,7 +64,7 @@ public class SeleniumQueryFluentWait {
 					return elements;
 				}
 			}, "to "+evaluator.stringFor(value));
-			return SeleniumQueryLocalFactory.getInstance().create(seleniumQueryObject, elements);
+			return SQLocalFactory.getInstance().create(seleniumQueryObject, elements);
 		}
 	};
 	

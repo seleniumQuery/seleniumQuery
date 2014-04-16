@@ -1,12 +1,5 @@
 package io.github.seleniumquery;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.functions.AttrFunction;
 import io.github.seleniumquery.functions.ClickFunction;
@@ -22,6 +15,12 @@ import io.github.seleniumquery.functions.TextFunction;
 import io.github.seleniumquery.functions.ValFunction;
 import io.github.seleniumquery.wait.SeleniumQueryQueryUntil;
 import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
+
+import java.util.Iterator;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Represents the SeleniumQuery Object: a list of WebElements with special methods.
@@ -93,21 +92,18 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	
-	
-	
 	/**************************************************************************************************************************************
 	 * Java SeleniumQueryObject constrcutors
 	 **************************************************************************************************************************************/
 	
-	public SeleniumQueryObject(WebDriver driver, String selector) {
-		this(driver, selector, driver.findElements(SeleniumQueryBy.byEnhancedSelector(selector)));
+	SeleniumQueryObject(WebDriver driver, String selector) {
+		this.driver = driver;
+		this.by = SeleniumQueryBy.byEnhancedSelector(selector);
+		this.elements = driver.findElements(this.by);
+		this.previous = null;
 	}
 	
-	public SeleniumQueryObject(WebDriver driver, String selector, List<WebElement> webElements) {
-		this(driver, selector, webElements, null);
-	}
-
-	public SeleniumQueryObject(WebDriver driver, String selector, List<WebElement> webElements, SeleniumQueryObject previous) {
+	SeleniumQueryObject(WebDriver driver, String selector, List<WebElement> webElements, SeleniumQueryObject previous) {
 		this.driver = driver;
 		this.by = SeleniumQueryBy.byEnhancedSelector(selector);
 		this.elements = webElements;
@@ -119,14 +115,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		this.by = SeleniumQueryBy.NO_SELECTOR_INVALID_BY;
 		this.elements = webElements;
 		this.previous = previous;
-	}
-	
-	public SeleniumQueryObject(WebDriver driver, WebElement element) {
-		this(driver, new ArrayList<WebElement>(Arrays.asList(element)), null);
-	}
-	
-	public SeleniumQueryObject(WebDriver driver, WebElement element, SeleniumQueryObject previous) {
-		this(driver, new ArrayList<WebElement>(Arrays.asList(element)), previous);
 	}
 	
 	/**************************************************************************************************************************************
@@ -176,7 +164,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 */
 	public SeleniumQueryObject not(String selector) {
 		List<WebElement> filteredElements = NotFunction.not(this, this.elements, selector);
-		return new SeleniumQueryObject(this.getWebDriver(), filteredElements, this);
+		return SQLocalFactory.getInstance().createWithInvalidSelector(this.getWebDriver(), filteredElements, this);
 	}
 
 	/**

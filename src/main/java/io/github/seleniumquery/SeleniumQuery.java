@@ -96,7 +96,7 @@ public class SeleniumQuery {
 	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject sQ(WebElement element) {
-		return new SeleniumQueryObject(((WrapsDriver) element).getWrappedDriver(), element);
+		return SQLocalFactory.getInstance().createWithInvalidSelectorAndNoPrevious(((WrapsDriver) element).getWrappedDriver(), element);
 	}
 	
 	/**
