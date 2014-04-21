@@ -44,6 +44,17 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>net.sourceforge.cssparser</groupId>
+			<artifactId>cssparser</artifactId>
+			<version>0.9.12</version>
+		</dependency>
+		<!-- Also in HtmlUnit dependency, so no harm here, it'd be there anyway. Currently used for escaping the string in :contains() -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.31.0</version>

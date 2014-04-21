@@ -2,9 +2,10 @@ package io.github.seleniumquery.by.enhancements;
 
 import static io.github.seleniumquery.by.enhancements.SeleniumQueryEnhancementUtils.isNotHtmlUnitDriver;
 import static io.github.seleniumquery.by.enhancements.SeleniumQueryEnhancements.isNativeCss;
+import static io.github.seleniumquery.by.evaluator.SelectorUtils.ESCAPED_SLASHES;
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.CheckedPseudoClass;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -20,10 +21,10 @@ import org.openqa.selenium.WebElement;
  */
 public class CheckedSelector implements SeleniumQueryEnhancement {
 	
-	private static final String CHECKED_PATTERN = "(.*)"+"(?<!\\\\):"+"checked";
+	private static final String CHECKED_PATTERN = "(.*)"+ESCAPED_SLASHES+":checked";
 	
-	private static final List<String> ALLOWED_TAGS = Arrays.asList("input", "option");
-
+	private final CheckedPseudoClass checkedPseudoClass = CheckedPseudoClass.getInstance();
+	
 	@Override
 	public boolean isApplicable(String selector, SearchContext context) {
 		if (!selector.matches(CHECKED_PATTERN)) {
@@ -56,7 +57,7 @@ public class CheckedSelector implements SeleniumQueryEnhancement {
 		
 		for (Iterator<WebElement> iterator = elementsFound.iterator(); iterator.hasNext();) {
 			WebElement webElement = iterator.next();
-			if (!ALLOWED_TAGS.contains(webElement.getTagName()) || !webElement.isSelected()) {
+			if (!checkedPseudoClass.isChecked(webElement)) {
 				iterator.remove();
 			}
 		}

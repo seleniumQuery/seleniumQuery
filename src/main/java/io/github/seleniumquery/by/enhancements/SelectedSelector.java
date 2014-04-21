@@ -1,5 +1,9 @@
 package io.github.seleniumquery.by.enhancements;
 
+import static io.github.seleniumquery.by.evaluator.SelectorUtils.ESCAPED_SLASHES;
+import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.SelectedPseudoClass;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -8,7 +12,6 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.by.SeleniumQueryBy;
 
 /**
  * <p>Selects all <code>&lt;option&gt;<code>s that are selected.</p>
@@ -23,8 +26,9 @@ import io.github.seleniumquery.by.SeleniumQueryBy;
  */
 public class SelectedSelector implements SeleniumQueryEnhancement {
 	
-	private static final String OPTION_TAG = "option";
-	private static final String SELECTED_PATTERN = "(.*)"+"(?<!\\\\):"+"selected";
+	private static final String SELECTED_PATTERN = "(.*)"+ESCAPED_SLASHES+":selected";
+	
+	private final SelectedPseudoClass selectedPseudoClass = SelectedPseudoClass.getInstance();
 
 	@Override
 	public boolean isApplicable(String selector, SearchContext context) {
@@ -50,7 +54,7 @@ public class SelectedSelector implements SeleniumQueryEnhancement {
 		
 		for (Iterator<WebElement> iterator = elementsFound.iterator(); iterator.hasNext();) {
 			WebElement webElement = iterator.next();
-			if (!webElement.getTagName().equals(OPTION_TAG) || !webElement.isSelected()) {
+			if (!selectedPseudoClass.isSelected(webElement)) {
 				iterator.remove();
 			}
 		}

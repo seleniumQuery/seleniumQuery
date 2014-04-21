@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SeleniumQuery Selectors Parser Test Page</title>
+</head>
+<body lang="pt-BR">
+	<p id="brazilian-p">Eu sou brasileiro.</p>
+	<p id="french-p" lang="fr">Je suis français.</p>
+
+	<select name="hero" id="hero-combo" class="e1">
+		<option value="batman" class="e2">Batman</option>
+		<option value="spiderman" class="e3">Spider Man</option>
+		<option value="superman" class="e4">Super Man</option>
+	</select>
+
+	<div>
+		PARENT DIV
+		<div id="onlyChild">
+			CHILD DIV
+			<div id="grandsonWithSiblings">a</div>
+			<div>b</div>
+			<div>c</div>
+		</div>
+	</div>
+
+	<div id="containsDiv">
+		0<div>abc</div>
+		1<div>"abc"</div>
+		2<div>'abc'</div>
+		3<div>a"bc</div>
+		4<div>ab)c</div>
+		5<div>a\"b)c</div>
+	</div>
+</body>
+</html>
