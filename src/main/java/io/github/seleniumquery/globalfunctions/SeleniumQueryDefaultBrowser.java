@@ -115,7 +115,7 @@ public class SeleniumQueryDefaultBrowser {
 			}
 			urlToOpen = getDefaultContext() + urlToOpen;
 		}
-		System.out.println("Opening URL: "+urlToOpen);
+		LOGGER.debug("Opening URL: "+urlToOpen);
 		getDefaultDriver().get(urlToOpen);
 	}
 

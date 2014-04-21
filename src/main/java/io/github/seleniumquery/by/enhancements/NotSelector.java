@@ -1,5 +1,8 @@
 package io.github.seleniumquery.by.enhancements;
 
+import static io.github.seleniumquery.by.evaluator.SelectorUtils.ESCAPED_SLASHES;
+import io.github.seleniumquery.by.SeleniumQueryBy;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,7 +10,6 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.by.SeleniumQueryBy;
 
 public class NotSelector implements SeleniumQueryEnhancement {
 	
@@ -19,7 +21,7 @@ public class NotSelector implements SeleniumQueryEnhancement {
 	 * 
 	 * In the future, the intention is to switch for a, hopefully, simple, lightweight parser approach.
 	 */
-	private static final String NOT_PATTERN = "(.*?)"+"(?<!\\\\):"+"not"+"\\("+"((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*)"+"\\)";
+	private static final String NOT_PATTERN = "(.*?)"+ESCAPED_SLASHES+":not"+"\\("+"((?:[^()]*|\\((?:[^()]*|\\([^()]*\\))*\\))*)"+"\\)";
 	
 	@Override
 	public boolean isApplicable(String selector, SearchContext context) {

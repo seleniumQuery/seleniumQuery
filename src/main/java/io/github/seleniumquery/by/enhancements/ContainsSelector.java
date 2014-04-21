@@ -1,5 +1,6 @@
 package io.github.seleniumquery.by.enhancements;
 
+import static io.github.seleniumquery.by.evaluator.SelectorUtils.ESCAPED_SLASHES;
 import io.github.seleniumquery.by.SeleniumQueryBy;
 
 import java.util.HashSet;
@@ -17,7 +18,7 @@ public class ContainsSelector implements SeleniumQueryEnhancement {
 	/**
 	 * http://regex101.com/r/rC1eZ5
 	 */
-	private static final String CONTAINS_PATTERN = "(.*)"+"(?<!\\\\):"+"contains"+"\\((\"(?:\\\\.|[^\"])*\"|'(?:\\\\.|[^'])*'|[^)]+)\\)";
+	private static final String CONTAINS_PATTERN = "(.*)"+ESCAPED_SLASHES+":contains"+"\\((\"(?:\\\\.|[^\"])*\"|'(?:\\\\.|[^'])*'|[^)]+)\\)";
 
 	@Override
 	public boolean isApplicable(String selector, SearchContext context) {
