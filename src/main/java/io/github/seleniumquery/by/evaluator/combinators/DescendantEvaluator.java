@@ -3,6 +3,8 @@ package io.github.seleniumquery.by.evaluator.combinators;
 import io.github.seleniumquery.by.evaluator.CSSSelector;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.by.selector.CSSFilter;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,11 +13,9 @@ import org.w3c.css.sac.DescendantSelector;
 public class DescendantEvaluator implements CSSSelector<DescendantSelector> {
 	
 	private static final DescendantEvaluator instance = new DescendantEvaluator();
-
 	public static DescendantEvaluator getInstance() {
 		return instance;
 	}
-	
 	private DescendantEvaluator() { }
 	
 	/**
@@ -35,6 +35,11 @@ public class DescendantEvaluator implements CSSSelector<DescendantSelector> {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public CompiledSelector compile(WebDriver driver, DescendantSelector selector) {
+		return new CompiledSelector(selector.toString(), CSSFilter.FILTER_NOTHING);
 	}
 
 }

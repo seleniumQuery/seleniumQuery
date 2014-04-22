@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals;
 
 import io.github.seleniumquery.by.evaluator.CSSCondition;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,9 +24,16 @@ public class OrCombinationConditionEvaluator implements CSSCondition<CombinatorC
 	 */
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
-		ConditionalSelectorEvaluator conditionalEvaluator = ConditionalSelectorEvaluator.getInstance();
-		return conditionalEvaluator.isCondition(driver, element, selectorUpToThisPoint, combinatorCondition.getFirstCondition())
-		    || conditionalEvaluator.isCondition(driver, element, selectorUpToThisPoint, combinatorCondition.getSecondCondition());
+		throw new RuntimeException("IT IS USED!");
+//		ConditionalSelectorEvaluator conditionalEvaluator = ConditionalSelectorEvaluator.getInstance();
+//		return conditionalEvaluator.isCondition(driver, element, selectorUpToThisPoint, combinatorCondition.getFirstCondition())
+//		    || conditionalEvaluator.isCondition(driver, element, selectorUpToThisPoint, combinatorCondition.getSecondCondition());
+	}
+
+	@Override
+	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, CombinatorCondition condition) {
+		throw new RuntimeException("IT IS USED!");
+//		return new CompiledSelector(condition.toString(), CSSFilter.FILTER_NOTHING);
 	}
 
 }

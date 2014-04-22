@@ -3,6 +3,8 @@ package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.by.selector.CSSFilter;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,6 +39,11 @@ public class ContainsSubstringAttributeEvaluator implements CSSCondition<Attribu
 		String wantedValue = attributeCondition.getValue();
 		String attributeValue = element.getAttribute(attributeName);
 		return containsIgnoreCase(attributeValue, wantedValue);
+	}
+
+	@Override
+	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition condition) {
+		return new CompiledSelector(condition.toString(), CSSFilter.FILTER_NOTHING);
 	}
 
 }

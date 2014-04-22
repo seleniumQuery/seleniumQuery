@@ -1,6 +1,8 @@
 package io.github.seleniumquery.by.evaluator.conditionals;
 
 import io.github.seleniumquery.by.evaluator.CSSCondition;
+import io.github.seleniumquery.by.selector.CSSFilterUtils;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +36,17 @@ public class AndCombinationConditionEvaluator implements CSSCondition<Combinator
 		
 		return conditionalEvaluator.isCondition(driver, element, selectorUpToThisPoint, combinatorCondition.getFirstCondition())
 		    && conditionalEvaluator.isCondition(driver, element, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
+	}
+
+	@Override
+	public CompiledSelector compile(WebDriver driver, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
+		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
+																					(SimpleSelector) selectorUpToThisPoint,
+																						combinatorCondition.getFirstCondition());
+
+		CompiledSelector compiledFirst = conditionalEvaluator.compileCondition(driver, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
+		CompiledSelector compiledSecond = conditionalEvaluator.compileCondition(driver, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
+		return CSSFilterUtils.combine(compiledFirst, compiledSecond);
 	}
 	
 }

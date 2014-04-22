@@ -3,6 +3,8 @@ package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.by.selector.CSSFilter;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,6 +42,11 @@ public class EqualsOrHasAttributeEvaluator implements CSSCondition<AttributeCond
 		}
 		// [attribute]
 		return SelectorUtils.hasAttribute(element, attributeName);
+	}
+
+	@Override
+	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition condition) {
+		return new CompiledSelector(condition.toString(), CSSFilter.FILTER_NOTHING);
 	}
 
 }

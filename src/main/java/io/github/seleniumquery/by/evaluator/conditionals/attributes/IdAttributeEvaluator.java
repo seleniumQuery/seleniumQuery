@@ -2,6 +2,8 @@ package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.by.selector.CSSFilter;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,6 +38,11 @@ public class IdAttributeEvaluator implements CSSCondition<AttributeCondition> {
 		String wantedId = attributeCondition.getValue();
 		String actualId = element.getAttribute(ID_ATTRIBUTE);
 		return actualId.equals(wantedId);
+	}
+
+	@Override
+	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition condition) {
+		return new CompiledSelector(condition.toString(), "ID");
 	}
 
 }

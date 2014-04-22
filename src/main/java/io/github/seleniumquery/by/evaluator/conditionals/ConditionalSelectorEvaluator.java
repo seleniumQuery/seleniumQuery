@@ -3,6 +3,9 @@ package io.github.seleniumquery.by.evaluator.conditionals;
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.CSSSelector;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
+import io.github.seleniumquery.by.selector.CSSFilterUtils;
+import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SQSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,6 +34,21 @@ public class ConditionalSelectorEvaluator implements CSSSelector<ConditionalSele
 	boolean isCondition(WebDriver driver, WebElement element, Selector simpleSelector, Condition condition) {
 		CSSCondition<Condition> evaluator = (CSSCondition<Condition>) ConditionalEvaluatorFactory.getInstance().getSelector(condition);
 		return evaluator.is(driver, element, simpleSelector, condition);
+	}
+
+	@Override
+	public CompiledSelector compile(WebDriver driver, ConditionalSelector conditionalSelector) {
+		Condition condition = conditionalSelector.getCondition();
+		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
+		CompiledSelector compiledSelector = SQSelector.compile(driver, simpleSelector);
+		CompiledSelector compiledCondition = compileCondition(driver, simpleSelector, condition);
+		return CSSFilterUtils.combine(compiledSelector, compiledCondition);
+	}
+
+	@SuppressWarnings("unchecked")
+	CompiledSelector compileCondition(WebDriver driver, Selector simpleSelector, Condition condition) {
+		CSSCondition<Condition> evaluator = (CSSCondition<Condition>) ConditionalEvaluatorFactory.getInstance().getSelector(condition);
+		return evaluator.compile(driver, simpleSelector, condition);
 	}
 
 }

@@ -3,6 +3,8 @@ package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 import io.github.seleniumquery.by.evaluator.CSSCondition;
+import io.github.seleniumquery.by.selector.CSSFilter;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,6 +34,11 @@ public class ContainsPrefixAttributeEvaluator implements CSSCondition<AttributeC
 		String wantedValue = attributeCondition.getValue();
 		String actualValue = element.getAttribute(attributeCondition.getLocalName());
 		return equalsIgnoreCase(actualValue, wantedValue) || startsWithIgnoreCase(actualValue, wantedValue+'-');
+	}
+
+	@Override
+	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition condition) {
+		return new CompiledSelector(condition.toString(), CSSFilter.FILTER_NOTHING);
 	}
 	
 }
