@@ -96,7 +96,21 @@ public class SeleniumQuery {
 	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject sQ(WebElement element) {
-		return SQLocalFactory.getInstance().createWithInvalidSelectorAndNoPrevious(((WrapsDriver) element).getWrappedDriver(), element);
+		return sQ(((WrapsDriver) element).getWrappedDriver(), element);
+	}
+	
+	/**
+	 * <p>The seleniumQuery constructor. Works as <code>$</code> (actually, the dollar sign is an alias to this).</p>
+	 * <p>Use <code>sQ("selector").function()</code> or <code>sQ.property.function()</code></p>
+	 * <br>
+	 * Example:<br>
+	 * <code>sQ("div").text();</code><br>
+	 * <code>sQ.location.href("http://www.google.com");</code><br>
+	 * 
+	 * @since 0.3.0
+	 */
+	public static SeleniumQueryObject sQ(WebDriver driver, WebElement element) {
+		return SQLocalFactory.getInstance().createWithInvalidSelectorAndNoPrevious(driver, element);
 	}
 	
 	/**
@@ -153,6 +167,13 @@ public class SeleniumQuery {
 	 */
 	public static SeleniumQueryObject $(WebElement element) {
 		return sQ(element);
+	}
+	
+	/**
+	 * @since 0.5.0
+	 */
+	public static SeleniumQueryObject $(WebDriver driver, WebElement element) {
+		return sQ(driver, element);
 	}
 	
 	/**
