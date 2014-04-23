@@ -16,7 +16,7 @@ public class FindFunction {
 			final List<WebElement> elementsBelowThisElement = webElement.findElements(SeleniumQueryBy.byEnhancedSelector(selector));
 			allElementsBelow.addAll(elementsBelowThisElement);
 		}
-		return SQLocalFactory.getInstance().create(seleniumQueryObject, allElementsBelow);
+		return SQLocalFactory.getInstance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), allElementsBelow, seleniumQueryObject);
 	}
 
 }
