@@ -42,7 +42,7 @@ public class SeleniumQueryFluentWait {
 	}
 	
 	public static interface WaitMethod {
-		<T> SeleniumQueryObject evaluateUntil(final Evaluator<T> evaluator, final T value, SeleniumQueryObject seleniumQueryObject);
+		<T> SeleniumQueryObject evaluateUntil(Evaluator<T> evaluator, T value, SeleniumQueryObject seleniumQueryObject, boolean negated);
 	}
 	
 	/**
@@ -51,20 +51,28 @@ public class SeleniumQueryFluentWait {
 	 */
 	public static WaitMethod QUERY_UNTIL = new WaitMethod() {
 		@Override
-		public <T> SeleniumQueryObject evaluateUntil(final Evaluator<T> evaluator, final T value, SeleniumQueryObject seleniumQueryObject) {
+		public <T> SeleniumQueryObject evaluateUntil(final Evaluator<T> evaluator, final T value, SeleniumQueryObject seleniumQueryObject
+				, final boolean negated) {
 			final WebDriver driver = seleniumQueryObject.getWebDriver();
 			final SeleniumQueryBy by = seleniumQueryObject.getBy();
 			List<WebElement> elements = fluentWait(seleniumQueryObject, new Function<By, List<WebElement>>() {
 				@Override
 				public List<WebElement> apply(By selector) {
 					List<WebElement> elements = driver.findElements(by);
-					if (!evaluator.evaluate(driver, elements, value)) {
-						return null;
+					final boolean evaluate = evaluator.evaluate(driver, elements, value);
+					if (!negated) {
+						if (!evaluate) {
+							return null;
+						}
+					} else {
+						if (evaluate) {
+							return null;
+						}
 					}
 					return elements;
 				}
 			}, "to "+evaluator.stringFor(value));
-			return SQLocalFactory.getInstance().create(seleniumQueryObject, elements);
+			return SQLocalFactory.getInstance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
 		}
 	};
 	
@@ -74,13 +82,18 @@ public class SeleniumQueryFluentWait {
 	 */
 	public static WaitMethod WAIT_UNTIL = new WaitMethod() {
 		@Override
-		public <T> SeleniumQueryObject evaluateUntil(final Evaluator<T> evaluator, final T value, SeleniumQueryObject seleniumQueryObject) {
+		public <T> SeleniumQueryObject evaluateUntil(final Evaluator<T> evaluator, final T value, SeleniumQueryObject seleniumQueryObject
+				, final boolean negated) {
 			final WebDriver driver = seleniumQueryObject.getWebDriver();
 			final SeleniumQueryBy by = seleniumQueryObject.getBy();
 			SeleniumQueryFluentWait.fluentWait(seleniumQueryObject, new Function<By, Boolean>() {
 				@Override
 				public Boolean apply(By selector) {
-					return evaluator.evaluate(driver, driver.findElements(by), value);
+					final boolean evaluate = evaluator.evaluate(driver, driver.findElements(by), value);
+					if (negated) {
+						return !evaluate;
+					}
+					return evaluate;
 				}
 			}, "to "+evaluator.stringFor(value));
 			return seleniumQueryObject;

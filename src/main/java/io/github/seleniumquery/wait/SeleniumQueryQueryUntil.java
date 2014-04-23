@@ -38,7 +38,7 @@ public class SeleniumQueryQueryUntil {
 	 * @since 0.5.0
 	 */
 	public SeleniumQueryAndOrThen is(String selector) {
-		SeleniumQueryObject seleniumQueryObjectAfterWait = getWaitMethod().evaluateUntil(IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject);
+		SeleniumQueryObject seleniumQueryObjectAfterWait = getWaitMethod().evaluateUntil(IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, false);
 		return new SeleniumQueryAndOrThen(seleniumQueryObjectAfterWait);
 	}
 	
