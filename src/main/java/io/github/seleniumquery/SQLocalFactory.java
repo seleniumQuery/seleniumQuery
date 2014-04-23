@@ -19,6 +19,10 @@ public class SQLocalFactory {
 	
 	private SQLocalFactory() { }
 	
+	public SeleniumQueryObject create(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements) {
+		return new SeleniumQueryObject(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
+	}
+
 	public SeleniumQueryObject create(WebDriver driver, String selector, List<WebElement> elements, SeleniumQueryObject seleniumQueryObject) {
 		return new SeleniumQueryObject(driver, selector, elements, seleniumQueryObject);
 	}
