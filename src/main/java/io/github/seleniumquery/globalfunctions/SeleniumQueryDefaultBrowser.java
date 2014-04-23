@@ -19,8 +19,6 @@ public class SeleniumQueryDefaultBrowser {
 	
 	private WebDriver defaultDriver;
 
-	private String defaultContext = "";
-	
 	public SeleniumQueryDefaultBrowser() { }
 	
 	public SeleniumQueryDefaultBrowser setDefaultDriver(WebDriver defaultDriver) {
@@ -107,14 +105,7 @@ public class SeleniumQueryDefaultBrowser {
 	 * @author acdcjunior
 	 * @since 0.5.0
 	 */
-	public void openUrl(String url) {
-		String urlToOpen = url;
-		if (getDefaultContext() != null && !getDefaultContext().isEmpty()) {
-			if (!"/".equals(urlToOpen.substring(0, 1))) {
-				urlToOpen = "/" + urlToOpen;
-			}
-			urlToOpen = getDefaultContext() + urlToOpen;
-		}
+	public void openUrl(String urlToOpen) {
 		LOGGER.debug("Opening URL: "+urlToOpen);
 		getDefaultDriver().get(urlToOpen);
 	}
@@ -142,6 +133,16 @@ public class SeleniumQueryDefaultBrowser {
 	}
 	
 	/**
+	 * Attempts to maximize the window of the default driver.
+	 * 
+	 * @author acdcjunior
+	 * @since 0.7.0
+	 */
+	public void maximizeWindow() {
+		getDefaultDriver().manage().window().maximize();
+	}
+	
+	/**
 	 * Returns the current URL in the default browser.
 	 * @return the currently opened url.
 	 * 
@@ -152,12 +153,4 @@ public class SeleniumQueryDefaultBrowser {
 		return getDefaultDriver().getCurrentUrl();
 	}
 	
-	public String getDefaultContext() {
-		return this.defaultContext;
-	}
-	
-	public void setDefaultContext(String defaultContext) {
-		this.defaultContext = defaultContext;
-	}
-
 }
