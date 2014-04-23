@@ -1,13 +1,18 @@
 package io.github.seleniumquery.functions;
 
+import io.github.seleniumquery.SeleniumQueryObject;
+
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.support.ui.Select;
 
 public class ValFunction {
 
+	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryObject.class);
+	
 	/**
 	 * $(".selector").val();
 	 */
@@ -37,6 +42,7 @@ public class ValFunction {
 		} else if ("textarea".equals(tagName)) {
 			return element.getText();
 		}
+		LOGGER.warn("Attempting to call .val() in an element of type '"+tagName+"': "+element+". Returning empty string.");
 		return "";
 	}
 	
