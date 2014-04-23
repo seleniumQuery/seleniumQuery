@@ -17,21 +17,6 @@
 		</license>
 	</licenses>
 
-	<developers>
-		<developer>
-			<name>Antonio C. Carvalho Jr.</name>
-			<email>acdcjunior@gmail.com</email>
-			<organization>seleniumQuery</organization>
-			<organizationUrl>http://seleniumquery.github.io/</organizationUrl>
-		</developer>
-		<developer>
-			<name>Ricardo S. Carvalho</name>
-			<email>ricardosc@gmail.com</email>
-			<organization>seleniumQuery</organization>
-			<organizationUrl>http://seleniumquery.github.io/</organizationUrl>
-		</developer>
-	</developers>
-
 	<scm>
 		<connection>scm:git:git@github.com:seleniumquery/seleniumQuery.git</connection>
 		<developerConnection>scm:git:git@github.com:seleniumquery/seleniumQuery.git</developerConnection>
@@ -39,7 +24,7 @@
 	</scm>
 
 	<properties>
-		<createChecksum>true</createChecksum>
+	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
@@ -48,7 +33,9 @@
 			<artifactId>cssparser</artifactId>
 			<version>0.9.12</version>
 		</dependency>
-		<!-- Also in HtmlUnit dependency, so no harm here, it'd be there anyway. Currently used for escaping the string in :contains() -->
+		<!-- Also in HtmlUnit dependency, so no harm here, it'd be there anyway.
+		Currently used mainly for escaping the string for :contains(), but also on 
+		several case-insensitive equals/contains -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -57,7 +44,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>2.31.0</version>
+			<version>2.41.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -68,7 +55,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -113,6 +100,7 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -123,6 +111,19 @@
 					<execution>
 						<id>attach-sources</id>
 						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
 							<goal>jar</goal>
 						</goals>
 					</execution>
@@ -130,5 +131,59 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	
+	<developers>
+		<developer>
+			<id>acdcjunior</id>
+			<name>Antonio C. Carvalho Jr.</name>
+			<email>acdcjunior@gmail.com</email>
+			<url>http://seleniumquery.github.io/</url>
+			<timezone>-3</timezone>
+		</developer>
+		<developer>
+			<id>ricardo-sc</id>
+			<name>Ricardo S. Carvalho</name>
+			<email>ricardosc@gmail.com</email>
+			<url>http://seleniumquery.github.io/</url>
+			<timezone>-3</timezone>
+		</developer>
+	</developers>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
