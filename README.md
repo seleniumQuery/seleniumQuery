@@ -66,11 +66,12 @@ To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
         <version>1.0.0-SNAPSHOT</version>
     </dependency>
 </dependencies>
-<!-- The repository URL, so maven can download it directly -->
+<!-- The repository the snapshots will be downloaded from. Can either go in your pom.xml or settings.xml -->
 <repositories>
 	<repository>
-		<id>Repo for seleniumQuery</id>
-		<url>https://raw.githubusercontent.com/seleniumquery/snapshots-repository/master</url>
+        	<id>sonatype-nexus-snapshots</id>
+		<name>Sonatype Nexus Snapshots</name>
+        	<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		<snapshots>
 			<enabled>true</enabled>
 			<updatePolicy>always</updatePolicy>
