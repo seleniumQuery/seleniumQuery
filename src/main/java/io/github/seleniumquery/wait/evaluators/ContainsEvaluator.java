@@ -16,7 +16,8 @@ public class ContainsEvaluator implements Evaluator<String> {
 
 	@Override
 	public boolean evaluate(WebDriver driver, List<WebElement> elements, String valueToEqual) {
-		return getter.get(driver, elements).toString().contains(valueToEqual);
+		Object propertyGot = getter.get(driver, elements);
+		return propertyGot != null && propertyGot.toString().contains(valueToEqual);
 	}
 
 	@Override
