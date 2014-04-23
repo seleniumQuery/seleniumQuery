@@ -75,7 +75,7 @@ public class SeleniumQueryDefaultBrowser {
 	 */
 	public void sleep(int timeToWait, TimeUnit timeUnit) {
 		try {
-			long secondsToWait = timeUnit.convert(timeToWait, TimeUnit.SECONDS) * 1000;
+			long secondsToWait = timeUnit.convert(timeToWait, TimeUnit.MILLISECONDS);
 			if (secondsToWait > Integer.MAX_VALUE) {
 				secondsToWait = Integer.MAX_VALUE;
 			}
