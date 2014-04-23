@@ -48,7 +48,8 @@ public class SeleniumQueryBy extends By {
 	public static final SeleniumQueryBy NO_SELECTOR_INVALID_BY = new SeleniumQueryBy(null) {
 		@Override public List<WebElement> findElements(SearchContext context) {
 			throw new RuntimeException("This object was instantiated without a selector, you cannot search " +
-					"elements based on it as the string used to match it is unavailable.");
+					"elements based on it as the string used to match it is unavailable.\n" +
+					"Try not using more than one .queryUntil() in a single line.");
 		}
 	};
 	
