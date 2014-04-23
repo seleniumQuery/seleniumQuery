@@ -210,7 +210,7 @@ public class AttributeSelectorsTest {
 	}
 
 	/* Attribute Not Equal Selector: [name!="value"] -- equivalent to :not([name="value"])
-	 * Select elements that either don’t have the specified attribute, or do have the specified attribute but not with a certain value.
+	 * Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.
 	 */
 	@Test
 	public void attribute_not_equals() {
