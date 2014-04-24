@@ -3,7 +3,7 @@
 
 Java library/framework that intends to bring a “cross-driver” (cross-browser) jQuery-like interface in (pure) Java for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
-Example snippet:
+Example snippet, written in **Java**:
 
 `````java
 // getting the value
@@ -11,7 +11,7 @@ String oldStreet = $("input.street").val();
 // setting the value
 $("input.street").val("4th St!");
 `````
-Allows querying elements by **XPath**, **CSS Selectors** and even some **jQuery/Sizzle enhancements**, such as `:eq()`, `:not()` and others!
+Allows querying elements by **XPath**, **CSS Selectors** and even **jQuery/Sizzle enhancements**, such as `:eq()`, `:contains()` and others!
 
 Built using Selenium WebDriver's native capabilities **only**:
 - No `jQuery.js` is embedded at the page, no side-effects are generated;
@@ -20,7 +20,7 @@ Built using Selenium WebDriver's native capabilities **only**:
 - **Capable of testing JavaScript-disabled pages**
     - Test pages that use [Unobtrusive JavaScript!](http://en.wikipedia.org/wiki/Unobtrusive_JavaScript)
     - Most functions don't even require a browser/driver with JavaScript enabled!
-        - (Exceptions are functions like `.trigger()` which obviously requires JavaScript on the browser.)
+        - Functions like `.trigger()` which require JavaScript on the browser are the exceptions.
 
 ##TL; DR: Running Example
 
@@ -66,12 +66,13 @@ To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
         <version>1.0.0-SNAPSHOT</version>
     </dependency>
 </dependencies>
-<!-- The repository the snapshots will be downloaded from. Can either go in your pom.xml or settings.xml -->
+<!-- The repository the snapshots will be downloaded from.
+    Can either go in your pom.xml or settings.xml -->
 <repositories>
 	<repository>
-        	<id>sonatype-nexus-snapshots</id>
+		<id>sonatype-nexus-snapshots</id>
 		<name>Sonatype Nexus Snapshots</name>
-        	<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		<snapshots>
 			<enabled>true</enabled>
 			<updatePolicy>always</updatePolicy>
