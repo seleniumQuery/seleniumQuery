@@ -75,27 +75,32 @@ public class SeleniumQueryDefaultBrowser {
 	 */
 	public void sleep(int timeToWait, TimeUnit timeUnit) {
 		try {
-			long secondsToWait = timeUnit.convert(timeToWait, TimeUnit.MILLISECONDS);
-			if (secondsToWait > Integer.MAX_VALUE) {
-				secondsToWait = Integer.MAX_VALUE;
-			}
-			LOGGER.debug("Sleeping for "+secondsToWait+" milliseconds.");
-			Thread.sleep((int) secondsToWait);
+			long timeInMillis = TimeUnit.MILLISECONDS.convert(timeToWait, timeUnit);
+			int millis = safeToInt(timeInMillis);
+			LOGGER.debug("Sleeping for "+millis+" milliseconds.");
+			Thread.sleep(millis);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
 	}
+
+	private int safeToInt(long longNum) {
+		if (longNum > Integer.MAX_VALUE) {
+			longNum = Integer.MAX_VALUE;
+		}
+		return (int) longNum;
+	}
 	
 	/**
-	 * Instructs the browser (thread) to wait (sleep) for the time <b>in seconds</b> passed as argument.<br>
+	 * Instructs the browser (thread) to wait (sleep) for the time <b>in milliseconds</b> passed as argument.<br>
 	 * <br>
-	 * Example: <code>$.browser.sleep(10); // sleeps for 10 seconds</code>
+	 * Example: <code>$.browser.sleep(10 * 1000); // sleeps for 10 seconds</code>
 	 * 
 	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
-	public void sleep(int timeToWaitInSeconds) {
-		sleep(timeToWaitInSeconds, TimeUnit.SECONDS);
+	public void sleep(int millis) {
+		sleep(millis, TimeUnit.MILLISECONDS);
 	}
 
 	/**
