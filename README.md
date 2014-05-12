@@ -8,7 +8,7 @@ seleniumQuery is a Java library/framework that intends to bring a "cross-driver"
 
 Example snippet:
 
-```
+```java
 // getting the value
 String oldStreet = $("input.street").val();
 // setting the value
@@ -36,7 +36,7 @@ Built using Selenium WebDriver's native capabilities **only**:
 
 Try it out now with the running example below:
 
-`````java
+```java
 import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the short syntax
 
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -64,10 +64,10 @@ public class SeleniumQueryExample {
         $.browser.quitDefaultBrowser(); // quits the firefox driver
     }
 }
-`````
+```
 To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 
-`````xml
+```xml
 <!-- The project dependency -->
 <dependencies>
     <dependency>
@@ -89,7 +89,7 @@ To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 		</snapshots>
 	</repository>
 </repositories>
-`````
+```
 
 #Features
 
@@ -97,7 +97,7 @@ To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 
 Make your code/tests more readable and easier to maintain. Leverage your knowledge of jQuery.
 
-```
+```java
 // Instead of regular Selenium code:
 WebElement element = driver.findElement(By.id("mySelect"));
 new Select(element).selectByValue("ford");
@@ -111,7 +111,7 @@ $("#mySelect").val("ford");
 
 Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element through the use of `.queryUntil()` and `.waitUntil()` functions:
 
-```
+```java
 /*
  * Selenium WebDriver cannot natively detect the end of an Ajax call.
  * To test your application behaviour, you can/should work with the Ajax's expected effects.
@@ -137,7 +137,7 @@ In order to handle interactions with Ajax-enabled pages, you can use the `.query
 - The `.queryUntil()` functions will requery for the elements until the given condition is met, returning a new seleniumQuery object when that happens.
 - The `.waitUntil()` will act only on the elements matched when the seleniumQuery object was built (at the moment `$()` was called).
 
-```
+```java
 // .queryUntil() will requery the DOM every time until the matched set fulfills the requirements
 
 // .is() functions
@@ -171,7 +171,7 @@ Global object (static) functions:
 
 If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field) imported statically. Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same functions:
 
-```
+```java
 import static io.github.seleniumquery.SeleniumQuery.sQ;
 import static io.github.seleniumquery.SeleniumQuery.jQuery;
 ...
