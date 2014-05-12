@@ -1,33 +1,43 @@
-#seleniumQuery - http://seleniumquery.github.io
+#seleniumQuery - Cross-Driver jQuery in Selenium
+
+http://seleniumquery.github.io
+
 ###Cross-Driver (Cross-Browser) jQuery-like native Java interface for Selenium WebDriver
 
-Java library/framework that intends to bring a “cross-driver” (cross-browser) jQuery-like interface in (pure) Java for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
+seleniumQuery is a Java library/framework that intends to bring a "cross-driver" (cross-browser) **jQuery-like interface in** (pure) **Java** for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
-Example snippet, written in **Java**:
+Example snippet:
 
-`````java
+```
 // getting the value
 String oldStreet = $("input.street").val();
 // setting the value
 $("input.street").val("4th St!");
-`````
-Allows querying elements by **XPath**, **CSS Selectors** and even **jQuery/Sizzle enhancements**, such as `:eq()`, `:contains()` and others!
+```
+
+Allows querying elements by:
+
+- **XPath** - `$("//div/*/label")`
+- **CSS Selectors** - `$(".myClass")`,
+- **jQuery/Sizzle enhancements** - `:eq()`: `$(".myClass:eq(3)")`, `:contains()`: `$(".myClass:contains('My Text!')")`
+- and even some own **seleniumQuery selectors**: `$("#myOldDiv").is(":not(:present)")`.
 
 Built using Selenium WebDriver's native capabilities **only**:
+
 - No `jQuery.js` is embedded at the page, no side-effects are generated;
-- Works predictably and exactly the same with any (including legacy, old JSF) system;
-- Doesn't matter if the page uses jQuery or not (or even if the JavaScript global variable `$` is other library like `Prototype.js`).
-- **Capable of testing JavaScript-disabled pages**
+    - Doesn't matter if the page uses jQuery or not (or even if the JavaScript global variable `$` is other library like `Prototype.js`).
+- Capable of handling/testing **JavaScript-disabled pages**
     - Test pages that use [Unobtrusive JavaScript!](http://en.wikipedia.org/wiki/Unobtrusive_JavaScript)
     - Most functions don't even require a browser/driver with JavaScript enabled!
-        - Functions like `.trigger()` which require JavaScript on the browser are the exceptions.
+        - Exceptions are functions like `.trigger()` which naturally require JavaScript to execute and some that don't have "human-user" equivalent, like `.html()`, in the sense that ordinary users don't generally care about the HTML of the page.
 
-##TL; DR: Running Example
+
+##Quickstart: A running example
 
 Try it out now with the running example below:
 
 `````java
-import static org.openqa.selenium.seleniumquery.SeleniumQuery.$; // this will allow the short syntax
+import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the short syntax
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 
