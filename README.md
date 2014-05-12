@@ -248,14 +248,11 @@ Looking for a function not listed below? The functions we did not add in the lis
 ###Suported
 
 - [`.attr()`](http://api.jquery.com/attr/) - Get the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
+- [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
 - [`.html()`](http://api.jquery.com/html/) - Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
 - [`.prop()`](http://api.jquery.com/prop/) - Get the value of a property for the first element in the set of matched elements or set one or more properties for every matched element.
 - [`.removeAttr()`](http://api.jquery.com/removeAttr/) - Remove an attribute from each element in the set of matched elements.
 - [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
-
-###Soon (next release roadmap)
-
-- [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
 
 ###Not supported
 
@@ -266,7 +263,7 @@ Looking for a function not listed below? The functions we did not add in the lis
 
 ##[CSS](http://api.jquery.com/category/css/)
 
-###Soon
+###Supported
 
 - [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
 
@@ -354,6 +351,7 @@ Looking for a function not listed below? The functions we did not add in the lis
 
 - [`.find()`](http://api.jquery.com/find/) - Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
 - [`.first()`](http://api.jquery.com/first/) - Reduce the set of matched elements to the first in the set.
+- [`.is()`](http://api.jquery.com/is/) - Check the current matched set of elements against a selector, element, or jQuery object and return true if at least one of these elements matches the given arguments.
 - [`.not()`](http://api.jquery.com/not/) - Remove elements from the set of matched elements.
 - [`.parent()`](http://api.jquery.com/parent/) - Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
 
@@ -373,7 +371,6 @@ Looking for a function not listed below? The functions we did not add in the lis
  - [`.end()`](http://api.jquery.com/end/) - End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
  - [`.filter()`](http://api.jquery.com/filter/) - Reduce the set of matched elements to those that match the selector or pass the function’s test.
  - [`.has()`](http://api.jquery.com/has/) - Reduce the set of matched elements to those that have a descendant that matches the selector or DOM element.
- - [`.is()`](http://api.jquery.com/is/) - Check the current matched set of elements against a selector, element, or jQuery object and return true if at least one of these elements matches the given arguments.
  - [`.last()`](http://api.jquery.com/last/) - Reduce the set of matched elements to the final one in the set.
  - [`.map()`](http://api.jquery.com/map/) - Pass each element in the current matched set through a function, producing a new jQuery object containing the return values.
  - [`.next()`](http://api.jquery.com/next/) - Get the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector.
