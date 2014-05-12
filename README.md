@@ -333,9 +333,6 @@ Looking for a function not listed below? The functions we did not add in the lis
 
 - [`.get()`](http://api.jquery.com/get/) - Retrieve the DOM elements matched by the jQuery object.
 - [`.size()`](http://api.jquery.com/size/) - Return the number of elements in the jQuery object.
-
-###Soon
-
 - [`.toArray()`](http://api.jquery.com/toArray/) - Retrieve all the elements contained in the jQuery set, as an array.
 
 ###Not Supported
