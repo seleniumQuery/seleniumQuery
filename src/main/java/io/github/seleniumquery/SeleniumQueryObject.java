@@ -6,6 +6,7 @@ import io.github.seleniumquery.functions.ClickFunction;
 import io.github.seleniumquery.functions.FindFunction;
 import io.github.seleniumquery.functions.FirstFunction;
 import io.github.seleniumquery.functions.GetFunction;
+import io.github.seleniumquery.functions.HasClassFunction;
 import io.github.seleniumquery.functions.HtmlFunction;
 import io.github.seleniumquery.functions.IsFunction;
 import io.github.seleniumquery.functions.NotFunction;
@@ -329,6 +330,15 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 */
 	public boolean is(String selector) {
 		return IsFunction.is(this, elements, selector);
+	}
+	
+	/**
+	 * Determine whether any of the matched elements are assigned the given class.
+	 * 
+	 * @since 1.0.0
+	 */
+	public boolean hasClass(String className) {
+		return HasClassFunction.hasClass(this, elements, className);
 	}
    
 }

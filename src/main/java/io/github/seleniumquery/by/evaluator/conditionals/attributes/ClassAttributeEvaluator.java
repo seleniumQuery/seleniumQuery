@@ -2,7 +2,6 @@ package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CSSFilter;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import java.util.Arrays;
@@ -36,7 +35,7 @@ public class ClassAttributeEvaluator implements CSSCondition<AttributeCondition>
 		}
 		String wantedClassName = attributeCondition.getValue();
 		String classAttributeValue = element.getAttribute(CLASS_ATTRIBUTE);
-		return Arrays.asList(classAttributeValue.split(" ")).contains(wantedClassName);
+		return Arrays.asList(classAttributeValue.split("\\s+")).contains(wantedClassName);
 	}
 
 	@Override
