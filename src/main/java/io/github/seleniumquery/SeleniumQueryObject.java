@@ -13,6 +13,7 @@ import io.github.seleniumquery.functions.NotFunction;
 import io.github.seleniumquery.functions.PropFunction;
 import io.github.seleniumquery.functions.RemoveAttrFunction;
 import io.github.seleniumquery.functions.TextFunction;
+import io.github.seleniumquery.functions.ToArrayFunction;
 import io.github.seleniumquery.functions.ValFunction;
 import io.github.seleniumquery.wait.SeleniumQueryQueryUntil;
 import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
@@ -339,6 +340,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 */
 	public boolean hasClass(String className) {
 		return HasClassFunction.hasClass(this, elements, className);
+	}
+
+	public WebElement[] toArray() {
+		return ToArrayFunction.toArray(this, elements);
 	}
    
 }
