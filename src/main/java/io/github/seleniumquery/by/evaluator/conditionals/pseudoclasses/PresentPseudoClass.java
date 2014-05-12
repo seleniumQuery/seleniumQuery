@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import io.github.seleniumquery.by.selector.CompiledSelector;
+
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +35,11 @@ public class PresentPseudoClass implements PseudoClass {
 			// failed staleness check, so not present
 			return false;
 		}
+	}
+	
+	@Override
+	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+		return new CompiledSelector(":present", "PRESENT PSEUDO");
 	}
 	
 }

@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import io.github.seleniumquery.by.selector.CompiledSelector;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +24,11 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
 		String tagName = element.getTagName();
 		return driver.findElements(By.tagName(tagName)).size() == 1;
+	}
+	
+	@Override
+	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+		return new CompiledSelector(":only-of-type", "ONLY OF TYPE PSEUDO");
 	}
 	
 }

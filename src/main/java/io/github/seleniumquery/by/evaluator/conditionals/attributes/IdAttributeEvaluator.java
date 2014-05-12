@@ -2,7 +2,6 @@ package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CSSFilter;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;

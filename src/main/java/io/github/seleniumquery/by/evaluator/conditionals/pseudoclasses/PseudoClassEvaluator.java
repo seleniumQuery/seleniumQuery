@@ -1,7 +1,6 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
 import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.selector.CSSFilter;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import java.util.Arrays;
@@ -38,9 +37,18 @@ public class PseudoClassEvaluator implements CSSCondition<AttributeCondition> {
 		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
 		return false;
 	}
+	
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition condition) {
-		return new CompiledSelector(condition.toString(), CSSFilter.FILTER_NOTHING);
+	public CompiledSelector compile(WebDriver driver, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+		
+		String pseudoClassValue = attributeCondition.getValue();
+		for (PseudoClass pseudoClass : pseudoClasses) {
+			if (pseudoClass.isApplicable(pseudoClassValue)) {
+				return pseudoClass.compilePseudoClass(driver, selectorUpToThisPoint, pseudoClassValue);
+			}
+		}
+		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
+		return new CompiledSelector(":"+attributeCondition.toString(), "Unsupported pseudo-class!!!");
 	}
 
 }

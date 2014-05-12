@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +28,11 @@ public class FirstChildPseudoClass implements PseudoClass {
 			return false;
 		}
 		return SelectorUtils.itselfWithSiblings(element).get(0).equals(element);
+	}
+	
+	@Override
+	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+		return new CompiledSelector(":first-child", "FIRST-CHILD PSEUDO");
 	}
 	
 }

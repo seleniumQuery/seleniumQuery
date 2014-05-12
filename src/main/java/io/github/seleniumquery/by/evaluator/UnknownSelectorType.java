@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.evaluator;
 
-import io.github.seleniumquery.by.selector.CSSFilter;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +22,7 @@ public class UnknownSelectorType<T> implements CSSSelector<T> {
 	@Override
 	public CompiledSelector compile(WebDriver driver, T selector) {
 		// if it is unknown, we just push it forward, hoping the browser will know what to do
-		return new CompiledSelector(selector.toString(), CSSFilter.FILTER_NOTHING);
+		return new CompiledSelector(selector.toString(), SqCSSFilter.FILTER_NOTHING);
 	}
 	
 }

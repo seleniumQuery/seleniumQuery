@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,11 @@ public class NotPseudoClass implements PseudoClass {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
 		String selector = pseudoClassValue.substring(NOT_BRACE_LENGTH, pseudoClassValue.length() - 1);
 		return !SelectorEvaluator.is(driver, element, selector);
+	}
+	
+	@Override
+	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+		return new CompiledSelector(":not("+pseudoClassValue+")", "NOT PSEUDO");
 	}
 	
 }

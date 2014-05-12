@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals;
 
 import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.selector.CSSFilter;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
@@ -25,7 +25,7 @@ public class UnknownConditionType<T extends Condition> implements CSSCondition<T
 	@Override
 	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, Condition condition) {
 		// we dont know what to do, just pass along hoping the browser will
-		return new CompiledSelector(condition.toString(), CSSFilter.FILTER_NOTHING);
+		return new CompiledSelector(condition.toString(), SqCSSFilter.FILTER_NOTHING);
 	}
 	
 }

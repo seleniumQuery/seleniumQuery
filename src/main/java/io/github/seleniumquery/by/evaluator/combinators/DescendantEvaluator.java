@@ -3,7 +3,6 @@ package io.github.seleniumquery.by.evaluator.combinators;
 import io.github.seleniumquery.by.evaluator.CSSSelector;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CSSFilter;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
@@ -39,7 +38,7 @@ public class DescendantEvaluator implements CSSSelector<DescendantSelector> {
 
 	@Override
 	public CompiledSelector compile(WebDriver driver, DescendantSelector selector) {
-		return new CompiledSelector(selector.toString(), CSSFilter.FILTER_NOTHING);
+		return CompiledSelector.createNoFilterSelector(selector);
 	}
 
 }

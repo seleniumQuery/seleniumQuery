@@ -1,5 +1,6 @@
 package io.github.seleniumquery.by.selector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.SearchContext;
@@ -14,7 +15,15 @@ public class CompiledSelectorList {
 	}
 	
 	public List<WebElement> execute(SearchContext context) {
-		return null;
+		List<List<WebElement>> elements = new ArrayList<List<WebElement>>(css.size());
+		List<WebElement> execute = null;
+		for (CompiledSelector cs : css) {
+			execute = cs.execute(context);
+			elements.add(execute);
+		}
+		// you have to implement the intersection here!
+		System.err.println("NOT IMPLEMENTED!!!");
+		return execute;
 	}
 
 }

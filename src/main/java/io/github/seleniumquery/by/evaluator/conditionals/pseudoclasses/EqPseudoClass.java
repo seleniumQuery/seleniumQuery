@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import java.util.List;
 
@@ -30,6 +31,11 @@ public class EqPseudoClass implements PseudoClass {
 		Integer index = Integer.valueOf(eqIndex);
 		List<WebElement> elements = driver.findElements(SeleniumQueryBy.byEnhancedSelector(selectorThisConditionShouldApply.toString()));
 		return elements.size() > index && elements.get(index).equals(element);
+	}
+	
+	@Override
+	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+		return new CompiledSelector(":eq("+pseudoClassValue+")", "EQ PSEUDO");
 	}
 	
 }

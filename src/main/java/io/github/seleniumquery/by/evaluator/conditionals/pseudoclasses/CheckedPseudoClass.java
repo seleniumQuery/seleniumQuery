@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import io.github.seleniumquery.by.selector.CompiledSelector;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,6 +31,11 @@ public class CheckedPseudoClass implements PseudoClass {
 	
 	public boolean isChecked(WebElement element) {
 		return CHECKED_ALLOWED_TAGS.contains(element.getTagName()) && element.isSelected();
+	}
+	
+	@Override
+	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+		return new CompiledSelector(":checked", "CHECKED PSEUDO");
 	}
 
 }

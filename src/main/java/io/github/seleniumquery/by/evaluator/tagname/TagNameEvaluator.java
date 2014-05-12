@@ -24,7 +24,7 @@ public class TagNameEvaluator implements CSSSelector<ElementSelector> {
 	@Override
 	public CompiledSelector compile(WebDriver driver, ElementSelector selector) {
 		// nothing to do, everyone supports filtering by tag name
-		return new CompiledSelector(selector.toString(), "TAGNAME");
+		return CompiledSelector.createNoFilterSelector(selector);
 	}
 
 }

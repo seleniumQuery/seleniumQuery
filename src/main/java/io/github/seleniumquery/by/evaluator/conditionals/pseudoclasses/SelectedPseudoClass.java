@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import io.github.seleniumquery.by.selector.CompiledSelector;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
@@ -26,6 +28,11 @@ public class SelectedPseudoClass implements PseudoClass {
 	
 	public boolean isSelected(WebElement element) {
 		return element.getTagName().equals(OPTION_TAG) && element.isSelected();
+	}
+	
+	@Override
+	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+		return new CompiledSelector(":selected", "SELECTED PSEUDO");
 	}
 
 }

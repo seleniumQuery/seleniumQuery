@@ -5,7 +5,7 @@ import io.github.seleniumquery.by.evaluator.CSSSelector;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
 import io.github.seleniumquery.by.selector.CSSFilterUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SQSelector;
+import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,7 +40,7 @@ public class ConditionalSelectorEvaluator implements CSSSelector<ConditionalSele
 	public CompiledSelector compile(WebDriver driver, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
-		CompiledSelector compiledSelector = SQSelector.compile(driver, simpleSelector);
+		CompiledSelector compiledSelector = SeleniumQueryCssCompiler.compileSelector(driver, simpleSelector);
 		CompiledSelector compiledCondition = compileCondition(driver, simpleSelector, condition);
 		return CSSFilterUtils.combine(compiledSelector, compiledCondition);
 	}

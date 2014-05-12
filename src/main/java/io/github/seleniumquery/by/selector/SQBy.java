@@ -50,7 +50,7 @@ public class SQBy extends By {
 	 */
 	@Override
 	public List<WebElement> findElements(SearchContext context) {
-		this.compiledSelectorList = SQSelector.compile((WebDriver) context, selector);
+		this.compiledSelectorList = SeleniumQueryCssCompiler.compileSelectorList((WebDriver) context, selector);
 		if (this.selectorIsXPathExpression) {
 			return new By.ByXPath(this.selector).findElements(context);
 		}

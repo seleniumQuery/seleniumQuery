@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,6 +31,11 @@ public class OnlyChildPseudoClass implements PseudoClass {
 			return false;
 		}
 		return SelectorUtils.itselfWithSiblings(element).size() == 1;
+	}
+	
+	@Override
+	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+		return new CompiledSelector(":only-child", "ONLYCHILD PSEUDO");
 	}
 	
 }
