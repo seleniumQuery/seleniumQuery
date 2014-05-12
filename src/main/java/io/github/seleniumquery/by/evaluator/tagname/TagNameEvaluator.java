@@ -1,9 +1,6 @@
 package io.github.seleniumquery.by.evaluator.tagname;
 
-import java.util.List;
-
 import io.github.seleniumquery.by.evaluator.CSSSelector;
-import io.github.seleniumquery.by.selector.CSSFilter;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;

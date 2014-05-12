@@ -4,6 +4,7 @@ import static io.github.seleniumquery.by.enhancements.SeleniumQueryEnhancementUt
 
 import org.openqa.selenium.SearchContext;
 
+@SuppressWarnings("unused")
 public class SeleniumQueryEnhancements {
 	
 	// SeleniumQueryEnhancements.isNativeCss
