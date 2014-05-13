@@ -3,6 +3,7 @@ package io.github.seleniumquery;
 import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.functions.AttrFunction;
 import io.github.seleniumquery.functions.ClickFunction;
+import io.github.seleniumquery.functions.ClosestFunction;
 import io.github.seleniumquery.functions.FindFunction;
 import io.github.seleniumquery.functions.FirstFunction;
 import io.github.seleniumquery.functions.GetFunction;
@@ -342,8 +343,23 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return HasClassFunction.hasClass(this, elements, className);
 	}
 
+	/**
+	 * Retrieve all the elements contained in the seleniumQuery set, as an array.
+	 * 
+	 * @since 1.0.0
+	 */
 	public WebElement[] toArray() {
 		return ToArrayFunction.toArray(this, elements);
+	}
+
+	/**
+	 * For each element in the set, get the first element that matches the selector by
+	 * testing the element itself and traversing up through its ancestors in the DOM tree.
+	 * 
+	 * @since 1.0.0
+	 */
+	public SeleniumQueryObject closest(String selector) {
+		return ClosestFunction.closest(this, elements, selector);
 	}
    
 }
