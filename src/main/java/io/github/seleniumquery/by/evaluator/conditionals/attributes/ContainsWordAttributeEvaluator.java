@@ -12,16 +12,15 @@ import org.w3c.css.sac.Selector;
 
 public class ContainsWordAttributeEvaluator implements CSSCondition<AttributeCondition> {
 
-	public static final String CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL = "~=";
-	
 	private static final ContainsWordAttributeEvaluator instance = new ContainsWordAttributeEvaluator();
-
 	public static ContainsWordAttributeEvaluator getInstance() {
 		return instance;
 	}
-	
 	private ContainsWordAttributeEvaluator() { }
+	
 
+	public static final String CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL = "~=";
+	
 	/**
 	 * @see {@link org.w3c.css.sac.Condition#SAC_ONE_OF_ATTRIBUTE_CONDITION}
 	 * 

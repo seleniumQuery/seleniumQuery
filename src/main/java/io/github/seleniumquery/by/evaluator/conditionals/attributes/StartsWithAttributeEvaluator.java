@@ -12,12 +12,13 @@ import org.w3c.css.sac.Selector;
 public class StartsWithAttributeEvaluator implements CSSCondition<AttributeCondition> {
 
 	private static final StartsWithAttributeEvaluator instance = new StartsWithAttributeEvaluator();
-
 	public static StartsWithAttributeEvaluator getInstance() {
 		return instance;
 	}
-	
 	private StartsWithAttributeEvaluator() { }
+	
+	
+	public static final String STARTS_WITH_ATTRIBUTE_SELECTOR_SYMBOL = "^=";
 
 	/**
 	 * Currently it is (mistakenly?) mapped to the type {@link org.w3c.css.sac.Condition#SAC_ATTRIBUTE_CONDITION}.
@@ -37,9 +38,8 @@ public class StartsWithAttributeEvaluator implements CSSCondition<AttributeCondi
 
 	@Override
 	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition attributeCondition) {
-		String attributeSelectorSymbol = "^=";
 		// nothing to do, everyone supports this selector
-		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, attributeSelectorSymbol);
+		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, STARTS_WITH_ATTRIBUTE_SELECTOR_SYMBOL);
 	}
 
 }

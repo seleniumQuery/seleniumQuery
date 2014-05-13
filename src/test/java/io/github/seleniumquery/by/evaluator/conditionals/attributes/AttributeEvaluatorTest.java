@@ -48,7 +48,7 @@ public class AttributeEvaluatorTest {
 	
 	@Test
 	public void startsWithAttributeEvaluator() {
-		assertAll("^=", "");
+		assertAll(StartsWithAttributeEvaluator.STARTS_WITH_ATTRIBUTE_SELECTOR_SYMBOL, "");
 	}
 	
 	@Test
