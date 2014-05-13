@@ -67,10 +67,7 @@ public class CompiledSelector {
 
 	public List<WebElement> execute(SearchContext context) {
 		List<WebElement> elements = new By.ByCssSelector(this.cssSelector).findElements(context);
-		for (SqCSSFilter cf : cssFilter) {
-			elements = cf.filter((WebDriver) context, elements);
-		}
-		return elements;
+		return filter((WebDriver) context, elements);
 	}
 	
 	public String getCssSelector() {
@@ -84,6 +81,13 @@ public class CompiledSelector {
 	@Override
 	public String toString() {
 		return "CS! Selector: "+cssSelector+" // Filter: "+cssFilter;
+	}
+
+	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
+		for (SqCSSFilter cf : cssFilter) {
+			elements = cf.filter(driver, elements);
+		}
+		return elements;
 	}
 
 }
