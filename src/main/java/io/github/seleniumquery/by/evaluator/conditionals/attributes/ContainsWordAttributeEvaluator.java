@@ -3,7 +3,6 @@ package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
@@ -13,6 +12,8 @@ import org.w3c.css.sac.Selector;
 
 public class ContainsWordAttributeEvaluator implements CSSCondition<AttributeCondition> {
 
+	public static final String CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL = "~=";
+	
 	private static final ContainsWordAttributeEvaluator instance = new ContainsWordAttributeEvaluator();
 
 	public static ContainsWordAttributeEvaluator getInstance() {
@@ -47,8 +48,10 @@ public class ContainsWordAttributeEvaluator implements CSSCondition<AttributeCon
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition condition) {
-		return new CompiledSelector(condition.toString(), SqCSSFilter.FILTER_NOTHING);
+	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition attributeCondition) {
+		// nothing to do, everyone supports this selector
+		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition,
+				CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL);
 	}
 
 }
