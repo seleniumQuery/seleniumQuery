@@ -93,7 +93,7 @@ public class SeleniumQueryCssCompilerIntegrationTest {
     }
     
     @Test
-    public void tag_and_tag_adjacent() {
+    public void tag_and_tag_direct_adjacent() {
     	List<WebElement> elements = compileAndExecute("option + option");
     	
     	assertThat(elements, hasSize(2));
@@ -102,11 +102,20 @@ public class SeleniumQueryCssCompilerIntegrationTest {
     }
     
     @Test
-    public void tag_and_tag_adjacent_with_pseudo() {
+    public void tag_and_tag_direct_adjacent_with_pseudo() {
     	List<WebElement> elements = compileAndExecute("span.spanYo:hidden + span:hidden");
     	
     	assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).toString(), is("<span class=\"yo2\" style=\"display: none\">"));
+    }
+    
+    @Test
+    public void tag_and_tag_general_adjacent_with_pseudo() {
+    	List<WebElement> elements = compileAndExecute(".spanYo:hidden ~ button");
+    	
+    	assertThat(elements, hasSize(2));
+    	assertThat(elements.get(0).toString(), is("<button class=\"btnn\" />"));
+    	assertThat(elements.get(1).toString(), is("<button id=\"bA\" style=\"display: none\" />"));
     }
     
 }

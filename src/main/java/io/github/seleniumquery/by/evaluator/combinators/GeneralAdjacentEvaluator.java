@@ -4,7 +4,10 @@ import io.github.seleniumquery.by.evaluator.CSSSelector;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -52,8 +55,49 @@ public class GeneralAdjacentEvaluator implements CSSSelector<SiblingSelector> {
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, SiblingSelector selector) {
-		return CompiledSelector.createNoFilterSelector(selector);
+	public CompiledSelector compile(WebDriver driver, SiblingSelector siblingSelector) {
+		CompiledSelector previousElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, siblingSelector.getSelector());
+		CompiledSelector siblingElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, siblingSelector.getSiblingSelector());
+		
+		SqCSSFilter generalAdjacentFilter = new GeneralAdjacentFilter(previousElementCompiled, siblingElementCompiled);
+		return new CompiledSelector(previousElementCompiled.getCssSelector()+"~"+siblingElementCompiled.getCssSelector(),
+										generalAdjacentFilter);
+	}
+	
+	private static final class GeneralAdjacentFilter implements SqCSSFilter {
+		private final CompiledSelector siblingsCompiledSelector;
+		private final CompiledSelector elementCompiledSelector;
+		
+		private GeneralAdjacentFilter(CompiledSelector previousElementCompiled, CompiledSelector siblingElementCompiled) {
+			this.siblingsCompiledSelector = previousElementCompiled;
+			this.elementCompiledSelector = siblingElementCompiled;
+		}
+		
+		@Override
+		public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
+			elements = elementCompiledSelector.filter(driver, elements);
+			
+			outerFor:for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext();) {
+				WebElement element = iterator.next();
+				
+				List<WebElement> previousSiblings = SelectorUtils.getPreviousSiblings(element);
+				
+				previousSiblings = siblingsCompiledSelector.filter(driver, previousSiblings);
+				
+				for (WebElement previousSibling : previousSiblings) {
+					boolean previousSiblingMatchesSelectorFirstPart = SelectorEvaluator.is(driver, previousSibling,
+																		siblingsCompiledSelector.getCssSelector());
+					if (previousSiblingMatchesSelectorFirstPart) {
+						// found a mathing sibling, dont remove the element from the list, continue to next element
+						continue outerFor;
+					}
+				}
+				// no matching sibling was found, remove element
+				iterator.remove();
+				
+			}
+			return elements;
+		}
 	}
 
 }

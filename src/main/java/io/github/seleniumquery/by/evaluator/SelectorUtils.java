@@ -63,15 +63,15 @@ public class SelectorUtils {
 		return parent.findElements(By.xpath("./*"));
 	}
 	
-	public static List<WebElement> getPreviousSiblings(WebElement element) {
-		List<WebElement> itselfWithSiblings = SelectorUtils.itselfWithSiblings(element);
+	public static List<WebElement> getPreviousSiblings(WebElement elementItSelf) {
+		List<WebElement> itselfWithSiblings = SelectorUtils.itselfWithSiblings(elementItSelf);
 		
 		List<WebElement> previousSiblings = new ArrayList<WebElement>();
-		for (WebElement itselfOrSibling : itselfWithSiblings) {
-			if (element.equals(itselfOrSibling)) {
+		for (WebElement siblingOrItSelf : itselfWithSiblings) {
+			if (elementItSelf.equals(siblingOrItSelf)) {
 				break;
 			}
-			previousSiblings.add(itselfOrSibling);
+			previousSiblings.add(siblingOrItSelf);
 		}
 		return previousSiblings;
 	}
