@@ -35,7 +35,7 @@ public class HiddenPseudoClass implements PseudoClass {
 	
 	public static final SqCSSFilter HiddenPseudoClassFilter = new SqCSSFilter() {
 		@Override
-		public List<WebElement> filter(List<WebElement> elements) {
+		public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
 			for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext();) {
 				WebElement webElement = iterator.next();
 				if (webElement.isDisplayed()) {

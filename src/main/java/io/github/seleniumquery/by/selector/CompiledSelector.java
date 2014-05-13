@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
 
@@ -54,7 +55,7 @@ public class CompiledSelector {
 	public CompiledSelector(final String cssSelector, final String filterName) {
 		this(cssSelector, new SqCSSFilter() {
 			@Override
-			public List<WebElement> filter(List<WebElement> elements) {
+			public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
 				return elements;
 			}
 			@Override
@@ -67,7 +68,7 @@ public class CompiledSelector {
 	public List<WebElement> execute(SearchContext context) {
 		List<WebElement> elements = new By.ByCssSelector(this.cssSelector).findElements(context);
 		for (SqCSSFilter cf : cssFilter) {
-			elements = cf.filter(elements);
+			elements = cf.filter((WebDriver) context, elements);
 		}
 		return elements;
 	}
