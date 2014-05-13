@@ -20,7 +20,7 @@ public class SeleniumQueryCssCompilerIntegrationTest {
 		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 	
-	public List<WebElement> compileAndExecute(String selector) {
+	public static List<WebElement> compileAndExecute(String selector) {
 		CompiledSelectorList csl = SeleniumQueryCssCompiler.compileSelectorList($.browser.getDefaultDriver(), selector);
 		List<WebElement> execute = csl.execute($.browser.getDefaultDriver());
 		return execute;

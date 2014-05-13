@@ -24,7 +24,8 @@ public class OrCombinationConditionEvaluator implements CSSCondition<CombinatorC
 	 */
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
-		throw new RuntimeException("IT IS USED!");
+		// i dont think the CSS parser uses this. I kept it just in case...
+		throw new RuntimeException("OrCombinationConditionEvaluator - IT IS USED!");
 //		ConditionalSelectorEvaluator conditionalEvaluator = ConditionalSelectorEvaluator.getInstance();
 //		return conditionalEvaluator.isCondition(driver, element, selectorUpToThisPoint, combinatorCondition.getFirstCondition())
 //		    || conditionalEvaluator.isCondition(driver, element, selectorUpToThisPoint, combinatorCondition.getSecondCondition());
@@ -32,7 +33,8 @@ public class OrCombinationConditionEvaluator implements CSSCondition<CombinatorC
 
 	@Override
 	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, CombinatorCondition condition) {
-		throw new RuntimeException("IT IS USED!");
+		// i dont think the CSS parser uses this. I kept it just in case...
+		throw new RuntimeException("OrCombinationConditionEvaluator - IT IS USED!");
 //		return new CompiledSelector(condition.toString(), CSSFilter.FILTER_NOTHING);
 	}
 

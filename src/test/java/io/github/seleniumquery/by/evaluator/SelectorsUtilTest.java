@@ -92,5 +92,17 @@ public class SelectorsUtilTest {
 		assertThat(SelectorUtils.escapeSelector("-123"), is("\\-123"));
 		assertThat(SelectorUtils.escapeSelector("---"), is("\\---"));
 	}
+	
+	@Test
+	public void escapeAttributeValue__should_escape_strings_according_to_how_the_CSS_parser_works() {
+		// abc -> "abc"
+		assertThat(SelectorUtils.escapeAttributeValue("abc"), is("\"abc\""));
+		// a\"bc -> "a\"bc"
+		assertThat(SelectorUtils.escapeAttributeValue("a\\\"bc"), is("\"a\\\"bc\""));
+		// a'bc -> "a'bc"
+		assertThat(SelectorUtils.escapeAttributeValue("a'bc"), is("\"a'bc\""));
+		// a\tc -> "a\\tc"
+		assertThat(SelectorUtils.escapeAttributeValue("a\\tc"), is("\"a\\\\tc\""));
+	}
 
 }

@@ -103,4 +103,19 @@ public class SelectorUtils {
 		return escapedSelector;
 	}
 
+	/**
+	 * Escapes the attributes values into a valid CSS string.
+	 * Deals with the way the CSS parser gives the attributes' values to us.
+	 */
+	public static String escapeAttributeValue(String attributeValue) {
+		// " comes escaped already, so we unescape them (otherwise the next step will escape its \)
+		attributeValue = attributeValue.replace("\\\"", "\"");
+		// now we escape all \
+		attributeValue = attributeValue.replace("\\", "\\\\");
+		// and escape "
+		attributeValue = attributeValue.replace("\"", "\\\"");
+		// finally, surround with "s
+		return '"'+attributeValue+'"';
+	}
+
 }
