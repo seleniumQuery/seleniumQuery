@@ -110,12 +110,47 @@ public class SeleniumQueryCssCompilerIntegrationTest {
     }
     
     @Test
+    public void tag_class_and_tag_general_adjacent() {
+    	List<WebElement> elements = compileAndExecute("div.clz ~ h1");
+    	
+    	assertThat(elements, hasSize(1));
+    	assertThat(elements.get(0).toString(), is("<h1 id=\"must:escape\">"));
+    }
+    
+    @Test
     public void tag_and_tag_general_adjacent_with_pseudo() {
     	List<WebElement> elements = compileAndExecute(".spanYo:hidden ~ button");
     	
     	assertThat(elements, hasSize(2));
     	assertThat(elements.get(0).toString(), is("<button class=\"btnn\" />"));
     	assertThat(elements.get(1).toString(), is("<button id=\"bA\" style=\"display: none\" />"));
+    }
+    
+    @Test
+    public void tag_class_and_tag_child_selector() {
+    	List<WebElement> elements = compileAndExecute("select > option");
+    	
+    	assertThat(elements, hasSize(4));
+    	assertThat(elements.get(0).toString(), is("<option id=\"o1\" value=\"\">"));
+    	assertThat(elements.get(1).toString(), is("<option id=\"o11\" class=\"opt\" value=\"\" selected=\"\">"));
+    	assertThat(elements.get(2).toString(), is("<option id=\"o2\" value=\"\">"));
+    	assertThat(elements.get(3).toString(), is("<option id=\"o22\" class=\"opt\" value=\"\" selected=\"\">"));
+    }
+    
+    
+    @Test
+    public void tag_class_and_tag_child_selector__with_pseudo_on_both() {
+    	List<WebElement> elementsZero = compileAndExecute("select:hidden > option");
+    	assertThat(elementsZero, hasSize(0));
+    	
+    	List<WebElement> elements = compileAndExecute("body > :hidden > :hidden");
+    	
+    	assertThat(elements, hasSize(5));
+    	assertThat(elements.get(0).getTagName(), is("button"));
+    	assertThat(elements.get(1).getTagName(), is("span"));
+    	assertThat(elements.get(2).getTagName(), is("span"));
+    	assertThat(elements.get(3).getTagName(), is("button"));
+    	assertThat(elements.get(4).getTagName(), is("button"));
     }
     
 }
