@@ -4,6 +4,14 @@ import io.github.seleniumquery.by.evaluator.CSSSelector;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.functions.ClosestFunction;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,8 +45,41 @@ public class DescendantEvaluator implements CSSSelector<DescendantSelector> {
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, DescendantSelector selector) {
-		return CompiledSelector.createNoFilterSelector(selector);
+	public CompiledSelector compile(WebDriver driver, DescendantSelector descendantSelector) {
+		final CompiledSelector childrenCompiled = SeleniumQueryCssCompiler.compileSelector(driver, descendantSelector.getSimpleSelector());
+		final CompiledSelector ancestorCompiled = SeleniumQueryCssCompiler.compileSelector(driver, descendantSelector.getAncestorSelector());
+		
+		SqCSSFilter ancestorFilter = new SqCSSFilter() {
+			@Override
+			public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
+				elements = childrenCompiled.filter(driver, elements);
+				
+				for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext();) {
+					WebElement element = iterator.next();
+					
+					 // closest() starts in the element, we dont want that because we are testing the parent on the descendant selector
+					WebElement startingElement = SelectorUtils.parent(element);
+					
+					WebElement matchingAncestor = ClosestFunction.closest(driver, startingElement, ancestorCompiled.getCssSelector());
+					while (matchingAncestor != null) {
+						
+						List<WebElement> mas = ancestorCompiled.filter(driver, new ArrayList<WebElement>(Arrays.asList(matchingAncestor)));
+						boolean theMatchedAncestorMatchesTheFilter = !mas.isEmpty();
+						if (theMatchedAncestorMatchesTheFilter) {
+							continue; // this element's ancestor is ok, keep it, continue to next element
+						}
+						
+						// walks up one step, otherwise closest will match the same element again
+						matchingAncestor = SelectorUtils.parent(matchingAncestor);
+						
+						matchingAncestor = ClosestFunction.closest(driver, matchingAncestor, ancestorCompiled.getCssSelector());
+					}
+					iterator.remove();
+				}
+				return elements;
+			}
+		};
+		return new CompiledSelector(ancestorCompiled.getCssSelector()+" "+childrenCompiled, ancestorFilter);
 	}
 
 }
