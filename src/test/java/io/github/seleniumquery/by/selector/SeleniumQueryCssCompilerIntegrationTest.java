@@ -70,10 +70,10 @@ public class SeleniumQueryCssCompilerIntegrationTest {
     
     @Test
     public void hidden_pseudo_as_parent_and_descendant() {
-    	List<WebElement> elements = compileAndExecute("p:hidden span.spanYo");
+    	List<WebElement> elements = compileAndExecute("p:hidden span.spanYo:hidden");
     	
     	assertThat(elements, hasSize(1));
-    	assertThat(elements.get(0).toString(), is("<span class=\"spanYo\">"));
+    	assertThat(elements.get(0).toString(), is("<span class=\"spanYo\" style=\"display: none\">"));
     }
     
 }
