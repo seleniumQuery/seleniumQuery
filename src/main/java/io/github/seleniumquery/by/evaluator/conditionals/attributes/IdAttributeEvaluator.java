@@ -43,7 +43,7 @@ public class IdAttributeEvaluator implements CSSCondition<AttributeCondition> {
 	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedId = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by id
-		return CompiledSelector.createNoFilterSelector("#"+wantedId);
+		return CompiledSelector.createNoFilterSelector("#"+SelectorUtils.escapeSelector(wantedId));
 	}
 
 }

@@ -85,5 +85,22 @@ public class SelectorUtils {
 		}
 		return previousSiblings.get(siblingCount-1);
 	}
+	
+	public static String escapeSelector(String unescapedSelector) {
+		String escapedSelector = unescapedSelector;
+		if (Character.isDigit(unescapedSelector.charAt(0))) {
+			escapedSelector = "\\\\3"+unescapedSelector.charAt(0)+" "+escapedSelector.substring(1);
+		}
+		escapedSelector = escapedSelector.replace(":", "\\:");
+		if (escapedSelector.charAt(0) == '-') {
+			if (escapedSelector.length() == 1
+					||
+				(escapedSelector.length() > 1 && (Character.isDigit(escapedSelector.charAt(1)) || escapedSelector.charAt(1) == '-'))
+				) {
+			escapedSelector = "\\"+escapedSelector;
+			}
+		}
+		return escapedSelector;
+	}
 
 }

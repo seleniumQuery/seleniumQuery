@@ -72,5 +72,25 @@ public class SelectorsUtilTest {
 		assertThat(grandsons.get(1).getAttribute("id"), is("grandsonB"));
 		assertThat(grandsons.get(2).getAttribute("id"), is("grandsonC"));
 	}
+	
+	@Test
+	public void escapeSelector_should_escape_starting_integer() {
+		String escapedSelector = SelectorUtils.escapeSelector("1a2b3c");
+		assertThat(escapedSelector, is("\\\\31 a2b3c"));
+	}
+	
+	@Test
+	public void escapeSelector_should_escape_colon() {
+		String escapedSelector = SelectorUtils.escapeSelector("must:escape");
+		assertThat(escapedSelector, is("must\\:escape"));
+	}
+	
+	@Test
+	public void escapeSelector_should_escape_hyphen_if_next_char_is_hyphen_or_digit() {
+		assertThat(SelectorUtils.escapeSelector("-abc"), is("-abc"));
+		assertThat(SelectorUtils.escapeSelector("-"), is("\\-")); // only hyphen
+		assertThat(SelectorUtils.escapeSelector("-123"), is("\\-123"));
+		assertThat(SelectorUtils.escapeSelector("---"), is("\\---"));
+	}
 
 }

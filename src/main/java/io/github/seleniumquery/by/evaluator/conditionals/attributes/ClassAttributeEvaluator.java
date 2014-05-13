@@ -42,7 +42,7 @@ public class ClassAttributeEvaluator implements CSSCondition<AttributeCondition>
 	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by class
-		return CompiledSelector.createNoFilterSelector("."+wantedClassName);
+		return CompiledSelector.createNoFilterSelector("."+SelectorUtils.escapeSelector(wantedClassName));
 	}
 	
 }
