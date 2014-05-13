@@ -27,6 +27,22 @@ public class SeleniumQueryCssCompilerIntegrationTest {
 	}
 	
 	@Test
+	public void id() {
+		List<WebElement> elements = compileAndExecute("#d1");
+		
+		assertThat(elements, hasSize(1));
+		assertThat(elements.get(0).toString(), is("<div id=\"d1\" class=\"clz\">"));
+	}
+	
+	@Test
+	public void id_with_escape() {
+		List<WebElement> elements = compileAndExecute("#must\\:escape");
+		
+		assertThat(elements, hasSize(1));
+		assertThat(elements.get(0).toString(), is("<h1 id=\"must:escape\">"));
+	}
+	
+	@Test
 	public void tag() throws Exception {
 		List<WebElement> elements = compileAndExecute("div");
 		
@@ -74,6 +90,23 @@ public class SeleniumQueryCssCompilerIntegrationTest {
     	
     	assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).toString(), is("<span class=\"spanYo\" style=\"display: none\">"));
+    }
+    
+    @Test
+    public void tag_and_tag_adjacent() {
+    	List<WebElement> elements = compileAndExecute("option + option");
+    	
+    	assertThat(elements, hasSize(2));
+    	assertThat(elements.get(0).toString(), is("<option id=\"o11\" class=\"opt\" value=\"\" selected=\"\">"));
+    	assertThat(elements.get(1).toString(), is("<option id=\"o22\" class=\"opt\" value=\"\" selected=\"\">"));
+    }
+    
+    @Test
+    public void tag_and_tag_adjacent_with_pseudo() {
+    	List<WebElement> elements = compileAndExecute("span.spanYo:hidden + span:hidden");
+    	
+    	assertThat(elements, hasSize(1));
+    	assertThat(elements.get(0).toString(), is("<span class=\"yo2\" style=\"display: none\">"));
     }
     
 }
