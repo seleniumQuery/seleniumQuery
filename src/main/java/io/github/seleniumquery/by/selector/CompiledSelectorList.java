@@ -22,7 +22,8 @@ public class CompiledSelectorList {
 			elements.add(execute);
 		}
 		// you have to implement the intersection here!
-		System.err.println("NOT IMPLEMENTED!!!");
+		System.err.println("If you used \"selector1,selector2,selector3\" only the result of \"selector1\"" +
+				" is being shown. The rest is yet not implemented!");
 		return execute;
 	}
 

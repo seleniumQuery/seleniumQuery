@@ -21,7 +21,15 @@ public class CompiledSelector {
 	 * it is entirely supported by the driver.
 	 */
 	public static CompiledSelector createNoFilterSelector(Selector selector) {
-		return new CompiledSelector(selector.toString(), SqCSSFilter.FILTER_NOTHING);
+		return createNoFilterSelector(selector.toString());
+	}
+	
+	/**
+	 * Creates a compiled selector that does no filtering, meaning
+	 * it is entirely supported by the driver.
+	 */
+	public static CompiledSelector createNoFilterSelector(String selector) {
+		return new CompiledSelector(selector, SqCSSFilter.FILTER_NOTHING);
 	}
 
 	/**

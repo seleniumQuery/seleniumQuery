@@ -38,22 +38,22 @@ public class SeleniumQueryCssCompiler {
     private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
 
 	public static CompiledSelectorList compileSelectorList(WebDriver driver, String selector) {
-		String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.fixAttributeNotEquals(selector);
-        SelectorList selectorList = null;
         try {
-        	selectorList = css3Parser.parseSelectors(new InputSource(new StringReader(fixedSelector)));
+        	
+        	String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.fixAttributeNotEquals(selector);
+        	SelectorList selectorList = css3Parser.parseSelectors(new InputSource(new StringReader(fixedSelector)));
+
+        	List<CompiledSelector> css = new ArrayList<CompiledSelector>(selectorList.getLength()); 
+        	for (int i = 0; i < selectorList.getLength(); i++) {
+        		CompiledSelector cs = compileSelector(driver, selectorList.item(i));
+        		css.add(cs);
+        	}
+        	
+        	return new CompiledSelectorList(css);
+        	
         } catch (Exception e) {
         	throw new RuntimeException(e);
         }
-		List<CompiledSelector> css = new ArrayList<CompiledSelector>(selectorList.getLength()); 
-		for (int i = 0; i < selectorList.getLength(); i++) {
-			Selector selector1 = selectorList.item(i);
-			System.out.println("SELECTOR #"+i+" IS: "+selector1.getClass());
-			CompiledSelector cs = compileSelector(driver, selector1);
-			css.add(cs);
-		}
-        
-		return new CompiledSelectorList(css);
 	}
     
 	@SuppressWarnings("unchecked")
@@ -63,7 +63,7 @@ public class SeleniumQueryCssCompiler {
 	}
 	
 	public static void main(String[] args) {
-		CompiledSelectorList csl = compileSelectorList(null, "h1:not(ul),span:hidden,div#myId.class,.w00t:lang(fr)");
+		CompiledSelectorList csl = SeleniumQueryCssCompiler.compileSelectorList(null, "h1:not(ul),span:hidden,div#myId.class,.w00t:lang(fr)");
 		for (CompiledSelector cs : csl.css) {
 			System.out.println(cs);
 		}
