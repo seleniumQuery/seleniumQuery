@@ -346,7 +346,6 @@ Looking for a function not listed below? The functions we did not add in the lis
 
 ###Supported
 
-- [`.closest()`](http://api.jquery.com/closest/) - For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.
 - [`.find()`](http://api.jquery.com/find/) - Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
 - [`.first()`](http://api.jquery.com/first/) - Reduce the set of matched elements to the first in the set.
 - [`.is()`](http://api.jquery.com/is/) - Check the current matched set of elements against a selector, element, or jQuery object and return true if at least one of these elements matches the given arguments.
@@ -363,6 +362,7 @@ Looking for a function not listed below? The functions we did not add in the lis
  - [`.add()`](http://api.jquery.com/add/) - Add elements to the set of matched elements.
  - [`.addBack()`](http://api.jquery.com/addBack/) - Add the previous set of elements on the stack to the current set, optionally filtered by a selector.
  - [`.andSelf()`](http://api.jquery.com/andSelf/) - Add the previous set of elements on the stack to the current set.
+ - [`.closest()`](http://api.jquery.com/closest/) - For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.
  - [`.contents()`](http://api.jquery.com/contents/) - Get the children of each element in the set of matched elements, including text and comment nodes.
  - [`.each()`](http://api.jquery.com/each/) - Iterate over a jQuery object, executing a function for each matched element.
  - [`.end()`](http://api.jquery.com/end/) - End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
