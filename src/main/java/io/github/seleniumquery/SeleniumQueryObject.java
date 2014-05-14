@@ -187,6 +187,16 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
+	 * <p>
+	 * Get the combined text contents of each element in the set of matched elements, including their descendants.
+	 * </p>
+	 * 
+	 * <p>
+	 * <b>Note:</b> This functions uses Selenium's <code>{@link WebElement#getText()}</code>, and, as jQuery, <i>"Due
+	 *  to variations in the HTML parsers in different browsers, the text returned may vary in
+	 * newlines and other white space."</i>
+	 * </p>
+	 * 
 	 * @since 0.2.0
 	 */
 	public String text() {
