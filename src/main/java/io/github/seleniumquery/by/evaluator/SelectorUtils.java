@@ -53,6 +53,11 @@ public class SelectorUtils {
 	public static boolean hasAttribute(WebElement element, String localName) {
 		return element.getAttribute(localName) != null;
 	}
+	
+	public static boolean isVisible(WebElement element) {
+		// HtmlUnitDriver considers the <title> to be displayed. Firefox and Chrome don't consider it visible, so we don't.
+		return element.isDisplayed() && !element.getTagName().equals("title");
+	}
 
 	public static List<WebElement> itselfWithSiblings(WebElement element) {
 		WebElement parent = SelectorUtils.parent(element);

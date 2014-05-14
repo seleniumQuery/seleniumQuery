@@ -1,5 +1,6 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import org.openqa.selenium.WebDriver;
@@ -21,7 +22,7 @@ public class VisiblePseudoClass implements PseudoClass {
 	
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return element.isDisplayed();
+		return SelectorUtils.isVisible(element);
 	}
 	
 	@Override
