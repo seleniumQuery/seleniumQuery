@@ -26,6 +26,11 @@ public class SeleniumQueryCssCompilerIntegrationTest {
 		return execute;
 	}
 	
+	public static void assertSelectorMatchedSetSize(String selector, int size) {
+		List<WebElement> elements = compileAndExecute(selector);
+		assertThat(elements, hasSize(size));
+	}
+	
 	@Test
 	public void id() {
 		List<WebElement> elements = compileAndExecute("#d1");

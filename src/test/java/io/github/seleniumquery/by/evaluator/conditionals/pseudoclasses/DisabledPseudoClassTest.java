@@ -1,16 +1,11 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
+import static io.github.seleniumquery.by.selector.SeleniumQueryCssCompilerIntegrationTest.assertSelectorMatchedSetSize;
 import io.github.seleniumquery.TestInfrastructure;
-import io.github.seleniumquery.by.selector.SeleniumQueryCssCompilerIntegrationTest;
-
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class DisabledPseudoClassTest {
@@ -68,10 +63,4 @@ public class DisabledPseudoClassTest {
 		}
 	}
 
-	private void assertSelectorMatchedSetSize(String selector, int size) {
-		List<WebElement> elements = SeleniumQueryCssCompilerIntegrationTest.compileAndExecute(selector);
-		
-		assertThat(elements, hasSize(size));
-	}
-	
 }
