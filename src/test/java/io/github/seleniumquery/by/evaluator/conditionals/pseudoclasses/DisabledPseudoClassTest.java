@@ -17,7 +17,7 @@ public class DisabledPseudoClassTest {
 	
 	@Before
 	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver(1));
+		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
 		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 	
