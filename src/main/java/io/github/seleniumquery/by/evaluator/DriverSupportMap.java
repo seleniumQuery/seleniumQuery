@@ -49,4 +49,13 @@ public class DriverSupportMap {
 		return driverMap;
 	}
 	
+	private static final String HTML_UNIT_DRIVER_CLASSNAME = "HtmlUnitDriver";
+	public static boolean isHtmlUnitDriver(Object instance) {
+		return instance.getClass().getSimpleName().equals(HTML_UNIT_DRIVER_CLASSNAME);
+	}
+	
+	public static boolean isNotHtmlUnitDriver(Object instance) {
+		return !isHtmlUnitDriver(instance);
+	}
+	
 }
