@@ -49,17 +49,17 @@ public class SeleniumQueryExample {
         
         $("input[name='q']").val("selenium");
         $("button[name='btnG']").click();
-        System.out.println($("#resultStats").text());
 
-        // Besides the short syntax and the useful assumptions, other very useful capabilities of
-        // seleniumQuery are the .queryUntil() and .waitUntil() functions, especially handy for
-        // handling/testing Ajax enabled pages:
+        String resultsText = $("#resultStats").text();
+        System.out.println(resultsText);
+
+        // Besides the short syntax and the jQuery behavior you already know,
+        // other very useful function in seleniumQuery is .waitUntil(),
+        // especially handy for handling/testing Ajax enabled pages:
         
-        /*
-        $("input[name='q']").queryUntil().is(":not(:present)");
-        */
-        
-        // The line above throws an exception as that input never goes away in google.com.
+        $("input[name='q']").waitUntil().is(":enabled");
+        // The line above waits for no time, as that input
+        // is always enabled in google.com.
 
         $.browser.quitDefaultBrowser(); // quits the firefox driver
     }
