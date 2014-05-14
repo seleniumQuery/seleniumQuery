@@ -5,7 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsDriver;
 
 public class SelectorUtils {
 	
@@ -129,6 +132,17 @@ public class SelectorUtils {
 		attributeValue = attributeValue.replace("\"", "\\\"");
 		// finally, surround with "s
 		return '"'+attributeValue+'"';
+	}
+	
+	public static WebDriver getWebDriver(SearchContext context) {
+		if (context instanceof WebDriver) {
+			return (WebDriver) context;
+		}
+		if (context instanceof WrapsDriver) {
+			return ((WrapsDriver) context).getWrappedDriver();
+		}
+		throw new RuntimeException("We don't know how to extract the WebDriver from this context: "
+				+context.getClass()+" -> "+context);
 	}
 
 }

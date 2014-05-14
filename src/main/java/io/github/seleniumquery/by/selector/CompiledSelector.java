@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.selector;
 
+import io.github.seleniumquery.by.evaluator.SelectorUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -75,7 +77,8 @@ public class CompiledSelector {
 
 	public List<WebElement> execute(SearchContext context) {
 		List<WebElement> elements = new By.ByCssSelector(this.cssSelector).findElements(context);
-		return filter((WebDriver) context, elements);
+		WebDriver driver = SelectorUtils.getWebDriver(context);
+		return filter(driver, elements);
 	}
 	
 	public String getCssSelector() {

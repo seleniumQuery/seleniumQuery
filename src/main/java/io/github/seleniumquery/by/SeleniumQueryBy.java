@@ -1,22 +1,15 @@
 package io.github.seleniumquery.by;
 
-import java.util.Arrays;
+import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.by.selector.CompiledSelectorList;
+import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.by.enhancements.CheckedSelector;
-import io.github.seleniumquery.by.enhancements.ContainsSelector;
-import io.github.seleniumquery.by.enhancements.DisabledSelector;
-import io.github.seleniumquery.by.enhancements.EnabledSelector;
-import io.github.seleniumquery.by.enhancements.EqSelector;
-import io.github.seleniumquery.by.enhancements.HiddenSelector;
-import io.github.seleniumquery.by.enhancements.NotSelector;
-import io.github.seleniumquery.by.enhancements.PresentSelector;
-import io.github.seleniumquery.by.enhancements.SelectedSelector;
-import io.github.seleniumquery.by.enhancements.SeleniumQueryEnhancement;
-import io.github.seleniumquery.by.enhancements.VisibleSelector;
 
 /**
  * This By is a combination of the By.xpath and By.css, where the css is also enhanced with some of
@@ -27,16 +20,6 @@ import io.github.seleniumquery.by.enhancements.VisibleSelector;
  * @since 0.2.0
  */
 public class SeleniumQueryBy extends By {
-	
-	/**
-	 * Enhancements to be applied to selector.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
-	 */
-	private static List<? extends SeleniumQueryEnhancement> enhancements = Arrays.asList(new NotSelector(), new EqSelector(),
-			new ContainsSelector(), new SelectedSelector(), new VisibleSelector(), new HiddenSelector(), new EnabledSelector(),
-			new DisabledSelector(), new CheckedSelector(), new PresentSelector());
 	
 	/**
 	 * A By to be used in an element created with no By. Attempting to filter elements through this By
@@ -135,20 +118,16 @@ public class SeleniumQueryBy extends By {
 	}
 	
 	/**
-	 * Applies all enhancements, such as :eq(), :not(), etc. and returns.
+	 * Compiles the selector for the given context (the context
+	 * will determinate what selectors are natively supported and what selectors should
+	 * be handled by SeleniumQuery) and matches elements based on it.
 	 * 
-	 * If no enhancement is appliable, ordinary CSS selection is used.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
+	 * @since 0.6.2
 	 */
 	private List<WebElement> enhancedCssFindElements(SearchContext context) {
-		for (SeleniumQueryEnhancement enhancement : enhancements) {
-			if (enhancement.isApplicable(this.selector, context)) {
-				return enhancement.apply(this.selector, context);
-			}
-		}
-		return new By.ByCssSelector(this.selector).findElements(context);
+		WebDriver driver = SelectorUtils.getWebDriver(context);
+		CompiledSelectorList compileSelectorList = SeleniumQueryCssCompiler.compileSelectorList(driver, this.selector);
+		return compileSelectorList.execute(context);
 	}
 
 	/**

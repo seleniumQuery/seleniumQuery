@@ -1,6 +1,5 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.DriverSupportMap;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 import io.github.seleniumquery.by.selector.SqCSSFilter;
@@ -34,9 +33,13 @@ public class NotPseudoClass implements PseudoClass {
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:not
-		if (DriverSupportMap.getInstance().supportsNatively(driver, ":not(div)")) {
-			return CompiledSelector.createNoFilterSelector(":not("+pseudoClassValue+")");
-		}
+
+		// we never consider not to be supported natively, as it may contains not supported selectors in it
+		// until we find a way to check if those selectors inside it are supported, we filter.
+		
+//		if (DriverSupportMap.getInstance().supportsNatively(driver, ":not(div)")) {
+//			return CompiledSelector.createNoFilterSelector(":not("+pseudoClassValue+")");
+//		}
 		SqCSSFilter notPseudoClassFilter = new PseudoClassFilter(getInstance(), selectorThisConditionShouldApply,
 															pseudoClassValue);
 		return CompiledSelector.createFilterOnlySelector(notPseudoClassFilter);

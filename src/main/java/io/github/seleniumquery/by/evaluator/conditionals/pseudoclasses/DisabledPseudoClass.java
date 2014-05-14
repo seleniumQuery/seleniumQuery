@@ -6,6 +6,9 @@ import io.github.seleniumquery.by.evaluator.DriverSupportMap;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 import io.github.seleniumquery.by.selector.SqCSSFilter;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
@@ -20,6 +23,8 @@ public class DisabledPseudoClass implements PseudoClass {
 	
 	private static final String DISABLED_PSEUDO_CLASS_NO_COLON = "disabled";
 	private static final String DISABLED_PSEUDO_CLASS = ":"+DISABLED_PSEUDO_CLASS_NO_COLON;
+	
+	private static final List<String> ALLOWED_TAGS = Arrays.asList("input", "button", "optgroup", "option", "select", "textarea");
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -28,7 +33,7 @@ public class DisabledPseudoClass implements PseudoClass {
 
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return !element.isEnabled();
+		return !element.isEnabled() && ALLOWED_TAGS.contains(element.getTagName());
 	}
 
 	private static final SqCSSFilter disabledPseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED,

@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.selector;
 
+import io.github.seleniumquery.by.evaluator.SelectorUtils;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -50,7 +52,8 @@ public class SQBy extends By {
 	 */
 	@Override
 	public List<WebElement> findElements(SearchContext context) {
-		this.compiledSelectorList = SeleniumQueryCssCompiler.compileSelectorList((WebDriver) context, selector);
+		WebDriver driver = SelectorUtils.getWebDriver(context);
+		this.compiledSelectorList = SeleniumQueryCssCompiler.compileSelectorList(driver, selector);
 		if (this.selectorIsXPathExpression) {
 			return new By.ByXPath(this.selector).findElements(context);
 		}
