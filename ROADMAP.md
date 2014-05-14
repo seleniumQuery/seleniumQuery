@@ -123,6 +123,7 @@ Looking for a function not listed below? The functions we did not add in the lis
 ###Soon
 
 - [`.children()`](http://api.jquery.com/children/) - Get the children of each element in the set of matched elements, optionally filtered by a selector.
+ - [`.end()`](http://api.jquery.com/end/) - End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
 - [`.eq()`](http://api.jquery.com/eq/) - Reduce the set of matched elements to the one at the specified index.
 
 ###Not supported
@@ -132,7 +133,6 @@ Looking for a function not listed below? The functions we did not add in the lis
  - [`.andSelf()`](http://api.jquery.com/andSelf/) - Add the previous set of elements on the stack to the current set.
  - [`.contents()`](http://api.jquery.com/contents/) - Get the children of each element in the set of matched elements, including text and comment nodes.
  - [`.each()`](http://api.jquery.com/each/) - Iterate over a jQuery object, executing a function for each matched element.
- - [`.end()`](http://api.jquery.com/end/) - End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
  - [`.filter()`](http://api.jquery.com/filter/) - Reduce the set of matched elements to those that match the selector or pass the function’s test.
  - [`.has()`](http://api.jquery.com/has/) - Reduce the set of matched elements to those that have a descendant that matches the selector or DOM element.
  - [`.last()`](http://api.jquery.com/last/) - Reduce the set of matched elements to the final one in the set.
