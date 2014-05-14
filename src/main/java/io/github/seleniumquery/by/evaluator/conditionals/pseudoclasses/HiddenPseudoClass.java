@@ -18,10 +18,11 @@ public class HiddenPseudoClass implements PseudoClass {
 	}
 	private HiddenPseudoClass() { }
 	
+	private static final String HIDDEN_PSEUDO_CLASS_NO_COLON = "hidden";
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
-		return "hidden".equals(pseudoClassValue);
+		return HIDDEN_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
 	}
 	
 	@Override
@@ -29,10 +30,11 @@ public class HiddenPseudoClass implements PseudoClass {
 		return !SelectorUtils.isVisible(element);
 	}
 	
-	private static final SqCSSFilter HiddenPseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED, PSEUDO_CLASS_VALUE_NOT_USED);
+	private static final SqCSSFilter hiddenPseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED,
+																		PSEUDO_CLASS_VALUE_NOT_USED);
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return CompiledSelector.createFilterOnlySelector(HiddenPseudoClassFilter);
+		return CompiledSelector.createFilterOnlySelector(hiddenPseudoClassFilter);
 	}
 	
 }
