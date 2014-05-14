@@ -13,12 +13,11 @@ public class HtmlFunctionTest {
 	@Before
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-
 		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 
     @Test
-    public void prop() throws Exception {
+    public void html() {
         assertThat($("body").html(),
         is("\n"+
 		"    <div>Batman</div>\n"+
