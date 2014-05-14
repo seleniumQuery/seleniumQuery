@@ -17,7 +17,7 @@ public class SelectedSelectorTest {
         
         assertThat($("option").size(), is(6));
         assertThat($("option:selected").size(), is(2));
-        assertThat($("option:selected").text(), is("Shrubs"));
+        assertThat($("option:selected").get(0).getText(), is("Shrubs"));
     }
 
 }

@@ -1,13 +1,12 @@
 package io.github.seleniumquery.by.enhancement;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import io.github.seleniumquery.TestInfrastructure;
 
 import org.junit.Before;
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
 
 public class CombinationNotEqSelectorTest {
 
@@ -41,7 +40,7 @@ public class CombinationNotEqSelectorTest {
     	// when
     	String text = $("div:not(div):eq(0)").text();
     	// then
-		assertThat(text, is(nullValue()));
+		assertThat(text, is(""));
     }
     
     @Test
@@ -50,7 +49,7 @@ public class CombinationNotEqSelectorTest {
     	// when
     	String text = $("div:not(div):eq(1)").text();
     	// then
-		assertThat(text, is(nullValue()));
+		assertThat(text, is(""));
     }
     
     @Test
@@ -59,7 +58,7 @@ public class CombinationNotEqSelectorTest {
     	// when
     	String text = $("div:not(.w00t):eq(1)").text();
     	// then
-		assertThat(text, is(nullValue()));
+		assertThat(text, is(""));
     }
 
 }

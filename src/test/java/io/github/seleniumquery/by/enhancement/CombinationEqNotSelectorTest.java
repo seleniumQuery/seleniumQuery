@@ -1,12 +1,11 @@
 package io.github.seleniumquery.by.enhancement;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import io.github.seleniumquery.TestInfrastructure;
 
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
 
 public class CombinationEqNotSelectorTest {
 
@@ -17,9 +16,9 @@ public class CombinationEqNotSelectorTest {
         $.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(EqSelectorTest.class));
         
         assertThat($("div:eq(0):not(span)").text(), is("Batman"));
-        assertThat($("div:eq(1):not(div)").text(), is(nullValue()));
+        assertThat($("div:eq(1):not(div)").text(), is(""));
         assertThat($("div:eq(1):not(.w00t)").text(), is("Spider Man"));
-        assertThat($("div:eq(2):not(.w00t)").text(), is(nullValue()));
+        assertThat($("div:eq(2):not(.w00t)").text(), is(""));
     }
 
 }
