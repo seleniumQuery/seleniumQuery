@@ -109,21 +109,21 @@ $("#mySelect").val("ford");
 
 ###Waiting capabilities for improved Ajax testing
 
-Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element through the use of `.queryUntil()` and `.waitUntil()` functions:
+Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element (so long, boilerplate code!) through the use of the `.waitUntil()` function:
 
 ```java
 /*
  * Selenium WebDriver cannot natively detect the end of an Ajax call.
- * To test your application behaviour, you can/should work with the Ajax's expected effects.
+ * To test your application behaviour, you can and should work with the Ajax's expected effects.
  * 
  * Below is an example of a <div> that should be hidden as effect of an Ajax call.
  * The code will only continue after it is gone. If not, it will throw a timeout exception.
  */
 $("#ajaxDiv").click();
-$("#ajaxDiv").queryUntil().is(":not(:visible)");
+$("#ajaxDiv").waitUntil().is(":not(:visible)");
 
 // Or, fluently:
-$("#ajaxDiv").click().queryUntil().is(":not(:visible)");
+$("#ajaxDiv").click().waitUntil().is(":not(:visible)");
 ```
 
 And, yeah, that's right, the `.is()` function above is your old-time friend that takes a selector as argument!
@@ -132,29 +132,22 @@ And, yeah, that's right, the `.is()` function above is your old-time friend that
 
 For the currently implemented jQuery functions check the [supported list below](#supported-jquery-functions).
 
-In order to handle interactions with Ajax-enabled pages, you can use the `.queryUntil()` and `.waitUntil()` functions:
+In order to handle interactions with Ajax-enabled pages, you can use the `.waitUntil()` function:
 
-- The `.queryUntil()` functions will requery for the elements until the given condition is met, returning a new seleniumQuery object when that happens.
-- The `.waitUntil()` will act only on the elements matched when the seleniumQuery object was built (at the moment `$()` was called).
+- The `.waitUntil()` functions will *requery* the DOM for the elements until the given condition is met, returning a **new** seleniumQuery object when that happens.
 
 ```java
-// .queryUntil() will requery the DOM every time until the matched set fulfills the requirements
+// .waitUntil() will requery the DOM every time until the matched set fulfills the requirements
 
 // .is() functions
-$(".aDivDiv").queryUntil().is(":present");
-$(".myInput").queryUntil().is(":enabled");
-$(".aDivDiv").queryUntil().is(":visible");
-$(".myInput").queryUntil().is(":visible:enabled");
-// functions such as .val(), .text() and others are also available
-$(".myInput").queryUntil().val().isEqualTo("expectedValue");
-$(".aDivDiv").queryUntil().text().contains("expectedText");
-
-// .waitUntil() will work only on the already matched set, and have the exact same set of functions
-
-// .waitUntil() supports the exact same functions as .queryUntil()
 $(".aDivDiv").waitUntil().is(":present");
+$(".myInput").waitUntil().is(":enabled");
+$(".aDivDiv").waitUntil().is(":visible");
 $(".myInput").waitUntil().is(":visible:enabled");
-// other functions as well
+// functions such as .val(), .text() and others are also available
+$(".myInput").waitUntil().val().isEqualTo("expectedValue");
+$(".aDivDiv").waitUntil().text().contains("expectedText");
+// and more...
 $(".myInput").waitUntil().val().matches(".*\d{10}\*");
 $(".myInput").waitUntil().size().isGreaterThan(7);
 $(".aDivDiv").waitUntil().html().contains("<div>expected</div>");
@@ -221,9 +214,6 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - [`:submit` Selector](http://api.jquery.com/submit-selector/) - Selects all elements of type submit.
 - [`:text` Selector](http://api.jquery.com/text-selector/) - Selects all elements of type text.
 
-###Not Supported
-
-- [`:animated` Selector](http://api.jquery.com/animated-selector/) -  Select all elements that are in the progress of an animation at the time the selector is run.
 - [Attribute Not Equal Selector `[name!="value"]`](http://api.jquery.com/attribute-not-equal-selector/) - Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.
 - [`:file` Selector](http://api.jquery.com/file-selector/) - Selects all elements of type file.
 - [`:focus` Selector](http://api.jquery.com/focus-selector/) - Selects element if it is currently focused.
@@ -241,7 +231,7 @@ Some functions, specially those that require JavaScript enabled in the browser/d
 
 Below you will find the list of currently supported jQuery functions, by category.
 
-Looking for a function not listed below? Check the `ROADMAP.md` file. The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function directly/explicitly through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.queryUntil()` and `.waitUntil()`  functions).
+Looking for a function not listed below? Check the `ROADMAP.md` file. The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function directly/explicitly through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil()`  function).
 
 ##[Attributes](http://api.jquery.com/category/attributes/)
 
@@ -254,13 +244,9 @@ Looking for a function not listed below? Check the `ROADMAP.md` file. The functi
 
 ##[CSS](http://api.jquery.com/category/css/)
 
-###Supported
-
 - [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
 
 ##[Events](http://api.jquery.com/category/events/)
-
-###Supported
 
 - [`.trigger()`](http://api.jquery.com/trigger/) - Execute all handlers and behaviors attached to the matched elements for the given event type.
 - [`.click()`](http://api.jquery.com/click/) - Trigger the "click" JavaScript event on the matched elements.
@@ -273,31 +259,19 @@ Looking for a function not listed below? Check the `ROADMAP.md` file. The functi
 
 ##[Forms](http://api.jquery.com/category/forms/)
 
-###Supported
-
 - [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
 
-###Not Supported
-
-- [`jQuery.param()`](http://api.jquery.com/jQuery.param/) - Create a serialized representation of an array or object, suitable for use in a URL query string or Ajax request.
-- [`.serialize()`](http://api.jquery.com/serialize/) - Encode a set of form elements as a string for submission.
-- [`.serializeArray()`](http://api.jquery.com/serializeArray/) - Encode a set of form elements as an array of names and values.
-
 ##[Miscellaneous](http://api.jquery.com/category/miscellaneous/)
-
-###Supported
 
 - [`.get()`](http://api.jquery.com/get/) - Retrieve the DOM elements matched by the jQuery object.
 - [`.size()`](http://api.jquery.com/size/) - Return the number of elements in the jQuery object.
 - [`.toArray()`](http://api.jquery.com/toArray/) - Retrieve all the elements contained in the jQuery set, as an array.
 
 - [`.each()`](http://api.jquery.com/each/) - Iterate over a jQuery object, executing a function for each matched element.
-    - The `$()` object is an `Iterable`, though, so you can use a Java **foreach** loop.
+    - The `.each()` function does not really exist: $()` object is an `Iterable`, so you can use a Java **foreach** loop.
         - Example: `for (WebElement divElement : $("div")) { ... }`
 
 ##[Traversing functions](http://api.jquery.com/category/traversing/)
-
-###Supported
 
 - [`.closest()`](http://api.jquery.com/closest/) - For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.
 - [`.find()`](http://api.jquery.com/find/) - Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
