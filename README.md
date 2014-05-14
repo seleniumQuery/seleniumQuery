@@ -221,7 +221,7 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - [`:image` Selector](http://api.jquery.com/image-selector/) -  Selects all elements of type image.
 - [`:parent` Selector](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text).
 
-#jQuery Functions
+#Supported jQuery Functions
 
 As seleniumQuery main goals are emulating user actions and "sensing" the pages, currently our intention is to implement functions that read (that's what we mean by "sense") the state of the page plus those that manipulate forms.
 
@@ -231,7 +231,7 @@ Some functions, specially those that require JavaScript enabled in the browser/d
 
 Below you will find the list of currently supported jQuery functions, by category.
 
-Looking for a function not listed below? Check the `ROADMAP.md` file. The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function directly/explicitly through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil()`  function).
+Looking for a function not listed below? Check the [`ROADMAP.md`](ROADMAP.md) file. The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function directly/explicitly through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil()`  function).
 
 ##[Attributes](http://api.jquery.com/category/attributes/)
 
