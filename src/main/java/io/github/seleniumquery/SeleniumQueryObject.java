@@ -79,7 +79,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
-	public final SeleniumQueryWaitUntil waitUntil() {
+	public final SeleniumQueryWaitUntil testUntil() {
 		return new SeleniumQueryWaitUntil(this);
 	}
 	
@@ -90,8 +90,18 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
-	public final SeleniumQueryQueryUntil queryUntil() {
+	public final SeleniumQueryQueryUntil waitUntil() {
 		return new SeleniumQueryQueryUntil(this);
+	}
+	
+	/**
+	 * The queryUntil() function is deprecated. Use <code>.waitUntil()</code> instead.
+	 * 
+	 * @deprecated @see {@link SeleniumQueryObject#waitUntil()}
+	 */
+	@Deprecated
+	public final SeleniumQueryQueryUntil queryUntil() {
+		return waitUntil();
 	}
 	
 	

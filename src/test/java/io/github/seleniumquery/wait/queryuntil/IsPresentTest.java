@@ -22,22 +22,22 @@ public class IsPresentTest {
 		$("div.clickable").click();
 		// then
 		assertEquals(0, $("input.ball").size());
-		assertEquals("generated input starting value", $("input.ball").queryUntil().is(":present").then().val());
+		assertEquals("generated input starting value", $("input.ball").waitUntil().is(":present").then().val());
 	}
 	
 	@Test
 	public void queryUntil_not_present() {
-		$(".whatever").queryUntil().is(":not(:present)");
+		$(".whatever").waitUntil().is(":not(:present)");
 	}
 	
 	@Test
 	public void queryUntil_enabled_not_present() {
-		$(".whatever").queryUntil().is(":enabled:not(:present)");
+		$(".whatever").waitUntil().is(":enabled:not(:present)");
 	}
 	
 	@Test
 	public void queryUntil_not_present_enabled() {
-		$(".whatever").queryUntil().is(":not(:present):enabled");
+		$(".whatever").waitUntil().is(":not(:present):enabled");
 	}
 
 }

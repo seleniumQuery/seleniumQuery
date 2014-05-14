@@ -19,37 +19,37 @@ public class SeleniumQueryQueryUntilIsTest {
 
 	@Test
 	public void queryUntil_not_enabled() {
-		assertThat($("input.disabledInput").queryUntil().is(":not(:enabled)").then().size(), is(1));
+		assertThat($("input.disabledInput").waitUntil().is(":not(:enabled)").then().size(), is(1));
 	}
 	
 	@Test
 	public void queryUntil_disabled() {
-		assertThat($("input.disabledInput").queryUntil().is(":disabled").then().size(), is(1));
+		assertThat($("input.disabledInput").waitUntil().is(":disabled").then().size(), is(1));
 	}
 
 	@Test
 	public void queryUntil_visible() {
-		assertThat($("input.enabledInput").queryUntil().is(":visible").then().size(), is(1));
+		assertThat($("input.enabledInput").waitUntil().is(":visible").then().size(), is(1));
 	}
 
 	@Test
 	public void queryUntil_enabled() {
-		assertThat($("input.enabledInput").queryUntil().is(":enabled").then().size(), is(1));
+		assertThat($("input.enabledInput").waitUntil().is(":enabled").then().size(), is(1));
 	}
 
 	@Test
 	public void queryUntil_present() {
-		assertThat($("input.enabledInput").queryUntil().is(":present").then().size(), is(1));
+		assertThat($("input.enabledInput").waitUntil().is(":present").then().size(), is(1));
 	}
 
 	@Test
 	public void queryUntil_visible_enabled() {
-		assertThat($("input.enabledInput").queryUntil().is(":visible:enabled").then().size(), is(1));
+		assertThat($("input.enabledInput").waitUntil().is(":visible:enabled").then().size(), is(1));
 	}
 	
 	@Test
 	public void queryUntil_hidden() {
-		assertThat($("div.invisibleDiv").queryUntil().is(":hidden").then().size(), is(1));
+		assertThat($("div.invisibleDiv").waitUntil().is(":hidden").then().size(), is(1));
 	}
 
 }
