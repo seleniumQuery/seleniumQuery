@@ -91,6 +91,14 @@ public class SelectorUtils {
 		return previousSiblings.get(siblingCount-1);
 	}
 	
+	/**
+	 * Escapes a CSS identifier.
+	 * 
+	 * Future references for CSS escaping:
+	 * http://mathiasbynens.be/notes/css-escapes
+	 * http://mothereff.in/css-escapes
+	 * https://github.com/mathiasbynens/mothereff.in/blob/master/css-escapes/eff.js
+	 */
 	public static String escapeSelector(String unescapedSelector) {
 		String escapedSelector = unescapedSelector;
 		if (Character.isDigit(unescapedSelector.charAt(0))) {
