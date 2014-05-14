@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
@@ -23,13 +23,14 @@ public class ContainsPseudoClass implements PseudoClass {
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
 		String textToContain = pseudoClassValue.substring(9, pseudoClassValue.length() - 1);
-		String escapedTextToContain = StringEscapeUtils.unescapeJava(textToContain);
-		return element.getText().contains(escapedTextToContain);
+		return element.getText().contains(textToContain);
 	}
 	
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return new CompiledSelector(":contains("+pseudoClassValue+")", "CONTAINS PSEUDO");
+		SqCSSFilter containsPseudoClassFilter = new PseudoClassFilter(getInstance(), PseudoClassFilter.SELECTOR_NOT_USED,
+																				pseudoClassValue);
+		return CompiledSelector.createFilterOnlySelector(containsPseudoClassFilter);
 	}
 	
 }
