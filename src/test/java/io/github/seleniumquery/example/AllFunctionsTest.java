@@ -1,13 +1,12 @@
 package io.github.seleniumquery.example;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.junit.Assert.assertEquals;
+import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.wait.SeleniumQueryWaitException;
 
 import org.junit.Before;
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
-import io.github.seleniumquery.wait.SeleniumQueryWaitException;
 
 @SuppressWarnings("deprecation")
 public class AllFunctionsTest {
@@ -25,7 +24,7 @@ public class AllFunctionsTest {
 
 	@Test
 	public void isNotPresent() {
-		assertNull($(".nonExistingDiv").testUntil().is(":not(:present)").then().text());
+		assertEquals("", $(".nonExistingDiv").testUntil().is(":not(:present)").then().text());
 	}
 
 	@Test
