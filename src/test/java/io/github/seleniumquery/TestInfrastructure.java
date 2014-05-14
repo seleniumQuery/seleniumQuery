@@ -3,6 +3,7 @@ package io.github.seleniumquery;
 import java.io.File;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -21,6 +22,13 @@ public class TestInfrastructure {
 		
 		htmlUnitDriver.setJavascriptEnabled(true);
 		return htmlUnitDriver;
+	}
+	
+	// just a quick function so when I add a simple argument, the browser is switched to firefox:
+	// $.browser.setDefaultDriver(TestInfrastructure.getDriver()); --> runs htmlunit
+	// $.browser.setDefaultDriver(TestInfrastructure.getDriver(1)); --> runs firefox
+	public static WebDriver getDriver(int... key) {
+		return new FirefoxDriver();
 	}
 	
 	public static String getHtmlTestFileUrl(Class<?> clazz) {

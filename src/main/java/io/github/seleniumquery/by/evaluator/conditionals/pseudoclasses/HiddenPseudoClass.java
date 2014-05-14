@@ -29,7 +29,7 @@ public class HiddenPseudoClass implements PseudoClass {
 		return !SelectorUtils.isVisible(element);
 	}
 	
-	public static final SqCSSFilter HiddenPseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED, PSEUDO_CLASS_VALUE_NOT_USED);
+	private static final SqCSSFilter HiddenPseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED, PSEUDO_CLASS_VALUE_NOT_USED);
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
 		return CompiledSelector.createFilterOnlySelector(HiddenPseudoClassFilter);

@@ -26,7 +26,8 @@ public class EnabledPseudoClass implements PseudoClass {
 	
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return new CompiledSelector(":enabled", "ENABLED PSEUDO");
+		// this pseudo class is expected to be natively supported
+		return CompiledSelector.createNoFilterSelector(":enabled");
 	}
 	
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>seleniumQuery :enabled test page</title>
+</head>
+<body>
+	<div id="hiddenDiv" class="clz" style="display: none">
+		<h1 class="btn"></h1>
+		<button class="spanYo" style="display: none">yo</button>
+		<span class="yo2" style="display: block">yodiv</span>
+	</div>
+	<div id="visibleDiv" class="clz">
+		<h1 class="btn">aa</h1>
+		<button class="spanYo">aa</button>
+		<span class="yo2">bb</span>
+	</div>
+	
+	<button type="button">Click Me!</button>
+<br>	
+	<input type="button" value="Click me" onclick="msg()">
+<br>
+	<input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+	<input type="checkbox" name="vehicle" value="Car"> I have a car<br>
+<br>
+	<input type="color" name="favcolor">
+<br>
+	<input type="date" name="bday">
+<br>
+	<input type="datetime-local" name="bdaytime">
+<br>
+	<input type="email" name="usremail">
+<br>
+	<input type="file" name="img">
+<br>
+	<input type="hidden" name="country" value="Norway">
+<br>
+	<input type="image" src="img_submit.gif" alt="Submit">
+<br>
+	<input type="month" name="bdaymonth">
+<br>
+	<input type="number" name="quantity" min="1" max="5">
+<br>
+	<input type="password" name="pwd">
+<br>
+	<input type="radio" name="gender" value="male"> Male<br>
+	<input type="radio" name="gender" value="female"> Female
+<br>
+	<input type="range" name="points" min="1" max="10">
+<br>
+	<input type="reset">
+<br>
+	<input type="search" name="googlesearch">
+<br>
+	<input type="submit">
+<br>
+	First name: <input type="text" name="fname"><br>
+	Last name: <input type="text" name="lname"><br>
+<br>
+	Select a time: <input type="time" name="usr_time">
+<br>
+	<input type="url" name="homepage">
+<br>
+	<input type="week" name="week_year">
+<br>
+	
+</body>
+</html>
+
+
+Although their resulting selections are usually the same, :enabled selector is subtly different
+ from :not([disabled]); :enabled selects elements that have their boolean disabled property strictly equal
+  to false, while :not([disabled]) selects elements that do not have a disabled attribute set (regardless of its value).
+
+The :enabled selector should only be used for selecting HTML elements that support the disabled attribute
+
+ (<button>, <input>, <optgroup>, <option>, <select>, and <textarea>).
