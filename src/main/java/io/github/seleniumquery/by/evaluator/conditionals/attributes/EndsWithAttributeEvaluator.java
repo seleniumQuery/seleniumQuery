@@ -12,12 +12,12 @@ import org.w3c.css.sac.Selector;
 public class EndsWithAttributeEvaluator implements CSSCondition<AttributeCondition> {
 
 	private static final EndsWithAttributeEvaluator instance = new EndsWithAttributeEvaluator();
-
 	public static EndsWithAttributeEvaluator getInstance() {
 		return instance;
 	}
-	
 	private EndsWithAttributeEvaluator() { }
+	
+	public static final String ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL = "$=";
 
 	/**
 	 * Currently it is (mistakenly?) mapped to the type {@link org.w3c.css.sac.Condition#SAC_ATTRIBUTE_CONDITION}.
@@ -37,9 +37,8 @@ public class EndsWithAttributeEvaluator implements CSSCondition<AttributeConditi
 
 	@Override
 	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition attributeCondition) {
-		String attributeSelectorSymbol = "$=";
 		// nothing to do, everyone supports this selector
-		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, attributeSelectorSymbol);
+		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL);
 	}
 
 }

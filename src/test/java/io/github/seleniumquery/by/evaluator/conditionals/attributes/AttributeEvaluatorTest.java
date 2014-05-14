@@ -53,7 +53,7 @@ public class AttributeEvaluatorTest {
 	
 	@Test
 	public void endsWithAttributeEvaluator() {
-		assertAll("$=", "c");
+		assertAll(EndsWithAttributeEvaluator.ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL, "c");
 	}
 
 	public void assertAll(String attr, String suffix) {
