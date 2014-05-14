@@ -1,7 +1,9 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import io.github.seleniumquery.by.evaluator.DriverSupportMap;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +18,7 @@ public class NotPseudoClass implements PseudoClass {
 	private NotPseudoClass() { }
 	
 	private static final int NOT_BRACE_LENGTH = "not(".length();
+	private static final int END_BRACE_LENGTH = ")".length();
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -24,13 +27,19 @@ public class NotPseudoClass implements PseudoClass {
 	
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		String selector = pseudoClassValue.substring(NOT_BRACE_LENGTH, pseudoClassValue.length() - 1);
+		String selector = pseudoClassValue.substring(NOT_BRACE_LENGTH, pseudoClassValue.length() - END_BRACE_LENGTH);
 		return !SelectorEvaluator.is(driver, element, selector);
 	}
 	
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return new CompiledSelector(":not("+pseudoClassValue+")", "NOT PSEUDO");
+		// https://developer.mozilla.org/en-US/docs/Web/CSS/:not
+		if (DriverSupportMap.getInstance().supportsNatively(driver, ":not(div)")) {
+			return CompiledSelector.createNoFilterSelector(":not("+pseudoClassValue+")");
+		}
+		SqCSSFilter notPseudoClassFilter = new PseudoClassFilter(getInstance(), selectorThisConditionShouldApply,
+															pseudoClassValue);
+		return CompiledSelector.createFilterOnlySelector(notPseudoClassFilter);
 	}
 	
 }

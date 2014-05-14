@@ -1,6 +1,10 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.PSEUDO_CLASS_VALUE_NOT_USED;
+import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.SELECTOR_NOT_USED;
+import io.github.seleniumquery.by.evaluator.DriverSupportMap;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,9 +19,12 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 	}
 	private OnlyOfTypePseudoClass() { }
 	
+	private static final String ONLY_OF_TYPE_PSEUDO_CLASS_NO_COLON = "only-of-type";
+	private static final String ONLY_OF_TYPE_PSEUDO_CLASS = ":"+ONLY_OF_TYPE_PSEUDO_CLASS_NO_COLON;
+	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
-		return "only-of-type".equals(pseudoClassValue);
+		return ONLY_OF_TYPE_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
 	}
 	
 	@Override
@@ -26,9 +33,16 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 		return driver.findElements(By.tagName(tagName)).size() == 1;
 	}
 	
+	private static final SqCSSFilter onlyOfTypePseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED,
+			PSEUDO_CLASS_VALUE_NOT_USED);
+
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return new CompiledSelector(":only-of-type", "ONLY OF TYPE PSEUDO");
+		// https://developer.mozilla.org/en-US/docs/Web/CSS/:only-of-type
+		if (DriverSupportMap.getInstance().supportsNatively(driver, ONLY_OF_TYPE_PSEUDO_CLASS)) {
+			return CompiledSelector.createNoFilterSelector(ONLY_OF_TYPE_PSEUDO_CLASS);
+		}
+		return CompiledSelector.createFilterOnlySelector(onlyOfTypePseudoClassFilter);
 	}
 	
 }

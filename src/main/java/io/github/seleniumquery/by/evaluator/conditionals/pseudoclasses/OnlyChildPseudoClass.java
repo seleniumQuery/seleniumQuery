@@ -1,7 +1,11 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.PSEUDO_CLASS_VALUE_NOT_USED;
+import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.SELECTOR_NOT_USED;
+import io.github.seleniumquery.by.evaluator.DriverSupportMap;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +19,12 @@ public class OnlyChildPseudoClass implements PseudoClass {
 	}
 	private OnlyChildPseudoClass() { }
 	
+	private static final String ONLY_CHILD_PSEUDO_CLASS_NO_COLON = "only-child";
+	private static final String ONLY_CHILD_PSEUDO_CLASS = ":"+ONLY_CHILD_PSEUDO_CLASS_NO_COLON;
+	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
-		return "only-child".equals(pseudoClassValue);
+		return ONLY_CHILD_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
 	}
 	
 	@Override
@@ -33,9 +40,16 @@ public class OnlyChildPseudoClass implements PseudoClass {
 		return SelectorUtils.itselfWithSiblings(element).size() == 1;
 	}
 	
+	private static final SqCSSFilter onlyChildPseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED,
+			PSEUDO_CLASS_VALUE_NOT_USED);
+
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return new CompiledSelector(":only-child", "ONLYCHILD PSEUDO");
+		// https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child
+		if (DriverSupportMap.getInstance().supportsNatively(driver, ONLY_CHILD_PSEUDO_CLASS)) {
+			return CompiledSelector.createNoFilterSelector(ONLY_CHILD_PSEUDO_CLASS);
+		}
+		return CompiledSelector.createFilterOnlySelector(onlyChildPseudoClassFilter);
 	}
 	
 }

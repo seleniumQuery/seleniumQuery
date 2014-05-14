@@ -1,6 +1,9 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.PSEUDO_CLASS_VALUE_NOT_USED;
+import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.SELECTOR_NOT_USED;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -15,9 +18,11 @@ public class PresentPseudoClass implements PseudoClass {
 	}
 	private PresentPseudoClass() { }
 	
+	private static final String PRESENT_PSEUDO_CLASS_NO_COLON = "present";
+	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
-		return "present".equals(pseudoClassValue);
+		return PRESENT_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
 	}
 	
 	@Override
@@ -37,9 +42,12 @@ public class PresentPseudoClass implements PseudoClass {
 		}
 	}
 	
+	private static final SqCSSFilter presentPseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED,
+			PSEUDO_CLASS_VALUE_NOT_USED);
+
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return new CompiledSelector(":present", "PRESENT PSEUDO");
+		return CompiledSelector.createFilterOnlySelector(presentPseudoClassFilter);
 	}
 	
 }
