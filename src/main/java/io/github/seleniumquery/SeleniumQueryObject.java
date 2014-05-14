@@ -68,7 +68,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * of calling a "destructive" function (such as <code>.not()</code>) on that element.<br>
 	 * This property is retrieved by a call to <code>.end()</code>.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.3.0
 	 */
 	private SeleniumQueryObject previous;
@@ -76,9 +75,9 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * List of functions that will halt the execution until the specified condition is met.
 	 * 
-	 * @author acdcjunior
-	 * @since 0.4.0
+	 * @deprecated @see {@link SeleniumQueryObject#waitUntil()}
 	 */
+	@Deprecated
 	public final SeleniumQueryWaitUntil testUntil() {
 		return new SeleniumQueryWaitUntil(this);
 	}

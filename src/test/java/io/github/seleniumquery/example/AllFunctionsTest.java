@@ -9,6 +9,7 @@ import org.junit.Test;
 import io.github.seleniumquery.TestInfrastructure;
 import io.github.seleniumquery.wait.SeleniumQueryWaitException;
 
+@SuppressWarnings("deprecation")
 public class AllFunctionsTest {
 
 	@Before

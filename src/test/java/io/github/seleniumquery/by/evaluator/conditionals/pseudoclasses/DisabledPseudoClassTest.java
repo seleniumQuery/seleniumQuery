@@ -13,58 +13,58 @@ import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-public class EnabledPseudoClassTest {
+public class DisabledPseudoClassTest {
 	
 	@Before
 	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
+		$.browser.setDefaultDriver(TestInfrastructure.getDriver(1));
 		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 	
 	@Test
-	public void enabledPseudo_with_tag_button() {
-		assertSelectorMatchedSetSize("button:enabled", 1);
+	public void disabledPseudo_with_tag_button() {
+		assertSelectorMatchedSetSize("button:disabled", 2);
 	}
 	
 	@Test
-	public void enabledPseudo_with_tag_input() {
-		assertSelectorMatchedSetSize("input:enabled", 24);
+	public void disabledPseudo_with_tag_input() {
+		assertSelectorMatchedSetSize("input:disabled", 48);
 	}
 	
 	@Test
-	public void enabledPseudo_with_tag_select() {
-		assertSelectorMatchedSetSize("select:enabled", 1);
+	public void disabledPseudo_with_tag_select() {
+		assertSelectorMatchedSetSize("select:disabled", 2);
 	}
 	
 	@Test
-	public void enabledPseudo_with_tag_option() {
+	public void disabledPseudo_with_tag_option() {
 		if ($.browser.getDefaultDriver() instanceof HtmlUnitDriver) {
 			// TODO this is a known HtmlUnit bug! See issue #3
-			assertSelectorMatchedSetSize("option:enabled", 9);
+			assertSelectorMatchedSetSize("option:disabled", 18);
 		}
 		else {
-			assertSelectorMatchedSetSize("option:enabled", 3);
+			assertSelectorMatchedSetSize("option:disabled", 24);
 		}
 	}
 	
 	@Test
-	public void enabledPseudo_with_tag_optgroup() {
-		assertSelectorMatchedSetSize("optgroup:enabled", 3);
+	public void disabledPseudo_with_tag_optgroup() {
+		assertSelectorMatchedSetSize("optgroup:disabled", 6);
 	}
 	
 	@Test
-	public void enabledPseudo_with_tag_textarea() {
-		assertSelectorMatchedSetSize("textarea:enabled", 1);
+	public void disabledPseudo_with_tag_textarea() {
+		assertSelectorMatchedSetSize("textarea:disabled", 2);
 	}
 	
 	@Test
-	public void enabledPseudo() {
+	public void disabledPseudo() {
 		if ($.browser.getDefaultDriver() instanceof HtmlUnitDriver) {
-			// TODO see enabledPseudo_with_tag_option()
-			assertSelectorMatchedSetSize(":enabled", 39);
+			// TODO see disabledPseudo_with_tag_option()
+			assertSelectorMatchedSetSize(":disabled", 78);
 		}
 		else {
-			assertSelectorMatchedSetSize(":enabled", 33);
+			assertSelectorMatchedSetSize(":disabled", 84);
 		}
 	}
 

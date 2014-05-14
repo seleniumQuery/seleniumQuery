@@ -1,6 +1,10 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.PSEUDO_CLASS_VALUE_NOT_USED;
+import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.SELECTOR_NOT_USED;
+import io.github.seleniumquery.by.evaluator.DriverSupportMap;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,9 +18,12 @@ public class EnabledPseudoClass implements PseudoClass {
 	}
 	private EnabledPseudoClass() { }
 	
+	private static final String ENABLED_PSEUDO_CLASS_NO_COLON = "enabled";
+	private static final String ENABLED_PSEUDO_CLASS = ":"+ENABLED_PSEUDO_CLASS_NO_COLON;
+	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
-		return "enabled".equals(pseudoClassValue);
+		return ENABLED_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
 	}
 	
 	@Override
@@ -24,10 +31,15 @@ public class EnabledPseudoClass implements PseudoClass {
 		return element.isEnabled();
 	}
 	
+	private static final SqCSSFilter enabledPseudoClassFilter = new PseudoClassFilter(getInstance(),
+																		SELECTOR_NOT_USED, PSEUDO_CLASS_VALUE_NOT_USED);
 	@Override
 	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		// this pseudo class is expected to be natively supported
-		return CompiledSelector.createNoFilterSelector(":enabled");
+		// https://developer.mozilla.org/en-US/docs/Web/CSS/:enabled
+		if (DriverSupportMap.getInstance().supportsNatively(driver, ENABLED_PSEUDO_CLASS)) {
+			return CompiledSelector.createNoFilterSelector(ENABLED_PSEUDO_CLASS);
+		}
+		return CompiledSelector.createFilterOnlySelector(enabledPseudoClassFilter);
 	}
 	
 }
