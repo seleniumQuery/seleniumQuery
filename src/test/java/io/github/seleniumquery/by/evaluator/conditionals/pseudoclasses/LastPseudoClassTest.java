@@ -1,0 +1,28 @@
+package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import io.github.seleniumquery.TestInfrastructure;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class LastPseudoClassTest {
+	
+	@Before
+	public void setUp() {
+		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
+		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(EqPseudoClassTest.class));
+	}
+	
+	@Test
+	public void lastPseudoClass() {
+		assertThat($("div:last").text(), is("Bozo"));
+		assertThat($("div.c2:last").text(), is("Spider Man"));
+		
+		assertThat($("div:last.c2").text(), is(""));
+		assertThat($("hr:last").text(), is(""));
+	}
+	
+}

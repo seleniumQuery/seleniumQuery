@@ -12,7 +12,7 @@ public class EqFunctionTest {
 
 	@Before
 	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
+		$.browser.setDefaultDriver(TestInfrastructure.getDriver(1));
 		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 	
@@ -84,6 +84,7 @@ public class EqFunctionTest {
 	public void first_function() {
 		assertThat($("div").first().text(), is("Batman"));
 		assertThat($("div.c2").first().text(), is("Spider Man"));
+		assertThat($("hr").first().text(), is(""));
     }
 	
 	// As .last() function uses .eq(), we put the test here (instead of creating whole new .java and .html files)
@@ -91,6 +92,7 @@ public class EqFunctionTest {
 	public void last_function() {
 		assertThat($("div").last().text(), is("Bozo"));
 		assertThat($("div.c2").last().text(), is("Spider Man"));
+		assertThat($("hr").last().text(), is(""));
 	}
     
 }

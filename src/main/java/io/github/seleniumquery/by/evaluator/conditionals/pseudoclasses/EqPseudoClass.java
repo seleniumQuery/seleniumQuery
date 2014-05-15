@@ -29,12 +29,16 @@ public class EqPseudoClass implements PseudoClass {
 		if (!eqIndex.matches("[+-]?\\d+")) {
 			throw new RuntimeException("The :eq() pseudo-class requires an integer but got: " + pseudoClassValue);
 		}
-		List<WebElement> elements = driver.findElements(SeleniumQueryBy.byEnhancedSelector(selectorThisConditionShouldApply.toString()));
-		
 		if (eqIndex.charAt(0) == '+') {
 			eqIndex = eqIndex.substring(1);
 		}
-		Integer index = Integer.valueOf(eqIndex);
+		int index = Integer.valueOf(eqIndex);
+		
+		return EqPseudoClass.isEq(driver, element, selectorThisConditionShouldApply, index);
+	}
+	
+	static boolean isEq(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, int index) {
+		List<WebElement> elements = driver.findElements(SeleniumQueryBy.byEnhancedSelector(selectorThisConditionShouldApply.toString()));
 		if (index < 0) {
 			return elements.size() >= -index && elements.get(elements.size() + index).equals(element);
 		}
