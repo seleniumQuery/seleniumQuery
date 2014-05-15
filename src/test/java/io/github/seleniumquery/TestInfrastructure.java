@@ -27,6 +27,7 @@ public class TestInfrastructure {
 	// just a quick function so when I add a simple argument, the browser is switched to firefox:
 	// $.browser.setDefaultDriver(TestInfrastructure.getDriver()); --> runs htmlunit
 	// $.browser.setDefaultDriver(TestInfrastructure.getDriver(1)); --> runs firefox
+	@Deprecated
 	public static WebDriver getDriver(@SuppressWarnings("unused") int... key) {
 		return new FirefoxDriver();
 	}

@@ -18,7 +18,7 @@ public class RadioPseudoClassTest {
 	
 	@Test
 	public void radioPseudo() {
-		assertThat($("[type='radio']").size(), is(3));
+		assertThat($("[type='radio']").size(), is(4));
 		assertThat($(":radio").size(), is(1));
 		assertThat($("*:radio").size(), is(1));
 		assertThat($("input:radio").size(), is(1));

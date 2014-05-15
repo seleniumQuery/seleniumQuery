@@ -12,13 +12,13 @@ public class CheckboxPseudoClassTest {
 	
 	@Before
 	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver(1));
+		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
 		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 	
 	@Test
 	public void checkboxPseudo() {
-		assertThat($("[type='checkbox']").size(), is(3));
+		assertThat($("[type='checkbox']").size(), is(4));
 		assertThat($(":checkbox").size(), is(1));
 		assertThat($("*:checkbox").size(), is(1));
 		assertThat($("input:checkbox").size(), is(1));
