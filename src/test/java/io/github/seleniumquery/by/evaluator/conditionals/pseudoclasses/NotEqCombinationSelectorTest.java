@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.enhancement;
+package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -8,7 +8,7 @@ import io.github.seleniumquery.TestInfrastructure;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CombinationNotEqSelectorTest {
+public class NotEqCombinationSelectorTest {
 
 	@Before
 	public void setUp() {
