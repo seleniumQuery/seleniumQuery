@@ -20,7 +20,6 @@ public class AttributeEvaluatorTest {
 	@Before
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-//		$.browser.setDefaultDriver(new org.openqa.selenium.firefox.FirefoxDriver());
 		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
 	}
 	
