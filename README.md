@@ -181,10 +181,6 @@ Below the list of current supported noteworthy CSS and jQuery Extension selector
 
 As expected, the note jQuery usually displays in their extensions applies to seleniumQuery as well: Queries using the extended selectors cannot take advantage of the performance boost provided by the native DOM `querySelectorAll()` method. This way, if your code has performance issues, you may achive faster results by using native CSS selectors.
 
-
-
-###Supported
-
 - [`[name!="value"]` - Attribute Not Equal](http://api.jquery.com/attribute-not-equal-selector/) - Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.
 - NOT [`:button`](http://api.jquery.com/button-selector/) - Selects all button elements and elements of type button.
 - [`:checkbox`](http://api.jquery.com/checkbox-selector/) - Selects all elements of type checkbox.
