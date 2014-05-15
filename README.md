@@ -177,23 +177,23 @@ jQuery("input.street").val("5th St!");
 
 #CSS and jQuery Extension Selectors
 
-Below the list of current supported noteworthy CSS and jQuery Extension selectors.
+Below the list of supported and noteworthy CSS and jQuery Extension selectors.
 
 As expected, the note jQuery usually displays in their extensions applies to seleniumQuery as well: Queries using the extended selectors cannot take advantage of the performance boost provided by the native DOM `querySelectorAll()` method. This way, if your code has performance issues, you may achive faster results by using native CSS selectors.
 
 - [`[name!="value"]` - Attribute Not Equal](http://api.jquery.com/attribute-not-equal-selector/) - Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.
-- NOT [`:button`](http://api.jquery.com/button-selector/) - Selects all button elements and elements of type button.
-- [`:checkbox`](http://api.jquery.com/checkbox-selector/) - Selects all elements of type checkbox.
+- [`:button`](http://api.jquery.com/button-selector/) - Selects all `button` elements and elements of type `button`.
+- [`:checkbox`](http://api.jquery.com/checkbox-selector/) - Selects all elements of type `checkbox`.
 - [`:checked`](https://api.jquery.com/checked-selector/) - Matches all elements that are checked or selected.
 - [`:contains()`](http://api.jquery.com/contains-selector/) - Select all elements that contain the specified text.
 - [`:disabled`](http://api.jquery.com/disabled-selector/) - Selects all elements that are disabled.
 - [`:enabled`](http://api.jquery.com/enabled-selector/) - Selects all elements that are enabled.
-- [`:eq()`](http://api.jquery.com/eq-selector/) - Select the element at index n within the matched set.
-- NOT [`:even`](http://api.jquery.com/even-selector/) - Selects even elements, zero-indexed. See also odd.
-- [`:file`](http://api.jquery.com/file-selector/) - Selects all elements of type file.
+- [`:eq()`](http://api.jquery.com/eq-selector/) - Select the element at index `n` within the matched set.
+- NOT [`:even`](http://api.jquery.com/even-selector/) - Selects even elements, zero-indexed. See also `:odd`.
+- [`:file`](http://api.jquery.com/file-selector/) - Selects all elements of type `file`.
 - [`:first`](http://api.jquery.com/first-selector/) -  Selects the first matched element.
 - NOT [`:focus`](http://api.jquery.com/focus-selector/) - Selects element if it is currently focused.
-- NOT [`:gt()`](http://api.jquery.com/gt-selector/) -  Select all elements at an index greater than index within the matched set.
+- NOT [`:gt()`](http://api.jquery.com/gt-selector/) -  Select all elements at an index greater than the given `index` within the matched set.
 - NOT [`:has()`](http://api.jquery.com/has-selector/) - Selects elements which contain at least one element that matches the specified selector.
 - NOT [`:header`](http://api.jquery.com/header-selector/) - Selects all elements that are headers, like h1, h2, h3 and so on.
 - [`:hidden`](http://api.jquery.com/hidden-selector/) - Selects all elements that are hidden.
