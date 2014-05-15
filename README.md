@@ -195,7 +195,7 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - NOT [`:focus`](http://api.jquery.com/focus-selector/) - Selects element if it is currently focused.
 - NOT [`:gt()`](http://api.jquery.com/gt-selector/) -  Select all elements at an index greater than the given `index` within the matched set.
 - NOT [`:has()`](http://api.jquery.com/has-selector/) - Selects elements which contain at least one element that matches the specified selector.
-- NOT [`:header`](http://api.jquery.com/header-selector/) - Selects all elements that are headers, like h1, h2, h3 and so on.
+- [`:header`](http://api.jquery.com/header-selector/) - Selects all elements that are headers, like `h1`, `h2`, `h3` and so on.
 - [`:hidden`](http://api.jquery.com/hidden-selector/) - Selects all elements that are hidden.
 - [`:image`](http://api.jquery.com/image-selector/) -  Selects all elements of type image.
 - [`:input`](http://api.jquery.com/input-selector/) - Selects all `input`, `textarea`, `select` and `button` elements.
