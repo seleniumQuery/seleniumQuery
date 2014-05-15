@@ -198,17 +198,17 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - NOT [`:header`](http://api.jquery.com/header-selector/) - Selects all elements that are headers, like h1, h2, h3 and so on.
 - [`:hidden`](http://api.jquery.com/hidden-selector/) - Selects all elements that are hidden.
 - [`:image`](http://api.jquery.com/image-selector/) -  Selects all elements of type image.
-- NOT [`:input`](http://api.jquery.com/input-selector/) - Selects all input, textarea, select and button elements.
+- [`:input`](http://api.jquery.com/input-selector/) - Selects all `input`, `textarea`, `select` and `button` elements.
 - [`:last`](http://api.jquery.com/last-selector/) - Selects the last matched element.
-- NOT [`:lt()`](http://api.jquery.com/lt-selector/) - Select all elements at an index less than index within the matched set.
+- NOT [`:lt()`](http://api.jquery.com/lt-selector/) - Select all elements at an index less than the given `index` within the matched set.
 - NOT [`:odd`](http://api.jquery.com/odd-selector/) -  Selects odd elements, zero-indexed. See also even.
-- [`:password`](http://api.jquery.com/password-selector/) - Selects all elements of type password.
+- [`:password`](http://api.jquery.com/password-selector/) - Selects all elements of type `password`.
 - NOT [`:parent`](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text).
-- [`:radio`](http://api.jquery.com/radio-selector/) - Selects all elements of type radio.
-- [`:reset`](http://api.jquery.com/reset-selector/) - Selects all elements of type reset.
+- [`:radio`](http://api.jquery.com/radio-selector/) - Selects all elements of type `radio`.
+- [`:reset`](http://api.jquery.com/reset-selector/) - Selects all elements of type `reset`.
 - [`:selected`](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
-- [`:submit`](http://api.jquery.com/submit-selector/) - Selects all elements of type submit.
-- NOT [`:text`](http://api.jquery.com/text-selector/) - Selects all elements of type text.
+- [`:submit`](http://api.jquery.com/submit-selector/) - Selects all elements of type `submit`.
+- NOT [`:text`](http://api.jquery.com/text-selector/) - Selects all elements of type `text`.
 - [`:visible`](http://api.jquery.com/visible-selector/) - Selects all elements that are visible.
 
 ###Extra - seleniumQuery only selectors
