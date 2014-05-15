@@ -49,6 +49,7 @@ public class EqPseudoClassTest {
 		assertThat(compileAndExecute("div:eq(+3)").get(0).getText(), is("Bozo"));
 		
 		assertThat(compileAndExecute("div:eq(-0)").get(0).getText(), is("Batman"));
+		assertThat(compileAndExecute("div:eq(-4)").get(0).getText(), is("Batman"));
 		assertThat(compileAndExecute("div:eq(-3)").get(0).getText(), is("Spider Man"));
 		assertThat(compileAndExecute("div:eq(-2)").get(0).getText(), is("Hulk"));
 		assertThat(compileAndExecute("div:eq(-1)").get(0).getText(), is("Bozo"));
@@ -58,6 +59,26 @@ public class EqPseudoClassTest {
 	public void eqPseudo() {
 		assertSelectorMatchedSetSize(":eq(0)", 1);
 		assertSelectorMatchedSetSize(":eq(99)", 0);
+	}
+	
+    @Test
+    public void testEqSelector() {
+        assertThat($("div.c1:eq(0)").text(), is("Batman"));
+        assertThat($("div.c2:eq(0)").text(), is("Spider Man"));
+        assertThat($("div.c3:eq(0)").text(), is("Hulk"));
+        
+        assertThat($("div.c1:eq(1)").text(), is(""));
+
+        assertThat($("div:eq(0)").text(), is("Batman"));
+        assertThat($("div:eq(1)").text(), is("Spider Man"));
+        assertThat($("div:eq(2)").text(), is("Hulk"));
+    }
+    
+	@Test
+	public void eqFunction_with_tag_and_class__and_single_set_with_negative_index() {
+        assertThat($("div.c1:eq(-1)").text(), is("Batman"));
+        assertThat($("div.c2:eq(-1)").text(), is("Spider Man"));
+        assertThat($("div.c3:eq(-1)").text(), is("Hulk"));
 	}
 	
 }

@@ -13,7 +13,7 @@ public class NotEqCombinationSelectorTest {
 	@Before
 	public void setUp() {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(EqSelectorTest.class));
+		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(EqPseudoClassTest.class));
 	}
 	
 	@Test

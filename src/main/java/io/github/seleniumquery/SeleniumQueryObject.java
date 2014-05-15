@@ -4,8 +4,8 @@ import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.functions.AttrFunction;
 import io.github.seleniumquery.functions.ClickFunction;
 import io.github.seleniumquery.functions.ClosestFunction;
+import io.github.seleniumquery.functions.EqFunction;
 import io.github.seleniumquery.functions.FindFunction;
-import io.github.seleniumquery.functions.FirstFunction;
 import io.github.seleniumquery.functions.GetFunction;
 import io.github.seleniumquery.functions.HasClassFunction;
 import io.github.seleniumquery.functions.HtmlFunction;
@@ -180,10 +180,40 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	 * @since 0.2.0
+	 * <p>Reduce the set of matched elements to the first in the set.</p>
+	 * <p>
+	 * Given a seleniumQuery object that represents a set of DOM elements, the <code>.last()</code> method constructs
+	 * a new seleniumQuery object from the first element in that set.
+	 * </p>
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject first() {
-		return FirstFunction.first(this, this.elements);
+		return EqFunction.eq(this, this.elements, 0);
+	}
+	
+	/**
+	 * <p>Reduce the set of matched elements to the final one in the set.</p>
+	 * <p>
+	 * Given a seleniumQuery object that represents a set of DOM elements, the <code>.last()</code> method constructs
+	 * a new seleniumQuery object from the last element in that set.
+	 * </p>
+	 * @since 1.0.0
+	 */
+	public SeleniumQueryObject last() {
+		return EqFunction.eq(this, this.elements, -1);
+	}
+	
+	/**
+	 * Reduce the set of matched elements to the one at the specified index.
+	 * 
+	 * @param index If positive: An integer indicating the 0-based position of the element.<br>
+	 * 				If negative: An integer indicating the position of the element, counting backwards
+	 * 			from the last element in the set.
+	 * 
+	 * @since 1.0.0
+	 */
+	public SeleniumQueryObject eq(int index) {
+		return EqFunction.eq(this, this.elements, index);
 	}
 
 	/**

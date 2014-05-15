@@ -112,7 +112,8 @@ public class SeleniumQueryBy extends By {
 	 */
 	public String getSelectorForElementAtPosition(int position) {
 		if (this.selectorIsXPathExpression) {
-			return "("+this.selector+")["+position+"]";
+			// notice that, in XPath, the position is one-based.
+			return "("+this.selector+")["+ (position+1) +"]";
 		}
 		return this.selector+":eq("+position+")";
 	}

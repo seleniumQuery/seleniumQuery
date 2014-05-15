@@ -36,7 +36,7 @@ public class EqPseudoClass implements PseudoClass {
 		}
 		Integer index = Integer.valueOf(eqIndex);
 		if (index < 0) {
-			return elements.size() > -index && elements.get(elements.size() + index).equals(element);
+			return elements.size() >= -index && elements.get(elements.size() + index).equals(element);
 		}
 		return elements.size() > index && elements.get(index).equals(element);
 	}
