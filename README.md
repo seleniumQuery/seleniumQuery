@@ -205,9 +205,9 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - [`:password`](http://api.jquery.com/password-selector/) - Selects all elements of type password.
 - NOT [`:parent`](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text).
 - [`:radio`](http://api.jquery.com/radio-selector/) - Selects all elements of type radio.
-- NOT [`:reset`](http://api.jquery.com/reset-selector/) - Selects all elements of type reset.
+- [`:reset`](http://api.jquery.com/reset-selector/) - Selects all elements of type reset.
 - [`:selected`](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
-- NOT [`:submit`](http://api.jquery.com/submit-selector/) - Selects all elements of type submit.
+- [`:submit`](http://api.jquery.com/submit-selector/) - Selects all elements of type submit.
 - NOT [`:text`](http://api.jquery.com/text-selector/) - Selects all elements of type text.
 - [`:visible`](http://api.jquery.com/visible-selector/) - Selects all elements that are visible.
 
