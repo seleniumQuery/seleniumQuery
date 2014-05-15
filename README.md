@@ -181,45 +181,43 @@ Below the list of current supported noteworthy CSS and jQuery Extension selector
 
 As expected, the note jQuery usually displays in their extensions applies to seleniumQuery as well: Queries using the extended selectors cannot take advantage of the performance boost provided by the native DOM `querySelectorAll()` method. This way, if your code has performance issues, you may achive faster results by using native CSS selectors.
 
-###Extras (seleniumQuery only)
 
-- `:present` Selector - Matches all elements that are **attached to the DOM**. This is a very important property in Selenium page handling, as detached elements cannot be interacted with - they'd throw the infamous `StaleElementReferenceException`.
 
 ###Supported
 
-- [`:checked` Selector](https://api.jquery.com/checked-selector/) - Matches all elements that are checked or selected.
-- [`:contains()` Selector](http://api.jquery.com/contains-selector/) - Select all elements that contain the specified text.
-- [`:disabled` Selector](http://api.jquery.com/disabled-selector/) - Selects all elements that are disabled.
-- [`:enabled` Selector](http://api.jquery.com/enabled-selector/) - Selects all elements that are enabled.
-- [`:eq()` Selector](http://api.jquery.com/eq-selector/) - Select the element at index n within the matched set.
-- [`:hidden` Selector](http://api.jquery.com/hidden-selector/) - Selects all elements that are hidden.
-- [`:selected` Selector](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
-- [`:visible` Selector](http://api.jquery.com/visible-selector/) - Selects all elements that are visible.
+- [`[name!="value"]` - Attribute Not Equal](http://api.jquery.com/attribute-not-equal-selector/) - Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.
+- NOT [`:button`](http://api.jquery.com/button-selector/) - Selects all button elements and elements of type button.
+- [`:checkbox`](http://api.jquery.com/checkbox-selector/) - Selects all elements of type checkbox.
+- [`:checked`](https://api.jquery.com/checked-selector/) - Matches all elements that are checked or selected.
+- [`:contains()`](http://api.jquery.com/contains-selector/) - Select all elements that contain the specified text.
+- [`:disabled`](http://api.jquery.com/disabled-selector/) - Selects all elements that are disabled.
+- [`:enabled`](http://api.jquery.com/enabled-selector/) - Selects all elements that are enabled.
+- [`:eq()`](http://api.jquery.com/eq-selector/) - Select the element at index n within the matched set.
+- NOT [`:even`](http://api.jquery.com/even-selector/) - Selects even elements, zero-indexed. See also odd.
+- [`:file`](http://api.jquery.com/file-selector/) - Selects all elements of type file.
+- [`:first`](http://api.jquery.com/first-selector/) -  Selects the first matched element.
+- NOT [`:focus`](http://api.jquery.com/focus-selector/) - Selects element if it is currently focused.
+- NOT [`:gt()`](http://api.jquery.com/gt-selector/) -  Select all elements at an index greater than index within the matched set.
+- NOT [`:has()`](http://api.jquery.com/has-selector/) - Selects elements which contain at least one element that matches the specified selector.
+- NOT [`:header`](http://api.jquery.com/header-selector/) - Selects all elements that are headers, like h1, h2, h3 and so on.
+- [`:hidden`](http://api.jquery.com/hidden-selector/) - Selects all elements that are hidden.
+- [`:image`](http://api.jquery.com/image-selector/) -  Selects all elements of type image.
+- NOT [`:input`](http://api.jquery.com/input-selector/) - Selects all input, textarea, select and button elements.
+- [`:last`](http://api.jquery.com/last-selector/) - Selects the last matched element.
+- NOT [`:lt()`](http://api.jquery.com/lt-selector/) - Select all elements at an index less than index within the matched set.
+- NOT [`:odd`](http://api.jquery.com/odd-selector/) -  Selects odd elements, zero-indexed. See also even.
+- [`:password`](http://api.jquery.com/password-selector/) - Selects all elements of type password.
+- NOT [`:parent`](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text).
+- [`:radio`](http://api.jquery.com/radio-selector/) - Selects all elements of type radio.
+- NOT [`:reset`](http://api.jquery.com/reset-selector/) - Selects all elements of type reset.
+- [`:selected`](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
+- NOT [`:submit`](http://api.jquery.com/submit-selector/) - Selects all elements of type submit.
+- NOT [`:text`](http://api.jquery.com/text-selector/) - Selects all elements of type text.
+- [`:visible`](http://api.jquery.com/visible-selector/) - Selects all elements that are visible.
 
-###Soon (next release roadmap)
+###Extra - seleniumQuery only selectors
 
-- [`:input` Selector](http://api.jquery.com/input-selector/) - Selects all input, textarea, select and button elements.
-- [`:button` Selector](http://api.jquery.com/button-selector/) - Selects all button elements and elements of type button.
-- [`:checkbox` Selector](http://api.jquery.com/checkbox-selector/) - Selects all elements of type checkbox.
-- [`:even` Selector](http://api.jquery.com/even-selector/) - Selects even elements, zero-indexed. See also odd.
-- [`:first` Selector](http://api.jquery.com/first-selector/) -  Selects the first matched element.
-- [`:gt()` Selector](http://api.jquery.com/gt-selector/) -  Select all elements at an index greater than index within the matched set.
-- [`:header` Selector](http://api.jquery.com/header-selector/) - Selects all elements that are headers, like h1, h2, h3 and so on.
-- [`:last` Selector](http://api.jquery.com/last-selector/) - Selects the last matched element.
-- [`:lt()` Selector](http://api.jquery.com/lt-selector/) - Select all elements at an index less than index within the matched set.
-- [`:odd` Selector](http://api.jquery.com/odd-selector/) -  Selects odd elements, zero-indexed. See also even.
-- [`:password` Selector](http://api.jquery.com/password-selector/) - Selects all elements of type password.
-- [`:radio` Selector](http://api.jquery.com/radio-selector/) - Selects all elements of type radio.
-- [`:reset` Selector](http://api.jquery.com/reset-selector/) - Selects all elements of type reset.
-- [`:submit` Selector](http://api.jquery.com/submit-selector/) - Selects all elements of type submit.
-- [`:text` Selector](http://api.jquery.com/text-selector/) - Selects all elements of type text.
-
-- [Attribute Not Equal Selector `[name!="value"]`](http://api.jquery.com/attribute-not-equal-selector/) - Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.
-- [`:file` Selector](http://api.jquery.com/file-selector/) - Selects all elements of type file.
-- [`:focus` Selector](http://api.jquery.com/focus-selector/) - Selects element if it is currently focused.
-- [`:has()` Selector](http://api.jquery.com/has-selector/) - Selects elements which contain at least one element that matches the specified selector.
-- [`:image` Selector](http://api.jquery.com/image-selector/) -  Selects all elements of type image.
-- [`:parent` Selector](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text).
+- `:present` - Matches all elements that are **attached to the DOM**. This is a very important property in Selenium page handling, as detached elements cannot be interacted with - they'd throw the infamous `StaleElementReferenceException`.
 
 #Supported jQuery Functions
 
