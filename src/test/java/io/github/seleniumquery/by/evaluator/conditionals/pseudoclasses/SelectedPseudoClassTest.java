@@ -16,27 +16,27 @@ public class SelectedPseudoClassTest {
 	}
 	
 	@Test
-	public void checkedPseudo_with_tag_option() {
+	public void selectedPseudo_with_tag_option() {
 		assertSelectorMatchedSetSize("option:selected", 2);
 	}
 	
 	@Test
-	public void checkedPseudo_with_tag_input() {
+	public void selectedPseudo_with_tag_input() {
 		assertSelectorMatchedSetSize("input:selected", 0);
 	}
 	
 	@Test
-	public void checkedPseudo_with_tag_input_checkbox() {
+	public void selectedPseudo_with_tag_input_checkbox() {
 		assertSelectorMatchedSetSize("input[type=checkbox]:selected", 0);
 	}
 	
 	@Test
-	public void checkedPseudo_with_tag_input_radio() {
+	public void selectedPseudo_with_tag_input_radio() {
 		assertSelectorMatchedSetSize("input[type=radio]:selected", 0);
 	}
 	
 	@Test
-	public void checkedPseudo() {
+	public void selectedPseudo() {
 		assertSelectorMatchedSetSize(":selected", 2);
 	}
 	

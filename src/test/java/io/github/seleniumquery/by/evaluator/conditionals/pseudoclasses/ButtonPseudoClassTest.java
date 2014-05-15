@@ -18,7 +18,7 @@ public class ButtonPseudoClassTest {
 	
 	// http://jsbin.com/yacerelo/1/edit
 	@Test
-	public void checkboxPseudo() {
+	public void buttonPseudo() {
 		assertThat($("[type='button']").size(), is(4));
 		assertThat($(":button").size(), is(5));
 		assertThat($("*:button").size(), is(5));
