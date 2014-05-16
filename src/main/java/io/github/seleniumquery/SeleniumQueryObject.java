@@ -172,11 +172,13 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * @since 0.2.0
+	 * Remove elements from the set of matched elements.
+	 * 
+	 * @param selector	A string containing a selector expression to match elements against.
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject not(String selector) {
-		List<WebElement> filteredElements = NotFunction.not(this, this.elements, selector);
-		return SQLocalFactory.getInstance().createWithInvalidSelector(this.getWebDriver(), filteredElements, this);
+		return NotFunction.not(this, this.elements, selector);
 	}
 
 	/**
