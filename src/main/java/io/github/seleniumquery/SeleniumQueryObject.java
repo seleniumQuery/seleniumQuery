@@ -6,6 +6,7 @@ import io.github.seleniumquery.functions.ClickFunction;
 import io.github.seleniumquery.functions.ClosestFunction;
 import io.github.seleniumquery.functions.EqFunction;
 import io.github.seleniumquery.functions.FindFunction;
+import io.github.seleniumquery.functions.FocusFunction;
 import io.github.seleniumquery.functions.GetFunction;
 import io.github.seleniumquery.functions.HasClassFunction;
 import io.github.seleniumquery.functions.HtmlFunction;
@@ -411,6 +412,19 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 */
 	public SeleniumQueryObject closest(String selector) {
 		return ClosestFunction.closest(this, elements, selector);
+	}
+	
+	/**
+	 * <p>Trigger the focus event on <b>every</b> element of the matched set.</p>
+	 * 
+	 * <p>Note: The order of the triggering is the order of the elements in the
+	 * matched list. The last one will end up with the focus, though all of them
+	 * will have it at some point.</p>
+	 * 
+	 * @since 1.0.0
+	 */
+	public SeleniumQueryObject focus() {
+		return FocusFunction.focus(this, elements);
 	}
    
 }
