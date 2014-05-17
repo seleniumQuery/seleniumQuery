@@ -4,10 +4,63 @@
 <meta charset="utf-8">
 <title>seleniumQuery .focus() test page</title>
 </head>
-<body id="bodyID">
-	<div id="divID">.focus()!</div>
+<body id="bodyID" tabindex="1">
+	<span id="spanID">.focus()!</span>
 	<input type="text" id="i0" value="i0">
 	<input type="text" id="i1" value="i1">
 	<input type="text" id="i2" value="i2">
+	<img id="im1" src="../sq.png" width="100" height="100" alt="" tabindex="2">
+	<a id="a1" href="#" tabindex="2">a1</a>
+	
+  <script>
+  var addEvent = (function( window, document ) { 
+      if ( document.addEventListener ) { 
+          return function( elem, type, cb ) { 
+              if ( (elem && !elem.length) || elem === window ) { 
+                  elem.addEventListener(type, cb, false ); 
+              } 
+              else if ( elem && elem.length ) { 
+                  var len = elem.length; 
+                  for ( var i = 0; i < len; i++ ) { 
+                      addEvent( elem[i], type, cb ); 
+                  } 
+              } 
+          }; 
+      } 
+      else if ( document.attachEvent ) { 
+          return function ( elem, type, cb ) { 
+              if ( (elem && !elem.length) || elem === window ) { 
+                  elem.attachEvent( 'on' + type, function() { return cb.call(elem, window.event); } ); 
+              } 
+              else if ( elem.length ) { 
+                  var len = elem.length; 
+                  for ( var i = 0; i < len; i++ ) { 
+                      addEvent( elem[i], type, cb ); 
+                  } 
+              } 
+          }; 
+      } 
+  })( this, document );
+  function insertDiv(text) {
+    var div = document.createElement('div');
+    div.setAttribute('class', text);
+    div.innerHTML = text;
+    document.body.appendChild(div);
+  }
+  
+  function prepareId(id) {
+	  addEvent(document.getElementById(id), 'click', function() { insertDiv('click '+id); });
+	  addEvent(document.getElementById(id), 'focus', function() { insertDiv('focus '+id); });
+  }
+
+  prepareId('i0');
+  prepareId('i1');
+  prepareId('i2');
+  prepareId('im1');
+  prepareId('a1');
+  
+  addEvent(document.getElementsByTagName('body')[0], 'click', function() { insertDiv('click body'); });
+  addEvent(document.getElementsByTagName('body')[0], 'focus', function() { insertDiv('focus body'); });
+  </script>
 </body>
 </html>

@@ -24,7 +24,7 @@ public class DisabledPseudoClass implements PseudoClass {
 	private static final String DISABLED_PSEUDO_CLASS_NO_COLON = "disabled";
 	private static final String DISABLED_PSEUDO_CLASS = ":"+DISABLED_PSEUDO_CLASS_NO_COLON;
 	
-	private static final List<String> ALLOWED_TAGS = Arrays.asList("input", "button", "optgroup", "option", "select", "textarea");
+	public static final List<String> DISABLEABLE_TAGS = Arrays.asList("input", "button", "optgroup", "option", "select", "textarea");
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -33,7 +33,7 @@ public class DisabledPseudoClass implements PseudoClass {
 
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return !element.isEnabled() && ALLOWED_TAGS.contains(element.getTagName());
+		return !element.isEnabled() && DISABLEABLE_TAGS.contains(element.getTagName());
 	}
 
 	private static final SqCSSFilter disabledPseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED,
