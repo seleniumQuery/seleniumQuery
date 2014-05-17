@@ -29,7 +29,7 @@ public class PseudoClassEvaluator implements CSSCondition<AttributeCondition> {
 			PasswordPseudoClass.getInstance(), FilePseudoClass.getInstance(), SubmitPseudoClass.getInstance(),
 			ResetPseudoClass.getInstance(), ButtonPseudoClass.getInstance(), InputPseudoClass.getInstance(),
 			HeaderPseudoClass.getInstance(), LtPseudoClass.getInstance(), GtPseudoClass.getInstance(),
-			FocusPseudoClass.getInstance(), FocusablePseudoClass.getInstance());
+			FocusPseudoClass.getInstance(), FocusablePseudoClass.getInstance(), TabbablePseudoClass.getInstance());
 
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {

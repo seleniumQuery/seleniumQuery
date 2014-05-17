@@ -209,6 +209,7 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - [`:reset`](http://api.jquery.com/reset-selector/) - Selects all elements of type `reset`.
 - [`:selected`](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
 - [`:submit`](http://api.jquery.com/submit-selector/) - Selects all elements of type `submit`.
+- [`:tabbable`](http://api.jqueryui.com/tabbable-selector/) - **From [jQuery UI](http://api.jqueryui.com/category/selectors/)**. Selects elements which the user can focus via tabbing.
 - NOT [`:text`](http://api.jquery.com/text-selector/) - Selects all elements of type `text`.
 - [`:visible`](http://api.jquery.com/visible-selector/) - Selects all elements that are visible.
 
