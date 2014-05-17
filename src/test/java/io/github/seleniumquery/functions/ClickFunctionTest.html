@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>seleniumQuery .click() test page</title>
+</head>
+<body>
+  <input type="text" id="i1">
+  <input type="text" id="i2">
+  <script>
+  var addEvent = (function( window, document ) { 
+      if ( document.addEventListener ) { 
+          return function( elem, type, cb ) { 
+              if ( (elem && !elem.length) || elem === window ) { 
+                  elem.addEventListener(type, cb, false ); 
+              } 
+              else if ( elem && elem.length ) { 
+                  var len = elem.length; 
+                  for ( var i = 0; i < len; i++ ) { 
+                      addEvent( elem[i], type, cb ); 
+                  } 
+              } 
+          }; 
+      } 
+      else if ( document.attachEvent ) { 
+          return function ( elem, type, cb ) { 
+              if ( (elem && !elem.length) || elem === window ) { 
+                  elem.attachEvent( 'on' + type, function() { return cb.call(elem, window.event); } ); 
+              } 
+              else if ( elem.length ) { 
+                  var len = elem.length; 
+                  for ( var i = 0; i < len; i++ ) { 
+                      addEvent( elem[i], type, cb ); 
+                  } 
+              } 
+          }; 
+      } 
+  })( this, document );
+  function insertDiv(text) {
+    var div = document.createElement('div');
+    div.setAttribute('class', text);
+    div.innerHTML = text;
+    document.body.appendChild(div);
+  }
+
+  addEvent(document.getElementById('i1'), 'click', function() { 
+    insertDiv('click i1');
+  });
+  addEvent(document.getElementById('i1'), 'focus', function() { 
+    insertDiv('focus i1');
+  });
+  addEvent(document.getElementById('i2'), 'click', function() { 
+    insertDiv('click i2');
+  });
+  addEvent(document.getElementById('i2'), 'focus', function() { 
+    insertDiv('focus i2');
+  });
+  addEvent(document.getElementsByTagName('body')[0], 'click', function() { 
+    insertDiv('click body');
+  });
+  addEvent(document.getElementsByTagName('body')[0], 'focus', function() { 
+    insertDiv('focus body');
+  });
+  </script>
+</body>
+</html>
