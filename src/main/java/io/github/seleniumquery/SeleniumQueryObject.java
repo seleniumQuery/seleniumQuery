@@ -379,7 +379,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * @author acdcjunior
+	 * Check the current matched set of elements against a selector and return true if
+	 * at least one of these elements matches the given arguments.
+	 * 
+	 * @param selector	A string containing a selector expression to match elements against.
 	 * @since 0.5.0
 	 */
 	public boolean is(String selector) {

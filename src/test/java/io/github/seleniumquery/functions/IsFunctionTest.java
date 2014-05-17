@@ -44,7 +44,7 @@ public class IsFunctionTest {
 		assertThat($("*").is("*"), is(true));
 		assertThat($("div").is("div"), is(true)); 
 		assertThat($("div").is("*"), is(true)); 
-		assertThat($("*").is("div"), is(false));
+		assertThat($("*").is("div"), is(true));
 	}
     
 }

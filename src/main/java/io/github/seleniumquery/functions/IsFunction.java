@@ -29,12 +29,21 @@ public class IsFunction {
 			// then we should return false (because there are no elements)!
 			return false;
 		}
+		if (elements.isEmpty() && hasNegatedPresent) {
+			// there are no elements (because "elements" is empty), and we want to
+			// find no elements (as there is a ":not(:present)" -- hasNegatedPresent is true),
+			// then we should return true!
+			return true;
+		}
+		// comment for the future refactorers: We realize there could be only one if with "return hasNegatedPresent",
+		// we left this way, though, because we believe it is more descriptive of the code's intention
+
 		for (WebElement element : elements) {
-			if (!SelectorEvaluator.is(driver, element, selector)) {
-				return false;
+			if (SelectorEvaluator.is(driver, element, selector)) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 }
