@@ -193,6 +193,7 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - [`:file`](http://api.jquery.com/file-selector/) - Selects all elements of type `file`.
 - [`:first`](http://api.jquery.com/first-selector/) -  Selects the first matched element.
 - NOT [`:focus`](http://api.jquery.com/focus-selector/) - Selects element if it is currently focused.
+- [`:focusable`](http://api.jqueryui.com/focusable-selector/) - **From [jQuery UI](http://api.jqueryui.com/category/selectors/)**. Selects elements which can be focused.
 - [`:gt()`](http://api.jquery.com/gt-selector/) -  Select all elements at an index greater than the given `index` within the matched set.
 - NOT [`:has()`](http://api.jquery.com/has-selector/) - Selects elements which contain at least one element that matches the specified selector.
 - [`:header`](http://api.jquery.com/header-selector/) - Selects all elements that are headers, like `h1`, `h2`, `h3` and so on.
