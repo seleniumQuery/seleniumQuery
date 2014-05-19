@@ -41,7 +41,7 @@ public class PseudoClassEvaluator implements CSSCondition<AttributeCondition> {
 				return pseudoClass.isPseudoClass(driver, element, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
 			}
 		}
-		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
+//		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
 		return false;
 	}
 	
@@ -54,8 +54,9 @@ public class PseudoClassEvaluator implements CSSCondition<AttributeCondition> {
 				return pseudoClass.compilePseudoClass(driver, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
 			}
 		}
-		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
-		return new CompiledSelector(":"+attributeCondition.toString(), "Unsupported pseudo-class!!!");
+//		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
+		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue);
+		return CompiledSelector.createNoFilterSelector(pseudoClassSelector.getOriginalPseudoClassSelector());
 	}
 
 }

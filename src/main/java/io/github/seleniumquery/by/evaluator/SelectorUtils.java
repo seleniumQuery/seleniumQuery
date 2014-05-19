@@ -157,8 +157,6 @@ public class SelectorUtils {
 			escapedString = StringEscapeUtils.unescapeEcmaScript(stringValue);
 			escapedString = escapedString.substring(1, escapedString.length()-1);
 		}
-		System.out.println("GOT: "+stringValue);
-		System.out.println("RESTURNER: "+escapedString);
 		return escapedString;
 	}
 

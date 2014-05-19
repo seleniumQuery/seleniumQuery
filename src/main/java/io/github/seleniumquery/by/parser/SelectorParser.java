@@ -16,12 +16,12 @@ public class SelectorParser {
 	
 	private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
 
-	public static ParsedSelector<SelectorList> selector(String selector) {
-		TransformedSelector transformedSelector = new SelectorPreParser().transformSelector(selector);
-		String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.fixAttributeNotEquals(transformedSelector.getTransformedSelector());
+	public static ParsedSelector<SelectorList> parseSelector(String selector) {
+		String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.fixAttributeNotEquals(selector);
+		TransformedSelector transformedSelector = new SelectorPreParser().transformSelector(fixedSelector);
 	    SelectorList selectorList = null;
 	    try {
-	    	selectorList = css3Parser.parseSelectors(new InputSource(new StringReader(fixedSelector)));
+	    	selectorList = css3Parser.parseSelectors(new InputSource(new StringReader(transformedSelector.getTransformedSelector())));
 	    } catch (RuntimeException e) {
 	    	throw e;
 	    } catch (Exception e) {

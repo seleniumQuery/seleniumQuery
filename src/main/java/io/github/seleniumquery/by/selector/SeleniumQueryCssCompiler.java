@@ -17,7 +17,7 @@ public class SeleniumQueryCssCompiler {
 	
 	public static CompiledSelectorList compileSelectorList(WebDriver driver, String selector) {
         try {
-    		ParsedSelector<SelectorList> parsedSelector = SelectorParser.selector(selector);
+    		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
     		SelectorList selectorList = parsedSelector.getSelector();
 
         	List<CompiledSelector> css = new ArrayList<CompiledSelector>(selectorList.getLength()); 
@@ -33,18 +33,10 @@ public class SeleniumQueryCssCompiler {
         }
 	}
     
-	@SuppressWarnings("unchecked")
 	public static CompiledSelector compileSelector(WebDriver driver, Map<String, String> stringMap, Selector selector) {
+		@SuppressWarnings("unchecked")
 		CSSSelector<Selector> cssSelector =  (CSSSelector<Selector>) SelectorEvaluatorFactory.getInstance().getSelector(selector);
 		return cssSelector.compile(driver, stringMap, selector);
 	}
 	
-	public static void main(String[] args) {
-		CompiledSelectorList csl = SeleniumQueryCssCompiler.compileSelectorList(null, "h1:not(ul),span:hidden,div#myId.class,.w00t:lang(fr)");
-		for (CompiledSelector cs : csl.css) {
-			System.out.println(cs);
-		}
-		//csl.execute(driver);
-	}
-
 }

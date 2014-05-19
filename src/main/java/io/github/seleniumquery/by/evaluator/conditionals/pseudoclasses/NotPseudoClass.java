@@ -23,7 +23,6 @@ public class NotPseudoClass implements PseudoClass {
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
-		System.out.println("NOT SELECTOR IS: "+notSelector);
 		return !SelectorEvaluator.elementMatchesStringSelector(driver, element, notSelector);
 	}
 	

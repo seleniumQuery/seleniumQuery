@@ -18,7 +18,6 @@ public class PseudoClassSelector {
 
 	public String getPseudoClassContent() {
 		String index = pseudoClassValue.substring(pseudoClassValue.indexOf('(')+1, pseudoClassValue.length()-1);
-		System.out.println("pseudoClassValue: "+pseudoClassValue);
 		return this.stringMap.get(index);
 	}
 
@@ -33,6 +32,24 @@ public class PseudoClassSelector {
 
 	public Map<String, String> getStringMap() {
 		return stringMap;
+	}
+
+	public String getOriginalPseudoClassSelector() {
+		String pseudoClassBracesContent = getPseudoClassContent();
+		
+		String rawUsupportedSelector = ":"+getPseudoClass();
+		if (pseudoClassBracesContent != null) {
+			rawUsupportedSelector = ":"+getPseudoClass()+"("+pseudoClassBracesContent+")";
+		}
+		return rawUsupportedSelector;
+	}
+	
+	private String getPseudoClass() {
+		int openingBracket = pseudoClassValue.indexOf('(');
+		if (openingBracket == -1) {
+			return pseudoClassValue;
+		}
+		return pseudoClassValue.substring(0, openingBracket);
 	}
 
 }

@@ -24,7 +24,6 @@ public class ContainsPseudoClass implements PseudoClass {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		String textToContain = pseudoClassSelector.getPseudoClassContent();
 		textToContain = SelectorUtils.unescapeString(textToContain);
-		System.out.println("\tCONTAINS WILL CHECK FOR: "+textToContain);
 		return element.getText().contains(textToContain);
 	}
 	
