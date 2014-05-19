@@ -1,37 +1,30 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
 
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class PseudoClassEvaluatorTest {
+	
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(PseudoClassEvaluatorTest.class);
 
-	static WebDriver driver;
+	WebDriver driver;
 	
-	@BeforeClass
-	public static void before() {
-		driver = TestInfrastructure.getDriver();
-//		driver = new FirefoxDriver();
-//    	System.setProperty("webdriver.chrome.driver", "F:\\desenv\\chromedriver.exe");
-//    	driver = new ChromeDriver();
-//		System.setProperty("webdriver.ie.driver",  "F:\\desenv\\IEDriverServer.exe");
-//    	driver = new InternetExplorerDriver();
-		driver.get(TestInfrastructure.getHtmlTestFileUrl(PseudoClassEvaluatorTest.class));
-	}
-	
-	@AfterClass
-	public static void after() {
-		driver.quit();
+	@Before
+	public void before() {
+		driver = $.browser.getDefaultDriver();
 	}
 	
 	@Test

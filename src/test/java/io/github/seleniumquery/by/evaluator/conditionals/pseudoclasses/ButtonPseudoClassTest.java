@@ -3,22 +3,19 @@ package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 public class ButtonPseudoClassTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
 	// http://jsbin.com/yacerelo/1/edit
 	@Test
-	public void buttonPseudo() {
+	public void buttonPseudoClass() {
 		assertThat($("[type='button']").size(), is(4));
 		assertThat($(":button").size(), is(5));
 		assertThat($("*:button").size(), is(5));

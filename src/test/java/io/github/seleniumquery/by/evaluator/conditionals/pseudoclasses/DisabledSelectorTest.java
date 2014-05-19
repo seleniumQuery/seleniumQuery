@@ -1,20 +1,17 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static io.github.seleniumquery.SeleniumQuery.$;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
 
 public class DisabledSelectorTest {
 
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
     public void disabled_selector() {

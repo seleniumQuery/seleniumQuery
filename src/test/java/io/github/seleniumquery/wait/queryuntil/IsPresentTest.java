@@ -1,19 +1,16 @@
 package io.github.seleniumquery.wait.queryuntil;
 
-import static org.junit.Assert.assertEquals;
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.junit.Assert.assertEquals;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
 
 public class IsPresentTest {
 
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(IsPresentTest.class));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
 	@Test
 	public void isPresent__should_not_throw_an_exception_when_the_element_becomes_present__and__return_the_elements_val() throws Exception {

@@ -1,23 +1,20 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static io.github.seleniumquery.SeleniumQuery.$;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
 
 public class HiddenSelectorTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
-    public void is_test() throws Exception {
+    public void hiddenPseudoClass() throws Exception {
     	assertThat($("#visibleDiv").is(":hidden"), is(false));
     	assertThat($("#visibleDiv2").is(":hidden"), is(false));
     	assertThat($("#invisibleDiv").is(":hidden"), is(true));

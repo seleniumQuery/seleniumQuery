@@ -3,22 +3,19 @@ package io.github.seleniumquery.functions;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 public class ClosestFunctionTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
-    public void is_test() throws Exception {
+    public void closest_function() throws Exception {
     	WebElement d1 = $("#d1").get(0);
     	WebElement d2 = $("#d2").get(0);
     	

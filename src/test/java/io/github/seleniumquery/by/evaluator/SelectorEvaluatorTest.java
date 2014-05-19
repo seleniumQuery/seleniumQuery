@@ -2,10 +2,11 @@ package io.github.seleniumquery.by.evaluator;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SeleniumQuery;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,22 +14,14 @@ import org.openqa.selenium.WebElement;
 
 public class SelectorEvaluatorTest {
 	
-	static WebDriver driver;
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@BeforeClass
-	public static void before() {
-		driver = TestInfrastructure.getDriver();
-//		driver = new FirefoxDriver();
-//    	System.setProperty("webdriver.chrome.driver", "F:\\desenv\\chromedriver.exe");
-//    	driver = new ChromeDriver();
-//		System.setProperty("webdriver.ie.driver",  "F:\\desenv\\IEDriverServer.exe");
-//    	driver = new InternetExplorerDriver();
-		driver.get(TestInfrastructure.getHtmlTestFileUrl(SelectorEvaluatorTest.class));
-	}
+	WebDriver driver;
 	
-	@AfterClass
-	public static void after() {
-		driver.quit();
+	@Before
+	public void before() {
+		driver = SeleniumQuery.$.browser.getDefaultDriver();
 	}
 	
     // E ~ F

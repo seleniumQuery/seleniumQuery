@@ -1,26 +1,22 @@
 package io.github.seleniumquery.functions;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static io.github.seleniumquery.SeleniumQuery.$;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
 
 public class PropFunctionTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
 	// http://jsbin.com/zofekalo/1/edit
     @Test
-    public void prop_get() throws Exception {
+    public void prop_function__getting() throws Exception {
         assertThat($("#chk_checked").<Boolean>prop("checked"), is(true));
         assertThat($("#chk_not_checked").<Boolean>prop("checked"), is(false));
         
@@ -42,25 +38,25 @@ public class PropFunctionTest {
     
     // http://jsbin.com/ceqijima/2/edit
     @Test
-    public void prop_set() throws Exception {
-    	setAndExpect(true, true);
-    	setAndExpect(1, true);
-    	setAndExpect(0, false);
-    	setAndExpect("1", true);
-    	setAndExpect("0", true);
-    	setAndExpect("a", true);
-    	setAndExpect("", false);
-    	setAndExpect(false, false);
+    public void prop_function__setting() throws Exception {
+    	setAndVerify(true, true);
+    	setAndVerify(1, true);
+    	setAndVerify(0, false);
+    	setAndVerify("1", true);
+    	setAndVerify("0", true);
+    	setAndVerify("a", true);
+    	setAndVerify("", false);
+    	setAndVerify(false, false);
     }
-
-	private void reset() {
-		$("#c1 .initial").prop("selected", true);
-	}
 	
-	private void setAndExpect(Object val, Object expected) {
+	private void setAndVerify(Object val, Object expected) {
 		reset();
 		$("#c1 .other").prop("selected", val);
 		assertThat($("#c1 .other").prop("selected"), is(expected));
+	}
+	
+	private void reset() {
+		$("#c1 .initial").prop("selected", true);
 	}
 
 }

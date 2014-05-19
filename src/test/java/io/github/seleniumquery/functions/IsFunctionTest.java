@@ -1,23 +1,20 @@
 package io.github.seleniumquery.functions;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static io.github.seleniumquery.SeleniumQuery.$;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
 
 public class IsFunctionTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
-    public void is_test() throws Exception {
+    public void is_function() {
     	assertThat($("#myDiv").is("div"), is(true));
         assertThat($("#myDiv").is(".classOne"), is(true));
         assertThat($("#myDiv").is(".classTwo"), is(true));
@@ -35,12 +32,12 @@ public class IsFunctionTest {
     }
     
 	@Test
-	public void is_with_no_matched_sets() {
+	public void is_function__with_no_matched_sets() {
 		assertThat($("#mothafocka").is("#moo"), is(false));
 	}
 	
 	@Test
-	public void is_with_very_permissive_sets() {
+	public void is_function__with_very_permissive_sets() {
 		assertThat($("*").is("*"), is(true));
 		assertThat($("div").is("div"), is(true)); 
 		assertThat($("div").is("*"), is(true)); 

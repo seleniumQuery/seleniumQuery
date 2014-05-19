@@ -3,22 +3,19 @@ package io.github.seleniumquery.functions;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class FocusFunctionTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
-    public void focus() {
+    public void focus_function() {
     	$("#i1").focus();
     	assertThat($("#i1").is(":focus"), is(true));
     	
@@ -50,7 +47,7 @@ public class FocusFunctionTest {
     
 
     @Test
-    public void focus__should_make_sure_the_elements_are_just_focused_and_NOT_clicked() {
+    public void focus_function__should_make_sure_the_elements_are_just_focused_and_NOT_clicked() {
     	// for each click or focus in those elements, there will be a div added to the body
     	// this tests makes sure only a div relative to the focus event is added
     	// (and not two divs, one for focus and one for click, if that happened, the it was a click+focus, not just focus)

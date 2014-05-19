@@ -3,13 +3,13 @@ package io.github.seleniumquery.by.evaluator;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.TestInfrastructure;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.SeleniumQuery;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,17 +17,14 @@ import org.openqa.selenium.WebElement;
 
 public class SelectorsUtilTest {
 	
-	static WebDriver driver;
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@BeforeClass
-	public static void before() {
-		driver = TestInfrastructure.getDriver();
-		driver.get(TestInfrastructure.getHtmlTestFileUrl(SelectorsUtilTest.class));
-	}
+	WebDriver driver;
 	
-	@AfterClass
-	public static void after() {
-		driver.quit();
+	@Before
+	public void before() {
+		driver = SeleniumQuery.$.browser.getDefaultDriver();
 	}
 
 	@Test

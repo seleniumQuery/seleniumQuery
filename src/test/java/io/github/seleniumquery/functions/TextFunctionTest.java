@@ -1,28 +1,25 @@
 package io.github.seleniumquery.functions;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static io.github.seleniumquery.SeleniumQuery.$;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
 
 public class TextFunctionTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
-    public void text() {
+    public void text_function() {
     	assertThat($("div.demo-container").text().replaceAll("\\s+", " "), is("Demonstration Box list item 1 list item 2"));
     }
     
     @Test
-    public void text2() {
+    public void text_function__another_div() {
     	assertThat($("div.d").text(), is("Batman Spider Man yo Hulk"));
     }
 

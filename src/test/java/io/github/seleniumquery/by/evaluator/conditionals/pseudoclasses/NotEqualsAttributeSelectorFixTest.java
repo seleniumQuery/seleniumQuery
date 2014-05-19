@@ -2,19 +2,14 @@ package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.by.evaluator.conditionals.attributes.NotEqualsAttributeSelectorFix;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class NotEqualsAttributeSelectorFixTest {
 	
 	NotEqualsAttributeSelectorFix notEqualsAttributeSelectorFix = new NotEqualsAttributeSelectorFix();
-
-	@Before
-	public void setUp() throws Exception {
-	}
 
 	@Test
 	public void removeStrings__should_turn_all_quoted_strings_into_an_underscore_sequence() {

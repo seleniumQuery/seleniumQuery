@@ -1,30 +1,27 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static io.github.seleniumquery.SeleniumQuery.$;
-
-import org.junit.Before;
-import org.junit.Test;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
+
+import org.junit.Rule;
+import org.junit.Test;
 
 public class PresentSelectorTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
-    public void present_selector_basics() {
+    public void presentPseudoClass_basics() {
     	assertThat($("*").size(), is(9));
     	assertThat($(":present").size(), is(9));
     }
     
     @Test
-    public void present_selector_while_removing_element_from_DOM() {
+    public void presentPseudoClass_while_removing_element_from_DOM() {
     	SeleniumQueryObject $presentDiv = $("#presentDiv");
     	SeleniumQueryObject $otherPresentDiv = $("#otherPresentDiv");
 		assertThat($presentDiv.is(":present"), is(true));
@@ -44,32 +41,32 @@ public class PresentSelectorTest {
     }
     
     @Test
-    public void  present_selector_with_IS1() {
+    public void  presentPseudoClass_with_IS1() {
     	assertThat($("#presentDiv").is(":present"), is(true));
     }
     
     @Test
-    public void  present_selector_with_IS2() {
+    public void  presentPseudoClass_with_IS2() {
     	assertThat($("#otherPresentDiv").is(":present"), is(true));
     }
     
     @Test
-    public void  present_selector_with_IS22() {
+    public void  presentPseudoClass_with_IS22() {
     	assertThat($("#otherPresentDiv").is(":not(:present)"), is(false));
     }
     
     @Test
-    public void  present_selector_with_IS3() {
+    public void  presentPseudoClass_with_IS3() {
     	assertThat($("button").is(":present"), is(true));
     }
     
     @Test
-    public void  present_selector_with_IS4() {
+    public void  presentPseudoClass_with_IS4() {
     	assertThat($("#bozo").is(":present"), is(false));
     }
     
     @Test
-    public void  present_selector_with_IS5() {
+    public void  presentPseudoClass_with_IS5() {
     	assertThat($("#bozo").is(":not(:present)"), is(true));
     }
 

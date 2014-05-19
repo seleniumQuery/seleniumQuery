@@ -1,21 +1,18 @@
 package io.github.seleniumquery.wait;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static io.github.seleniumquery.SeleniumQuery.$;
-
-import org.junit.Before;
-import org.junit.Test;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 import io.github.seleniumquery.example.AllFunctionsTest;
+
+import org.junit.Rule;
+import org.junit.Test;
 
 public class SeleniumQueryQueryUntilIsTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(AllFunctionsTest.class));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(AllFunctionsTest.class);
 
 	@Test
 	public void queryUntil_not_enabled() {

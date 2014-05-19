@@ -1,42 +1,38 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.by.selector.SeleniumQueryCssCompilerIntegrationTest.assertSelectorMatchedSetSize;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 public class SelectedPseudoClassTest {
 	
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(getClass()));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
 	@Test
-	public void selectedPseudo_with_tag_option() {
+	public void selectedPseudoClass_with_tag_option() {
 		assertSelectorMatchedSetSize("option:selected", 2);
 	}
 	
 	@Test
-	public void selectedPseudo_with_tag_input() {
+	public void selectedPseudoClass_with_tag_input() {
 		assertSelectorMatchedSetSize("input:selected", 0);
 	}
 	
 	@Test
-	public void selectedPseudo_with_tag_input_checkbox() {
+	public void selectedPseudoClass_with_tag_input_checkbox() {
 		assertSelectorMatchedSetSize("input[type=checkbox]:selected", 0);
 	}
 	
 	@Test
-	public void selectedPseudo_with_tag_input_radio() {
+	public void selectedPseudoClass_with_tag_input_radio() {
 		assertSelectorMatchedSetSize("input[type=radio]:selected", 0);
 	}
 	
 	@Test
-	public void selectedPseudo() {
+	public void selectedPseudoClass() {
 		assertSelectorMatchedSetSize(":selected", 2);
 	}
 	

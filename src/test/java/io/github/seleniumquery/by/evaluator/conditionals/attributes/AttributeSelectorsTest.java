@@ -2,11 +2,12 @@ package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SeleniumQuery;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,17 +16,14 @@ import org.w3c.css.sac.CSSParseException;
 
 public class AttributeSelectorsTest {
 	
-	static WebDriver driver;
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@BeforeClass
-	public static void before() {
-		driver = TestInfrastructure.getDriver();
-		driver.get(TestInfrastructure.getHtmlTestFileUrl(AttributeSelectorsTest.class));
-	}
+	WebDriver driver;
 	
-	@AfterClass
-	public static void after() {
-		driver.quit();
+	@Before
+	public void before() {
+		driver = SeleniumQuery.$.browser.getDefaultDriver();
 	}
 	
 	/* Has Attribute Selector: [name]
