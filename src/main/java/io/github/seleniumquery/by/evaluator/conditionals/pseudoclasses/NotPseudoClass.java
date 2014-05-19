@@ -6,7 +6,6 @@ import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 public class NotPseudoClass implements PseudoClass {
 	
@@ -16,22 +15,20 @@ public class NotPseudoClass implements PseudoClass {
 	}
 	private NotPseudoClass() { }
 	
-	private static final int NOT_BRACE_LENGTH = "not(".length();
-	private static final int END_BRACE_LENGTH = ")".length();
-	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
-		return pseudoClassValue.matches("not\\(.*\\)");
+		return pseudoClassValue.matches("not-sq\\(.*\\)");
 	}
 	
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		String selector = pseudoClassValue.substring(NOT_BRACE_LENGTH, pseudoClassValue.length() - END_BRACE_LENGTH);
-		return !SelectorEvaluator.is(driver, element, selector);
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
+		String notSelector = pseudoClassSelector.getPseudoClassContent();
+		System.out.println("NOT SELECTOR IS: "+notSelector);
+		return !SelectorEvaluator.elementMatchesStringSelector(driver, element, notSelector);
 	}
 	
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:not
 
 		// we never consider not to be supported natively, as it may contains not supported selectors in it
@@ -40,8 +37,7 @@ public class NotPseudoClass implements PseudoClass {
 //		if (DriverSupportMap.getInstance().supportsNatively(driver, ":not(div)")) {
 //			return CompiledSelector.createNoFilterSelector(":not("+pseudoClassValue+")");
 //		}
-		SqCSSFilter notPseudoClassFilter = new PseudoClassFilter(getInstance(), selectorThisConditionShouldApply,
-															pseudoClassValue);
+		SqCSSFilter notPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledSelector.createFilterOnlySelector(notPseudoClassFilter);
 	}
 	

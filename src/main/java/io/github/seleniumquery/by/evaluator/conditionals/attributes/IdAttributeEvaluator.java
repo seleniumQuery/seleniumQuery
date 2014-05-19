@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 
+import java.util.Map;
+
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
@@ -30,7 +32,7 @@ public class IdAttributeEvaluator implements CSSCondition<AttributeCondition> {
 	 * CASE SENSITIVE!
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		if (!SelectorUtils.hasAttribute(element, ID_ATTRIBUTE)) {
 			return false;
 		}
@@ -40,7 +42,7 @@ public class IdAttributeEvaluator implements CSSCondition<AttributeCondition> {
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedId = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by id
 		return CompiledSelector.createNoFilterSelector("#"+SelectorUtils.escapeSelector(wantedId));

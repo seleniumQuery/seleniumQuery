@@ -2,6 +2,9 @@ package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
+
+import java.util.Map;
+
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
@@ -29,14 +32,14 @@ public class ContainsPrefixAttributeEvaluator implements CSSCondition<AttributeC
 	 * Case INsensitve
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String wantedValue = attributeCondition.getValue();
 		String actualValue = element.getAttribute(attributeCondition.getLocalName());
 		return equalsIgnoreCase(actualValue, wantedValue) || startsWithIgnoreCase(actualValue, wantedValue+'-');
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeSelectorSymbol = "|=";
 		// nothing to do, everyone supports this selector
 		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, attributeSelectorSymbol);

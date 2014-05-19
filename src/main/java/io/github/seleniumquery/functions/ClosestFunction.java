@@ -30,7 +30,7 @@ public class ClosestFunction {
 	public static WebElement closest(WebDriver driver, WebElement element, String selector) {
 		WebElement ancestorOrSelf = element; // begins by evaluating the element itself
 		while (ancestorOrSelf != null) {
-			if (SelectorEvaluator.is(driver, ancestorOrSelf, selector)) {
+			if (SelectorEvaluator.elementMatchesStringSelector(driver, ancestorOrSelf, selector)) {
 				return ancestorOrSelf;
 			}
 			ancestorOrSelf = SelectorUtils.parent(ancestorOrSelf);

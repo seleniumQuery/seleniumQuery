@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.evaluator.tagname;
 
+import java.util.Map;
+
 import io.github.seleniumquery.by.evaluator.CSSSelector;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
@@ -16,13 +18,13 @@ public class TagNameEvaluator implements CSSSelector<ElementSelector> {
 	}
 
 	@Override
-	public boolean is(WebDriver driver, WebElement element, ElementSelector elementSelector) {
+	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, ElementSelector elementSelector) {
 		String name = elementSelector.getLocalName();
 		return name == null || name.equalsIgnoreCase(element.getTagName());
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, ElementSelector selector) {
+	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, ElementSelector selector) {
 		// nothing to do, everyone supports filtering by tag name
 		return CompiledSelector.createNoFilterSelector(selector);
 	}

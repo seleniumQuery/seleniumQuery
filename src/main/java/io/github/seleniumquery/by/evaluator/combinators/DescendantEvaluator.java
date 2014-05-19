@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,13 +30,13 @@ public class DescendantEvaluator implements CSSSelector<DescendantSelector> {
 	 * E F
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, DescendantSelector descendantSelector) {
-		if (SelectorEvaluator.is(driver, element, descendantSelector.getSimpleSelector())) {
+	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, DescendantSelector descendantSelector) {
+		if (SelectorEvaluator.elementMatchesSelector(driver, element, stringMap, descendantSelector.getSimpleSelector())) {
 	
 			WebElement ancestor = SelectorUtils.parent(element);
 	
 			while (ancestor != null) {
-				if (SelectorEvaluator.is(driver, ancestor, descendantSelector.getAncestorSelector())) {
+				if (SelectorEvaluator.elementMatchesSelector(driver, ancestor, stringMap, descendantSelector.getAncestorSelector())) {
 					return true;
 				}
 				ancestor = SelectorUtils.parent(ancestor);
@@ -45,9 +46,9 @@ public class DescendantEvaluator implements CSSSelector<DescendantSelector> {
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, DescendantSelector descendantSelector) {
-		CompiledSelector childrenCompiled = SeleniumQueryCssCompiler.compileSelector(driver, descendantSelector.getSimpleSelector());
-		CompiledSelector ancestorCompiled = SeleniumQueryCssCompiler.compileSelector(driver, descendantSelector.getAncestorSelector());
+	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
+		CompiledSelector childrenCompiled = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
+		CompiledSelector ancestorCompiled = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
 		
 		SqCSSFilter descendantFilter = new DescendantFilter(childrenCompiled, ancestorCompiled);
 		return new CompiledSelector(ancestorCompiled.getCssSelector()+" "+childrenCompiled.getCssSelector(), descendantFilter);

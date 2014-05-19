@@ -5,7 +5,6 @@ import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 public class LastPseudoClass implements PseudoClass {
 
@@ -24,13 +23,14 @@ public class LastPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		return EqPseudoClass.isEq(driver, element, selectorThisConditionShouldApply, -1);
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
+		return EqPseudoClass.isEq(driver, element, pseudoClassSelector, -1);
 	}
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		SqCSSFilter firstPseudoClassFilter = new PseudoClassFilter(getInstance(), selectorThisConditionShouldApply, pseudoClassValue);
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		// :last is an extension selector, no browser implements it natively
+		SqCSSFilter firstPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledSelector.createFilterOnlySelector(firstPseudoClassFilter);
 	}
 

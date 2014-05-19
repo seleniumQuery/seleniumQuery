@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals;
 
+import java.util.Map;
+
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.CSSSelector;
 import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
@@ -23,32 +25,32 @@ public class ConditionalSelectorEvaluator implements CSSSelector<ConditionalSele
 	}
 	
 	@Override
-	public boolean is(WebDriver driver, WebElement element, ConditionalSelector conditionalSelector) {
+	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
-		return SelectorEvaluator.is(driver, element, simpleSelector)
-				&& isCondition(driver, element, simpleSelector, condition);
+		return SelectorEvaluator.elementMatchesSelector(driver, element, stringMap, simpleSelector)
+				&& isCondition(driver, element, stringMap, simpleSelector, condition);
 	}
 	
-	@SuppressWarnings("unchecked")
-	boolean isCondition(WebDriver driver, WebElement element, Selector simpleSelector, Condition condition) {
+	boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
+		@SuppressWarnings("unchecked")
 		CSSCondition<Condition> evaluator = (CSSCondition<Condition>) ConditionalEvaluatorFactory.getInstance().getSelector(condition);
-		return evaluator.is(driver, element, simpleSelector, condition);
+		return evaluator.isCondition(driver, element, stringMap, simpleSelector, condition);
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, ConditionalSelector conditionalSelector) {
+	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
-		CompiledSelector compiledSelector = SeleniumQueryCssCompiler.compileSelector(driver, simpleSelector);
-		CompiledSelector compiledCondition = compileCondition(driver, simpleSelector, condition);
+		CompiledSelector compiledSelector = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, simpleSelector);
+		CompiledSelector compiledCondition = compileCondition(driver, stringMap, simpleSelector, condition);
 		return CSSFilterUtils.combine(compiledSelector, compiledCondition);
 	}
 
-	@SuppressWarnings("unchecked")
-	CompiledSelector compileCondition(WebDriver driver, Selector simpleSelector, Condition condition) {
+	CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
+		@SuppressWarnings("unchecked")
 		CSSCondition<Condition> evaluator = (CSSCondition<Condition>) ConditionalEvaluatorFactory.getInstance().getSelector(condition);
-		return evaluator.compile(driver, simpleSelector, condition);
+		return evaluator.compileCondition(driver, stringMap, simpleSelector, condition);
 	}
 
 }

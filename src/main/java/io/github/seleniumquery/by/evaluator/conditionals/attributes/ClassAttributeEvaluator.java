@@ -5,6 +5,7 @@ import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,7 +30,7 @@ public class ClassAttributeEvaluator implements CSSCondition<AttributeCondition>
 	 * .example
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		if (!SelectorUtils.hasAttribute(element, CLASS_ATTRIBUTE)) {
 			return false;
 		}
@@ -39,7 +40,7 @@ public class ClassAttributeEvaluator implements CSSCondition<AttributeCondition>
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by class
 		return CompiledSelector.createNoFilterSelector("."+SelectorUtils.escapeSelector(wantedClassName));

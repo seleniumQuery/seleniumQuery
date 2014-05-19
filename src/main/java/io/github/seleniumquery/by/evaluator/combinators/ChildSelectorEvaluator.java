@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,19 +29,19 @@ public class ChildSelectorEvaluator implements CSSSelector<DescendantSelector> {
 	 * PARENT > ELEMENT
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, DescendantSelector descendantSelector) {
+	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, DescendantSelector descendantSelector) {
 		WebElement parent = SelectorUtils.parent(element);
 		if (parent.getTagName().equals("html")) {
 			return false;
 		}
-		return SelectorEvaluator.is(driver, element, descendantSelector.getSimpleSelector())
-				&& SelectorEvaluator.is(driver, parent, descendantSelector.getAncestorSelector());
+		return SelectorEvaluator.elementMatchesSelector(driver, element, stringMap, descendantSelector.getSimpleSelector())
+				&& SelectorEvaluator.elementMatchesSelector(driver, parent, stringMap, descendantSelector.getAncestorSelector());
 	}
 	
 	@Override
-	public CompiledSelector compile(WebDriver driver, DescendantSelector descendantSelector) {
-		CompiledSelector elementCompiledSelector = SeleniumQueryCssCompiler.compileSelector(driver, descendantSelector.getSimpleSelector());
-		CompiledSelector parentCompiledSelector = SeleniumQueryCssCompiler.compileSelector(driver, descendantSelector.getAncestorSelector());
+	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
+		CompiledSelector elementCompiledSelector = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
+		CompiledSelector parentCompiledSelector = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
 		
 		SqCSSFilter childSelectorFilter = new ChildSelectorFilter(parentCompiledSelector, elementCompiledSelector);
 		return new CompiledSelector(parentCompiledSelector.getCssSelector()+">"+elementCompiledSelector.getCssSelector(),

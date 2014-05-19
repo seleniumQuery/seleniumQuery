@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -143,6 +144,22 @@ public class SelectorUtils {
 		}
 		throw new RuntimeException("We don't know how to extract the WebDriver from this context: "
 				+context.getClass()+" -> "+context);
+	}
+	
+	/**
+	 * Escapes the attributes values into a valid CSS string.
+	 * Deals with the way the CSS parser gives the attributes' values to us.
+	 */
+	public static String unescapeString(String stringValue) {
+		String escapedString = stringValue;
+		char firstChar = stringValue.charAt(0);
+		if (firstChar == '\'' || firstChar == '"') {
+			escapedString = StringEscapeUtils.unescapeEcmaScript(stringValue);
+			escapedString = escapedString.substring(1, escapedString.length()-1);
+		}
+		System.out.println("GOT: "+stringValue);
+		System.out.println("RESTURNER: "+escapedString);
+		return escapedString;
 	}
 
 }

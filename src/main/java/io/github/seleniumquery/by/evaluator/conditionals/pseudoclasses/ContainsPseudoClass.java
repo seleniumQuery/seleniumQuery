@@ -1,11 +1,11 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
+import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 public class ContainsPseudoClass implements PseudoClass {
 	
@@ -21,15 +21,16 @@ public class ContainsPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		String textToContain = pseudoClassValue.substring(9, pseudoClassValue.length() - 1);
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
+		String textToContain = pseudoClassSelector.getPseudoClassContent();
+		textToContain = SelectorUtils.unescapeString(textToContain);
+		System.out.println("\tCONTAINS WILL CHECK FOR: "+textToContain);
 		return element.getText().contains(textToContain);
 	}
 	
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		SqCSSFilter containsPseudoClassFilter = new PseudoClassFilter(getInstance(), PseudoClassFilter.SELECTOR_NOT_USED,
-																				pseudoClassValue);
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		SqCSSFilter containsPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledSelector.createFilterOnlySelector(containsPseudoClassFilter);
 	}
 	

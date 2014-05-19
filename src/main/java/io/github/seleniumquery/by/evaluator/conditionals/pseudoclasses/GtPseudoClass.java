@@ -1,14 +1,13 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
 import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 public class GtPseudoClass implements PseudoClass {
 
@@ -24,21 +23,22 @@ public class GtPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		String gtIndex = pseudoClassValue.substring(3, pseudoClassValue.length() - 1);
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
+		String gtIndex = pseudoClassSelector.getPseudoClassContent();
 		if (!gtIndex.matches("[+-]?\\d+")) {
-			throw new RuntimeException("The :gt() pseudo-class requires an integer but got: " + pseudoClassValue);
+			throw new RuntimeException("The :gt() pseudo-class requires an integer but got: " + gtIndex);
 		}
 		if (gtIndex.charAt(0) == '+') {
 			gtIndex = gtIndex.substring(1);
 		}
 		int index = Integer.valueOf(gtIndex);
 		
-		return GtPseudoClass.isGt(driver, element, selectorThisConditionShouldApply, index);
+		return GtPseudoClass.isGt(driver, element, pseudoClassSelector, index);
 	}
 	
-	private static boolean isGt(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, int wantedIndex) {
-		List<WebElement> elements = driver.findElements(SeleniumQueryBy.byEnhancedSelector(selectorThisConditionShouldApply.toString()));
+	private static boolean isGt(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector, int wantedIndex) {
+		CompiledSelector compileSelector = SeleniumQueryCssCompiler.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		List<WebElement> elements = compileSelector.execute(driver);
 		if (elements.isEmpty()) {
 			return false;
 		}
@@ -58,8 +58,9 @@ public class GtPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		SqCSSFilter gtPseudoClassFilter = new PseudoClassFilter(getInstance(), selectorThisConditionShouldApply, pseudoClassValue);
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		// no browser supports :gt() natively
+		SqCSSFilter gtPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledSelector.createFilterOnlySelector(gtPseudoClassFilter);
 	}
 

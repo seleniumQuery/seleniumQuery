@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,16 +29,16 @@ public class DirectAdjacentEvaluator implements CSSSelector<SiblingSelector> {
 	 * E + F
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, SiblingSelector siblingSelector) {
+	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, SiblingSelector siblingSelector) {
 		WebElement previousElement = SelectorUtils.getPreviousSibling(element);
-		return SelectorEvaluator.is(driver, previousElement, siblingSelector.getSelector())
-				&& SelectorEvaluator.is(driver, element, siblingSelector.getSiblingSelector());
+		return SelectorEvaluator.elementMatchesSelector(driver, previousElement, stringMap, siblingSelector.getSelector())
+				&& SelectorEvaluator.elementMatchesSelector(driver, element, stringMap, siblingSelector.getSiblingSelector());
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, SiblingSelector siblingSelector) {
-		CompiledSelector previousElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, siblingSelector.getSelector());
-		CompiledSelector siblingElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, siblingSelector.getSiblingSelector());
+	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		CompiledSelector previousElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, siblingSelector.getSelector());
+		CompiledSelector siblingElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
 		
 		SqCSSFilter directAdjacentFilter = new DirectAdjacentFilter(previousElementCompiled, siblingElementCompiled);
 		return new CompiledSelector(previousElementCompiled.getCssSelector()+"+"+siblingElementCompiled.getCssSelector(),

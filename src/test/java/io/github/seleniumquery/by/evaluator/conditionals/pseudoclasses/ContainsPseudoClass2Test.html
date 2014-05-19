@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>seleniumQuery :contains selector test page</title>
+</head>
+<body>
+  <div id="d1">abc</div>
+  <div id="d2">abc</div>
+  <div id="d3">
+    <div id="d4">abc</div>
+  </div>
+  
+  <div id="d5">"abc"</div>
+  <div id="d6">"abc"</div>
+  <div id="d7">
+    <div id="d8">"abc"</div>
+  </div>
+  
+  <div id="d9">'abc'</div>
+  <div id="d10">'abc'</div>
+  <div id="d11">
+    <div id="d11">'abc'</div>
+  </div>
+  
+  <div id="d12">a"bc</div>
+  <div id="d13">a"bc</div>
+  <div id="d14">
+    <div id="d15">a"bc</div>
+  </div>
+  
+  <div id="d16">a'bc</div>
+  <div id="d17">a'bc</div>
+  <div id="d18">
+    <div id="d19">a'bc</div>
+  </div>
+  
+  <div id="d20">ab)c</div>
+  <div id="d21">ab)c</div>
+  <div id="d22">
+    <div id="d23">ab)c</div>
+  </div>
+  
+  <div id="d24">a"b)c</div>
+  <div id="d25">a"b)c</div>
+  <div id="d26">
+    <div id="d27">a"b)c</div>
+  </div>
+  
+  <div id="d28">'a'b)c</div>
+  <div id="d29">'a'b)c</div>
+  <div id="d30">
+    <div id="d31">a'b)c</div>
+  </div>
+
+  <div id="d32">
+    <div id="d33">a\'b)c</div>
+  </div>
+  <div id="d34">
+    <div id="d35">a\"b)c</div>
+  </div>
+  
+  <div id="d40">'a'b):has(span</div>
+  <div id="d50">'a'b<span></span></div>
+</body>
+</html>

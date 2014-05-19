@@ -1,13 +1,10 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.PSEUDO_CLASS_VALUE_NOT_USED;
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.SELECTOR_NOT_USED;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 /**
  * :tabbable elements are all those :focusable, except those that have a negative tabindex.
@@ -34,8 +31,8 @@ public class TabbablePseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		boolean isFocusable = focusable.isPseudoClass(driver, element, selectorThisConditionShouldApply, pseudoClassValue);
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
+		boolean isFocusable = focusable.isPseudoClass(driver, element, pseudoClassSelector);
 		if (!isFocusable) {
 			return false;
 		}
@@ -49,9 +46,9 @@ public class TabbablePseudoClass implements PseudoClass {
 		return !tabindexIsNegativeInteger;
 	}
 	
-	private static final SqCSSFilter tabbablePseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED, PSEUDO_CLASS_VALUE_NOT_USED);
+	private static final SqCSSFilter tabbablePseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// no browser supports :tabbable natively
 		return CompiledSelector.createFilterOnlySelector(tabbablePseudoClassFilter);
 	}

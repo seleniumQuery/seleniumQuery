@@ -19,11 +19,13 @@ public class NotEqualsAttributeSelectorFixTest {
 	@Test
 	public void removeStrings__should_turn_all_quoted_strings_into_an_underscore_sequence() {
 		// given
-		String input = "abc\"def\"ghi :asd\"aaa\\\"ssss\" dsds'xyz' de c'azv\"aeae' 'aa\\'aa' a'aa\\\"aa'xy";
+		String input = "dq\"a2b\"dq " // double quotes base case: dq"a2b"dq
+				+ ":d2q\"a2b\\\"c3b\"d2q " // double with escaped double quotes inside: :d2q"a2b\"c3b"d2q
+				+ "dsds'xyz' de c'azv\"aeae' 'aa\\'aa' a'aa\\\"aa'xy";
 		// when
 		String output = notEqualsAttributeSelectorFix.removeStrings(input);
 		// then
-		assertThat(output, is(equalTo("abc_____ghi :asd___________ dsds_____ de c__________ ________ a________xy")));
+		assertThat(output, is(equalTo("dq_____dq :d2q__________d2q dsds_____ de c__________ ________ a________xy")));
 	}
 	
 	@Test

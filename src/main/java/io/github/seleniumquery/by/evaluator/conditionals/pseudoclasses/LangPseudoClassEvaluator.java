@@ -1,12 +1,12 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.PSEUDO_CLASS_VALUE_NOT_USED;
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.SELECTOR_NOT_USED;
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.DriverSupportMap;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 import io.github.seleniumquery.by.selector.SqCSSFilter;
+
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,29 +28,31 @@ public class LangPseudoClassEvaluator implements CSSCondition<LangCondition> {
 	 * :lang(fr)
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, LangCondition langCondition) {
-		String wantedLang = langCondition.getLang();
+	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, LangCondition langCondition) {
+		String wantedLangIndex = langCondition.getLang();
+		String wantedLang = stringMap.get(wantedLangIndex);
 		return wantedLang.equals(SelectorUtils.lang(element));
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, LangCondition langCondition) {
-		String wantedLang = langCondition.getLang();
+	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, LangCondition langCondition) {
+		String wantedLangIndex = langCondition.getLang();
+		String wantedLang = stringMap.get(wantedLangIndex);
+		
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
 		if (DriverSupportMap.getInstance().supportsNatively(driver, ":lang(en)")) {
 			return CompiledSelector.createNoFilterSelector(":lang("+wantedLang+")");
 		}
-		SqCSSFilter langPseudoClassFilter = new PseudoClassFilter(new LangPseudoClassAdapter(wantedLang), SELECTOR_NOT_USED,
-				PSEUDO_CLASS_VALUE_NOT_USED);
+		SqCSSFilter langPseudoClassFilter = new PseudoClassFilter(new LangPseudoClassAdapter(wantedLang));
 		return CompiledSelector.createFilterOnlySelector(langPseudoClassFilter);
 	}
 	
 	/**
-	 * Adapter to PseudoClass for LangPseudoClassEvaluator, so LangPseudoClassEvaluator doesnt
-	 * need to implement that interface.
+	 * Adapts LangPseudoClassEvaluator into a PseudoClass, so LangPseudoClassEvaluator doesnt
+	 * need to implement that interface directly.
 	 * 
 	 * This class bridges only the necessary methods (if LangPseudoClassEvaluator implemented
-	 * PseudoClass, it would have to have all those methods.)
+	 * PseudoClass, it would have to have all those methods, and not all of them are used.)
 	 */
 	private class LangPseudoClassAdapter implements PseudoClass {
 		private LangCondition langCondition;
@@ -61,10 +63,11 @@ public class LangPseudoClassEvaluator implements CSSCondition<LangCondition> {
 			};
 		}
 		@Override
-		public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String wantedLang) {
-			return is(driver, element, null, langCondition);
+		public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
+			return isCondition(driver, element, pseudoClassSelector.getStringMap(), null, langCondition);
 		}
 		@Override public boolean isApplicable(String x) { /* not used */ return false; }
-		@Override public CompiledSelector compilePseudoClass(WebDriver x, Selector y, String z) { /* not used */ return null; }
+		@Override public CompiledSelector compilePseudoClass(WebDriver x, PseudoClassSelector pseudoClassSelector) { /* not used */ return null; }
 	}
+
 }

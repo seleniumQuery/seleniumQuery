@@ -1,14 +1,13 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
 import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 public class EqPseudoClass implements PseudoClass {
 
@@ -24,21 +23,22 @@ public class EqPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		String eqIndex = pseudoClassValue.substring(3, pseudoClassValue.length() - 1);
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
+		String eqIndex = pseudoClassSelector.getPseudoClassContent();
 		if (!eqIndex.matches("[+-]?\\d+")) {
-			throw new RuntimeException("The :eq() pseudo-class requires an integer but got: " + pseudoClassValue);
+			throw new RuntimeException("The :eq() pseudo-class requires an integer but got: " + eqIndex);
 		}
 		if (eqIndex.charAt(0) == '+') {
 			eqIndex = eqIndex.substring(1);
 		}
 		int index = Integer.valueOf(eqIndex);
 		
-		return EqPseudoClass.isEq(driver, element, selectorThisConditionShouldApply, index);
+		return EqPseudoClass.isEq(driver, element, pseudoClassSelector, index);
 	}
 	
-	static boolean isEq(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, int index) {
-		List<WebElement> elements = driver.findElements(SeleniumQueryBy.byEnhancedSelector(selectorThisConditionShouldApply.toString()));
+	static boolean isEq(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector, int index) {
+		CompiledSelector compileSelector = SeleniumQueryCssCompiler.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		List<WebElement> elements = compileSelector.execute(driver);
 		if (index < 0) {
 			return elements.size() >= -index && elements.get(elements.size() + index).equals(element);
 		}
@@ -46,8 +46,8 @@ public class EqPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		SqCSSFilter eqPseudoClassFilter = new PseudoClassFilter(getInstance(), selectorThisConditionShouldApply, pseudoClassValue);
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		SqCSSFilter eqPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledSelector.createFilterOnlySelector(eqPseudoClassFilter);
 	}
 

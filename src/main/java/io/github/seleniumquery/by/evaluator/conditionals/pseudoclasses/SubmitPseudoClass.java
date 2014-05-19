@@ -1,13 +1,10 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.PSEUDO_CLASS_VALUE_NOT_USED;
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.SELECTOR_NOT_USED;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 /**
  * http://api.jquery.com/submit-selector/
@@ -33,7 +30,7 @@ public class SubmitPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		return (
 					INPUT.equals(element.getTagName()) && SUBMIT.equalsIgnoreCase(element.getAttribute("type"))
 			   )
@@ -46,10 +43,9 @@ public class SubmitPseudoClass implements PseudoClass {
 			  );
 	}
 	
-	private static final SqCSSFilter submitPseudoClassFilter = new PseudoClassFilter(getInstance(),
-																		SELECTOR_NOT_USED, PSEUDO_CLASS_VALUE_NOT_USED);
+	private static final SqCSSFilter submitPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :submit is an extension selector, nobody implements it natively
 		return CompiledSelector.createFilterOnlySelector(submitPseudoClassFilter);
 	}

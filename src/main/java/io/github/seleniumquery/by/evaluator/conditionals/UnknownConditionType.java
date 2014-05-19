@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals;
 
+import java.util.Map;
+
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
@@ -17,12 +19,12 @@ public class UnknownConditionType<T extends Condition> implements CSSCondition<T
 	}
 
 	@Override
-	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, T condition) {
+	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, T condition) {
 		throw new RuntimeException("CSS condition "+condition.getClass().getSimpleName()+" of type "+type+" is invalid or not supported!");
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, Condition condition) {
+	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, T condition) {
 		// we dont know what to do, just pass along hoping the browser will
 		return CompiledSelector.createNoFilterSelector(condition.toString());
 	}

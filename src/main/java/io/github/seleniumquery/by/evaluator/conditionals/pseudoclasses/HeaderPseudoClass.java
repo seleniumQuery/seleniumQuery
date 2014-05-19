@@ -1,17 +1,13 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.PSEUDO_CLASS_VALUE_NOT_USED;
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.SELECTOR_NOT_USED;
+import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import java.util.Arrays;
 import java.util.List;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 /**
  * http://api.jquery.com/header-selector/
@@ -37,15 +33,14 @@ public class HeaderPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		return HEADER_TAGS.contains(element.getTagName());
 	}
 	
-	private static final SqCSSFilter headerPseudoClassFilter = new PseudoClassFilter(getInstance(),
-																		SELECTOR_NOT_USED, PSEUDO_CLASS_VALUE_NOT_USED);
+	private static final SqCSSFilter headerPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		// :header is an extension selector, nobody implements it natively
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		// :header is an extension selector, no browser implements it natively
 		return CompiledSelector.createFilterOnlySelector(headerPseudoClassFilter);
 	}
 	

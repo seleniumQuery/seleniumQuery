@@ -9,6 +9,7 @@ import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,15 +39,15 @@ public class GeneralAdjacentEvaluator implements CSSSelector<SiblingSelector> {
 	 * </div>
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, SiblingSelector siblingSelector) {
-		boolean elementMatchesSelectorSecondPart = SelectorEvaluator.is(driver, element, siblingSelector.getSiblingSelector());
+	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		boolean elementMatchesSelectorSecondPart = SelectorEvaluator.elementMatchesSelector(driver, element, stringMap, siblingSelector.getSiblingSelector());
 		if (!elementMatchesSelectorSecondPart) {
 			return false;
 		}
 		
 		List<WebElement> previousSiblings = SelectorUtils.getPreviousSiblings(element);
 		for (WebElement previousSibling : previousSiblings) {
-			boolean previousSiblingMatchesSelectorFirstPart = SelectorEvaluator.is(driver, previousSibling, siblingSelector.getSelector());
+			boolean previousSiblingMatchesSelectorFirstPart = SelectorEvaluator.elementMatchesSelector(driver, previousSibling, stringMap, siblingSelector.getSelector());
 			if (previousSiblingMatchesSelectorFirstPart) {
 				return true;
 			}
@@ -55,9 +56,9 @@ public class GeneralAdjacentEvaluator implements CSSSelector<SiblingSelector> {
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, SiblingSelector siblingSelector) {
-		CompiledSelector previousElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, siblingSelector.getSelector());
-		CompiledSelector siblingElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, siblingSelector.getSiblingSelector());
+	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		CompiledSelector previousElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, siblingSelector.getSelector());
+		CompiledSelector siblingElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
 		
 		SqCSSFilter generalAdjacentFilter = new GeneralAdjacentFilter(previousElementCompiled, siblingElementCompiled);
 		return new CompiledSelector(previousElementCompiled.getCssSelector()+"~"+siblingElementCompiled.getCssSelector(),
@@ -85,7 +86,7 @@ public class GeneralAdjacentEvaluator implements CSSSelector<SiblingSelector> {
 				previousSiblings = siblingsCompiledSelector.filter(driver, previousSiblings);
 				
 				for (WebElement previousSibling : previousSiblings) {
-					boolean previousSiblingMatchesSelectorFirstPart = SelectorEvaluator.is(driver, previousSibling,
+					boolean previousSiblingMatchesSelectorFirstPart = SelectorEvaluator.elementMatchesStringSelector(driver, previousSibling,
 																		siblingsCompiledSelector.getCssSelector());
 					if (previousSiblingMatchesSelectorFirstPart) {
 						// found a mathing sibling, dont remove the element from the list, continue to next element

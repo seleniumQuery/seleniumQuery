@@ -1,7 +1,5 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.PSEUDO_CLASS_VALUE_NOT_USED;
-import static io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassFilter.SELECTOR_NOT_USED;
 import io.github.seleniumquery.by.evaluator.DriverSupportMap;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
@@ -9,7 +7,6 @@ import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 public class FirstChildPseudoClass implements PseudoClass {
 
@@ -28,7 +25,7 @@ public class FirstChildPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		WebElement parent = SelectorUtils.parent(element);
 		// parent is null when element is <HTML>
 		if (parent == null) {
@@ -37,11 +34,10 @@ public class FirstChildPseudoClass implements PseudoClass {
 		return SelectorUtils.itselfWithSiblings(element).get(0).equals(element);
 	}
 
-	private static final SqCSSFilter firstChildPseudoClassFilter = new PseudoClassFilter(getInstance(), SELECTOR_NOT_USED,
-			PSEUDO_CLASS_VALUE_NOT_USED);
+	private static final SqCSSFilter firstChildPseudoClassFilter = new PseudoClassFilter(getInstance());
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:first-child
 		if (DriverSupportMap.getInstance().supportsNatively(driver, FIRST_CHILD_PSEUDO_CLASS)) {
 			return CompiledSelector.createNoFilterSelector(FIRST_CHILD_PSEUDO_CLASS);

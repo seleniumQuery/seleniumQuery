@@ -1,14 +1,13 @@
 package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
 
-import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
 import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Selector;
 
 public class LtPseudoClass implements PseudoClass {
 
@@ -24,24 +23,25 @@ public class LtPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public boolean isPseudoClass(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		String ltIndex = pseudoClassValue.substring(3, pseudoClassValue.length() - 1);
+	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
+		String ltIndex = pseudoClassSelector.getPseudoClassContent();
 		if (!ltIndex.matches("[+-]?\\d+")) {
-			throw new RuntimeException("The :lt() pseudo-class requires an integer but got: " + pseudoClassValue);
+			throw new RuntimeException("The :lt() pseudo-class requires an integer but got: " + ltIndex);
 		}
 		if (ltIndex.charAt(0) == '+') {
 			ltIndex = ltIndex.substring(1);
 		}
 		int index = Integer.valueOf(ltIndex);
 		
-		return LtPseudoClass.isLt(driver, element, selectorThisConditionShouldApply, index);
+		return LtPseudoClass.isLt(driver, element, pseudoClassSelector, index);
 	}
 	
-	private static boolean isLt(WebDriver driver, WebElement element, Selector selectorThisConditionShouldApply, int wantedIndex) {
+	private static boolean isLt(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector, int wantedIndex) {
 		if (wantedIndex == 0) {
 			return false;
 		}
-		List<WebElement> elements = driver.findElements(SeleniumQueryBy.byEnhancedSelector(selectorThisConditionShouldApply.toString()));
+		CompiledSelector compileSelector = SeleniumQueryCssCompiler.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		List<WebElement> elements = compileSelector.execute(driver);
 		if (elements.isEmpty()) {
 			return false;
 		}
@@ -61,8 +61,9 @@ public class LtPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		SqCSSFilter ltPseudoClassFilter = new PseudoClassFilter(getInstance(), selectorThisConditionShouldApply, pseudoClassValue);
+	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		// :lt() is an extension selector, no browser implements it natively
+		SqCSSFilter ltPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledSelector.createFilterOnlySelector(ltPseudoClassFilter);
 	}
 

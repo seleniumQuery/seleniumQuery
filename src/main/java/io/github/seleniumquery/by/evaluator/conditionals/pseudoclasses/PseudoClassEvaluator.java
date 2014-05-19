@@ -5,6 +5,7 @@ import io.github.seleniumquery.by.selector.CompiledSelector;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,14 +30,15 @@ public class PseudoClassEvaluator implements CSSCondition<AttributeCondition> {
 			PasswordPseudoClass.getInstance(), FilePseudoClass.getInstance(), SubmitPseudoClass.getInstance(),
 			ResetPseudoClass.getInstance(), ButtonPseudoClass.getInstance(), InputPseudoClass.getInstance(),
 			HeaderPseudoClass.getInstance(), LtPseudoClass.getInstance(), GtPseudoClass.getInstance(),
-			FocusPseudoClass.getInstance(), FocusablePseudoClass.getInstance(), TabbablePseudoClass.getInstance());
+			FocusPseudoClass.getInstance(), FocusablePseudoClass.getInstance(), TabbablePseudoClass.getInstance(),
+			HasPseudoClass.getInstance(), LangPseudoClass.getInstance());
 
 	@Override
-	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String pseudoClassValue = attributeCondition.getValue();
 		for (PseudoClass pseudoClass : pseudoClasses) {
 			if (pseudoClass.isApplicable(pseudoClassValue)) {
-				return pseudoClass.isPseudoClass(driver, element, selectorUpToThisPoint, pseudoClassValue);
+				return pseudoClass.isPseudoClass(driver, element, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
 			}
 		}
 		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
@@ -44,12 +46,12 @@ public class PseudoClassEvaluator implements CSSCondition<AttributeCondition> {
 	}
 	
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		
 		String pseudoClassValue = attributeCondition.getValue();
 		for (PseudoClass pseudoClass : pseudoClasses) {
 			if (pseudoClass.isApplicable(pseudoClassValue)) {
-				return pseudoClass.compilePseudoClass(driver, selectorUpToThisPoint, pseudoClassValue);
+				return pseudoClass.compilePseudoClass(driver, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
 			}
 		}
 		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);

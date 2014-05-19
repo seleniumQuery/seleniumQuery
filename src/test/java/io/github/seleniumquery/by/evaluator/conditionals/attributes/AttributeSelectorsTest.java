@@ -35,13 +35,13 @@ public class AttributeSelectorsTest {
 	public void has_attribute() {
         WebElement myA = driver.findElement(By.id("myA"));
 			
-		assertThat(SelectorEvaluator.is(driver, myA, "a"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[bozo]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[data-title]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[bozo]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[data-title]"), is(false));
 		
 		// case INsensitive
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rEL]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rEL]"), is(true));
 	}
 	
 	/* http://api.jquery.com/category/selectors/attribute-selectors/
@@ -51,7 +51,7 @@ public class AttributeSelectorsTest {
 	@Test(expected=CSSParseException.class)
 	public void attribute_equals_unquoted_space_is_not_valid() {
 		WebElement myA = driver.findElement(By.id("myA"));
-		SelectorEvaluator.is(driver, myA, "a[rel=nofollow self]"); // should throw exception
+		SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel=nofollow self]"); // should throw exception
 	}
 	
 	/* Attribute Equals Selector: [name="value"]
@@ -62,14 +62,14 @@ public class AttributeSelectorsTest {
         WebElement myA = driver.findElement(By.id("myA"));
 		WebElement myA2 = driver.findElement(By.id("myA2"));
 			
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel=\"nofollow self\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel='nofollow self']"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA2, "a[hreflang=en]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel=\"nofollow self\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel='nofollow self']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA2, "a[hreflang=en]"), is(true));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[attrDOESnotExist=yay]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[attrDOESnotExist=yay]"), is(false));
 		
 		// case INsensitive
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rEL='noFOLLow sELf']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rEL='noFOLLow sELf']"), is(true));
 	}
 	
 	/* Attribute Contains Word Selector: [name~="value"]
@@ -79,30 +79,30 @@ public class AttributeSelectorsTest {
 	public void attribute_contains_word() {
 		WebElement myA = driver.findElement(By.id("myA"));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=nofollow]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=self]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=nofollow]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=self]"), is(true));
 		
 		// only whole words
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=nofollo]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=sel]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=nofollo]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=sel]"), is(false));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=\"nofollow\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=\"self\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~='nofollow']"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~='self']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=\"nofollow\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=\"self\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~='nofollow']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~='self']"), is(true));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=\"nofollow self\"]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~='nofollow self']"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=\"nofollow self\"]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~='nofollow self']"), is(false));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=nofollowself]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=selfie]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=nofollowself]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=selfie]"), is(false));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[nofollow~=no]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel~=re]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[nofollow~=no]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel~=re]"), is(false));
 		
 		
 		// case INsensitive
-		assertThat(SelectorEvaluator.is(driver, myA, "a[REl~=noFOLLow]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[REl~=noFOLLow]"), is(true));
 	}
 	
 	/* Attribute Contains Prefix Selector: [name|="value"]
@@ -116,17 +116,17 @@ public class AttributeSelectorsTest {
 		WebElement myA5 = driver.findElement(By.id("myA5"));
 		WebElement myA6 = driver.findElement(By.id("myA6"));
 		
-		assertThat(SelectorEvaluator.is(driver, myA2, "a[hreflang|=en]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA3, "a[hreflang|=en]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA4, "a[hreflang|=en]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA5, "a[hreflang|=en]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA6, "a[hreflang|=en]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA2, "a[hreflang|=en]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA3, "a[hreflang|=en]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA4, "a[hreflang|=en]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA5, "a[hreflang|=en]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA6, "a[hreflang|=en]"), is(true));
 		
-		assertThat(SelectorEvaluator.is(driver, myA5, "a[hreflang|=ex]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA5, "a[hreflang|=fr]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA5, "a[hreflang|=ex]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA5, "a[hreflang|=fr]"), is(false));
 		
 		// case INsensitive
-		assertThat(SelectorEvaluator.is(driver, myA2, "a[hREFlaNg|=eN]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA2, "a[hREFlaNg|=eN]"), is(true));
 	}
 	
 	/* Attribute Starts With Selector: [name^="value"]
@@ -136,21 +136,21 @@ public class AttributeSelectorsTest {
 	public void attribute_starts_with() {
 		WebElement myA = driver.findElement(By.id("myA"));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^=nofollow]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^=self]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^=\"nofollow\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^=\"self\"]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^='nofollow']"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^='self']"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^=nofollow]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^=self]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^=\"nofollow\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^=\"self\"]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^='nofollow']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^='self']"), is(false));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^=\"nofollow self\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^='nofollow self']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^=\"nofollow self\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^='nofollow self']"), is(true));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^=nofollowself]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel^=selfie]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^=nofollowself]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel^=selfie]"), is(false));
 		
 		// case insensitive
-		assertThat(SelectorEvaluator.is(driver, myA, "a[ReL^=noFOLLow]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[ReL^=noFOLLow]"), is(true));
 	}
 	
 	/* Attribute Ends With Selector: [name$="value"]
@@ -160,22 +160,22 @@ public class AttributeSelectorsTest {
 	public void attribute_ends_with() {
 		WebElement myA = driver.findElement(By.id("myA"));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$=nofollow]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$=self]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$=\"nofollow\"]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$=\"self\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$='nofollow']"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$='self']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$=nofollow]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$=self]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$=\"nofollow\"]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$=\"self\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$='nofollow']"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$='self']"), is(true));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$=\"nofollow self\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$='nofollow self']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$=\"nofollow self\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$='nofollow self']"), is(true));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$=nofollowself]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$=selfie]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$=nofollowself]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$=selfie]"), is(false));
 		
 		// case SENSITIVE (only the string)
-		assertThat(SelectorEvaluator.is(driver, myA, "a[ReL$=self]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel$=sELf]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[ReL$=self]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel$=sELf]"), is(false));
 	}
 	
 	/* Attribute Contains Selector: [name*="value"]
@@ -185,28 +185,28 @@ public class AttributeSelectorsTest {
 	public void attribute_contains_substring() {
 		WebElement myA = driver.findElement(By.id("myA"));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=nofollow]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=self]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=nofollow]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=self]"), is(true));
 		
 		// substrings are OK
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=nofollo]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=sel]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=nofollo]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=sel]"), is(true));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=\"nofollow\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=\"self\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*='nofollow']"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*='self']"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=\"nofollow self\"]"), is(true));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*='nofollow self']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=\"nofollow\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=\"self\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*='nofollow']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*='self']"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=\"nofollow self\"]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*='nofollow self']"), is(true));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=nofollowself]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=selfie]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=nofollowself]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=selfie]"), is(false));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[nofollow*=no]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel*=re]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[nofollow*=no]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel*=re]"), is(false));
 		
 		// case INsensitive
-		assertThat(SelectorEvaluator.is(driver, myA, "a[REl*=noFOLL]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[REl*=noFOLL]"), is(true));
 	}
 
 	/* Attribute Not Equal Selector: [name!="value"] -- equivalent to :not([name="value"])
@@ -217,14 +217,14 @@ public class AttributeSelectorsTest {
         WebElement myA = driver.findElement(By.id("myA"));
 		WebElement myA2 = driver.findElement(By.id("myA2"));
 			
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel!=\"nofollow self\"]"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rel!='nofollow self']"), is(false));
-		assertThat(SelectorEvaluator.is(driver, myA2, "a[hreflang!=en]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel!=\"nofollow self\"]"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rel!='nofollow self']"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA2, "a[hreflang!=en]"), is(false));
 		
-		assertThat(SelectorEvaluator.is(driver, myA, "a[attrDOESnotExist!=yay]"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[attrDOESnotExist!=yay]"), is(true));
 		
 		// case INsensitive
-		assertThat(SelectorEvaluator.is(driver, myA, "a[rEL!='noFOLLow sELf']"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, myA, "a[rEL!='noFOLLow sELf']"), is(false));
 	}
 	
 	/* #id
@@ -233,10 +233,10 @@ public class AttributeSelectorsTest {
 	public void id() {
 		WebElement span = driver.findElement(By.tagName("span"));
 		
-		assertThat(SelectorEvaluator.is(driver, span, "#somId"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, span, "#somId"), is(false));
 		
-		assertThat(SelectorEvaluator.is(driver, driver.findElement(By.id("d1")), "#d1"), is(true));
-		assertThat(SelectorEvaluator.is(driver, driver.findElement(By.id("d1")), "#d2"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, driver.findElement(By.id("d1")), "#d1"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, driver.findElement(By.id("d1")), "#d2"), is(false));
 	}
 	
 	/* .className
@@ -245,14 +245,14 @@ public class AttributeSelectorsTest {
 	public void className_and_id() {
 		WebElement span = driver.findElement(By.tagName("span"));
 		
-		assertThat(SelectorEvaluator.is(driver, span, ".someClass"), is(false));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, span, ".someClass"), is(false));
 		
-		assertThat(SelectorEvaluator.is(driver, driver.findElement(By.id("d1")), ".one"), is(true));
-		assertThat(SelectorEvaluator.is(driver, driver.findElement(By.id("d2")), ".one"), is(true));
-		assertThat(SelectorEvaluator.is(driver, driver.findElement(By.id("d3")), ".one"), is(true));
-		assertThat(SelectorEvaluator.is(driver, driver.findElement(By.id("d4")), ".one"), is(true));
-		assertThat(SelectorEvaluator.is(driver, driver.findElement(By.id("d5")), ".one"), is(true));
-		assertThat(SelectorEvaluator.is(driver, driver.findElement(By.id("d6")), ".one"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, driver.findElement(By.id("d1")), ".one"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, driver.findElement(By.id("d2")), ".one"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, driver.findElement(By.id("d3")), ".one"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, driver.findElement(By.id("d4")), ".one"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, driver.findElement(By.id("d5")), ".one"), is(true));
+		assertThat(SelectorEvaluator.elementMatchesStringSelector(driver, driver.findElement(By.id("d6")), ".one"), is(true));
 	}
 
 }

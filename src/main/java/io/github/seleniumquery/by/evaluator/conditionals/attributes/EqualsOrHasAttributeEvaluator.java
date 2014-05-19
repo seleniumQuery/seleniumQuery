@@ -1,6 +1,9 @@
 package io.github.seleniumquery.by.evaluator.conditionals.attributes;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
+
+import java.util.Map;
+
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.evaluator.SelectorUtils;
 import io.github.seleniumquery.by.selector.CompiledSelector;
@@ -33,7 +36,7 @@ public class EqualsOrHasAttributeEvaluator implements CSSCondition<AttributeCond
 	 * Case INsensitive!
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		// [attribute=wantedValue]
 		if (attributeCondition.getSpecified()) {
@@ -46,7 +49,7 @@ public class EqualsOrHasAttributeEvaluator implements CSSCondition<AttributeCond
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		// nothing to do, everyone supports this selector
 		// [attribute=wantedValue]
 		if (attributeCondition.getSpecified()) {

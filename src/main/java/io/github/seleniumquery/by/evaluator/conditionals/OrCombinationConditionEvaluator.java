@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.evaluator.conditionals;
 
+import java.util.Map;
+
 import io.github.seleniumquery.by.evaluator.CSSCondition;
 import io.github.seleniumquery.by.selector.CompiledSelector;
 
@@ -23,7 +25,7 @@ public class OrCombinationConditionEvaluator implements CSSCondition<CombinatorC
 	 * @see {@link Condition#SAC_OR_CONDITION}
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
 		// i dont think the CSS parser uses this. I kept it just in case...
 		throw new RuntimeException("OrCombinationConditionEvaluator - IT IS USED!");
 //		ConditionalSelectorEvaluator conditionalEvaluator = ConditionalSelectorEvaluator.getInstance();
@@ -32,7 +34,7 @@ public class OrCombinationConditionEvaluator implements CSSCondition<CombinatorC
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Selector simpleSelector, CombinatorCondition condition) {
+	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, CombinatorCondition condition) {
 		// i dont think the CSS parser uses this. I kept it just in case...
 		throw new RuntimeException("OrCombinationConditionEvaluator - IT IS USED!");
 //		return new CompiledSelector(condition.toString(), CSSFilter.FILTER_NOTHING);

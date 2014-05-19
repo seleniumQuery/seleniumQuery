@@ -39,7 +39,7 @@ public class IsFunction {
 		// we left this way, though, because we believe it is more descriptive of the code's intention
 
 		for (WebElement element : elements) {
-			if (SelectorEvaluator.is(driver, element, selector)) {
+			if (SelectorEvaluator.elementMatchesStringSelector(driver, element, selector)) {
 				return true;
 			}
 		}
