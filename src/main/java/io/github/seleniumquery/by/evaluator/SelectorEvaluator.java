@@ -16,11 +16,11 @@ public class SelectorEvaluator {
 		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
 		SelectorList selectorList = parsedSelector.getSelector();
         for (int i = 0; i < selectorList.getLength(); i++) {
-			if (!SelectorEvaluator.elementMatchesSelector(driver, element, parsedSelector.getStringMap(), selectorList.item(i))) {
-				return false;
+			if (SelectorEvaluator.elementMatchesSelector(driver, element, parsedSelector.getStringMap(), selectorList.item(i))) {
+				return true;
 			}
 		}
-        return true;
+        return false;
 	}
 
 	public static boolean elementMatchesSelector(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selector) {
