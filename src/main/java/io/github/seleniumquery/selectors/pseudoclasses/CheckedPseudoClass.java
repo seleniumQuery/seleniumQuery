@@ -42,8 +42,11 @@ public class CheckedPseudoClass implements PseudoClass {
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:checked
 
-		// if it is HtmlUnit, we don't let it take it, as :checked is not consistent in it
+		// #Cross-Driver
+		// In HtmlUnitDriver, :checked is not consistent, so we consider it as not supported
+		// In PhantomJSDriver, :checked does not work for <option> tags, so we consider it as not supported as well
 		if (DriverSupportService.isNotHtmlUnitDriver(driver) &&
+				DriverSupportService.isNotPhantomJsDriver(driver) &&
 				DriverSupportService.getInstance().supportsNatively(driver, CHECKED_PSEUDO_CLASS)) {
 			return CompiledCssSelector.createNoFilterSelector(CHECKED_PSEUDO_CLASS);
 		}

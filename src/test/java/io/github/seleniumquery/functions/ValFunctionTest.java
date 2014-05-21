@@ -19,7 +19,9 @@ public class ValFunctionTest {
     	assertThat($("div").val(), is(""));
     	assertThat($("#opt").val(), is("a1"));
     	assertThat($("#s1").val(), is("a1"));
-    	assertThat($("#ta").val(), is("bozo")); // jQuery is: "    bozo\n  "
+    	// Chrome/PhantomJS/IE10: "    bozo\n  "
+    	// HtmlUnit/Firefox: "bozo"
+    	assertThat($("#ta").val().trim(), is("bozo"));
     	assertThat($("#i1").val(), is("ii!"));
     	assertThat($("#r1").val(), is("ra!"));
     }
