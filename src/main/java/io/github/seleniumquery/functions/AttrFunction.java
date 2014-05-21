@@ -6,9 +6,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.selector.DriverSupportService;
 
 public class AttrFunction {
 	
+	private static final String SELECTED = "selected";
+	private static final String CHECKED = "checked";
+
 	public static String attr(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String attributeName) {
 		return attr(seleniumQueryObject.getWebDriver(), elements, attributeName);
 	}
@@ -17,21 +21,50 @@ public class AttrFunction {
 		if (elements.isEmpty()) {
 			return null;
 		}
+		WebElement firstElement = elements.get(0);
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		Object propertyValue = js.executeScript("return arguments[0].getAttribute(arguments[1])", elements.get(0), attributeName);
-		return (propertyValue != null ? propertyValue.toString() : null);
+		Object attributeValue = js.executeScript("return arguments[0].getAttribute(arguments[1])", firstElement, attributeName);
+		
+		if (CHECKED.equals(attributeName) || SELECTED.equals(attributeName)) {
+			// #Cross-Driver
+			// In HtmlUnit, the checked/selected attributes are changed when the checked/selected
+			// prop changes. (E.g. if checked is false, the checked attribute becomes null -- while remains unchanged on other browsers)
+			// that way, we check for the prop here and return the attribute according to it
+			if (DriverSupportService.isHtmlUnitDriver(driver)) {
+				System.err.println("WARNING: HtmlUnitDriver does not consider the checked/selected properties to be " +
+						"something other than the checked/selected attributes! In other words, in latest browsers " +
+						"when you change the checked/selected properties, the checked/selected attributes remain unchanged, " +
+						"while in HtmlUnitDriver they **are** changed. In the general case, you will probably want .prop() instead" +
+						" of .attr() for checked/selected. If you are using HtmlUnitDriver, though, using .prop() is almost " +
+						"mandatory, as there is very little utility in a .attr() that changes when .prop() is used!");
+			}
+			if (attributeValue != null) {
+				return attributeName; // returns checked or selected
+			}
+		}
+		return (attributeValue != null ? attributeValue.toString() : null);
 	}
 	
 	public static SeleniumQueryObject attr(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements,
 												String attributeName, Object value) {
 		if (value == null || !(value instanceof Boolean || value instanceof String || value instanceof Number ||
 				value instanceof WebElement)) {
+			// calling $().attr("attributeName", undefined); in jQuery has no effect
+			// calling $().attr("attributeName", null); in jQuery is the same as .removeAttr("attributeName")
+			// therefore, due to this diverse behavior, we forbid the use of Java's null here, as we don't feel there is loss.
 			throw new IllegalArgumentException("The value in $().attr(\"attributeName\", value) must not be null and can only " +
-					"be a String, Number, Boolean or WebElement.");
+					"be a String, Number, Boolean or WebElement. If you want to remove an attribute, use $().removeAttr().");
+		}
+		Object valueToSet = value;
+		if (CHECKED.equals(attributeName) || SELECTED.equals(attributeName)) {
+			// we know that 'value' is not null here (as it was verified in the first IF), we set
+			// it to checked/selected, as jQuery does
+			valueToSet = attributeName; // sets checked or selected
 		}
 		JavascriptExecutor js = (JavascriptExecutor) seleniumQueryObject.getWebDriver();
 		for (WebElement webElement : elements) {
-			js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", webElement, attributeName, value);
+			js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", webElement, attributeName, valueToSet);
 		}
 		return seleniumQueryObject;
 	}
