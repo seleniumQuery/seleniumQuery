@@ -2,20 +2,17 @@ package io.github.seleniumquery.example;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
-import io.github.seleniumquery.TestInfrastructure;
+import io.github.seleniumquery.SetUpAndTearDownDriver;
 import io.github.seleniumquery.wait.SeleniumQueryWaitException;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 @SuppressWarnings("deprecation")
 public class AllFunctionsTest {
 
-	@Before
-	public void setUp() {
-		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(AllFunctionsTest.class));
-	}
+	@Rule
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
 	@Test
 	public void isPresent() {
