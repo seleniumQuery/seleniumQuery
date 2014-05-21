@@ -1,20 +1,23 @@
-package io.github.seleniumquery.by.evaluator.conditionals;
+package io.github.seleniumquery.selectors.conditionals;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.Selector;
 
-public class UnknownConditionType<T extends Condition> implements CSSCondition<T> {
+/**
+ * Represents an unknown condition type.
+ */
+public class UnknownConditionalCssSelector<T extends Condition> implements CssConditionalSelector<T> {
 	
 	private short type;
 	
-	public UnknownConditionType(short type) {
+	public UnknownConditionalCssSelector(short type) {
 		this.type = type;
 	}
 
@@ -24,9 +27,9 @@ public class UnknownConditionType<T extends Condition> implements CSSCondition<T
 	}
 
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, T condition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, T condition) {
 		// we dont know what to do, just pass along hoping the browser will
-		return CompiledSelector.createNoFilterSelector(condition.toString());
+		return CompiledCssSelector.createNoFilterSelector(condition.toString());
 	}
 	
 }

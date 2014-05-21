@@ -1,9 +1,9 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.CompiledSelectorList;
-import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CompiledCssSelectorList;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.CssSelectorCompilerService;
 
 import java.util.List;
 
@@ -27,17 +27,17 @@ public class HasPseudoClass implements PseudoClass {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		String hasSelector = pseudoClassSelector.getPseudoClassContent();
 		
-		CompiledSelectorList compileSelectorList = SeleniumQueryCssCompiler.compileSelectorList(driver, hasSelector);
+		CompiledCssSelectorList compileSelectorList = CssSelectorCompilerService.compileSelectorList(driver, hasSelector);
 		List<WebElement> elements = compileSelectorList.execute(element);
 		
 		return !elements.isEmpty();
 	}
 	
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// we never consider :has to be supported natively
-		SqCSSFilter hasPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		return CompiledSelector.createFilterOnlySelector(hasPseudoClassFilter);
+		CssFilter hasPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		return CompiledCssSelector.createFilterOnlySelector(hasPseudoClassFilter);
 	}
 	
 }

@@ -34,12 +34,9 @@ public class SetUpAndTearDownDriver implements MethodRule {
 	
 	private void before(Object testClassInstance) {
 		$.browser.setDefaultDriver(TestInfrastructure.getDriver());
-		
-//		driver = new FirefoxDriver();
-//    	System.setProperty("webdriver.chrome.driver", "F:\\desenv\\chromedriver.exe");
-//    	driver = new ChromeDriver();
-//		System.setProperty("webdriver.ie.driver",  "F:\\desenv\\IEDriverServer.exe");
-//    	driver = new InternetExplorerDriver();
+//		$.browser.setDefaultDriverAsChrome();
+//		$.browser.setDefaultDriverAsIE();
+//		$.browser.setDefaultDriverAsFirefox();
 		
 		if (htmlTestUrlClass == null) {
 			$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(testClassInstance.getClass()));
@@ -51,5 +48,5 @@ public class SetUpAndTearDownDriver implements MethodRule {
 	private void after() {
 		$.browser.quitDefaultBrowser();
 	}
- 
+	
 }

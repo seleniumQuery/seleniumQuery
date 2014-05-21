@@ -1,18 +1,19 @@
-package io.github.seleniumquery.by.evaluator;
+package io.github.seleniumquery.selector;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class UnknownSelectorType<T> implements CSSSelector<T> {
+/**
+ * Represents an unknown CSS selector type.
+ */
+public class UnknownCssSelector<T> implements CssSelector<T> {
 	
 	private short type;
 	
-	public UnknownSelectorType(short type) {
+	public UnknownCssSelector(short type) {
 		this.type = type;
 	}
 
@@ -22,9 +23,9 @@ public class UnknownSelectorType<T> implements CSSSelector<T> {
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, T selector) {
+	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, T selector) {
 		// if it is unknown, we just push it forward, hoping the browser will know what to do
-		return new CompiledSelector(selector.toString(), SqCSSFilter.FILTER_NOTHING);
+		return new CompiledCssSelector(selector.toString(), CssFilter.FILTER_NOTHING);
 	}
 	
 }

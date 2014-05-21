@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,14 +32,14 @@ class InputTypeAttributePseudoClass implements PseudoClass {
 		return "input".equals(element.getTagName()) && typeAttributeValue.equalsIgnoreCase(element.getAttribute("type"));
 	}
 	
-	private final SqCSSFilter itaPseudoClassFilter = new PseudoClassFilter(this);
+	private final CssFilter itaPseudoClassFilter = new PseudoClassFilter(this);
 	
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// we could simply return the selector input[type=typeAttributeValue], but this breaks the CSS parser
 		// as something like input[style]:password would result in input[style]input[type=password] which is not valid CSS.
 		// All we can do is filter...
-		return CompiledSelector.createFilterOnlySelector(itaPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(itaPseudoClassFilter);
 	}
 	
 }

@@ -1,24 +1,24 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
-public class StartsWithAttributeEvaluator implements CSSCondition<AttributeCondition> {
+public class StartsWithAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final StartsWithAttributeEvaluator instance = new StartsWithAttributeEvaluator();
-	public static StartsWithAttributeEvaluator getInstance() {
+	private static final StartsWithAttributeCssSelector instance = new StartsWithAttributeCssSelector();
+	public static StartsWithAttributeCssSelector getInstance() {
 		return instance;
 	}
-	private StartsWithAttributeEvaluator() { }
+	private StartsWithAttributeCssSelector() { }
 	
 	
 	public static final String STARTS_WITH_ATTRIBUTE_SELECTOR_SYMBOL = "^=";
@@ -40,7 +40,7 @@ public class StartsWithAttributeEvaluator implements CSSCondition<AttributeCondi
 	}
 
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		// nothing to do, everyone supports this selector
 		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, STARTS_WITH_ATTRIBUTE_SELECTOR_SYMBOL);
 	}

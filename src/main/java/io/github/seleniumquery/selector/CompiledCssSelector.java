@@ -1,6 +1,5 @@
-package io.github.seleniumquery.by.selector;
+package io.github.seleniumquery.selector;
 
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,16 +12,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
 
-public class CompiledSelector {
+public class CompiledCssSelector {
 
-	private static final List<SqCSSFilter> EMPTY_UNMODIFIABLE_LIST = Collections.unmodifiableList(new ArrayList<SqCSSFilter>());
+	private static final List<CssFilter> EMPTY_UNMODIFIABLE_LIST = Collections.unmodifiableList(new ArrayList<CssFilter>());
 	private final static String EMPTY_SELECTOR = ""; 
 	
 	/**
 	 * Creates a compiled selector that does no filtering, meaning
 	 * it is entirely supported by the driver.
 	 */
-	public static CompiledSelector createNoFilterSelector(Selector selector) {
+	public static CompiledCssSelector createNoFilterSelector(Selector selector) {
 		return createNoFilterSelector(selector.toString());
 	}
 	
@@ -30,31 +29,31 @@ public class CompiledSelector {
 	 * Creates a compiled selector that does no filtering, meaning
 	 * it is entirely supported by the driver.
 	 */
-	public static CompiledSelector createNoFilterSelector(String selector) {
-		return new CompiledSelector(selector, SqCSSFilter.FILTER_NOTHING);
+	public static CompiledCssSelector createNoFilterSelector(String selector) {
+		return new CompiledCssSelector(selector, CssFilter.FILTER_NOTHING);
 	}
 
 	/**
 	 * Creates a compiled selector that only does filtering, meaning
 	 * it is entirely NOT supported by the driver.
 	 */
-	public static CompiledSelector createFilterOnlySelector(SqCSSFilter filter) {
-		return new CompiledSelector(EMPTY_SELECTOR, filter);
+	public static CompiledCssSelector createFilterOnlySelector(CssFilter filter) {
+		return new CompiledCssSelector(EMPTY_SELECTOR, filter);
 	}
 	
 	private String cssSelector;
-	private List<SqCSSFilter> cssFilter;
+	private List<CssFilter> cssFilter;
 
-	public CompiledSelector(String cssSelector, SqCSSFilter cssFilter) {
+	public CompiledCssSelector(String cssSelector, CssFilter cssFilter) {
 		this.cssSelector = cssSelector;
-		if (cssFilter == SqCSSFilter.FILTER_NOTHING) {
+		if (cssFilter == CssFilter.FILTER_NOTHING) {
 			this.cssFilter = EMPTY_UNMODIFIABLE_LIST;
 		} else {
-			this.cssFilter = new ArrayList<SqCSSFilter>(Arrays.asList(cssFilter));
+			this.cssFilter = new ArrayList<CssFilter>(Arrays.asList(cssFilter));
 		}
 	}
 	
-	public CompiledSelector(String cssSelector, List<SqCSSFilter> cssFilter) {
+	public CompiledCssSelector(String cssSelector, List<CssFilter> cssFilter) {
 		this.cssSelector = cssSelector;
 		this.cssFilter = cssFilter;
 	}
@@ -62,8 +61,8 @@ public class CompiledSelector {
 	/**
 	 * THIS IS CREATED FOR DEVELOPMENT PURPOSES ONLY!
 	 */
-	public CompiledSelector(final String cssSelector, final String filterName) {
-		this(cssSelector, new SqCSSFilter() {
+	public CompiledCssSelector(final String cssSelector, final String filterName) {
+		this(cssSelector, new CssFilter() {
 			@Override
 			public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
 				return elements;
@@ -85,7 +84,7 @@ public class CompiledSelector {
 		return cssSelector;
 	}
 	
-	public List<SqCSSFilter> getCssFilter() {
+	public List<CssFilter> getCssFilter() {
 		return cssFilter;
 	}
 	
@@ -95,7 +94,7 @@ public class CompiledSelector {
 	}
 
 	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
-		for (SqCSSFilter cf : cssFilter) {
+		for (CssFilter cf : cssFilter) {
 			elements = cf.filter(driver, elements);
 		}
 		return elements;

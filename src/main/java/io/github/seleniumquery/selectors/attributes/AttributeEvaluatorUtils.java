@@ -1,22 +1,22 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selectors.attributes;
 
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import org.w3c.css.sac.AttributeCondition;
 
 public class AttributeEvaluatorUtils {
 
-	public static CompiledSelector createAttributeNoFilterCompiledSelector(AttributeCondition attributeCondition,
+	public static CompiledCssSelector createAttributeNoFilterCompiledSelector(AttributeCondition attributeCondition,
 																				String attributeSelectorSymbol) {
 		String attributeName = SelectorUtils.escapeSelector(attributeCondition.getLocalName()).replace("\\\\", "\\");
 		String wantedValue = SelectorUtils.escapeAttributeValue(attributeCondition.getValue());
-		return CompiledSelector.createNoFilterSelector("[" + attributeName + attributeSelectorSymbol + wantedValue + "]");
+		return CompiledCssSelector.createNoFilterSelector("[" + attributeName + attributeSelectorSymbol + wantedValue + "]");
 	}
 	
-	public static CompiledSelector createAttributeNoFilterCompiledSelector(AttributeCondition attributeCondition) {
+	public static CompiledCssSelector createAttributeNoFilterCompiledSelector(AttributeCondition attributeCondition) {
 		String attributeName = SelectorUtils.escapeSelector(attributeCondition.getLocalName()).replace("\\\\", "\\");
-		return CompiledSelector.createNoFilterSelector("[" + attributeName + "]");
+		return CompiledCssSelector.createNoFilterSelector("[" + attributeName + "]");
 	}
 
 }

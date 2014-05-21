@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
 import io.github.seleniumquery.functions.FocusFunctionTest;
 

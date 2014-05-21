@@ -1,9 +1,9 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.DriverSupportMap;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,14 +28,14 @@ public class LangPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		String wantedLang = pseudoClassSelector.getPseudoClassContent();
-		SqCSSFilter langPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		CssFilter langPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
-		if (DriverSupportMap.getInstance().supportsNatively(driver, ":lang(en)")) {
-			return CompiledSelector.createNoFilterSelector(":lang("+wantedLang+")");
+		if (DriverSupportService.getInstance().supportsNatively(driver, ":lang(en)")) {
+			return CompiledCssSelector.createNoFilterSelector(":lang("+wantedLang+")");
 		}
-		return CompiledSelector.createFilterOnlySelector(langPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(langPseudoClassFilter);
 	}
 	
 }

@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.parser;
+package io.github.seleniumquery.selector.parser;
 
 import static java.lang.Character.isLetter;
 

@@ -1,9 +1,7 @@
-package io.github.seleniumquery.by.selector;
+package io.github.seleniumquery.selector;
 
-import io.github.seleniumquery.by.evaluator.CSSSelector;
-import io.github.seleniumquery.by.evaluator.SelectorEvaluatorFactory;
-import io.github.seleniumquery.by.parser.ParsedSelector;
-import io.github.seleniumquery.by.parser.SelectorParser;
+import io.github.seleniumquery.selector.parser.ParsedSelector;
+import io.github.seleniumquery.selector.parser.SelectorParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,29 +11,29 @@ import org.openqa.selenium.WebDriver;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 
-public class SeleniumQueryCssCompiler {
+public class CssSelectorCompilerService {
 	
-	public static CompiledSelectorList compileSelectorList(WebDriver driver, String selector) {
+	public static CompiledCssSelectorList compileSelectorList(WebDriver driver, String selector) {
         try {
     		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
     		SelectorList selectorList = parsedSelector.getSelector();
 
-        	List<CompiledSelector> css = new ArrayList<CompiledSelector>(selectorList.getLength()); 
+        	List<CompiledCssSelector> css = new ArrayList<CompiledCssSelector>(selectorList.getLength()); 
         	for (int i = 0; i < selectorList.getLength(); i++) {
-        		CompiledSelector cs = compileSelector(driver, parsedSelector.getStringMap(), selectorList.item(i));
+        		CompiledCssSelector cs = compileSelector(driver, parsedSelector.getStringMap(), selectorList.item(i));
         		css.add(cs);
         	}
         	
-        	return new CompiledSelectorList(css);
+        	return new CompiledCssSelectorList(css);
         	
         } catch (Exception e) {
         	throw new RuntimeException(e);
         }
 	}
     
-	public static CompiledSelector compileSelector(WebDriver driver, Map<String, String> stringMap, Selector selector) {
+	public static CompiledCssSelector compileSelector(WebDriver driver, Map<String, String> stringMap, Selector selector) {
 		@SuppressWarnings("unchecked")
-		CSSSelector<Selector> cssSelector =  (CSSSelector<Selector>) SelectorEvaluatorFactory.getInstance().getSelector(selector);
+		CssSelector<Selector> cssSelector =  (CssSelector<Selector>) CssSelectorFactory.getInstance().getSelector(selector);
 		return cssSelector.compile(driver, stringMap, selector);
 	}
 	

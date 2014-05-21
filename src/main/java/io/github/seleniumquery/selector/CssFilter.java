@@ -1,13 +1,13 @@
-package io.github.seleniumquery.by.selector;
+package io.github.seleniumquery.selector;
 
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public interface SqCSSFilter {
+public interface CssFilter {
 	
-	public static final SqCSSFilter FILTER_NOTHING = new SqCSSFilter() {
+	public static final CssFilter FILTER_NOTHING = new CssFilter() {
 		@Override
 		public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
 			return elements;

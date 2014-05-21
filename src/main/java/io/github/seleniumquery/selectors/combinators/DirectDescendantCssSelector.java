@@ -1,11 +1,11 @@
-package io.github.seleniumquery.by.evaluator.combinators;
+package io.github.seleniumquery.selectors.combinators;
 
-import io.github.seleniumquery.by.evaluator.CSSSelector;
-import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.CssSelector;
+import io.github.seleniumquery.selector.CssSelectorCompilerService;
+import io.github.seleniumquery.selector.CssSelectorMatcherService;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,13 +17,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.DescendantSelector;
 
-public class ChildSelectorEvaluator implements CSSSelector<DescendantSelector> {
+public class DirectDescendantCssSelector implements CssSelector<DescendantSelector> {
 	
-	private static final ChildSelectorEvaluator instance = new ChildSelectorEvaluator();
-	public static ChildSelectorEvaluator getInstance() {
+	private static final DirectDescendantCssSelector instance = new DirectDescendantCssSelector();
+	public static DirectDescendantCssSelector getInstance() {
 		return instance;
 	}
-	private ChildSelectorEvaluator() { }
+	private DirectDescendantCssSelector() { }
 	
 	/**
 	 * PARENT > ELEMENT
@@ -34,25 +34,25 @@ public class ChildSelectorEvaluator implements CSSSelector<DescendantSelector> {
 		if (parent.getTagName().equals("html")) {
 			return false;
 		}
-		return SelectorEvaluator.elementMatchesSelector(driver, element, stringMap, descendantSelector.getSimpleSelector())
-				&& SelectorEvaluator.elementMatchesSelector(driver, parent, stringMap, descendantSelector.getAncestorSelector());
+		return CssSelectorMatcherService.elementMatchesSelector(driver, element, stringMap, descendantSelector.getSimpleSelector())
+				&& CssSelectorMatcherService.elementMatchesSelector(driver, parent, stringMap, descendantSelector.getAncestorSelector());
 	}
 	
 	@Override
-	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		CompiledSelector elementCompiledSelector = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
-		CompiledSelector parentCompiledSelector = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
+	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
+		CompiledCssSelector elementCompiledSelector = CssSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
+		CompiledCssSelector parentCompiledSelector = CssSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
 		
-		SqCSSFilter childSelectorFilter = new ChildSelectorFilter(parentCompiledSelector, elementCompiledSelector);
-		return new CompiledSelector(parentCompiledSelector.getCssSelector()+">"+elementCompiledSelector.getCssSelector(),
+		CssFilter childSelectorFilter = new ChildSelectorFilter(parentCompiledSelector, elementCompiledSelector);
+		return new CompiledCssSelector(parentCompiledSelector.getCssSelector()+">"+elementCompiledSelector.getCssSelector(),
 										childSelectorFilter);
 	}
 	
-	private static final class ChildSelectorFilter implements SqCSSFilter {
-		private final CompiledSelector parentCompiledSelector;
-		private final CompiledSelector elementCompiledSelector;
+	private static final class ChildSelectorFilter implements CssFilter {
+		private final CompiledCssSelector parentCompiledSelector;
+		private final CompiledCssSelector elementCompiledSelector;
 		
-		private ChildSelectorFilter(CompiledSelector parentCompiledSelector, CompiledSelector elementCompiledSelector) {
+		private ChildSelectorFilter(CompiledCssSelector parentCompiledSelector, CompiledCssSelector elementCompiledSelector) {
 			this.parentCompiledSelector = parentCompiledSelector;
 			this.elementCompiledSelector = elementCompiledSelector;
 		}

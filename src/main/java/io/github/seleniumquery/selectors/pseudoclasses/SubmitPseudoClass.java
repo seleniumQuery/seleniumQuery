@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,11 +43,11 @@ public class SubmitPseudoClass implements PseudoClass {
 			  );
 	}
 	
-	private static final SqCSSFilter submitPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter submitPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :submit is an extension selector, nobody implements it natively
-		return CompiledSelector.createFilterOnlySelector(submitPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(submitPseudoClassFilter);
 	}
 	
 }

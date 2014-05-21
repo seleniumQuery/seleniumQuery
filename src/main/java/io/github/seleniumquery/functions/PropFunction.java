@@ -13,13 +13,18 @@ public class PropFunction {
 		return prop(seleniumQueryObject.getWebDriver(), elements, propertyName);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static <T> T prop(WebDriver driver, List<WebElement> elements, String propertyName) {
 		if (elements.isEmpty()) {
 			return null;
 		}
+		return prop(driver, elements.get(0), propertyName);
+	}
+	
+	public static <T> T prop(WebDriver driver, WebElement element, String propertyName) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		return (T) js.executeScript("return arguments[0][arguments[1]]", elements.get(0), propertyName);
+		@SuppressWarnings("unchecked")
+		T propertyValue = (T) js.executeScript("return arguments[0][arguments[1]]", element, propertyName);
+		return propertyValue;
 	}
 	
 	public static SeleniumQueryObject prop(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements,
@@ -32,7 +37,7 @@ public class PropFunction {
 		}
 		
 		JavascriptExecutor js = (JavascriptExecutor) seleniumQueryObject.getWebDriver();
-		// "false" is truthy and "0" is truthy, so we keep them false and 0.
+		// "false" is truthy and "0" is truthy, so we dont convert them to string: we keep them false and 0.
 		if (value instanceof Boolean || value instanceof Number || value instanceof WebElement) {
 			for (WebElement webElement : elements) {
 				js.executeScript("arguments[0][arguments[1]] = arguments[2]", webElement, propertyName, value);

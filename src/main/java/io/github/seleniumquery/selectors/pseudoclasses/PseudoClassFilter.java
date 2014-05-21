@@ -1,6 +1,6 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CssFilter;
 
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
 
-class PseudoClassFilter implements SqCSSFilter {
+class PseudoClassFilter implements CssFilter {
 	
 	public static final Map<String, String> STRING_MAP_NOT_USED = null;
 	public static final Selector SELECTOR_NOT_USED = null;

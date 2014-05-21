@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,10 +25,10 @@ public class VisiblePseudoClass implements PseudoClass {
 		return SelectorUtils.isVisible(element);
 	}
 	
-	private static final SqCSSFilter VisiblePseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter VisiblePseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return CompiledSelector.createFilterOnlySelector(VisiblePseudoClassFilter);
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return CompiledCssSelector.createFilterOnlySelector(VisiblePseudoClassFilter);
 	}
 	
 }

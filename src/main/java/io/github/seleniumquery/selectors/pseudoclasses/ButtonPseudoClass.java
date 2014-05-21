@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,11 +35,11 @@ public class ButtonPseudoClass implements PseudoClass {
 			   BUTTON.equals(element.getTagName());
 	}
 	
-	private static final SqCSSFilter buttonPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter buttonPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :button is an extension selector, nobody implements it natively
-		return CompiledSelector.createFilterOnlySelector(buttonPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(buttonPseudoClassFilter);
 	}
 	
 }

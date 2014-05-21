@@ -1,11 +1,11 @@
-package io.github.seleniumquery.by.evaluator.combinators;
+package io.github.seleniumquery.selectors.combinators;
 
-import io.github.seleniumquery.by.evaluator.CSSSelector;
-import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.CssSelector;
+import io.github.seleniumquery.selector.CssSelectorCompilerService;
+import io.github.seleniumquery.selector.CssSelectorMatcherService;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,13 +17,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.SiblingSelector;
 
-public class DirectAdjacentEvaluator implements CSSSelector<SiblingSelector> {
+public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector> {
 
-	private static final DirectAdjacentEvaluator instance = new DirectAdjacentEvaluator();
-	public static DirectAdjacentEvaluator getInstance() {
+	private static final DirectAdjacentCssSelector instance = new DirectAdjacentCssSelector();
+	public static DirectAdjacentCssSelector getInstance() {
 		return instance;
 	}
-	private DirectAdjacentEvaluator() { }
+	private DirectAdjacentCssSelector() { }
 
 	/**
 	 * E + F
@@ -31,25 +31,25 @@ public class DirectAdjacentEvaluator implements CSSSelector<SiblingSelector> {
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, SiblingSelector siblingSelector) {
 		WebElement previousElement = SelectorUtils.getPreviousSibling(element);
-		return SelectorEvaluator.elementMatchesSelector(driver, previousElement, stringMap, siblingSelector.getSelector())
-				&& SelectorEvaluator.elementMatchesSelector(driver, element, stringMap, siblingSelector.getSiblingSelector());
+		return CssSelectorMatcherService.elementMatchesSelector(driver, previousElement, stringMap, siblingSelector.getSelector())
+				&& CssSelectorMatcherService.elementMatchesSelector(driver, element, stringMap, siblingSelector.getSiblingSelector());
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		CompiledSelector previousElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, siblingSelector.getSelector());
-		CompiledSelector siblingElementCompiled = SeleniumQueryCssCompiler.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
+	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		CompiledCssSelector previousElementCompiled = CssSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSelector());
+		CompiledCssSelector siblingElementCompiled = CssSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
 		
-		SqCSSFilter directAdjacentFilter = new DirectAdjacentFilter(previousElementCompiled, siblingElementCompiled);
-		return new CompiledSelector(previousElementCompiled.getCssSelector()+"+"+siblingElementCompiled.getCssSelector(),
+		CssFilter directAdjacentFilter = new DirectAdjacentFilter(previousElementCompiled, siblingElementCompiled);
+		return new CompiledCssSelector(previousElementCompiled.getCssSelector()+"+"+siblingElementCompiled.getCssSelector(),
 										directAdjacentFilter);
 	}
 	
-	private static final class DirectAdjacentFilter implements SqCSSFilter {
-		private final CompiledSelector previousElementCompiled;
-		private final CompiledSelector siblingElementCompiled;
+	private static final class DirectAdjacentFilter implements CssFilter {
+		private final CompiledCssSelector previousElementCompiled;
+		private final CompiledCssSelector siblingElementCompiled;
 		
-		private DirectAdjacentFilter(CompiledSelector previousElementCompiled, CompiledSelector siblingElementCompiled) {
+		private DirectAdjacentFilter(CompiledCssSelector previousElementCompiled, CompiledCssSelector siblingElementCompiled) {
 			this.previousElementCompiled = previousElementCompiled;
 			this.siblingElementCompiled = siblingElementCompiled;
 		}

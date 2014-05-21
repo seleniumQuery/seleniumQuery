@@ -1,9 +1,9 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.NotEqualsAttributeSelectorFix;
+import io.github.seleniumquery.selectors.attributes.NotEqualsAttributeSelectorFix;
 
 import org.junit.Test;
 

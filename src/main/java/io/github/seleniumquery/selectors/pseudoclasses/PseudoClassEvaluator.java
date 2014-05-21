@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
-public class PseudoClassEvaluator implements CSSCondition<AttributeCondition> {
+public class PseudoClassEvaluator implements CssConditionalSelector<AttributeCondition> {
 
 	private static final PseudoClassEvaluator instance = new PseudoClassEvaluator();
 	public static PseudoClassEvaluator getInstance() {
@@ -46,7 +46,7 @@ public class PseudoClassEvaluator implements CSSCondition<AttributeCondition> {
 	}
 	
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		
 		String pseudoClassValue = attributeCondition.getValue();
 		for (PseudoClass pseudoClass : pseudoClasses) {
@@ -56,7 +56,7 @@ public class PseudoClassEvaluator implements CSSCondition<AttributeCondition> {
 		}
 //		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
 		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue);
-		return CompiledSelector.createNoFilterSelector(pseudoClassSelector.getOriginalPseudoClassSelector());
+		return CompiledCssSelector.createNoFilterSelector(pseudoClassSelector.getOriginalPseudoClassSelector());
 	}
 
 }

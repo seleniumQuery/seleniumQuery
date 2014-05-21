@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.DriverSupportMap;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.DriverSupportService;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,15 +30,15 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 		return driver.findElements(By.tagName(tagName)).size() == 1;
 	}
 	
-	private static final SqCSSFilter onlyOfTypePseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter onlyOfTypePseudoClassFilter = new PseudoClassFilter(getInstance());
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:only-of-type
-		if (DriverSupportMap.getInstance().supportsNatively(driver, ONLY_OF_TYPE_PSEUDO_CLASS)) {
-			return CompiledSelector.createNoFilterSelector(ONLY_OF_TYPE_PSEUDO_CLASS);
+		if (DriverSupportService.getInstance().supportsNatively(driver, ONLY_OF_TYPE_PSEUDO_CLASS)) {
+			return CompiledCssSelector.createNoFilterSelector(ONLY_OF_TYPE_PSEUDO_CLASS);
 		}
-		return CompiledSelector.createFilterOnlySelector(onlyOfTypePseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(onlyOfTypePseudoClassFilter);
 	}
 	
 }

@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by;
 
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelectorList;
-import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
+import io.github.seleniumquery.selector.CompiledCssSelectorList;
+import io.github.seleniumquery.selector.CssSelectorCompilerService;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import java.util.List;
 
@@ -127,7 +127,7 @@ public class SeleniumQueryBy extends By {
 	 */
 	private List<WebElement> enhancedCssFindElements(SearchContext context) {
 		WebDriver driver = SelectorUtils.getWebDriver(context);
-		CompiledSelectorList compileSelectorList = SeleniumQueryCssCompiler.compileSelectorList(driver, this.selector);
+		CompiledCssSelectorList compileSelectorList = CssSelectorCompilerService.compileSelectorList(driver, this.selector);
 		return compileSelectorList.execute(context);
 	}
 

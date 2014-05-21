@@ -1,10 +1,11 @@
-package io.github.seleniumquery.by.evaluator;
+package io.github.seleniumquery.selector;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import java.util.List;
 

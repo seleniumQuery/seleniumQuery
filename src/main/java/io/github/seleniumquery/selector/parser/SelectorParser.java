@@ -1,6 +1,6 @@
-package io.github.seleniumquery.by.parser;
+package io.github.seleniumquery.selector.parser;
 
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.NotEqualsAttributeSelectorFix;
+import io.github.seleniumquery.selectors.attributes.NotEqualsAttributeSelectorFix;
 
 import java.io.StringReader;
 

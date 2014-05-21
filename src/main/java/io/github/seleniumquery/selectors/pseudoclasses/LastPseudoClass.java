@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,10 +28,10 @@ public class LastPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :last is an extension selector, no browser implements it natively
-		SqCSSFilter firstPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		return CompiledSelector.createFilterOnlySelector(firstPseudoClassFilter);
+		CssFilter firstPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		return CompiledCssSelector.createFilterOnlySelector(firstPseudoClassFilter);
 	}
 
 }

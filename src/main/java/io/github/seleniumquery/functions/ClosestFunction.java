@@ -2,8 +2,8 @@ package io.github.seleniumquery.functions;
 
 import io.github.seleniumquery.SQLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.selector.CssSelectorMatcherService;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class ClosestFunction {
 	public static WebElement closest(WebDriver driver, WebElement element, String selector) {
 		WebElement ancestorOrSelf = element; // begins by evaluating the element itself
 		while (ancestorOrSelf != null) {
-			if (SelectorEvaluator.elementMatchesStringSelector(driver, ancestorOrSelf, selector)) {
+			if (CssSelectorMatcherService.elementMatchesStringSelector(driver, ancestorOrSelf, selector)) {
 				return ancestorOrSelf;
 			}
 			ancestorOrSelf = SelectorUtils.parent(ancestorOrSelf);

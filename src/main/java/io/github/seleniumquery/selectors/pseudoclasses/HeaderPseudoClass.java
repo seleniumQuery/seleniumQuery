@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,11 +37,11 @@ public class HeaderPseudoClass implements PseudoClass {
 		return HEADER_TAGS.contains(element.getTagName());
 	}
 	
-	private static final SqCSSFilter headerPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter headerPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :header is an extension selector, no browser implements it natively
-		return CompiledSelector.createFilterOnlySelector(headerPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(headerPseudoClassFilter);
 	}
 	
 }

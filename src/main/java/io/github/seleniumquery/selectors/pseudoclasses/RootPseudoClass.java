@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.DriverSupportMap;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.DriverSupportService;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,15 +28,15 @@ public class RootPseudoClass implements PseudoClass {
 		return element.getTagName().equals("html");
 	}
 	
-	private static final SqCSSFilter rootPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter rootPseudoClassFilter = new PseudoClassFilter(getInstance());
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:root
-		if (DriverSupportMap.getInstance().supportsNatively(driver, ROOT_PSEUDO_CLASS)) {
-			return CompiledSelector.createNoFilterSelector(ROOT_PSEUDO_CLASS);
+		if (DriverSupportService.getInstance().supportsNatively(driver, ROOT_PSEUDO_CLASS)) {
+			return CompiledCssSelector.createNoFilterSelector(ROOT_PSEUDO_CLASS);
 		}
-		return CompiledSelector.createFilterOnlySelector(rootPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(rootPseudoClassFilter);
 	}
 	
 }

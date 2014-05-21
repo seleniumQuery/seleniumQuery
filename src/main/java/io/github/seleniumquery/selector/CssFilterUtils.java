@@ -1,17 +1,18 @@
-package io.github.seleniumquery.by.selector;
+package io.github.seleniumquery.selector;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSSFilterUtils {
+public class CssFilterUtils {
 
-	public static CompiledSelector combine(CompiledSelector compiledSelector, CompiledSelector compiledCondition) {
+	public static CompiledCssSelector combine(CompiledCssSelector compiledSelector, CompiledCssSelector compiledCondition) {
 		String combinedSelector = compiledSelector.getCssSelector() + compiledCondition.getCssSelector();
-		List<SqCSSFilter> filters = new ArrayList<SqCSSFilter>(compiledSelector.getCssFilter().size() + compiledCondition.getCssFilter().size());
+		List<CssFilter> filters = new ArrayList<CssFilter>(compiledSelector.getCssFilter().size() + compiledCondition.getCssFilter().size());
 		filters.addAll(compiledSelector.getCssFilter());
 		filters.addAll(compiledCondition.getCssFilter());
 		
-		return new CompiledSelector(combinedSelector, filters);
+		return new CompiledCssSelector(combinedSelector, filters);
 	}
 
 }

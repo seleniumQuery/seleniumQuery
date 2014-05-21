@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.CssSelectorCompilerService;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class GtPseudoClass implements PseudoClass {
 	}
 	
 	private static boolean isGt(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector, int wantedIndex) {
-		CompiledSelector compileSelector = SeleniumQueryCssCompiler.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		CompiledCssSelector compileSelector = CssSelectorCompilerService.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
 		List<WebElement> elements = compileSelector.execute(driver);
 		if (elements.isEmpty()) {
 			return false;
@@ -58,10 +58,10 @@ public class GtPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// no browser supports :gt() natively
-		SqCSSFilter gtPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		return CompiledSelector.createFilterOnlySelector(gtPseudoClassFilter);
+		CssFilter gtPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		return CompiledCssSelector.createFilterOnlySelector(gtPseudoClassFilter);
 	}
 
 }
