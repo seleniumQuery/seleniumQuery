@@ -43,7 +43,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class SeleniumQueryExample {
     public static void main(String[] args) {
-        $.browser.setDefaultDriver(new FirefoxDriver()); // sets the driver used by $()
+        $.browser.setDefaultDriverAsFirefox(); // sets Firefox as the browser used by $()
         
         $.browser.openUrl("http://www.google.com");
         
