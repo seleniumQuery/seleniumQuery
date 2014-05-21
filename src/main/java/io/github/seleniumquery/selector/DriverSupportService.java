@@ -50,12 +50,21 @@ public class DriverSupportService {
 	}
 	
 	private static final String HTML_UNIT_DRIVER_CLASSNAME = "HtmlUnitDriver";
-	public static boolean isHtmlUnitDriver(Object instance) {
-		return instance.getClass().getSimpleName().equals(HTML_UNIT_DRIVER_CLASSNAME);
+	private static final String PHANTOM_JS_DRIVER_CLASSNAME = "PhantomJSDriver";
+	public static boolean isHtmlUnitDriver(Object driver) {
+		return instanceEqualsClassName(driver, HTML_UNIT_DRIVER_CLASSNAME);
 	}
 	
-	public static boolean isNotHtmlUnitDriver(Object instance) {
-		return !isHtmlUnitDriver(instance);
+	public static boolean isNotHtmlUnitDriver(Object driver) {
+		return !isHtmlUnitDriver(driver);
+	}
+	
+	public static boolean isNotPhantomJsDriver(WebDriver driver) {
+		return !instanceEqualsClassName(driver, PHANTOM_JS_DRIVER_CLASSNAME);
+	}
+	
+	private static boolean instanceEqualsClassName(Object instance, final String className) {
+		return instance.getClass().getSimpleName().equals(className);
 	}
 	
 }
