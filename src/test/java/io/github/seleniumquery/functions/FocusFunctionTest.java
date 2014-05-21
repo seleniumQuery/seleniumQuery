@@ -37,8 +37,8 @@ public class FocusFunctionTest {
     	// Due to that, there is not even the possibility of a workaround specific for HtmlUnitDriver.
     	// still, someone wanting to focus the html seems to be a highly unlikely operation, even more
     	// since the body IS focusable
+    	$("html").focus();
     	if (!($.browser.getDefaultDriver() instanceof HtmlUnitDriver)) {
-    		$("html").focus();    	
     		assertThat($("html").is(":focus"), is(true));
     	}
 
