@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selectors.attributes;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -12,16 +12,16 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
-public class ClassAttributeEvaluator implements CSSCondition<AttributeCondition> {
+public class ClassAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
 	private static final String CLASS_ATTRIBUTE = "class";
-	private static final ClassAttributeEvaluator instance = new ClassAttributeEvaluator();
+	private static final ClassAttributeCssSelector instance = new ClassAttributeCssSelector();
 
-	public static ClassAttributeEvaluator getInstance() {
+	public static ClassAttributeCssSelector getInstance() {
 		return instance;
 	}
 	
-	private ClassAttributeEvaluator() { }
+	private ClassAttributeCssSelector() { }
 
 	/**
 	 * @see {@link org.w3c.css.sac.Condition#SAC_CLASS_CONDITION}
@@ -40,10 +40,10 @@ public class ClassAttributeEvaluator implements CSSCondition<AttributeCondition>
 	}
 
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by class
-		return CompiledSelector.createNoFilterSelector("."+SelectorUtils.escapeSelector(wantedClassName));
+		return CompiledCssSelector.createNoFilterSelector("."+SelectorUtils.escapeSelector(wantedClassName));
 	}
 	
 }

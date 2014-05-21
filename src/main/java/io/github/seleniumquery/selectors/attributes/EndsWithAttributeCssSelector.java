@@ -1,24 +1,24 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.endsWith;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
-public class EndsWithAttributeEvaluator implements CSSCondition<AttributeCondition> {
+public class EndsWithAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final EndsWithAttributeEvaluator instance = new EndsWithAttributeEvaluator();
-	public static EndsWithAttributeEvaluator getInstance() {
+	private static final EndsWithAttributeCssSelector instance = new EndsWithAttributeCssSelector();
+	public static EndsWithAttributeCssSelector getInstance() {
 		return instance;
 	}
-	private EndsWithAttributeEvaluator() { }
+	private EndsWithAttributeCssSelector() { }
 	
 	public static final String ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL = "$=";
 
@@ -39,7 +39,7 @@ public class EndsWithAttributeEvaluator implements CSSCondition<AttributeConditi
 	}
 
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		// nothing to do, everyone supports this selector
 		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL);
 	}

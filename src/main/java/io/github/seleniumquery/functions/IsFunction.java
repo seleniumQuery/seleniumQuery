@@ -2,7 +2,7 @@ package io.github.seleniumquery.functions;
 
 import static io.github.seleniumquery.functions.NotPresentParser.NOT_PRESENT_PARSER;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.evaluator.SelectorEvaluator;
+import io.github.seleniumquery.selector.CssSelectorMatcherService;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class IsFunction {
 		// we left this way, though, because we believe it is more descriptive of the code's intention
 
 		for (WebElement element : elements) {
-			if (SelectorEvaluator.elementMatchesStringSelector(driver, element, selector)) {
+			if (CssSelectorMatcherService.elementMatchesStringSelector(driver, element, selector)) {
 				return true;
 			}
 		}

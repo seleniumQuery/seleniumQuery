@@ -33,8 +33,10 @@ public class FocusFunctionTest {
     	$("#i2").focus();
     	assertThat($("#i2").is(":focus"), is(true));
     	
-    	// html is not focusable on HtmlUnit! Due to that, there is not even the possibility of a workaround specific for HtmlUnitDriver.
-    	// still, someone wanting to focus the html seems to be a highly unlikely operation, even more since the body IS focusable
+    	// html is not focusable on HtmlUnit, not even with tabindex!
+    	// Due to that, there is not even the possibility of a workaround specific for HtmlUnitDriver.
+    	// still, someone wanting to focus the html seems to be a highly unlikely operation, even more
+    	// since the body IS focusable
     	if (!($.browser.getDefaultDriver() instanceof HtmlUnitDriver)) {
     		$("html").focus();    	
     		assertThat($("html").is(":focus"), is(true));

@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,11 +55,11 @@ public class FocusablePseudoClass implements PseudoClass {
 		return element.getAttribute("tabindex") != null;
 	}
 	
-	private static final SqCSSFilter focusablePseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter focusablePseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// no browser supports :focusable natively
-		return CompiledSelector.createFilterOnlySelector(focusablePseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(focusablePseudoClassFilter);
 	}
 	
 }

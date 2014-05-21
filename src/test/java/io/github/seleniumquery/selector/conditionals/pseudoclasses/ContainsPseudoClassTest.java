@@ -1,6 +1,6 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
-import static io.github.seleniumquery.by.selector.SeleniumQueryCssCompilerIntegrationTest.assertSelectorMatchedSetSize;
+import static io.github.seleniumquery.selector.CssSelectorCompilerServiceTest.assertSelectorMatchedSetSize;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
 
 import org.junit.Rule;

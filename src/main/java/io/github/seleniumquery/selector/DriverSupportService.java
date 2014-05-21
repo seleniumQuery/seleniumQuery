@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.evaluator;
+package io.github.seleniumquery.selector;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,13 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 
-public class DriverSupportMap {
+public class DriverSupportService {
 	
-	private static final DriverSupportMap instance = new DriverSupportMap();
-	public static DriverSupportMap getInstance() {
+	private static final DriverSupportService instance = new DriverSupportService();
+	public static DriverSupportService getInstance() {
 		return instance;
 	}
-	private DriverSupportMap() { }
+	private DriverSupportService() { }
 	
 	private Map<WebDriver, Map<String, Boolean>> driverSupportedPseudos = new HashMap<WebDriver, Map<String, Boolean>>();
 	

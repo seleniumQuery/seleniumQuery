@@ -1,11 +1,15 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selector.conditionals.attributes;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
-import io.github.seleniumquery.by.selector.SeleniumQueryCssCompilerIntegrationTest;
+import io.github.seleniumquery.selector.CssSelectorCompilerServiceTest;
+import io.github.seleniumquery.selectors.attributes.ContainsWordAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.EndsWithAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.EqualsOrHasAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.StartsWithAttributeCssSelector;
 
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +26,7 @@ public class AttributeEvaluatorTest {
 	
 	@Test
 	public void equalsOrHasAttributeEvaluator() {
-		assertAll(EqualsOrHasAttributeEvaluator.EQUALS_ATTRIBUTE_SELECTOR_SYMBOL, "c");
+		assertAll(EqualsOrHasAttributeCssSelector.EQUALS_ATTRIBUTE_SELECTOR_SYMBOL, "c");
 	}
 	
 	@Test
@@ -39,17 +43,17 @@ public class AttributeEvaluatorTest {
 	@Test
 	public void containsWordAttributeEvaluator() {
 		// TODO problem here on HtmlUnitDriver, check warnings
-		assertAll(ContainsWordAttributeEvaluator.CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL, "c");
+		assertAll(ContainsWordAttributeCssSelector.CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL, "c");
 	}
 	
 	@Test
 	public void startsWithAttributeEvaluator() {
-		assertAll(StartsWithAttributeEvaluator.STARTS_WITH_ATTRIBUTE_SELECTOR_SYMBOL, "");
+		assertAll(StartsWithAttributeCssSelector.STARTS_WITH_ATTRIBUTE_SELECTOR_SYMBOL, "");
 	}
 	
 	@Test
 	public void endsWithAttributeEvaluator() {
-		assertAll(EndsWithAttributeEvaluator.ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL, "c");
+		assertAll(EndsWithAttributeCssSelector.ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL, "c");
 	}
 
 	public void assertAll(String attr, String suffix) {
@@ -70,7 +74,7 @@ public class AttributeEvaluatorTest {
 		assertSelectorFindsIds("[title" + attr + "\"a\\t" + suffix + "\"]");
 		assertSelectorFindsIds("[title" + attr + "\"a\\\\t" + suffix + "\"]", "d6");
 		
-		if (!ContainsWordAttributeEvaluator.CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL.equals(attr)) {
+		if (!ContainsWordAttributeCssSelector.CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL.equals(attr)) {
 			assertSelectorFindsIds("[title" + attr + "'a	" + suffix + "']", "d7");
 			assertSelectorFindsIds("[title" + attr + "\"a	" + suffix + "\"]", "d7");
 			assertSelectorFindsIds("[title" + attr + "\"a\t" + suffix + "\"]", "d7");
@@ -82,7 +86,7 @@ public class AttributeEvaluatorTest {
 	}
 	
 	public void assertSelectorFindsIds(String selector, String... ids) {
-		List<WebElement> elements = SeleniumQueryCssCompilerIntegrationTest.compileAndExecute(selector);
+		List<WebElement> elements = CssSelectorCompilerServiceTest.compileAndExecute(selector);
 		assertThat(elements, hasSize(ids.length));
 		
 		Iterator<WebElement> iterator = elements.iterator();

@@ -1,10 +1,10 @@
-package io.github.seleniumquery.by.evaluator.conditionals;
+package io.github.seleniumquery.selectors.conditionals;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.selector.CSSFilterUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selector.CssFilterUtils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,15 +15,15 @@ import org.w3c.css.sac.SimpleSelector;
 
 import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
 
-public class AndCombinationConditionEvaluator implements CSSCondition<CombinatorCondition> {
+public class AndConditionalCssSelector implements CssConditionalSelector<CombinatorCondition> {
 
-	private static final AndCombinationConditionEvaluator instance = new AndCombinationConditionEvaluator();
+	private static final AndConditionalCssSelector instance = new AndConditionalCssSelector();
 
-	public static AndCombinationConditionEvaluator getInstance() {
+	public static AndConditionalCssSelector getInstance() {
 		return instance;
 	}
 
-	private ConditionalSelectorEvaluator conditionalEvaluator = ConditionalSelectorEvaluator.getInstance();
+	private ConditionalCssSelector conditionalEvaluator = ConditionalCssSelector.getInstance();
 	
 	/**
 	 * E.firstCondition.secondCondition
@@ -41,14 +41,14 @@ public class AndCombinationConditionEvaluator implements CSSCondition<Combinator
 	}
 
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
 		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
 																					(SimpleSelector) selectorUpToThisPoint,
 																						combinatorCondition.getFirstCondition());
 
-		CompiledSelector compiledFirst = conditionalEvaluator.compileCondition(driver, stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
-		CompiledSelector compiledSecond = conditionalEvaluator.compileCondition(driver, stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
-		return CSSFilterUtils.combine(compiledFirst, compiledSecond);
+		CompiledCssSelector compiledFirst = conditionalEvaluator.compileCondition(driver, stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
+		CompiledCssSelector compiledSecond = conditionalEvaluator.compileCondition(driver, stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
+		return CssFilterUtils.combine(compiledFirst, compiledSecond);
 	}
 	
 }

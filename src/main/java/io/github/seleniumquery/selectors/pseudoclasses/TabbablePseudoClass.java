@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,11 +46,11 @@ public class TabbablePseudoClass implements PseudoClass {
 		return !tabindexIsNegativeInteger;
 	}
 	
-	private static final SqCSSFilter tabbablePseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter tabbablePseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// no browser supports :tabbable natively
-		return CompiledSelector.createFilterOnlySelector(tabbablePseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(tabbablePseudoClassFilter);
 	}
 	
 }

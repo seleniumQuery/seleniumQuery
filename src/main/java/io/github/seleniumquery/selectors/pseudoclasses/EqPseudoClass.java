@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SeleniumQueryCssCompiler;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.CssSelectorCompilerService;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class EqPseudoClass implements PseudoClass {
 	}
 	
 	static boolean isEq(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector, int index) {
-		CompiledSelector compileSelector = SeleniumQueryCssCompiler.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		CompiledCssSelector compileSelector = CssSelectorCompilerService.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
 		List<WebElement> elements = compileSelector.execute(driver);
 		if (index < 0) {
 			return elements.size() >= -index && elements.get(elements.size() + index).equals(element);
@@ -46,9 +46,9 @@ public class EqPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		SqCSSFilter eqPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		return CompiledSelector.createFilterOnlySelector(eqPseudoClassFilter);
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		CssFilter eqPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		return CompiledCssSelector.createFilterOnlySelector(eqPseudoClassFilter);
 	}
 
 }

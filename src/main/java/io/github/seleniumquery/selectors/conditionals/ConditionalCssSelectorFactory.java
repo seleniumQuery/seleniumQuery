@@ -1,56 +1,60 @@
-package io.github.seleniumquery.by.evaluator.conditionals;
+package io.github.seleniumquery.selectors.conditionals;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.ClassAttributeEvaluator;
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.ContainsPrefixAttributeEvaluator;
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.ContainsSubstringAttributeEvaluator;
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.ContainsWordAttributeEvaluator;
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.EndsWithAttributeEvaluator;
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.EqualsOrHasAttributeEvaluator;
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.IdAttributeEvaluator;
-import io.github.seleniumquery.by.evaluator.conditionals.attributes.StartsWithAttributeEvaluator;
-import io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.LangPseudoClassEvaluator;
-import io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses.PseudoClassEvaluator;
+import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selectors.attributes.ClassAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.ContainsPrefixAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.ContainsSubstringAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.ContainsWordAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.EndsWithAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.EqualsOrHasAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.IdAttributeCssSelector;
+import io.github.seleniumquery.selectors.attributes.StartsWithAttributeCssSelector;
+import io.github.seleniumquery.selectors.pseudoclasses.LangPseudoClassEvaluator;
+import io.github.seleniumquery.selectors.pseudoclasses.PseudoClassEvaluator;
 
 import org.w3c.css.sac.Condition;
 
-public class ConditionalEvaluatorFactory {
+public class ConditionalCssSelectorFactory {
 
-	private static final ConditionalEvaluatorFactory instance = new ConditionalEvaluatorFactory();
+	private static final ConditionalCssSelectorFactory instance = new ConditionalCssSelectorFactory();
 	
-	public static ConditionalEvaluatorFactory getInstance() {
+	public static ConditionalCssSelectorFactory getInstance() {
 		return instance;
 	}
 	
-	private ConditionalEvaluatorFactory() { }
+	private ConditionalCssSelectorFactory() { }
 
-	public CSSCondition<? extends Condition> getSelector(Condition condition) {
+	public CssConditionalSelector<? extends Condition> getSelector(Condition condition) {
 	    switch (condition.getConditionType()) {
 		    case Condition.SAC_AND_CONDITION:
-		    	return AndCombinationConditionEvaluator.getInstance();
+		    	return AndConditionalCssSelector.getInstance();
 		    case Condition.SAC_OR_CONDITION:
-		    	return OrCombinationConditionEvaluator.getInstance();
+		    	// if the exception below gets thrown, this means the CSS Parser has changed and
+		    	// we must update our code as well.
+		    	throw new RuntimeException("The Condition.SAC_OR_CONDITION is not used by the CSS Parser. " +
+		    			"This version of seleniumQuery is not compatible with the CSS Parser present in the" +
+		    			"classpath.");
 		    	
 		    case Condition.SAC_ATTRIBUTE_CONDITION:
 		    	if (condition instanceof com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl) {
-		    		return StartsWithAttributeEvaluator.getInstance();
+		    		return StartsWithAttributeCssSelector.getInstance();
 		    	}
 		    	if (condition instanceof com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl) {
-		    		return EndsWithAttributeEvaluator.getInstance();
+		    		return EndsWithAttributeCssSelector.getInstance();
 		    	}
 		    	if (condition instanceof com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl) {
-		    		return ContainsSubstringAttributeEvaluator.getInstance();
+		    		return ContainsSubstringAttributeCssSelector.getInstance();
 		    	}
 		    	// else: condition is most probably a instance of com.steadystate.css.parser.selectors.AttributeConditionImpl
-		    	return EqualsOrHasAttributeEvaluator.getInstance();
+		    	return EqualsOrHasAttributeCssSelector.getInstance();
 	        case Condition.SAC_ID_CONDITION:
-				return IdAttributeEvaluator.getInstance();
+				return IdAttributeCssSelector.getInstance();
 	        case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
-	        	return ContainsWordAttributeEvaluator.getInstance();
+	        	return ContainsWordAttributeCssSelector.getInstance();
 	        case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-	        	return ContainsPrefixAttributeEvaluator.getInstance();
+	        	return ContainsPrefixAttributeCssSelector.getInstance();
 	        case Condition.SAC_CLASS_CONDITION:
-	        	return ClassAttributeEvaluator.getInstance();
+	        	return ClassAttributeCssSelector.getInstance();
 				
 	        case Condition.SAC_PSEUDO_CLASS_CONDITION:
 	        	return PseudoClassEvaluator.getInstance();
@@ -58,7 +62,7 @@ public class ConditionalEvaluatorFactory {
 	        	return LangPseudoClassEvaluator.getInstance();
 	            
 	        default:
-				return new UnknownConditionType<Condition>(condition.getConditionType());
+				return new UnknownConditionalCssSelector<Condition>(condition.getConditionType());
 		}
 	}
 	

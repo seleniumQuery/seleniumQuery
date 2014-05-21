@@ -1,27 +1,27 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
-public class ContainsSubstringAttributeEvaluator implements CSSCondition<AttributeCondition> {
+public class ContainsSubstringAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final ContainsSubstringAttributeEvaluator instance = new ContainsSubstringAttributeEvaluator();
+	private static final ContainsSubstringAttributeCssSelector instance = new ContainsSubstringAttributeCssSelector();
 
-	public static ContainsSubstringAttributeEvaluator getInstance() {
+	public static ContainsSubstringAttributeCssSelector getInstance() {
 		return instance;
 	}
 	
-	private ContainsSubstringAttributeEvaluator() { }
+	private ContainsSubstringAttributeCssSelector() { }
 
 	/**
 	 * Currently it is (mistakenly?) mapped to the type {@link org.w3c.css.sac.Condition#SAC_ATTRIBUTE_CONDITION}.
@@ -44,7 +44,7 @@ public class ContainsSubstringAttributeEvaluator implements CSSCondition<Attribu
 	}
 
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeSelectorSymbol = "*=";
 		// nothing to do, everyone supports this selector
 		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, attributeSelectorSymbol);

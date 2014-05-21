@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.evaluator;
+package io.github.seleniumquery.selector;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +46,11 @@ public class SelectorUtils {
 		WebElement currElement = element;
 		while (currElement != null) {
 			String lang = currElement.getAttribute("lang");
-			if (lang != null) {
+			// #Cross-Driver
+			// Absent lang attribute returns:
+			// - null in HtmlUnitDriver
+			// - "" in FirefoxDriver
+			if (lang != null && !lang.isEmpty()) {
 				return lang;
 			}
 			currElement = SelectorUtils.parent(currElement);

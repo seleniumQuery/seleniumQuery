@@ -1,7 +1,9 @@
-package io.github.seleniumquery.by.parser;
+package io.github.seleniumquery.selector.parser;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import io.github.seleniumquery.selector.parser.SelectorPreParser;
+import io.github.seleniumquery.selector.parser.TransformedSelector;
 
 import org.junit.Test;
 

@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,11 +37,11 @@ public class InputPseudoClass implements PseudoClass {
 		return FORM_ELEMENT_TAGS.contains(element.getTagName());
 	}
 	
-	private static final SqCSSFilter inputPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter inputPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :input is an extension selector, nobody implements it natively
-		return CompiledSelector.createFilterOnlySelector(inputPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(inputPseudoClassFilter);
 	}
 	
 }

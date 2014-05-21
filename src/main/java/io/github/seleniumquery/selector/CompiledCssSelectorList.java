@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector;
+package io.github.seleniumquery.selector;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -8,17 +8,17 @@ import java.util.Set;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
-public class CompiledSelectorList {
+public class CompiledCssSelectorList {
 	
-	List<CompiledSelector> css;
+	List<CompiledCssSelector> css;
 	
-	CompiledSelectorList(List<CompiledSelector> css) {
+	CompiledCssSelectorList(List<CompiledCssSelector> css) {
 		this.css = css;
 	}
 	
 	public List<WebElement> execute(SearchContext context) {
 		Set<WebElement> elements = new LinkedHashSet<WebElement>();
-		for (CompiledSelector cs : css) {
+		for (CompiledCssSelector cs : css) {
 			List<WebElement> execute = cs.execute(context);
 			elements.addAll(execute);
 		}

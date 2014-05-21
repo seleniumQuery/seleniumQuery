@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.DriverSupportMap;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.DriverSupportService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,14 +34,14 @@ public class EnabledPseudoClass implements PseudoClass {
 		return element.isEnabled() && ALLOWED_TAGS.contains(element.getTagName());
 	}
 	
-	private static final SqCSSFilter enabledPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter enabledPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:enabled
-		if (DriverSupportMap.getInstance().supportsNatively(driver, ENABLED_PSEUDO_CLASS)) {
-			return CompiledSelector.createNoFilterSelector(ENABLED_PSEUDO_CLASS);
+		if (DriverSupportService.getInstance().supportsNatively(driver, ENABLED_PSEUDO_CLASS)) {
+			return CompiledCssSelector.createNoFilterSelector(ENABLED_PSEUDO_CLASS);
 		}
-		return CompiledSelector.createFilterOnlySelector(enabledPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(enabledPseudoClassFilter);
 	}
 	
 }

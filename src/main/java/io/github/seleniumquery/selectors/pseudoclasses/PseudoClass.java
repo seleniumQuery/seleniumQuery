@@ -1,6 +1,6 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +11,6 @@ public interface PseudoClass {
 
 	boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector);
 
-	CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector);
+	CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector);
 
 }

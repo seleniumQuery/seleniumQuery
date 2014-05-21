@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.DriverSupportMap;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.DriverSupportService;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,14 +29,14 @@ public class FocusPseudoClass implements PseudoClass {
 		return element.equals(currentlyActiveElement);
 	}
 	
-	private static final SqCSSFilter focusPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter focusPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:focus
-		if (DriverSupportMap.getInstance().supportsNatively(driver, FOCUS_PSEUDO_CLASS)) {
-			return CompiledSelector.createNoFilterSelector(FOCUS_PSEUDO_CLASS);
+		if (DriverSupportService.getInstance().supportsNatively(driver, FOCUS_PSEUDO_CLASS)) {
+			return CompiledCssSelector.createNoFilterSelector(FOCUS_PSEUDO_CLASS);
 		}
-		return CompiledSelector.createFilterOnlySelector(focusPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(focusPseudoClassFilter);
 	}
 	
 }

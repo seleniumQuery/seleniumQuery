@@ -1,7 +1,7 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,11 +33,11 @@ public class ResetPseudoClass implements PseudoClass {
 				&& RESET.equalsIgnoreCase(element.getAttribute("type"));
 	}
 	
-	private static final SqCSSFilter resetPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter resetPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :reset is an extension selector, nobody implements it natively
-		return CompiledSelector.createFilterOnlySelector(resetPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(resetPseudoClassFilter);
 	}
 	
 }

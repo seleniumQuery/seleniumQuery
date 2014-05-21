@@ -1,6 +1,6 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selectors.attributes;
 
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

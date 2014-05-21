@@ -1,26 +1,26 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selectors.attributes;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
-public class IdAttributeEvaluator implements CSSCondition<AttributeCondition> {
+public class IdAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
 	private static final String ID_ATTRIBUTE = "id";
-	private static final IdAttributeEvaluator instance = new IdAttributeEvaluator();
+	private static final IdAttributeCssSelector instance = new IdAttributeCssSelector();
 
-	public static IdAttributeEvaluator getInstance() {
+	public static IdAttributeCssSelector getInstance() {
 		return instance;
 	}
 	
-	private IdAttributeEvaluator() { }
+	private IdAttributeCssSelector() { }
 
 	/**
 	 * @see {@link org.w3c.css.sac.Condition#SAC_ID_CONDITION}
@@ -42,10 +42,10 @@ public class IdAttributeEvaluator implements CSSCondition<AttributeCondition> {
 	}
 
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedId = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by id
-		return CompiledSelector.createNoFilterSelector("#"+SelectorUtils.escapeSelector(wantedId));
+		return CompiledCssSelector.createNoFilterSelector("#"+SelectorUtils.escapeSelector(wantedId));
 	}
 
 }

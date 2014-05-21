@@ -1,19 +1,19 @@
-package io.github.seleniumquery.by.evaluator.tagname;
+package io.github.seleniumquery.selectors.tagname;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.evaluator.CSSSelector;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.ElementSelector;
 
-public class TagNameEvaluator implements CSSSelector<ElementSelector> {
+public class TagNameSelector implements CssSelector<ElementSelector> {
 
-	private static final TagNameEvaluator instance = new TagNameEvaluator();
+	private static final TagNameSelector instance = new TagNameSelector();
 
-	public static TagNameEvaluator getInstance() {
+	public static TagNameSelector getInstance() {
 		return instance;
 	}
 
@@ -24,9 +24,9 @@ public class TagNameEvaluator implements CSSSelector<ElementSelector> {
 	}
 
 	@Override
-	public CompiledSelector compile(WebDriver driver, Map<String, String> stringMap, ElementSelector selector) {
+	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, ElementSelector selector) {
 		// nothing to do, everyone supports filtering by tag name
-		return CompiledSelector.createNoFilterSelector(selector);
+		return CompiledCssSelector.createNoFilterSelector(selector);
 	}
 
 }

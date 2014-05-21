@@ -39,17 +39,17 @@ public class PropFunctionTest {
     // http://jsbin.com/ceqijima/2/edit
     @Test
     public void prop_function__setting() throws Exception {
-    	setAndVerify(true, true);
-    	setAndVerify(1, true);
-    	setAndVerify(0, false);
-    	setAndVerify("1", true);
-    	setAndVerify("0", true);
-    	setAndVerify("a", true);
-    	setAndVerify("", false);
-    	setAndVerify(false, false);
+    	setPropAndVerify(true, true);
+    	setPropAndVerify(1, true);
+    	setPropAndVerify(0, false);
+    	setPropAndVerify("1", true);
+    	setPropAndVerify("0", true);
+    	setPropAndVerify("a", true);
+    	setPropAndVerify("", false);
+    	setPropAndVerify(false, false);
     }
 	
-	private void setAndVerify(Object val, Object expected) {
+	private void setPropAndVerify(Object val, Object expected) {
 		reset();
 		$("#c1 .other").prop("selected", val);
 		assertThat($("#c1 .other").prop("selected"), is(expected));

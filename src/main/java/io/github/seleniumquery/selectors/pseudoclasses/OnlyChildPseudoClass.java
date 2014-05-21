@@ -1,9 +1,9 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.DriverSupportMap;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,15 +37,15 @@ public class OnlyChildPseudoClass implements PseudoClass {
 		return SelectorUtils.itselfWithSiblings(element).size() == 1;
 	}
 	
-	private static final SqCSSFilter onlyChildPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter onlyChildPseudoClassFilter = new PseudoClassFilter(getInstance());
 
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child
-		if (DriverSupportMap.getInstance().supportsNatively(driver, ONLY_CHILD_PSEUDO_CLASS)) {
-			return CompiledSelector.createNoFilterSelector(ONLY_CHILD_PSEUDO_CLASS);
+		if (DriverSupportService.getInstance().supportsNatively(driver, ONLY_CHILD_PSEUDO_CLASS)) {
+			return CompiledCssSelector.createNoFilterSelector(ONLY_CHILD_PSEUDO_CLASS);
 		}
-		return CompiledSelector.createFilterOnlySelector(onlyChildPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(onlyChildPseudoClassFilter);
 	}
 	
 }

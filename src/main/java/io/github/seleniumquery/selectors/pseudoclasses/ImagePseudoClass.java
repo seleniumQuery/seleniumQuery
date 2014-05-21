@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
 /**
  * http://api.jquery.com/image-selector/

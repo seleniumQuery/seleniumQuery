@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.evaluator.conditionals.pseudoclasses;
+package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
-import io.github.seleniumquery.by.selector.SqCSSFilter;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,11 +27,11 @@ public class HiddenPseudoClass implements PseudoClass {
 		return !SelectorUtils.isVisible(element);
 	}
 	
-	private static final SqCSSFilter hiddenPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final CssFilter hiddenPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
-	public CompiledSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :hidden is an extension selector, no browser implements it natively
-		return CompiledSelector.createFilterOnlySelector(hiddenPseudoClassFilter);
+		return CompiledCssSelector.createFilterOnlySelector(hiddenPseudoClassFilter);
 	}
 	
 }

@@ -1,27 +1,27 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
-public class ContainsPrefixAttributeEvaluator implements CSSCondition<AttributeCondition> {
+public class ContainsPrefixAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final ContainsPrefixAttributeEvaluator instance = new ContainsPrefixAttributeEvaluator();
+	private static final ContainsPrefixAttributeCssSelector instance = new ContainsPrefixAttributeCssSelector();
 
-	public static ContainsPrefixAttributeEvaluator getInstance() {
+	public static ContainsPrefixAttributeCssSelector getInstance() {
 		return instance;
 	}
 	
-	private ContainsPrefixAttributeEvaluator() { }
+	private ContainsPrefixAttributeCssSelector() { }
 
 	/**
 	 * @see {@link org.w3c.css.sac.Condition#SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION}
@@ -39,7 +39,7 @@ public class ContainsPrefixAttributeEvaluator implements CSSCondition<AttributeC
 	}
 
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeSelectorSymbol = "|=";
 		// nothing to do, everyone supports this selector
 		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, attributeSelectorSymbol);

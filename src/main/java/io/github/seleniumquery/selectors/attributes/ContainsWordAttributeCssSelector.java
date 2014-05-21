@@ -1,25 +1,25 @@
-package io.github.seleniumquery.by.evaluator.conditionals.attributes;
+package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 
 import java.util.Map;
 
-import io.github.seleniumquery.by.evaluator.CSSCondition;
-import io.github.seleniumquery.by.evaluator.SelectorUtils;
-import io.github.seleniumquery.by.selector.CompiledSelector;
+import io.github.seleniumquery.selector.CompiledCssSelector;
+import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
-public class ContainsWordAttributeEvaluator implements CSSCondition<AttributeCondition> {
+public class ContainsWordAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final ContainsWordAttributeEvaluator instance = new ContainsWordAttributeEvaluator();
-	public static ContainsWordAttributeEvaluator getInstance() {
+	private static final ContainsWordAttributeCssSelector instance = new ContainsWordAttributeCssSelector();
+	public static ContainsWordAttributeCssSelector getInstance() {
 		return instance;
 	}
-	private ContainsWordAttributeEvaluator() { }
+	private ContainsWordAttributeCssSelector() { }
 	
 
 	public static final String CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL = "~=";
@@ -50,7 +50,7 @@ public class ContainsWordAttributeEvaluator implements CSSCondition<AttributeCon
 	}
 
 	@Override
-	public CompiledSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		// nothing to do, everyone supports this selector
 		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition,
 				CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL);
