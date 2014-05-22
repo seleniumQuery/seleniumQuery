@@ -22,12 +22,18 @@ public class HtmlFunction {
 		return html(driver, elements.get(0));
 	}
 
+	// #Cross-Driver
+	// element.getAttribute("innerHTML") does not work for HtmlUnitDriver, so we must
+	// resort to JavaScript when it is being used as driver.
 	public static String html(WebDriver driver, WebElement element) {
+		if (DriverSupportService.isNotHtmlUnitDriver(driver)) {
+			return element.getAttribute("innerHTML");
+		}
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String html = js.executeScript("return arguments[0].innerHTML", element).toString();
 		// #Cross-Driver
 		// HtmlUnitDriver does not append a "\n" to the HTML of the body tag
-		// Chrome, Firefox and IE10 seem to.
+		// as Chrome, Firefox and IE10 seem to.
 		// So we add it!
 		if (DriverSupportService.isHtmlUnitDriver(driver) && "body".equals(element.getTagName())) {
 			html = html + "\n";
