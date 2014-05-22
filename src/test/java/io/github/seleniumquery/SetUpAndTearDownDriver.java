@@ -37,9 +37,9 @@ public class SetUpAndTearDownDriver implements MethodRule {
 	}
 	
 	private void before(Object testClassInstance) {
-		$.browser.setDefaultDriver(getHtmlUnitFirefox3Driver());
+//		$.browser.setDefaultDriver(getHtmlUnitFirefox3Driver());
 //		$.browser.setDefaultDriverAsChrome();
-//		$.browser.setDefaultDriverAsIE();
+		$.browser.setDefaultDriverAsIE();
 //		$.browser.setDefaultDriverAsFirefox();
 //		$.browser.setDefaultDriverAsPhantomJS();
 //		$.browser.setDefaultDriverAsHtmlUnit();

@@ -13,34 +13,20 @@ public class ParentPseudoClassTest {
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	// http://jsbin.com/lutim/4/edit
+	// http://jsbin.com/lutim/6/edit
 	@Test
 	public void parentPseudoClass() {
-		assertThat($("#d1").is(":parent"), is(false));
-	}
-	@Test
-	public void parentPseudoClass2() {
-		assertThat($("#d2").is(":parent"), is(true));
-	}
-	@Test
-	public void parentPseudoClass3() {
+		assertThat($("#d1").is(":parent"), is(true));
+		assertThat($("#d2").is(":parent"), is(false));
 		assertThat($("#d3").is(":parent"), is(true));
-	}
-	@Test
-	public void parentPseudoClass4() {
-		assertThat($("#d4").is(":parent"), is(false));
-	}
-	@Test
-	public void parentPseudoClass5() {
+		assertThat($("#d4").is(":parent"), is(true));
 		assertThat($("#d5").is(":parent"), is(true));
-	}
-	@Test
-	public void parentPseudoClass6() {
-		assertThat($("#d6").is(":parent"), is(false));
-	}
-	@Test
-	public void parentPseudoClass7() {
-		assertThat($("#d7").is(":parent"), is(true));
+
+		assertThat($("#d10").is(":parent"), is(true));
+		assertThat($("#d11").is(":parent"), is(false));
+		assertThat($("#d12").is(":parent"), is(true));
+		assertThat($("#d13").is(":parent"), is(false));
+		assertThat($("#d14").is(":parent"), is(true));
 	}
 	
 }
