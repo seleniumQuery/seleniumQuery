@@ -10,7 +10,7 @@ import io.github.seleniumquery.selectors.attributes.EqualsOrHasAttributeCssSelec
 import io.github.seleniumquery.selectors.attributes.IdAttributeCssSelector;
 import io.github.seleniumquery.selectors.attributes.StartsWithAttributeCssSelector;
 import io.github.seleniumquery.selectors.pseudoclasses.LangPseudoClassEvaluator;
-import io.github.seleniumquery.selectors.pseudoclasses.PseudoClassEvaluator;
+import io.github.seleniumquery.selectors.pseudoclasses.PseudoClassCssSelector;
 
 import org.w3c.css.sac.Condition;
 
@@ -57,7 +57,7 @@ public class ConditionalCssSelectorFactory {
 	        	return ClassAttributeCssSelector.getInstance();
 				
 	        case Condition.SAC_PSEUDO_CLASS_CONDITION:
-	        	return PseudoClassEvaluator.getInstance();
+	        	return PseudoClassCssSelector.getInstance();
 	        case Condition.SAC_LANG_CONDITION:
 	        	return LangPseudoClassEvaluator.getInstance();
 	            
