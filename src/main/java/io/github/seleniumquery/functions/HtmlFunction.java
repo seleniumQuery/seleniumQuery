@@ -16,16 +16,20 @@ public class HtmlFunction {
 	}
 	
 	public static String html(WebDriver driver, List<WebElement> elements) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		if (elements.isEmpty()) {
 			return null;
 		}
-		String html = js.executeScript("return arguments[0].innerHTML", elements.get(0)).toString();
+		return html(driver, elements.get(0));
+	}
+
+	public static String html(WebDriver driver, WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String html = js.executeScript("return arguments[0].innerHTML", element).toString();
 		// #Cross-Driver
 		// HtmlUnitDriver does not append a "\n" to the HTML of the body tag
 		// Chrome, Firefox and IE10 seem to.
 		// So we add it!
-		if (DriverSupportService.isHtmlUnitDriver(driver) && "body".equals(elements.get(0).getTagName())) {
+		if (DriverSupportService.isHtmlUnitDriver(driver) && "body".equals(element.getTagName())) {
 			html = html + "\n";
 		}
 		return html;
