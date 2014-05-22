@@ -26,16 +26,19 @@ public class ParentPseudoClass implements PseudoClass {
 	
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		System.out.println("#"+element.getAttribute("id"));
-		List<WebElement> findElements = element.findElements(By.xpath("./*"));
-		if (findElements.isEmpty()) {
-			System.out.println("\nHAS NO CHILDREN. Text is: '"+element.getText()+"'");
-			System.out.println("Empty? "+element.getText().isEmpty());
-			return !element.getText().isEmpty();
-		}
-		System.out.println("HAS CHILDREN!");
-		// has children
-		return true;
+		
+		return !element.findElements(By.xpath("self::node()[count(node()) > 0]")).isEmpty();
+		
+		
+//		System.out.println("#"+element.getAttribute("id"));
+//		boolean elementHasChildrenNodes = !element.findElements(By.xpath("./*[0]")).isEmpty();
+//		if (elementHasChildrenNodes) {
+//			System.out.println("HAS CHILDREN!");
+//			return true;
+//		}
+//		System.out.println("\nHAS NO CHILDREN. Text is: '"+element.getText()+"'");
+//		System.out.println("Empty? "+element.getText().isEmpty());
+//		return !element.getText().isEmpty();
 	}
 	
 	private static final CssFilter parentPseudoClassFilter = new PseudoClassFilter(getInstance());
