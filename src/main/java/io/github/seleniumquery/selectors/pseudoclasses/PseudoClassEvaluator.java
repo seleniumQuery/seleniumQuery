@@ -31,7 +31,8 @@ public class PseudoClassEvaluator implements CssConditionalSelector<AttributeCon
 			ResetPseudoClass.getInstance(), ButtonPseudoClass.getInstance(), InputPseudoClass.getInstance(),
 			HeaderPseudoClass.getInstance(), LtPseudoClass.getInstance(), GtPseudoClass.getInstance(),
 			FocusPseudoClass.getInstance(), FocusablePseudoClass.getInstance(), TabbablePseudoClass.getInstance(),
-			HasPseudoClass.getInstance(), LangPseudoClass.getInstance(), ParentPseudoClass.getInstance());
+			HasPseudoClass.getInstance(), LangPseudoClass.getInstance(), ParentPseudoClass.getInstance(),
+			EmptyPseudoClass.getInstance());
 
 	@Override
 	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {

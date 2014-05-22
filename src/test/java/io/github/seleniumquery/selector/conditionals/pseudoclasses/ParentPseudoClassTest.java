@@ -1,6 +1,7 @@
 package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static io.github.seleniumquery.selector.DriverSupportService.isHtmlUnitDriverEmulatingIE;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
@@ -18,15 +19,26 @@ public class ParentPseudoClassTest {
 	public void parentPseudoClass() {
 		assertThat($("#d1").is(":parent"), is(true));
 		assertThat($("#d2").is(":parent"), is(false));
-		assertThat($("#d3").is(":parent"), is(true));
-		assertThat($("#d4").is(":parent"), is(true));
+		
+		if (isHtmlUnitDriverEmulatingIE($.browser.getDefaultDriver())) {
+			assertThat($("#d3").is(":parent"), is(false));
+			assertThat($("#d4").is(":parent"), is(false));
+		} else {
+			assertThat($("#d3").is(":parent"), is(true));
+			assertThat($("#d4").is(":parent"), is(true));
+		}
 		assertThat($("#d5").is(":parent"), is(true));
 
 		assertThat($("#d10").is(":parent"), is(true));
 		assertThat($("#d11").is(":parent"), is(false));
 		assertThat($("#d12").is(":parent"), is(true));
 		assertThat($("#d13").is(":parent"), is(false));
-		assertThat($("#d14").is(":parent"), is(true));
+		
+		if (isHtmlUnitDriverEmulatingIE($.browser.getDefaultDriver())) {
+			assertThat($("#d14").is(":parent"), is(false));
+		} else {
+			assertThat($("#d14").is(":parent"), is(true));
+		}
 	}
 	
 }
