@@ -177,9 +177,11 @@ jQuery("input.street").val("5th St!");
 
 #CSS and jQuery Extension Selectors
 
-**All jQuery (Sizzle) Extension selectors are supported**. Below the list of supported and noteworthy CSS and jQuery Extension selectors.
+**All jQuery (Sizzle) Extension selectors are supported**. Below the list of noteworthy CSS and jQuery Extension selectors.
 
-As expected, the note jQuery usually displays in their extensions applies to seleniumQuery as well: Queries using the extended selectors cannot take advantage of the performance boost provided by the native DOM `querySelectorAll()` method. This way, if your code has performance issues, you may achive faster results by using native CSS selectors.
+As expected, the note jQuery usually displays in their extensions applies to seleniumQuery as well:
+
+> Queries using the extended selectors cannot take advantage of the performance boost provided by the native DOM `querySelectorAll()` method. This way, if your code has performance issues, you may achieve faster results by using native CSS selectors.
 
 - [`[name!="value"]` - Attribute Not Equal](http://api.jquery.com/attribute-not-equal-selector/) - Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.
 - [`:button`](http://api.jquery.com/button-selector/) - Selects all `button` elements and elements of type `button`.
@@ -205,7 +207,7 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - [`:lt()`](http://api.jquery.com/lt-selector/) - Select all elements at an index less than the given `index` within the matched set.
 - [`:odd`](http://api.jquery.com/odd-selector/) -  Selects odd elements, zero-indexed. See also `:even`.
 - [`:password`](http://api.jquery.com/password-selector/) - Selects all elements of type `password`.
-- [`:parent`](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text). See also `:empty`.
+- [`:parent`](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text). See `:empty`.
 - [`:radio`](http://api.jquery.com/radio-selector/) - Selects all elements of type `radio`.
 - [`:reset`](http://api.jquery.com/reset-selector/) - Selects all elements of type `reset`.
 - [`:selected`](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
