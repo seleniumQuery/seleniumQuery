@@ -1,6 +1,7 @@
 package io.github.seleniumquery;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.junit.Assert.fail;
 
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
@@ -22,13 +23,14 @@ public class SetUpAndTearDownDriver implements MethodRule {
 	
 	@Override
 	public Statement apply(final Statement base, FrameworkMethod method, final Object target) {
-//		return new RunStatementInEveryBrowser(base, target);
-		return new RunStatementForSelectedBrowser(base, target);
+		return new RunStatementInEveryBrowser(base, target);
+//		return new RunStatementForSelectedBrowser(base, target);
 	}
 	
 	class RunStatementInEveryBrowser extends Statement {
 		private Statement base;
 		private Object target;
+		private boolean failed = false;
 		public RunStatementInEveryBrowser(Statement base, Object target) {
 			super();
 			this.base = base;
@@ -60,12 +62,18 @@ public class SetUpAndTearDownDriver implements MethodRule {
 			System.out.println("@# Running on PhantomJS");
 			$.browser.setDefaultDriverAsPhantomJS();
 			execute();
+			if (failed) {
+				fail("There are test failures.");
+			}
 		}
 		
 		private void execute() throws Throwable {
 			before(target);
 			try {
 				base.evaluate();
+			} catch (Throwable t) {
+				failed = true;
+				System.err.println("Test failed!"+t.getMessage());
 			} finally {
 				after();
 			}
