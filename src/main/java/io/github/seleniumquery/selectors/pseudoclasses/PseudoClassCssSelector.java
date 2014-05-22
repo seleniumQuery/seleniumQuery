@@ -12,13 +12,13 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
-public class PseudoClassEvaluator implements CssConditionalSelector<AttributeCondition> {
+public class PseudoClassCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final PseudoClassEvaluator instance = new PseudoClassEvaluator();
-	public static PseudoClassEvaluator getInstance() {
+	private static final PseudoClassCssSelector instance = new PseudoClassCssSelector();
+	public static PseudoClassCssSelector getInstance() {
 		return instance;
 	}
-	private PseudoClassEvaluator() { }
+	private PseudoClassCssSelector() { }
 	
 	private final List<PseudoClass> pseudoClasses = Arrays.asList(CheckedPseudoClass.getInstance(),
 			SelectedPseudoClass.getInstance(), EqPseudoClass.getInstance(), OnlyChildPseudoClass.getInstance(),
