@@ -5,7 +5,6 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -23,28 +22,91 @@ public class SetUpAndTearDownDriver implements MethodRule {
 	
 	@Override
 	public Statement apply(final Statement base, FrameworkMethod method, final Object target) {
-		return new Statement() {
-			@Override
-			public void evaluate() throws Throwable {
-				before(target);
-				try {
-					base.evaluate();
-				} finally {
-					after();
-				}
+//		return new RunStatementInEveryBrowser(base, target);
+		return new RunStatementForSelectedBrowser(base, target);
+	}
+	
+	class RunStatementInEveryBrowser extends Statement {
+		private Statement base;
+		private Object target;
+		public RunStatementInEveryBrowser(Statement base, Object target) {
+			super();
+			this.base = base;
+			this.target = target;
+		}
+		
+		@SuppressWarnings("deprecation")
+		@Override
+		public void evaluate() throws Throwable {
+			executeInHtmlUnit(BrowserVersion.FIREFOX_3_6);
+			executeInHtmlUnit(BrowserVersion.FIREFOX_10);
+			executeInHtmlUnit(BrowserVersion.FIREFOX_17);
+			executeInHtmlUnit(BrowserVersion.CHROME_16);
+			executeInHtmlUnit(BrowserVersion.CHROME);
+			executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_6);
+			executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_7);
+			executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
+			executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_9);
+			executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_10);
+			System.out.println("@# Running on Chrome");
+			$.browser.setDefaultDriverAsChrome();
+			execute();
+			System.out.println("@# Running on IE10");
+			$.browser.setDefaultDriverAsIE();
+			execute();
+			System.out.println("@# Running on Firefox");
+			$.browser.setDefaultDriverAsFirefox();
+			execute();
+			System.out.println("@# Running on PhantomJS");
+			$.browser.setDefaultDriverAsPhantomJS();
+			execute();
+		}
+		
+		private void execute() throws Throwable {
+			before(target);
+			try {
+				base.evaluate();
+			} finally {
+				after();
 			}
-		};
+		}
+		
+		private void executeInHtmlUnit(BrowserVersion browserVersion) throws Throwable {
+			System.out.println("@# Running on HtmlUnit ("+browserVersion+")");
+			$.browser.setDefaultDriver(createHtmlUnitDriverWithJavasCriptEnabled(browserVersion));
+			execute();
+		}
+	}
+	
+	class RunStatementForSelectedBrowser extends Statement {
+		private Statement base;
+		private Object target;
+		public RunStatementForSelectedBrowser(Statement base, Object target) {
+			super();
+			this.base = base;
+			this.target = target;
+		}
+		@Override
+		public void evaluate() throws Throwable {
+			before(target);
+			try {
+				base.evaluate();
+			} finally {
+				after();
+			}
+		}
 	}
 	
 	private void before(Object testClassInstance) {
-//		$.browser.setDefaultDriver(getHtmlUnitFirefox3Driver());
+//		$.browser.setDefaultDriverAsHtmlUnit();
 //		$.browser.setDefaultDriverAsChrome();
-		$.browser.setDefaultDriverAsIE();
+//		$.browser.setDefaultDriverAsIE();
 //		$.browser.setDefaultDriverAsFirefox();
 //		$.browser.setDefaultDriverAsPhantomJS();
-//		$.browser.setDefaultDriverAsHtmlUnit();
-		
-		
+		openPage(testClassInstance);
+	}
+	
+	private void openPage(Object testClassInstance) {
 		if (htmlTestUrlClass == null) {
 			$.browser.openUrl(TestInfrastructure.getHtmlTestFileUrl(testClassInstance.getClass()));
 		} else {
@@ -52,19 +114,14 @@ public class SetUpAndTearDownDriver implements MethodRule {
 		}
 	}
 	
-	/**
-	 * Driver to be used by all tests.
-	 * This method exists so we can, from time to time, run all tests in a different browser.
-	 */
-	private static WebDriver getHtmlUnitFirefox3Driver() {
-		@SuppressWarnings("deprecation")
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_3_6);
-		htmlUnitDriver.setJavascriptEnabled(true);
-		return htmlUnitDriver;
-	}
-	
 	private void after() {
 		$.browser.quitDefaultBrowser();
+	}
+	
+	private static HtmlUnitDriver createHtmlUnitDriverWithJavasCriptEnabled(final BrowserVersion browserVersion) {
+		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(browserVersion);
+		htmlUnitDriver.setJavascriptEnabled(true);
+		return htmlUnitDriver;
 	}
 	
 }

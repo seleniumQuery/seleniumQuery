@@ -1,11 +1,15 @@
 package io.github.seleniumquery.selector;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import com.gargoylesoftware.htmlunit.WebClient;
 
 public class DriverSupportService {
 	
@@ -65,6 +69,27 @@ public class DriverSupportService {
 	
 	private static boolean instanceEqualsClassName(Object instance, final String className) {
 		return instance.getClass().getSimpleName().equals(className);
+	}
+	
+	public static String getEmulatedBrowser(WebDriver htmlUnitDriver) {
+		if (!(htmlUnitDriver instanceof HtmlUnitDriver)) {
+			return "";
+		}
+		try {
+			Method m = HtmlUnitDriver.class.getDeclaredMethod("getWebClient");
+			final boolean accessible = m.isAccessible();
+			m.setAccessible(true);
+			WebClient wc = (WebClient) m.invoke(htmlUnitDriver);
+			m.setAccessible(accessible);
+			return wc.getBrowserVersion().toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
+	
+	public static boolean isHtmlUnitDriverEmulatingIE(WebDriver driver) {
+		return DriverSupportService.getEmulatedBrowser(driver).startsWith("IE");
 	}
 	
 }
