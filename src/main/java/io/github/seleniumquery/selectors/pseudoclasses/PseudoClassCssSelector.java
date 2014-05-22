@@ -32,7 +32,8 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 			HeaderPseudoClass.getInstance(), LtPseudoClass.getInstance(), GtPseudoClass.getInstance(),
 			FocusPseudoClass.getInstance(), FocusablePseudoClass.getInstance(), TabbablePseudoClass.getInstance(),
 			HasPseudoClass.getInstance(), LangPseudoClass.getInstance(), ParentPseudoClass.getInstance(),
-			EmptyPseudoClass.getInstance(), TextPseudoClass.getInstance());
+			EmptyPseudoClass.getInstance(), TextPseudoClass.getInstance(), EvenPseudoClass.getInstance(),
+			OddPseudoClass.getInstance());
 
 	@Override
 	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
