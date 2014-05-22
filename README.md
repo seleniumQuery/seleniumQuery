@@ -177,7 +177,7 @@ jQuery("input.street").val("5th St!");
 
 #CSS and jQuery Extension Selectors
 
-Below the list of supported and noteworthy CSS and jQuery Extension selectors.
+**All jQuery (Sizzle) Extension selectors are supported**. Below the list of supported and noteworthy CSS and jQuery Extension selectors.
 
 As expected, the note jQuery usually displays in their extensions applies to seleniumQuery as well: Queries using the extended selectors cannot take advantage of the performance boost provided by the native DOM `querySelectorAll()` method. This way, if your code has performance issues, you may achive faster results by using native CSS selectors.
 
