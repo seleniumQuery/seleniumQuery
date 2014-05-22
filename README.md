@@ -187,10 +187,10 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - [`:checked`](https://api.jquery.com/checked-selector/) - Matches all elements that are checked or selected.
 - [`:contains()`](http://api.jquery.com/contains-selector/) - Select all elements that contain the specified text.
 - [`:disabled`](http://api.jquery.com/disabled-selector/) - Selects all elements that are disabled.
-- [`:empty`](http://api.jquery.com/empty-selector/) - Select all elements that have no children (including text nodes).
+- [`:empty`](http://api.jquery.com/empty-selector/) - Select all elements that have no children (including text nodes). See also `:parent`.
 - [`:enabled`](http://api.jquery.com/enabled-selector/) - Selects all elements that are enabled.
 - [`:eq()`](http://api.jquery.com/eq-selector/) - Select the element at index `n` within the matched set.
-- ~~[`:even`](http://api.jquery.com/even-selector/) - Selects even elements, zero-indexed. See also `:odd`.~~
+- [`:even`](http://api.jquery.com/even-selector/) - Selects even elements, zero-indexed. See also `:odd`.
 - [`:file`](http://api.jquery.com/file-selector/) - Selects all elements of type `file`.
 - [`:first`](http://api.jquery.com/first-selector/) -  Selects the first matched element.
 - [`:focus`](http://api.jquery.com/focus-selector/) - Selects element if it is currently focused.
@@ -199,13 +199,13 @@ As expected, the note jQuery usually displays in their extensions applies to sel
 - [`:has()`](http://api.jquery.com/has-selector/) - Selects elements which contain at least one element that matches the specified selector.
 - [`:header`](http://api.jquery.com/header-selector/) - Selects all elements that are headers, like `h1`, `h2`, `h3` and so on.
 - [`:hidden`](http://api.jquery.com/hidden-selector/) - Selects all elements that are hidden.
-- [`:image`](http://api.jquery.com/image-selector/) -  Selects all elements of type image.
+- [`:image`](http://api.jquery.com/image-selector/) -  Selects all elements of type `image`.
 - [`:input`](http://api.jquery.com/input-selector/) - Selects all `input`, `textarea`, `select` and `button` elements.
 - [`:last`](http://api.jquery.com/last-selector/) - Selects the last matched element.
 - [`:lt()`](http://api.jquery.com/lt-selector/) - Select all elements at an index less than the given `index` within the matched set.
-- ~~[`:odd`](http://api.jquery.com/odd-selector/) -  Selects odd elements, zero-indexed. See also even.~~
+- [`:odd`](http://api.jquery.com/odd-selector/) -  Selects odd elements, zero-indexed. See also `:even`.
 - [`:password`](http://api.jquery.com/password-selector/) - Selects all elements of type `password`.
-- [`:parent`](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text).
+- [`:parent`](http://api.jquery.com/parent-selector/) - Select all elements that have at least one child node (either an element or text). See also `:empty`.
 - [`:radio`](http://api.jquery.com/radio-selector/) - Selects all elements of type `radio`.
 - [`:reset`](http://api.jquery.com/reset-selector/) - Selects all elements of type `reset`.
 - [`:selected`](http://api.jquery.com/selected-selector/) - Selects all elements that are selected.
