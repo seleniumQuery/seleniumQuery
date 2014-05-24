@@ -31,7 +31,7 @@ public class AttributeEvaluatorTest {
 	
 	@Test
 	public void containsPrefixAttributeEvaluator() {
-		// TODO problem here on HtmlUnitDriver, check warnings
+		// TODO maybe there's a problem here on HtmlUnitDriver, check warnings
 		assertAll("|=", "c");
 	}
 	
@@ -42,7 +42,7 @@ public class AttributeEvaluatorTest {
 	
 	@Test
 	public void containsWordAttributeEvaluator() {
-		// TODO problem here on HtmlUnitDriver, check warnings
+		// TODO maybe there's a problem here on HtmlUnitDriver, check warnings
 		assertAll(ContainsWordAttributeCssSelector.CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL, "c");
 	}
 	
