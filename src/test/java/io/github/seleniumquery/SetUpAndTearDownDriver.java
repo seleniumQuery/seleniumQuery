@@ -30,16 +30,40 @@ public class SetUpAndTearDownDriver implements MethodRule {
 	class RunStatementInEveryBrowser extends Statement {
 		private Statement base;
 		private Object target;
-		private boolean failed = false;
+		private String failed;
 		public RunStatementInEveryBrowser(Statement base, Object target) {
 			super();
 			this.base = base;
 			this.target = target;
+			this.failed = "";
 		}
 		
-		@SuppressWarnings("deprecation")
 		@Override
 		public void evaluate() throws Throwable {
+			executeAllHtmlUnits();
+			executeAllOtherDrivers();
+			if (!failed.isEmpty()) {
+				fail("There are test failures in the drivers: "+failed);
+			}
+		}
+
+		private void executeAllOtherDrivers() throws Throwable {
+			System.out.println("@# Running on Chrome");
+			$.browser.setDefaultDriverAsChrome();
+			execute("Chrome");
+//			System.out.println("@# Running on IE10");
+//			$.browser.setDefaultDriverAsIE();
+//			execute("IE10");
+			System.out.println("@# Running on Firefox");
+			$.browser.setDefaultDriverAsFirefox();
+			execute("Firefox");
+			System.out.println("@# Running on PhantomJS");
+			$.browser.setDefaultDriverAsPhantomJS();
+			execute("PhantomJS");
+		}
+
+		@SuppressWarnings("deprecation")
+		private void executeAllHtmlUnits() throws Throwable {
 			executeInHtmlUnit(BrowserVersion.FIREFOX_3_6);
 			executeInHtmlUnit(BrowserVersion.FIREFOX_10);
 			executeInHtmlUnit(BrowserVersion.FIREFOX_17);
@@ -50,29 +74,14 @@ public class SetUpAndTearDownDriver implements MethodRule {
 			executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
 			executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_9);
 			executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_10);
-			System.out.println("@# Running on Chrome");
-			$.browser.setDefaultDriverAsChrome();
-			execute();
-			System.out.println("@# Running on IE10");
-			$.browser.setDefaultDriverAsIE();
-			execute();
-			System.out.println("@# Running on Firefox");
-			$.browser.setDefaultDriverAsFirefox();
-			execute();
-			System.out.println("@# Running on PhantomJS");
-			$.browser.setDefaultDriverAsPhantomJS();
-			execute();
-			if (failed) {
-				fail("There are test failures.");
-			}
 		}
 		
-		private void execute() throws Throwable {
+		private void execute(String driver) throws Throwable {
 			before(target);
 			try {
 				base.evaluate();
 			} catch (Throwable t) {
-				failed = true;
+				failed += driver + " ";
 				System.err.println("Test failed!"+t.getMessage());
 			} finally {
 				after();
@@ -82,7 +91,7 @@ public class SetUpAndTearDownDriver implements MethodRule {
 		private void executeInHtmlUnit(BrowserVersion browserVersion) throws Throwable {
 			System.out.println("@# Running on HtmlUnit ("+browserVersion+")");
 			$.browser.setDefaultDriver(createHtmlUnitDriverWithJavasCriptEnabled(browserVersion));
-			execute();
+			execute("HtmlUnit("+browserVersion.toString()+")");
 		}
 	}
 	
