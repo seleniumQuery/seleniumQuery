@@ -1,12 +1,12 @@
 package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.selector.CssSelectorCompilerServiceTest.assertSelectorMatchedSetSize;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class EnabledPseudoClassTest {
 	
@@ -15,49 +15,37 @@ public class EnabledPseudoClassTest {
 	
 	@Test
 	public void enabledPseudo_with_tag_button() {
-		assertSelectorMatchedSetSize("button:enabled", 1);
+		assertThat($("button:enabled").size(), is(1));
 	}
 	
 	@Test
 	public void enabledPseudo_with_tag_input() {
-		assertSelectorMatchedSetSize("input:enabled", 24);
+		assertThat($("input:enabled").size(), is(24));
 	}
 	
 	@Test
 	public void enabledPseudo_with_tag_select() {
-		assertSelectorMatchedSetSize("select:enabled", 1);
+		assertThat($("select:enabled").size(), is(1));
 	}
 	
 	@Test
 	public void enabledPseudo_with_tag_option() {
-		if ($.browser.getDefaultDriver() instanceof HtmlUnitDriver) {
-			// TODO this is a known HtmlUnit bug! See issue #3
-			assertSelectorMatchedSetSize("option:enabled", 9);
-		}
-		else {
-			assertSelectorMatchedSetSize("option:enabled", 3);
-		}
+		assertThat($("option:enabled").size(), is(3));
 	}
 	
 	@Test
 	public void enabledPseudo_with_tag_optgroup() {
-		assertSelectorMatchedSetSize("optgroup:enabled", 3);
+		assertThat($("optgroup:enabled").size(), is(3));
 	}
 	
 	@Test
 	public void enabledPseudo_with_tag_textarea() {
-		assertSelectorMatchedSetSize("textarea:enabled", 1);
+		assertThat($("textarea:enabled").size(), is(1));
 	}
 	
 	@Test
 	public void enabledPseudo() {
-		if ($.browser.getDefaultDriver() instanceof HtmlUnitDriver) {
-			// TODO see enabledPseudo_with_tag_option()
-			assertSelectorMatchedSetSize(":enabled", 39);
-		}
-		else {
-			assertSelectorMatchedSetSize(":enabled", 33);
-		}
+		assertThat($(":enabled").size(), is(33));
 	}
 
 }
