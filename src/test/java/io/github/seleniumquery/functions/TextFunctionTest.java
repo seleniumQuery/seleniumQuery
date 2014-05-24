@@ -4,6 +4,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
+import io.github.seleniumquery.selector.DriverSupportService;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +16,13 @@ public class TextFunctionTest {
 
     @Test
     public void text_function() {
-    	assertThat($("div.demo-container").text().replaceAll("\\s+", " "), is("Demonstration Box list item 1 list item 2"));
+    	if (DriverSupportService.isHtmlUnitDriverEmulatingIE($.browser.getDefaultDriver())) {
+    		assertThat($("div.demo-container").text().replaceAll("\\s+", " "), is("Demonstration Box list item 1list item 2"));
+    	} else if (DriverSupportService.isHtmlUnitDriver($.browser.getDefaultDriver())) {
+    			assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1 list item 2"));
+    	} else {
+    		assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1\nlist item 2"));
+    	}
     }
     
     @Test
