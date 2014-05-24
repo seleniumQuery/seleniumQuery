@@ -23,14 +23,15 @@ public class SetUpAndTearDownDriver implements MethodRule {
 	
 	@Override
 	public Statement apply(final Statement base, FrameworkMethod method, final Object target) {
-		return new RunStatementInEveryBrowser(base, target);
-//		return new RunStatementForSelectedBrowser(base, target);
+//		return new RunStatementInEveryBrowser(base, target);
+		return new RunStatementForSelectedBrowser(base, target);
 	}
 	
 	class RunStatementInEveryBrowser extends Statement {
 		private Statement base;
 		private Object target;
 		private String failed;
+		private Throwable firstFailure;
 		public RunStatementInEveryBrowser(Statement base, Object target) {
 			super();
 			this.base = base;
@@ -43,11 +44,15 @@ public class SetUpAndTearDownDriver implements MethodRule {
 			executeAllHtmlUnits();
 			executeAllOtherDrivers();
 			if (!failed.isEmpty()) {
-				fail("There are test failures in the drivers: "+failed);
+				if (this.firstFailure == null) {
+					fail("There are test failures in the drivers: "+failed);
+				} else {
+					throw this.firstFailure;
+				}
 			}
 		}
 
-		private void executeAllOtherDrivers() throws Throwable {
+		private void executeAllOtherDrivers() {
 			System.out.println("@# Running on Chrome");
 			$.browser.setDefaultDriverAsChrome();
 			execute("Chrome");
@@ -63,7 +68,7 @@ public class SetUpAndTearDownDriver implements MethodRule {
 		}
 
 		@SuppressWarnings("deprecation")
-		private void executeAllHtmlUnits() throws Throwable {
+		private void executeAllHtmlUnits() {
 			executeInHtmlUnit(BrowserVersion.FIREFOX_3_6);
 			executeInHtmlUnit(BrowserVersion.FIREFOX_10);
 			executeInHtmlUnit(BrowserVersion.FIREFOX_17);
@@ -76,11 +81,14 @@ public class SetUpAndTearDownDriver implements MethodRule {
 			executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_10);
 		}
 		
-		private void execute(String driver) throws Throwable {
+		private void execute(String driver) {
 			before(target);
 			try {
 				base.evaluate();
 			} catch (Throwable t) {
+				if (this.firstFailure == null) {
+					this.firstFailure = t;
+				}
 				failed += driver + " ";
 				System.err.println("Test failed!"+t.getMessage());
 			} finally {
@@ -88,7 +96,7 @@ public class SetUpAndTearDownDriver implements MethodRule {
 			}
 		}
 		
-		private void executeInHtmlUnit(BrowserVersion browserVersion) throws Throwable {
+		private void executeInHtmlUnit(BrowserVersion browserVersion) {
 			System.out.println("@# Running on HtmlUnit ("+browserVersion+")");
 			$.browser.setDefaultDriver(createHtmlUnitDriverWithJavasCriptEnabled(browserVersion));
 			execute("HtmlUnit("+browserVersion.toString()+")");
