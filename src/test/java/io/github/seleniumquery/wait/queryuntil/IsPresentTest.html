@@ -3,17 +3,45 @@
 <body>
     <div id="btn" class="clickable">Yo</div>
     <script type="text/javascript">
-		document.getElementById('btn').addEventListener("click",
-				function(event) {
-					event.preventDefault();
-					setTimeout(function() {
-						var input = document.createElement("input");
-						input.setAttribute('type', 'text');
-						input.setAttribute('class', 'ball')
-						input.value = 'generated input starting value';
-						document.body.appendChild(input);
-					}, 10 * 1000); // 10 seconds after click
-				}, false);
+    var addEvent = (function( window, document ) { 
+        if ( document.addEventListener ) { 
+            return function( elem, type, cb ) { 
+                if ( (elem && !elem.length) || elem === window ) { 
+                    elem.addEventListener(type, cb, false ); 
+                } 
+                else if ( elem && elem.length ) { 
+                    var len = elem.length; 
+                    for ( var i = 0; i < len; i++ ) { 
+                        addEvent( elem[i], type, cb ); 
+                    } 
+                } 
+            }; 
+        } 
+        else if ( document.attachEvent ) { 
+            return function ( elem, type, cb ) { 
+                if ( (elem && !elem.length) || elem === window ) { 
+                    elem.attachEvent( 'on' + type, function() { return cb.call(elem, window.event); } ); 
+                } 
+                else if ( elem.length ) { 
+                    var len = elem.length; 
+                    for ( var i = 0; i < len; i++ ) { 
+                        addEvent( elem[i], type, cb ); 
+                    } 
+                } 
+            }; 
+        } 
+    })( this, document );
+
+    addEvent(document.getElementById('btn'), 'click', function(event) {
+		event.preventDefault ? event.preventDefault() : event.returnValue = false;
+		setTimeout(function() {
+			var input = document.createElement("input");
+			input.setAttribute('type', 'text');
+			input.setAttribute('class', 'ball')
+			input.value = 'generated input starting value';
+			document.body.appendChild(input);
+		}, 10 * 1000); // 10 seconds after click
+	});
 	</script>
 </body>
 </html>
