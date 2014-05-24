@@ -1,63 +1,52 @@
 package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.selector.CssSelectorCompilerServiceTest.assertSelectorMatchedSetSize;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class DisabledPseudoClassTest {
 	
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
+	// http://jsbin.com/guqef/3/edit
 	@Test
 	public void disabledPseudo_with_tag_button() {
-		assertSelectorMatchedSetSize("button:disabled", 2);
+		assertThat($("button:disabled").size(), is(2));
 	}
 	
 	@Test
 	public void disabledPseudo_with_tag_input() {
-		assertSelectorMatchedSetSize("input:disabled", 48);
+		assertThat($("input:disabled").size(), is(48));
 	}
 	
 	@Test
 	public void disabledPseudo_with_tag_select() {
-		assertSelectorMatchedSetSize("select:disabled", 2);
+		assertThat($("select:disabled").size(), is(2));
 	}
 	
 	@Test
 	public void disabledPseudo_with_tag_option() {
-		if ($.browser.getDefaultDriver() instanceof HtmlUnitDriver) {
-			// TODO this is a known HtmlUnit bug! See issue #3
-			assertSelectorMatchedSetSize("option:disabled", 18);
-		}
-		else {
-			assertSelectorMatchedSetSize("option:disabled", 24);
-		}
+		assertThat($("option:disabled").size(), is(24));
 	}
 	
 	@Test
 	public void disabledPseudo_with_tag_optgroup() {
-		assertSelectorMatchedSetSize("optgroup:disabled", 6);
+		assertThat($("optgroup:disabled").size(), is(6));
 	}
 	
 	@Test
 	public void disabledPseudo_with_tag_textarea() {
-		assertSelectorMatchedSetSize("textarea:disabled", 2);
+		assertThat($("textarea:disabled").size(), is(2));
 	}
 	
 	@Test
 	public void disabledPseudo() {
-		if ($.browser.getDefaultDriver() instanceof HtmlUnitDriver) {
-			// TODO see disabledPseudo_with_tag_option()
-			assertSelectorMatchedSetSize(":disabled", 78);
-		}
-		else {
-			assertSelectorMatchedSetSize(":disabled", 84);
-		}
+		assertThat($(":disabled").size(), is(84));
 	}
 
 }
