@@ -73,6 +73,10 @@ public class SelectorUtils {
 		if (parent == null) {
 			return new ArrayList<WebElement>(Arrays.asList(element));
 		}
+		return getDirectChildren(parent);
+	}
+
+	public static List<WebElement> getDirectChildren(WebElement parent) {
 		return parent.findElements(By.xpath("./*"));
 	}
 	

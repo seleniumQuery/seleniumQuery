@@ -2,6 +2,7 @@ package io.github.seleniumquery;
 
 import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.functions.AttrFunction;
+import io.github.seleniumquery.functions.ChildrenFunction;
 import io.github.seleniumquery.functions.ClickFunction;
 import io.github.seleniumquery.functions.ClosestFunction;
 import io.github.seleniumquery.functions.EqFunction;
@@ -428,6 +429,28 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 */
 	public SeleniumQueryObject focus() {
 		return FocusFunction.focus(this, elements);
+	}
+	
+	/**
+	 * Get the children of each element in the set of matched elements.
+	 * 
+	 * @return A <b>new</b> SeleniumQueryObject, containing the children of each element in the set of matched elements.
+	 * 
+	 * @since 1.0.0
+	 */
+	public SeleniumQueryObject children() {
+		return ChildrenFunction.children(this, elements);
+	}
+	
+	/**
+	 * Get the children of each element in the set of matched elements, filtered by a selector.
+	 * 
+	 * @return A <b>new</b> SeleniumQueryObject, containing the children of each element in the set of matched elements.
+	 * 
+	 * @since 1.0.0
+	 */
+	public SeleniumQueryObject children(String selector) {
+		return ChildrenFunction.children(this, elements, selector);
 	}
    
 }

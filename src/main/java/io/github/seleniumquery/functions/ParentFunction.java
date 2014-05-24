@@ -1,15 +1,15 @@
 package io.github.seleniumquery.functions;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import io.github.seleniumquery.SQLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.selector.SelectorUtils;
+
+import org.openqa.selenium.WebElement;
 
 public class ParentFunction {
 
 	public static SeleniumQueryObject parent(SeleniumQueryObject caller, WebElement element) {
-		WebElement parentElement = element.findElement(By.xpath(".."));
+		WebElement parentElement = SelectorUtils.parent(element);
 		return SQLocalFactory.getInstance().createWithInvalidSelector(caller.getWebDriver(), parentElement, caller);
 	}
 
