@@ -272,19 +272,15 @@ Looking for a function not listed below? Check the [`ROADMAP.md`](ROADMAP.md) fi
 
 ##[Traversing functions](http://api.jquery.com/category/traversing/)
 
+- [`.children()`](http://api.jquery.com/children/) - Get the children of each element in the set of matched elements, optionally filtered by a selector.
 - [`.closest()`](http://api.jquery.com/closest/) - For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.
 - [`.end()`](http://api.jquery.com/end/) - End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
+- [`.eq()`](http://api.jquery.com/eq/) - Reduce the set of matched elements to the one at the specified index.
 - [`.find()`](http://api.jquery.com/find/) - Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
 - [`.first()`](http://api.jquery.com/first/) - Reduce the set of matched elements to the first in the set.
 - [`.is()`](http://api.jquery.com/is/) - Check the current matched set of elements against a selector, element, or jQuery object and return true if at least one of these elements matches the given arguments.
 - [`.not()`](http://api.jquery.com/not/) - Remove elements from the set of matched elements.
 - [`.parent()`](http://api.jquery.com/parent/) - Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
-
-###Soon
-
-- [`.children()`](http://api.jquery.com/children/) - Get the children of each element in the set of matched elements, optionally filtered by a selector.
-- [`.eq()`](http://api.jquery.com/eq/) - Reduce the set of matched elements to the one at the specified index.
-
 
 ##[Properties](http://api.jquery.com/category/properties/)
 
