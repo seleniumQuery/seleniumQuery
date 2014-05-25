@@ -23,8 +23,8 @@ public class SetUpAndTearDownDriver implements MethodRule {
 	
 	@Override
 	public Statement apply(final Statement base, FrameworkMethod method, final Object target) {
-//		return new RunStatementInEveryBrowser(base, target);
-		return new RunStatementForSelectedBrowser(base, target);
+		return new RunStatementInEveryBrowser(base, target);
+//		return new RunStatementForSelectedBrowser(base, target);
 	}
 	
 	class RunStatementInEveryBrowser extends Statement {
