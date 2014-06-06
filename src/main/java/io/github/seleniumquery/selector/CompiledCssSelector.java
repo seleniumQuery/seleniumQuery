@@ -58,22 +58,6 @@ public class CompiledCssSelector {
 		this.cssFilter = cssFilter;
 	}
 	
-	/**
-	 * THIS IS CREATED FOR DEVELOPMENT PURPOSES ONLY!
-	 */
-	public CompiledCssSelector(final String cssSelector, final String filterName) {
-		this(cssSelector, new CssFilter() {
-			@Override
-			public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
-				return elements;
-			}
-			@Override
-			public String toString() {
-				return "Wont filter nothing for selector '"+cssSelector+"' as said by filtername '"+filterName+"'.";
-			};
-		});
-	}
-
 	public List<WebElement> execute(SearchContext context) {
 		List<WebElement> elements = new By.ByCssSelector(this.cssSelector).findElements(context);
 		WebDriver driver = SelectorUtils.getWebDriver(context);
