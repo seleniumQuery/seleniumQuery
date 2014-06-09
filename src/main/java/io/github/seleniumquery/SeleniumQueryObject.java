@@ -113,6 +113,14 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
+	 * Use {@link #waitUntil()}
+	 */
+	@Deprecated
+	public final SeleniumQueryWaitUntil queryUntil() {
+		return new SeleniumQueryWaitUntil(this);
+	}
+	
+	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
 	 * a new seleniumQuery object at the end.
 	 * 
