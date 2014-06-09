@@ -98,7 +98,7 @@ public class SeleniumQueryDefaultBrowser {
 	}
 	
 	private void setDriverTimeout() {
-		this.defaultDriver.manage().timeouts().implicitlyWait(SeleniumQueryConfig.getGlobalTimeoutInMillisseconds(), TimeUnit.MILLISECONDS);
+		this.defaultDriver.manage().timeouts().implicitlyWait(SeleniumQueryConfig.getGlobalTimeout(), TimeUnit.MILLISECONDS);
 	}
 	
 	public WebDriver getDefaultDriver() {

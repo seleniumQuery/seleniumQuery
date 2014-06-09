@@ -19,9 +19,9 @@ public class SeleniumQueryConfig {
 		try {
 			loadPropertiesFileFromClasspath();
 
-			GLOBAL_TIMEOUT_IN_MILLISSECONDS = getLongProperty("GLOBAL_TIMEOUT_IN_MILLISSECONDS", GLOBAL_TIMEOUT_IN_MILLISSECONDS);
-			TIMEOUT_IN_SECONDS = getLongProperty("TIMEOUT_IN_SECONDS", TIMEOUT_IN_SECONDS);
-			POLLING_IN_MILLISSECONDS = getLongProperty("POLLING_IN_MILLISSECONDS", POLLING_IN_MILLISSECONDS);
+			GLOBAL_TIMEOUT = getLongProperty(PROP_GLOBAL_TIMEOUT, GLOBAL_TIMEOUT);
+			WAITUNTIL_TIMEOUT = getLongProperty(PROP_WAITUNTIL_TIMEOUT, WAITUNTIL_TIMEOUT);
+			WAITUNTIL_POLLING_INTERVAL = getLongProperty(PROP_WAITUNTIL_POLLING_INTERVAL, WAITUNTIL_POLLING_INTERVAL);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class SeleniumQueryConfig {
 	
 	private static long getLongProperty(String propertyName, long defaultValue) {
 		String propertyAsString = SeleniumQueryConfig.properties.getProperty(propertyName);
-		if (propertyAsString == null || propertyAsString.isEmpty()) {
+		if (propertyAsString == null || propertyAsString.trim().isEmpty()) {
 			return defaultValue;
 		}
 		return Long.valueOf(propertyAsString);
@@ -53,18 +53,25 @@ public class SeleniumQueryConfig {
 		return properties.getProperty(property);
 	}	
 	
-	private static long GLOBAL_TIMEOUT_IN_MILLISSECONDS = 1500;
-	private static long TIMEOUT_IN_SECONDS = 10;
-	private static long POLLING_IN_MILLISSECONDS = 900;
+	/**
+	 * All times are in milliseconds.
+	 */
+	private static long GLOBAL_TIMEOUT = 1500;
+	private static long WAITUNTIL_TIMEOUT = 10000;
+	private static long WAITUNTIL_POLLING_INTERVAL = 900;
 	
-	public static long getGlobalTimeoutInMillisseconds() {
-		return GLOBAL_TIMEOUT_IN_MILLISSECONDS;
+	private static final String PROP_GLOBAL_TIMEOUT = "GLOBAL_TIMEOUT";
+	private static final String PROP_WAITUNTIL_TIMEOUT = "WAITUNTIL_TIMEOUT";
+	private static final String PROP_WAITUNTIL_POLLING_INTERVAL = "WAITUNTIL_POLLING_INTERVAL";
+
+	public static long getGlobalTimeout() {
+		return GLOBAL_TIMEOUT;
 	}
-	public static long getWaitTimeoutInSeconds() {
-		return TIMEOUT_IN_SECONDS;
+	public static long getWaitUntilTimeout() {
+		return WAITUNTIL_TIMEOUT;
 	}
-	public static long getWaitPollingInMillisseconds() {
-		return POLLING_IN_MILLISSECONDS;
+	public static long getWaitUntilPollingInterval() {
+		return WAITUNTIL_POLLING_INTERVAL;
 	}
 
 }
