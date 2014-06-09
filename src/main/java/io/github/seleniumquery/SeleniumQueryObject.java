@@ -18,7 +18,6 @@ import io.github.seleniumquery.functions.RemoveAttrFunction;
 import io.github.seleniumquery.functions.TextFunction;
 import io.github.seleniumquery.functions.ToArrayFunction;
 import io.github.seleniumquery.functions.ValFunction;
-import io.github.seleniumquery.wait.SeleniumQueryQueryUntil;
 import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
 
 import java.util.Iterator;
@@ -74,38 +73,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 */
 	private SeleniumQueryObject previous;
 	
-	/**
-	 * List of functions that will halt the execution until the specified condition is met.
-	 * 
-	 * @deprecated @see {@link SeleniumQueryObject#waitUntil()}
-	 */
-	@Deprecated
-	public final SeleniumQueryWaitUntil testUntil() {
-		return new SeleniumQueryWaitUntil(this);
-	}
-	
-	/**
-	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
-	 * a new seleniumQuery object at the end.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.4.0
-	 */
-	public final SeleniumQueryQueryUntil waitUntil() {
-		return new SeleniumQueryQueryUntil(this);
-	}
-	
-	/**
-	 * The queryUntil() function is deprecated. Use <code>.waitUntil()</code> instead.
-	 * 
-	 * @deprecated @see {@link SeleniumQueryObject#waitUntil()}
-	 */
-	@Deprecated
-	public final SeleniumQueryQueryUntil queryUntil() {
-		return waitUntil();
-	}
-	
-	
 	/**************************************************************************************************************************************
 	 * Java SeleniumQueryObject constrcutors
 	 **************************************************************************************************************************************/
@@ -129,6 +96,45 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		this.by = SeleniumQueryBy.NO_SELECTOR_INVALID_BY;
 		this.elements = webElements;
 		this.previous = previous;
+	}
+	
+	/**************************************************************************************************************************************
+	 * Java SeleniumQueryObject waitUntil() functions
+	 **************************************************************************************************************************************/
+	
+	/**
+	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
+	 * a new seleniumQuery object at the end.
+	 * 
+	 * @since 1.0.0
+	 */
+	public final SeleniumQueryWaitUntil waitUntil() {
+		return new SeleniumQueryWaitUntil(this);
+	}
+	
+	/**
+	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
+	 * a new seleniumQuery object at the end.
+	 * 
+	 * @param waitUntilTimeout Time in milliseconds to wait for the condition.
+	 * 
+	 * @since 1.0.0
+	 */
+	public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) {
+		return new SeleniumQueryWaitUntil(this, waitUntilTimeout);
+	}
+	
+	/**
+	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
+	 * a new seleniumQuery object at the end.
+	 * 
+	 * @param waitUntilTimeout Time in milliseconds to wait for the condition.
+	 * @param waitUntilPollingInterval Interval in milliseconds between every requery/check.
+	 * 
+	 * @since 1.0.0
+	 */
+	public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) {
+		return new SeleniumQueryWaitUntil(this, waitUntilTimeout, waitUntilPollingInterval);
 	}
 	
 	/**************************************************************************************************************************************
@@ -166,7 +172,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Returns the number of elements in the seleniumQuery object.
 	 * @return the number of elements in the seleniumQuery object.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.2.0
 	 */
 	public int size() {
@@ -275,7 +280,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
 	 * @return the seleniumQuery object that originated the current instance.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.3.0
 	 */
 	public SeleniumQueryObject end() {
@@ -285,7 +289,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Get the descendants of each element in the current set of matched elements, filtered by a selector.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
 	public SeleniumQueryObject find(String selector) {
@@ -295,7 +298,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Get the value of an attribute for the first element in the set of matched elements.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
 	public String attr(String attributeName) {
@@ -305,7 +307,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Set one or more attributes for every matched element.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
 	public SeleniumQueryObject attr(String attributeName, Object value) {
@@ -315,7 +316,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Get the value of a property for the first element in the set of matched elements.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
 	public <T> T prop(String propertyName) {
@@ -325,7 +325,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Set one or more properties for every matched element
 	 * 
-	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
 	public SeleniumQueryObject prop(String propertyName, Object value) {
@@ -338,7 +337,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @param index A zero-based integer indicating which element to retrieve.
 	 * @return the element at the specified index.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
 	public WebElement get(int index) {
@@ -351,7 +349,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @param index A zero-based integer indicating which element to retrieve.
 	 * @return the element at the specified index.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
 	public List<WebElement> get() {
@@ -362,7 +359,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Remove an attribute from each element in the set of matched elements.
 	 * It can be a space-separated list of attributes.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
 	public SeleniumQueryObject removeAttr(String attributeNames) {
@@ -372,7 +368,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Get the HTML contents of the first element in the set of matched elements.
 	 * 
-	 * @author acdcjunior
 	 * @since 0.4.0
 	 */
 	public String html() {

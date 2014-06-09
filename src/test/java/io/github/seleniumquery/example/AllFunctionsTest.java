@@ -8,7 +8,6 @@ import io.github.seleniumquery.wait.SeleniumQueryWaitException;
 import org.junit.Rule;
 import org.junit.Test;
 
-@SuppressWarnings("deprecation")
 public class AllFunctionsTest {
 
 	@Rule
@@ -16,37 +15,37 @@ public class AllFunctionsTest {
 	
 	@Test
 	public void isPresent() {
-		assertEquals("!visibleDiv!", $(".visibleDiv").testUntil().is(":present").then().text());
+		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().is(":present").then().text());
 	}
 
 	@Test
 	public void isNotPresent() {
-		assertEquals("", $(".nonExistingDiv").testUntil().is(":not(:present)").then().text());
+		assertEquals("", $(".nonExistingDiv").waitUntil().is(":not(:present)").then().text());
 	}
 
 	@Test
 	public void isVisible() {
-		assertEquals("!visibleDiv!", $(".visibleDiv").testUntil().is(":visible").then().text());
+		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().is(":visible").then().text());
 	}
 
 	@Test
 	public void isNotVisible() {
-		assertEquals("", $(".invisibleDiv").testUntil().is(":not(:visible)").then().text());
+		assertEquals("", $(".invisibleDiv").waitUntil().is(":not(:visible)").then().text());
 	}
 
 	@Test
 	public void isVisibleAndEnabled() {
-		assertEquals("!enabledInput!", $(".enabledInput").testUntil().is(":visible:enabled").then().val());
+		assertEquals("!enabledInput!", $(".enabledInput").waitUntil().is(":visible:enabled").then().val());
 	}
 
 	@Test
 	public void containsText() {
-		assertEquals("!visibleDiv!", $(".visibleDiv").testUntil().text().contains("isibleDi").then().text());
+		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().contains("isibleDi").then().text());
 	}
 	
 	@Test(expected=SeleniumQueryWaitException.class)
 	public void waitUntil_has_textContaininig__should_throw_an_exception_after_waiting_for_div_without_the_desired_text() {
-		$(".visibleDiv").testUntil().text().contains("CRAZY TEXT THAT IT DOES NOT CONTAIN");
+		$(".visibleDiv").waitUntil().text().contains("CRAZY TEXT THAT IT DOES NOT CONTAIN");
 	}
 	
 	public void queryUntil() {
@@ -71,12 +70,12 @@ public class AllFunctionsTest {
 		$(".myDivs").waitUntil().is(":present").and().size().isGreaterThan(7).then().click();
 		
 		// .is() functions
-		$(".aDivDiv").testUntil().is(":present");
-		$(".myInput").testUntil().is(":enabled");
-		$(".aDivDiv").testUntil().is(":visible");
-		$(".myInput").testUntil().is(":visible:enabled");
+		$(".aDivDiv").waitUntil().is(":present");
+		$(".myInput").waitUntil().is(":enabled");
+		$(".aDivDiv").waitUntil().is(":visible");
+		$(".myInput").waitUntil().is(":visible:enabled");
 		// .has() functions
-		$(".myInput").testUntil().val().isEqualTo("expectedValue");
+		$(".myInput").waitUntil().val().isEqualTo("expectedValue");
 //		$(".aDivDiv").waitUntil().has().textContaining("expectedText");
 //		// both .is() and .has() can use .not()
 //		$(".myInput").waitUntil().is().not().enabled();
