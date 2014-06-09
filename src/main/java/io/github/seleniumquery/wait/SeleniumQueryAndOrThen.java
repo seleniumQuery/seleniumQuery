@@ -10,8 +10,8 @@ public class SeleniumQueryAndOrThen {
 		this.seleniumQueryObject = seleniumQueryObject;
 	}
 
-	public SeleniumQueryQueryUntil and() {
-		return new SeleniumQueryQueryUntil(this.seleniumQueryObject);
+	public SeleniumQueryWaitUntil and() {
+		return new SeleniumQueryWaitUntil(this.seleniumQueryObject);
 	}
 	
 	public SeleniumQueryObject then() {
