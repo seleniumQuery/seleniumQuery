@@ -26,7 +26,7 @@ public class SeleniumQueryWaitUntil {
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryWaitUntil(SeleniumQueryObject seleniumQueryObject) {
-		this(seleniumQueryObject, SeleniumQueryConfig.getWaitTimeoutInSeconds(), SeleniumQueryConfig.getWaitPollingInMillisseconds());
+		this(seleniumQueryObject, SeleniumQueryConfig.getWaitUntilTimeout(), SeleniumQueryConfig.getWaitUntilPollingInterval());
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class SeleniumQueryWaitUntil {
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout) {
-		this(seleniumQueryObject, waitUntilTimeout, SeleniumQueryConfig.getWaitPollingInMillisseconds());
+		this(seleniumQueryObject, waitUntilTimeout, SeleniumQueryConfig.getWaitUntilPollingInterval());
 	}
 	
 	/**
