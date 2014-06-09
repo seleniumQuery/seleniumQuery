@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class SeleniumQueryConfig {
+	
+	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryConfig.class);
 	
 	static {
 		loadProperties();
@@ -12,31 +17,34 @@ public class SeleniumQueryConfig {
 	
 	private static void loadProperties() {
 		try {
-			SeleniumQueryConfig.properties = new Properties();
-			InputStream in = SeleniumQueryConfig.class.getClassLoader().getResourceAsStream("seleniumquery.properties");
-			SeleniumQueryConfig.properties.load(in);
-			in.close();
-			{
-				String gtim = SeleniumQueryConfig.properties.getProperty("GLOBAL_TIMEOUT_IN_MILLISSECONDS");
-				if (gtim != null && !gtim.isEmpty()) {
-					GLOBAL_TIMEOUT_IN_MILLISSECONDS = Long.valueOf(gtim);
-				}
-			}
-			{
-				String tis = SeleniumQueryConfig.properties.getProperty("TIMEOUT_IN_SECONDS");
-				if (tis != null && !tis.isEmpty()) {
-					TIMEOUT_IN_SECONDS = Long.valueOf(tis);
-				}
-			}
-			{
-				String tim = SeleniumQueryConfig.properties.getProperty("POLLING_IN_MILLISSECONDS");
-				if (tim != null && !tim.isEmpty()) {
-					POLLING_IN_MILLISSECONDS = Long.valueOf(tim);
-				}
-			}
+			loadPropertiesFileFromClasspath();
+
+			GLOBAL_TIMEOUT_IN_MILLISSECONDS = getLongProperty("GLOBAL_TIMEOUT_IN_MILLISSECONDS", GLOBAL_TIMEOUT_IN_MILLISSECONDS);
+			TIMEOUT_IN_SECONDS = getLongProperty("TIMEOUT_IN_SECONDS", TIMEOUT_IN_SECONDS);
+			POLLING_IN_MILLISSECONDS = getLongProperty("POLLING_IN_MILLISSECONDS", POLLING_IN_MILLISSECONDS);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void loadPropertiesFileFromClasspath() throws IOException {
+		properties = new Properties();
+		LOGGER.debug("Attempting to load properties from seleniumQuery.properties in classpath.");
+		InputStream in = SeleniumQueryConfig.class.getClassLoader().getResourceAsStream("seleniumQuery.properties");
+		if (in == null) {
+			LOGGER.info("No seleniumQuery.properties found in classpath, falling back to defaults.");
+		}
+		properties.load(in);
+		in.close();
+	}
+	
+	private static long getLongProperty(String propertyName, long defaultValue) {
+		String propertyAsString = SeleniumQueryConfig.properties.getProperty(propertyName);
+		if (propertyAsString == null || propertyAsString.isEmpty()) {
+			return defaultValue;
+		}
+		return Long.valueOf(propertyAsString);
 	}
 	
 	private static Properties properties;
