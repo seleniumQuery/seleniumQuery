@@ -32,6 +32,28 @@ public class CssSelectorCompilerServiceTest {
 	}
 	
 	@Test
+	public void parts() {
+//		CompiledCssSelectorList csl = CssSelectorCompilerService.compileSelectorList($.browser.getDefaultDriver(), ".rich-data-scr");
+		CompiledCssSelectorList csl = CssSelectorCompilerService.compileSelectorList($.browser.getDefaultDriver(),
+				"table.rich-dtascroller-table tr td:nth-child(5)");
+		
+		final List<CompiledCssSelector> compS = csl.css;
+		
+		for (CompiledCssSelector compiledCssSelector : compS) {
+			System.out.println(compiledCssSelector.getCssSelector());
+			System.out.println(compiledCssSelector.getCssFilter().get(0));
+		}
+		
+//		List<WebElement> execute = csl.execute($.browser.getDefaultDriver());
+//		List<WebElement> elements = execute;
+//		
+//		assertThat(elements, hasSize(1));
+//		assertThat(elements.get(0).getTagName(), is("div"));
+//		assertThat(elements.get(0).getAttribute("id"), is("d1"));
+//		assertThat(elements.get(0).getAttribute("class"), is("clz"));
+	}
+	
+	@Test
 	public void id() {
 		List<WebElement> elements = compileAndExecute("#d1");
 		
