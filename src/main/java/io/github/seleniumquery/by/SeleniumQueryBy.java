@@ -32,7 +32,7 @@ public class SeleniumQueryBy extends By {
 		@Override public List<WebElement> findElements(SearchContext context) {
 			throw new RuntimeException("This object was instantiated without a selector, you cannot search " +
 					"elements based on it as the string used to match it is unavailable.\n" +
-					"Try not using more than one .queryUntil() in a single line.");
+					"Try not using more than one .waitUntil() in a single line.");
 		}
 	};
 	
