@@ -1,6 +1,7 @@
 package io.github.seleniumquery.functions;
 
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.selector.SelectorUtils;
 
 import java.util.List;
 
@@ -69,9 +70,30 @@ public class ValFunction {
 		} else if ("input".equals(element.getTagName()) && "file".equals(element.getAttribute("type"))) {
 			element.sendKeys(value);
 		} else {
-			element.clear();
+			// some browsers will not allow clearing a non content-editable element
+			if (isContentEditable(element)) {
+				element.clear();
+			}
 			element.sendKeys(value);
 		}
+	}
+	
+	private static boolean isContentEditable(WebElement element) {
+		if (element == null) {
+			return false;
+		}
+		String contenteditable = element.getAttribute("contenteditable");
+		if ("false".equals(contenteditable)) {
+			return false;
+		}
+		if ("".equals(contenteditable) || "true".equals(contenteditable)) {
+			return true;
+		}
+		// no contenteditable; or
+		// concontenteditable == "inherit"; or
+		// concontenteditable == "anything";
+		// then we consider as "inherit"
+		return isContentEditable(SelectorUtils.parent(element));
 	}
 
 }
