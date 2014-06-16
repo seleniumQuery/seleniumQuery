@@ -97,8 +97,8 @@ public class SeleniumQueryBy extends By {
 	/**
 	 * If it begins with "/" or "(/" or "(((((/", we assume the selector given is a XPath expression.
 	 */
-	private boolean isXPathExpression(String selector) {
-		return selector != null && selector.matches("(\\s+\\(\\s+)*/.*");
+	static boolean isXPathExpression(String selector) {
+		return selector != null && selector.matches("(\\s*\\(\\s*)*/.*");
 	}
 	
 	/**
