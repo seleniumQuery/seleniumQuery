@@ -78,4 +78,11 @@ public class EqPseudoClassTest {
         assertThat($("div.c3:eq(-1)").text(), is("Hulk"));
 	}
 	
+	@Test
+	public void eqPseudo_with_descendant() {
+		assertSelectorMatchedSetSize(".nesting a", 1);
+		assertSelectorMatchedSetSize(".nesting a:eq(0)", 1);
+		assertThat($(".nesting a:eq(0)").text(), is("yo"));
+	}
+	
 }
