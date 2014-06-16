@@ -12,7 +12,7 @@ import org.openqa.selenium.TimeoutException;
 import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.SeleniumQueryObject;
 
-public class SeleniumQueryWaitException extends RuntimeException {
+public class SeleniumQueryWaitException extends TimeoutException {
 
 	private static final long serialVersionUID = 2L;
 	
