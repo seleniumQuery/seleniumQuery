@@ -1,15 +1,15 @@
 seleniumQuery aims to have predictable and uniform behavior across drivers/browsers. To accomplish that, it must take
-into account every drivers and every browsers' issues.
+into account every drivers' and every browsers' issues.
 
 | Driver             | Driver version | Browser | CSS     | XPath | seleniumQuery's behavior |
 | ------------------ | -------------- | ------- | ------- | ----- | ------------------------ |
-| IEDriverServer.exe | win32_2.41.0   | IE 6    | Sizzle  | 1.0   | Uses driver's Sizzle
+| IEDriverServer.exe | win32_2.41.0   | IE 6    | Sizzle  | 1.0   | Uses driver's Sizzle     |
 | IEDriverServer.exe | win32_2.41.0   | IE 7    | Sizzle? | 1.0   | ?
 | IEDriverServer.exe | win32_2.41.0   | IE 8    | Sizzle? | 1.0   | ?
 | IEDriverServer.exe | win32_2.41.0   | IE 9    | Native? | 1.0   | 
-| IEDriverServer.exe | win32_2.41.0   | IE 10   | Native? | 1.0   | seleniumQuery default*
-| chromedriver.exe   | win32_2.10     | Chrome Latest  | Native  | 2.0   |
-| -                  | -              | Firefox Latest | Native  | 2.0   |
+| IEDriverServer.exe | win32_2.41.0   | IE 10   | Native? | 1.0   | seleniumQuery default*   |
+| chromedriver.exe   | win32_2.10     | Chrome Latest  | Native  | 2.0   | seleniumQuery default*   |
+| -                  | -              | Firefox Latest | Native  | 2.0   | seleniumQuery default*   |
 | -                  | -              | Firefox 3.4    | ?  | ?   |
 | -                  | -              | Phantom JS ?  | ?  | ?   |
 
