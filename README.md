@@ -39,8 +39,6 @@ Try it out now with the running example below:
 ```java
 import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the short syntax
 
-import org.openqa.selenium.firefox.FirefoxDriver;
-
 public class SeleniumQueryExample {
     public static void main(String[] args) {
         $.browser.setDefaultDriverAsFirefox(); // sets Firefox as the browser used by $()
