@@ -47,6 +47,18 @@ public class SelectorPreParser {
 			
 			eatChar(getNextChar());
 			return;
+		case  '\'':
+			// begins a string not inside a pseudoclass (that is, not in :pseudo('HERE!!')), probably in an attribute value, such as [attr='value']
+			String contentSingleQuote = eatEverythingUntilStringEnd('\'');
+			appendToFinalSelector(contentSingleQuote.substring(1)).append('\'');
+			eatChar(getNextChar());
+			return;
+		case  '"':
+			// begins a string not inside a pseudoclass (that is, not in :pseudo("HERE!!")), probably in an attribute value, such as [attr="value"]
+			String contentDoubleQuotes = eatEverythingUntilStringEnd('"');
+			appendToFinalSelector(contentDoubleQuotes.substring(1)).append('"');
+			eatChar(getNextChar());
+			return;
 		default:
 			eatChar(getNextChar());
 			return;

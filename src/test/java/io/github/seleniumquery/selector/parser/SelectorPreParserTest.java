@@ -152,6 +152,17 @@ public class SelectorPreParserTest {
 		assertThat(transformedSelector.getStringMap().get("0"), is("ab)c"));
 	}
 	
+	@Test
+	public void transformSelector__should_keep_strings_in_the_selectors_when_they_are_within_attribute_selectors() {
+		// given
+		String selector = "a[id$='test:0']";
+		// when
+		TransformedSelector transformedSelector = selectorPreparator.transformSelector(selector);
+		// then
+		assertThat(transformedSelector.getStringMap().size(), is(0));
+		assertThat(transformedSelector.getTransformedSelector(), is("a[id$='test:0']"));
+	}
+	
 //	jQuery and sizzle have the most absolute no-sense way of parsing strings inside pseudos!
 	// http://regex101.com/r/xC3cF6
 //	@Test
