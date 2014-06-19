@@ -47,5 +47,12 @@ public class EnabledPseudoClassTest {
 	public void enabledPseudo() {
 		assertThat($(":enabled").size(), is(33));
 	}
+	
+	@Test
+	public void enabledPseudo_with_class() {
+		assertThat($(".c").size(), is(3));
+		assertThat($(".c:enabled").size(), is(1));
+		assertThat($(".c:not(:enabled)").size(), is(2));
+	}
 
 }
