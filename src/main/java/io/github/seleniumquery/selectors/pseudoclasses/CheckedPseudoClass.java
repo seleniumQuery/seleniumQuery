@@ -1,16 +1,22 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
-
-import java.util.Arrays;
-import java.util.List;
+import io.github.seleniumquery.selector.SqElementFilter;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class CheckedPseudoClass implements PseudoClass {
+
+	private static final String INPUT_TAG_NAME = "input";
+	private static final String OPTION_TAG_NAME = "option";
+	
+	private static final String TYPE_ATTRIBUTE_NAME = "type";
+	private static final String RADIO_ATTR_VALUE = "radio";
+	private static final String CHECKBOX_ATTR_VALUE = "checkbox";
 
 	private static final CheckedPseudoClass instance = new CheckedPseudoClass();
 	public static CheckedPseudoClass getInstance() {
@@ -18,8 +24,6 @@ public class CheckedPseudoClass implements PseudoClass {
 	}
 	private CheckedPseudoClass() { }
 
-	private static final List<String> CHECKED_ALLOWED_TAGS = Arrays.asList("input", "option");
-	
 	private static final String CHECKED_PSEUDO_CLASS_NO_COLON = "checked";
 	private static final String CHECKED_PSEUDO_CLASS = ":"+CHECKED_PSEUDO_CLASS_NO_COLON;
 
@@ -34,10 +38,17 @@ public class CheckedPseudoClass implements PseudoClass {
 	}
 
 	public boolean isChecked(WebElement element) {
-		return CHECKED_ALLOWED_TAGS.contains(element.getTagName()) && element.isSelected();
+		String tagName = element.getTagName();
+		String typeAttribute = element.getAttribute(TYPE_ATTRIBUTE_NAME);
+		return element.isSelected() && 
+				(
+						OPTION_TAG_NAME.equals(tagName)
+						||
+						(INPUT_TAG_NAME.equals(tagName) && (RADIO_ATTR_VALUE.equals(typeAttribute) || CHECKBOX_ATTR_VALUE.equals(typeAttribute)) )
+				);
 	}
 
-	private static final CssFilter checkedPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final SqElementFilter checkedPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:checked
