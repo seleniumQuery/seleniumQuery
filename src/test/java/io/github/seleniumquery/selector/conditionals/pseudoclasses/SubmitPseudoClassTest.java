@@ -13,13 +13,13 @@ public class SubmitPseudoClassTest {
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	// http://jsbin.com/mopireya/1/edit
+	// http://jsbin.com/mopireya/6/edit
 	@Test
 	public void submitPseudoClass() {
-		assertThat($("[type='submit']").size(), is(5));
-		assertThat($(":submit").size(), is(3));
-		assertThat($("*:submit").size(), is(3));
-		assertThat($("input:submit").size(), is(1));
+		assertThat($("[type='submit']").size(), is(6));
+		assertThat($(":submit").size(), is(4));
+		assertThat($("*:submit").size(), is(4));
+		assertThat($("input:submit").size(), is(2));
 		assertThat($("div:submit").size(), is(0));
 		assertThat($("span:submit").size(), is(0));
 
@@ -33,6 +33,7 @@ public class SubmitPseudoClassTest {
 
 		assertThat($("#b1").is(":submit"), is(true));
 		
+		// #Cross-Driver (not a workaround, just documenting a difference)
 		// the line below depends on the browser
 		// firefox (only when through selenium!!!) considers that element's attribute type is
 		// actually submit, even though it is empty.
@@ -44,6 +45,9 @@ public class SubmitPseudoClassTest {
 		
 		assertThat($("#b2").is(":submit"), is(true));
 		assertThat($("#b2").is("[type='submit']"), is(true));
+		
+		assertThat($(".clz:submit").size(), is(1));
+		assertThat($("#i1c").is(".clz:submit"), is(true));
 	}
 	
 }
