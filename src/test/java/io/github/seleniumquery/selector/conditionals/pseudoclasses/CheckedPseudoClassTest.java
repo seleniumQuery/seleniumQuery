@@ -54,6 +54,13 @@ public class CheckedPseudoClassTest {
     	
     	assertThat($("#opt1").is(":checked"), is(true));
     	assertThat($("#opt2").is(":checked"), is(false));
+    	
+    	assertThat($("#nc1").is(":checked"), is(false));
+    	assertThat($("#nc2").is(":checked"), is(false));
+    	assertThat($("#nc3").is(":checked"), is(false));
+    	
+    	assertThat($(".c[type=checkbox]").is(":checked"), is(true));
+    	assertThat($(".c[type=radio]").is(":checked"), is(true));
     }
 
 	@Test
