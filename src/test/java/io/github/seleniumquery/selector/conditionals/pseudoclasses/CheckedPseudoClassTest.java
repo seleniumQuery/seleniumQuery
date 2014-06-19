@@ -14,6 +14,12 @@ public class CheckedPseudoClassTest {
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
 	@Test
+	public void checkedPseudo() {
+		assertThat($("*").size(), is(14+7+3+7));
+		assertThat($(":checked").size(), is(4+7+7));
+	}
+	
+	@Test
 	public void checkedPseudo_with_tag_option() {
 		assertThat($("option:checked").size(), is(2));
 	}
@@ -32,17 +38,6 @@ public class CheckedPseudoClassTest {
 	public void checkedPseudo_with_tag_input_radio() {
 		assertThat($("input[type=radio]:checked").size(), is(1+7));
 	}
-	
-	@Test
-	public void checkedPseudo() {
-		assertThat($(":checked").size(), is(4+7+7));
-	}
-	
-    @Test
-    public void checked_selector() {
-    	assertThat($("*").size(), is(14+7+3+7));
-    	assertThat($(":checked").size(), is(4+7+7));
-    }
     
     @Test
     public void  checked_selector_with_not() {
