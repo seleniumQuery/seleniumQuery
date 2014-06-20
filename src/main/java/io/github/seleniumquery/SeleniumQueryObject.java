@@ -15,6 +15,7 @@ import io.github.seleniumquery.functions.IsFunction;
 import io.github.seleniumquery.functions.NotFunction;
 import io.github.seleniumquery.functions.PropFunction;
 import io.github.seleniumquery.functions.RemoveAttrFunction;
+import io.github.seleniumquery.functions.SelectFunction;
 import io.github.seleniumquery.functions.TextFunction;
 import io.github.seleniumquery.functions.ToArrayFunction;
 import io.github.seleniumquery.functions.ValFunction;
@@ -23,6 +24,8 @@ import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -56,9 +59,11 @@ import org.openqa.selenium.WebElement;
  * </p>
  *  
  * @author acdcjunior
- * @since 0.2.0
+ * @since 1.0.0
  */
 public class SeleniumQueryObject implements Iterable<WebElement> {
+	
+	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryObject.class);
 	
 	private SeleniumQueryBy by;
 	private WebDriver driver;
@@ -255,30 +260,33 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * @since 0.2.0
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject click() {
+		LOGGER.debug("Clicking "+this+".");
 		return ClickFunction.click(this, this.elements);
 	}
 	
 	/**
-	 * @since 0.2.0
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject val(String value) {
+		LOGGER.debug("Setting value of "+this+" to: \""+value+"\".");
 		return ValFunction.val(this, this.elements, value);
 	}
 	
 	/**
-	 * @since 0.2.0
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject val(Number value) {
+		LOGGER.debug("Setting value of "+this+" to: "+value+".");
 		return ValFunction.val(this, this.elements, value);
 	}
 	
 	/**
 	 * Get the current value of the first element in the set of matched elements.
 	 * 
-	 * @since 0.2.0
+	 * @since 1.0.0
 	 */
 	public String val() {
 		return ValFunction.val(this.elements);
@@ -455,5 +463,19 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public SeleniumQueryObject children(String selector) {
 		return ChildrenFunction.children(this, elements, selector);
 	}
-   
+
+	public SeleniumQueryObject selectOptionByVisibleText(String text) {
+		LOGGER.debug("Selecting "+this+" by visible text: \""+text+"\".");
+		return SelectFunction.selectOptionByVisibleText(this, elements, text);
+	}
+	
+	public SeleniumQueryObject selectOptionByValue(String value) {
+		return SelectFunction.selectOptionByValue(this, elements, value);
+	}
+	
+	@Override
+	public String toString() {
+		return this.by.toString();
+	}
+	
 }
