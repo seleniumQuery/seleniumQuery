@@ -21,7 +21,7 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
 
 	@Override
 	public String stringFor(T valueToEqual) {
-		return "isEqualTo(\"" + valueToEqual + "\")";
+		return getter + " isEqualTo(\"" + valueToEqual + "\")";
 	}
 
 }

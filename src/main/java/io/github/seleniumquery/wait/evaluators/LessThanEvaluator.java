@@ -49,7 +49,7 @@ public class LessThanEvaluator implements Evaluator<Number> {
 
 	@Override
 	public String stringFor(Number valueToCompare) {
-		return "isGreaterThan(\"" + valueToCompare + "\")";
+		return getter + " isGreaterThan(\"" + valueToCompare + "\")";
 	}
 
 }
