@@ -1,12 +1,17 @@
 package io.github.seleniumquery.wait.evaluators;
 
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import io.github.seleniumquery.wait.getters.Getter;
 
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 public class EqualsEvaluator<T> implements Evaluator<T> {
+	
+	private static final Log LOGGER = LogFactory.getLog(EqualsEvaluator.class);
 
 	private Getter<T> getter;
 
@@ -16,7 +21,10 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
 
 	@Override
 	public boolean evaluate(WebDriver driver, List<WebElement> elements, T valueToEqual) {
-		return getter.get(driver, elements).equals(valueToEqual);
+		LOGGER.debug("Evaluating isEqualTo()...");
+		final T gotValue = getter.get(driver, elements);
+		LOGGER.debug("Evaluating isEqualTo()... got "+getter+": \""+gotValue+"\". Wanted: \""+valueToEqual+"\".");
+		return gotValue.equals(valueToEqual);
 	}
 
 	@Override
