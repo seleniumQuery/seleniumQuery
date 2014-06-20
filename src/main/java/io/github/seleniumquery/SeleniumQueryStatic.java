@@ -1,12 +1,16 @@
 package io.github.seleniumquery;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+
 import io.github.seleniumquery.globalfunctions.SeleniumQueryDefaultBrowser;
 
 /**
  * Represents the seleniumQuery global object.
  * 
  * @author acdcjunior
- * @since 0.2.0
+ * @since 1.0.0
  */
 public class SeleniumQueryStatic {
 	
@@ -17,12 +21,30 @@ public class SeleniumQueryStatic {
 	 * A different browser can be used by using <code>$(anotherDriver, ".selector");</code>
 	 * 
 	 * @author acdcjunior
-	 * @since 0.2.0
+	 * @since 1.0.0
 	 */
 	public final SeleniumQueryDefaultBrowser browser;
 	
 	public SeleniumQueryStatic() {
 		this.browser = new SeleniumQueryDefaultBrowser();
+	}
+	
+	public void setConsoleLogLevel(java.util.logging.Level level) {
+	    Logger topLogger = java.util.logging.Logger.getLogger("io.github.seleniumquery");
+
+	    Handler consoleHandler = null;
+	    for (Handler handler : topLogger.getHandlers()) {
+	        if (handler instanceof ConsoleHandler) {
+	            consoleHandler = handler;
+	            break;
+	        }
+	    }
+
+	    if (consoleHandler == null) {
+	        consoleHandler = new ConsoleHandler();
+	        topLogger.addHandler(consoleHandler);
+	    }
+	    consoleHandler.setLevel(level);
 	}
 
 }
