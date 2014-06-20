@@ -22,7 +22,7 @@ public class ContainsEvaluator implements Evaluator<String> {
 
 	@Override
 	public String stringFor(String valueToEqual) {
-		return "contains(\"" + valueToEqual + "\")";
+		return getter + " contains(\"" + valueToEqual + "\")";
 	}
 
 }
