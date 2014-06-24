@@ -1,3 +1,18 @@
+JavaScript support
+
+| Driver             | Driver version | Browser | May disable JS? | Obs |
+| ------------------ | -------------- | ------- | ------- | ----- | ------------------------ |
+| IEDriverServer.exe | win32_2.41.0   | IE 6    | No | Injects Sizzle |
+| IEDriverServer.exe | win32_2.41.0   | IE 7    | No | Injects Sizzle |
+| IEDriverServer.exe | win32_2.41.0   | IE 8    | No | Injects Sizzle |
+| IEDriverServer.exe | win32_2.41.0   | IE 9    | No |
+| IEDriverServer.exe | win32_2.41.0   | IE 10   | No |
+| chromedriver.exe   | win32_2.10     | Chrome Latest  | No | |
+| -                  | -              | Firefox Latest | Yes  | |
+| -                  | -              | Firefox 3.4    | No?  | |
+| -                  | -              | Phantom JS v?  | Yes |   |
+| -                  | -              | HtmlUnit v? | Yes | |
+
 seleniumQuery aims to have predictable and uniform behavior across drivers/browsers. To accomplish that, it must take
 into account every drivers' and every browsers' issues.
 
@@ -11,8 +26,8 @@ into account every drivers' and every browsers' issues.
 | chromedriver.exe   | win32_2.10     | Chrome Latest  | Native  | 2.0   | seleniumQuery default*   |
 | -                  | -              | Firefox Latest | Native  | 2.0   | seleniumQuery default*   |
 | -                  | -              | Firefox 3.4    | ?  | ?   |
-| -                  | -              | Phantom JS ?  | ?  | ?   |
-
+| -                  | -              | Phantom JS v?  | ?  | ?   |
+| -                  | -              | HtmlUnit v? | Native | 1.0 | seleniumQuery default*
 
 ##* seleniumQuery default behavior
 
