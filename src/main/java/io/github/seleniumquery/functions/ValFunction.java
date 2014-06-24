@@ -67,7 +67,10 @@ public class ValFunction {
 	private static void val(WebElement element, String value) {
 		if ("select".equals(element.getTagName())) {
 			new Select(element).selectByValue(value);
-		} else if ("input".equals(element.getTagName()) && "file".equals(element.getAttribute("type"))) {
+		} else if ("input".equals(element.getTagName())) {
+			if (!"file".equals(element.getAttribute("type"))) {
+				element.clear();
+			}
 			element.sendKeys(value);
 		} else {
 			// some browsers will not allow clearing a non content-editable element
