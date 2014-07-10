@@ -19,7 +19,7 @@ public class GetFunction {
 	
 	public static WebElement get(List<WebElement> elements, int index) {
 		if (elements.size() <= index) {
-			LOGGER.warn(".get() called on index ("+index+") larger than current .size() ("+elements.size()+").");
+			LOGGER.warn(".get() called on index larger than or equal to current .size(). Index="+index+"; size="+elements.size()+".");
 			return null;
 		}
 		return elements.get(index);
