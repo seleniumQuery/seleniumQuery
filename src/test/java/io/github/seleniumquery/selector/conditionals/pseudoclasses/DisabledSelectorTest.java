@@ -15,13 +15,13 @@ public class DisabledSelectorTest {
 
     @Test
     public void disabled_selector() {
-    	assertThat($("*").size(), is(27));
+    	assertThat($("*").size(), is(28));
     	assertThat($(":disabled").size(), is(8));
     }
     
     @Test
     public void  disabled_selector_with_not() {
-    	assertThat($(":not(:disabled)").size(), is(19));
+    	assertThat($(":not(:disabled)").size(), is(20));
     }
 
     @Test
