@@ -1,11 +1,15 @@
 package io.github.seleniumquery.selectors.combinators;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.CssSelector;
 import io.github.seleniumquery.selector.CssSelectorCompilerService;
 import io.github.seleniumquery.selector.CssSelectorMatcherService;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqSelectorKind;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorCompilerService;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,12 +47,12 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 		CompiledCssSelector elementCompiledSelector = CssSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
 		CompiledCssSelector parentCompiledSelector = CssSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
 		
-		CssFilter childSelectorFilter = new ChildSelectorFilter(parentCompiledSelector, elementCompiledSelector);
+		ElementFilter childSelectorFilter = new ChildSelectorFilter(parentCompiledSelector, elementCompiledSelector);
 		return new CompiledCssSelector(parentCompiledSelector.getCssSelector()+">"+elementCompiledSelector.getCssSelector(),
 										childSelectorFilter);
 	}
 	
-	private static final class ChildSelectorFilter implements CssFilter {
+	private static final class ChildSelectorFilter implements ElementFilter {
 		private final CompiledCssSelector parentCompiledSelector;
 		private final CompiledCssSelector elementCompiledSelector;
 		
@@ -58,7 +62,7 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 		}
 		
 		@Override
-		public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
+		public List<WebElement> filterElements(WebDriver driver, List<WebElement> elements) {
 			elements = elementCompiledSelector.filter(driver, elements);
 			
 			for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext();) {
@@ -75,6 +79,15 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 			}
 			return elements;
 		}
+	}
+	
+	@Override
+	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
+		SqXPathSelector elementCompiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
+		SqXPathSelector parentCompiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
+		
+		elementCompiledSelector.kind = SqSelectorKind.DESCENDANT_DIRECT;
+		return parentCompiledSelector.combine(elementCompiledSelector);
 	}
 
 }

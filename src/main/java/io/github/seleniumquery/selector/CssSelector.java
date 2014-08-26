@@ -1,7 +1,5 @@
 package io.github.seleniumquery.selector;
 
-
-
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -23,5 +21,7 @@ public interface CssSelector<T> {
 	 * 			the CSS selector natively.
 	 */
 	CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, T selector);
+
+	SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, T selector);
 	
 }

@@ -86,7 +86,7 @@ public class AttributeEvaluatorTest {
 	}
 	
 	public void assertSelectorFindsIds(String selector, String... ids) {
-		List<WebElement> elements = CssSelectorCompilerServiceTest.compileAndExecute(selector);
+		List<WebElement> elements = $(selector).get();
 		assertThat(elements, hasSize(ids.length));
 		
 		Iterator<WebElement> iterator = elements.iterator();

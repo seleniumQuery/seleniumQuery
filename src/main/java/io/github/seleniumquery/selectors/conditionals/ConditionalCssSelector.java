@@ -8,6 +8,9 @@ import io.github.seleniumquery.selector.CssFilterUtils;
 import io.github.seleniumquery.selector.CssSelector;
 import io.github.seleniumquery.selector.CssSelectorCompilerService;
 import io.github.seleniumquery.selector.CssSelectorMatcherService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorCompilerService;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,6 +43,15 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector> 
 		return CssFilterUtils.combine(compiledSelector, compiledCondition);
 	}
 	
+	@Override
+	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, ConditionalSelector conditionalSelector) {
+		Condition condition = conditionalSelector.getCondition();
+		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
+		SqXPathSelector compiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, simpleSelector);
+		SqXPathSelector compiledCondition = conditionToXPath(driver, stringMap, simpleSelector, condition);
+		return compiledSelector.combine(compiledCondition);
+	}
+	
 	/**
 	 * Gets the given condition's CssSelector and tests if the element matches it. 
 	 */
@@ -53,6 +65,12 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector> 
 		@SuppressWarnings("unchecked")
 		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) ConditionalCssSelectorFactory.getInstance().getSelector(condition);
 		return evaluator.compileCondition(driver, stringMap, simpleSelector, condition);
+	}
+	
+	SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
+		@SuppressWarnings("unchecked")
+		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) ConditionalCssSelectorFactory.getInstance().getSelector(condition);
+		return evaluator.conditionToXPath(driver, stringMap, simpleSelector, condition);
 	}
 
 }

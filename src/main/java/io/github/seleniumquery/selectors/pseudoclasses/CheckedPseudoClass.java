@@ -1,8 +1,8 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.DriverSupportService;
-import io.github.seleniumquery.selector.SqElementFilter;
 import io.github.seleniumquery.selector.SqXPathSelector;
 import io.github.seleniumquery.selector.XPathSelectorFactory;
 
@@ -48,7 +48,7 @@ public class CheckedPseudoClass implements PseudoClass {
 				);
 	}
 
-	private static final SqElementFilter checkedPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter checkedPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:checked
@@ -62,6 +62,11 @@ public class CheckedPseudoClass implements PseudoClass {
 			return CompiledCssSelector.createNoFilterSelector(CHECKED_PSEUDO_CLASS);
 		}
 		return CompiledCssSelector.createFilterOnlySelector(checkedPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[((name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) or (name() = 'option' and @selected))]");
 	}
 
 }

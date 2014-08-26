@@ -1,7 +1,9 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,11 +35,16 @@ class TextPseudoClass implements PseudoClass {
 				(element.getAttribute("type") == null || "text".equalsIgnoreCase(element.getAttribute("type")));
 	}
 	
-	private static final CssFilter textPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter textPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// we never consider :text to be supported natively
 		return CompiledCssSelector.createFilterOnlySelector(textPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[name() = 'input' and (@type = 'text' or not([@type]))]");
 	}
 	
 }

@@ -18,5 +18,14 @@ public class AttributeEvaluatorUtils {
 		String attributeName = SelectorUtils.escapeSelector(attributeCondition.getLocalName()).replace("\\\\", "\\");
 		return CompiledCssSelector.createNoFilterSelector("[" + attributeName + "]");
 	}
+	
+	public static String getXPathAttribute(AttributeCondition attributeCondition) {
+		// em queals or has era
+		String attributeName = attributeCondition.getLocalName();
+		if (!Character.isLetter(attributeName.charAt(0))) {
+			return "@*[name() = "+ SelectorUtils.intoEscapedXPathString(attributeName) +"]";
+		}
+		return "@"+ attributeName;
+	}
 
 }

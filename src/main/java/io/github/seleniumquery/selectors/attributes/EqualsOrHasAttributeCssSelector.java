@@ -1,11 +1,13 @@
 package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CssConditionalSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.Iterator;
 import java.util.List;
@@ -57,7 +59,7 @@ public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<A
 		// Who knows why, HtmlUnitDriver, while emulating ie, bugs on the following selector: [title="a\\tc"]
 		// So we never allow HtmlUnitDriver+Emulatint IE to handle attribute selectors natively...
 		if (DriverSupportService.isHtmlUnitDriverEmulatingIE(driver)) {
-			CssFilter equalsOrHasAttributeFilter = new EqualsOrHasAttributeFilter(this, stringMap, simpleSelector, attributeCondition);
+			ElementFilter equalsOrHasAttributeFilter = new EqualsOrHasAttributeFilter(this, stringMap, simpleSelector, attributeCondition);
 			return CompiledCssSelector.createFilterOnlySelector(equalsOrHasAttributeFilter);
 		}
 		// now, everyone else supports this selector...
@@ -69,9 +71,21 @@ public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<A
 		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition);
 	}
 
+	@Override
+	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
+		// [attribute=wantedValue]
+		if (attributeCondition.getSpecified()) {
+			String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
+			return XPathSelectorFactory.createNoFilterSelector("["+attributeName+" = "+wantedValue+"]");
+		}
+		// [attribute]
+		return XPathSelectorFactory.createNoFilterSelector("["+attributeName+"]");
+	}
+
 }
 
-class EqualsOrHasAttributeFilter implements CssFilter {
+class EqualsOrHasAttributeFilter implements ElementFilter {
 	private final EqualsOrHasAttributeCssSelector equalsOrHasAttributeCssSelector;
 	private final Map<String, String> stringMap;
 	private final Selector simpleSelector;
@@ -86,7 +100,7 @@ class EqualsOrHasAttributeFilter implements CssFilter {
 	}
 
 	@Override
-	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
+	public List<WebElement> filterElements(WebDriver driver, List<WebElement> elements) {
 		for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext();) {
 			WebElement webElement = iterator.next();
 			if (!equalsOrHasAttributeCssSelector.isCondition(driver, webElement, stringMap, simpleSelector, attributeCondition)) {

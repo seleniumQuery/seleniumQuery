@@ -1,8 +1,10 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,7 +31,7 @@ public class FocusPseudoClass implements PseudoClass {
 		return element.equals(currentlyActiveElement);
 	}
 	
-	private static final CssFilter focusPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter focusPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:focus
@@ -37,6 +39,12 @@ public class FocusPseudoClass implements PseudoClass {
 			return CompiledCssSelector.createNoFilterSelector(FOCUS_PSEUDO_CLASS);
 		}
 		return CompiledCssSelector.createFilterOnlySelector(focusPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		// #no-xpath
+		return XPathSelectorFactory.createFilterOnlySelector(focusPseudoClassFilter);
 	}
 	
 }

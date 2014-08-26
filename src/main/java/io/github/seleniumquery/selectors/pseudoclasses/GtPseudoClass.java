@@ -1,8 +1,10 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.CssSelectorCompilerService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.List;
 
@@ -60,8 +62,25 @@ public class GtPseudoClass implements PseudoClass {
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// no browser supports :gt() natively
-		CssFilter gtPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		ElementFilter gtPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledCssSelector.createFilterOnlySelector(gtPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		String eqIndex = pseudoClassSelector.getPseudoClassContent();
+		if (!eqIndex.matches("[+-]?\\d+")) {
+			throw new RuntimeException("The :gt() pseudo-class requires an integer but got: " + eqIndex);
+		}
+		if (eqIndex.charAt(0) == '+') {
+			eqIndex = eqIndex.substring(1);
+		}
+		int index = Integer.valueOf(eqIndex);
+		
+		if (index >= 0) {
+			return XPathSelectorFactory.createNoFilterSelectorAppliedToAll("[position() > "+(index+1)+"]");
+		}
+		return XPathSelectorFactory.createNoFilterSelectorAppliedToAll("[position() > (last()-"+ (-index-1) +")]");
 	}
 
 }

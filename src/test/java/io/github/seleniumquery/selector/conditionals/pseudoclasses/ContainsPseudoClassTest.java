@@ -1,6 +1,8 @@
 package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
-import static io.github.seleniumquery.selector.CssSelectorCompilerServiceTest.assertSelectorMatchedSetSize;
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
 
 import org.junit.Rule;
@@ -14,29 +16,29 @@ public class ContainsPseudoClassTest {
 	// http://jsbin.com/siwapeqe/1/edit
     @Test
     public void contains_pseudo_with_tag() {
-    	assertSelectorMatchedSetSize("div", 36);
+    	assertThat($("div").size(), is(36));
 
-    	assertSelectorMatchedSetSize("div:contains(abc)", 12);
-    	assertSelectorMatchedSetSize("div:contains(\"abc\")", 12);
-    	assertSelectorMatchedSetSize("div:contains('abc')", 12);
+    	assertThat($("div:contains(abc)").size(), is(12));
+    	assertThat($("div:contains(\"abc\")").size(), is(12));
+    	assertThat($("div:contains('abc')").size(), is(12));
 
-    	assertSelectorMatchedSetSize("div:contains(\"'abc'\")", 4);
-    	assertSelectorMatchedSetSize("div:contains('\"abc\"')", 4);
+    	assertThat($("div:contains(\"'abc'\")").size(), is(4));
+    	assertThat($("div:contains('\"abc\"')").size(), is(4));
 
-    	assertSelectorMatchedSetSize("div:contains(\"a'bc\")", 4);
-    	assertSelectorMatchedSetSize("div:contains('a\"bc')", 4);
+    	assertThat($("div:contains(\"a'bc\")").size(), is(4));
+    	assertThat($("div:contains('a\"bc')").size(), is(4));
 
-    	assertSelectorMatchedSetSize("div:contains(\"ab)c\")", 4);
-    	assertSelectorMatchedSetSize("div:contains('ab)c')", 4);
+    	assertThat($("div:contains(\"ab)c\")").size(), is(4));
+    	assertThat($("div:contains('ab)c')").size(), is(4));
 
-    	assertSelectorMatchedSetSize("div:contains(\"a'b)c\")", 4);
-    	assertSelectorMatchedSetSize("div:contains('a\"b)c')", 4);
+    	assertThat($("div:contains(\"a'b)c\")").size(), is(4));
+    	assertThat($("div:contains('a\"b)c')").size(), is(4));
     }
     
     @Test
     public void contains_pseudo_with_tag_escaping_double_quotes_inside_double_quotes_string() {
-    	assertSelectorMatchedSetSize("div:contains(\"a\\\"b)c\")", 4); //2?? 4?? who knows!!!
-    	assertSelectorMatchedSetSize("div:contains(\"a\\\\\\\"b)c\")", 2); //2?? 4?? who knows!!!
+    	assertThat($("div:contains(\"a\\\"b)c\")").size(), is(4)); //2?? 4?? who knows!!!
+    	assertThat($("div:contains(\"a\\\\\\\"b)c\")").size(), is(2)); //2?? 4?? who knows!!!
     }
 
     @Test
@@ -48,16 +50,16 @@ public class ContainsPseudoClassTest {
     	//
     	// To me, the CSS parser does the right thing, but jQuery disagrees.
     	// There's not much we can do here without changing the CSS Parser...
-    	assertSelectorMatchedSetSize("div:contains('a\\'b)c')", 4);
-    	assertSelectorMatchedSetSize("div:contains('a\\\'b)c')", 4);
+    	assertThat($("div:contains('a\\'b)c')").size(), is(4));
+    	assertThat($("div:contains('a\\\'b)c')").size(), is(4));
     }
     
     @Test
     public void containsPseudo() {
-    	assertSelectorMatchedSetSize("div:contains(abc)", 12);
-    	assertSelectorMatchedSetSize("body:contains(abc)", 1);
-    	assertSelectorMatchedSetSize("html:contains(abc)", 1);
-    	assertSelectorMatchedSetSize(":contains(abc)", 14);
+    	assertThat($("div:contains(abc)").size(), is(12));
+    	assertThat($("body:contains(abc)").size(), is(1));
+    	assertThat($("html:contains(abc)").size(), is(1));
+    	assertThat($(":contains(abc)").size(), is(14));
     }
 	
 }

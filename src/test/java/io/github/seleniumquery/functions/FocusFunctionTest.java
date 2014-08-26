@@ -114,4 +114,12 @@ public class FocusFunctionTest {
     	}
     }
     
+    @Test
+    public void focus_pseudoClass_selector() {
+    	$("#i1").focus();
+    	assertThat($("#i1").is(":focus"), is(true));
+    	assertThat($(":focus").size(), is(1));
+    	assertThat($(":focus").attr("id"), is("i1"));
+    }
+    
 }
