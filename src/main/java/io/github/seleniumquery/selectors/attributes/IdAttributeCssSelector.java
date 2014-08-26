@@ -5,6 +5,8 @@ import java.util.Map;
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CssConditionalSelector;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,6 +48,12 @@ public class IdAttributeCssSelector implements CssConditionalSelector<AttributeC
 		String wantedId = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by id
 		return CompiledCssSelector.createNoFilterSelector("#"+SelectorUtils.escapeSelector(wantedId));
+	}
+
+	@Override
+	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+		String wantedId = attributeCondition.getValue();
+		return XPathSelectorFactory.createNoFilterSelector("[@id = '"+wantedId+"']");
 	}
 
 }

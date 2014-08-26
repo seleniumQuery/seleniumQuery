@@ -1,7 +1,9 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,11 +45,19 @@ public class SubmitPseudoClass implements PseudoClass {
 			  );
 	}
 	
-	private static final CssFilter submitPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter submitPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :submit is an extension selector, nobody implements it natively
 		return CompiledCssSelector.createFilterOnlySelector(submitPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[("
+				+ "(name() = 'input' and @type = 'submit') or "
+				+ "(name() = 'button' and (@type = 'submit' or not(@type)) )"
+				+ ")]");
 	}
 	
 }

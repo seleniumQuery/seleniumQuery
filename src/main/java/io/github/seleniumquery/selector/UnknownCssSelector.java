@@ -1,8 +1,11 @@
 package io.github.seleniumquery.selector;
 
+import io.github.seleniumquery.locator.ElementFilter;
+
 import java.util.Map;
 
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -10,6 +13,8 @@ import org.openqa.selenium.WebElement;
  * Represents an unknown CSS selector type.
  */
 public class UnknownCssSelector<T> implements CssSelector<T> {
+	
+	private static final Log LOGGER = LogFactory.getLog(UnknownCssSelector.class);
 	
 	private short type;
 	
@@ -25,7 +30,14 @@ public class UnknownCssSelector<T> implements CssSelector<T> {
 	@Override
 	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, T selector) {
 		// if it is unknown, we just push it forward, hoping the browser will know what to do
-		return new CompiledCssSelector(selector.toString(), CssFilter.FILTER_NOTHING);
+		return new CompiledCssSelector(selector.toString(), ElementFilter.FILTER_NOTHING);
+	}
+
+	@Override
+	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, T selector) {
+		// if it is unknown, we can't convert it, so we simply ignore it
+		LOGGER.warn("CSS Selector '"+selector+"' is unknown. Ignoring it.");
+		return XPathSelectorFactory.createFilterOnlySelector(ElementFilter.FILTER_NOTHING);
 	}
 	
 }

@@ -1,8 +1,10 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,11 +48,16 @@ public class ParentPseudoClass implements PseudoClass {
 		return !element.findElements(By.xpath("self::node()[count(node()) > 0]")).isEmpty();
 	}
 	
-	private static final CssFilter parentPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter parentPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// we never consider :parent to be supported natively
 		return CompiledCssSelector.createFilterOnlySelector(parentPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[count(.//*) > 0]");
 	}
 	
 }

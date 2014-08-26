@@ -1,8 +1,6 @@
 package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.selector.CssSelectorCompilerServiceTest.assertSelectorMatchedSetSize;
-import static io.github.seleniumquery.selector.CssSelectorCompilerServiceTest.compileAndExecute;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
@@ -17,45 +15,46 @@ public class EqPseudoClassTest {
 	
 	@Test
 	public void eqPseudo_with_tag_div() {
-		assertSelectorMatchedSetSize("div:eq(0)", 1);
-		assertSelectorMatchedSetSize("div:eq(4)", 0);
-		assertSelectorMatchedSetSize("div:eq(99)", 0);
+		assertThat($("div:eq(0)").size(), is(1));
+		assertThat($("div:eq(4)").size(), is(0));
+		assertThat($("div:eq(99)").size(), is(0));
 	}
 	
 	@Test
 	public void eqPseudo_with_class() {
-		assertSelectorMatchedSetSize(".c1:eq(0)", 1);
-		assertSelectorMatchedSetSize(".c1:eq(1)", 0);
-		assertSelectorMatchedSetSize(".c1:eq(99)", 0);
+		assertThat($(".c1:eq(0)").size(), is(1));
+		assertThat($(".c1:eq(1)").size(), is(0));
+		assertThat($(".c1:eq(99)").size(), is(0));
 		
-		assertSelectorMatchedSetSize(".w00t:eq(0)", 1);
-		assertSelectorMatchedSetSize(".w00t:eq(2)", 1);
-		assertSelectorMatchedSetSize(".w00t:eq(3)", 0);
+		assertThat($(".w00t:eq(0)").size(), is(1));
+		assertThat($(".w00t:eq(2)").size(), is(1));
+		assertThat($(".w00t:eq(3)").size(), is(0));
 	}
 	
 	@Test
 	public void eqPseudo_with_tag__INDIVIDUAL_CHECK() {
-		assertThat(compileAndExecute("div:eq(0)").get(0).getText(), is("Batman"));
-		assertThat(compileAndExecute("div:eq(1)").get(0).getText(), is("Spider Man"));
-		assertThat(compileAndExecute("div:eq(2)").get(0).getText(), is("Hulk"));
-		assertThat(compileAndExecute("div:eq(3)").get(0).getText(), is("Bozo"));
-		
-		assertThat(compileAndExecute("div:eq(+0)").get(0).getText(), is("Batman"));
-		assertThat(compileAndExecute("div:eq(+1)").get(0).getText(), is("Spider Man"));
-		assertThat(compileAndExecute("div:eq(+2)").get(0).getText(), is("Hulk"));
-		assertThat(compileAndExecute("div:eq(+3)").get(0).getText(), is("Bozo"));
-		
-		assertThat(compileAndExecute("div:eq(-0)").get(0).getText(), is("Batman"));
-		assertThat(compileAndExecute("div:eq(-4)").get(0).getText(), is("Batman"));
-		assertThat(compileAndExecute("div:eq(-3)").get(0).getText(), is("Spider Man"));
-		assertThat(compileAndExecute("div:eq(-2)").get(0).getText(), is("Hulk"));
-		assertThat(compileAndExecute("div:eq(-1)").get(0).getText(), is("Bozo"));
+//		assertThat($("div:eq(0)").get().get(0).getText(), is("Batman"));
+//		assertThat($("div:eq(1)").get().get(0).getText(), is("Spider Man"));
+//		assertThat($("div:eq(2)").get().get(0).getText(), is("Hulk"));
+//		assertThat($("div:eq(3)").get().get(0).getText(), is("Bozo"));
+//		
+//		assertThat($("div:eq(+0)").get().get(0).getText(), is("Batman"));
+//		assertThat($("div:eq(+1)").get().get(0).getText(), is("Spider Man"));
+//		assertThat($("div:eq(+2)").get().get(0).getText(), is("Hulk"));
+//		assertThat($("div:eq(+3)").get().get(0).getText(), is("Bozo"));
+//		
+//		assertThat($("div:eq(-0)").get().get(0).getText(), is("Batman"));
+//		assertThat($("div:eq(-5)").size(), is(0));
+		assertThat($("div:eq(-1)").get().get(0).getText(), is("Bozo"));
+		assertThat($("div:eq(-4)").get().get(0).getText(), is("Batman"));
+		assertThat($("div:eq(-3)").get().get(0).getText(), is("Spider Man"));
+		assertThat($("div:eq(-2)").get().get(0).getText(), is("Hulk"));
 	}
 	
 	@Test
 	public void eqPseudo() {
-		assertSelectorMatchedSetSize(":eq(0)", 1);
-		assertSelectorMatchedSetSize(":eq(99)", 0);
+		assertThat($(":eq(0)").size(), is(1));
+		assertThat($(":eq(99)").size(), is(0));
 	}
 	
     @Test

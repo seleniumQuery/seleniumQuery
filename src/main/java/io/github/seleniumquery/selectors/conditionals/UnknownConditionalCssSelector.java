@@ -1,10 +1,15 @@
 package io.github.seleniumquery.selectors.conditionals;
 
-import java.util.Map;
-
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Condition;
@@ -14,6 +19,8 @@ import org.w3c.css.sac.Selector;
  * Represents an unknown condition type.
  */
 public class UnknownConditionalCssSelector<T extends Condition> implements CssConditionalSelector<T> {
+	
+	private static final Log LOGGER = LogFactory.getLog(UnknownConditionalCssSelector.class);
 	
 	private short type;
 	
@@ -30,6 +37,13 @@ public class UnknownConditionalCssSelector<T extends Condition> implements CssCo
 	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, T condition) {
 		// we dont know what to do, just pass along hoping the browser will
 		return CompiledCssSelector.createNoFilterSelector(condition.toString());
+	}
+	
+	@Override
+	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, T condition) {
+		// if it is unknown, we can't convert it, so we simply ignore it
+		LOGGER.warn("CSS Selector Condition '"+condition+"' is unknown. Ignoring it.");
+		return XPathSelectorFactory.createFilterOnlySelector(ElementFilter.FILTER_NOTHING);
 	}
 	
 }

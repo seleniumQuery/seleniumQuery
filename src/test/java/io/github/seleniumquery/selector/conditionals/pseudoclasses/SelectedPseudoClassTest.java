@@ -1,6 +1,8 @@
 package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
-import static io.github.seleniumquery.selector.CssSelectorCompilerServiceTest.assertSelectorMatchedSetSize;
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
 
 import org.junit.Rule;
@@ -13,27 +15,27 @@ public class SelectedPseudoClassTest {
 	
 	@Test
 	public void selectedPseudoClass_with_tag_option() {
-		assertSelectorMatchedSetSize("option:selected", 2);
+		assertThat($("option:selected").size(), is(2));
 	}
 	
 	@Test
 	public void selectedPseudoClass_with_tag_input() {
-		assertSelectorMatchedSetSize("input:selected", 0);
+		assertThat($("input:selected").size(), is(0));
 	}
 	
 	@Test
 	public void selectedPseudoClass_with_tag_input_checkbox() {
-		assertSelectorMatchedSetSize("input[type=checkbox]:selected", 0);
+		assertThat($("input[type=checkbox]:selected").size(), is(0));
 	}
 	
 	@Test
 	public void selectedPseudoClass_with_tag_input_radio() {
-		assertSelectorMatchedSetSize("input[type=radio]:selected", 0);
+		assertThat($("input[type=radio]:selected").size(), is(0));
 	}
 	
 	@Test
 	public void selectedPseudoClass() {
-		assertSelectorMatchedSetSize(":selected", 2);
+		assertThat($(":selected").size(), is(2));
 	}
 	
 }

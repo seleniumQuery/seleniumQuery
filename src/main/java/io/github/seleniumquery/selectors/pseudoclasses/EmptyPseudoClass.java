@@ -1,8 +1,10 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,11 +43,16 @@ public class EmptyPseudoClass implements PseudoClass {
 		return isEmpty;
 	}
 	
-	private static final CssFilter emptyPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter emptyPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// we never consider :empty to be supported natively
 		return CompiledCssSelector.createFilterOnlySelector(emptyPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[count(.//*) = 0]");
 	}
 	
 }

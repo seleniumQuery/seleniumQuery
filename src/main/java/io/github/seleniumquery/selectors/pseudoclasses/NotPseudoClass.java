@@ -1,8 +1,11 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.CssSelectorMatcherService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorCompilerService;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,8 +39,15 @@ public class NotPseudoClass implements PseudoClass {
 //		if (DriverSupportMap.getInstance().supportsNatively(driver, ":not(div)")) {
 //			return CompiledSelector.createNoFilterSelector(":not("+pseudoClassValue+")");
 //		}
-		CssFilter notPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		ElementFilter notPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledCssSelector.createFilterOnlySelector(notPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		String notSelector = pseudoClassSelector.getPseudoClassContent();
+		String insideNotXPath = XPathSelectorCompilerService.compileSelectorList(driver, notSelector).toXPathCondition();
+		return XPathSelectorFactory.createNoFilterSelector("[not("+insideNotXPath+")]");
 	}
 	
 }

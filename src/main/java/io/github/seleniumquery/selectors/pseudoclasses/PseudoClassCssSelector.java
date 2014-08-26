@@ -2,6 +2,8 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -59,6 +61,19 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 //		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
 		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue);
 		return CompiledCssSelector.createNoFilterSelector(pseudoClassSelector.getOriginalPseudoClassSelector());
+	}
+	
+	@Override
+	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+		String pseudoClassValue = attributeCondition.getValue();
+		for (PseudoClass pseudoClass : pseudoClasses) {
+			if (pseudoClass.isApplicable(pseudoClassValue)) {
+				return pseudoClass.pseudoClassToXPath(driver, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
+			}
+		}
+		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue);
+		System.err.println("Pseudo not supported: "+pseudoClassSelector.getOriginalPseudoClassSelector());
+		return XPathSelectorFactory.createNoFilterSelector("");
 	}
 
 }

@@ -1,11 +1,13 @@
 package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.endsWith;
-
-import java.util.Map;
-
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
+
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,6 +44,14 @@ public class EndsWithAttributeCssSelector implements CssConditionalSelector<Attr
 	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		// nothing to do, everyone supports this selector
 		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL);
+	}
+	
+	@Override
+	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
+		String attrValue = attributeCondition.getValue();
+		String wantedValue = SelectorUtils.intoEscapedXPathString(attrValue);
+		return XPathSelectorFactory.createNoFilterSelector("[substring("+attributeName+", string-length("+attributeName+")-"+(attrValue.length()-1)+") = "+wantedValue+"]");
 	}
 
 }

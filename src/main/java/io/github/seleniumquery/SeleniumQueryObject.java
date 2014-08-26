@@ -376,7 +376,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Get the HTML contents of the first element in the set of matched elements.
 	 * 
-	 * @since 0.4.0
+	 * @since 1.0.0
 	 */
 	public String html() {
 		return HtmlFunction.html(this, elements);
@@ -387,7 +387,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * at least one of these elements matches the given arguments.
 	 * 
 	 * @param selector	A string containing a selector expression to match elements against.
-	 * @since 0.5.0
+	 * @since 1.0.0
 	 */
 	public boolean is(String selector) {
 		return IsFunction.is(this, elements, selector);

@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.locator.ElementFilter;
 
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
 
-class PseudoClassFilter implements CssFilter {
+class PseudoClassFilter implements ElementFilter {
 	
 	public static final Map<String, String> STRING_MAP_NOT_USED = null;
 	public static final Selector SELECTOR_NOT_USED = null;
@@ -30,7 +30,7 @@ class PseudoClassFilter implements CssFilter {
 	}
 	
 	@Override
-	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
+	public List<WebElement> filterElements(WebDriver driver, List<WebElement> elements) {
 		for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext();) {
 			WebElement webElement = iterator.next();
 			if (!pseudoClass.isPseudoClass(driver, webElement, this.pseudoClassSelector)) {

@@ -20,42 +20,9 @@ public class CssSelectorCompilerServiceTest {
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	public static List<WebElement> compileAndExecute(String selector) {
-		CompiledCssSelectorList csl = CssSelectorCompilerService.compileSelectorList($.browser.getDefaultDriver(), selector);
-		List<WebElement> execute = csl.execute($.browser.getDefaultDriver());
-		return execute;
-	}
-	
-	public static void assertSelectorMatchedSetSize(String selector, int size) {
-		List<WebElement> elements = compileAndExecute(selector);
-		assertThat(elements, hasSize(size));
-	}
-	
-	@Test
-	public void parts() {
-//		CompiledCssSelectorList csl = CssSelectorCompilerService.compileSelectorList($.browser.getDefaultDriver(), ".rich-data-scr");
-		CompiledCssSelectorList csl = CssSelectorCompilerService.compileSelectorList($.browser.getDefaultDriver(),
-				"table.rich-dtascroller-table tr td:nth-child(5)");
-		
-		final List<CompiledCssSelector> compS = csl.css;
-		
-		for (CompiledCssSelector compiledCssSelector : compS) {
-			System.out.println(compiledCssSelector.getCssSelector());
-			System.out.println(compiledCssSelector.getCssFilter().get(0));
-		}
-		
-//		List<WebElement> execute = csl.execute($.browser.getDefaultDriver());
-//		List<WebElement> elements = execute;
-//		
-//		assertThat(elements, hasSize(1));
-//		assertThat(elements.get(0).getTagName(), is("div"));
-//		assertThat(elements.get(0).getAttribute("id"), is("d1"));
-//		assertThat(elements.get(0).getAttribute("class"), is("clz"));
-	}
-	
 	@Test
 	public void id() {
-		List<WebElement> elements = compileAndExecute("#d1");
+		List<WebElement> elements = $("#d1").get();
 		
 		assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).getTagName(), is("div"));
@@ -65,7 +32,7 @@ public class CssSelectorCompilerServiceTest {
 	
 	@Test
 	public void id_with_escape() {
-		List<WebElement> elements = compileAndExecute("#must\\:escape");
+		List<WebElement> elements = $("#must\\:escape").get();
 		
 		assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).getTagName(), is("h1"));
@@ -74,7 +41,7 @@ public class CssSelectorCompilerServiceTest {
 	
 	@Test
 	public void tag() {
-		List<WebElement> elements = compileAndExecute("div");
+		List<WebElement> elements = $("div").get();
 		
 		assertThat(elements, hasSize(3));
     	assertThat(elements.get(0).getTagName(), is("div"));
@@ -92,7 +59,7 @@ public class CssSelectorCompilerServiceTest {
 
     @Test
     public void tag_and_class() {
-		List<WebElement> elements = compileAndExecute("div.clz");
+		List<WebElement> elements = $("div.clz").get();
 		
 		assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).getTagName(), is("div"));
@@ -102,7 +69,7 @@ public class CssSelectorCompilerServiceTest {
     
     @Test
     public void tag_and_tag_descendant() {
-    	List<WebElement> elements = compileAndExecute("div div");
+    	List<WebElement> elements = $("div div").get();
     	
     	assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).getTagName(), is("div"));
@@ -112,7 +79,7 @@ public class CssSelectorCompilerServiceTest {
 
     @Test
     public void tag_and_class_AND_tag_and_class_descendant() {
-		List<WebElement> elements = compileAndExecute("div.clz select.clz");
+		List<WebElement> elements = $("div.clz select.clz").get();
 		
 		assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).getTagName(), is("select"));
@@ -122,7 +89,7 @@ public class CssSelectorCompilerServiceTest {
     
     @Test
     public void hidden_pseudo() {
-    	List<WebElement> elements = compileAndExecute("p:hidden");
+    	List<WebElement> elements = $("p:hidden").get();
     	
     	assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).getTagName(), is("p"));
@@ -133,7 +100,16 @@ public class CssSelectorCompilerServiceTest {
     
     @Test
     public void hidden_pseudo_as_parent_and_descendant() {
-    	List<WebElement> elements = compileAndExecute("p:hidden span.spanYo:hidden");
+    	System.out.println(Character.getType('a'));
+    	System.out.println(Character.getType('Z'));
+    	System.out.println(Character.getType('1'));
+    	System.out.println(Character.getType('á'));
+    	
+    	
+    	List<WebElement> elements = $("p:hidden span.spanYo:hidden").get();
+    	for (WebElement webElement : elements) {
+			System.out.println("@# El: "+webElement);
+		}
     	
     	assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).getTagName(), is("span"));
@@ -143,7 +119,7 @@ public class CssSelectorCompilerServiceTest {
     
     @Test
     public void tag_and_tag_direct_adjacent() {
-    	List<WebElement> elements = compileAndExecute("option + option");
+    	List<WebElement> elements = $("option + option").get();
     	
     	assertThat(elements, hasSize(2));
     	
@@ -161,7 +137,7 @@ public class CssSelectorCompilerServiceTest {
     
     @Test
     public void tag_and_tag_direct_adjacent_with_pseudo() {
-    	List<WebElement> elements = compileAndExecute("span.spanYo:hidden + span:hidden");
+    	List<WebElement> elements = $("span.spanYo:hidden + span:hidden").get();
     	
     	assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).getTagName(), is("span"));
@@ -171,7 +147,7 @@ public class CssSelectorCompilerServiceTest {
     
     @Test
     public void tag_class_and_tag_general_adjacent() {
-    	List<WebElement> elements = compileAndExecute("div.clz ~ h1");
+    	List<WebElement> elements = $("div.clz ~ h1").get();
     	
     	assertThat(elements, hasSize(1));
     	assertThat(elements.get(0).getTagName(), is("h1"));
@@ -180,7 +156,7 @@ public class CssSelectorCompilerServiceTest {
     
     @Test
     public void tag_and_tag_general_adjacent_with_pseudo() {
-    	List<WebElement> elements = compileAndExecute(".spanYo:hidden ~ button");
+    	List<WebElement> elements = $(".spanYo:hidden ~ button").get();
     	
     	assertThat(elements, hasSize(2));
     	assertThat(elements.get(0).getTagName(), is("button"));
@@ -193,7 +169,7 @@ public class CssSelectorCompilerServiceTest {
     
     @Test
     public void tag_class_and_tag_child_selector() {
-    	List<WebElement> elements = compileAndExecute("select > option");
+    	List<WebElement> elements = $("select > option").get();
     	
     	assertThat(elements, hasSize(4));
     	assertThat(elements.get(0).getTagName(), is("option"));
@@ -218,10 +194,10 @@ public class CssSelectorCompilerServiceTest {
     
     @Test
     public void tag_class_and_tag_child_selector__with_pseudo_on_both() {
-    	List<WebElement> elementsZero = compileAndExecute("select:hidden > option");
+    	List<WebElement> elementsZero = $("select:hidden > option").get();
     	assertThat(elementsZero, hasSize(0));
     	
-    	List<WebElement> elements = compileAndExecute("body > :hidden > :hidden");
+    	List<WebElement> elements = $("body > :hidden > :hidden").get();
     	
     	assertThat(elements, hasSize(5));
     	assertThat(elements.get(0).getTagName(), is("button"));

@@ -1,7 +1,9 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,8 +32,13 @@ public class LastPseudoClass implements PseudoClass {
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :last is an extension selector, no browser implements it natively
-		CssFilter firstPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		ElementFilter firstPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledCssSelector.createFilterOnlySelector(firstPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelectorAppliedToAll("[position() = last()]");
 	}
 
 }

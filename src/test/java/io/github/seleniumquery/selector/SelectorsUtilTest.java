@@ -102,5 +102,13 @@ public class SelectorsUtilTest {
 		// a\tc -> "a\\tc"
 		assertThat(SelectorUtils.escapeAttributeValue("a\\tc"), is("\"a\\\\tc\""));
 	}
+	
+	@Test
+	public void intoEscapedXPathString() {
+		assertThat(SelectorUtils.intoEscapedXPathString("abc"), is("'abc'"));
+		assertThat(SelectorUtils.intoEscapedXPathString("a\"bc"), is("'a\"bc'"));
+		assertThat(SelectorUtils.intoEscapedXPathString("a'bc"), is("concat('a', \"'\", 'bc')"));
+		assertThat(SelectorUtils.intoEscapedXPathString("'abc'"), is("concat('', \"'\", 'abc', \"'\", '')"));
+	}
 
 }
