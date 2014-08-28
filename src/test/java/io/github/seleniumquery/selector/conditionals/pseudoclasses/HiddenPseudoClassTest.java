@@ -1,10 +1,10 @@
 package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
-import io.github.seleniumquery.selector.CssSelectorCompilerServiceTest;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ public class HiddenPseudoClassTest {
 	
 	@Test
 	public void hiddenPseudoClass() {
-		List<WebElement> elements = CssSelectorCompilerServiceTest.compileAndExecute(":hidden");
+		List<WebElement> elements = $(":hidden").get();
 		
-		assertThat(elements, hasSize(7));
+		assertThat(elements, hasSize(9));
 		assertThat(elements.get(0).getTagName(), is("head"));
 		assertThat(elements.get(1).getTagName(), is("meta"));
 		assertThat(elements.get(2).getTagName(), is("title"));
@@ -29,6 +29,8 @@ public class HiddenPseudoClassTest {
 		assertThat(elements.get(4).getTagName(), is("h1"));
 		assertThat(elements.get(5).getTagName(), is("button"));
 		assertThat(elements.get(6).getTagName(), is("span"));
+		assertThat(elements.get(7).getTagName(), is("div"));
+		assertThat(elements.get(8).getTagName(), is("p"));
 	}
 	
 }
