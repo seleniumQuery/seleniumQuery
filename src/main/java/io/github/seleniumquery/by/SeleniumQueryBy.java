@@ -3,7 +3,7 @@ package io.github.seleniumquery.by;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selectorcss.CompiledCssSelectorList;
 import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
-import io.github.seleniumquery.selectorxpath.XPathCompiledSelectorList;
+import io.github.seleniumquery.selectorxpath.XPathExpressionList;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 
 import java.util.List;
@@ -136,9 +136,8 @@ public class SeleniumQueryBy extends By {
 			return compileSelectorList.execute(context);
 		}
 		
-		XPathCompiledSelectorList xPathLocator = XPathSelectorCompilerService.compileSelectorList(driver, this.selector);
-		return xPathLocator.locate(context);
-		
+		XPathExpressionList xPathLocator = XPathSelectorCompilerService.compileSelectorList(driver, this.selector);
+		return xPathLocator.findWebElements(context);
 	}
 
 	/**

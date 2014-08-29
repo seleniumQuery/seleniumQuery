@@ -7,6 +7,6 @@ import org.openqa.selenium.WebElement;
 
 public interface Locator {
 	
-	List<WebElement> locate(SearchContext context);
+	List<WebElement> findWebElements(SearchContext context);
 	
 }

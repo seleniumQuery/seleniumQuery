@@ -32,11 +32,11 @@ public class XPathExpression implements Locator {
 	
 	@Override
 	public String toString() {
-		return "[SqXPathSelector: \""+xPathExpression+"\", kind: "+kind+", filters: "+elementFilters+"]";
+		return "[XPath: \""+xPathExpression+"\", kind: "+kind+", filters: "+elementFilters+"]";
 	}
 	
 	@Override
-	public List<WebElement> locate(SearchContext context) {
+	public List<WebElement> findWebElements(SearchContext context) {
 		String finalXPathExpression = this.toXPath();
 		List<WebElement> elements = new By.ByXPath(finalXPathExpression).findElements(context);
 		WebDriver driver = SelectorUtils.getWebDriver(context);
