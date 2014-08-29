@@ -17,7 +17,7 @@ public class EqBugPseudoClassTest {
 	public void eqPseudo_with_descendant() {
 		assertThat($("//*[@id='areaCentral']/table/tbody/tr[1]/td[2]/a").size(), is(1));
 //		$.browser.sleep(600*1000);
-		assertThat($(".rich-table tr:nth-child(1) a").size(), is(1));
+//		assertThat($(".rich-table tr:nth-child(1) a").size(), is(1));
 		assertThat($(".rich-table a:eq(0)").size(), is(1));
 	}
 	
