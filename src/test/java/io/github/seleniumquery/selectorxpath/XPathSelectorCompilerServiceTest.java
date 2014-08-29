@@ -36,7 +36,7 @@ public class XPathSelectorCompilerServiceTest {
 	@Test
 	public void by_id_and_DESCENDANT_class() {
 		XPathExpressionList compileSelectorList = XPathSelectorCompilerService.compileSelectorList(null, "#ball .bozo");
-		assertThat(compileSelectorList.toXPath(), is("(//*[@id = 'ball']/[contains(concat(' ', normalize-space(@class), ' '), ' bozo ')])"));
+		assertThat(compileSelectorList.toXPath(), is("(//*[@id = 'ball']//*[contains(concat(' ', normalize-space(@class), ' '), ' bozo ')])"));
 	}
 	
 	@Test
