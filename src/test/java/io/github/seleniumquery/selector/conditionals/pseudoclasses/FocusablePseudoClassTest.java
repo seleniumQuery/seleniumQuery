@@ -13,7 +13,7 @@ public class FocusablePseudoClassTest {
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void focusablePseudoClass() {
 		assertThat($("body > *").size(), is(6));
 		assertThat($(":focusable").size(), is(3));

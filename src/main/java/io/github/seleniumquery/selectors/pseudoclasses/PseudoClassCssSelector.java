@@ -76,7 +76,7 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 			return XPathSelectorFactory.createNoFilterSelector("");
 		}
 		// right now we'll just exit, hoping to cause less problems
-		throw new RuntimeException("Pseudo not supported: "+pseudoClassSelector.getOriginalPseudoClassSelector());
+		throw new UnsupportedPseudoClassException(pseudoClassSelector.getOriginalPseudoClassSelector());
 	}
 
 }

@@ -14,7 +14,7 @@ public class TabbablePseudoClassTest {
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void tabbablePseudoClass() {
 		assertThat($("body > *").size(), is(3));
 		for (WebElement el : $(":tabbable")) {

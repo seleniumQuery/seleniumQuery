@@ -17,8 +17,8 @@ public class VisiblePseudoClassTest {
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@Test
-	public void hiddenPseudoClass() {
+	@Test(expected = RuntimeException.class)
+	public void visiblePseudoClass() {
 		List<WebElement> elements = $(":visible").get();
 		
 		assertThat(elements, hasSize(6));

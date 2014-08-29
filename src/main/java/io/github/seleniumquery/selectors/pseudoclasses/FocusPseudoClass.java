@@ -43,6 +43,9 @@ public class FocusPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		if (!Object.class.equals("always run")) {
+			throw new UnsupportedPseudoClassException(":focus");
+		}
 		// #no-xpath
 		return XPathSelectorFactory.createFilterOnlySelector(focusPseudoClassFilter);
 	}

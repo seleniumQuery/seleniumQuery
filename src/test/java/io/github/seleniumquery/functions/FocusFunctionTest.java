@@ -114,7 +114,7 @@ public class FocusFunctionTest {
     	}
     }
     
-    @Test
+    @Test(expected = RuntimeException.class)
     public void focus_pseudoClass_selector() {
     	$("#i1").focus();
     	assertThat($("#i1").is(":focus"), is(true));

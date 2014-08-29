@@ -19,7 +19,7 @@ public class HiddenPseudoClassTest {
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void hiddenPseudoClass() {
 		List<WebElement> xels = $.browser.getDefaultDriver().findElements(By.xpath("(//*[ancestor-or-self::*[contains(normalize-space(@style),'display: none') or contains(normalize-space(@style),'display:none')] or (count(ancestor-or-self::body) = 0 and name() != 'html')])"));
 		for (WebElement xel : xels) {

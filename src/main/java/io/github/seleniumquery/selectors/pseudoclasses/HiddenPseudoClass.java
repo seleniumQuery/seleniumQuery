@@ -49,6 +49,9 @@ public class HiddenPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		if (!Object.class.equals("always run")) {
+			throw new UnsupportedPseudoClassException(":hidden");
+		}
 		// #not-pure-xpath // it is not pure because XPath cant see the styles declared in the classes declared
 		return XPathSelectorFactory.create("[" + HIDDEN_XPATH_MUST_FILTER + "]", hiddenPseudoClassFilter);
 	}
