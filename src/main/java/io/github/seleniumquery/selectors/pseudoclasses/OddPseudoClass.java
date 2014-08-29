@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class OddPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// notice that XPath is 1-based and :odd is not.
 		return XPathSelectorFactory.createNoFilterSelectorAppliedToAll("[(position() mod 2) = 0]");
 	}

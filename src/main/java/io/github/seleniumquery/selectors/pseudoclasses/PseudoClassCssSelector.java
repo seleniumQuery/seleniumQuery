@@ -2,7 +2,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Arrays;
@@ -64,7 +64,7 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 	}
 	
 	@Override
-	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String pseudoClassValue = attributeCondition.getValue();
 		for (PseudoClass pseudoClass : pseudoClasses) {
 			if (pseudoClass.isApplicable(pseudoClassValue)) {

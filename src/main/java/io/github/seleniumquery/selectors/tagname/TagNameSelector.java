@@ -5,7 +5,7 @@ import java.util.Map;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssSelector;
 import io.github.seleniumquery.selectorxpath.SqSelectorKind;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
@@ -33,9 +33,9 @@ public class TagNameSelector implements CssSelector<ElementSelector> {
 	}
 
 	@Override
-	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, ElementSelector selector) {
+	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, ElementSelector selector) {
 		String tagName = selector.toString();
-		SqXPathSelector tagSelector = XPathSelectorFactory.createNoFilterSelector(tagName);
+		XPathExpression tagSelector = XPathSelectorFactory.createNoFilterSelector(tagName);
 		tagSelector.kind = SqSelectorKind.TAG;
 		return tagSelector;
 //		if ("*".equals(tagName)) {

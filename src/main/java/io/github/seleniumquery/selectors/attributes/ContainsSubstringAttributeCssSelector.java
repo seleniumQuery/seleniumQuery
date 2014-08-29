@@ -7,7 +7,7 @@ import java.util.Map;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
@@ -53,7 +53,7 @@ public class ContainsSubstringAttributeCssSelector implements CssConditionalSele
 	}
 	
 	@Override
-	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
 		return XPathSelectorFactory.createNoFilterSelector("[contains("+attributeName+", "+wantedValue+")]");

@@ -12,7 +12,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class SqXPathSelector implements Locator {
+public class XPathExpression implements Locator {
 
 	private String xPathExpression;
 	private List<ElementFilter> elementFilters;
@@ -20,11 +20,11 @@ public class SqXPathSelector implements Locator {
 	/**
 	 * What is a XPath line??? TODO
 	 */
-	private List<SqXPathSelector> xpathLine = new ArrayList<SqXPathSelector>();
+	private List<XPathExpression> xpathLine = new ArrayList<XPathExpression>();
 	
 	public SqSelectorKind kind;
 
-	SqXPathSelector(String xPathExpression, List<ElementFilter> elementFilter) {
+	XPathExpression(String xPathExpression, List<ElementFilter> elementFilter) {
 		this.xPathExpression = xPathExpression;
 		this.elementFilters = elementFilter;
 		this.kind = SqSelectorKind.CONDITIONAL_SIMPLE;
@@ -50,13 +50,13 @@ public class SqXPathSelector implements Locator {
 		return elements;
 	}
 	
-	public SqXPathSelector combine(SqXPathSelector other) {
+	public XPathExpression combine(XPathExpression other) {
 		this.xpathLine.add(other);
 		this.xpathLine.addAll(other.xpathLine);
 		return this;
 	}
 	
-	private SqXPathSelector merge(SqXPathSelector other) {
+	private XPathExpression merge(XPathExpression other) {
 		switch (other.kind) {
 		case ADJACENT:
 			this.xPathExpression = this.xPathExpression + "/following-sibling::" + other.xPathExpression;
@@ -98,7 +98,7 @@ public class SqXPathSelector implements Locator {
 			throw new RuntimeException("Weird... i didnt think this was possible!");
 		}
 		this.xPathExpression = "/z/" + this.xPathExpression;
-		for (SqXPathSelector x : xpathLine) {
+		for (XPathExpression x : xpathLine) {
 			this.merge(x);
 		}
 		return "(" + this.xPathExpression + ")";
@@ -113,7 +113,7 @@ public class SqXPathSelector implements Locator {
 		} else {
 			this.xPathExpression = "[name()]";
 		}
-		for (SqXPathSelector x : xpathLine) {
+		for (XPathExpression x : xpathLine) {
 			this.merge(x);
 		}
 		return this.xPathExpression.substring(1, this.xPathExpression.length()-1); // removes [] around

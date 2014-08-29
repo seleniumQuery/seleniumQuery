@@ -5,7 +5,7 @@ import java.util.Map;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 import io.github.seleniumquery.selectorcss.CssFilterUtils;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
@@ -54,13 +54,13 @@ public class AndConditionalCssSelector implements CssConditionalSelector<Combina
 	}
 	
 	@Override
-	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
+	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
 		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
 				(SimpleSelector) selectorUpToThisPoint,
 				combinatorCondition.getFirstCondition());
 		
-		SqXPathSelector compiledFirst = conditionalEvaluator.conditionToXPath(driver, stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
-		SqXPathSelector compiledSecond = conditionalEvaluator.conditionToXPath(driver, stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
+		XPathExpression compiledFirst = conditionalEvaluator.conditionToXPath(driver, stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
+		XPathExpression compiledSecond = conditionalEvaluator.conditionToXPath(driver, stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
 		return compiledFirst.combine(compiledSecond);
 	}
 

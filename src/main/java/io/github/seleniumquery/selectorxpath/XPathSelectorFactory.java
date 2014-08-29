@@ -16,12 +16,12 @@ public class XPathSelectorFactory {
 	 * Creates a compiled selector that only does filtering, meaning
 	 * it is entirely NOT supported by the driver.
 	 */
-	public static SqXPathSelector createFilterOnlySelector(ElementFilter filter) {
+	public static XPathExpression createFilterOnlySelector(ElementFilter filter) {
 		return create(EMPTY_SELECTOR, filter);
 	}
 
-	public static SqXPathSelector createNoFilterSelectorAppliedToAll(String cssSelector) {
-		SqXPathSelector create = create(cssSelector, ElementFilter.FILTER_NOTHING);
+	public static XPathExpression createNoFilterSelectorAppliedToAll(String cssSelector) {
+		XPathExpression create = create(cssSelector, ElementFilter.FILTER_NOTHING);
 		create.kind = SqSelectorKind.CONDITIONAL_TO_ALL;
 		return create;
 	}
@@ -30,7 +30,7 @@ public class XPathSelectorFactory {
 	 * Creates a compiled selector that does no filtering, meaning
 	 * it is entirely supported by the driver.
 	 */
-	public static SqXPathSelector createNoFilterSelector(String selector) {
+	public static XPathExpression createNoFilterSelector(String selector) {
 		return create(selector, ElementFilter.FILTER_NOTHING);
 	}
 
@@ -38,11 +38,11 @@ public class XPathSelectorFactory {
 	 * Creates a compiled selector that does no filtering, meaning
 	 * it is entirely supported by the driver.
 	 */
-	public static SqXPathSelector createNoFilterSelector(Selector selector) {
+	public static XPathExpression createNoFilterSelector(Selector selector) {
 		return createNoFilterSelector(selector.toString());
 	}
 
-	public static SqXPathSelector create(String selector, ElementFilter filter) {
+	public static XPathExpression create(String selector, ElementFilter filter) {
 		
 		List<ElementFilter> filterList = null;
 		
@@ -52,7 +52,7 @@ public class XPathSelectorFactory {
 			filterList = new ArrayList<ElementFilter>(Arrays.asList(filter));
 		}
 		
-		return new SqXPathSelector(selector, filterList);
+		return new XPathExpression(selector, filterList);
 	}
 
 }

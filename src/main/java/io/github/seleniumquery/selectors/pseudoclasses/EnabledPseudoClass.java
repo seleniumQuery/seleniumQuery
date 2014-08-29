@@ -4,7 +4,7 @@ import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Arrays;
@@ -74,7 +74,7 @@ public class EnabledPseudoClass implements PseudoClass {
 			+ ")";
 	
 	@Override
-	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		return XPathSelectorFactory.createNoFilterSelector("[" + ENABLED_XPATH + "]");
 	}
 	

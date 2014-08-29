@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectorcss;
 
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 
 import java.util.Map;
 
@@ -24,6 +24,6 @@ public interface CssSelector<T> {
 	 */
 	CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, T selector);
 
-	SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, T selector);
+	XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, T selector);
 	
 }

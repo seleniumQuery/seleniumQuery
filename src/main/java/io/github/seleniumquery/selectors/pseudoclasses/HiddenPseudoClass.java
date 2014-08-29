@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
@@ -48,7 +48,7 @@ public class HiddenPseudoClass implements PseudoClass {
 			+ ")";
 	
 	@Override
-	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// #not-pure-xpath // it is not pure because XPath cant see the styles declared in the classes declared
 		return XPathSelectorFactory.create("[" + HIDDEN_XPATH_MUST_FILTER + "]", hiddenPseudoClassFilter);
 	}

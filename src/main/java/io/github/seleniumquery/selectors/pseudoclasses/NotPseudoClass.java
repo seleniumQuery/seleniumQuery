@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -44,7 +44,7 @@ public class NotPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
 		String insideNotXPath = XPathSelectorCompilerService.compileSelectorList(driver, notSelector).toXPathCondition();
 		return XPathSelectorFactory.createNoFilterSelector("[not("+insideNotXPath+")]");

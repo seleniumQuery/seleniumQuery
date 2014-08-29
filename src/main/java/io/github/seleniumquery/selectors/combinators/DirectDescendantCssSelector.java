@@ -7,7 +7,7 @@ import io.github.seleniumquery.selectorcss.CssSelector;
 import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 import io.github.seleniumquery.selectorxpath.SqSelectorKind;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -82,9 +82,9 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	}
 	
 	@Override
-	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		SqXPathSelector elementCompiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
-		SqXPathSelector parentCompiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
+	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
+		XPathExpression elementCompiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
+		XPathExpression parentCompiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
 		
 		elementCompiledSelector.kind = SqSelectorKind.DESCENDANT_DIRECT;
 		return parentCompiledSelector.combine(elementCompiledSelector);
