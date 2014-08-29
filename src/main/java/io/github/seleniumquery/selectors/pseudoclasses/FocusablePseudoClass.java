@@ -87,6 +87,9 @@ public class FocusablePseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		if (!Object.class.equals("always run")) {
+			throw new UnsupportedPseudoClassException(":focusable");
+		}
 		// #no-xpath
 		System.err.println(":focusable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
 		return XPathSelectorFactory.createNoFilterSelector("[" + FOCUSABLE_XPATH + "]");

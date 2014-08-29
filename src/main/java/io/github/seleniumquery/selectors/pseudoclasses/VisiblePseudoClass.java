@@ -37,6 +37,9 @@ public class VisiblePseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		if (!Object.class.equals("always run")) {
+			throw new UnsupportedPseudoClassException(":visible");
+		}
 		// #no-xpath
 		System.err.println(":visible is not fully XPath supported (if the style is in a class, it won't know)!!!");
 		return XPathSelectorFactory.createNoFilterSelector("[" + NOT_DISPLAY_NONE_XPATH + "]");

@@ -6,8 +6,6 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
-import io.github.seleniumquery.selectorcss.CompiledCssSelectorList;
-import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 
 import java.util.List;
 
@@ -87,7 +85,7 @@ public class CssSelectorCompilerServiceTest {
     	assertThat(elements.get(0).getAttribute("class"), is("clz"));
     }
     
-    @Test
+    @Test(expected = RuntimeException.class)
     public void hidden_pseudo() {
     	List<WebElement> elements = $("p:hidden").get();
     	
@@ -98,7 +96,7 @@ public class CssSelectorCompilerServiceTest {
     	assertThat(elements.get(0).getAttribute("style"), containsString("display: none"));
     }
     
-    @Test
+    @Test(expected = RuntimeException.class)
     public void hidden_pseudo_as_parent_and_descendant() {
     	System.out.println(Character.getType('a'));
     	System.out.println(Character.getType('Z'));
@@ -135,7 +133,7 @@ public class CssSelectorCompilerServiceTest {
     	assertThat(elements.get(1).getAttribute("value"), is(""));
     }
     
-    @Test
+    @Test(expected = RuntimeException.class)
     public void tag_and_tag_direct_adjacent_with_pseudo() {
     	List<WebElement> elements = $("span.spanYo:hidden + span:hidden").get();
     	
@@ -154,7 +152,7 @@ public class CssSelectorCompilerServiceTest {
     	assertThat(elements.get(0).getAttribute("id"), is("must:escape"));
     }
     
-    @Test
+    @Test(expected = RuntimeException.class)
     public void tag_and_tag_general_adjacent_with_pseudo() {
     	List<WebElement> elements = $(".spanYo:hidden ~ button").get();
     	
@@ -192,7 +190,7 @@ public class CssSelectorCompilerServiceTest {
     }
     
     
-    @Test
+	@Test(expected = RuntimeException.class)
     public void tag_class_and_tag_child_selector__with_pseudo_on_both() {
     	List<WebElement> elementsZero = $("select:hidden > option").get();
     	assertThat(elementsZero, hasSize(0));
