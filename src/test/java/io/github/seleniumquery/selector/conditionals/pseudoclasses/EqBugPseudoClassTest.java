@@ -1,8 +1,6 @@
 package io.github.seleniumquery.selector.conditionals.pseudoclasses;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.selector.CssSelectorCompilerServiceTest.assertSelectorMatchedSetSize;
-import static io.github.seleniumquery.selector.CssSelectorCompilerServiceTest.compileAndExecute;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;

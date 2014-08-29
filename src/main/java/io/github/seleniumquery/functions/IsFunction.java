@@ -2,7 +2,7 @@ package io.github.seleniumquery.functions;
 
 import static io.github.seleniumquery.functions.NotPresentParser.NOT_PRESENT_PARSER;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.selector.CssSelectorMatcherService;
+import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package io.github.seleniumquery.locator;
 
-import io.github.seleniumquery.selector.XPathSelectorCompilerService;
+import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;

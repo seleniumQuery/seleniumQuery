@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectors.attributes;
 
-import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 
 import org.w3c.css.sac.AttributeCondition;
 

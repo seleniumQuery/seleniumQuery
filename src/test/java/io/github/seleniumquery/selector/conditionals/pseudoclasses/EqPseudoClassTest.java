@@ -79,8 +79,8 @@ public class EqPseudoClassTest {
 	
 	@Test
 	public void eqPseudo_with_descendant() {
-		assertSelectorMatchedSetSize(".nesting a", 1);
-		assertSelectorMatchedSetSize(".nesting a:eq(0)", 1);
+		assertThat($(".nesting a").size(), is(1));
+		assertThat($(".nesting a:eq(0)").size(), is(1));
 		assertThat($(".nesting a:eq(0)").text(), is("yo"));
 	}
 	

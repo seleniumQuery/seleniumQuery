@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
-import io.github.seleniumquery.selector.CssSelectorCompilerServiceTest;
+import io.github.seleniumquery.selectorcss.CssSelectorCompilerServiceTest;
 import io.github.seleniumquery.selectors.attributes.ContainsWordAttributeCssSelector;
 import io.github.seleniumquery.selectors.attributes.EndsWithAttributeCssSelector;
 import io.github.seleniumquery.selectors.attributes.EqualsOrHasAttributeCssSelector;

@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selectorcss.CompiledCssSelector;
+import io.github.seleniumquery.selectorxpath.SqXPathSelector;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -2,11 +2,11 @@ package io.github.seleniumquery.selectors.attributes;
 
 import java.util.Map;
 
-import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssConditionalSelector;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selector.SqXPathSelector;
-import io.github.seleniumquery.selector.XPathSelectorFactory;
+import io.github.seleniumquery.selectorcss.CompiledCssSelector;
+import io.github.seleniumquery.selectorcss.CssConditionalSelector;
+import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
