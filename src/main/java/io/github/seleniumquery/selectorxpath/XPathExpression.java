@@ -3,6 +3,7 @@ package io.github.seleniumquery.selectorxpath;
 import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.locator.Locator;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selectors.pseudoclasses.UnsupportedPseudoClassException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,9 @@ public class XPathExpression implements Locator {
 	}
 	
 	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
+		if (this.elementFilters.size() > 0) {
+			throw new UnsupportedPseudoClassException("The current selector is unsupported. Please try a simpler one.");
+		}
 		for (ElementFilter elementFilter : elementFilters) {
 			elements = elementFilter.filterElements(driver, elements);
 		}
