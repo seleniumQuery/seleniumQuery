@@ -15,7 +15,7 @@ import org.w3c.css.sac.SelectorList;
 
 public class XPathSelectorCompilerService {
 	
-	public static XPathCompiledSelectorList compileSelectorList(WebDriver driver, String selector) {
+	public static XPathExpressionList compileSelectorList(WebDriver driver, String selector) {
         try {
     		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
     		SelectorList selectorList = parsedSelector.getSelector();
@@ -26,7 +26,7 @@ public class XPathSelectorCompilerService {
         		css.add(cs);
         	}
         	
-        	return new XPathCompiledSelectorList(css);
+        	return new XPathExpressionList(css);
         	
         } catch (Exception e) {
         	throw new RuntimeException(e);
