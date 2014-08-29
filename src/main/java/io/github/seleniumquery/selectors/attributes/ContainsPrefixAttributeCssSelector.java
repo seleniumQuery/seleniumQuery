@@ -2,11 +2,13 @@ package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
-
-import java.util.Map;
-
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CssConditionalSelector;
+import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
+
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,6 +45,14 @@ public class ContainsPrefixAttributeCssSelector implements CssConditionalSelecto
 		String attributeSelectorSymbol = "|=";
 		// nothing to do, everyone supports this selector
 		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, attributeSelectorSymbol);
+	}
+
+	@Override
+	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
+		String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
+		String wantedValueWithSuffix = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue() + "-");
+		return XPathSelectorFactory.createNoFilterSelector("[("+attributeName+" = "+wantedValue+" or starts-with("+attributeName+", "+wantedValueWithSuffix+"))]");
 	}
 	
 }

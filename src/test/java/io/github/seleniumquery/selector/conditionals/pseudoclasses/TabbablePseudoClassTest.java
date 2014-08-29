@@ -7,6 +7,7 @@ import io.github.seleniumquery.SetUpAndTearDownDriver;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 
 public class TabbablePseudoClassTest {
 	
@@ -16,6 +17,9 @@ public class TabbablePseudoClassTest {
 	@Test
 	public void tabbablePseudoClass() {
 		assertThat($("body > *").size(), is(3));
+		for (WebElement el : $(":tabbable")) {
+			System.out.println("@# El: "+el);
+		}
 		assertThat($(":tabbable").size(), is(2));
 	}
 	

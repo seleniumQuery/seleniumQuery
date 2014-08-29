@@ -1,9 +1,11 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +36,7 @@ public class FirstChildPseudoClass implements PseudoClass {
 		return SelectorUtils.itselfWithSiblings(element).get(0).equals(element);
 	}
 
-	private static final CssFilter firstChildPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter firstChildPseudoClassFilter = new PseudoClassFilter(getInstance());
 
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
@@ -43,6 +45,11 @@ public class FirstChildPseudoClass implements PseudoClass {
 			return CompiledCssSelector.createNoFilterSelector(FIRST_CHILD_PSEUDO_CLASS);
 		}
 		return CompiledCssSelector.createFilterOnlySelector(firstChildPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[position() = 1]");
 	}
 
 }

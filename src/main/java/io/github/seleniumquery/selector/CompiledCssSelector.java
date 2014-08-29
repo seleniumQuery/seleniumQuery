@@ -1,6 +1,8 @@
 package io.github.seleniumquery.selector;
 
 
+import io.github.seleniumquery.locator.ElementFilter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,7 +16,7 @@ import org.w3c.css.sac.Selector;
 
 public class CompiledCssSelector {
 
-	private static final List<CssFilter> EMPTY_UNMODIFIABLE_LIST = Collections.unmodifiableList(new ArrayList<CssFilter>());
+	private static final List<ElementFilter> EMPTY_UNMODIFIABLE_LIST = Collections.unmodifiableList(new ArrayList<ElementFilter>());
 	private final static String EMPTY_SELECTOR = ""; 
 	
 	/**
@@ -30,30 +32,30 @@ public class CompiledCssSelector {
 	 * it is entirely supported by the driver.
 	 */
 	public static CompiledCssSelector createNoFilterSelector(String selector) {
-		return new CompiledCssSelector(selector, CssFilter.FILTER_NOTHING);
+		return new CompiledCssSelector(selector, ElementFilter.FILTER_NOTHING);
 	}
 
 	/**
 	 * Creates a compiled selector that only does filtering, meaning
 	 * it is entirely NOT supported by the driver.
 	 */
-	public static CompiledCssSelector createFilterOnlySelector(CssFilter filter) {
+	public static CompiledCssSelector createFilterOnlySelector(ElementFilter filter) {
 		return new CompiledCssSelector(EMPTY_SELECTOR, filter);
 	}
 	
 	private String cssSelector;
-	private List<CssFilter> cssFilter;
+	private List<ElementFilter> cssFilter;
 
-	public CompiledCssSelector(String cssSelector, CssFilter cssFilter) {
+	public CompiledCssSelector(String cssSelector, ElementFilter cssFilter) {
 		this.cssSelector = cssSelector;
-		if (cssFilter == CssFilter.FILTER_NOTHING) {
+		if (cssFilter == ElementFilter.FILTER_NOTHING) {
 			this.cssFilter = EMPTY_UNMODIFIABLE_LIST;
 		} else {
-			this.cssFilter = new ArrayList<CssFilter>(Arrays.asList(cssFilter));
+			this.cssFilter = new ArrayList<ElementFilter>(Arrays.asList(cssFilter));
 		}
 	}
 	
-	public CompiledCssSelector(String cssSelector, List<CssFilter> cssFilter) {
+	public CompiledCssSelector(String cssSelector, List<ElementFilter> cssFilter) {
 		this.cssSelector = cssSelector;
 		this.cssFilter = cssFilter;
 	}
@@ -68,7 +70,7 @@ public class CompiledCssSelector {
 		return cssSelector;
 	}
 	
-	public List<CssFilter> getCssFilter() {
+	public List<ElementFilter> getCssFilter() {
 		return cssFilter;
 	}
 	
@@ -78,8 +80,8 @@ public class CompiledCssSelector {
 	}
 
 	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
-		for (CssFilter cf : cssFilter) {
-			elements = cf.filter(driver, elements);
+		for (ElementFilter cf : cssFilter) {
+			elements = cf.filterElements(driver, elements);
 		}
 		return elements;
 	}

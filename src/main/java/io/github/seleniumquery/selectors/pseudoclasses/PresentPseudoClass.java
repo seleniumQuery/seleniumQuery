@@ -1,7 +1,9 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -39,12 +41,17 @@ public class PresentPseudoClass implements PseudoClass {
 		}
 	}
 	
-	private static final CssFilter presentPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter presentPseudoClassFilter = new PseudoClassFilter(getInstance());
 
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :present is a seleniumQuery extension selector, no browser implements it natively
 		return CompiledCssSelector.createFilterOnlySelector(presentPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("");
 	}
 	
 }

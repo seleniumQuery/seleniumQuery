@@ -1,11 +1,15 @@
 package io.github.seleniumquery.selectors.combinators;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.CssSelector;
 import io.github.seleniumquery.selector.CssSelectorCompilerService;
 import io.github.seleniumquery.selector.CssSelectorMatcherService;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqSelectorKind;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorCompilerService;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.Iterator;
 import java.util.List;
@@ -60,12 +64,12 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> 
 		CompiledCssSelector previousElementCompiled = CssSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSelector());
 		CompiledCssSelector siblingElementCompiled = CssSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
 		
-		CssFilter generalAdjacentFilter = new GeneralAdjacentFilter(previousElementCompiled, siblingElementCompiled);
+		ElementFilter generalAdjacentFilter = new GeneralAdjacentFilter(previousElementCompiled, siblingElementCompiled);
 		return new CompiledCssSelector(previousElementCompiled.getCssSelector()+"~"+siblingElementCompiled.getCssSelector(),
 										generalAdjacentFilter);
 	}
 	
-	private static final class GeneralAdjacentFilter implements CssFilter {
+	private static final class GeneralAdjacentFilter implements ElementFilter {
 		private final CompiledCssSelector siblingsCompiledSelector;
 		private final CompiledCssSelector elementCompiledSelector;
 		
@@ -75,7 +79,7 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> 
 		}
 		
 		@Override
-		public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
+		public List<WebElement> filterElements(WebDriver driver, List<WebElement> elements) {
 			elements = elementCompiledSelector.filter(driver, elements);
 			
 			outerFor:for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext();) {
@@ -99,6 +103,15 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> 
 			}
 			return elements;
 		}
+	}
+
+	@Override
+	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		SqXPathSelector previousElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSelector());
+		SqXPathSelector siblingElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
+		
+		siblingElementCompiled.kind = SqSelectorKind.ADJACENT;
+		return previousElementCompiled.combine(siblingElementCompiled);
 	}
 
 }

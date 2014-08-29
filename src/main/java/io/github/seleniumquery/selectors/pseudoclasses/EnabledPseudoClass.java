@@ -1,9 +1,11 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +47,7 @@ public class EnabledPseudoClass implements PseudoClass {
 		return element.isEnabled() && ENABLEABLE_TAGS.contains(element.getTagName());
 	}
 	
-	private static final CssFilter enabledPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter enabledPseudoClassFilter = new PseudoClassFilter(getInstance());
 	
 	// #Cross-Driver
 	// HtmlUnitDriver has problems with :enabled, so we consider it can never be handler by the browser
@@ -58,6 +60,22 @@ public class EnabledPseudoClass implements PseudoClass {
 			return CompiledCssSelector.createNoFilterSelector(ENABLED_PSEUDO_CLASS);
 		}
 		return CompiledCssSelector.createFilterOnlySelector(enabledPseudoClassFilter);
+	}
+	
+	public static final String ENABLED_XPATH = "("
+			+ "not(@disabled) and "
+			+ "(name() = 'input' or "
+			+ "name() = 'button' or "
+			+ "name() = 'optgroup' or "
+			+ "name() = 'option' or "
+			+ "name() = 'select' or "
+			+ "name() = 'textarea') "
+			+ " and (name() != 'option' or not(ancestor::select[@disabled]))"
+			+ ")";
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[" + ENABLED_XPATH + "]");
 	}
 	
 }

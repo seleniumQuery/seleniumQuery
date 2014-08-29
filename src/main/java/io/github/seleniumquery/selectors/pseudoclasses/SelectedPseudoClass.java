@@ -1,8 +1,10 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +36,7 @@ public class SelectedPseudoClass implements PseudoClass {
 		return element.getTagName().equals(OPTION_TAG) && element.isSelected();
 	}
 	
-	private static final CssFilter selectedPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter selectedPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/:selected
@@ -42,6 +44,11 @@ public class SelectedPseudoClass implements PseudoClass {
 			return CompiledCssSelector.createNoFilterSelector(SELECTED_PSEUDO_CLASS);
 		}
 		return CompiledCssSelector.createFilterOnlySelector(selectedPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[name() = 'option' and @selected]");
 	}
 
 }

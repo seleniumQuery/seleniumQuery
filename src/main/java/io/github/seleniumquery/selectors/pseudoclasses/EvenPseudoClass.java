@@ -1,8 +1,10 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.CssSelectorCompilerService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.List;
 
@@ -34,8 +36,14 @@ public class EvenPseudoClass implements PseudoClass {
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// we never consider :even to be supported natively
-		CssFilter evenPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		ElementFilter evenPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledCssSelector.createFilterOnlySelector(evenPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		// notice that XPath is 1-based and :even is not.
+		return XPathSelectorFactory.createNoFilterSelectorAppliedToAll("[(position() mod 2) = 1]");
 	}
 
 }

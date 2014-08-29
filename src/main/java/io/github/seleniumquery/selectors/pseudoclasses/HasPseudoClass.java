@@ -1,9 +1,12 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CompiledCssSelectorList;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.CssSelectorCompilerService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorCompilerService;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.List;
 
@@ -36,8 +39,16 @@ public class HasPseudoClass implements PseudoClass {
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// we never consider :has to be supported natively
-		CssFilter hasPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
+		ElementFilter hasPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
 		return CompiledCssSelector.createFilterOnlySelector(hasPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		String notSelector = pseudoClassSelector.getPseudoClassContent();
+		String insideHasXPath = XPathSelectorCompilerService.compileSelectorList(driver, notSelector).toXPath();
+		insideHasXPath = insideHasXPath.substring(1, insideHasXPath.length()-1);
+		return XPathSelectorFactory.createNoFilterSelector("[."+insideHasXPath+"]");
 	}
 	
 }
