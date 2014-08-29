@@ -72,8 +72,11 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 			}
 		}
 		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue);
-		System.err.println("Pseudo not supported: "+pseudoClassSelector.getOriginalPseudoClassSelector());
-		return XPathSelectorFactory.createNoFilterSelector("");
+		if (Object.class.equals("in the future, place a debug log here and maybe do somenething")) {
+			return XPathSelectorFactory.createNoFilterSelector("");
+		}
+		// right now we'll just exit, hoping to cause less problems
+		throw new RuntimeException("Pseudo not supported: "+pseudoClassSelector.getOriginalPseudoClassSelector());
 	}
 
 }
