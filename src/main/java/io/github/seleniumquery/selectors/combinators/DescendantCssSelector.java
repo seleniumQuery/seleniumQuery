@@ -21,6 +21,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.DescendantSelector;
+import org.w3c.css.sac.Selector;
+import org.w3c.css.sac.SimpleSelector;
 
 public class DescendantCssSelector implements CssSelector<DescendantSelector> {
 
@@ -100,10 +102,13 @@ public class DescendantCssSelector implements CssSelector<DescendantSelector> {
 
 	@Override
 	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		XPathExpression ancestorCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
-		XPathExpression childrenCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
-		System.out.println("@# ANCESTOR XPATH: "+ancestorCompiled.toXPath());
+		Selector ancestorCSSSelector = descendantSelector.getAncestorSelector();
+		XPathExpression ancestorCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, ancestorCSSSelector);
+		
+		SimpleSelector descendantCSSSelector = descendantSelector.getSimpleSelector();
+		XPathExpression childrenCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantCSSSelector);
 		childrenCompiled.kind = SqSelectorKind.DESCENDANT_GENERAL;
+		
 		return ancestorCompiled.combine(childrenCompiled);
 	}
 	
