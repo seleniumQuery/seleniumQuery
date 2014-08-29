@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectorcss;
 
 import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Map;
@@ -36,7 +36,7 @@ public class UnknownCssSelector<T> implements CssSelector<T> {
 	}
 
 	@Override
-	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, T selector) {
+	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, T selector) {
 		// if it is unknown, we can't convert it, so we simply ignore it
 		LOGGER.warn("CSS Selector '"+selector+"' is unknown. Ignoring it.");
 		return XPathSelectorFactory.createFilterOnlySelector(ElementFilter.FILTER_NOTHING);

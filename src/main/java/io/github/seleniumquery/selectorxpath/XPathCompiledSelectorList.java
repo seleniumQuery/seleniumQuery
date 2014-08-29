@@ -12,16 +12,16 @@ import org.openqa.selenium.WebElement;
 
 public class XPathCompiledSelectorList implements Locator {
 	
-	List<SqXPathSelector> locators;
+	List<XPathExpression> locators;
 	
-	XPathCompiledSelectorList(List<SqXPathSelector> css) {
+	XPathCompiledSelectorList(List<XPathExpression> css) {
 		this.locators = css;
 	}
 	
 	@Override
 	public List<WebElement> locate(SearchContext context) {
 		Set<WebElement> elements = new LinkedHashSet<WebElement>();
-		for (SqXPathSelector cs : locators) {
+		for (XPathExpression cs : locators) {
 			List<WebElement> execute = cs.locate(context);
 			elements.addAll(execute);
 		}
@@ -30,7 +30,7 @@ public class XPathCompiledSelectorList implements Locator {
 	
 	public String toXPath() {
 		StringBuilder sb = new StringBuilder();
-		for (SqXPathSelector cs : locators) {
+		for (XPathExpression cs : locators) {
 			sb.append(cs.toXPath()).append(" | ");
 		}
 		if (!locators.isEmpty()) {
@@ -42,7 +42,7 @@ public class XPathCompiledSelectorList implements Locator {
 	public String toXPathCondition() {
 		StringBuilder sb = new StringBuilder();
 		sb.append('(');
-		for (SqXPathSelector cs : locators) {
+		for (XPathExpression cs : locators) {
 			sb.append(cs.toXPathCondition()).append(") or (");
 		}
 		if (!locators.isEmpty()) {

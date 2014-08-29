@@ -7,7 +7,7 @@ import io.github.seleniumquery.selectorcss.CssSelector;
 import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 import io.github.seleniumquery.selectorxpath.SqSelectorKind;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -79,11 +79,11 @@ public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector> {
 	}
 
 	@Override
-	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		SqXPathSelector previousElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSelector());
-		SqXPathSelector siblingElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
+	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		XPathExpression previousElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSelector());
+		XPathExpression siblingElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
 		
-		SqXPathSelector positionOne = XPathSelectorFactory.createNoFilterSelector("[position() = 1]");
+		XPathExpression positionOne = XPathSelectorFactory.createNoFilterSelector("[position() = 1]");
 		siblingElementCompiled.combine(positionOne).kind = SqSelectorKind.ADJACENT;
 		
 		return previousElementCompiled.combine(siblingElementCompiled);

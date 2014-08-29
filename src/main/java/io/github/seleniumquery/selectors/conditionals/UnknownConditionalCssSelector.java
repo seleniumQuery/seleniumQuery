@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.conditionals;
 import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Map;
@@ -40,7 +40,7 @@ public class UnknownConditionalCssSelector<T extends Condition> implements CssCo
 	}
 	
 	@Override
-	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, T condition) {
+	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, T condition) {
 		// if it is unknown, we can't convert it, so we simply ignore it
 		LOGGER.warn("CSS Selector Condition '"+condition+"' is unknown. Ignoring it.");
 		return XPathSelectorFactory.createFilterOnlySelector(ElementFilter.FILTER_NOTHING);

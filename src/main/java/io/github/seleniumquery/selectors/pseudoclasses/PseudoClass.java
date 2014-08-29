@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +14,6 @@ public interface PseudoClass {
 
 	CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector);
 
-	SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector);
+	XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector);
 
 }

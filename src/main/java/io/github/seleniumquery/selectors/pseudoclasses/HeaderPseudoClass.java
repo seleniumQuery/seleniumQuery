@@ -2,7 +2,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Arrays;
@@ -47,7 +47,7 @@ public class HeaderPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		return XPathSelectorFactory.createNoFilterSelector("[(name() = 'h0' or name() = 'h1' or name() = 'h2' or name() = 'h3' or name() = 'h4'"
 				+ " or name() = 'h5' or name() = 'h6' or name() = 'h7' or name() = 'h8' or name() = 'h9')]");
 	}

@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.attributes;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Arrays;
@@ -49,7 +49,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	}
 
 	@Override
-	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by class
 		return XPathSelectorFactory.createNoFilterSelector("[contains(concat(' ', normalize-space(@class), ' '), ' "+wantedClassName+" ')]");

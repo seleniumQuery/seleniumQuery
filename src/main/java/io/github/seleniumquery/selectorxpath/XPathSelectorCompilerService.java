@@ -20,9 +20,9 @@ public class XPathSelectorCompilerService {
     		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
     		SelectorList selectorList = parsedSelector.getSelector();
 
-        	List<SqXPathSelector> css = new ArrayList<SqXPathSelector>(selectorList.getLength()); 
+        	List<XPathExpression> css = new ArrayList<XPathExpression>(selectorList.getLength()); 
         	for (int i = 0; i < selectorList.getLength(); i++) {
-        		SqXPathSelector cs = compileSelector(driver, parsedSelector.getStringMap(), selectorList.item(i));
+        		XPathExpression cs = compileSelector(driver, parsedSelector.getStringMap(), selectorList.item(i));
         		css.add(cs);
         	}
         	
@@ -33,7 +33,7 @@ public class XPathSelectorCompilerService {
         }
 	}
     
-	public static SqXPathSelector compileSelector(WebDriver driver, Map<String, String> stringMap, Selector selector) {
+	public static XPathExpression compileSelector(WebDriver driver, Map<String, String> stringMap, Selector selector) {
 		@SuppressWarnings("unchecked")
 		CssSelector<Selector> cssSelector =  (CssSelector<Selector>) CssSelectorFactory.getInstance().getSelector(selector);
 		return cssSelector.toXPath(driver, stringMap, selector);

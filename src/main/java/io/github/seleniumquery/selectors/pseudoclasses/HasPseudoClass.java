@@ -4,7 +4,7 @@ import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CompiledCssSelectorList;
 import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -44,7 +44,7 @@ public class HasPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
 		String insideHasXPath = XPathSelectorCompilerService.compileSelectorList(driver, notSelector).toXPath();
 		insideHasXPath = insideHasXPath.substring(1, insideHasXPath.length()-1);

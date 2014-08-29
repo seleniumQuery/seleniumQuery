@@ -8,7 +8,7 @@ import io.github.seleniumquery.selectorcss.CssSelector;
 import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 import io.github.seleniumquery.selectorxpath.SqSelectorKind;
-import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 
 import java.util.ArrayList;
@@ -99,19 +99,19 @@ public class DescendantCssSelector implements CssSelector<DescendantSelector> {
 	}
 
 	@Override
-	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		SqXPathSelector ancestorCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
-		SqXPathSelector childrenCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
+	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
+		XPathExpression ancestorCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
+		XPathExpression childrenCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
 		System.out.println("@# ANCESTOR XPATH: "+ancestorCompiled.toXPath());
 		childrenCompiled.kind = SqSelectorKind.DESCENDANT_GENERAL;
 		return ancestorCompiled.combine(childrenCompiled);
 	}
 	
 	private static final class DescendantXPathFilter implements ElementFilter {
-		private final SqXPathSelector ancestorCompiled;
-		private final SqXPathSelector childrenCompiled;
+		private final XPathExpression ancestorCompiled;
+		private final XPathExpression childrenCompiled;
 		
-		private DescendantXPathFilter(SqXPathSelector ancestorCompiled, SqXPathSelector childrenCompiled) {
+		private DescendantXPathFilter(XPathExpression ancestorCompiled, XPathExpression childrenCompiled) {
 			this.ancestorCompiled = ancestorCompiled;
 			this.childrenCompiled = childrenCompiled;
 		}
@@ -147,7 +147,7 @@ public class DescendantCssSelector implements CssSelector<DescendantSelector> {
 		}
 	}
 	
-	public static List<WebElement> parents(WebElement element, SqXPathSelector selector) {
+	public static List<WebElement> parents(WebElement element, XPathExpression selector) {
 		return parentz(element, selector.toXPathCondition());
 	}
 	
