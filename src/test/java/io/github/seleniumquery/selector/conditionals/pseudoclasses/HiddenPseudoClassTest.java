@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
-import io.github.seleniumquery.selector.XPathSelectorCompilerService;
+import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 
 import java.util.List;
 

@@ -2,14 +2,14 @@ package io.github.seleniumquery.selectors.combinators;
 
 import io.github.seleniumquery.functions.ClosestFunction;
 import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssSelector;
-import io.github.seleniumquery.selector.CssSelectorCompilerService;
-import io.github.seleniumquery.selector.CssSelectorMatcherService;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selector.SqSelectorKind;
-import io.github.seleniumquery.selector.SqXPathSelector;
-import io.github.seleniumquery.selector.XPathSelectorCompilerService;
+import io.github.seleniumquery.selectorcss.CompiledCssSelector;
+import io.github.seleniumquery.selectorcss.CssSelector;
+import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
+import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
+import io.github.seleniumquery.selectorxpath.SqSelectorKind;
+import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 
 import java.util.ArrayList;
 import java.util.Arrays;

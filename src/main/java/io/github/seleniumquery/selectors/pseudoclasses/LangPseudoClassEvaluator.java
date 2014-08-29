@@ -1,12 +1,12 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssConditionalSelector;
 import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selector.SqXPathSelector;
-import io.github.seleniumquery.selector.XPathSelectorFactory;
+import io.github.seleniumquery.selectorcss.CompiledCssSelector;
+import io.github.seleniumquery.selectorcss.CssConditionalSelector;
+import io.github.seleniumquery.selectorxpath.SqXPathSelector;
+import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Map;
 
