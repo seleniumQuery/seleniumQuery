@@ -32,7 +32,7 @@ public class XPathExpression implements Locator {
 	
 	@Override
 	public String toString() {
-		return "[XPath: \""+xPathExpression+"\", kind: "+kind+", filters: "+elementFilters+"]";
+		return "[XPath: \""+xPathExpression+"\", kind: "+kind+", line: "+xpathLine+", filters: "+elementFilters+"]";
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class XPathExpression implements Locator {
 			this.xPathExpression = this.xPathExpression + "/" + other.xPathExpression;
 			break;
 		case DESCENDANT_GENERAL:
-			this.xPathExpression = this.xPathExpression + "/x/" + other.xPathExpression;
+			this.xPathExpression = this.xPathExpression + "//" + other.xPathExpression;
 			break;
 		case CONDITIONAL_SIMPLE:
 			if (this.xPathExpression.endsWith("]")) {
@@ -93,11 +93,10 @@ public class XPathExpression implements Locator {
 	}
 	
 	public String toXPath() {
-		System.out.println("@# line: "+ this.xpathLine);
 		if (this.kind != SqSelectorKind.TAG) {
 			throw new RuntimeException("Weird... i didnt think this was possible!");
 		}
-		this.xPathExpression = "/z/" + this.xPathExpression;
+		this.xPathExpression = "//" + this.xPathExpression;
 		for (XPathExpression x : xpathLine) {
 			this.merge(x);
 		}
