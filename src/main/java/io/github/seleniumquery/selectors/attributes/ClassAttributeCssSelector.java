@@ -3,6 +3,8 @@ package io.github.seleniumquery.selectors.attributes;
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CssConditionalSelector;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -44,6 +46,13 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 		String wantedClassName = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by class
 		return CompiledCssSelector.createNoFilterSelector("."+SelectorUtils.escapeSelector(wantedClassName));
+	}
+
+	@Override
+	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+		String wantedClassName = attributeCondition.getValue();
+		// nothing to do, everyone supports filtering by class
+		return XPathSelectorFactory.createNoFilterSelector("[contains(concat(' ', normalize-space(@class), ' '), ' "+wantedClassName+" ')]");
 	}
 	
 }

@@ -41,6 +41,10 @@ public class SelectorUtils {
 			return null;
 		}
 	}
+	
+	public static List<WebElement> parents(WebElement element) {
+		return element.findElements(By.xpath("ancestor::node()[count(ancestor-or-self::html) > 0]"));
+	}
 
 	public static String lang(WebElement element) {
 		WebElement currElement = element;
@@ -62,9 +66,22 @@ public class SelectorUtils {
 		return element.getAttribute(localName) != null;
 	}
 	
-	public static boolean isVisible(WebElement element) {
-		// HtmlUnitDriver considers the <title> to be displayed. Firefox and Chrome don't consider it visible, so we don't.
-		return element.isDisplayed() && !element.getTagName().equals("title");
+	public static boolean isVisible(WebDriver driver, WebElement element) {
+		if (!element.isDisplayed()) {
+			return false;
+		}
+		// #Cross-Driver
+		// at this point, it is visible...
+		if (!DriverSupportService.isHtmlUnitDriver(driver)) {
+			return true;
+		}
+		// ...or we are in HtmlUnitDriver. In this case we must check if it is under <body>
+		
+		// Firefox and Chrome don't consider elements directly under <html> (such as, commonly, <title>, <meta>, etc.,
+		// EXCEPT for <body>) to be visible, so we filter them, because HtmlUnitDriver thinks they ARE visible.
+		boolean isBodyOrChildOfBody = !element.findElements(By.xpath("ancestor-or-self::body")).isEmpty();
+		// in other words, it is visible only if it is <body> or if it has <body> as its parent
+		return isBodyOrChildOfBody;
 	}
 
 	public static List<WebElement> itselfWithSiblings(WebElement element) {
@@ -166,6 +183,13 @@ public class SelectorUtils {
 			escapedString = escapedString.substring(1, escapedString.length()-1);
 		}
 		return escapedString;
+	}
+
+	public static String intoEscapedXPathString(String value) {
+		if (value.indexOf('\'') == -1) {
+			return "'" + value + "'";
+		}
+		return "concat('" + value.replace("'", "', \"'\", '") + "')";
 	}
 
 }

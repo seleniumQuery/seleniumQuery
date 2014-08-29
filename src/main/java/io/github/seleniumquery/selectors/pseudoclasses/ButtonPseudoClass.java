@@ -1,7 +1,9 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,11 +37,16 @@ public class ButtonPseudoClass implements PseudoClass {
 			   BUTTON.equals(element.getTagName());
 	}
 	
-	private static final CssFilter buttonPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter buttonPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :button is an extension selector, nobody implements it natively
 		return CompiledCssSelector.createFilterOnlySelector(buttonPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[(name() = 'input' and @type = 'button') or name() = 'button']");
 	}
 	
 }

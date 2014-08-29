@@ -1,10 +1,12 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CssConditionalSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.Map;
 
@@ -43,7 +45,7 @@ public class LangPseudoClassEvaluator implements CssConditionalSelector<LangCond
 		if (DriverSupportService.getInstance().supportsNatively(driver, ":lang(en)")) {
 			return CompiledCssSelector.createNoFilterSelector(":lang("+wantedLang+")");
 		}
-		CssFilter langPseudoClassFilter = new PseudoClassFilter(new LangPseudoClassAdapter(wantedLang));
+		ElementFilter langPseudoClassFilter = new PseudoClassFilter(new LangPseudoClassAdapter(wantedLang));
 		return CompiledCssSelector.createFilterOnlySelector(langPseudoClassFilter);
 	}
 	
@@ -68,6 +70,14 @@ public class LangPseudoClassEvaluator implements CssConditionalSelector<LangCond
 		}
 		@Override public boolean isApplicable(String x) { /* not used */ return false; }
 		@Override public CompiledCssSelector compilePseudoClass(WebDriver x, PseudoClassSelector pseudoClassSelector) { /* not used */ return null; }
+		@Override public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) { /* not used */ return null; }
+	}
+
+	@Override
+	public SqXPathSelector conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, LangCondition langCondition) {
+		String wantedLangIndex = langCondition.getLang();
+		String wantedLang = stringMap.get(wantedLangIndex);
+		return XPathSelectorFactory.createNoFilterSelector("[ancestor-or-self::*[@lang][1]/@lang = '"+wantedLang+"']");
 	}
 
 }

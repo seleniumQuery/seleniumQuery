@@ -3,6 +3,8 @@ package io.github.seleniumquery.by;
 import io.github.seleniumquery.selector.CompiledCssSelectorList;
 import io.github.seleniumquery.selector.CssSelectorCompilerService;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.XPathCompiledSelectorList;
+import io.github.seleniumquery.selector.XPathSelectorCompilerService;
 
 import java.util.List;
 
@@ -97,6 +99,7 @@ public class SeleniumQueryBy extends By {
 	/**
 	 * If it begins with "/" or "(/" or "(((((/", we assume the selector given is a XPath expression.
 	 */
+
 	static boolean isXPathExpression(String selector) {
 		return selector != null && selector.matches("(\\s*\\(\\s*)*/.*");
 	}
@@ -127,8 +130,13 @@ public class SeleniumQueryBy extends By {
 	 */
 	private List<WebElement> enhancedCssFindElements(SearchContext context) {
 		WebDriver driver = SelectorUtils.getWebDriver(context);
-		CompiledCssSelectorList compileSelectorList = CssSelectorCompilerService.compileSelectorList(driver, this.selector);
-		return compileSelectorList.execute(context);
+
+		
+		XPathCompiledSelectorList xPathLocator = XPathSelectorCompilerService.compileSelectorList(driver, this.selector);
+		return xPathLocator.locate(context);
+		
+//		CompiledCssSelectorList compileSelectorList = CssSelectorCompilerService.compileSelectorList(driver, this.selector);
+//		return compileSelectorList.execute(context);
 	}
 
 	/**

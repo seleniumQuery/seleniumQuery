@@ -1,9 +1,11 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +47,7 @@ public class DisabledPseudoClass implements PseudoClass {
 		return !element.isEnabled() && DISABLEABLE_TAGS.contains(element.getTagName());
 	}
 
-	private static final CssFilter disabledPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter disabledPseudoClassFilter = new PseudoClassFilter(getInstance());
 	
 	// #Cross-Driver
 	// HtmlUnitDriver has problems with :disabled, so we consider it can never be handler by the browser
@@ -58,6 +60,19 @@ public class DisabledPseudoClass implements PseudoClass {
 			return CompiledCssSelector.createNoFilterSelector(DISABLED_PSEUDO_CLASS);
 		}
 		return CompiledCssSelector.createFilterOnlySelector(disabledPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[(@disabled and "
+				+ "(name() = 'input' or "
+				+ "name() = 'button' or "
+				+ "name() = 'optgroup' or "
+				+ "name() = 'option' or "
+				+ "name() = 'select' or "
+				+ "name() = 'textarea')"
+				+ ") "
+				+ " or (name() = 'option' and ancestor::select[@disabled])]");
 	}
 
 }

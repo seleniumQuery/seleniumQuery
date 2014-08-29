@@ -1,8 +1,10 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,7 +32,7 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 		return driver.findElements(By.tagName(tagName)).size() == 1;
 	}
 	
-	private static final CssFilter onlyOfTypePseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter onlyOfTypePseudoClassFilter = new PseudoClassFilter(getInstance());
 
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
@@ -39,6 +41,12 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 			return CompiledCssSelector.createNoFilterSelector(ONLY_OF_TYPE_PSEUDO_CLASS);
 		}
 		return CompiledCssSelector.createFilterOnlySelector(onlyOfTypePseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		// #no-xpath
+		return XPathSelectorFactory.createFilterOnlySelector(onlyOfTypePseudoClassFilter);
 	}
 	
 }

@@ -1,8 +1,8 @@
 package io.github.seleniumquery.selector.conditionals.attributes;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
 import io.github.seleniumquery.selector.CssSelectorMatcherService;
 
@@ -23,7 +23,7 @@ public class AttributeSelectorsTest {
 	
 	@Before
 	public void before() {
-		driver = SeleniumQuery.$.browser.getDefaultDriver();
+		driver = $.browser.getDefaultDriver();
 	}
 	
 	/* Has Attribute Selector: [name]
@@ -37,9 +37,14 @@ public class AttributeSelectorsTest {
 		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, myA, "a[rel]"), is(true));
 		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, myA, "a[bozo]"), is(false));
 		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, myA, "a[data-title]"), is(false));
+		assertThat($("#myA").is("a"), is(true));
+		assertThat($("#myA").is("a[rel]"), is(true));
+		assertThat($("#myA").is("a[bozo]"), is(false));
+		assertThat($("#myA").is("a[data-title]"), is(false));
 		
 		// case INsensitive
 		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, myA, "a[rEL]"), is(true));
+		assertThat($("#myA").is("a[rEL]"), is(true));
 	}
 	
 	/* http://api.jquery.com/category/selectors/attribute-selectors/

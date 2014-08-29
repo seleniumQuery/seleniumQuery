@@ -1,7 +1,9 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,11 +39,17 @@ public class HeaderPseudoClass implements PseudoClass {
 		return HEADER_TAGS.contains(element.getTagName());
 	}
 	
-	private static final CssFilter headerPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter headerPseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// :header is an extension selector, no browser implements it natively
 		return CompiledCssSelector.createFilterOnlySelector(headerPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[(name() = 'h0' or name() = 'h1' or name() = 'h2' or name() = 'h3' or name() = 'h4'"
+				+ " or name() = 'h5' or name() = 'h6' or name() = 'h7' or name() = 'h8' or name() = 'h9')]");
 	}
 	
 }

@@ -1,8 +1,10 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,7 +30,7 @@ public class RootPseudoClass implements PseudoClass {
 		return element.getTagName().equals("html");
 	}
 	
-	private static final CssFilter rootPseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter rootPseudoClassFilter = new PseudoClassFilter(getInstance());
 
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
@@ -37,6 +39,11 @@ public class RootPseudoClass implements PseudoClass {
 			return CompiledCssSelector.createNoFilterSelector(ROOT_PSEUDO_CLASS);
 		}
 		return CompiledCssSelector.createFilterOnlySelector(rootPseudoClassFilter);
+	}
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		return XPathSelectorFactory.createNoFilterSelector("[name() = 'html']");
 	}
 	
 }

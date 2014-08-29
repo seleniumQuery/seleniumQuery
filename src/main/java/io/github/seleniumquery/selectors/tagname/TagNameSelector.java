@@ -4,6 +4,9 @@ import java.util.Map;
 
 import io.github.seleniumquery.selector.CompiledCssSelector;
 import io.github.seleniumquery.selector.CssSelector;
+import io.github.seleniumquery.selector.SqSelectorKind;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +30,18 @@ public class TagNameSelector implements CssSelector<ElementSelector> {
 	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, ElementSelector selector) {
 		// nothing to do, everyone supports filtering by tag name
 		return CompiledCssSelector.createNoFilterSelector(selector);
+	}
+
+	@Override
+	public SqXPathSelector toXPath(WebDriver driver, Map<String, String> stringMap, ElementSelector selector) {
+		String tagName = selector.toString();
+		SqXPathSelector tagSelector = XPathSelectorFactory.createNoFilterSelector(tagName);
+		tagSelector.kind = SqSelectorKind.TAG;
+		return tagSelector;
+//		if ("*".equals(tagName)) {
+//			return XPathSelectorFactory.createNoFilterSelector("");
+//		}
+//		return XPathSelectorFactory.createNoFilterSelector("[name() = '"+selector+"']");
 	}
 
 }

@@ -1,7 +1,9 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
+import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.CompiledCssSelector;
-import io.github.seleniumquery.selector.CssFilter;
+import io.github.seleniumquery.selector.SqXPathSelector;
+import io.github.seleniumquery.selector.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,11 +57,39 @@ public class FocusablePseudoClass implements PseudoClass {
 		return element.getAttribute("tabindex") != null;
 	}
 	
-	private static final CssFilter focusablePseudoClassFilter = new PseudoClassFilter(getInstance());
+	private static final ElementFilter focusablePseudoClassFilter = new PseudoClassFilter(getInstance());
 	@Override
 	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		// no browser supports :focusable natively
 		return CompiledCssSelector.createFilterOnlySelector(focusablePseudoClassFilter);
+	}
+	// //button[.='OK' and not(ancestor::div[contains(@style,'display:none')]) and ]
+	
+	
+	// upon changing the expression below, check also the one at :tabbable
+	public static final String FOCUSABLE_XPATH = "("
+			+ VisiblePseudoClass.NOT_DISPLAY_NONE_XPATH
+			+ " and "
+				+ " ("
+					+ " ("
+						+ " (name() = 'input' or name() = 'button' or name() = 'optgroup' or name() = 'option' or name() = 'select' or name() = 'textarea')"
+						+ " and "
+						+ EnabledPseudoClass.ENABLED_XPATH
+					+ " ) "
+					+ " or "
+					+ " (name() = 'a' and @href) "
+					+ " or "
+					+ " (name() = 'area' and @href)"
+					+ " or "
+					+ " @tabindex"
+				+ ")"
+			+ ")";
+	
+	@Override
+	public SqXPathSelector pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+		// #no-xpath
+		System.err.println(":focusable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
+		return XPathSelectorFactory.createNoFilterSelector("[" + FOCUSABLE_XPATH + "]");
 	}
 	
 }
