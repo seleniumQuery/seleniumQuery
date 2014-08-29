@@ -56,49 +56,13 @@ public class XPathExpression implements Locator {
 		return this;
 	}
 	
-	private XPathExpression merge(XPathExpression other) {
-		switch (other.kind) {
-		case ADJACENT:
-			this.xPathExpression = this.xPathExpression + "/following-sibling::" + other.xPathExpression;
-			break;
-		case DESCENDANT_DIRECT:
-			this.xPathExpression = this.xPathExpression + "/" + other.xPathExpression;
-			break;
-		case DESCENDANT_GENERAL:
-			this.xPathExpression = this.xPathExpression + "//" + other.xPathExpression;
-			break;
-		case CONDITIONAL_SIMPLE:
-			if (this.xPathExpression.endsWith("]")) {
-				this.xPathExpression = this.xPathExpression.substring(0, this.xPathExpression.length()-1) + " and " + other.xPathExpression.substring(1);
-			} else {
-				this.xPathExpression = this.xPathExpression + other.xPathExpression;
-			}
-			break;
-		case CONDITIONAL_TO_ALL:
-			this.xPathExpression = "(" + this.xPathExpression + ")" + other.xPathExpression;
-			break;
-		case TAG:
-			if (!"*".equals(other.xPathExpression)) {
-				this.merge(XPathSelectorFactory.createNoFilterSelector("[name() = '"+other.xPathExpression+"']"));
-			} else {
-				this.merge(XPathSelectorFactory.createNoFilterSelector("[name()]"));
-			}
-			break;
-		default:
-			throw new RuntimeException("Kind '"+other.kind + "' is not supported yet!");
-		}
-		
-		this.elementFilters.addAll(other.elementFilters);
-		return this;
-	}
-	
 	public String toXPath() {
 		if (this.kind != SqSelectorKind.TAG) {
 			throw new RuntimeException("Weird... i didnt think this was possible!");
 		}
 		this.xPathExpression = "//" + this.xPathExpression;
-		for (XPathExpression x : xpathLine) {
-			this.merge(x);
+		for (XPathExpression other : xpathLine) {
+			mergeExpression(other);
 		}
 		return "(" + this.xPathExpression + ")";
 	}
@@ -112,10 +76,15 @@ public class XPathExpression implements Locator {
 		} else {
 			this.xPathExpression = "[name()]";
 		}
-		for (XPathExpression x : xpathLine) {
-			this.merge(x);
+		for (XPathExpression other : xpathLine) {
+			mergeExpression(other);
 		}
 		return this.xPathExpression.substring(1, this.xPathExpression.length()-1); // removes [] around
+	}
+	
+	private void mergeExpression(XPathExpression other) {
+		this.elementFilters.addAll(other.elementFilters);
+		this.xPathExpression = other.kind.merge(this.xPathExpression, other.xPathExpression);
 	}
 
 }
