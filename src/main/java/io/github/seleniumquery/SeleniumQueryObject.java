@@ -185,14 +185,14 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Returns the number of elements in the seleniumQuery object.
 	 * @return the number of elements in the seleniumQuery object.
 	 * 
-	 * @since 0.2.0
+	 * @since 1.0.0
 	 */
 	public int size() {
 		return this.elements.size();
 	}
 	
 	/**
-	 * Remove elements from the set of matched elements.
+	 * Removes elements from the set of matched elements.
 	 * 
 	 * @param selector	A string containing a selector expression to match elements against.
 	 * @since 1.0.0
@@ -202,11 +202,11 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	 * <p>Reduce the set of matched elements to the first in the set.</p>
-	 * <p>
-	 * Given a seleniumQuery object that represents a set of DOM elements, the <code>.last()</code> method constructs
-	 * a new seleniumQuery object from the first element in that set.
-	 * </p>
+	 * <p>Reduces the set of matched elements to the first in the set.</p>
+	 * 
+	 * <p>Given a seleniumQuery object that represents a set of DOM elements, the <code>.last()</code>
+	 * method constructs a new seleniumQuery object from the first element in that set.</p>
+	 * 
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject first() {
@@ -214,11 +214,11 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * <p>Reduce the set of matched elements to the final one in the set.</p>
-	 * <p>
-	 * Given a seleniumQuery object that represents a set of DOM elements, the <code>.last()</code> method constructs
-	 * a new seleniumQuery object from the last element in that set.
-	 * </p>
+	 * <p>Reduces the set of matched elements to the final one in the set.</p>
+	 * 
+	 * <p>Given a seleniumQuery object that represents a set of DOM elements, the <code>.last()</code>
+	 * method constructs a new seleniumQuery object from the last element in that set.</p>
+	 * 
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject last() {
@@ -228,8 +228,8 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Reduce the set of matched elements to the one at the specified index.
 	 * 
-	 * @param index If positive: An integer indicating the 0-based position of the element.<br>
-	 * 				If negative: An integer indicating the position of the element, counting backwards
+	 * @param index If <i>positive</i>: An integer indicating the 0-based position of the element.
+	 * 				If <i>negative</i>: An integer indicating the position of the element, counting backwards
 	 * 			from the last element in the set.
 	 * 
 	 * @since 1.0.0
@@ -239,17 +239,14 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	 * <p>
-	 * Get the combined text contents of each element in the set of matched elements, including their descendants.
-	 * </p>
+	 * <p>Gets the combined text contents of each element in the set of matched elements, including
+	 * their descendants.</p>
 	 * 
-	 * <p>
-	 * <b>Note:</b> This functions uses Selenium's <code>{@link WebElement#getText()}</code>, and, as jQuery, <i>"Due
-	 *  to variations in the HTML parsers in different browsers, the text returned may vary in
-	 * newlines and other white space."</i>
-	 * </p>
+	 * <p><b>Note:</b> This functions uses Selenium's <code>{@link WebElement#getText()}</code>, and, as
+	 * jQuery, <i>"due to variations in the HTML parsers in different browsers, the text returned may vary
+	 * in newlines and other white space."</i></p>
 	 * 
-	 * @since 0.2.0
+	 * @since 1.0.0
 	 */
 	public String text() {
 		// Warning!
@@ -260,6 +257,9 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
+	 * Clicks <strong>all</strong> elements in the set of matched elements, in the
+	 * order they were matched.
+	 * 
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject click() {
@@ -268,6 +268,9 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
+	 * Sets the value of <strong>all</strong> elements in the set of matched elements.
+	 * 
+	 * @param value The (string) value to be set.
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject val(String value) {
@@ -276,6 +279,9 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
+	 * Sets the value of <strong>all</strong> elements in the set of matched elements.
+	 * 
+	 * @param value The (number) value to be set.
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject val(Number value) {
@@ -284,7 +290,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * Get the current value of the first element in the set of matched elements.
+	 * Gets the current value of the first element in the set of matched elements.
 	 * 
 	 * @since 1.0.0
 	 */
@@ -293,96 +299,108 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
-	 * @return the seleniumQuery object that originated the current instance.
+	 * Ends the most recent filtering operation in the current chain and returns the set of matched
+	 * elements to its previous state.
 	 * 
-	 * @since 0.3.0
+	 * @return the seleniumQuery object that originated the current instance.
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject end() {
 		return this.previous;
 	}
 	
 	/**
-	 * Get the descendants of each element in the current set of matched elements, filtered by a selector.
+	 * Gets the descendants of each element in the current set of matched elements, filtered by a selector.
 	 * 
-	 * @since 0.4.0
+	 * @param selector Selector the descendants must match.
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject find(String selector) {
 		return FindFunction.find(this, elements, selector);
 	}
 	
 	/**
-	 * Get the value of an attribute for the first element in the set of matched elements.
+	 * Gets the value of an attribute for the first element in the set of matched elements.
 	 * 
-	 * @since 0.4.0
+	 * @since 1.0.0
 	 */
 	public String attr(String attributeName) {
 		return AttrFunction.attr(this, elements, attributeName);
 	}
 	
 	/**
-	 * Set one or more attributes for every matched element.
+	 * Sets one or more attributes for <strong>every</strong> matched element.
 	 * 
-	 * @since 0.4.0
+	 * <p><b>Note:</b> If interacting with an <code>&lt;input&gt;</code> element while in a UI test,
+	 * it is preferable to use {@link #click()} instead of setting the attributes
+	 * through this function, as selenium tests should verify the pages from the user point of
+	 * view.</p>
+	 * 
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject attr(String attributeName, Object value) {
 		return AttrFunction.attr(this, elements, attributeName, value);
 	}
 	
 	/**
-	 * Get the value of a property for the first element in the set of matched elements.
+	 * Gets the value of a property for the first element in the set of matched elements.
 	 * 
-	 * @since 0.4.0
+	 * @since 1.0.0
 	 */
 	public <T> T prop(String propertyName) {
 		return PropFunction.<T>prop(this, elements, propertyName);
 	}
 	
 	/**
-	 * Set one or more properties for every matched element
+	 * Set one or more properties for <strong>every</strong> matched element
 	 * 
-	 * @since 0.4.0
+	 * <p><b>Note:</b> If interacting with an <code>&lt;input&gt;</code> element while in a UI test,
+	 * it is preferable to use {@link #click()} instead of setting the attributes
+	 * through this function, as selenium tests should verify the pages from the user point of
+	 * view.</p>
+	 * 
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject prop(String propertyName, Object value) {
 		return PropFunction.prop(this, elements, propertyName, value);
 	}
 	
 	/**
-	 * Retrieve one of the {@link WebElement} matched by the seleniumQuery object.
+	 * Retrieves one of the {@link WebElement} matched by the seleniumQuery object.
 	 * 
 	 * @param index A zero-based integer indicating which element to retrieve.
 	 * @return the element at the specified index.
 	 * 
-	 * @since 0.4.0
+	 * @since 1.0.0
 	 */
 	public WebElement get(int index) {
 		return GetFunction.get(elements, index);
 	}
 	
 	/**
-	 * Retrieve the {@link WebElement}s matched by the seleniumQuery object.
+	 * Retrieves the {@link WebElement}s matched by the seleniumQuery object.
 	 * 
 	 * @param index A zero-based integer indicating which element to retrieve.
 	 * @return the element at the specified index.
 	 * 
-	 * @since 0.4.0
+	 * @since 1.0.0
 	 */
 	public List<WebElement> get() {
 		return GetFunction.get(elements);
 	}
 	
 	/**
-	 * Remove an attribute from each element in the set of matched elements.
+	 * Removes an attribute from each element in the set of matched elements.
 	 * It can be a space-separated list of attributes.
 	 * 
-	 * @since 0.4.0
+	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject removeAttr(String attributeNames) {
 		return RemoveAttrFunction.removeAttr(this, elements, attributeNames);
 	}
 	
 	/**
-	 * Get the HTML contents of the first element in the set of matched elements.
+	 * Gets the HTML contents of the first element in the set of matched elements.
 	 * 
 	 * @since 1.0.0
 	 */
@@ -391,8 +409,8 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * Check the current matched set of elements against a selector and return true if
-	 * at least one of these elements matches the given arguments.
+	 * Checks the current matched set of elements against a selector and returns <code>true</code>
+	 * if at least one of these elements matches the given arguments.
 	 * 
 	 * @param selector	A string containing a selector expression to match elements against.
 	 * @since 1.0.0
@@ -402,7 +420,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * Determine whether any of the matched elements are assigned the given class.
+	 * Determines whether any of the matched elements are assigned the given class.
 	 * 
 	 * @since 1.0.0
 	 */
@@ -411,7 +429,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	 * Retrieve all the elements contained in the seleniumQuery set, as an array.
+	 * Retrieves all the elements contained in the seleniumQuery set, as an array.
 	 * 
 	 * @since 1.0.0
 	 */
@@ -420,7 +438,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	 * For each element in the set, get the first element that matches the selector by
+	 * For each element in the set, gets the first element that matches the selector by
 	 * testing the element itself and traversing up through its ancestors in the DOM tree.
 	 * 
 	 * @since 1.0.0
@@ -430,9 +448,9 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * <p>Trigger the focus event on <b>every</b> element of the matched set.</p>
+	 * <p>Triggers the <code>focus</code> event on <b>every</b> element of the matched set.</p>
 	 * 
-	 * <p>Note: The order of the triggering is the order of the elements in the
+	 * <p><b>Note:</b> The order of the triggering is the order of the elements in the
 	 * matched list. The last one will end up with the focus, though all of them
 	 * will have it at some point.</p>
 	 * 
@@ -443,7 +461,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * Get the children of each element in the set of matched elements.
+	 * Gets the children of each element in the set of matched elements.
 	 * 
 	 * @return A <b>new</b> SeleniumQueryObject, containing the children of each element in the set of matched elements.
 	 * 
@@ -454,7 +472,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * Get the children of each element in the set of matched elements, filtered by a selector.
+	 * Gets the children of each element in the set of matched elements, filtered by a selector.
 	 * 
 	 * @return A <b>new</b> SeleniumQueryObject, containing the children of each element in the set of matched elements.
 	 * 
@@ -464,11 +482,35 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return ChildrenFunction.children(this, elements, selector);
 	}
 
+	/**
+	 * Selects the children of each element in the set of matched elements, filtered by a selector.
+	 * 
+	 * @return A <b>new</b> SeleniumQueryObject, containing the children of each element in the set of matched elements.
+	 * 
+	 * @since 1.0.0
+	 */
+	  /**
+	   * Selects all <code>&lt;option&gt;</code>s that display text matching the argument.
+	   * That is, when given <code>"Bar"</code> this would select an option like:
+	   * 
+	   * <code>&lt;option value="foo"&gt;Bar&lt;/option&gt;</code>
+	   * 
+	   * @param text The visible text to match against
+	   */
 	public SeleniumQueryObject selectOptionByVisibleText(String text) {
 		LOGGER.debug("Selecting "+this+" by visible text: \""+text+"\".");
 		return SelectFunction.selectOptionByVisibleText(this, elements, text);
 	}
 	
+	/**
+	 * Selects all <code>&lt;option&gt;</code>s that have a value matching the argument.
+	 * That is, when given <code>"foo"</code> this would select an option like:
+	 * 
+	 * <code>&lt;option value="foo"&gt;Bar&lt;/option&gt;</code>
+	 * 
+	 * @param value
+	 *            The value to match against
+	 */
 	public SeleniumQueryObject selectOptionByValue(String value) {
 		return SelectFunction.selectOptionByValue(this, elements, value);
 	}
