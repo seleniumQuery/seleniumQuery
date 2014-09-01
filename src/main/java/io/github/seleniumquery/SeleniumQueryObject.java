@@ -30,7 +30,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Represents the SeleniumQuery Object: a list of WebElements with special methods.
+ * Represents the <strong>SeleniumQuery Object</strong>: a list of {@link WebElement}s with special methods.
  * <p>
  * A seleniumQuery object (similar to the regular JavaScript jQuery object) contains a collection of
  * Selenium {@link WebElement}s (JavaScript jQuery is a collection of DOM elements) that have been <b>selected
@@ -38,8 +38,9 @@ import org.openqa.selenium.WebElement;
  * the set of elements in a seleniumQuery object is often called a set of <i>"matched elements"</i> or <i>"selected elements"</i>.
  * </p>
  * <p>
- * The seleniumQuery object itself behaves much like a {@link List}; it has a {@link SeleniumQueryObject#size()} method and the
- * elements in the list can be accessed by their numeric indices through {@link SeleniumQueryObject#get()}.
+ * The seleniumQuery object itself behaves much like a {@link List}; it has a {@link SeleniumQueryObject#size()} method, the
+ * elements in the list can be accessed by their numeric indices through {@link SeleniumQueryObject#get()} and can also
+ * be iterated through.
  * </p>
  * <p>
  * Just like jQuery, many seleniumQuery methods return the seleniumQuery object itself, so that method calls can be chained.
@@ -59,6 +60,8 @@ import org.openqa.selenium.WebElement;
  * </p>
  *  
  * @author acdcjunior
+ * @author ricardo-sc
+ * 
  * @since 1.0.0
  */
 public class SeleniumQueryObject implements Iterable<WebElement> {
