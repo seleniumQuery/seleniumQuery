@@ -16,13 +16,11 @@ import org.openqa.selenium.WebElement;
 public class XPathExpression implements Locator {
 
 	private String xPathExpression;
+	private List<XPathExpression> otherExpressions = new ArrayList<XPathExpression>();
+	
 	private List<ElementFilter> elementFilters;
 	
-	/**
-	 * What is a XPath line??? TODO
-	 */
-	private List<XPathExpression> xpathLine = new ArrayList<XPathExpression>();
-	
+	// TODO this is very, very, very nasty!
 	public SqSelectorKind kind;
 
 	XPathExpression(String xPathExpression, List<ElementFilter> elementFilter) {
@@ -33,7 +31,7 @@ public class XPathExpression implements Locator {
 	
 	@Override
 	public String toString() {
-		return "[XPath: \""+xPathExpression+"\", kind: "+kind+", line: "+xpathLine+", filters: "+elementFilters+"]";
+		return "[XPath: \""+xPathExpression+"\", kind: "+kind+", otherExps: "+otherExpressions+", filters: "+elementFilters+"]";
 	}
 	
 	@Override
@@ -46,6 +44,8 @@ public class XPathExpression implements Locator {
 	
 	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
 		if (this.elementFilters.size() > 0) {
+			// we are currently disabling the support to filters
+			// we will only take it back when the system is stable
 			throw new UnsupportedPseudoClassException("The current selector is unsupported. Please try a simpler one.");
 		}
 		for (ElementFilter elementFilter : elementFilters) {
@@ -55,17 +55,17 @@ public class XPathExpression implements Locator {
 	}
 	
 	public XPathExpression combine(XPathExpression other) {
-		this.xpathLine.add(other);
-		this.xpathLine.addAll(other.xpathLine);
+		this.otherExpressions.add(other);
+		this.otherExpressions.addAll(other.otherExpressions);
 		return this;
 	}
 	
 	public String toXPath() {
 		if (this.kind != SqSelectorKind.TAG) {
-			throw new RuntimeException("Weird... i didnt think this was possible!");
+			throw new RuntimeException("This should not happen!");
 		}
-		this.xPathExpression = "//" + this.xPathExpression;
-		for (XPathExpression other : xpathLine) {
+		this.xPathExpression = ".//" + this.xPathExpression;
+		for (XPathExpression other : otherExpressions) {
 			mergeExpression(other);
 		}
 		return "(" + this.xPathExpression + ")";
@@ -73,14 +73,14 @@ public class XPathExpression implements Locator {
 	
 	public String toXPathCondition() {
 		if (this.kind != SqSelectorKind.TAG) {
-			throw new RuntimeException("Weird... i didnt think this was possible!");
+			throw new RuntimeException("This should not happen!");
 		}
 		if (!"*".equals(this.xPathExpression)) {
 			this.xPathExpression = "[name() = '"+this.xPathExpression+"']";
 		} else {
 			this.xPathExpression = "[name()]";
 		}
-		for (XPathExpression other : xpathLine) {
+		for (XPathExpression other : otherExpressions) {
 			mergeExpression(other);
 		}
 		return this.xPathExpression.substring(1, this.xPathExpression.length()-1); // removes [] around
