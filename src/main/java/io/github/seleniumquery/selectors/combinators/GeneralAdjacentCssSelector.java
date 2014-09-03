@@ -9,7 +9,6 @@ import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 import io.github.seleniumquery.selectorxpath.SqSelectorKind;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Iterator;
 import java.util.List;
