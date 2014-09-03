@@ -29,6 +29,9 @@ public class IsFunctionTest {
         assertThat($("#o2").is("option"), is(true));
         assertThat($("#o1").is(":not(:selected)"), is(true));
         assertThat($("#o2").is(":selected"), is(true));
+        
+        assertThat($("#o1").is(":not(:not(:not(:selected)))"), is(true));
+        assertThat($("#o2").is(":not(:not(:selected))"), is(true));
     }
     
 	@Test

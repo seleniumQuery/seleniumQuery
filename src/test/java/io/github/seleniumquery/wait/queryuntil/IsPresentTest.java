@@ -1,7 +1,9 @@
 package io.github.seleniumquery.wait.queryuntil;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
 
 import org.junit.Rule;
@@ -35,6 +37,17 @@ public class IsPresentTest {
 	@Test
 	public void queryUntil_not_present_enabled() {
 		$(".whatever").waitUntil().is(":not(:present):enabled");
+	}
+	
+	@Test
+	public void queryUntil_not_not_not_present_with_others() {
+		$(".whatever").waitUntil().is(".xyz:enabled:not(:not(:not(:present))):disabled");
+	}
+	
+	@Test
+	public void is_not_not_not_present() {
+		assertThat($(".whatever").is(".xyz:enabled:disabled"), is(false));
+		assertThat($(".whatever").is(".xyz:enabled:not(:not(:not(:present))):disabled"), is(true));
 	}
 
 }
