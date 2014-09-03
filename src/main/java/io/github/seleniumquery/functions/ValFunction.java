@@ -30,9 +30,7 @@ public class ValFunction {
 	 * 
 	 * @param element The element you want the value of.
 	 * @return The value of the element.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.3.0
+	 * @since 1.0.0
 	 */
 	public static String val(WebElement element) {
 		String tagName = element.getTagName();
@@ -65,10 +63,10 @@ public class ValFunction {
 	}
 	
 	private static void val(WebElement element, String value) {
-		if ("select".equals(element.getTagName())) {
+		if (isSelectTag(element)) {
 			new Select(element).selectByValue(value);
-		} else if ("input".equals(element.getTagName())) {
-			if (!"file".equals(element.getAttribute("type"))) {
+		} else if (isInputTag(element) || isTextareaTag(element)) {
+			if (!isInputFileTag(element)) {
 				element.clear();
 			}
 			element.sendKeys(value);
@@ -79,6 +77,22 @@ public class ValFunction {
 			}
 			element.sendKeys(value);
 		}
+	}
+
+	private static boolean isInputFileTag(WebElement element) {
+		return isInputTag(element) && "file".equals(element.getAttribute("type"));
+	}
+	
+	private static boolean isTextareaTag(WebElement element) {
+		return "textarea".equals(element.getTagName());
+	}
+
+	private static boolean isInputTag(WebElement element) {
+		return "input".equals(element.getTagName());
+	}
+
+	private static boolean isSelectTag(WebElement element) {
+		return "select".equals(element.getTagName());
 	}
 	
 	private static boolean isContentEditable(WebElement element) {
