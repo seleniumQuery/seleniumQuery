@@ -77,7 +77,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * of calling a "destructive" function (such as <code>.not()</code>) on that element.<br>
 	 * This property is retrieved by a call to <code>.end()</code>.
 	 * 
-	 * @since 0.3.0
+	 * @since 1.0.0
 	 */
 	private SeleniumQueryObject previous;
 	
