@@ -1,14 +1,12 @@
 package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
-
-import java.util.Map;
-
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
+
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,13 +43,6 @@ public class ContainsSubstringAttributeCssSelector implements CssConditionalSele
 		return containsIgnoreCase(attributeValue, wantedValue);
 	}
 
-	@Override
-	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
-		String attributeSelectorSymbol = "*=";
-		// nothing to do, everyone supports this selector
-		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, attributeSelectorSymbol);
-	}
-	
 	@Override
 	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);

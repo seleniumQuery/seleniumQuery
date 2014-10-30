@@ -1,8 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selector.DriverSupportService;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -10,6 +8,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:only-of-type
+ * 
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class OnlyOfTypePseudoClass implements PseudoClass {
 	
 	private static final OnlyOfTypePseudoClass instance = new OnlyOfTypePseudoClass();
@@ -19,7 +23,6 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 	private OnlyOfTypePseudoClass() { }
 	
 	private static final String ONLY_OF_TYPE_PSEUDO_CLASS_NO_COLON = "only-of-type";
-	private static final String ONLY_OF_TYPE_PSEUDO_CLASS = ":"+ONLY_OF_TYPE_PSEUDO_CLASS_NO_COLON;
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -34,15 +37,6 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 	
 	private static final ElementFilter onlyOfTypePseudoClassFilter = new PseudoClassFilter(getInstance());
 
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// https://developer.mozilla.org/en-US/docs/Web/CSS/:only-of-type
-		if (DriverSupportService.getInstance().supportsNatively(driver, ONLY_OF_TYPE_PSEUDO_CLASS)) {
-			return CompiledCssSelector.createNoFilterSelector(ONLY_OF_TYPE_PSEUDO_CLASS);
-		}
-		return CompiledCssSelector.createFilterOnlySelector(onlyOfTypePseudoClassFilter);
-	}
-	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":only-of-type");

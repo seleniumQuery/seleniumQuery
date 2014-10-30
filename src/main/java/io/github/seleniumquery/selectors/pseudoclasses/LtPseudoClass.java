@@ -1,9 +1,7 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
-import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
+import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.List;
@@ -42,8 +40,8 @@ public class LtPseudoClass implements PseudoClass {
 		if (wantedIndex == 0) {
 			return false;
 		}
-		CompiledCssSelector compileSelector = CssSelectorCompilerService.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
-		List<WebElement> elements = compileSelector.execute(driver);
+		XPathExpression compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		List<WebElement> elements = compiledSelector.findWebElements(driver);
 		if (elements.isEmpty()) {
 			return false;
 		}
@@ -62,13 +60,6 @@ public class LtPseudoClass implements PseudoClass {
 		return indexFound < actuallyWantedIndex;
 	}
 
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// :lt() is an extension selector, no browser implements it natively
-		ElementFilter ltPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		return CompiledCssSelector.createFilterOnlySelector(ltPseudoClassFilter);
-	}
-	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String eqIndex = pseudoClassSelector.getPseudoClassContent();

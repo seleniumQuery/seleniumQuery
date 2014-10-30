@@ -1,7 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -49,11 +48,6 @@ public class TabbablePseudoClass implements PseudoClass {
 	}
 	
 	private static final ElementFilter tabbablePseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// no browser supports :tabbable natively
-		return CompiledCssSelector.createFilterOnlySelector(tabbablePseudoClassFilter);
-	}
 	
 	// see :focusable. change there before here, this selector is highly dependable on :focusable as it is just a small change to it
 	@Override
@@ -62,7 +56,8 @@ public class TabbablePseudoClass implements PseudoClass {
 		
 		// #no-xpath
 		System.err.println(":tabbable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
-		return XPathSelectorFactory.createNoFilterSelector("[(" + FocusablePseudoClass.FOCUSABLE_XPATH + " and (not(@tabindex) or @tabindex > -1))]");
+		return XPathSelectorFactory.create("[(" + FocusablePseudoClass.FOCUSABLE_XPATH + " and (not(@tabindex) or @tabindex > -1))]",
+				tabbablePseudoClassFilter);
 	}
 	
 }

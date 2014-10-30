@@ -1,7 +1,5 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -37,13 +35,6 @@ public class InputPseudoClass implements PseudoClass {
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		return FORM_ELEMENT_TAGS.contains(element.getTagName());
-	}
-	
-	private static final ElementFilter inputPseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// :input is an extension selector, nobody implements it natively
-		return CompiledCssSelector.createFilterOnlySelector(inputPseudoClassFilter);
 	}
 	
 	@Override

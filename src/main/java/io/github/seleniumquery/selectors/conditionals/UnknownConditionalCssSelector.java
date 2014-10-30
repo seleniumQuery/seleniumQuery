@@ -1,7 +1,6 @@
 package io.github.seleniumquery.selectors.conditionals;
 
 import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
@@ -33,12 +32,6 @@ public class UnknownConditionalCssSelector<T extends Condition> implements CssCo
 		throw new RuntimeException("CSS condition "+condition.getClass().getSimpleName()+" of type "+type+" is invalid or not supported!");
 	}
 
-	@Override
-	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, T condition) {
-		// we dont know what to do, just pass along hoping the browser will
-		return CompiledCssSelector.createNoFilterSelector(condition.toString());
-	}
-	
 	@Override
 	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, T condition) {
 		// if it is unknown, we can't convert it, so we simply ignore it

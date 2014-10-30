@@ -3,7 +3,6 @@ package io.github.seleniumquery.selectors.attributes;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
@@ -38,13 +37,6 @@ public class ContainsPrefixAttributeCssSelector implements CssConditionalSelecto
 		String wantedValue = attributeCondition.getValue();
 		String actualValue = element.getAttribute(attributeCondition.getLocalName());
 		return equalsIgnoreCase(actualValue, wantedValue) || startsWithIgnoreCase(actualValue, wantedValue+'-');
-	}
-
-	@Override
-	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
-		String attributeSelectorSymbol = "|=";
-		// nothing to do, everyone supports this selector
-		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, attributeSelectorSymbol);
 	}
 
 	@Override

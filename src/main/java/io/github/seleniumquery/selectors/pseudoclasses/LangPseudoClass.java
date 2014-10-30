@@ -1,15 +1,17 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
+ * 
+ * @author acdcjunior
+ */
 public class LangPseudoClass implements PseudoClass {
 	
 	private static final LangPseudoClass instance = new LangPseudoClass();
@@ -29,16 +31,6 @@ public class LangPseudoClass implements PseudoClass {
 		return wantedLang.equals(SelectorUtils.lang(element));
 	}
 	
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		String wantedLang = pseudoClassSelector.getPseudoClassContent();
-		ElementFilter langPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		// https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
-		if (DriverSupportService.getInstance().supportsNatively(driver, ":lang(en)")) {
-			return CompiledCssSelector.createNoFilterSelector(":lang("+wantedLang+")");
-		}
-		return CompiledCssSelector.createFilterOnlySelector(langPseudoClassFilter);
-	}
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String wantedLang = pseudoClassSelector.getPseudoClassContent();

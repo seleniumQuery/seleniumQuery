@@ -16,14 +16,6 @@ public interface CssSelector<T> {
 	 */
 	boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, T selector);
 	
-	/**
-	 * Compiles the selector.
-	 * 
-	 * @param driver Is used here to allow driver feature sniffing, to determinate if the browser supports
-	 * 			the CSS selector natively.
-	 */
-	CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, T selector);
-
 	XPathExpression toXPath(Map<String, String> stringMap, T selector);
 	
 }

@@ -1,14 +1,12 @@
 package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
-
-import java.util.Map;
-
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
+
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,13 +47,6 @@ public class ContainsWordAttributeCssSelector implements CssConditionalSelector<
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
-		// nothing to do, everyone supports this selector
-		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition,
-				CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL);
 	}
 	
 	@Override

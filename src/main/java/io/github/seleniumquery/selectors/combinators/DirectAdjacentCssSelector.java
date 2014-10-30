@@ -1,20 +1,13 @@
 package io.github.seleniumquery.selectors.combinators;
 
-import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssSelector;
-import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 import io.github.seleniumquery.selectorxpath.SqSelectorKind;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -37,45 +30,6 @@ public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector> {
 		WebElement previousElement = SelectorUtils.getPreviousSibling(element);
 		return CssSelectorMatcherService.elementMatchesSelector(driver, previousElement, stringMap, siblingSelector.getSelector())
 				&& CssSelectorMatcherService.elementMatchesSelector(driver, element, stringMap, siblingSelector.getSiblingSelector());
-	}
-
-	@Override
-	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		CompiledCssSelector previousElementCompiled = CssSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSelector());
-		CompiledCssSelector siblingElementCompiled = CssSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
-		
-		ElementFilter directAdjacentFilter = new DirectAdjacentFilter(previousElementCompiled, siblingElementCompiled);
-		return new CompiledCssSelector(previousElementCompiled.getCssSelector()+"+"+siblingElementCompiled.getCssSelector(),
-										directAdjacentFilter);
-	}
-	
-	private static final class DirectAdjacentFilter implements ElementFilter {
-		private final CompiledCssSelector previousElementCompiled;
-		private final CompiledCssSelector siblingElementCompiled;
-		
-		private DirectAdjacentFilter(CompiledCssSelector previousElementCompiled, CompiledCssSelector siblingElementCompiled) {
-			this.previousElementCompiled = previousElementCompiled;
-			this.siblingElementCompiled = siblingElementCompiled;
-		}
-		
-		@Override
-		public List<WebElement> filterElements(WebDriver driver, List<WebElement> elements) {
-			elements = siblingElementCompiled.filter(driver, elements);
-			
-			for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext();) {
-				WebElement element = iterator.next();
-				
-				WebElement previousSibling = SelectorUtils.getPreviousSibling(element);
-					
-				List<WebElement> psf = previousElementCompiled.filter(driver, new ArrayList<WebElement>(Arrays.asList(previousSibling)));
-				boolean previousSiblingMatchesTheFilter = !psf.isEmpty();
-				if (!previousSiblingMatchesTheFilter) {
-					// this element's previous sibling is NOT ok, dont keep it
-					iterator.remove();
-				}
-			}
-			return elements;
-		}
 	}
 
 	@Override

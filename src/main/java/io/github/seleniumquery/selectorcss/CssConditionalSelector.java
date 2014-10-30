@@ -15,8 +15,6 @@ public interface CssConditionalSelector<T extends Condition> {
 
 	boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selector, T condtition);
 
-	CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector selector, T condition);
-
 	XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, T condition);
 	
 }

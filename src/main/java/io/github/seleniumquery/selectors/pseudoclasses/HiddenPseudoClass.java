@@ -2,7 +2,6 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -30,11 +29,6 @@ public class HiddenPseudoClass implements PseudoClass {
 	}
 	
 	private static final ElementFilter hiddenPseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// :hidden is an extension selector, no browser implements it natively
-		return CompiledCssSelector.createFilterOnlySelector(hiddenPseudoClassFilter);
-	}
 	
 	public static final String HIDDEN_XPATH_MUST_FILTER = "("
 			// we consider an element to be hidden when...

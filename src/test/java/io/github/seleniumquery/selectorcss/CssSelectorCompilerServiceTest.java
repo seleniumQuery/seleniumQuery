@@ -205,26 +205,4 @@ public class CssSelectorCompilerServiceTest {
     	assertThat(elements.get(4).getTagName(), is("button"));
     }
     
-    @Test
-    public void selector_compiler_should_send_raw_pseudo_if_it_is_unsupported() {
-    	// given
-    	String selector = ":random-unsupported-pseudo(c'o'n\"t\"e'n't)";
-    	// when
-		CompiledCssSelectorList csl = CssSelectorCompilerService.compileSelectorList($.browser.getDefaultDriver(), selector);
-		// then
-		assertThat(csl.css.size(), is(1));
-		assertThat(csl.css.get(0).getCssSelector(), is("*"+selector));
-    }
-    
-    @Test
-    public void selector_compiler_should_send_raw_pseudo_without_contents_if_it_is_unsupported() {
-    	// given
-    	String selector = ":random-unsupported-pseudo-without-braces";
-    	// when
-    	CompiledCssSelectorList csl = CssSelectorCompilerService.compileSelectorList($.browser.getDefaultDriver(), selector);
-    	// then
-    	assertThat(csl.css.size(), is(1));
-    	assertThat(csl.css.get(0).getCssSelector(), is("*"+selector));
-    }
-    
 }

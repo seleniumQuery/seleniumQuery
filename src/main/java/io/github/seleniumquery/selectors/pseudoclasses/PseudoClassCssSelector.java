@@ -1,9 +1,7 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
-import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,22 +43,8 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 				return pseudoClass.isPseudoClass(driver, element, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
 			}
 		}
-//		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
+		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
 		return false;
-	}
-	
-	@Override
-	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
-		
-		String pseudoClassValue = attributeCondition.getValue();
-		for (PseudoClass pseudoClass : pseudoClasses) {
-			if (pseudoClass.isApplicable(pseudoClassValue)) {
-				return pseudoClass.compilePseudoClass(driver, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
-			}
-		}
-//		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
-		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue);
-		return CompiledCssSelector.createNoFilterSelector(pseudoClassSelector.getOriginalPseudoClassSelector());
 	}
 	
 	@Override
@@ -72,9 +56,6 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 			}
 		}
 		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue);
-		if (Object.class.equals("in the future, place a debug log here and maybe do somenething")) {
-			return XPathSelectorFactory.createNoFilterSelector("");
-		}
 		// right now we'll just exit, hoping to cause less problems
 		throw new UnsupportedPseudoClassException(pseudoClassSelector.getOriginalPseudoClassSelector());
 	}

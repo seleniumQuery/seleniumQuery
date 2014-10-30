@@ -1,7 +1,5 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -29,13 +27,6 @@ public class FirstPseudoClass implements PseudoClass {
 		return EqPseudoClass.isEq(driver, element, pseudoClassSelector, 0);
 	}
 
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// no browser supports :first natively
-		ElementFilter firstPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		return CompiledCssSelector.createFilterOnlySelector(firstPseudoClassFilter);
-	}
-	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return XPathSelectorFactory.createNoFilterSelectorAppliedToAll("[position() = 1]");

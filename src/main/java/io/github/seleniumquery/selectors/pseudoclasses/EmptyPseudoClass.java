@@ -1,8 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.DriverSupportService;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -41,13 +39,6 @@ public class EmptyPseudoClass implements PseudoClass {
 					" were ignored) or if they were just empty.");
 		}
 		return isEmpty;
-	}
-	
-	private static final ElementFilter emptyPseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// we never consider :empty to be supported natively
-		return CompiledCssSelector.createFilterOnlySelector(emptyPseudoClassFilter);
 	}
 	
 	@Override

@@ -1,9 +1,7 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
-import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
+import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.List;
@@ -28,16 +26,9 @@ public class EvenPseudoClass implements PseudoClass {
 
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		CompiledCssSelector compileSelector = CssSelectorCompilerService.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
-		List<WebElement> elements = compileSelector.execute(driver);
+		XPathExpression compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		List<WebElement> elements = compiledSelector.findWebElements(driver);
 		return elements.indexOf(element) % 2 == 0;
-	}
-	
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// we never consider :even to be supported natively
-		ElementFilter evenPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		return CompiledCssSelector.createFilterOnlySelector(evenPseudoClassFilter);
 	}
 	
 	@Override

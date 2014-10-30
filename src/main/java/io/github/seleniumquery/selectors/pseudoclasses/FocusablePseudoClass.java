@@ -1,7 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -10,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 /**
  * @ see http://api.jqueryui.com/focusable-selector/
+ * No browser supports :focusable natively.
  * 
  * Some elements are natively focusable, while others require explicitly setting a tab index. In all cases, the element must be visible in order to be focusable.
  * 
@@ -58,11 +58,7 @@ public class FocusablePseudoClass implements PseudoClass {
 	}
 	
 	private static final ElementFilter focusablePseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// no browser supports :focusable natively
-		return CompiledCssSelector.createFilterOnlySelector(focusablePseudoClassFilter);
-	}
+
 	// //button[.='OK' and not(ancestor::div[contains(@style,'display:none')]) and ]
 	
 	
@@ -91,7 +87,7 @@ public class FocusablePseudoClass implements PseudoClass {
 		
 		// #no-xpath
 		System.err.println(":focusable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
-		return XPathSelectorFactory.createNoFilterSelector("[" + FOCUSABLE_XPATH + "]");
+		return XPathSelectorFactory.create("[" + FOCUSABLE_XPATH + "]", focusablePseudoClassFilter);
 	}
 	
 }

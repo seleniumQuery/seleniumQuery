@@ -1,15 +1,12 @@
 package io.github.seleniumquery.selectors.conditionals;
 
-import java.util.Map;
-
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
-import io.github.seleniumquery.selectorcss.CssFilterUtils;
 import io.github.seleniumquery.selectorcss.CssSelector;
-import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
+
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,15 +31,6 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector> 
 	}
 	
 	@Override
-	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, ConditionalSelector conditionalSelector) {
-		Condition condition = conditionalSelector.getCondition();
-		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
-		CompiledCssSelector compiledSelector = CssSelectorCompilerService.compileSelector(driver, stringMap, simpleSelector);
-		CompiledCssSelector compiledCondition = compileCondition(driver, stringMap, simpleSelector, condition);
-		return CssFilterUtils.combine(compiledSelector, compiledCondition);
-	}
-	
-	@Override
 	public XPathExpression toXPath(Map<String, String> stringMap, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
@@ -60,12 +48,6 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector> 
 		return evaluator.isCondition(driver, element, stringMap, simpleSelector, condition);
 	}
 
-	CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
-		@SuppressWarnings("unchecked")
-		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) ConditionalCssSelectorFactory.getInstance().getSelector(condition);
-		return evaluator.compileCondition(driver, stringMap, simpleSelector, condition);
-	}
-	
 	XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
 		@SuppressWarnings("unchecked")
 		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) ConditionalCssSelectorFactory.getInstance().getSelector(condition);
