@@ -4,6 +4,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
+import io.github.seleniumquery.selectors.pseudoclasses.UnsupportedXPathPseudoClassException;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class FocusablePseudoClassTest {
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@Test(expected = RuntimeException.class)
+	@Test(expected = UnsupportedXPathPseudoClassException.class)
 	public void focusablePseudoClass() {
 		assertThat($("body > *").size(), is(6));
 		assertThat($(":focusable").size(), is(3));
