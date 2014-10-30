@@ -19,16 +19,13 @@ import org.openqa.selenium.WebElement;
  * 
  * 
  * @author acdcjunior
- * @since 0.2.0
+ * @since 1.0.0
  */
 public class SeleniumQueryBy extends By {
 	
 	/**
-	 * A By to be used in an element created with no By. Attempting to filter elements through this By
+	 * A {@link By} to be used in an element created with no By. Attempting to filter elements through this By
 	 * will throw a RuntimeException.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.3.0
 	 */
 	public static final SeleniumQueryBy NO_SELECTOR_INVALID_BY = new SeleniumQueryBy(null) {
 		@Override public List<WebElement> findElements(SearchContext context) {
@@ -41,9 +38,6 @@ public class SeleniumQueryBy extends By {
 	/**
 	 * Enhanced selector is not just the CSS selector, it also supports XPath expressions and some
 	 * Sizzle enhancements.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
 	 */
 	public static SeleniumQueryBy byEnhancedSelector(final String selector) {
 		if (selector == null) {
@@ -59,9 +53,6 @@ public class SeleniumQueryBy extends By {
 	/**
 	 * Constructs a SeleniumQueryBy for the given selector.
 	 * @param selector the selector you need the elements to match.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
 	 */
 	private SeleniumQueryBy(String selector) {
 		this.selector = selector;
@@ -72,9 +63,6 @@ public class SeleniumQueryBy extends By {
 	/**
 	 * Returns the list of elements that match this By in the given context.
 	 * @return the list of elements that match this By in the given context.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
 	 */
 	@Override
 	public List<WebElement> findElements(SearchContext context) {
@@ -87,9 +75,6 @@ public class SeleniumQueryBy extends By {
 	/**
 	 * Returns the string representation of this By.
 	 * @return the string representation of this By.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
 	 */
 	@Override
 	public String toString() {
@@ -107,11 +92,8 @@ public class SeleniumQueryBy extends By {
 	/**
 	 * Zero-based.
 	 * 
-	 * @param position
+	 * @param position Zero-based index of the wanted element.
 	 * @return the selector string for the element at <code>position</code>.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.2.0
 	 */
 	public String getSelectorForElementAtPosition(int position) {
 		if (this.selectorIsXPathExpression) {
@@ -125,8 +107,6 @@ public class SeleniumQueryBy extends By {
 	 * Compiles the selector for the given context (the context
 	 * will determinate what selectors are natively supported and what selectors should
 	 * be handled by SeleniumQuery) and matches elements based on it.
-	 * 
-	 * @since 0.6.2
 	 */
 	private List<WebElement> enhancedCssFindElements(SearchContext context) {
 		WebDriver driver = SelectorUtils.getWebDriver(context);
@@ -143,9 +123,6 @@ public class SeleniumQueryBy extends By {
 	/**
 	 * Returns the selector used in the creation of this By.
 	 * @return the selector used in the creation of this By.
-	 * 
-	 * @author acdcjunior
-	 * @since 0.3.0
 	 */
 	public String getSelector() {
 		return this.selector;
