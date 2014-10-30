@@ -1,14 +1,15 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selector.DriverSupportService;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:focus
+ */
 public class FocusPseudoClass implements PseudoClass {
 	
 	private static final FocusPseudoClass instance = new FocusPseudoClass();
@@ -18,7 +19,6 @@ public class FocusPseudoClass implements PseudoClass {
 	private FocusPseudoClass() { }
 	
 	private static final String FOCUS_PSEUDO_CLASS_NO_COLON = "focus";
-	private static final String FOCUS_PSEUDO_CLASS = ":"+FOCUS_PSEUDO_CLASS_NO_COLON;
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -32,14 +32,6 @@ public class FocusPseudoClass implements PseudoClass {
 	}
 	
 	private static final ElementFilter focusPseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// https://developer.mozilla.org/en-US/docs/Web/CSS/:focus
-		if (DriverSupportService.getInstance().supportsNatively(driver, FOCUS_PSEUDO_CLASS)) {
-			return CompiledCssSelector.createNoFilterSelector(FOCUS_PSEUDO_CLASS);
-		}
-		return CompiledCssSelector.createFilterOnlySelector(focusPseudoClassFilter);
-	}
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {

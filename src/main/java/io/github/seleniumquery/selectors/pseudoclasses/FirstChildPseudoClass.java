@@ -1,15 +1,15 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:first-child
+ */
 public class FirstChildPseudoClass implements PseudoClass {
 
 	private static final FirstChildPseudoClass instance = new FirstChildPseudoClass();
@@ -19,7 +19,6 @@ public class FirstChildPseudoClass implements PseudoClass {
 	private FirstChildPseudoClass() { }
 	
 	private static final String FIRST_CHILD_PSEUDO_CLASS_NO_COLON = "first-child";
-	private static final String FIRST_CHILD_PSEUDO_CLASS = ":"+FIRST_CHILD_PSEUDO_CLASS_NO_COLON;
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -36,17 +35,6 @@ public class FirstChildPseudoClass implements PseudoClass {
 		return SelectorUtils.itselfWithSiblings(element).get(0).equals(element);
 	}
 
-	private static final ElementFilter firstChildPseudoClassFilter = new PseudoClassFilter(getInstance());
-
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// https://developer.mozilla.org/en-US/docs/Web/CSS/:first-child
-		if (DriverSupportService.getInstance().supportsNatively(driver, FIRST_CHILD_PSEUDO_CLASS)) {
-			return CompiledCssSelector.createNoFilterSelector(FIRST_CHILD_PSEUDO_CLASS);
-		}
-		return CompiledCssSelector.createFilterOnlySelector(firstChildPseudoClassFilter);
-	}
-	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return XPathSelectorFactory.createNoFilterSelector("[position() = 1]");

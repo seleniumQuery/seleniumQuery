@@ -2,7 +2,6 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -29,11 +28,7 @@ public class VisiblePseudoClass implements PseudoClass {
 		return SelectorUtils.isVisible(driver, element);
 	}
 	
-	private static final ElementFilter VisiblePseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return CompiledCssSelector.createFilterOnlySelector(VisiblePseudoClassFilter);
-	}
+	private static final ElementFilter visiblePseudoClassFilter = new PseudoClassFilter(getInstance());
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
@@ -41,7 +36,7 @@ public class VisiblePseudoClass implements PseudoClass {
 		
 		// #no-xpath
 		System.err.println(":visible is not fully XPath supported (if the style is in a class, it won't know)!!!");
-		return XPathSelectorFactory.createNoFilterSelector("[" + NOT_DISPLAY_NONE_XPATH + "]");
+		return XPathSelectorFactory.create("[" + NOT_DISPLAY_NONE_XPATH + "]", visiblePseudoClassFilter);
 	}
 	
 }

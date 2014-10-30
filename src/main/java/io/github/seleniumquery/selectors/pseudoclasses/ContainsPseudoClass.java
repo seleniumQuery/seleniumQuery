@@ -1,8 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -27,12 +25,6 @@ public class ContainsPseudoClass implements PseudoClass {
 		String textToContain = pseudoClassSelector.getPseudoClassContent();
 		textToContain = SelectorUtils.unescapeString(textToContain);
 		return element.getText().contains(textToContain);
-	}
-	
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		ElementFilter containsPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		return CompiledCssSelector.createFilterOnlySelector(containsPseudoClassFilter);
 	}
 	
 	@Override

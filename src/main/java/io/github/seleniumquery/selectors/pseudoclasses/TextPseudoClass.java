@@ -1,7 +1,5 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -33,13 +31,6 @@ class TextPseudoClass implements PseudoClass {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		return "input".equals(element.getTagName()) &&
 				(element.getAttribute("type") == null || "text".equalsIgnoreCase(element.getAttribute("type")));
-	}
-	
-	private static final ElementFilter textPseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// we never consider :text to be supported natively
-		return CompiledCssSelector.createFilterOnlySelector(textPseudoClassFilter);
 	}
 	
 	@Override

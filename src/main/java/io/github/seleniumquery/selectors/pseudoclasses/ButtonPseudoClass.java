@@ -1,7 +1,5 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -35,13 +33,6 @@ public class ButtonPseudoClass implements PseudoClass {
 		return (INPUT.equals(element.getTagName()) && BUTTON.equalsIgnoreCase(element.getAttribute("type")))
 				||
 			   BUTTON.equals(element.getTagName());
-	}
-	
-	private static final ElementFilter buttonPseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// :button is an extension selector, nobody implements it natively
-		return CompiledCssSelector.createFilterOnlySelector(buttonPseudoClassFilter);
 	}
 	
 	@Override

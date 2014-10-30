@@ -1,7 +1,5 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -43,13 +41,6 @@ public class SubmitPseudoClass implements PseudoClass {
 						   									SUBMIT.equalsIgnoreCase(element.getAttribute("type"))
 						   								  )
 			  );
-	}
-	
-	private static final ElementFilter submitPseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// :submit is an extension selector, nobody implements it natively
-		return CompiledCssSelector.createFilterOnlySelector(submitPseudoClassFilter);
 	}
 	
 	@Override

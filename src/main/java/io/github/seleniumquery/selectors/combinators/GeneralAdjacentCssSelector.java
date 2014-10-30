@@ -1,16 +1,12 @@
 package io.github.seleniumquery.selectors.combinators;
 
-import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssSelector;
-import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 import io.github.seleniumquery.selectorxpath.SqSelectorKind;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -56,52 +52,6 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> 
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		CompiledCssSelector previousElementCompiled = CssSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSelector());
-		CompiledCssSelector siblingElementCompiled = CssSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
-		
-		ElementFilter generalAdjacentFilter = new GeneralAdjacentFilter(previousElementCompiled, siblingElementCompiled);
-		return new CompiledCssSelector(previousElementCompiled.getCssSelector()+"~"+siblingElementCompiled.getCssSelector(),
-										generalAdjacentFilter);
-	}
-	
-	private static final class GeneralAdjacentFilter implements ElementFilter {
-		private final CompiledCssSelector siblingsCompiledSelector;
-		private final CompiledCssSelector elementCompiledSelector;
-		
-		private GeneralAdjacentFilter(CompiledCssSelector previousElementCompiled, CompiledCssSelector siblingElementCompiled) {
-			this.siblingsCompiledSelector = previousElementCompiled;
-			this.elementCompiledSelector = siblingElementCompiled;
-		}
-		
-		@Override
-		public List<WebElement> filterElements(WebDriver driver, List<WebElement> elements) {
-			elements = elementCompiledSelector.filter(driver, elements);
-			
-			outerFor:for (Iterator<WebElement> iterator = elements.iterator(); iterator.hasNext();) {
-				WebElement element = iterator.next();
-				
-				List<WebElement> previousSiblings = SelectorUtils.getPreviousSiblings(element);
-				
-				previousSiblings = siblingsCompiledSelector.filter(driver, previousSiblings);
-				
-				for (WebElement previousSibling : previousSiblings) {
-					boolean previousSiblingMatchesSelectorFirstPart = CssSelectorMatcherService.elementMatchesStringSelector(driver, previousSibling,
-																		siblingsCompiledSelector.getCssSelector());
-					if (previousSiblingMatchesSelectorFirstPart) {
-						// found a mathing sibling, dont remove the element from the list, continue to next element
-						continue outerFor;
-					}
-				}
-				// no matching sibling was found, remove element
-				iterator.remove();
-				
-			}
-			return elements;
-		}
 	}
 
 	@Override

@@ -1,8 +1,5 @@
 package io.github.seleniumquery.by;
 
-import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelectorList;
-import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathExpressionList;
 import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 
@@ -10,7 +7,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -109,13 +105,6 @@ public class SeleniumQueryBy extends By {
 	 * be handled by SeleniumQuery) and matches elements based on it.
 	 */
 	private List<WebElement> enhancedCssFindElements(SearchContext context) {
-		WebDriver driver = SelectorUtils.getWebDriver(context);
-
-		if (new Object().equals("never execute this")) {
-			CompiledCssSelectorList compileSelectorList = CssSelectorCompilerService.compileSelectorList(driver, this.selector);
-			return compileSelectorList.execute(context);
-		}
-		
 		XPathExpressionList xPathLocator = XPathSelectorCompilerService.compileSelectorList(this.selector);
 		return xPathLocator.findWebElements(context);
 	}

@@ -1,14 +1,17 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selector.DriverSupportService;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:root
+ * 
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class RootPseudoClass implements PseudoClass {
 	
 	private static final RootPseudoClass instance = new RootPseudoClass();
@@ -18,7 +21,6 @@ public class RootPseudoClass implements PseudoClass {
 	private RootPseudoClass() { }
 	
 	private static final String ROOT_PSEUDO_CLASS_NO_COLON = "root";
-	private static final String ROOT_PSEUDO_CLASS = ":"+ROOT_PSEUDO_CLASS_NO_COLON;
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -28,17 +30,6 @@ public class RootPseudoClass implements PseudoClass {
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		return element.getTagName().equals("html");
-	}
-	
-	private static final ElementFilter rootPseudoClassFilter = new PseudoClassFilter(getInstance());
-
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// https://developer.mozilla.org/en-US/docs/Web/CSS/:root
-		if (DriverSupportService.getInstance().supportsNatively(driver, ROOT_PSEUDO_CLASS)) {
-			return CompiledCssSelector.createNoFilterSelector(ROOT_PSEUDO_CLASS);
-		}
-		return CompiledCssSelector.createFilterOnlySelector(rootPseudoClassFilter);
 	}
 	
 	@Override

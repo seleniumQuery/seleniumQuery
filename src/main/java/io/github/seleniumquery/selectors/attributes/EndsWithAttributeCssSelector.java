@@ -2,7 +2,6 @@ package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.endsWith;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
@@ -40,12 +39,6 @@ public class EndsWithAttributeCssSelector implements CssConditionalSelector<Attr
 		return endsWith(actualValue, wantedValue);
 	}
 
-	@Override
-	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
-		// nothing to do, everyone supports this selector
-		return AttributeEvaluatorUtils.createAttributeNoFilterCompiledSelector(attributeCondition, ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL);
-	}
-	
 	@Override
 	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);

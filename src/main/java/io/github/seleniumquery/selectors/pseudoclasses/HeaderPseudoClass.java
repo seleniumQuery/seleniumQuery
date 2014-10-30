@@ -1,7 +1,5 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -48,13 +46,6 @@ public class HeaderPseudoClass implements PseudoClass {
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		return HEADER_TAGS.contains(element.getTagName());
-	}
-	
-	private static final ElementFilter headerPseudoClassFilter = new PseudoClassFilter(getInstance());
-	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		// :header is an extension selector, no browser implements it natively
-		return CompiledCssSelector.createFilterOnlySelector(headerPseudoClassFilter);
 	}
 	
 	@Override

@@ -1,6 +1,5 @@
 package io.github.seleniumquery.selectorcss;
 
-import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
@@ -27,12 +26,6 @@ public class UnknownCssSelector<T> implements CssSelector<T> {
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, T selector) {
 		throw new RuntimeException("CSS "+selector.getClass().getSimpleName()+" of type "+type+" is invalid or not supported!");
-	}
-
-	@Override
-	public CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, T selector) {
-		// if it is unknown, we just push it forward, hoping the browser will know what to do
-		return new CompiledCssSelector(selector.toString(), ElementFilter.FILTER_NOTHING);
 	}
 
 	@Override

@@ -1,9 +1,7 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
-import io.github.seleniumquery.selectorcss.CssSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
+import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.List;
@@ -39,8 +37,8 @@ public class EqPseudoClass implements PseudoClass {
 	}
 	
 	static boolean isEq(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector, int index) {
-		CompiledCssSelector compileSelector = CssSelectorCompilerService.compileSelector(driver, pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
-		List<WebElement> elements = compileSelector.execute(driver);
+		XPathExpression compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		List<WebElement> elements = compiledSelector.findWebElements(driver);
 		if (index < 0) {
 			return elements.size() >= -index && elements.get(elements.size() + index).equals(element);
 		}
@@ -48,16 +46,10 @@ public class EqPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		ElementFilter eqPseudoClassFilter = new PseudoClassFilter(getInstance(), pseudoClassSelector);
-		return CompiledCssSelector.createFilterOnlySelector(eqPseudoClassFilter);
-	}
-	
-	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String eqIndex = pseudoClassSelector.getPseudoClassContent();
 		if (!eqIndex.matches("[+-]?\\d+")) {
-			throw new RuntimeException("The :eq() pseudo-class requires an integer but got: " + eqIndex);
+			throw new IllegalArgumentException("The :eq() pseudo-class requires an integer but got: " + eqIndex);
 		}
 		if (eqIndex.charAt(0) == '+') {
 			eqIndex = eqIndex.substring(1);

@@ -1,12 +1,11 @@
 package io.github.seleniumquery.selectors.attributes;
 
-import java.util.Map;
-
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 import io.github.seleniumquery.selectorxpath.XPathExpression;
 import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
+
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,13 +40,6 @@ public class IdAttributeCssSelector implements CssConditionalSelector<AttributeC
 		String wantedId = attributeCondition.getValue();
 		String actualId = element.getAttribute(ID_ATTRIBUTE);
 		return actualId.equals(wantedId);
-	}
-
-	@Override
-	public CompiledCssSelector compileCondition(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
-		String wantedId = attributeCondition.getValue();
-		// nothing to do, everyone supports filtering by id
-		return CompiledCssSelector.createNoFilterSelector("#"+SelectorUtils.escapeSelector(wantedId));
 	}
 
 	@Override
