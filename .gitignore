@@ -1,7 +1,17 @@
+# ECLIPSE
+#
 /target
 /.settings
 .project
 .classpath
+
+# IntelliJ IDEA
+#
+*.iml
+/.idea
+
+# Others
+#
 errorPage.html
 phantomjsdriver.log
 errorPage.png
