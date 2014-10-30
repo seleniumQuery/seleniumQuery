@@ -57,10 +57,9 @@ public class TabbablePseudoClass implements PseudoClass {
 	
 	// see :focusable. change there before here, this selector is highly dependable on :focusable as it is just a small change to it
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		if (!Object.class.equals("always run")) {
-			throw new UnsupportedPseudoClassException(":tabbable");
-		}
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":tabbable");
+		
 		// #no-xpath
 		System.err.println(":tabbable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
 		return XPathSelectorFactory.createNoFilterSelector("[(" + FocusablePseudoClass.FOCUSABLE_XPATH + " and (not(@tabindex) or @tabindex > -1))]");

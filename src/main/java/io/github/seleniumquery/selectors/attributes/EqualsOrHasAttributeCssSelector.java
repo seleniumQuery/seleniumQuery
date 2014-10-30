@@ -72,7 +72,7 @@ public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<A
 	}
 
 	@Override
-	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		// [attribute=wantedValue]
 		if (attributeCondition.getSpecified()) {

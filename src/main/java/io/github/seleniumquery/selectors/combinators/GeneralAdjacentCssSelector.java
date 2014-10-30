@@ -105,9 +105,9 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> 
 	}
 
 	@Override
-	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		XPathExpression previousElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSelector());
-		XPathExpression siblingElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
+	public XPathExpression toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		XPathExpression previousElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
+		XPathExpression siblingElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
 		
 		siblingElementCompiled.kind = SqSelectorKind.ADJACENT;
 		return previousElementCompiled.combine(siblingElementCompiled);

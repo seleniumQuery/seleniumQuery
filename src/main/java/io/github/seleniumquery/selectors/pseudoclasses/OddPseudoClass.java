@@ -41,7 +41,7 @@ public class OddPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		// notice that XPath is 1-based and :odd is not.
 		return XPathSelectorFactory.createNoFilterSelectorAppliedToAll("[(position() mod 2) = 0]");
 	}

@@ -14,6 +14,6 @@ public interface PseudoClass {
 
 	CompiledCssSelector compilePseudoClass(WebDriver driver, PseudoClassSelector pseudoClassSelector);
 
-	XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector);
+	XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector);
 
 }

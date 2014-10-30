@@ -43,11 +43,11 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector> 
 	}
 	
 	@Override
-	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, ConditionalSelector conditionalSelector) {
+	public XPathExpression toXPath(Map<String, String> stringMap, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
-		XPathExpression compiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, simpleSelector);
-		XPathExpression compiledCondition = conditionToXPath(driver, stringMap, simpleSelector, condition);
+		XPathExpression compiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, simpleSelector);
+		XPathExpression compiledCondition = conditionToXPath(stringMap, simpleSelector, condition);
 		return compiledSelector.combine(compiledCondition);
 	}
 	
@@ -66,10 +66,10 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector> 
 		return evaluator.compileCondition(driver, stringMap, simpleSelector, condition);
 	}
 	
-	XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
+	XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
 		@SuppressWarnings("unchecked")
 		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) ConditionalCssSelectorFactory.getInstance().getSelector(condition);
-		return evaluator.conditionToXPath(driver, stringMap, simpleSelector, condition);
+		return evaluator.conditionToXPath(stringMap, simpleSelector, condition);
 	}
 
 }

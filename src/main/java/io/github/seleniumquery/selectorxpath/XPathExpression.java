@@ -1,9 +1,9 @@
 package io.github.seleniumquery.selectorxpath;
 
-import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.locator.Locator;
+import io.github.seleniumquery.locator.filter.ElementFilterList;
+import io.github.seleniumquery.locator.filter.ElementFilterListCombinator;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectors.pseudoclasses.UnsupportedPseudoClassException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,21 +17,21 @@ public class XPathExpression implements Locator {
 
 	private String xPathExpression;
 	private List<XPathExpression> otherExpressions = new ArrayList<XPathExpression>();
-	
-	private List<ElementFilter> elementFilters;
+	private ElementFilterList elementFilterList;
 	
 	// TODO this is very, very, very nasty!
+	// should probably be replaced by polymorphism
 	public SqSelectorKind kind;
 
-	XPathExpression(String xPathExpression, List<ElementFilter> elementFilter) {
+	XPathExpression(String xPathExpression, ElementFilterList elementFilterList) {
 		this.xPathExpression = xPathExpression;
-		this.elementFilters = elementFilter;
+		this.elementFilterList = elementFilterList;
 		this.kind = SqSelectorKind.CONDITIONAL_SIMPLE;
 	}
 	
 	@Override
 	public String toString() {
-		return "[XPath: \""+xPathExpression+"\", kind: "+kind+", otherExps: "+otherExpressions+", filters: "+elementFilters+"]";
+		return "[XPath: \""+xPathExpression+"\", kind: "+kind+", otherExps: "+otherExpressions+", filter: "+elementFilterList+"]";
 	}
 	
 	@Override
@@ -39,19 +39,7 @@ public class XPathExpression implements Locator {
 		String finalXPathExpression = this.toXPath();
 		List<WebElement> elements = new By.ByXPath(finalXPathExpression).findElements(context);
 		WebDriver driver = SelectorUtils.getWebDriver(context);
-		return filter(driver, elements);
-	}
-	
-	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
-		if (this.elementFilters.size() > 0) {
-			// we are currently disabling the support to filters
-			// we will only take it back when the system is stable
-			throw new UnsupportedPseudoClassException("The current selector is unsupported. Please try a simpler one.");
-		}
-		for (ElementFilter elementFilter : elementFilters) {
-			elements = elementFilter.filterElements(driver, elements);
-		}
-		return elements;
+		return elementFilterList.filter(driver, elements);
 	}
 	
 	public XPathExpression combine(XPathExpression other) {
@@ -87,7 +75,8 @@ public class XPathExpression implements Locator {
 	}
 	
 	private void mergeExpression(XPathExpression other) {
-		this.elementFilters.addAll(other.elementFilters);
+		this.elementFilterList = ElementFilterListCombinator.combine((WebElement) null, this.xPathExpression, this.elementFilterList,
+																		other.kind, other.xPathExpression, other.elementFilterList);
 		this.xPathExpression = other.kind.merge(this.xPathExpression, other.xPathExpression);
 	}
 

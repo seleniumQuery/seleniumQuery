@@ -44,10 +44,9 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		if (!Object.class.equals("always run")) {
-			throw new UnsupportedPseudoClassException(":only-of-type");
-		}
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":only-of-type");
+		
 		// #no-xpath
 		return XPathSelectorFactory.createFilterOnlySelector(onlyOfTypePseudoClassFilter);
 	}

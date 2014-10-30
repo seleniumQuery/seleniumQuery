@@ -70,7 +70,7 @@ public class LtPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String eqIndex = pseudoClassSelector.getPseudoClassContent();
 		if (!eqIndex.matches("[+-]?\\d+")) {
 			throw new RuntimeException("The :lt() pseudo-class requires an integer but got: " + eqIndex);

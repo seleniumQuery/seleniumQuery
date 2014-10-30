@@ -24,6 +24,6 @@ public interface CssSelector<T> {
 	 */
 	CompiledCssSelector compile(WebDriver driver, Map<String, String> stringMap, T selector);
 
-	XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, T selector);
+	XPathExpression toXPath(Map<String, String> stringMap, T selector);
 	
 }

@@ -37,22 +37,22 @@ public class HiddenPseudoClass implements PseudoClass {
 	}
 	
 	public static final String HIDDEN_XPATH_MUST_FILTER = "("
-			// we consider to be hidden when...
+			// we consider an element to be hidden when...
 			
-			// element or ancestor has 'display: none'
+			// element itself or ancestor have 'display: none'
 			+ " ancestor-or-self::*[contains(normalize-space(@style),'display: none') or contains(normalize-space(@style),'display:none')] "
-			// element or ancestor has a class (the style of the class will be checked by the filter)
+			// element itself or ancestor have a class (a class itself won't hide the element, but it could! The filter exists to check exactly if
+			// the class' style is hiding the element or its children)
 			+ " or ancestor-or-self::*[@class] "
-			// it is not under body (and is not <html> itself)
+			// it is not under body (and is not <html> itself), because all <head> elements are not visible!
 			+ " or (count(ancestor-or-self::body) = 0 and local-name() != 'html')"
 			+ ")";
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		if (!Object.class.equals("always run")) {
-			throw new UnsupportedPseudoClassException(":hidden");
-		}
-		// #not-pure-xpath // it is not pure because XPath cant see the styles declared in the classes declared
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":hidden");
+
+		// #not-pure-xpath // it is not pure because XPath can't see the styles affecting the element's classes
 		return XPathSelectorFactory.create("[" + HIDDEN_XPATH_MUST_FILTER + "]", hiddenPseudoClassFilter);
 	}
 	

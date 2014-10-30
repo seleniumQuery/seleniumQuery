@@ -36,7 +36,7 @@ public class UnknownCssSelector<T> implements CssSelector<T> {
 	}
 
 	@Override
-	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, T selector) {
+	public XPathExpression toXPath(Map<String, String> stringMap, T selector) {
 		// if it is unknown, we can't convert it, so we simply ignore it
 		LOGGER.warn("CSS Selector '"+selector+"' is unknown. Ignoring it.");
 		return XPathSelectorFactory.createEmptyXPathExpression();

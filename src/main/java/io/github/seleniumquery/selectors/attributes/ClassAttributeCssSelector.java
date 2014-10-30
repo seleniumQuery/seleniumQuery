@@ -49,7 +49,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	}
 
 	@Override
-	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by class
 		return XPathSelectorFactory.createNoFilterSelector("[contains(concat(' ', normalize-space(@class), ' '), ' "+wantedClassName+" ')]");

@@ -53,7 +53,7 @@ public class ContainsSubstringAttributeCssSelector implements CssConditionalSele
 	}
 	
 	@Override
-	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
 		return XPathSelectorFactory.createNoFilterSelector("[contains("+attributeName+", "+wantedValue+")]");

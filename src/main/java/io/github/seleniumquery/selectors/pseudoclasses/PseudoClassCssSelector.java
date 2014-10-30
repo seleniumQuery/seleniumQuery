@@ -64,11 +64,11 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 	}
 	
 	@Override
-	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String pseudoClassValue = attributeCondition.getValue();
 		for (PseudoClass pseudoClass : pseudoClasses) {
 			if (pseudoClass.isApplicable(pseudoClassValue)) {
-				return pseudoClass.pseudoClassToXPath(driver, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
+				return pseudoClass.pseudoClassToXPath(new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
 			}
 		}
 		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue);

@@ -74,7 +74,7 @@ public class EnabledPseudoClass implements PseudoClass {
 			+ ")";
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return XPathSelectorFactory.createNoFilterSelector("[" + ENABLED_XPATH + "]");
 	}
 	

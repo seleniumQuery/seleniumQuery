@@ -19,19 +19,19 @@ public class HiddenPseudoClassTest {
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@Test(expected = RuntimeException.class)
+	@Test
 	public void hiddenPseudoClass() {
-		List<WebElement> xels = $.browser.getDefaultDriver().findElements(By.xpath("(//*[ancestor-or-self::*[contains(normalize-space(@style),'display: none') or contains(normalize-space(@style),'display:none')] or (count(ancestor-or-self::body) = 0 and local-name() != 'html')])"));
-		for (WebElement xel : xels) {
-			System.out.println("@# XEL: " + xel);
-		}
-		System.out.println("@#---------------------------");
-		
-		List<WebElement> findElements = $.browser.getDefaultDriver().findElements(By.id("hiddenByClass"));
-		System.out.println("@# FOUND: "+findElements);
-		System.out.println("@# is 1st visible: "+findElements.get(0).isDisplayed());
-		
-		System.out.println("@# EFFECTIVE XPATH: "+XPathSelectorCompilerService.compileSelectorList(null, ":hidden").toXPath());
+//		List<WebElement> xels = $.browser.getDefaultDriver().findElements(By.xpath("(//*[ancestor-or-self::*[contains(normalize-space(@style),'display: none') or contains(normalize-space(@style),'display:none')] or (count(ancestor-or-self::body) = 0 and local-name() != 'html')])"));
+//		for (WebElement xel : xels) {
+//			System.out.println("@# XEL: " + xel);
+//		}
+//		System.out.println("@#---------------------------");
+//		
+//		List<WebElement> findElements = $.browser.getDefaultDriver().findElements(By.id("hiddenByClass"));
+//		System.out.println("@# FOUND: "+findElements);
+//		System.out.println("@# is 1st visible: "+findElements.get(0).isDisplayed());
+//		
+//		System.out.println("@# EFFECTIVE XPATH: "+XPathSelectorCompilerService.compileSelectorList(":hidden").toXPath());
 		
 		List<WebElement> elements = $(":hidden").get();
 		

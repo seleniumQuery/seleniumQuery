@@ -40,7 +40,7 @@ public class UnknownConditionalCssSelector<T extends Condition> implements CssCo
 	}
 	
 	@Override
-	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, T condition) {
+	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, T condition) {
 		// if it is unknown, we can't convert it, so we simply ignore it
 		LOGGER.warn("CSS Selector Condition '"+condition+"' is unknown. Ignoring it.");
 		return XPathSelectorFactory.createFilterOnlySelector(ElementFilter.FILTER_NOTHING);

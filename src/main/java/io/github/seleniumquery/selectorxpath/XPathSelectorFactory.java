@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectorxpath;
 
 import io.github.seleniumquery.locator.ElementFilter;
-import org.w3c.css.sac.Selector;
+import io.github.seleniumquery.locator.filter.ElementFilterList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,16 +39,9 @@ public class XPathSelectorFactory {
 		return create(selector, ElementFilter.FILTER_NOTHING);
 	}
 
-	/**
-	 * Creates a compiled selector that does no filtering, meaning
-	 * it is entirely supported by the driver.
-	 */
-	public static XPathExpression createNoFilterSelector(Selector selector) {
-		return createNoFilterSelector(selector.toString());
-	}
-
 	public static XPathExpression create(String selector, ElementFilter filter) {
-        return new XPathExpression(selector, elementFilterList(filter));
+        List<ElementFilter> elementFilterList = elementFilterList(filter);
+		return new XPathExpression(selector, new ElementFilterList(elementFilterList));
 	}
 
     private static List<ElementFilter> elementFilterList(ElementFilter filter) {
