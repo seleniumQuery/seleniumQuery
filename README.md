@@ -28,9 +28,7 @@ Built using Selenium WebDriver's native capabilities **only**:
     - Doesn't matter if the page uses jQuery or not (or even if the JavaScript global variable `$` is other library like `Prototype.js`).
 - Capable of handling/testing **JavaScript-disabled pages**
     - Test pages that use [Unobtrusive JavaScript!](http://en.wikipedia.org/wiki/Unobtrusive_JavaScript)
-    - Most functions don't even require a browser/driver with JavaScript enabled!
-        - Exceptions are functions like `.trigger()` which naturally require JavaScript to execute and some that don't have "human-user" equivalent, like `.html()`, in the sense that ordinary users don't generally care about the HTML of the page.
-
+    - Most functions don't even require the browser/driver to have JavaScript enabled!
 
 ##Quickstart: A running example
 
@@ -184,7 +182,9 @@ Currently, most selectors both from CSS3 and jQuery extensions are supported, bu
 It is worth noting that, in seleniumQuery, all CSS Selectors are translated to XPath before execution by the browser. This 
 way, most of extended selectors won't result in a performance hit, as happens with jQuery. On the other hand, some may.
 
+#Supported functions
 
+seleniumQuery aims to implement all relevant jQuery functions, as well as including some particular ones.
 
 #Supported jQuery Functions
 
