@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 /**
  * http://api.jquery.com/button-selector/
  * 
- * @since 1.0.0
  * @author acdcjunior
+ * @since 1.0.0
  */
 public class ButtonPseudoClass implements PseudoClass {
 	
@@ -46,7 +46,7 @@ public class ButtonPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[(name() = 'input' and @type = 'button') or name() = 'button']");
+		return XPathSelectorFactory.createNoFilterSelector("[(local-name() = 'input' and @type = 'button') or local-name() = 'button']");
 	}
 	
 }

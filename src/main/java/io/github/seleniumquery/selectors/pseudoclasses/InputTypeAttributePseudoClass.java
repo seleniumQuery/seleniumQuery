@@ -12,8 +12,8 @@ import org.openqa.selenium.WebElement;
  * This represents the pseudoclasses that check for the type attribute, such as
  * <code>:password</code>, that is equivalent to <code>[type="password"]</code>.
  * 
- * @since 1.0.0
  * @author acdcjunior
+ * @since 1.0.0
  */
 class InputTypeAttributePseudoClass implements PseudoClass {
 	
@@ -46,7 +46,7 @@ class InputTypeAttributePseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[name() = 'input' and @type = '"+typeAttributeValue+"']");
+		return XPathSelectorFactory.createNoFilterSelector("[local-name() = 'input' and @type = '"+typeAttributeValue+"']");
 	}
 	
 }

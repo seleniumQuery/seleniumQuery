@@ -76,9 +76,9 @@ public class XPathExpression implements Locator {
 			throw new RuntimeException("This should not happen!");
 		}
 		if (!"*".equals(this.xPathExpression)) {
-			this.xPathExpression = "[name() = '"+this.xPathExpression+"']";
+			this.xPathExpression = "[local-name() = '"+this.xPathExpression+"']";
 		} else {
-			this.xPathExpression = "[name()]";
+			this.xPathExpression = "[local-name()]";
 		}
 		for (XPathExpression other : otherExpressions) {
 			mergeExpression(other);

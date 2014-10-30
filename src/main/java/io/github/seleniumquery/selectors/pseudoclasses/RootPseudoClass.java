@@ -43,7 +43,7 @@ public class RootPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[name() = 'html']");
+		return XPathSelectorFactory.createNoFilterSelector("[local-name() = 'html']");
 	}
 	
 }

@@ -14,11 +14,22 @@ import org.openqa.selenium.WebElement;
 /**
  * http://api.jquery.com/header-selector/
  * 
- * @since 1.0.0
  * @author acdcjunior
+ * @since 1.0.0
  */
 public class HeaderPseudoClass implements PseudoClass {
 	
+	private static final String HX_XPATH = "[(local-name() = 'h0' or "
+											+ "local-name() = 'h1' or "
+											+ "local-name() = 'h2' or "
+											+ "local-name() = 'h3' or "
+											+ "local-name() = 'h4' or "
+											+ "local-name() = 'h5' or "
+											+ "local-name() = 'h6' or "
+											+ "local-name() = 'h7' or "
+											+ "local-name() = 'h8' or "
+											+ "local-name() = 'h9')]";
+
 	private static final HeaderPseudoClass instance = new HeaderPseudoClass();
 	public static HeaderPseudoClass getInstance() {
 		return instance;
@@ -48,8 +59,7 @@ public class HeaderPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[(name() = 'h0' or name() = 'h1' or name() = 'h2' or name() = 'h3' or name() = 'h4'"
-				+ " or name() = 'h5' or name() = 'h6' or name() = 'h7' or name() = 'h8' or name() = 'h9')]");
+		return XPathSelectorFactory.createNoFilterSelector(HX_XPATH);
 	}
 	
 }

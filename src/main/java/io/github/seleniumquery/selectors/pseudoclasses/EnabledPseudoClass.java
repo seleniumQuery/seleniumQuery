@@ -64,13 +64,13 @@ public class EnabledPseudoClass implements PseudoClass {
 	
 	public static final String ENABLED_XPATH = "("
 			+ "not(@disabled) and "
-			+ "(name() = 'input' or "
-			+ "name() = 'button' or "
-			+ "name() = 'optgroup' or "
-			+ "name() = 'option' or "
-			+ "name() = 'select' or "
-			+ "name() = 'textarea') "
-			+ " and (name() != 'option' or not(ancestor::select[@disabled]))"
+			+ "(local-name() = 'input' or "
+			+ "local-name() = 'button' or "
+			+ "local-name() = 'optgroup' or "
+			+ "local-name() = 'option' or "
+			+ "local-name() = 'select' or "
+			+ "local-name() = 'textarea') "
+			+ " and (local-name() != 'option' or not(ancestor::select[@disabled]))"
 			+ ")";
 	
 	@Override

@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 /**
  * http://api.jquery.com/reset-selector/
  * 
- * @since 1.0.0
  * @author acdcjunior
+ * @since 1.0.0
  */
 public class ResetPseudoClass implements PseudoClass {
 	
@@ -44,7 +44,7 @@ public class ResetPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[(name() = 'input' or name() = 'button') and @type = 'reset']");
+		return XPathSelectorFactory.createNoFilterSelector("[(local-name() = 'input' or local-name() = 'button') and @type = 'reset']");
 	}
 	
 }
