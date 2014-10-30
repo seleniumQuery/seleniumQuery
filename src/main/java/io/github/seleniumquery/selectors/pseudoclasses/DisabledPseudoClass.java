@@ -63,7 +63,7 @@ public class DisabledPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return XPathSelectorFactory.createNoFilterSelector("[(@disabled and "
 				+ "(local-name() = 'input' or "
 				+ "local-name() = 'button' or "

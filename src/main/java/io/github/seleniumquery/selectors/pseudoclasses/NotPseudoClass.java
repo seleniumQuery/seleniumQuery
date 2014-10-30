@@ -44,9 +44,9 @@ public class NotPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
-		String insideNotXPath = XPathSelectorCompilerService.compileSelectorList(driver, notSelector).toXPathCondition();
+		String insideNotXPath = XPathSelectorCompilerService.compileSelectorList(notSelector).toXPathCondition();
 		return XPathSelectorFactory.createNoFilterSelector("[not("+insideNotXPath+")]");
 	}
 	

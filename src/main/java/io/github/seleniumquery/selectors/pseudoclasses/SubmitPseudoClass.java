@@ -53,7 +53,7 @@ public class SubmitPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return XPathSelectorFactory.createNoFilterSelector("[("
 				+ "(local-name() = 'input' and @type = 'submit') or "
 				+ "(local-name() = 'button' and (@type = 'submit' or not(@type)) )"

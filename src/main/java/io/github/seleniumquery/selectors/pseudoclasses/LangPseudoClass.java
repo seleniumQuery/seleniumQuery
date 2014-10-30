@@ -40,7 +40,7 @@ public class LangPseudoClass implements PseudoClass {
 		return CompiledCssSelector.createFilterOnlySelector(langPseudoClassFilter);
 	}
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String wantedLang = pseudoClassSelector.getPseudoClassContent();
 		return XPathSelectorFactory.createNoFilterSelector("[ancestor-or-self::*[@lang][1]/@lang = '"+wantedLang+"']");
 	}

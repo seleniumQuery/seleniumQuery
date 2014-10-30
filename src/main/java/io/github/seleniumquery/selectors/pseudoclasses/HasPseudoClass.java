@@ -44,9 +44,9 @@ public class HasPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
-		String insideHasXPath = XPathSelectorCompilerService.compileSelectorList(driver, notSelector).toXPath();
+		String insideHasXPath = XPathSelectorCompilerService.compileSelectorList(notSelector).toXPath();
 		insideHasXPath = insideHasXPath.substring(1, insideHasXPath.length()-1);
 		return XPathSelectorFactory.createNoFilterSelector("["+insideHasXPath+"]");
 	}

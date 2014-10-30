@@ -47,7 +47,7 @@ public class EndsWithAttributeCssSelector implements CssConditionalSelector<Attr
 	}
 	
 	@Override
-	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String attrValue = attributeCondition.getValue();
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attrValue);

@@ -36,7 +36,7 @@ public class ContainsPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String textToContain = pseudoClassSelector.getPseudoClassContent();
 		textToContain = SelectorUtils.unescapeString(textToContain);
 		String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);

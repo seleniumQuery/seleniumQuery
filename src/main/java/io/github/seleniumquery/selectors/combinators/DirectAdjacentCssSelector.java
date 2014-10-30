@@ -79,9 +79,9 @@ public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector> {
 	}
 
 	@Override
-	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		XPathExpression previousElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSelector());
-		XPathExpression siblingElementCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, siblingSelector.getSiblingSelector());
+	public XPathExpression toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		XPathExpression previousElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
+		XPathExpression siblingElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
 		
 		XPathExpression positionOne = XPathSelectorFactory.createNoFilterSelector("[position() = 1]");
 		siblingElementCompiled.combine(positionOne).kind = SqSelectorKind.ADJACENT;

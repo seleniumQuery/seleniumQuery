@@ -33,7 +33,7 @@ public class TagNameSelector implements CssSelector<ElementSelector> {
 	}
 
 	@Override
-	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, ElementSelector selector) {
+	public XPathExpression toXPath(Map<String, String> stringMap, ElementSelector selector) {
 		String tagName = selector.toString();
 		XPathExpression tagSelector = XPathSelectorFactory.createNoFilterSelector(tagName);
 		tagSelector.kind = SqSelectorKind.TAG;

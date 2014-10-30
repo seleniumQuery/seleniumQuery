@@ -81,9 +81,9 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	}
 	
 	@Override
-	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		XPathExpression elementCompiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getSimpleSelector());
-		XPathExpression parentCompiledSelector = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantSelector.getAncestorSelector());
+	public XPathExpression toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
+		XPathExpression elementCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getSimpleSelector());
+		XPathExpression parentCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
 		
 		elementCompiledSelector.kind = SqSelectorKind.DESCENDANT_DIRECT;
 		return parentCompiledSelector.combine(elementCompiledSelector);

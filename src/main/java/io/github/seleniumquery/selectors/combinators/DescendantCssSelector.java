@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.DescendantSelector;
@@ -101,63 +100,15 @@ public class DescendantCssSelector implements CssSelector<DescendantSelector> {
 	}
 
 	@Override
-	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, DescendantSelector descendantSelector) {
+	public XPathExpression toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
 		Selector ancestorCSSSelector = descendantSelector.getAncestorSelector();
-		XPathExpression ancestorCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, ancestorCSSSelector);
+		XPathExpression ancestorCompiled = XPathSelectorCompilerService.compileSelector(stringMap, ancestorCSSSelector);
 		
 		SimpleSelector descendantCSSSelector = descendantSelector.getSimpleSelector();
-		XPathExpression childrenCompiled = XPathSelectorCompilerService.compileSelector(driver, stringMap, descendantCSSSelector);
+		XPathExpression childrenCompiled = XPathSelectorCompilerService.compileSelector(stringMap, descendantCSSSelector);
 		childrenCompiled.kind = SqSelectorKind.DESCENDANT_GENERAL;
 		
 		return ancestorCompiled.combine(childrenCompiled);
 	}
 	
-	private static final class DescendantXPathFilter implements ElementFilter {
-		private final XPathExpression ancestorCompiled;
-		private final XPathExpression childrenCompiled;
-		
-		private DescendantXPathFilter(XPathExpression ancestorCompiled, XPathExpression childrenCompiled) {
-			this.ancestorCompiled = ancestorCompiled;
-			this.childrenCompiled = childrenCompiled;
-		}
-		
-		@Override
-		public List<WebElement> filterElements(WebDriver driver, List<WebElement> elements) {
-			List<WebElement> filteredElements = childrenCompiled.filter(driver, elements);
-			
-			outerFor:for (Iterator<WebElement> iterator = filteredElements.iterator(); iterator.hasNext();) {
-				WebElement element = iterator.next();
-				
-				// closest() starts in the element, we dont want that because we are testing the parent on the descendant selector
-				WebElement startingElement = SelectorUtils.parent(element);
-				
-				String cssSelector = null;// ancestorCompiled.getCssSelector();
-				WebElement matchingAncestor = ClosestFunction.closest(driver, startingElement, cssSelector);
-				while (matchingAncestor != null) {
-					
-					List<WebElement> mas = ancestorCompiled.filter(driver, new ArrayList<WebElement>(Arrays.asList(matchingAncestor)));
-					boolean theMatchedAncestorMatchesTheFilter = !mas.isEmpty();
-					if (theMatchedAncestorMatchesTheFilter) {
-						continue outerFor; // this element's ancestor is ok, keep it, continue to next element
-					}
-					
-					// walks up one step, otherwise closest will match the same element again
-					matchingAncestor = SelectorUtils.parent(matchingAncestor);
-					
-					matchingAncestor = ClosestFunction.closest(driver, matchingAncestor, cssSelector);
-				}
-				iterator.remove();
-			}
-			return filteredElements;
-		}
-	}
-	
-	public static List<WebElement> parents(WebElement element, XPathExpression selector) {
-		return parentz(element, selector.toXPathCondition());
-	}
-	
-	private static List<WebElement> parentz(WebElement element, String xPathCondition) {
-		return element.findElements(By.xpath("ancestor::node()[count(ancestor-or-self::html) > 0 and " + xPathCondition.substring(1)));
-	}
-
 }

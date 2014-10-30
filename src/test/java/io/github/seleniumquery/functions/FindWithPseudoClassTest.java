@@ -23,7 +23,7 @@ public class FindWithPseudoClassTest {
     
 	@Test
 	public void find_function_with_pseudo_optionChecked_COMPILATION() {
-		XPathExpressionList compileSelectorList = XPathSelectorCompilerService.compileSelectorList(null, "option:checked");
+		XPathExpressionList compileSelectorList = XPathSelectorCompilerService.compileSelectorList("option:checked");
 		String x = "(.//option[((local-name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) or (local-name() = 'option' and @selected))])";
 		assertThat(compileSelectorList.toXPath(), is(x));
 	}

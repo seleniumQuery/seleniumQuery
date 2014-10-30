@@ -51,7 +51,7 @@ public class IdAttributeCssSelector implements CssConditionalSelector<AttributeC
 	}
 
 	@Override
-	public XPathExpression conditionToXPath(WebDriver driver, Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedId = attributeCondition.getValue();
 		return XPathSelectorFactory.createNoFilterSelector("[@id = '"+wantedId+"']");
 	}

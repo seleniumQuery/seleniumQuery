@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * @see http://api.jqueryui.com/focusable-selector/
+ * @ see http://api.jqueryui.com/focusable-selector/
  * 
  * Some elements are natively focusable, while others require explicitly setting a tab index. In all cases, the element must be visible in order to be focusable.
  * 
@@ -86,10 +86,9 @@ public class FocusablePseudoClass implements PseudoClass {
 			+ ")";
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		if (!Object.class.equals("always run")) {
-			throw new UnsupportedPseudoClassException(":focusable");
-		}
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":focusable");
+		
 		// #no-xpath
 		System.err.println(":focusable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
 		return XPathSelectorFactory.createNoFilterSelector("[" + FOCUSABLE_XPATH + "]");

@@ -116,7 +116,7 @@ public class SeleniumQueryBy extends By {
 			return compileSelectorList.execute(context);
 		}
 		
-		XPathExpressionList xPathLocator = XPathSelectorCompilerService.compileSelectorList(driver, this.selector);
+		XPathExpressionList xPathLocator = XPathSelectorCompilerService.compileSelectorList(this.selector);
 		return xPathLocator.findWebElements(context);
 	}
 

@@ -1,6 +1,5 @@
 package io.github.seleniumquery.selectorxpath;
 
-
 public enum SqSelectorKind {
 	
 	/*
@@ -64,5 +63,5 @@ public enum SqSelectorKind {
 	 * @return The merged expression.
 	 */
 	public abstract String merge(String sourceXPathExpression, String otherXPathExpression);
-
+	
 }

@@ -37,7 +37,7 @@ public class FirstPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
+	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return XPathSelectorFactory.createNoFilterSelectorAppliedToAll("[position() = 1]");
 	}
 
