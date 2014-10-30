@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.locator.ElementFilter;
+import io.github.seleniumquery.selector.filter.ElementFilter;
 
 import java.util.Iterator;
 import java.util.List;

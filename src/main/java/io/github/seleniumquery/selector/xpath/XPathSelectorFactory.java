@@ -1,7 +1,7 @@
-package io.github.seleniumquery.selectorxpath;
+package io.github.seleniumquery.selector.xpath;
 
-import io.github.seleniumquery.locator.ElementFilter;
-import io.github.seleniumquery.locator.filter.ElementFilterList;
+import io.github.seleniumquery.selector.filter.ElementFilter;
+import io.github.seleniumquery.selector.filter.ElementFilterList;
 
 import java.util.ArrayList;
 import java.util.List;

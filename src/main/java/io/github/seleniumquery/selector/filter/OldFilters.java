@@ -1,7 +1,6 @@
-package io.github.seleniumquery.locator.filter;
+package io.github.seleniumquery.selector.filter;
 
 import io.github.seleniumquery.functions.ClosestFunction;
-import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 

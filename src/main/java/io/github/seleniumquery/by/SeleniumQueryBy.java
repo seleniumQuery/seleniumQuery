@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by;
 
-import io.github.seleniumquery.selectorxpath.XPathExpressionList;
-import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.selector.xpath.XPathExpressionList;
+import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
 
 import java.util.List;
 
