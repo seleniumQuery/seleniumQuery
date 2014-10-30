@@ -1,17 +1,22 @@
 package io.github.seleniumquery.selectorxpath;
 
 import io.github.seleniumquery.locator.ElementFilter;
+import org.w3c.css.sac.Selector;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import org.w3c.css.sac.Selector;
 
 public class XPathSelectorFactory {
 	
 	private final static String EMPTY_SELECTOR = ""; 
 
+	/**
+	 * Creates a XPath expression that is empty and filters nothing.
+	 */
+	public static XPathExpression createEmptyXPathExpression() {
+		return createFilterOnlySelector(ElementFilter.FILTER_NOTHING);
+	}
+	
 	/**
 	 * Creates a compiled selector that only does filtering, meaning
 	 * it is entirely NOT supported by the driver.
@@ -43,16 +48,16 @@ public class XPathSelectorFactory {
 	}
 
 	public static XPathExpression create(String selector, ElementFilter filter) {
-		
-		List<ElementFilter> filterList = null;
-		
-		if (filter == ElementFilter.FILTER_NOTHING) {
-			filterList = new ArrayList<ElementFilter>();
-		} else {
-			filterList = new ArrayList<ElementFilter>(Arrays.asList(filter));
-		}
-		
-		return new XPathExpression(selector, filterList);
+        return new XPathExpression(selector, elementFilterList(filter));
 	}
+
+    private static List<ElementFilter> elementFilterList(ElementFilter filter) {
+        if (filter == ElementFilter.FILTER_NOTHING) {
+            return new ArrayList<ElementFilter>();
+        }
+        ArrayList<ElementFilter> elementFilters = new ArrayList<ElementFilter>();
+        elementFilters.add(filter);
+        return elementFilters;
+    }
 
 }
