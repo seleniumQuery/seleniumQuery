@@ -48,7 +48,7 @@ public class SelectedPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[name() = 'option' and @selected]");
+		return XPathSelectorFactory.createNoFilterSelector("[local-name() = 'option' and @selected]");
 	}
 
 }

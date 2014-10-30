@@ -14,8 +14,8 @@ import org.openqa.selenium.WebElement;
 /**
  * http://api.jquery.com/input-selector/
  * 
- * @since 1.0.0
  * @author acdcjunior
+ * @since 1.0.0
  */
 public class InputPseudoClass implements PseudoClass {
 	
@@ -48,7 +48,7 @@ public class InputPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[(name() = 'input' or name() = 'button' or name() = 'select' or name() = 'textarea')]");
+		return XPathSelectorFactory.createNoFilterSelector("[(local-name() = 'input' or local-name() = 'button' or local-name() = 'select' or local-name() = 'textarea')]");
 	}
 	
 }

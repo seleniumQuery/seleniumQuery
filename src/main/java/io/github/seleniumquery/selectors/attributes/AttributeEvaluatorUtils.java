@@ -5,6 +5,12 @@ import io.github.seleniumquery.selectorcss.CompiledCssSelector;
 
 import org.w3c.css.sac.AttributeCondition;
 
+/**
+ * Utility methods for XPath/CSS attributes.
+ * 
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class AttributeEvaluatorUtils {
 
 	public static CompiledCssSelector createAttributeNoFilterCompiledSelector(AttributeCondition attributeCondition,
@@ -23,7 +29,7 @@ public class AttributeEvaluatorUtils {
 		// em queals or has era
 		String attributeName = attributeCondition.getLocalName();
 		if (!Character.isLetter(attributeName.charAt(0))) {
-			return "@*[name() = "+ SelectorUtils.intoEscapedXPathString(attributeName) +"]";
+			return "@*[local-name() = "+ SelectorUtils.intoEscapedXPathString(attributeName) +"]";
 		}
 		return "@"+ attributeName;
 	}

@@ -2,8 +2,6 @@ package io.github.seleniumquery.selectorxpath;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.selectorxpath.XPathExpressionList;
-import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
 
 import org.junit.Test;
 
@@ -137,7 +135,7 @@ public class XPathSelectorCompilerServiceTest {
 	@Test
 	public void not_all() {
 		XPathExpressionList compileSelectorList = XPathSelectorCompilerService.compileSelectorList(null, "*:not(*)");
-		assertThat(compileSelectorList.toXPath(), is("(.//*[not((name()))])"));
+		assertThat(compileSelectorList.toXPath(), is("(.//*[not((local-name()))])"));
 	}
 	
 	@Test
@@ -147,7 +145,7 @@ public class XPathSelectorCompilerServiceTest {
 				"("
 						+ ".//div["
 						+ "not("
-									+ "(name() and contains(concat(' ', normalize-space(@class), ' '), ' c3 ')) or (name() and contains(concat(' ', normalize-space(@class), ' '), ' c1 '))"
+									+ "(local-name() and contains(concat(' ', normalize-space(@class), ' '), ' c3 ')) or (local-name() and contains(concat(' ', normalize-space(@class), ' '), ' c1 '))"
 							+ ")"
 						+ "]"
 				+ ")"));

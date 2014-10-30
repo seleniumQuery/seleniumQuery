@@ -21,7 +21,7 @@ public class HiddenPseudoClassTest {
 	
 	@Test(expected = RuntimeException.class)
 	public void hiddenPseudoClass() {
-		List<WebElement> xels = $.browser.getDefaultDriver().findElements(By.xpath("(//*[ancestor-or-self::*[contains(normalize-space(@style),'display: none') or contains(normalize-space(@style),'display:none')] or (count(ancestor-or-self::body) = 0 and name() != 'html')])"));
+		List<WebElement> xels = $.browser.getDefaultDriver().findElements(By.xpath("(//*[ancestor-or-self::*[contains(normalize-space(@style),'display: none') or contains(normalize-space(@style),'display:none')] or (count(ancestor-or-self::body) = 0 and local-name() != 'html')])"));
 		for (WebElement xel : xels) {
 			System.out.println("@# XEL: " + xel);
 		}

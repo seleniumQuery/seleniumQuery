@@ -54,9 +54,9 @@ public enum SqSelectorKind {
 		@Override
 		public String merge(String sourceXPathExpression, String otherXPathExpression) {
 			if ("*".equals(otherXPathExpression)) {
-				return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, "[name()]");
+				return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, "[local-name()]");
 			}
-			return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, "[name() = '"+otherXPathExpression+"']");
+			return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, "[local-name() = '"+otherXPathExpression+"']");
 		}
 	};
 	

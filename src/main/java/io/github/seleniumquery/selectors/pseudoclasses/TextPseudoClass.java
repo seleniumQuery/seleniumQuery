@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 /**
  * http://api.jquery.com/text-selector/
  * 
- * @since 1.0.0
  * @author acdcjunior
+ * @since 1.0.0
  */
 class TextPseudoClass implements PseudoClass {
 	
@@ -44,7 +44,7 @@ class TextPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[name() = 'input' and (@type = 'text' or not([@type]))]");
+		return XPathSelectorFactory.createNoFilterSelector("[local-name() = 'input' and (@type = 'text' or not([@type]))]");
 	}
 	
 }

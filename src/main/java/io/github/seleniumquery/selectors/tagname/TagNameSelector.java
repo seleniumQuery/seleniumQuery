@@ -41,7 +41,7 @@ public class TagNameSelector implements CssSelector<ElementSelector> {
 //		if ("*".equals(tagName)) {
 //			return XPathSelectorFactory.createNoFilterSelector("");
 //		}
-//		return XPathSelectorFactory.createNoFilterSelector("[name() = '"+selector+"']");
+//		return XPathSelectorFactory.createNoFilterSelector("[local-name() = '"+selector+"']");
 	}
 
 }

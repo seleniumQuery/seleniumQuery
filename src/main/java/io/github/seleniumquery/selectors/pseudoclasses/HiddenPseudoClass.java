@@ -44,7 +44,7 @@ public class HiddenPseudoClass implements PseudoClass {
 			// element or ancestor has a class (the style of the class will be checked by the filter)
 			+ " or ancestor-or-self::*[@class] "
 			// it is not under body (and is not <html> itself)
-			+ " or (count(ancestor-or-self::body) = 0 and name() != 'html')"
+			+ " or (count(ancestor-or-self::body) = 0 and local-name() != 'html')"
 			+ ")";
 	
 	@Override

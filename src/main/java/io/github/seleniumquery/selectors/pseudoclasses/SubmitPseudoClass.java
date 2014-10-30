@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 /**
  * http://api.jquery.com/submit-selector/
  * 
- * @since 1.0.0
  * @author acdcjunior
+ * @since 1.0.0
  */
 public class SubmitPseudoClass implements PseudoClass {
 	
@@ -55,8 +55,8 @@ public class SubmitPseudoClass implements PseudoClass {
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
 		return XPathSelectorFactory.createNoFilterSelector("[("
-				+ "(name() = 'input' and @type = 'submit') or "
-				+ "(name() = 'button' and (@type = 'submit' or not(@type)) )"
+				+ "(local-name() = 'input' and @type = 'submit') or "
+				+ "(local-name() = 'button' and (@type = 'submit' or not(@type)) )"
 				+ ")]");
 	}
 	
