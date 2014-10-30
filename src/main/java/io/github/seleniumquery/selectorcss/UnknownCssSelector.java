@@ -39,7 +39,7 @@ public class UnknownCssSelector<T> implements CssSelector<T> {
 	public XPathExpression toXPath(WebDriver driver, Map<String, String> stringMap, T selector) {
 		// if it is unknown, we can't convert it, so we simply ignore it
 		LOGGER.warn("CSS Selector '"+selector+"' is unknown. Ignoring it.");
-		return XPathSelectorFactory.createFilterOnlySelector(ElementFilter.FILTER_NOTHING);
+		return XPathSelectorFactory.createEmptyXPathExpression();
 	}
 	
 }
