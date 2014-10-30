@@ -1,12 +1,12 @@
 package io.github.seleniumquery.selectors.combinators;
 
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.xpath.SqSelectorKind;
+import io.github.seleniumquery.selector.xpath.XPathExpression;
+import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
 import io.github.seleniumquery.selectorcss.CssSelector;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
-import io.github.seleniumquery.selectorxpath.SqSelectorKind;
-import io.github.seleniumquery.selectorxpath.XPathExpression;
-import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.selectorxpath.XPathSelectorFactory;
 
 import java.util.Map;
 

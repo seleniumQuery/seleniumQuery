@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selectorxpath;
+package io.github.seleniumquery.selector.xpath;
 
 public enum SqSelectorKind {
 	

@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectorcss;
 
-import io.github.seleniumquery.selectorxpath.XPathExpression;
+import io.github.seleniumquery.selector.xpath.XPathExpression;
 
 import java.util.Map;
 

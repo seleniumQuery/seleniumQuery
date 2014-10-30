@@ -1,6 +1,4 @@
-package io.github.seleniumquery.selectorxpath;
-
-import io.github.seleniumquery.locator.Locator;
+package io.github.seleniumquery.selector.xpath;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -19,7 +17,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @author ricardo-sc
  */
-public class XPathExpressionList implements Locator {
+public class XPathExpressionList {
 	
 	private static final String XPATH_EXPRESSION_OR = " | ";
 	private static final String XPATH_CONDITIONAL_OR = ") or (";
@@ -30,7 +28,6 @@ public class XPathExpressionList implements Locator {
 		this.xPathExpressions = xPathExpressions;
 	}
 	
-	@Override
 	public List<WebElement> findWebElements(SearchContext context) {
 		Set<WebElement> elements = new LinkedHashSet<WebElement>();
 		for (XPathExpression xPathExpression : xPathExpressions) {

@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.selectorxpath.XPathExpression;
+import io.github.seleniumquery.selector.xpath.XPathExpression;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -1,6 +1,5 @@
-package io.github.seleniumquery.locator.filter;
+package io.github.seleniumquery.selector.filter;
 
-import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selectors.pseudoclasses.UnsupportedPseudoClassException;
 
 import java.util.List;

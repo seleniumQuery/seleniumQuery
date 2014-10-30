@@ -1,6 +1,6 @@
-package io.github.seleniumquery.locator.filter;
+package io.github.seleniumquery.selector.filter;
 
-import io.github.seleniumquery.selectorxpath.SqSelectorKind;
+import io.github.seleniumquery.selector.xpath.SqSelectorKind;
 
 import org.openqa.selenium.WebElement;
 

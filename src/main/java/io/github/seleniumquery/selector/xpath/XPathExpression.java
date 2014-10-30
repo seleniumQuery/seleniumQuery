@@ -1,9 +1,8 @@
-package io.github.seleniumquery.selectorxpath;
+package io.github.seleniumquery.selector.xpath;
 
-import io.github.seleniumquery.locator.Locator;
-import io.github.seleniumquery.locator.filter.ElementFilterList;
-import io.github.seleniumquery.locator.filter.ElementFilterListCombinator;
 import io.github.seleniumquery.selector.SelectorUtils;
+import io.github.seleniumquery.selector.filter.ElementFilterList;
+import io.github.seleniumquery.selector.filter.ElementFilterListCombinator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class XPathExpression implements Locator {
+public class XPathExpression {
 
 	private String xPathExpression;
 	private List<XPathExpression> otherExpressions = new ArrayList<XPathExpression>();
@@ -34,7 +33,6 @@ public class XPathExpression implements Locator {
 		return "[XPath: \""+xPathExpression+"\", kind: "+kind+", otherExps: "+otherExpressions+", filter: "+elementFilterList+"]";
 	}
 	
-	@Override
 	public List<WebElement> findWebElements(SearchContext context) {
 		String finalXPathExpression = this.toXPath();
 		List<WebElement> elements = new By.ByXPath(finalXPathExpression).findElements(context);

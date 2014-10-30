@@ -1,9 +1,8 @@
-package io.github.seleniumquery.locator.filter;
+package io.github.seleniumquery.selector.filter;
 
 import io.github.seleniumquery.functions.ClosestFunction;
-import io.github.seleniumquery.locator.ElementFilter;
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selectorxpath.XPathExpression;
+import io.github.seleniumquery.selector.xpath.XPathExpression;
 
 import java.util.ArrayList;
 import java.util.Arrays;

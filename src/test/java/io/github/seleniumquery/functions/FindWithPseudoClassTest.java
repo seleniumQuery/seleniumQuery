@@ -4,8 +4,8 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SetUpAndTearDownDriver;
-import io.github.seleniumquery.selectorxpath.XPathExpressionList;
-import io.github.seleniumquery.selectorxpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.selector.xpath.XPathExpressionList;
+import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
 
 import org.junit.Rule;
 import org.junit.Test;
