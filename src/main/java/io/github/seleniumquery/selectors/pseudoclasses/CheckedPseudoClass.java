@@ -66,7 +66,7 @@ public class CheckedPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(WebDriver driver, PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[((name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) or (name() = 'option' and @selected))]");
+		return XPathSelectorFactory.createNoFilterSelector("[((local-name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) or (local-name() = 'option' and @selected))]");
 	}
 
 }
