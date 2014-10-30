@@ -173,6 +173,8 @@ jQuery("input.street").val("5th St!");
 
 #CSS and jQuery Extension Selectors
 
+[Full list of supported selectors.](docs/SUPPORTED-SELECTORS.md)
+
 Our aim is to implement all CSS3 and jQuery (Sizzle) extension selectors.
  
 Currently, most selectors both from CSS3 and jQuery extensions are supported, but not all. E.g.:
@@ -187,6 +189,8 @@ way, most of extended selectors won't result in a performance hit, as happens wi
 seleniumQuery aims to implement all relevant jQuery functions, as well as including some particular ones.
 
 #Supported jQuery Functions
+
+[Full list of supported functions.](docs/SUPPORTED-FUNCTIONS.md)
 
 As seleniumQuery main goals are emulating user actions and "sensing" the pages, currently our intention is to implement functions that read (that's what we mean by "sense") the state of the page plus those that manipulate forms.
 
