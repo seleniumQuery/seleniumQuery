@@ -10,13 +10,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :parent
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class ParentPseudoClass implements PseudoClass {
-	
-	private static final ParentPseudoClass instance = new ParentPseudoClass();
-	public static ParentPseudoClass getInstance() {
-		return instance;
-	}
-	private ParentPseudoClass() { }
 	
 	private static final Log LOGGER = LogFactory.getLog(ParentPseudoClass.class);
 	
@@ -41,7 +41,12 @@ public class ParentPseudoClass implements PseudoClass {
 		}
 		return isParent;
 	}
-	
+
+    /**
+     * Tests if the element has any children.
+     * @param element The element to be checked if it is a parent.
+     * @return true if the element is a parent (has children), false otherwise.
+     */
 	boolean isParent(WebElement element) {
 		return !element.findElements(By.xpath("self::node()[count(node()) > 0]")).isEmpty();
 	}

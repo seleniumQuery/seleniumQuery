@@ -17,12 +17,6 @@ import org.openqa.selenium.WebElement;
  */
 public class InputPseudoClass implements PseudoClass {
 	
-	private static final InputPseudoClass instance = new InputPseudoClass();
-	public static InputPseudoClass getInstance() {
-		return instance;
-	}
-	private InputPseudoClass() { }
-	
 	private static final List<String> FORM_ELEMENT_TAGS = Arrays.asList("input", "button", "select", "textarea");
 	
 	private static final String INPUT = "input";

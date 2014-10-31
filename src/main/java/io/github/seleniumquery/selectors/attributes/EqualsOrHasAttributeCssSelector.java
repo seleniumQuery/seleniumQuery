@@ -14,9 +14,11 @@ import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
 /**
+ * [simple]
+ * [restart="never"]
+ *
  * #Cross-Driver
- * 
- * Who knows why, HtmlUnitDriver, while emulating IE, bugs on the selector: [title="a\\tc"]
+  * Who knows why, HtmlUnitDriver, while emulating IE, bugs on the selector: [title="a\\tc"]
  * So we should never allow HtmlUnitDriver+Emulating IE to handle attribute selectors natively...
  * 
  * @author acdcjunior
@@ -24,14 +26,6 @@ import org.w3c.css.sac.Selector;
  */
 public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final EqualsOrHasAttributeCssSelector instance = new EqualsOrHasAttributeCssSelector();
-
-	public static EqualsOrHasAttributeCssSelector getInstance() {
-		return instance;
-	}
-	
-	private EqualsOrHasAttributeCssSelector() { }
-	
 	public static final String EQUALS_ATTRIBUTE_SELECTOR_SYMBOL = "=";
 
 	/**

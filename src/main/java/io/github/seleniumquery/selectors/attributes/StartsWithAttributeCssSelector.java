@@ -13,15 +13,14 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
+/**
+ * [attribute^=stringToStart]
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class StartsWithAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final StartsWithAttributeCssSelector instance = new StartsWithAttributeCssSelector();
-	public static StartsWithAttributeCssSelector getInstance() {
-		return instance;
-	}
-	private StartsWithAttributeCssSelector() { }
-	
-	
 	public static final String STARTS_WITH_ATTRIBUTE_SELECTOR_SYMBOL = "^=";
 
 	/**

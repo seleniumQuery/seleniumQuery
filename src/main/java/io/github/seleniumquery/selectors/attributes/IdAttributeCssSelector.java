@@ -12,16 +12,15 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
+/**
+ * #id
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class IdAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
 	private static final String ID_ATTRIBUTE = "id";
-	private static final IdAttributeCssSelector instance = new IdAttributeCssSelector();
-
-	public static IdAttributeCssSelector getInstance() {
-		return instance;
-	}
-	
-	private IdAttributeCssSelector() { }
 
 	/**
 	 * @see {@link org.w3c.css.sac.Condition#SAC_ID_CONDITION}

@@ -14,12 +14,6 @@ import org.openqa.selenium.WebElement;
  */
 public class ResetPseudoClass implements PseudoClass {
 	
-	private static final ResetPseudoClass instance = new ResetPseudoClass();
-	public static ResetPseudoClass getInstance() {
-		return instance;
-	}
-	private ResetPseudoClass() { }
-	
 	private static final String RESET = "reset";
 	
 	@Override

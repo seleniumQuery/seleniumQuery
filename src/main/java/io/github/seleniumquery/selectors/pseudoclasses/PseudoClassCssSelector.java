@@ -12,28 +12,28 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
+/**
+ * :pseudo-classes(optionalparameters)
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class PseudoClassCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final PseudoClassCssSelector instance = new PseudoClassCssSelector();
-	public static PseudoClassCssSelector getInstance() {
-		return instance;
-	}
-	private PseudoClassCssSelector() { }
-	
-	private final List<PseudoClass> pseudoClasses = Arrays.asList(CheckedPseudoClass.getInstance(),
-			SelectedPseudoClass.getInstance(), EqPseudoClass.getInstance(), OnlyChildPseudoClass.getInstance(),
-			ContainsPseudoClass.getInstance(), FirstChildPseudoClass.getInstance(), NotPseudoClass.getInstance(),
-			OnlyOfTypePseudoClass.getInstance(), RootPseudoClass.getInstance(), PresentPseudoClass.getInstance(),
-			EnabledPseudoClass.getInstance(), DisabledPseudoClass.getInstance(), VisiblePseudoClass.getInstance(),
-			HiddenPseudoClass.getInstance(), FirstPseudoClass.getInstance(), LastPseudoClass.getInstance(),
-			CheckboxPseudoClass.getInstance(), RadioPseudoClass.getInstance(), ImagePseudoClass.getInstance(),
-			PasswordPseudoClass.getInstance(), FilePseudoClass.getInstance(), SubmitPseudoClass.getInstance(),
-			ResetPseudoClass.getInstance(), ButtonPseudoClass.getInstance(), InputPseudoClass.getInstance(),
-			HeaderPseudoClass.getInstance(), LtPseudoClass.getInstance(), GtPseudoClass.getInstance(),
-			FocusPseudoClass.getInstance(), FocusablePseudoClass.getInstance(), TabbablePseudoClass.getInstance(),
-			HasPseudoClass.getInstance(), LangPseudoClass.getInstance(), ParentPseudoClass.getInstance(),
-			EmptyPseudoClass.getInstance(), TextPseudoClass.getInstance(), EvenPseudoClass.getInstance(),
-			OddPseudoClass.getInstance());
+	private final List<PseudoClass> pseudoClasses = Arrays.asList(new CheckedPseudoClass(),
+			new SelectedPseudoClass(), new EqPseudoClass(), new OnlyChildPseudoClass(),
+			new ContainsPseudoClass(), new FirstChildPseudoClass(), new NotPseudoClass(),
+			new OnlyOfTypePseudoClass(), new RootPseudoClass(), new PresentPseudoClass(),
+			new EnabledPseudoClass(), new DisabledPseudoClass(), new VisiblePseudoClass(),
+			new HiddenPseudoClass(), new FirstPseudoClass(), new LastPseudoClass(),
+			new CheckboxPseudoClass(), new RadioPseudoClass(), new ImagePseudoClass(),
+			new PasswordPseudoClass(), new FilePseudoClass(), new SubmitPseudoClass(),
+			new ResetPseudoClass(), new ButtonPseudoClass(), new InputPseudoClass(),
+			new HeaderPseudoClass(), new LtPseudoClass(), new GtPseudoClass(),
+			new FocusPseudoClass(), new FocusablePseudoClass(), new TabbablePseudoClass(),
+			new HasPseudoClass(), new LangPseudoClass(), new ParentPseudoClass(),
+			new EmptyPseudoClass(), new TextPseudoClass(), new EvenPseudoClass(),
+			new OddPseudoClass());
 
 	@Override
 	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {

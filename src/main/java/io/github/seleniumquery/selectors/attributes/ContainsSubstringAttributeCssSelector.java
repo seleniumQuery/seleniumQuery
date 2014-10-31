@@ -13,22 +13,20 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
+/**
+ * [attribute*=stringToContain]
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class ContainsSubstringAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
-
-	private static final ContainsSubstringAttributeCssSelector instance = new ContainsSubstringAttributeCssSelector();
-
-	public static ContainsSubstringAttributeCssSelector getInstance() {
-		return instance;
-	}
-	
-	private ContainsSubstringAttributeCssSelector() { }
 
 	/**
 	 * Currently it is (mistakenly?) mapped to the type {@link org.w3c.css.sac.Condition#SAC_ATTRIBUTE_CONDITION}.
 	 * The factory then inspects the actual type and redirects here.
 	 * 
 	 * This selector is:
-	 * [attribute*=stringToStart]
+	 * [attribute*=stringToContain]
 	 * 
 	 * CASE INsensitive!
 	 */

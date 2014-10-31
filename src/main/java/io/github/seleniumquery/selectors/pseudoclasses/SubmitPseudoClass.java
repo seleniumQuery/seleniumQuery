@@ -14,12 +14,6 @@ import org.openqa.selenium.WebElement;
  */
 public class SubmitPseudoClass implements PseudoClass {
 	
-	private static final SubmitPseudoClass instance = new SubmitPseudoClass();
-	public static SubmitPseudoClass getInstance() {
-		return instance;
-	}
-	private SubmitPseudoClass() { }
-	
 	private static final String SUBMIT = "submit";
 	private static final String INPUT = "input";
 	private static final String BUTTON = "button";

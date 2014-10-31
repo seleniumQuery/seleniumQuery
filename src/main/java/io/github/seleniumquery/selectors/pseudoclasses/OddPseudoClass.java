@@ -17,12 +17,6 @@ import org.openqa.selenium.WebElement;
  */
 public class OddPseudoClass implements PseudoClass {
 
-	private static final OddPseudoClass instance = new OddPseudoClass();
-	public static OddPseudoClass getInstance() {
-		return instance;
-	}
-	private OddPseudoClass() { }
-	
 	private static final String ODD_PSEUDO_CLASS_NO_COLON = "odd";
 	
 	@Override

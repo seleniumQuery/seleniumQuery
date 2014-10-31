@@ -15,14 +15,12 @@ import org.w3c.css.sac.ConditionalSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SimpleSelector;
 
+
 public class ConditionalCssSelector implements CssSelector<ConditionalSelector> {
-	
-	private static final ConditionalCssSelector instance = new ConditionalCssSelector();
-	public static ConditionalCssSelector getInstance() {
-		return instance;
-	}
-	
-	@Override
+
+    private final ConditionalCssSelectorFactory conditionalCssSelectorFactory = new ConditionalCssSelectorFactory();
+
+    @Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
@@ -44,13 +42,13 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector> 
 	 */
 	boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
 		@SuppressWarnings("unchecked")
-		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) ConditionalCssSelectorFactory.getInstance().getSelector(condition);
+		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) conditionalCssSelectorFactory.getSelector(condition);
 		return evaluator.isCondition(driver, element, stringMap, simpleSelector, condition);
 	}
 
 	XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
 		@SuppressWarnings("unchecked")
-		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) ConditionalCssSelectorFactory.getInstance().getSelector(condition);
+		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) conditionalCssSelectorFactory.getSelector(condition);
 		return evaluator.conditionToXPath(stringMap, simpleSelector, condition);
 	}
 

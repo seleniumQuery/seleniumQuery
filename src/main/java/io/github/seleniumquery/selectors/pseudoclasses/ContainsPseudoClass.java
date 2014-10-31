@@ -7,13 +7,13 @@ import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :contains()
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class ContainsPseudoClass implements PseudoClass {
-	
-	private static final ContainsPseudoClass instance = new ContainsPseudoClass();
-	public static ContainsPseudoClass getInstance() {
-		return instance;
-	}
-	private ContainsPseudoClass() { }
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {

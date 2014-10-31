@@ -8,6 +8,12 @@ import org.openqa.selenium.WebElement;
 import io.github.seleniumquery.SQLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 
+/**
+ * $("selector").eq(#)
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class EqFunction {
 	
 	// http://api.jquery.com/eq/
@@ -26,7 +32,7 @@ public class EqFunction {
 			}
 		}
 		
-		return SQLocalFactory.getInstance().create(seleniumQueryObject.getWebDriver(), selectorAtIndex,
+		return SQLocalFactory.create(seleniumQueryObject.getWebDriver(), selectorAtIndex,
 				eqElementList, seleniumQueryObject);
 	}
 

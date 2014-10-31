@@ -8,6 +8,12 @@ import io.github.seleniumquery.SQLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
 
+/**
+ * $("selector").find("selector")
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class FindFunction {
 
 	public static SeleniumQueryObject find(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String selector) {
@@ -17,7 +23,7 @@ public class FindFunction {
 			List<WebElement> elementsBelowThisElement = webElement.findElements(by);
 			allElementsBelow.addAll(elementsBelowThisElement);
 		}
-		return SQLocalFactory.getInstance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), allElementsBelow, seleniumQueryObject);
+		return SQLocalFactory.createWithInvalidSelector(seleniumQueryObject.getWebDriver(), allElementsBelow, seleniumQueryObject);
 	}
 
 }

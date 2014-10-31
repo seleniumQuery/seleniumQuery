@@ -9,13 +9,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :eq()
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class EqPseudoClass implements PseudoClass {
-
-	private static final EqPseudoClass instance = new EqPseudoClass();
-	public static EqPseudoClass getInstance() {
-		return instance;
-	}
-	private EqPseudoClass() { }
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {

@@ -14,12 +14,6 @@ import org.openqa.selenium.WebElement;
  */
 class TextPseudoClass implements PseudoClass {
 	
-	private static final TextPseudoClass instance = new TextPseudoClass();
-	public static TextPseudoClass getInstance() {
-		return instance;
-	}
-	private TextPseudoClass() { }
-	
 	private static final String TEXT_PSEUDO_CLASS_NO_COLON = "text";
 	
 	@Override

@@ -17,15 +17,12 @@ import org.openqa.selenium.WebElement;
  * #Cross-Driver
  * HtmlUnitDriver has problems with :disabled, so we consider it can never be handler by the browser
  * by "problems" we mean it is inconsistent, changing depending on what browser it is attempting to emulate
+ *
+ * @author acdcjunior
+ * @since 1.0.0
  */
 public class DisabledPseudoClass implements PseudoClass {
 
-	private static final DisabledPseudoClass instance = new DisabledPseudoClass();
-	public static DisabledPseudoClass getInstance() {
-		return instance;
-	}
-	private DisabledPseudoClass() { }
-	
 	private static final String DISABLED_PSEUDO_CLASS_NO_COLON = "disabled";
 	
 	private static final String OPTGROUP = "optgroup";

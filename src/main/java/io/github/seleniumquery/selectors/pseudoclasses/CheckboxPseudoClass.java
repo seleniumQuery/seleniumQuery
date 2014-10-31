@@ -2,16 +2,14 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 
 /**
  * http://api.jquery.com/checkbox-selector/
- * 
- * @since 1.0.0
+ *
  * @author acdcjunior
+ * @since 1.0.0
  */
-public class CheckboxPseudoClass {
-	
-	private static final PseudoClass instance = new InputTypeAttributePseudoClass("checkbox");
-	public static PseudoClass getInstance() {
-		return instance;
-	}
-	private CheckboxPseudoClass() { }
-	
+public class CheckboxPseudoClass extends InputTypeAttributePseudoClass {
+
+    public CheckboxPseudoClass() {
+        super("checkbox");
+    }
+
 }

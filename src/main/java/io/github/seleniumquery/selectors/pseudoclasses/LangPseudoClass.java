@@ -11,14 +11,9 @@ import org.openqa.selenium.WebElement;
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
  * 
  * @author acdcjunior
+ * @since 1.0.0
  */
 public class LangPseudoClass implements PseudoClass {
-	
-	private static final LangPseudoClass instance = new LangPseudoClass();
-	public static LangPseudoClass getInstance() {
-		return instance;
-	}
-	private LangPseudoClass() { }
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {

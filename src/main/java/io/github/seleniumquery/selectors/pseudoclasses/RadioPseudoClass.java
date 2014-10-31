@@ -6,12 +6,10 @@ package io.github.seleniumquery.selectors.pseudoclasses;
  * @since 1.0.0
  * @author acdcjunior
  */
-public class RadioPseudoClass {
+public class RadioPseudoClass extends InputTypeAttributePseudoClass {
 	
-	private static final PseudoClass instance = new InputTypeAttributePseudoClass("radio");
-	public static PseudoClass getInstance() {
-		return instance;
-	}
-	private RadioPseudoClass() { }
+	public RadioPseudoClass() {
+        super("radio");
+    }
 	
 }

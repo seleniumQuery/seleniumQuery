@@ -13,14 +13,13 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
+/**
+ * [values~="10"]
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class ContainsWordAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
-
-	private static final ContainsWordAttributeCssSelector instance = new ContainsWordAttributeCssSelector();
-	public static ContainsWordAttributeCssSelector getInstance() {
-		return instance;
-	}
-	private ContainsWordAttributeCssSelector() { }
-	
 
 	public static final String CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL = "~=";
 	

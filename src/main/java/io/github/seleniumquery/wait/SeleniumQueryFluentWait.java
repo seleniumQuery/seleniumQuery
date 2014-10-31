@@ -37,7 +37,7 @@ public class SeleniumQueryFluentWait {
 		final WebDriver driver = seleniumQueryObject.getWebDriver();
 		final SeleniumQueryBy by = seleniumQueryObject.getBy();
 		List<WebElement> elements = fluentWait(seleniumQueryObject, new WaitFunction<T>(driver, value, evaluator, by, negated), "to "+evaluator.stringFor(value));
-		return SQLocalFactory.getInstance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
+		return SQLocalFactory.createWithInvalidSelector(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
 	}
 
 	/**

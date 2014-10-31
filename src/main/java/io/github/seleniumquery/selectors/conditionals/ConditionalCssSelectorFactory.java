@@ -14,20 +14,28 @@ import io.github.seleniumquery.selectors.pseudoclasses.PseudoClassCssSelector;
 
 import org.w3c.css.sac.Condition;
 
+/**
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class ConditionalCssSelectorFactory {
 
-	private static final ConditionalCssSelectorFactory instance = new ConditionalCssSelectorFactory();
-	
-	public static ConditionalCssSelectorFactory getInstance() {
-		return instance;
-	}
-	
-	private ConditionalCssSelectorFactory() { }
+    private final AndConditionalCssSelector andConditionalCssSelector = new AndConditionalCssSelector();
+    private final StartsWithAttributeCssSelector startsWithAttributeCssSelector = new StartsWithAttributeCssSelector();
+    private final EndsWithAttributeCssSelector endsWithAttributeCssSelector = new EndsWithAttributeCssSelector();
+    private final ContainsSubstringAttributeCssSelector containsSubstringAttributeCssSelector = new ContainsSubstringAttributeCssSelector();
+    private final EqualsOrHasAttributeCssSelector equalsOrHasAttributeCssSelector = new EqualsOrHasAttributeCssSelector();
+    private final IdAttributeCssSelector idAttributeCssSelector = new IdAttributeCssSelector();
+    private final ContainsWordAttributeCssSelector containsWordAttributeCssSelector = new ContainsWordAttributeCssSelector();
+    private final ContainsPrefixAttributeCssSelector containsPrefixAttributeCssSelector = new ContainsPrefixAttributeCssSelector();
+    private final ClassAttributeCssSelector classAttributeCssSelector = new ClassAttributeCssSelector();
+    private final PseudoClassCssSelector pseudoClassCssSelector = new PseudoClassCssSelector();
+    private final LangPseudoClassEvaluator langPseudoClassEvaluator = new LangPseudoClassEvaluator();
 
 	public CssConditionalSelector<? extends Condition> getSelector(Condition condition) {
 	    switch (condition.getConditionType()) {
 		    case Condition.SAC_AND_CONDITION:
-		    	return AndConditionalCssSelector.getInstance();
+		    	return andConditionalCssSelector;
 		    case Condition.SAC_OR_CONDITION:
 		    	// if the exception below gets thrown, this means the CSS Parser has changed and
 		    	// we must update our code as well.
@@ -37,29 +45,29 @@ public class ConditionalCssSelectorFactory {
 		    	
 		    case Condition.SAC_ATTRIBUTE_CONDITION:
 		    	if (condition instanceof com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl) {
-		    		return StartsWithAttributeCssSelector.getInstance();
+		    		return startsWithAttributeCssSelector;
 		    	}
 		    	if (condition instanceof com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl) {
-		    		return EndsWithAttributeCssSelector.getInstance();
+		    		return endsWithAttributeCssSelector;
 		    	}
 		    	if (condition instanceof com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl) {
-		    		return ContainsSubstringAttributeCssSelector.getInstance();
+		    		return containsSubstringAttributeCssSelector;
 		    	}
 		    	// else: condition is most probably a instance of com.steadystate.css.parser.selectors.AttributeConditionImpl
-		    	return EqualsOrHasAttributeCssSelector.getInstance();
+		    	return equalsOrHasAttributeCssSelector;
 	        case Condition.SAC_ID_CONDITION:
-				return IdAttributeCssSelector.getInstance();
+				return idAttributeCssSelector;
 	        case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
-	        	return ContainsWordAttributeCssSelector.getInstance();
+	        	return containsWordAttributeCssSelector;
 	        case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-	        	return ContainsPrefixAttributeCssSelector.getInstance();
+	        	return containsPrefixAttributeCssSelector;
 	        case Condition.SAC_CLASS_CONDITION:
-	        	return ClassAttributeCssSelector.getInstance();
+	        	return classAttributeCssSelector;
 				
 	        case Condition.SAC_PSEUDO_CLASS_CONDITION:
-	        	return PseudoClassCssSelector.getInstance();
+	        	return pseudoClassCssSelector;
 	        case Condition.SAC_LANG_CONDITION:
-	        	return LangPseudoClassEvaluator.getInstance();
+	        	return langPseudoClassEvaluator;
 	            
 	        default:
 				return new UnknownConditionalCssSelector<Condition>(condition.getConditionType());

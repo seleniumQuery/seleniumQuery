@@ -9,34 +9,47 @@ import io.github.seleniumquery.selectors.tagname.TagNameSelector;
 
 import org.w3c.css.sac.Selector;
 
+/**
+ * Picks a high level CssSelector based on the Selector type.
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class CssSelectorFactory {
 
-	private static final CssSelectorFactory instance = new CssSelectorFactory();
-	
-	public static CssSelectorFactory getInstance() {
+    private final ConditionalCssSelector conditionalCssSelector = new ConditionalCssSelector();
+
+    private final TagNameSelector tagNameSelector = new TagNameSelector();
+
+    private final DescendantCssSelector descendantCssSelector = new DescendantCssSelector();
+    private final DirectDescendantCssSelector directDescendantCssSelector = new DirectDescendantCssSelector();
+    private final DirectAdjacentCssSelector directAdjacentCssSelector = new DirectAdjacentCssSelector();
+    private final GeneralAdjacentCssSelector generalAdjacentCssSelector = new GeneralAdjacentCssSelector();
+
+    private static final CssSelectorFactory instance = new CssSelectorFactory();
+    public static CssSelectorFactory getInstance() {
 		return instance;
 	}
-	
-	private CssSelectorFactory() { }
+    private CssSelectorFactory() { }
 
 	public CssSelector<? extends Selector> getSelector(Selector selector) {
 		switch (selector.getSelectorType()) {
 			case Selector.SAC_CONDITIONAL_SELECTOR:
-				return ConditionalCssSelector.getInstance();
+				return conditionalCssSelector;
 				
 			case Selector.SAC_ELEMENT_NODE_SELECTOR:
-				return TagNameSelector.getInstance();
+				return tagNameSelector;
 				
 			// COMBINATORS
 			case Selector.SAC_DESCENDANT_SELECTOR:
-				return DescendantCssSelector.getInstance();
+				return descendantCssSelector;
 			case Selector.SAC_CHILD_SELECTOR:
-				return DirectDescendantCssSelector.getInstance();
+				return directDescendantCssSelector;
 			case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
-				return DirectAdjacentCssSelector.getInstance();
+				return directAdjacentCssSelector;
 			// the parser returns this code for the "E ~ F" selector. Go figure...
 			case Selector.SAC_ANY_NODE_SELECTOR:
-				return GeneralAdjacentCssSelector.getInstance();
+				return generalAdjacentCssSelector;
 				
 			case Selector.SAC_ROOT_NODE_SELECTOR:
 			case Selector.SAC_NEGATIVE_SELECTOR:

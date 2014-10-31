@@ -10,13 +10,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :has(selector)
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class HasPseudoClass implements PseudoClass {
-	
-	private static final HasPseudoClass instance = new HasPseudoClass();
-	public static HasPseudoClass getInstance() {
-		return instance;
-	}
-	private HasPseudoClass() { }
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {

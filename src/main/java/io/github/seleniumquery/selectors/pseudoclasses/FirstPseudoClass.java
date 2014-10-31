@@ -6,17 +6,16 @@ import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :first
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class FirstPseudoClass implements PseudoClass {
 
-	private static final FirstPseudoClass instance = new FirstPseudoClass();
-	public static FirstPseudoClass getInstance() {
-		return instance;
-	}
-	private FirstPseudoClass() { }
-
 	private static final String FIRST_PSEUDO_CLASS_NO_COLON = "first";
-	
-	
+
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return FIRST_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);

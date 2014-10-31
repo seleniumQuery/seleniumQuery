@@ -27,12 +27,6 @@ import org.openqa.selenium.WebElement;
  */
 public class FocusablePseudoClass implements PseudoClass {
 	
-	private static final FocusablePseudoClass instance = new FocusablePseudoClass();
-	public static FocusablePseudoClass getInstance() {
-		return instance;
-	}
-	private FocusablePseudoClass() { }
-	
 	private static final String FOCUSABLE_PSEUDO_CLASS_NO_COLON = "focusable";
 	
 	@Override
@@ -57,7 +51,7 @@ public class FocusablePseudoClass implements PseudoClass {
 		return element.getAttribute("tabindex") != null;
 	}
 	
-	private static final ElementFilter focusablePseudoClassFilter = new PseudoClassFilter(getInstance());
+	private final ElementFilter focusablePseudoClassFilter = new PseudoClassFilter(this);
 
 	// //button[.='OK' and not(ancestor::div[contains(@style,'display:none')]) and ]
 	

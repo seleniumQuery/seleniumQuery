@@ -9,13 +9,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :lt(#)
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class LtPseudoClass implements PseudoClass {
-
-	private static final LtPseudoClass instance = new LtPseudoClass();
-	public static LtPseudoClass getInstance() {
-		return instance;
-	}
-	private LtPseudoClass() { }
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {

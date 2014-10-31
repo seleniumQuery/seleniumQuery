@@ -21,7 +21,7 @@ import org.openqa.selenium.internal.WrapsDriver;
  * </p>
  *
  * @author acdcjunior
- * @since 0.2.0
+ * @since 1.0.0
  */
 public class SeleniumQuery {
 	
@@ -32,8 +32,6 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>sQ("div").text();</code><br>
 	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.2.0
 	 */
 	public static final SeleniumQueryStatic sQ = new SeleniumQueryStatic();
 	
@@ -45,15 +43,11 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>$("div").text();</code><br>
 	 * <code>$.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.2.0
 	 */
 	public static final SeleniumQueryStatic $ = sQ;
 	
 	/**
 	 * <p>The seleniumQuery global object.</p> This works as an alias to <code>$</code>.
-	 * 
-	 * @since 0.3.0
 	 */
 	public static final SeleniumQueryStatic jQuery = sQ;
 	
@@ -64,8 +58,6 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>sQ("div").text();</code><br>
 	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.2.0
 	 */
 	public static SeleniumQueryObject sQ(String selector) {
 		return new SeleniumQueryObject(sQ.browser.getDefaultDriver(), selector);
@@ -78,8 +70,6 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>sQ("div").text();</code><br>
 	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.2.0
 	 */
 	public static SeleniumQueryObject sQ(WebDriver driver, String selector) {
 		return new SeleniumQueryObject(driver, selector);
@@ -92,8 +82,6 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>sQ("div").text();</code><br>
 	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject sQ(WebElement element) {
 		return sQ(((WrapsDriver) element).getWrappedDriver(), element);
@@ -106,11 +94,9 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>sQ("div").text();</code><br>
 	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject sQ(WebDriver driver, WebElement element) {
-		return SQLocalFactory.getInstance().createWithInvalidSelectorAndNoPrevious(driver, element);
+		return SQLocalFactory.createWithInvalidSelectorAndNoPrevious(driver, element);
 	}
 	
 	/**
@@ -120,8 +106,6 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>sQ("div").text();</code><br>
 	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject sQ(SeleniumQueryObject seleniumQueryObject) {
 		return seleniumQueryObject;
@@ -134,8 +118,6 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>$("div").text();</code><br>
 	 * <code>$.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.2.0
 	 */
 	public static SeleniumQueryObject $(String selector) {
 		return sQ(selector);
@@ -148,8 +130,6 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>$("div").text();</code><br>
 	 * <code>$.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.2.0
 	 */
 	public static SeleniumQueryObject $(WebDriver driver, String selector) {
 		return sQ(driver, selector);
@@ -162,15 +142,13 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>$("div").text();</code><br>
 	 * <code>$.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject $(WebElement element) {
 		return sQ(element);
 	}
 	
 	/**
-	 * @since 0.5.0
+     * Creates a seleniumQuery object from existing driver and element.
 	 */
 	public static SeleniumQueryObject $(WebDriver driver, WebElement element) {
 		return sQ(driver, element);
@@ -183,8 +161,6 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>$("div").text();</code><br>
 	 * <code>$.location.href("http://www.google.com");</code><br>
-	 * 
-	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject $(SeleniumQueryObject seleniumQueryObject) {
 		return sQ(seleniumQueryObject);
@@ -192,8 +168,6 @@ public class SeleniumQuery {
 	
 	/**
 	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
-	 * 
-	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject jQuery(String selector) {
 		return sQ(selector);
@@ -201,8 +175,6 @@ public class SeleniumQuery {
 	
 	/**
 	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
-	 * 
-	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject jQuery(WebDriver driver, String selector) {
 		return sQ(driver, selector);
@@ -210,8 +182,6 @@ public class SeleniumQuery {
 	
 	/**
 	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
-	 * 
-	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject jQuery(WebElement element) {
 		return sQ(element);
@@ -219,8 +189,6 @@ public class SeleniumQuery {
 	
 	/**
 	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
-	 * 
-	 * @since 0.3.0
 	 */
 	public static SeleniumQueryObject jQuery(SeleniumQueryObject seleniumQueryObject) {
 		return sQ(seleniumQueryObject);

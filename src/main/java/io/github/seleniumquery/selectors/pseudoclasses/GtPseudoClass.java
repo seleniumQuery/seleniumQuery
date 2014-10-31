@@ -9,13 +9,13 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :gt(#)
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class GtPseudoClass implements PseudoClass {
-
-	private static final GtPseudoClass instance = new GtPseudoClass();
-	public static GtPseudoClass getInstance() {
-		return instance;
-	}
-	private GtPseudoClass() { }
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
