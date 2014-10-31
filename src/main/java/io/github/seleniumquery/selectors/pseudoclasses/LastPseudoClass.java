@@ -6,13 +6,13 @@ import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :last
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class LastPseudoClass implements PseudoClass {
-
-	private static final LastPseudoClass instance = new LastPseudoClass();
-	public static LastPseudoClass getInstance() {
-		return instance;
-	}
-	private LastPseudoClass() { }
 
 	private static final String LAST_PSEUDO_CLASS_NO_COLON = "last";
 	

@@ -6,12 +6,10 @@ package io.github.seleniumquery.selectors.pseudoclasses;
  * @since 1.0.0
  * @author acdcjunior
  */
-public class ImagePseudoClass {
-	
-	private static final PseudoClass instance = new InputTypeAttributePseudoClass("image");
-	public static PseudoClass getInstance() {
-		return instance;
-	}
-	private ImagePseudoClass() { }
-	
+public class ImagePseudoClass extends InputTypeAttributePseudoClass {
+
+    public ImagePseudoClass() {
+        super("image");
+    }
+
 }

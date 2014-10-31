@@ -12,6 +12,9 @@ import org.openqa.selenium.WebElement;
  * #Cross-Driver
  * In HtmlUnitDriver, :checked is not consistent, so we consider it as not supported
  * In PhantomJSDriver, :checked does not work for <option> tags, so we consider it as not supported as well
+ *
+ * @author acdcjunior
+ * @since 1.0.0
  */
 public class CheckedPseudoClass implements PseudoClass {
 
@@ -21,12 +24,6 @@ public class CheckedPseudoClass implements PseudoClass {
 	private static final String TYPE_ATTRIBUTE_NAME = "type";
 	private static final String RADIO_ATTR_VALUE = "radio";
 	private static final String CHECKBOX_ATTR_VALUE = "checkbox";
-
-	private static final CheckedPseudoClass instance = new CheckedPseudoClass();
-	public static CheckedPseudoClass getInstance() {
-		return instance;
-	}
-	private CheckedPseudoClass() { }
 
 	private static final String CHECKED_PSEUDO_CLASS_NO_COLON = "checked";
 

@@ -14,14 +14,7 @@ import org.openqa.selenium.WebElement;
  */
 public class SelectedPseudoClass implements PseudoClass {
 	
-	private static final SelectedPseudoClass instance = new SelectedPseudoClass();
-	public static SelectedPseudoClass getInstance() {
-		return instance;
-	}
-	private SelectedPseudoClass() { }
-	
 	private static final String OPTION_TAG = "option";
-	
 	private static final String SELECTED_PSEUDO_CLASS_NO_COLON = "selected";
 
 	@Override

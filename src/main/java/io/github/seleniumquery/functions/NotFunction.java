@@ -9,6 +9,12 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
+/**
+ * $("selector").not("selector")
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class NotFunction {
 	
 	public static SeleniumQueryObject not(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String selector) {
@@ -17,7 +23,7 @@ public class NotFunction {
 		List<WebElement> elementsToExclude = seleniumQueryObject.getWebDriver().findElements(SeleniumQueryBy.byEnhancedSelector(selector));
 		filteredElements.removeAll(elementsToExclude);
 		
-		return SQLocalFactory.getInstance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), filteredElements, seleniumQueryObject);
+		return SQLocalFactory.createWithInvalidSelector(seleniumQueryObject.getWebDriver(), filteredElements, seleniumQueryObject);
 	}
 
 }

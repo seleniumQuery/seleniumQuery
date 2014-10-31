@@ -13,16 +13,16 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
+/**
+ * .class
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class ClassAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
 	private static final String CLASS_ATTRIBUTE = "class";
 	
-	private static final ClassAttributeCssSelector instance = new ClassAttributeCssSelector();
-	public static ClassAttributeCssSelector getInstance() {
-		return instance;
-	}
-	private ClassAttributeCssSelector() { }
-
 	/**
 	 * @see {@link org.w3c.css.sac.Condition#SAC_CLASS_CONDITION}
 	 *

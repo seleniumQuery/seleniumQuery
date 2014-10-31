@@ -8,28 +8,28 @@ import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :hidden
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class HiddenPseudoClass implements PseudoClass {
 	
-	private static final HiddenPseudoClass instance = new HiddenPseudoClass();
-	public static HiddenPseudoClass getInstance() {
-		return instance;
-	}
-	private HiddenPseudoClass() { }
-	
 	private static final String HIDDEN_PSEUDO_CLASS_NO_COLON = "hidden";
-	
+
+    private final ElementFilter hiddenPseudoClassFilter = new PseudoClassFilter(this);
+
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return HIDDEN_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
 	}
-	
+
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		return !SelectorUtils.isVisible(driver, element);
 	}
-	
-	private static final ElementFilter hiddenPseudoClassFilter = new PseudoClassFilter(getInstance());
-	
+
 	public static final String HIDDEN_XPATH_MUST_FILTER = "("
 			// we consider an element to be hidden when...
 			

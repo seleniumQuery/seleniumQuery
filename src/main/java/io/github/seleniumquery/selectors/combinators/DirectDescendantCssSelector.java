@@ -13,17 +13,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.DescendantSelector;
 
+/**
+ * PARENT > ELEMENT
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class DirectDescendantCssSelector implements CssSelector<DescendantSelector> {
 	
-	private static final DirectDescendantCssSelector instance = new DirectDescendantCssSelector();
-	public static DirectDescendantCssSelector getInstance() {
-		return instance;
-	}
-	private DirectDescendantCssSelector() { }
-	
-	/**
-	 * PARENT > ELEMENT
-	 */
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, DescendantSelector descendantSelector) {
 		WebElement parent = SelectorUtils.parent(element);

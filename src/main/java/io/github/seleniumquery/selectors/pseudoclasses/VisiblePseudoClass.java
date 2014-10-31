@@ -8,28 +8,28 @@ import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :visible
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class VisiblePseudoClass implements PseudoClass {
-	
+
 	public static final String NOT_DISPLAY_NONE_XPATH = "not(" + HiddenPseudoClass.HIDDEN_XPATH_MUST_FILTER + ")";
-	
-	private static final VisiblePseudoClass instance = new VisiblePseudoClass();
-	public static VisiblePseudoClass getInstance() {
-		return instance;
-	}
-	private VisiblePseudoClass() { }
-	
+
+    private final ElementFilter visiblePseudoClassFilter = new PseudoClassFilter(this);
+
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return "visible".equals(pseudoClassValue);
 	}
-	
+
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		return SelectorUtils.isVisible(driver, element);
 	}
-	
-	private static final ElementFilter visiblePseudoClassFilter = new PseudoClassFilter(getInstance());
-	
+
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":visible");

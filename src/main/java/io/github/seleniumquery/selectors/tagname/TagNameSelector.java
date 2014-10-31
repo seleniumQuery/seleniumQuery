@@ -11,13 +11,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.ElementSelector;
 
+/**
+ * $("tagname")
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class TagNameSelector implements CssSelector<ElementSelector> {
-
-	private static final TagNameSelector instance = new TagNameSelector();
-
-	public static TagNameSelector getInstance() {
-		return instance;
-	}
 
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, ElementSelector elementSelector) {

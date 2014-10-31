@@ -16,14 +16,9 @@ import org.w3c.css.sac.Selector;
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
  * 
  * @author acdcjunior
+ * @since 1.0.0
  */
 public class LangPseudoClassEvaluator implements CssConditionalSelector<LangCondition> {
-
-	private static final LangPseudoClassEvaluator instance = new LangPseudoClassEvaluator();
-	public static LangPseudoClassEvaluator getInstance() {
-		return instance;
-	}
-	private LangPseudoClassEvaluator() { }
 
 	/**
 	 * @see {@link org.w3c.css.sac.Condition#SAC_LANG_CONDITION}

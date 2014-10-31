@@ -11,6 +11,12 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * $("selector").closest("selector")
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class ClosestFunction {
 
 	public static SeleniumQueryObject closest(SeleniumQueryObject caller, List<WebElement> elements, String selector) {
@@ -24,7 +30,7 @@ public class ClosestFunction {
 			}
 		}
 		
-		return SQLocalFactory.getInstance().createWithInvalidSelector(caller.getWebDriver(), closests, caller);
+		return SQLocalFactory.createWithInvalidSelector(caller.getWebDriver(), closests, caller);
 	}
 
 	public static WebElement closest(WebDriver driver, WebElement element, String selector) {

@@ -16,12 +16,6 @@ import org.openqa.selenium.WebElement;
  */
 public class NotPseudoClass implements PseudoClass {
 	
-	private static final NotPseudoClass instance = new NotPseudoClass();
-	public static NotPseudoClass getInstance() {
-		return instance;
-	}
-	private NotPseudoClass() { }
-	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return pseudoClassValue.matches("not-sq\\(.*\\)");

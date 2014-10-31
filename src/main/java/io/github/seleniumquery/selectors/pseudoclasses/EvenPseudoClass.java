@@ -9,14 +9,14 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :even
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class EvenPseudoClass implements PseudoClass {
 
-	private static final EvenPseudoClass instance = new EvenPseudoClass();
-	public static EvenPseudoClass getInstance() {
-		return instance;
-	}
-	private EvenPseudoClass() { }
-	
 	private static final String EVEN_PSEUDO_CLASS_NO_COLON = "even";
 	
 	@Override

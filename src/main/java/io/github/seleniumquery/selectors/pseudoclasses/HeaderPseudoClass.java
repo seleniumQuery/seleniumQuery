@@ -28,12 +28,6 @@ public class HeaderPseudoClass implements PseudoClass {
 											+ "local-name() = 'h8' or "
 											+ "local-name() = 'h9')]";
 
-	private static final HeaderPseudoClass instance = new HeaderPseudoClass();
-	public static HeaderPseudoClass getInstance() {
-		return instance;
-	}
-	private HeaderPseudoClass() { }
-	
 	private static final List<String> HEADER_TAGS = Arrays.asList("h0", "h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8", "h9");
 	
 	private static final String HEADER = "header";

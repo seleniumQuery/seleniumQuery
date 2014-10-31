@@ -13,11 +13,11 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 1.0.0
  */
-class InputTypeAttributePseudoClass implements PseudoClass {
+abstract class InputTypeAttributePseudoClass implements PseudoClass {
 	
 	private String typeAttributeValue;
 	
-	public InputTypeAttributePseudoClass(String typeAttributeValue) {
+	protected InputTypeAttributePseudoClass(String typeAttributeValue) {
 		this.typeAttributeValue = typeAttributeValue;
 	}
 	

@@ -14,17 +14,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.SiblingSelector;
 
+/**
+ * E + F
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector> {
 
-	private static final DirectAdjacentCssSelector instance = new DirectAdjacentCssSelector();
-	public static DirectAdjacentCssSelector getInstance() {
-		return instance;
-	}
-	private DirectAdjacentCssSelector() { }
-
-	/**
-	 * E + F
-	 */
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, SiblingSelector siblingSelector) {
 		WebElement previousElement = SelectorUtils.getPreviousSibling(element);

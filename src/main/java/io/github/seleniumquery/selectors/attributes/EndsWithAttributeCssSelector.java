@@ -13,14 +13,14 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
+/**
+ * [attribute$=stringToEnd]
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class EndsWithAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
-	private static final EndsWithAttributeCssSelector instance = new EndsWithAttributeCssSelector();
-	public static EndsWithAttributeCssSelector getInstance() {
-		return instance;
-	}
-	private EndsWithAttributeCssSelector() { }
-	
 	public static final String ENDS_WITH_ATTRIBUTE_SELECTOR_SYMBOL = "$=";
 
 	/**

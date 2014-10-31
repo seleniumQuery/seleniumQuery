@@ -9,17 +9,18 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :empty
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class EmptyPseudoClass implements PseudoClass {
 	
-	private static final EmptyPseudoClass instance = new EmptyPseudoClass();
-	public static EmptyPseudoClass getInstance() {
-		return instance;
-	}
-	private EmptyPseudoClass() { }
-	
 	private static final Log LOGGER = LogFactory.getLog(EmptyPseudoClass.class);
-	
 	private static final String EMPTY_PSEUDO_CLASS_NO_COLON = "empty";
+
+    private final ParentPseudoClass parentPseudoClass = new ParentPseudoClass();
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -28,7 +29,7 @@ public class EmptyPseudoClass implements PseudoClass {
 	
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		boolean isEmpty = !ParentPseudoClass.getInstance().isParent(element);
+		boolean isEmpty = !parentPseudoClass.isParent(element);
 		// #Cross-Driver
 		if (isEmpty && DriverSupportService.isHtmlUnitDriverEmulatingIE(driver)) {
 			LOGGER.warn("The outcome of the selector with the pseudo-class \":empty\" could be affected:" +

@@ -14,15 +14,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.SiblingSelector;
 
+/**
+ * E ~ PRE
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> {
-
-	private static final GeneralAdjacentCssSelector instance = new GeneralAdjacentCssSelector();
-
-	public static GeneralAdjacentCssSelector getInstance() {
-		return instance;
-	}
-	
-	private GeneralAdjacentCssSelector() { }
 
 	/**
 	 * http://www.w3.org/TR/css3-selectors/#general-sibling-combinators

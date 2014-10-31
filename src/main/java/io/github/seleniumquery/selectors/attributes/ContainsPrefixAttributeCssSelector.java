@@ -14,15 +14,13 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
+/**
+ * [languages|="fr"]
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class ContainsPrefixAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
-
-	private static final ContainsPrefixAttributeCssSelector instance = new ContainsPrefixAttributeCssSelector();
-
-	public static ContainsPrefixAttributeCssSelector getInstance() {
-		return instance;
-	}
-	
-	private ContainsPrefixAttributeCssSelector() { }
 
 	/**
 	 * @see {@link org.w3c.css.sac.Condition#SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION}

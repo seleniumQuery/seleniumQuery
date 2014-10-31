@@ -9,15 +9,12 @@ import org.openqa.selenium.WebElement;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:first-child
+ *
+ * @author acdcjunior
+ * @since 1.0.0
  */
 public class FirstChildPseudoClass implements PseudoClass {
 
-	private static final FirstChildPseudoClass instance = new FirstChildPseudoClass();
-	public static FirstChildPseudoClass getInstance() {
-		return instance;
-	}
-	private FirstChildPseudoClass() { }
-	
 	private static final String FIRST_CHILD_PSEUDO_CLASS_NO_COLON = "first-child";
 
 	@Override

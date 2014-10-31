@@ -15,17 +15,14 @@ import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SimpleSelector;
 
+/**
+ * E F
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class DescendantCssSelector implements CssSelector<DescendantSelector> {
 
-	private static final DescendantCssSelector instance = new DescendantCssSelector();
-	public static DescendantCssSelector getInstance() {
-		return instance;
-	}
-	private DescendantCssSelector() { }
-	
-	/**
-	 * E F
-	 */
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, DescendantSelector descendantSelector) {
 		if (CssSelectorMatcherService.elementMatchesSelector(driver, element, stringMap, descendantSelector.getSimpleSelector())) {

@@ -17,20 +17,16 @@ import org.openqa.selenium.WebElement;
  */
 public class TabbablePseudoClass implements PseudoClass {
 	
-	private static final TabbablePseudoClass instance = new TabbablePseudoClass();
-	public static TabbablePseudoClass getInstance() {
-		return instance;
-	}
-	private TabbablePseudoClass() { }
-	
 	private static final String TABBABLE_PSEUDO_CLASS_NO_COLON = "tabbable";
-	private static final FocusablePseudoClass focusable = FocusablePseudoClass.getInstance();
-	
+
+	private final FocusablePseudoClass focusable = new FocusablePseudoClass();
+    private final ElementFilter tabbablePseudoClassFilter = new PseudoClassFilter(this);
+
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return TABBABLE_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
 	}
-	
+
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		boolean isFocusable = focusable.isPseudoClass(driver, element, pseudoClassSelector);
@@ -46,9 +42,7 @@ public class TabbablePseudoClass implements PseudoClass {
 		boolean tabindexIsNegativeInteger = tabindex.matches("\\s*-\\d+\\s*");
 		return !tabindexIsNegativeInteger;
 	}
-	
-	private static final ElementFilter tabbablePseudoClassFilter = new PseudoClassFilter(getInstance());
-	
+
 	// see :focusable. change there before here, this selector is highly dependable on :focusable as it is just a small change to it
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {

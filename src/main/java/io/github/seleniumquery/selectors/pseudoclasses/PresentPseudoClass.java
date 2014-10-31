@@ -7,13 +7,13 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * :present
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class PresentPseudoClass implements PseudoClass {
-	
-	private static final PresentPseudoClass instance = new PresentPseudoClass();
-	public static PresentPseudoClass getInstance() {
-		return instance;
-	}
-	private PresentPseudoClass() { }
 	
 	private static final String PRESENT_PSEUDO_CLASS_NO_COLON = "present";
 	

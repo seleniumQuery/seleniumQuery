@@ -13,11 +13,17 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * $("selector").children()
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class ChildrenFunction {
 
 	public static SeleniumQueryObject children(SeleniumQueryObject caller, List<WebElement> elements) {
 		List<WebElement> children = getChildren(elements);
-		return SQLocalFactory.getInstance().createWithInvalidSelector(caller.getWebDriver(), children, caller);
+		return SQLocalFactory.createWithInvalidSelector(caller.getWebDriver(), children, caller);
 	}
 	
 	public static SeleniumQueryObject children(SeleniumQueryObject caller, List<WebElement> elements, String selector) {
@@ -29,7 +35,7 @@ public class ChildrenFunction {
 				iterator.remove();
 			}
 		}
-		return SQLocalFactory.getInstance().createWithInvalidSelector(webDriver, children, caller);
+		return SQLocalFactory.createWithInvalidSelector(webDriver, children, caller);
 	}
 	
 	private static List<WebElement> getChildren(List<WebElement> elements) {

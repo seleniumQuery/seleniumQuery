@@ -14,21 +14,18 @@ import org.w3c.css.sac.SimpleSelector;
 
 import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
 
+/**
+ * E.firstCondition.secondCondition
+ *
+ * @see {@link Condition#SAC_AND_CONDITION}
+ *
+ * @author acdcjunior
+ * @since 1.0.0
+ */
 public class AndConditionalCssSelector implements CssConditionalSelector<CombinatorCondition> {
 
-	private static final AndConditionalCssSelector instance = new AndConditionalCssSelector();
+	private ConditionalCssSelector conditionalEvaluator = new ConditionalCssSelector();
 
-	public static AndConditionalCssSelector getInstance() {
-		return instance;
-	}
-
-	private ConditionalCssSelector conditionalEvaluator = ConditionalCssSelector.getInstance();
-	
-	/**
-	 * E.firstCondition.secondCondition
-	 * 
-	 * @see {@link Condition#SAC_AND_CONDITION}
-	 */
 	@Override
 	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
 		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(

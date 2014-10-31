@@ -14,12 +14,6 @@ import org.openqa.selenium.WebElement;
  */
 public class RootPseudoClass implements PseudoClass {
 	
-	private static final RootPseudoClass instance = new RootPseudoClass();
-	public static RootPseudoClass getInstance() {
-		return instance;
-	}
-	private RootPseudoClass() { }
-	
 	private static final String ROOT_PSEUDO_CLASS_NO_COLON = "root";
 	
 	@Override

@@ -15,12 +15,6 @@ import org.openqa.selenium.WebElement;
  */
 public class OnlyChildPseudoClass implements PseudoClass {
 	
-	private static final OnlyChildPseudoClass instance = new OnlyChildPseudoClass();
-	public static OnlyChildPseudoClass getInstance() {
-		return instance;
-	}
-	private OnlyChildPseudoClass() { }
-	
 	private static final String ONLY_CHILD_PSEUDO_CLASS_NO_COLON = "only-child";
 	
 	@Override

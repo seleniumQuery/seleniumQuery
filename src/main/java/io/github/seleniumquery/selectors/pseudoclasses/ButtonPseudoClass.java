@@ -14,12 +14,6 @@ import org.openqa.selenium.WebElement;
  */
 public class ButtonPseudoClass implements PseudoClass {
 	
-	private static final ButtonPseudoClass instance = new ButtonPseudoClass();
-	public static ButtonPseudoClass getInstance() {
-		return instance;
-	}
-	private ButtonPseudoClass() { }
-	
 	private static final String INPUT = "input";
 	private static final String BUTTON = "button";
 	

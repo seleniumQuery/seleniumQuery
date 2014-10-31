@@ -6,12 +6,10 @@ package io.github.seleniumquery.selectors.pseudoclasses;
  * @since 1.0.0
  * @author acdcjunior
  */
-public class FilePseudoClass {
-	
-	private static final PseudoClass instance = new InputTypeAttributePseudoClass("file");
-	public static PseudoClass getInstance() {
-		return instance;
-	}
-	private FilePseudoClass() { }
-	
+public class FilePseudoClass extends InputTypeAttributePseudoClass {
+
+    public FilePseudoClass() {
+        super("file");
+    }
+
 }
