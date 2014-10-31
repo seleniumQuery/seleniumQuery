@@ -13,7 +13,6 @@ import org.w3c.css.sac.AttributeCondition;
 public class AttributeEvaluatorUtils {
 
 	public static String getXPathAttribute(AttributeCondition attributeCondition) {
-		// em queals or has era
 		String attributeName = attributeCondition.getLocalName();
 		if (!Character.isLetter(attributeName.charAt(0))) {
 			return "@*[local-name() = "+ SelectorUtils.intoEscapedXPathString(attributeName) +"]";

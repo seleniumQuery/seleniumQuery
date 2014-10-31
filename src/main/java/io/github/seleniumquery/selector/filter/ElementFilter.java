@@ -15,7 +15,7 @@ public interface ElementFilter {
 		@Override
 		public String toString() {
 			return "FILTER_NOTHING";
-		};
+		}
 	};
 
 	List<WebElement> filterElements(WebDriver driver, List<WebElement> elements);
