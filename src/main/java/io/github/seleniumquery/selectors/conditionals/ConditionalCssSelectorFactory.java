@@ -20,7 +20,7 @@ import org.w3c.css.sac.Condition;
  */
 public class ConditionalCssSelectorFactory {
 
-    private final AndConditionalCssSelector andConditionalCssSelector = new AndConditionalCssSelector();
+    private final AndConditionalCssSelector andConditionalCssSelector;
     private final StartsWithAttributeCssSelector startsWithAttributeCssSelector = new StartsWithAttributeCssSelector();
     private final EndsWithAttributeCssSelector endsWithAttributeCssSelector = new EndsWithAttributeCssSelector();
     private final ContainsSubstringAttributeCssSelector containsSubstringAttributeCssSelector = new ContainsSubstringAttributeCssSelector();
@@ -31,6 +31,10 @@ public class ConditionalCssSelectorFactory {
     private final ClassAttributeCssSelector classAttributeCssSelector = new ClassAttributeCssSelector();
     private final PseudoClassCssSelector pseudoClassCssSelector = new PseudoClassCssSelector();
     private final LangPseudoClassEvaluator langPseudoClassEvaluator = new LangPseudoClassEvaluator();
+
+	public ConditionalCssSelectorFactory(ConditionalCssSelector conditionalCssSelector) {
+		this.andConditionalCssSelector = new AndConditionalCssSelector(conditionalCssSelector);
+	}
 
 	public CssConditionalSelector<? extends Condition> getSelector(Condition condition) {
 	    switch (condition.getConditionType()) {

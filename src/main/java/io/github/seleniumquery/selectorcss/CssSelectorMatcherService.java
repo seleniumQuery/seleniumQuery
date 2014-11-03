@@ -24,8 +24,7 @@ public class CssSelectorMatcherService {
 	}
 
 	public static boolean elementMatchesSelector(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selector) {
-		@SuppressWarnings("unchecked")
-		CssSelector<Selector> cssSelector =  (CssSelector<Selector>) CssSelectorFactory.getInstance().getSelector(selector);
+		CssSelector<Selector> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
 		return cssSelector.is(driver, element, stringMap, selector);	
 	}
 

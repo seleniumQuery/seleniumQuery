@@ -28,8 +28,7 @@ public class XPathSelectorCompilerService {
 	}
     
 	public static XPathExpression compileSelector(Map<String, String> stringMap, Selector selector) {
-		@SuppressWarnings("unchecked")
-		CssSelector<Selector> cssSelector =  (CssSelector<Selector>) CssSelectorFactory.getInstance().getSelector(selector);
+		CssSelector<Selector> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
 		return cssSelector.toXPath(stringMap, selector);
 	}
 	

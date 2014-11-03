@@ -24,7 +24,11 @@ import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
  */
 public class AndConditionalCssSelector implements CssConditionalSelector<CombinatorCondition> {
 
-	private ConditionalCssSelector conditionalEvaluator = new ConditionalCssSelector();
+	private ConditionalCssSelector conditionalEvaluator;
+	
+	public AndConditionalCssSelector(ConditionalCssSelector conditionalEvaluator) {
+		this.conditionalEvaluator = conditionalEvaluator;
+	}
 
 	@Override
 	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {

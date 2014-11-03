@@ -18,7 +18,7 @@ import org.w3c.css.sac.SimpleSelector;
 
 public class ConditionalCssSelector implements CssSelector<ConditionalSelector> {
 
-    private final ConditionalCssSelectorFactory conditionalCssSelectorFactory = new ConditionalCssSelectorFactory();
+    private final ConditionalCssSelectorFactory conditionalCssSelectorFactory = new ConditionalCssSelectorFactory(this);
 
     @Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, ConditionalSelector conditionalSelector) {

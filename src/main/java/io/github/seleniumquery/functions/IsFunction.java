@@ -35,7 +35,7 @@ public class IsFunction {
     			return true;
     		}
 
-    		CssSelector<Selector> cssSelector = parsedToCss(parsedSimpleSelector);
+    		CssSelector<Selector> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(parsedSimpleSelector);
 			for (WebElement webElement : elements) {
     			// if any matches, then it returns true
 				if (cssSelector.is(driver, webElement, stringMap, parsedSimpleSelector)) {
@@ -46,11 +46,6 @@ public class IsFunction {
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
-	private static CssSelector<Selector> parsedToCss(Selector parsedSimpleSelector) {
-		return (CssSelector<Selector>) CssSelectorFactory.getInstance().getSelector(parsedSimpleSelector);
-	}
-	
 	private static boolean hasNegatedPresent(Map<String, String> stringMap, String parsedSimpleSelector) {
 		Pattern p = Pattern.compile("not-sq\\((\\d+)\\)");
 		Matcher m = p.matcher(parsedSimpleSelector); 
