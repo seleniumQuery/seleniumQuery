@@ -17,22 +17,19 @@ import org.w3c.css.sac.Selector;
  */
 public class CssSelectorFactory {
 
-    private final ConditionalCssSelector conditionalCssSelector = new ConditionalCssSelector();
+    private static final ConditionalCssSelector conditionalCssSelector = new ConditionalCssSelector();
+    private static final TagNameSelector tagNameSelector = new TagNameSelector();
+    private static final DescendantCssSelector descendantCssSelector = new DescendantCssSelector();
+    private static final DirectDescendantCssSelector directDescendantCssSelector = new DirectDescendantCssSelector();
+    private static final DirectAdjacentCssSelector directAdjacentCssSelector = new DirectAdjacentCssSelector();
+    private static final GeneralAdjacentCssSelector generalAdjacentCssSelector = new GeneralAdjacentCssSelector();
 
-    private final TagNameSelector tagNameSelector = new TagNameSelector();
-
-    private final DescendantCssSelector descendantCssSelector = new DescendantCssSelector();
-    private final DirectDescendantCssSelector directDescendantCssSelector = new DirectDescendantCssSelector();
-    private final DirectAdjacentCssSelector directAdjacentCssSelector = new DirectAdjacentCssSelector();
-    private final GeneralAdjacentCssSelector generalAdjacentCssSelector = new GeneralAdjacentCssSelector();
-
-    private static final CssSelectorFactory instance = new CssSelectorFactory();
-    public static CssSelectorFactory getInstance() {
-		return instance;
-	}
-    private CssSelectorFactory() { }
-
-	public CssSelector<? extends Selector> getSelector(Selector selector) {
+    @SuppressWarnings("unchecked")
+	public static CssSelector<Selector> parsedSelectorToCssSelector(Selector parsedSimpleSelector) {
+    	return (CssSelector<Selector>) CssSelectorFactory.getSelector(parsedSimpleSelector);
+    }
+    
+	private static CssSelector<? extends Selector> getSelector(Selector selector) {
 		switch (selector.getSelectorType()) {
 			case Selector.SAC_CONDITIONAL_SELECTOR:
 				return conditionalCssSelector;
