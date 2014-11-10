@@ -18,7 +18,7 @@ public class SeleniumQueryDefaultBrowserTest {
 		// given
 		long tempoNoInicio = System.currentTimeMillis();
 		// when
-		seleniumQueryDefaultBrowser.sleep(1 * 1000);
+		seleniumQueryDefaultBrowser.sleep(1000);
 		// then
 		long tempoGasto = System.currentTimeMillis() - tempoNoInicio;
 		assertThat(new BigDecimal(tempoGasto), is(closeTo(new BigDecimal(1000), new BigDecimal(100))));

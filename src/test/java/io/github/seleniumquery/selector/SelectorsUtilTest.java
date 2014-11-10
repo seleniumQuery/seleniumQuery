@@ -4,8 +4,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SeleniumQuery;
-import io.github.seleniumquery.SetUpAndTearDownDriver;
-import io.github.seleniumquery.selector.SelectorUtils;
+import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ import org.openqa.selenium.WebElement;
 public class SelectorsUtilTest {
 	
 	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
 	
 	WebDriver driver;
 	

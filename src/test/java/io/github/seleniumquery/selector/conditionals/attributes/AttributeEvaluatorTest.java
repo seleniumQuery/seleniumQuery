@@ -4,7 +4,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.SetUpAndTearDownDriver;
+import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
 import io.github.seleniumquery.selector.xpath.XPathExpressionList;
 import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectors.attributes.ContainsWordAttributeCssSelector;
@@ -22,7 +22,7 @@ import org.openqa.selenium.WebElement;
 public class AttributeEvaluatorTest {
 
 	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
 	
 	@Test
 	public void equalsOrHasAttributeEvaluator() {

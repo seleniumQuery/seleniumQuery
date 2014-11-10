@@ -3,7 +3,7 @@ package io.github.seleniumquery.selector;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SeleniumQuery;
-import io.github.seleniumquery.SetUpAndTearDownDriver;
+import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 
 import org.junit.Before;
@@ -16,7 +16,7 @@ import org.openqa.selenium.WebElement;
 public class SelectorEvaluatorTest {
 	
 	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
 	
 	WebDriver driver;
 	
