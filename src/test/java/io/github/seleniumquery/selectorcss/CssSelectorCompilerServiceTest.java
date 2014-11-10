@@ -98,12 +98,6 @@ public class CssSelectorCompilerServiceTest {
     
     @Test(expected = RuntimeException.class)
     public void hidden_pseudo_as_parent_and_descendant() {
-    	System.out.println(Character.getType('a'));
-    	System.out.println(Character.getType('Z'));
-    	System.out.println(Character.getType('1'));
-    	System.out.println(Character.getType('á'));
-    	
-    	
     	List<WebElement> elements = $("p:hidden span.spanYo:hidden").get();
     	for (WebElement webElement : elements) {
 			System.out.println("@# El: "+webElement);
