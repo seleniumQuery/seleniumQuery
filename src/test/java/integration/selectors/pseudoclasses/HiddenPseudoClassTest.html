@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>seleniumQuery :hidden test page</title>
+<style type="text/css">
+	.notVisible { display: none; }
+</style>
+<bell>this IS considered to be hidden</bell>
+</head>
+<body>
+	<div id="hiddenDiv" class="clz" style="display: none">
+		<h1 class="btn"></h1>
+		<button class="spanYo" style="display: none">yo</button>
+		<span class="yo2" style="display: block">yodiv</span>
+	</div>
+	<div id="visibleDiv" class="clz">
+		<h1 class="btn">aa</h1>
+		<button class="spanYo">aa</button>
+		<span class="yo2">bb</span>
+	</div>
+	<div id="hiddenByClass" class="notVisible">
+		<p>this p is hidden by a class in its parent</p>
+	</div>
+</body>
+</html>

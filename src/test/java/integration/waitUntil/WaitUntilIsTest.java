@@ -1,18 +1,17 @@
 package integration.waitUntil;
 
+import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import org.junit.ClassRule;
+import org.junit.Test;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.SetUpAndTearDownDriver;
-import io.github.seleniumquery.example.AllFunctionsTest;
-
-import org.junit.Rule;
-import org.junit.Test;
 
 public class WaitUntilIsTest {
 	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(AllFunctionsTest.class);
+	@ClassRule
+	public static SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(WaitUntilIsMoreTest.class);
 
 	@Test
 	public void queryUntil_not_enabled() {

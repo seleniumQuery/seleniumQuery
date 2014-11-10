@@ -3,7 +3,7 @@ package io.github.seleniumquery.selector.conditionals.attributes;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.SetUpAndTearDownDriver;
+import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 
 import org.junit.Before;
@@ -17,7 +17,7 @@ import org.w3c.css.sac.CSSParseException;
 public class AttributeSelectorsTest {
 	
 	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
 	
 	WebDriver driver;
 	
