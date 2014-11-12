@@ -2,7 +2,7 @@ package io.github.seleniumquery.selectors.attributes;
 
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 
 import java.util.Arrays;
@@ -42,7 +42,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		// nothing to do, everyone supports filtering by class
-		return XPathSelectorFactory.createNoFilterSelector("[contains(concat(' ', normalize-space(@class), ' '), ' "+wantedClassName+" ')]");
+		return XPathExpressionFactory.createNoFilterSelector("[contains(concat(' ', normalize-space(@class), ' '), ' " + wantedClassName + " ')]");
 	}
 	
 }

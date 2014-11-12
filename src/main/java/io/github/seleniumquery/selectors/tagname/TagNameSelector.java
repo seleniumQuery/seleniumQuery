@@ -2,7 +2,7 @@ package io.github.seleniumquery.selectors.tagname;
 
 import io.github.seleniumquery.selector.xpath.SqSelectorKind;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.selectorcss.CssSelector;
 
 import java.util.Map;
@@ -28,7 +28,7 @@ public class TagNameSelector implements CssSelector<ElementSelector> {
 	@Override
 	public XPathExpression toXPath(Map<String, String> stringMap, ElementSelector selector) {
 		String tagName = selector.toString();
-		XPathExpression tagSelector = XPathSelectorFactory.createNoFilterSelector(tagName);
+		XPathExpression tagSelector = XPathExpressionFactory.createNoFilterSelector(tagName);
 		tagSelector.kind = SqSelectorKind.TAG;
 		return tagSelector;
 	}

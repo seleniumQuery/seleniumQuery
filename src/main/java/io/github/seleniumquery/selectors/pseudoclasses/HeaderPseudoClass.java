@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +44,7 @@ public class HeaderPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector(HX_XPATH);
+		return XPathExpressionFactory.createNoFilterSelector(HX_XPATH);
 	}
 	
 }

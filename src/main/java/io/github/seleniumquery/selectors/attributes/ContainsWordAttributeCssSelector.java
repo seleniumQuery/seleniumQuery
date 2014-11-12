@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.attributes;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 
 import java.util.Map;
@@ -53,7 +53,7 @@ public class ContainsWordAttributeCssSelector implements CssConditionalSelector<
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValueSurroundedBySpaces = SelectorUtils.intoEscapedXPathString(" " + attributeCondition.getValue() + " ");
 
-		return XPathSelectorFactory.createNoFilterSelector("[contains(concat(' ', normalize-space("+attributeName+"), ' '), "+wantedValueSurroundedBySpaces+")]");
+		return XPathExpressionFactory.createNoFilterSelector("[contains(concat(' ', normalize-space(" + attributeName + "), ' '), " + wantedValueSurroundedBySpaces + ")]");
 	}
 
 }
