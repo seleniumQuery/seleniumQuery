@@ -22,12 +22,12 @@ public class XPathExpression {
 	
 	// TODO this is very, very, very nasty!
 	// should probably be replaced by polymorphism
-	public SqSelectorKind kind;
+	public CssSelectorType kind;
 
 	XPathExpression(String xPathExpression, ElementFilterList elementFilterList) {
 		this.xPathExpression = xPathExpression;
 		this.elementFilterList = elementFilterList;
-		this.kind = SqSelectorKind.CONDITIONAL_SIMPLE;
+		this.kind = CssSelectorType.CONDITIONAL_SIMPLE;
 	}
 	
 	@Override
@@ -49,7 +49,7 @@ public class XPathExpression {
 	}
 	
 	public String toXPath() {
-		if (this.kind != SqSelectorKind.TAG) {
+		if (this.kind != CssSelectorType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
 		this.xPathExpression = ".//" + this.xPathExpression;
@@ -66,7 +66,7 @@ public class XPathExpression {
 	}
 
 	public String toXPathCondition() {
-		if (this.kind != SqSelectorKind.TAG) {
+		if (this.kind != CssSelectorType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
 		if (!"*".equals(this.xPathExpression)) {

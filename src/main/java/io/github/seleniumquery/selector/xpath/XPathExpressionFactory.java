@@ -27,7 +27,7 @@ public class XPathExpressionFactory {
 
 	public static XPathExpression createNoFilterSelectorAppliedToAll(String cssSelector) {
 		XPathExpression create = create(cssSelector, ElementFilter.FILTER_NOTHING);
-		create.kind = SqSelectorKind.CONDITIONAL_TO_ALL;
+		create.kind = CssSelectorType.CONDITIONAL_TO_ALL;
 		return create;
 	}
 

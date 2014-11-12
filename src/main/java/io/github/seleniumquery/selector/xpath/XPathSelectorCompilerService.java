@@ -33,18 +33,18 @@ public class XPathSelectorCompilerService {
 	}
 
 	public static XPathExpression compileToDescendantGeneralExpression(Map<String, String> stringMap, Selector cssSelector) {
-		return compileAndSetKind(stringMap, cssSelector, SqSelectorKind.DESCENDANT_GENERAL);
+		return compileAndSetKind(stringMap, cssSelector, CssSelectorType.DESCENDANT_GENERAL);
 	}
 
 	public static XPathExpression compileToDescendantDirectExpression(Map<String, String> stringMap, Selector cssSelector) {
-		return compileAndSetKind(stringMap, cssSelector, SqSelectorKind.DESCENDANT_DIRECT);
+		return compileAndSetKind(stringMap, cssSelector, CssSelectorType.DESCENDANT_DIRECT);
 	}
 
 	public static XPathExpression compileToAdjacentExpression(Map<String, String> stringMap, Selector cssSelector) {
-		return compileAndSetKind(stringMap, cssSelector, SqSelectorKind.ADJACENT);
+		return compileAndSetKind(stringMap, cssSelector, CssSelectorType.ADJACENT);
 	}
 
-	private static XPathExpression compileAndSetKind(Map<String, String> stringMap, Selector cssSelector, SqSelectorKind selectorKind) {
+	private static XPathExpression compileAndSetKind(Map<String, String> stringMap, Selector cssSelector, CssSelectorType selectorKind) {
 		XPathExpression xPathExpression = compileSelector(stringMap, cssSelector);
 		xPathExpression.kind = selectorKind;
 		return xPathExpression;
