@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selector.filter;
 
-import io.github.seleniumquery.selector.xpath.SqSelectorKind;
+import io.github.seleniumquery.selector.xpath.CssSelectorType;
 
 import org.openqa.selenium.WebElement;
 
@@ -9,11 +9,11 @@ public class ElementFilterListCombinator {
 	public static ElementFilterList combine(WebElement webElement,
 												String xPathExpression,
 												ElementFilterList elementFilterList,
-													SqSelectorKind sqSelectorKind,
+													CssSelectorType cssSelectorType,
 														String xPathExpression2,
 														ElementFilterList elementFilterList2) {
 		
-		switch (sqSelectorKind) {
+		switch (cssSelectorType) {
 			case CONDITIONAL_SIMPLE:
 			case CONDITIONAL_TO_ALL:
 			case DESCENDANT_GENERAL:

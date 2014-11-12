@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectors.combinators;
 
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selector.xpath.SqSelectorKind;
+import io.github.seleniumquery.selector.xpath.CssSelectorType;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
@@ -35,7 +35,7 @@ public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector> {
 		XPathExpression siblingElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
 		
 		XPathExpression positionOne = XPathExpressionFactory.createNoFilterSelector("[position() = 1]");
-		siblingElementCompiled.combine(positionOne).kind = SqSelectorKind.ADJACENT;
+		siblingElementCompiled.combine(positionOne).kind = CssSelectorType.ADJACENT;
 		
 		return previousElementCompiled.combine(siblingElementCompiled);
 	}
