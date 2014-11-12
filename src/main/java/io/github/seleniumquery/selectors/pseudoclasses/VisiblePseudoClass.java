@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selector.filter.ElementFilter;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,7 +36,7 @@ public class VisiblePseudoClass implements PseudoClass {
 		
 		// #no-xpath
 		System.err.println(":visible is not fully XPath supported (if the style is in a class, it won't know)!!!");
-		return XPathSelectorFactory.create("[" + NOT_DISPLAY_NONE_XPATH + "]", visiblePseudoClassFilter);
+		return XPathExpressionFactory.create("[" + NOT_DISPLAY_NONE_XPATH + "]", visiblePseudoClassFilter);
 	}
 	
 }

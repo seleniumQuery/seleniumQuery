@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,7 +49,7 @@ public class CheckedPseudoClass implements PseudoClass {
 
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[((local-name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) or (local-name() = 'option' and @selected))]");
+		return XPathExpressionFactory.createNoFilterSelector("[((local-name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) or (local-name() = 'option' and @selected))]");
 	}
 
 }

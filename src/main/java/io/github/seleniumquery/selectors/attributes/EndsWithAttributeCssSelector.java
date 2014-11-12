@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.attributes;
 import static org.apache.commons.lang3.StringUtils.endsWith;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 
 import java.util.Map;
@@ -44,7 +44,7 @@ public class EndsWithAttributeCssSelector implements CssConditionalSelector<Attr
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String attrValue = attributeCondition.getValue();
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attrValue);
-		return XPathSelectorFactory.createNoFilterSelector("[substring("+attributeName+", string-length("+attributeName+")-"+(attrValue.length()-1)+") = "+wantedValue+"]");
+		return XPathExpressionFactory.createNoFilterSelector("[substring(" + attributeName + ", string-length(" + attributeName + ")-" + (attrValue.length() - 1) + ") = " + wantedValue + "]");
 	}
 
 }

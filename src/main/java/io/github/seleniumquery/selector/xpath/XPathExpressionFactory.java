@@ -6,7 +6,7 @@ import io.github.seleniumquery.selector.filter.ElementFilterList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XPathSelectorFactory {
+public class XPathExpressionFactory {
 	
 	private final static String EMPTY_SELECTOR = ""; 
 

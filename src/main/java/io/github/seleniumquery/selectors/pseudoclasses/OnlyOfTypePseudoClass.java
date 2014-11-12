@@ -2,7 +2,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.selector.filter.ElementFilter;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +36,7 @@ public class OnlyOfTypePseudoClass implements PseudoClass {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":only-of-type");
 		
 		// #no-xpath
-		return XPathSelectorFactory.createFilterOnlySelector(onlyOfTypePseudoClassFilter);
+		return XPathExpressionFactory.createFilterOnlySelector(onlyOfTypePseudoClassFilter);
 	}
 	
 }

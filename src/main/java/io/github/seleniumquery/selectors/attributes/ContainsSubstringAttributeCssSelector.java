@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.attributes;
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 
 import java.util.Map;
@@ -45,7 +45,7 @@ public class ContainsSubstringAttributeCssSelector implements CssConditionalSele
 	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
-		return XPathSelectorFactory.createNoFilterSelector("[contains("+attributeName+", "+wantedValue+")]");
+		return XPathExpressionFactory.createNoFilterSelector("[contains(" + attributeName + ", " + wantedValue + ")]");
 	}
 	
 }

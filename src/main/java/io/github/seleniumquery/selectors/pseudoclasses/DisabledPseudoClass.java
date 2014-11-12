@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +50,7 @@ public class DisabledPseudoClass implements PseudoClass {
 
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathSelectorFactory.createNoFilterSelector("[(@disabled and "
+		return XPathExpressionFactory.createNoFilterSelector("[(@disabled and "
 				+ "(local-name() = 'input' or "
 				+ "local-name() = 'button' or "
 				+ "local-name() = 'optgroup' or "

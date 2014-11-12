@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathExpressionList;
 import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.selector.xpath.XPathSelectorFactory;
+import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class HasPseudoClass implements PseudoClass {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
 		String insideHasXPath = XPathSelectorCompilerService.compileSelectorList(notSelector).toXPath();
 		insideHasXPath = insideHasXPath.substring(1, insideHasXPath.length()-1);
-		return XPathSelectorFactory.createNoFilterSelector("["+insideHasXPath+"]");
+		return XPathExpressionFactory.createNoFilterSelector("[" + insideHasXPath + "]");
 	}
 	
 }
