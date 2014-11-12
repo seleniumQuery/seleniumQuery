@@ -14,6 +14,8 @@ import org.openqa.selenium.WebElement;
 
 public class XPathExpression {
 
+	public static final String EMPTY_LOCAL_NAME_CONDITIONAL = "local-name()";
+
 	private String xPathExpression;
 	private List<XPathExpression> otherExpressions = new ArrayList<XPathExpression>();
 	private ElementFilterList elementFilterList;
@@ -56,26 +58,32 @@ public class XPathExpression {
 		}
 		return "(" + this.xPathExpression + ")";
 	}
-	
+
+	private void mergeExpression(XPathExpression other) {
+		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
+				other.kind, other.xPathExpression, other.elementFilterList);
+		this.xPathExpression = other.kind.merge(this.xPathExpression, null, other.xPathExpression);
+	}
+
 	public String toXPathCondition() {
 		if (this.kind != SqSelectorKind.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
 		if (!"*".equals(this.xPathExpression)) {
-			this.xPathExpression = "[local-name() = '"+this.xPathExpression+"']";
+			this.xPathExpression = "local-name() = '"+this.xPathExpression+"'";
 		} else {
-			this.xPathExpression = "[local-name()]";
+			this.xPathExpression = EMPTY_LOCAL_NAME_CONDITIONAL;
 		}
 		for (XPathExpression other : otherExpressions) {
-			mergeExpression(other);
+			mergeAsCondition(other);
 		}
-		return this.xPathExpression.substring(1, this.xPathExpression.length()-1); // removes [] around
+		return this.xPathExpression;
 	}
-	
-	private void mergeExpression(XPathExpression other) {
-		this.elementFilterList = ElementFilterListCombinator.combine((WebElement) null, this.xPathExpression, this.elementFilterList,
-																		other.kind, other.xPathExpression, other.elementFilterList);
-		this.xPathExpression = other.kind.merge(this.xPathExpression, other.xPathExpression);
+
+	private void mergeAsCondition(XPathExpression other) {
+		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
+				other.kind, other.xPathExpression, other.elementFilterList);
+		this.xPathExpression = other.kind.mergeAsCondition(this.xPathExpression, null, other.xPathExpression);
 	}
 
 }
