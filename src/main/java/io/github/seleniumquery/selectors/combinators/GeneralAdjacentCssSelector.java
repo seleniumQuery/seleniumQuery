@@ -1,18 +1,16 @@
 package io.github.seleniumquery.selectors.combinators;
 
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selector.xpath.SqSelectorKind;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorcss.CssSelector;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
-
-import java.util.List;
-import java.util.Map;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.SiblingSelector;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * E ~ PRE
@@ -55,9 +53,8 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> 
 	@Override
 	public XPathExpression toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
 		XPathExpression previousElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
-		XPathExpression siblingElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
-		
-		siblingElementCompiled.kind = SqSelectorKind.ADJACENT;
+		XPathExpression siblingElementCompiled = XPathSelectorCompilerService.compileToAdjacentExpression(stringMap, siblingSelector.getSiblingSelector());
+
 		return previousElementCompiled.combine(siblingElementCompiled);
 	}
 
