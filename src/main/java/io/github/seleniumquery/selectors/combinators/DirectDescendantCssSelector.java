@@ -1,17 +1,15 @@
 package io.github.seleniumquery.selectors.combinators;
 
 import io.github.seleniumquery.selector.SelectorUtils;
-import io.github.seleniumquery.selector.xpath.SqSelectorKind;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selectorcss.CssSelector;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
-
-import java.util.Map;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.DescendantSelector;
+
+import java.util.Map;
 
 /**
  * PARENT > ELEMENT
@@ -33,10 +31,9 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	
 	@Override
 	public XPathExpression toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		XPathExpression elementCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getSimpleSelector());
+		XPathExpression elementCompiledSelector = XPathSelectorCompilerService.compileToDescendantDirectExpression(stringMap, descendantSelector.getSimpleSelector());
 		XPathExpression parentCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
-		
-		elementCompiledSelector.kind = SqSelectorKind.DESCENDANT_DIRECT;
+
 		return parentCompiledSelector.combine(elementCompiledSelector);
 	}
 

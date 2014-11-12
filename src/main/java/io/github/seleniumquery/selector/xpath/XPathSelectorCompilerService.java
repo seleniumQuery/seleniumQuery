@@ -31,5 +31,23 @@ public class XPathSelectorCompilerService {
 		CssSelector<Selector> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
 		return cssSelector.toXPath(stringMap, selector);
 	}
-	
+
+	public static XPathExpression compileToDescendantGeneralExpression(Map<String, String> stringMap, Selector cssSelector) {
+		return compileAndSetKind(stringMap, cssSelector, SqSelectorKind.DESCENDANT_GENERAL);
+	}
+
+	public static XPathExpression compileToDescendantDirectExpression(Map<String, String> stringMap, Selector cssSelector) {
+		return compileAndSetKind(stringMap, cssSelector, SqSelectorKind.DESCENDANT_DIRECT);
+	}
+
+	public static XPathExpression compileToAdjacentExpression(Map<String, String> stringMap, Selector cssSelector) {
+		return compileAndSetKind(stringMap, cssSelector, SqSelectorKind.ADJACENT);
+	}
+
+	private static XPathExpression compileAndSetKind(Map<String, String> stringMap, Selector cssSelector, SqSelectorKind selectorKind) {
+		XPathExpression xPathExpression = compileSelector(stringMap, cssSelector);
+		xPathExpression.kind = selectorKind;
+		return xPathExpression;
+	}
+
 }
