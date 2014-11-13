@@ -23,6 +23,9 @@ public class IsFunction {
 	}
 	
 	public static boolean is(WebDriver driver, List<WebElement> elements, String selector) {
+		if (selector.trim().isEmpty()) {
+			return false;
+		}
 		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
 		SelectorList parsedSelectorList = parsedSelector.getSelector();
 		Map<String, String> stringMap = parsedSelector.getStringMap();
