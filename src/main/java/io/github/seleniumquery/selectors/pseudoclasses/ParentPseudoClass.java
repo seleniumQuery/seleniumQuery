@@ -53,7 +53,7 @@ public class ParentPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[count(.//*) > 0]");
+		return XPathExpressionFactory.createNoFilterSelector("[count(node()) > 0]");
 	}
 	
 }
