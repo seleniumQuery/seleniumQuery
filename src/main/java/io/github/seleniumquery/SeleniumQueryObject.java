@@ -351,7 +351,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 1.0.0
 	 */
 	public <T> T prop(String propertyName) {
-		return PropFunction.<T>prop(this, elements, propertyName);
+		return PropFunction.prop(this, elements, propertyName);
 	}
 	
 	/**
@@ -383,7 +383,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Retrieves the {@link WebElement}s matched by the seleniumQuery object.
 	 * 
-	 * @param index A zero-based integer indicating which element to retrieve.
 	 * @return the element at the specified index.
 	 * 
 	 * @since 1.0.0

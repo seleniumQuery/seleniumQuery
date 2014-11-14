@@ -18,7 +18,7 @@ public class FirstPseudoClass implements PseudoClass {
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
-		return FIRST_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
+		return FIRST_PSEUDO_CLASS_NO_COLON.equalsIgnoreCase(pseudoClassValue);
 	}
 	
 	@Override
