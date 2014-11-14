@@ -8,6 +8,7 @@ import io.github.seleniumquery.selectorcss.CssConditionalSelector;
 import java.util.Arrays;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
@@ -41,8 +42,9 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	@Override
 	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
+		String unescapedClassName = StringEscapeUtils.unescapeJava(wantedClassName);
 		// nothing to do, everyone supports filtering by class
-		return XPathExpressionFactory.createNoFilterSelector("[contains(concat(' ', normalize-space(@class), ' '), ' " + wantedClassName + " ')]");
+		return XPathExpressionFactory.createNoFilterSelector("[contains(concat(' ', normalize-space(@class), ' '), ' " + unescapedClassName + " ')]");
 	}
 	
 }
