@@ -194,6 +194,20 @@ public class XPathExpressionTest {
         assertThat(xPath, is("(.//span[not(local-name() = 'span' and ancestor::div[ancestor::body])])"));
     }
 
+    @Test
+    public void toXPath__id_text() {
+        XPathExpression xPathExpr = selectorToExpression("#myID :text");
+        String xPath = xPathExpr.toXPath();
+        assertThat(xPath, is("(.//*[@id = 'myID']//*[local-name() = 'input' and (@type = 'text' or not(@type))])"));
+    }
+
+    @Test
+    public void toXPath__only_child() {
+        XPathExpression xPathExpr = selectorToExpression("#idz a:only-child");
+        String xPath = xPathExpr.toXPath();
+        assertThat(xPath, is("(.//*[@id = 'idz']//a[../*[last() = 1]])"));
+    }
+
     public static XPathExpression selectorToExpression(String selector) {
         ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
         SelectorList selectorList = parsedSelector.getSelector();
@@ -219,6 +233,13 @@ public class XPathExpressionTest {
         XPathExpression xPathExpr = selectorToExpression(".cls");
         String xPathCondition = xPathExpr.toXPathCondition();
         assertThat(xPathCondition, is("local-name() and contains(concat(' ', normalize-space(@class), ' '), ' cls ')"));
+    }
+
+    @Test
+    public void toXPathCondition__escaped_class() {
+        XPathExpression xPathExpr = selectorToExpression(".foo\\:bar");
+        String xPathCondition = xPathExpr.toXPathCondition();
+        assertThat(xPathCondition, is("local-name() and contains(concat(' ', normalize-space(@class), ' '), ' foo:bar ')"));
     }
 
 }

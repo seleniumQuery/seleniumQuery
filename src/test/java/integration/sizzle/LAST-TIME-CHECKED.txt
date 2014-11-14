@@ -1,0 +1,5 @@
+URL: https://github.com/jquery/sizzle/tree/master/test
+
+Last time checked: 14/11/2014
+
+Commit was: https://github.com/jquery/sizzle/commit/7e1360dfa5aa6684218462c65a1341ed1f5608aa
