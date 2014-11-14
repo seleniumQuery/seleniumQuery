@@ -37,7 +37,9 @@ public class OnlyChildPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[last() = 1]");
+		// [last() = 1] will not suffice because it may be composed into an expression like //a[last() = 1] which will yield wrong results
+		// So you have to go up and then down again: //a[../*[last() = 1]]
+		return XPathExpressionFactory.createNoFilterSelector("[../*[last() = 1]]");
 	}
 
 }
