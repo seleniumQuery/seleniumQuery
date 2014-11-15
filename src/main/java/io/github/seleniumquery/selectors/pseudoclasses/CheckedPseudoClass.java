@@ -6,6 +6,8 @@ import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static io.github.seleniumquery.selectors.pseudoclasses.SelectedPseudoClass.SELECTED_PSEUDO_CONDITION;
+
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:checked
  * 
@@ -14,6 +16,7 @@ import org.openqa.selenium.WebElement;
  * In PhantomJSDriver, :checked does not work for <option> tags, so we consider it as not supported as well
  *
  * @author acdcjunior
+ * @author ricardo-sc
  * @since 1.0.0
  */
 public class CheckedPseudoClass implements PseudoClass {
@@ -49,7 +52,13 @@ public class CheckedPseudoClass implements PseudoClass {
 
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[((local-name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) or (local-name() = 'option' and @selected))]");
+		return XPathExpressionFactory.createNoFilterSelector("[" +
+				"(" +
+					"(local-name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) " +
+					"or " +
+					"(" + SELECTED_PSEUDO_CONDITION + ")" +
+				")" +
+			"]");
 	}
 
 }

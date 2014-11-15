@@ -95,8 +95,7 @@ public class SizzleAttributes extends SizzleTest {
         t("Empty values", "#select1 option[value='']", new String[]{"option1a"});
         t("Empty values", "#select1 option[value!='']", new String[]{"option1b", "option1c", "option1d"});
 
-// TODO(issue#38)
-//        t("Select options via :selected", "#select1 option:selected", new String[]{"option1a"});
+        t("Select options via :selected", "#select1 option:selected", new String[]{"option1a"});
         t("Select options via :selected", "#select2 option:selected", new String[]{"option2d"});
         t("Select options via :selected", "#select3 option:selected", new String[]{"option3b", "option3c"});
         t("Select options via :selected", "select[name='select2'] option:selected", new String[]{"option2d"});

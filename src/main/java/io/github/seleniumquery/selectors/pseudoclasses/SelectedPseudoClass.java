@@ -13,7 +13,10 @@ import org.openqa.selenium.WebElement;
  * @since 1.0.0
  */
 public class SelectedPseudoClass implements PseudoClass {
-	
+
+	public static final String SELECTED_PSEUDO_CONDITION = "local-name() = 'option' and (@selected or (ancestor::select[not(@multiple) and not(option[@selected])] and position() = 1))";
+	private static final String SELECTED_PSEUDO_CONDITIONAL_EXPRESSION = "[" + SELECTED_PSEUDO_CONDITION + "]";
+
 	private static final String OPTION_TAG = "option";
 	private static final String SELECTED_PSEUDO_CLASS_NO_COLON = "selected";
 
@@ -33,7 +36,7 @@ public class SelectedPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[local-name() = 'option' and (@selected or (ancestor::select[not(@multiple) and not(option[@selected])] and position() = 1))]");
+		return XPathExpressionFactory.createNoFilterSelector(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
 	}
 
 }
