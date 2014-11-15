@@ -1,24 +1,22 @@
 package io.github.seleniumquery;
 
 import io.github.seleniumquery.by.SeleniumQueryBy;
-import io.github.seleniumquery.functions.AttrFunction;
-import io.github.seleniumquery.functions.ChildrenFunction;
-import io.github.seleniumquery.functions.ClickFunction;
-import io.github.seleniumquery.functions.ClosestFunction;
-import io.github.seleniumquery.functions.EqFunction;
-import io.github.seleniumquery.functions.FindFunction;
-import io.github.seleniumquery.functions.FocusFunction;
-import io.github.seleniumquery.functions.GetFunction;
-import io.github.seleniumquery.functions.HasClassFunction;
-import io.github.seleniumquery.functions.HtmlFunction;
-import io.github.seleniumquery.functions.IsFunction;
-import io.github.seleniumquery.functions.NotFunction;
-import io.github.seleniumquery.functions.PropFunction;
-import io.github.seleniumquery.functions.RemoveAttrFunction;
-import io.github.seleniumquery.functions.SelectFunction;
-import io.github.seleniumquery.functions.TextFunction;
-import io.github.seleniumquery.functions.ToArrayFunction;
-import io.github.seleniumquery.functions.ValFunction;
+import io.github.seleniumquery.functions.jquery.attributes.AttrFunction;
+import io.github.seleniumquery.functions.jquery.traversing.filtering.*;
+import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ChildrenFunction;
+import io.github.seleniumquery.functions.jquery.events.ClickFunction;
+import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
+import io.github.seleniumquery.functions.jquery.traversing.treetraversal.FindFunction;
+import io.github.seleniumquery.functions.jquery.forms.FocusFunction;
+import io.github.seleniumquery.functions.jquery.miscellaneous.GetFunction;
+import io.github.seleniumquery.functions.jquery.attributes.HasClassFunction;
+import io.github.seleniumquery.functions.jquery.manipulation.HtmlFunction;
+import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
+import io.github.seleniumquery.functions.jquery.attributes.RemoveAttrFunction;
+import io.github.seleniumquery.functions.as.AsSelect;
+import io.github.seleniumquery.functions.jquery.manipulation.TextFunction;
+import io.github.seleniumquery.functions.jquery.miscellaneous.ToArrayFunction;
+import io.github.seleniumquery.functions.jquery.forms.ValFunction;
 import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
 
 import java.util.Iterator;
@@ -47,11 +45,11 @@ import org.openqa.selenium.WebElement;
  * </p>
  * <p>
  * In API calls that return a seleniumQuery object, the value returned will be the original seleniumQuery object unless
- * otherwise documented by that API. API methods such as {@link SeleniumQueryObject#first()} or {@link SeleniumQueryObject#not()}
+ * otherwise documented by that API. API methods such as {@link SeleniumQueryObject#first()} or {@link SeleniumQueryObject#not(String)}
  * modify their incoming set and thus return a <b>new</b> seleniumQuery object.
  * </p>
  * Whenever you use a "destructive" seleniumQuery method that potentially changes the set of elements in the seleniumQuery object,
- * such as {@link SeleniumQueryObject#first()} or {@link SeleniumQueryObject#not()}, that method actually returns a new seleniumQuery
+ * such as {@link SeleniumQueryObject#first()} or {@link SeleniumQueryObject#not(String)}, that method actually returns a new seleniumQuery
  * object with the resulting elements. To return to the previous seleniumQuery object, you use the {@link SeleniumQueryObject#end()} method.
  * </p>
  * <p>
@@ -121,14 +119,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 	
 	/**
-	 * Use {@link #waitUntil()}
-	 */
-	@Deprecated
-	public final SeleniumQueryWaitUntil queryUntil() {
-		return new SeleniumQueryWaitUntil(this);
-	}
-	
-	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
 	 * a new seleniumQuery object at the end.
 	 * 
@@ -156,7 +146,12 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**************************************************************************************************************************************
 	 * Java SeleniumQueryObject specific functions
 	 **************************************************************************************************************************************/
-	
+
+	/**
+	 * Returns an iterator over the matched elements of this seleniumQuery object.
+	 *
+	 * @return an iterator over the matched elements of this seleniumQuery object.
+	 */
 	@Override
 	public Iterator<WebElement> iterator() {
 		return this.elements.iterator();
@@ -186,6 +181,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 
 	/**
 	 * Returns the number of elements in the seleniumQuery object.
+	 *
 	 * @return the number of elements in the seleniumQuery object.
 	 * 
 	 * @since 1.0.0
@@ -198,6 +194,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Removes elements from the set of matched elements.
 	 * 
 	 * @param selector	A string containing a selector expression to match elements against.
+	 *
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject not(String selector) {
@@ -207,13 +204,13 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * <p>Reduces the set of matched elements to the first in the set.</p>
 	 * 
-	 * <p>Given a seleniumQuery object that represents a set of DOM elements, the <code>.last()</code>
+	 * <p>Given a seleniumQuery object that represents a set of DOM elements, the <code>.first()</code>
 	 * method constructs a new seleniumQuery object from the first element in that set.</p>
 	 * 
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject first() {
-		return EqFunction.eq(this, this.elements, 0);
+		return FirstFunction.first(this, this.elements);
 	}
 	
 	/**
@@ -225,7 +222,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject last() {
-		return EqFunction.eq(this, this.elements, -1);
+		return LastFunction.last(this, this.elements);
 	}
 	
 	/**
@@ -274,6 +271,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Sets the value of <strong>all</strong> elements in the set of matched elements.
 	 * 
 	 * @param value The (string) value to be set.
+	 *
 	 * @since 1.0.0
 	 */
 	public SeleniumQueryObject val(String value) {
@@ -501,7 +499,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	   */
 	public SeleniumQueryObject selectOptionByVisibleText(String text) {
 		LOGGER.debug("Selecting "+this+" by visible text: \""+text+"\".");
-		return SelectFunction.selectOptionByVisibleText(this, elements, text);
+		return AsSelect.selectOptionByVisibleText(this, elements, text);
 	}
 	
 	/**
@@ -514,7 +512,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *            The value to match against
 	 */
 	public SeleniumQueryObject selectOptionByValue(String value) {
-		return SelectFunction.selectOptionByValue(this, elements, value);
+		return AsSelect.selectOptionByValue(this, elements, value);
 	}
 	
 	@Override

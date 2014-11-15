@@ -1,4 +1,4 @@
-package io.github.seleniumquery.functions;
+package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
 import io.github.seleniumquery.SQLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;

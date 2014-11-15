@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.functions.HtmlFunction;
+import io.github.seleniumquery.functions.jquery.manipulation.HtmlFunction;
 
 public class HtmlGetter implements Getter<String> {
 	

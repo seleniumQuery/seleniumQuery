@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.functions.AttrFunction;
+import io.github.seleniumquery.functions.jquery.attributes.AttrFunction;
 
 public class AttrGetter implements Getter<String> {
 	

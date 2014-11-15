@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.functions.PropFunction;
+import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
 
 public class PropGetter<T> implements Getter<T> {
 	
