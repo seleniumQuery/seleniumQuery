@@ -17,9 +17,9 @@ $("input.street").val("4th St!");
 
 Allows querying elements by:
 
-- **XPath** - `$("//div/*/label")`
 - **CSS Selectors** - `$(".myClass")`,
-- **jQuery/Sizzle enhancements** - `:eq()`: `$(".myClass:eq(3)")`, `:contains()`: `$(".myClass:contains('My Text!')")`
+- **jQuery/Sizzle enhancements** - `$(".myClass:eq(3)")`, `$(".myClass:contains('My Text!')")`
+- **XPath** - `$("//div/*/label")`
 - and even some own **seleniumQuery selectors**: `$("#myOldDiv").is(":not(:present)")`.
 
 Built using Selenium WebDriver's native capabilities **only**:
@@ -27,7 +27,7 @@ Built using Selenium WebDriver's native capabilities **only**:
 - No `jQuery.js` is embedded at the page, no side-effects are generated;
     - Doesn't matter if the page uses jQuery or not (or even if the JavaScript global variable `$` is other library like `Prototype.js`).
 - Capable of handling/testing **JavaScript-disabled pages**
-    - Test pages that use [Unobtrusive JavaScript!](http://en.wikipedia.org/wiki/Unobtrusive_JavaScript)
+    - Test pages that use [Unobtrusive JavaScript](http://en.wikipedia.org/wiki/Unobtrusive_JavaScript).
     - Most functions don't even require the browser/driver to have JavaScript enabled!
 
 ##Quickstart: A running example
@@ -126,7 +126,7 @@ And, yeah, that's right, the `.is()` function above is your old-time friend that
 
 #API
 
-For the currently implemented jQuery functions check the [supported list below](#supported-jquery-functions).
+For the currently implemented jQuery functions check the [supported list](#supported-jquery-functions).
 
 In order to handle interactions with Ajax-enabled pages, you can use the `.waitUntil()` function:
 
