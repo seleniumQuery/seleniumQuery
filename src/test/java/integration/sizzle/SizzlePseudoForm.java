@@ -21,13 +21,8 @@ public class SizzlePseudoForm extends SizzleTest {
         t("Form element :checkbox:checked", "#form :checkbox:checked", new String[]{"check1"});
         t("Form element :radio:checked, :checkbox:checked", "#form :radio:checked, #form :checkbox:checked", new String[]{"radio2", "check1"});
 
-// TODO(issue#38)
-//        t("Selected Option Element", "#form option:selected", new String[]{"option1a", "option2d", "option3b", "option3c", "option4b", "option4c", "option4d", "option5a"});
-//        t("Selected Option Element are also :checked", "#form option:checked", new String[]{"option1a", "option2d", "option3b", "option3c", "option4b", "option4c", "option4d", "option5a"});
-
-// the two tests below should be removed when
-        t("Selected Option Element", "#form option:selected",                  new String[]{"option2d", "option3b", "option3c", "option4b", "option4c", "option4d"});
-        t("Selected Option Element are also :checked", "#form option:checked", new String[]{"option2d", "option3b", "option3c", "option4b", "option4c", "option4d"});
+        t("Selected Option Element", "#form option:selected", new String[]{"option1a", "option2d", "option3b", "option3c", "option4b", "option4c", "option4d", "option5a"});
+        t("Selected Option Element are also :checked", "#form option:checked", new String[]{"option1a", "option2d", "option3b", "option3c", "option4b", "option4c", "option4d", "option5a"});
 
         t("Hidden inputs should be treated as enabled. See QSA test.", "#hidden1:enabled", new String[]{"hidden1"});
 
