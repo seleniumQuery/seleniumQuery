@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.functions.IsFunction;
+import io.github.seleniumquery.functions.jquery.traversing.filtering.IsFunction;
 
 public class IsEvaluator implements Evaluator<String> {
 

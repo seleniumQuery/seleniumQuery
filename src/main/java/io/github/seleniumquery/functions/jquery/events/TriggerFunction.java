@@ -1,4 +1,4 @@
-package io.github.seleniumquery.functions;
+package io.github.seleniumquery.functions.jquery.events;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

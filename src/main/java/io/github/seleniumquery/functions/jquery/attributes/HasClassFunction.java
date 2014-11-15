@@ -1,4 +1,4 @@
-package io.github.seleniumquery.functions;
+package io.github.seleniumquery.functions.jquery.attributes;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 

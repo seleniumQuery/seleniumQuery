@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selector.filter;
 
-import io.github.seleniumquery.functions.ClosestFunction;
+import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
 import io.github.seleniumquery.selector.SelectorUtils;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 

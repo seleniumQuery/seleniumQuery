@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.functions.ValFunction;
+import io.github.seleniumquery.functions.jquery.forms.ValFunction;
 
 public class ValGetter implements Getter<String> {
 	

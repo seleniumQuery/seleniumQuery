@@ -1,7 +1,7 @@
 package other;
 
 import io.github.seleniumquery.SeleniumQuery;
-import io.github.seleniumquery.functions.HtmlFunction;
+import io.github.seleniumquery.functions.jquery.manipulation.HtmlFunction;
 
 import java.util.List;
 

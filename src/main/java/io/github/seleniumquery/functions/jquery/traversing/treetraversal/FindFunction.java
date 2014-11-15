@@ -1,4 +1,4 @@
-package io.github.seleniumquery.functions;
+package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
 import java.util.LinkedList;
 import java.util.List;
