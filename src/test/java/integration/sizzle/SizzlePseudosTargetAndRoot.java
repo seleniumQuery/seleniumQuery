@@ -4,6 +4,8 @@ import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static infrastructure.IntegrationTestUtils.equal;
+
 public class SizzlePseudosTargetAndRoot extends SizzleTest {
 
     @Rule

@@ -37,9 +37,44 @@ public class IntegrationTestUtils {
         SeleniumQueryObject f = $(selector);
         List<String> actualIds = new ArrayList<String>();
         for (WebElement webElement : f) {
-            actualIds.add(webElement.getAttribute("id"));
+            actualIds.add(id(webElement));
         }
         return actualIds.toArray(new String[actualIds.size()]);
+    }
+
+    /**
+     * Gets the @id of the given element.
+     * @param webElement element to extract id.
+     * @return the ID attribute.
+     */
+    public static String id(WebElement webElement) {
+        return webElement.getAttribute("id");
+    }
+
+    /**
+     * Gets the @id of the first element in the matched set.
+     * @param sq matched set to extract id of first element from.
+     * @return the ID attribute.
+     */
+    public static String id(SeleniumQueryObject sq) {
+        return id(sq.get(0));
+    }
+
+    /**
+     * Gets the @ids of all elements in the matched set.
+     * @param sq matched set to extract ids from.
+     * @return list of IDs.
+     */
+    public static List<String> ids(SeleniumQueryObject sq) {
+        List<String> ids = new ArrayList<String>(sq.size());
+        for (WebElement element : sq) {
+            ids.add(id(element));
+        }
+        return ids;
+    }
+
+    public static void equal(Object o1, Object o2, String msg) {
+        assertEquals(msg, o2, o1);
     }
 
     /**

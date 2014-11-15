@@ -17,6 +17,7 @@ import io.github.seleniumquery.functions.as.AsSelect;
 import io.github.seleniumquery.functions.jquery.manipulation.TextFunction;
 import io.github.seleniumquery.functions.jquery.miscellaneous.ToArrayFunction;
 import io.github.seleniumquery.functions.jquery.forms.ValFunction;
+import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ParentFunction;
 import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
 
 import java.util.Iterator;
@@ -473,7 +474,8 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	
 	/**
 	 * Gets the children of each element in the set of matched elements, filtered by a selector.
-	 * 
+	 *
+	 * @param selector Selector to filter the children.
 	 * @return A <b>new</b> SeleniumQueryObject, containing the children of each element in the set of matched elements.
 	 * 
 	 * @since 1.0.0
@@ -483,20 +485,44 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	 * Selects the children of each element in the set of matched elements, filtered by a selector.
-	 * 
-	 * @return A <b>new</b> SeleniumQueryObject, containing the children of each element in the set of matched elements.
-	 * 
+	 * Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
+	 * <br><br>
+	 * Note that <code>$("html").parent()</code> returns an empty matched set, as &lt;html&gt; has no parent elements.
+	 *
+	 * @return A <b>new</b> SeleniumQueryObject, containing the parent of each element in the set of matched elements.
+	 *
 	 * @since 1.0.0
 	 */
-	  /**
-	   * Selects all <code>&lt;option&gt;</code>s that display text matching the argument.
-	   * That is, when given <code>"Bar"</code> this would select an option like:
-	   * 
-	   * <code>&lt;option value="foo"&gt;Bar&lt;/option&gt;</code>
-	   * 
-	   * @param text The visible text to match against
-	   */
+	public SeleniumQueryObject parent() {
+		return ParentFunction.parent(this, elements);
+	}
+
+	/**
+	 * Get the parent of each element in the current set of matched elements, filtered by a selector.
+	 *
+	 * <br><br>
+	 * Note that <code>$("html").parent("selector-Matching-HTML-Element")</code> returns an empty matched set,
+	 * as &lt;html&gt; has no parent elements.
+	 *
+	 * @param selector Selector to filter the parents.
+	 * @return A <b>new</b> SeleniumQueryObject, containing the parent of each element in the set of matched elements.
+	 *
+	 * @since 1.0.0
+	 */
+	public SeleniumQueryObject parent(String selector) {
+		return ParentFunction.parent(this, elements, selector);
+	}
+
+	/**
+	* Selects all <code>&lt;option&gt;</code>s that display text matching the argument.
+	* That is, when given <code>"Bar"</code> this would select an option like:
+	*
+	* <code>&lt;option value="foo"&gt;Bar&lt;/option&gt;</code>
+	*
+	* @param text The visible text to match against
+	*
+	* @since 1.0.0
+	*/
 	public SeleniumQueryObject selectOptionByVisibleText(String text) {
 		LOGGER.debug("Selecting "+this+" by visible text: \""+text+"\".");
 		return AsSelect.selectOptionByVisibleText(this, elements, text);

@@ -79,10 +79,6 @@ public class SizzleTest {
         return actualIds;
     }
 
-    protected void equal(Object o1, Object o2, String msg) {
-        assertEquals(msg, o2, o1);
-    }
-
     protected void deepEqual(SeleniumQueryObject o1, List<WebElement> o2, String msg) {
         assertEquals(msg, o2, o1.get());
     }
