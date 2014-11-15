@@ -33,7 +33,7 @@ public class SelectedPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[local-name() = 'option' and @selected]");
+		return XPathExpressionFactory.createNoFilterSelector("[local-name() = 'option' and (@selected or (ancestor::select[not(@multiple) and not(option[@selected])] and position() = 1))]");
 	}
 
 }
