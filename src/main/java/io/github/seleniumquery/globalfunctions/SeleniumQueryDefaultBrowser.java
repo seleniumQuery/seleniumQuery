@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
  * The seleniumQuery browser. Adds several utility functions to the WebDriver class.
  * 
  * @author acdcjunior
+ *
  * @since 1.0.0
  */
 public class SeleniumQueryDefaultBrowser {
@@ -40,32 +41,51 @@ public class SeleniumQueryDefaultBrowser {
 	}
 
 	/**
-	 * This method looks for the chromedriver.exe at the classpath. (Tipically at a resources/ folder of a
-	 * maven project.)
+	 * Sets <b>Chrome</b> as the default {@link WebDriver} for seleniumQuery.
+	 * <p>
+	 * Note that the Chrome driver needs a <i>server executable</i> to bridge Selenium to the browser and as such
+	 * Selenium must have the path to it. It is a file usually named <code>chromedriver.exe</code> and its latest
+	 * version can be downloaded from <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's
+	 * download page</a> -- or check <a
+	 * href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-as-WebDriver-Browser">
+	 * seleniumQuery and Chrome as WebDriver/Browser wiki page</a> for the latest info.
+	 * </p>
+	 * <p><b> This method looks for the chromedriver.exe at the CLASSPATH.</b> If you wish to directly specify a path,
+	 * use {@link #setDefaultDriverAsChrome(String)}</p>
+	 * <p>
+	 * For more info, see <a href="https://code.google.com/p/selenium/wiki/ChromeDriver">ChromeDriver's official wiki</a>.
+	 * </p>
 	 */
 	public SeleniumQueryDefaultBrowser setDefaultDriverAsChrome() {
 		return setDefaultDriver(driverInstantiationUtils.instantiateChromeDriverWithoutPath());
 	}
 
 	/**
-	 * Sets Chrome as the default driver for seleniumQuery.
+	 * Sets <b>Chrome</b> as the default {@link WebDriver} for seleniumQuery.
 	 * <p>
-	 * Note that, as Chrome needs a "server" to bridge selenium to the browser, you have
-	 * to point the path to it. It is a file usually named "chromedriver.exe" and its latest
-	 * version can be downloaded from http://chromedriver.storage.googleapis.com/index.html.
+	 * Note that the Chrome driver needs a <i>server executable</i> to bridge Selenium to the browser and as such
+	 * Selenium must have the path to it. It is a file usually named <code>chromedriver.exe</code> and its latest
+	 * version can be downloaded from <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's
+	 * download page</a> -- or check <a
+	 * href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-as-WebDriver-Browser">
+	 * seleniumQuery and Chrome as WebDriver/Browser wiki page</a> for the latest info.
 	 * </p>
+	 * <p><b> This method looks for the chromedriver.exe at the path specified by the <code>pathToChromeDriverExe</code>
+	 * argument.</b></p>
 	 * <p>
-	 * For more info, check https://code.google.com/p/selenium/wiki/ChromeDriver
+	 * For more info, see <a href="https://code.google.com/p/selenium/wiki/ChromeDriver">ChromeDriver's official wiki</a>.
 	 * </p>
-	 * 
-	 * @param pathToChromeDriverExe The full path to the chromedriver.exe file.
+	 *
+	 * @param pathToChromeDriverExe The full path to the executable server file. Examples:
+	 *     <code>"C:\\myFiles\\chromedriver.exe"</code>; can be relative, as in <code>"..\\stuff\\chromedriver.exe"</code>,
+	 *     does not matter if the .exe was renamed, such as <code>"drivers\\chrome\\chromedriver_v12345.exe"</code>.
 	 */
 	public SeleniumQueryDefaultBrowser setDefaultDriverAsChrome(String pathToChromeDriverExe) {
 		return setDefaultDriver(driverInstantiationUtils.instantiateChromeDriverWithPath(pathToChromeDriverExe));
 	}
 	
 	/**
-	 * This method looks for the IEDriverServer.exe at the classpath. (Tipically at a resources/ folder of a
+	 * This method looks for the IEDriverServer.exe at the CLASSPATH. (Tipically at a resources/ folder of a
 	 * maven project.)
 	 */
 	public SeleniumQueryDefaultBrowser setDefaultDriverAsIE() {
@@ -100,7 +120,15 @@ public class SeleniumQueryDefaultBrowser {
 	private void setDriverTimeout() {
 		this.defaultDriver.manage().timeouts().implicitlyWait(SeleniumQueryConfig.getGlobalTimeout(), TimeUnit.MILLISECONDS);
 	}
-	
+
+	/**
+	 * <p>Returns the currently set default {@link WebDriver}.</p>
+	 * <p><b>If no driver has been set before, it assigns a <code>HtmlUnitDriver</code> instance as driver and returns it.</b></p>
+	 *
+	 * @return the currently set default {@link WebDriver};
+	 *
+	 * @since 1.0.0
+	 */
 	public WebDriver getDefaultDriver() {
 		if (this.defaultDriver == null) {
 			setDefaultDriverAsHtmlUnit();
@@ -154,8 +182,8 @@ public class SeleniumQueryDefaultBrowser {
 	}
 
 	/**
-	 * Sets the URL for the default browser.
-	 * @param url The URL to be opened. Example: "http://seleniumquery.github.io"
+	 * Opens the given URL in the default browser.
+	 * @param urlToOpen The URL to be opened. Example: "http://seleniumquery.github.io"
 	 * 
 	 * @since 1.0.0
 	 */
