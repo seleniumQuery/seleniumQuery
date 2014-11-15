@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +14,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsDriver;
 
 public class SelectorUtils {
+
+	private static final Log LOGGER = LogFactory.getLog(SelectorUtils.class);
 	
 	/**<p> 
 	 * Sequence to be used in regexes to prevent matching escaped symbols.
@@ -36,8 +40,8 @@ public class SelectorUtils {
 		try {
 			return element.findElement(By.xpath(".."));
 		} catch (RuntimeException e) {
-//			String exceptionMessage = e.getMessage();
-//			System.err.println(exceptionMessage.substring(0, Math.min(200, exceptionMessage.length())));
+			LOGGER.debug("parent() (XPath \"..\") on element ("+element+") failed. It probably is because element is <html>." +
+					" Still, it could be something else, thus this logging.", e);
 			return null;
 		}
 	}
