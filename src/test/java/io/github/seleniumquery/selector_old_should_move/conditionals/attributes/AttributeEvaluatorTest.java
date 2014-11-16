@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector.conditionals.attributes;
+package io.github.seleniumquery.selector_old_should_move.conditionals.attributes;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;

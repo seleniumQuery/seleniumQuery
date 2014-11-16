@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector;
+package io.github.seleniumquery.selector_old_should_move;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

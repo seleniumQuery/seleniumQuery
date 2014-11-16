@@ -1,8 +1,11 @@
-package io.github.seleniumquery.selector.xpath;
+package io.github.seleniumquery.selector_old_should_move.xpath;
 
 import io.github.seleniumquery.by.selector.UnsupportedConditionalSelector;
 import io.github.seleniumquery.selector.parser.ParsedSelector;
 import io.github.seleniumquery.selector.parser.SelectorParser;
+import io.github.seleniumquery.selector.xpath.XPathExpression;
+import io.github.seleniumquery.selector.xpath.XPathExpressionList;
+import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
 import org.junit.Test;
 import org.w3c.css.sac.SelectorList;
 
