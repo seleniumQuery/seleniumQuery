@@ -1,9 +1,7 @@
-package io.github.seleniumquery.selector_old_should_move.parser;
+package io.github.seleniumquery.by.preparser;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.by.preparser.SelectorPreParser;
-import io.github.seleniumquery.by.preparser.TransformedSelector;
 
 import org.junit.Test;
 
