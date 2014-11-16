@@ -12,7 +12,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 
 import java.lang.reflect.Method;
 
-import static io.github.seleniumquery.selector.DriverSupportService.isHtmlUnitDriverEmulatingIEBelow11;
+import static io.github.seleniumquery.selector.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
 
 /**
  * <p>

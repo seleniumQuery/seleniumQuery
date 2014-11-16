@@ -1,7 +1,7 @@
 package integration.functions;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.selector.DriverSupportService.isHtmlUnitDriverEmulatingIE;
+import static io.github.seleniumquery.selector.DriverVersionUtils.isHtmlUnitDriverEmulatingIE;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;

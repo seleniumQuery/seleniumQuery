@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.selector.DriverSupportService.isHtmlUnitDriverEmulatingIE;
+import static io.github.seleniumquery.selector.DriverVersionUtils.isHtmlUnitDriverEmulatingIE;
 import static java.util.Arrays.asList;
 
 public class SizzleElement extends SizzleTest {
