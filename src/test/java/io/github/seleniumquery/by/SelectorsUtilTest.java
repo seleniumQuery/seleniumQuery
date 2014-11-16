@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector_old_should_move;
+package io.github.seleniumquery.by;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
