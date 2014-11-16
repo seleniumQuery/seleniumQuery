@@ -1,7 +1,7 @@
 package io.github.seleniumquery.functions.jquery.forms;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.DriverVersionUtils;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class FocusFunction {
 
 	private static void focusElement(WebDriver driver, WebElement elementToBeFocused) {
 		// #Cross-Driver
-		if (DriverSupportService.isHtmlUnitDriver(driver) && "html".equals(elementToBeFocused.getTagName())) {
+		if (DriverVersionUtils.isHtmlUnitDriver(driver) && "html".equals(elementToBeFocused.getTagName())) {
 			LOGGER.warn("The HTML element is not focusable in HtmlUnitDriver, even with a tabindex attribute!");
 		}
 		elementToBeFocused.sendKeys(Keys.NULL);

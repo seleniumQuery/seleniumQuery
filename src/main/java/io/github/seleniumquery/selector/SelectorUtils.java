@@ -76,7 +76,7 @@ public class SelectorUtils {
 		}
 		// #Cross-Driver
 		// at this point, it is visible...
-		if (!DriverSupportService.isHtmlUnitDriver(driver)) {
+		if (!DriverVersionUtils.isHtmlUnitDriver(driver)) {
 			return true;
 		}
 		// ...or we are in HtmlUnitDriver. In this case we must check if it is under <body>

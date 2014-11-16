@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.selector.DriverSupportService;
+import io.github.seleniumquery.selector.DriverVersionUtils;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 
@@ -31,7 +31,7 @@ public class ParentPseudoClass implements PseudoClass {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		boolean isParent = isParent(element);
 		// #Cross-Driver
-		if (!isParent && DriverSupportService.isHtmlUnitDriverEmulatingIEBelow11(driver)) {
+		if (!isParent && DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11(driver)) {
 			LOGGER.warn("The outcome of the selector with the pseudo-class \":parent\" could be affected:" +
 					" HtmlUnidDriver emulating IE below 11 considers elements " +
 					" with space-only content (e.g. \"<div> </div>\") to be empty, while for other browsers" +
