@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector.parser;
+package io.github.seleniumquery.by.selector.preparser;
 
 import java.util.Map;
 

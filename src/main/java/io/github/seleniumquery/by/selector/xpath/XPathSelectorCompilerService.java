@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.selector.xpath;
 
-import io.github.seleniumquery.by.selector.parser.ParsedSelector;
-import io.github.seleniumquery.by.selector.parser.SelectorParser;
+import io.github.seleniumquery.by.selector.preparser.ParsedSelector;
+import io.github.seleniumquery.by.selector.preparser.SelectorParser;
 import io.github.seleniumquery.by.selector.css.CssSelector;
 import io.github.seleniumquery.by.selector.css.CssSelectorFactory;
 
