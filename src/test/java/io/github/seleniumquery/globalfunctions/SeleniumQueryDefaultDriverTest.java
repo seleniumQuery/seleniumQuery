@@ -9,16 +9,16 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
-public class SeleniumQueryDefaultBrowserTest {
+public class SeleniumQueryDefaultDriverTest {
 
-	SeleniumQueryDefaultBrowser seleniumQueryDefaultBrowser = new SeleniumQueryDefaultBrowser();
+	SeleniumQueryDefaultDriver seleniumQueryDefaultDriver = new SeleniumQueryDefaultDriver();
 
 	@Test
 	public void sleepInt__should_sleep_for_the_given_time_in_millis() {
 		// given
 		long tempoNoInicio = System.currentTimeMillis();
 		// when
-		seleniumQueryDefaultBrowser.sleep(1000);
+		seleniumQueryDefaultDriver.sleep(1000);
 		// then
 		long tempoGasto = System.currentTimeMillis() - tempoNoInicio;
 		assertThat(new BigDecimal(tempoGasto), is(closeTo(new BigDecimal(1000), new BigDecimal(100))));
@@ -29,7 +29,7 @@ public class SeleniumQueryDefaultBrowserTest {
 		// given
 		long tempoNoInicio = System.currentTimeMillis();
 		// when
-		seleniumQueryDefaultBrowser.sleep(1, TimeUnit.SECONDS);
+		seleniumQueryDefaultDriver.sleep(1, TimeUnit.SECONDS);
 		// then
 		long tempoGasto = System.currentTimeMillis() - tempoNoInicio;
 		assertThat(new BigDecimal(tempoGasto), is(closeTo(new BigDecimal(1000), new BigDecimal(100))));
@@ -40,7 +40,7 @@ public class SeleniumQueryDefaultBrowserTest {
 		// given
 		long tempoNoInicio = System.currentTimeMillis();
 		// when
-		seleniumQueryDefaultBrowser.sleep(1, TimeUnit.MILLISECONDS);
+		seleniumQueryDefaultDriver.sleep(1, TimeUnit.MILLISECONDS);
 		// then
 		long tempoGasto = System.currentTimeMillis() - tempoNoInicio;
 		assertThat(new BigDecimal(tempoGasto), is(closeTo(new BigDecimal(1), new BigDecimal(100))));

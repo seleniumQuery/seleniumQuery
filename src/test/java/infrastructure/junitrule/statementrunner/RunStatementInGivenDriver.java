@@ -2,7 +2,6 @@ package infrastructure.junitrule.statementrunner;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.junit.runners.model.Statement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -24,7 +23,7 @@ public class RunStatementInGivenDriver extends Statement {
         String driverName = $.browser.getDefaultDriver().getClass().getSimpleName();
         sQBeforeAfterer.executeMethodForDriver(driverName);
 
-        $.browser.quitDefaultBrowser();
+        $.browser.quitDefaultDriver();
 
         sQBeforeAfterer.reportFailures();
     }

@@ -2,9 +2,6 @@ package other;
 
 import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the short syntax
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -32,7 +29,7 @@ public class ChromeDemo {
         
         // The line above throws an exception as that input never goes away in google.com.
 
-        $.browser.quitDefaultBrowser();
+        $.browser.quitDefaultDriver();
     }
 
 }

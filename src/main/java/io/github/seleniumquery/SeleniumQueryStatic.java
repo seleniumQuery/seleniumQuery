@@ -4,7 +4,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
 
-import io.github.seleniumquery.globalfunctions.SeleniumQueryDefaultBrowser;
+import io.github.seleniumquery.globalfunctions.SeleniumQueryDefaultDriver;
 
 /**
  * Represents the seleniumQuery global object.
@@ -23,10 +23,10 @@ public class SeleniumQueryStatic {
 	 * @author acdcjunior
 	 * @since 1.0.0
 	 */
-	public final SeleniumQueryDefaultBrowser browser;
+	public final SeleniumQueryDefaultDriver browser;
 	
 	public SeleniumQueryStatic() {
-		this.browser = new SeleniumQueryDefaultBrowser();
+		this.browser = new SeleniumQueryDefaultDriver();
 	}
 	
 	public void setConsoleLogLevel(java.util.logging.Level level) {

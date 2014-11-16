@@ -1,6 +1,6 @@
 package io.github.seleniumquery.functions.jquery.miscellaneous;
 
-import io.github.seleniumquery.globalfunctions.SeleniumQueryDefaultBrowser;
+import io.github.seleniumquery.globalfunctions.SeleniumQueryDefaultDriver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
  */
 public class GetFunction {
 	
-	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryDefaultBrowser.class);
+	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryDefaultDriver.class);
 	
 	public static WebElement get(List<WebElement> elements, int index) {
 		if (elements.size() <= index) {
