@@ -3,7 +3,7 @@ package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 import io.github.seleniumquery.SQLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.selector.SelectorUtils;
-import io.github.seleniumquery.by.selector.css.CssSelectorMatcherService;
+import io.github.seleniumquery.by.css.CssSelectorMatcherService;
 
 import java.util.ArrayList;
 import java.util.List;

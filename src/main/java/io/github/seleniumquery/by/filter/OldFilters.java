@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.selector.filter;
+package io.github.seleniumquery.by.filter;
 
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
 import io.github.seleniumquery.by.selector.SelectorUtils;
-import io.github.seleniumquery.by.selector.css.CssSelectorMatcherService;
+import io.github.seleniumquery.by.css.CssSelectorMatcherService;
 
 import java.util.ArrayList;
 import java.util.Arrays;

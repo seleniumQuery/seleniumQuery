@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.tagname;
 import io.github.seleniumquery.by.selector.xpath.CssSelectorType;
 import io.github.seleniumquery.by.selector.xpath.XPathExpression;
 import io.github.seleniumquery.by.selector.xpath.XPathExpressionFactory;
-import io.github.seleniumquery.by.selector.css.CssSelector;
+import io.github.seleniumquery.by.css.CssSelector;
 
 import java.util.Map;
 

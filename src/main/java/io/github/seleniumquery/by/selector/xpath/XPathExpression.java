@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.selector.xpath;
 
 import io.github.seleniumquery.by.selector.SelectorUtils;
-import io.github.seleniumquery.by.selector.filter.ElementFilterList;
-import io.github.seleniumquery.by.selector.filter.ElementFilterListCombinator;
+import io.github.seleniumquery.by.filter.ElementFilterList;
+import io.github.seleniumquery.by.filter.ElementFilterListCombinator;
 
 import java.util.ArrayList;
 import java.util.List;
