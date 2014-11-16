@@ -140,7 +140,7 @@ public class SeleniumQueryDefaultBrowser {
 	 * Quits the seleniumQuery default WebDriver (the one available at <code>$.browser.getDefaultBrowser()</code>).
 	 */
 	public void quitDefaultBrowser() {
-		this.defaultDriver.quit();
+		quit(this.defaultDriver);
 	}
 	
 	/**
