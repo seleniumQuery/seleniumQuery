@@ -8,7 +8,7 @@ import infrastructure.junitrule.SetUpAndTearDownDriver;
 
 import java.util.List;
 
-import io.github.seleniumquery.by.selector.SelectorUtils;
+import io.github.seleniumquery.by.SelectorUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

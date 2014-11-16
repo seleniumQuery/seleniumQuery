@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector;
+package io.github.seleniumquery.by;
 
 import java.util.ArrayList;
 import java.util.Arrays;
