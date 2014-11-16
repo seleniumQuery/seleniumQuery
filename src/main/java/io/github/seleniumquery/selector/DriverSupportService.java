@@ -1,23 +1,20 @@
 package io.github.seleniumquery.selector;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.gargoylesoftware.htmlunit.WebClient;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.gargoylesoftware.htmlunit.WebClient;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverSupportService {
-	
-	private static final DriverSupportService instance = new DriverSupportService();
-	public static DriverSupportService getInstance() {
-		return instance;
-	}
-	private DriverSupportService() { }
+
+	private static final Log LOGGER = LogFactory.getLog(DriverSupportService.class);
 	
 	private Map<WebDriver, Map<String, Boolean>> driverSupportedPseudos = new HashMap<WebDriver, Map<String, Boolean>>();
 	
@@ -55,6 +52,7 @@ public class DriverSupportService {
 	
 	private static final String HTML_UNIT_DRIVER_CLASSNAME = "HtmlUnitDriver";
 	private static final String PHANTOM_JS_DRIVER_CLASSNAME = "PhantomJSDriver";
+
 	public static boolean isHtmlUnitDriver(Object driver) {
 		return instanceEqualsClassName(driver, HTML_UNIT_DRIVER_CLASSNAME);
 	}
@@ -77,19 +75,34 @@ public class DriverSupportService {
 		}
 		return DriverSupportService.getEmulatedBrowser((HtmlUnitDriver) driver).startsWith("IE");
 	}
-	
-	private static String getEmulatedBrowser(HtmlUnitDriver htmlUnitDriver) {
+
+	public static boolean isHtmlUnitDriverEmulatingIEBelow11(WebDriver driver) {
+		if (!(driver instanceof HtmlUnitDriver)) {
+			return false;
+		}
+		String emulatedBrowser = DriverSupportService.getEmulatedBrowser((HtmlUnitDriver) driver);
 		try {
-			Method m = HtmlUnitDriver.class.getDeclaredMethod("getWebClient");
-			boolean wasAccessibleBefore = m.isAccessible();
-			m.setAccessible(true);
-			WebClient wc = (WebClient) m.invoke(htmlUnitDriver);
-			m.setAccessible(wasAccessibleBefore);
-			return wc.getBrowserVersion().toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "";
+			int ieVersion = Integer.parseInt(emulatedBrowser.substring(2));
+			return ieVersion < 11;
+		} catch (NumberFormatException e) {
+			LOGGER.debug("Error while inspecting HtmlUnitDriver IE version.", e);
+			return false;
 		}
 	}
 	
+	private static String getEmulatedBrowser(HtmlUnitDriver htmlUnitDriver) {
+		try {
+			// #HtmlUnit #reflection #hack
+			Method getWebClientMethod = HtmlUnitDriver.class.getDeclaredMethod("getWebClient");
+			boolean wasAccessibleBefore = getWebClientMethod.isAccessible();
+			getWebClientMethod.setAccessible(true);
+			WebClient webClient = (WebClient) getWebClientMethod.invoke(htmlUnitDriver);
+			getWebClientMethod.setAccessible(wasAccessibleBefore);
+			return webClient.getBrowserVersion().toString();
+		} catch (Exception e) {
+			LOGGER.debug("Error while inspecting HtmlUnitDriver version.", e);
+			return "";
+		}
+	}
+
 }

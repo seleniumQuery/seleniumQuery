@@ -31,9 +31,9 @@ public class ParentPseudoClass implements PseudoClass {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		boolean isParent = isParent(element);
 		// #Cross-Driver
-		if (!isParent && DriverSupportService.isHtmlUnitDriverEmulatingIE(driver)) {
+		if (!isParent && DriverSupportService.isHtmlUnitDriverEmulatingIEBelow11(driver)) {
 			LOGGER.warn("The outcome of the selector with the pseudo-class \":parent\" could be affected:" +
-					" HtmlUnidDriver emulating IE considers elements " +
+					" HtmlUnidDriver emulating IE below 11 considers elements " +
 					" with space-only content (e.g. \"<div> </div>\") to be empty, while for other browsers" +
 					" they are not! There is no workaround for this, as HtmlUnitDriver ignored the spaces during" +
 					" the DOM parsing phase, and we have no means to know now if the elements had spaces (that" +
