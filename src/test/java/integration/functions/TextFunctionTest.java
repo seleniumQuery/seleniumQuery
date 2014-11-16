@@ -1,22 +1,23 @@
 package integration.functions;
 
+import infrastructure.junitrule.SetUpAndTearDownDriver;
+import io.github.seleniumquery.selector.DriverSupportService;
+import org.junit.ClassRule;
+import org.junit.Test;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static io.github.seleniumquery.selector.DriverSupportService.isHtmlUnitDriverEmulatingIEBelow11;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
-import io.github.seleniumquery.selector.DriverSupportService;
-
-import org.junit.Rule;
-import org.junit.Test;
 
 public class TextFunctionTest {
 	
-	@Rule
-	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
+	@ClassRule
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(TextFunctionTest.class);
 
     @Test
     public void text_function() {
-    	if (DriverSupportService.isHtmlUnitDriverEmulatingIE($.browser.getDefaultDriver())) {
+    	if (isHtmlUnitDriverEmulatingIEBelow11($.browser.getDefaultDriver())) {
     		assertThat($("div.demo-container").text().replaceAll("\\s+", " "), is("Demonstration Box list item 1list item 2"));
     	} else if (DriverSupportService.isHtmlUnitDriver($.browser.getDefaultDriver())) {
     			assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1 list item 2"));

@@ -2,7 +2,7 @@ package integration.waitUntil;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.wait.SeleniumQueryWaitException;
 
 import org.junit.Rule;
@@ -11,7 +11,7 @@ import org.junit.Test;
 public class WaitUntilIsMoreTest {
 
 	@Rule
-	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
 	
 	@Test
 	public void isPresent() {

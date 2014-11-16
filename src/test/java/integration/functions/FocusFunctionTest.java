@@ -3,7 +3,7 @@ package integration.functions;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.selectors.pseudoclasses.UnsupportedXPathPseudoClassException;
 
 import org.junit.Rule;
@@ -13,7 +13,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class FocusFunctionTest {
 	
 	@Rule
-	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
 
     @Test
     public void focus_function() {
@@ -77,7 +77,8 @@ public class FocusFunctionTest {
     	assertThat($("div.i2").size(), is(1));
     	assertThat($("div.a1").size(), is(1));
     	assertThat($("div.a1.focus").size(), is(1));
-    	
+
+		// #failure org.openqa.selenium.ElementNotVisibleException: Element is not currently visible and so may not be interacted with
     	$("#im1").focus();
     	assertThat($("#im1").is(":focus"), is(true));
 

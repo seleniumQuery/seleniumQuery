@@ -1,13 +1,13 @@
 package integration.sizzle;
 
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class SizzlePseudoForm extends SizzleTest {
 
     @Rule
-    public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(SizzleTest.class);
+    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
     public void pseudo_form() throws Exception {
@@ -16,6 +16,22 @@ public class SizzlePseudoForm extends SizzleTest {
         t("Form element :input", "#form :input", new String[]{"text1", "text2", "radio1", "radio2", "check1", "check2", "hidden1", "hidden2", "name", "search", "button", "area1", "select1", "select2", "select3", "select4", "select5", "impliedText", "capitalText"});
         t("Form element :radio", "#form :radio", new String[]{"radio1", "radio2"});
         t("Form element :checkbox", "#form :checkbox", new String[]{"check1", "check2"});
+
+        // #failure
+        /*
+          @## >>> Running on Chrome
+   @## FAILED on Chrome! -> Form element :text --> Lists differ! expected:<...2, name, impliedText[, capitalText]]> but was:<...2, name, impliedText[]]>
+   @## <<< Done on Chrome
+@## > Instantiating on Firefox
+   @## >>> Running on Firefox
+   @## FAILED on Firefox! -> Form element :text --> Lists differ! expected:<...2, name, impliedText[, capitalText]]> but was:<...2, name, impliedText[]]>
+   @## <<< Done on Firefox
+      @## FAILED on PhantomJS! -> Form element :text --> Lists differ! expected:<...2, name, impliedText[, capitalText]]> but was:<...2, name, impliedText[]]>
+      java.lang.AssertionError: There are test failures in some drivers: Chrome Firefox PhantomJS
+
+Expected :[text1, text2, hidden2, name, impliedText, capitalText]
+Actual   :[text1, text2, hidden2, name, impliedText]
+         */
         t("Form element :text", "#form :text", new String[]{"text1", "text2", "hidden2", "name", "impliedText", "capitalText"});
         t("Form element :radio:checked", "#form :radio:checked", new String[]{"radio2"});
         t("Form element :checkbox:checked", "#form :checkbox:checked", new String[]{"check1"});

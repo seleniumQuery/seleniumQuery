@@ -1,18 +1,19 @@
 package integration.selectors.pseudoclasses.form;
 
+import infrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
+import org.junit.Test;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static io.github.seleniumquery.selector.DriverSupportService.isHtmlUnitDriverEmulatingIEBelow11;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
-
-import org.junit.Rule;
-import org.junit.Test;
 
 public class SubmitPseudoClassTest {
 	
-	@Rule
-	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
-	
+	@ClassRule
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SubmitPseudoClassTest.class);
+
 	// http://jsbin.com/mopireya/6/edit
 	@Test
 	public void submitPseudoClass() {
@@ -32,22 +33,23 @@ public class SubmitPseudoClassTest {
 		assertThat($("#i4").is(":submit"), is(false));
 
 		assertThat($("#b1").is(":submit"), is(true));
-		
-		// #Cross-Driver (not a workaround, just documenting a difference)
-		// the line below depends on the browser
-		// firefox (only when through selenium!!!) considers that element's attribute type is
-		// actually submit, even though it is empty.
-		// via usual firefox this does not happen! Curious!
-		// we can let this pass (so we comment it) because this uncertainty is
-		// stated in the docs!
-//		assertThat($("#b1").is("[type='submit']"), is(false));
-		
-		
+
+		// #Cross-Driver
+		// Not a workaround, just documenting a difference.
+		// Latest HtmlUnit, when emulating IE 8 abd 9, considers <button></button> to be <button type="button"></button>
+		// :submit and this example are affected. Check :submit implementation if you're curious about how it solves this
+		// problem (and, yes, it is nasty, it uses reflection and stuff).
+		if (isHtmlUnitDriverEmulatingIEBelow11($.browser.getDefaultDriver())) {
+			assertThat($("#b1").is("[type='submit']"), is(false));
+		} else {
+			assertThat($("#b1").is("[type='submit']"), is(true));
+		}
+
 		assertThat($("#b2").is(":submit"), is(true));
 		assertThat($("#b2").is("[type='submit']"), is(true));
 		
 		assertThat($(".clz:submit").size(), is(1));
 		assertThat($("#i1c").is(".clz:submit"), is(true));
 	}
-	
+
 }

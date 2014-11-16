@@ -1,13 +1,13 @@
 package integration.sizzle;
 
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class SizzlePseudoHas extends SizzleTest {
 
     @Rule
-    public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(SizzleTest.class);
+    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
     public void pseudo_has() throws Exception {

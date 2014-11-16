@@ -3,16 +3,15 @@ package integration.selectors.pseudoclasses.form;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 
 import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.Test;
 
 public class CheckboxPseudoClassTest {
 	
 	@ClassRule
-	public static SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(CheckboxPseudoClassTest.class);
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(CheckboxPseudoClassTest.class);
 	
 	@Test
 	public void checkboxPseudoClass() {

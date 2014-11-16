@@ -4,7 +4,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.selectors.pseudoclasses.UnsupportedXPathPseudoClassException;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import org.openqa.selenium.WebElement;
 public class HiddenPseudoClassTest {
 	
 	@Rule
-	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
 	
 	@Test(expected = UnsupportedXPathPseudoClassException.class)
 	public void hiddenPseudoClass() {

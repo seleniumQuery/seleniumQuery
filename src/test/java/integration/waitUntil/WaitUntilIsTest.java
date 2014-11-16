@@ -1,6 +1,6 @@
 package integration.waitUntil;
 
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 public class WaitUntilIsTest {
 	
 	@ClassRule
-	public static SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(WaitUntilIsMoreTest.class);
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(WaitUntilIsMoreTest.class);
 
 	@Test
 	public void queryUntil_not_enabled() {

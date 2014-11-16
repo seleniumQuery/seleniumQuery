@@ -24,40 +24,53 @@ public class RunStatementInEveryDriver extends Statement {
 
     @SuppressWarnings("deprecation")
     private void executeAllHtmlUnits() {
-        executeInHtmlUnit(BrowserVersion.FIREFOX_17);
-        executeInHtmlUnit(BrowserVersion.FIREFOX_24);
-        executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
-        executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_9);
-        executeInHtmlUnit(BrowserVersion.INTERNET_EXPLORER_11);
-        executeInHtmlUnit(BrowserVersion.CHROME);
+        executeOnHtmlUnit(BrowserVersion.FIREFOX_17);
+        executeOnHtmlUnit(BrowserVersion.FIREFOX_24);
+        executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
+        executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_9);
+        executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_11);
+        executeOnHtmlUnit(BrowserVersion.CHROME);
     }
 
     private void executeAllOtherDrivers() {
-        System.out.println("@# Running on Chrome");
+        executeTestOnChrome();
+        executeTestOnIE();
+        executeTestOnFirefox();
+        executeTestOnPhantomJS();
+    }
+
+    private void executeTestOnChrome() {
+        System.out.println("@## > Instantiating Chrome Driver");
         $.browser.setDefaultDriverAsChrome();
         statementRunner.executeMethodForDriver("Chrome");
         $.browser.quitDefaultBrowser();
+    }
 
-//			System.out.println("@# Running on IE10");
+    private void executeTestOnIE() {
+//			System.out.println("@## > Instantiating on IE10");
 //			$.browser.setDefaultDriverAsIE();
-//			sQBeforeAfterer.executeMethodForDriver("IE10");
+//			statementRunner.executeMethodForDriver("IE10");
 //          $.browser.quitDefaultBrowser();
+    }
 
-        System.out.println("@# Running on Firefox");
+    private void executeTestOnFirefox() {
+        System.out.println("@## > Instantiating Firefox Driver");
         $.browser.setDefaultDriverAsFirefox();
         statementRunner.executeMethodForDriver("Firefox");
         $.browser.quitDefaultBrowser();
+    }
 
-        System.out.println("@# Running on PhantomJS");
+    private void executeTestOnPhantomJS() {
+        System.out.println("@## > Instantiating PhantomJS Driver");
         $.browser.setDefaultDriverAsPhantomJS();
         statementRunner.executeMethodForDriver("PhantomJS");
         $.browser.quitDefaultBrowser();
     }
 
-    private void executeInHtmlUnit(BrowserVersion browserVersion) {
-        System.out.println("@# Running on HtmlUnit ("+browserVersion+")");
+    private void executeOnHtmlUnit(BrowserVersion browserVersion) {
+        System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver");
         $.browser.setDefaultDriver(createHtmlUnitDriverWithJavasCriptEnabled(browserVersion));
-        statementRunner.executeMethodForDriver("HtmlUnit(" + browserVersion.toString() + ")");
+        statementRunner.executeMethodForDriver("HtmlUnit(" + browserVersion + ")");
         $.browser.quitDefaultBrowser();
     }
 

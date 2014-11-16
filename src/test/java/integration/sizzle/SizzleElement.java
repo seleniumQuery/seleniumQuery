@@ -1,6 +1,6 @@
 package integration.sizzle;
 
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 public class SizzleElement extends SizzleTest {
 
     @Rule
-    public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(SizzleTest.class);
+    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
     public void element_selectors() throws Exception {
@@ -96,6 +96,13 @@ public class SizzleElement extends SizzleTest {
         executeJS("document.getElementById('qunit-fixture').appendChild(document.createElement('toString')).id = 'toString';");
         t("Element name matches Object.prototype property", "tostring#toString", new String[]{"toString"});
 
+        // #failure
+        /*
+        several HTMLUNIT fail
+            @## FAILED on HtmlUnit(FF17)! -> Element name matches Object.prototype property --> Lists differ! expected:<[[toString]]> but was:<[[]]>
+           @## FAILED on HtmlUnit(FF24)! -> Element name matches Object.prototype property --> Lists differ! expected:<[[toString]]> but was:<[[]]>
+           @## FAILED on HtmlUnit(Chrome)! -> Element name matches Object.prototype property --> Lists differ! expected:<[[toString]]> but was:<[[]]>
+         */
         if (!isHtmlUnitDriverEmulatingIE($.browser.getDefaultDriver())) { // HtmlUnit is case SENSITIVE and considers tags to be lowecase
             t("Element name matches Object.prototype property", "toString#toString", new String[]{"toString"});
         }

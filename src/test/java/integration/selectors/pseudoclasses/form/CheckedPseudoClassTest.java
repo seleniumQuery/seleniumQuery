@@ -3,7 +3,7 @@ package integration.selectors.pseudoclasses.form;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import org.junit.Test;
 public class CheckedPseudoClassTest {
 	
 	@Rule
-	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
 	
 	@Test
 	public void checkedPseudo() {
@@ -57,7 +57,8 @@ public class CheckedPseudoClassTest {
     	
     	assertThat($("#opt1").is(":checked"), is(true));
     	assertThat($("#opt2").is(":checked"), is(false));
-    	
+
+		// #failure PhantomJS tells element is not selectable
     	assertThat($("#nc1").is(":checked"), is(false));
     	assertThat($("#nc2").is(":checked"), is(false));
     	assertThat($("#nc3").is(":checked"), is(false));

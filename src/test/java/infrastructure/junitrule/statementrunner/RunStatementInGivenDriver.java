@@ -1,6 +1,9 @@
 package infrastructure.junitrule.statementrunner;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.junit.runners.model.Statement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.fail;
@@ -27,7 +30,8 @@ public class RunStatementInGivenDriver extends Statement {
     }
 
     private void setUpDriver() {
-		$.browser.setDefaultDriverAsHtmlUnit();
+//		$.browser.setDefaultDriverAsHtmlUnit();
+        $.browser.setDefaultDriver(new HtmlUnitDriver(BrowserVersion.FIREFOX_24));
 //		$.browser.setDefaultDriverAsChrome();
 //		$.browser.setDefaultDriverAsIE();
 //      $.browser.setDefaultDriverAsFirefox();

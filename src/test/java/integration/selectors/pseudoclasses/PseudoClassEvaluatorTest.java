@@ -3,7 +3,7 @@ package integration.selectors.pseudoclasses;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.selectorcss.CssSelectorMatcherService;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import org.openqa.selenium.WebElement;
 public class PseudoClassEvaluatorTest {
 	
 	@Rule
-	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(PseudoClassEvaluatorTest.class);
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(PseudoClassEvaluatorTest.class);
 
 	WebDriver driver;
 	
