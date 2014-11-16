@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector_old_should_move.conditionals.attributes;
+package io.github.seleniumquery.by.css.attributes;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
@@ -7,10 +7,6 @@ import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.xpath.XPathExpressionList;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.css.attributes.ContainsWordAttributeCssSelector;
-import io.github.seleniumquery.by.css.attributes.EndsWithAttributeCssSelector;
-import io.github.seleniumquery.by.css.attributes.EqualsOrHasAttributeCssSelector;
-import io.github.seleniumquery.by.css.attributes.StartsWithAttributeCssSelector;
 
 import java.util.Iterator;
 import java.util.List;

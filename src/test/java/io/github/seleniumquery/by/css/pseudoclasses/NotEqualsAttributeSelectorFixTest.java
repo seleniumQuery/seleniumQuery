@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector_old_should_move.conditionals.pseudoclasses;
+package io.github.seleniumquery.by.css.pseudoclasses;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;

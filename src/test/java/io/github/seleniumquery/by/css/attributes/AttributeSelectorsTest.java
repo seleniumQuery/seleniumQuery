@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector_old_should_move.conditionals.attributes;
+package io.github.seleniumquery.by.css.attributes;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
