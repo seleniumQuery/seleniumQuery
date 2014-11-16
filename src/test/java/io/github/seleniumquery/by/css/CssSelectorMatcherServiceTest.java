@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector_old_should_move;
+package io.github.seleniumquery.by.css;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -13,7 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class SelectorEvaluatorTest {
+public class CssSelectorMatcherServiceTest {
 	
 	@Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
