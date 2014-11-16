@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selectorcss;
+package io.github.seleniumquery.selector.css;
 
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
