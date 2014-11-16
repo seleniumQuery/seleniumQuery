@@ -4,7 +4,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.selectors.pseudoclasses.UnsupportedXPathPseudoClassException;
+import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedXPathPseudoClassException;
 
 import org.junit.Rule;
 import org.junit.Test;

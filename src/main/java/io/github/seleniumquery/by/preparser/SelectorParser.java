@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.preparser;
 
-import io.github.seleniumquery.selectors.attributes.NotEqualsAttributeSelectorFix;
+import io.github.seleniumquery.by.css.attributes.NotEqualsAttributeSelectorFix;
 
 import java.io.StringReader;
 

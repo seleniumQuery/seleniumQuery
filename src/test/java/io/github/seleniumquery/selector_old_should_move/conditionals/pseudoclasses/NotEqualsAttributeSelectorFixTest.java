@@ -3,7 +3,7 @@ package io.github.seleniumquery.selector_old_should_move.conditionals.pseudoclas
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.selectors.attributes.NotEqualsAttributeSelectorFix;
+import io.github.seleniumquery.by.css.attributes.NotEqualsAttributeSelectorFix;
 
 import org.junit.Test;
 
