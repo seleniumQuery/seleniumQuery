@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css;
 
-import io.github.seleniumquery.by.selector.preparser.ParsedSelector;
-import io.github.seleniumquery.by.selector.preparser.SelectorParser;
+import io.github.seleniumquery.by.preparser.ParsedSelector;
+import io.github.seleniumquery.by.preparser.SelectorParser;
 
 import java.util.Map;
 

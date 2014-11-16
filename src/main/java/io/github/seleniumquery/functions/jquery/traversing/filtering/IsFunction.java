@@ -1,8 +1,8 @@
 package io.github.seleniumquery.functions.jquery.traversing.filtering;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.selector.preparser.ParsedSelector;
-import io.github.seleniumquery.by.selector.preparser.SelectorParser;
+import io.github.seleniumquery.by.preparser.ParsedSelector;
+import io.github.seleniumquery.by.preparser.SelectorParser;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorFactory;
 
