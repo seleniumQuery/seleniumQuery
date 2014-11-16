@@ -2,8 +2,8 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
-import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.selector.xpath.XPathExpression;
+import io.github.seleniumquery.by.selector.xpath.XPathExpressionFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;

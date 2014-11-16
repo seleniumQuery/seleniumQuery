@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.selector.filter;
 
-import io.github.seleniumquery.selector.xpath.CssSelectorType;
+import io.github.seleniumquery.by.selector.xpath.CssSelectorType;
 
 import org.openqa.selenium.WebElement;
 

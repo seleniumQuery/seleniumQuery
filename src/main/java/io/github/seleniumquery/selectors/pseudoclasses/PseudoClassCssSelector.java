@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.selector.xpath.XPathExpression;
+import io.github.seleniumquery.by.selector.xpath.XPathExpression;
 import io.github.seleniumquery.by.selector.css.CssConditionalSelector;
 
 import java.util.Arrays;
