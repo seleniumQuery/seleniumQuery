@@ -13,7 +13,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import static io.github.seleniumquery.by.selector.DriverVersionUtils.isHtmlUnitDriver;
+import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriver;
 
 /**
  * $("selector").html()

@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
-import io.github.seleniumquery.by.selector.SelectorUtils;
+import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.xpath.XPathExpression;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;

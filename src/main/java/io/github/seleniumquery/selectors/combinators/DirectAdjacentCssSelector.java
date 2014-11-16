@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectors.combinators;
 
-import io.github.seleniumquery.by.selector.SelectorUtils;
+import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.xpath.CssSelectorType;
 import io.github.seleniumquery.by.xpath.XPathExpression;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;

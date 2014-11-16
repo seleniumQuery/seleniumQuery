@@ -1,7 +1,7 @@
 package integration.sizzle;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.by.selector.SelectorUtils;
+import io.github.seleniumquery.by.SelectorUtils;
 import org.junit.Rule;
 import org.junit.Test;
 

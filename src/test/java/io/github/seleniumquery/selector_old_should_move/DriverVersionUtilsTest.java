@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 import java.util.List;
 import java.util.Set;
 
-import io.github.seleniumquery.by.selector.DriverVersionUtils;
+import io.github.seleniumquery.by.DriverVersionUtils;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

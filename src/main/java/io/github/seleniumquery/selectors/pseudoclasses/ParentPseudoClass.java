@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.DriverVersionUtils;
+import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.xpath.XPathExpression;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 

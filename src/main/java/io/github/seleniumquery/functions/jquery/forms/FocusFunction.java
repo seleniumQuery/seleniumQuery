@@ -1,7 +1,7 @@
 package io.github.seleniumquery.functions.jquery.forms;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.selector.DriverVersionUtils;
+import io.github.seleniumquery.by.DriverVersionUtils;
 
 import java.util.List;
 

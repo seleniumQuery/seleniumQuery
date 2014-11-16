@@ -6,7 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.selector.DriverVersionUtils;
+import io.github.seleniumquery.by.DriverVersionUtils;
 
 public class AttrFunction {
 	

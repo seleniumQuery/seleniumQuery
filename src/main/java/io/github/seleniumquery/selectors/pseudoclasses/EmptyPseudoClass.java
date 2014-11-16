@@ -8,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static io.github.seleniumquery.by.selector.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
+import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
 
 /**
  * :empty
