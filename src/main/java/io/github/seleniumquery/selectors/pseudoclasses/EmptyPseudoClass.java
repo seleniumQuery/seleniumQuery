@@ -1,6 +1,5 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.selector.DriverSupportService;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 
@@ -8,6 +7,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static io.github.seleniumquery.selector.DriverSupportService.isHtmlUnitDriverEmulatingIEBelow11;
 
 /**
  * :empty
@@ -31,9 +32,9 @@ public class EmptyPseudoClass implements PseudoClass {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		boolean isEmpty = !parentPseudoClass.isParent(element);
 		// #Cross-Driver
-		if (isEmpty && DriverSupportService.isHtmlUnitDriverEmulatingIE(driver)) {
+		if (isEmpty && isHtmlUnitDriverEmulatingIEBelow11(driver)) {
 			LOGGER.warn("The outcome of the selector with the pseudo-class \":empty\" could be affected:" +
-					" HtmlUnidDriver emulating IE considers elements " +
+					" HtmlUnidDriver emulating IE below 11 considers elements" +
 					" with space-only content (e.g. \"<div> </div>\") to be empty, while for other browsers" +
 					" they are not! There is no workaround for this, as HtmlUnitDriver ignored the spaces during" +
 					" the DOM parsing phase, and we have no means to know now if the elements had spaces (that" +
