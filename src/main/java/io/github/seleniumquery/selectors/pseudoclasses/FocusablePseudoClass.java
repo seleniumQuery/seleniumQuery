@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.selector.filter.ElementFilter;
+import io.github.seleniumquery.by.selector.filter.ElementFilter;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
 

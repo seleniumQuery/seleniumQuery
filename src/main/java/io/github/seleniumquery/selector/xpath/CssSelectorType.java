@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selector.xpath;
 
-import io.github.seleniumquery.selector.UnsupportedConditionalSelector;
+import io.github.seleniumquery.by.selector.UnsupportedConditionalSelector;
 
 import static io.github.seleniumquery.selector.xpath.XPathExpression.EMPTY_LOCAL_NAME_CONDITIONAL;
 

@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector.css;
+package io.github.seleniumquery.by.selector.css;
 
 import io.github.seleniumquery.selectors.combinators.DescendantCssSelector;
 import io.github.seleniumquery.selectors.combinators.DirectAdjacentCssSelector;

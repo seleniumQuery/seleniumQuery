@@ -4,7 +4,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.github.seleniumquery.SeleniumQuery;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.selector.css.CssSelectorMatcherService;
+import io.github.seleniumquery.by.selector.css.CssSelectorMatcherService;
 
 import org.junit.Before;
 import org.junit.Rule;

@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector;
+package io.github.seleniumquery.by.selector;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.apache.commons.logging.Log;

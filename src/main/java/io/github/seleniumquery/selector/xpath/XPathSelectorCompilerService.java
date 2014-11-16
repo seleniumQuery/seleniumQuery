@@ -2,8 +2,8 @@ package io.github.seleniumquery.selector.xpath;
 
 import io.github.seleniumquery.selector.parser.ParsedSelector;
 import io.github.seleniumquery.selector.parser.SelectorParser;
-import io.github.seleniumquery.selector.css.CssSelector;
-import io.github.seleniumquery.selector.css.CssSelectorFactory;
+import io.github.seleniumquery.by.selector.css.CssSelector;
+import io.github.seleniumquery.by.selector.css.CssSelectorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
