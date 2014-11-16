@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector.xpath;
+package io.github.seleniumquery.by.xpath;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

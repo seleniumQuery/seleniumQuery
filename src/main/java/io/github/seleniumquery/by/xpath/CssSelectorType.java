@@ -1,8 +1,8 @@
-package io.github.seleniumquery.by.selector.xpath;
+package io.github.seleniumquery.by.xpath;
 
 import io.github.seleniumquery.by.selector.UnsupportedConditionalSelector;
 
-import static io.github.seleniumquery.by.selector.xpath.XPathExpression.EMPTY_LOCAL_NAME_CONDITIONAL;
+import static io.github.seleniumquery.by.xpath.XPathExpression.EMPTY_LOCAL_NAME_CONDITIONAL;
 
 public enum CssSelectorType {
 	

@@ -2,8 +2,8 @@ package io.github.seleniumquery.selectors.attributes;
 
 import static org.apache.commons.lang3.StringUtils.endsWith;
 import io.github.seleniumquery.by.selector.SelectorUtils;
-import io.github.seleniumquery.by.selector.xpath.XPathExpression;
-import io.github.seleniumquery.by.selector.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Map;

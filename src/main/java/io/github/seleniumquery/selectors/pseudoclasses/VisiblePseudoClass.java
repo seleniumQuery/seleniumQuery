@@ -2,8 +2,8 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.by.selector.SelectorUtils;
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.selector.xpath.XPathExpression;
-import io.github.seleniumquery.by.selector.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
