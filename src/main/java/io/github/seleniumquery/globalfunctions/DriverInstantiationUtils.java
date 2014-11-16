@@ -1,15 +1,18 @@
 package io.github.seleniumquery.globalfunctions;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.net.URL;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.SessionNotFoundException;
+
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.net.URL;
 
 public class DriverInstantiationUtils {
 	
@@ -33,14 +36,57 @@ public class DriverInstantiationUtils {
 	}
 
 	WebDriver instantiateIeDriverWithPath(String pathToIEDriverServerExe) {
-		return instantiateDriverWithPath(pathToIEDriverServerExe,
-									"IE Driver Server",
-										"http://selenium-release.storage.googleapis.com/index.html",
-											"$.browser.setDefaultDriverAsIE(\"other/path/to/IEDriverServer.exe\")",
-												"webdriver.ie.driver",
-													InternetExplorerDriver.class);
+		try {
+			WebDriver iEWebDriver = instantiateDriverWithPath(pathToIEDriverServerExe,
+                    "IE Driver Server",
+                    "http://selenium-release.storage.googleapis.com/index.html",
+                    "$.browser.setDefaultDriverAsIE(\"other/path/to/IEDriverServer.exe\")",
+                    "webdriver.ie.driver",
+                    InternetExplorerDriver.class);
+
+			guaranteeActiveXIsNotBlocked(iEWebDriver);
+
+			return iEWebDriver;
+		} catch (SessionNotFoundException snfe) {
+			String message = snfe.getLocalizedMessage();
+			System.out.println("MSG: "+message);
+			System.out.println("MSG: "+snfe.getMessage());
+			if (message != null && message.contains("Protected Mode")) {
+				throw new SeleniumQueryException("IE Driver requires Protected Mode settings to be the same for all zones.\n" +
+						"Go to Tools -> Internet Options -> Security Tab, and set all zones to the same protected mode," +
+						" be it enabled or disabled, does not matter.\n" +
+						"If this does not solve the problem, or for more info, check the " +
+						" https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-IE-Driver wiki page.", snfe);
+			}
+			throw snfe;
+		}
 	}
-	
+
+	private void guaranteeActiveXIsNotBlocked(WebDriver iEWebDriver) {
+		try {
+			iEWebDriver.get(new File(getFullPathForFileInClassPath("ie.html")).toURI().toString());
+			iEWebDriver.findElements(By.xpath("/nobody"));
+		} catch (InvalidSelectorException ise) {
+			LOGGER.debug("Failed while testing if ActiveX is enabled in IE Driver.", ise);
+			try {
+				System.out.println("Your IE Driver is probably blocking ActiveX. Enable it.");
+				iEWebDriver.get(new File(getFullPathForFileInClassPath("ie-activex.html")).toURI().toString());
+				for (int i = 0; i < 45; i++) {
+					try {
+						iEWebDriver.findElements(By.xpath("/nobody"));
+						break;
+					} catch (Exception e) {
+						LOGGER.debug("Forcing ActiveX error again["+i+"].", e);
+					}
+					Thread.sleep(1000);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				LOGGER.debug("Failed after giving the user some time to enable ActiveX.", e);
+			}
+		}
+	}
+
 	WebDriver instantiateIeDriverWithoutPath() {
 		return instantiateIeDriverWithPath(getFullPathForFileInClassPath("IEDriverServer.exe"));
 	}
@@ -140,6 +186,8 @@ public class DriverInstantiationUtils {
 			}
 			System.setProperty(driverServerSystemPropertyPath, driverSErverExecutableFilePath);
 			return driverClass.newInstance();
+		} catch (RuntimeException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
