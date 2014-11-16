@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.conditionals;
 import io.github.seleniumquery.selector.filter.ElementFilter;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
-import io.github.seleniumquery.selectorcss.CssConditionalSelector;
+import io.github.seleniumquery.selector.css.CssConditionalSelector;
 
 import java.util.Map;
 
