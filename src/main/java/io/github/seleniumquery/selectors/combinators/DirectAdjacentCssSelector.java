@@ -1,10 +1,10 @@
 package io.github.seleniumquery.selectors.combinators;
 
 import io.github.seleniumquery.by.selector.SelectorUtils;
-import io.github.seleniumquery.by.selector.xpath.CssSelectorType;
-import io.github.seleniumquery.by.selector.xpath.XPathExpression;
-import io.github.seleniumquery.by.selector.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.selector.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.CssSelectorType;
+import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
 

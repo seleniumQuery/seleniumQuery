@@ -1,9 +1,9 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
-import io.github.seleniumquery.by.selector.xpath.XPathExpression;
-import io.github.seleniumquery.by.selector.xpath.XPathExpressionList;
-import io.github.seleniumquery.by.selector.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.selector.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathExpressionList;
+import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 
 import java.util.List;
 

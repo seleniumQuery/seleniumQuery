@@ -1,7 +1,7 @@
 package io.github.seleniumquery.selectors.conditionals;
 
-import io.github.seleniumquery.by.selector.xpath.XPathExpression;
-import io.github.seleniumquery.by.selector.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;

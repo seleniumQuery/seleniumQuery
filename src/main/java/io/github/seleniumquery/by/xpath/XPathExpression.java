@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector.xpath;
+package io.github.seleniumquery.by.xpath;
 
 import io.github.seleniumquery.by.selector.SelectorUtils;
 import io.github.seleniumquery.by.filter.ElementFilterList;

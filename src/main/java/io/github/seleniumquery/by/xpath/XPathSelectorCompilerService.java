@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector.xpath;
+package io.github.seleniumquery.by.xpath;
 
 import io.github.seleniumquery.by.preparser.ParsedSelector;
 import io.github.seleniumquery.by.preparser.SelectorParser;
