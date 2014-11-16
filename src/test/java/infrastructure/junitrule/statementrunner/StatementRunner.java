@@ -1,8 +1,5 @@
 package infrastructure.junitrule.statementrunner;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.junit.Assert.fail;
-
 public abstract class StatementRunner {
 
     private String failed = "";
@@ -13,6 +10,7 @@ public abstract class StatementRunner {
     public abstract void after();
 
     public void executeMethodForDriver(String driver) {
+        System.out.println("   @## >>> Running on "+driver);
         before();
         try {
             evaluate();
@@ -21,19 +19,16 @@ public abstract class StatementRunner {
                 this.firstFailure = t;
             }
             failed += driver + " ";
-            System.err.println("Test failed!"+t.getMessage());
+            System.out.println("   @## %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FAILED on "+driver+"! -> "+t.getMessage());
         } finally {
             after();
         }
+        System.out.println("   @## <<< Done on "+driver);
     }
 
     public void reportFailures() throws Throwable {
         if (!failed.isEmpty()) {
-            if (this.firstFailure == null) {
-                fail("There are test failures in the drivers: "+failed);
-            } else {
-                throw this.firstFailure;
-            }
+            throw new AssertionError("There are test failures in some drivers: "+failed, this.firstFailure);
         }
     }
 

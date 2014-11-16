@@ -5,17 +5,15 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import infrastructure.IntegrationTestUtils;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 
 import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.Test;
 
 public class SelectedPseudoClassTest {
 
 	@ClassRule
-	public static SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(SelectedPseudoClassTest.class);
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SelectedPseudoClassTest.class);
 	
 	@Test
 	public void selectedPseudoClass() {

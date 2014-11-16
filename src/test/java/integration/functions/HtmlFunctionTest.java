@@ -4,7 +4,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.selector.DriverSupportService.isHtmlUnitDriverEmulatingIE;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
@@ -15,7 +15,7 @@ import org.junit.Test;
 public class HtmlFunctionTest {
 	
 	@Rule
-	public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(getClass());
+	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
 
     @Test
     public void html_function__simple_element() {

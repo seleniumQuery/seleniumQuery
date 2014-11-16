@@ -1,6 +1,6 @@
 package integration.sizzle;
 
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.selector.SelectorUtils;
 import org.junit.Rule;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import static infrastructure.IntegrationTestUtils.equal;
 public class SizzleID extends SizzleTest {
 
     @Rule
-    public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(SizzleTest.class);
+    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
     public void id_selectors() throws Exception {

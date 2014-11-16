@@ -1,6 +1,6 @@
 package integration.sizzle;
 
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -13,8 +13,15 @@ import static java.util.Arrays.asList;
 public class SizzleAttributes extends SizzleTest {
 
     @Rule
-    public SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(SizzleTest.class);
+    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
+
+    /*
+    #failure
+     @## FAILED on Chrome! -> Attribute Exists (case-insensitive) --> Lists differ! expected:<[[google]]> but was:<[[]]>
+     @## FAILED on Firefox! -> Finding by attribute with escaped characters. expected:<[[org.openqa.selenium.remote.RemoteWebElement@9a82aa8 -> unknown locator]]> but was:<[]>
+     @## FAILED on PhantomJS! -> Attribute Exists (case-insensitive) --> Lists differ! expected:<[[google]]> but was:<[[]]>
+     */
     @Test
     public void attribute_selectors() throws Exception {
         t("Attribute Exists", "#qunit-fixture a[title]", new String[]{"google"});

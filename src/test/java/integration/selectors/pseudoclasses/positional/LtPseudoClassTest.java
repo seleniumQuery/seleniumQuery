@@ -3,16 +3,15 @@ package integration.selectors.pseudoclasses.positional;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownGivenDriver;
+import infrastructure.junitrule.SetUpAndTearDownDriver;
 
 import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.Test;
 
 public class LtPseudoClassTest {
 	
 	@ClassRule
-	public static SetUpAndTearDownGivenDriver setUpAndTearDownGivenDriverRule = new SetUpAndTearDownGivenDriver(LtPseudoClassTest.class);
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(LtPseudoClassTest.class);
 	
 	// http://jsbin.com/bavidofo/1/edit
 	@Test
