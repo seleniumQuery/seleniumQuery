@@ -1,11 +1,11 @@
 package io.github.seleniumquery.by.css;
 
-import io.github.seleniumquery.selectors.combinators.DescendantCssSelector;
-import io.github.seleniumquery.selectors.combinators.DirectAdjacentCssSelector;
-import io.github.seleniumquery.selectors.combinators.DirectDescendantCssSelector;
-import io.github.seleniumquery.selectors.combinators.GeneralAdjacentCssSelector;
-import io.github.seleniumquery.selectors.conditionals.ConditionalCssSelector;
-import io.github.seleniumquery.selectors.tagname.TagNameSelector;
+import io.github.seleniumquery.by.css.combinators.DescendantCssSelector;
+import io.github.seleniumquery.by.css.combinators.DirectAdjacentCssSelector;
+import io.github.seleniumquery.by.css.combinators.DirectDescendantCssSelector;
+import io.github.seleniumquery.by.css.combinators.GeneralAdjacentCssSelector;
+import io.github.seleniumquery.by.css.conditionals.ConditionalCssSelector;
+import io.github.seleniumquery.by.css.tagname.TagNameSelector;
 
 import org.w3c.css.sac.Selector;
 

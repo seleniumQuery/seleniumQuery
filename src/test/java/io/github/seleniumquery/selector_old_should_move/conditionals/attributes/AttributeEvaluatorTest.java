@@ -7,10 +7,10 @@ import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.xpath.XPathExpressionList;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.selectors.attributes.ContainsWordAttributeCssSelector;
-import io.github.seleniumquery.selectors.attributes.EndsWithAttributeCssSelector;
-import io.github.seleniumquery.selectors.attributes.EqualsOrHasAttributeCssSelector;
-import io.github.seleniumquery.selectors.attributes.StartsWithAttributeCssSelector;
+import io.github.seleniumquery.by.css.attributes.ContainsWordAttributeCssSelector;
+import io.github.seleniumquery.by.css.attributes.EndsWithAttributeCssSelector;
+import io.github.seleniumquery.by.css.attributes.EqualsOrHasAttributeCssSelector;
+import io.github.seleniumquery.by.css.attributes.StartsWithAttributeCssSelector;
 
 import java.util.Iterator;
 import java.util.List;

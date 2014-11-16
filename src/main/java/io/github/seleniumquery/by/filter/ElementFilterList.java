@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.filter;
 
-import io.github.seleniumquery.selectors.pseudoclasses.UnsupportedPseudoClassException;
+import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
 
 import java.util.List;
 
