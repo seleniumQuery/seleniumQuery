@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector.preparser;
+package io.github.seleniumquery.by.preparser;
 
 import io.github.seleniumquery.selectors.attributes.NotEqualsAttributeSelectorFix;
 
