@@ -1,12 +1,12 @@
 package integration.functions;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.selector.DriverVersionUtils;
+import io.github.seleniumquery.by.selector.DriverVersionUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.selector.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
+import static io.github.seleniumquery.by.selector.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 

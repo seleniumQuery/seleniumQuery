@@ -3,7 +3,7 @@ package io.github.seleniumquery.selectors.pseudoclasses;
 import io.github.seleniumquery.selector.xpath.XPathExpression;
 import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
-import io.github.seleniumquery.selector.css.CssSelectorMatcherService;
+import io.github.seleniumquery.by.selector.css.CssSelectorMatcherService;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

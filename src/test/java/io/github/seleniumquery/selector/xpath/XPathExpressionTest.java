@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selector.xpath;
 
-import io.github.seleniumquery.selector.UnsupportedConditionalSelector;
+import io.github.seleniumquery.by.selector.UnsupportedConditionalSelector;
 import io.github.seleniumquery.selector.parser.ParsedSelector;
 import io.github.seleniumquery.selector.parser.SelectorParser;
 import org.junit.Test;

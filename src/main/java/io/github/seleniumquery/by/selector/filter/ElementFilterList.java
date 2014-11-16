@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector.filter;
+package io.github.seleniumquery.by.selector.filter;
 
 import io.github.seleniumquery.selectors.pseudoclasses.UnsupportedPseudoClassException;
 

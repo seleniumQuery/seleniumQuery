@@ -1,4 +1,4 @@
-package io.github.seleniumquery.selector;
+package io.github.seleniumquery.by.selector;
 
 /**
  * We still don't support some selectors inside conditions.

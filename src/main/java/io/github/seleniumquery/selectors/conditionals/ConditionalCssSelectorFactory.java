@@ -1,6 +1,6 @@
 package io.github.seleniumquery.selectors.conditionals;
 
-import io.github.seleniumquery.selector.css.CssConditionalSelector;
+import io.github.seleniumquery.by.selector.css.CssConditionalSelector;
 import io.github.seleniumquery.selectors.attributes.ClassAttributeCssSelector;
 import io.github.seleniumquery.selectors.attributes.ContainsPrefixAttributeCssSelector;
 import io.github.seleniumquery.selectors.attributes.ContainsSubstringAttributeCssSelector;
