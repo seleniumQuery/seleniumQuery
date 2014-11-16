@@ -1,8 +1,8 @@
 package io.github.seleniumquery.selectors.combinators;
 
 import io.github.seleniumquery.by.selector.SelectorUtils;
-import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.selector.xpath.XPathExpression;
+import io.github.seleniumquery.by.selector.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.selector.css.CssSelector;
 import io.github.seleniumquery.by.selector.css.CssSelectorMatcherService;
 import org.openqa.selenium.WebDriver;

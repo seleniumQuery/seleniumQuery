@@ -1,8 +1,8 @@
 package io.github.seleniumquery.selectors.pseudoclasses;
 
 import io.github.seleniumquery.by.selector.DriverVersionUtils;
-import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.selector.xpath.XPathExpression;
+import io.github.seleniumquery.by.selector.xpath.XPathExpressionFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

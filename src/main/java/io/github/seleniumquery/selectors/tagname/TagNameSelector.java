@@ -1,8 +1,8 @@
 package io.github.seleniumquery.selectors.tagname;
 
-import io.github.seleniumquery.selector.xpath.CssSelectorType;
-import io.github.seleniumquery.selector.xpath.XPathExpression;
-import io.github.seleniumquery.selector.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.selector.xpath.CssSelectorType;
+import io.github.seleniumquery.by.selector.xpath.XPathExpression;
+import io.github.seleniumquery.by.selector.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.by.selector.css.CssSelector;
 
 import java.util.Map;
