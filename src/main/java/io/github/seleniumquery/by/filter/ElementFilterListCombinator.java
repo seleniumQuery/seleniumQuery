@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector.filter;
+package io.github.seleniumquery.by.filter;
 
 import io.github.seleniumquery.by.selector.xpath.CssSelectorType;
 

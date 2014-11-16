@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector.css;
+package io.github.seleniumquery.by.css;
 
 import io.github.seleniumquery.by.selector.preparser.ParsedSelector;
 import io.github.seleniumquery.by.selector.preparser.SelectorParser;

@@ -1,9 +1,9 @@
 package io.github.seleniumquery.selectors.conditionals;
 
-import io.github.seleniumquery.by.selector.filter.ElementFilter;
+import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.selector.xpath.XPathExpression;
 import io.github.seleniumquery.by.selector.xpath.XPathExpressionFactory;
-import io.github.seleniumquery.by.selector.css.CssConditionalSelector;
+import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Map;
 

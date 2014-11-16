@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.selector.filter;
+package io.github.seleniumquery.by.filter;
 
 import java.util.List;
 
