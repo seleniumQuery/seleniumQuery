@@ -7,9 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
+ * :text
  * http://api.jquery.com/text-selector/
  * 
  * @author acdcjunior
+ *
  * @since 1.0.0
  */
 class TextPseudoClass implements PseudoClass {
@@ -18,7 +20,7 @@ class TextPseudoClass implements PseudoClass {
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
-		return TEXT_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
+		return TEXT_PSEUDO_CLASS_NO_COLON.equalsIgnoreCase(pseudoClassValue);
 	}
 	
 	@Override
@@ -29,7 +31,7 @@ class TextPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[local-name() = 'input' and (@type = 'text' or not(@type))]");
+		return XPathExpressionFactory.createNoFilterSelector("[self::input and (translate(@type,'TEXT','text') = 'text' or not(@type))]");
 	}
 	
 }
