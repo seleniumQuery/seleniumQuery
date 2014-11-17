@@ -29,7 +29,7 @@ class TextPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[local-name() = 'input' and (@type = 'text' or not(@type))]");
+		return XPathExpressionFactory.createNoFilterSelector("[self::input and (translate(@type,'TEXT','text') = 'text' or not(@type))]");
 	}
 	
 }
