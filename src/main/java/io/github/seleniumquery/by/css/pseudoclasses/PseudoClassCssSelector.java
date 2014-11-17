@@ -13,9 +13,11 @@ import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
 /**
- * :pseudo-classes(optionalparameters)
+ * :pseudo-classes
+ * :pseudo-classes([args])
  *
  * @author acdcjunior
+ *
  * @since 1.0.0
  */
 public class PseudoClassCssSelector implements CssConditionalSelector<AttributeCondition> {
@@ -33,7 +35,7 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 			new FocusPseudoClass(), new FocusablePseudoClass(), new TabbablePseudoClass(),
 			new HasPseudoClass(), new LangPseudoClass(), new ParentPseudoClass(),
 			new EmptyPseudoClass(), new TextPseudoClass(), new EvenPseudoClass(),
-			new OddPseudoClass());
+			new OddPseudoClass(), new NthChildPseudoClass());
 
 	@Override
 	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
