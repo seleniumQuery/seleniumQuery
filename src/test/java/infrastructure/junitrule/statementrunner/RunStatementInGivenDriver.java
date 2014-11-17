@@ -30,7 +30,9 @@ public class RunStatementInGivenDriver extends Statement {
 
     private void setUpDriver() {
 //		$.browser.setDefaultDriverAsHtmlUnit();
-        $.browser.setDefaultDriver(new HtmlUnitDriver(BrowserVersion.FIREFOX_24));
+        HtmlUnitDriver defaultDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
+        defaultDriver.setJavascriptEnabled(true);
+        $.browser.setDefaultDriver(defaultDriver);
 //		$.browser.setDefaultDriverAsChrome();
 //		$.browser.setDefaultDriverAsIE();
 //      $.browser.setDefaultDriverAsFirefox();

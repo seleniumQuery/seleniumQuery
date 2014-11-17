@@ -32,20 +32,17 @@ public class SizzlePseudosChildAndOfType extends SizzleTest {
 
 // TODO(issue#46) - add :only-of-type
 //        t("Only-of-type", "#qunit-fixture > :only-of-type", new String[]{"name+value", "firstUL", "empty", "floatTest", "iframe", "table", "last"});
-
-// TODO(issue#14) - add :nth-child
-/*
-        // Verify that the child position isn't being cached improperly
-        executeJS("jQuery('p:nth-child(2)').before('<div id=\"secondChildrenTestDiv\"></div>');");
-        t("No longer second child", "p:nth-child(2)", new String[]{});
-        executeJS("jQuery('#secondChildrenTestDiv').remove()");
-        t("Restored second child", "p:nth-child(2)", new String[]{"ap", "en"});
-*/
     }
 
-    // TODO(issue#14) - add :nth-child
-    //@Test
+    @Test
     public void nth_child() throws Exception {
+        // Verify that the child position isn't being cached improperly
+        t("Test before adding second child", "p:nth-child(2)", new String[]{"ap", "en"});
+        executeJS("jQuery('p:nth-child(2)').before('<div class=\"secondChildrenTestDiv\"></div>');");
+        t("No longer second child", "p:nth-child(2)", new String[]{});
+        executeJS("jQuery('.secondChildrenTestDiv').remove()");
+        t("Restored second child", "p:nth-child(2)", new String[]{"ap", "en"});
+
         t("Nth-child", "p:nth-child(1)", new String[]{"firstp", "sndp"});
         t("Nth-child (with whitespace)", "p:nth-child( 1 )", new String[]{"firstp", "sndp"});
         t("Nth-child (case-insensitive)", "#form select:first option:NTH-child(3)", new String[]{"option1c"});
@@ -77,6 +74,59 @@ public class SizzlePseudosChildAndOfType extends SizzleTest {
         t("Nth-child(-1n+3)", "#form select:first option:nth-child(-1n+3)", new String[]{"option1a", "option1b", "option1c"});
         t("Nth-child(-n+3)", "#form select:first option:nth-child(-n+3)", new String[]{"option1a", "option1b", "option1c"});
         t("Nth-child(-1n + 3)", "#form select:first option:nth-child(-1n + 3)", new String[]{"option1a", "option1b", "option1c"});
+
+        // http://jsbin.com/nosikenise/4/edit?html,js,output
+        t(":nth-child seleniumQuery additional tests", "#form select:first option:nth-child(-1n+3)", new String[]{"option1a", "option1b", "option1c"});
+        t(":nth-child seleniumQuery additional tests", "#form select:first option:nth-child(-2n+3)", new String[]{"option1a", "option1c"});
+        t(":nth-child seleniumQuery additional tests", "#form select:first option:nth-child(-3n+3)", new String[]{"option1c"});
+        t(":nth-child seleniumQuery additional tests", "#form select:first option:nth-child(-4n+3)", new String[]{"option1c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(even)", new String[]{"option1b", "option1d", "option2b", "option2d", "option3b", "option3d", "option4b", "option4d", "option5b"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(odd)", new String[]{"option1a", "option1c", "option2a", "option2c", "option3a", "option3c", "option3e", "option4a", "option4c", "option4e", "option5a", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(0)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(+0)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-0)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(1)", new String[]{"option1a", "option2a", "option3a", "option4a", "option5a"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(+1)", new String[]{"option1a", "option2a", "option3a", "option4a", "option5a"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-1)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(2)", new String[]{"option1b", "option2b", "option3b", "option4b", "option4d", "option5b"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(+2)", new String[]{"option1b", "option2b", "option3b", "option4b", "option4d", "option5b"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-2)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(n)", new String[]{"option1a", "option1b", "option1c", "option1d", "option2a", "option2b", "option2c", "option2d", "option3a", "option3b", "option3c", "option3d", "option3e", "option4a", "option4b", "option4c", "option4d", "option4e", "option5a", "option5b", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(+n)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-n)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(0n)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(+0n)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-0n)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(1n)", new String[]{"option1a", "option1b", "option1c", "option1d", "option2a", "option2b", "option2c", "option2d", "option3a", "option3b", "option3c", "option3d", "option3e", "option4a", "option4b", "option4c", "option4d", "option4e", "option5a", "option5b", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(+1n)", new String[]{"option1a", "option1b", "option1c", "option1d", "option2a", "option2b", "option2c", "option2d", "option3a", "option3b", "option3c", "option3d", "option3e", "option4a", "option4b", "option4c", "option4d", "option4e", "option5a", "option5b", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-1n)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(2n)", new String[]{"option1b", "option1d", "option2b", "option2d", "option3b", "option3d", "option4b", "option4d", "option5b"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(+2n)", new String[]{"option1b", "option1d", "option2b", "option2d", "option3b", "option3d", "option4b", "option4d", "option5b"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-2n)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(1n+0)", new String[]{"option1a", "option1b", "option1c", "option1d", "option2a", "option2b", "option2c", "option2d", "option3a", "option3b", "option3c", "option3d", "option3e", "option4a", "option4b", "option4c", "option4d", "option4e", "option5a", "option5b", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(2n+0)", new String[]{"option1b", "option1d", "option2b", "option2d", "option3b", "option3d", "option4b", "option4d", "option5b"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(3n+0)", new String[]{"option1c", "option2c", "option3c", "option4c", "option4e", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(4n+0)", new String[]{"option1d", "option2d", "option3d"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-1n+0)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-2n+0)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-3n+0)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-4n+0)", new String[]{});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(1n+1)", new String[]{"option1a", "option1b", "option1c", "option1d", "option2a", "option2b", "option2c", "option2d", "option3a", "option3b", "option3c", "option3d", "option3e", "option4a", "option4b", "option4c", "option4d", "option4e", "option5a", "option5b", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(2n+1)", new String[]{"option1a", "option1c", "option2a", "option2c", "option3a", "option3c", "option3e", "option4a", "option4c", "option4e", "option5a", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(3n+1)", new String[]{"option1a", "option1d", "option2a", "option2d", "option3a", "option3d", "option4a", "option5a"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(4n+1)", new String[]{"option1a", "option2a", "option3a", "option3e", "option4a", "option5a"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-1n+1)", new String[]{"option1a", "option2a", "option3a", "option4a", "option5a"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-2n+1)", new String[]{"option1a", "option2a", "option3a", "option4a", "option5a"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-3n+1)", new String[]{"option1a", "option2a", "option3a", "option4a", "option5a"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-4n+1)", new String[]{"option1a", "option2a", "option3a", "option4a", "option5a"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(1n+3)", new String[]{"option1c", "option1d", "option2c", "option2d", "option3c", "option3d", "option3e", "option4c", "option4e", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(2n+3)", new String[]{"option1c", "option2c", "option3c", "option3e", "option4c", "option4e", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(3n+3)", new String[]{"option1c", "option2c", "option3c", "option4c", "option4e", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(4n+3)", new String[]{"option1c", "option2c", "option3c", "option4c", "option4e", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-1n+3)", new String[]{"option1a", "option1b", "option1c", "option2a", "option2b", "option2c", "option3a", "option3b", "option3c", "option4a", "option4b", "option4c", "option4d", "option4e", "option5a", "option5b", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-2n+3)", new String[]{"option1a", "option1c", "option2a", "option2c", "option3a", "option3c", "option4a", "option4c", "option4e", "option5a", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-3n+3)", new String[]{"option1c", "option2c", "option3c", "option4c", "option4e", "option5c"});
+        t(":nth-child seleniumQuery additional tests", "#form option:nth-child(-4n+3)", new String[]{"option1c", "option2c", "option3c", "option4c", "option4e", "option5c"});
 
         //deepEqual(Sizzle(":nth-child(n)", null, null,[document.createElement("a")].concat(q("ap"))), q("ap"), "Seeded nth-child");
     }
