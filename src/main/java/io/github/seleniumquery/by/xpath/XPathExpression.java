@@ -14,14 +14,14 @@ import org.openqa.selenium.WebElement;
 
 public class XPathExpression {
 
-	public static final String EMPTY_LOCAL_NAME_CONDITIONAL = "local-name()";
+	public static final String MATCH_EVERYTHING_XPATH_CONDITIONAL = "true()";
 
 	private String xPathExpression;
 	private List<XPathExpression> otherExpressions = new ArrayList<XPathExpression>();
 	private ElementFilterList elementFilterList;
 	
 	// TODO this is very, very, very nasty!
-	// should probably be replaced by polymorphism
+	// should probably be replaced with polymorphism
 	public CssSelectorType kind;
 
 	XPathExpression(String xPathExpression, ElementFilterList elementFilterList) {
@@ -52,7 +52,11 @@ public class XPathExpression {
 		if (this.kind != CssSelectorType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
-		this.xPathExpression = ".//" + this.xPathExpression;
+		if ("*".equals(this.xPathExpression)) {
+			this.xPathExpression = ".//*";
+		} else {
+			this.xPathExpression = ".//*[self::" + this.xPathExpression+"]";
+		}
 		for (XPathExpression other : otherExpressions) {
 			mergeExpression(other);
 		}
@@ -69,10 +73,10 @@ public class XPathExpression {
 		if (this.kind != CssSelectorType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
-		if (!"*".equals(this.xPathExpression)) {
-			this.xPathExpression = "local-name() = '"+this.xPathExpression+"'";
+		if ("*".equals(this.xPathExpression)) {
+			this.xPathExpression = MATCH_EVERYTHING_XPATH_CONDITIONAL;
 		} else {
-			this.xPathExpression = EMPTY_LOCAL_NAME_CONDITIONAL;
+			this.xPathExpression = "local-name() = '"+this.xPathExpression+"'";
 		}
 		for (XPathExpression other : otherExpressions) {
 			mergeAsCondition(other);
@@ -84,6 +88,10 @@ public class XPathExpression {
 		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
 				other.kind, other.xPathExpression, other.elementFilterList);
 		this.xPathExpression = other.kind.mergeAsCondition(this.xPathExpression, null, other.xPathExpression);
+	}
+
+	public String toSingleXPathExpression() {
+		return this.xPathExpression;
 	}
 
 }

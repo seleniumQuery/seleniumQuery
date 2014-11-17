@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.xpath;
 
-import static io.github.seleniumquery.by.xpath.XPathExpression.EMPTY_LOCAL_NAME_CONDITIONAL;
+import static io.github.seleniumquery.by.xpath.XPathExpression.MATCH_EVERYTHING_XPATH_CONDITIONAL;
 
 public enum CssSelectorType {
 	
@@ -22,6 +22,9 @@ public enum CssSelectorType {
 		}
 		@Override
 		public String mergeAsCondition(String sourceXPathExpression, CssSelectorType sourceKind, String otherXPathExpression) {
+			if (sourceXPathExpression.equals(MATCH_EVERYTHING_XPATH_CONDITIONAL)) {
+				return removeBraces(otherXPathExpression);
+			}
 			return sourceXPathExpression + " and " + removeBraces(otherXPathExpression);
 		}
 	},
@@ -32,7 +35,7 @@ public enum CssSelectorType {
 		}
 		@Override
 		public String mergeAsCondition(String sourceXPathExpression, CssSelectorType sourceKind, String otherXPathExpression) {
-			if (sourceXPathExpression.equals(EMPTY_LOCAL_NAME_CONDITIONAL)) {
+			if (sourceXPathExpression.equals(MATCH_EVERYTHING_XPATH_CONDITIONAL)) {
 				return removeBraces(otherXPathExpression);
 			}
 			return sourceXPathExpression + " and " + removeBraces(otherXPathExpression);
@@ -43,7 +46,10 @@ public enum CssSelectorType {
 	DESCENDANT_GENERAL {
 		@Override
 		public String merge(String sourceXPathExpression, CssSelectorType sourceKind, String otherXPathExpression) {
-			return sourceXPathExpression + "//" + otherXPathExpression;
+			if ("*".equals(otherXPathExpression)) {
+				return sourceXPathExpression + "//*";
+			}
+			return sourceXPathExpression + "//*[self::" + otherXPathExpression + "]";
 		}
 		@Override
 		public String mergeAsCondition(String sourceXPathExpression, CssSelectorType sourceKind, String otherXPathExpression) {
@@ -55,7 +61,10 @@ public enum CssSelectorType {
 	DESCENDANT_DIRECT {
 		@Override
 		public String merge(String sourceXPathExpression, CssSelectorType sourceKind, String otherXPathExpression) {
-			return sourceXPathExpression + "/" + otherXPathExpression;
+			if ("*".equals(otherXPathExpression)) {
+				return sourceXPathExpression + "/*";
+			}
+			return sourceXPathExpression + "/*[self::" + otherXPathExpression + "]";
 		}
 		@Override
 		public String mergeAsCondition(String sourceXPathExpression, CssSelectorType sourceKind, String otherXPathExpression) {
@@ -64,7 +73,7 @@ public enum CssSelectorType {
 	},
 	
 	// "/following-sibling::"  (the direct will add a position()=1 by itself)
-	// acdcjunior: read the above later but didnt understand: what direct??
+	// acdcjunior: I read the above later but didnt understand: what direct??
 	ADJACENT {
 		@Override
 		public String merge(String sourceXPathExpression, CssSelectorType sourceKind, String otherXPathExpression) {
@@ -76,9 +85,9 @@ public enum CssSelectorType {
 		@Override
 		public String merge(String sourceXPathExpression, CssSelectorType sourceKind, String otherXPathExpression) {
 			if ("*".equals(otherXPathExpression)) {
-				return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, null, "[local-name()]");
+				return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, null, "["+MATCH_EVERYTHING_XPATH_CONDITIONAL+"]");
 			}
-			return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, null, "[local-name() = '"+otherXPathExpression+"']");
+			return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, null, "[self::"+otherXPathExpression+"]");
 		}
 	};
 

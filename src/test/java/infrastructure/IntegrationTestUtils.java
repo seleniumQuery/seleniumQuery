@@ -9,6 +9,7 @@ import java.util.List;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class IntegrationTestUtils {
 
@@ -31,6 +32,13 @@ public class IntegrationTestUtils {
         int actualIds = ids(selector).length;
         assertEquals(assertionName + " --> Lists differ!", expectedMatchedSetSize, actualIds);
         return new NegativeAbleTest(assertionName);
+    }
+
+    protected void tIS(String assertionName, String selector, String[] expectedIds) {
+        for (String expectedId : expectedIds) {
+            System.out.println("$(\"#"+expectedId+"\").is(\""+selector+"\")");
+            assertTrue(assertionName, $("#"+expectedId).is(selector));
+        }
     }
 
     public static String[] ids(String selector) {
