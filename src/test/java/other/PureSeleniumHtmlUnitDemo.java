@@ -9,25 +9,51 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class PureSeleniumHtmlUnitDemo {
 	
 	public static void main(String[] args) {
-//        WebDriver driver = new HtmlUnitDriver(true);
+        WebDriver driver = new HtmlUnitDriver(true);
 //		WebDriver driver = new FirefoxDriver();
-        WebDriver driver = SeleniumQuery.$.browser.setDefaultDriverAsIE().getDefaultDriver();
+//        WebDriver driver = SeleniumQuery.$.browser.setDefaultDriverAsIE().getDefaultDriver();
         driver.get(new PureSeleniumHtmlUnitDemo().getClass().getClassLoader().getResource("BasicPage.html").toString());
-        
+
+
+		WebElement d1 = driver.findElement(By.id("d2"));
+		System.out.println(d1);
+		String xpathExpression = ".";
+		d1(d1, xpathExpression);
+		d1(d1, "self::*");
+		d1(d1, "self::*[position() = 0]");
+		d1(d1, "self::*[position() = 1]");
+		d1(d1, "self::*[position() = 2]");
+		d1(d1, "self::*[position() = 3]");
+
+
+		d1(d1, "self::*[../*[position() = 2] = .]");
+		d1(d1, "../*[position() = 2]");
+		d1(d1, "self::*[../*[position() = 3] = .]");
+
+
+		d1(d1, "self::*[@id='d1']");
+//		d1(d1, "./*[@id='d1']");
+		d1(d1, "self::*[@class='start']");
+		d1(d1, "self::*[@class='startx']");
+
+		System.out.println("#################");
+		System.exit(0);
+
 //        printAll(driver.findElements(By.cssSelector("*")));
         printAllJUST("//div[count(node()) > 0]", driver);
         printAllJUST("//div[string-length(text()) > 0]", driver);
         
         printAll(driver, driver.findElements(By.xpath("//div")));
-        
-        
-        
-        
         driver.quit();
+	}
+
+	private static void d1(WebElement d1, String xpathExpression) {
+		System.out.println(xpathExpression+": "+d1.findElements(By.xpath(xpathExpression)));
 	}
 
 	private static void printAll(WebDriver driver, List<WebElement> els) {

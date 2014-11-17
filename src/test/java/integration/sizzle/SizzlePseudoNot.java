@@ -34,8 +34,7 @@ public class SizzlePseudoNot extends SizzleTest {
         t(":not Multiple", "p:not(p,a)", new String[]{});
         t(":not Multiple", "p:not(a,p,b)", new String[]{});
         t(":not Multiple", ":input:not(:image,:input,:submit)", new String[]{});
-// TODO(issue#14) - add :nth-child
-//        t(":not Multiple", "#qunit-fixture p:not(:has(a), :nth-child(1))", new String[]{"first"});
+        t(":not Multiple", "#qunit-fixture p:not(:has(a), :nth-child(1))", new String[]{"first"});
 
         t("No element not selector", ".container div:not(.excluded) div", new String[]{});
 
