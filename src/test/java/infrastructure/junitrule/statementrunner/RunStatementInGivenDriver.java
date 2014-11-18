@@ -30,13 +30,17 @@ public class RunStatementInGivenDriver extends Statement {
 
     private void setUpDriver() {
 //		$.browser.setDefaultDriverAsHtmlUnit();
-        HtmlUnitDriver defaultDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
-        defaultDriver.setJavascriptEnabled(true);
-        $.browser.setDefaultDriver(defaultDriver);
+        setDefaultDriverAsHtmlUnitEmulatingFirefox();
 //		$.browser.setDefaultDriverAsChrome();
 //		$.browser.setDefaultDriverAsIE();
 //      $.browser.setDefaultDriverAsFirefox();
 //		$.browser.setDefaultDriverAsPhantomJS();
+    }
+
+    private void setDefaultDriverAsHtmlUnitEmulatingFirefox() {
+        HtmlUnitDriver defaultDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
+        defaultDriver.setJavascriptEnabled(true);
+        $.browser.setDefaultDriver(defaultDriver);
     }
 
 }

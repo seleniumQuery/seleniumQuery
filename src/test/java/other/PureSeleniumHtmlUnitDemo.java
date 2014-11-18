@@ -14,9 +14,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class PureSeleniumHtmlUnitDemo {
 	
 	public static void main(String[] args) {
-        WebDriver driver = new HtmlUnitDriver(true);
+//        WebDriver driver = new HtmlUnitDriver(true);
 //		WebDriver driver = new FirefoxDriver();
-//        WebDriver driver = SeleniumQuery.$.browser.setDefaultDriverAsIE().getDefaultDriver();
+        WebDriver driver = SeleniumQuery.$.browser.setDefaultDriverAsIE().getDefaultDriver();
         driver.get(new PureSeleniumHtmlUnitDemo().getClass().getClassLoader().getResource("BasicPage.html").toString());
 
 
@@ -24,6 +24,9 @@ public class PureSeleniumHtmlUnitDemo {
 		System.out.println(d1);
 		String xpathExpression = ".";
 		d1(d1, xpathExpression);
+		d1(d1, "self::*[@class = 'text']");
+		d1(d1, "self::*[@class = 'TEXT']");
+		d1(d1, "self::*[translate(@class,'TEXT','text') = 'text']");
 		d1(d1, "self::*");
 		d1(d1, "self::*[position() = 0]");
 		d1(d1, "self::*[position() = 1]");
