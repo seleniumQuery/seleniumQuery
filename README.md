@@ -39,9 +39,10 @@ import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the sh
 
 public class SeleniumQueryExample {
     public static void main(String[] args) {
-        $.browser.setDefaultDriverAsFirefox(); // sets Firefox as the browser used by $()
+        // sets Firefox as the global driver
+        $.browser.globalDriver().useFirefox();
         
-        $.browser.openUrl("http://www.google.com");
+        $.browser.open("http://www.google.com");
         
         $("input[name='q']").val("selenium");
         $("button[name='btnG']").click();
@@ -57,7 +58,7 @@ public class SeleniumQueryExample {
         // The line above waits for no time, as that input
         // is always enabled in google.com.
 
-        $.browser.quitDefaultBrowser(); // quits the firefox driver
+        $.browser.quit(); // quits the global (firefox) driver
     }
 }
 ```
@@ -69,7 +70,7 @@ To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
     <dependency>
         <groupId>io.github.seleniumquery</groupId>
         <artifactId>seleniumquery</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.9.0-SNAPSHOT</version>
     </dependency>
 </dependencies>
 <!-- The repository the snapshots will be downloaded from.
