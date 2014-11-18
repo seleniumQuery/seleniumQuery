@@ -4,12 +4,13 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
 
-import io.github.seleniumquery.globalfunctions.SeleniumQueryDefaultDriver;
+import io.github.seleniumquery.globalfunctions.SeleniumQueryBrowser;
 
 /**
  * Represents the seleniumQuery global object.
  * 
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class SeleniumQueryStatic {
@@ -20,13 +21,12 @@ public class SeleniumQueryStatic {
 	 * The default browser is emplyed when a seleniumQuery object is build using <code>$(".selector");</code>.<br>
 	 * A different browser can be used by using <code>$(anotherDriver, ".selector");</code>
 	 * 
-	 * @author acdcjunior
 	 * @since 0.9.0
 	 */
-	public final SeleniumQueryDefaultDriver browser;
+	public final SeleniumQueryBrowser browser;
 	
 	public SeleniumQueryStatic() {
-		this.browser = new SeleniumQueryDefaultDriver();
+		this.browser = new SeleniumQueryBrowser();
 	}
 	
 	public void setConsoleLogLevel(java.util.logging.Level level) {

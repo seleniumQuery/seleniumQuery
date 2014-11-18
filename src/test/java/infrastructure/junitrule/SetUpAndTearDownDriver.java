@@ -15,7 +15,7 @@ public class SetUpAndTearDownDriver implements TestRule {
 
 	private static final String TEST_SRC_FOLDER = "src/test/java/";
 
-	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.ALL_DRIVERS;
+	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.GIVEN_DRIVER;
 
 	private final Class<?> htmlTestUrlClass;
 

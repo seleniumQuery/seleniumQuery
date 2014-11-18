@@ -23,14 +23,14 @@ public class RunStatementInGivenDriver extends Statement {
         String driverName = $.browser.getDefaultDriver().getClass().getSimpleName();
         sQBeforeAfterer.executeMethodForDriver(driverName);
 
-        $.browser.quitDefaultDriver();
+        $.browser.quit();
 
         sQBeforeAfterer.reportFailures();
     }
 
     private void setUpDriver() {
-//		$.browser.setDefaultDriverAsHtmlUnit();
-        setDefaultDriverAsHtmlUnitEmulatingFirefox();
+		$.browser.globalDriver().useHtmlUnit();
+//        setDefaultDriverAsHtmlUnitEmulatingFirefox();
 //		$.browser.setDefaultDriverAsChrome();
 //		$.browser.setDefaultDriverAsIE();
 //      $.browser.setDefaultDriverAsFirefox();
