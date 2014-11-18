@@ -5,7 +5,7 @@
 	<title>seleniumQuery .val() test page</title>
 </head>
 <body>
-	<div>BOZO</div>
+	<div id="div-with-text-bozo">BOZO</div>
 	<select id="s1" name="">
 		<option id="opt" value="a1">AA</option>
 	</select>
@@ -13,6 +13,22 @@
 		bozo
 	</textarea>
 	<input type="text" id="i1" value="ii!">
-	<input type="radio" id="r1" value="ra!">
+
+	<input type="radio" id="ir1" value="input-radio-value">
+	<input type="checkbox" id="ic1" value="input-checkbox-value">
+	<input type="hidden" id="ih1" value="input-hidden-value">
+	<input type="button" id="ib1" value="input-button-value">
+	<input type="submit" id="is1" value="input-submit-value">
+
+	<div id="editable" contenteditable="true">DIZ EZ EDITABLE</div>
+
+	<div id="non-editable-preceding-div">Not Editable</div>
+	<div id="parent-of-editable-empty">
+		<div id="editable-empty" contenteditable="true"></div>
+	</div>
+
+	<select id="select-option-without-value">
+		<option selected="selected">selected option without value</option>
+	</select>
 </body>
 </html>

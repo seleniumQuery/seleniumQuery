@@ -1,15 +1,17 @@
 package integration.functions;
 
+import infrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
+import org.junit.Test;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriver;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
-
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
+import static org.junit.Assert.fail;
 
 public class ValFunctionTest {
 	
@@ -17,44 +19,111 @@ public class ValFunctionTest {
 	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(ValFunctionTest.class);
 
 	// http://jsbin.com/futuhipuhi/2/edit?html,js,output
-	// #failure SEVERAL FAILURES in SEVERAL browsers
-	// TODO(issue#56)
     @Test
-    public void val_function__setting() throws Exception {
-		assertThat($("div").val(), is(""));
-		$("div").val("SHOULD HAVE NO EFFECT");
-		assertThat($("div").val(), is("SHOULD HAVE NO EFFECT")); // #disagree jquery sets the val() in a div, but we want as below!
-	    //assertThat($("div").val(), is("")); // but we want this
-		assertThat($("div").text(), is("BOZO"));
+    public void val() throws Exception {
+		assertThat($("#div-with-text-bozo").val(), is(""));
 
-		/* <select> and <option> --------------------------------------------------------- */
+		try {
+			$("#div-with-text-bozo").val("SHOULD HAVE NO EFFECT");
+			if (!isHtmlUnitDriver($.browser.getDefaultDriver())) {
+				fail($.browser.getDefaultDriver().getClass().toString());
+			}
+		} catch (Exception ignore) { }
+//		assertThat($("#div-with-text-bozo").val(), is("SHOULD HAVE NO EFFECT")); // #disagree jquery sets the val() in a div, but we want as below!
+	    assertThat($("#div-with-text-bozo").val(), is("")); // #disagree - this is what we want
+		assertThat($("#div-with-text-bozo").text(), is("BOZO"));
+
+		// <select> and <option> ---------------------------------------------------------------------------------------
 		assertThat($("#s1").val(), is("a1"));
 
 		assertThat($("#opt").val(), is("a1"));
-		$("#opt").val("NEW-OPTION-VALUE");
-		assertThat($("#opt").val(), is("NEW-OPTION-VALUE"));
-		assertThat($("#s1").val(), is("NEW-OPTION-VALUE")); // as options's val() changed
+		$("#opt").val("NEW-OPTION-VALUE"); // #disagree - this willhave no effect
 
-		$("#s1").val("NEW-SELECT-VALUE");
-		assertThat($("#s1").val(), is(nullValue())); // as there is no option with that value
-		$("#s1").val("NEW-OPTION-VALUE");
-		assertThat($("#s1").val(), is("NEW-OPTION-VALUE"));
+//		assertThat($("#opt").val(), is("NEW-OPTION-VALUE")); // #disagree - we don't set values of <option>s through val()
+		assertThat($("#opt").val(), is("a1"));
+//		assertThat($("#s1").val(), is("NEW-OPTION-VALUE")); // #disagree (it's be so as options's val() changed)
 
-		/* TEXTAREA --------------------------------------------------------- */
-		assertThat($("#ta").val(), is("    bozo\n  ")); // Chrome/PhantomJS/IE10: "    bozo\n  "
-		//assertThat($("#ta").val(), is("bozo")); // HtmlUnit/Firefox: "bozo"
+//		$("#s1").val("NEW-SELECT-VALUE"); // #disagree we dont set selectos to non-existant options
+// 		assertThat($("#s1").val(), is(nullValue())); // #disagree so the option didnt change (it'd be null as there'd be no option with that value)
+
+//		$("#s1").val("NEW-OPTION-VALUE"); // #disagree, this option does not exist, as we didnt change its value above
+		//assertThat($("#s1").val(), is("NEW-OPTION-VALUE"));// #disagree, the value was not set
+//		assertThat($("#s1").val(), is(nullValue()));// #disagree, the value was not set
+
+		// TEXTAREA ----------------------------------------------------------------------------------------------------
+		assertThat($("#ta").val().trim(), is("bozo"));
+		assertThat($("#ta").val(), is("\t\tbozo\n\t")); // Firefox/Chrome/PhantomJS/IE10
+
 		$("#ta").val("NEW-TEXTAREA-VALUE");
 		assertThat($("#ta").val(), is("NEW-TEXTAREA-VALUE"));
 
-		/* <input type="text"> --------------------------------------------------------- */
+		// <input type="text"> -----------------------------------------------------------------------------------------
 		assertThat($("#i1").val(), is("ii!"));
 		$("#i1").val("NEW-INPUT-TEXT-VALUE");
 		assertThat($("#i1").val(), is("NEW-INPUT-TEXT-VALUE"));
 
-		/* <input type="radio"> --------------------------------------------------------- */
-		assertThat($("#r1").val(), is("ra!"));
-		$("#r1").val("NEW-RADIO-VALUE");
-		assertThat($("#r1").val(), is("NEW-RADIO-VALUE"));
-    }
+		// <input type="radio"> ----------------------------------------------------------------------------------------
+		assertThat($("#ir1").val(), is("input-radio-value"));
+		$("#ir1").val("new-radio-value"); // #disagree - should have no effect
+		//assertThat($("#ir1").val(), is("new-radio-value")); // #disagree - it didnt change as line above should have no effect
+		assertThat($("#ir1").val(), is("input-radio-value")); // #disagree - so the value must be the same
+
+		// <input type="checkbox"> -------------------------------------------------------------------------------------
+		assertThat($("#ic1").val(), is("input-checkbox-value"));
+		$("#ic1").val("new-checkbox-value"); // #disagree - should have no effect
+		//assertThat($("#ic1").val(), is("new-checkbox-value")); // #disagree - it didnt change as line above should have no effect
+		assertThat($("#ic1").val(), is("input-checkbox-value")); // #disagree - so the value must be the same
+
+		// <input type="hidden"> ---------------------------------------------------------------------------------------
+		assertThat($("#ih1").val(), is("input-hidden-value"));
+		$("#ih1").val("new-hidden-value"); // #disagree - should have no effect
+		//assertThat($("#ih1").val(), is("new-hidden-value")); // #disagree - it didnt change as line above should have no effect
+		assertThat($("#ih1").val(), is("input-hidden-value")); // #disagree - so the value must be the same
+
+		// <input type="submit"> ---------------------------------------------------------------------------------------
+		assertThat($("#is1").val(), is("input-submit-value"));
+		$("#is1").val("new-submit-value"); // #disagree - should have no effect
+		//assertThat($("#is1").val(), is("new-submit-value")); // #disagree - it didnt change as line above should have no effect
+		assertThat($("#is1").val(), is("input-submit-value")); // #disagree - so the value must be the same
+
+		// <input type="button"> ---------------------------------------------------------------------------------------
+		assertThat($("#ib1").val(), is("input-button-value"));
+		$("#ib1").val("new-button-value"); // #disagree - should have no effect
+		//assertThat($("#ib1").val(), is("new-button-value")); // #disagree - it didnt change as line above should have no effect
+		assertThat($("#ib1").val(), is("input-button-value")); // #disagree - so the value must be the same
+
+		// <select id="select-option-without-value"> -------------------------------------------------------------------
+		assertThat($("#select-option-without-value").val(), is("selected option without value"));
+
+		// <div id="editable" contenteditable="true"> ------------------------------------------------------------------
+		testEditableDiv("#editable", "DIZ EZ EDITABLE");
+
+		// <div id="editable-empty" contenteditable="true"> ------------------------------------------------------------
+		try {
+			testEditableDiv("#editable-empty", "");
+		} catch (ElementNotVisibleException e) {
+			if (!($.browser.getDefaultDriver() instanceof FirefoxDriver)) {
+				throw e;
+			}
+		}
+	}
+
+	private void testEditableDiv(String editableDivId, String initialValue) {
+		assertThat($(editableDivId).val(), is(""));
+		assertThat($(editableDivId).text(), is(initialValue));
+		$(editableDivId).val("TYPED <a>& STUFF");
+		assertThat($(editableDivId).text(), is("TYPED <a>& STUFF"));
+		//assertThat($("#editable").val(), is("SHOULD HAVE NO EFFECT")); // #disagree jquery sets the val() in a div, we dont want that...
+		assertThat($(editableDivId).val(), is("")); // #disagree - ...so the value must be the same
+		assertThat($(editableDivId).text(), is("TYPED <a>& STUFF"));
+
+		if ($.browser.getDefaultDriver() instanceof InternetExplorerDriver) {
+			assertThat($(editableDivId).html(), is(" TYPED &lt;a&gt;&amp; STUFF")); // notice the space at the beginning
+		} else if ($.browser.getDefaultDriver() instanceof FirefoxDriver) {
+			assertThat($(editableDivId).html(), is("TYPED &lt;a&gt;&amp; STUFF<br>")); // notice the <br> at the end
+		} else {
+			assertThat($(editableDivId).html(), is("TYPED &lt;a&gt;&amp; STUFF"));
+		}
+	}
 
 }
