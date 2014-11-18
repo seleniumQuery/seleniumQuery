@@ -126,7 +126,7 @@ And, that's right, the `.is()` function above is your old-time friend that takes
 
 <br>
 
-#API: jQuery, `waitUntil()` and other functions
+#API: jQuery, waitUntil and other functions
 
 seleniumQuery aims to implement all relevant jQuery functions, as well as adding some of our own.
 
