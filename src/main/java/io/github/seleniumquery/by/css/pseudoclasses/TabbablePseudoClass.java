@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * From http://api.jqueryui.com/tabbable-selector/: "Elements with a negative tab index are :focusable, but not :tabbable."
  * 
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class TabbablePseudoClass implements PseudoClass {
 	

@@ -20,7 +20,7 @@ import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
  * @see {@link Condition#SAC_AND_CONDITION}
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class AndConditionalCssSelector implements CssConditionalSelector<CombinatorCondition> {
 

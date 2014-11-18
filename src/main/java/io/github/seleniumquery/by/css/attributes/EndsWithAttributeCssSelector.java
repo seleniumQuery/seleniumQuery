@@ -17,7 +17,7 @@ import org.w3c.css.sac.Selector;
  * [attribute$=stringToEnd]
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class EndsWithAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 

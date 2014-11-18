@@ -20,7 +20,7 @@ import com.google.common.base.Function;
 
 /**
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class SeleniumQueryFluentWait {
 	
@@ -41,7 +41,7 @@ public class SeleniumQueryFluentWait {
 	}
 
 	/**
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	private <T> T fluentWait(SeleniumQueryObject seleniumQueryObject, Function<By, T> function, String reason) {
 		try {

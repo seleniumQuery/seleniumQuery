@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:only-of-type
  * 
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class OnlyOfTypePseudoClass implements PseudoClass {
 	

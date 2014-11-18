@@ -16,7 +16,7 @@ import org.w3c.css.sac.Selector;
  * #id
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class IdAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 

@@ -17,7 +17,7 @@ import static io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass.S
  *
  * @author acdcjunior
  * @author ricardo-sc
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class CheckedPseudoClass implements PseudoClass {
 

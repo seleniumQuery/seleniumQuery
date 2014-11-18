@@ -15,7 +15,7 @@ import org.w3c.css.sac.ElementSelector;
  * $("tagname")
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class TagNameSelector implements CssSelector<ElementSelector> {
 

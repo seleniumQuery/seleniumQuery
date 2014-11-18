@@ -14,7 +14,7 @@ import static io.github.seleniumquery.SeleniumQuery.sQ;
  * $("selector").parent()
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class ParentFunction {
 

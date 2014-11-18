@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * :present
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class PresentPseudoClass implements PseudoClass {
 	

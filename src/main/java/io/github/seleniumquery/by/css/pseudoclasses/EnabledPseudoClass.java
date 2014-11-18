@@ -19,7 +19,7 @@ import org.openqa.selenium.WebElement;
  * by "problems" we mean it is inconsistent, changing depending on what browser it is attempting to emulate
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class EnabledPseudoClass implements PseudoClass {
 	

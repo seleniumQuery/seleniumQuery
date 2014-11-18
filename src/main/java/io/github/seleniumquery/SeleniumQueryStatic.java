@@ -10,7 +10,7 @@ import io.github.seleniumquery.globalfunctions.SeleniumQueryDefaultDriver;
  * Represents the seleniumQuery global object.
  * 
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class SeleniumQueryStatic {
 	
@@ -21,7 +21,7 @@ public class SeleniumQueryStatic {
 	 * A different browser can be used by using <code>$(anotherDriver, ".selector");</code>
 	 * 
 	 * @author acdcjunior
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public final SeleniumQueryDefaultDriver browser;
 	

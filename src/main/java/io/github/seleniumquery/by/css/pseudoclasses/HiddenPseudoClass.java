@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
  * :hidden
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class HiddenPseudoClass implements PseudoClass {
 	

@@ -16,7 +16,7 @@ import java.util.Map;
  * E ~ PRE
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> {
 

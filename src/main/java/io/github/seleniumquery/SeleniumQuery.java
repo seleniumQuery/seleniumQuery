@@ -5,13 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsDriver;
 
 /**
- * The seleniumQuery factory for objects.<br>
+ * The seleniumQuery objects factory.<br>
  * <br>
  * Recommended way of use is to import statically the function:<br><br>
  * <strong><code>import static io.github.seleniumquery.SeleniumQuery.$;</code></strong>
  * <br>
  * <p>
- * And use it like:</br>
+ * And use it like:<br>
  * <strong><code>$("selector").function()</code></strong>
  * </p>
  * <p>
@@ -21,7 +21,8 @@ import org.openqa.selenium.internal.WrapsDriver;
  * </p>
  *
  * @author acdcjunior
- * @since 1.0.0
+ *
+ * @since 0.9.0
  */
 public class SeleniumQuery {
 	
@@ -106,6 +107,8 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>sQ("div").text();</code><br>
 	 * <code>sQ.location.href("http://www.google.com");</code><br>
+	 *
+	 * @return the very {@link SeleniumQueryObject} given as argument.
 	 */
 	public static SeleniumQueryObject sQ(SeleniumQueryObject seleniumQueryObject) {
 		return seleniumQueryObject;
@@ -118,6 +121,8 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>$("div").text();</code><br>
 	 * <code>$.location.href("http://www.google.com");</code><br>
+	 *
+	 * @return a {@link SeleniumQueryObject} containing all elements in the matched by the selector in the global driver.
 	 */
 	public static SeleniumQueryObject $(String selector) {
 		return sQ(selector);
@@ -130,6 +135,8 @@ public class SeleniumQuery {
 	 * Example:<br>
 	 * <code>$("div").text();</code><br>
 	 * <code>$.location.href("http://www.google.com");</code><br>
+	 *
+	 * @return a {@link SeleniumQueryObject} containing all elements in the matched by the selector in the given driver.
 	 */
 	public static SeleniumQueryObject $(WebDriver driver, String selector) {
 		return sQ(driver, selector);
@@ -168,6 +175,8 @@ public class SeleniumQuery {
 	
 	/**
 	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
+	 *
+	 * @return a {@link SeleniumQueryObject} containing all elements in the matched by the selector in the global driver.
 	 */
 	public static SeleniumQueryObject jQuery(String selector) {
 		return sQ(selector);
@@ -175,6 +184,8 @@ public class SeleniumQuery {
 	
 	/**
 	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
+	 *
+	 * @return a {@link SeleniumQueryObject} containing all elements in the matched by the selector in the fiven driver.
 	 */
 	public static SeleniumQueryObject jQuery(WebDriver driver, String selector) {
 		return sQ(driver, selector);
@@ -189,6 +200,7 @@ public class SeleniumQuery {
 	
 	/**
 	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
+	 * @return a {@link SeleniumQueryObject}.
 	 */
 	public static SeleniumQueryObject jQuery(SeleniumQueryObject seleniumQueryObject) {
 		return sQ(seleniumQueryObject);

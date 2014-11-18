@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
  * Represents a list of {@link XPathExpression}. In other words, multiple XPath expressions
  * that should be "composed" or "merged" to become a single expression.
  * 
- * @since 1.0.0
+ * @since 0.9.0
  * 
  * @author acdcjunior
  * @author ricardo-sc
