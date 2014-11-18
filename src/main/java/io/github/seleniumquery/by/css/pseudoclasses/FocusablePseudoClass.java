@@ -23,7 +23,7 @@ import org.openqa.selenium.WebElement;
  * - ALL OTHER elements are focusable based solely on their tabindex attribute and visibility.
  * 
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class FocusablePseudoClass implements PseudoClass {
 	

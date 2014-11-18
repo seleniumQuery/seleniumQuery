@@ -37,7 +37,7 @@ public class ValFunction {
 	 * 
 	 * @param element The element you want the value of.
 	 * @return The value of the element.
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public static String val(WebElement element) {
 		String tagName = element.getTagName();

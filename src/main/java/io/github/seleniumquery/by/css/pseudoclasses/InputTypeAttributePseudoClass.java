@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * <code>:password</code>, that is equivalent to <code>[type="password"]</code>.
  * 
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 abstract class InputTypeAttributePseudoClass implements PseudoClass {
 	

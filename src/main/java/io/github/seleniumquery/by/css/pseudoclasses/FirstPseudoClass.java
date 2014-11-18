@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
  * :first
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class FirstPseudoClass implements PseudoClass {
 

@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * http://api.jquery.com/input-selector/
  * 
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class InputPseudoClass implements PseudoClass {
 	

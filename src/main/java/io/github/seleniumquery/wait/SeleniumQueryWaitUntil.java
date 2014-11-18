@@ -12,7 +12,7 @@ import io.github.seleniumquery.wait.getters.ValGetter;
 
 /**
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class SeleniumQueryWaitUntil {
 	
@@ -23,7 +23,7 @@ public class SeleniumQueryWaitUntil {
 	/**
 	 * Creates a waitUntil object for the given seleniumQueryObject, with timeout and polling interval
 	 * as defined in the config files.
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public SeleniumQueryWaitUntil(SeleniumQueryObject seleniumQueryObject) {
 		this(seleniumQueryObject, SeleniumQueryConfig.getWaitUntilTimeout(), SeleniumQueryConfig.getWaitUntilPollingInterval());
@@ -32,7 +32,7 @@ public class SeleniumQueryWaitUntil {
 	/**
 	 * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval
 	 * as defined in the config files.
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public SeleniumQueryWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout) {
 		this(seleniumQueryObject, waitUntilTimeout, SeleniumQueryConfig.getWaitUntilPollingInterval());
@@ -40,7 +40,7 @@ public class SeleniumQueryWaitUntil {
 	
 	/**
 	 * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval.
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public SeleniumQueryWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout, long waitUntilPollingInterval) {
 		this.seleniumQueryObject = seleniumQueryObject;
@@ -51,7 +51,7 @@ public class SeleniumQueryWaitUntil {
 	 * Requeries the DOM <strong>until at least one element returned</strong> by a query to the selector used
 	 * to construct this seleniumQuery object <strong>is matched by the selector given</strong>.
 	 * 
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public SeleniumQueryAndOrThen is(String selector) {
 		SeleniumQueryObject seleniumQueryObjectAfterWait = this.fluentWait.waitUntil(IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, false);

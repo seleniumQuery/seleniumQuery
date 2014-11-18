@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
  * 
  * @author acdcjunior
  *
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class SeleniumQueryDefaultDriver {
 	
@@ -127,7 +127,7 @@ public class SeleniumQueryDefaultDriver {
 	 *
 	 * @return the currently set default {@link WebDriver};
 	 *
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public WebDriver getDefaultDriver() {
 		if (this.defaultDriver == null) {
@@ -157,7 +157,7 @@ public class SeleniumQueryDefaultDriver {
 	 * <br>
 	 * Example: <code>$.browser.sleep(10, TimeUnit.SECONDS); // sleeps for 10 seconds</code>
 	 * 
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public void sleep(int timeToWait, TimeUnit timeUnit) {
 		try {
@@ -175,7 +175,7 @@ public class SeleniumQueryDefaultDriver {
 	 * <br>
 	 * Example: <code>$.browser.sleep(10 * 1000); // sleeps for 10 seconds</code>
 	 * 
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public void sleep(int millis) {
 		sleep(millis, TimeUnit.MILLISECONDS);
@@ -185,7 +185,7 @@ public class SeleniumQueryDefaultDriver {
 	 * Opens the given URL in the default browser.
 	 * @param urlToOpen The URL to be opened. Example: "http://seleniumquery.github.io"
 	 * 
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public void openUrl(String urlToOpen) {
 		LOGGER.debug("Opening URL: "+urlToOpen);
@@ -196,7 +196,7 @@ public class SeleniumQueryDefaultDriver {
 	 * Opens the given file as a URL in the browser.
 	 * @param file the file to open.
 	 * 
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public void openUrl(File file) {
 		openUrl(file.toURI().toString());
@@ -206,7 +206,7 @@ public class SeleniumQueryDefaultDriver {
 	 * Returns the current URL in the default browser.
 	 * @return the currently opened URL.
 	 * 
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public String url() {
 		return getCurrentUrl();
@@ -215,7 +215,7 @@ public class SeleniumQueryDefaultDriver {
 	/**
 	 * Attempts to maximize the window of the default driver.
 	 * 
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public void maximizeWindow() {
 		getDefaultDriver().manage().window().maximize();
@@ -225,7 +225,7 @@ public class SeleniumQueryDefaultDriver {
 	 * Returns the current URL in the default browser.
 	 * @return the currently opened URL.
 	 * 
-	 * @since 1.0.0
+	 * @since 0.9.0
 	 */
 	public String getCurrentUrl() {
 		return getDefaultDriver().getCurrentUrl();

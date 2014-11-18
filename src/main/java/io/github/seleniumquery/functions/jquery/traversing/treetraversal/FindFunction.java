@@ -12,7 +12,7 @@ import io.github.seleniumquery.by.SeleniumQueryBy;
  * $("selector").find("selector")
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class FindFunction {
 

@@ -18,7 +18,7 @@ import org.w3c.css.sac.Selector;
  *
  * @author acdcjunior
  *
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class PseudoClassCssSelector implements CssConditionalSelector<AttributeCondition> {
 

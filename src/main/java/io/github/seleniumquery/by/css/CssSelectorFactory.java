@@ -13,7 +13,7 @@ import org.w3c.css.sac.Selector;
  * Picks a high level CssSelector based on the Selector type.
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class CssSelectorFactory {
 

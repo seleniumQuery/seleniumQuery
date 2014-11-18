@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * :eq()
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.9.0
  */
 public class EqPseudoClass implements PseudoClass {
 
