@@ -86,6 +86,8 @@ To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 </repositories>
 ```
 
+<br>
+
 #Features
 
 ###Readable jQuery syntax you already know
@@ -122,13 +124,17 @@ $("#modalDivOkButton").click().waitUntil().is(":not(:visible)");
 
 And, that's right, the `.is()` function above is your old-time friend that takes a selector as argument!
 
-#seleniumQuery API: jQuery, waitUntil and other functions
+<br>
+
+#API: jQuery, `waitUntil()` and other functions
 
 seleniumQuery aims to implement all relevant jQuery functions, as well as adding some of our own.
 
 Our main goals is emulating user actions and "sensing" the pages, currently our intention is to implement functions that read the state of the page and allow intuitive form manipulation.
 
 Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
+
+<br>
 
 #CSS and jQuery Extension Selectors
 
