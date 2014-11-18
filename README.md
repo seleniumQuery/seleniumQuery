@@ -110,7 +110,7 @@ Other important feature is the leverage of `WebDriver`'s `FluentWait` capabiliti
 
 ```java
 // WebDriver cannot natively detect the end of an Ajax call.
-// To test your application's behavior, you can and should alsways work with the
+// To test your application's behavior, you can and should always work with the
 // Ajax's expected effects, visible for the end user.
 // Below is an example of a <div> that should be hidden as effect of an Ajax call.
 // The code will hold until the modal is gone. If it is never gone, seleniumQuery
@@ -140,6 +140,10 @@ Get to know what jQuery functions seleniumQuery supports and what else it brings
 
 seleniumQuery allows querying elements by XPath, CSS3 selectors, jQuery/Sizzle extensions and even some exclusive selectors. Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
+<br>
+
+<br>
+
 ###Alternate symbols
 
 If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field) imported statically. Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same functions:
@@ -154,3 +158,10 @@ sQ("input.street").val("4th St!");
 String oldStreetz = jQuery("input.street").val();
 jQuery("input.street").val("5th St!");
 ```
+
+
+<br>
+
+#More
+
+Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
