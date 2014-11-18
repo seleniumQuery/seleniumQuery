@@ -47,10 +47,10 @@ public class RunStatementInEveryDriver extends Statement {
     }
 
     private void executeTestOnIE() {
-//			System.out.println("@## > Instantiating on IE10");
-//			$.browser.setDefaultDriverAsIE();
-//			statementRunner.executeMethodForDriver("IE10");
-//          $.browser.quitDefaultDriver();
+        System.out.println("@## > Instantiating on IE");
+        $.browser.setDefaultDriverAsIE();
+        statementRunner.executeMethodForDriver("IE");
+        $.browser.quitDefaultDriver();
     }
 
     private void executeTestOnFirefox() {
@@ -68,15 +68,20 @@ public class RunStatementInEveryDriver extends Statement {
     }
 
     private void executeOnHtmlUnit(BrowserVersion browserVersion) {
-        System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver");
-        $.browser.setDefaultDriver(createHtmlUnitDriverWithJavasCriptEnabled(browserVersion));
+        System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver - JavaScript ON");
+        $.browser.setDefaultDriver(createHtmlUnitDriverWithJavasCript(browserVersion, true));
+        statementRunner.executeMethodForDriver("HtmlUnit(" + browserVersion + ")");
+        $.browser.quitDefaultDriver();
+
+        System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver - JavaScript OFF");
+        $.browser.setDefaultDriver(createHtmlUnitDriverWithJavasCript(browserVersion, false));
         statementRunner.executeMethodForDriver("HtmlUnit(" + browserVersion + ")");
         $.browser.quitDefaultDriver();
     }
 
-    private HtmlUnitDriver createHtmlUnitDriverWithJavasCriptEnabled(final BrowserVersion browserVersion) {
+    private HtmlUnitDriver createHtmlUnitDriverWithJavasCript(BrowserVersion browserVersion, boolean enableJavascript) {
         HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(browserVersion);
-        htmlUnitDriver.setJavascriptEnabled(true);
+        htmlUnitDriver.setJavascriptEnabled(enableJavascript);
         return htmlUnitDriver;
     }
 

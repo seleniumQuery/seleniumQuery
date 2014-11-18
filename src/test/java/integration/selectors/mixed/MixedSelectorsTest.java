@@ -1,22 +1,20 @@
 package integration.selectors.mixed;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-
-import java.util.List;
-
-import org.junit.Rule;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
+
 public class MixedSelectorsTest {
 	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+	@ClassRule
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(MixedSelectorsTest.class);
 	
 	@Test
 	public void id() {

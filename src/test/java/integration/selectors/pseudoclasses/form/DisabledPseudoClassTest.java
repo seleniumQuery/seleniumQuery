@@ -1,17 +1,17 @@
 package integration.selectors.pseudoclasses.form;
 
+import infrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
+import org.junit.Test;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
-
-import org.junit.Rule;
-import org.junit.Test;
 
 public class DisabledPseudoClassTest {
 	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+	@ClassRule
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(DisabledPseudoClassTest.class);
 	
 	// http://jsbin.com/guqef/3/edit
 	@Test
