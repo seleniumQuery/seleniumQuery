@@ -1,6 +1,4 @@
-#seleniumQuery - Cross-Driver jQuery in Selenium
-
-http://seleniumquery.github.io
+#[seleniumQuery](http://seleniumquery.github.io) - Cross-Driver Selenium Java interface
 
 ###Cross-Driver (Cross-Browser) jQuery-like native Java interface for Selenium WebDriver
 
@@ -19,7 +17,7 @@ Allows querying elements by:
 
 - **CSS Selectors** - `$(".myClass")`,
 - **jQuery/Sizzle enhancements** - `$(".myClass:eq(3)")`, `$(".myClass:contains('My Text!')")`
-- **XPath** - `$("//div/*/label")`
+- **XPath** - `$("//div/*/label/preceding::*")`
 - and even some own **seleniumQuery selectors**: `$("#myOldDiv").is(":not(:present)")`.
 
 Built using Selenium WebDriver's native capabilities **only**:
@@ -157,7 +155,7 @@ Global object (static) functions:
 - `$.browser.setDefaultBrowser(webDriver);`: Sets the browser to be used by `$(".selector")`
 - `$.browser.sleep(10, TimeUnit.SECONDS);`: Instructs the browser (thread) to wait (sleep) for the given time.
 
-###Alternative symbols
+###Alternate symbols
 
 If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field) imported statically. Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same functions:
 
@@ -174,88 +172,14 @@ jQuery("input.street").val("5th St!");
 
 #CSS and jQuery Extension Selectors
 
-[Full list of supported selectors.](docs/SUPPORTED-SELECTORS.md)
+seleniumQuery allows querying elements by XPath, CSS3 selectors, jQuery/Sizzle extensions and even some exclusive selectors. Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
-Our aim is to implement all CSS3 and jQuery (Sizzle) extension selectors.
- 
-Currently, most selectors both from CSS3 and jQuery extensions are supported, but not all. E.g.:
+#seleniumQuery API: jQuery, waitUntil and other functions
 
-- [`:contains() Selector`](http://api.jquery.com/contains-selector/) - Select all elements that contain the specified text.
+seleniumQuery aims to implement all relevant jQuery functions, as well as adding some of our own.
 
-It is worth noting that, in seleniumQuery, all CSS Selectors are translated to XPath before execution by the browser. This 
-way, most of extended selectors won't result in a performance hit, as happens with jQuery. On the other hand, some may.
+Our main goals is emulating user actions and "sensing" the pages, currently our intention is to implement functions that read the state of the page and allow intuitive form manipulation.
 
-#Supported functions
+Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
-seleniumQuery aims to implement all relevant jQuery functions, as well as including some particular ones.
 
-#Supported jQuery Functions
-
-[Full list of supported functions.](docs/SUPPORTED-FUNCTIONS.md)
-
-As seleniumQuery main goals are emulating user actions and "sensing" the pages, currently our intention is to implement functions that read (that's what we mean by "sense") the state of the page plus those that manipulate forms.
-
-By following the principle above, supporting functions like `.val()` and `.find()` are among our priorities, whereas `.addClass()` and `.attr('attributeName', 'attributeValue')` are not.
-
-Some functions, specially those that require JavaScript enabled in the browser/driver, take the best-case approach, so they may have some small differences in specific versions of some browsers. Adding cross-driver/cross-browser support is among our goals, though keep in mind that user-emulating functions (as stated before) are our priorities and problems with them are likely to be fixed first. Usually, still, we will keep on fixing cross-driver issues as they are reported/found.
-
-Below you will find the list of currently supported jQuery functions, by category.
-
-Looking for a function not listed below? Check the [`ROADMAP.md`](ROADMAP.md) file. The functions we did not add in the list below were either considered not applicable (like `jQuery.noConflict()` or `.data()`) or of no use (as the [Ajax](http://api.jquery.com/category/ajax/) functions: why would anyone want to issue an Ajax function directly/explicitly through selenium? Usually, ajax in selenium is related to waiting for the browser to end Ajax calls. For that, check the `.waitUntil()`  function).
-
-##[Attributes](http://api.jquery.com/category/attributes/)
-
-- [`.attr()`](http://api.jquery.com/attr/) - Get the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
-- [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
-- [`.html()`](http://api.jquery.com/html/) - Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
-- [`.prop()`](http://api.jquery.com/prop/) - Get the value of a property for the first element in the set of matched elements or set one or more properties for every matched element.
-- [`.removeAttr()`](http://api.jquery.com/removeAttr/) - Remove an attribute from each element in the set of matched elements.
-- [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
-
-##[CSS](http://api.jquery.com/category/css/)
-
-- [`.hasClass()`](http://api.jquery.com/hasClass/) - Determine whether any of the matched elements are assigned the given class.
-
-##[Events](http://api.jquery.com/category/events/)
-
-- [`.trigger()`](http://api.jquery.com/trigger/) - Execute all handlers and behaviors attached to the matched elements for the given event type.
-- [`.click()`](http://api.jquery.com/click/) - Trigger the "click" JavaScript event on the matched elements.
-- [`.focus()`](http://api.jquery.com/focus/) - Trigger the "focus" JavaScript event on the matched elements.
-
-###Soon
-
-- [`.keyup()`](http://api.jquery.com/keyup/) - Trigger the "keyup" JavaScript event on the matched elements.
-- [`.blur()`](http://api.jquery.com/blur/) - Trigger the "blur" JavaScript event on the matched elements.
-
-##[Forms](http://api.jquery.com/category/forms/)
-
-- [`.val()`](http://api.jquery.com/val/) - Get the current value of the first element in the set of matched elements or set the value of every matched element.
-
-##[Miscellaneous](http://api.jquery.com/category/miscellaneous/)
-
-- [`.get()`](http://api.jquery.com/get/) - Retrieve the DOM elements matched by the jQuery object.
-- [`.size()`](http://api.jquery.com/size/) - Return the number of elements in the jQuery object.
-- [`.toArray()`](http://api.jquery.com/toArray/) - Retrieve all the elements contained in the jQuery set, as an array.
-
-- [`.each()`](http://api.jquery.com/each/) - Iterate over a jQuery object, executing a function for each matched element.
-    - The `.each()` function does not really exist: `$()` object is an `Iterable`, so you can use a Java **foreach** loop.
-        - Example: `for (WebElement divElement : $("div")) { ... }`
-
-##[Traversing functions](http://api.jquery.com/category/traversing/)
-
-- [`.children()`](http://api.jquery.com/children/) - Get the children of each element in the set of matched elements, optionally filtered by a selector.
-- [`.closest()`](http://api.jquery.com/closest/) - For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.
-- [`.end()`](http://api.jquery.com/end/) - End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
-- [`.eq()`](http://api.jquery.com/eq/) - Reduce the set of matched elements to the one at the specified index.
-- [`.find()`](http://api.jquery.com/find/) - Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
-- [`.first()`](http://api.jquery.com/first/) - Reduce the set of matched elements to the first in the set.
-- [`.is()`](http://api.jquery.com/is/) - Check the current matched set of elements against a selector, element, or jQuery object and return true if at least one of these elements matches the given arguments.
-- [`.not()`](http://api.jquery.com/not/) - Remove elements from the set of matched elements.
-- [`.parent()`](http://api.jquery.com/parent/) - Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
-
-##[Properties](http://api.jquery.com/category/properties/)
-
-- [`.length`](http://api.jquery.com/length/) - The number of elements in the jQuery object.
-    - This functionality is available through the `.size()` function.
-- [`.selector`](http://api.jquery.com/selector/) - A selector representing selector passed to jQuery(), if any, when creating the original set.
-    - This functionality is available through the `.getBy()` function and, as `.selector` was, depending on the context, is not always available.
