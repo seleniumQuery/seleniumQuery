@@ -88,7 +88,7 @@ To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 
 #Features
 
-###Readable jQuery syntax code you already know
+###Readable jQuery syntax you already know
 
 Make your code/tests more readable and easier to maintain. Leverage your knowledge of jQuery.
 
@@ -104,56 +104,35 @@ $("#mySelect").val("ford");
 
 ###Waiting capabilities for improved Ajax testing
 
-Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element (so long, boilerplate code!) through the use of the `.waitUntil()` function:
+Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element (no boilerplate code!) through the use of the `.waitUntil()` function:
 
 ```java
-/*
- * Selenium WebDriver cannot natively detect the end of an Ajax call.
- * To test your application behaviour, you can and should work with the Ajax's expected effects.
- * 
- * Below is an example of a <div> that should be hidden as effect of an Ajax call.
- * The code will only continue after it is gone. If not, it will throw a timeout exception.
- */
-$("#ajaxDiv").click();
-$("#ajaxDiv").waitUntil().is(":not(:visible)");
+// WebDriver cannot natively detect the end of an Ajax call.
+// To test your application's behavior, you can and should alsways work with the
+// Ajax's expected effects, visible for the end user.
+// Below is an example of a <div> that should be hidden as effect of an Ajax call.
+// The code will hold until the modal is gone. If it is never gone, seleniumQuery
+// will throw a timeout exception.
+$("#modalDiv :button:contains('OK')").click();
+$("#modalDiv :button:contains('OK')").waitUntil().is(":not(:visible)");
 
 // Or, fluently:
-$("#ajaxDiv").click().waitUntil().is(":not(:visible)");
+$("#modalDivOkButton").click().waitUntil().is(":not(:visible)");
 ```
 
-And, yeah, that's right, the `.is()` function above is your old-time friend that takes a selector as argument!
+And, that's right, the `.is()` function above is your old-time friend that takes a selector as argument!
 
-#API
+#seleniumQuery API: jQuery, waitUntil and other functions
 
-For the currently implemented jQuery functions check the [supported list](#supported-jquery-functions).
+seleniumQuery aims to implement all relevant jQuery functions, as well as adding some of our own.
 
-In order to handle interactions with Ajax-enabled pages, you can use the `.waitUntil()` function:
+Our main goals is emulating user actions and "sensing" the pages, currently our intention is to implement functions that read the state of the page and allow intuitive form manipulation.
 
-- The `.waitUntil()` functions will *requery* the DOM for the elements until the given condition is met, returning a **new** seleniumQuery object when that happens.
+Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
-```java
-// .waitUntil() will requery the DOM every time until the matched set fulfills the requirements
+#CSS and jQuery Extension Selectors
 
-// .is() functions
-$(".aDivDiv").waitUntil().is(":present");
-$(".myInput").waitUntil().is(":enabled");
-$(".aDivDiv").waitUntil().is(":visible");
-$(".myInput").waitUntil().is(":visible:enabled");
-// functions such as .val(), .text() and others are also available
-$(".myInput").waitUntil().val().isEqualTo("expectedValue");
-$(".aDivDiv").waitUntil().text().contains("expectedText");
-// and more...
-$(".myInput").waitUntil().val().matches(".*\d{10}\*");
-$(".myInput").waitUntil().size().isGreaterThan(7);
-$(".aDivDiv").waitUntil().html().contains("<div>expected</div>");
-```
-
-Global object (static) functions:
-
-- `$.browser.openUrl("http://www.url.to.go.com");`: Opens a URL
-- `$.browser.openUrl(new File("path/to/localFile.html"));`: Opens a local file
-- `$.browser.setDefaultBrowser(webDriver);`: Sets the browser to be used by `$(".selector")`
-- `$.browser.sleep(10, TimeUnit.SECONDS);`: Instructs the browser (thread) to wait (sleep) for the given time.
+seleniumQuery allows querying elements by XPath, CSS3 selectors, jQuery/Sizzle extensions and even some exclusive selectors. Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
 ###Alternate symbols
 
@@ -169,17 +148,3 @@ sQ("input.street").val("4th St!");
 String oldStreetz = jQuery("input.street").val();
 jQuery("input.street").val("5th St!");
 ```
-
-#CSS and jQuery Extension Selectors
-
-seleniumQuery allows querying elements by XPath, CSS3 selectors, jQuery/Sizzle extensions and even some exclusive selectors. Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
-
-#seleniumQuery API: jQuery, waitUntil and other functions
-
-seleniumQuery aims to implement all relevant jQuery functions, as well as adding some of our own.
-
-Our main goals is emulating user actions and "sensing" the pages, currently our intention is to implement functions that read the state of the page and allow intuitive form manipulation.
-
-Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
-
-
