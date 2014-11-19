@@ -1,6 +1,7 @@
 package infrastructure.junitrule.statementrunner;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import infrastructure.junitrule.DriverToRunTestsIn;
 import org.junit.runners.model.Statement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 

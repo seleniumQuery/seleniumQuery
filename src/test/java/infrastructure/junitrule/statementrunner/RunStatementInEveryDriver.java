@@ -1,6 +1,7 @@
 package infrastructure.junitrule.statementrunner;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import infrastructure.junitrule.DriverToRunTestsIn;
 import org.junit.runners.model.Statement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -9,21 +10,29 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 public class RunStatementInEveryDriver extends Statement {
 
     private final StatementRunner statementRunner;
+    private final DriverToRunTestsIn driverToRunTestsIn;
 
-    public RunStatementInEveryDriver(StatementRunner statementRunner) {
+    public RunStatementInEveryDriver(DriverToRunTestsIn driverToRunTestsIn, StatementRunner statementRunner) {
         super();
+        this.driverToRunTestsIn = driverToRunTestsIn;
         this.statementRunner = statementRunner;
     }
 
     @Override
     public void evaluate() throws Throwable {
-        executeAllHtmlUnits();
-        executeAllOtherDrivers();
+        executeTestOnHtmlUnits();
+        executeTestOnChrome();
+        executeTestOnIE();
+        executeTestOnFirefox();
+        executeTestOnPhantomJS();
         statementRunner.reportFailures();
     }
 
     @SuppressWarnings("deprecation")
-    private void executeAllHtmlUnits() {
+    private void executeTestOnHtmlUnits() {
+        if (!driverToRunTestsIn.canRunHtmlUnit()) {
+            return;
+        }
         executeOnHtmlUnit(BrowserVersion.FIREFOX_17);
         executeOnHtmlUnit(BrowserVersion.FIREFOX_24);
         executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
@@ -32,51 +41,56 @@ public class RunStatementInEveryDriver extends Statement {
         executeOnHtmlUnit(BrowserVersion.CHROME);
     }
 
-    private void executeAllOtherDrivers() {
-        executeTestOnChrome();
-        executeTestOnIE();
-        executeTestOnFirefox();
-        executeTestOnPhantomJS();
-    }
-
     private void executeTestOnChrome() {
+        if (!driverToRunTestsIn.canRunChrome()) {
+            return;
+        }
         System.out.println("@## > Instantiating Chrome Driver");
-        $.browser.setDefaultDriverAsChrome();
+        $.browser.globalDriver().useChrome();
         statementRunner.executeMethodForDriver("Chrome");
-        $.browser.quitDefaultDriver();
+        $.browser.quit();
     }
 
     private void executeTestOnIE() {
+        if (!driverToRunTestsIn.canRunIE()) {
+            return;
+        }
         System.out.println("@## > Instantiating on IE");
-        $.browser.setDefaultDriverAsIE();
+        $.browser.globalDriver().useInternetExplorer();
         statementRunner.executeMethodForDriver("IE");
-        $.browser.quitDefaultDriver();
+        $.browser.quit();
     }
 
     private void executeTestOnFirefox() {
+        if (!driverToRunTestsIn.canRunFirefox()) {
+            return;
+        }
         System.out.println("@## > Instantiating Firefox Driver");
-        $.browser.setDefaultDriverAsFirefox();
+        $.browser.globalDriver().useFirefox();
         statementRunner.executeMethodForDriver("Firefox");
-        $.browser.quitDefaultDriver();
+        $.browser.quit();
     }
 
     private void executeTestOnPhantomJS() {
+        if (!driverToRunTestsIn.canRunPhantomJS()) {
+            return;
+        }
         System.out.println("@## > Instantiating PhantomJS Driver");
-        $.browser.setDefaultDriverAsPhantomJS();
+        $.browser.globalDriver().usePhantomJS();
         statementRunner.executeMethodForDriver("PhantomJS");
-        $.browser.quitDefaultDriver();
+        $.browser.quit();
     }
 
     private void executeOnHtmlUnit(BrowserVersion browserVersion) {
         System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver - JavaScript ON");
-        $.browser.setDefaultDriver(createHtmlUnitDriverWithJavasCript(browserVersion, true));
+        $.browser.globalDriver().use(createHtmlUnitDriverWithJavasCript(browserVersion, true));
         statementRunner.executeMethodForDriver("HtmlUnit(" + browserVersion + ")");
-        $.browser.quitDefaultDriver();
+        $.browser.quit();
 
         System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver - JavaScript OFF");
-        $.browser.setDefaultDriver(createHtmlUnitDriverWithJavasCript(browserVersion, false));
+        $.browser.globalDriver().use(createHtmlUnitDriverWithJavasCript(browserVersion, false));
         statementRunner.executeMethodForDriver("HtmlUnit(" + browserVersion + ")");
-        $.browser.quitDefaultDriver();
+        $.browser.quit();
     }
 
     private HtmlUnitDriver createHtmlUnitDriverWithJavasCript(BrowserVersion browserVersion, boolean enableJavascript) {
