@@ -47,7 +47,7 @@
 		<!-- These two dependencies are here to force that version, because ghostdriver dependency may override them -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-firefox-driver</artifactId>
+			<artifactId>selenium-remote-driver</artifactId>
 			<version>2.44.0</version>
 		</dependency>
 		<dependency>
