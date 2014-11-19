@@ -15,7 +15,7 @@ $("input.street").val("4th St!");
 
 Allows querying elements by:
 
-- **CSS Selectors** - `$(".myClass")`,
+- **CSS3 Selectors** - `$(".myClass")`, `$("#table tr:nth-child(3n+1)")`
 - **jQuery/Sizzle enhancements** - `$(".myClass:eq(3)")`, `$(".myClass:contains('My Text!')")`
 - **XPath** - `$("//div/*/label/preceding::*")`
 - and even some own **seleniumQuery selectors**: `$("#myOldDiv").is(":not(:present)")`.
@@ -102,7 +102,22 @@ new Select(element).selectByValue("ford");
 // You can have the same effect writing just:
 $("#mySelect").val("ford");
 ```
+###Powerful selector system
 
+Let the tool do the hard work and find elements easily:
+
+- **CSS3 Selectors** - `$(".myClass")`, `$("#table tr:nth-child(3n+1)")`
+- **jQuery/Sizzle enhancements** - `$(".myClass:eq(3)")`, `$(".myClass:contains('My Text!')")`
+- **XPath** - `$("//div/*/label/preceding::*")`
+- and even some own **seleniumQuery selectors**: `$("#myOldDiv").is(":not(:present)")`.
+
+You pick your style. Whatever is more interesting at the moment. Even mix them:
+
+```
+$("#table tr:nth-child(3n+1)").find("/img[@alt='calendar']/preceding::input").val("2014-11-12")
+```
+
+seleniumQuery allows querying elements by XPath, CSS3 selectors, jQuery/Sizzle extensions and even some exclusive selectors. Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
 ###Waiting capabilities for improved Ajax testing
 
@@ -133,12 +148,6 @@ seleniumQuery aims to implement all relevant jQuery functions, as well as adding
 Our main goals is emulating user actions and "sensing" the pages, currently our intention is to implement functions that read the state of the page and allow intuitive form manipulation.
 
 Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
-
-<br>
-
-#CSS and jQuery Extension Selectors
-
-seleniumQuery allows querying elements by XPath, CSS3 selectors, jQuery/Sizzle extensions and even some exclusive selectors. Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
 <br>
 
