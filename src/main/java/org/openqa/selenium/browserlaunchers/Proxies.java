@@ -13,6 +13,8 @@ import org.openqa.selenium.Proxy;
 public class Proxies {
 
     public static Proxy extractProxy(Capabilities capabilities) {
+        // If the line below throws an exception, you probably have a dependency
+        // requiring/forcing a Selenium version lower than 2.44.0
         return Proxy.extractFrom(capabilities);
     }
 
