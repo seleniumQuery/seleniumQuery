@@ -90,6 +90,9 @@ To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 
 #Features
 
+seleniumQuery aims to implement all relevant jQuery functions, as well as adding some of our own. Our main goal is to make emulating user actions and reading the state of pages easier than ever, with a consistent behavior across drivers.
+
+
 ###Readable jQuery syntax you already know
 
 Make your code/tests more readable and easier to maintain. Leverage your knowledge of jQuery.
@@ -103,6 +106,7 @@ new Select(element).selectByValue("ford");
 $("#mySelect").val("ford");
 ```
 
+Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
 ###Powerful selector system
 
@@ -141,23 +145,14 @@ $("#modalDivOkButton").click().waitUntil().is(":not(:visible)");
 
 And, that's right, the `.is()` function above is your old-time friend that takes a selector as argument!
 
-<br>
+Check out what else `.waitUntil()` can do in the [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
-#API: jQuery, waitUntil and other functions
-
-seleniumQuery aims to implement all relevant jQuery functions, as well as adding some of our own.
-
-Our main goals is emulating user actions and "sensing" the pages, currently our intention is to implement functions that read the state of the page and allow intuitive form manipulation.
-
-Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
-
-<br>
 
 <br>
 
 ###Alternate symbols
 
-If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field) imported statically. Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same functions:
+If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field). Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same goodies:
 
 ```java
 import static io.github.seleniumquery.SeleniumQuery.sQ;
