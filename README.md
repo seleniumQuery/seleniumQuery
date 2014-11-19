@@ -102,22 +102,24 @@ new Select(element).selectByValue("ford");
 // You can have the same effect writing just:
 $("#mySelect").val("ford");
 ```
+
+
 ###Powerful selector system
 
 Let the tool do the hard work and find elements easily:
 
-- **CSS3 Selectors** - `$(".myClass")`, `$("#table tr:nth-child(3n+1)")`
-- **jQuery/Sizzle enhancements** - `$(".myClass:eq(3)")`, `$(".myClass:contains('My Text!')")`
-- **XPath** - `$("//div/*/label/preceding::*")`
-- and even some own **seleniumQuery selectors**: `$("#myOldDiv").is(":not(:present)")`.
+- CSS3 Selectors - `$(".myClass")`, `$("#table tr:nth-child(3n+1)")`
+- jQuery/Sizzle enhancements - `$(".claz:eq(3)")`, `$(".claz:contains('My Text!')")`
+- XPath - `$("//div/*/label/preceding::*")`
+- and even some own seleniumQuery selectors: `$("#myOldDiv").is(":not(:present)")`.
 
 You pick your style. Whatever is more interesting at the moment. Even mix them:
 
+```java
+$("#table tr:nth-child(3n+1)")
+                 .find("/img[@alt='calendar']/preceding::input").val("2014-11-12")
 ```
-$("#table tr:nth-child(3n+1)").find("/img[@alt='calendar']/preceding::input").val("2014-11-12")
-```
-
-seleniumQuery allows querying elements by XPath, CSS3 selectors, jQuery/Sizzle extensions and even some exclusive selectors. Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
+Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
 ###Waiting capabilities for improved Ajax testing
 
