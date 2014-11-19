@@ -19,15 +19,29 @@ import org.openqa.selenium.WebElement;
  * by "problems" we mean it is inconsistent, changing depending on what browser it is attempting to emulate
  *
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class DisabledPseudoClass implements PseudoClass {
 
 	private static final String DISABLED_PSEUDO_CLASS_NO_COLON = "disabled";
-	
-	private static final String OPTGROUP = "optgroup";
+
+	private static final String INPUT = "input";
+	private static final String BUTTON = "button";
 	private static final String OPTION = "option";
-	public static final List<String> DISABLEABLE_TAGS = Arrays.asList("input", "button", OPTGROUP, OPTION, "select", "textarea");
+	private static final String OPTGROUP = "optgroup";
+	private static final String SELECT = "select";
+	private static final String TEXTAREA = "textarea";
+
+	public static final List<String> DISABLEABLE_TAGS = Arrays.asList(INPUT, BUTTON, OPTGROUP, OPTION, SELECT, TEXTAREA);
+
+	private static final String DISABLEABLE_TAGS_XPATH;
+	static {
+		String or = " or ";
+		StringBuilder sb = new StringBuilder("(");
+		for (String disableableTag : DISABLEABLE_TAGS) { sb.append("self::").append(disableableTag).append(or); }
+		DISABLEABLE_TAGS_XPATH = sb.replace(sb.length()-or.length(), sb.length(),")").toString();
+	}
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -50,15 +64,12 @@ public class DisabledPseudoClass implements PseudoClass {
 
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[(@disabled and "
-				+ "(local-name() = 'input' or "
-				+ "local-name() = 'button' or "
-				+ "local-name() = 'optgroup' or "
-				+ "local-name() = 'option' or "
-				+ "local-name() = 'select' or "
-				+ "local-name() = 'textarea')"
-				+ ") "
-				+ " or (local-name() = 'option' and ancestor::select[@disabled])]");
+		return XPathExpressionFactory.createNoFilterSelector(
+				"[(" +
+					"(@disabled and "+ DISABLEABLE_TAGS_XPATH + ") " +
+					"or " +
+					"(self::option and ancestor::select[@disabled])" +
+				")]");
 	}
 
 }

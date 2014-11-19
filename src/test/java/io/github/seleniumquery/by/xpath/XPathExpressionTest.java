@@ -27,7 +27,7 @@ public class XPathExpressionTest {
     public void toXPath__id_text() {
         XPathExpression xPathExpr = selectorToExpression("#myID :text");
         String xPath = xPathExpr.toXPath();
-        assertThat(xPath, is("(.//*[@id = 'myID']//*[local-name() = 'input' and (@type = 'text' or not(@type))])"));
+        assertThat(xPath, is("(.//*[@id = 'myID']//*[self::input and (translate(@type,'TEXT','text') = 'text' or not(@type))])"));
     }
 
     @Test

@@ -10,6 +10,10 @@ public class SeleniumQueryGlobalDriver {
         this.seleniumQueryBrowser = seleniumQueryBrowser;
     }
 
+    public void use(WebDriver globalDriver) {
+        seleniumQueryBrowser.setDefaultDriver(globalDriver);
+    }
+
     public void useHtmlUnit() {
         seleniumQueryBrowser.setDefaultDriver(seleniumQueryBrowser.driverInstantiationUtils.instantiateHtmlUnitDriverWithoutPath());
     }
