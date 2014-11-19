@@ -37,7 +37,7 @@ import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the sh
 
 public class SeleniumQueryExample {
     public static void main(String[] args) {
-        // sets Firefox as the global driver, it is optional if omitted, will default 
+        // sets Firefox as the global driver; setting is optional - if omitted, will default 
         // to HtmlUnit or whatever you set at the, also optional, config files
         $.browser.globalDriver().useFirefox();
         
