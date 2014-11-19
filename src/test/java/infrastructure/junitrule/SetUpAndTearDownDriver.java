@@ -15,7 +15,7 @@ public class SetUpAndTearDownDriver implements TestRule {
 
 	private static final String TEST_SRC_FOLDER = "src/test/java/";
 
-	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.GIVEN_DRIVER;
+	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.ALL_DRIVERS;
 
 	private final Class<?> htmlTestUrlClass;
 
@@ -24,7 +24,7 @@ public class SetUpAndTearDownDriver implements TestRule {
 	}
 
 	private void openTestPage() {
-		$.browser.openUrl(htmlTestFileUrl(htmlTestUrlClass));
+		$.browser.open(htmlTestFileUrl(htmlTestUrlClass));
 	}
 
 	private static String htmlTestFileUrl(Class<?> clazz) {
@@ -50,14 +50,10 @@ public class SetUpAndTearDownDriver implements TestRule {
 			@Override
 			public void after() { }
 		};
-		if (driverToRunTestsIn == DriverToRunTestsIn.ALL_DRIVERS) {
-			return new RunStatementInEveryDriver(statementRunner);
+		if (driverToRunTestsIn == DriverToRunTestsIn.GIVEN_DRIVER) {
+			return new RunStatementInGivenDriver(statementRunner);
 		}
-		return new RunStatementInGivenDriver(statementRunner);
+		return new RunStatementInEveryDriver(driverToRunTestsIn, statementRunner);
 	}
 	
-}
-
-enum DriverToRunTestsIn {
-	ALL_DRIVERS, GIVEN_DRIVER
 }
