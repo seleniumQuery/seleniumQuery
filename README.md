@@ -2,7 +2,7 @@
 
 ###Cross-Driver (Cross-Browser) jQuery-like native Java interface for Selenium WebDriver
 
-seleniumQuery is a Java library/framework that intends to bring a "cross-driver" (cross-browser) **jQuery-like interface in** (pure) **Java** for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
+seleniumQuery is a Java library/framework that intends to bring a "**cross-driver**" **jQuery-like** interface in Java for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
 Example snippet:
 
