@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
  * http://api.jquery.com/button-selector/
  * 
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class ButtonPseudoClass implements PseudoClass {
@@ -31,7 +32,11 @@ public class ButtonPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[(local-name() = 'input' and @type = 'button') or local-name() = 'button']");
+		return XPathExpressionFactory.createNoFilterSelector("[(" +
+				"(self::input and translate(@type,'BUTTON','button') = 'button') " +
+				"or " +
+				"self::button" +
+			")]");
 	}
 	
 }

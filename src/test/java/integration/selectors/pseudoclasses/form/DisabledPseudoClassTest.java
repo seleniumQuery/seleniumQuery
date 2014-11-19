@@ -4,6 +4,7 @@ import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Test;
 
+import static infrastructure.IntegrationTestUtils.t;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -36,7 +37,7 @@ public class DisabledPseudoClassTest {
 	
 	@Test
 	public void disabledPseudo_with_tag_optgroup() {
-		assertThat($("optgroup:disabled").size(), is(6));
+		t(":disabled <optgroup>s", "optgroup:disabled", "optgroup-2", "optgroup-3", "optgroup-5", "optgroup-6", "optgroup-8", "optgroup-9");
 	}
 	
 	@Test

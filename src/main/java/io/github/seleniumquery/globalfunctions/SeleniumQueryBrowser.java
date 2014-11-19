@@ -23,7 +23,12 @@ public class SeleniumQueryBrowser {
 	private WebDriver defaultDriver;
 
 	public SeleniumQueryBrowser() { }
-	
+
+	/**
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.globalDriver().use(webDriverInstance);</code>
+	 */
+	@Deprecated
 	public SeleniumQueryBrowser setDefaultDriver(WebDriver defaultDriver) {
 		this.defaultDriver = defaultDriver;
 		this.setDriverTimeout();
@@ -37,7 +42,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.globalDriver().useHtmlUnit();</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.globalDriver().useHtmlUnit();</code>
 	 */
 	@Deprecated
 	public SeleniumQueryBrowser setDefaultDriverAsHtmlUnit() {
@@ -45,7 +51,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.globalDriver().useFirefox();</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.globalDriver().useFirefox();</code>
 	 */
 	@Deprecated
 	public SeleniumQueryBrowser setDefaultDriverAsFirefox() {
@@ -53,7 +60,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.globalDriver().useChrome();</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.globalDriver().useChrome();</code>
 	 */
 	@Deprecated
 	public SeleniumQueryBrowser setDefaultDriverAsChrome() {
@@ -61,7 +69,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.globalDriver().useChrome(path);</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.globalDriver().useChrome(path);</code>
 	 */
 	@Deprecated
 	public SeleniumQueryBrowser setDefaultDriverAsChrome(String pathToChromeDriverExe) {
@@ -69,7 +78,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.globalDriver().useInternetExplorer();</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.globalDriver().useInternetExplorer();</code>
 	 */
 	@Deprecated
 	public SeleniumQueryBrowser setDefaultDriverAsIE() {
@@ -77,7 +87,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.globalDriver().useInternetExplorer(path);</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.globalDriver().useInternetExplorer(path);</code>
 	 */
 	@Deprecated
 	public SeleniumQueryBrowser setDefaultDriverAsIE(String pathToIEDriverServerExe) {
@@ -85,7 +96,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.globalDriver().usePhantomJS();</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.globalDriver().usePhantomJS();</code>
 	 */
 	@Deprecated
 	public SeleniumQueryBrowser setDefaultDriverAsPhantomJS() {
@@ -93,7 +105,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.globalDriver().usePhantomJS(path);</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.globalDriver().usePhantomJS(path);</code>
 	 */
 	@Deprecated
 	public SeleniumQueryBrowser setDefaultDriverAsPhantomJS(String pathToPhantomJs) {
@@ -122,11 +135,23 @@ public class SeleniumQueryBrowser {
 	/**
 	 * Quits the seleniumQuery global driver.
 	 *
-	 * @deprecated use <code>$.browser.quit();</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.quit();</code>
 	 */
 	@Deprecated
 	public void quitDefaultDriver() {
 		quit(this.defaultDriver);
+	}
+
+	/**
+	 * Quits the seleniumQuery global driver.
+	 *
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.quit();</code>
+	 */
+	@Deprecated
+	public void quitDefaultBrowser() {
+		quit();
 	}
 
 	/**
@@ -142,6 +167,9 @@ public class SeleniumQueryBrowser {
 	 * @param webDriver The WebDriver instance to be quitted.
 	 */
 	public void quit(WebDriver webDriver) {
+		if (webDriver == null) {
+			throw new SeleniumQueryException("WebDriver was not initialized, you can't .quit() it.");
+		}
 		webDriver.quit();
 	}
 	
@@ -175,7 +203,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.open(url);</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.open(url);</code>
 	 */
 	@Deprecated
 	public void openUrl(String urlToOpen) {
@@ -184,7 +213,8 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.open(file);</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.open(file);</code>
 	 */
 	@Deprecated
 	public void openUrl(File file) {
@@ -213,13 +243,34 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
+	 * Opens the given URL in the default browser.
+	 * @param urlToOpen The URL to be opened. Example: "http://seleniumquery.github.io"
+	 *
+	 * @since 0.9.0
+	 */
+	public void url(String urlToOpen) {
+		LOGGER.debug("Opening URL: "+urlToOpen);
+		getDefaultDriver().get(urlToOpen);
+	}
+
+	/**
+	 * Opens the given file as a URL in the browser.
+	 * @param fileToOpenAsURL the file to be opened.
+	 *
+	 * @since 0.9.0
+	 */
+	public void url(File fileToOpenAsURL) {
+		openUrl(fileToOpenAsURL.toURI().toString());
+	}
+
+	/**
 	 * Returns the current URL in the default browser.
 	 * @return the currently opened URL.
 	 * 
 	 * @since 0.9.0
 	 */
 	public String url() {
-		return getCurrentUrl();
+		return getDefaultDriver().getCurrentUrl();
 	}
 	
 	/**
@@ -232,21 +283,12 @@ public class SeleniumQueryBrowser {
 	}
 
 	/**
-	 * @deprecated use <code>$.browser.currentUrl();</code>
+	 * This function has been deprecated.<br>
+     * Use: <b><code>$.browser.url();</code>
 	 */
 	@Deprecated
 	public String getCurrentUrl() {
-		return getDefaultDriver().getCurrentUrl();
+		return url();
 	}
 
-	/**
-	 * Returns the current URL in the default browser.
-	 * @return the currently opened URL.
-	 *
-	 * @since 0.9.0
-	 */
-	public String currentUrl() {
-		return getDefaultDriver().getCurrentUrl();
-	}
-	
 }
