@@ -37,10 +37,11 @@ import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the sh
 
 public class SeleniumQueryExample {
     public static void main(String[] args) {
-        // sets Firefox as the global driver
+        // sets Firefox as the global driver, it is optional if omitted, will default 
+        // to HtmlUnit or whatever you set at the, also optional, config files
         $.browser.globalDriver().useFirefox();
         
-        $.browser.open("http://www.google.com");
+        $.browser.url("http://www.google.com");
         
         $("input[name='q']").val("selenium");
         $("button[name='btnG']").click();
@@ -117,11 +118,10 @@ Let the tool do the hard work and find elements easily:
 - XPath - `$("//div/*/label/preceding::*")`
 - and even some own seleniumQuery selectors: `$("#myOldDiv").is(":not(:present)")`.
 
-You pick your style. Whatever is more interesting at the moment. Even mix them:
+You pick your style. Whatever is more interesting at the moment. Mixing is OK:
 
 ```java
-$("#table tr:nth-child(3n+1)")
-                 .find("/img[@alt='calendar']/preceding::input").val("2014-11-12")
+$("#tab tr:nth-child(3n+1)").find("/img[@alt='calendar']/preceding::input").val("2014-11-12")
 ```
 Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
