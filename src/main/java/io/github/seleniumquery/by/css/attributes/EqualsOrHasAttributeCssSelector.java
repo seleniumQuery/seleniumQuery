@@ -22,6 +22,7 @@ import org.w3c.css.sac.Selector;
  * So we should never allow HtmlUnitDriver+Emulating IE to handle attribute selectors natively...
  * 
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
