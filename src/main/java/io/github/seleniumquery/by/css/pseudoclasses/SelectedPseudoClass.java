@@ -2,14 +2,16 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.XPathExpression;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static io.github.seleniumquery.by.WebElementUtils.isOptionTag;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:selected
  * 
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class SelectedPseudoClass implements PseudoClass {
@@ -17,7 +19,6 @@ public class SelectedPseudoClass implements PseudoClass {
 	public static final String SELECTED_PSEUDO_CONDITION = "local-name() = 'option' and (@selected or (ancestor::select[not(@multiple) and not(option[@selected])] and position() = 1))";
 	private static final String SELECTED_PSEUDO_CONDITIONAL_EXPRESSION = "[" + SELECTED_PSEUDO_CONDITION + "]";
 
-	private static final String OPTION_TAG = "option";
 	private static final String SELECTED_PSEUDO_CLASS_NO_COLON = "selected";
 
 	@Override
@@ -31,7 +32,7 @@ public class SelectedPseudoClass implements PseudoClass {
 	}
 	
 	public boolean isSelected(WebElement element) {
-		return element.getTagName().equals(OPTION_TAG) && element.isSelected();
+		return isOptionTag(element) && element.isSelected();
 	}
 	
 	@Override
