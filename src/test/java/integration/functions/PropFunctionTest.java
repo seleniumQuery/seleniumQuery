@@ -6,13 +6,14 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class PropFunctionTest {
 	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+	@ClassRule
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(PropFunctionTest.class);
 
 	// http://jsbin.com/zofekalo/1/edit
     @Test

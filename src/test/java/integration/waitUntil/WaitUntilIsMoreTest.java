@@ -1,17 +1,17 @@
 package integration.waitUntil;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.junit.Assert.assertEquals;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.wait.SeleniumQueryWaitException;
-
-import org.junit.Rule;
+import org.junit.ClassRule;
 import org.junit.Test;
+
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.junit.Assert.assertEquals;
 
 public class WaitUntilIsMoreTest {
 
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+	@ClassRule
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(WaitUntilIsMoreTest.class);
 	
 	@Test
 	public void isPresent() {

@@ -1,17 +1,17 @@
 package integration.selectors.pseudoclasses.visibility;
 
+import infrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
+import org.junit.Test;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
-
-import org.junit.Rule;
-import org.junit.Test;
 
 public class HiddenSelectorTest {
 	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+	@ClassRule
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(HiddenSelectorTest.class);
 
     @Test
     public void hiddenPseudoClass() throws Exception {
