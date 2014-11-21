@@ -8,6 +8,7 @@ import org.w3c.css.sac.AttributeCondition;
  * Utility methods for XPath attributes.
  * 
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class AttributeEvaluatorUtils {
@@ -15,9 +16,9 @@ public class AttributeEvaluatorUtils {
 	public static String getXPathAttribute(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		if (!Character.isLetter(attributeName.charAt(0))) {
-			return "@*[local-name() = "+ SelectorUtils.intoEscapedXPathString(attributeName) +"]";
+			attributeName = SelectorUtils.intoEscapedXPathString(attributeName);
 		}
-		return "@"+ attributeName;
+		return "@*[translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '"+ attributeName.toLowerCase() +"']";
 	}
 
 }
