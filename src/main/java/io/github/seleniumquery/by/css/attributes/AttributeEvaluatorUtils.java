@@ -18,7 +18,7 @@ public class AttributeEvaluatorUtils {
 		if (!Character.isLetter(attributeName.charAt(0))) {
 			attributeName = SelectorUtils.intoEscapedXPathString(attributeName);
 		}
-		return "@*[translate(local-name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '"+ attributeName.toLowerCase() +"']";
+		return "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '"+ attributeName.toLowerCase() +"']";
 	}
 
 }
