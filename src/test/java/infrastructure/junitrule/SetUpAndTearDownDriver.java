@@ -1,7 +1,6 @@
 package infrastructure.junitrule;
 
 import infrastructure.junitrule.statementrunner.RunStatementInEveryDriver;
-import infrastructure.junitrule.statementrunner.RunStatementInGivenDriver;
 import infrastructure.junitrule.statementrunner.StatementRunner;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -15,7 +14,7 @@ public class SetUpAndTearDownDriver implements TestRule {
 
 	private static final String TEST_SRC_FOLDER = "src/test/java/";
 
-	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.ALL_DRIVERS;
+	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.HEADLESS_DRIVERS;
 
 	private final Class<?> htmlTestUrlClass;
 
@@ -50,9 +49,6 @@ public class SetUpAndTearDownDriver implements TestRule {
 			@Override
 			public void after() { }
 		};
-		if (driverToRunTestsIn == DriverToRunTestsIn.GIVEN_DRIVER) {
-			return new RunStatementInGivenDriver(statementRunner);
-		}
 		return new RunStatementInEveryDriver(driverToRunTestsIn, statementRunner);
 	}
 	
