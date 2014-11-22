@@ -49,14 +49,12 @@ public class DriverInstantiationUtils {
 			return iEWebDriver;
 		} catch (SessionNotFoundException snfe) {
 			String message = snfe.getLocalizedMessage();
-			System.out.println("MSG: "+message);
-			System.out.println("MSG: "+snfe.getMessage());
 			if (message != null && message.contains("Protected Mode")) {
-				throw new SeleniumQueryException("IE Driver requires Protected Mode settings to be the same for all zones.\n" +
-						"Go to Tools -> Internet Options -> Security Tab, and set all zones to the same protected mode," +
-						" be it enabled or disabled, does not matter.\n" +
-						"If this does not solve the problem, or for more info, check the " +
-						" https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-IE-Driver wiki page.", snfe);
+				throw new SeleniumQueryException("IE Driver requires Protected Mode settings to be the same for all zones. Go to\n\t\t" +
+						"'Tools' -> 'Internet Options' -> 'Security Tab', and set all zones to the same protected mode," +
+						" be it enabled or disabled, does not matter.\n\t\t" +
+						"If this does not solve the problem, or for more info, check our IE Driver wiki page at: " +
+						"https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-IE-Driver", snfe);
 			}
 			throw snfe;
 		}
