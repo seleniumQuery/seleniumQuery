@@ -16,7 +16,7 @@ $("input.street").val("4th St!");
 Allows querying elements by:
 
 - **CSS3 Selectors** - `$(".myClass")`, `$("#table tr:nth-child(3n+1)")`;
-- **jQuery/Sizzle enhancements** - `$(".myClass:eq(3)")`, `$(".myClass:contains('My Text!')")`;
+- **jQuery/Sizzle enhancements** - `$(":text:eq(3)")`, `$(".myClass:contains('My Text!')")`;
 - **XPath** - `$("//div/*/label/preceding::*")`;
 - and even some own **seleniumQuery selectors**: `$("#myOldDiv").is(":not(:present)")`.
 
