@@ -7,7 +7,7 @@ package io.github.seleniumquery;
  *
  * @since 0.9.0
  */
-public class SeleniumQueryGlobalBrowser extends SeleniumQueryBaseBrowser {
+public class SeleniumQueryGlobalBrowser extends SeleniumQueryBrowserFunctions {
 	
 	/**
 	 * Series of functions that set the default browser behavior.<br>

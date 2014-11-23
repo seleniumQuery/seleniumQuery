@@ -7,6 +7,14 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * THe seleniumQuery config util class.
+ *
+ * @author acdcjunior
+ * @author ricardo-sc
+ *
+ * @since 0.9.0
+ */
 public class SeleniumQueryConfig {
 	
 	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryConfig.class);

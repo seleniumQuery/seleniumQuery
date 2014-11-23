@@ -85,23 +85,24 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * SeleniumQueryObject constrcutors
 	 **************************************************************************************************************************************/
 	
-	SeleniumQueryObject(WebDriver driver, String selector) {
+	protected SeleniumQueryObject(WebDriver driver, String selector) {
 		this.driver = driver;
 		this.by = SeleniumQueryBy.byEnhancedSelector(selector);
 		this.elements = driver.findElements(this.by);
 		this.previous = null;
 	}
-	
-	SeleniumQueryObject(WebDriver driver, String selector, List<WebElement> webElements, SeleniumQueryObject previous) {
-		this.driver = driver;
-		this.by = SeleniumQueryBy.byEnhancedSelector(selector);
-		this.elements = webElements;
-		this.previous = previous;
+
+	protected SeleniumQueryObject(WebDriver driver, String selector, List<WebElement> webElements, SeleniumQueryObject previous) {
+		this(driver, SeleniumQueryBy.byEnhancedSelector(selector), webElements, previous);
 	}
-	
-	SeleniumQueryObject(WebDriver driver, List<WebElement> webElements, SeleniumQueryObject previous) {
+
+	protected SeleniumQueryObject(WebDriver driver, List<WebElement> webElements, SeleniumQueryObject previous) {
+		this(driver, SeleniumQueryBy.NO_SELECTOR_INVALID_BY, webElements, previous);
+	}
+
+	private SeleniumQueryObject(WebDriver driver, SeleniumQueryBy seleniumQueryBy, List<WebElement> webElements, SeleniumQueryObject previous) {
 		this.driver = driver;
-		this.by = SeleniumQueryBy.NO_SELECTOR_INVALID_BY;
+		this.by = seleniumQueryBy;
 		this.elements = webElements;
 		this.previous = previous;
 	}
