@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 @Deprecated
 public class SeleniumQueryDeprecatedBrowser {
 	
-	private SeleniumQueryBaseBrowser browser;
-	public SeleniumQueryDeprecatedBrowser(SeleniumQueryBaseBrowser browser) { this.browser = browser; }
+	private SeleniumQueryBrowserFunctions browser;
+	public SeleniumQueryDeprecatedBrowser(SeleniumQueryBrowserFunctions browser) { this.browser = browser; }
 
 	/** This function has been deprecated.<br> Use: <b><code>$.driver();</code> */
 	@Deprecated public SeleniumQueryDriver globalDriver() { return browser.driver(); }

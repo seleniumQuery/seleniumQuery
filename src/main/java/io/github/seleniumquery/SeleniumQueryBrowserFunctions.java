@@ -9,9 +9,9 @@ import java.io.File;
 /**
  * Set of functionality used both by user-managed browsers and global (the static) browser.
  */
-public class SeleniumQueryBaseBrowser {
+public class SeleniumQueryBrowserFunctions {
 
-    private static final Log LOGGER = LogFactory.getLog(SeleniumQueryBaseBrowser.class);
+    private static final Log LOGGER = LogFactory.getLog(SeleniumQueryBrowserFunctions.class);
 
     private SeleniumQueryDriver globalDriver = new SeleniumQueryDriver();
 
@@ -45,7 +45,7 @@ public class SeleniumQueryBaseBrowser {
      *
      * @since 0.9.0
      */
-    public SeleniumQueryBaseBrowser url(String urlToOpen) {
+    public SeleniumQueryBrowserFunctions url(String urlToOpen) {
         LOGGER.debug("Opening URL: "+urlToOpen);
         driver().get().get(urlToOpen);
         return this;
@@ -57,7 +57,7 @@ public class SeleniumQueryBaseBrowser {
      *
      * @since 0.9.0
      */
-    public SeleniumQueryBaseBrowser url(File fileToOpenAsURL) {
+    public SeleniumQueryBrowserFunctions url(File fileToOpenAsURL) {
         return url(fileToOpenAsURL.toURI().toString());
     }
 

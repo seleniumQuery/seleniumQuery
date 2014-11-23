@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @since 0.9.0
  */
-public class SeleniumQueryBrowser extends SeleniumQueryBaseBrowser {
+public class SeleniumQueryBrowser extends SeleniumQueryBrowserFunctions {
 
     /**
      * <p>The seleniumQuery global browser and functions object.</p>
