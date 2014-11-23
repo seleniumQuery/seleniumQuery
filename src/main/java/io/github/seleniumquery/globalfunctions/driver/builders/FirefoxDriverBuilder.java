@@ -6,8 +6,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
-
 /**
  * Builds FirefoxDriver instances for SeleniumQueryDriver.
  *
