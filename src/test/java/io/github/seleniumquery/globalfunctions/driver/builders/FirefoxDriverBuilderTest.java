@@ -1,24 +1,16 @@
 package io.github.seleniumquery.globalfunctions.driver.builders;
 
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
+import static org.junit.Assert.assertThat;
 
 public class FirefoxDriverBuilderTest {
 
@@ -56,11 +48,10 @@ public class FirefoxDriverBuilderTest {
         assertJavaScriptIsOff($.driver().get());
     }
 
-    private void assertJavaScriptIsOn(WebDriver driver) {
-        driver.get(htmlTestFileUrl(getClass()));
-        assertThat(driver.findElements(By.tagName("div")), hasSize(1+3));
+    public static void assertJavaScriptIsOn(WebDriver driver) {
+        driver.get(htmlTestFileUrl(FirefoxDriverBuilderTest.class));
+        assertThat(driver.findElements(By.tagName("div")), hasSize(1 + 3));
     }
-
 
     // TODO reuse methods from SetUpAndTearDownDriver - maybe extract them to some other class
     // i aint doing it now because there is another branch with changes to that file and I dont want to cause
@@ -73,8 +64,8 @@ public class FirefoxDriverBuilderTest {
         return new File(htmlPath).toURI().toString();
     }
 
-    private void assertJavaScriptIsOff(WebDriver driver) {
-        driver.get(htmlTestFileUrl(getClass()));
+    public static void assertJavaScriptIsOff(WebDriver driver) {
+        driver.get(htmlTestFileUrl(FirefoxDriverBuilderTest.class));
         assertThat(driver.findElements(By.tagName("div")), hasSize(1));
     }
 

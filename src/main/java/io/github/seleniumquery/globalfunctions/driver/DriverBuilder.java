@@ -14,6 +14,7 @@ public abstract class DriverBuilder<T extends DriverBuilder> {
 
     protected DesiredCapabilities desiredCapabilities;
 
+    @SuppressWarnings("unchecked")
     public T withCapabilities(DesiredCapabilities desiredCapabilities) {
         this.desiredCapabilities = desiredCapabilities;
         return (T) this;
@@ -42,4 +43,5 @@ public abstract class DriverBuilder<T extends DriverBuilder> {
      * @return A WebDriver instance based on the previous configurations.
      */
     protected abstract WebDriver build();
+
 }
