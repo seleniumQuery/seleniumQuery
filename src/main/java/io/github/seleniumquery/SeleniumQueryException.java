@@ -1,4 +1,4 @@
-package io.github.seleniumquery.globalfunctions;
+package io.github.seleniumquery;
 
 public class SeleniumQueryException extends RuntimeException {
 

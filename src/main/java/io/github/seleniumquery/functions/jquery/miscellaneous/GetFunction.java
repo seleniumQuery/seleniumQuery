@@ -1,6 +1,6 @@
 package io.github.seleniumquery.functions.jquery.miscellaneous;
 
-import io.github.seleniumquery.globalfunctions.SeleniumQueryBrowser;
+import io.github.seleniumquery.SeleniumQueryDeprecatedBrowser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
  */
 public class GetFunction {
 	
-	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryBrowser.class);
+	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryDeprecatedBrowser.class);
 	
 	public static WebElement get(List<WebElement> elements, int index) {
 		if (elements.size() <= index) {
