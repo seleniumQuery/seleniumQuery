@@ -16,17 +16,28 @@ public class SQLocalFactory {
 	}
 
 	public static SeleniumQueryObject createWithInvalidSelector(WebDriver driver, WebElement element, SeleniumQueryObject previous) {
-		List<WebElement> elements = new ArrayList<WebElement>(Arrays.asList(element));
+		List<WebElement> elements = toArrayList(element);
 		return createWithInvalidSelector(driver, elements, previous);
 	}
 
 	public static SeleniumQueryObject createWithInvalidSelector(WebDriver driver, List<WebElement> elements, SeleniumQueryObject previous) {
 		return new SeleniumQueryObject(driver, elements, previous);
 	}
-	
-	public static SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, WebElement element) {
-		List<WebElement> elements = new ArrayList<WebElement>(Arrays.asList(element));
-		return new SeleniumQueryObject(driver, elements, NO_PREVIOUS);
+
+	public static SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, List<WebElement> elements) {
+		return createWithInvalidSelector(driver, elements, NO_PREVIOUS);
 	}
 	
+	public static SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, WebElement element) {
+		return createWithInvalidSelectorAndNoPrevious(driver, toArrayList(element));
+	}
+
+	static SeleniumQueryObject createWithValidSelectorAndNoPrevious(WebDriver driver, String selector) {
+		return new SeleniumQueryObject(driver, selector);
+	}
+
+	private static ArrayList<WebElement> toArrayList(WebElement element) {
+		return new ArrayList<WebElement>(Arrays.asList(element));
+	}
+
 }

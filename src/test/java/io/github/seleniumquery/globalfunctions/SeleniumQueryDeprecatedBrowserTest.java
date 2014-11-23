@@ -7,18 +7,19 @@ import static org.junit.Assert.*;
 import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
+import io.github.seleniumquery.SeleniumQueryDeprecatedBrowser;
 import org.junit.Test;
 
-public class SeleniumQueryBrowserTest {
+public class SeleniumQueryDeprecatedBrowserTest {
 
-	SeleniumQueryBrowser seleniumQueryBrowser = new SeleniumQueryBrowser();
+	SeleniumQueryDeprecatedBrowser seleniumQueryDeprecatedBrowser = new SeleniumQueryDeprecatedBrowser(null);
 
 	@Test
 	public void sleepInt__should_sleep_for_the_given_time_in_millis() {
 		// given
 		long tempoNoInicio = System.currentTimeMillis();
 		// when
-		seleniumQueryBrowser.sleep(1000);
+		seleniumQueryDeprecatedBrowser.sleep(1000);
 		// then
 		long tempoGasto = System.currentTimeMillis() - tempoNoInicio;
 		assertThat(new BigDecimal(tempoGasto), is(closeTo(new BigDecimal(1000), new BigDecimal(100))));
@@ -29,7 +30,7 @@ public class SeleniumQueryBrowserTest {
 		// given
 		long tempoNoInicio = System.currentTimeMillis();
 		// when
-		seleniumQueryBrowser.sleep(1, TimeUnit.SECONDS);
+		seleniumQueryDeprecatedBrowser.sleep(1, TimeUnit.SECONDS);
 		// then
 		long tempoGasto = System.currentTimeMillis() - tempoNoInicio;
 		assertThat(new BigDecimal(tempoGasto), is(closeTo(new BigDecimal(1000), new BigDecimal(100))));
@@ -40,7 +41,7 @@ public class SeleniumQueryBrowserTest {
 		// given
 		long tempoNoInicio = System.currentTimeMillis();
 		// when
-		seleniumQueryBrowser.sleep(1, TimeUnit.MILLISECONDS);
+		seleniumQueryDeprecatedBrowser.sleep(1, TimeUnit.MILLISECONDS);
 		// then
 		long tempoGasto = System.currentTimeMillis() - tempoNoInicio;
 		assertThat(new BigDecimal(tempoGasto), is(closeTo(new BigDecimal(1), new BigDecimal(100))));

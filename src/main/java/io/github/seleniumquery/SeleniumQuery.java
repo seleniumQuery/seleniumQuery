@@ -1,24 +1,39 @@
 package io.github.seleniumquery;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsDriver;
+
+import java.util.List;
 
 /**
  * The seleniumQuery objects factory.<br>
  * <br>
- * Recommended way of use is to import statically the function:<br><br>
- * <strong><code>import static io.github.seleniumquery.SeleniumQuery.$;</code></strong>
+ * Recommended way of use is to import statically the function:<br>
+ * <div style="padding: 0px 0px 0px 15px;">
+ * 		<strong><code>import static io.github.seleniumquery.SeleniumQuery.$;</code></strong>
+ * </div>
  * <br>
  * <p>
- * And use it like:<br>
- * <strong><code>$("selector").function()</code></strong>
+ * And use it like:
+ * <div style="padding: 0px 0px 0px 15px;">
+ * 		<strong><code>$("selector").function()</code></strong>
+ * </div>
  * </p>
  * <p>
- * Other uses (aliases) include <code>jQuery()</code> and <code>sQ()</code>:<br>
- * <strong><code>jQuery("selector").function()</code></strong><br>
- * <strong><code>sQ("selector").function()</code></strong><br>
+ * Other uses (aliases) include <code>jQuery()</code> and <code>sQ()</code>:
+ * <div style="padding: 0px 0px 0px 15px;">
+ * 		<strong><code>jQuery("selector").function()</code></strong><br>
+ * 		<strong><code>sQ("selector").function()</code></strong>
+ * </div>
  * </p>
+ *
+ * <br>
+ * The default browser/driver is employed when a seleniumQuery object is built using <code>$(".selector");</code>.<br>
+ * A different browser can be used by using the {@link io.github.seleniumquery.SeleniumQueryBrowser} class:
+ * <div style="padding: 5px 0px 0px 15px;">
+ *     <code>SeleniumQueryBrowser <b>chrome</b> = new SeleniumQueryBrowser();<br>
+ *     <b>chrome</b>.driver().useChrome();<br>
+ *     <b>chrome</b>.$(".selector").val("123");</code>
+ * </div>
  *
  * @author acdcjunior
  *
@@ -27,183 +42,168 @@ import org.openqa.selenium.internal.WrapsDriver;
 public class SeleniumQuery {
 	
 	/**
-	 * <p>The seleniumQuery global object. Works as <code>$</code> (actually, the dollar sign is an alias to this).</p>
-	 * <p>Use <code>sQ("selector").function()</code> or <code>sQ.property.function()</code></p>
-	 * <br>
-	 * Example:<br>
-	 * <code>sQ("div").text();</code><br>
-	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 */
-	public static final SeleniumQueryStatic sQ = new SeleniumQueryStatic();
-	
-	/**
-	 * <p>The seleniumQuery global object.</p>
+	 * <p>The seleniumQuery global browser and functions object.</p>
 	 * <p>
-	 * Use <code>$("selector").function()</code> or <code>$.property.function()</code></p>
+	 *     Use <code>$.function()</code> for browser-scoped actions and
+	 *     <code>$("selector").function()</code> for tasks that should work on groups of elements.
+	 * </p>
 	 * <br>
-	 * Example:<br>
-	 * <code>$("div").text();</code><br>
-	 * <code>$.location.href("http://www.google.com");</code><br>
+	 * Examples:<br>
+	 * <code>$.driver().useFirefox();</code><br>
+	 * <code>$.url("http://www.google.com");</code><br>
+	 * <code>$("div").text();</code>
 	 */
-	public static final SeleniumQueryStatic $ = sQ;
+	public static final SeleniumQueryGlobalBrowser $ = new SeleniumQueryGlobalBrowser();
+
+	/**
+	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
+	 */
+	public static final SeleniumQueryGlobalBrowser sQ = $;
 	
 	/**
-	 * <p>The seleniumQuery global object.</p> This works as an alias to <code>$</code>.
+	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
 	 */
-	public static final SeleniumQueryStatic jQuery = sQ;
-	
+	public static final SeleniumQueryGlobalBrowser jQuery = $;
+
 	/**
-	 * <p>The seleniumQuery constructor. Works as <code>$</code> (actually, the dollar sign is an alias to this).</p>
-	 * <p>Use <code>sQ("selector").function()</code> or <code>sQ.property.function()</code></p>
+	 * <p>The seleniumQuery global browser and functions object.</p>
+	 * <p>
+	 *     Use <code>$.function()</code> for browser-scoped actions and
+	 *     <code>$("selector").function()</code> for tasks that should work on groups of elements.
+	 * </p>
 	 * <br>
-	 * Example:<br>
-	 * <code>sQ("div").text();</code><br>
-	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 */
-	public static SeleniumQueryObject sQ(String selector) {
-		return new SeleniumQueryObject(sQ.browser.getDefaultDriver(), selector);
-	}
-	
-	/**
-	 * <p>The seleniumQuery constructor. Works as <code>$</code> (actually, the dollar sign is an alias to this).</p>
-	 * <p>Use <code>sQ("selector").function()</code> or <code>sQ.property.function()</code></p>
-	 * <br>
-	 * Example:<br>
-	 * <code>sQ("div").text();</code><br>
-	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 */
-	public static SeleniumQueryObject sQ(WebDriver driver, String selector) {
-		return new SeleniumQueryObject(driver, selector);
-	}
-	
-	/**
-	 * <p>The seleniumQuery constructor. Works as <code>$</code> (actually, the dollar sign is an alias to this).</p>
-	 * <p>Use <code>sQ("selector").function()</code> or <code>sQ.property.function()</code></p>
-	 * <br>
-	 * Example:<br>
-	 * <code>sQ("div").text();</code><br>
-	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 */
-	public static SeleniumQueryObject sQ(WebElement element) {
-		return sQ(((WrapsDriver) element).getWrappedDriver(), element);
-	}
-	
-	/**
-	 * <p>The seleniumQuery constructor. Works as <code>$</code> (actually, the dollar sign is an alias to this).</p>
-	 * <p>Use <code>sQ("selector").function()</code> or <code>sQ.property.function()</code></p>
-	 * <br>
-	 * Example:<br>
-	 * <code>sQ("div").text();</code><br>
-	 * <code>sQ.location.href("http://www.google.com");</code><br>
-	 */
-	public static SeleniumQueryObject sQ(WebDriver driver, WebElement element) {
-		return SQLocalFactory.createWithInvalidSelectorAndNoPrevious(driver, element);
-	}
-	
-	/**
-	 * <p>The seleniumQuery constructor. Works as <code>$</code> (actually, the dollar sign is an alias to this).</p>
-	 * <p>Use <code>sQ("selector").function()</code> or <code>sQ.property.function()</code></p>
-	 * <br>
-	 * Example:<br>
-	 * <code>sQ("div").text();</code><br>
-	 * <code>sQ.location.href("http://www.google.com");</code><br>
+	 * Examples:<br>
+	 * <code>$.driver().useFirefox();</code><br>
+	 * <code>$.url("http://www.google.com");</code><br>
+	 * <code>$("div").text();</code>
 	 *
-	 * @return the very {@link SeleniumQueryObject} given as argument.
-	 */
-	public static SeleniumQueryObject sQ(SeleniumQueryObject seleniumQueryObject) {
-		return seleniumQueryObject;
-	}
-	
-	/**
-	 * <p>The seleniumQuery constructor.</p>
-	 * <p>Use <code>$("selector").function()</code> or <code>$.property.function()</code></p>
-	 * <br>
-	 * Example:<br>
-	 * <code>$("div").text();</code><br>
-	 * <code>$.location.href("http://www.google.com");</code><br>
+	 * @param selector A selector. Can be a CSS3 selector, a jQuery/Sizzle/seleniumQuery extended selector or an
+	 *                 XPath expression - if the argument starts with <code>(</code>, <code>/</code> or an XPath axis,
+	 *                 such as <code>descendant-or-self::</code>.
+	 * @return a {@link SeleniumQueryObject} containing all elements in matched by the selector.
 	 *
-	 * @return a {@link SeleniumQueryObject} containing all elements in the matched by the selector in the global driver.
+	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject $(String selector) {
-		return sQ(selector);
+		return SQLocalFactory.createWithValidSelectorAndNoPrevious($.driver().get(), selector);
 	}
-	
+
 	/**
-	 * <p>The seleniumQuery constructor.</p>
-	 * <p>Use <code>$("selector").function()</code> or <code>$.property.function()</code></p>
+	 * <p>The seleniumQuery global browser and functions object.</p>
+	 * <p>
+	 *     Use <code>$.function()</code> for browser-scoped actions and
+	 *     <code>$("selector").function()</code> for tasks that should work on groups of elements.
+	 * </p>
 	 * <br>
-	 * Example:<br>
-	 * <code>$("div").text();</code><br>
-	 * <code>$.location.href("http://www.google.com");</code><br>
+	 * Examples:<br>
+	 * <code>$.driver().useFirefox();</code><br>
+	 * <code>$.url("http://www.google.com");</code><br>
+	 * <code>$("div").text();</code>
 	 *
-	 * @return a {@link SeleniumQueryObject} containing all elements in the matched by the selector in the given driver.
-	 */
-	public static SeleniumQueryObject $(WebDriver driver, String selector) {
-		return sQ(driver, selector);
-	}
-	
-	/**
-	 * <p>The seleniumQuery object constructor.</p>
-	 * <p>Use <code>$("selector").function()</code> or <code>$.property.function()</code></p>
-	 * <br>
-	 * Example:<br>
-	 * <code>$("div").text();</code><br>
-	 * <code>$.location.href("http://www.google.com");</code><br>
+	 * @param element A {@link WebElement}s to initialize a {@link SeleniumQueryObject} with.
+	 * @return a {@link SeleniumQueryObject} containing the given element.
+	 *
+	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject $(WebElement element) {
-		return sQ(element);
+		return SQLocalFactory.createWithInvalidSelectorAndNoPrevious($.driver().get(), element);
 	}
-	
+
 	/**
-     * Creates a seleniumQuery object from existing driver and element.
-	 */
-	public static SeleniumQueryObject $(WebDriver driver, WebElement element) {
-		return sQ(driver, element);
-	}
-	
-	/**
-	 * <p>The seleniumQuery object constructor.</p>
-	 * <p>Use <code>$("selector").function()</code> or <code>$.property.function()</code></p>
+	 * <p>The seleniumQuery global browser and functions object.</p>
+	 * <p>
+	 *     Use <code>$.function()</code> for browser-scoped actions and
+	 *     <code>$("selector").function()</code> for tasks that should work on groups of elements.
+	 * </p>
 	 * <br>
-	 * Example:<br>
-	 * <code>$("div").text();</code><br>
-	 * <code>$.location.href("http://www.google.com");</code><br>
-	 */
-	public static SeleniumQueryObject $(SeleniumQueryObject seleniumQueryObject) {
-		return sQ(seleniumQueryObject);
-	}
-	
-	/**
-	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
+	 * Examples:<br>
+	 * <code>$.driver().useFirefox();</code><br>
+	 * <code>$.url("http://www.google.com");</code><br>
+	 * <code>$("div").text();</code>
 	 *
-	 * @return a {@link SeleniumQueryObject} containing all elements in the matched by the selector in the global driver.
+	 * @param elements A list of {@link WebElement}s to initialize a {@link SeleniumQueryObject} with.
+	 * @return a {@link SeleniumQueryObject} containing all given elements.
+	 *
+	 * @since 0.9.0
+	 */
+	public static SeleniumQueryObject $(List<WebElement> elements) {
+		return SQLocalFactory.createWithInvalidSelectorAndNoPrevious($.driver().get(), elements);
+	}
+
+	/**
+	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
+	 *
+	 * @param selector A selector. Can be a CSS3 selector, a jQuery/Sizzle/seleniumQuery extended selector or an
+	 *                 XPath expression - if the argument starts with <code>(</code>, <code>/</code> or an XPath axis,
+	 *                 such as <code>descendant-or-self::</code>.
+	 * @return a {@link SeleniumQueryObject} containing all elements in matched by the selector.
+	 *
+	 * @since 0.9.0
+	 */
+	public static SeleniumQueryObject sQ(String selector) {
+		return $(selector);
+	}
+
+	/**
+	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
+	 *
+	 * @param element A {@link WebElement}s to initialize a {@link SeleniumQueryObject} with.
+	 * @return a {@link SeleniumQueryObject} containing the given element.
+	 *
+	 * @since 0.9.0
+	 */
+	public static SeleniumQueryObject sQ(WebElement element) {
+		return $(element);
+	}
+
+	/**
+	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
+	 *
+	 * @param elements A list of {@link WebElement}s to initialize a {@link SeleniumQueryObject} with.
+	 * @return a {@link SeleniumQueryObject} containing all given elements.
+	 *
+	 * @since 0.9.0
+	 */
+	public static SeleniumQueryObject sQ(List<WebElement> elements) {
+		return $(elements);
+	}
+
+	/**
+	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
+	 *
+	 * @param selector A selector. Can be a CSS3 selector, a jQuery/Sizzle/seleniumQuery extended selector or an
+	 *                 XPath expression - if the argument starts with <code>(</code>, <code>/</code> or an XPath axis,
+	 *                 such as <code>descendant-or-self::</code>.
+	 * @return a {@link SeleniumQueryObject} containing all elements in matched by the selector.
+	 *
+	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject jQuery(String selector) {
-		return sQ(selector);
+		return $(selector);
 	}
-	
+
 	/**
-	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
+	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
 	 *
-	 * @return a {@link SeleniumQueryObject} containing all elements in the matched by the selector in the fiven driver.
-	 */
-	public static SeleniumQueryObject jQuery(WebDriver driver, String selector) {
-		return sQ(driver, selector);
-	}
-	
-	/**
-	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
+	 * @param element A {@link WebElement}s to initialize a {@link SeleniumQueryObject} with.
+	 * @return a {@link SeleniumQueryObject} containing the given element.
+	 *
+	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject jQuery(WebElement element) {
-		return sQ(element);
+		return $(element);
 	}
-	
+
 	/**
-	 * <p>The seleniumQuery constructor.</p> This function is an alias to <code>$()</code>.
-	 * @return a {@link SeleniumQueryObject}.
+	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
+	 *
+	 * @param elements A list of {@link WebElement}s to initialize a {@link SeleniumQueryObject} with.
+	 * @return a {@link SeleniumQueryObject} containing all given elements.
+	 *
+	 * @since 0.9.0
 	 */
-	public static SeleniumQueryObject jQuery(SeleniumQueryObject seleniumQueryObject) {
-		return sQ(seleniumQueryObject);
+	public static SeleniumQueryObject jQuery(List<WebElement> elements) {
+		return $(elements);
 	}
 	
 }

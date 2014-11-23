@@ -82,7 +82,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	private SeleniumQueryObject previous;
 	
 	/**************************************************************************************************************************************
-	 * Java SeleniumQueryObject constrcutors
+	 * SeleniumQueryObject constrcutors
 	 **************************************************************************************************************************************/
 	
 	SeleniumQueryObject(WebDriver driver, String selector) {
