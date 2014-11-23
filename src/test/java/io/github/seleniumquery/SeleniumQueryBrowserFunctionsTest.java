@@ -16,12 +16,12 @@ public class SeleniumQueryBrowserFunctionsTest {
     @SuppressWarnings("deprecation")
     public void pause__should_pause_for_the_given_time_in_millis() {
         // given
-        long tempoNoInicio = System.currentTimeMillis();
+        long startingTime = System.currentTimeMillis();
         // when
         seleniumQueryBrowserFunctions.pause(1000);
         // then
-        long tempoGasto = System.currentTimeMillis() - tempoNoInicio;
-        assertThat(new BigDecimal(tempoGasto), is(closeTo(new BigDecimal(1000), new BigDecimal(100))));
+        long timeSpent = System.currentTimeMillis() - startingTime;
+        assertThat(new BigDecimal(timeSpent), is(closeTo(new BigDecimal(1000), new BigDecimal(100))));
     }
 
 }
