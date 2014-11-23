@@ -11,7 +11,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
  *
  * @since 0.9.0
  */
-public class PhantomJSDriverBuilder extends DriverBuilder {
+public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder> {
 
     private String customPathToPhantomJs;
 
