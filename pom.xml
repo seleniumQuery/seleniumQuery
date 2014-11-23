@@ -10,19 +10,6 @@
 	<url>http://seleniumquery.github.io/</url>
 	<description>Cross-Driver (Cross-Browser) jQuery-like interface in Java for Selenium WebDriver.</description>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-		</license>
-	</licenses>
-
-	<scm>
-		<connection>scm:git:git@github.com:seleniumquery/seleniumQuery.git</connection>
-		<developerConnection>scm:git:git@github.com:seleniumquery/seleniumQuery.git</developerConnection>
-		<url>git@github.com:seleniumquery/seleniumQuery.git</url>
-	</scm>
-
 	<properties>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -44,17 +31,6 @@
 			<version>3.1</version>
 		</dependency>
 
-		<!-- These two dependencies are here to force that version, because ghostdriver dependency may override them -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-remote-driver</artifactId>
-			<version>2.44.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<version>2.44.0</version>
-		</dependency>
 		<!-- The selenium dependency -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -68,15 +44,38 @@
 			<version>1.1.3</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.detro.ghostdriver</groupId>
+			<artifactId>phantomjsdriver</artifactId>
+			<version>1.1.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>selenium-remote-driver</artifactId>
+					<groupId>org.seleniumhq.selenium</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>selenium-server</artifactId>
+					<groupId>org.seleniumhq.selenium</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 
 
 
 		<!-- BELOW, TEST DEPENDENCIES ONLY -->
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hamcrest</groupId>
+					<artifactId>hamcrest-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
@@ -84,6 +83,19 @@
 			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.10.8</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>hamcrest-core</artifactId>
+					<groupId>org.hamcrest</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
@@ -108,12 +120,6 @@
 			<version>4.3.3</version>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.github.detro.ghostdriver</groupId>
-            <artifactId>phantomjsdriver</artifactId>
-            <version>1.1.0</version>
-            <scope>test</scope>
-        </dependency>
 	</dependencies>
 
 	<build>
@@ -210,5 +216,19 @@
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
+
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git@github.com:seleniumquery/seleniumQuery.git</connection>
+		<developerConnection>scm:git:git@github.com:seleniumquery/seleniumQuery.git</developerConnection>
+		<url>git@github.com:seleniumquery/seleniumQuery.git</url>
+	</scm>
 
 </project>
