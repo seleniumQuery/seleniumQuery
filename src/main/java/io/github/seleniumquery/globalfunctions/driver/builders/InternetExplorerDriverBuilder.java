@@ -19,7 +19,7 @@ import java.io.File;
  *
  * @since 0.9.0
  */
-public class InternetExplorerDriverBuilder extends DriverBuilder {
+public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplorerDriverBuilder> {
 
     private static final Log LOGGER = LogFactory.getLog(InternetExplorerDriverBuilder.class);
 

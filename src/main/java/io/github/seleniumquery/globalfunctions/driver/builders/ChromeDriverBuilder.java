@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *
  * @since 0.9.0
  */
-public class ChromeDriverBuilder extends DriverBuilder {
+public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
     private String custoPathToChromeDriverExe;
 

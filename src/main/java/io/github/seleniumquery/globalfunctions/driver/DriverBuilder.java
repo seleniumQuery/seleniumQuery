@@ -10,7 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  *
  * @since 0.9.0
  */
-public abstract class DriverBuilder<T extends DriverBuilder> {
+public abstract class DriverBuilder<T extends DriverBuilder<T>> {
 
     protected DesiredCapabilities desiredCapabilities;
 
