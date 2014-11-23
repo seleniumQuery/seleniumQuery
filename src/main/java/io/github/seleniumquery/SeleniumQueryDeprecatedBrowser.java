@@ -90,19 +90,14 @@ public class SeleniumQueryDeprecatedBrowser {
 	public String getCurrentUrl() { return browser.url(); }
 
 	/** @deprecated Use: <b><code>$.pause(timeToPauseInMillis);</code> */
-	public void sleep(int timeToWait, TimeUnit timeUnit) { browser.pause(MILLISECONDS.convert(timeToWait, timeUnit));
-	}
+	public void sleep(int timeToWait, TimeUnit timeUnit) { browser.pause(MILLISECONDS.convert(timeToWait, timeUnit)); }
 
 	/** @deprecated Use: <b><code>$.pause(timeToPauseInMillis);</code> */
 	public void sleep(int millis) { browser.pause(millis); }
 
-	/**
-	 * Attempts to maximize the window of the default driver.
-	 *
-	 * @since 0.9.0
-	 */
+	/** @deprecated Use: <b><code>$.maximizeWindow();</code> */
 	public void maximizeWindow() {
-		getDefaultDriver().manage().window().maximize();
+		browser.maximizeWindow();
 	}
 
 }

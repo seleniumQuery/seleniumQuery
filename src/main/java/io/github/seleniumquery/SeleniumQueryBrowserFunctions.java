@@ -7,8 +7,15 @@ import org.openqa.selenium.interactions.PauseAction;
 
 import java.io.File;
 
+import static java.lang.String.format;
+
 /**
  * Set of functionality used both by user-managed browsers and global (the static) browser.
+ *
+ * @author acdcjunior
+ * @author ricardo-sc
+ *
+ * @since 0.9.0
  */
 public class SeleniumQueryBrowserFunctions {
 
@@ -49,7 +56,7 @@ public class SeleniumQueryBrowserFunctions {
      * @since 0.9.0
      */
     public SeleniumQueryBrowserFunctions url(String urlToOpen) {
-        LOGGER.debug("Opening URL: "+urlToOpen);
+        LOGGER.debug(format("Opening URL: %s", urlToOpen));
         driver().get().get(urlToOpen);
         return this;
     }
@@ -85,8 +92,21 @@ public class SeleniumQueryBrowserFunctions {
     @Deprecated
     @SuppressWarnings("deprecation")
     public SeleniumQueryBrowserFunctions pause(long timeToPauseInMillis) {
-        LOGGER.debug(String.format("Pausing for %d milliseconds.", timeToPauseInMillis));
+        LOGGER.debug(format("Pausing for %d milliseconds.", timeToPauseInMillis));
         new PauseAction(timeToPauseInMillis).perform();
+        return this;
+    }
+
+    /**
+     * Attempts to maximize the window of the current browser/driver.
+     *
+     * @return A self reference
+     *
+     * @since 0.9.0
+     */
+    public SeleniumQueryBrowserFunctions maximizeWindow() {
+        LOGGER.debug("Maximizing window.");
+        driver().get().manage().window().maximize();
         return this;
     }
 
