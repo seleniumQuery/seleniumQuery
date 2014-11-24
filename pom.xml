@@ -21,7 +21,6 @@
 			<version>0.9.12</version>
 		</dependency>
 
-
 		<!-- commons-lang3 is also a HtmlUnit dependency, so no harm here, it'd be there anyway.
 		Currently used mainly for escaping the string for :contains() and selectors, but also on
 		several case-insensitive equals/contains -->
@@ -36,12 +35,6 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.44.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.3</version>
 		</dependency>
 
 		<dependency>
@@ -60,11 +53,13 @@
 			</exclusions>
 		</dependency>
 
-
-
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.3</version>
+		</dependency>
 
 		<!-- BELOW, TEST DEPENDENCIES ONLY -->
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -94,31 +89,6 @@
 					<groupId>org.hamcrest</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>9.1.3.v20140225</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-util</artifactId>
-			<version>9.1.3.v20140225</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-plus</artifactId>
-			<version>9.1.3.v20140225</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.3.3</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
