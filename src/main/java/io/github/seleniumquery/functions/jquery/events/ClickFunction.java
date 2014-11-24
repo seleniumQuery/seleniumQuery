@@ -1,7 +1,7 @@
 package io.github.seleniumquery.functions.jquery.events;
 
+import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.globalfunctions.SeleniumQueryException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
 
