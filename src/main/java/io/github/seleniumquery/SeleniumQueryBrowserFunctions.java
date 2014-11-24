@@ -3,7 +3,6 @@ package io.github.seleniumquery;
 import io.github.seleniumquery.globalfunctions.driver.SeleniumQueryDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.interactions.PauseAction;
 
 import java.io.File;
 
@@ -93,7 +92,7 @@ public class SeleniumQueryBrowserFunctions {
     @SuppressWarnings("deprecation")
     public SeleniumQueryBrowserFunctions pause(long timeToPauseInMillis) {
         LOGGER.debug(format("Pausing for %d milliseconds.", timeToPauseInMillis));
-        new PauseAction(timeToPauseInMillis).perform();
+        new org.openqa.selenium.interactions.PauseAction(timeToPauseInMillis).perform();
         return this;
     }
 
