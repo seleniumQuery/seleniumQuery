@@ -1,21 +1,16 @@
 package other;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-
-import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the short syntax
+import static io.github.seleniumquery.SeleniumQuery.$;
 
 public class SeleniumQueryExample {
     public static void main(String[] args) {
-        // sets Firefox as the global driver; setting is optional - if omitted, will default
+        // sets Firefox as the driver -- this is optional, if omitted, will default
         // to HtmlUnit or whatever you set at the, also optional, config files
-        FirefoxProfile firefoxProfile = new FirefoxProfile();
-        firefoxProfile.setPreference("javascript.enabled", false);
-        $.browser.globalDriver().use(new FirefoxDriver(firefoxProfile));
+        $.driver().useFirefox().withoutJavaScript();
 
-        $.browser.open("http://www.google.com/?hl=en");
+        $.url("http://www.google.com/?hl=en");
 
-        $(":text[name='q']").val("selenium");
+        $(":text[name='q']").val("selenium"); // the keys are actually typed
         $(":button:contains('Google Search')").click();
 
         String resultsText = $("#resultStats").text();
@@ -23,12 +18,11 @@ public class SeleniumQueryExample {
 
         // Besides the short syntax and the jQuery behavior you already know,
         // other very useful function in seleniumQuery is .waitUntil(),
-        // especially handy for handling/testing Ajax enabled pages:
-
+        // handy for dealing with Ajax enabled pages:
         $(":input[name='q']").waitUntil().is(":enabled");
         // The line above waits for no time, as that input
         // is always enabled in google.com.
 
-        $.browser.quit(); // quits the global (firefox) driver
+        $.quit(); // quits the currently used driver (firefox)
     }
 }

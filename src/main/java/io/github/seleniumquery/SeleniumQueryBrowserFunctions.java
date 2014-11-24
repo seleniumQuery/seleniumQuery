@@ -10,7 +10,7 @@ import java.io.File;
 import static java.lang.String.format;
 
 /**
- * Set of functionality used both by user-managed browsers and global (the static) browser.
+ * Set of functionality used both by user-managed browsers and global (static) browser.
  *
  * @author acdcjunior
  * @author ricardo-sc
@@ -30,7 +30,7 @@ public class SeleniumQueryBrowserFunctions {
      *     <li>call .use*() methods to change the WebDriver currently used</li>
      * </ul>
      *
-     * @return the seleniumQuery's driver tool instance
+     * @return The seleniumQuery's driver tool instance.
      */
     public SeleniumQueryDriver driver() {
         return globalDriver;
@@ -39,7 +39,7 @@ public class SeleniumQueryBrowserFunctions {
     /**
      * Returns the current URL in the browser.
      *
-     * @return the currently loaded URL.
+     * @return The currently loaded URL.
      *
      * @since 0.9.0
      */
@@ -50,7 +50,7 @@ public class SeleniumQueryBrowserFunctions {
     /**
      * Opens the given URL in the default browser.
      *
-     * @param urlToOpen the URL to be opened. Example: "http://seleniumquery.github.io"
+     * @param urlToOpen The URL to be opened. Example: "http://seleniumquery.github.io"
      * @return A self reference.
      *
      * @since 0.9.0
@@ -64,7 +64,7 @@ public class SeleniumQueryBrowserFunctions {
     /**
      * Opens the given file as a URL in the browser.
      *
-     * @param fileToOpenAsURL the file to be opened as URL.
+     * @param fileToOpenAsURL The file to be opened as URL.
      * @return A self reference.
      *
      * @since 0.9.0
@@ -80,7 +80,7 @@ public class SeleniumQueryBrowserFunctions {
      * $.pause(200); // pauses for 200 milliseconds
      * $.pause(10 * 1000); // pauses for 10 seconds
      * </pre>
-     * @param timeToPauseInMillis pause duration, in milliseconds.
+     * @param timeToPauseInMillis Pause duration, in milliseconds.
      * @return A self reference.
      *
      * @since 0.9.0
@@ -100,13 +100,25 @@ public class SeleniumQueryBrowserFunctions {
     /**
      * Attempts to maximize the window of the current browser/driver.
      *
-     * @return A self reference
+     * @return A self reference.
      *
      * @since 0.9.0
      */
     public SeleniumQueryBrowserFunctions maximizeWindow() {
         LOGGER.debug("Maximizing window.");
         driver().get().manage().window().maximize();
+        return this;
+    }
+
+    /**
+     * Quits the WebDriver in use by this seleniumQuery browser.
+     *
+     * @return A self reference.
+     *
+     * @since 0.9.0
+     */
+    public SeleniumQueryBrowserFunctions quit() {
+        driver().quit();
         return this;
     }
 
