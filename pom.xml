@@ -8,7 +8,7 @@
 
 	<name>seleniumQuery</name>
 	<url>http://seleniumquery.github.io/</url>
-	<description>Cross-Driver (Cross-Browser) jQuery-like interface in Java for Selenium WebDriver.</description>
+	<description>Cross-driver jQuery-like Java interface for Selenium WebDriver.</description>
 
 	<properties>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
