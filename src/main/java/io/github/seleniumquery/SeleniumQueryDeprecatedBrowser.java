@@ -23,79 +23,105 @@ public class SeleniumQueryDeprecatedBrowser {
 	private SeleniumQueryBrowserFunctions browser;
 	public SeleniumQueryDeprecatedBrowser(SeleniumQueryBrowserFunctions browser) { this.browser = browser; }
 
-	/** @deprecated Use: <b><code>$.driver();</code> */
+	/** @deprecated Use: <code>$.driver();</code>
+	 * @return A self reference. */
 	public SeleniumQueryDriver globalDriver() { return browser.driver(); }
 
-	/** @deprecated Use: <b><code>$.driver().use(webDriverInstance);</code> */
+	/** @deprecated Use: <code>$.driver().use(webDriverInstance);</code>
+	 * @param defaultDriver The new global WebDriver instance.
+	 * @return A self reference. */
 	public SeleniumQueryDeprecatedBrowser setDefaultDriver(WebDriver defaultDriver) { browser.driver().use(defaultDriver); return this; }
 
-	/** @deprecated Use: <b><code>$.driver().useHtmlUnit();</code> */
+	/** @deprecated Use: <code>$.driver().useHtmlUnit();</code>
+	 * @return A self reference. */
 	public SeleniumQueryDeprecatedBrowser setDefaultDriverAsHtmlUnit() { browser.driver().useHtmlUnit(); return this; }
 
-	/** @deprecated Use: <b><code>$.driver().useFirefox();</code> */
+	/** @deprecated Use: <code>$.driver().useFirefox();</code>
+	 * @return A self reference. */
 	public SeleniumQueryDeprecatedBrowser setDefaultDriverAsFirefox() { browser.driver().useFirefox(); return this; }
 
-	/** @deprecated Use: <b><code>$.driver().useChrome();</code> */
+	/** @deprecated Use: <code>$.driver().useChrome();</code>
+	 * @return A self reference. */
 	public SeleniumQueryDeprecatedBrowser setDefaultDriverAsChrome() { browser.driver().useChrome(); return this; }
 
-	/** @deprecated Use: <b><code>$.driver().useChrome().withPathToChromeDriverExe(path);</code> */
+	/** @deprecated Use: <code>$.driver().useChrome().withPathToChromeDriverExe(path);</code>
+	 * @param path path to chromedriver.exe.
+	 * @return A self reference. */
 	public SeleniumQueryDeprecatedBrowser setDefaultDriverAsChrome(String path) { browser.driver().useChrome().withPathToChromeDriverExe(path); return this; }
 
-	/** @deprecated Use: <b><code>$.driver().useInternetExplorer();</code> */
+	/** @deprecated Use: <code>$.driver().useInternetExplorer();</code>
+	 * @return A self reference. */
 	public SeleniumQueryDeprecatedBrowser setDefaultDriverAsIE() { browser.driver().useInternetExplorer(); return this; }
 
-	/** @deprecated Use: <b><code>$.driver().useInternetExplorer().withPathToIEDriverServerExe(path);</code> */
+	/** @deprecated Use: <code>$.driver().useInternetExplorer().withPathToIEDriverServerExe(path);</code>
+	 * @param path path to IEDriverServer.exe.
+	 * @return A self reference. */
 	public SeleniumQueryDeprecatedBrowser setDefaultDriverAsIE(String path) { browser.driver().useInternetExplorer().withPathToIEDriverServerExe(path); return this; }
 
-	/** @deprecated Use: <b><code>$.driver().usePhantomJS();</code> */
+	/** @deprecated Use: <code>$.driver().usePhantomJS();</code>
+	 * @return A self reference. */
 	public SeleniumQueryDeprecatedBrowser setDefaultDriverAsPhantomJS() { browser.driver().usePhantomJS(); return this; }
 
-	/** @deprecated Use: <b><code>$.driver().usePhantomJS().withPathToPhantomJsExe(path);</code> */
+	/** @deprecated Use: <code>$.driver().usePhantomJS().withPathToPhantomJsExe(path);</code>
+	 * @param path path to phantomjs.exe.
+	 * @return A self reference. */
 	public SeleniumQueryDeprecatedBrowser setDefaultDriverAsPhantomJS(String path) { browser.driver().usePhantomJS().withPathToPhantomJsExe(path); return this; }
 
-	/** @deprecated Use: <b><code>$.driver().get();</code> */
+	/** @deprecated Use: <code>$.driver().get();</code>
+	 * @return the currently set {@link WebDriver}. */
 	public WebDriver getDefaultDriver() { return browser.driver().get(); }
 
-	/** @deprecated Use: <b><code>$.driver().quit();</code> */
+	/** @deprecated Use: <code>$.driver().quit();</code> */
 	public void quitDefaultDriver() { browser.driver().quit(); }
 
-	/** @deprecated Use: <b><code>$.driver().quit();</code> */
+	/** @deprecated Use: <code>$.driver().quit();</code> */
 	public void quitDefaultBrowser() { browser.driver().quit(); }
 
-	/** @deprecated Use: <b><code>$.driver().quit();</code> */
+	/** @deprecated Use: <code>$.driver().quit();</code> */
 	public void quit() { browser.driver().quit(); }
 	
-	/** @deprecated Use: <b><code>$.url(url);</code> */
+	/** @deprecated Use: <code>$.url(url);</code>
+	 * @param url the URL to be opened. */
 	public void openUrl(String url) { browser.url(url); }
 
-	/** @deprecated Use: <b><code>$.url(file);</code> */
+	/** @deprecated Use: <code>$.url(file);</code>
+	 * @param file the file to be opened as URL. */
 	public void openUrl(File file) { browser.url(file); }
 
-	/** @deprecated Use: <b><code>$.url(url);</code> */
+	/** @deprecated Use: <code>$.url(url);</code>
+	 * @param url the URL to be opened. */
 	public void open(String url) { browser.url(url); }
 
-	/** @deprecated Use: <b><code>$.url(file);</code> */
+	/** @deprecated Use: <code>$.url(file);</code>
+	 * @param file the file to be opened as URL. */
 	public void open(File file) { browser.url(file); }
 
-	/** @deprecated Use: <b><code>$.url(url);</code> */
+	/** @deprecated Use: <code>$.url(url);</code>
+	 * @param url the URL to be opened. */
 	public void url(String url) { browser.url(url); }
 
-	/** @deprecated Use: <b><code>$.url(file);</code> */
+	/** @deprecated Use: <code>$.url(file);</code>
+	 * @param file the file to be opened as URL. */
 	public void url(File file) { browser.url(file); }
 
-	/** @deprecated Use: <b><code>$.url();</code> */
+	/** @deprecated Use: <code>$.url();</code>
+	 * @return the currently loaded URL. */
 	public String url() { return browser.url(); }
 	
-	/** @deprecated Use: <b><code>$.url();</code> */
+	/** @deprecated Use: <code>$.url();</code>
+	 * @return the currently loaded URL. */
 	public String getCurrentUrl() { return browser.url(); }
 
-	/** @deprecated Use: <b><code>$.pause(timeToPauseInMillis);</code> */
+	/** @deprecated Use: <code>$.pause(timeToPauseInMillis);</code>
+	 * @param timeToWait time to wait
+	 * @param timeUnit a given unit of time granularity */
 	public void sleep(int timeToWait, TimeUnit timeUnit) { browser.pause(MILLISECONDS.convert(timeToWait, timeUnit)); }
 
-	/** @deprecated Use: <b><code>$.pause(timeToPauseInMillis);</code> */
+	/** @deprecated Use: <code>$.pause(timeToPauseInMillis);</code>
+	 * @param millis pause duration, in milliseconds. */
 	public void sleep(int millis) { browser.pause(millis); }
 
-	/** @deprecated Use: <b><code>$.maximizeWindow();</code> */
+	/** @deprecated Use: <code>$.maximizeWindow();</code> */
 	public void maximizeWindow() {
 		browser.maximizeWindow();
 	}

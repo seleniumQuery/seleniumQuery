@@ -50,7 +50,7 @@ public class SeleniumQueryBrowserFunctions {
     /**
      * Opens the given URL in the default browser.
      *
-     * @param urlToOpen The URL to be opened. Example: "http://seleniumquery.github.io"
+     * @param urlToOpen the URL to be opened. Example: "http://seleniumquery.github.io"
      * @return A self reference.
      *
      * @since 0.9.0
@@ -64,7 +64,7 @@ public class SeleniumQueryBrowserFunctions {
     /**
      * Opens the given file as a URL in the browser.
      *
-     * @param fileToOpenAsURL the file to be opened.
+     * @param fileToOpenAsURL the file to be opened as URL.
      * @return A self reference.
      *
      * @since 0.9.0
