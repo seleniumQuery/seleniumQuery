@@ -1,21 +1,25 @@
 package io.github.seleniumquery.functions.jquery.miscellaneous;
 
-import io.github.seleniumquery.globalfunctions.SeleniumQueryBrowser;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
+ * <pre>
+ * $("selector").get();
+ * $("selector").get(index);
+ * </pre>
+ *
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class GetFunction {
 	
-	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryBrowser.class);
+	private static final Log LOGGER = LogFactory.getLog(GetFunction.class);
 	
 	public static WebElement get(List<WebElement> elements, int index) {
 		if (elements.size() <= index) {
