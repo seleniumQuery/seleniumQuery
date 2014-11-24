@@ -55,7 +55,7 @@ public class SeleniumQueryExample {
      // handy for dealing with Ajax enabled pages:
      //
      $(":input[name='q']").waitUntil().is(":enabled");
-     // The line above waits for no time, as that input is always enabled in google.com.
+     // The line above waits for no time, as that input is always enabled in google.com
 
      $.quit(); // quits the currently used driver (firefox)
   }
