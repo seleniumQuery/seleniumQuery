@@ -7,33 +7,27 @@ import java.util.List;
 /**
  * The seleniumQuery objects factory.<br>
  * <br>
- * Recommended way of use is to import statically the function:<br>
- * <div style="padding: 0px 0px 0px 15px;">
- * 		<strong><code>import static io.github.seleniumquery.SeleniumQuery.$;</code></strong>
- * </div>
- * <br>
- * <p>
+ * Recommended way of use is to import statically the function:
+ * <pre>
+ * import static io.github.seleniumquery.SeleniumQuery.$;
+ * </pre>
  * And use it like:
- * <div style="padding: 0px 0px 0px 15px;">
- * 		<strong><code>$("selector").function()</code></strong>
- * </div>
- * </p>
- * <p>
- * Other uses (aliases) include <code>jQuery()</code> and <code>sQ()</code>:
- * <div style="padding: 0px 0px 0px 15px;">
- * 		<strong><code>jQuery("selector").function()</code></strong><br>
- * 		<strong><code>sQ("selector").function()</code></strong>
- * </div>
- * </p>
- *
- * <br>
+ * <pre>
+ * $.url("http://example.com");
+ * $("selector").function();
+ * </pre>
  * The default browser/driver is employed when a seleniumQuery object is built using <code>$(".selector");</code>.<br>
  * A different browser can be used by using the {@link io.github.seleniumquery.SeleniumQueryBrowser} class:
- * <div style="padding: 5px 0px 0px 15px;">
- *     <code>SeleniumQueryBrowser <b>chrome</b> = new SeleniumQueryBrowser();<br>
- *     <b>chrome</b>.driver().useChrome();<br>
- *     <b>chrome</b>.$(".selector").val("123");</code>
- * </div>
+ * <pre>
+ * SeleniumQueryBrowser <b>chrome</b> = new SeleniumQueryBrowser();
+ * <b>chrome</b>.driver().useChrome();
+ * <b>chrome</b>.$(".selector").val("123");
+ * </pre>
+ * Other uses (aliases) include <code>jQuery()</code> and <code>sQ()</code>:
+ * <pre>
+ * jQuery("selector").function();
+ * sQ("selector").function();
+ * </pre>
  *
  * @author acdcjunior
  *

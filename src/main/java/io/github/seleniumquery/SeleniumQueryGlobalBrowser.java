@@ -13,7 +13,7 @@ public class SeleniumQueryGlobalBrowser extends SeleniumQueryBrowserFunctions {
 	 * Series of functions that set the default browser behavior.<br>
 	 *
 	 * This field has been deprecated.<br>
-	 *     You'll find the functions for this object in <b><code>$.function();</code</b> or <b><code>$.driver().function();</code></b>.
+	 *     You'll find the functions for this object in <b><code>$.function();</code></b> or <b><code>$.driver().function();</code></b>.
 	 *
 	 * @since 0.9.0
 	 */
