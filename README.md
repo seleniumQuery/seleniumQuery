@@ -65,7 +65,6 @@ The code above can be found at the sample [seleniumQuery demos project](https://
 
 To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 ```xml
-<!-- The project dependency -->
 <dependencies>
     <dependency>
         <groupId>io.github.seleniumquery</groupId>
