@@ -8,7 +8,11 @@ import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedXPathPseudoClassE
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class FocusFunctionTest {
 	
@@ -51,10 +55,11 @@ public class FocusFunctionTest {
 
     @Test
     public void focus_function__should_make_sure_the_elements_are_just_focused_and_NOT_clicked() {
+		removeStartingFocusDivCreatedByIE();
+
     	// for each click or focus in those elements, there will be a div added to the body
     	// this tests makes sure only a div relative to the focus event is added
     	// (and not two divs, one for focus and one for click, if that happened, the it was a click+focus, not just focus)
-    	
     	assertThat($("div").size(), is(0));
     	$("#i1").focus();
     	assertThat($("#i1").is(":focus"), is(true));
@@ -115,8 +120,20 @@ public class FocusFunctionTest {
 	    	assertThat($("div.a1").size(), is(1));
     	}
     }
-    
-    @Test(expected = UnsupportedXPathPseudoClassException.class)
+
+	private void removeStartingFocusDivCreatedByIE() {
+		WebDriver driver = $.browser.getDefaultDriver();
+		boolean isIE = driver instanceof InternetExplorerDriver;
+		if (isIE) {
+			// IE, when STARTING, focuses the <BODY> by itself, so a div is generated and we don't want it, as we are using
+			// the number of generated divs in the test!
+			for (WebElement div : $("div")) {
+				((JavascriptExecutor) driver).executeScript("document.body.removeChild(arguments[0]);", div);
+			}
+		}
+	}
+
+	@Test(expected = UnsupportedXPathPseudoClassException.class)
     public void focus_pseudoClass_selector() {
     	$("#i1").focus();
     	assertThat($("#i1").is(":focus"), is(true));

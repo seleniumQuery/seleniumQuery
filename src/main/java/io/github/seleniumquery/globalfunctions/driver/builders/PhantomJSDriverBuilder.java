@@ -15,6 +15,11 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
 
     private String customPathToPhantomJs;
 
+    /**
+     * Sets the path used by the PhantomJSDriver to find the phantomjs executable.
+     * @param pathToPhantomJs Path to phantomjs.exe.
+     * @return A self reference.
+     */
     public PhantomJSDriverBuilder withPathToPhantomJsExe(String pathToPhantomJs) {
         this.customPathToPhantomJs = pathToPhantomJs;
         return this;

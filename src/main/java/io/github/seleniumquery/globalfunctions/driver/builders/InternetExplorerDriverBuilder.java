@@ -42,6 +42,11 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
      *
      * @param pathToIEDriverServerExe The full path to the IEDriverServer.exe file.
      */
+    /**
+     * Sets the path used by the InternetExplorerDriver to find the IEDriver server executable.
+     * @param pathToIEDriverServerExe Path to IEDriverServer.exe.
+     * @return A self reference.
+     */
     public InternetExplorerDriverBuilder withPathToIEDriverServerExe(String pathToIEDriverServerExe) {
         this.customPathToIEDriverServerExe = pathToIEDriverServerExe;
         return this;

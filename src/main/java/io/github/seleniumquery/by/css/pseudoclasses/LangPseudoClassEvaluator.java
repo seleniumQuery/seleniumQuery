@@ -20,8 +20,8 @@ import org.w3c.css.sac.Selector;
  */
 public class LangPseudoClassEvaluator implements CssConditionalSelector<LangCondition> {
 
-	/**
-	 * @see {@link org.w3c.css.sac.Condition#SAC_LANG_CONDITION}
+	/*
+	 * see also: {@link org.w3c.css.sac.Condition#SAC_LANG_CONDITION}
 	 *
 	 * This condition checks the language of the node. Example: :lang(fr)
 	 */

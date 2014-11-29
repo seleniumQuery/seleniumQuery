@@ -1,4 +1,4 @@
-Copyright (c) 2014 seleniumQuery Team and contributors https://github.com/seleniumQuery
+Copyright (c) 2014 seleniumQuery authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,6 +1,6 @@
 #[seleniumQuery](http://seleniumquery.github.io) - Cross-Driver Selenium Java interface
 
-###Cross-Driver (Cross-Browser) jQuery-like native Java interface for Selenium WebDriver
+###*Cross-Driver* jQuery-like Java interface for Selenium WebDriver
 
 seleniumQuery is a Java library/framework that brings a ***cross-driver*** **jQuery-like** interface for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
@@ -36,35 +36,35 @@ Try it out now with the running example below:
 import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the short syntax
 
 public class SeleniumQueryExample {
-    public static void main(String[] args) {
-        // sets Firefox as the global driver; setting is optional - if omitted, will default 
-        // to HtmlUnit or whatever you set at the, also optional, config files
-        $.browser.globalDriver().useFirefox();
-        
-        $.browser.url("http://www.google.com");
-        
-        $("input[name='q']").val("selenium");
-        $("button[name='btnG']").click();
+  public static void main(String[] args) {
+     // sets Firefox as the driver -- this is optional, if omitted, will default
+     // to HtmlUnit or whatever you set at the, also optional, config files
+     //
+     $.driver().useFirefox().withoutJavaScript(); // JS will be disabled!
 
-        String resultsText = $("#resultStats").text();
-        System.out.println(resultsText);
+     $.url("http://www.google.com/?hl=en");
 
-        // Besides the short syntax and the jQuery behavior you already know,
-        // other very useful function in seleniumQuery is .waitUntil(),
-        // especially handy for handling/testing Ajax enabled pages:
-        
-        $("input[name='q']").waitUntil().is(":enabled");
-        // The line above waits for no time, as that input
-        // is always enabled in google.com.
+     $(":text[name='q']").val("selenium"); // the keys are actually typed
+     $(":button:contains('Google Search')").click();
 
-        $.browser.quit(); // quits the global (firefox) driver
-    }
+     String resultsText = $("#resultStats").text();
+     System.out.println(resultsText);
+
+     // Besides the short syntax and the jQuery behavior you already know,
+     // other very useful function in seleniumQuery is .waitUntil(),
+     // handy for dealing with Ajax enabled pages:
+     //
+     $(":input[name='q']").waitUntil().is(":enabled");
+     // The line above waits for no time, as that input is always enabled in google.com
+
+     $.quit(); // quits the currently used driver (firefox)
+  }
 }
 ```
-To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
+The code above can be found at the sample [seleniumQuery demos project](https://github.com/seleniumQuery/seleniumQuery-demos).
 
+To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 ```xml
-<!-- The project dependency -->
 <dependencies>
     <dependency>
         <groupId>io.github.seleniumquery</groupId>
