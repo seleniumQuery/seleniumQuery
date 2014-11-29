@@ -1,32 +1,32 @@
 package io.github.seleniumquery;
 
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
+import io.github.seleniumquery.functions.as.StandardPlugins;
 import io.github.seleniumquery.functions.jquery.attributes.AttrFunction;
-import io.github.seleniumquery.functions.jquery.traversing.filtering.*;
-import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ChildrenFunction;
-import io.github.seleniumquery.functions.jquery.events.ClickFunction;
-import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
-import io.github.seleniumquery.functions.jquery.traversing.treetraversal.FindFunction;
-import io.github.seleniumquery.functions.jquery.forms.FocusFunction;
-import io.github.seleniumquery.functions.jquery.miscellaneous.GetFunction;
 import io.github.seleniumquery.functions.jquery.attributes.HasClassFunction;
-import io.github.seleniumquery.functions.jquery.manipulation.HtmlFunction;
 import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
 import io.github.seleniumquery.functions.jquery.attributes.RemoveAttrFunction;
-import io.github.seleniumquery.functions.as.AsSelect;
-import io.github.seleniumquery.functions.jquery.manipulation.TextFunction;
-import io.github.seleniumquery.functions.jquery.miscellaneous.ToArrayFunction;
+import io.github.seleniumquery.functions.jquery.events.ClickFunction;
+import io.github.seleniumquery.functions.jquery.forms.FocusFunction;
 import io.github.seleniumquery.functions.jquery.forms.ValFunction;
+import io.github.seleniumquery.functions.jquery.manipulation.HtmlFunction;
+import io.github.seleniumquery.functions.jquery.manipulation.TextFunction;
+import io.github.seleniumquery.functions.jquery.miscellaneous.GetFunction;
+import io.github.seleniumquery.functions.jquery.miscellaneous.ToArrayFunction;
+import io.github.seleniumquery.functions.jquery.traversing.filtering.*;
+import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ChildrenFunction;
+import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
+import io.github.seleniumquery.functions.jquery.traversing.treetraversal.FindFunction;
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ParentFunction;
 import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
-
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Represents the <strong>SeleniumQuery Object</strong>: a list of {@link WebElement}s with special methods.
@@ -541,36 +541,54 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	* Selects all <code>&lt;option&gt;</code>s that display text matching the argument.
-	* That is, when given <code>"Bar"</code> this would select an option like:
-	*
-	* <code>&lt;option value="foo"&gt;Bar&lt;/option&gt;</code>
-	*
-	* @param text The visible text to match against
-	*
-	* @since 0.9.0
-	*/
-	public SeleniumQueryObject selectOptionByVisibleText(String text) {
-		LOGGER.debug("Selecting "+this+" by visible text: \""+text+"\".");
-		return AsSelect.selectOptionByVisibleText(this, elements, text);
+	 * Enables several functions (plugins) that allow executing specific tasks, from specific points of view, on
+	 * the elements of this {@link io.github.seleniumquery.SeleniumQueryObject}.
+	 *
+	 * @return A list of functions showing the available tasks that can be performed.
+	 *
+	 * @since 0.9.0
+	 */
+	public StandardPlugins as() {
+		return new StandardPlugins(this, elements);
 	}
-	
+
 	/**
-	 * Selects all <code>&lt;option&gt;</code>s that have a value matching the argument.
-	 * That is, when given <code>"foo"</code> this would select an option like:
-	 * 
-	 * <code>&lt;option value="foo"&gt;Bar&lt;/option&gt;</code>
-	 * 
-	 * @param value
-	 *            The value to match against
+	 * Enables the execution of functions defined by the plugin sent as argument.
+	 *
+	 * @param pluginFunction The plugin instance this object will be handed to.
+	 * @return An object provided by the plugin.
+	 *
+	 * @since 0.9.0
+	 */
+	public <R> R as(SeleniumQueryPlugin<R> pluginFunction) {
+		return pluginFunction.as(this, this.elements);
+	}
+
+	/**
+	 * This method will be removed in {@code 0.10.0}.
+	 * @deprecated Use: <code>$("selector").as().select().selectByVisibleText(text);</code>
+	 * @param text The visible text to match against.
+	 * @return A self reference.
+	 * @since 0.9.0
+	 */
+	public SeleniumQueryObject selectOptionByVisibleText(String text) {
+		return as().select().selectByVisibleText(text);
+	}
+
+	/**
+	 * This method will be removed in {@code 0.10.0}.
+	 * @deprecated Use: <code>$("selector").as().select().selectByValue(value);</code>
+	 * @param value The value to match against.
+	 * @return A self reference.
+	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject selectOptionByValue(String value) {
-		return AsSelect.selectOptionByValue(this, elements, value);
+		return as().select().selectByValue(value);
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.by.toString();
 	}
-	
+
 }
