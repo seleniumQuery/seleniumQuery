@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
-import io.github.seleniumquery.SQLocalFactory;
+import io.github.seleniumquery.ObjectLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 
 /**
@@ -33,7 +33,7 @@ public class EqFunction {
 			}
 		}
 		
-		return SQLocalFactory.create(seleniumQueryObject.getWebDriver(), selectorAtIndex,
+		return ObjectLocalFactory.create(seleniumQueryObject.getWebDriver(), selectorAtIndex,
 				eqElementList, seleniumQueryObject);
 	}
 

@@ -1,6 +1,6 @@
 package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
-import io.github.seleniumquery.SQLocalFactory;
+import io.github.seleniumquery.ObjectLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
@@ -23,7 +23,7 @@ public class ChildrenFunction {
 
 	public static SeleniumQueryObject children(SeleniumQueryObject caller, List<WebElement> elements) {
 		List<WebElement> children = getChildren(elements);
-		return SQLocalFactory.createWithInvalidSelector(caller.getWebDriver(), children, caller);
+		return ObjectLocalFactory.createWithInvalidSelector(caller.getWebDriver(), children, caller);
 	}
 	
 	public static SeleniumQueryObject children(SeleniumQueryObject caller, List<WebElement> elements, String selector) {
@@ -35,7 +35,7 @@ public class ChildrenFunction {
 				iterator.remove();
 			}
 		}
-		return SQLocalFactory.createWithInvalidSelector(webDriver, children, caller);
+		return ObjectLocalFactory.createWithInvalidSelector(webDriver, children, caller);
 	}
 	
 	private static List<WebElement> getChildren(List<WebElement> elements) {

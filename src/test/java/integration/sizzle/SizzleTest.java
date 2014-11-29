@@ -1,6 +1,6 @@
 package integration.sizzle;
 
-import io.github.seleniumquery.SQLocalFactory;
+import io.github.seleniumquery.ObjectLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,7 +26,7 @@ public class SizzleTest {
 
     @SuppressWarnings("unused")
     protected SeleniumQueryObject Sizzle(String selector, Boolean b, Boolean c, List<WebElement> x) {
-        return SQLocalFactory.createWithInvalidSelector($.browser.getDefaultDriver(), x, null).find(selector);
+        return ObjectLocalFactory.createWithInvalidSelector($.driver().get(), x, null).find(selector);
     }
 
     protected SeleniumQueryObject Sizzle(WebElement we) {
@@ -84,7 +84,7 @@ public class SizzleTest {
     }
 
     protected Object executeJS(String javaScriptCode, Object... args) {
-        return ((JavascriptExecutor) $.browser.getDefaultDriver()).executeScript(javaScriptCode, args);
+        return ((JavascriptExecutor) $.driver().get()).executeScript(javaScriptCode, args);
     }
 
     /**
@@ -101,7 +101,7 @@ public class SizzleTest {
     }
 
     protected WebElement id(String id) {
-        return $.browser.getDefaultDriver().findElement(By.id(id));
+        return $.driver().get().findElement(By.id(id));
     }
 
     protected void ok(boolean b, String msg) {

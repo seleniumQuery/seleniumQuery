@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @since 0.9.0
  */
-public class SQLocalFactory {
+public class ObjectLocalFactory {
 	
 	private static final SeleniumQueryObject NO_PREVIOUS = null;
 	
@@ -36,16 +36,16 @@ public class SQLocalFactory {
 		return createWithInvalidSelector(driver, elements, NO_PREVIOUS);
 	}
 	
-	public static SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, WebElement element) {
-		return createWithInvalidSelectorAndNoPrevious(driver, toArrayList(element));
+	public static SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, WebElement... elements) {
+		return createWithInvalidSelectorAndNoPrevious(driver, toArrayList(elements));
 	}
 
 	static SeleniumQueryObject createWithValidSelectorAndNoPrevious(WebDriver driver, String selector) {
 		return new SeleniumQueryObject(driver, selector);
 	}
 
-	private static ArrayList<WebElement> toArrayList(WebElement element) {
-		return new ArrayList<WebElement>(Arrays.asList(element));
+	private static List<WebElement> toArrayList(WebElement... elements) {
+		return new ArrayList<WebElement>(Arrays.asList(elements));
 	}
 
 }

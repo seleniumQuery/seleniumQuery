@@ -1,6 +1,6 @@
 package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
-import io.github.seleniumquery.SQLocalFactory;
+import io.github.seleniumquery.ObjectLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
@@ -30,7 +30,7 @@ public class ClosestFunction {
 			}
 		}
 		
-		return SQLocalFactory.createWithInvalidSelector(caller.getWebDriver(), closests, caller);
+		return ObjectLocalFactory.createWithInvalidSelector(caller.getWebDriver(), closests, caller);
 	}
 
 	public static WebElement closest(WebDriver driver, WebElement element, String selector) {
