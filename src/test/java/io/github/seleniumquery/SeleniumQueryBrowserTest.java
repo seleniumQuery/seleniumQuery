@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
 public class SeleniumQueryBrowserTest {
 
     @Test
-    public void testName() throws Exception {
+    public void multiple_browser_instances_should_work_OK() {
         SeleniumQueryBrowser chrome = new SeleniumQueryBrowser();
         chrome.$.driver().useHtmlUnit().emulatingChrome();
         chrome.$.url(htmlTestFileUrl(SeleniumQueryBrowserTest.class));
