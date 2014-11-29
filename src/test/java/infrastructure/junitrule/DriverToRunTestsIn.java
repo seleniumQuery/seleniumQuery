@@ -1,5 +1,6 @@
 package infrastructure.junitrule;
 
+@SuppressWarnings("unused")
 public enum DriverToRunTestsIn {
 
 	ALL_DRIVERS,
@@ -40,4 +41,5 @@ public enum DriverToRunTestsIn {
 	public boolean canRunIE() { return ie; }
 	public boolean canRunPhantomJS() { return phantomJS; }
 	public boolean shouldTestDisabledJavaScript() { return shouldTestDisabledJavaScript; }
+
 }
