@@ -1,5 +1,6 @@
 package io.github.seleniumquery;
 
+import io.github.seleniumquery.globalfunctions.BrowserFunctionsWithDeprecatedFunctions;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -53,17 +54,17 @@ public class SeleniumQuery {
 	 * <code>$.url("http://www.google.com");</code><br>
 	 * <code>$("div").text();</code>
 	 */
-	public static final SeleniumQueryGlobalBrowser $ = new SeleniumQueryGlobalBrowser();
+	public static final BrowserFunctionsWithDeprecatedFunctions $ = new BrowserFunctionsWithDeprecatedFunctions();
 
 	/**
 	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
 	 */
-	public static final SeleniumQueryGlobalBrowser sQ = $;
+	public static final BrowserFunctionsWithDeprecatedFunctions sQ = $;
 	
 	/**
 	 * <p>The seleniumQuery global browser and functions object.</p> This works as an alias to <code>$</code>.
 	 */
-	public static final SeleniumQueryGlobalBrowser jQuery = $;
+	public static final BrowserFunctionsWithDeprecatedFunctions jQuery = $;
 
 	/**
 	 * <p>The seleniumQuery global browser and functions object.</p>
