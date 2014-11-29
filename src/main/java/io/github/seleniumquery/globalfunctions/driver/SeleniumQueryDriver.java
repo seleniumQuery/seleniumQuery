@@ -65,6 +65,8 @@ public class SeleniumQueryDriver {
      * Quits the WebDriver in use by this seleniumQuery browser.
      *
      * @since 0.9.0
+     *
+     * @return A self reference.
      */
     public SeleniumQueryDriver quit() {
         if (webDriver == null) { // TODO unit test
@@ -97,31 +99,26 @@ public class SeleniumQueryDriver {
     }
 
     /**
-     * Sets <b>Chrome</b> as the default {@link WebDriver} for seleniumQuery.
+     * Sets {@link org.openqa.selenium.chrome.ChromeDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
      * <p>
      * Note that the Chrome driver needs a <i>server executable</i> to bridge Selenium to the browser and as such
-     * Selenium must have the path to it. It is a file usually named <code>chromedriver.exe</code> and its latest
+     * Selenium must know the path to it. It is a file usually named <code>chromedriver.exe</code> and its latest
      * version can be downloaded from <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's
      * download page</a> -- or check <a
-     * href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-as-WebDriver-Browser">
-     * seleniumQuery and Chrome as WebDriver/Browser wiki page</a> for the latest info.
+     * href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver">
+     * seleniumQuery and Chrome Driver wiki page</a> for the latest info.
      * </p>
-     * <p><b> This method looks for the chromedriver.exe at the CLASSPATH.</b> If you wish to directly specify a path,
-     * use {@link #useChrome()}.withPathToChromeDriverExe()</p>
-     * <p>
-     * For more info, see <a href="https://code.google.com/p/selenium/wiki/ChromeDriver">ChromeDriver's official wiki</a>.
-     * </p>
+     * <p><b> This method looks for the chromedriver.exe at the CLASSPATH (tipically at a {@code resources/} folder of a
+     * maven project.)</b> If you wish to directly specify a path, use {@code .useChrome().withPathToChromeDriverExe(pathStr)}</p>
+     *
+     * @return A {@link ChromeDriverBuilder}, allowing further configuration of the driver.
      */
     public ChromeDriverBuilder useChrome() {
         return clearCurrentDriverAndAssignNewBuilder(new ChromeDriverBuilder());
     }
 
     /**
-     * This method looks for the IEDriverServer.exe at the CLASSPATH. (Tipically at a resources/ folder of a
-     * maven project.)
-     *
-     *
-     * Sets IE as the default driver for seleniumQuery.
+     * Sets {@link org.openqa.selenium.ie.InternetExplorerDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
      * <p>
      * Note that, as IE needs a "server" to bridge selenium to the browser, you have
      * to point the path to it. It is a file usually named "IEDriverServer.exe" and its latest
@@ -130,8 +127,10 @@ public class SeleniumQueryDriver {
      * <p>
      * For more info, check https://code.google.com/p/selenium/wiki/InternetExplorerDriver
      * </p>
+     * <p><b> This method looks for the IEDriverServer.exe at the CLASSPATH (tipically at a {@code resources/} folder of a
+     * maven project.)</b> If you wish to directly specify a path, use {@code .useInternetExplorer().withPathToIEDriverServerExe(pathStr)}</p>
      *
-     * @param pathToIEDriverServerExe The full path to the IEDriverServer.exe file.
+     * @return A {@link InternetExplorerDriverBuilder}, allowing further configuration of the driver.
      */
     public InternetExplorerDriverBuilder useInternetExplorer() {
         return clearCurrentDriverAndAssignNewBuilder(new InternetExplorerDriverBuilder());

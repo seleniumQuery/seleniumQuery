@@ -25,6 +25,23 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
 
     private String customPathToIEDriverServerExe;
 
+    /**
+     * This method looks for the IEDriverServer.exe at the CLASSPATH. (Tipically at a resources/ folder of a
+     * maven project.)
+     *
+     *
+     * Sets IE as the default driver for seleniumQuery.
+     * <p>
+     * Note that, as IE needs a "server" to bridge selenium to the browser, you have
+     * to point the path to it. It is a file usually named "IEDriverServer.exe" and its latest
+     * version can be downloaded from http://selenium-release.storage.googleapis.com/index.html.
+     * </p>
+     * <p>
+     * For more info, check https://code.google.com/p/selenium/wiki/InternetExplorerDriver
+     * </p>
+     *
+     * @param pathToIEDriverServerExe The full path to the IEDriverServer.exe file.
+     */
     public InternetExplorerDriverBuilder withPathToIEDriverServerExe(String pathToIEDriverServerExe) {
         this.customPathToIEDriverServerExe = pathToIEDriverServerExe;
         return this;
