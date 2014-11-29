@@ -15,10 +15,8 @@ public class AttributeEvaluatorUtils {
 
 	public static String getXPathAttribute(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
-		if (!Character.isLetter(attributeName.charAt(0))) {
-			attributeName = SelectorUtils.intoEscapedXPathString(attributeName);
-		}
-		return "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '"+ attributeName.toLowerCase() +"']";
+		String escapedAttributeName = SelectorUtils.intoEscapedXPathString(attributeName).toLowerCase();
+		return "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = "+ escapedAttributeName +"]";
 	}
 
 }

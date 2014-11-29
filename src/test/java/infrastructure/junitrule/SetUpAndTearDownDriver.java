@@ -1,6 +1,5 @@
 package infrastructure.junitrule;
 
-import infrastructure.IntegrationTestUtils;
 import infrastructure.junitrule.statementrunner.RunStatementInEveryDriver;
 import infrastructure.junitrule.statementrunner.RunStatementInGivenDriver;
 import infrastructure.junitrule.statementrunner.StatementRunner;
@@ -40,9 +39,6 @@ public class SetUpAndTearDownDriver implements TestRule {
 			@Override
 			public void after() { }
 		};
-		if (driverToRunTestsIn == DriverToRunTestsIn.GIVEN_DRIVER) {
-			return new RunStatementInGivenDriver(statementRunner);
-		}
 		return new RunStatementInEveryDriver(driverToRunTestsIn, statementRunner);
 	}
 	

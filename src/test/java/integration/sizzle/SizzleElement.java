@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriverEmulatingIE;
+import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriver;
 import static java.util.Arrays.asList;
 
 public class SizzleElement extends SizzleTest {
@@ -96,15 +96,17 @@ public class SizzleElement extends SizzleTest {
         executeJS("document.getElementById('qunit-fixture').appendChild(document.createElement('toString')).id = 'toString';");
         t("Element name matches Object.prototype property", "tostring#toString", new String[]{"toString"});
 
-        // #failure
-        /*
-        several HTMLUNIT fail
-            @## FAILED on HtmlUnit(FF17)! -> Element name matches Object.prototype property --> Lists differ! expected:<[[toString]]> but was:<[[]]>
-           @## FAILED on HtmlUnit(FF24)! -> Element name matches Object.prototype property --> Lists differ! expected:<[[toString]]> but was:<[[]]>
-           @## FAILED on HtmlUnit(Chrome)! -> Element name matches Object.prototype property --> Lists differ! expected:<[[toString]]> but was:<[[]]>
-         */
-        if (!isHtmlUnitDriverEmulatingIE($.browser.getDefaultDriver())) { // HtmlUnit is case SENSITIVE and considers tags to be lowecase
+        if (!isHtmlUnitDriver($.browser.getDefaultDriver())) {
             t("Element name matches Object.prototype property", "toString#toString", new String[]{"toString"});
+        } else {
+            // #Cross-Driver
+            // HtmlUnit is case SENSITIVE, BUT considers tags to be LOWERCASE :(
+            // - One way to work around this is to detect if the browser is HtmlUnit and add case-insensitiveness there
+            //          --> but we cant because we currently don't send the WebDriver instance to the CSS->XPath translator.
+            // - Another way would be to just add case-insensitiveness to everyone
+            //          --> we wont do this because right now that is just too much work for so little gain.
+            //          --> if in the future this proves necessary, than we may do it.
+            t("Element name matches Object.prototype property", "tostring#toString", new String[]{"toString"});
         }
     }
 

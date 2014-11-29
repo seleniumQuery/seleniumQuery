@@ -3,6 +3,8 @@ package infrastructure.junitrule.statementrunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import infrastructure.junitrule.DriverToRunTestsIn;
 import org.junit.runners.model.Statement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -33,11 +35,13 @@ public class RunStatementInEveryDriver extends Statement {
         if (!driverToRunTestsIn.canRunHtmlUnit()) {
             return;
         }
-        executeOnHtmlUnit(BrowserVersion.FIREFOX_17);
-        executeOnHtmlUnit(BrowserVersion.FIREFOX_24);
-        executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
-        executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_9);
-        executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_11);
+        if (driverToRunTestsIn != DriverToRunTestsIn.HTMLUNIT_ONLY_ONCE) {
+            executeOnHtmlUnit(BrowserVersion.FIREFOX_17);
+            executeOnHtmlUnit(BrowserVersion.FIREFOX_24);
+            executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
+            executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_9);
+            executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_11);
+        }
         executeOnHtmlUnit(BrowserVersion.CHROME);
     }
 
@@ -65,8 +69,18 @@ public class RunStatementInEveryDriver extends Statement {
         if (!driverToRunTestsIn.canRunFirefox()) {
             return;
         }
-        System.out.println("@## > Instantiating Firefox Driver");
+        System.out.println("@## > Instantiating Firefox Driver - JavaScript ON");
         $.browser.globalDriver().useFirefox();
+        statementRunner.executeMethodForDriver("Firefox");
+        $.browser.quit();
+
+        if (!driverToRunTestsIn.shouldTestDisabledJavaScript()) {
+            return;
+        }
+        System.out.println("@## > Instantiating Firefox Driver - JavaScript OFF");
+        FirefoxProfile firefoxProfile = new FirefoxProfile();
+        firefoxProfile.setPreference("javascript.enabled", false);
+        $.browser.globalDriver().use(new FirefoxDriver(firefoxProfile));
         statementRunner.executeMethodForDriver("Firefox");
         $.browser.quit();
     }
@@ -87,6 +101,9 @@ public class RunStatementInEveryDriver extends Statement {
         statementRunner.executeMethodForDriver("HtmlUnit(" + browserVersion + ")");
         $.browser.quit();
 
+        if (!driverToRunTestsIn.shouldTestDisabledJavaScript()) {
+            return;
+        }
         System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver - JavaScript OFF");
         $.browser.globalDriver().use(createHtmlUnitDriverWithJavasCript(browserVersion, false));
         statementRunner.executeMethodForDriver("HtmlUnit(" + browserVersion + ")");

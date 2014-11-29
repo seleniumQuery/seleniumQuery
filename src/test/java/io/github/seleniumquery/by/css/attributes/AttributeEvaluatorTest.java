@@ -99,7 +99,7 @@ public class AttributeEvaluatorTest {
 		String selector = "[attr=\"a\\\"bc\"]"; // [attr="a\"bc"]
 		XPathExpressionList compileSelectorList = XPathSelectorCompilerService.compileSelectorList(selector);
 		String xPath = compileSelectorList.toXPath();
-		assertThat(xPath, is("(.//*[@attr = 'a\\\"bc'])")); // (.//*[@attr = 'a\"bc'])
+		assertThat(xPath, is("(.//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attr'] = 'a\\\"bc'])")); // (.//*[@attr = 'a\"bc'])
 	}
 
 }

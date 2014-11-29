@@ -45,7 +45,7 @@ public class SeleniumQueryDriver {
      *     </li>
      * </ul>
      *
-     * @return the currently set default {@link WebDriver};
+     * @return the currently set {@link WebDriver}.
      *
      * @since 0.9.0
      */
