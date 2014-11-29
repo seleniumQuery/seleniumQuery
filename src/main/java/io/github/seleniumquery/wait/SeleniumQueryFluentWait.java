@@ -1,6 +1,6 @@
 package io.github.seleniumquery.wait;
 
-import io.github.seleniumquery.SQLocalFactory;
+import io.github.seleniumquery.ObjectLocalFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.wait.evaluators.Evaluator;
@@ -37,7 +37,7 @@ public class SeleniumQueryFluentWait {
 		final WebDriver driver = seleniumQueryObject.getWebDriver();
 		final SeleniumQueryBy by = seleniumQueryObject.getBy();
 		List<WebElement> elements = fluentWait(seleniumQueryObject, new WaitFunction<T>(driver, value, evaluator, by, negated), "to "+evaluator.stringFor(value));
-		return SQLocalFactory.createWithInvalidSelector(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
+		return ObjectLocalFactory.createWithInvalidSelector(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
 	}
 
 	/**
