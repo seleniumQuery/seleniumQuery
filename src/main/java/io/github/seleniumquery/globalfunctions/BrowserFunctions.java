@@ -110,4 +110,16 @@ public class BrowserFunctions {
         return this;
     }
 
+    /**
+     * Quits the WebDriver in use by this seleniumQuery browser.
+     *
+     * @since 0.9.0
+     *
+     * @return A self reference.
+     */
+    public BrowserFunctions quit() {
+        driver().quit();
+        return this;
+    }
+
 }
