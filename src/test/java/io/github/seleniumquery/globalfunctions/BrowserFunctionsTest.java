@@ -1,6 +1,6 @@
-package io.github.seleniumquery;
+package io.github.seleniumquery.globalfunctions;
 
-import io.github.seleniumquery.globalfunctions.BrowserFunctions;
+import io.github.seleniumquery.SeleniumQueryBrowser;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -23,20 +23,6 @@ public class BrowserFunctionsTest {
         // then
         long timeSpent = System.currentTimeMillis() - startingTime;
         assertThat(new BigDecimal(timeSpent), is(closeTo(new BigDecimal(1000), new BigDecimal(100))));
-    }
-
-    @Test
-    public void testName() throws Exception {
-        SeleniumQueryBrowser chrome = new SeleniumQueryBrowser();
-        chrome.$.driver().useHtmlUnit().emulatingChrome();
-        chrome.$.url(htmlTestFileUrl(BrowserFunctionsTest.class));
-
-        SeleniumQueryBrowser firefox = new SeleniumQueryBrowser();
-        firefox.$.driver().useHtmlUnit().emulatingFirefox();
-        firefox.$.url(htmlTestFileUrl(BrowserFunctionsTest.class));
-
-        assertThat(chrome.$("#agent").text(), containsString("Chrome"));
-        assertThat(firefox.$("#agent").text(), containsString("Firefox"));
     }
 
 }
