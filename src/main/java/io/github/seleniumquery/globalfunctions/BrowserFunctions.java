@@ -1,4 +1,4 @@
-package io.github.seleniumquery;
+package io.github.seleniumquery.globalfunctions;
 
 import io.github.seleniumquery.globalfunctions.driver.SeleniumQueryDriver;
 import org.apache.commons.logging.Log;
@@ -17,9 +17,9 @@ import static java.lang.String.format;
  *
  * @since 0.9.0
  */
-public class SeleniumQueryBrowserFunctions {
+public class BrowserFunctions {
 
-    private static final Log LOGGER = LogFactory.getLog(SeleniumQueryBrowserFunctions.class);
+    private static final Log LOGGER = LogFactory.getLog(BrowserFunctions.class);
 
     private SeleniumQueryDriver globalDriver = new SeleniumQueryDriver();
 
@@ -55,7 +55,7 @@ public class SeleniumQueryBrowserFunctions {
      *
      * @since 0.9.0
      */
-    public SeleniumQueryBrowserFunctions url(String urlToOpen) {
+    public BrowserFunctions url(String urlToOpen) {
         LOGGER.debug(format("Opening URL: %s", urlToOpen));
         driver().get().get(urlToOpen);
         return this;
@@ -69,7 +69,7 @@ public class SeleniumQueryBrowserFunctions {
      *
      * @since 0.9.0
      */
-    public SeleniumQueryBrowserFunctions url(File fileToOpenAsURL) {
+    public BrowserFunctions url(File fileToOpenAsURL) {
         return url(fileToOpenAsURL.toURI().toString());
     }
 
@@ -91,7 +91,7 @@ public class SeleniumQueryBrowserFunctions {
      */
     @Deprecated
     @SuppressWarnings("deprecation")
-    public SeleniumQueryBrowserFunctions pause(long timeToPauseInMillis) {
+    public BrowserFunctions pause(long timeToPauseInMillis) {
         LOGGER.debug(format("Pausing for %d milliseconds.", timeToPauseInMillis));
         new PauseAction(timeToPauseInMillis).perform();
         return this;
@@ -104,7 +104,7 @@ public class SeleniumQueryBrowserFunctions {
      *
      * @since 0.9.0
      */
-    public SeleniumQueryBrowserFunctions maximizeWindow() {
+    public BrowserFunctions maximizeWindow() {
         LOGGER.debug("Maximizing window.");
         driver().get().manage().window().maximize();
         return this;

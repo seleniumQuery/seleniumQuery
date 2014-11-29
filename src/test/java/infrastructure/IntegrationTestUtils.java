@@ -3,6 +3,7 @@ package infrastructure;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class IntegrationTestUtils {
+
+    private static final String TEST_SRC_FOLDER = "src/test/java/";
 
     /**
      * Asserts that a select matches the given IDs
@@ -32,6 +35,13 @@ public class IntegrationTestUtils {
         int actualIds = ids(selector).length;
         assertEquals(assertionName + " --> Lists differ!", expectedMatchedSetSize, actualIds);
         return new NegativeAbleTest(assertionName);
+    }
+
+    public static String htmlTestFileUrl(Class<?> clazz) {
+        String classFullName = clazz.getName();
+        String classPath = classFullName.replace('.', '/');
+        String htmlPath = TEST_SRC_FOLDER + classPath + ".html";
+        return new File(htmlPath).toURI().toString();
     }
 
     protected void tIS(String assertionName, String selector, String[] expectedIds) {

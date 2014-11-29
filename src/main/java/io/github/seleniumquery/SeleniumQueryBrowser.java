@@ -1,5 +1,6 @@
 package io.github.seleniumquery;
 
+import io.github.seleniumquery.globalfunctions.BrowserFunctions;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.List;
  *
  * @since 0.9.0
  */
-public class SeleniumQueryBrowser extends SeleniumQueryBrowserFunctions {
+public class SeleniumQueryBrowser {
+
+    public final BrowserFunctions $ = new BrowserFunctions();
 
     /**
      * <p>The seleniumQuery global browser and functions object.</p>
@@ -34,7 +37,7 @@ public class SeleniumQueryBrowser extends SeleniumQueryBrowserFunctions {
      * @since 0.9.0
      */
     public SeleniumQueryObject $(String selector) {
-        return SQLocalFactory.createWithValidSelectorAndNoPrevious(this.driver().get(), selector);
+        return SQLocalFactory.createWithValidSelectorAndNoPrevious(this.$.driver().get(), selector);
     }
 
     /**
@@ -55,7 +58,7 @@ public class SeleniumQueryBrowser extends SeleniumQueryBrowserFunctions {
      * @since 0.9.0
      */
     public SeleniumQueryObject $(WebElement element) {
-        return SQLocalFactory.createWithInvalidSelectorAndNoPrevious(this.driver().get(), element);
+        return SQLocalFactory.createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), element);
     }
 
     /**
@@ -76,7 +79,7 @@ public class SeleniumQueryBrowser extends SeleniumQueryBrowserFunctions {
      * @since 0.9.0
      */
     public SeleniumQueryObject $(List<WebElement> elements) {
-        return SQLocalFactory.createWithInvalidSelectorAndNoPrevious(this.driver().get(), elements);
+        return SQLocalFactory.createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), elements);
     }
 
     /**
