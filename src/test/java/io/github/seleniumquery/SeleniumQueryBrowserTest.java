@@ -20,6 +20,9 @@ public class SeleniumQueryBrowserTest {
 
         assertThat(chrome.$("#agent").text(), containsString("Chrome"));
         assertThat(firefox.$("#agent").text(), containsString("Firefox"));
+
+        chrome.$.quit();
+        firefox.$.quit();
     }
 
 }
