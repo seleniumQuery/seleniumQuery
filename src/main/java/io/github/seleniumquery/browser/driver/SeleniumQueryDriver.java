@@ -103,10 +103,10 @@ public class SeleniumQueryDriver {
      * <p>
      * Note that the Chrome driver needs a <i>server executable</i> to bridge Selenium to the browser and as such
      * Selenium must know the path to it. It is a file usually named <code>chromedriver.exe</code> and its latest
-     * version can be downloaded from <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's
-     * download page</a> -- or check <a
-     * href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver">
-     * seleniumQuery and Chrome Driver wiki page</a> for the latest info.
+     * version can be downloaded from
+     * <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's download page</a> -- or check
+     * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver"> seleniumQuery and Chrome Driver wiki page</a>
+     * for the latest info.
      * </p>
      * <p><b> This method looks for the chromedriver.exe at the CLASSPATH (tipically at a {@code resources/} folder of a
      * maven project.)</b> If you wish to directly specify a path, use {@code .useChrome().withPathToChromeDriverExe(pathStr)}</p>
