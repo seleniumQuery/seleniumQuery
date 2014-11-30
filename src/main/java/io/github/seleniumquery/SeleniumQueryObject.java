@@ -552,7 +552,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public StandardPlugins as() {
-		return new StandardPlugins(this, elements);
+		return new StandardPlugins(this);
 	}
 
 	/**
@@ -563,8 +563,8 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public <R> R as(SeleniumQueryPlugin<R> pluginFunction) {
-		return pluginFunction.as(this, this.elements);
+	public <PLUGIN> PLUGIN as(SeleniumQueryPlugin<PLUGIN> pluginFunction) {
+		return pluginFunction.as(this);
 	}
 
 	/**
