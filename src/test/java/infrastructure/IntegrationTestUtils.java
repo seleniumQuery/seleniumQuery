@@ -37,7 +37,7 @@ public class IntegrationTestUtils {
         return new NegativeAbleTest(assertionName);
     }
 
-    public static String htmlTestFileUrl(Class<?> clazz) {
+    public static String classNameToTestFileUrl(Class<?> clazz) {
         String classFullName = clazz.getName();
         String classPath = classFullName.replace('.', '/');
         String htmlPath = TEST_SRC_FOLDER + classPath + ".html";

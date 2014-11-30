@@ -17,7 +17,7 @@ public class SetUpAndTearDownDriver implements TestRule {
 
 	@Override
 	public Statement apply(final Statement base, Description description) {
-		String url = IntegrationTestUtils.htmlTestFileUrl(htmlTestUrlClass);
+		String url = IntegrationTestUtils.classNameToTestFileUrl(htmlTestUrlClass);
 		return new RunTestMethodsInChosenDrivers(driverToRunTestsIn, base, url);
 	}
 	

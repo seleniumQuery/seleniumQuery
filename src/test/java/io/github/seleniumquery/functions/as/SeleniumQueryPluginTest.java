@@ -5,7 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static infrastructure.IntegrationTestUtils.htmlTestFileUrl;
+import static infrastructure.IntegrationTestUtils.classNameToTestFileUrl;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.functions.as.Sizer.SIZER;
 import static org.hamcrest.Matchers.is;
@@ -16,7 +16,7 @@ public class SeleniumQueryPluginTest {
     @Before
     public void setUp() throws Exception {
         $.driver().useHtmlUnit();
-        $.url(htmlTestFileUrl(SeleniumQueryPluginTest.class));
+        $.url(classNameToTestFileUrl(SeleniumQueryPluginTest.class));
         assertThat($("div").size(), is(7)); // negative test
     }
 

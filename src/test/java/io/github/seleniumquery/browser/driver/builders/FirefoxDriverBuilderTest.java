@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
-import static infrastructure.IntegrationTestUtils.htmlTestFileUrl;
+import static infrastructure.IntegrationTestUtils.classNameToTestFileUrl;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
@@ -48,12 +48,12 @@ public class FirefoxDriverBuilderTest {
     }
 
     public static void assertJavaScriptIsOn(WebDriver driver) {
-        driver.get(htmlTestFileUrl(FirefoxDriverBuilderTest.class));
+        driver.get(classNameToTestFileUrl(FirefoxDriverBuilderTest.class));
         assertThat(driver.findElements(By.tagName("div")), hasSize(1 + 3));
     }
 
     public static void assertJavaScriptIsOff(WebDriver driver) {
-        driver.get(htmlTestFileUrl(FirefoxDriverBuilderTest.class));
+        driver.get(classNameToTestFileUrl(FirefoxDriverBuilderTest.class));
         assertThat(driver.findElements(By.tagName("div")), hasSize(1));
     }
 
