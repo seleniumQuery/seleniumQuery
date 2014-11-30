@@ -25,8 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Represents the <strong>SeleniumQuery Object</strong>: a list of {@link WebElement}s with special methods.
@@ -88,7 +87,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	protected SeleniumQueryObject(WebDriver driver, String selector) {
 		this.driver = driver;
 		this.by = SeleniumQueryBy.byEnhancedSelector(selector);
-		this.elements = driver.findElements(this.by);
+		this.elements = toImmutableRandomAccessList(driver.findElements(this.by));
 		this.previous = null;
 	}
 
@@ -103,10 +102,14 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	private SeleniumQueryObject(WebDriver driver, SeleniumQueryBy seleniumQueryBy, List<WebElement> webElements, SeleniumQueryObject previous) {
 		this.driver = driver;
 		this.by = seleniumQueryBy;
-		this.elements = webElements;
+		this.elements = toImmutableRandomAccessList(webElements);
 		this.previous = previous;
 	}
-	
+
+	private static List<WebElement> toImmutableRandomAccessList(List<WebElement> els) {
+		return Collections.unmodifiableList(new ArrayList<WebElement>(els));
+	}
+
 	/**************************************************************************************************************************************
 	 * Java SeleniumQueryObject waitUntil() functions
 	 **************************************************************************************************************************************/
@@ -398,7 +401,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Retrieves one of the {@link WebElement} matched by the seleniumQuery object.
 	 * 
 	 * @param index A zero-based integer indicating which element to retrieve.
-	 * @return the element at the specified index.
+	 * @return The element at the specified index.
 	 * 
 	 * @since 0.9.0
 	 */
@@ -409,12 +412,12 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Retrieves the {@link WebElement}s matched by the seleniumQuery object.
 	 * 
-	 * @return the element at the specified index.
+	 * @return The (immutable) list of matched elements.
 	 * 
 	 * @since 0.9.0
 	 */
 	public List<WebElement> get() {
-		return GetFunction.get(elements);
+		return this.elements;
 	}
 	
 	/**

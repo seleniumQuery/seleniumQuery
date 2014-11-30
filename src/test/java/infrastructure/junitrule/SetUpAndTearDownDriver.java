@@ -7,7 +7,7 @@ import org.junit.runners.model.Statement;
 
 public class SetUpAndTearDownDriver implements TestRule {
 
-	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.ALL_DRIVERS;
+	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.HTMLUNIT_ONLY_ONCE;
 
 	private final Class<?> htmlTestUrlClass;
 

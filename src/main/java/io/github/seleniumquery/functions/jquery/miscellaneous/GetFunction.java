@@ -29,8 +29,4 @@ public class GetFunction {
 		return elements.get(index);
 	}
 
-	public static List<WebElement> get(List<WebElement> elements) {
-		return new ArrayList<WebElement>(elements);
-	}
-
 }
