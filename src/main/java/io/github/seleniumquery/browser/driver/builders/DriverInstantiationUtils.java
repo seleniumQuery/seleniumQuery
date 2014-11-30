@@ -20,13 +20,13 @@ class DriverInstantiationUtils {
 					Class<? extends WebDriver> driverClass) {
 		try {
 			File driverServerExecutableFile = new File(pathToDriverServerExecutable);
-			String driverSErverExecutableFilePath = driverServerExecutableFile.getCanonicalPath();
+			String driverServerExecutableFilePath = driverServerExecutableFile.getCanonicalPath();
 			if (!driverServerExecutableFile.exists() || driverServerExecutableFile.isDirectory()) {
 				throw new RuntimeException("No " + driverServerFileDescription + " file was found at '" +
-						driverSErverExecutableFilePath + "'. Download the latest release at " + driverServerDownloadPage
+						driverServerExecutableFilePath + "'. Download the latest release at " + driverServerDownloadPage
 						+ " and place it there or specify a different path using " + alternativeMethod + ".");
 			}
-			System.setProperty(driverServerSystemPropertyPath, driverSErverExecutableFilePath);
+			System.setProperty(driverServerSystemPropertyPath, driverServerExecutableFilePath);
 			return driverClass.newInstance();
 		} catch (RuntimeException e) {
 			throw e;
@@ -35,7 +35,7 @@ class DriverInstantiationUtils {
 		}
 	}
 	
-	static String getFullPathForFileInClassPath(String executableFileName) {
+	static String getFullPathForFileInClasspath(String executableFileName) {
 		String slashExecutableFileName = "/" + executableFileName;
 		URL executableFileInTheClassPathUrl = DriverInstantiationUtils.class.getResource(slashExecutableFileName);
 		if (executableFileInTheClassPathUrl == null) {

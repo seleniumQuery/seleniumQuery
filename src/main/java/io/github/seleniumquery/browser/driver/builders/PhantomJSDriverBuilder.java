@@ -43,7 +43,7 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
     }
 
     private WebDriver instantiatePhantomJsDriverWithoutPath() {
-        return instantiatePhantomJsDriverWithPath(DriverInstantiationUtils.getFullPathForFileInClassPath("phantomjs.exe"));
+        return instantiatePhantomJsDriverWithPath(DriverInstantiationUtils.getFullPathForFileInClasspath("phantomjs.exe"));
     }
 
 }

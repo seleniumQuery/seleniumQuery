@@ -21,7 +21,7 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
      *
      * @param pathToChromeDriverExe The full path to the executable server file. Examples:
      *     <code>"C:\\myFiles\\chromedriver.exe"</code>; can be relative, as in <code>"..\\stuff\\chromedriver.exe"</code>,
-     *     does not matter if the .exe was renamed, such as <code>"drivers\\chrome\\chromedriver_v12345.exe"</code>.
+     *     does not matter if the executable was renamed, such as <code>"drivers\\chrome\\chromedriver_v12345.exe"</code>.
      */
     public ChromeDriverBuilder withPathToChromeDriverExe(String pathToChromeDriverExe) {
         this.customPathToChromeDriverExe = pathToChromeDriverExe;
@@ -37,14 +37,14 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     }
 
     private WebDriver instantiateChromeDriverWithoutPath() {
-        return instantiateChromeDriverWithPath(DriverInstantiationUtils.getFullPathForFileInClassPath("chromedriver.exe"));
+        return instantiateChromeDriverWithPath(DriverInstantiationUtils.getFullPathForFileInClasspath("chromedriver.exe"));
     }
 
     private WebDriver instantiateChromeDriverWithPath(String pathToChromeDriverExe) {
         return DriverInstantiationUtils.instantiateDriverWithPath(pathToChromeDriverExe,
                 "Chrome Driver Server",
                 "http://chromedriver.storage.googleapis.com/index.html",
-                "$.driver().useChrome().withPath(\"other/path/to/chromedriver.exe\")",
+                "$.driver().useChrome().withPathToChromeDriverExe(\"other/path/to/chromedriver.exe\")",
                 "webdriver.chrome.driver",
                 ChromeDriver.class);
     }

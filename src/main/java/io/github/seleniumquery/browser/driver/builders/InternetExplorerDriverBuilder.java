@@ -61,7 +61,7 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
     }
 
     private WebDriver instantiateIeDriverWithoutPath() {
-        return instantiateIeDriverWithPath(DriverInstantiationUtils.getFullPathForFileInClassPath("IEDriverServer.exe"));
+        return instantiateIeDriverWithPath(DriverInstantiationUtils.getFullPathForFileInClasspath("IEDriverServer.exe"));
     }
 
     private WebDriver instantiateIeDriverWithPath(String pathToIEDriverServerExe) {
@@ -91,13 +91,13 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
 
     private void guaranteeActiveXIsNotBlocked(WebDriver iEWebDriver) {
         try {
-            iEWebDriver.get(new File(DriverInstantiationUtils.getFullPathForFileInClassPath("ie.html")).toURI().toString());
+            iEWebDriver.get(new File(DriverInstantiationUtils.getFullPathForFileInClasspath("ie.html")).toURI().toString());
             iEWebDriver.findElements(By.xpath("/nobody"));
         } catch (InvalidSelectorException ise) {
             LOGGER.debug("Failed while testing if ActiveX is enabled in IE Driver.", ise);
             try {
                 System.out.println("Your IE Driver is probably blocking ActiveX. Enable it.");
-                iEWebDriver.get(new File(DriverInstantiationUtils.getFullPathForFileInClassPath("ie-activex.html")).toURI().toString());
+                iEWebDriver.get(new File(DriverInstantiationUtils.getFullPathForFileInClasspath("ie-activex.html")).toURI().toString());
                 for (int i = 0; i < 45; i++) {
                     try {
                         iEWebDriver.findElements(By.xpath("/nobody"));
