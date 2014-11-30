@@ -12,21 +12,28 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * <pre>
  * $("selector").parent()
+ * $("selector").parent(selector)
+ * </pre>
  *
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class ParentFunction {
 
-	public static SeleniumQueryObject parent(SeleniumQueryObject caller, List<WebElement> elements) {
-		return parent(caller, elements, null);
+	private static final String NO_FILTER_SELECTOR_PROVIDED = null;
+
+	public static SeleniumQueryObject parent(SeleniumQueryObject caller) {
+		return parent(caller, NO_FILTER_SELECTOR_PROVIDED);
 	}
 
-	public static SeleniumQueryObject parent(SeleniumQueryObject caller, List<WebElement> elements, String selector) {
+	public static SeleniumQueryObject parent(SeleniumQueryObject caller, String selector) {
 		Set<WebElement> alreadyInsertedParents = new HashSet<WebElement>();
 		WebDriver callerWebDriver = caller.getWebDriver();
 
+		List<WebElement> elements = caller.get();
 		List<WebElement> parents = new ArrayList<WebElement>(elements.size());
 		for (WebElement element : elements) {
 			WebElement parentElement = SelectorUtils.parent(element);
@@ -39,8 +46,8 @@ public class ParentFunction {
 	}
 
 	private static boolean parentMatchesSelector(WebDriver callerWebDriver, String selector, WebElement parentElement) {
-		// if selector is null, then it was not provided and everyone matches it
-		return selector == null || createParentElement(callerWebDriver, parentElement).is(selector);
+		//noinspection StringEquality
+		return selector == NO_FILTER_SELECTOR_PROVIDED || createParentElement(callerWebDriver, parentElement).is(selector);
 	}
 
 	private static SeleniumQueryObject createParentElement(WebDriver callerWebDriver, WebElement parentElement) {

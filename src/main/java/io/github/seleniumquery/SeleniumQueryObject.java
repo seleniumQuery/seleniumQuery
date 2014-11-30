@@ -534,7 +534,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject parent() {
-		return ParentFunction.parent(this, elements);
+		return ParentFunction.parent(this);
 	}
 
 	/**
@@ -550,7 +550,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject parent(String selector) {
-		return ParentFunction.parent(this, elements, selector);
+		return ParentFunction.parent(this, selector);
 	}
 
 	/**
@@ -584,6 +584,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @return A self reference.
 	 * @since 0.9.0
 	 */
+	@SuppressWarnings("unused")
 	public SeleniumQueryObject selectOptionByVisibleText(String text) {
 		return as().select().selectByVisibleText(text);
 	}
@@ -595,6 +596,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @return A self reference.
 	 * @since 0.9.0
 	 */
+	@SuppressWarnings("unused")
 	public SeleniumQueryObject selectOptionByValue(String value) {
 		return as().select().selectByValue(value);
 	}
