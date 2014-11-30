@@ -1,17 +1,10 @@
 package integration.functions.jquery.forms;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-import org.junit.Assert;
 import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.Test;
 
-import static infrastructure.IntegrationTestUtils.equal;
-import static infrastructure.IntegrationTestUtils.id;
-import static infrastructure.IntegrationTestUtils.ids;
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.SeleniumQuery.jQuery;
-import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
