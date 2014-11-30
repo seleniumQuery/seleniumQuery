@@ -1,8 +1,9 @@
 package io.github.seleniumquery.browser.driver;
 
 import io.github.seleniumquery.SeleniumQueryConfig;
-import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.browser.driver.builders.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -13,6 +14,8 @@ import java.util.concurrent.TimeUnit;
  * @since 0.9.0
  */
 public class SeleniumQueryDriver {
+
+    private static final Log LOGGER = LogFactory.getLog(SeleniumQueryDriver.class);
 
     private static final DriverBuilder DEFAULT_DRIVER_BUILDER = new HtmlUnitDriverBuilder();
 
@@ -62,7 +65,7 @@ public class SeleniumQueryDriver {
     }
 
     /**
-     * Quits the WebDriver in use by this seleniumQuery browser.
+     * Quits, if exists, the WebDriver in use by this seleniumQuery browser.
      *
      * @since 0.9.0
      *
@@ -70,10 +73,11 @@ public class SeleniumQueryDriver {
      */
     public SeleniumQueryDriver quit() {
         if (webDriver == null) { // TODO unit test
-            throw new SeleniumQueryException("WebDriver was not initialized, you can't .quit() it.");
+            LOGGER.warn("Called .quit() before initializing WebDriver, nothing was done.");
+        } else {
+            webDriver.quit();
+            webDriver = null;
         }
-        webDriver.quit();
-        webDriver = null;
         return this;
     }
 
