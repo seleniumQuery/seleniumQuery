@@ -1,11 +1,12 @@
 package io.github.seleniumquery.browser.driver.builders;
 
 import io.github.seleniumquery.SeleniumQueryException;
-import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
+import static java.lang.String.format;
 
 /**
  * Utilities for instantiating drivers.
@@ -34,13 +35,26 @@ class DriverInstantiationUtils {
 		}
 	}
 
-	public static boolean isValidFile(File driverServerExecutableFile) {
+	static boolean isValidFile(File driverServerExecutableFile) {
         return driverServerExecutableFile.exists() && !driverServerExecutableFile.isDirectory();
     }
 
-	public static boolean executableExistsInClasspath(String file) {
+	static boolean executableExistsInClasspath(String file) {
         String strPath = getFullPathForFileInClasspath(file);
         File driverServerExecutableFile = new File(strPath);
         return isValidFile(driverServerExecutableFile);
     }
+
+    static boolean customPathWasProvidedAndExecutableExistsThere(String pathToExecutable, String exceptionMessage) {
+        boolean customPathWasProvided = pathToExecutable != null;
+        if (!customPathWasProvided) {
+            return false;
+        }
+        File driverServerExecutableFile = new File(pathToExecutable);
+        if (!isValidFile(driverServerExecutableFile)) {
+            throw new SeleniumQueryException(format(exceptionMessage, getFullPath(pathToExecutable)));
+        }
+        return true;
+    }
+
 }
