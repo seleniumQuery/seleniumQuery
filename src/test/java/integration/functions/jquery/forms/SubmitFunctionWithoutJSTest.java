@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.CoreMatchers.endsWith;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class SubmitFunctionWithoutJSTest {
