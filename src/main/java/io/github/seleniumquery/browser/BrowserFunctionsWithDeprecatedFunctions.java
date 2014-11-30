@@ -64,10 +64,10 @@ public class BrowserFunctionsWithDeprecatedFunctions extends BrowserFunctions {
 		 * @return A self reference. */
 		public OldBrowserFunctions setDefaultDriverAsChrome() { browser.driver().useChrome(); return this; }
 
-		/** @deprecated Use: <code>$.driver().useChrome().withPathToChromeDriverExe(path);</code>
-		 * @param path path to chromedriver.exe.
+		/** @deprecated Use: <code>$.driver().useChrome().withPathToChromeDriver(path);</code>
+		 * @param path path to ChromeDriver executable (<code>chromedriver.exe</code>/<code>chromedriver</code>).
 		 * @return A self reference. */
-		public OldBrowserFunctions setDefaultDriverAsChrome(String path) { browser.driver().useChrome().withPathToChromeDriverExe(path); return this; }
+		public OldBrowserFunctions setDefaultDriverAsChrome(String path) { browser.driver().useChrome().withPathToChromeDriver(path); return this; }
 
 		/** @deprecated Use: <code>$.driver().useInternetExplorer();</code>
 		 * @return A self reference. */

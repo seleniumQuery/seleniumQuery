@@ -27,7 +27,7 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
             "(1) on the classpath of this project; or\n" +
             "(2) on the path specified by the \"" + CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY + "\" system property; or\n" +
             "(3) on a folder in the system's PATH variable; or\n" +
-            "(4) wherever and set the path via $.driver().useChrome().withPathToChromeDriverExe(\"other/path/to/chromedriver.exe\").\n" +
+            "(4) wherever and set the path via $.driver().useChrome().withPathToChromeDriver(\"other/path/to/chromedriver<.exe>\").\n" +
             "For more information, see https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver";
 
     private static final String BAD_PATH_PROVIDED_EXCEPTION_MESSAGE = "The ChromeDriver Server executable file was not found (or is a directory) at \"%s\"." + EXCEPTION_MESSAGE;
@@ -35,11 +35,12 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     static String CHROMEDRIVER_EXE = "chromedriver.exe"; // package visibility so it can be changed during test
 
 
-    private String customPathToChromeDriverExe;
+    private String customPathToChromeDriver;
     private ChromeOptions chromeOptions;
 
     /**
      * Sets specific {@link ChromeOptions} options to be used in the {@link ChromeDriver}.
+     *
      * @param chromeOptions Options to be used.
      * @return A self reference, allowing further configuration.
      *
@@ -51,18 +52,19 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     }
 
     /**
-     * Configures the builder to look for the <code>chromedriver.exe</code> at the path specified by the argument.
+     * Configures the builder to look for the ChromeDriver executable (<code>chromedriver.exe</code>/<code>chromedriver</code>) at
+     * the specified path.
      *
-     * @param pathToChromeDriverExe The path to the executable server file. Examples:
-     *     <code>"C:\\myFiles\\chromedriver.exe"</code>; can be relative, as in <code>"..\\stuff\\chromedriver.exe"</code>;
-     *     does not matter if the executable was renamed, such as <code>"drivers\\chrome\\chromedriver_v12345.exe"</code>.
+     * @param pathToChromeDriver The path to the executable server file. Examples:
+     *     <code>"C:\myFiles\chromedriver.exe"</code>; can be relative, as in <code>"..\stuff\chromedriver"</code>;
+     *     does not matter if the executable was renamed, such as <code>"wherever/myself/drivers/chromedriver_v12345.exe"</code>.
      *
      * @return A self reference, allowing further configuration.
      *
      * @since 0.9.0
      */
-    public ChromeDriverBuilder withPathToChromeDriverExe(String pathToChromeDriverExe) {
-        this.customPathToChromeDriverExe = pathToChromeDriverExe;
+    public ChromeDriverBuilder withPathToChromeDriver(String pathToChromeDriver) {
+        this.customPathToChromeDriver = pathToChromeDriver;
         return this;
     }
 
@@ -71,8 +73,8 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.chrome());
         overwriteCapabilityIfValueNotNull(capabilities, ChromeOptions.CAPABILITY, this.chromeOptions);
 
-        if (customPathWasProvidedAndExecutableExistsThere(this.customPathToChromeDriverExe, BAD_PATH_PROVIDED_EXCEPTION_MESSAGE)) {
-            System.setProperty(CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPath(this.customPathToChromeDriverExe));
+        if (customPathWasProvidedAndExecutableExistsThere(this.customPathToChromeDriver, BAD_PATH_PROVIDED_EXCEPTION_MESSAGE)) {
+            System.setProperty(CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPath(this.customPathToChromeDriver));
         } else if (executableExistsInClasspath(CHROMEDRIVER_EXE)) {
             System.setProperty(CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPathForFileInClasspath(CHROMEDRIVER_EXE));
         }

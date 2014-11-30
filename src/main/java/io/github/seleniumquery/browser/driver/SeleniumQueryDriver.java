@@ -105,19 +105,20 @@ public class SeleniumQueryDriver {
     /**
      * Sets {@link org.openqa.selenium.chrome.ChromeDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
      * <p>
-     * Note that the Chrome driver needs a <i>server executable</i> to bridge Selenium to the browser and as such
-     * Selenium must know the path to it. It is a file usually named <code>chromedriver.exe</code> and its latest
-     * version can be downloaded from
-     * <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's download page</a> -- or check
+     * Note that the Chrome needs a <i>ChromeDriver Server executable</i> to bridge Selenium to the browser and as such
+     * Selenium must know the path to it. It is a file usually named <code>chromedriver.exe</code> (windows) or <code>chromedriver</code> (linix)
+     * and its latest version can be downloaded from
+     * <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's download page</a>. You can also check
      * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver">seleniumQuery and Chrome Driver wiki page</a>
-     * for the latest info.
+     * for the other info.
      * </p>
      * <br>
-     * <b> This method looks for the <code>chromedriver.exe</code> at the CLASSPATH (tipically at a {@code resources/} folder of a
-     * maven project), at the "webdriver.chrome.driver" system property or at the system's PATH variable.</b>
+     * <b> This method looks for the ChromeDriver executable (<code>chromedriver.exe</code>/<code>chromedriver</code>) at the CLASSPATH
+     * (tipically at a {@code resources/} folder of a maven project), at the "webdriver.chrome.driver" system property or at the system's PATH variable.</b>
      * If you wish to directly specify a path, use:
      * <pre>
-     * $.driver().useChrome().withPathToChromeDriverExe("other/path/to/chromedriver.exe");
+     * $.driver().useChrome().withPathToChromeDriver("other/path/to/chromedriver.exe"); // windows
+     * $.driver().useChrome().withPathToChromeDriver("other/path/to/chromedriver"); // linux
      * </pre>
      *
      * @return A {@link ChromeDriverBuilder}, allowing further configuration of the driver.
