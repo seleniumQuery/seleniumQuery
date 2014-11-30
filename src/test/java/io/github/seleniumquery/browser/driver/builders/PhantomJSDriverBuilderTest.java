@@ -2,6 +2,7 @@ package io.github.seleniumquery.browser.driver.builders;
 
 import io.github.seleniumquery.SeleniumQueryBrowserTest;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -14,10 +15,23 @@ import static org.junit.Assert.assertThat;
 
 public class PhantomJSDriverBuilderTest {
 
-    String phantomExecutable = PhantomJSDriverBuilder.PHANTOMJS_EXE;
+    static String phantomExecutable = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS;
+    static String originalPathWindows;
+    static String originalPathLinux;
+
+    @BeforeClass
+    public static void setUp() throws Exception {
+        if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+            phantomExecutable = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX;
+        }
+        originalPathWindows = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS;
+        originalPathLinux = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX;
+    }
 
     @After
     public void tearDown() throws Exception {
+        PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS = originalPathWindows;
+        PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX = originalPathLinux;
         $.quit();
     }
 
@@ -51,7 +65,8 @@ public class PhantomJSDriverBuilderTest {
     @Test
     public void usePhantomJS__should_fall_back_to_systemProperty_when_executable_not_found_in_classpath() {
         // given
-        PhantomJSDriverBuilder.PHANTOMJS_EXE = "not-in-classpath.txt";
+        PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS = "not-in-classpath.txt";
+        PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX = "not-in-classpath.txt";
         System.setProperty("phantomjs.binary.path", getFullPathForFileInClasspath(phantomExecutable));
         // when
         $.driver().usePhantomJS();

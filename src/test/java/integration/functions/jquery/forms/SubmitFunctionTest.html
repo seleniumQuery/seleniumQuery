@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>.submit() test page - http://jsbin.com/bovusorofo/3/edit?html,output</title>
+</head>
+<body>
+<script>
+    var addEvent = (function( window, document ) {
+        if ( document.addEventListener ) {
+            return function( elem, type, cb ) {
+                if ( (elem && !elem.length) || elem === window ) {
+                    elem.addEventListener(type, cb, false );
+                }
+                else if ( elem && elem.length ) {
+                    var len = elem.length;
+                    for ( var i = 0; i < len; i++ ) {
+                        addEvent( elem[i], type, cb );
+                    }
+                }
+            };
+        }
+        else if ( document.attachEvent ) {
+            return function ( elem, type, cb ) {
+                if ( (elem && !elem.length) || elem === window ) {
+                    elem.attachEvent( 'on' + type, function() { return cb.call(elem, window.event); } );
+                }
+                else if ( elem.length ) {
+                    var len = elem.length;
+                    for ( var i = 0; i < len; i++ ) {
+                        addEvent( elem[i], type, cb );
+                    }
+                }
+            };
+        }
+    })( this, document );
+
+
+    function pl(str) { document.getElementById("out").innerHTML += str; }
+    function submitA() { pl("a"); return false; }
+    function submitB() { pl("b"); return false; }
+</script>
+
+<form onsubmit="return submitA();">
+    <input type="text" id="input-a">
+    <div id="div-a"></div>
+</form>
+
+<form onsubmit="return submitB();">
+    <input type="text" id="input-b">
+    <div id="div-b"></div>
+</form>
+
+<button id="go">GO</button>
+
+<pre id="out"></pre>
+
+</body>
+</html>
