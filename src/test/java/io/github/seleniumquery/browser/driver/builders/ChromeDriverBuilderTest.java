@@ -1,6 +1,7 @@
 package io.github.seleniumquery.browser.driver.builders;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -12,6 +13,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ChromeDriverBuilderTest {
+
+    String chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXE;
+
+    @Before
+    public void setUp() throws Exception {
+        System.out.println("OS: "+System.getProperty("os.name"));
+    }
 
     @After
     public void tearDown() throws Exception {
@@ -50,9 +58,9 @@ public class ChromeDriverBuilderTest {
     }
 
     @Test
-    public void withPathToChromeDriverExe() {
+    public void withPathToChromeDriver() {
         // given
-        $.driver().useChrome().withPathToChromeDriverExe("src/test/resources/chromedriver.exe");
+        $.driver().useChrome().withPathToChromeDriver("src/test/resources/"+chromeExecutable);
         // when
         $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
         // then
@@ -62,8 +70,8 @@ public class ChromeDriverBuilderTest {
     @Test
     public void useChrome__should_fall_back_to_systemProperty_when_executable_not_found_in_classpath() {
         // given
-        ChromeDriverBuilder.CHROMEDRIVER_EXE = "not-in-classpath.exe";
-        System.setProperty("webdriver.chrome.driver", getFullPathForFileInClasspath("chromedriver.exe"));
+        ChromeDriverBuilder.CHROMEDRIVER_EXE = "not-in-classpath.txt";
+        System.setProperty("webdriver.chrome.driver", getFullPathForFileInClasspath(chromeExecutable));
         // when
         $.driver().useChrome();
         $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
