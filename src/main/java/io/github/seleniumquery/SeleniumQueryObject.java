@@ -406,7 +406,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public WebElement get(int index) {
-		return GetFunction.get(elements, index);
+		return GetFunction.get(this, index);
 	}
 	
 	/**
