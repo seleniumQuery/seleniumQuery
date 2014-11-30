@@ -73,9 +73,9 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public List<WebElement> elements;
 	
 	/**
-	 * The previous (or "father") element, meaning this SeleniumQueryObject was created as result
-	 * of calling a "destructive" function (such as <code>.not()</code>) on that element.<br>
-	 * This property is retrieved by a call to <code>.end()</code>.
+	 * The previous (or "parent") element, meaning this SeleniumQueryObject was created as result
+	 * of calling a "destructive" function (such as {@link #not(String)}) on that element.<br>
+	 * This property is retrieved by a call to {@link #end()}.
 	 * 
 	 * @since 0.9.0
 	 */
