@@ -105,13 +105,20 @@ public class SeleniumQueryDriver {
      * Selenium must know the path to it. It is a file usually named <code>chromedriver.exe</code> and its latest
      * version can be downloaded from
      * <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's download page</a> -- or check
-     * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver"> seleniumQuery and Chrome Driver wiki page</a>
+     * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver">seleniumQuery and Chrome Driver wiki page</a>
      * for the latest info.
      * </p>
-     * <p><b> This method looks for the chromedriver.exe at the CLASSPATH (tipically at a {@code resources/} folder of a
-     * maven project.)</b> If you wish to directly specify a path, use {@code .useChrome().withPathToChromeDriverExe(pathStr)}</p>
+     * <br>
+     * <b> This method looks for the <code>chromedriver.exe</code> at the CLASSPATH (tipically at a {@code resources/} folder of a
+     * maven project), at the "webdriver.chrome.driver" system property or at the system's PATH variable.</b>
+     * If you wish to directly specify a path, use:
+     * <pre>
+     * $.driver().useChrome().withPathToChromeDriverExe("other/path/to/chromedriver.exe");
+     * </pre>
      *
      * @return A {@link ChromeDriverBuilder}, allowing further configuration of the driver.
+     *
+     * @since 0.9.0
      */
     public ChromeDriverBuilder useChrome() {
         return clearCurrentDriverAndAssignNewBuilder(new ChromeDriverBuilder());
@@ -120,17 +127,24 @@ public class SeleniumQueryDriver {
     /**
      * Sets {@link org.openqa.selenium.ie.InternetExplorerDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
      * <p>
-     * Note that, as IE needs a "server" to bridge selenium to the browser, you have
-     * to point the path to it. It is a file usually named "IEDriverServer.exe" and its latest
-     * version can be downloaded from http://selenium-release.storage.googleapis.com/index.html.
+     * Note that the {@link org.openqa.selenium.ie.InternetExplorerDriver} needs a <i>server executable</i> to bridge selenium to the browser and,
+     * as such, Selenium must know the path to it. It is a file usually named <code>IEDriverServer.exe</code> and its latest
+     * version can be downloaded from
+     * <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer's download page</a> -- or check
+     * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-IE-Driverr">seleniumQuery and IE Driver wiki page</a>
+     * for the latest info.
      * </p>
-     * <p>
-     * For more info, check https://code.google.com/p/selenium/wiki/InternetExplorerDriver
-     * </p>
-     * <p><b> This method looks for the IEDriverServer.exe at the CLASSPATH (tipically at a {@code resources/} folder of a
-     * maven project.)</b> If you wish to directly specify a path, use {@code .useInternetExplorer().withPathToIEDriverServerExe(pathStr)}</p>
+     * <br>
+     * <b> This method looks for the <code>IEDriverServer.exe</code> at the CLASSPATH (tipically at a {@code resources/} folder of a
+     * maven project), at the "webdriver.ie.driver" system property or at the system's PATH variable.</b>
+     * If you wish to directly specify a path, use:
+     * <pre>
+     * $.driver().useChrome().withPathToIEDriverServerExe("other/path/to/IEDriverServer.exe");
+     * </pre>
      *
      * @return A {@link InternetExplorerDriverBuilder}, allowing further configuration of the driver.
+     *
+     * @since 0.9.0
      */
     public InternetExplorerDriverBuilder useInternetExplorer() {
         return clearCurrentDriverAndAssignNewBuilder(new InternetExplorerDriverBuilder());
