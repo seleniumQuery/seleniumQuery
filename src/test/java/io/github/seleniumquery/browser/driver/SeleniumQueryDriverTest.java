@@ -1,4 +1,4 @@
-package io.github.seleniumquery.globalfunctions.driver;
+package io.github.seleniumquery.browser.driver;
 
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;

@@ -1,4 +1,4 @@
-package io.github.seleniumquery.globalfunctions;
+package io.github.seleniumquery.browser;
 
 import io.github.seleniumquery.SeleniumQueryBrowser;
 import org.junit.Test;

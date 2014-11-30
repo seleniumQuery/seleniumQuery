@@ -1,4 +1,4 @@
-package io.github.seleniumquery.globalfunctions.driver.builders;
+package io.github.seleniumquery.browser.driver.builders;
 
 import org.junit.After;
 import org.junit.Test;

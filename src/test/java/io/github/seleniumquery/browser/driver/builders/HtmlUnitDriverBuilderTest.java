@@ -1,4 +1,4 @@
-package io.github.seleniumquery.globalfunctions.driver.builders;
+package io.github.seleniumquery.browser.driver.builders;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.junit.After;
@@ -11,8 +11,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.lang.reflect.Method;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.globalfunctions.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOff;
-import static io.github.seleniumquery.globalfunctions.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOn;
+import static io.github.seleniumquery.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOff;
+import static io.github.seleniumquery.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOn;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
