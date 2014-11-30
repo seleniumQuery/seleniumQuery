@@ -1,8 +1,10 @@
 package io.github.seleniumquery.browser.driver.builders;
 
+import io.github.seleniumquery.SeleniumQueryException;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -21,6 +23,7 @@ class DriverInstantiationUtils {
 		try {
 			File driverServerExecutableFile = new File(pathToDriverServerExecutable);
 			String driverServerExecutableFilePath = driverServerExecutableFile.getCanonicalPath();
+
 			if (!driverServerExecutableFile.exists() || driverServerExecutableFile.isDirectory()) {
 				throw new RuntimeException("No " + driverServerFileDescription + " file was found at '" +
 						driverServerExecutableFilePath + "'. Download the latest release at " + driverServerDownloadPage
@@ -42,6 +45,15 @@ class DriverInstantiationUtils {
 			return DriverInstantiationUtils.class.getResource("/").getPath() + slashExecutableFileName;
 		}
 		return executableFileInTheClassPathUrl.getPath();
+	}
+
+	static String getFullPath(String file) {
+		try {
+			File driverServerExecutableFile = new File(file);
+			return driverServerExecutableFile.getCanonicalPath();
+		} catch (IOException e) {
+			throw new SeleniumQueryException("Unable to get canonical path for "+file, e);
+		}
 	}
 
 }
