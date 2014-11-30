@@ -82,10 +82,10 @@ public class BrowserFunctionsWithDeprecatedFunctions extends BrowserFunctions {
 		 * @return A self reference. */
 		public OldBrowserFunctions setDefaultDriverAsPhantomJS() { browser.driver().usePhantomJS(); return this; }
 
-		/** @deprecated Use: <code>$.driver().usePhantomJS().withPathToPhantomJsExe(path);</code>
-		 * @param path path to phantomjs.exe.
+		/** @deprecated Use: <code>$.driver().usePhantomJS().withPathToPhantomJS(path);</code>
+		 * @param path path to PhantomJS executable (<code>phantomjs.exe</code>/<code>phantomjs.exe</code>).
 		 * @return A self reference. */
-		public OldBrowserFunctions setDefaultDriverAsPhantomJS(String path) { browser.driver().usePhantomJS().withPathToPhantomJsExe(path); return this; }
+		public OldBrowserFunctions setDefaultDriverAsPhantomJS(String path) { browser.driver().usePhantomJS().withPathToPhantomJS(path); return this; }
 
 		/** @deprecated Use: <code>$.driver().get();</code>
 		 * @return the currently set {@link WebDriver}. */
