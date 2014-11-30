@@ -15,7 +15,7 @@ public class HtmlGetter implements Getter<String> {
 	
 	@Override
 	public String get(WebDriver driver, List<WebElement> elements) {
-		return HtmlFunction.html(driver, elements);
+		return HtmlFunction.html(elements);
 	}
 	
 	@Override
