@@ -1,9 +1,6 @@
 package io.github.seleniumquery.functions.as;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * Plugin interface for seleniumQuery.
@@ -13,8 +10,8 @@ import java.util.List;
  *
  * @since 0.9.0
  */
-public interface SeleniumQueryPlugin<T> {
+public interface SeleniumQueryPlugin<PLUGIN> {
 
-    T as(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements);
+    PLUGIN as(SeleniumQueryObject seleniumQueryObject);
 
 }

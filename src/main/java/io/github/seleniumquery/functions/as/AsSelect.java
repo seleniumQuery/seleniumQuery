@@ -6,8 +6,6 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
-
 import static io.github.seleniumquery.by.WebElementUtils.isSelectTag;
 
 public class AsSelect {
@@ -15,11 +13,9 @@ public class AsSelect {
 	private static final Log LOGGER = LogFactory.getLog(AsSelect.class);
 
 	private SeleniumQueryObject caller;
-	private List<WebElement> elements;
 
-	AsSelect(SeleniumQueryObject caller, List<WebElement> elements) {
+	AsSelect(SeleniumQueryObject caller) {
 		this.caller = caller;
-		this.elements = elements;
 	}
 
 	/**
@@ -35,7 +31,7 @@ public class AsSelect {
 	 */
 	public SeleniumQueryObject selectByVisibleText(String text) {
 		LOGGER.debug("Selecting <option>s on "+caller+" by visible text: \""+text+"\".");
-		for (WebElement element : elements) {
+		for (WebElement element : caller.get()) {
 			if (isSelectTag(element)) {
 				new Select(element).selectByVisibleText(text);
 			}
@@ -54,7 +50,7 @@ public class AsSelect {
 	 */
 	public SeleniumQueryObject selectByValue(String value) {
 		LOGGER.debug("Selecting <option>s on "+caller+" by value: \""+value+"\".");
-		for (WebElement element : elements) {
+		for (WebElement element : caller.get()) {
 			if (isSelectTag(element)) {
 				new Select(element).selectByValue(value);
 			}

@@ -4,15 +4,12 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 import static infrastructure.IntegrationTestUtils.htmlTestFileUrl;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.functions.as.Sizer.SIZER;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class SeleniumQueryPluginTest {
 
@@ -43,21 +40,18 @@ public class SeleniumQueryPluginTest {
 class Sizer {
     public static final SeleniumQueryPlugin<Sizer> SIZER = new SeleniumQueryPlugin<Sizer>() {
         @Override
-        public Sizer as(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements) {
-            return new Sizer(seleniumQueryObject, elements);
+        public Sizer as(SeleniumQueryObject seleniumQueryObject) {
+            return new Sizer(seleniumQueryObject);
         }
     };
 
-    @SuppressWarnings({"unused", "FieldCanBeLocal"}) // may, of course, not even use all args
     private SeleniumQueryObject seleniumQueryObject;
-    private List<WebElement> elements;
-    public Sizer(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements) {
+    public Sizer(SeleniumQueryObject seleniumQueryObject) {
         this.seleniumQueryObject = seleniumQueryObject;
-        this.elements = elements;
     }
 
     public int gimmeTheSize() {
-        return this.elements.size();
+        return this.seleniumQueryObject.get().size();
     }
 
 }
