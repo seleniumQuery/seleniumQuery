@@ -4,6 +4,8 @@ import io.github.seleniumquery.browser.driver.DriverBuilder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
+import java.io.File;
+
 /**
  * Builds PhantomJSDriver instances for SeleniumQueryDriver.
  *
@@ -34,12 +36,22 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
     }
 
     private WebDriver instantiatePhantomJsDriverWithPath(String pathToPhantomJs) {
-        return DriverInstantiationUtils.instantiateDriverWithPath(pathToPhantomJs,
-                "PhantomJS Executable",
-                "http://phantomjs.org/download.html",
-                "$.driver.usePhantomJS().withPath(\"other/path/to/PhantomJS.exe\")",
-                "phantomjs.binary.path",
-                PhantomJSDriver.class);
+        try {
+            File driverServerExecutableFile = new File(pathToPhantomJs);
+            String driverServerExecutableFilePath = driverServerExecutableFile.getCanonicalPath();
+
+            if (!driverServerExecutableFile.exists() || driverServerExecutableFile.isDirectory()) {
+                throw new RuntimeException("No " + "PhantomJS Executable" + " file was found at '" +
+                        driverServerExecutableFilePath + "'. Download the latest release at " + "http://phantomjs.org/download.html"
+                        + " and place it there or specify a different path using " + "$.driver.usePhantomJS().withPath(\"other/path/to/PhantomJS.exe\")" + ".");
+            }
+            System.setProperty("phantomjs.binary.path", driverServerExecutableFilePath);
+            return PhantomJSDriver.class.newInstance();
+        } catch (RuntimeException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private WebDriver instantiatePhantomJsDriverWithoutPath() {

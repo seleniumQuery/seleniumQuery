@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.executableExistsInClasspath;
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPath;
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
 
@@ -70,7 +71,7 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
         if (customPathWasProvidedAndExecutableExistsThere()) {
             System.setProperty(CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPath(this.customPathToChromeDriverExe));
-        } else if (executableExistsInClasspath()) {
+        } else if (executableExistsInClasspath(CHROMEDRIVER_EXE)) {
             System.setProperty(CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPathForFileInClasspath(CHROMEDRIVER_EXE));
         }
         try {
@@ -92,22 +93,12 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
             return false;
         }
         File driverServerExecutableFile = new File(this.customPathToChromeDriverExe);
-        if (!isValidFile(driverServerExecutableFile)) {
+        if (!DriverInstantiationUtils.isValidFile(driverServerExecutableFile)) {
             throw new SeleniumQueryException(
-                    "No ChromeDriver Server executable file was not found (or is a directory) at \"" +
+                    "The ChromeDriver Server executable file was not found (or is a directory) at \"" +
                             getFullPath(this.customPathToChromeDriverExe) + "\"." + EXCEPTION_MESSAGE);
         }
         return true;
-    }
-
-    private boolean executableExistsInClasspath() {
-        String strPath = getFullPathForFileInClasspath(CHROMEDRIVER_EXE);
-        File driverServerExecutableFile = new File(strPath);
-        return isValidFile(driverServerExecutableFile);
-    }
-
-    private boolean isValidFile(File driverServerExecutableFile) {
-        return driverServerExecutableFile.exists() && !driverServerExecutableFile.isDirectory();
     }
 
 }
