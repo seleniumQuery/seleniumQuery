@@ -1,7 +1,7 @@
 package io.github.seleniumquery.browser.driver.builders;
 
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -14,15 +14,23 @@ import static org.junit.Assert.assertThat;
 
 public class ChromeDriverBuilderTest {
 
-    String chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXE;
+    static String chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS;
+    static String originalPathWindows;
+    static String originalPathLinux;
 
-    @Before
-    public void setUp() throws Exception {
-        System.out.println("OS: "+System.getProperty("os.name"));
+    @BeforeClass
+    public static void setUp() throws Exception {
+        if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+            chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX;
+        }
+        originalPathWindows = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS;
+        originalPathLinux = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX;
     }
 
     @After
     public void tearDown() throws Exception {
+        ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS = originalPathWindows;
+        ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX = originalPathLinux;
         $.quit();
     }
 
@@ -70,7 +78,8 @@ public class ChromeDriverBuilderTest {
     @Test
     public void useChrome__should_fall_back_to_systemProperty_when_executable_not_found_in_classpath() {
         // given
-        ChromeDriverBuilder.CHROMEDRIVER_EXE = "not-in-classpath.txt";
+        ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS = "not-in-classpath.txt";
+        ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX = "not-in-classpath.txt";
         System.setProperty("webdriver.chrome.driver", getFullPathForFileInClasspath(chromeExecutable));
         // when
         $.driver().useChrome();

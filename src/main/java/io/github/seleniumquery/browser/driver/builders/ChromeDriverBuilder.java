@@ -2,6 +2,8 @@ package io.github.seleniumquery.browser.driver.builders;
 
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.browser.driver.DriverBuilder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,6 +23,8 @@ import static java.lang.String.format;
  */
 public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
+    private static final Log LOGGER = LogFactory.getLog(ChromeDriverBuilder.class);
+
     private static final String CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY = "webdriver.chrome.driver";
 
     private static final String EXCEPTION_MESSAGE = " \nDownload the latest release at http://chromedriver.storage.googleapis.com/index.html and place it: \n" +
@@ -32,7 +36,9 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
     private static final String BAD_PATH_PROVIDED_EXCEPTION_MESSAGE = "The ChromeDriver Server executable file was not found (or is a directory) at \"%s\"." + EXCEPTION_MESSAGE;
 
-    static String CHROMEDRIVER_EXE = "chromedriver.exe"; // package visibility so it can be changed during test
+    // package visibility so they can be changed during test
+    static String CHROMEDRIVER_EXECUTABLE_WINDOWS = "chromedriver.exe";
+    static String CHROMEDRIVER_EXECUTABLE_LINUX = "chromedriver";
 
 
     private String customPathToChromeDriver;
@@ -74,9 +80,11 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
         overwriteCapabilityIfValueNotNull(capabilities, ChromeOptions.CAPABILITY, this.chromeOptions);
 
         if (customPathWasProvidedAndExecutableExistsThere(this.customPathToChromeDriver, BAD_PATH_PROVIDED_EXCEPTION_MESSAGE)) {
-            System.setProperty(CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPath(this.customPathToChromeDriver));
-        } else if (executableExistsInClasspath(CHROMEDRIVER_EXE)) {
-            System.setProperty(CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPathForFileInClasspath(CHROMEDRIVER_EXE));
+            setExecutableSystemProperty(getFullPath(this.customPathToChromeDriver));
+        } else if (executableExistsInClasspath(CHROMEDRIVER_EXECUTABLE_WINDOWS)) {
+            setExecutableSystemProperty(getFullPathForFileInClasspath(CHROMEDRIVER_EXECUTABLE_WINDOWS));
+        } else if (executableExistsInClasspath(CHROMEDRIVER_EXECUTABLE_LINUX)) {
+            setExecutableSystemProperty(getFullPathForFileInClasspath(CHROMEDRIVER_EXECUTABLE_LINUX));
         }
         try {
             return new ChromeDriver(capabilities);
@@ -86,12 +94,17 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
         }
     }
 
+    private void setExecutableSystemProperty(String executableFullPath) {
+        LOGGER.debug("Loading ChromeDriver executable from "+executableFullPath);
+        System.setProperty(CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, executableFullPath);
+    }
+
     private void throwCustomExceptionIfExecutableWasNotFound(IllegalStateException e) {
         if (e.getMessage().contains("path to the driver executable must be set")) {
             throw new SeleniumQueryException(
                 format(
-                        "The ChromeDriver server executable (%s) was not found in the classpath, in the \"%s\" system property or in the system's PATH variable. %s",
-                        CHROMEDRIVER_EXE, CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, EXCEPTION_MESSAGE
+                        "The ChromeDriver server executable (%s/%s) was not found in the classpath, in the \"%s\" system property or in the system's PATH variable. %s",
+                        CHROMEDRIVER_EXECUTABLE_WINDOWS, CHROMEDRIVER_EXECUTABLE_LINUX, CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, EXCEPTION_MESSAGE
                 ), e);
         }
     }

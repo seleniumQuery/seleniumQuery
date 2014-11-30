@@ -9,6 +9,7 @@ import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
 import io.github.seleniumquery.functions.jquery.attributes.RemoveAttrFunction;
 import io.github.seleniumquery.functions.jquery.events.ClickFunction;
 import io.github.seleniumquery.functions.jquery.forms.FocusFunction;
+import io.github.seleniumquery.functions.jquery.forms.SubmitFunction;
 import io.github.seleniumquery.functions.jquery.forms.ValFunction;
 import io.github.seleniumquery.functions.jquery.manipulation.HtmlFunction;
 import io.github.seleniumquery.functions.jquery.manipulation.TextFunction;
@@ -604,6 +605,23 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	@Override
 	public String toString() {
 		return this.by.toString();
+	}
+
+	/**
+	 * <p>Attempts to submits, in the current order, every element in the matched set.</p>
+	 * <p>If a matched element is a form, or an element within a form, then it will be submitted.</p>
+	 * <p><b>If submitting an element causes the current page to change, then this method will block until
+	 * the new page is loaded; as consequence, not all elements may get to be submitted - and will be ignored.</b></p>
+	 *
+	 * @throws org.openqa.selenium.NoSuchElementException If a submitted element is not a, or within a, form.
+	 *
+	 * @return A self reference.
+	 *
+	 * @since 0.9.0
+	 */
+	public SeleniumQueryObject submit() {
+		SubmitFunction.submit(this);
+		return this;
 	}
 
 }
