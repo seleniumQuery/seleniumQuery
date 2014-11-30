@@ -9,13 +9,14 @@ import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class HtmlFunctionTest {
 	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+	@ClassRule
+	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(HtmlFunctionTest.class);
 
     @Test
     public void html_function__simple_element() {
@@ -24,7 +25,7 @@ public class HtmlFunctionTest {
     
     @Test
     public void html_function__element_with_nested_element_with_no_line_breaks() {
-    	if (isHtmlUnitDriverEmulatingIE($.browser.getDefaultDriver())) {
+    	if (isHtmlUnitDriverEmulatingIE($.driver().get())) {
     		assertThat($("div:eq(1)").html(), equalsIgnoringCaseWhiteSpaceAndQuotes("Spider <div>\"The Spidey\"</div> Man"));
     	} else {
     		assertThat($("div:eq(1)").html(), is("Spider <div>\"The Spidey\"</div> Man"));
@@ -33,7 +34,7 @@ public class HtmlFunctionTest {
     
     @Test
     public void html_function__element_with_nested_element_with_line_breaks() {
-    	if (isHtmlUnitDriverEmulatingIE($.browser.getDefaultDriver())) {
+    	if (isHtmlUnitDriverEmulatingIE($.driver().get())) {
 	    	assertThat($("#nestedMultiLine").html(), equalsIgnoringCaseWhiteSpaceAndQuotes("ABC\n"+
 	    			"    	<div>DEF</div>\n"+
 	    			"    	<div>GHI</div>\n"+
@@ -50,7 +51,7 @@ public class HtmlFunctionTest {
     
     @Test
     public void html_function__body() {
-    	if (isHtmlUnitDriverEmulatingIE($.browser.getDefaultDriver())) {
+    	if (isHtmlUnitDriverEmulatingIE($.driver().get())) {
 	        assertThat($("body").html(),
     		equalsIgnoringCaseWhiteSpaceAndQuotes("\n"+
 			"    <div>Batman</div>\n"+

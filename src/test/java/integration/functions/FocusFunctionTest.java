@@ -43,7 +43,7 @@ public class FocusFunctionTest {
     	// still, someone wanting to focus the html seems to be a highly unlikely operation, even more
     	// since the body IS focusable
     	$("html").focus();
-    	if (!($.browser.getDefaultDriver() instanceof HtmlUnitDriver)) {
+    	if (!($.driver().get() instanceof HtmlUnitDriver)) {
     		assertThat($("html").is(":focus"), is(true));
     	}
 
@@ -87,7 +87,7 @@ public class FocusFunctionTest {
     	$("#im1").focus();
     	assertThat($("#im1").is(":focus"), is(true));
 
-    	if (!($.browser.getDefaultDriver() instanceof HtmlUnitDriver)) {
+    	if (!($.driver().get() instanceof HtmlUnitDriver)) {
 	    	assertThat($("div").size(), is(4));
 	    	assertThat($("div.i1").size(), is(1));
 	    	assertThat($("div.i2").size(), is(1));
@@ -104,7 +104,7 @@ public class FocusFunctionTest {
     	
     	$("body").focus();
     	assertThat($("body").is(":focus"), is(true));
-    	if (!($.browser.getDefaultDriver() instanceof HtmlUnitDriver)) {
+    	if (!($.driver().get() instanceof HtmlUnitDriver)) {
 	    	assertThat($("div").size(), is(5));
 	    	assertThat($("div.i1").size(), is(1));
 	    	assertThat($("div.i2").size(), is(1));
@@ -122,7 +122,7 @@ public class FocusFunctionTest {
     }
 
 	private void removeStartingFocusDivCreatedByIE() {
-		WebDriver driver = $.browser.getDefaultDriver();
+		WebDriver driver = $.driver().get();
 		boolean isIE = driver instanceof InternetExplorerDriver;
 		if (isIE) {
 			// IE, when STARTING, focuses the <BODY> by itself, so a div is generated and we don't want it, as we are using

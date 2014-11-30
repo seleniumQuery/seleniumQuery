@@ -22,7 +22,7 @@ public class CssSelectorMatcherServiceTest {
 	
 	@Before
 	public void before() {
-		driver = SeleniumQuery.$.browser.getDefaultDriver();
+		driver = SeleniumQuery.$.driver().get();
 	}
 	
     // E ~ F

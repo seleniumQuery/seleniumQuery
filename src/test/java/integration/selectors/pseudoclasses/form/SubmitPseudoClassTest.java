@@ -39,7 +39,7 @@ public class SubmitPseudoClassTest {
 		// Latest HtmlUnit, when emulating IE 8 abd 9, considers <button></button> to be <button type="button"></button>
 		// :submit and this example are affected. Check :submit implementation if you're curious about how it solves this
 		// problem (and, yes, it is nasty, it uses reflection and stuff).
-		if (isHtmlUnitDriverEmulatingIEBelow11($.browser.getDefaultDriver())) {
+		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat($("#b1").is("[type='submit']"), is(false));
 		} else {
 			assertThat($("#b1").is("[type='submit']"), is(true));

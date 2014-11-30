@@ -23,7 +23,7 @@ public class AttributeSelectorsTest {
 	
 	@Before
 	public void before() {
-		driver = $.browser.getDefaultDriver();
+		driver = $.driver().get();
 	}
 	
 	/* Has Attribute Selector: [name]

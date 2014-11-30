@@ -20,7 +20,7 @@ public class ParentPseudoClassTest {
 		assertThat($("#d1").is(":parent"), is(true));
 		assertThat($("#d2").is(":parent"), is(false));
 
-		if (isHtmlUnitDriverEmulatingIEBelow11($.browser.getDefaultDriver())) {
+		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat($("#d3").is(":parent"), is(false));
 			assertThat($("#d4").is(":parent"), is(false));
 		} else {
@@ -34,7 +34,7 @@ public class ParentPseudoClassTest {
 		assertThat($("#d12").is(":parent"), is(true));
 		assertThat($("#d13").is(":parent"), is(false));
 		
-		if (isHtmlUnitDriverEmulatingIEBelow11($.browser.getDefaultDriver())) {
+		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat($("#d14").is(":parent"), is(false));
 		} else {
 			assertThat($("#d14").is(":parent"), is(true));
