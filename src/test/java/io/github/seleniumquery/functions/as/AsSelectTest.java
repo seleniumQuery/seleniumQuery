@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static infrastructure.IntegrationTestUtils.htmlTestFileUrl;
+import static infrastructure.IntegrationTestUtils.classNameToTestFileUrl;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -14,7 +14,7 @@ public class AsSelectTest {
     @Before
     public void setUp() throws Exception {
         $.driver().useHtmlUnit();
-        $.url(htmlTestFileUrl(AsSelectTest.class));
+        $.url(classNameToTestFileUrl(AsSelectTest.class));
         assertThat($("select").val(), is("valueA")); // negative test
         assertThat($("input").val(), is("inputValueShouldNotBeAffected")); // negative test
     }

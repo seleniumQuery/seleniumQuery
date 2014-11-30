@@ -1,11 +1,9 @@
 package io.github.seleniumquery.browser;
 
-import io.github.seleniumquery.SeleniumQueryBrowser;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static infrastructure.IntegrationTestUtils.htmlTestFileUrl;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
