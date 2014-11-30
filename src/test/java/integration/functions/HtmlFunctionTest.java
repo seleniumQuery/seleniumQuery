@@ -1,17 +1,16 @@
 package integration.functions;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriverEmulatingIE;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.Test;
+
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriverEmulatingIE;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class HtmlFunctionTest {
 	
