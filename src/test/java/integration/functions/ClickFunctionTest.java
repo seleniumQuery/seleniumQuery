@@ -19,7 +19,7 @@ public class ClickFunctionTest {
 
     @Test
     public void click_function() {
-		WebDriver driver = $.browser.getDefaultDriver();
+		WebDriver driver = $.driver().get();
 		boolean isIE = driver instanceof InternetExplorerDriver;
 		if (isIE) {
 			// IE, when STARTING, focuses the <BODY> by itself, so a div is generated and we don't want it, as we are using

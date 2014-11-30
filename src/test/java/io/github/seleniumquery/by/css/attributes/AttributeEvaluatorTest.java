@@ -57,7 +57,7 @@ public class AttributeEvaluatorTest {
 		assertSelectorFindsIds("[title" + attr + "'ab" + suffix + "']", "d1", "d2", "d3");
 		assertSelectorFindsIds("[title" + attr + "\"ab" + suffix + "\"]", "d1", "d2", "d3");
 		
-		if ($.browser.getDefaultDriver() == null) {
+		if ($.driver().get() == null) {
 			// TODO This is not being escaped properly! see #attribute_escaping__maybe_should_change()
 			// checked: $= (doesn't work)
 			// <div id="d4" title='a"bc'></div>

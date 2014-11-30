@@ -25,7 +25,7 @@ public class SelectorsUtilTest {
 	
 	@Before
 	public void before() {
-		driver = SeleniumQuery.$.browser.getDefaultDriver();
+		driver = SeleniumQuery.$.driver().get();
 	}
 
 	@Test

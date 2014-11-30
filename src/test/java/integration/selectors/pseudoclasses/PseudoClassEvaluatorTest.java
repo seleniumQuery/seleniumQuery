@@ -24,7 +24,7 @@ public class PseudoClassEvaluatorTest {
 	
 	@Before
 	public void before() {
-		driver = $.browser.getDefaultDriver();
+		driver = $.driver().get();
 	}
 	
 	@Test

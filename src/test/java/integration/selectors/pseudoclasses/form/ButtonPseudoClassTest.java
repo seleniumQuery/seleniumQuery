@@ -43,7 +43,7 @@ public class ButtonPseudoClassTest {
 		// not really a problem here, as it doesn't affect :button's behavior.
 		// :submit, though, is affected. Check its implementation if you're curious about how it solves this
 		// problem (and, yes, it is nasty, it uses reflection and stuff).
-		if (isHtmlUnitDriverEmulatingIEBelow11($.browser.getDefaultDriver())) {
+		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat($("#b1").is("[type='button']"), is(true));
 		} else {
 			assertThat($("#b1").is("[type='button']"), is(false));

@@ -96,7 +96,7 @@ public class SizzleElement extends SizzleTest {
         executeJS("document.getElementById('qunit-fixture').appendChild(document.createElement('toString')).id = 'toString';");
         t("Element name matches Object.prototype property", "tostring#toString", new String[]{"toString"});
 
-        if (!isHtmlUnitDriver($.browser.getDefaultDriver())) {
+        if (!isHtmlUnitDriver($.driver().get())) {
             t("Element name matches Object.prototype property", "toString#toString", new String[]{"toString"});
         } else {
             // #Cross-Driver

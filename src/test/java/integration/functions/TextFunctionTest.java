@@ -20,7 +20,7 @@ public class TextFunctionTest {
 
     @Test
     public void text_function() {
-		WebDriver driver = $.browser.getDefaultDriver();
+		WebDriver driver = $.driver().get();
 
 		if (isHtmlUnitDriverEmulatingIEBelow11(driver)) {
     		assertThat($("div.demo-container").text().replaceAll("\\s+", " "), is("Demonstration Box list item 1list item 2"));

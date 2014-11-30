@@ -86,7 +86,7 @@ public class AttrFunctionTest {
     	// before it was changed via property. We cant do that, since the value can be changed from means that are
     	// not seleniumQuery, thus we cant track it!
     	// We added a warning in the .attr() function, though!
-    	if ($.browser.getDefaultDriver() instanceof HtmlUnitDriver) {
+    	if ($.driver().get() instanceof HtmlUnitDriver) {
     		assertThat($("#chk1").attr("checked"), is(nullValue()));
     	} else {
     		assertThat($("#chk1").attr("checked"), is("checked"));
@@ -94,7 +94,7 @@ public class AttrFunctionTest {
     	assertThat($("#chk1").<Boolean>prop("checked"), is(false));
 
     	assertThat($("#chk1").attr("data-ball"), is("yo"));
-    	if ($.browser.getDefaultDriver() instanceof HtmlUnitDriver) {
+    	if ($.driver().get() instanceof HtmlUnitDriver) {
     		// Properties follow the value of the attribute in HtmlUnitDriver. They shouldn't! This should be NULL!
     		assertThat($("#chk1").<String>prop("data-ball"), is("yo"));
     	} else {

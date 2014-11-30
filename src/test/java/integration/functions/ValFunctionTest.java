@@ -25,8 +25,8 @@ public class ValFunctionTest {
 
 		try {
 			$("#div-with-text-bozo").val("SHOULD HAVE NO EFFECT");
-			if (!isHtmlUnitDriver($.browser.getDefaultDriver())) {
-				fail($.browser.getDefaultDriver().getClass().toString());
+			if (!isHtmlUnitDriver($.driver().get())) {
+				fail($.driver().get().getClass().toString());
 			}
 		} catch (Exception ignore) { }
 //		assertThat($("#div-with-text-bozo").val(), is("SHOULD HAVE NO EFFECT")); // #disagree jquery sets the val() in a div, but we want as below!
@@ -102,7 +102,7 @@ public class ValFunctionTest {
 		try {
 			testEditableDiv("#editable-empty", "");
 		} catch (ElementNotVisibleException e) {
-			if (!($.browser.getDefaultDriver() instanceof FirefoxDriver)) {
+			if (!($.driver().get() instanceof FirefoxDriver)) {
 				throw e;
 			}
 		}
@@ -117,9 +117,9 @@ public class ValFunctionTest {
 		assertThat($(editableDivId).val(), is("")); // #disagree - ...so the value must be the same
 		assertThat($(editableDivId).text(), is("TYPED <a>& STUFF"));
 
-		if ($.browser.getDefaultDriver() instanceof InternetExplorerDriver) {
+		if ($.driver().get() instanceof InternetExplorerDriver) {
 			assertThat($(editableDivId).html(), is(" TYPED &lt;a&gt;&amp; STUFF")); // notice the space at the beginning
-		} else if ($.browser.getDefaultDriver() instanceof FirefoxDriver) {
+		} else if ($.driver().get() instanceof FirefoxDriver) {
 			assertThat($(editableDivId).html(), is("TYPED &lt;a&gt;&amp; STUFF<br>")); // notice the <br> at the end
 		} else {
 			assertThat($(editableDivId).html(), is("TYPED &lt;a&gt;&amp; STUFF"));

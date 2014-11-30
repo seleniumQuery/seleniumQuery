@@ -20,7 +20,7 @@ public class EmptyPseudoClassTest {
 		assertThat($("#d1").is(":empty"), is(false));
 		assertThat($("#d2").is(":empty"), is(true));
 
-		if (isHtmlUnitDriverEmulatingIEBelow11($.browser.getDefaultDriver())) {
+		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat($("#d3").is(":empty"), is(true));
 			assertThat($("#d4").is(":empty"), is(true));
 		} else {
@@ -34,7 +34,7 @@ public class EmptyPseudoClassTest {
 		assertThat($("#d12").is(":empty"), is(false));
 		assertThat($("#d13").is(":empty"), is(true));
 		
-		if (isHtmlUnitDriverEmulatingIEBelow11($.browser.getDefaultDriver())) {
+		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat($("#d14").is(":empty"), is(true));
 		} else {
 			assertThat($("#d14").is(":empty"), is(false));
