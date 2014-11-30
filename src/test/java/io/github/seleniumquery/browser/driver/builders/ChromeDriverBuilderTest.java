@@ -1,5 +1,6 @@
 package io.github.seleniumquery.browser.driver.builders;
 
+import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -12,20 +13,21 @@ import static org.junit.Assert.assertThat;
 
 public class ChromeDriverBuilderTest {
 
+    @After
+    public void tearDown() throws Exception {
+        $.quit();
+    }
+
     @Test
     public void withOptions() {
+        // given
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
-
+        // when
         $.driver().useChrome().withOptions(options);
-
+        // then
         $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
-
-        try {
-            assertThat($("#isMaximized").text(), is("yes"));
-        } finally {
-            $.quit();
-        }
+        assertThat($("#isMaximized").text(), is("yes"));
     }
 
     @Test
@@ -39,11 +41,7 @@ public class ChromeDriverBuilderTest {
         $.driver().useChrome().withCapabilities(capabilities);
         // then
         $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
-        try {
-            assertThat($("#isMaximized").text(), is("yes"));
-        } finally {
-            $.quit();
-        }
+        assertThat($("#isMaximized").text(), is("yes"));
     }
 
     @Test
@@ -53,21 +51,24 @@ public class ChromeDriverBuilderTest {
 
     @Test
     public void withPathToChromeDriverExe() {
+        // given
         $.driver().useChrome().withPathToChromeDriverExe("src/test/resources/chromedriver.exe");
-        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class)); // just opening a page should work
-        $.quit();
+        // when
+        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
+        // then
+        // no exception is thrown while opening a page
     }
 
     @Test
     public void useChrome__should_fall_back_to_systemProperty_when_executable_not_found_in_classpath() {
         // given
         ChromeDriverBuilder.CHROMEDRIVER_EXE = "not-in-classpath.exe";
-        // when
         System.setProperty("webdriver.chrome.driver", getFullPathForFileInClasspath("chromedriver.exe"));
+        // when
         $.driver().useChrome();
+        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
         // then
-        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class)); // just opening a page should work
-        $.quit();
+        // no exception is thrown while opening a page
     }
 
 }
