@@ -25,7 +25,7 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     private static final String EXCEPTION_MESSAGE = " \nDownload the latest release at http://chromedriver.storage.googleapis.com/index.html and place it: \n" +
             "(1) on the classpath of this project; or\n" +
             "(2) on the path specified by the \"" + CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY + "\" system property; or\n" +
-            "(3) on a folder in the system path variable; or\n" +
+            "(3) on a folder in the system's PATH variable; or\n" +
             "(4) wherever and set the path via $.driver().useChrome().withPathToChromeDriverExe(\"other/path/to/chromedriver.exe\").\n" +
             "For more information, see https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver";
 
@@ -48,11 +48,10 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     }
 
     /**
-     * Looks for the chromedriver.exe at the path specified by the <code>pathToChromeDriverExe</code>
-     * argument.
+     * Configures the builder to look for the <code>chromedriver.exe</code> at the path specified by the argument.
      *
-     * @param pathToChromeDriverExe The full path to the executable server file. Examples:
-     *     <code>"C:\\myFiles\\chromedriver.exe"</code>; can be relative, as in <code>"..\\stuff\\chromedriver.exe"</code>,
+     * @param pathToChromeDriverExe The path to the executable server file. Examples:
+     *     <code>"C:\\myFiles\\chromedriver.exe"</code>; can be relative, as in <code>"..\\stuff\\chromedriver.exe"</code>;
      *     does not matter if the executable was renamed, such as <code>"drivers\\chrome\\chromedriver_v12345.exe"</code>.
      *
      * @return A self reference, allowing further configuration.
@@ -80,7 +79,7 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
             if (e.getMessage().contains("path to the driver executable must be set")) {
                 throw new SeleniumQueryException(
                         "The ChromeDriver server executable ("+CHROMEDRIVER_EXE+") was not found in the classpath," +
-                        " in the \""+CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY+"\" system property or in the system path variable."
+                        " in the \""+CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY+"\" system property or in the system's PATH variable."
                         +EXCEPTION_MESSAGE, e);
             }
             throw e;
