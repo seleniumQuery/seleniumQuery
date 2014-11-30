@@ -25,7 +25,7 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
             "(2) on the path specified by the \"" + PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY + "\" system property; or\n" +
             "(3) on a folder in the system's PATH variable; or\n" +
             "(4) on the path set in the \""+PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY+"\" capability; or\n" +
-            "(5) wherever and set the path via $.driver.usePhantomJS().withPathToPhantomJsExe(\"other/path/to/phantomjs.exe\").\n" +
+            "(5) wherever and set the path via $.driver.usePhantomJS().withPathToPhantomJS(\"other/path/to/phantomjs<.exe>\").\n" +
             "For more information, see https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-PhantomJS-Driver";
 
     private static final String BAD_PATH_PROVIDED_EXCEPTION_MESSAGE = "The PhantomJS executable file was not found (or is a directory) at \"%s\"." + EXCEPTION_MESSAGE;
@@ -35,11 +35,11 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
     private String customPathToPhantomJs;
 
     /**
-     * Sets the path used by the PhantomJSDriver to find the phantomjs executable.
-     * @param pathToPhantomJs Path to phantomjs.exe.
+     * Sets the path used by the PhantomJSDriver to find the PhantomJS executable.
+     * @param pathToPhantomJs Path to PhantomJS executable (<code>phantomjs.exe</code>/<code>phantomjs.exe</code>).
      * @return A self reference.
      */
-    public PhantomJSDriverBuilder withPathToPhantomJsExe(String pathToPhantomJs) {
+    public PhantomJSDriverBuilder withPathToPhantomJS(String pathToPhantomJs) {
         this.customPathToPhantomJs = pathToPhantomJs;
         return this;
     }

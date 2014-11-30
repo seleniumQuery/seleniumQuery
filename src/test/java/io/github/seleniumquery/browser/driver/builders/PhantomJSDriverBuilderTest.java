@@ -14,6 +14,8 @@ import static org.junit.Assert.assertThat;
 
 public class PhantomJSDriverBuilderTest {
 
+    String phantomExecutable = PhantomJSDriverBuilder.PHANTOMJS_EXE;
+
     @After
     public void tearDown() throws Exception {
         $.quit();
@@ -33,13 +35,13 @@ public class PhantomJSDriverBuilderTest {
 
     @Test
     public void withCapabilities__should_return_the_current_PhantomJSDriverBuilder_instance_to_allow_further_chaining() {
-        $.driver().usePhantomJS().withCapabilities(null).withPathToPhantomJsExe(null); // should compile
+        $.driver().usePhantomJS().withCapabilities(null).withPathToPhantomJS(null); // should compile
     }
 
     @Test
-    public void withPathToPhantomJsExe() {
+    public void withPathToPhantomJS() {
         // given
-        $.driver().usePhantomJS().withPathToPhantomJsExe("src/test/resources/phantomjs.exe");
+        $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/"+ phantomExecutable);
         // when
         $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
         // then
@@ -49,8 +51,8 @@ public class PhantomJSDriverBuilderTest {
     @Test
     public void usePhantomJS__should_fall_back_to_systemProperty_when_executable_not_found_in_classpath() {
         // given
-        PhantomJSDriverBuilder.PHANTOMJS_EXE = "not-in-classpath.exe";
-        System.setProperty("phantomjs.binary.path", getFullPathForFileInClasspath("phantomjs.exe"));
+        PhantomJSDriverBuilder.PHANTOMJS_EXE = "not-in-classpath.txt";
+        System.setProperty("phantomjs.binary.path", getFullPathForFileInClasspath(phantomExecutable));
         // when
         $.driver().usePhantomJS();
         $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
