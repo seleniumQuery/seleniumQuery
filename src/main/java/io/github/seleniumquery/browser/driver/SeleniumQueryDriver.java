@@ -1,8 +1,8 @@
-package io.github.seleniumquery.globalfunctions.driver;
+package io.github.seleniumquery.browser.driver;
 
 import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.SeleniumQueryException;
-import io.github.seleniumquery.globalfunctions.driver.builders.*;
+import io.github.seleniumquery.browser.driver.builders.*;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;

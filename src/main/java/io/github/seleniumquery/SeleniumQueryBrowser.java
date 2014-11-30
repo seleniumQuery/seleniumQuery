@@ -1,6 +1,6 @@
 package io.github.seleniumquery;
 
-import io.github.seleniumquery.globalfunctions.BrowserFunctions;
+import io.github.seleniumquery.browser.BrowserFunctions;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

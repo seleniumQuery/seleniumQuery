@@ -1,6 +1,6 @@
-package io.github.seleniumquery.globalfunctions;
+package io.github.seleniumquery.browser;
 
-import io.github.seleniumquery.globalfunctions.driver.SeleniumQueryDriver;
+import io.github.seleniumquery.browser.driver.SeleniumQueryDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

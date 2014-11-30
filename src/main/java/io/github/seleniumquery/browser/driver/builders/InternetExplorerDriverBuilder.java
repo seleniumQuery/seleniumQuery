@@ -1,7 +1,7 @@
-package io.github.seleniumquery.globalfunctions.driver.builders;
+package io.github.seleniumquery.browser.driver.builders;
 
 import io.github.seleniumquery.SeleniumQueryException;
-import io.github.seleniumquery.globalfunctions.driver.DriverBuilder;
+import io.github.seleniumquery.browser.driver.DriverBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;

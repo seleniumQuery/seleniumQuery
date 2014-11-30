@@ -1,4 +1,4 @@
-package io.github.seleniumquery.globalfunctions.driver;
+package io.github.seleniumquery.browser.driver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;

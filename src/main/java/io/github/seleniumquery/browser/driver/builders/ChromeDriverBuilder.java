@@ -1,6 +1,6 @@
-package io.github.seleniumquery.globalfunctions.driver.builders;
+package io.github.seleniumquery.browser.driver.builders;
 
-import io.github.seleniumquery.globalfunctions.driver.DriverBuilder;
+import io.github.seleniumquery.browser.driver.DriverBuilder;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 

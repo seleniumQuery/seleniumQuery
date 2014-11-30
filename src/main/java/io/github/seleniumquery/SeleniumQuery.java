@@ -1,6 +1,6 @@
 package io.github.seleniumquery;
 
-import io.github.seleniumquery.globalfunctions.BrowserFunctionsWithDeprecatedFunctions;
+import io.github.seleniumquery.browser.BrowserFunctionsWithDeprecatedFunctions;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
