@@ -423,7 +423,9 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Removes an attribute from each element in the set of matched elements.
 	 * It can be a space-separated list of attributes.
-	 * 
+	 *
+	 * @return A self reference.
+	 *
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject removeAttr(String attributeNames) {
@@ -432,11 +434,13 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	
 	/**
 	 * Gets the HTML contents of the first element in the set of matched elements.
-	 * 
+	 *
+	 * @return The HTML of the first element in the set of matched elements.
+	 *
 	 * @since 0.9.0
 	 */
 	public String html() {
-		return HtmlFunction.html(this, elements);
+		return HtmlFunction.html(this);
 	}
 	
 	/**
@@ -461,6 +465,8 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 
 	/**
 	 * Retrieves all the elements contained in the seleniumQuery set, as an array.
+	 *
+	 * @return The set of matched elements as an array.
 	 * 
 	 * @since 0.9.0
 	 */
@@ -471,7 +477,11 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * For each element in the set, gets the first element that matches the selector by
 	 * testing the element itself and traversing up through its ancestors in the DOM tree.
-	 * 
+	 *
+	 * @param selector A selector expression to match elements against.
+	 *
+	 * @return A self reference.
+	 *
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject closest(String selector) {
