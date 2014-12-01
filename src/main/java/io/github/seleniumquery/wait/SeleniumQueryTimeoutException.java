@@ -12,13 +12,13 @@ import org.openqa.selenium.TimeoutException;
 import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.SeleniumQueryObject;
 
-public class SeleniumQueryWaitException extends TimeoutException {
+public class SeleniumQueryTimeoutException extends TimeoutException {
 
 	private static final long serialVersionUID = 2L;
 	
 	private SeleniumQueryObject seleniumQueryObject;
 	
-	public SeleniumQueryWaitException(TimeoutException sourceException, SeleniumQueryObject seleniumQueryObject, String reason) {
+	public SeleniumQueryTimeoutException(TimeoutException sourceException, SeleniumQueryObject seleniumQueryObject, String reason) {
 		super("Timeout while waiting for selector '"+seleniumQueryObject.getBy()+"' "+reason, sourceException);
 		this.seleniumQueryObject = seleniumQueryObject;
 		
