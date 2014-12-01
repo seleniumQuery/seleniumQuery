@@ -7,7 +7,7 @@ import org.junit.runners.model.Statement;
 
 public class SetUpAndTearDownDriver implements TestRule {
 
-	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.PHANTOMJS;
+	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.HEADLESS_DRIVERS;
 
 	private final Class<?> htmlTestUrlClass;
 
@@ -17,6 +17,8 @@ public class SetUpAndTearDownDriver implements TestRule {
 
 	@Override
 	public Statement apply(final Statement base, Description description) {
+		System.out.println("BASE: "+base);
+		System.out.println("description: "+description);
 		String url = IntegrationTestUtils.classNameToTestFileUrl(htmlTestUrlClass);
 		return new RunTestMethodsInChosenDrivers(driverToRunTestsIn, base, url);
 	}

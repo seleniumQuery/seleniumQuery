@@ -74,19 +74,6 @@ public class SeleniumQueryDriverTest {
     }
 
     @Test
-    public void get__should_instantiate_HtmlUnitDriver_if_no_useSOMEDRIVER_was_called_before() {
-        // given
-        // when
-        WebDriver driver = $.driver().get();
-        // then
-        try {
-            assertThat(driver, instanceOf(HtmlUnitDriver.class));
-        } finally {
-            $.driver().quit();
-        }
-    }
-
-    @Test
     public void useHtmlUnit__should_create_a_HtmlUnitDriver_upon_first_use() {
         // given
         $.driver().useHtmlUnit();
