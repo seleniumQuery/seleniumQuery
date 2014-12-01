@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * @ see http://api.jqueryui.com/focusable-selector/
+ * see -> http://api.jqueryui.com/focusable-selector/
  * No browser supports :focusable natively.
  * 
  * Some elements are natively focusable, while others require explicitly setting a tab index. In all cases, the element must be visible in order to be focusable.
@@ -23,6 +23,7 @@ import org.openqa.selenium.WebElement;
  * - ALL OTHER elements are focusable based solely on their tabindex attribute and visibility.
  * 
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class FocusablePseudoClass implements PseudoClass {

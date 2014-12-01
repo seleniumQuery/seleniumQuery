@@ -30,7 +30,7 @@ public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<A
 	public static final String EQUALS_ATTRIBUTE_SELECTOR_SYMBOL = "=";
 
 	/**
-	 * @see {@link org.w3c.css.sac.Condition#SAC_ATTRIBUTE_CONDITION}
+	 * see {@link org.w3c.css.sac.Condition#SAC_ATTRIBUTE_CONDITION}
 	 * 
 	 * This condition checks an attribute. example:
 	 * 
