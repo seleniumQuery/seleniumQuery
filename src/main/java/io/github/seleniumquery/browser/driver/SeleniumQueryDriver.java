@@ -9,6 +9,9 @@ import org.openqa.selenium.WebDriver;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Represents and manages the {@link org.openqa.selenium.WebDriver} instance used a specific
+ * {@link io.github.seleniumquery.SeleniumQueryBrowser}.
+ *
  * @author acdcjunior
  *
  * @since 0.9.0
@@ -81,6 +84,13 @@ public class SeleniumQueryDriver {
         return this;
     }
 
+    /**
+     * <p>Sets {@link org.openqa.selenium.htmlunit.HtmlUnitDriver} as the {@link WebDriver} for this seleniumQuery browser instance.</p>
+     *
+     * @return A {@link HtmlUnitDriverBuilder}, allowing further configuration of the driver.
+     *
+     * @since 0.9.0
+     */
     public HtmlUnitDriverBuilder useHtmlUnit() {
         return clearCurrentDriverAndAssignNewBuilder(new HtmlUnitDriverBuilder());
     }
@@ -98,6 +108,15 @@ public class SeleniumQueryDriver {
         }
     }
 
+    /**
+     * <p>Sets {@link org.openqa.selenium.firefox.FirefoxDriver} as the {@link WebDriver} for this seleniumQuery browser instance.</p>
+     *
+     * This method looks for the Firefox binary at the system's PATH variable.
+     *
+     * @return A {@link FirefoxDriverBuilder}, allowing further configuration of the driver.
+     *
+     * @since 0.9.0
+     */
     public FirefoxDriverBuilder useFirefox() {
         return clearCurrentDriverAndAssignNewBuilder(new FirefoxDriverBuilder());
     }
@@ -106,7 +125,7 @@ public class SeleniumQueryDriver {
      * Sets {@link org.openqa.selenium.chrome.ChromeDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
      * <p>
      * Note that the Chrome needs a <i>ChromeDriver Server executable</i> to bridge Selenium to the browser and as such
-     * Selenium must know the path to it. It is a file usually named <code>chromedriver.exe</code> (windows) or <code>chromedriver</code> (linix)
+     * Selenium must know the path to it. It is a file usually named <code>chromedriver.exe</code> (windows) or <code>chromedriver</code> (linux)
      * and its latest version can be downloaded from
      * <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's download page</a>. You can also check
      * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver">seleniumQuery and Chrome Driver wiki page</a>
@@ -155,6 +174,27 @@ public class SeleniumQueryDriver {
         return clearCurrentDriverAndAssignNewBuilder(new InternetExplorerDriverBuilder());
     }
 
+    /**
+     * Sets {@link org.openqa.selenium.phantomjs.PhantomJSDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
+     * <p>
+     * Note that the PhantomJS Driver needs a <i>PhantomJS executable</i> to act as browser and as such
+     * Selenium must know the path to it. It is a file usually named <code>phantomjs.exe</code> (windows) or <code>phantomjs</code> (linux)
+     * and its latest version can be downloaded from
+     * <a href="http://phantomjs.org/download.html ">PhantomJS download page</a>.
+     * </p>
+     * <br>
+     * <b> This method looks for the PhantomJS executable (<code>phantomjs.exe</code>/<code>phantomjs</code>) at the CLASSPATH
+     * (tipically at a {@code resources/} folder of a maven project), at the "phantomjs.binary.path" system property or at the system's PATH variable.</b>
+     * If you wish to directly specify a path, use:
+     * <pre>
+     * $.driver().usePhantomJS().withPathToPhantomJS("other/path/to/phantomjs.exe"); // windows
+     * $.driver().usePhantomJS().withPathToPhantomJS("other/path/to/phantomjs"); // linux
+     * </pre>
+     *
+     * @return A {@link PhantomJSDriverBuilder}, allowing further configuration of the driver.
+     *
+     * @since 0.9.0
+     */
     public PhantomJSDriverBuilder usePhantomJS() {
         return clearCurrentDriverAndAssignNewBuilder(new PhantomJSDriverBuilder());
     }
