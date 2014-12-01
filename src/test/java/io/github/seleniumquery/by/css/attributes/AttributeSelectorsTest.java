@@ -7,6 +7,7 @@ import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
 
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -15,9 +16,9 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.CSSParseException;
 
 public class AttributeSelectorsTest {
-	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 	
 	WebDriver driver;
 	

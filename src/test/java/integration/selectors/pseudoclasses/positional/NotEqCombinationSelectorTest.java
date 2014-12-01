@@ -5,13 +5,14 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class NotEqCombinationSelectorTest {
 
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(EqPseudoClassTest.class);
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(EqPseudoClassTest.class);
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 	
 	@Test
 	public void not_eq__should_return_the_element_where_eq_is_applied_to_the_result_of_not() throws Exception {

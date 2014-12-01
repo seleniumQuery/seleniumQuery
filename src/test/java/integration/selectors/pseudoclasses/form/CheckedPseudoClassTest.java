@@ -2,6 +2,7 @@ package integration.selectors.pseudoclasses.form;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -12,10 +13,10 @@ import static org.junit.Assert.assertThat;
  * {@link SelectedPseudoClassTest} has some :checked tests as well.
  */
 public class CheckedPseudoClassTest {
-	
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(CheckedPseudoClassTest.class);
-	
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+
 	@Test
 	public void checkedPseudo() {
 		assertThat($("*").size(), is(14+7+3+7));
