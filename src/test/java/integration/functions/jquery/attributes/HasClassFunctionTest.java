@@ -1,4 +1,4 @@
-package integration.functions;
+package integration.functions.jquery.attributes;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;

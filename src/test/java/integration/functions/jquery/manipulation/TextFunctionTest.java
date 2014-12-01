@@ -1,7 +1,6 @@
-package integration.functions;
+package integration.functions.jquery.manipulation;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.by.DriverVersionUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;

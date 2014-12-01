@@ -1,4 +1,4 @@
-package integration.functions;
+package integration.functions.jquery.manipulation;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.hamcrest.BaseMatcher;
