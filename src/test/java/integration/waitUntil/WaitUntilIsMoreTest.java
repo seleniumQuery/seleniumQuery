@@ -1,18 +1,21 @@
 package integration.waitUntil;
 
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriver;
 import static org.junit.Assert.assertEquals;
 
 public class WaitUntilIsMoreTest {
 
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(WaitUntilIsMoreTest.class);
-	
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+
 	@Test
 	public void isPresent() {
 		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().is(":present").then().text());
@@ -28,9 +31,17 @@ public class WaitUntilIsMoreTest {
 		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().is(":visible").then().text());
 	}
 
-	@Test
-	public void isNotVisible() {
+	@Test @JavaScriptOnly
+	public void isNotVisible() {// if JS is ON, it works everywhere
 		assertEquals("", $(".invisibleDiv").waitUntil().is(":not(:visible)").then().text());
+	}
+
+	@Test
+	public void isNotVisible_2() {
+		// without JS only if it is not HtmlUnit
+		if (!isHtmlUnitDriver($.driver().get())) {
+			assertEquals("", $(".invisibleDiv").waitUntil().is(":not(:visible)").then().text());
+		}
 	}
 
 	@Test
@@ -44,43 +55,8 @@ public class WaitUntilIsMoreTest {
 	}
 	
 	@Test(expected=SeleniumQueryTimeoutException.class)
-	public void waitUntil_has_textContaininig__should_throw_an_exception_after_waiting_for_div_without_the_desired_text() {
-		$(".visibleDiv").waitUntil().text().contains("CRAZY TEXT THAT IT DOES NOT CONTAIN");
-	}
-	
-	public void queryUntil() {
-		
-		
-		// .queryUntil() will requery the DOM every time
-		// you can use .is()
-		$(".aDivDiv").waitUntil().is(":present").then().click();
-		$(".myInput").waitUntil().is(":enabled");
-		$(".aDivDiv").waitUntil().is(":visible");
-		$(".myInput").waitUntil().is(":visible:enabled");
-		// .val()
-		$(".myInput").waitUntil().val().isEqualTo("expectedValue");
-		// text()
-		$(".aDivDiv").waitUntil().text().contains("expectedText");
-		// both .is() and .has() can use .not()
-		$(".myInput").waitUntil().is(":not(:enabled)");
-//		$(".myInput").queryUntil().val().not().isEqualTo("expectedValue");
-		
-		// .waitUntil() will work only on the already matched set, and have the exact same set of functions
-		
-		$(".myDivs").waitUntil().is(":present").and().size().isGreaterThan(7).then().click();
-		
-		// .is() functions
-		$(".aDivDiv").waitUntil().is(":present");
-		$(".myInput").waitUntil().is(":enabled");
-		$(".aDivDiv").waitUntil().is(":visible");
-		$(".myInput").waitUntil().is(":visible:enabled");
-		// .has() functions
-		$(".myInput").waitUntil().val().isEqualTo("expectedValue");
-//		$(".aDivDiv").waitUntil().has().textContaining("expectedText");
-//		// both .is() and .has() can use .not()
-//		$(".myInput").waitUntil().is().not().enabled();
-//		$(".myInput").waitUntil().has().not().valEqualTo("expectedValue");
-		
+	public void waitUntil_has_textContaining__should_throw_an_exception_after_waiting_for_div_without_the_desired_text() {
+		$(".visibleDiv").waitUntil(1200).text().contains("CRAZY TEXT THAT IT DOES NOT CONTAIN");
 	}
 
 }

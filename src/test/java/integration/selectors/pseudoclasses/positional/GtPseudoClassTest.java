@@ -6,12 +6,13 @@ import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 public class GtPseudoClassTest {
-	
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(GtPseudoClassTest.class);
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 	
 	// http://jsbin.com/laganusi/1/edit
 	@Test

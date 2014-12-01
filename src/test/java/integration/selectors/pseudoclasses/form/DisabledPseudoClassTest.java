@@ -2,6 +2,7 @@ package integration.selectors.pseudoclasses.form;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static infrastructure.IntegrationTestUtils.t;
@@ -10,9 +11,9 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class DisabledPseudoClassTest {
-	
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(DisabledPseudoClassTest.class);
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 	
 	// http://jsbin.com/guqef/3/edit
 	@Test

@@ -5,13 +5,14 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class HasClassFunctionTest {
-	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
     @Test
     public void hasClass_function() {

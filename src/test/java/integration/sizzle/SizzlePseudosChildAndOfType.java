@@ -1,13 +1,15 @@
 package integration.sizzle;
 
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class SizzlePseudosChildAndOfType extends SizzleTest {
 
-    @Rule
-    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
     // pseudos: (first|last|only)-(child|of-type)
     @Test
@@ -34,15 +36,18 @@ public class SizzlePseudosChildAndOfType extends SizzleTest {
 //        t("Only-of-type", "#qunit-fixture > :only-of-type", new String[]{"name+value", "firstUL", "empty", "floatTest", "iframe", "table", "last"});
     }
 
-    @Test
-    public void nth_child() throws Exception {
+    @Test @JavaScriptOnly
+    public void nth_child() {
         // Verify that the child position isn't being cached improperly
         t("Test before adding second child", "p:nth-child(2)", new String[]{"ap", "en"});
         executeJS("jQuery('p:nth-child(2)').before('<div class=\"secondChildrenTestDiv\"></div>');");
         t("No longer second child", "p:nth-child(2)", new String[]{});
         executeJS("jQuery('.secondChildrenTestDiv').remove()");
         t("Restored second child", "p:nth-child(2)", new String[]{"ap", "en"});
+    }
 
+    @Test
+    public void nth_child_2() {
         t("Nth-child", "p:nth-child(1)", new String[]{"firstp", "sndp"});
         t("Nth-child (with whitespace)", "p:nth-child( 1 )", new String[]{"firstp", "sndp"});
         t("Nth-child (case-insensitive)", "#form select:first option:NTH-child(3)", new String[]{"option1c"});

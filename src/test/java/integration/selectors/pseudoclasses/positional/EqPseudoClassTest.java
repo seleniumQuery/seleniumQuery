@@ -6,12 +6,13 @@ import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 public class EqPseudoClassTest {
-	
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(EqPseudoClassTest.class);
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 	
 	@Test
 	public void eqPseudo_with_tag_div() {

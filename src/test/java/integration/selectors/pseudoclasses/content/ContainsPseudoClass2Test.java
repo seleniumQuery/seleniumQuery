@@ -2,6 +2,7 @@ package integration.selectors.pseudoclasses.content;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -9,9 +10,9 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ContainsPseudoClass2Test {
-	
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(ContainsPseudoClass2Test.class);
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 	
 	// http://jsbin.com/tapol/6/edit
     @Test

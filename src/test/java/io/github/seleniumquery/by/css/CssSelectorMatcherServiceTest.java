@@ -1,23 +1,23 @@
 package io.github.seleniumquery.by.css;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import io.github.seleniumquery.SeleniumQuery;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.by.css.CssSelectorMatcherService;
-
+import io.github.seleniumquery.SeleniumQuery;
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 public class CssSelectorMatcherServiceTest {
-	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
-	
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+
 	WebDriver driver;
 	
 	@Before

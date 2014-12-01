@@ -11,14 +11,15 @@ import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import java.util.Iterator;
 import java.util.List;
 
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 public class AttributeEvaluatorTest {
 
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 	
 	@Test
 	public void equalsOrHasAttributeEvaluator() {

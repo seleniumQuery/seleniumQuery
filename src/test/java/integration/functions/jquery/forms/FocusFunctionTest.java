@@ -3,9 +3,12 @@ package integration.functions.jquery.forms;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedXPathPseudoClassException;
 
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,11 +18,11 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class FocusFunctionTest {
-	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
 
-    @Test
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+
+    @Test @JavaScriptOnly
     public void focus_function() {
     	$("#i1").focus();
     	assertThat($("#i1").is(":focus"), is(true));
@@ -53,7 +56,7 @@ public class FocusFunctionTest {
     }
     
 
-    @Test
+    @Test @JavaScriptOnly
     public void focus_function__should_make_sure_the_elements_are_just_focused_and_NOT_clicked() {
 		removeStartingFocusDivCreatedByIE();
 

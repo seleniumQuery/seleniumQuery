@@ -1,5 +1,6 @@
 package integration.selectors.pseudoclasses;
 
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.ClassRule;
@@ -11,9 +12,9 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class PresentSelectorTest {
-	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(PresentSelectorTest.class);
+
+    @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+    @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
     @Test
     public void  presentPseudoClass() {
@@ -29,7 +30,7 @@ public class PresentSelectorTest {
         assertThat($("#bozo").is(":not(:present)"), is(true));
     }
 
-    @Test
+    @Test @JavaScriptOnly
     public void presentPseudoClass_while_removing_element_from_DOM() {
     	SeleniumQueryObject $presentDiv = $("#presentDiv");
     	SeleniumQueryObject $otherPresentDiv = $("#otherPresentDiv");

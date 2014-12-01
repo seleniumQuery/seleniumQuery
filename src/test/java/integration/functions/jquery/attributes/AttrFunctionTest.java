@@ -4,19 +4,22 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
+
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class AttrFunctionTest {
-	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
-	
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+
 	// http://jsbin.com/pupoj/5/edit
-    @Test
+    @Test @JavaScriptOnly
     public void attr_function__getting_and_setting_whatever_to_CHECKED_is_like_setting_to_CHECKED_string() {
     	// whatever value checked is, if it exists, attr returns "checked"
     	assertThat($("#x1").attr("checked"), is("checked"));
@@ -55,7 +58,7 @@ public class AttrFunctionTest {
     	assertThat($("#n1").attr("checked"), is("checked"));
     }
     
-    @Test
+    @Test @JavaScriptOnly
     public void attr_function__does_the_same_CHECKED_stuff_to_SELECTED_no_matter_what_tag() {
     	// no matter what tag, the "checked" policy remains!
     	$("#d1").attr("checked", "");
@@ -70,7 +73,7 @@ public class AttrFunctionTest {
     	assertThat($("#d1").attr("selected"), is("selected"));
     }
     
-    @Test
+    @Test @JavaScriptOnly
     public void attr_function__getting_and_setting() {
     	assertThat($("#chk1").attr("checked"), is("checked"));
     	assertThat($("#chk1").<Boolean>prop("checked"), is(true));
