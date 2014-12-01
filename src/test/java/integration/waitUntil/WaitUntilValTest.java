@@ -1,6 +1,7 @@
 package integration.waitUntil;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
+import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class WaitUntilValTest {
 		assertThat($("#i2").waitUntil().val().not().isEqualTo("xyz").then().size(), is(1));
 	}
 
-	@Test
+	@Test(expected = SeleniumQueryTimeoutException.class)
 	public void waitUntil_val__not_everyone_meet() {
 		assertThat($("input").waitUntil(500).val().isEqualTo("abcdef").then().size(), is(1));
 	}

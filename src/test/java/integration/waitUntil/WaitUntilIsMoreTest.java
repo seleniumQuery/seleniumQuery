@@ -1,7 +1,7 @@
 package integration.waitUntil;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.wait.SeleniumQueryWaitException;
+import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 import org.junit.ClassRule;
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public class WaitUntilIsMoreTest {
 		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().contains("isibleDi").then().text());
 	}
 	
-	@Test(expected=SeleniumQueryWaitException.class)
+	@Test(expected=SeleniumQueryTimeoutException.class)
 	public void waitUntil_has_textContaininig__should_throw_an_exception_after_waiting_for_div_without_the_desired_text() {
 		$(".visibleDiv").waitUntil().text().contains("CRAZY TEXT THAT IT DOES NOT CONTAIN");
 	}

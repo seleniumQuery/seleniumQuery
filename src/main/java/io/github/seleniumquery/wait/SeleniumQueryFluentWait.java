@@ -52,7 +52,7 @@ public class SeleniumQueryFluentWait {
 										.ignoring(NoSuchElementException.class)
 											.until(function);
 		} catch (TimeoutException sourceException) {
-			throw new SeleniumQueryWaitException(sourceException, seleniumQueryObject, reason);
+			throw new SeleniumQueryTimeoutException(sourceException, seleniumQueryObject, reason);
 		}
 	}
 	
