@@ -6,6 +6,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 
+@SuppressWarnings("deprecation")
 public class RunTestMethodsInChosenDrivers extends Statement {
 
 	private final TestMethodsRunner testMethodsRunner;
@@ -27,19 +28,19 @@ public class RunTestMethodsInChosenDrivers extends Statement {
 		testMethodsRunner.reportFailures();
 	}
 
-	@SuppressWarnings("deprecation")
 	private void executeTestOnHtmlUnits() {
 		if (!driverToRunTestsIn.canRunHtmlUnit()) {
 			return;
 		}
-		if (driverToRunTestsIn != DriverToRunTestsIn.HTMLUNIT_ONLY_ONCE) {
-			executeOnHtmlUnit(BrowserVersion.FIREFOX_17);
-			executeOnHtmlUnit(BrowserVersion.FIREFOX_24);
-			executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
-			executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_9);
-			executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_11);
+		if (driverToRunTestsIn != DriverToRunTestsIn.HTMLUNIT_CHROME &&
+			driverToRunTestsIn != DriverToRunTestsIn.HTMLUNIT_CHROME_WITH_JS_OFF_AS_WELL) {
+			executeOnHtmlUnitEmulatingFirefox17();
+			executeOnHtmlUnitEmulatingFirefox24();
+			executeOnHtmlUnitEmulatingIE8();
+			executeOnHtmlUnitEmulatingIE9();
+			executeOnHtmlUnitEmulatingIE11();
 		}
-		executeOnHtmlUnit(BrowserVersion.CHROME);
+		executeOnHtmlUnitEmulatingChrome();
 	}
 
 	private void executeTestOnChrome() {
@@ -90,6 +91,30 @@ public class RunTestMethodsInChosenDrivers extends Statement {
 		$.quit();
 	}
 
+	private void executeOnHtmlUnitEmulatingChrome() {
+		executeOnHtmlUnit(BrowserVersion.CHROME);
+	}
+
+	private void executeOnHtmlUnitEmulatingIE11() {
+		executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_11);
+	}
+
+	private void executeOnHtmlUnitEmulatingIE9() {
+		executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_9);
+	}
+
+	private void executeOnHtmlUnitEmulatingIE8() {
+		executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
+	}
+
+	private void executeOnHtmlUnitEmulatingFirefox24() {
+		executeOnHtmlUnit(BrowserVersion.FIREFOX_24);
+	}
+
+	private void executeOnHtmlUnitEmulatingFirefox17() {
+		executeOnHtmlUnit(BrowserVersion.FIREFOX_17);
+	}
+
 	private void executeOnHtmlUnit(BrowserVersion browserVersion) {
 		System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver - JavaScript ON");
 		$.driver().use(createHtmlUnitDriverWithJavasCript(browserVersion, true));
@@ -125,19 +150,11 @@ class TestMethodsRunner {
 		this.url = url;
 	}
 
-	public void openTestPage() {
-		$.url(url);
-	}
-
-	public void runTests() throws Throwable {
-		base.evaluate();
-	}
-
 	public void executeMethodForDriver(String driver) {
 		System.out.println("   @## >>> Running on "+driver);
-		openTestPage();
+		$.url(url); // this wont be needed when everyone use this both as @Rule and @ClassRule
 		try {
-			runTests();
+			base.evaluate();
 		} catch (Throwable t) {
 			if (this.firstFailure == null) {
 				this.firstFailure = t;
@@ -149,7 +166,7 @@ class TestMethodsRunner {
 	}
 
 	public void reportFailures() throws Throwable {
-		if (!failed.isEmpty()) {
+		if (this.firstFailure != null) {
 			throw new AssertionError("There are test failures in some drivers: "+failed, this.firstFailure);
 		}
 	}
