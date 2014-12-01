@@ -18,11 +18,26 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
     private Boolean enableJavaScript;
     private FirefoxProfile firefoxProfile;
 
+    /**
+     * Configures Firefox to have JavaScript disabled.
+     *
+     * @return A self reference.
+     *
+     * @since 0.9.0
+     */
     public FirefoxDriverBuilder withoutJavaScript() {
         this.enableJavaScript = false;
         return this;
     }
 
+    /**
+     * Sets specific {@link org.openqa.selenium.firefox.FirefoxProfile} to be used in the {@link org.openqa.selenium.firefox.FirefoxDriver}.
+     *
+     * @param firefoxProfile Profile to be used.
+     * @return A self reference, allowing further configuration.
+     *
+     * @since 0.9.0
+     */
     public FirefoxDriverBuilder withProfile(FirefoxProfile firefoxProfile) {
         this.firefoxProfile = firefoxProfile;
         return this;

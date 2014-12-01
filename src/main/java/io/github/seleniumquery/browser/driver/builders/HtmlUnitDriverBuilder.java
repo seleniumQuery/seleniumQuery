@@ -29,6 +29,8 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
      * Configures HtmlUnit to have JavaScript disabled.
      *
      * @return A self reference.
+     *
+     * @since 0.9.0
      */
     public HtmlUnitDriverBuilder withoutJavaScript() {
         this.javaScriptEnabled = false;
@@ -39,6 +41,8 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
      * Configures HtmlUnit to have JavaScript enabled.
      *
      * @return A self reference.
+     *
+     * @since 0.9.0
      */
     public HtmlUnitDriverBuilder withJavaScript() {
         this.javaScriptEnabled = true;
@@ -49,6 +53,8 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
      * Configures HtmlUnit to emulate latest available Firefox version.
      *
      * @return A self reference.
+     *
+     * @since 0.9.0
      */
     public HtmlUnitDriverBuilder emulatingFirefox() {
         this.emulatedBrowserName = BrowserType.FIREFOX;
@@ -59,6 +65,8 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
      * Configures HtmlUnit to emulate Chrome.
      *
      * @return A self reference.
+     *
+     * @since 0.9.0
      */
     public HtmlUnitDriverBuilder emulatingChrome() {
         this.emulatedBrowserName = BrowserType.CHROME;
@@ -69,6 +77,8 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
      * Configures HtmlUnit to emulate latest available Internet Explorer version.
      *
      * @return A self reference.
+     *
+     * @since 0.9.0
      */
     public HtmlUnitDriverBuilder emulatingInternetExplorer() {
         return emulatingInternetExplorer11();
@@ -78,6 +88,8 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
      * Configures HtmlUnit to emulate Internet Explorer 11.
      *
      * @return A self reference.
+     *
+     * @since 0.9.0
      */
     public HtmlUnitDriverBuilder emulatingInternetExplorer11() {
         this.emulatedBrowserName = BrowserType.IE;
@@ -90,6 +102,8 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
      *
      * @return A self reference.
      * @deprecated as of HtmlUnit 2.14
+     *
+     * @since 0.9.0
      */
     @SuppressWarnings("deprecation")
     public HtmlUnitDriverBuilder emulatingInternetExplorer9() {
@@ -103,6 +117,8 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
      *
      * @return A self reference.
      * @deprecated as of HtmlUnit 2.14
+     *
+     * @since 0.9.0
      */
     @SuppressWarnings("deprecation")
     public HtmlUnitDriverBuilder emulatingInternetExplorer8() {
