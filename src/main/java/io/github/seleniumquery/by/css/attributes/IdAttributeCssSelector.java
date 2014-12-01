@@ -16,6 +16,7 @@ import org.w3c.css.sac.Selector;
  * #id
  *
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class IdAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
@@ -23,7 +24,7 @@ public class IdAttributeCssSelector implements CssConditionalSelector<AttributeC
 	private static final String ID_ATTRIBUTE = "id";
 
 	/**
-	 * @see {@link org.w3c.css.sac.Condition#SAC_ID_CONDITION}
+	 * see {@link org.w3c.css.sac.Condition#SAC_ID_CONDITION}
 	 * 
 	 * This condition checks an id attribute. Example:
 	 * 

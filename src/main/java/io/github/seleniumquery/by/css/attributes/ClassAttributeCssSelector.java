@@ -18,6 +18,7 @@ import org.w3c.css.sac.Selector;
  * .class
  *
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class ClassAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
@@ -25,7 +26,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	private static final String CLASS_ATTRIBUTE = "class";
 	
 	/**
-	 * @see {@link org.w3c.css.sac.Condition#SAC_CLASS_CONDITION}
+	 * see {@link org.w3c.css.sac.Condition#SAC_CLASS_CONDITION}
 	 *
 	 * This condition checks for a specified class. Example: .example
 	 */

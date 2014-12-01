@@ -13,6 +13,8 @@ import io.github.seleniumquery.wait.getters.Getter;
  * @author acdcjunior
  *
  * @param <T> The type returned by the getter and TYPE OF THE ARGUMENT used in the end function.
+ *
+ * @since 0.9.0
  */
 public class SeleniumQueryEvaluateUntil<T> {
 	
@@ -32,34 +34,82 @@ public class SeleniumQueryEvaluateUntil<T> {
 		this.negated = negated;
 	}
 
+	/**
+	 * <p>Tests if the result of the preceding function is equal to the given argument.</p>
+	 * <b>If you want to test for inequality, use <code>.not().isEqualTo()</code>.</b>
+	 *
+	 * @param valueToEqual The value the function call result must be equal to.
+	 * @return An element that allows chaining of further waiting conditions or calling regular functions.
+	 *
+	 * @since 0.9.0
+	 */
 	public SeleniumQueryAndOrThen isEqualTo(T valueToEqual) {
 		Evaluator<T> equalsEvaluator = new EqualsEvaluator<T>(getter);
 		SeleniumQueryObject sq = fluentWait.waitUntil(equalsEvaluator, valueToEqual, seleniumQueryObject, this.negated);
 		return new SeleniumQueryAndOrThen(sq);
 	}
-	
+
+	/**
+	 * Tests if the result of the preceding function contains the given argument.
+	 *
+	 * @param string The string the function call result must contain.
+	 * @return An element that allows chaining of further waiting conditions or calling regular functions.
+	 *
+	 * @since 0.9.0
+	 */
 	public SeleniumQueryAndOrThen contains(String string) {
 		Evaluator<String> containsEvaluator = new ContainsEvaluator(getter);
 		return new SeleniumQueryAndOrThen(fluentWait.waitUntil(containsEvaluator, string, seleniumQueryObject, this.negated));
 	}
-	
+
+	/**
+	 * Tests if the result of the preceding function matches the given regex.
+	 *
+	 * @param regex The regex the function call result must match.
+	 * @return An element that allows chaining of further waiting conditions or calling regular functions.
+	 *
+	 * @since 0.9.0
+	 */
 	public SeleniumQueryAndOrThen matches(String regex) {
 		Evaluator<String> matchesEvaluator = new MatchesEvaluator(getter);
 		return new SeleniumQueryAndOrThen(fluentWait.waitUntil(matchesEvaluator, regex, seleniumQueryObject, this.negated));
 	}
-	
+
+	/**
+	 * <p>Tests if the result of the preceding function is greater than the given argument.</p>
+	 *
+	 * @param valueToCompare The number the function call result must be greater than.
+	 * @return An element that allows chaining of further waiting conditions or calling regular functions.
+	 *
+	 * @since 0.9.0
+	 */
 	public SeleniumQueryAndOrThen isGreaterThan(Number valueToCompare) {
 		Evaluator<Number> greaterThanEvaluator = new GreaterThanEvaluator(getter);
 		SeleniumQueryObject sq = fluentWait.waitUntil(greaterThanEvaluator, valueToCompare, seleniumQueryObject, this.negated);
 		return new SeleniumQueryAndOrThen(sq);
 	}
-	
+
+	/**
+	 * <p>Tests if the result of the preceding function is less than the given argument.</p>
+	 *
+	 * @param valueToCompare The number the function call result must be less than.
+	 * @return An element that allows chaining of further waiting conditions or calling regular functions.
+	 *
+	 * @since 0.9.0
+	 */
 	public SeleniumQueryAndOrThen isLessThan(Number valueToCompare) {
 		Evaluator<Number> lessThanEvaluator = new LessThanEvaluator(getter);
 		SeleniumQueryObject sq = fluentWait.waitUntil(lessThanEvaluator, valueToCompare, seleniumQueryObject, this.negated);
 		return new SeleniumQueryAndOrThen(sq);
 	}
-	
+
+	/**
+	 * Negates the criteria that follows.
+	 *
+	 * @return An object for specifying the criteria which the function call result must <b>NOT</b> meet.
+	 *
+	 * @since 0.9.0
+	 */
 	public SeleniumQueryEvaluateUntil<T> not() {
 		return new SeleniumQueryEvaluateUntil<T>(fluentWait, getter, seleniumQueryObject, !this.negated);
 	}

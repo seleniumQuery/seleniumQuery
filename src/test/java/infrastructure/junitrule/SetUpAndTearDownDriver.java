@@ -7,7 +7,7 @@ import org.junit.runners.model.Statement;
 
 public class SetUpAndTearDownDriver implements TestRule {
 
-	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.FIREFOX_WITH_JS_OFF_AS_WELL;
+	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.PHANTOMJS;
 
 	private final Class<?> htmlTestUrlClass;
 

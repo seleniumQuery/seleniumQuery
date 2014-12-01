@@ -17,6 +17,7 @@ import org.w3c.css.sac.Selector;
  * [values~="10"]
  *
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class ContainsWordAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
@@ -24,7 +25,7 @@ public class ContainsWordAttributeCssSelector implements CssConditionalSelector<
 	public static final String CONTAINS_WORD_ATTRIBUTE_SELECTOR_SYMBOL = "~=";
 	
 	/**
-	 * @see {@link org.w3c.css.sac.Condition#SAC_ONE_OF_ATTRIBUTE_CONDITION}
+	 * see {@link org.w3c.css.sac.Condition#SAC_ONE_OF_ATTRIBUTE_CONDITION}
 	 * 
 	 * This condition checks for a value in a space-separated values in a specified attribute example:
 	 * [values~="10"]

@@ -18,12 +18,13 @@ import org.w3c.css.sac.Selector;
  * [languages|="fr"]
  *
  * @author acdcjunior
+ *
  * @since 0.9.0
  */
 public class ContainsPrefixAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
 
 	/**
-	 * @see {@link org.w3c.css.sac.Condition#SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION}
+	 * see {@link org.w3c.css.sac.Condition#SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION}
 	 *
 	 * This condition checks if the value is in a hypen-separated list of values in a specified attribute. example:
 	 * [languages|="fr"]

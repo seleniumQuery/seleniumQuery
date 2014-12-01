@@ -70,7 +70,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	
 	private SeleniumQueryBy by;
 	private WebDriver driver;
-	public List<WebElement> elements;
+	private List<WebElement> elements;
 	
 	/**
 	 * The previous (or "parent") element, meaning this SeleniumQueryObject was created as result
@@ -112,12 +112,18 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**************************************************************************************************************************************
-	 * Java SeleniumQueryObject waitUntil() functions
+	 * Java SeleniumQueryObject waitUntil() and as() functions
 	 **************************************************************************************************************************************/
 	
 	/**
-	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
-	 * a new seleniumQuery object at the end.
+	 * <p>List of functions that will halt the execution and requery the selector until the specified condition is met, returning
+	 * a new seleniumQuery object at the end.</p>
+	 * <p>
+	 * This method will wait as specified in the properties file. <b>By default, it waits up to 10 seconds, polling (requerying) every 900 ms.</b>
+	 * </p>
+	 *
+	 * If a different amout of time is needed, either create and/or modify the <code>seleniumQuery.properties</code> file or use this method's
+	 * version with a time parameter.
 	 *
 	 * @return a {@link SeleniumQueryWaitUntil} object for specifying the wait conditions.
 	 *
@@ -126,12 +132,12 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public final SeleniumQueryWaitUntil waitUntil() {
 		return new SeleniumQueryWaitUntil(this);
 	}
-	
+
 	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
 	 * a new seleniumQuery object at the end.
-	 * 
-	 * @param waitUntilTimeout Time in milliseconds to wait for the condition.
+	 *
+	 * @param waitUntilTimeout Time in milliseconds to wait before a timeout is thrown.
 	 * @return a {@link SeleniumQueryWaitUntil} object for specifying the wait conditions.
 	 *
 	 * @since 0.9.0
@@ -139,11 +145,11 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) {
 		return new SeleniumQueryWaitUntil(this, waitUntilTimeout);
 	}
-	
+
 	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
 	 * a new seleniumQuery object at the end.
-	 * 
+	 *
 	 * @param waitUntilTimeout Time in milliseconds to wait for the condition.
 	 * @param waitUntilPollingInterval Interval in milliseconds between every requery/check.
 	 * @return a {@link SeleniumQueryWaitUntil} object for specifying the wait conditions.
@@ -153,7 +159,31 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) {
 		return new SeleniumQueryWaitUntil(this, waitUntilTimeout, waitUntilPollingInterval);
 	}
-	
+
+	/**
+	 * Enables several functions (plugins) that allow executing specific tasks, from specific points of view, on
+	 * the elements of this {@link io.github.seleniumquery.SeleniumQueryObject}.
+	 *
+	 * @return A list of functions showing the available tasks that can be performed.
+	 *
+	 * @since 0.9.0
+	 */
+	public StandardPlugins as() {
+		return new StandardPlugins(this);
+	}
+
+	/**
+	 * Enables the execution of functions defined by the plugin sent as argument.
+	 *
+	 * @param pluginFunction The plugin instance this object will be handed to.
+	 * @return An object provided by the plugin.
+	 *
+	 * @since 0.9.0
+	 */
+	public <PLUGIN> PLUGIN as(SeleniumQueryPlugin<PLUGIN> pluginFunction) {
+		return pluginFunction.as(this);
+	}
+
 	/**************************************************************************************************************************************
 	 * Java SeleniumQueryObject specific functions
 	 **************************************************************************************************************************************/
@@ -175,7 +205,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public WebDriver getWebDriver() {
 		return this.driver;
 	}
-	
+
 	/**
 	 * Returns the By used to search the matched elements of this seleniumQuery object.
 	 * @return the By used to search the matched elements of this seleniumQuery object.
@@ -184,8 +214,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return this.by;
 	}
 
-
-	
 	/**************************************************************************************************************************************
 	 * jQuery-emulating functions
 	 **************************************************************************************************************************************/
@@ -194,16 +222,16 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Returns the number of elements in the seleniumQuery object.
 	 *
 	 * @return the number of elements in the seleniumQuery object.
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public int size() {
 		return this.elements.size();
 	}
-	
+
 	/**
 	 * Removes elements from the set of matched elements.
-	 * 
+	 *
 	 * @param selector	A string containing a selector expression to match elements against.
 	 * @return A seleniumQuery object containing all elements not removed.
 	 *
@@ -215,7 +243,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 
 	/**
 	 * <p>Reduces the set of matched elements to the first in the set.</p>
-	 * 
+	 *
 	 * <p>Given a seleniumQuery object that represents a set of DOM elements, the <code>.first()</code>
 	 * method constructs a new seleniumQuery object from the first element in that set.</p>
 	 *
@@ -226,10 +254,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public SeleniumQueryObject first() {
 		return FirstFunction.first(this, this.elements);
 	}
-	
+
 	/**
 	 * <p>Reduces the set of matched elements to the final one in the set.</p>
-	 * 
+	 *
 	 * <p>Given a seleniumQuery object that represents a set of DOM elements, the <code>.last()</code>
 	 * method constructs a new seleniumQuery object from the last element in that set.</p>
 	 *
@@ -240,10 +268,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public SeleniumQueryObject last() {
 		return LastFunction.last(this, this.elements);
 	}
-	
+
 	/**
 	 * Reduce the set of matched elements to the one at the specified index.
-	 * 
+	 *
 	 * @param index If <i>positive</i>: An integer indicating the 0-based position of the element.
 	 * 				If <i>negative</i>: An integer indicating the position of the element, counting backwards
 	 * 			from the last element in the set.
@@ -258,7 +286,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * <p>Gets the combined text contents of each element in the set of matched elements, including
 	 * their descendants.</p>
-	 * 
+	 *
 	 * <p><b>Note:</b> This functions uses Selenium's <code>{@link WebElement#getText()}</code>, and, as
 	 * jQuery, <i>"due to variations in the HTML parsers in different browsers, the text returned may vary
 	 * in newlines and other white space."</i></p>
@@ -274,7 +302,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		// More in WebDriver FAQs: https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_Why_is_it_not_possible_to_interact_with_hidden_elements?
 		return TextFunction.text(this.elements);
 	}
-	
+
 	/**
 	 * Clicks <strong>all</strong> elements in the set of matched elements, in the
 	 * order they were matched.
@@ -287,10 +315,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		LOGGER.debug("Clicking "+this+".");
 		return ClickFunction.click(this, this.elements);
 	}
-	
+
 	/**
 	 * Sets the value of <strong>all</strong> elements in the set of matched elements.
-	 * 
+	 *
 	 * @param value The (string) value to be set.
 	 * @return The same seleniumQuery object.
 	 *
@@ -300,10 +328,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		LOGGER.debug("Setting value of "+this+" to: \""+value+"\".");
 		return ValFunction.val(this, this.elements, value);
 	}
-	
+
 	/**
 	 * Sets the value of <strong>all</strong> elements in the set of matched elements.
-	 * 
+	 *
 	 * @param value The (number) value to be set.
 	 * @return The same seleniumQuery object.
 	 *
@@ -313,7 +341,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		LOGGER.debug("Setting value of "+this+" to: "+value+".");
 		return ValFunction.val(this, this.elements, value);
 	}
-	
+
 	/**
 	 * Gets the current value of the first element in the set of matched elements.
 	 *
@@ -324,11 +352,11 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public String val() {
 		return ValFunction.val(this.elements);
 	}
-	
+
 	/**
 	 * Ends the most recent filtering operation in the current chain and returns the set of matched
 	 * elements to its previous state.
-	 * 
+	 *
 	 * @return the seleniumQuery object that originated the current instance.
 	 *
 	 * @since 0.9.0
@@ -336,10 +364,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public SeleniumQueryObject end() {
 		return this.previous;
 	}
-	
+
 	/**
 	 * Gets the descendants of each element in the current set of matched elements, filtered by a selector.
-	 * 
+	 *
 	 * @param selector Selector the descendants must match.
 	 * @return a {@link SeleniumQueryObject} containing the (filtered) descendants.
 	 *
@@ -348,7 +376,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public SeleniumQueryObject find(String selector) {
 		return FindFunction.find(this, elements, selector);
 	}
-	
+
 	/**
 	 * Gets the value of an attribute for the first element in the set of matched elements.
 	 *
@@ -360,67 +388,67 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public String attr(String attributeName) {
 		return AttrFunction.attr(this, elements, attributeName);
 	}
-	
+
 	/**
 	 * Sets one or more attributes for <strong>every</strong> matched element.
-	 * 
+	 *
 	 * <p><b>Note:</b> If interacting with an <code>&lt;input&gt;</code> element while in a UI test,
 	 * it is preferable to use {@link #click()} instead of setting the attributes
 	 * through this function, as selenium tests should verify the pages from the user point of
 	 * view.</p>
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject attr(String attributeName, Object value) {
 		return AttrFunction.attr(this, elements, attributeName, value);
 	}
-	
+
 	/**
 	 * Gets the value of a property for the first element in the set of matched elements.
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public <T> T prop(String propertyName) {
 		return PropFunction.prop(this, elements, propertyName);
 	}
-	
+
 	/**
 	 * Set one or more properties for <strong>every</strong> matched element
-	 * 
+	 *
 	 * <p><b>Note:</b> If interacting with an <code>&lt;input&gt;</code> element while in a UI test,
 	 * it is preferable to use {@link #click()} instead of setting the attributes
 	 * through this function, as selenium tests should verify the pages from the user point of
 	 * view.</p>
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject prop(String propertyName, Object value) {
 		return PropFunction.prop(this, elements, propertyName, value);
 	}
-	
+
 	/**
 	 * Retrieves one of the {@link WebElement} matched by the seleniumQuery object.
-	 * 
+	 *
 	 * @param index A zero-based integer indicating which element to retrieve.
 	 * @return The element at the specified index.
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public WebElement get(int index) {
 		return GetFunction.get(this, index);
 	}
-	
+
 	/**
 	 * Retrieves the {@link WebElement}s matched by the seleniumQuery object.
-	 * 
+	 *
 	 * @return The (immutable) list of matched elements.
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public List<WebElement> get() {
 		return this.elements;
 	}
-	
+
 	/**
 	 * Removes an attribute from each element in the set of matched elements.
 	 * It can be a space-separated list of attributes.
@@ -432,7 +460,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public SeleniumQueryObject removeAttr(String attributeNames) {
 		return RemoveAttrFunction.removeAttr(this, elements, attributeNames);
 	}
-	
+
 	/**
 	 * Gets the HTML contents of the first element in the set of matched elements.
 	 *
@@ -443,21 +471,21 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public String html() {
 		return HtmlFunction.html(this);
 	}
-	
+
 	/**
 	 * Checks the current matched set of elements against a selector and returns <code>true</code>
 	 * if at least one of these elements matches the given arguments.
-	 * 
+	 *
 	 * @param selector	A string containing a selector expression to match elements against.
 	 * @since 0.9.0
 	 */
 	public boolean is(String selector) {
 		return IsFunction.is(this, elements, selector);
 	}
-	
+
 	/**
 	 * Determines whether any of the matched elements are assigned the given class.
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public boolean hasClass(String className) {
@@ -468,7 +496,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Retrieves all the elements contained in the seleniumQuery set, as an array.
 	 *
 	 * @return The set of matched elements as an array.
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public WebElement[] toArray() {
@@ -488,37 +516,37 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	public SeleniumQueryObject closest(String selector) {
 		return ClosestFunction.closest(this, elements, selector);
 	}
-	
+
 	/**
 	 * <p>Triggers the <code>focus</code> event on <b>every</b> element of the matched set.</p>
-	 * 
+	 *
 	 * <p><b>Note:</b> The order of the triggering is the order of the elements in the
 	 * matched list. The last one will end up with the focus, though all of them
 	 * will have it at some point.</p>
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject focus() {
 		return FocusFunction.focus(this, elements);
 	}
-	
+
 	/**
 	 * Gets the children of each element in the set of matched elements.
-	 * 
+	 *
 	 * @return A <b>new</b> SeleniumQueryObject, containing the children of each element in the set of matched elements.
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject children() {
 		return ChildrenFunction.children(this, elements);
 	}
-	
+
 	/**
 	 * Gets the children of each element in the set of matched elements, filtered by a selector.
 	 *
 	 * @param selector Selector to filter the children.
 	 * @return A <b>new</b> SeleniumQueryObject, containing the children of each element in the set of matched elements.
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject children(String selector) {
@@ -555,27 +583,20 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	 * Enables several functions (plugins) that allow executing specific tasks, from specific points of view, on
-	 * the elements of this {@link io.github.seleniumquery.SeleniumQueryObject}.
+	 * <p>Attempts to submits, in the current order, every element in the matched set.</p>
+	 * <p>If a matched element is a form, or an element within a form, then it will be submitted.</p>
+	 * <p><b>If submitting an element causes the current page to change, then this method will block until
+	 * the new page is loaded; as consequence, not all elements may get to be submitted - and will be ignored.</b></p>
 	 *
-	 * @return A list of functions showing the available tasks that can be performed.
+	 * @throws org.openqa.selenium.NoSuchElementException If a submitted element is not a, or within a, form.
 	 *
-	 * @since 0.9.0
-	 */
-	public StandardPlugins as() {
-		return new StandardPlugins(this);
-	}
-
-	/**
-	 * Enables the execution of functions defined by the plugin sent as argument.
-	 *
-	 * @param pluginFunction The plugin instance this object will be handed to.
-	 * @return An object provided by the plugin.
+	 * @return A self reference.
 	 *
 	 * @since 0.9.0
 	 */
-	public <PLUGIN> PLUGIN as(SeleniumQueryPlugin<PLUGIN> pluginFunction) {
-		return pluginFunction.as(this);
+	public SeleniumQueryObject submit() {
+		SubmitFunction.submit(this);
+		return this;
 	}
 
 	/**
@@ -605,23 +626,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	@Override
 	public String toString() {
 		return this.by.toString();
-	}
-
-	/**
-	 * <p>Attempts to submits, in the current order, every element in the matched set.</p>
-	 * <p>If a matched element is a form, or an element within a form, then it will be submitted.</p>
-	 * <p><b>If submitting an element causes the current page to change, then this method will block until
-	 * the new page is loaded; as consequence, not all elements may get to be submitted - and will be ignored.</b></p>
-	 *
-	 * @throws org.openqa.selenium.NoSuchElementException If a submitted element is not a, or within a, form.
-	 *
-	 * @return A self reference.
-	 *
-	 * @since 0.9.0
-	 */
-	public SeleniumQueryObject submit() {
-		SubmitFunction.submit(this);
-		return this;
 	}
 
 }
