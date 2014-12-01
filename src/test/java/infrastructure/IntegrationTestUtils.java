@@ -39,6 +39,10 @@ public class IntegrationTestUtils {
 
     public static String classNameToTestFileUrl(Class<?> clazz) {
         String classFullName = clazz.getName();
+        return classNameToTestFileUrl(classFullName);
+    }
+
+    public static String classNameToTestFileUrl(String classFullName) {
         String classPath = classFullName.replace('.', '/');
         String htmlPath = TEST_SRC_FOLDER + classPath + ".html";
         return new File(htmlPath).toURI().toString();
