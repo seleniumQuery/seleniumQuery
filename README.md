@@ -43,8 +43,7 @@ public class SeleniumQueryExample {
 
     $(":text[name='q']").val("selenium"); // the keys are actually typed!
     $(":button:contains('Google Search')").click();
-
-    // Alternatively: $(":text[name='q']").val("selenium").submit();
+    // Another way: $(":text[name='q']").val("selenium").submit();
 
     // Besides the short syntax and the jQuery behavior you already know,
     // other very useful function in seleniumQuery is .waitUntil(),
@@ -103,6 +102,80 @@ $("#tab tr:nth-child(3n+1)").find("/img[@alt='calendar']/preceding::input").val(
 ```
 Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
+###Flexible WebDriver builder system
+
+How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only at the first use.
+
+#####Firefox
+
+```java
+$.driver().useFirefox(); // Will set up firefox as driver
+
+$.url("http://seleniumquery.github.io"); // the driver will be instantiated when this executes
+```
+
+#####Firefox driver with disabled JavaScript
+
+Want `FirefoxDriver` without JavaScript? Just:
+```java
+$.driver().useFirefox().withoutJavaScript(); // when started, Firefox will have JS OFF
+```
+
+#####Chrome, InternetExplorer, PhantomJS drivers
+
+All you have to do is download [their executables](https://github.com/seleniumQuery/seleniumQuery-demos/tree/master/src/main/resources) before. Setting them up in seleniumQuery is all too easy:
+
+```java
+// Using Chrome
+$.driver().useChrome(); // will look for chromedriver(.exe) to you, including the classpath!
+// Or if you want to set the path yourself
+$.driver().useChrome().withPathToChromeDriver("path/to/chromedriver.exe")
+
+// InternetExplorerDriver
+$.driver().useInternetExplorer(); // we search IEDriverServer.exe for you
+// Or you set the path yourself
+$.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer.exe");
+
+// PhantomJS
+$.driver().usePhantomJS(); // again, we'll find phantomjs[.exe] to you
+// Or you may set the path yourself
+$.driver().usePhantomJS().withPathToPhantomJS("path/to/phantomjs.exe");
+````
+
+#####HtmlUnit
+
+So many ways to set up `HtmlUnitDriver`... If only there was a simple way. Oh, wait:
+
+```java
+// HtmlUnit default (Chrome/JavaScript ON)
+$.driver().useHtmlUnit();
+// Want disabled JavaScript, just call .withoutJavaScript()
+$.driver().useHtmlUnit().withoutJavaScript();
+
+// HtmlUnit emulating Chrome
+$.driver().useHtmlUnit().emulatingChrome();
+$.driver().useHtmlUnit().emulatingChrome().withoutJavaScript();
+// HtmlUnit emulating Firefox
+$.driver().useHtmlUnit().emulatingFirefox(); // could disable JS here as well
+// And IE
+$.driver().useHtmlUnit().emulatingInternetExplorer11(); // JS is disableable as well
+$.driver().useHtmlUnit().emulatingInternetExplorer8(); // JS is disableable as well
+$.driver().useHtmlUnit().emulatingInternetExplorer9(); // JS is disableable as well
+$.driver().useHtmlUnit().emulatingInternetExplorer(); // will pick latest IE
+````
+
+####But there is more
+
+Explore the auto-complete. There are additional options to every browser, such as `.withCapabilities(DesiredCapabilities)` or some specific, such as `.withProfile(FirefoxProfile)` or `.withOptions(ChromeOptions)`.
+
+Finally, if you want to create the `WebDriver` yourself:
+
+```java
+WebDriver myDriver = ...;
+$.driver().use(myDriver);
+```
+
+
 ###Waiting capabilities for improved Ajax testing
 
 Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element (no boilerplate code!) through the use of the `.waitUntil()` function:
@@ -128,23 +201,6 @@ Check out what else `.waitUntil()` can do in the [seleniumQuery API wiki page](h
 
 <br>
 
-###Alternate symbols
-
-If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field). Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same goodies:
-
-```java
-import static io.github.seleniumquery.SeleniumQuery.sQ;
-import static io.github.seleniumquery.SeleniumQuery.jQuery;
-...
-String oldStreet = sQ("input.street").val();
-sQ("input.street").val("4th St!");
-
-String oldStreetz = jQuery("input.street").val();
-jQuery("input.street").val("5th St!");
-```
-
-<br>
-
 ##seleniumQuery still is Selenium - with "just" a jQuery interface
 
 That's why it can work with disabled JavaScript!
@@ -165,6 +221,23 @@ the text in them, again, key by key, as an user would!
 
 On the same tone, when selecting/checking `<option>`s or checkboxes or radios, try not to use `$().prop("selected", true)` directly to them.
 Do as an user would: call `.click()`!
+
+<br>
+
+###Alternate symbols
+
+If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field). Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same goodies:
+
+```java
+import static io.github.seleniumquery.SeleniumQuery.sQ;
+import static io.github.seleniumquery.SeleniumQuery.jQuery;
+...
+String oldStreet = sQ("input.street").val();
+sQ("input.street").val("4th St!");
+
+String oldStreetz = jQuery("input.street").val();
+jQuery("input.street").val("5th St!");
+```
 
 <br>
 
