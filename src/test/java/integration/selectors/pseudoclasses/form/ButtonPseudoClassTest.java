@@ -49,7 +49,6 @@ public class ButtonPseudoClassTest {
 		} else {
 			assertThat($("#b1").is("[type='button']"), is(false));
 		}
-		// #failure above, inside if, probbly HU IE 11
 
 		assertThat($("#b2").is(":button"), is(true));
 		assertThat($("#b2").is("[type='button']"), is(true));

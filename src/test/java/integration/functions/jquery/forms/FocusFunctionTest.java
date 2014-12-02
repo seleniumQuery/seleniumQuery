@@ -86,7 +86,6 @@ public class FocusFunctionTest {
     	assertThat($("div.a1").size(), is(1));
     	assertThat($("div.a1.focus").size(), is(1));
 
-		// #failure org.openqa.selenium.ElementNotVisibleException: Element is not currently visible and so may not be interacted with
     	$("#im1").focus();
     	assertThat($("#im1").is(":focus"), is(true));
 

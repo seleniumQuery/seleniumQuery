@@ -16,12 +16,6 @@ public class SizzleAttributes extends SizzleTest {
     @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
     @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
-    /*
-    #failure
-     @## FAILED on Chrome! -> Attribute Exists (case-insensitive) --> Lists differ! expected:<[[google]]> but was:<[[]]>
-     @## FAILED on Firefox! -> Finding by attribute with escaped characters. expected:<[[org.openqa.selenium.remote.RemoteWebElement@9a82aa8 -> unknown locator]]> but was:<[]>
-     @## FAILED on PhantomJS! -> Attribute Exists (case-insensitive) --> Lists differ! expected:<[[google]]> but was:<[[]]>
-     */
     @Test
     public void attribute_selectors() {
         t("Attribute Exists", "#qunit-fixture a[title]", new String[]{"google"});
