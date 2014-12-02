@@ -28,14 +28,6 @@ public class VisibleSelectorTest {
 	public void is_visiblePseudoClass() {
 		assertThat($("#visibleDiv").is(":visible"), is(true));
 		assertThat($("#visibleDiv2").is(":visible"), is(true));
-	}
-
-	// #HtmlUnit #bug curious! when without JS, this bugs O_o!
-    @Test @JavaScriptOnly
-    public void is_visiblePseudoClass_2() {
-		WebElement webElement = $.driver().get().findElement(By.id("invisibleDiv"));
-		System.out.println(webElement.isDisplayed());
-
 		assertThat($("#invisibleDiv").is(":visible"), is(false));
     	assertThat($("#invisibleParentDiv").is(":visible"), is(false));
     	assertThat($("#almostVisibleDiv").is(":visible"), is(false));

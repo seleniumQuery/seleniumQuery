@@ -1,13 +1,11 @@
 package integration.waitUntil;
 
-import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriver;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -46,18 +44,9 @@ public class WaitUntilIsTest {
 		assertThat($("input.enabledInput").waitUntil().is(":visible:enabled").then().size(), is(1));
 	}
 	
-	@Test @JavaScriptOnly
-	public void queryUntil_hidden() {
-		// if JS is ON, it works everywhere
-		assertThat($("div.invisibleDiv").waitUntil().is(":hidden").then().size(), is(1));
-	}
-
 	@Test
-	public void queryUntil_hidden_2() {
-		// without JS only if it is not HtmlUnit
-		if (!isHtmlUnitDriver($.driver().get())) {
-			assertThat($("div.invisibleDiv").waitUntil().is(":hidden").then().size(), is(1));
-		}
+	public void queryUntil_hidden() {
+		assertThat($("div.invisibleDiv").waitUntil().is(":hidden").then().size(), is(1));
 	}
 
 }

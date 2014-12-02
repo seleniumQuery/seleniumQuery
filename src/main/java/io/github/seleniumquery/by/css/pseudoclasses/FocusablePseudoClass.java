@@ -3,9 +3,10 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.xpath.XPathExpression;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static io.github.seleniumquery.by.SelectorUtils.isVisible;
 
 /**
  * see -> http://api.jqueryui.com/focusable-selector/
@@ -37,7 +38,7 @@ public class FocusablePseudoClass implements PseudoClass {
 	
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		if (!element.isDisplayed()) {
+		if (!isVisible(element)) {
 			return false;
 		}
 		if (DisabledPseudoClass.DISABLEABLE_TAGS.contains(element.getTagName())) {
@@ -46,6 +47,7 @@ public class FocusablePseudoClass implements PseudoClass {
 		if (element.getTagName().equals("a") && element.getAttribute("href") != null) {
 			return true;
 		}
+		//noinspection SimplifiableIfStatement
 		if (element.getTagName().equals("area") && element.getAttribute("href") != null /* && inside a named map */ /* && there is a visible image using the map */) {
 			return true;
 		}

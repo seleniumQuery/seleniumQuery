@@ -19,7 +19,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 @SuppressWarnings("unused")
 public class SetUpAndTearDownDriver implements TestRule {
 
-	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.HTMLUNIT_CHROME_JS_OFF_ONLY;
+	private static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.ALL_DRIVERS_JS_ON_AND_OFF;
 	private static final String NOT_SPECIFIED = null;
 
 	private final String testUrl;
@@ -46,6 +46,7 @@ public class SetUpAndTearDownDriver implements TestRule {
 	public Statement apply(final Statement base, final Description description) {
 		if (description.isSuite()) {
 			browserWasStarted = true;
+			// TODO check if all methods of the class are annotated with JSOnly and skip driver creation when it wont have JS ON
 			return new RunTestMethodsInChosenDrivers(driverToRunTestsIn, base, url(description));
 			/*return new Statement() {
 				@Override

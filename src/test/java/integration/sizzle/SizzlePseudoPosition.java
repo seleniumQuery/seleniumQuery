@@ -1,17 +1,19 @@
 package integration.sizzle;
 
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 public class SizzlePseudoPosition extends SizzleTest {
 
-    @Rule
-    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
     @Test
-    public void pseudo_position_selectors() throws Exception {
+    public void pseudo_position_selectors() {
 
         t("First element", "#qunit-fixture p:first", new String[]{"firstp"});
         t("First element(case-insensitive)", "#qunit-fixture p:fiRst", new String[]{"firstp"});
@@ -51,7 +53,10 @@ public class SizzlePseudoPosition extends SizzleTest {
         t("Isolated position", "#qunit-fixture :last", new String[]{"last"});
 
 //        deepEqual(Sizzle("*:lt(2) + *", null, null, Sizzle("#qunit-fixture > p").get()), q("ap"), "Seeded pos with trailing relative");
+    }
 
+    @Test @JavaScriptOnly
+    public void pseudo_position_selectors_2() {
         // jQuery #12526
         WebElement context = (WebElement) executeJS("return jQuery('#qunit-fixture').append(\"<div id='jquery12526'></div>\")[0]");
         deepEqual(Sizzle(":last", context), q("jquery12526"), "Post-manipulation positional");

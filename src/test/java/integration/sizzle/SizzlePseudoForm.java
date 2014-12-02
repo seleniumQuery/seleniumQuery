@@ -1,15 +1,17 @@
 package integration.sizzle;
 
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class SizzlePseudoForm extends SizzleTest {
 
-    @Rule
-    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
-    @Test
+    @Test @JavaScriptOnly
     public void pseudo_form() throws Exception {
         executeJS("jQuery('<input id=\"impliedText\"/><input id=\"capitalText\" type=\"TEXT\">').appendTo('#form');");
 

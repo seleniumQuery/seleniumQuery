@@ -1,7 +1,9 @@
 package integration.sizzle;
 
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.SeleniumQueryObject;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -14,11 +16,11 @@ import static java.util.Arrays.asList;
 
 public class SizzleElement extends SizzleTest {
 
-    @Rule
-    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
     @Test
-    public void element_selectors() throws Exception {
+    public void element_selectors() {
 //TODO(issue#33) - Have empty selectors $("") return an empty list right off the bat
 //        equal(Sizzle("").size(), 0, "Empty selector returns an empty array");
 //        deepEqual(Sizzle("div", document.createTextNode("")),[],"Text element as context fails silently");
@@ -34,13 +36,19 @@ public class SizzleElement extends SizzleTest {
 
         SeleniumQueryObject all = Sizzle("*");
         ok(all.size() >= 30, "Select all");
+    }
+    @Test @JavaScriptOnly
+    public void element_selectors_2() {
+        SeleniumQueryObject all = Sizzle("*");
         for (int i = 0; i < all.size(); i++) {
             String nodeType = executeJS("return arguments[0].nodeType", all.get(i)).toString();
             if (nodeType.equals("8")) {
                 ok(false, "Select all elements, no comment nodes");
             }
         }
-
+    }
+    @Test
+    public void element_selectors_3() {
         t("Element Selector", "html", new String[]{"html"});
         t("Element Selector", "body", new String[]{"body"});
         t("Element Selector", "#qunit-fixture p", new String[]{"firstp", "ap", "sndp", "en", "sap", "first"});
@@ -61,13 +69,17 @@ public class SizzleElement extends SizzleTest {
 
         // Check for unique-ness and sort order
         deepEqual(Sizzle("p, div p"), Sizzle("p").get(), "Check for duplicates: p, div p");
-
+    }
+    @Test @JavaScriptOnly
+    public void element_selectors_4() {
         executeJS("jQuery(\"<h1 id='h1'/><h2 id='h2'/><h2 id='h2-2'/>\").prependTo(\"#qunit-fixture\");");
         // the original tests checked the order, but we won't struggle for that...
         tio("Checking sort order", "#qunit-fixture h2, #qunit-fixture h1", new String[]{"h1", "h2", "h2-2"});
         tio("Checking sort order", "#qunit-fixture h2:first, #qunit-fixture h1:first", new String[]{"h1", "h2"});
         tio("Checking sort order", "#qunit-fixture p, #qunit-fixture p a", new String[]{"firstp", "simon1", "ap", "google", "groups", "anchor1", "mark", "sndp", "en", "yahoo", "sap", "anchor2", "simon", "first"});
-
+    }
+    @Test
+    public void element_selectors_5() {
         // Test Conflict ID
         WebElement lengthtest = id("lengthtest");
         deepEqual(Sizzle("#idTest", lengthtest), q("idTest"), "Finding element with id of ID.");
@@ -81,7 +93,9 @@ public class SizzleElement extends SizzleTest {
 
 // TODO(issue#53)
 //        deepEqual(Sizzle("div em, em\\,", siblingTest), new ArrayList<WebElement>(), "Escaped commas do not get treated with an id in element-rooted QSA");
-
+    }
+    @Test @JavaScriptOnly
+    public void element_selectors_6() {
 /*
         String html = "";
         for (i = 0; i < 100; i++) {

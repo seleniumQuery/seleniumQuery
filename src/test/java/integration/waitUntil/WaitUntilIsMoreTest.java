@@ -1,6 +1,5 @@
 package integration.waitUntil;
 
-import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 import org.junit.ClassRule;
@@ -8,7 +7,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriver;
 import static org.junit.Assert.assertEquals;
 
 public class WaitUntilIsMoreTest {
@@ -31,17 +29,9 @@ public class WaitUntilIsMoreTest {
 		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().is(":visible").then().text());
 	}
 
-	@Test @JavaScriptOnly
-	public void isNotVisible() {// if JS is ON, it works everywhere
-		assertEquals("", $(".invisibleDiv").waitUntil().is(":not(:visible)").then().text());
-	}
-
 	@Test
-	public void isNotVisible_2() {
-		// without JS only if it is not HtmlUnit
-		if (!isHtmlUnitDriver($.driver().get())) {
-			assertEquals("", $(".invisibleDiv").waitUntil().is(":not(:visible)").then().text());
-		}
+	public void isNotVisible() {
+		assertEquals("", $(".invisibleDiv").waitUntil().is(":not(:visible)").then().text());
 	}
 
 	@Test

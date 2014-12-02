@@ -1,10 +1,8 @@
 package integration.functions;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
-
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,12 +10,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
-public class ClickFunctionTest {
-	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
-    @Test
+public class ClickFunctionTest {
+
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+
+    @Test @JavaScriptOnly
     public void click_function() {
 		WebDriver driver = $.driver().get();
 		boolean isIE = driver instanceof InternetExplorerDriver;

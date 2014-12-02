@@ -27,7 +27,7 @@ public class HiddenPseudoClass implements PseudoClass {
 
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		return !SelectorUtils.isVisible(driver, element);
+		return !SelectorUtils.isVisible(element);
 	}
 
 	public static final String HIDDEN_XPATH_MUST_FILTER = "("
