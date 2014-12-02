@@ -152,7 +152,7 @@ All you have to do is download [their executables](https://github.com/seleniumQu
 
 ```java
 // Using Chrome
-$.driver().useChrome(); // will look for chromedriver(.exe) to you, including in the classpath!
+$.driver().useChrome(); // will look for chromedriver/exe to you, including in the classpath!
 // Or if you want to set the path yourself
 $.driver().useChrome().withPathToChromeDriver("path/to/chromedriver.exe")
 
