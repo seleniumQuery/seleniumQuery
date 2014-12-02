@@ -1,6 +1,8 @@
 package integration.sizzle;
 
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -8,12 +10,13 @@ import static infrastructure.IntegrationTestUtils.equal;
 
 public class SizzlePseudosTargetAndRoot extends SizzleTest {
 
-    @Rule
-    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
     // TODO(issue#50) - add :target
     // :target
     //@Test
+    @SuppressWarnings("unused")
     public void target_pseudo() throws Exception {
         executeJS(" jQuery('<a>').attr({href: '#', id: 'new-link'}).appendTo('#qunit-fixture'); ");
         String oldHash = (String) executeJS("return window.location.hash;");
@@ -26,7 +29,7 @@ public class SizzlePseudosTargetAndRoot extends SizzleTest {
     }
 
     // :root
-    @Test
+    @Test @JavaScriptOnly
     public void root_pseudo() throws Exception {
         Object documentElement = executeJS("return document.documentElement;");
         equal(Sizzle(":root").get(0), documentElement, ":root selector");

@@ -1,20 +1,20 @@
 package integration.sizzle;
 
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
 import static java.util.Arrays.asList;
 
 public class SizzleAttributes extends SizzleTest {
 
-    @Rule
-    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
-
+    @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
     /*
     #failure
@@ -23,7 +23,7 @@ public class SizzleAttributes extends SizzleTest {
      @## FAILED on PhantomJS! -> Attribute Exists (case-insensitive) --> Lists differ! expected:<[[google]]> but was:<[[]]>
      */
     @Test
-    public void attribute_selectors() throws Exception {
+    public void attribute_selectors() {
         t("Attribute Exists", "#qunit-fixture a[title]", new String[]{"google"});
         t("Attribute Exists (case-insensitive)", "#qunit-fixture a[TITLE]", new String[]{"google"});
         t("Attribute Exists (case-insensitive 2)", "#qunit-fixture a[TItlE]", new String[]{"google"});
@@ -46,10 +46,15 @@ public class SizzleAttributes extends SizzleTest {
 //        t("Attribute Equals Number", "#qunit-fixture option[value=1]", new String[]{"option1b", "option2b", "option3b", "option4b", "option5c"});
 //        t("Attribute Equals Number", "#qunit-fixture li[tabIndex=-1]", new String[]{"foodWithNegativeTabIndex"});
 
+    }
+    @Test @JavaScriptOnly
+    public void attribute_selectors_2() {
         executeJS("arguments[0].href = '#2';", id("anchor2"));
         t("href Attribute", "p a[href^='#']", new String[]{"anchor2"});
         t("href Attribute", "p a[href*='#']", new String[]{"simon1", "anchor2"});
-
+    }
+    @Test
+    public void attribute_selectors_3() {
         t("for Attribute", "form label[for]", new String[]{"label-for"});
         t("for Attribute in form", "#form [for=action]", new String[]{"label-for"});
 
@@ -82,7 +87,9 @@ public class SizzleAttributes extends SizzleTest {
         t("Attribute Whitespace List Includes", "input[data-15233~='foo']", new String[]{"t15233-single", "t15233-double", "t15233-double-tab", "t15233-double-nl", "t15233-triple"});
         t("Attribute Whitespace List Includes", "input[data-15233~='bar']", new String[]{"t15233-double", "t15233-double-tab", "t15233-double-nl", "t15233-triple"});
         t("Attribute Whitespace List Includes", "input[data-15233~='baz']", new String[]{"t15233-triple"});
-
+    }
+    @Test @JavaScriptOnly
+    public void attribute_selectors_4() {
         WebElement opt = id("option1a");
         executeJS("arguments[0].setAttribute('test', '');", opt);
 
@@ -94,8 +101,10 @@ public class SizzleAttributes extends SizzleTest {
 
 // TODO(issue#37)
 //        ok(!Sizzle.matchesSelector(opt, "[test^='']"), "Attribute with empty string value does not match startsWith selector (^=)");
-
-        ok(Sizzle.matchesSelector(opt, "[id=option1a]"), "Attribute With No Quotes Equals Matches");
+    }
+    @Test
+    public void attribute_selectors_5() {
+        ok(Sizzle.matchesSelector(id("option1a"), "[id=option1a]"), "Attribute With No Quotes Equals Matches");
 // TODO(issue#40)
 //        ok(Sizzle.matchesSelector(id("simon1"), "a[href*=#]"), "Attribute With No Quotes Href Contains Matches");
 
@@ -108,7 +117,9 @@ public class SizzleAttributes extends SizzleTest {
         t("Select options via :selected", "select[name='select2'] option:selected", new String[]{"option2d"});
 
         t("Grouped Form Elements", "input[name='foo[bar]']", new String[]{"hidden2"});
-
+    }
+    @Test @JavaScriptOnly
+    public void attribute_selectors_6() {
         WebElement input = id("text1");
         executeJS("arguments[0].title = 'Don\\'t click me';", input);
 
@@ -167,11 +178,15 @@ public class SizzleAttributes extends SizzleTest {
         // It was too much code to fix Safari 5.x Supplemental Plane crashes (see ba5f09fa404379a87370ec905ffa47f8ac40aaa3)
         // deepEqual( Sizzle( "input[data-attr='\\01D306A']", null, null, attrbad ), q("attrbad_unicode"),
         // 	"Long numeric escape (non-BMP)" );
-
+    }
+    @Test
+    public void attribute_selectors_7() {
         t("input[type=text]", "#form input[type=text]", new String[]{"text1", "text2", "hidden2", "name"});
         t("input[type=search]", "#form input[type=search]", new String[]{"search"});
         t("script[src] (jQuery #13777)", "#moretests script[src]", new String[]{"script-src"});
-
+    }
+    @Test @JavaScriptOnly
+    public void attribute_selectors_8() {
         // #3279
         executeJS("var div = document.createElement('div'); " +
                                                 "div.id = 'divPARENTSELENIUMQUERY'; " +
@@ -189,7 +204,9 @@ public class SizzleAttributes extends SizzleTest {
 
         t("Object.prototype property \"constructor\"", "[constructor='foo']", new String[]{"fooSELENIUMQUERY"});
         t("Gecko Object.prototype property \"watch\"", "[watch='bar']", new String[]{"fooSELENIUMQUERY"});
-
+    }
+    @Test
+    public void attribute_selectors_9() {
         t("Value attribute is retrieved correctly", "input[value=Test]", new String[]{"text1", "text2"});
     }
 

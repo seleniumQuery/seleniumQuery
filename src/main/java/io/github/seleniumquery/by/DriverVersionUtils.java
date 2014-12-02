@@ -14,6 +14,11 @@ import java.util.Map;
 
 /**
  * Contains some utility functions for dealing with WebDrivers, such as inspecting their version.
+ *
+ * @author acdcjunior
+ * @author ricardo-sc
+ *
+ * @since 0.9.0
  */
 public class DriverVersionUtils {
 
@@ -52,38 +57,20 @@ public class DriverVersionUtils {
 		}
 		return driverMap;
 	}
-	
-	private static final String HTML_UNIT_DRIVER_CLASSNAME = "HtmlUnitDriver";
-	private static final String PHANTOM_JS_DRIVER_CLASSNAME = "PhantomJSDriver";
 
-	public static boolean isHtmlUnitDriver(Object driver) {
-		return instanceEqualsClassName(driver, HTML_UNIT_DRIVER_CLASSNAME);
-	}
-	
-	public static boolean isNotHtmlUnitDriver(Object driver) {
-		return !isHtmlUnitDriver(driver);
-	}
-	
-	public static boolean isNotPhantomJsDriver(WebDriver driver) {
-		return !instanceEqualsClassName(driver, PHANTOM_JS_DRIVER_CLASSNAME);
-	}
-	
-	private static boolean instanceEqualsClassName(Object instance, final String className) {
-		return instance.getClass().getSimpleName().equals(className);
+	public static boolean isHtmlUnitDriver(WebDriver driver) {
+		return driver instanceof HtmlUnitDriver;
 	}
 	
 	public static boolean isHtmlUnitDriverEmulatingIE(WebDriver driver) {
-		if (!(driver instanceof HtmlUnitDriver)) {
-			return false;
-		}
-		return DriverVersionUtils.getEmulatedBrowser((HtmlUnitDriver) driver).startsWith("IE");
+		return isHtmlUnitDriver(driver) && getEmulatedBrowser((HtmlUnitDriver) driver).startsWith("IE");
 	}
 
 	public static boolean isHtmlUnitDriverEmulatingIEBelow11(WebDriver driver) {
-		if (!(driver instanceof HtmlUnitDriver)) {
+		if (!isHtmlUnitDriver(driver)) {
 			return false;
 		}
-		String emulatedBrowser = DriverVersionUtils.getEmulatedBrowser((HtmlUnitDriver) driver);
+		String emulatedBrowser = getEmulatedBrowser((HtmlUnitDriver) driver);
 		try {
 			int ieVersion = Integer.parseInt(emulatedBrowser.substring(2));
 			return ieVersion < 11;

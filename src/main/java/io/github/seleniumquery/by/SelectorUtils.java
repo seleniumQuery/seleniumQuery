@@ -1,9 +1,7 @@
 package io.github.seleniumquery.by;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,7 +9,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.internal.WrapsDriver;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SelectorUtils {
 
@@ -70,22 +74,50 @@ public class SelectorUtils {
 		return element.getAttribute(localName) != null;
 	}
 	
-	public static boolean isVisible(WebDriver driver, WebElement element) {
-		if (!element.isDisplayed()) {
+	public static boolean isVisible(WebElement element) {
+		boolean elementIsNotVisible = !element.isDisplayed();
+		if (elementIsNotVisible) {
 			return false;
 		}
-		// #Cross-Driver
-		// at this point, it is visible...
-		if (!DriverVersionUtils.isHtmlUnitDriver(driver)) {
-			return true;
+		// at this point, it is visible!
+
+		// And either we are not in HtmlUnitDriver
+		if (!(element instanceof HtmlUnitWebElement)) {
+			return true; // in that case, if the driver said it was visible, then it is
 		}
-		// ...or we are in HtmlUnitDriver. In this case we must check if it is under <body>
-		
-		// Firefox and Chrome don't consider elements directly under <html> (such as, commonly, <title>, <meta>, etc.,
-		// EXCEPT for <body>) to be visible, so we filter them, because HtmlUnitDriver thinks they ARE visible.
+		// ...or we are in HtmlUnitDriver.
+
+		// #Cross-Driver
+		// HtmlUnitDriver, says some elements are visible when they arent. So we must do some additional
+		// checking to correct its result.
+
+		// CHECKING #1: if JS is OFF, HtmlUnitDriver says everyone is visible, when that's not the case!
+		// so we do some force-checking. If it finds the element is not visible, we return as so.
+		if (!isHtmlUnitWebElementReallyDisplayed(element)) {
+			return false;
+		}
+
+		// CHECKING #2: If all verification above passed, then we still think it is visible.
+		// The last checking is seeing if the given element is under <body>:
+		//         Firefox and Chrome don't consider elements directly under <html> (such as, commonly, <title>, <meta>, etc.,
+		//      EXCEPT for <body>) to be visible, so we filter them, because HtmlUnitDriver thinks they ARE visible.
 		boolean isBodyOrChildOfBody = !element.findElements(By.xpath("ancestor-or-self::body")).isEmpty();
 		// in other words, it is visible only if it is <body> or if it has <body> as its parent
 		return isBodyOrChildOfBody;
+	}
+
+	private static boolean isHtmlUnitWebElementReallyDisplayed(WebElement webElement) {
+		try {
+			// #Cross-Driver #HtmlUnit #reflection #hack
+			HtmlUnitWebElement htmlUnitWebElement = (HtmlUnitWebElement) webElement;
+			Method getElementMethod = HtmlUnitWebElement.class.getDeclaredMethod("getElement");
+			getElementMethod.setAccessible(true);
+			HtmlElement htmlElement = (HtmlElement) getElementMethod.invoke(htmlUnitWebElement);
+			return !(htmlElement instanceof HtmlHiddenInput) && htmlElement.isDisplayed();
+		} catch (Exception e) {
+			LOGGER.debug("Unable to retrieve real HtmlUnitWebElement#isDisplayed().", e);
+			return true;
+		}
 	}
 
 	public static List<WebElement> itselfWithSiblings(WebElement element) {

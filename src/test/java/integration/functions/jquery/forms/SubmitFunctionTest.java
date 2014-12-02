@@ -1,7 +1,9 @@
 package integration.functions.jquery.forms;
 
+import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -10,10 +12,10 @@ import static org.junit.Assert.assertThat;
 
 public class SubmitFunctionTest {
 
-    @ClassRule
-    public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SubmitFunctionTest.class);
+    @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+    @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
-    @Test
+    @Test @JavaScriptOnly
     public void submit_function() {
         assertOutput("");
         $("#input-a").submit();
