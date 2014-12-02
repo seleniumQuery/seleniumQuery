@@ -219,11 +219,11 @@ We don't change  the `value` attribute directly like jQuery does. We actually do
 and **type, key by key**, the string provided as argument!
 
 And we go the *extra mile*: Our **`$().val()` even works on `contenteditable` elements**: They don't have `value`, but we type
-the text in them, again, key by key, as an user would,
+the text in them, again, key by key, as an user would!
 
 ###Always from the user perspective
 
-On the same tone, when selecting/checking `<option>`s or checkboxes or radios, try not to use `$().prop("selected", true)` directly to them.
+On the same tone, when selecting/checking `<option>`s or checkboxes or radios, try not to use `$().prop("selected", true)` directly to them (which to work, of course, would need JS to be enabled on the driver).
 Do as an user would: call `.click()`!
 
 <br><br>
