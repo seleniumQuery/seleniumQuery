@@ -102,6 +102,32 @@ $("#tab tr:nth-child(3n+1)").find("/img[@alt='calendar']/preceding::input").val(
 ```
 Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
+<br>
+
+###Waiting capabilities for improved Ajax testing
+
+Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element (no boilerplate code!) through the use of the `.waitUntil()` function:
+
+```java
+// WebDriver cannot natively detect the end of an Ajax call.
+// To test your application's behavior, you can and should always work with the
+// Ajax's expected effects, visible for the end user.
+// Below is an example of a <div> that should be hidden as effect of an Ajax call.
+// The code will hold until the modal is gone. If it is never gone, seleniumQuery
+// will throw a timeout exception.
+$("#modalDiv :button:contains('OK')").click();
+$("#modalDiv :button:contains('OK')").waitUntil().is(":not(:visible)");
+
+// Or, fluently:
+$("#modalDivOkButton").click().waitUntil().is(":not(:visible)");
+```
+
+And, that's right, the `.is()` function above is your old-time friend that takes a selector as argument!
+
+Check out what else `.waitUntil()` can do in the [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
+
+<br>
+
 ###Flexible WebDriver builder system
 
 How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only at the first use.
@@ -174,30 +200,6 @@ Finally, if you want to create the `WebDriver` yourself:
 WebDriver myDriver = ...;
 $.driver().use(myDriver);
 ```
-
-
-###Waiting capabilities for improved Ajax testing
-
-Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element (no boilerplate code!) through the use of the `.waitUntil()` function:
-
-```java
-// WebDriver cannot natively detect the end of an Ajax call.
-// To test your application's behavior, you can and should always work with the
-// Ajax's expected effects, visible for the end user.
-// Below is an example of a <div> that should be hidden as effect of an Ajax call.
-// The code will hold until the modal is gone. If it is never gone, seleniumQuery
-// will throw a timeout exception.
-$("#modalDiv :button:contains('OK')").click();
-$("#modalDiv :button:contains('OK')").waitUntil().is(":not(:visible)");
-
-// Or, fluently:
-$("#modalDivOkButton").click().waitUntil().is(":not(:visible)");
-```
-
-And, that's right, the `.is()` function above is your old-time friend that takes a selector as argument!
-
-Check out what else `.waitUntil()` can do in the [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
-
 
 <br>
 
