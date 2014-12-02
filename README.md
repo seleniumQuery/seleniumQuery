@@ -130,14 +130,13 @@ Check out what else `.waitUntil()` can do in the [seleniumQuery API wiki page](h
 
 ###Flexible WebDriver builder system
 
-How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only at the first use.
+How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only when first used.
 
 #####Firefox
 
 ```java
 $.driver().useFirefox(); // Will set up firefox as driver
-
-$.url("http://seleniumquery.github.io"); // the driver will be instantiated when this executes
+$.url("http://seleniumquery.github.io"); //the driver will be instantiated when this executes
 ```
 
 #####Firefox driver with disabled JavaScript
@@ -153,7 +152,7 @@ All you have to do is download [their executables](https://github.com/seleniumQu
 
 ```java
 // Using Chrome
-$.driver().useChrome(); // will look for chromedriver(.exe) to you, including the classpath!
+$.driver().useChrome(); // will look for chromedriver(.exe) to you, including in the classpath!
 // Or if you want to set the path yourself
 $.driver().useChrome().withPathToChromeDriver("path/to/chromedriver.exe")
 
@@ -162,7 +161,7 @@ $.driver().useInternetExplorer(); // we search IEDriverServer.exe for you
 // Or you set the path yourself
 $.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer.exe");
 
-// PhantomJS
+// PhantomJS (GhostDriver)
 $.driver().usePhantomJS(); // again, we'll find phantomjs[.exe] to you
 // Or you may set the path yourself
 $.driver().usePhantomJS().withPathToPhantomJS("path/to/phantomjs.exe");
@@ -170,7 +169,7 @@ $.driver().usePhantomJS().withPathToPhantomJS("path/to/phantomjs.exe");
 
 #####HtmlUnit
 
-So many ways to set up `HtmlUnitDriver`... If only there was a simple way. Oh, wait:
+So many possibilities to set up `HtmlUnitDriver`... If only there was a simple way to use them. Oh, wait:
 
 ```java
 // HtmlUnit default (Chrome/JavaScript ON)
@@ -192,7 +191,7 @@ $.driver().useHtmlUnit().emulatingInternetExplorer(); // will pick latest IE
 
 ####But there is more
 
-Explore the auto-complete. There are additional options to every browser, such as `.withCapabilities(DesiredCapabilities)` or some specific, such as `.withProfile(FirefoxProfile)` or `.withOptions(ChromeOptions)`.
+Explore the auto-complete. There are additional options to every driver, such as `.withCapabilities(DesiredCapabilities)` or some specific, such as `.withProfile(FirefoxProfile)` or `.withOptions(ChromeOptions)`.
 
 Finally, if you want to create the `WebDriver` yourself:
 
@@ -224,7 +223,7 @@ the text in them, again, key by key, as an user would!
 On the same tone, when selecting/checking `<option>`s or checkboxes or radios, try not to use `$().prop("selected", true)` directly to them.
 Do as an user would: call `.click()`!
 
-<br>
+<br><br>
 
 ###Alternate symbols
 
