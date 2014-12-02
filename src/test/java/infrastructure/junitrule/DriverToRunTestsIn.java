@@ -3,44 +3,55 @@ package infrastructure.junitrule;
 @SuppressWarnings("unused")
 public enum DriverToRunTestsIn {
 
-	ALL_DRIVERS,
-	ALL_DRIVERS_WITH_JS_OFF_AS_WELL(true, true, true, true, true, true),
-	HEADLESS_DRIVERS(true, false, false, false, true, false),
-	HEADLESS_DRIVERS_WITH_JS_OFF_AS_WELL(true, false, false, false, true, true),
-	NON_HEADLESS_DRIVERS(false, true, true, true, false, false),
-	HTMLUNIT(true, false, false, false, false, false),
-	HTMLUNIT_WITH_JS_OFF_AS_WELL(true, false, false, false, false, true),
-	HTMLUNIT_CHROME(true, false, false, false, false, false),
-	HTMLUNIT_CHROME_WITH_JS_OFF_AS_WELL(true, false, false, false, false, true),
-	CHROME(false, false, true, false, false, false),
-	FIREFOX(false, true, false, false, false, false),
-	FIREFOX_WITH_JS_OFF_AS_WELL(false, true, false, false, false, true),
-	IE(false, false, false, true, false, false),
-	PHANTOMJS(false, false, false, false, true, false);
+	ALL_DRIVERS_JS_ON_AND_OFF			(true,  true,  true,  true,  true,    true,  true),
+	ALL_DRIVERS_JS_ON_ONLY				(true,  true,  true,  true,  true,    true,  false),
+	HEADLESS_DRIVERS_JS_ON_AND_OFF      (false, false, false, true,  true,    true,  true),
+	HEADLESS_DRIVERS_JS_ON_ONLY         (false, false, false, true,  true,    true,  false),
+	NON_HEADLESS_DRIVERS_JS_ON_ONLY     (true,  true,  true,  false, false,   true,  false),
 
-	DriverToRunTestsIn() { }
+	FIREFOX_JS_ON_ONLY                  (true,  false, false, false, false,   true,  false),
+	FIREFOX_JS_ON_AND_OFF               (true,  false, false, false, false,   true,  true),
+	FIREFOX_JS_OFF_ONLY                 (true,  false, false, false, false,   false, true),
 
-	DriverToRunTestsIn(boolean htmlUnit, boolean firefox, boolean chrome, boolean ie, boolean phantomJS, boolean shouldTestDisabledJavaScript) {
-		this.htmlUnit = htmlUnit;
+	CHROME                              (false, true,  false, false, false,   true,  false),
+	IE                                  (false, false, true,  false, false,   true,  false),
+	PHANTOMJS                           (false, false, false, true,  false,   true,  false),
+
+	HTMLUNIT_ALL_JS_ON_AND_OFF          (false, false, false, false, true,    true,  true),
+	HTMLUNIT_ALL_JS_ON_ONLY             (false, false, false, false, true,    true,  false),
+	HTMLUNIT_ALL_JS_OFF_ONLY            (false, false, false, false, true,    false, true),
+
+	HTMLUNIT_CHROME_JS_ON_AND_OFF       (false, false, false, false, false,   false,  false),
+	HTMLUNIT_CHROME_JS_ON_ONLY          (false, false, false, false, false,   false,  false),
+	HTMLUNIT_CHROME_JS_OFF_ONLY         (false, false, false, false, false,   false,  false);
+
+
+	DriverToRunTestsIn(boolean firefox, boolean chrome, boolean ie, boolean phantomJS, boolean htmlUnit, boolean javaScriptOn, boolean javaScriptOff) {
 		this.firefox = firefox;
 		this.chrome = chrome;
 		this.ie = ie;
 		this.phantomJS = phantomJS;
-		this.shouldTestDisabledJavaScript = shouldTestDisabledJavaScript;
+		this.htmlUnit = htmlUnit;
+		this.javaScriptOn = javaScriptOn;
+		this.javaScriptOff = javaScriptOff;
 	}
 
-	private boolean htmlUnit = true;
-	private boolean firefox = true;
-	private boolean chrome = true;
-	private boolean ie = true;
-	private boolean phantomJS = true;
-	private boolean shouldTestDisabledJavaScript = false;
+	private final boolean htmlUnit;
+	private final boolean firefox;
+	private final boolean chrome;
+	private final boolean ie;
+	private final boolean phantomJS;
+	private final boolean javaScriptOn;
+	private final boolean javaScriptOff;
 
 	public boolean canRunHtmlUnit() { return htmlUnit; }
 	public boolean canRunFirefox() { return firefox; }
 	public boolean canRunChrome() { return chrome; }
 	public boolean canRunIE() { return ie; }
 	public boolean canRunPhantomJS() { return phantomJS; }
-	public boolean shouldTestDisabledJavaScript() { return shouldTestDisabledJavaScript; }
+	public boolean shouldRunWithJavaScriptOn() { return javaScriptOn; }
+	public boolean shouldRunWithJavaScriptOff() { return javaScriptOff; }
+	public boolean canRunHtmlUnitWithJavaScriptOn() { return canRunHtmlUnit() && shouldRunWithJavaScriptOn(); }
+	public boolean canRunHtmlUnitWithJavaScriptOff() { return canRunHtmlUnit() && shouldRunWithJavaScriptOff(); }
 
 }

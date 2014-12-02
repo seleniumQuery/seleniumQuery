@@ -1,9 +1,8 @@
 package infrastructure.junitrule;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.junit.runners.model.Statement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import static infrastructure.junitrule.DriverInstantiator.*;
 import static io.github.seleniumquery.SeleniumQuery.$;
 
 @SuppressWarnings("deprecation")
@@ -23,151 +22,56 @@ public class RunTestMethodsInChosenDrivers extends Statement {
 		executeTestOnHtmlUnits();
 		executeTestOnChrome();
 		executeTestOnIE();
-		executeTestOnFirefox();
+		executeTestOnFirefoxWithJS();
+		executeTestOnFirefoxWithoutJS();
 		executeTestOnPhantomJS();
 		testMethodsRunner.reportFailures();
 	}
 
 	private void executeTestOnHtmlUnits() {
-		if (!driverToRunTestsIn.canRunHtmlUnit()) {
-			return;
-		}
-		if (driverToRunTestsIn != DriverToRunTestsIn.HTMLUNIT_CHROME &&
-			driverToRunTestsIn != DriverToRunTestsIn.HTMLUNIT_CHROME_WITH_JS_OFF_AS_WELL) {
-			executeOnHtmlUnitEmulatingFirefox17();
-			executeOnHtmlUnitEmulatingFirefox24();
-			executeOnHtmlUnitEmulatingIE8();
-			executeOnHtmlUnitEmulatingIE9();
-			executeOnHtmlUnitEmulatingIE11();
-		}
-		executeOnHtmlUnitEmulatingChrome();
+		executeTestOnHtmlUnitEmulatingChromeJavaScriptOn();
+		executeTestOnHtmlUnitEmulatingChromeJavaScriptOff();
+		executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOn();
+		executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOff();
+		executeTestOnHtmlUnitEmulatingIE8JavaScriptOn();
+		executeTestOnHtmlUnitEmulatingIE8JavaScriptOff();
+		executeTestOnHtmlUnitEmulatingIE9JavaScriptOn();
+		executeTestOnHtmlUnitEmulatingIE9JavaScriptOff();
+		executeTestOnHtmlUnitEmulatingIE11JavaScriptOn();
+		executeTestOnHtmlUnitEmulatingIE11JavaScriptOff();
 	}
 
-	private void executeTestOnChrome() {
-		if (!driverToRunTestsIn.canRunChrome()) {
-			return;
-		}
-		System.out.println("@## > Instantiating Chrome Driver");
-		$.driver().useChrome();
-		testMethodsRunner.executeMethodForDriver("Chrome");
-		$.quit();
+	private void executeTestOnChrome() { executeTestOn(driverToRunTestsIn.canRunChrome(), DriverInstantiator.CHROME); }
+	private void executeTestOnIE() { executeTestOn(driverToRunTestsIn.canRunIE(), DriverInstantiator.IE); }
+	private void executeTestOnFirefoxWithJS() { executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOn(), FIREFOX_JS_ON); }
+	private void executeTestOnFirefoxWithoutJS() { executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOff(), FIREFOX_JS_OFF); }
+	private void executeTestOnPhantomJS() { executeTestOn(driverToRunTestsIn.canRunPhantomJS(), PHANTOMJS); }
+
+	private void executeTestOnHtmlUnitEmulatingChromeJavaScriptOn() {
+		boolean shouldExecute = driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn()  || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY
+																					 || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_AND_OFF;
+		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_CHROME_JS_ON);
 	}
-
-	private void executeTestOnIE() {
-		if (!driverToRunTestsIn.canRunIE()) {
-			return;
-		}
-		System.out.println("@## > Instantiating on IE");
-		$.driver().useInternetExplorer();
-		testMethodsRunner.executeMethodForDriver("IE");
-		$.quit();
+	private void executeTestOnHtmlUnitEmulatingChromeJavaScriptOff() {
+		boolean shouldExecute = driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff() || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_CHROME_JS_OFF_ONLY
+																					 || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_AND_OFF;
+		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_CHROME_JS_OFF);
 	}
+	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOn()  { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_ON); }
+	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOff() { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_OFF); }
+	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOn()      { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE8_JS_ON); }
+	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOff()     { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE8_JS_OFF); }
+	private void executeTestOnHtmlUnitEmulatingIE9JavaScriptOn()      { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE9_JS_ON); }
+	private void executeTestOnHtmlUnitEmulatingIE9JavaScriptOff()     { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE9_JS_OFF); }
+	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOn()     { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE11_JS_ON); }
+	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOff()    { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE11_JS_OFF); }
 
-	private void executeTestOnFirefox() {
-		if (!driverToRunTestsIn.canRunFirefox()) {
-			return;
-		}
-		System.out.println("@## > Instantiating Firefox Driver - JavaScript ON");
-		$.driver().useFirefox();
-		testMethodsRunner.executeMethodForDriver("Firefox");
-		$.quit();
-
-		if (!driverToRunTestsIn.shouldTestDisabledJavaScript()) {
-			return;
-		}
-		System.out.println("@## > Instantiating Firefox Driver - JavaScript OFF");
-		$.driver().useFirefox().withoutJavaScript();
-		testMethodsRunner.executeMethodForDriver("Firefox");
-		$.quit();
-	}
-
-	private void executeTestOnPhantomJS() {
-		if (!driverToRunTestsIn.canRunPhantomJS()) {
-			return;
-		}
-		System.out.println("@## > Instantiating PhantomJS Driver");
-		$.driver().usePhantomJS();
-		testMethodsRunner.executeMethodForDriver("PhantomJS");
-		$.quit();
-	}
-
-	private void executeOnHtmlUnitEmulatingChrome() {
-		executeOnHtmlUnit(BrowserVersion.CHROME);
-	}
-
-	private void executeOnHtmlUnitEmulatingIE11() {
-		executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_11);
-	}
-
-	private void executeOnHtmlUnitEmulatingIE9() {
-		executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_9);
-	}
-
-	private void executeOnHtmlUnitEmulatingIE8() {
-		executeOnHtmlUnit(BrowserVersion.INTERNET_EXPLORER_8);
-	}
-
-	private void executeOnHtmlUnitEmulatingFirefox24() {
-		executeOnHtmlUnit(BrowserVersion.FIREFOX_24);
-	}
-
-	private void executeOnHtmlUnitEmulatingFirefox17() {
-		executeOnHtmlUnit(BrowserVersion.FIREFOX_17);
-	}
-
-	private void executeOnHtmlUnit(BrowserVersion browserVersion) {
-		System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver - JavaScript ON");
-		$.driver().use(createHtmlUnitDriverWithJavasCript(browserVersion, true));
-		testMethodsRunner.executeMethodForDriver("HtmlUnit(" + browserVersion + ")");
-		$.quit();
-
-		if (!driverToRunTestsIn.shouldTestDisabledJavaScript()) {
-			return;
-		}
-		System.out.println("@## > Instantiating HtmlUnit ("+browserVersion+") Driver - JavaScript OFF");
-		$.driver().use(createHtmlUnitDriverWithJavasCript(browserVersion, false));
-		testMethodsRunner.executeMethodForDriver("HtmlUnit(" + browserVersion + ")");
-		$.quit();
-	}
-
-	private HtmlUnitDriver createHtmlUnitDriverWithJavasCript(BrowserVersion browserVersion, boolean enableJavascript) {
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(browserVersion);
-		htmlUnitDriver.setJavascriptEnabled(enableJavascript);
-		return htmlUnitDriver;
-	}
-
-}
-
-class TestMethodsRunner {
-
-	private String failed = "";
-	private Throwable firstFailure;
-	private Statement base;
-	private String url;
-
-	public TestMethodsRunner(Statement base, String url) {
-		this.base = base;
-		this.url = url;
-	}
-
-	public void executeMethodForDriver(String driver) {
-		System.out.println("   @## >>> Running on "+driver);
-		$.url(url); // this wont be needed when everyone use this both as @Rule and @ClassRule
-		try {
-			base.evaluate();
-		} catch (Throwable t) {
-			if (this.firstFailure == null) {
-				this.firstFailure = t;
-			}
-			failed += driver + " ";
-			System.out.println("   @## %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FAILED on "+driver+"! -> "+t.getMessage());
-		}
-		System.out.println("   @## <<< Done on "+driver);
-	}
-
-	public void reportFailures() throws Throwable {
-		if (this.firstFailure != null) {
-			throw new AssertionError("There are test failures in some drivers: "+failed, this.firstFailure);
+	private void executeTestOn(boolean shouldExecute, DriverInstantiator driverInstantiator) {
+		if (shouldExecute) {
+			System.out.println("@## > Instantiating " + driverInstantiator.getDriverDescription());
+			driverInstantiator.instantiateDriver($);
+			testMethodsRunner.executeMethodForDriver(driverInstantiator.getDriverDescription());
+			$.quit();
 		}
 	}
 
