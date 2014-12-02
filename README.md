@@ -36,31 +36,27 @@ import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the sh
 
 public class SeleniumQueryExample {
   public static void main(String[] args) {
-     // sets Firefox as the driver -- this is optional, if omitted, will default
-     // to HtmlUnit or whatever you set at the, also optional, config files
-     //
-     $.driver().useFirefox().withoutJavaScript(); // JS will be disabled!
+    // sets Firefox as the driver (this is optional, if omitted, will default to HtmlUnit)
+    $.driver().useFirefox().withoutJavaScript(); // JavaScript will be disabled!
 
-     $.url("http://www.google.com/?hl=en");
+    $.url("http://www.google.com/?hl=en");
 
-     $(":text[name='q']").val("selenium"); // the keys are actually typed
-     $(":button:contains('Google Search')").click();
+    $(":text[name='q']").val("selenium"); // the keys are actually typed!
+    $(":button:contains('Google Search')").click();
 
-     String resultsText = $("#resultStats").text();
-     System.out.println(resultsText);
+    // Alternatively: $(":text[name='q']").val("selenium").submit();
 
-     // Besides the short syntax and the jQuery behavior you already know,
-     // other very useful function in seleniumQuery is .waitUntil(),
-     // handy for dealing with Ajax enabled pages:
-     //
-     $(":input[name='q']").waitUntil().is(":enabled");
-     // The line above waits for no time, as that input is always enabled in google.com
+    // Besides the short syntax and the jQuery behavior you already know,
+    // other very useful function in seleniumQuery is .waitUntil(),
+    // handy for dealing with user-waiting actions (specially in Ajax enabled pages):
+    String resultsText = $("#resultStats").waitUntil().is(":visible").then().text();
+    System.out.println(resultsText);
 
-     $.quit(); // quits the currently used driver (firefox)
+    $.quit(); // quits the currently used driver (firefox)
   }
 }
 ```
-The code above can be found at the sample [seleniumQuery demos project](https://github.com/seleniumQuery/seleniumQuery-demos).
+The code above can be found at the [seleniumQuery demos project](https://github.com/seleniumQuery/seleniumQuery-demos).
 
 To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
 ```xml
@@ -68,22 +64,9 @@ To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
     <dependency>
         <groupId>io.github.seleniumquery</groupId>
         <artifactId>seleniumquery</artifactId>
-        <version>0.9.0-SNAPSHOT</version>
+        <version>0.9.0</version>
     </dependency>
 </dependencies>
-<!-- The repository the snapshots will be downloaded from.
-    Can either go in your pom.xml or settings.xml -->
-<repositories>
-	<repository>
-		<id>sonatype-nexus-snapshots</id>
-		<name>Sonatype Nexus Snapshots</name>
-		<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		<snapshots>
-			<enabled>true</enabled>
-			<updatePolicy>always</updatePolicy>
-		</snapshots>
-	</repository>
-</repositories>
 ```
 
 <br>
@@ -164,6 +147,28 @@ String oldStreetz = jQuery("input.street").val();
 jQuery("input.street").val("5th St!");
 ```
 
+<br>
+
+##seleniumQuery still is Selenium - with "just" a jQuery interface
+
+That's why it can work with disabled JavaScript!
+
+But there is a more important aspect of that: As our functions yield the same result as if you were using jQuery, remember we always execute them from the user perspective.
+In other words, when you call:
+```java
+$(":input[name='email']").val("seleniumQuery@example.com");
+```
+
+We don't change  the `value` attribute directly like jQuery does. We actually do as a user would: We clear the input
+and type, key by key, the string provided as argument!
+
+But we go the **extra mile**: Our `$().val()` works even on `contenteditable` elements: They don't have `value`, but we type
+the text in them, again, key by key, as an user would!
+
+###Always from the user perspective
+
+On the same tone, when selecting/checking `<option>`s or checkboxes or radios, try not to use `$().prop("selected", true)` directly to them.
+Do as an user would: call `.click()`!
 
 <br>
 
