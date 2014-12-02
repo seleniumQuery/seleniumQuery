@@ -56,17 +56,13 @@ public class SeleniumQueryExample {
   }
 }
 ```
-The code above can be found at the [seleniumQuery demos project](https://github.com/seleniumQuery/seleniumQuery-demos).
-
-To get seleniumQuery's latest snapshot, add this to your **`pom.xml`**:
+The code above can be found at the [seleniumQuery demos project](https://github.com/seleniumQuery/seleniumQuery-demos). To get the latest version, add to your **`pom.xml`**:
 ```xml
-<dependencies>
-    <dependency>
-        <groupId>io.github.seleniumquery</groupId>
-        <artifactId>seleniumquery</artifactId>
-        <version>0.9.0</version>
-    </dependency>
-</dependencies>
+<dependency>
+    <groupId>io.github.seleniumquery</groupId>
+    <artifactId>seleniumquery</artifactId>
+    <version>0.9.0</version>
+</dependency>
 ```
 
 <br>
@@ -153,16 +149,16 @@ jQuery("input.street").val("5th St!");
 
 That's why it can work with disabled JavaScript!
 
-But there is a more important aspect of that: As our functions yield the same result as if you were using jQuery, remember we always execute them from the user perspective.
+But there is a more important aspect to it: As our functions yield the same result as if you were using jQuery, remember we always execute them from the user perspective.
 In other words, when you call:
 ```java
 $(":input[name='email']").val("seleniumQuery@example.com");
 ```
 
-We don't change  the `value` attribute directly like jQuery does. We actually do as a user would: We clear the input
-and type, key by key, the string provided as argument!
+We don't change  the `value` attribute directly like jQuery does. We actually do as a user would: We **clear** the input
+and **type, key by key**, the string provided as argument!
 
-But we go the **extra mile**: Our `$().val()` works even on `contenteditable` elements: They don't have `value`, but we type
+But we go the **extra mile**: Our `$().val()` even works on `contenteditable` elements: They don't have `value`, but we type
 the text in them, again, key by key, as an user would!
 
 ###Always from the user perspective
