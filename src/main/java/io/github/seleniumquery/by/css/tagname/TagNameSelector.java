@@ -28,9 +28,7 @@ public class TagNameSelector implements CssSelector<ElementSelector> {
 	@Override
 	public XPathExpression toXPath(Map<String, String> stringMap, ElementSelector selector) {
 		String tagName = selector.toString();
-		XPathExpression tagSelector = XPathExpressionFactory.createNoFilterSelector(tagName);
-		tagSelector.kind = CssSelectorType.TAG;
-		return tagSelector;
+		return XPathExpressionFactory.createNoFilterSelector(tagName, CssSelectorType.TAG);
 	}
 
 }

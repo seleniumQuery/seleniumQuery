@@ -20,19 +20,28 @@ public class XPathExpression {
 	private List<XPathExpression> otherExpressions = new ArrayList<XPathExpression>();
 	private ElementFilterList elementFilterList;
 	
-	// TODO this is very, very, very nasty!
-	// should probably be replaced with polymorphism
-	public CssSelectorType kind;
+	/**
+	 * The behavior this field drives should probably be replaced with polymorphism.
+	 * Also, its presence shows a "rupture" with this class' (XPathExpression) concept.
+	 * How can an "XPath Exression" have a "CSS Selector Type"?
+	 * Maybe this should be a CSSSelector (or SQLocator, or whatever) that has a toXPathExpression() method.
+	 * Or the conversion to XPath may be a visitor hierarchy. Something like that.
+	 */
+	private CssSelectorType cssSelectorType;
 
 	XPathExpression(String xPathExpression, ElementFilterList elementFilterList) {
+		this(xPathExpression, elementFilterList, CssSelectorType.CONDITIONAL_SIMPLE);
+	}
+
+	XPathExpression(String xPathExpression, ElementFilterList elementFilterList, CssSelectorType cssSelectorType) {
 		this.xPathExpression = xPathExpression;
 		this.elementFilterList = elementFilterList;
-		this.kind = CssSelectorType.CONDITIONAL_SIMPLE;
+		this.cssSelectorType = cssSelectorType;
 	}
 	
 	@Override
 	public String toString() {
-		return "[XPath: \""+xPathExpression+"\", kind: "+kind+", otherExps: "+otherExpressions+", filter: "+elementFilterList+"]";
+		return "[XPath: \""+xPathExpression+"\", kind: "+ getCssSelectorType() +", otherExps: "+otherExpressions+", filter: "+elementFilterList+"]";
 	}
 	
 	public List<WebElement> findWebElements(SearchContext context) {
@@ -49,7 +58,7 @@ public class XPathExpression {
 	}
 	
 	public String toXPath() {
-		if (this.kind != CssSelectorType.TAG) {
+		if (this.getCssSelectorType() != CssSelectorType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
 		if ("*".equals(this.xPathExpression)) {
@@ -65,12 +74,12 @@ public class XPathExpression {
 
 	private void mergeExpression(XPathExpression other) {
 		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
-				other.kind, other.xPathExpression, other.elementFilterList);
-		this.xPathExpression = other.kind.merge(this.xPathExpression, null, other.xPathExpression);
+				other.getCssSelectorType(), other.xPathExpression, other.elementFilterList);
+		this.xPathExpression = other.getCssSelectorType().merge(this.xPathExpression, null, other.xPathExpression);
 	}
 
 	public String toXPathCondition() {
-		if (this.kind != CssSelectorType.TAG) {
+		if (this.getCssSelectorType() != CssSelectorType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
 		if ("*".equals(this.xPathExpression)) {
@@ -86,12 +95,19 @@ public class XPathExpression {
 
 	private void mergeAsCondition(XPathExpression other) {
 		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
-				other.kind, other.xPathExpression, other.elementFilterList);
-		this.xPathExpression = other.kind.mergeAsCondition(this.xPathExpression, null, other.xPathExpression);
+				other.getCssSelectorType(), other.xPathExpression, other.elementFilterList);
+		this.xPathExpression = other.getCssSelectorType().mergeAsCondition(this.xPathExpression, null, other.xPathExpression);
 	}
 
 	public String toSingleXPathExpression() {
 		return this.xPathExpression;
 	}
 
+	public CssSelectorType getCssSelectorType() {
+		return cssSelectorType;
+	}
+
+	public void setCssSelectorType(CssSelectorType cssSelectorType) {
+		this.cssSelectorType = cssSelectorType;
+	}
 }
