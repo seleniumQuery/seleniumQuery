@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.css.combinators;
 
 import io.github.seleniumquery.by.SelectorUtils;
+import io.github.seleniumquery.by.xpath.CssSelectorType;
 import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.css.CssSelector;
@@ -32,10 +33,10 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	
 	@Override
 	public XPathComponent toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		XPathComponent elementCompiledSelector = XPathSelectorCompilerService.compileToDescendantDirectExpression(stringMap, descendantSelector.getSimpleSelector());
+		XPathComponent elementCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getSimpleSelector());
 		XPathComponent parentCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
 
-		return parentCompiledSelector.combine(elementCompiledSelector);
+		return parentCompiledSelector.combine(elementCompiledSelector, CssSelectorType.DESCENDANT_DIRECT);
 	}
 
 }
