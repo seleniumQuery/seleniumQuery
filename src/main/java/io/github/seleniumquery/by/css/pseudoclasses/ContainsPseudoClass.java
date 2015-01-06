@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +32,7 @@ public class ContainsPseudoClass implements PseudoClass {
 		String textToContain = pseudoClassSelector.getPseudoClassContent();
 		textToContain = SelectorUtils.unescapeString(textToContain);
 		String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
-		return XPathExpressionFactory.createNoFilterSelector("[contains(string(.), " + wantedTextToContain + ")]");
+		return XPathComponentFactory.createNoFilter("[contains(string(.), " + wantedTextToContain + ")]");
 	}
 
 }

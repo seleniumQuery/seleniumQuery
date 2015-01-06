@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,7 +47,7 @@ public class HiddenPseudoClass implements PseudoClass {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":hidden");
 
 		// #not-pure-xpath // it is not pure because XPath can't see the styles affecting the element's classes
-		return XPathExpressionFactory.createSimpleConditional("[" + HIDDEN_XPATH_MUST_FILTER + "]", hiddenPseudoClassFilter);
+		return XPathComponentFactory.createSimpleConditional("[" + HIDDEN_XPATH_MUST_FILTER + "]", hiddenPseudoClassFilter);
 	}
 	
 }

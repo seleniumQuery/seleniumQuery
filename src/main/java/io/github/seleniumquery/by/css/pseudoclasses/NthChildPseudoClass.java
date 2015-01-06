@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,10 +51,10 @@ public class NthChildPseudoClass implements PseudoClass {
 			return nthChild(0, parseInt(nthChildContent));
 		// n --> 1n --> everyone
 		} else if (nthChildContent.matches("n")) {
-			return XPathExpressionFactory.createNoFilterSelector("[true()]");
+			return XPathComponentFactory.createNoFilter("[true()]");
 		// 0n --> nobody
 		} else if (nthChildContent.matches("[+-]?[0]?n")) {
-			return XPathExpressionFactory.createNoFilterSelector("[false()]");
+			return XPathComponentFactory.createNoFilter("[false()]");
 		}
 		// an+b --> general case
 		Matcher m = NTH_CHILD_REGEX.matcher(nthChildContent);
@@ -72,14 +72,14 @@ public class NthChildPseudoClass implements PseudoClass {
 	public static XPathComponent nthChild(int a, int b) {
 		// a == 0: 0n+b 0n-b
 		if (a == 0) {
-            return XPathExpressionFactory.createNoFilterSelector("[position() = " + b + "]");
+            return XPathComponentFactory.createNoFilter("[position() = " + b + "]");
         }
 		// a < 0: -an+b -an-b
 		if (a < 0) {
-            return XPathExpressionFactory.createNoFilterSelector("[(position() - " + b + ") mod " + a + " = 0 and position() <= " + b + "]");
+            return XPathComponentFactory.createNoFilter("[(position() - " + b + ") mod " + a + " = 0 and position() <= " + b + "]");
         }
 		// a > 0: an+b an-b
-		return XPathExpressionFactory.createNoFilterSelector("[(position() - " + b + ") mod " + a + " = 0 and position() >= " + b + "]");
+		return XPathComponentFactory.createNoFilter("[(position() - " + b + ") mod " + a + " = 0 and position() >= " + b + "]");
 	}
 
 }

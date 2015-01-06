@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -93,7 +93,7 @@ public class SubmitPseudoClass implements PseudoClass {
 
 	@Override
 	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[("
+		return XPathComponentFactory.createNoFilter("[("
 				+ "( local-name() = 'input' and @type = 'submit' ) or "
 				+ "( local-name() = 'button' and (@type = 'submit' or not(@type)) )"
 				+ ")]");

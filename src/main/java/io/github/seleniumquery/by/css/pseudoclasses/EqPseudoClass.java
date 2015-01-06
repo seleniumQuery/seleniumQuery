@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 
 import java.util.List;
 
@@ -57,9 +57,9 @@ public class EqPseudoClass implements PseudoClass {
 		int index = Integer.valueOf(eqIndex);
 		
 		if (index >= 0) {
-			return XPathExpressionFactory.createNoFilterSelectorAppliedToAll("[position() = " + (index + 1) + "]");
+			return XPathComponentFactory.createNoFilterAppliedToAll("[position() = " + (index + 1) + "]");
 		}
-		return XPathExpressionFactory.createNoFilterSelectorAppliedToAll("[position() = (last()-" + (-index - 1) + ")]");
+		return XPathComponentFactory.createNoFilterAppliedToAll("[position() = (last()-" + (-index - 1) + ")]");
 	}
 
 }
