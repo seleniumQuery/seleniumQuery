@@ -21,7 +21,7 @@ public class XPathExpressionFactory {
 	 * it is entirely NOT supported by the driver.
 	 */
 	public static XPathExpression createFilterOnlySelector(ElementFilter filter) {
-		return create(EMPTY_SELECTOR, filter);
+		return createSimpleConditional(EMPTY_SELECTOR, filter);
 	}
 
 	public static XPathExpression createNoFilterSelectorAppliedToAll(String cssSelector) {
@@ -32,15 +32,15 @@ public class XPathExpressionFactory {
 	 * Creates a XPath expression that does no additional filtering.
 	 */
 	public static XPathExpression createNoFilterSelector(String selector) {
-		return create(selector, ElementFilter.FILTER_NOTHING);
+		return createSimpleConditional(selector, ElementFilter.FILTER_NOTHING);
 	}
 
 	public static XPathExpression createNoFilterSelector(String selector, CssSelectorType cssSelectorType) {
 		return create(selector, ElementFilter.FILTER_NOTHING, cssSelectorType);
 	}
 
-	public static XPathExpression create(String selector, ElementFilter filter) {
-		return new XPathExpression(selector, toElementFilterList(filter));
+	public static XPathExpression createSimpleConditional(String selector, ElementFilter filter) {
+		return new XPathExpression(selector, toElementFilterList(filter), CssSelectorType.CONDITIONAL_SIMPLE);
 	}
 
 	public static XPathExpression create(String selector, ElementFilter filter, CssSelectorType cssSelectorType) {

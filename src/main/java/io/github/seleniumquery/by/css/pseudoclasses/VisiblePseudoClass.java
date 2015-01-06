@@ -36,7 +36,7 @@ public class VisiblePseudoClass implements PseudoClass {
 		
 		// #no-xpath
 		System.err.println(":visible is not fully XPath supported (if the style is in a class, it won't know)!!!");
-		return XPathExpressionFactory.create("[" + NOT_DISPLAY_NONE_XPATH + "]", visiblePseudoClassFilter);
+		return XPathExpressionFactory.createSimpleConditional("[" + NOT_DISPLAY_NONE_XPATH + "]", visiblePseudoClassFilter);
 	}
 	
 }
