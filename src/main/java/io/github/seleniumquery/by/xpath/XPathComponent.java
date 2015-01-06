@@ -12,12 +12,12 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class XPathExpression {
+public class XPathComponent {
 
 	public static final String MATCH_EVERYTHING_XPATH_CONDITIONAL = "true()";
 
 	private String xPathExpression;
-	private List<XPathExpression> otherExpressions = new ArrayList<XPathExpression>();
+	private List<XPathComponent> otherExpressions = new ArrayList<XPathComponent>();
 	private ElementFilterList elementFilterList;
 	
 	/**
@@ -29,7 +29,7 @@ public class XPathExpression {
 	 */
 	private CssSelectorType cssSelectorType;
 
-	XPathExpression(String xPathExpression, ElementFilterList elementFilterList, CssSelectorType cssSelectorType) {
+	XPathComponent(String xPathExpression, ElementFilterList elementFilterList, CssSelectorType cssSelectorType) {
 		this.xPathExpression = xPathExpression;
 		this.elementFilterList = elementFilterList;
 		this.cssSelectorType = cssSelectorType;
@@ -47,7 +47,7 @@ public class XPathExpression {
 		return elementFilterList.filter(driver, elements);
 	}
 	
-	public XPathExpression combine(XPathExpression other) {
+	public XPathComponent combine(XPathComponent other) {
 		this.otherExpressions.add(other);
 		this.otherExpressions.addAll(other.otherExpressions);
 		return this;
@@ -62,13 +62,13 @@ public class XPathExpression {
 		} else {
 			this.xPathExpression = ".//*[self::" + this.xPathExpression+"]";
 		}
-		for (XPathExpression other : otherExpressions) {
+		for (XPathComponent other : otherExpressions) {
 			mergeExpression(other);
 		}
 		return "(" + this.xPathExpression + ")";
 	}
 
-	private void mergeExpression(XPathExpression other) {
+	private void mergeExpression(XPathComponent other) {
 		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
 				other.getCssSelectorType(), other.xPathExpression, other.elementFilterList);
 		this.xPathExpression = other.getCssSelectorType().merge(this.xPathExpression, null, other.xPathExpression);
@@ -83,13 +83,13 @@ public class XPathExpression {
 		} else {
 			this.xPathExpression = "local-name() = '"+this.xPathExpression+"'";
 		}
-		for (XPathExpression other : otherExpressions) {
+		for (XPathComponent other : otherExpressions) {
 			mergeAsCondition(other);
 		}
 		return this.xPathExpression;
 	}
 
-	private void mergeAsCondition(XPathExpression other) {
+	private void mergeAsCondition(XPathComponent other) {
 		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
 				other.getCssSelectorType(), other.xPathExpression, other.elementFilterList);
 		this.xPathExpression = other.getCssSelectorType().mergeAsCondition(this.xPathExpression, null, other.xPathExpression);

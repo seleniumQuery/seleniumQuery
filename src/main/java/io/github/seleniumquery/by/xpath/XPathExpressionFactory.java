@@ -12,7 +12,7 @@ public class XPathExpressionFactory {
 	/**
 	 * Creates a XPath expression that is empty and filters nothing.
 	 */
-	public static XPathExpression createEmptyXPathExpression() {
+	public static XPathComponent createEmptyXPathExpression() {
 		return createFilterOnlySelector(ElementFilter.FILTER_NOTHING);
 	}
 	
@@ -20,31 +20,31 @@ public class XPathExpressionFactory {
 	 * Creates a compiled selector that only does filtering, meaning
 	 * it is entirely NOT supported by the driver.
 	 */
-	public static XPathExpression createFilterOnlySelector(ElementFilter filter) {
+	public static XPathComponent createFilterOnlySelector(ElementFilter filter) {
 		return createSimpleConditional(EMPTY_SELECTOR, filter);
 	}
 
-	public static XPathExpression createNoFilterSelectorAppliedToAll(String cssSelector) {
+	public static XPathComponent createNoFilterSelectorAppliedToAll(String cssSelector) {
 		return create(cssSelector, ElementFilter.FILTER_NOTHING, CssSelectorType.CONDITIONAL_TO_ALL);
 	}
 
 	/**
 	 * Creates a XPath expression that does no additional filtering.
 	 */
-	public static XPathExpression createNoFilterSelector(String selector) {
+	public static XPathComponent createNoFilterSelector(String selector) {
 		return createSimpleConditional(selector, ElementFilter.FILTER_NOTHING);
 	}
 
-	public static XPathExpression createNoFilterSelector(String selector, CssSelectorType cssSelectorType) {
+	public static XPathComponent createNoFilterSelector(String selector, CssSelectorType cssSelectorType) {
 		return create(selector, ElementFilter.FILTER_NOTHING, cssSelectorType);
 	}
 
-	public static XPathExpression createSimpleConditional(String selector, ElementFilter filter) {
-		return new XPathExpression(selector, toElementFilterList(filter), CssSelectorType.CONDITIONAL_SIMPLE);
+	public static XPathComponent createSimpleConditional(String selector, ElementFilter filter) {
+		return new XPathComponent(selector, toElementFilterList(filter), CssSelectorType.CONDITIONAL_SIMPLE);
 	}
 
-	public static XPathExpression create(String selector, ElementFilter filter, CssSelectorType cssSelectorType) {
-		return new XPathExpression(selector, toElementFilterList(filter), cssSelectorType);
+	public static XPathComponent create(String selector, ElementFilter filter, CssSelectorType cssSelectorType) {
+		return new XPathComponent(selector, toElementFilterList(filter), cssSelectorType);
 	}
 
     private static ElementFilterList toElementFilterList(ElementFilter filter) {

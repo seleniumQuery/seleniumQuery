@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 
 import org.openqa.selenium.WebDriver;
@@ -25,6 +25,7 @@ public class OnlyChildPseudoClass implements PseudoClass {
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		WebElement parent = SelectorUtils.parent(element);
+		//noinspection SimplifiableIfStatement
 		if (parent == null // parent is null when element is <HTML>
 				|| parent.getTagName().equals("html")
 				|| parent.getTagName().equals("body")
@@ -36,7 +37,7 @@ public class OnlyChildPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		// [last() = 1] will not suffice because it may be composed into an expression like //a[last() = 1] which will yield wrong results
 		// So you have to go up and then down again: //a[../*[last() = 1]]
 		return XPathExpressionFactory.createNoFilterSelector("[../*[last() = 1]]");

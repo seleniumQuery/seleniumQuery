@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 
@@ -40,7 +40,7 @@ public class LtPseudoClass implements PseudoClass {
 		if (wantedIndex == 0) {
 			return false;
 		}
-		XPathExpression compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		XPathComponent compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
 		List<WebElement> elements = compiledSelector.findWebElements(driver);
 		if (elements.isEmpty()) {
 			return false;
@@ -54,6 +54,7 @@ public class LtPseudoClass implements PseudoClass {
 			return true;
 		}
 		int indexFound = elements.indexOf(element);
+		//noinspection SimplifiableIfStatement
 		if (indexFound == -1) {
 			return false;
 		}
@@ -61,7 +62,7 @@ public class LtPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String eqIndex = pseudoClassSelector.getPseudoClassContent();
 		if (!eqIndex.matches("[+-]?\\d+")) {
 			throw new RuntimeException("The :lt() pseudo-class requires an integer but got: " + eqIndex);

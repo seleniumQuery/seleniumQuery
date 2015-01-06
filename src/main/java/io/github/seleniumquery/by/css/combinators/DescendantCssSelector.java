@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.combinators;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
@@ -38,12 +38,12 @@ public class DescendantCssSelector implements CssSelector<DescendantSelector> {
 	}
 
 	@Override
-	public XPathExpression toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
+	public XPathComponent toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
 		Selector ancestorCSSSelector = descendantSelector.getAncestorSelector();
-		XPathExpression ancestorCompiled = XPathSelectorCompilerService.compileSelector(stringMap, ancestorCSSSelector);
+		XPathComponent ancestorCompiled = XPathSelectorCompilerService.compileSelector(stringMap, ancestorCSSSelector);
 		
 		SimpleSelector descendantCSSSelector = descendantSelector.getSimpleSelector();
-		XPathExpression childrenCompiled = XPathSelectorCompilerService.compileToDescendantGeneralExpression(stringMap, descendantCSSSelector);
+		XPathComponent childrenCompiled = XPathSelectorCompilerService.compileToDescendantGeneralExpression(stringMap, descendantCSSSelector);
 
 		return ancestorCompiled.combine(childrenCompiled);
 	}

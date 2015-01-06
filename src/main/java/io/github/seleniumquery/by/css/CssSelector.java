@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css;
 
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 
 import java.util.Map;
 
@@ -16,6 +16,6 @@ public interface CssSelector<T> {
 	 */
 	boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, T selector);
 	
-	XPathExpression toXPath(Map<String, String> stringMap, T selector);
+	XPathComponent toXPath(Map<String, String> stringMap, T selector);
 	
 }

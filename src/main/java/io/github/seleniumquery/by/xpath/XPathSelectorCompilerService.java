@@ -18,36 +18,36 @@ public class XPathSelectorCompilerService {
 		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
 		SelectorList selectorList = parsedSelector.getSelector();
 
-    	List<XPathExpression> css = new ArrayList<XPathExpression>(selectorList.getLength()); 
+    	List<XPathComponent> css = new ArrayList<XPathComponent>(selectorList.getLength());
     	for (int i = 0; i < selectorList.getLength(); i++) {
-    		XPathExpression cs = compileSelector(parsedSelector.getStringMap(), selectorList.item(i));
+    		XPathComponent cs = compileSelector(parsedSelector.getStringMap(), selectorList.item(i));
     		css.add(cs);
     	}
     	
     	return new XPathExpressionList(css);
 	}
     
-	public static XPathExpression compileSelector(Map<String, String> stringMap, Selector selector) {
+	public static XPathComponent compileSelector(Map<String, String> stringMap, Selector selector) {
 		CssSelector<Selector> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
 		return cssSelector.toXPath(stringMap, selector);
 	}
 
-	public static XPathExpression compileToDescendantGeneralExpression(Map<String, String> stringMap, Selector cssSelector) {
+	public static XPathComponent compileToDescendantGeneralExpression(Map<String, String> stringMap, Selector cssSelector) {
 		return compileAndOverrideCssSelectorType(stringMap, cssSelector, CssSelectorType.DESCENDANT_GENERAL);
 	}
 
-	public static XPathExpression compileToDescendantDirectExpression(Map<String, String> stringMap, Selector cssSelector) {
+	public static XPathComponent compileToDescendantDirectExpression(Map<String, String> stringMap, Selector cssSelector) {
 		return compileAndOverrideCssSelectorType(stringMap, cssSelector, CssSelectorType.DESCENDANT_DIRECT);
 	}
 
-	public static XPathExpression compileToAdjacentExpression(Map<String, String> stringMap, Selector cssSelector) {
+	public static XPathComponent compileToAdjacentExpression(Map<String, String> stringMap, Selector cssSelector) {
 		return compileAndOverrideCssSelectorType(stringMap, cssSelector, CssSelectorType.ADJACENT);
 	}
 
-	private static XPathExpression compileAndOverrideCssSelectorType(Map<String, String> stringMap, Selector cssSelector, CssSelectorType cssSelectorType) {
-		XPathExpression xPathExpression = compileSelector(stringMap, cssSelector);
-		xPathExpression.setCssSelectorType(cssSelectorType);
-		return xPathExpression;
+	private static XPathComponent compileAndOverrideCssSelectorType(Map<String, String> stringMap, Selector cssSelector, CssSelectorType cssSelectorType) {
+		XPathComponent xPathComponent = compileSelector(stringMap, cssSelector);
+		xPathComponent.setCssSelectorType(cssSelectorType);
+		return xPathComponent;
 	}
 
 }

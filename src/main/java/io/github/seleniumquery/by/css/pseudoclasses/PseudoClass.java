@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +11,6 @@ public interface PseudoClass {
 
 	boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector);
 
-	XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector);
+	XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector);
 
 }
