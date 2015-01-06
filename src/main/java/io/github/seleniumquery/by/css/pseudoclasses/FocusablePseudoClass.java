@@ -84,7 +84,7 @@ public class FocusablePseudoClass implements PseudoClass {
 		
 		// #no-xpath
 		System.err.println(":focusable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
-		return XPathExpressionFactory.create("[" + FOCUSABLE_XPATH + "]", focusablePseudoClassFilter);
+		return XPathExpressionFactory.createSimpleConditional("[" + FOCUSABLE_XPATH + "]", focusablePseudoClassFilter);
 	}
 	
 }

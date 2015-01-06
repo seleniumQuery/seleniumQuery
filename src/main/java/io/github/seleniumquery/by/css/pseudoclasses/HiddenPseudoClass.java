@@ -47,7 +47,7 @@ public class HiddenPseudoClass implements PseudoClass {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":hidden");
 
 		// #not-pure-xpath // it is not pure because XPath can't see the styles affecting the element's classes
-		return XPathExpressionFactory.create("[" + HIDDEN_XPATH_MUST_FILTER + "]", hiddenPseudoClassFilter);
+		return XPathExpressionFactory.createSimpleConditional("[" + HIDDEN_XPATH_MUST_FILTER + "]", hiddenPseudoClassFilter);
 	}
 	
 }

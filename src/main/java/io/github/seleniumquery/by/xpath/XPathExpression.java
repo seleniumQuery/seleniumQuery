@@ -29,10 +29,6 @@ public class XPathExpression {
 	 */
 	private CssSelectorType cssSelectorType;
 
-	XPathExpression(String xPathExpression, ElementFilterList elementFilterList) {
-		this(xPathExpression, elementFilterList, CssSelectorType.CONDITIONAL_SIMPLE);
-	}
-
 	XPathExpression(String xPathExpression, ElementFilterList elementFilterList, CssSelectorType cssSelectorType) {
 		this.xPathExpression = xPathExpression;
 		this.elementFilterList = elementFilterList;

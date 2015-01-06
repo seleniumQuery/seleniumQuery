@@ -50,7 +50,7 @@ public class TabbablePseudoClass implements PseudoClass {
 		
 		// #no-xpath
 		System.err.println(":tabbable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
-		return XPathExpressionFactory.create("[(" + FocusablePseudoClass.FOCUSABLE_XPATH + " and (not(@tabindex) or @tabindex > -1))]",
+		return XPathExpressionFactory.createSimpleConditional("[(" + FocusablePseudoClass.FOCUSABLE_XPATH + " and (not(@tabindex) or @tabindex > -1))]",
 				tabbablePseudoClassFilter);
 	}
 	
