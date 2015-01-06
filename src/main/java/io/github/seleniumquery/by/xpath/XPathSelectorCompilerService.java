@@ -32,22 +32,4 @@ public class XPathSelectorCompilerService {
 		return cssSelector.toXPath(stringMap, selector);
 	}
 
-	public static XPathComponent compileToDescendantGeneralExpression(Map<String, String> stringMap, Selector cssSelector) {
-		return compileAndOverrideCssSelectorType(stringMap, cssSelector, CssSelectorType.DESCENDANT_GENERAL);
-	}
-
-	public static XPathComponent compileToDescendantDirectExpression(Map<String, String> stringMap, Selector cssSelector) {
-		return compileAndOverrideCssSelectorType(stringMap, cssSelector, CssSelectorType.DESCENDANT_DIRECT);
-	}
-
-	public static XPathComponent compileToAdjacentExpression(Map<String, String> stringMap, Selector cssSelector) {
-		return compileAndOverrideCssSelectorType(stringMap, cssSelector, CssSelectorType.ADJACENT);
-	}
-
-	private static XPathComponent compileAndOverrideCssSelectorType(Map<String, String> stringMap, Selector cssSelector, CssSelectorType cssSelectorType) {
-		XPathComponent xPathComponent = compileSelector(stringMap, cssSelector);
-		xPathComponent.setCssSelectorType(cssSelectorType);
-		return xPathComponent;
-	}
-
 }

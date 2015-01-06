@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.css.combinators;
 
 import io.github.seleniumquery.by.SelectorUtils;
+import io.github.seleniumquery.by.xpath.CssSelectorType;
 import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.css.CssSelector;
@@ -53,9 +54,9 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> 
 	@Override
 	public XPathComponent toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
 		XPathComponent previousElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
-		XPathComponent siblingElementCompiled = XPathSelectorCompilerService.compileToAdjacentExpression(stringMap, siblingSelector.getSiblingSelector());
+		XPathComponent siblingElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
 
-		return previousElementCompiled.combine(siblingElementCompiled);
+		return previousElementCompiled.combine(siblingElementCompiled, CssSelectorType.ADJACENT);
 	}
 
 }

@@ -17,7 +17,7 @@ public class XPathComponent {
 	public static final String MATCH_EVERYTHING_XPATH_CONDITIONAL = "true()";
 
 	private String xPathExpression;
-	private List<XPathComponent> otherExpressions = new ArrayList<XPathComponent>();
+	private List<XPathComponent> otherExpressions;
 	private ElementFilterList elementFilterList;
 	
 	/**
@@ -30,14 +30,20 @@ public class XPathComponent {
 	private CssSelectorType cssSelectorType;
 
 	XPathComponent(String xPathExpression, ElementFilterList elementFilterList, CssSelectorType cssSelectorType) {
+		this(xPathExpression, new ArrayList<XPathComponent>(), elementFilterList, cssSelectorType);
+	}
+
+	private XPathComponent(String xPathExpression, List<XPathComponent> aggregatedComponents,
+						   	ElementFilterList elementFilterList, CssSelectorType cssSelectorType) {
 		this.xPathExpression = xPathExpression;
+		this.otherExpressions = aggregatedComponents;
 		this.elementFilterList = elementFilterList;
 		this.cssSelectorType = cssSelectorType;
 	}
 	
 	@Override
 	public String toString() {
-		return "[XPath: \""+xPathExpression+"\", kind: "+ getCssSelectorType() +", otherExps: "+otherExpressions+", filter: "+elementFilterList+"]";
+		return "[XPath: \""+xPathExpression+"\", kind: "+ cssSelectorType +", otherExps: "+otherExpressions+", filter: "+elementFilterList+"]";
 	}
 	
 	public List<WebElement> findWebElements(SearchContext context) {
@@ -46,15 +52,24 @@ public class XPathComponent {
 		WebDriver driver = SelectorUtils.getWebDriver(context);
 		return elementFilterList.filter(driver, elements);
 	}
-	
+
 	public XPathComponent combine(XPathComponent other) {
-		this.otherExpressions.add(other);
-		this.otherExpressions.addAll(other.otherExpressions);
-		return this;
+		return combine(other, other.cssSelectorType);
+	}
+
+	public XPathComponent combine(XPathComponent other, CssSelectorType cssSelectorType) {
+		XPathComponent otherCopyWithModifiedType = new XPathComponent(other.xPathExpression, other.otherExpressions,
+																		other.elementFilterList, cssSelectorType);
+		List<XPathComponent> aggregatedComponents = new ArrayList<XPathComponent>(this.otherExpressions);
+		aggregatedComponents.add(otherCopyWithModifiedType);
+		aggregatedComponents.addAll(other.otherExpressions);
+		// should combine ElementFilterList here as well
+		ElementFilterList combinedElementFilterList = this.elementFilterList;
+		return new XPathComponent(this.xPathExpression, aggregatedComponents, combinedElementFilterList, this.cssSelectorType);
 	}
 	
 	public String toXPath() {
-		if (this.getCssSelectorType() != CssSelectorType.TAG) {
+		if (cssSelectorType != CssSelectorType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
 		if ("*".equals(this.xPathExpression)) {
@@ -70,12 +85,12 @@ public class XPathComponent {
 
 	private void mergeExpression(XPathComponent other) {
 		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
-				other.getCssSelectorType(), other.xPathExpression, other.elementFilterList);
-		this.xPathExpression = other.getCssSelectorType().merge(this.xPathExpression, null, other.xPathExpression);
+				other.cssSelectorType, other.xPathExpression, other.elementFilterList);
+		this.xPathExpression = other.cssSelectorType.merge(this.xPathExpression, null, other.xPathExpression);
 	}
 
 	public String toXPathCondition() {
-		if (this.getCssSelectorType() != CssSelectorType.TAG) {
+		if (cssSelectorType != CssSelectorType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
 		if ("*".equals(this.xPathExpression)) {
@@ -91,19 +106,12 @@ public class XPathComponent {
 
 	private void mergeAsCondition(XPathComponent other) {
 		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
-				other.getCssSelectorType(), other.xPathExpression, other.elementFilterList);
-		this.xPathExpression = other.getCssSelectorType().mergeAsCondition(this.xPathExpression, null, other.xPathExpression);
+				other.cssSelectorType, other.xPathExpression, other.elementFilterList);
+		this.xPathExpression = other.cssSelectorType.mergeAsCondition(this.xPathExpression, null, other.xPathExpression);
 	}
 
 	public String toSingleXPathExpression() {
 		return this.xPathExpression;
 	}
 
-	public CssSelectorType getCssSelectorType() {
-		return cssSelectorType;
-	}
-
-	public void setCssSelectorType(CssSelectorType cssSelectorType) {
-		this.cssSelectorType = cssSelectorType;
-	}
 }
