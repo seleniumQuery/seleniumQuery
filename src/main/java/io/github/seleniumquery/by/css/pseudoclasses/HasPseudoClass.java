@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathExpressionList;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
@@ -34,7 +34,7 @@ public class HasPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
 		String insideHasXPath = XPathSelectorCompilerService.compileSelectorList(notSelector).toXPath();
 		insideHasXPath = insideHasXPath.substring(1, insideHasXPath.length()-1);

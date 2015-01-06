@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 
@@ -37,7 +37,7 @@ public class EqPseudoClass implements PseudoClass {
 	}
 	
 	static boolean isEq(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector, int index) {
-		XPathExpression compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		XPathComponent compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
 		List<WebElement> elements = compiledSelector.findWebElements(driver);
 		if (index < 0) {
 			return elements.size() >= -index && elements.get(elements.size() + index).equals(element);
@@ -46,7 +46,7 @@ public class EqPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String eqIndex = pseudoClassSelector.getPseudoClassContent();
 		if (!eqIndex.matches("[+-]?\\d+")) {
 			throw new IllegalArgumentException("The :eq() pseudo-class requires an integer but got: " + eqIndex);

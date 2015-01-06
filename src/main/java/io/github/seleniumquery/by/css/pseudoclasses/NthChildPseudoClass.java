@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,15 +30,15 @@ public class NthChildPseudoClass implements PseudoClass {
 
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		XPathExpression xPathExpression = pseudoClassToXPath(pseudoClassSelector);
-		String nthChildExpression = xPathExpression.toSingleXPathExpression();
+		XPathComponent xPathComponent = pseudoClassToXPath(pseudoClassSelector);
+		String nthChildExpression = xPathComponent.toSingleXPathExpression();
 		String nthChildExpressionRelativeToParent = "../*"+nthChildExpression;
 		List<WebElement> elements = element.findElements(By.xpath(nthChildExpressionRelativeToParent));
 		return elements.contains(element);
 	}
 
 	@Override
-	public XPathExpression pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String nthChildContent = pseudoClassSelector.getPseudoClassContent().trim();
 		// odd --> 2n+1
 		if ("odd".equals(nthChildContent)) {
@@ -69,7 +69,7 @@ public class NthChildPseudoClass implements PseudoClass {
 				":nth-child(even), :nth-child(an+b), :nth-child(an) or :nth-child(b), where a and b are integers.");
 	}
 
-	public static XPathExpression nthChild(int a, int b) {
+	public static XPathComponent nthChild(int a, int b) {
 		// a == 0: 0n+b 0n-b
 		if (a == 0) {
             return XPathExpressionFactory.createNoFilterSelector("[position() = " + b + "]");

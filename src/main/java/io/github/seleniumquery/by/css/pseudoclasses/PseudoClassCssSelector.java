@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Arrays;
@@ -50,7 +50,7 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 	}
 	
 	@Override
-	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String pseudoClassValue = attributeCondition.getValue();
 		for (PseudoClass pseudoClass : pseudoClasses) {
 			if (pseudoClass.isApplicable(pseudoClassValue)) {

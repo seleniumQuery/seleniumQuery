@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.combinators;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
@@ -22,6 +22,7 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, DescendantSelector descendantSelector) {
 		WebElement parent = SelectorUtils.parent(element);
+		//noinspection SimplifiableIfStatement
 		if (parent.getTagName().equals("html")) {
 			return false;
 		}
@@ -30,9 +31,9 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	}
 	
 	@Override
-	public XPathExpression toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		XPathExpression elementCompiledSelector = XPathSelectorCompilerService.compileToDescendantDirectExpression(stringMap, descendantSelector.getSimpleSelector());
-		XPathExpression parentCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
+	public XPathComponent toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
+		XPathComponent elementCompiledSelector = XPathSelectorCompilerService.compileToDescendantDirectExpression(stringMap, descendantSelector.getSimpleSelector());
+		XPathComponent parentCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
 
 		return parentCompiledSelector.combine(elementCompiledSelector);
 	}

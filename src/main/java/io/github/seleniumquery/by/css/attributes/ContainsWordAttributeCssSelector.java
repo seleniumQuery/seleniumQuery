@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.attributes;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
@@ -50,7 +50,7 @@ public class ContainsWordAttributeCssSelector implements CssConditionalSelector<
 	}
 	
 	@Override
-	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValueSurroundedBySpaces = SelectorUtils.intoEscapedXPathString(" " + attributeCondition.getValue() + " ");
 

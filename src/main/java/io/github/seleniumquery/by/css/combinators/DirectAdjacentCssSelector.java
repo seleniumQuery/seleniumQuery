@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.css.combinators;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import org.openqa.selenium.WebDriver;
@@ -28,11 +28,11 @@ public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector> {
 	}
 
 	@Override
-	public XPathExpression toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		XPathExpression previousCompiledExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
-		XPathExpression siblingSelectorCompiledAdjacentExpression = XPathSelectorCompilerService.compileToAdjacentExpression(stringMap, siblingSelector.getSiblingSelector());
+	public XPathComponent toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		XPathComponent previousCompiledExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
+		XPathComponent siblingSelectorCompiledAdjacentExpression = XPathSelectorCompilerService.compileToAdjacentExpression(stringMap, siblingSelector.getSiblingSelector());
 		
-		XPathExpression positionOne = XPathExpressionFactory.createNoFilterSelector("[position() = 1]");
+		XPathComponent positionOne = XPathExpressionFactory.createNoFilterSelector("[position() = 1]");
 		siblingSelectorCompiledAdjacentExpression.combine(positionOne);
 		
 		return previousCompiledExpression.combine(siblingSelectorCompiledAdjacentExpression);

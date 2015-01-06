@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css;
 
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 
 import java.util.Map;
 
@@ -16,6 +16,6 @@ public interface CssConditionalSelector<T extends Condition> {
 
 	boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selector, T condtition);
 
-	XPathExpression conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, T condition);
+	XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, T condition);
 	
 }

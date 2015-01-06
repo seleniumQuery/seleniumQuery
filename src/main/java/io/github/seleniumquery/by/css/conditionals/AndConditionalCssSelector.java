@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.conditionals;
 
-import io.github.seleniumquery.by.xpath.XPathExpression;
+import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Map;
@@ -42,13 +42,13 @@ public class AndConditionalCssSelector implements CssConditionalSelector<Combina
 	}
 
 	@Override
-	public XPathExpression conditionToXPath(Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
+	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
 		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
 				(SimpleSelector) selectorUpToThisPoint,
 				combinatorCondition.getFirstCondition());
 		
-		XPathExpression compiledFirst = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
-		XPathExpression compiledSecond = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
+		XPathComponent compiledFirst = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
+		XPathComponent compiledSecond = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
 		return compiledFirst.combine(compiledSecond);
 	}
 
