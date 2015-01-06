@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +33,7 @@ public class InputPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[(local-name() = 'input' or local-name() = 'button' or local-name() = 'select' or local-name() = 'textarea')]");
+		return XPathComponentFactory.createNoFilter("[(local-name() = 'input' or local-name() = 'button' or local-name() = 'select' or local-name() = 'textarea')]");
 	}
 	
 }

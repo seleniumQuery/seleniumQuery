@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -37,7 +37,7 @@ public class SelectedPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
+		return XPathComponentFactory.createNoFilter(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
 	}
 
 }

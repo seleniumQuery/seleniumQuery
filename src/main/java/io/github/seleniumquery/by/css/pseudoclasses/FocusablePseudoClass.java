@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -84,7 +84,7 @@ public class FocusablePseudoClass implements PseudoClass {
 		
 		// #no-xpath
 		System.err.println(":focusable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
-		return XPathExpressionFactory.createSimpleConditional("[" + FOCUSABLE_XPATH + "]", focusablePseudoClassFilter);
+		return XPathComponentFactory.createSimpleConditional("[" + FOCUSABLE_XPATH + "]", focusablePseudoClassFilter);
 	}
 	
 }

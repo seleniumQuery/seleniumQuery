@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.css.attributes;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Map;
@@ -58,10 +58,10 @@ public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<A
 		// [attribute=wantedValue]
 		if (attributeCondition.getSpecified()) {
 			String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
-			return XPathExpressionFactory.createNoFilterSelector("[" + attributeName + " = " + wantedValue + "]");
+			return XPathComponentFactory.createNoFilter("[" + attributeName + " = " + wantedValue + "]");
 		}
 		// [attribute]
-		return XPathExpressionFactory.createNoFilterSelector("[" + attributeName + "]");
+		return XPathComponentFactory.createNoFilter("[" + attributeName + "]");
 	}
 
 }

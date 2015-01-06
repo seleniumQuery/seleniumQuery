@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Map;
@@ -36,7 +36,7 @@ public class LangPseudoClassEvaluator implements CssConditionalSelector<LangCond
 	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, LangCondition langCondition) {
 		String wantedLangIndex = langCondition.getLang();
 		String wantedLang = stringMap.get(wantedLangIndex);
-		return XPathExpressionFactory.createNoFilterSelector("[ancestor-or-self::*[@lang][1]/@lang = '" + wantedLang + "']");
+		return XPathComponentFactory.createNoFilter("[ancestor-or-self::*[@lang][1]/@lang = '" + wantedLang + "']");
 	}
 
 }

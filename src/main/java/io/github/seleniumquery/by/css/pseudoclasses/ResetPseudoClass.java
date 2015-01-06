@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,7 +29,7 @@ public class ResetPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathExpressionFactory.createNoFilterSelector("[(local-name() = 'input' or local-name() = 'button') and @type = 'reset']");
+		return XPathComponentFactory.createNoFilter("[(local-name() = 'input' or local-name() = 'button') and @type = 'reset']");
 	}
 	
 }

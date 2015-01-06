@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.css.attributes;
 import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Map;
@@ -43,7 +43,7 @@ public class StartsWithAttributeCssSelector implements CssConditionalSelector<At
 	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
-		return XPathExpressionFactory.createNoFilterSelector("[starts-with(" + attributeName + ", " + wantedValue + ")]");
+		return XPathComponentFactory.createNoFilter("[starts-with(" + attributeName + ", " + wantedValue + ")]");
 	}
 
 }

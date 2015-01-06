@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.xpath.XPathExpressionFactory;
+import io.github.seleniumquery.by.xpath.XPathComponentFactory;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class EvenPseudoClass implements PseudoClass {
 	@Override
 	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		// notice that XPath is 1-based and :even is not.
-		return XPathExpressionFactory.createNoFilterSelectorAppliedToAll("[(position() mod 2) = 1]");
+		return XPathComponentFactory.createNoFilterAppliedToAll("[(position() mod 2) = 1]");
 	}
 
 }
