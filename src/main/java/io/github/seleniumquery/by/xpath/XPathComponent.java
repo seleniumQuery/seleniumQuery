@@ -16,9 +16,9 @@ public class XPathComponent {
 
 	public static final String MATCH_EVERYTHING_XPATH_CONDITIONAL = "true()";
 
-	private String xPathExpression;
-	private List<XPathComponent> otherExpressions;
-	private ElementFilterList elementFilterList;
+	protected String xPathExpression;
+	protected List<XPathComponent> combinatedComponents;
+	protected ElementFilterList elementFilterList;
 	
 	/**
 	 * The behavior this field drives should probably be replaced with polymorphism.
@@ -27,23 +27,23 @@ public class XPathComponent {
 	 * Maybe this should be a CSSSelector (or SQLocator, or whatever) that has a toXPathExpression() method.
 	 * Or the conversion to XPath may be a visitor hierarchy. Something like that.
 	 */
-	private CssSelectorType cssSelectorType;
+	protected CssCombinationType cssCombinationType;
 
-	XPathComponent(String xPathExpression, ElementFilterList elementFilterList, CssSelectorType cssSelectorType) {
-		this(xPathExpression, new ArrayList<XPathComponent>(), elementFilterList, cssSelectorType);
+	XPathComponent(String xPathExpression, ElementFilterList elementFilterList, CssCombinationType cssCombinationType) {
+		this(xPathExpression, new ArrayList<XPathComponent>(), elementFilterList, cssCombinationType);
 	}
 
-	private XPathComponent(String xPathExpression, List<XPathComponent> aggregatedComponents,
-						   	ElementFilterList elementFilterList, CssSelectorType cssSelectorType) {
+	public XPathComponent(String xPathExpression, List<XPathComponent> combinatedComponents,
+						   	ElementFilterList elementFilterList, CssCombinationType cssCombinationType) {
 		this.xPathExpression = xPathExpression;
-		this.otherExpressions = aggregatedComponents;
+		this.combinatedComponents = combinatedComponents;
 		this.elementFilterList = elementFilterList;
-		this.cssSelectorType = cssSelectorType;
+		this.cssCombinationType = cssCombinationType;
 	}
 	
 	@Override
 	public String toString() {
-		return "[XPath: \""+xPathExpression+"\", kind: "+ cssSelectorType +", otherExps: "+otherExpressions+", filter: "+elementFilterList+"]";
+		return "[XPath: \""+xPathExpression+"\", kind: "+ cssCombinationType +", otherExps: "+ combinatedComponents +", filter: "+elementFilterList+"]";
 	}
 	
 	public List<WebElement> findWebElements(SearchContext context) {
@@ -53,23 +53,25 @@ public class XPathComponent {
 		return elementFilterList.filter(driver, elements);
 	}
 
-	public XPathComponent combine(XPathComponent other) {
-		return combine(other, other.cssSelectorType);
+	public XPathComponent combineKeepingType(XPathComponent other) {
+		// im pretty sure other.cssCombinationType is always CONDITIONAL_SIMPLE here
+		// maybe CONDITIONAL_SIPLE_APPLIED_TO_ALL...
+		return combine(other, other.cssCombinationType);
 	}
 
-	public XPathComponent combine(XPathComponent other, CssSelectorType cssSelectorType) {
-		XPathComponent otherCopyWithModifiedType = new XPathComponent(other.xPathExpression, other.otherExpressions,
-																		other.elementFilterList, cssSelectorType);
-		List<XPathComponent> aggregatedComponents = new ArrayList<XPathComponent>(this.otherExpressions);
+	public XPathComponent combine(XPathComponent other, CssCombinationType cssCombinationType) {
+		XPathComponent otherCopyWithModifiedType = new XPathComponent(other.xPathExpression, other.combinatedComponents,
+																		other.elementFilterList, cssCombinationType);
+		List<XPathComponent> aggregatedComponents = new ArrayList<XPathComponent>(this.combinatedComponents);
 		aggregatedComponents.add(otherCopyWithModifiedType);
-		aggregatedComponents.addAll(other.otherExpressions);
+		aggregatedComponents.addAll(other.combinatedComponents);
 		// should combine ElementFilterList here as well
 		ElementFilterList combinedElementFilterList = this.elementFilterList;
-		return new XPathComponent(this.xPathExpression, aggregatedComponents, combinedElementFilterList, this.cssSelectorType);
+		return new XPathComponent(this.xPathExpression, aggregatedComponents, combinedElementFilterList, this.cssCombinationType);
 	}
 	
 	public String toXPath() {
-		if (cssSelectorType != CssSelectorType.TAG) {
+		if (cssCombinationType != CssCombinationType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
 		if ("*".equals(this.xPathExpression)) {
@@ -77,7 +79,7 @@ public class XPathComponent {
 		} else {
 			this.xPathExpression = ".//*[self::" + this.xPathExpression+"]";
 		}
-		for (XPathComponent other : otherExpressions) {
+		for (XPathComponent other : combinatedComponents) {
 			mergeExpression(other);
 		}
 		return "(" + this.xPathExpression + ")";
@@ -85,12 +87,12 @@ public class XPathComponent {
 
 	private void mergeExpression(XPathComponent other) {
 		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
-				other.cssSelectorType, other.xPathExpression, other.elementFilterList);
-		this.xPathExpression = other.cssSelectorType.merge(this.xPathExpression, null, other.xPathExpression);
+				other.cssCombinationType, other.xPathExpression, other.elementFilterList);
+		this.xPathExpression = other.cssCombinationType.merge(this.xPathExpression, null, other.xPathExpression);
 	}
 
 	public String toXPathCondition() {
-		if (cssSelectorType != CssSelectorType.TAG) {
+		if (cssCombinationType != CssCombinationType.TAG) {
 			throw new RuntimeException("This should not happen!");
 		}
 		if ("*".equals(this.xPathExpression)) {
@@ -98,7 +100,7 @@ public class XPathComponent {
 		} else {
 			this.xPathExpression = "local-name() = '"+this.xPathExpression+"'";
 		}
-		for (XPathComponent other : otherExpressions) {
+		for (XPathComponent other : combinatedComponents) {
 			mergeAsCondition(other);
 		}
 		return this.xPathExpression;
@@ -106,12 +108,27 @@ public class XPathComponent {
 
 	private void mergeAsCondition(XPathComponent other) {
 		this.elementFilterList = ElementFilterListCombinator.combine(null, this.xPathExpression, this.elementFilterList,
-				other.cssSelectorType, other.xPathExpression, other.elementFilterList);
-		this.xPathExpression = other.cssSelectorType.mergeAsCondition(this.xPathExpression, null, other.xPathExpression);
+				other.cssCombinationType, other.xPathExpression, other.elementFilterList);
+		this.xPathExpression = other.cssCombinationType.mergeAsCondition(this.xPathExpression, null, other.xPathExpression);
 	}
 
 	public String toSingleXPathExpression() {
 		return this.xPathExpression;
 	}
 
+	public String getXPathExpression() {
+		return xPathExpression;
+	}
+
+	public List<XPathComponent> getCombinatedComponents() {
+		return combinatedComponents;
+	}
+
+	public ElementFilterList getElementFilterList() {
+		return elementFilterList;
+	}
+
+	public CssCombinationType getCssCombinationType() {
+		return cssCombinationType;
+	}
 }
