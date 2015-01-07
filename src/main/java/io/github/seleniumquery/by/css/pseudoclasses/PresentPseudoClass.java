@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -41,7 +41,7 @@ public class PresentPseudoClass implements PseudoClass {
 	
 	@Override
 	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathComponentFactory.createEmpty();
+		return new SimpleConditionalComponent();
 	}
 	
 }

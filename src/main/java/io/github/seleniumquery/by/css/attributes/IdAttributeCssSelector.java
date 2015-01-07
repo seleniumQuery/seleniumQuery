@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Map;
@@ -45,7 +45,7 @@ public class IdAttributeCssSelector implements CssConditionalSelector<AttributeC
 	@Override
 	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedId = attributeCondition.getValue();
-		return XPathComponentFactory.createNoFilter("[@id = '" + wantedId + "']");
+		return new SimpleConditionalComponent("[@id = '" + wantedId + "']");
 	}
 
 }

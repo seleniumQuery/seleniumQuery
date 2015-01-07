@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.css.conditionals;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Map;
@@ -36,7 +36,7 @@ public class UnknownConditionalCssSelector<T extends Condition> implements CssCo
 	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, T condition) {
 		// if it is unknown, we can't convert it, so we simply ignore it
 		LOGGER.warn("CSS Selector Condition '"+condition+"' is unknown. Ignoring it.");
-		return XPathComponentFactory.createFilterOnly(ElementFilter.FILTER_NOTHING);
+		return new SimpleConditionalComponent(ElementFilter.FILTER_NOTHING);
 	}
 	
 }

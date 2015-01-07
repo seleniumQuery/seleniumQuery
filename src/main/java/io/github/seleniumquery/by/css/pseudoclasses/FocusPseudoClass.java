@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,7 +35,7 @@ public class FocusPseudoClass implements PseudoClass {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":focus");
 		
 		// #no-xpath
-		return XPathComponentFactory.createFilterOnly(focusPseudoClassFilter);
+		return new SimpleConditionalComponent(focusPseudoClassFilter);
 	}
 	
 }

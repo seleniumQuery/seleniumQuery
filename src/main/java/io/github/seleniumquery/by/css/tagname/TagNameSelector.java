@@ -1,15 +1,13 @@
 package io.github.seleniumquery.by.css.tagname;
 
-import io.github.seleniumquery.by.xpath.CssCombinationType;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssSelector;
-
-import java.util.Map;
-
+import io.github.seleniumquery.by.xpath.component.TagComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.ElementSelector;
+
+import java.util.Map;
 
 /**
  * $("tagname")
@@ -28,7 +26,7 @@ public class TagNameSelector implements CssSelector<ElementSelector> {
 	@Override
 	public XPathComponent toXPath(Map<String, String> stringMap, ElementSelector selector) {
 		String tagName = selector.toString();
-		return XPathComponentFactory.createNoFilter(tagName, CssCombinationType.TAG);
+		return new TagComponent(tagName);
 	}
 
 }

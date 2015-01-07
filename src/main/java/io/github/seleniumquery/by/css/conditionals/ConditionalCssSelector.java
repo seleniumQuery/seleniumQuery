@@ -1,5 +1,6 @@
 package io.github.seleniumquery.by.css.conditionals;
 
+import io.github.seleniumquery.by.xpath.component.KeepTypeComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
@@ -34,7 +35,7 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector> 
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
 		XPathComponent compiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, simpleSelector);
 		XPathComponent compiledCondition = conditionToXPath(stringMap, simpleSelector, condition);
-		return compiledSelector.combineKeepingType(compiledCondition);
+		return KeepTypeComponent.createKeepingType(compiledSelector, compiledCondition);
 	}
 	
 	/**

@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
 
 import org.openqa.selenium.WebDriver;
@@ -31,7 +31,7 @@ public class NotPseudoClass implements PseudoClass {
 	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
 		String insideNotXPath = XPathSelectorCompilerService.compileSelectorList(notSelector).toXPathCondition();
-		return XPathComponentFactory.createNoFilter("[not(" + insideNotXPath + ")]");
+		return new SimpleConditionalComponent("[not(" + insideNotXPath + ")]");
 	}
 	
 }
