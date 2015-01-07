@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,7 +29,7 @@ public class LangPseudoClass implements PseudoClass {
 	@Override
 	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String wantedLang = pseudoClassSelector.getPseudoClassContent();
-		return XPathComponentFactory.createNoFilter("[ancestor-or-self::*[@lang][1]/@lang = '" + wantedLang + "']");
+		return new SimpleConditionalComponent("[ancestor-or-self::*[@lang][1]/@lang = '" + wantedLang + "']");
 	}
 	
 }

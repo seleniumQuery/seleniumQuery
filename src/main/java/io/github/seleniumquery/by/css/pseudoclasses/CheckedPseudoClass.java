@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -49,7 +49,7 @@ public class CheckedPseudoClass implements PseudoClass {
 
 	@Override
 	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return XPathComponentFactory.createNoFilter("[" +
+		return new SimpleConditionalComponent("[" +
 				"(" +
 				"(local-name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) " +
 				"or " +

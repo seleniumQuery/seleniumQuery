@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Arrays;
@@ -45,7 +45,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 		String wantedClassName = attributeCondition.getValue();
 		String unescapedClassName = StringEscapeUtils.unescapeJava(wantedClassName);
 		// nothing to do, everyone supports filtering by class
-		return XPathComponentFactory.createNoFilter("[contains(concat(' ', normalize-space(@class), ' '), ' " + unescapedClassName + " ')]");
+		return new SimpleConditionalComponent("[contains(concat(' ', normalize-space(@class), ' '), ' " + unescapedClassName + " ')]");
 	}
 	
 }

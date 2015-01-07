@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css;
 
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public class UnknownCssSelector<T> implements CssSelector<T> {
 	public XPathComponent toXPath(Map<String, String> stringMap, T selector) {
 		// if it is unknown, we can't convert it, so we simply ignore it
 		LOGGER.warn("CSS Selector '"+selector+"' is unknown. Ignoring it.");
-		return XPathComponentFactory.createEmpty();
+		return new SimpleConditionalComponent();
 	}
 	
 }
