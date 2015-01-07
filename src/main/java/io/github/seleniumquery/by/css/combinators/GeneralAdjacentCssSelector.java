@@ -56,7 +56,7 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> 
 		XPathComponent previousElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
 		XPathComponent siblingElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
 
-		return AdjacentComponent.create(previousElementCompiled, siblingElementCompiled);
+		return AdjacentComponent.combine(previousElementCompiled, siblingElementCompiled);
 	}
 
 }

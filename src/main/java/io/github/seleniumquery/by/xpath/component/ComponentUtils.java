@@ -31,4 +31,10 @@ public class ComponentUtils {
         return new ElementFilterList(elementFilters);
     }
 
+    static void assertTagComponent(XPathComponent xPathComponent) {
+        if (xPathComponent.getClass() != TagComponent.class) {
+            throw new RuntimeException("Unexpected: Only TagComponent is expected here. Got: " + xPathComponent.getClass());
+        }
+    }
+
 }

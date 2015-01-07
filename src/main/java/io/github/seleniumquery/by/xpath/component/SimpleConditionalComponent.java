@@ -26,21 +26,21 @@ public class SimpleConditionalComponent extends XPathComponent {
     }
 
     public SimpleConditionalComponent(String xPathExpression, ElementFilter filter) {
-        super(xPathExpression, ComponentUtils.toElementFilterList(filter), CssCombinationType.CONDITIONAL_SIMPLE);
+        super(xPathExpression, ComponentUtils.toElementFilterList(filter));
     }
 
     SimpleConditionalComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
-        super(xPathExpression, combinatedComponents, elementFilterList, CssCombinationType.CONDITIONAL_SIMPLE);
+        super(xPathExpression, combinatedComponents, elementFilterList);
     }
 
     @Override
-    public String mergeExpression(String sourceXPathExpression) {
-        return CssCombinationType.CONDITIONAL_SIMPLE.merge(sourceXPathExpression, null, this.xPathExpression);
+    public String mergeIntoExpression(String sourceXPathExpression) {
+        return CssCombinationType.CONDITIONAL_SIMPLE.merge(sourceXPathExpression, this.xPathExpression);
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return CssCombinationType.CONDITIONAL_SIMPLE.mergeAsCondition(sourceXPathExpression, null, this.xPathExpression);
+        return CssCombinationType.CONDITIONAL_SIMPLE.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
     }
 
 }
