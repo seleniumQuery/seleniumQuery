@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.xpath;
 
-import static io.github.seleniumquery.by.xpath.XPathComponent.MATCH_EVERYTHING_XPATH_CONDITIONAL;
+import static io.github.seleniumquery.by.xpath.component.XPathComponent.MATCH_EVERYTHING_XPATH_CONDITIONAL;
 
 public enum CssCombinationType {
 	

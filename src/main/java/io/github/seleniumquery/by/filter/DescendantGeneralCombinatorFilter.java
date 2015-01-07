@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.filter;
 
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 
 import java.util.ArrayList;
 import java.util.Arrays;

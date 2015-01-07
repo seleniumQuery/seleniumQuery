@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.conditionals;
 
-import io.github.seleniumquery.by.xpath.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 import io.github.seleniumquery.by.css.CssSelector;

@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathComponentFactory;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Arrays;

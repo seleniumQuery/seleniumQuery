@@ -5,11 +5,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
 /**
- * Represents a list of {@link XPathComponent}. In other words, multiple XPath expressions
+ * Represents a list of {@link io.github.seleniumquery.by.xpath.component.XPathComponent}. In other words, multiple XPath expressions
  * that should be "composed" or "merged" to become a single expression.
  * 
  * @since 0.9.0

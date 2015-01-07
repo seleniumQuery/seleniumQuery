@@ -3,8 +3,8 @@ package io.github.seleniumquery.by.css.attributes;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathComponentFactory;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 
 import java.util.Map;

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 
