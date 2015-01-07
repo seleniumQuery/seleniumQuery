@@ -24,7 +24,7 @@ public class XPathComponentFactory {
 	}
 
 	public static XPathComponent createNoFilterAppliedToAll(String xPathExpression) {
-		return create(xPathExpression, ElementFilter.FILTER_NOTHING, CssSelectorType.CONDITIONAL_TO_ALL);
+		return create(xPathExpression, ElementFilter.FILTER_NOTHING, CssCombinationType.CONDITIONAL_TO_ALL);
 	}
 
 	/**
@@ -34,16 +34,16 @@ public class XPathComponentFactory {
 		return createSimpleConditional(xPathExpression, ElementFilter.FILTER_NOTHING);
 	}
 
-	public static XPathComponent createNoFilter(String xPathExpression, CssSelectorType cssSelectorType) {
-		return create(xPathExpression, ElementFilter.FILTER_NOTHING, cssSelectorType);
+	public static XPathComponent createNoFilter(String xPathExpression, CssCombinationType cssCombinationType) {
+		return create(xPathExpression, ElementFilter.FILTER_NOTHING, cssCombinationType);
 	}
 
 	public static XPathComponent createSimpleConditional(String xPathExpression, ElementFilter filter) {
-		return new XPathComponent(xPathExpression, toElementFilterList(filter), CssSelectorType.CONDITIONAL_SIMPLE);
+		return new XPathComponent(xPathExpression, toElementFilterList(filter), CssCombinationType.CONDITIONAL_SIMPLE);
 	}
 
-	public static XPathComponent create(String xPathExpression, ElementFilter filter, CssSelectorType cssSelectorType) {
-		return new XPathComponent(xPathExpression, toElementFilterList(filter), cssSelectorType);
+	public static XPathComponent create(String xPathExpression, ElementFilter filter, CssCombinationType cssCombinationType) {
+		return new XPathComponent(xPathExpression, toElementFilterList(filter), cssCombinationType);
 	}
 
     private static ElementFilterList toElementFilterList(ElementFilter filter) {

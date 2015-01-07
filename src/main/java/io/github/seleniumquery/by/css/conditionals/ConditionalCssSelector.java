@@ -34,7 +34,7 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector> 
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
 		XPathComponent compiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, simpleSelector);
 		XPathComponent compiledCondition = conditionToXPath(stringMap, simpleSelector, condition);
-		return compiledSelector.combine(compiledCondition);
+		return compiledSelector.combineKeepingType(compiledCondition);
 	}
 	
 	/**

@@ -49,7 +49,7 @@ public class AndConditionalCssSelector implements CssConditionalSelector<Combina
 		
 		XPathComponent compiledFirst = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
 		XPathComponent compiledSecond = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
-		return compiledFirst.combine(compiledSecond);
+		return compiledFirst.combineKeepingType(compiledSecond);
 	}
 
 }
