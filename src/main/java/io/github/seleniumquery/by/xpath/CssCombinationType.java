@@ -1,7 +1,5 @@
 package io.github.seleniumquery.by.xpath;
 
-import static io.github.seleniumquery.by.xpath.component.XPathComponent.MATCH_EVERYTHING_XPATH_CONDITIONAL;
-
 public enum CssCombinationType {
 	
 	/*
@@ -13,7 +11,7 @@ public enum CssCombinationType {
 	 */
 	CONDITIONAL_SIMPLE {
 		@Override
-		public String merge(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String merge(String sourceXPathExpression, String otherXPathExpression) {
 			if (sourceXPathExpression.endsWith("]")) {
 				// because the previous was merged as a conditional, and we are a conditional as well, so we just 'AND it
 				return sourceXPathExpression.substring(0, sourceXPathExpression.length()-1) + " and " + otherXPathExpression.substring(1);
@@ -21,7 +19,7 @@ public enum CssCombinationType {
 			return sourceXPathExpression + otherXPathExpression;
 		}
 		@Override
-		public String mergeAsCondition(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String mergeAsCondition(String sourceXPathExpression, String otherXPathExpression) {
 			if (sourceXPathExpression.equals(MATCH_EVERYTHING_XPATH_CONDITIONAL)) {
 				return removeBraces(otherXPathExpression);
 			}
@@ -30,11 +28,11 @@ public enum CssCombinationType {
 	},
 	CONDITIONAL_TO_ALL {
 		@Override
-		public String merge(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String merge(String sourceXPathExpression, String otherXPathExpression) {
 			return "(" + sourceXPathExpression + ")" + otherXPathExpression;
 		}
 		@Override
-		public String mergeAsCondition(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String mergeAsCondition(String sourceXPathExpression, String otherXPathExpression) {
 			if (sourceXPathExpression.equals(MATCH_EVERYTHING_XPATH_CONDITIONAL)) {
 				return removeBraces(otherXPathExpression);
 			}
@@ -45,14 +43,14 @@ public enum CssCombinationType {
 	// "//"
 	DESCENDANT_GENERAL {
 		@Override
-		public String merge(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String merge(String sourceXPathExpression, String otherXPathExpression) {
 			if ("*".equals(otherXPathExpression)) {
 				return sourceXPathExpression + "//*";
 			}
 			return sourceXPathExpression + "//*[self::" + otherXPathExpression + "]";
 		}
 		@Override
-		public String mergeAsCondition(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String mergeAsCondition(String sourceXPathExpression, String otherXPathExpression) {
 			return unsupported("general descendant");
 		}
 	},
@@ -60,48 +58,51 @@ public enum CssCombinationType {
 	// "/"
 	DESCENDANT_DIRECT {
 		@Override
-		public String merge(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String merge(String sourceXPathExpression, String otherXPathExpression) {
 			if ("*".equals(otherXPathExpression)) {
 				return sourceXPathExpression + "/*";
 			}
 			return sourceXPathExpression + "/*[self::" + otherXPathExpression + "]";
 		}
 		@Override
-		public String mergeAsCondition(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String mergeAsCondition(String sourceXPathExpression, String otherXPathExpression) {
 			return unsupported("direct descendant");
 		}
 	},
 	
-	// "/following-sibling::"  (the direct will add a position()=1 by itself)
-	// acdcjunior: I read the above later but didnt understand: what direct??
+	// "/following-sibling::"
+	// This one will be used by the "General Adjacent" and the "Direct Adjacent" selectors
+	// (in order to differentiate, the "Direct Adjacent" selector will itself add a [position()=1] to its expression)
 	ADJACENT {
 		@Override
-		public String merge(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String merge(String sourceXPathExpression, String otherXPathExpression) {
 			return sourceXPathExpression + "/following-sibling::" + otherXPathExpression;
 		}
 	},
 	
 	TAG {
 		@Override
-		public String merge(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
+		public String merge(String sourceXPathExpression, String otherXPathExpression) {
 			if ("*".equals(otherXPathExpression)) {
-				return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, null, "["+MATCH_EVERYTHING_XPATH_CONDITIONAL+"]");
+				return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, "["+MATCH_EVERYTHING_XPATH_CONDITIONAL+"]");
 			}
-			return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, null, "[self::"+otherXPathExpression+"]");
+			return CONDITIONAL_SIMPLE.merge(sourceXPathExpression, "[self::"+otherXPathExpression+"]");
 		}
 	};
 
-	/**
-	 * @return The merged expression.
-	 */
-	public abstract String merge(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression);
+	public static final String MATCH_EVERYTHING_XPATH_CONDITIONAL = "true()";
 
-	public String mergeAsCondition(String sourceXPathExpression, CssCombinationType sourceKind, String otherXPathExpression) {
-		return this.merge(sourceXPathExpression, sourceKind, otherXPathExpression);
+	/**
+	 * @return The merged expressions.
+	 */
+	public abstract String merge(String sourceXPathExpression, String otherXPathExpression);
+
+	public String mergeAsCondition(String sourceXPathExpression, String otherXPathExpression) {
+		return this.merge(sourceXPathExpression, otherXPathExpression);
 	}
 
-	private static String unsupported(String selectorKind) {
-		throw new UnsupportedConditionalSelector("We do not support "+selectorKind+" as conditions inside selectors.");
+	private static String unsupported(String cssSelectorType) {
+		throw new UnsupportedConditionalSelector("The "+cssSelectorType+" selector is not supported as condition inside selectors.");
 	}
 
 	private static String removeBraces(String src) {

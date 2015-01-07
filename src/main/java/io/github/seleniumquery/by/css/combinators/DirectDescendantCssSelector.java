@@ -36,7 +36,7 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 		XPathComponent elementCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getSimpleSelector());
 		XPathComponent parentCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
 
-		return DescendantDirectComponent.create(parentCompiledSelector, elementCompiledSelector);
+		return DescendantDirectComponent.combine(parentCompiledSelector, elementCompiledSelector);
 	}
 
 }

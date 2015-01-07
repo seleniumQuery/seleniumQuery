@@ -9,21 +9,21 @@ import java.util.List;
 public class ConditionalAppliedToAllComponent extends XPathComponent {
 
     public ConditionalAppliedToAllComponent(String xPathExpression) {
-        super(xPathExpression, ComponentUtils.toElementFilterList(ElementFilter.FILTER_NOTHING), CssCombinationType.CONDITIONAL_TO_ALL);
+        super(xPathExpression, ComponentUtils.toElementFilterList(ElementFilter.FILTER_NOTHING));
     }
 
     ConditionalAppliedToAllComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
-        super(xPathExpression, combinatedComponents, elementFilterList, CssCombinationType.CONDITIONAL_TO_ALL);
+        super(xPathExpression, combinatedComponents, elementFilterList);
     }
 
     @Override
-    public String mergeExpression(String sourceXPathExpression) {
-        return CssCombinationType.CONDITIONAL_TO_ALL.merge(sourceXPathExpression, null, this.xPathExpression);
+    public String mergeIntoExpression(String sourceXPathExpression) {
+        return CssCombinationType.CONDITIONAL_TO_ALL.merge(sourceXPathExpression, this.xPathExpression);
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return CssCombinationType.CONDITIONAL_TO_ALL.mergeAsCondition(sourceXPathExpression, null, this.xPathExpression);
+        return CssCombinationType.CONDITIONAL_TO_ALL.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
     }
 
 }

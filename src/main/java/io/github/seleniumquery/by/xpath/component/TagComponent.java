@@ -9,58 +9,55 @@ import java.util.List;
 public class TagComponent extends XPathComponent {
 
     public TagComponent(String xPathExpression) {
-        super(xPathExpression, ComponentUtils.toElementFilterList(ElementFilter.FILTER_NOTHING), CssCombinationType.TAG);
+        super(xPathExpression, ComponentUtils.toElementFilterList(ElementFilter.FILTER_NOTHING));
     }
 
     TagComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
-        super(xPathExpression, combinatedComponents, elementFilterList, CssCombinationType.TAG);
+        super(xPathExpression, combinatedComponents, elementFilterList);
     }
 
     @Override
     public String toXPath() {
+        String xPathExpression;
         if ("*".equals(this.xPathExpression)) {
-            this.xPathExpression = ".//*";
+            xPathExpression = ".//*";
         } else {
-            this.xPathExpression = ".//*[self::" + this.xPathExpression+"]";
+            xPathExpression = ".//*[self::" + this.xPathExpression+"]";
         }
-        for (XPathComponent other : combinatedComponents) {
-            merge(other);
-        }
-        return "(" + this.xPathExpression + ")";
-    }
+        ElementFilterList elementFilterList = this.elementFilterList; // should be a copy
 
-    private void merge(XPathComponent other) {
-        this.elementFilterList = other.mergeFilter(this.elementFilterList);
-        this.xPathExpression = other.mergeExpression(this.xPathExpression);
+        for (XPathComponent other : combinatedComponents) {
+            elementFilterList = other.mergeIntoFilter(elementFilterList);
+            xPathExpression = other.mergeIntoExpression(xPathExpression);
+        }
+        return "(" + xPathExpression + ")";
     }
 
     @Override
     public String toXPathCondition() {
+        String xPathExpression;
         if ("*".equals(this.xPathExpression)) {
-            this.xPathExpression = MATCH_EVERYTHING_XPATH_CONDITIONAL;
+            xPathExpression = CssCombinationType.MATCH_EVERYTHING_XPATH_CONDITIONAL;
         } else {
-            this.xPathExpression = "local-name() = '"+this.xPathExpression+"'";
+            xPathExpression = "local-name() = '"+this.xPathExpression+"'";
         }
+        ElementFilterList elementFilterList = this.elementFilterList; // should be a copy
+
         for (XPathComponent other : combinatedComponents) {
-            mergeAsCondition(other);
+            elementFilterList = other.mergeFilterAsCondition(elementFilterList);
+            xPathExpression = other.mergeExpressionAsCondition(xPathExpression);
         }
-        return this.xPathExpression;
+        return xPathExpression;
     }
-
-    private void mergeAsCondition(XPathComponent other) {
-        this.elementFilterList = other.mergeFilterAsCondition(this.elementFilterList);
-        this.xPathExpression = other.mergeExpressionAsCondition(this.xPathExpression);
-    }
-
 
     @Override
-    public String mergeExpression(String sourceXPathExpression) {
-        return CssCombinationType.TAG.merge(sourceXPathExpression, null, this.xPathExpression);
+    public String mergeIntoExpression(String sourceXPathExpression) {
+        return CssCombinationType.TAG.merge(sourceXPathExpression, this.xPathExpression);
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return CssCombinationType.TAG.mergeAsCondition(sourceXPathExpression, null, this.xPathExpression);
+        return CssCombinationType.TAG.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
     }
 
 }

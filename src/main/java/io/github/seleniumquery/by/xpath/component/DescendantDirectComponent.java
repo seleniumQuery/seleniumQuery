@@ -4,30 +4,26 @@ import io.github.seleniumquery.by.xpath.CssCombinationType;
 
 public class DescendantDirectComponent extends XPathComponent {
 
-    public static XPathComponent create(XPathComponent one, XPathComponent other) {
+    public static XPathComponent combine(XPathComponent one, XPathComponent other) {
+        ComponentUtils.assertTagComponent(one);
         DescendantDirectComponent otherCopyWithModifiedType = new DescendantDirectComponent(other);
-        switch (one.cssCombinationType) {
-            case TAG:
-                return new TagComponent(one.xPathExpression,
-                        ComponentUtils.combineComponents(one, other, otherCopyWithModifiedType),
-                        ComponentUtils.combineFilters(one, other, otherCopyWithModifiedType));
-            default:
-                throw new RuntimeException("Unexpected: Only TAG cssCombinationType is expected here. Got: "+one.cssCombinationType);
-        }
+        return new TagComponent(one.xPathExpression,
+                                ComponentUtils.combineComponents(one, other, otherCopyWithModifiedType),
+                                ComponentUtils.combineFilters(one, other, otherCopyWithModifiedType));
     }
 
     private DescendantDirectComponent(XPathComponent other) {
-        super(other.xPathExpression, other.combinatedComponents, other.elementFilterList,  CssCombinationType.DESCENDANT_DIRECT);
+        super(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
     }
 
     @Override
-    public String mergeExpression(String sourceXPathExpression) {
-        return CssCombinationType.DESCENDANT_DIRECT.merge(sourceXPathExpression, null, this.xPathExpression);
+    public String mergeIntoExpression(String sourceXPathExpression) {
+        return CssCombinationType.DESCENDANT_DIRECT.merge(sourceXPathExpression, this.xPathExpression);
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return CssCombinationType.DESCENDANT_DIRECT.mergeAsCondition(sourceXPathExpression, null, this.xPathExpression);
+        return CssCombinationType.DESCENDANT_DIRECT.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
     }
 
 }
