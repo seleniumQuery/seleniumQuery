@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.combinators;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.xpath.CssCombinationType;
-import io.github.seleniumquery.by.xpath.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;

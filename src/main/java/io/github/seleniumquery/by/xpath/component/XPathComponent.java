@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.xpath;
+package io.github.seleniumquery.by.xpath.component;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.filter.ElementFilterList;
@@ -7,6 +7,7 @@ import io.github.seleniumquery.by.filter.ElementFilterListCombinator;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.seleniumquery.by.xpath.CssCombinationType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;

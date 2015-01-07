@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.combinators;
 
 import io.github.seleniumquery.by.preparser.ParsedSelector;
 import io.github.seleniumquery.by.preparser.SelectorParser;
-import io.github.seleniumquery.by.xpath.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.junit.Test;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SiblingSelector;

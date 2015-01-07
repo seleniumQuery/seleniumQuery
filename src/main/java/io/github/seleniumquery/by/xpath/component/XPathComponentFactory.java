@@ -1,7 +1,8 @@
-package io.github.seleniumquery.by.xpath;
+package io.github.seleniumquery.by.xpath.component;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
+import io.github.seleniumquery.by.xpath.CssCombinationType;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css;
 
-import io.github.seleniumquery.by.xpath.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathComponentFactory;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponentFactory;
 
 import java.util.Map;
 
