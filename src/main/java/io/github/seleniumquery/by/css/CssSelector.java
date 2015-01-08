@@ -7,6 +7,10 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * A selector, capable of being transformed into {@link XPathComponent},
+ * or testing if a given {@link WebElement} matched it.
+ */
 public interface CssSelector<T, C extends XPathComponent> {
 
 	/**
