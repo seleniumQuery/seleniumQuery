@@ -1,12 +1,11 @@
 package io.github.seleniumquery.by.css;
 
-import io.github.seleniumquery.by.preparser.ParsedSelector;
+import io.github.seleniumquery.by.preparser.ParsedSelectorList;
 import io.github.seleniumquery.by.preparser.SelectorParser;
 
 import java.util.Map;
 
 import io.github.seleniumquery.by.xpath.component.TagComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
@@ -15,10 +14,10 @@ import org.w3c.css.sac.SelectorList;
 public class CssSelectorMatcherService {
 	
 	public static boolean elementMatchesStringSelector(WebDriver driver, WebElement element, String selector) {
-		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
-		SelectorList selectorList = parsedSelector.getSelector();
+		ParsedSelectorList parsedSelectorList = SelectorParser.parseSelector(selector);
+		SelectorList selectorList = parsedSelectorList.getSelectorList();
         for (int i = 0; i < selectorList.getLength(); i++) {
-			if (CssSelectorMatcherService.elementMatchesSelector(driver, element, parsedSelector.getStringMap(), selectorList.item(i))) {
+			if (CssSelectorMatcherService.elementMatchesSelector(driver, element, parsedSelectorList.getStringMap(), selectorList.item(i))) {
 				return true;
 			}
 		}

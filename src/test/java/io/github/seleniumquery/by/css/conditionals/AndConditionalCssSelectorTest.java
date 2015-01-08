@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.conditionals;
 
-import io.github.seleniumquery.by.preparser.ParsedSelector;
+import io.github.seleniumquery.by.preparser.ParsedSelectorList;
 import io.github.seleniumquery.by.preparser.SelectorParser;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.component.ComponentUtils;
@@ -23,12 +23,12 @@ public class AndConditionalCssSelectorTest {
 
     @Test
     public void testConditionToXPath() {
-        ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector("span.a.b");
-        SelectorList selectorList = parsedSelector.getSelector();
+        ParsedSelectorList parsedSelectorList = SelectorParser.parseSelector("span.a.b");
+        SelectorList selectorList = parsedSelectorList.getSelectorList();
         ConditionalSelector selector = (ConditionalSelector) selectorList.item(0);
 
 //        XPathComponent cs = conditionalCssSelector.toXPath(parsedSelector.getStringMap(), selector);
-        Map<String,String> stringMap = parsedSelector.getStringMap();
+        Map<String,String> stringMap = parsedSelectorList.getStringMap();
         SimpleSelector simpleSelector = selector.getSimpleSelector();
         TagComponent spanTagComponent = XPathSelectorCompilerService.compileSelector(stringMap, simpleSelector);
 
