@@ -5,9 +5,36 @@ import static java.lang.Character.isLetter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Parses a selector string (such as "span.warn:not(.something)") into a {@link PreParsedSelector}.
+ *
+ * A "Pre-Parsed Selector" is a:
+ * - Transformed Selector (String), repesenting the original selector string, but with some information taken out;
+ * - and a Map<String, String>, which will contain the information taken out from the original selector (and not
+ * present in the Transformed Selector).
+ *
+ * This is done to simplify some selectors and to enable others that the SAC Parser can't parse (we replace
+ * those with something else here and deal with them later).
+ *
+ */
 public class SelectorPreParser {
 
 	private static final Character END_OF_STRING = null;
+
+	public static class PreParsedSelector {
+		private String transformedSelector;
+		private Map<String, String> stringMap;
+		public PreParsedSelector(String transformedSelector, Map<String, String> stringMap) {
+			this.transformedSelector = transformedSelector;
+			this.stringMap = stringMap;
+		}
+		public String getTransformedSelector() {
+			return this.transformedSelector;
+		}
+		public Map<String, String> getStringMap() {
+			return this.stringMap;
+		}
+	}
 	
 	private String selector;
 	private int selectorCurrentParsingIndex;
@@ -15,13 +42,13 @@ public class SelectorPreParser {
 	private StringBuilder transformedSelector = new StringBuilder();
 	private Map<String, String> stringMap = new HashMap<String, String>();
 	
-	public TransformedSelector transformSelector(String selector) {
+	public PreParsedSelector transformSelector(String selector) {
 		this.selector = selector;
 		this.selectorCurrentParsingIndex = 0;
 
 		eatChar(getNextChar());
 		
-		return new TransformedSelector(transformedSelector.toString(), stringMap);
+		return new PreParsedSelector(transformedSelector.toString(), stringMap);
 	}
 	
 	private Character getNextChar() {
@@ -61,7 +88,6 @@ public class SelectorPreParser {
 			return;
 		default:
 			eatChar(getNextChar());
-			return;
 		}
 	}
 
