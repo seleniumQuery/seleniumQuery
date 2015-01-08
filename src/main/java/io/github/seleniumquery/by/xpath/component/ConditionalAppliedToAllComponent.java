@@ -6,7 +6,7 @@ import io.github.seleniumquery.by.xpath.CssCombinationType;
 
 import java.util.List;
 
-public class ConditionalAppliedToAllComponent extends XPathComponent {
+public class ConditionalAppliedToAllComponent extends ConditionComponent {
 
     public ConditionalAppliedToAllComponent(String xPathExpression) {
         super(xPathExpression, ComponentUtils.toElementFilterList(ElementFilter.FILTER_NOTHING));

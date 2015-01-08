@@ -3,13 +3,11 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:enabled
@@ -21,7 +19,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class EnabledPseudoClass implements PseudoClass {
+public class EnabledPseudoClass implements PseudoClass<SimpleConditionalComponent> {
 	
 	private static final String ENABLED_PSEUDO_CLASS_NO_COLON = "enabled";
 	
@@ -60,7 +58,7 @@ public class EnabledPseudoClass implements PseudoClass {
 			+ ")";
 	
 	@Override
-	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return new SimpleConditionalComponent("[" + ENABLED_XPATH + "]");
 	}
 	

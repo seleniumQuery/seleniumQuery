@@ -1,13 +1,11 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * http://api.jquery.com/header-selector/
@@ -15,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class HeaderPseudoClass implements PseudoClass {
+public class HeaderPseudoClass implements PseudoClass<SimpleConditionalComponent> {
 	
 	private static final String HX_XPATH = "[(local-name() = 'h0' or "
 											+ "local-name() = 'h1' or "
@@ -43,7 +41,7 @@ public class HeaderPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return new SimpleConditionalComponent(HX_XPATH);
 	}
 	

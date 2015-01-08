@@ -1,18 +1,17 @@
 package io.github.seleniumquery.by.css.attributes;
 
-import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
-import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-
-import java.util.Map;
-
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
+
+import java.util.Map;
+
+import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
+import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 
 /**
  * [languages|="fr"]
@@ -21,7 +20,7 @@ import org.w3c.css.sac.Selector;
  *
  * @since 0.9.0
  */
-public class ContainsPrefixAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
+public class ContainsPrefixAttributeCssSelector implements CssConditionalSelector<AttributeCondition, SimpleConditionalComponent> {
 
 	/**
 	 * see {@link org.w3c.css.sac.Condition#SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION}
@@ -39,7 +38,7 @@ public class ContainsPrefixAttributeCssSelector implements CssConditionalSelecto
 	}
 
 	@Override
-	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public SimpleConditionalComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
 		String wantedValueWithSuffix = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue() + "-");

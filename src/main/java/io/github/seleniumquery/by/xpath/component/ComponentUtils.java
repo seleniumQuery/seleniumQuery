@@ -23,16 +23,12 @@ public class ComponentUtils {
         return new ConditionalAppliedToAllComponent(one.xPathExpression, combineComponents(one, other, otherCopy), combineFilters(one, other, otherCopy));
     }
 
-    @Deprecated
-    public static XPathComponent combineKeepingTypeOfFirstArg(XPathComponent one, XPathComponent other) {
+    public static ConditionComponent combineKeepingTypeOfFirstArg(ConditionComponent one, XPathComponent other) {
         if (one.getClass() == SimpleConditionalComponent.class) {
             return combineKeepingTypeOfFirstArg((SimpleConditionalComponent) one, other);
         }
         if (one.getClass() == ConditionalAppliedToAllComponent.class) {
             return combineKeepingTypeOfFirstArg((ConditionalAppliedToAllComponent) one, other);
-        }
-        if (one.getClass() == TagComponent.class) {
-            return combineKeepingTypeOfFirstArg((TagComponent) one, other);
         }
         throw new RuntimeException("Unexpected: "+one.getClass());
     }

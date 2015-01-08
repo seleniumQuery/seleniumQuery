@@ -1,16 +1,15 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
+import io.github.seleniumquery.by.xpath.component.ConditionComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * :pseudo-classes
@@ -20,7 +19,7 @@ import org.w3c.css.sac.Selector;
  *
  * @since 0.9.0
  */
-public class PseudoClassCssSelector implements CssConditionalSelector<AttributeCondition> {
+public class PseudoClassCssSelector implements CssConditionalSelector<AttributeCondition, ConditionComponent> {
 
 	private final List<PseudoClass> pseudoClasses = Arrays.asList(new CheckedPseudoClass(),
 			new SelectedPseudoClass(), new EqPseudoClass(), new OnlyChildPseudoClass(),
@@ -50,7 +49,7 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 	}
 	
 	@Override
-	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public ConditionComponent conditionToXPath(Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String pseudoClassValue = attributeCondition.getValue();
 		for (PseudoClass pseudoClass : pseudoClasses) {
 			if (pseudoClass.isApplicable(pseudoClassValue)) {

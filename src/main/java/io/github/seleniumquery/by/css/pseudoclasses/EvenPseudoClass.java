@@ -1,14 +1,12 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
+import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.component.ConditionalAppliedToAllComponent;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * :even
@@ -16,7 +14,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class EvenPseudoClass implements PseudoClass {
+public class EvenPseudoClass implements PseudoClass<ConditionalAppliedToAllComponent> {
 
 	private static final String EVEN_PSEUDO_CLASS_NO_COLON = "even";
 	
@@ -33,7 +31,7 @@ public class EvenPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionalAppliedToAllComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		// notice that XPath is 1-based and :even is not.
 		return new ConditionalAppliedToAllComponent("[(position() mod 2) = 1]");
 	}

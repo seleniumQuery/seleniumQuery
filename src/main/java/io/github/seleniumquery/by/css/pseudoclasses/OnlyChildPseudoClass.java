@@ -2,8 +2,6 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class OnlyChildPseudoClass implements PseudoClass {
+public class OnlyChildPseudoClass implements PseudoClass<SimpleConditionalComponent> {
 	
 	private static final String ONLY_CHILD_PSEUDO_CLASS_NO_COLON = "only-child";
 	
@@ -37,7 +35,7 @@ public class OnlyChildPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		// [last() = 1] will not suffice because it may be composed into an expression like //a[last() = 1] which will yield wrong results
 		// So you have to go up and then down again: //a[../*[last() = 1]]
 		return new SimpleConditionalComponent("[../*[last() = 1]]");

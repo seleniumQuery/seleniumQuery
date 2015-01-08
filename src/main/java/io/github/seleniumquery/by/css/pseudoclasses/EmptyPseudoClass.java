@@ -1,8 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +14,7 @@ import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriverEmul
  * @author acdcjunior
  * @since 0.9.0
  */
-public class EmptyPseudoClass implements PseudoClass {
+public class EmptyPseudoClass implements PseudoClass<SimpleConditionalComponent> {
 	
 	private static final Log LOGGER = LogFactory.getLog(EmptyPseudoClass.class);
 	private static final String EMPTY_PSEUDO_CLASS_NO_COLON = "empty";
@@ -44,7 +42,7 @@ public class EmptyPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return new SimpleConditionalComponent("[count(.//*) = 0]");
 	}
 	
