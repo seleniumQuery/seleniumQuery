@@ -1,7 +1,7 @@
 package io.github.seleniumquery.functions.jquery.traversing.filtering;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.preparser.ParsedSelectorList;
+import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
 import io.github.seleniumquery.by.preparser.SelectorParser;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorFactory;
@@ -29,9 +29,9 @@ public class IsFunction {
 		if (selector.trim().isEmpty()) {
 			return false;
 		}
-		ParsedSelectorList parsedSelectorList = SelectorParser.parseSelector(selector);
-		SelectorList selectorList = parsedSelectorList.getSelectorList();
-		Map<String, String> stringMap = parsedSelectorList.getStringMap();
+		CSSParsedSelectorList CSSParsedSelectorList = SelectorParser.parseSelector(selector);
+		SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
+		Map<String, String> stringMap = CSSParsedSelectorList.getStringMap();
 
 		for (int i = 0; i < selectorList.getLength(); i++) {
     		Selector parsedSimpleSelector = selectorList.item(i);
@@ -58,7 +58,7 @@ public class IsFunction {
 		    String stringMapId = m.group(1);
 		    String notPseudoClassContent = stringMap.get(stringMapId);
 		    
-			ParsedSelectorList parsedPseudoClassContent = SelectorParser.parseSelector(notPseudoClassContent);
+			CSSParsedSelectorList parsedPseudoClassContent = SelectorParser.parseSelector(notPseudoClassContent);
 			SelectorList parsedPseudoClassContentSelectorList = parsedPseudoClassContent.getSelectorList();
 			Map<String, String> parsedPseudoClassContentStringMap = parsedPseudoClassContent.getStringMap();
 			for (int i = 0; i < parsedPseudoClassContentSelectorList.getLength(); i++) {

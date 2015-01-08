@@ -19,11 +19,11 @@ public class SelectorParser {
 
 	private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
 
-	public static ParsedSelectorList parseSelector(String selector) {
+	public static CSSParsedSelectorList parseSelector(String selector) {
 		String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.turnAttributeNotEqualsIntoNotAttributeEquals(selector);
 		PreParsedSelector preParsedSelector = new SelectorPreParser().transformSelector(fixedSelector);
 		SelectorList selectorList = parseSelectorIntoParseTree(preParsedSelector.getTransformedSelector());
-		return new ParsedSelectorList(selectorList, preParsedSelector.getStringMap());
+		return new CSSParsedSelectorList(selectorList, preParsedSelector.getStringMap());
 	}
 
 	/**
