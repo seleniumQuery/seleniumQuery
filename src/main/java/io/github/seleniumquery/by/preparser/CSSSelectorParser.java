@@ -13,9 +13,9 @@ import org.w3c.css.sac.SelectorList;
 
 import com.steadystate.css.parser.SACParserCSS3;
 
-public class SelectorParser {
+public class CSSSelectorParser {
 
-	private static final Log LOGGER = LogFactory.getLog(SelectorParser.class);
+	private static final Log LOGGER = LogFactory.getLog(CSSSelectorParser.class);
 
 	private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
 

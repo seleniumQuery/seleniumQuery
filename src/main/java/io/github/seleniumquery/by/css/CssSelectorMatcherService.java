@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css;
 
 import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.SelectorParser;
+import io.github.seleniumquery.by.preparser.CSSSelectorParser;
 
 import java.util.Map;
 
@@ -14,7 +14,7 @@ import org.w3c.css.sac.SelectorList;
 public class CssSelectorMatcherService {
 	
 	public static boolean elementMatchesStringSelector(WebDriver driver, WebElement element, String selector) {
-		CSSParsedSelectorList CSSParsedSelectorList = SelectorParser.parseSelector(selector);
+		CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
 		SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
         for (int i = 0; i < selectorList.getLength(); i++) {
 			if (CssSelectorMatcherService.elementMatchesSelector(driver, element, CSSParsedSelectorList.getStringMap(), selectorList.item(i))) {
