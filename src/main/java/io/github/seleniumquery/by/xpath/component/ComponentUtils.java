@@ -18,17 +18,17 @@ public class ComponentUtils {
         return new SimpleConditionalComponent(one.xPathExpression, combineComponents(one, other, otherCopy), combineFilters(one, other, otherCopy));
     }
 
-    public static ConditionalAppliedToAllComponent combineKeepingTypeOfFirstArg(ConditionalAppliedToAllComponent one, XPathComponent other) {
+    public static ConditionToAllComponent combineKeepingTypeOfFirstArg(ConditionToAllComponent one, XPathComponent other) {
         XPathComponent otherCopy = copy(other);
-        return new ConditionalAppliedToAllComponent(one.xPathExpression, combineComponents(one, other, otherCopy), combineFilters(one, other, otherCopy));
+        return new ConditionToAllComponent(one.xPathExpression, combineComponents(one, other, otherCopy), combineFilters(one, other, otherCopy));
     }
 
     public static ConditionComponent combineKeepingTypeOfFirstArg(ConditionComponent one, XPathComponent other) {
         if (one.getClass() == SimpleConditionalComponent.class) {
             return combineKeepingTypeOfFirstArg((SimpleConditionalComponent) one, other);
         }
-        if (one.getClass() == ConditionalAppliedToAllComponent.class) {
-            return combineKeepingTypeOfFirstArg((ConditionalAppliedToAllComponent) one, other);
+        if (one.getClass() == ConditionToAllComponent.class) {
+            return combineKeepingTypeOfFirstArg((ConditionToAllComponent) one, other);
         }
         throw new RuntimeException("Unexpected: "+one.getClass());
     }
@@ -38,8 +38,8 @@ public class ComponentUtils {
         if (other.getClass() == SimpleConditionalComponent.class) {
             return new SimpleConditionalComponent(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
         }
-        if (other.getClass() == ConditionalAppliedToAllComponent.class) {
-            return new ConditionalAppliedToAllComponent(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
+        if (other.getClass() == ConditionToAllComponent.class) {
+            return new ConditionToAllComponent(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
         }
         if (other.getClass() == TagComponent.class) {
             return new TagComponent(other.xPathExpression, other.combinatedComponents, other.elementFilterList);

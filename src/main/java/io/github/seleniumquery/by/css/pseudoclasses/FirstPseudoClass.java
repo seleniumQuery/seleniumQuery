@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.component.ConditionalAppliedToAllComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionToAllComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class FirstPseudoClass implements PseudoClass<ConditionalAppliedToAllComponent> {
+public class FirstPseudoClass implements PseudoClass<ConditionToAllComponent> {
 
 	private static final String FIRST_PSEUDO_CLASS_NO_COLON = "first";
 
@@ -25,8 +25,8 @@ public class FirstPseudoClass implements PseudoClass<ConditionalAppliedToAllComp
 	}
 
 	@Override
-	public ConditionalAppliedToAllComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new ConditionalAppliedToAllComponent("[position() = 1]");
+	public ConditionToAllComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionToAllComponent("[position() = 1]");
 	}
 
 }

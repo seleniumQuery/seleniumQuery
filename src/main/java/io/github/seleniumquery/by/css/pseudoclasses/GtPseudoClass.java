@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.xpath.component.ConditionalAppliedToAllComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionToAllComponent;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class GtPseudoClass implements PseudoClass<ConditionalAppliedToAllComponent> {
+public class GtPseudoClass implements PseudoClass<ConditionToAllComponent> {
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -58,7 +58,7 @@ public class GtPseudoClass implements PseudoClass<ConditionalAppliedToAllCompone
 	}
 	
 	@Override
-	public ConditionalAppliedToAllComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionToAllComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String eqIndex = pseudoClassSelector.getPseudoClassContent();
 		if (!eqIndex.matches("[+-]?\\d+")) {
 			throw new RuntimeException("The :gt() pseudo-class requires an integer but got: " + eqIndex);
@@ -69,10 +69,10 @@ public class GtPseudoClass implements PseudoClass<ConditionalAppliedToAllCompone
 		int index = Integer.valueOf(eqIndex);
 		
 		if (index >= 0) {
-			return new ConditionalAppliedToAllComponent("[position() > " + (index + 1) + "]");
+			return new ConditionToAllComponent("[position() > " + (index + 1) + "]");
 		}
 		String xPathExpression = "[position() > (last()-" + (-index - 1) + ")]";
-		return new ConditionalAppliedToAllComponent(xPathExpression);
+		return new ConditionToAllComponent(xPathExpression);
 	}
 
 }
