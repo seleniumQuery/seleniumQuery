@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class XPathSelectorCompilerService {
 	
-	public static XPathExpressionList compileSelectorList(String selector) {
+	public static TagComponentList compileSelectorList(String selector) {
 		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
 		SelectorList selectorList = parsedSelector.getSelector();
 
@@ -24,7 +24,7 @@ public class XPathSelectorCompilerService {
     		css.add(cs);
     	}
     	
-    	return new XPathExpressionList(css);
+    	return new TagComponentList(css);
 	}
     
 	public static TagComponent compileSelector(Map<String, String> stringMap, Selector selector) {

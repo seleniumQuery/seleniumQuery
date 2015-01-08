@@ -19,14 +19,14 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @author ricardo-sc
  */
-public class XPathExpressionList {
+public class TagComponentList {
 	
 	private static final String XPATH_EXPRESSION_OR = " | ";
 	private static final String XPATH_CONDITIONAL_OR = ") or (";
 	
 	private List<TagComponent> xPathComponents;
 	
-	XPathExpressionList(List<TagComponent> xPathComponents) {
+	TagComponentList(List<TagComponent> xPathComponents) {
 		this.xPathComponents = xPathComponents;
 	}
 	

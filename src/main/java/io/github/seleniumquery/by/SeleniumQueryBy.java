@@ -17,7 +17,7 @@ limitations under the License.
 package io.github.seleniumquery.by;
 
 import io.github.seleniumquery.SeleniumQueryException;
-import io.github.seleniumquery.by.xpath.XPathExpressionList;
+import io.github.seleniumquery.by.xpath.TagComponentList;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -132,7 +132,7 @@ public class SeleniumQueryBy extends By {
 	 * be handled by SeleniumQuery) and matches elements based on it.
 	 */
 	private List<WebElement> enhancedCssFindElements(SearchContext context) {
-		XPathExpressionList xPathLocator = XPathSelectorCompilerService.compileSelectorList(this.selector);
+		TagComponentList xPathLocator = XPathSelectorCompilerService.compileSelectorList(this.selector);
 		return xPathLocator.findWebElements(context);
 	}
 

@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.XPathExpressionList;
+import io.github.seleniumquery.by.xpath.TagComponentList;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +25,7 @@ public class HasPseudoClass implements PseudoClass<SimpleConditionalComponent> {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		String hasSelector = pseudoClassSelector.getPseudoClassContent();
 		
-		XPathExpressionList compiledSelector = XPathSelectorCompilerService.compileSelectorList(hasSelector);
+		TagComponentList compiledSelector = XPathSelectorCompilerService.compileSelectorList(hasSelector);
 		List<WebElement> elements = compiledSelector.findWebElements(driver);
 		
 		return !elements.isEmpty();

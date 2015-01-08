@@ -3,7 +3,6 @@ package io.github.seleniumquery.by.xpath;
 import io.github.seleniumquery.by.preparser.ParsedSelector;
 import io.github.seleniumquery.by.preparser.SelectorParser;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.junit.Test;
 import org.w3c.css.sac.SelectorList;
 
@@ -14,13 +13,13 @@ public class XPathComponentTest {
 
     @Test
     public void toXPath__id() {
-        XPathExpressionList compileSelectorList = XPathSelectorCompilerService.compileSelectorList("#ball");
+        TagComponentList compileSelectorList = XPathSelectorCompilerService.compileSelectorList("#ball");
         assertThat(compileSelectorList.toXPath(), is("(.//*[@id = 'ball'])"));
     }
 
     @Test
     public void toXPath__and_conditional() {
-        XPathExpressionList compileSelectorList = XPathSelectorCompilerService.compileSelectorList(".a.b");
+        TagComponentList compileSelectorList = XPathSelectorCompilerService.compileSelectorList(".a.b");
         assertThat(compileSelectorList.toXPath(), is("(.//*[contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')])"));
     }
 
