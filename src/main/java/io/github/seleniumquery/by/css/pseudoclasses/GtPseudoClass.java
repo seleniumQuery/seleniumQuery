@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.component.ConditionalAppliedToAllComponent;
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 
@@ -37,7 +38,7 @@ public class GtPseudoClass implements PseudoClass {
 	}
 	
 	private static boolean isGt(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector, int wantedIndex) {
-		XPathComponent compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		TagComponent compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
 		List<WebElement> elements = compiledSelector.findWebElements(driver);
 		if (elements.isEmpty()) {
 			return false;

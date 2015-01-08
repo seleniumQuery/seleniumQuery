@@ -5,7 +5,7 @@ import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.component.AdjacentComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.SiblingSelector;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> {
+public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector, TagComponent> {
 
 	/**
 	 * http://www.w3.org/TR/css3-selectors/#general-sibling-combinators
@@ -52,9 +52,9 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector> 
 	}
 
 	@Override
-	public XPathComponent toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		XPathComponent previousElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
-		XPathComponent siblingElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
+	public TagComponent toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		TagComponent previousElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
+		TagComponent siblingElementCompiled = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
 
 		return AdjacentComponent.combine(previousElementCompiled, siblingElementCompiled);
 	}

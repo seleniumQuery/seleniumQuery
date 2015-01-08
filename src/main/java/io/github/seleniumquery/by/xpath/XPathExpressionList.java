@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -23,9 +24,9 @@ public class XPathExpressionList {
 	private static final String XPATH_EXPRESSION_OR = " | ";
 	private static final String XPATH_CONDITIONAL_OR = ") or (";
 	
-	private List<XPathComponent> xPathComponents;
+	private List<TagComponent> xPathComponents;
 	
-	XPathExpressionList(List<XPathComponent> xPathComponents) {
+	XPathExpressionList(List<TagComponent> xPathComponents) {
 		this.xPathComponents = xPathComponents;
 	}
 	

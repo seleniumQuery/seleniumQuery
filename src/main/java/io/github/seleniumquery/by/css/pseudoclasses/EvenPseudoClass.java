@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.component.ConditionalAppliedToAllComponent;
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 
@@ -26,7 +27,7 @@ public class EvenPseudoClass implements PseudoClass {
 
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		XPathComponent compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
+		TagComponent compiledSelector = XPathSelectorCompilerService.compileSelector(pseudoClassSelector.getStringMap(), pseudoClassSelector.getSelector());
 		List<WebElement> elements = compiledSelector.findWebElements(driver);
 		return elements.indexOf(element) % 2 == 0;
 	}

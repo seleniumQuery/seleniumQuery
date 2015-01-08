@@ -1,11 +1,9 @@
 package io.github.seleniumquery.by.css.conditionals;
 
-import io.github.seleniumquery.by.xpath.component.KeepTypeComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-
-import java.util.Map;
-
+import io.github.seleniumquery.by.xpath.component.ComponentUtils;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.CombinatorCondition;
@@ -13,7 +11,7 @@ import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SimpleSelector;
 
-import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
+import java.util.Map;
 
 /**
  * E.firstCondition.secondCondition
@@ -50,7 +48,7 @@ public class AndConditionalCssSelector implements CssConditionalSelector<Combina
 		
 		XPathComponent compiledFirst = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
 		XPathComponent compiledSecond = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
-		return KeepTypeComponent.combineKeepingType(compiledFirst, compiledSecond);
+		return ComponentUtils.combineKeepingTypeOfFirstArg(compiledFirst, compiledSecond);
 	}
 
 }

@@ -5,6 +5,8 @@ import io.github.seleniumquery.by.preparser.SelectorParser;
 
 import java.util.Map;
 
+import io.github.seleniumquery.by.xpath.component.TagComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
@@ -24,7 +26,7 @@ public class CssSelectorMatcherService {
 	}
 
 	public static boolean elementMatchesSelector(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selector) {
-		CssSelector<Selector> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
+		CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
 		return cssSelector.is(driver, element, stringMap, selector);	
 	}
 

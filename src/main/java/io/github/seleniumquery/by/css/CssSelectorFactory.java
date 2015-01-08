@@ -6,7 +6,8 @@ import io.github.seleniumquery.by.css.combinators.DirectDescendantCssSelector;
 import io.github.seleniumquery.by.css.combinators.GeneralAdjacentCssSelector;
 import io.github.seleniumquery.by.css.conditionals.ConditionalCssSelector;
 import io.github.seleniumquery.by.css.tagname.TagNameSelector;
-
+import io.github.seleniumquery.by.xpath.component.TagComponent;
+import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.w3c.css.sac.Selector;
 
 /**
@@ -25,11 +26,11 @@ public class CssSelectorFactory {
     private static final GeneralAdjacentCssSelector generalAdjacentCssSelector = new GeneralAdjacentCssSelector();
 
     @SuppressWarnings("unchecked")
-	public static CssSelector<Selector> parsedSelectorToCssSelector(Selector parsedSimpleSelector) {
-    	return (CssSelector<Selector>) CssSelectorFactory.getSelector(parsedSimpleSelector);
+	public static CssSelector<Selector, TagComponent> parsedSelectorToCssSelector(Selector parsedSimpleSelector) {
+    	return (CssSelector<Selector, TagComponent>) CssSelectorFactory.getSelector(parsedSimpleSelector);
     }
     
-	private static CssSelector<? extends Selector> getSelector(Selector selector) {
+	private static CssSelector<? extends Selector, ? extends XPathComponent> getSelector(Selector selector) {
 		switch (selector.getSelectorType()) {
 			case Selector.SAC_CONDITIONAL_SELECTOR:
 				return conditionalCssSelector;

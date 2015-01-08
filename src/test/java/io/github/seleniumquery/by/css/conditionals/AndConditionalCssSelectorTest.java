@@ -3,7 +3,8 @@ package io.github.seleniumquery.by.css.conditionals;
 import io.github.seleniumquery.by.preparser.ParsedSelector;
 import io.github.seleniumquery.by.preparser.SelectorParser;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.xpath.component.KeepTypeComponent;
+import io.github.seleniumquery.by.xpath.component.ComponentUtils;
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -29,13 +30,13 @@ public class AndConditionalCssSelectorTest {
 //        XPathComponent cs = conditionalCssSelector.toXPath(parsedSelector.getStringMap(), selector);
         Map<String,String> stringMap = parsedSelector.getStringMap();
         SimpleSelector simpleSelector = selector.getSimpleSelector();
-        XPathComponent spanTagComponent = XPathSelectorCompilerService.compileSelector(stringMap, simpleSelector);
+        TagComponent spanTagComponent = XPathSelectorCompilerService.compileSelector(stringMap, simpleSelector);
 
 //        XPathComponent compiledCondition = conditionalCssSelector.conditionToXPath(stringMap, selector.getSimpleSelector(), selector.getCondition());
         CombinatorCondition combinatorCondition = (CombinatorCondition) selector.getCondition();
         XPathComponent compiledCondition = andConditionalCssSelector.conditionToXPath(stringMap, simpleSelector, combinatorCondition);
 
-        XPathComponent cs = KeepTypeComponent.combineKeepingType(spanTagComponent, compiledCondition);
+        XPathComponent cs = ComponentUtils.combineKeepingTypeOfFirstArg(spanTagComponent, compiledCondition);
         assertThat(cs.toXPath(), Matchers.is("(.//*[self::span and contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')])"));
         assertThat(cs.toXPathCondition(), Matchers.is("local-name() = 'span' and contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')"));
     }

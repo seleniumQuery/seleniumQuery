@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
@@ -19,17 +20,17 @@ public class XPathSelectorCompilerService {
 		ParsedSelector<SelectorList> parsedSelector = SelectorParser.parseSelector(selector);
 		SelectorList selectorList = parsedSelector.getSelector();
 
-    	List<XPathComponent> css = new ArrayList<XPathComponent>(selectorList.getLength());
+    	List<TagComponent> css = new ArrayList<TagComponent>(selectorList.getLength());
     	for (int i = 0; i < selectorList.getLength(); i++) {
-    		XPathComponent cs = compileSelector(parsedSelector.getStringMap(), selectorList.item(i));
+			TagComponent cs = compileSelector(parsedSelector.getStringMap(), selectorList.item(i));
     		css.add(cs);
     	}
     	
     	return new XPathExpressionList(css);
 	}
     
-	public static XPathComponent compileSelector(Map<String, String> stringMap, Selector selector) {
-		CssSelector<Selector> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
+	public static TagComponent compileSelector(Map<String, String> stringMap, Selector selector) {
+		CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
 		return cssSelector.toXPath(stringMap, selector);
 	}
 

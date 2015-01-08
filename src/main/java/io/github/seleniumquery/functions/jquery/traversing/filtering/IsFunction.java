@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
@@ -38,7 +39,7 @@ public class IsFunction {
     			return true;
     		}
 
-    		CssSelector<Selector> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(parsedSimpleSelector);
+    		CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(parsedSimpleSelector);
 			for (WebElement webElement : elements) {
     			// if any matches, then it returns true
 				if (cssSelector.is(driver, webElement, stringMap, parsedSimpleSelector)) {

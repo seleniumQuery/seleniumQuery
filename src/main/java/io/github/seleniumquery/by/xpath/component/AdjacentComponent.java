@@ -4,7 +4,7 @@ import io.github.seleniumquery.by.xpath.CssCombinationType;
 
 public class AdjacentComponent extends XPathComponent {
 
-    public static XPathComponent combine(XPathComponent one, XPathComponent other) {
+    public static TagComponent combine(TagComponent one, TagComponent other) {
         ComponentUtils.assertTagComponent(one);
         AdjacentComponent otherCopyWithModifiedType = new AdjacentComponent(other);
         return new TagComponent(one.xPathExpression,
