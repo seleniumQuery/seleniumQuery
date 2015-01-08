@@ -1,21 +1,21 @@
 package io.github.seleniumquery.by.preparser;
 
-import io.github.seleniumquery.by.preparser.SelectorPreParser.PreParsedSelector;
+import io.github.seleniumquery.by.preparser.CSSSelectorPreParser.PreParsedSelector;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SelectorPreParserTest {
+public class CSSSelectorPreParserTest {
 	
-	SelectorPreParser selectorPreparator = new SelectorPreParser();
+	CSSSelectorPreParser cssSelectorPreParser = new CSSSelectorPreParser();
 	
 	@Test
 	public void transformSelector__should_not_transform_class_or_id_selectors() {
 		// given
 		String selector = "#myId.myClass";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(0));
 		assertThat(preParsedSelector.getTransformedSelector(), is(selector));
@@ -26,7 +26,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "#form1\\:myId";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(0));
 		assertThat(preParsedSelector.getTransformedSelector(), is(selector));
@@ -37,7 +37,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "[myAttr^=myValue][myAttr=myValue][myAttr$=myValue][myAttr|=myValue][myAttr~=myValue][myAttr*=myValue]";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(0));
 		assertThat(preParsedSelector.getTransformedSelector(), is(selector));
@@ -48,7 +48,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = ":only-of-type";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(0));
 		assertThat(preParsedSelector.getTransformedSelector(), is(":only-of-type"));
@@ -59,7 +59,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = ":eq(1)";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(1));
 		assertThat(preParsedSelector.getTransformedSelector(), is(":eq(0)"));
@@ -71,7 +71,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = ":not(span)";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(1));
 		assertThat(preParsedSelector.getTransformedSelector(), is(":not-sq(0)"));
@@ -83,7 +83,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = ":lang(pt-BR)";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(1));
 		assertThat(preParsedSelector.getTransformedSelector(), is(":lang-sq(0)"));
@@ -95,7 +95,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "div:not('span')";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(1));
 		assertThat(preParsedSelector.getTransformedSelector(), is("div:not-sq(0)"));
@@ -107,7 +107,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "div:not(span:contains('a\"bc')):contains(\"a'b\")";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(2));
 		assertThat(preParsedSelector.getTransformedSelector(), is("div:not-sq(0):contains(1)"));
@@ -120,7 +120,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "div:contains('a)b')";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(1));
 		assertThat(preParsedSelector.getTransformedSelector(), is("div:contains(0)"));
@@ -132,7 +132,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "div:contains(ab\\xc)";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(1));
 		assertThat(preParsedSelector.getTransformedSelector(), is("div:contains(0)"));
@@ -144,7 +144,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "div:contains(ab\\)c)";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(1));
 		assertThat(preParsedSelector.getTransformedSelector(), is("div:contains(0)"));
@@ -156,7 +156,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "a[id$='test:0']";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(0));
 		assertThat(preParsedSelector.getTransformedSelector(), is("a[id$='test:0']"));
@@ -169,7 +169,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "div:contains('a'b):has(span')";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(1));
 		assertThat(preParsedSelector.getTransformedSelector(), is("div:contains(0)"));
@@ -181,7 +181,7 @@ public class SelectorPreParserTest {
 		// given
 		String selector = "div:contains('a'b):has(span)";
 		// when
-		PreParsedSelector preParsedSelector = selectorPreparator.transformSelector(selector);
+		PreParsedSelector preParsedSelector = cssSelectorPreParser.transformSelector(selector);
 		// then
 		assertThat(preParsedSelector.getStringMap().size(), is(2));
 		assertThat(preParsedSelector.getTransformedSelector(), is("div:contains(0):has(1)"));
