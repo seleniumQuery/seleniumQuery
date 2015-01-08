@@ -17,7 +17,7 @@ import java.util.Map;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector> {
+public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector, TagComponent> {
 
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, SiblingSelector siblingSelector) {
@@ -27,12 +27,12 @@ public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector> {
 	}
 
 	@Override
-	public XPathComponent toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		XPathComponent previousCompiledExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
-		XPathComponent siblingSelectorCompiledAdjacentExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
+	public TagComponent toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
+		TagComponent previousCompiledExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
+		TagComponent siblingSelectorCompiledAdjacentExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
 
-		XPathComponent positionOne = new SimpleConditionalComponent("[position() = 1]");
-		XPathComponent siblingAtPositionOne = KeepTypeComponent.combineKeepingType(siblingSelectorCompiledAdjacentExpression, positionOne);
+		SimpleConditionalComponent positionOne = new SimpleConditionalComponent("[position() = 1]");
+		TagComponent siblingAtPositionOne = ComponentUtils.combineKeepingTypeOfFirstArg(siblingSelectorCompiledAdjacentExpression, positionOne);
 		
 		return AdjacentComponent.combine(previousCompiledExpression, siblingAtPositionOne);
 	}

@@ -5,7 +5,7 @@ import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.component.DescendantGeneralComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.DescendantSelector;
@@ -20,7 +20,7 @@ import java.util.Map;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class DescendantCssSelector implements CssSelector<DescendantSelector> {
+public class DescendantCssSelector implements CssSelector<DescendantSelector, TagComponent> {
 
 	@Override
 	public boolean is(WebDriver driver, WebElement element, Map<String, String> stringMap, DescendantSelector descendantSelector) {
@@ -39,12 +39,12 @@ public class DescendantCssSelector implements CssSelector<DescendantSelector> {
 	}
 
 	@Override
-	public XPathComponent toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
+	public TagComponent toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
 		Selector ancestorCSSSelector = descendantSelector.getAncestorSelector();
-		XPathComponent ancestorCompiled = XPathSelectorCompilerService.compileSelector(stringMap, ancestorCSSSelector);
+		TagComponent ancestorCompiled = XPathSelectorCompilerService.compileSelector(stringMap, ancestorCSSSelector);
 		
 		SimpleSelector descendantCSSSelector = descendantSelector.getSimpleSelector();
-		XPathComponent childrenCompiled = XPathSelectorCompilerService.compileSelector(stringMap, descendantCSSSelector);
+		TagComponent childrenCompiled = XPathSelectorCompilerService.compileSelector(stringMap, descendantCSSSelector);
 
 		return DescendantGeneralComponent.combine(ancestorCompiled, childrenCompiled);
 	}
