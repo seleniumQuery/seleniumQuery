@@ -1,8 +1,13 @@
 package io.github.seleniumquery.by.xpath.component;
 
+import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.xpath.CssCombinationType;
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -16,7 +21,13 @@ public class TagComponent extends XPathComponent {
         super(xPathExpression, combinatedComponents, elementFilterList);
     }
 
-    @Override
+    public List<WebElement> findWebElements(SearchContext context) {
+        String finalXPathExpression = this.toXPath();
+        List<WebElement> elements = new By.ByXPath(finalXPathExpression).findElements(context);
+        WebDriver driver = SelectorUtils.getWebDriver(context);
+        return elementFilterList.filter(driver, elements);
+    }
+
     public String toXPath() {
         String xPathExpression;
         if ("*".equals(this.xPathExpression)) {
@@ -33,7 +44,6 @@ public class TagComponent extends XPathComponent {
         return "(" + xPathExpression + ")";
     }
 
-    @Override
     public String toXPathCondition() {
         String xPathExpression;
         if ("*".equals(this.xPathExpression)) {

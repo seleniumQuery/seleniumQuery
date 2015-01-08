@@ -1,13 +1,7 @@
 package io.github.seleniumquery.by.xpath.component;
 
-import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.filter.ElementFilterList;
-import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,7 +12,7 @@ public abstract class XPathComponent {
 	protected ElementFilterList elementFilterList;
 	
 	XPathComponent(String xPathExpression, ElementFilterList elementFilterList) {
-		this(xPathExpression, new ArrayList<XPathComponent>(), elementFilterList);
+		this(xPathExpression, Collections.<XPathComponent>emptyList(), elementFilterList);
 	}
 
 	XPathComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
@@ -32,28 +26,11 @@ public abstract class XPathComponent {
 		return "[XPath: \""+xPathExpression+"\", combinatedComponents: "+ combinatedComponents +", filter: "+elementFilterList+"]";
 	}
 	
-	public List<WebElement> findWebElements(SearchContext context) {
-		String finalXPathExpression = this.toXPath();
-		List<WebElement> elements = new By.ByXPath(finalXPathExpression).findElements(context);
-		WebDriver driver = SelectorUtils.getWebDriver(context);
-		return elementFilterList.filter(driver, elements);
-	}
-
-	// i know, this method violates LSP, but bear with me while I manage to refactor it out...
-	public String toXPath() {
-		throw new RuntimeException("Only Tag components can be turned into XPath expressions. Got: "+ this.getClass());
-	}
-
 	public ElementFilterList mergeIntoFilter(ElementFilterList sourceElementFilterList) {
 		return sourceElementFilterList;
 	}
 
 	public abstract String mergeIntoExpression(String sourceXPathExpression);
-
-	// i know, this method violates LSP, but bear with me while I manage to refactor it out...
-	public String toXPathCondition() {
-		throw new RuntimeException("Only Tag components can be turned into XPath expressions. Got: "+ this.getClass());
-	}
 
 	public ElementFilterList mergeFilterAsCondition(ElementFilterList sourceElementFilterList) {
 		return sourceElementFilterList;
