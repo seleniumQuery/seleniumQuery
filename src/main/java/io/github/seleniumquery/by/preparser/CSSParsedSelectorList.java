@@ -5,12 +5,12 @@ import org.w3c.css.sac.SelectorList;
 import java.util.Collections;
 import java.util.Map;
 
-public class ParsedSelectorList {
+public class CSSParsedSelectorList {
 	
 	private final SelectorList selectorList;
 	private final Map<String, String> stringMap;
 
-	public ParsedSelectorList(SelectorList selectorList, Map<String, String> stringMap) {
+	public CSSParsedSelectorList(SelectorList selectorList, Map<String, String> stringMap) {
 		this.selectorList = selectorList;
 		this.stringMap = Collections.unmodifiableMap(stringMap);
 	}
