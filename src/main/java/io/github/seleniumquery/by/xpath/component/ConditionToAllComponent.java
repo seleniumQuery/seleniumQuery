@@ -6,13 +6,16 @@ import io.github.seleniumquery.by.xpath.CssCombinationType;
 
 import java.util.List;
 
-public class ConditionalAppliedToAllComponent extends ConditionComponent {
+/**
+ * Represents a condition that must be applied to all the expression, not just appended (using AND) to it.
+ */
+public class ConditionToAllComponent extends ConditionComponent {
 
-    public ConditionalAppliedToAllComponent(String xPathExpression) {
+    public ConditionToAllComponent(String xPathExpression) {
         super(xPathExpression, ComponentUtils.toElementFilterList(ElementFilter.FILTER_NOTHING));
     }
 
-    ConditionalAppliedToAllComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
+    ConditionToAllComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
         super(xPathExpression, combinatedComponents, elementFilterList);
     }
 
