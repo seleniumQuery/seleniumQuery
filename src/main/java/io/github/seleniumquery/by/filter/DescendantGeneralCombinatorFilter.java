@@ -1,17 +1,16 @@
 package io.github.seleniumquery.by.filter;
 
-import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.TagComponent;
+import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * It will need:
@@ -68,7 +67,7 @@ public class DescendantGeneralCombinatorFilter implements ElementFilter {
 		return filteredChildren;
 	}
 	
-	public static List<WebElement> parents(WebElement element, XPathComponent selector) {
+	public static List<WebElement> parents(WebElement element, TagComponent selector) {
 		return parentz(element, selector.toXPathCondition());
 	}
 	

@@ -36,7 +36,7 @@ public class AndConditionalCssSelectorTest {
         CombinatorCondition combinatorCondition = (CombinatorCondition) selector.getCondition();
         XPathComponent compiledCondition = andConditionalCssSelector.conditionToXPath(stringMap, simpleSelector, combinatorCondition);
 
-        XPathComponent cs = ComponentUtils.combineKeepingTypeOfFirstArg(spanTagComponent, compiledCondition);
+        TagComponent cs = ComponentUtils.combineKeepingTypeOfFirstArg(spanTagComponent, compiledCondition);
         assertThat(cs.toXPath(), Matchers.is("(.//*[self::span and contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')])"));
         assertThat(cs.toXPathCondition(), Matchers.is("local-name() = 'span' and contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')"));
     }
