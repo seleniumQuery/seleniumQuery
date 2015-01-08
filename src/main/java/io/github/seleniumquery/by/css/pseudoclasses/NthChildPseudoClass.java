@@ -19,7 +19,7 @@ import static java.lang.Integer.parseInt;
  *
  * @since 0.9.0
  */
-public class NthChildPseudoClass implements PseudoClass {
+public class NthChildPseudoClass implements PseudoClass<SimpleConditionalComponent> {
 
 	private static final Pattern NTH_CHILD_REGEX = Pattern.compile("([+-]?\\d*)n(?:\\s*([+-]\\s*\\d+))?");
 
@@ -38,7 +38,7 @@ public class NthChildPseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String nthChildContent = pseudoClassSelector.getPseudoClassContent().trim();
 		// odd --> 2n+1
 		if ("odd".equals(nthChildContent)) {
@@ -69,7 +69,7 @@ public class NthChildPseudoClass implements PseudoClass {
 				":nth-child(even), :nth-child(an+b), :nth-child(an) or :nth-child(b), where a and b are integers.");
 	}
 
-	public static XPathComponent nthChild(int a, int b) {
+	public static SimpleConditionalComponent nthChild(int a, int b) {
 		// a == 0: 0n+b 0n-b
 		if (a == 0) {
 			return new SimpleConditionalComponent("[position() = " + b + "]");

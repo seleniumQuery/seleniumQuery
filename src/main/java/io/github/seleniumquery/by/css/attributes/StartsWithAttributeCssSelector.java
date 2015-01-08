@@ -1,17 +1,16 @@
 package io.github.seleniumquery.by.css.attributes;
 
-import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-
-import java.util.Map;
-
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
+
+import java.util.Map;
+
+import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
 
 /**
  * [attribute^=stringToStart]
@@ -19,7 +18,7 @@ import org.w3c.css.sac.Selector;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class StartsWithAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
+public class StartsWithAttributeCssSelector implements CssConditionalSelector<AttributeCondition, SimpleConditionalComponent> {
 
 	public static final String STARTS_WITH_ATTRIBUTE_SELECTOR_SYMBOL = "^=";
 
@@ -40,7 +39,7 @@ public class StartsWithAttributeCssSelector implements CssConditionalSelector<At
 	}
 
 	@Override
-	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public SimpleConditionalComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
 		return new SimpleConditionalComponent("[starts-with(" + attributeName + ", " + wantedValue + ")]");

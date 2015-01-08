@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.css.conditionals;
 import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 import io.github.seleniumquery.by.xpath.component.ComponentUtils;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.CombinatorCondition;
@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @since 0.9.0
  */
-public class AndConditionalCssSelector implements CssConditionalSelector<CombinatorCondition> {
+public class AndConditionalCssSelector implements CssConditionalSelector<CombinatorCondition, ConditionComponent> {
 
 	private ConditionalCssSelector conditionalEvaluator;
 	
@@ -41,13 +41,13 @@ public class AndConditionalCssSelector implements CssConditionalSelector<Combina
 	}
 
 	@Override
-	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
+	public ConditionComponent conditionToXPath(Map<String, String> stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
 		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
 				(SimpleSelector) selectorUpToThisPoint,
 				combinatorCondition.getFirstCondition());
-		
-		XPathComponent compiledFirst = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
-		XPathComponent compiledSecond = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
+
+		ConditionComponent compiledFirst = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
+		ConditionComponent compiledSecond = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
 		return ComponentUtils.combineKeepingTypeOfFirstArg(compiledFirst, compiledSecond);
 	}
 

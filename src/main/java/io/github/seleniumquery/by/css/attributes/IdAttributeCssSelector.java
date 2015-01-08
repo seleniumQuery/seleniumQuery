@@ -1,16 +1,14 @@
 package io.github.seleniumquery.by.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-
-import java.util.Map;
-
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
+
+import java.util.Map;
 
 /**
  * #id
@@ -19,7 +17,7 @@ import org.w3c.css.sac.Selector;
  *
  * @since 0.9.0
  */
-public class IdAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
+public class IdAttributeCssSelector implements CssConditionalSelector<AttributeCondition, SimpleConditionalComponent> {
 
 	private static final String ID_ATTRIBUTE = "id";
 
@@ -43,7 +41,7 @@ public class IdAttributeCssSelector implements CssConditionalSelector<AttributeC
 	}
 
 	@Override
-	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public SimpleConditionalComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedId = attributeCondition.getValue();
 		return new SimpleConditionalComponent("[@id = '" + wantedId + "']");
 	}

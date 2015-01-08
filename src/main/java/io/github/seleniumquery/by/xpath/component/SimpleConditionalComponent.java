@@ -6,7 +6,7 @@ import io.github.seleniumquery.by.xpath.CssCombinationType;
 
 import java.util.List;
 
-public class SimpleConditionalComponent extends XPathComponent {
+public class SimpleConditionalComponent extends ConditionComponent {
 
     private final static String EMPTY_XPATH_EXPRESSION = "";
 

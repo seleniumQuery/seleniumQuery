@@ -1,18 +1,16 @@
 package io.github.seleniumquery.by.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-
-import java.util.Arrays;
-import java.util.Map;
-
+import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
+
+import java.util.Arrays;
+import java.util.Map;
 
 /**
  * .class
@@ -21,7 +19,7 @@ import org.w3c.css.sac.Selector;
  *
  * @since 0.9.0
  */
-public class ClassAttributeCssSelector implements CssConditionalSelector<AttributeCondition> {
+public class ClassAttributeCssSelector implements CssConditionalSelector<AttributeCondition, SimpleConditionalComponent> {
 
 	private static final String CLASS_ATTRIBUTE = "class";
 	
@@ -41,7 +39,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	}
 
 	@Override
-	public XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public SimpleConditionalComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		String unescapedClassName = StringEscapeUtils.unescapeJava(wantedClassName);
 		// nothing to do, everyone supports filtering by class

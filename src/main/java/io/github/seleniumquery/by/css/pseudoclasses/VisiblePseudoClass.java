@@ -3,8 +3,6 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -14,7 +12,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class VisiblePseudoClass implements PseudoClass {
+public class VisiblePseudoClass implements PseudoClass<SimpleConditionalComponent> {
 
 	public static final String NOT_DISPLAY_NONE_XPATH = "not(" + HiddenPseudoClass.HIDDEN_XPATH_MUST_FILTER + ")";
 
@@ -31,7 +29,7 @@ public class VisiblePseudoClass implements PseudoClass {
 	}
 
 	@Override
-	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":visible");
 		
 		// #no-xpath

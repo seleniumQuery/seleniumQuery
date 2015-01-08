@@ -1,14 +1,12 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
+import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.component.ConditionalAppliedToAllComponent;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * :gt(#)
@@ -16,7 +14,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class GtPseudoClass implements PseudoClass {
+public class GtPseudoClass implements PseudoClass<ConditionalAppliedToAllComponent> {
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -60,7 +58,7 @@ public class GtPseudoClass implements PseudoClass {
 	}
 	
 	@Override
-	public XPathComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionalAppliedToAllComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String eqIndex = pseudoClassSelector.getPseudoClassContent();
 		if (!eqIndex.matches("[+-]?\\d+")) {
 			throw new RuntimeException("The :gt() pseudo-class requires an integer but got: " + eqIndex);

@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.css.conditionals;
 
 import io.github.seleniumquery.by.xpath.component.ComponentUtils;
+import io.github.seleniumquery.by.xpath.component.ConditionComponent;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
@@ -44,13 +45,13 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector, 
 	 */
 	boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
 		@SuppressWarnings("unchecked")
-		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) conditionalCssSelectorFactory.getSelector(condition);
+		CssConditionalSelector<Condition, ConditionComponent> evaluator = (CssConditionalSelector<Condition, ConditionComponent>) conditionalCssSelectorFactory.getSelector(condition);
 		return evaluator.isCondition(driver, element, stringMap, simpleSelector, condition);
 	}
 
-	XPathComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
+	ConditionComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, Condition condition) {
 		@SuppressWarnings("unchecked")
-		CssConditionalSelector<Condition> evaluator = (CssConditionalSelector<Condition>) conditionalCssSelectorFactory.getSelector(condition);
+		CssConditionalSelector<Condition, ConditionComponent> evaluator = (CssConditionalSelector<Condition, ConditionComponent>) conditionalCssSelectorFactory.getSelector(condition);
 		return evaluator.conditionToXPath(stringMap, simpleSelector, condition);
 	}
 

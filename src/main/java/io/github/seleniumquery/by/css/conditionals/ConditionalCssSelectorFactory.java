@@ -12,6 +12,7 @@ import io.github.seleniumquery.by.css.attributes.StartsWithAttributeCssSelector;
 import io.github.seleniumquery.by.css.pseudoclasses.LangPseudoClassEvaluator;
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassCssSelector;
 
+import io.github.seleniumquery.by.xpath.component.ConditionComponent;
 import org.w3c.css.sac.Condition;
 
 /**
@@ -36,7 +37,7 @@ public class ConditionalCssSelectorFactory {
 		this.andConditionalCssSelector = new AndConditionalCssSelector(conditionalCssSelector);
 	}
 
-	public CssConditionalSelector<? extends Condition> getSelector(Condition condition) {
+	public CssConditionalSelector<? extends Condition, ? extends ConditionComponent> getSelector(Condition condition) {
 	    switch (condition.getConditionType()) {
 		    case Condition.SAC_AND_CONDITION:
 		    	return andConditionalCssSelector;

@@ -1,18 +1,16 @@
 package io.github.seleniumquery.by.xpath;
 
-import io.github.seleniumquery.by.preparser.ParsedSelector;
-import io.github.seleniumquery.by.preparser.SelectorParser;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorFactory;
+import io.github.seleniumquery.by.preparser.ParsedSelector;
+import io.github.seleniumquery.by.preparser.SelectorParser;
+import io.github.seleniumquery.by.xpath.component.TagComponent;
+import org.w3c.css.sac.Selector;
+import org.w3c.css.sac.SelectorList;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import io.github.seleniumquery.by.xpath.component.TagComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import org.w3c.css.sac.Selector;
-import org.w3c.css.sac.SelectorList;
 
 public class XPathSelectorCompilerService {
 	
