@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.conditionals;
 
 import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.SelectorParser;
+import io.github.seleniumquery.by.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.xpath.component.ComponentUtils;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
@@ -23,7 +23,7 @@ public class AndConditionalCssSelectorTest {
 
     @Test
     public void testConditionToXPath() {
-        CSSParsedSelectorList CSSParsedSelectorList = SelectorParser.parseSelector("span.a.b");
+        CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector("span.a.b");
         SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
         ConditionalSelector selector = (ConditionalSelector) selectorList.item(0);
 

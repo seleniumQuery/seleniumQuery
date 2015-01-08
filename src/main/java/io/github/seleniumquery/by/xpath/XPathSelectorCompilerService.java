@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.xpath;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorFactory;
 import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.SelectorParser;
+import io.github.seleniumquery.by.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class XPathSelectorCompilerService {
 	
 	public static TagComponentList compileSelectorList(String selector) {
-		CSSParsedSelectorList CSSParsedSelectorList = SelectorParser.parseSelector(selector);
+		CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
 		SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
 
     	List<TagComponent> css = new ArrayList<TagComponent>(selectorList.getLength());

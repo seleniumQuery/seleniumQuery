@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.combinators;
 
 import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.SelectorParser;
+import io.github.seleniumquery.by.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.junit.Test;
 import org.w3c.css.sac.DescendantSelector;
@@ -16,7 +16,7 @@ public class DirectDescendantCssSelectorTest {
     @Test
     public void testToXPath() throws Exception {
         // given
-        CSSParsedSelectorList CSSParsedSelectorList = SelectorParser.parseSelector("a > b");
+        CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector("a > b");
         DescendantSelector descendantSelector = (DescendantSelector) CSSParsedSelectorList.getSelectorList().item(0);
         // when
         TagComponent xPathComponent = directDescendantCssSelector.toXPath(CSSParsedSelectorList.getStringMap(), descendantSelector);
