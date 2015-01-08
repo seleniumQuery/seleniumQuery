@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.preparser;
 
 import java.io.StringReader;
 
-import io.github.seleniumquery.by.preparser.SelectorPreParser.PreParsedSelector;
+import io.github.seleniumquery.by.preparser.CSSSelectorPreParser.PreParsedSelector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.CSSException;
@@ -21,7 +21,7 @@ public class SelectorParser {
 
 	public static CSSParsedSelectorList parseSelector(String selector) {
 		String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.turnAttributeNotEqualsIntoNotAttributeEquals(selector);
-		PreParsedSelector preParsedSelector = new SelectorPreParser().transformSelector(fixedSelector);
+		PreParsedSelector preParsedSelector = new CSSSelectorPreParser().transformSelector(fixedSelector);
 		SelectorList selectorList = parseSelectorIntoParseTree(preParsedSelector.getTransformedSelector());
 		return new CSSParsedSelectorList(selectorList, preParsedSelector.getStringMap());
 	}

@@ -17,7 +17,7 @@ import java.util.Map;
  * those with something else here and deal with them later).
  *
  */
-public class SelectorPreParser {
+public class CSSSelectorPreParser {
 
 	private static final Character END_OF_STRING = null;
 
