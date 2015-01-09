@@ -2,11 +2,16 @@ package io.github.seleniumquery.by.xpath.component;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
-import io.github.seleniumquery.by.xpath.CssCombinationType;
 import io.github.seleniumquery.by.xpath.component.special.Combinable;
 
 import java.util.List;
 
+/*
+ * if CONDITIONAL_SIMPLE, then the expr can be just appended to other, such as:
+ * //*[@other][@thisSelector]
+ *
+ * @see also {@link io.github.seleniumquery.by.xpath.component.ConditionToAllComponent}
+ */
 public class ConditionSimpleComponent extends ConditionComponent {
 
     private final static String EMPTY_XPATH_EXPRESSION = "";
@@ -35,13 +40,27 @@ public class ConditionSimpleComponent extends ConditionComponent {
     }
 
     @Override
-    public String mergeIntoExpression(String sourceXPathExpression) {
-        return CssCombinationType.CONDITIONAL_SIMPLE.merge(sourceXPathExpression, this.xPathExpression);
+        public String mergeIntoExpression(String sourceXPathExpression) {
+        return merge(sourceXPathExpression, this.xPathExpression);
     }
 
-    @Override
-    public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return CssCombinationType.CONDITIONAL_SIMPLE.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
+        @Override
+        public String mergeExpressionAsCondition(String sourceXPathExpression) {
+        return mergeAsCondition(sourceXPathExpression, this.xPathExpression);
+    }
+
+    public static String merge(String sourceXPathExpression, String otherXPathExpression) {
+        if (sourceXPathExpression.endsWith("]")) {
+            // because the previous was merged as a conditional, and we are a conditional as well, so we just 'AND it
+            return sourceXPathExpression.substring(0, sourceXPathExpression.length()-1) + " and " + otherXPathExpression.substring(1);
+        }
+        return sourceXPathExpression + otherXPathExpression;
+    }
+    public static String mergeAsCondition(String sourceXPathExpression, String otherXPathExpression) {
+        if (sourceXPathExpression.equals(MATCH_EVERYTHING_XPATH_CONDITIONAL)) {
+            return ComponentUtils.removeBraces(otherXPathExpression);
+        }
+        return sourceXPathExpression + " and " + ComponentUtils.removeBraces(otherXPathExpression);
     }
 
     @Override
