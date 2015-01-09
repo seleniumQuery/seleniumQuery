@@ -14,7 +14,7 @@ public class DescendantGeneralComponent extends XPathComponent {
                                 ComponentUtils.joinFilters(one.elementFilterList, otherCopyWithModifiedType));
     }
 
-    private DescendantGeneralComponent(XPathComponent other) {
+    private DescendantGeneralComponent(TagComponent other) {
         super(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
     }
 
