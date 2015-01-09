@@ -14,7 +14,7 @@ public class DescendantDirectComponent extends XPathComponent {
                                 ComponentUtils.joinFilters(one.elementFilterList, otherCopyWithModifiedType));
     }
 
-    private DescendantDirectComponent(XPathComponent other) {
+    private DescendantDirectComponent(TagComponent other) {
         super(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
     }
 

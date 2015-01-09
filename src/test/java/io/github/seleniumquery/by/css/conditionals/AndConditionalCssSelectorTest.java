@@ -5,7 +5,6 @@ import io.github.seleniumquery.by.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.xpath.component.ConditionComponent;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.ConditionalSelector;
@@ -14,6 +13,7 @@ import org.w3c.css.sac.SimpleSelector;
 
 import java.util.Map;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class AndConditionalCssSelectorTest {
@@ -36,8 +36,8 @@ public class AndConditionalCssSelectorTest {
         ConditionComponent compiledCondition = andConditionalCssSelector.conditionToXPath(stringMap, simpleSelector, combinatorCondition);
 
         TagComponent cs = spanTagComponent.cloneAndCombineTo(compiledCondition);
-        assertThat(cs.toXPath(), Matchers.is("(.//*[self::span and contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')])"));
-        assertThat(cs.toXPathCondition(), Matchers.is("local-name() = 'span' and contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')"));
+        assertThat(cs.toXPath(), is("(.//*[self::span and contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')])"));
+        assertThat(cs.toXPathCondition(), is("local-name() = 'span' and contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')"));
     }
 
 }

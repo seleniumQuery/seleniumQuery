@@ -17,7 +17,7 @@ public class AdjacentComponent extends XPathComponent {
                                 ComponentUtils.joinFilters(one.elementFilterList, otherCopyWithModifiedType));
     }
 
-    private AdjacentComponent(XPathComponent other) {
+    private AdjacentComponent(TagComponent other) {
         super(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
     }
 
