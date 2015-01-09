@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class LangPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class LangPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -25,9 +25,9 @@ public class LangPseudoClass implements PseudoClass<SimpleConditionalComponent> 
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String wantedLang = pseudoClassSelector.getPseudoClassContent();
-		return new SimpleConditionalComponent("[ancestor-or-self::*[@lang][1]/@lang = '" + wantedLang + "']");
+		return new ConditionSimpleComponent("[ancestor-or-self::*[@lang][1]/@lang = '" + wantedLang + "']");
 	}
 	
 }

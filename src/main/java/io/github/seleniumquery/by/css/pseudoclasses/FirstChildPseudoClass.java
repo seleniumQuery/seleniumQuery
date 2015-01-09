@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class FirstChildPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class FirstChildPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
 	private static final String FIRST_CHILD_PSEUDO_CLASS_NO_COLON = "first-child";
 
@@ -32,8 +32,8 @@ public class FirstChildPseudoClass implements PseudoClass<SimpleConditionalCompo
 	}
 
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new SimpleConditionalComponent("[position() = 1]");
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionSimpleComponent("[position() = 1]");
 	}
 
 }

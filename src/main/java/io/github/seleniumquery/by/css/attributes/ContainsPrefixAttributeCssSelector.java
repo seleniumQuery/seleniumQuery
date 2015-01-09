@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.startsWithIgnoreCase;
  *
  * @since 0.9.0
  */
-public class ContainsPrefixAttributeCssSelector implements CssConditionalSelector<AttributeCondition, SimpleConditionalComponent> {
+public class ContainsPrefixAttributeCssSelector implements CssConditionalSelector<AttributeCondition, ConditionSimpleComponent> {
 
 	/**
 	 * see {@link org.w3c.css.sac.Condition#SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION}
@@ -38,11 +38,11 @@ public class ContainsPrefixAttributeCssSelector implements CssConditionalSelecto
 	}
 
 	@Override
-	public SimpleConditionalComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public ConditionSimpleComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
 		String wantedValueWithSuffix = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue() + "-");
-		return new SimpleConditionalComponent("[(" + attributeName + " = " + wantedValue + " or starts-with(" + attributeName + ", " + wantedValueWithSuffix + "))]");
+		return new ConditionSimpleComponent("[(" + attributeName + " = " + wantedValue + " or starts-with(" + attributeName + ", " + wantedValueWithSuffix + "))]");
 	}
 	
 }

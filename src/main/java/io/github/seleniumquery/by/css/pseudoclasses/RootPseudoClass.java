@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class RootPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class RootPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String ROOT_PSEUDO_CLASS_NO_COLON = "root";
 	
@@ -25,8 +25,8 @@ public class RootPseudoClass implements PseudoClass<SimpleConditionalComponent> 
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new SimpleConditionalComponent("[local-name() = 'html']");
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionSimpleComponent("[local-name() = 'html']");
 	}
 	
 }

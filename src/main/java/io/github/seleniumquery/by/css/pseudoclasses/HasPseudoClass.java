@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.TagComponentList;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class HasPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class HasPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -32,11 +32,11 @@ public class HasPseudoClass implements PseudoClass<SimpleConditionalComponent> {
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
 		String insideHasXPath = XPathSelectorCompilerService.compileSelectorList(notSelector).toXPath();
 		insideHasXPath = insideHasXPath.substring(1, insideHasXPath.length()-1);
-		return new SimpleConditionalComponent("[" + insideHasXPath + "]");
+		return new ConditionSimpleComponent("[" + insideHasXPath + "]");
 	}
 	
 }

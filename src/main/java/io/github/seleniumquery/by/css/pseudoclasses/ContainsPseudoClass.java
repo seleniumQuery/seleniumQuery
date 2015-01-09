@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class ContainsPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class ContainsPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -26,11 +26,11 @@ public class ContainsPseudoClass implements PseudoClass<SimpleConditionalCompone
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String textToContain = pseudoClassSelector.getPseudoClassContent();
 		textToContain = SelectorUtils.unescapeString(textToContain);
 		String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
-		return new SimpleConditionalComponent("[contains(string(.), " + wantedTextToContain + ")]");
+		return new ConditionSimpleComponent("[contains(string(.), " + wantedTextToContain + ")]");
 	}
 
 }

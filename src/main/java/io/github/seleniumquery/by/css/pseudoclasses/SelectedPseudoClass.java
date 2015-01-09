@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +13,7 @@ import static io.github.seleniumquery.by.WebElementUtils.isOptionTag;
  *
  * @since 0.9.0
  */
-public class SelectedPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class SelectedPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
 	public static final String SELECTED_PSEUDO_CONDITION = "local-name() = 'option' and (@selected or (ancestor::select[not(@multiple) and not(option[@selected])] and position() = 1))";
 	private static final String SELECTED_PSEUDO_CONDITIONAL_EXPRESSION = "[" + SELECTED_PSEUDO_CONDITION + "]";
@@ -35,8 +35,8 @@ public class SelectedPseudoClass implements PseudoClass<SimpleConditionalCompone
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new SimpleConditionalComponent(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionSimpleComponent(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
 	}
 
 }

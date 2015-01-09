@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
 import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class NotPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class NotPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -26,10 +26,10 @@ public class NotPseudoClass implements PseudoClass<SimpleConditionalComponent> {
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
 		String insideNotXPath = XPathSelectorCompilerService.compileSelectorList(notSelector).toXPathCondition();
-		return new SimpleConditionalComponent("[not(" + insideNotXPath + ")]");
+		return new ConditionSimpleComponent("[not(" + insideNotXPath + ")]");
 	}
 	
 }

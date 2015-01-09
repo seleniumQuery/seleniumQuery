@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +19,7 @@ import static java.lang.Integer.parseInt;
  *
  * @since 0.9.0
  */
-public class NthChildPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class NthChildPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
 	private static final Pattern NTH_CHILD_REGEX = Pattern.compile("([+-]?\\d*)n(?:\\s*([+-]\\s*\\d+))?");
 
@@ -38,7 +38,7 @@ public class NthChildPseudoClass implements PseudoClass<SimpleConditionalCompone
 	}
 
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String nthChildContent = pseudoClassSelector.getPseudoClassContent().trim();
 		// odd --> 2n+1
 		if ("odd".equals(nthChildContent)) {
@@ -51,10 +51,10 @@ public class NthChildPseudoClass implements PseudoClass<SimpleConditionalCompone
 			return nthChild(0, parseInt(nthChildContent));
 		// n --> 1n --> everyone
 		} else if (nthChildContent.matches("n")) {
-			return new SimpleConditionalComponent("[true()]");
+			return new ConditionSimpleComponent("[true()]");
 			// 0n --> nobody
 		} else if (nthChildContent.matches("[+-]?[0]?n")) {
-			return new SimpleConditionalComponent("[false()]");
+			return new ConditionSimpleComponent("[false()]");
 		}
 		// an+b --> general case
 		Matcher m = NTH_CHILD_REGEX.matcher(nthChildContent);
@@ -69,17 +69,17 @@ public class NthChildPseudoClass implements PseudoClass<SimpleConditionalCompone
 				":nth-child(even), :nth-child(an+b), :nth-child(an) or :nth-child(b), where a and b are integers.");
 	}
 
-	public static SimpleConditionalComponent nthChild(int a, int b) {
+	public static ConditionSimpleComponent nthChild(int a, int b) {
 		// a == 0: 0n+b 0n-b
 		if (a == 0) {
-			return new SimpleConditionalComponent("[position() = " + b + "]");
+			return new ConditionSimpleComponent("[position() = " + b + "]");
 		}
 		// a < 0: -an+b -an-b
 		if (a < 0) {
-			return new SimpleConditionalComponent("[(position() - " + b + ") mod " + a + " = 0 and position() <= " + b + "]");
+			return new ConditionSimpleComponent("[(position() - " + b + ") mod " + a + " = 0 and position() <= " + b + "]");
 		}
 		// a > 0: an+b an-b
-		return new SimpleConditionalComponent("[(position() - " + b + ") mod " + a + " = 0 and position() >= " + b + "]");
+		return new ConditionSimpleComponent("[(position() - " + b + ") mod " + a + " = 0 and position() >= " + b + "]");
 	}
 
 }
