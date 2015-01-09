@@ -14,7 +14,7 @@ public class IdAttributeCssSelectorTest {
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
 
     @Test
-    public void visiblePseudoClass() throws Exception {
+    public void idAttributeCssSelector() throws Exception {
     	assertThat($("#myId").size(), is(1));
     	assertThat($("#myId").text(), is("abc"));
     }

@@ -3,6 +3,7 @@ package io.github.seleniumquery.by.css.attributes;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.special.IdConditionComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
@@ -43,7 +44,7 @@ public class IdAttributeCssSelector implements CssConditionalSelector<AttributeC
 	@Override
 	public SimpleConditionalComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedId = attributeCondition.getValue();
-		return new SimpleConditionalComponent("[@id = '" + wantedId + "']");
+		return new IdConditionComponent(wantedId);
 	}
 
 }
