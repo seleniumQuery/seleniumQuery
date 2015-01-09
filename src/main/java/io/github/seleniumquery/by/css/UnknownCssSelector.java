@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css;
 
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Represents an unknown CSS selector type.
  */
-public class UnknownCssSelector<T> implements CssSelector<T, SimpleConditionalComponent> {
+public class UnknownCssSelector<T> implements CssSelector<T, ConditionSimpleComponent> {
 	
 	private static final Log LOGGER = LogFactory.getLog(UnknownCssSelector.class);
 	
@@ -27,10 +27,10 @@ public class UnknownCssSelector<T> implements CssSelector<T, SimpleConditionalCo
 	}
 
 	@Override
-	public SimpleConditionalComponent toXPath(Map<String, String> stringMap, T selector) {
+	public ConditionSimpleComponent toXPath(Map<String, String> stringMap, T selector) {
 		// if it is unknown, we can't convert it, so we simply ignore it
 		LOGGER.warn("CSS Selector '"+selector+"' is unknown. Ignoring it.");
-		return new SimpleConditionalComponent();
+		return new ConditionSimpleComponent();
 	}
 	
 }

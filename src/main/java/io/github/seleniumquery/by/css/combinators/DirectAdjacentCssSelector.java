@@ -31,7 +31,7 @@ public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector, T
 		TagComponent previousCompiledExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
 		TagComponent siblingSelectorCompiledAdjacentExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
 
-		SimpleConditionalComponent positionOne = new SimpleConditionalComponent("[position() = 1]");
+		ConditionSimpleComponent positionOne = new ConditionSimpleComponent("[position() = 1]");
 		TagComponent siblingAtPositionOne = siblingSelectorCompiledAdjacentExpression.cloneAndCombineTo(positionOne);
 		
 		return AdjacentComponent.combine(previousCompiledExpression, siblingAtPositionOne);

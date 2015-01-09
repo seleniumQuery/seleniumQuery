@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.DriverVersionUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class ParentPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class ParentPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final Log LOGGER = LogFactory.getLog(ParentPseudoClass.class);
 	
@@ -50,8 +50,8 @@ public class ParentPseudoClass implements PseudoClass<SimpleConditionalComponent
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new SimpleConditionalComponent("[count(node()) > 0]");
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionSimpleComponent("[count(node()) > 0]");
 	}
 	
 }

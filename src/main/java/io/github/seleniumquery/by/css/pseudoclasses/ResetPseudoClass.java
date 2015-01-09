@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class ResetPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class ResetPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String RESET = "reset";
 	
@@ -26,8 +26,8 @@ public class ResetPseudoClass implements PseudoClass<SimpleConditionalComponent>
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new SimpleConditionalComponent("[(local-name() = 'input' or local-name() = 'button') and @type = 'reset']");
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionSimpleComponent("[(local-name() = 'input' or local-name() = 'button') and @type = 'reset']");
 	}
 	
 }

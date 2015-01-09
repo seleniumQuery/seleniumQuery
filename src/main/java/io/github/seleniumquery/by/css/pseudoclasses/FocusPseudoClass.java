@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class FocusPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class FocusPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
 	private static final String FOCUS_PSEUDO_CLASS_NO_COLON = "focus";
 
@@ -29,11 +29,11 @@ public class FocusPseudoClass implements PseudoClass<SimpleConditionalComponent>
 	}
 
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":focus");
 		
 		// #no-xpath
-		return new SimpleConditionalComponent(focusPseudoClassFilter);
+		return new ConditionSimpleComponent(focusPseudoClassFilter);
 	}
 	
 }

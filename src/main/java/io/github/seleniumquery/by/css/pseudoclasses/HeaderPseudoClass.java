@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class HeaderPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class HeaderPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String HX_XPATH = "[(local-name() = 'h0' or "
 											+ "local-name() = 'h1' or "
@@ -41,8 +41,8 @@ public class HeaderPseudoClass implements PseudoClass<SimpleConditionalComponent
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new SimpleConditionalComponent(HX_XPATH);
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionSimpleComponent(HX_XPATH);
 	}
 	
 }

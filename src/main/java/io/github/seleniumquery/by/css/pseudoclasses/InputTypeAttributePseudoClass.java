@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-abstract class InputTypeAttributePseudoClass implements PseudoClass<SimpleConditionalComponent> {
+abstract class InputTypeAttributePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private String typeAttributeValue;
 	
@@ -30,8 +30,8 @@ abstract class InputTypeAttributePseudoClass implements PseudoClass<SimpleCondit
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new SimpleConditionalComponent("[local-name() = 'input' and @type = '" + typeAttributeValue + "']");
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionSimpleComponent("[local-name() = 'input' and @type = '" + typeAttributeValue + "']");
 	}
 	
 }

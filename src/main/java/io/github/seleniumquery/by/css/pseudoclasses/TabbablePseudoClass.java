@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class TabbablePseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class TabbablePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String TABBABLE_PSEUDO_CLASS_NO_COLON = "tabbable";
 
@@ -43,12 +43,12 @@ public class TabbablePseudoClass implements PseudoClass<SimpleConditionalCompone
 
 	// see :focusable. change there before here, this selector is highly dependable on :focusable as it is just a small change to it
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":tabbable");
 		
 		// #no-xpath
 		System.err.println(":tabbable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
-		return new SimpleConditionalComponent("[(" + FocusablePseudoClass.FOCUSABLE_XPATH + " and (not(@tabindex) or @tabindex > -1))]", tabbablePseudoClassFilter);
+		return new ConditionSimpleComponent("[(" + FocusablePseudoClass.FOCUSABLE_XPATH + " and (not(@tabindex) or @tabindex > -1))]", tabbablePseudoClassFilter);
 	}
 	
 }

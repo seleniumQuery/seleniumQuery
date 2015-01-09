@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -26,7 +26,7 @@ import static io.github.seleniumquery.by.SelectorUtils.isVisible;
  *
  * @since 0.9.0
  */
-public class FocusablePseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class FocusablePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String FOCUSABLE_PSEUDO_CLASS_NO_COLON = "focusable";
 	
@@ -78,12 +78,12 @@ public class FocusablePseudoClass implements PseudoClass<SimpleConditionalCompon
 			+ ")";
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":focusable");
 		
 		// #no-xpath
 		System.err.println(":focusable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
-		return new SimpleConditionalComponent("[" + FOCUSABLE_XPATH + "]", focusablePseudoClassFilter);
+		return new ConditionSimpleComponent("[" + FOCUSABLE_XPATH + "]", focusablePseudoClassFilter);
 	}
 	
 }

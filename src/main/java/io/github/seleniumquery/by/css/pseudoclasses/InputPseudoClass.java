@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class InputPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class InputPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final List<String> FORM_ELEMENT_TAGS = Arrays.asList("input", "button", "select", "textarea");
 	
@@ -30,8 +30,8 @@ public class InputPseudoClass implements PseudoClass<SimpleConditionalComponent>
 	}
 	
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new SimpleConditionalComponent("[(local-name() = 'input' or local-name() = 'button' or local-name() = 'select' or local-name() = 'textarea')]");
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionSimpleComponent("[(local-name() = 'input' or local-name() = 'button' or local-name() = 'select' or local-name() = 'textarea')]");
 	}
 	
 }

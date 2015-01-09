@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.LangCondition;
@@ -16,7 +16,7 @@ import java.util.Map;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class LangPseudoClassEvaluator implements CssConditionalSelector<LangCondition, SimpleConditionalComponent> {
+public class LangPseudoClassEvaluator implements CssConditionalSelector<LangCondition, ConditionSimpleComponent> {
 
 	/*
 	 * see also: {@link org.w3c.css.sac.Condition#SAC_LANG_CONDITION}
@@ -31,10 +31,10 @@ public class LangPseudoClassEvaluator implements CssConditionalSelector<LangCond
 	}
 
 	@Override
-	public SimpleConditionalComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, LangCondition langCondition) {
+	public ConditionSimpleComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, LangCondition langCondition) {
 		String wantedLangIndex = langCondition.getLang();
 		String wantedLang = stringMap.get(wantedLangIndex);
-		return new SimpleConditionalComponent("[ancestor-or-self::*[@lang][1]/@lang = '" + wantedLang + "']");
+		return new ConditionSimpleComponent("[ancestor-or-self::*[@lang][1]/@lang = '" + wantedLang + "']");
 	}
 
 }

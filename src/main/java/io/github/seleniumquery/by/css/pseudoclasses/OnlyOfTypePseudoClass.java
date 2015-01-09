@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class OnlyOfTypePseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class OnlyOfTypePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String ONLY_OF_TYPE_PSEUDO_CLASS_NO_COLON = "only-of-type";
 
@@ -30,11 +30,11 @@ public class OnlyOfTypePseudoClass implements PseudoClass<SimpleConditionalCompo
 	}
 
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":only-of-type");
 		
 		// #no-xpath
-		return new SimpleConditionalComponent(onlyOfTypePseudoClassFilter);
+		return new ConditionSimpleComponent(onlyOfTypePseudoClassFilter);
 	}
 	
 }

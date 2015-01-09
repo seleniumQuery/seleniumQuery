@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.xpath.component.special;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.xpath.component.ComponentUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IdConditionComponent extends SimpleConditionalComponent {
+public class IdConditionComponent extends ConditionSimpleComponent {
 
     private final String wantedId;
 

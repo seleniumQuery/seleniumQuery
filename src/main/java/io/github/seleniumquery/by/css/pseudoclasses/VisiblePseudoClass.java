@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class VisiblePseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class VisiblePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
 	public static final String NOT_DISPLAY_NONE_XPATH = "not(" + HiddenPseudoClass.HIDDEN_XPATH_MUST_FILTER + ")";
 
@@ -29,12 +29,12 @@ public class VisiblePseudoClass implements PseudoClass<SimpleConditionalComponen
 	}
 
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":visible");
 		
 		// #no-xpath
 		System.err.println(":visible is not fully XPath supported (if the style is in a class, it won't know)!!!");
-		return new SimpleConditionalComponent("[" + NOT_DISPLAY_NONE_XPATH + "]", visiblePseudoClassFilter);
+		return new ConditionSimpleComponent("[" + NOT_DISPLAY_NONE_XPATH + "]", visiblePseudoClassFilter);
 	}
 	
 }

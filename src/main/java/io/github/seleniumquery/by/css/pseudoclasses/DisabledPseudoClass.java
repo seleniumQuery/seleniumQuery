@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @since 0.9.0
  */
-public class DisabledPseudoClass implements PseudoClass<SimpleConditionalComponent> {
+public class DisabledPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
 	private static final String DISABLED_PSEUDO_CLASS_NO_COLON = "disabled";
 
@@ -61,8 +61,8 @@ public class DisabledPseudoClass implements PseudoClass<SimpleConditionalCompone
 	}
 
 	@Override
-	public SimpleConditionalComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new SimpleConditionalComponent("[(" +
+	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		return new ConditionSimpleComponent("[(" +
 						"(@disabled and " + DISABLEABLE_TAGS_XPATH + ") " +
 						"or " +
 						"(self::option and ancestor::select[@disabled])" +

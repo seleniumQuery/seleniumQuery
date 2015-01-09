@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @since 0.9.0
  */
-public class ClassAttributeCssSelector implements CssConditionalSelector<AttributeCondition, SimpleConditionalComponent> {
+public class ClassAttributeCssSelector implements CssConditionalSelector<AttributeCondition, ConditionSimpleComponent> {
 
 	private static final String CLASS_ATTRIBUTE = "class";
 	
@@ -39,11 +39,11 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	}
 
 	@Override
-	public SimpleConditionalComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public ConditionSimpleComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		String unescapedClassName = StringEscapeUtils.unescapeJava(wantedClassName);
 		// nothing to do, everyone supports filtering by class
-		return new SimpleConditionalComponent("[contains(concat(' ', normalize-space(@class), ' '), ' " + unescapedClassName + " ')]");
+		return new ConditionSimpleComponent("[contains(concat(' ', normalize-space(@class), ' '), ' " + unescapedClassName + " ')]");
 	}
 	
 }

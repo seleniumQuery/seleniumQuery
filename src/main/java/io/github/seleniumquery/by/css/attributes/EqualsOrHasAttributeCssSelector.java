@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-import io.github.seleniumquery.by.xpath.component.SimpleConditionalComponent;
+import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
@@ -24,7 +24,7 @@ import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
  *
  * @since 0.9.0
  */
-public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<AttributeCondition, SimpleConditionalComponent> {
+public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<AttributeCondition, ConditionSimpleComponent> {
 
 	public static final String EQUALS_ATTRIBUTE_SELECTOR_SYMBOL = "=";
 
@@ -52,15 +52,15 @@ public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<A
 	}
 
 	@Override
-	public SimpleConditionalComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public ConditionSimpleComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		// [attribute=wantedValue]
 		if (attributeCondition.getSpecified()) {
 			String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
-			return new SimpleConditionalComponent("[" + attributeName + " = " + wantedValue + "]");
+			return new ConditionSimpleComponent("[" + attributeName + " = " + wantedValue + "]");
 		}
 		// [attribute]
-		return new SimpleConditionalComponent("[" + attributeName + "]");
+		return new ConditionSimpleComponent("[" + attributeName + "]");
 	}
 
 }
