@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.xpath.component.special;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
+import io.github.seleniumquery.by.xpath.component.Combinable;
 import io.github.seleniumquery.by.xpath.component.ComponentUtils;
 import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import io.github.seleniumquery.by.xpath.component.XPathComponent;
