@@ -30,10 +30,6 @@ public class IdConditionComponent extends SimpleConditionalComponent {
         this.wantedId = id;
     }
 
-    public IdConditionComponent cloneComponent() {
-        return new IdConditionComponent(this.wantedId);
-    }
-
     public List<WebElement> findWebElements(SearchContext context) {
         ArrayList<WebElement> webElements = new ArrayList<WebElement>();
         try {
@@ -42,11 +38,17 @@ public class IdConditionComponent extends SimpleConditionalComponent {
         return webElements;
     }
 
-    public IdConditionComponent cloneAndCombine(XPathComponent other) {
-        XPathComponent otherCopy = ComponentUtils.cloneComponent(other);
+    @Override
+    public IdConditionComponent cloneComponent() {
+        return new IdConditionComponent(this.wantedId);
+    }
+
+    @Override
+    public IdConditionComponent cloneAndCombineTo(Combinable other) {
+        XPathComponent otherCopy = other.cloneComponent();
         return new IdConditionComponent(this.wantedId,
-                                    ComponentUtils.combineComponents(this.combinatedComponents, otherCopy),
-                                        ComponentUtils.combineFilters(this.elementFilterList, otherCopy));
+                                    ComponentUtils.joinComponents(this.combinatedComponents, otherCopy),
+                                        ComponentUtils.joinFilters(this.elementFilterList, otherCopy));
     }
 
 }

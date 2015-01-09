@@ -1,22 +1,19 @@
 package io.github.seleniumquery.by.css.conditionals;
 
-import io.github.seleniumquery.by.xpath.component.ComponentUtils;
-import io.github.seleniumquery.by.xpath.component.ConditionComponent;
-import io.github.seleniumquery.by.xpath.component.TagComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
-
-import java.util.Map;
-
+import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.component.ConditionComponent;
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.ConditionalSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SimpleSelector;
+
+import java.util.Map;
 
 
 public class ConditionalCssSelector implements CssSelector<ConditionalSelector, TagComponent> {
@@ -36,8 +33,8 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector, 
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
 		TagComponent tagComponent = XPathSelectorCompilerService.compileSelector(stringMap, simpleSelector);
-		XPathComponent compiledCondition = conditionToXPath(stringMap, simpleSelector, condition);
-		return ComponentUtils.combineKeepingTypeOfFirstArg(tagComponent, compiledCondition);
+		ConditionComponent compiledCondition = conditionToXPath(stringMap, simpleSelector, condition);
+		return tagComponent.cloneAndCombineTo(compiledCondition);
 	}
 	
 	/**

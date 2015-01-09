@@ -3,6 +3,7 @@ package io.github.seleniumquery.by.xpath.component;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.xpath.CssCombinationType;
+import io.github.seleniumquery.by.xpath.component.special.Combinable;
 
 import java.util.List;
 
@@ -41,6 +42,19 @@ public class SimpleConditionalComponent extends ConditionComponent {
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
         return CssCombinationType.CONDITIONAL_SIMPLE.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
+    }
+
+    @Override
+    public SimpleConditionalComponent cloneComponent() {
+        return new SimpleConditionalComponent(this.xPathExpression, this.combinatedComponents, this.elementFilterList);
+    }
+
+    @Override
+    public SimpleConditionalComponent cloneAndCombineTo(Combinable other) {
+        XPathComponent otherCopy = other.cloneComponent();
+        return new SimpleConditionalComponent(this.xPathExpression,
+                ComponentUtils.joinComponents(this.combinatedComponents, otherCopy),
+                ComponentUtils.joinFilters(this.elementFilterList, otherCopy));
     }
 
 }

@@ -3,6 +3,7 @@ package io.github.seleniumquery.by.filter;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.SearchContext;
@@ -14,7 +15,7 @@ public class ElementFilterList {
 	private List<ElementFilter> elementFilters;
 	
 	public ElementFilterList(List<ElementFilter> elementFilters) {
-		this.elementFilters = elementFilters;
+		this.elementFilters = Collections.unmodifiableList(elementFilters);
 	}
 
 	public List<WebElement> filter(SearchContext context, List<WebElement> elements) {

@@ -5,11 +5,10 @@ import io.github.seleniumquery.by.xpath.CssCombinationType;
 public class AdjacentComponent extends XPathComponent {
 
     public static TagComponent combine(TagComponent one, TagComponent other) {
-        ComponentUtils.assertTagComponent(one);
         AdjacentComponent otherCopyWithModifiedType = new AdjacentComponent(other);
         return new TagComponent(one.xPathExpression,
-                                ComponentUtils.combineComponents(one, other, otherCopyWithModifiedType),
-                                ComponentUtils.combineFilters(one, other, otherCopyWithModifiedType));
+                                ComponentUtils.joinComponents(one.combinatedComponents, otherCopyWithModifiedType),
+                                ComponentUtils.joinFilters(one.elementFilterList, otherCopyWithModifiedType));
     }
 
     private AdjacentComponent(XPathComponent other) {
