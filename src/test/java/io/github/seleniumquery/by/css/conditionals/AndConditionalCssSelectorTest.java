@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.css.conditionals;
 
 import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
 import io.github.seleniumquery.by.preparser.CSSSelectorParser;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.xpath.component.ConditionComponent;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.hamcrest.Matchers;
@@ -29,7 +29,7 @@ public class AndConditionalCssSelectorTest {
 //        XPathComponent cs = conditionalCssSelector.toXPath(parsedSelector.getStringMap(), selector);
         Map<String,String> stringMap = CSSParsedSelectorList.getStringMap();
         SimpleSelector simpleSelector = selector.getSimpleSelector();
-        TagComponent spanTagComponent = XPathSelectorCompilerService.compileSelector(stringMap, simpleSelector);
+        TagComponent spanTagComponent = XPathComponentCompilerService.compileSelector(stringMap, simpleSelector);
 
 //        XPathComponent compiledCondition = conditionalCssSelector.conditionToXPath(stringMap, selector.getSimpleSelector(), selector.getCondition());
         CombinatorCondition combinatorCondition = (CombinatorCondition) selector.getCondition();

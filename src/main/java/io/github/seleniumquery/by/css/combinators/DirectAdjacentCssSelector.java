@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.css.combinators;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.xpath.component.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,8 +28,8 @@ public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector, T
 
 	@Override
 	public TagComponent toXPath(Map<String, String> stringMap, SiblingSelector siblingSelector) {
-		TagComponent previousCompiledExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
-		TagComponent siblingSelectorCompiledAdjacentExpression = XPathSelectorCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
+		TagComponent previousCompiledExpression = XPathComponentCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
+		TagComponent siblingSelectorCompiledAdjacentExpression = XPathComponentCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
 
 		ConditionSimpleComponent positionOne = new ConditionSimpleComponent("[position() = 1]");
 		TagComponent siblingAtPositionOne = siblingSelectorCompiledAdjacentExpression.cloneAndCombineTo(positionOne);

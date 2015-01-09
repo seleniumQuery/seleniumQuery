@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.TagComponentList;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +25,7 @@ public class HasPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		String hasSelector = pseudoClassSelector.getPseudoClassContent();
 		
-		TagComponentList compiledSelector = XPathSelectorCompilerService.compileSelectorList(hasSelector);
+		TagComponentList compiledSelector = XPathComponentCompilerService.compileSelectorList(hasSelector);
 		List<WebElement> elements = compiledSelector.findWebElements(driver);
 		
 		return !elements.isEmpty();
@@ -34,7 +34,7 @@ public class HasPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		String notSelector = pseudoClassSelector.getPseudoClassContent();
-		String insideHasXPath = XPathSelectorCompilerService.compileSelectorList(notSelector).toXPath();
+		String insideHasXPath = XPathComponentCompilerService.compileSelectorList(notSelector).toXPath();
 		insideHasXPath = insideHasXPath.substring(1, insideHasXPath.length()-1);
 		return new ConditionSimpleComponent("[" + insideHasXPath + "]");
 	}

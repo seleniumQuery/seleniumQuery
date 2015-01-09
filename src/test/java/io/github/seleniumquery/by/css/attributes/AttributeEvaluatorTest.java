@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.xpath.TagComponentList;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
 
 import java.util.Iterator;
 import java.util.List;
@@ -98,7 +98,7 @@ public class AttributeEvaluatorTest {
 	@Test
 	public void attribute_escaping__maybe_should_change() {
 		String selector = "[attr=\"a\\\"bc\"]"; // [attr="a\"bc"]
-		TagComponentList compileSelectorList = XPathSelectorCompilerService.compileSelectorList(selector);
+		TagComponentList compileSelectorList = XPathComponentCompilerService.compileSelectorList(selector);
 		String xPath = compileSelectorList.toXPath();
 		assertThat(xPath, is("(.//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attr'] = 'a\\\"bc'])")); // (.//*[@attr = 'a\"bc'])
 	}

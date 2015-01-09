@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class XPathSelectorCompilerService {
+public class XPathComponentCompilerService {
 	
 	public static TagComponentList compileSelectorList(String selector) {
 		CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);

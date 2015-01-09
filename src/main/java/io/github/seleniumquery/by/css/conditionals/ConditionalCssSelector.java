@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.css.conditionals;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.xpath.component.ConditionComponent;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
@@ -32,7 +32,7 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector, 
 	public TagComponent toXPath(Map<String, String> stringMap, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
-		TagComponent tagComponent = XPathSelectorCompilerService.compileSelector(stringMap, simpleSelector);
+		TagComponent tagComponent = XPathComponentCompilerService.compileSelector(stringMap, simpleSelector);
 		ConditionComponent compiledCondition = conditionToXPath(stringMap, simpleSelector, condition);
 		return tagComponent.cloneAndCombineTo(compiledCondition);
 	}
