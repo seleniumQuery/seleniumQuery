@@ -39,12 +39,12 @@ public class ConditionSimpleComponent extends ConditionComponent {
     }
 
     @Override
-        public String mergeIntoExpression(String sourceXPathExpression) {
+    public String mergeIntoExpression(String sourceXPathExpression) {
         return merge(sourceXPathExpression, this.xPathExpression);
     }
 
-        @Override
-        public String mergeExpressionAsCondition(String sourceXPathExpression) {
+    @Override
+    public String mergeExpressionAsCondition(String sourceXPathExpression) {
         return mergeAsCondition(sourceXPathExpression, this.xPathExpression);
     }
 

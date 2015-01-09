@@ -3,6 +3,10 @@ package io.github.seleniumquery.by.xpath.component;
 /**
  * cssA ~ cssB
  * cssA + cssB
+ *
+ * In XPath this becomes: "/following-sibling::"
+ * This one will be used by the "General Adjacent" and the "Direct Adjacent" selectors
+ * (in order to differentiate, the "Direct Adjacent" selector will itself add a [position()=1] to its expression)
  */
 public class AdjacentComponent extends XPathComponent {
 
@@ -19,19 +23,12 @@ public class AdjacentComponent extends XPathComponent {
 
     @Override
     public String mergeIntoExpression(String sourceXPathExpression) {
-        return merge(sourceXPathExpression, this.xPathExpression);
+        return sourceXPathExpression + "/following-sibling::" + this.xPathExpression;
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return merge(sourceXPathExpression, this.xPathExpression);
-    }
-
-    // "/following-sibling::"
-    // This one will be used by the "General Adjacent" and the "Direct Adjacent" selectors
-    // (in order to differentiate, the "Direct Adjacent" selector will itself add a [position()=1] to its expression)
-    private String merge(String sourceXPathExpression, String otherXPathExpression) {
-        return sourceXPathExpression + "/following-sibling::" + otherXPathExpression;
+        return mergeIntoExpression(sourceXPathExpression);
     }
 
 }

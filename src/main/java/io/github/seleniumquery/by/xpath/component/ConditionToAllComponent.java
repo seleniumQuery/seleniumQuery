@@ -22,23 +22,15 @@ public class ConditionToAllComponent extends ConditionComponent {
 
     @Override
     public String mergeIntoExpression(String sourceXPathExpression) {
-        return merge(sourceXPathExpression, this.xPathExpression);
+        return "(" + sourceXPathExpression + ")" + this.xPathExpression;
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return mergeAsCondition(sourceXPathExpression, this.xPathExpression);
-    }
-
-    private String merge(String sourceXPathExpression, String otherXPathExpression) {
-        return "(" + sourceXPathExpression + ")" + otherXPathExpression;
-    }
-
-    private String mergeAsCondition(String sourceXPathExpression, String otherXPathExpression) {
         if (sourceXPathExpression.equals(MATCH_EVERYTHING_XPATH_CONDITIONAL)) {
-            return ComponentUtils.removeBraces(otherXPathExpression);
+            return ComponentUtils.removeBraces(this.xPathExpression);
         }
-        return sourceXPathExpression + " and " + ComponentUtils.removeBraces(otherXPathExpression);
+        return sourceXPathExpression + " and " + ComponentUtils.removeBraces(this.xPathExpression);
     }
 
     @Override
