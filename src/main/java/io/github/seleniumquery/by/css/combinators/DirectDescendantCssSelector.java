@@ -33,10 +33,10 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	
 	@Override
 	public TagComponent toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		TagComponent elementCompiledSelector = XPathComponentCompilerService.compileSelector(stringMap, descendantSelector.getSimpleSelector());
-		TagComponent parentCompiledSelector = XPathComponentCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
+		TagComponent parentComponent = XPathComponentCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
+		TagComponent childComponent = XPathComponentCompilerService.compileSelector(stringMap, descendantSelector.getSimpleSelector());
 
-		return DescendantDirectComponent.combine(parentCompiledSelector, elementCompiledSelector);
+		return DescendantDirectComponent.combine(parentComponent, childComponent);
 	}
 
 }
