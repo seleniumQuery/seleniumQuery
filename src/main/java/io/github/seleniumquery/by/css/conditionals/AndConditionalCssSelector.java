@@ -2,7 +2,6 @@ package io.github.seleniumquery.by.css.conditionals;
 
 import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
-import io.github.seleniumquery.by.xpath.component.ComponentUtils;
 import io.github.seleniumquery.by.xpath.component.ConditionComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,9 +45,9 @@ public class AndConditionalCssSelector implements CssConditionalSelector<Combina
 				(SimpleSelector) selectorUpToThisPoint,
 				combinatorCondition.getFirstCondition());
 
-		ConditionComponent compiledFirst = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
-		ConditionComponent compiledSecond = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
-		return ComponentUtils.combineKeepingTypeOfFirstArg(compiledFirst, compiledSecond);
+		ConditionComponent firstCondition = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
+		ConditionComponent secondCondition = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
+		return firstCondition.cloneAndCombineTo(secondCondition);
 	}
 
 }

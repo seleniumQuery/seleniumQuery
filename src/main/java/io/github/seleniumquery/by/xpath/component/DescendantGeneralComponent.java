@@ -5,11 +5,10 @@ import io.github.seleniumquery.by.xpath.CssCombinationType;
 public class DescendantGeneralComponent extends XPathComponent {
 
     public static TagComponent combine(TagComponent one, TagComponent other) {
-        ComponentUtils.assertTagComponent(one);
         DescendantGeneralComponent otherCopyWithModifiedType = new DescendantGeneralComponent(other);
         return new TagComponent(one.xPathExpression,
-                                ComponentUtils.combineComponents(one, other, otherCopyWithModifiedType),
-                                ComponentUtils.combineFilters(one, other, otherCopyWithModifiedType));
+                                ComponentUtils.joinComponents(one.combinatedComponents, otherCopyWithModifiedType),
+                                ComponentUtils.joinFilters(one.elementFilterList, otherCopyWithModifiedType));
     }
 
     private DescendantGeneralComponent(XPathComponent other) {

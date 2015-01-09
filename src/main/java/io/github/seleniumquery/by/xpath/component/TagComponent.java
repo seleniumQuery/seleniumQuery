@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.xpath.component;
 
-import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.xpath.CssCombinationType;
+import io.github.seleniumquery.by.xpath.component.special.Combinable;
 import io.github.seleniumquery.by.xpath.component.special.IdConditionComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -10,12 +10,12 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class TagComponent extends XPathComponent {
+public class TagComponent extends XPathComponent implements Combinable<TagComponent> {
 
     private static final boolean ID_OPTIMIZATION = true;
 
     public TagComponent(String xPathExpression) {
-        super(xPathExpression, ComponentUtils.toElementFilterList(ElementFilter.FILTER_NOTHING));
+        super(xPathExpression, ComponentUtils.emptyElementFilterList());
     }
 
     TagComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
@@ -88,6 +88,19 @@ public class TagComponent extends XPathComponent {
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
         return CssCombinationType.TAG.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
+    }
+
+    @Override
+    public TagComponent cloneComponent() {
+        return new TagComponent(this.xPathExpression, this.combinatedComponents, this.elementFilterList);
+    }
+
+    @Override
+    public TagComponent cloneAndCombineTo(Combinable other) {
+        XPathComponent otherCopy = other.cloneComponent();
+        return new TagComponent(this.xPathExpression,
+                ComponentUtils.joinComponents(this.combinatedComponents, otherCopy),
+                ComponentUtils.joinFilters(this.elementFilterList, otherCopy));
     }
 
 }
