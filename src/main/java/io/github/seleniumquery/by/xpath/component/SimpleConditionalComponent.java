@@ -29,7 +29,7 @@ public class SimpleConditionalComponent extends ConditionComponent {
         super(xPathExpression, ComponentUtils.toElementFilterList(filter));
     }
 
-    SimpleConditionalComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
+    protected SimpleConditionalComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
         super(xPathExpression, combinatedComponents, elementFilterList);
     }
 

@@ -1,17 +1,18 @@
 package io.github.seleniumquery.by.xpath.component;
 
-import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.xpath.CssCombinationType;
+import io.github.seleniumquery.by.xpath.component.special.IdConditionComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
 public class TagComponent extends XPathComponent {
+
+    private static final boolean ID_OPTIMIZATION = true;
 
     public TagComponent(String xPathExpression) {
         super(xPathExpression, ComponentUtils.toElementFilterList(ElementFilter.FILTER_NOTHING));
@@ -22,10 +23,29 @@ public class TagComponent extends XPathComponent {
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
+        if (canUseById()) {
+            return findElementsById(context);
+        }
+        List<WebElement> elements = findElementsByXPath(context);
+
+        return elementFilterList.filter(context, elements);
+    }
+
+    private List<WebElement> findElementsById(SearchContext context) {
+        return ((IdConditionComponent) this.combinatedComponents.get(0)).findWebElements(context);
+    }
+
+    private List<WebElement> findElementsByXPath(SearchContext context) {
         String finalXPathExpression = this.toXPath();
-        List<WebElement> elements = new By.ByXPath(finalXPathExpression).findElements(context);
-        WebDriver driver = SelectorUtils.getWebDriver(context);
-        return elementFilterList.filter(driver, elements);
+        return new By.ByXPath(finalXPathExpression).findElements(context);
+    }
+
+    private boolean canUseById() {
+        //noinspection PointlessBooleanExpression,ConstantConditions
+        return ID_OPTIMIZATION
+                && this.xPathExpression.equals("*")
+                && this.combinatedComponents.size() == 1
+                && this.combinatedComponents.get(0) instanceof IdConditionComponent;
     }
 
     public String toXPath() {
