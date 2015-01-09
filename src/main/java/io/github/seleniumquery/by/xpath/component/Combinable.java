@@ -1,6 +1,4 @@
-package io.github.seleniumquery.by.xpath.component.special;
-
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
+package io.github.seleniumquery.by.xpath.component;
 
 public interface Combinable<T extends XPathComponent> {
 

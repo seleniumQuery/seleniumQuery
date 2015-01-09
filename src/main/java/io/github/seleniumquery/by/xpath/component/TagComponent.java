@@ -1,7 +1,6 @@
 package io.github.seleniumquery.by.xpath.component;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
-import io.github.seleniumquery.by.xpath.component.special.Combinable;
 import io.github.seleniumquery.by.xpath.component.special.IdConditionComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
