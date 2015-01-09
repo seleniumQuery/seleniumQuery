@@ -2,6 +2,7 @@ package io.github.seleniumquery.by.xpath.component;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
+import io.github.seleniumquery.by.xpath.UnsupportedConditionalSelector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,4 +35,11 @@ public class ComponentUtils {
         return new ElementFilterList(new ArrayList<ElementFilter>());
     }
 
+    public static String unsupported(String cssSelectorType) {
+        throw new UnsupportedConditionalSelector("The "+cssSelectorType+" selector is not supported as condition inside selectors.");
+    }
+
+    public static String removeBraces(String src) {
+        return src.substring(1, src.length()-1);
+    }
 }

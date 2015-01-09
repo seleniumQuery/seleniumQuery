@@ -1,7 +1,8 @@
 package io.github.seleniumquery.by.xpath.component;
 
-import io.github.seleniumquery.by.xpath.CssCombinationType;
-
+/**
+ * cssA cssB -> "//" -> xpathA//xpathB
+ */
 public class DescendantGeneralComponent extends XPathComponent {
 
     public static TagComponent combine(TagComponent one, TagComponent other) {
@@ -17,12 +18,15 @@ public class DescendantGeneralComponent extends XPathComponent {
 
     @Override
     public String mergeIntoExpression(String sourceXPathExpression) {
-        return CssCombinationType.DESCENDANT_GENERAL.merge(sourceXPathExpression, this.xPathExpression);
+        if ("*".equals(this.xPathExpression)) {
+            return sourceXPathExpression + "//*";
+        }
+        return sourceXPathExpression + "//*[self::" + this.xPathExpression + "]";
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return CssCombinationType.DESCENDANT_GENERAL.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
+        return ComponentUtils.unsupported("general descendant");
     }
 
 }

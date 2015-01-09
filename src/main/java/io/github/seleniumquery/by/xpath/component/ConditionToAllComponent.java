@@ -1,13 +1,15 @@
 package io.github.seleniumquery.by.xpath.component;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
-import io.github.seleniumquery.by.xpath.CssCombinationType;
 import io.github.seleniumquery.by.xpath.component.special.Combinable;
 
 import java.util.List;
 
 /**
  * Represents a condition that must be applied to all the expression, not just appended (using AND) to it.
+ *
+ * This must be applied to the whole result of the other, such as:
+ * (//*[@other])[@thisSelector]
  */
 public class ConditionToAllComponent extends ConditionComponent {
 
@@ -21,12 +23,23 @@ public class ConditionToAllComponent extends ConditionComponent {
 
     @Override
     public String mergeIntoExpression(String sourceXPathExpression) {
-        return CssCombinationType.CONDITIONAL_TO_ALL.merge(sourceXPathExpression, this.xPathExpression);
+        return merge(sourceXPathExpression, this.xPathExpression);
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return CssCombinationType.CONDITIONAL_TO_ALL.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
+        return mergeAsCondition(sourceXPathExpression, this.xPathExpression);
+    }
+
+    private String merge(String sourceXPathExpression, String otherXPathExpression) {
+        return "(" + sourceXPathExpression + ")" + otherXPathExpression;
+    }
+
+    private String mergeAsCondition(String sourceXPathExpression, String otherXPathExpression) {
+        if (sourceXPathExpression.equals(MATCH_EVERYTHING_XPATH_CONDITIONAL)) {
+            return ComponentUtils.removeBraces(otherXPathExpression);
+        }
+        return sourceXPathExpression + " and " + ComponentUtils.removeBraces(otherXPathExpression);
     }
 
     @Override

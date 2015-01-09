@@ -1,7 +1,6 @@
 package io.github.seleniumquery.by.xpath.component;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
-import io.github.seleniumquery.by.xpath.CssCombinationType;
 import io.github.seleniumquery.by.xpath.component.special.Combinable;
 import io.github.seleniumquery.by.xpath.component.special.IdConditionComponent;
 import org.openqa.selenium.By;
@@ -67,7 +66,7 @@ public class TagComponent extends XPathComponent implements Combinable<TagCompon
     public String toXPathCondition() {
         String xPathExpression;
         if ("*".equals(this.xPathExpression)) {
-            xPathExpression = CssCombinationType.MATCH_EVERYTHING_XPATH_CONDITIONAL;
+            xPathExpression = MATCH_EVERYTHING_XPATH_CONDITIONAL;
         } else {
             xPathExpression = "local-name() = '"+this.xPathExpression+"'";
         }
@@ -82,12 +81,19 @@ public class TagComponent extends XPathComponent implements Combinable<TagCompon
 
     @Override
     public String mergeIntoExpression(String sourceXPathExpression) {
-        return CssCombinationType.TAG.merge(sourceXPathExpression, this.xPathExpression);
+        return merge(sourceXPathExpression, this.xPathExpression);
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return CssCombinationType.TAG.mergeAsCondition(sourceXPathExpression, this.xPathExpression);
+        return merge(sourceXPathExpression, this.xPathExpression);
+    }
+
+    private String merge(String sourceXPathExpression, String otherXPathExpression) {
+        if ("*".equals(otherXPathExpression)) {
+            return ConditionSimpleComponent.merge(sourceXPathExpression, "["+ MATCH_EVERYTHING_XPATH_CONDITIONAL+"]");
+        }
+        return ConditionSimpleComponent.merge(sourceXPathExpression, "[self::"+otherXPathExpression+"]");
     }
 
     @Override

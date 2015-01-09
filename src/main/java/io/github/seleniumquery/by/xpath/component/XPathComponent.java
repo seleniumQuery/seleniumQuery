@@ -7,6 +7,7 @@ import java.util.List;
 
 public abstract class XPathComponent {
 
+	public static final String MATCH_EVERYTHING_XPATH_CONDITIONAL = "true()";
 	protected String xPathExpression;
 	protected final List<XPathComponent> combinatedComponents;
 	protected ElementFilterList elementFilterList;
