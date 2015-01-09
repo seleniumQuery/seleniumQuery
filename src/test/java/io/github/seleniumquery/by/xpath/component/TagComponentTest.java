@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.xpath.component;
 
 import io.github.seleniumquery.by.xpath.TagComponentList;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
 import org.junit.Test;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +23,7 @@ public class TagComponentTest {
     @Test
     public void findWebElements_should_call_findElementsByXPath() {
         // given
-        TagComponentList tagComponentList = XPathSelectorCompilerService.compileSelectorList("span");
+        TagComponentList tagComponentList = XPathComponentCompilerService.compileSelectorList("span");
 
         SearchContext searchContext = mock(SearchContext.class, withSettings().extraInterfaces(FindsByXPath.class, WebDriver.class));
         when(((FindsByXPath)searchContext).findElementsByXPath("(.//*[self::span])")).thenReturn(fakeElements);
@@ -49,7 +49,7 @@ public class TagComponentTest {
     @Test
     public void findWebElements_if_selector_is_just_an_id_it_should_call_findElementsById() {
         // given
-        TagComponentList tagComponentList = XPathSelectorCompilerService.compileSelectorList("#idz");
+        TagComponentList tagComponentList = XPathComponentCompilerService.compileSelectorList("#idz");
 
         SearchContext searchContext = mock(SearchContext.class, withSettings().extraInterfaces(FindsById.class, WebDriver.class));
         when(((FindsById)searchContext).findElementsById("idz")).thenReturn(fakeElements);

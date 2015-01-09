@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.css.combinators;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
-import io.github.seleniumquery.by.xpath.XPathSelectorCompilerService;
+import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.xpath.component.DescendantDirectComponent;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
@@ -33,8 +33,8 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	
 	@Override
 	public TagComponent toXPath(Map<String, String> stringMap, DescendantSelector descendantSelector) {
-		TagComponent elementCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getSimpleSelector());
-		TagComponent parentCompiledSelector = XPathSelectorCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
+		TagComponent elementCompiledSelector = XPathComponentCompilerService.compileSelector(stringMap, descendantSelector.getSimpleSelector());
+		TagComponent parentCompiledSelector = XPathComponentCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
 
 		return DescendantDirectComponent.combine(parentCompiledSelector, elementCompiledSelector);
 	}

@@ -13,13 +13,13 @@ public class XPathComponentTest {
 
     @Test
     public void toXPath__id() {
-        TagComponentList compileSelectorList = XPathSelectorCompilerService.compileSelectorList("#ball");
+        TagComponentList compileSelectorList = XPathComponentCompilerService.compileSelectorList("#ball");
         assertThat(compileSelectorList.toXPath(), is("(.//*[@id = 'ball'])"));
     }
 
     @Test
     public void toXPath__and_conditional() {
-        TagComponentList compileSelectorList = XPathSelectorCompilerService.compileSelectorList(".a.b");
+        TagComponentList compileSelectorList = XPathComponentCompilerService.compileSelectorList(".a.b");
         assertThat(compileSelectorList.toXPath(), is("(.//*[contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')])"));
     }
 
@@ -47,7 +47,7 @@ public class XPathComponentTest {
     public static TagComponent selectorToExpression(String selector) {
         CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
         SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
-        return XPathSelectorCompilerService.compileSelector(CSSParsedSelectorList.getStringMap(), selectorList.item(0));
+        return XPathComponentCompilerService.compileSelector(CSSParsedSelectorList.getStringMap(), selectorList.item(0));
     }
 
     @Test
