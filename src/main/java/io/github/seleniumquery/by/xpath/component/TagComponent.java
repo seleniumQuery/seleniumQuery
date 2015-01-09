@@ -80,19 +80,15 @@ public class TagComponent extends XPathComponent implements Combinable<TagCompon
 
     @Override
     public String mergeIntoExpression(String sourceXPathExpression) {
-        return merge(sourceXPathExpression, this.xPathExpression);
+        if ("*".equals(this.xPathExpression)) {
+            return ConditionSimpleComponent.merge(sourceXPathExpression, "["+ MATCH_EVERYTHING_XPATH_CONDITIONAL+"]");
+        }
+        return ConditionSimpleComponent.merge(sourceXPathExpression, "[self::"+ this.xPathExpression +"]");
     }
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return merge(sourceXPathExpression, this.xPathExpression);
-    }
-
-    private String merge(String sourceXPathExpression, String otherXPathExpression) {
-        if ("*".equals(otherXPathExpression)) {
-            return ConditionSimpleComponent.merge(sourceXPathExpression, "["+ MATCH_EVERYTHING_XPATH_CONDITIONAL+"]");
-        }
-        return ConditionSimpleComponent.merge(sourceXPathExpression, "[self::"+otherXPathExpression+"]");
+        return mergeIntoExpression(sourceXPathExpression);
     }
 
     @Override

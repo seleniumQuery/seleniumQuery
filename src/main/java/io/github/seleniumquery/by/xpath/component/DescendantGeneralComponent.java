@@ -1,5 +1,7 @@
 package io.github.seleniumquery.by.xpath.component;
 
+import io.github.seleniumquery.by.xpath.UnsupportedConditionalSelector;
+
 /**
  * cssA cssB -> "//" -> xpathA//xpathB
  */
@@ -26,7 +28,7 @@ public class DescendantGeneralComponent extends XPathComponent {
 
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
-        return ComponentUtils.unsupported("general descendant");
+        throw new UnsupportedConditionalSelector("The 'general descendant' (\"a b\") selector is not supported as condition inside other selectors.");
     }
 
 }
