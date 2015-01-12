@@ -1,11 +1,11 @@
 package io.github.seleniumquery.by.parser.translator.selector;
 
+import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
+import io.github.seleniumquery.by.parser.parsetree.selector.SQCssUnknownSelectorException;
 import io.github.seleniumquery.by.parser.translator.selector.combinator.SQCssDescendantSelectorTranslator;
 import io.github.seleniumquery.by.parser.translator.selector.combinator.SQCssDirectAdjacentSelectorTranslator;
 import io.github.seleniumquery.by.parser.translator.selector.combinator.SQCssDirectDescendantSelectorTranslator;
 import io.github.seleniumquery.by.parser.translator.selector.combinator.SQCssGeneralAdjacentSelectorTranslator;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssUnknownSelector;
 import org.w3c.css.sac.*;
 
 import java.util.Map;
@@ -52,7 +52,7 @@ public class SQCssSelectorTranslator {
 			case Selector.SAC_COMMENT_NODE_SELECTOR:
 			case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
 			default:
-				return new SQCssUnknownSelector(selector.getSelectorType());
+				throw new SQCssUnknownSelectorException(selector);
 		}
 	}
 
