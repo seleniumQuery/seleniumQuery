@@ -1,15 +1,14 @@
 package io.github.seleniumquery.by.parser.translator.condition;
 
 import io.github.seleniumquery.by.css.attributes.*;
-import io.github.seleniumquery.by.css.conditionals.AndConditionalCssSelector;
 import io.github.seleniumquery.by.css.conditionals.UnknownConditionalCssSelector;
 import io.github.seleniumquery.by.css.pseudoclasses.LangPseudoClassEvaluator;
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassCssSelector;
 import io.github.seleniumquery.by.parser.translator.selector.SQCssConditionalSelectorTranslator;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
+import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
-import org.w3c.css.sac.Selector;
+import org.w3c.css.sac.SimpleSelector;
 
 import java.util.Map;
 
@@ -19,7 +18,7 @@ import java.util.Map;
  */
 public class SQCssConditionTranslator {
 
-    private final AndConditionalCssSelector andConditionalCssSelector;
+    private final SQCssAndConditionTranslator andConditionalCssSelector;
     private final StartsWithAttributeCssSelector startsWithAttributeCssSelector = new StartsWithAttributeCssSelector();
     private final EndsWithAttributeCssSelector endsWithAttributeCssSelector = new EndsWithAttributeCssSelector();
     private final ContainsSubstringAttributeCssSelector containsSubstringAttributeCssSelector = new ContainsSubstringAttributeCssSelector();
@@ -33,13 +32,13 @@ public class SQCssConditionTranslator {
 
 	public SQCssConditionTranslator(SQCssConditionalSelectorTranslator sqCssConditionalSelectorTranslator) {
 //		this.andConditionalCssSelector = new AndConditionalCssSelector(sqCssConditionalSelectorTranslator);
-		this.andConditionalCssSelector = new AndConditionalCssSelector(null);
+		this.andConditionalCssSelector = new SQCssAndConditionTranslator(this);
 	}
 
-	public SQCssCondition translate(Map<String, String> stringMap, Selector simpleSelector, SQCssSelector sqCssSelector, Condition condition) {
+	public SQCssCondition translate(SimpleSelector simpleSelector, Map<String, String> stringMap, Condition condition) {
 	    switch (condition.getConditionType()) {
 		    case Condition.SAC_AND_CONDITION:
-		    	return andConditionalCssSelector;
+		    	return andConditionalCssSelector.translate(simpleSelector, stringMap, (CombinatorCondition) condition);
 		    case Condition.SAC_OR_CONDITION:
 		    	// if the exception below gets thrown, this means the CSS Parser has changed and
 		    	// we must update our code as well.

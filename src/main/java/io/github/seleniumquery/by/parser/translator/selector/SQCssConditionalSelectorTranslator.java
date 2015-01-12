@@ -6,11 +6,9 @@ import io.github.seleniumquery.by.parser.parsetree.selector.SQCssConditionalSele
 import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.ConditionalSelector;
-import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SimpleSelector;
 
 import java.util.Map;
-
 
 public class SQCssConditionalSelectorTranslator {
 
@@ -28,12 +26,12 @@ public class SQCssConditionalSelectorTranslator {
 
 		SQCssSelector sqCssSelector = sqCssSelectorTranslator.translate(stringMap, simpleSelector);
 
-		SQCssCondition sqCssCondition = translate(stringMap, simpleSelector, sqCssSelector, condition);
+		SQCssCondition sqCssCondition = translate(simpleSelector, stringMap, condition);
 		return new SQCssConditionalSelector(sqCssSelector, sqCssCondition);
 	}
 	
-	SQCssCondition translate(Map<String, String> stringMap, Selector simpleSelector, SQCssSelector sqCssSelector, Condition condition) {
-		return sqCssConditionTranslator.translate(stringMap, simpleSelector, sqCssSelector, condition);
+	SQCssCondition translate(SimpleSelector simpleSelector, Map<String, String> stringMap, Condition condition) {
+		return sqCssConditionTranslator.translate(simpleSelector, stringMap, condition);
 	}
 
 }
