@@ -12,7 +12,7 @@ import java.util.Map;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssLangPseudoClassConditionTranslator {
+public class SQCssLangPseudoClassTranslator {
 
 	public SQCssLangPseudoClass translate(Selector simpleSelector, Map<String, String> stringMap, LangCondition langCondition) {
 		String wantedLangIndex = langCondition.getLang();
