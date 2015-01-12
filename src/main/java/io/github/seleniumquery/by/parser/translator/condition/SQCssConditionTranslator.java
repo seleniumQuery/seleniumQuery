@@ -1,12 +1,9 @@
 package io.github.seleniumquery.by.parser.translator.condition;
 
-import io.github.seleniumquery.by.css.conditionals.UnknownConditionalCssSelector;
-import io.github.seleniumquery.by.css.pseudoclasses.LangPseudoClassEvaluator;
-import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassCssSelector;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssUnknownCondition;
+import io.github.seleniumquery.by.parser.parsetree.condition.SQCssUnknownConditionException;
 import io.github.seleniumquery.by.parser.translator.condition.attribute.*;
-import io.github.seleniumquery.by.parser.translator.condition.pseudoclass.SQCssLangPseudoClassConditionTranslator;
+import io.github.seleniumquery.by.parser.translator.condition.pseudoclass.SQCssLangPseudoClassTranslator;
 import io.github.seleniumquery.by.parser.translator.condition.pseudoclass.SQCssPseudoClassConditionTranslator;
 import org.w3c.css.sac.*;
 
@@ -28,7 +25,7 @@ public class SQCssConditionTranslator {
     private final SQCssContainsPrefixAttributeConditionTranslator containsPrefixAttributeConditionTranslator = new SQCssContainsPrefixAttributeConditionTranslator();
     private final SQCssClassAttributeConditionTranslator classAttributeConditionTranslator = new SQCssClassAttributeConditionTranslator();
     private final SQCssPseudoClassConditionTranslator pseudoClassCssSelector = new SQCssPseudoClassConditionTranslator();
-    private final SQCssLangPseudoClassConditionTranslator langPseudoClassEvaluator = new SQCssLangPseudoClassConditionTranslator();
+    private final SQCssLangPseudoClassTranslator langPseudoClassEvaluator = new SQCssLangPseudoClassTranslator();
 
 	public SQCssCondition translate(SimpleSelector simpleSelector, Map<String, String> stringMap, Condition condition) {
 	    switch (condition.getConditionType()) {
@@ -68,7 +65,7 @@ public class SQCssConditionTranslator {
 	        	return langPseudoClassEvaluator.translate(simpleSelector, stringMap, (LangCondition) condition);
 	            
 	        default:
-				throw new SQCssUnknownCondition(condition);
+				throw new SQCssUnknownConditionException(condition);
 		}
 	}
 
