@@ -1,7 +1,5 @@
 package io.github.seleniumquery.by.parser.parsetree.condition.attribute;
 
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
-
 /**
  * [simple]
  * [restart="never"]
@@ -11,6 +9,10 @@ import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssEqualsOrHasAttributeCondition implements SQCssCondition {
+public class SQCssEqualsOrHasAttributeCondition extends SQCssAttributeCondition {
+
+    public SQCssEqualsOrHasAttributeCondition(String attributeName, String wantedValue) {
+        super(attributeName, wantedValue);
+    }
 
 }

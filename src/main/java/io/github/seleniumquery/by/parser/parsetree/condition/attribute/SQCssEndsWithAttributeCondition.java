@@ -1,7 +1,5 @@
 package io.github.seleniumquery.by.parser.parsetree.condition.attribute;
 
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
-
 /**
  * [attribute$=stringToEnd]
  *
@@ -10,6 +8,10 @@ import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssEndsWithAttributeCondition implements SQCssCondition {
+public class SQCssEndsWithAttributeCondition extends SQCssAttributeCondition {
+
+    public SQCssEndsWithAttributeCondition(String attributeName, String wantedValue) {
+        super(attributeName, wantedValue);
+    }
 
 }

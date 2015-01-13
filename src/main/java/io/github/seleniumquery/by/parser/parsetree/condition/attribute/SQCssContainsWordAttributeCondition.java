@@ -1,7 +1,5 @@
 package io.github.seleniumquery.by.parser.parsetree.condition.attribute;
 
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
-
 /**
  * [values~="10"]
  *
@@ -10,6 +8,10 @@ import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssContainsWordAttributeCondition implements SQCssCondition {
+public class SQCssContainsWordAttributeCondition extends SQCssAttributeCondition {
+
+    public SQCssContainsWordAttributeCondition(String attributeName, String wantedValue) {
+        super(attributeName, wantedValue);
+    }
 
 }

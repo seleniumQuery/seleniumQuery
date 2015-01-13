@@ -46,18 +46,18 @@ public class SQCssConditionTranslator {
 		    		return endsWithAttributeConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
 		    	}
 		    	if (condition instanceof com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl) {
-		    		return containsSubstringAttributeConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
+		    		return containsSubstringAttributeConditionTranslator.translate((AttributeCondition) condition);
 		    	}
 		    	// else: condition is most probably a instance of com.steadystate.css.parser.selectors.AttributeConditionImpl
 		    	return equalsOrHasAttributeConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
 	        case Condition.SAC_ID_CONDITION:
 				return idAttridAttributeConditionTranslatorbuteCssSelector.translate(simpleSelector, stringMap, (AttributeCondition) condition);
 	        case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
-	        	return containsWordAttributeConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
+	        	return containsWordAttributeConditionTranslator.translate((AttributeCondition) condition);
 	        case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-	        	return containsPrefixAttributeConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
+	        	return containsPrefixAttributeConditionTranslator.translate((AttributeCondition) condition);
 	        case Condition.SAC_CLASS_CONDITION:
-	        	return classAttributeConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
+	        	return classAttributeConditionTranslator.translate((AttributeCondition) condition);
 				
 	        case Condition.SAC_PSEUDO_CLASS_CONDITION:
 	        	return pseudoClassCssSelector.translate(simpleSelector, stringMap, (AttributeCondition) condition);
