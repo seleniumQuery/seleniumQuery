@@ -12,7 +12,9 @@ import org.w3c.css.sac.AttributeCondition;
 public class SQCssContainsSubstringAttributeConditionTranslator {
 
 	public SQCssContainsSubstringAttributeCondition translate(AttributeCondition attributeCondition) {
-		return new SQCssContainsSubstringAttributeCondition(attributeCondition.getLocalName(), attributeCondition.getValue());
+		String attributeName = attributeCondition.getLocalName();
+		String wantedValue = attributeCondition.getValue();
+		return new SQCssContainsSubstringAttributeCondition(attributeName, wantedValue);
 	}
 
 }

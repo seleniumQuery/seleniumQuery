@@ -12,7 +12,9 @@ import org.w3c.css.sac.AttributeCondition;
 public class SQCssContainsPrefixAttributeConditionTranslator {
 
 	public SQCssContainsPrefixAttributeCondition translate(AttributeCondition attributeCondition) {
-		return new SQCssContainsPrefixAttributeCondition(attributeCondition.getLocalName(), attributeCondition.getValue());
+		String attributeName = attributeCondition.getLocalName();
+		String wantedValue = attributeCondition.getValue();
+		return new SQCssContainsPrefixAttributeCondition(attributeName, wantedValue);
 	}
 
 }
