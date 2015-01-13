@@ -10,8 +10,14 @@ import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
  */
 public class SQCssClassAttributeCondition implements SQCssCondition {
 
-    public SQCssClassAttributeCondition(String unescapedClassName) {
+    private String unescapedClassName;
 
+    public SQCssClassAttributeCondition(String unescapedClassName) {
+        this.unescapedClassName = unescapedClassName;
+    }
+
+    public String getClassName() {
+        return unescapedClassName;
     }
 
 }
