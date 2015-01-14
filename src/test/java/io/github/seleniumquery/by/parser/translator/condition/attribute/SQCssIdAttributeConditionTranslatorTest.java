@@ -8,6 +8,7 @@ import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
 import io.github.seleniumquery.by.parser.parsetree.selector.SQCssTagNameSelector;
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -85,17 +86,11 @@ public class SQCssIdAttributeConditionTranslatorTest {
 
     private void assertSelectorIsCompiledToId(String actualSelector, String expectedId) {
         // given
-        SQCssSelector cssSelector = SQParseTreeBuilder.parse(actualSelector).firstSelector();
-        assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));
+        // selector arg
         // when
-        SQCssSelector sqCssSelector = ((SQCssConditionalSelector) cssSelector).getSqCssSelector();
-        SQCssCondition sqCssCondition = ((SQCssConditionalSelector) cssSelector).getSqCssCondition();
+        SQCssIdAttributeCondition cssCondition = parseFirstCssCondition(actualSelector, SQCssIdAttributeCondition.class);
         // then
-        assertThat(sqCssSelector, instanceOf(SQCssTagNameSelector.class));
-        assertThat(((SQCssTagNameSelector) sqCssSelector).getTagName(), is("*"));
-
-        assertThat(sqCssCondition, instanceOf(SQCssIdAttributeCondition.class));
-        assertThat(((SQCssIdAttributeCondition) sqCssCondition).getId(), is(expectedId));
+        assertThat(cssCondition.getId(), is(expectedId));
     }
 
 }

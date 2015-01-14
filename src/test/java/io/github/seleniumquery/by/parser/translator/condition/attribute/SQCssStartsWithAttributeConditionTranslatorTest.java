@@ -1,33 +1,23 @@
 package io.github.seleniumquery.by.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.attribute.SQCssStartsWithAttributeCondition;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssConditionalSelector;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssTagNameSelector;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
+import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class SQCssStartsWithAttributeConditionTranslatorTest {
 
     @Test
-    public void translate() throws Exception {
+    public void translate() {
         // given
-        SQCssSelector cssSelector = SQParseTreeBuilder.parse("[abc^=\"def\"]").firstSelector();
-        assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));
+        String selector = "[abc^=\"def\"]";
         // when
-        SQCssSelector sqCssSelector = ((SQCssConditionalSelector) cssSelector).getSqCssSelector();
-        SQCssCondition sqCssCondition = ((SQCssConditionalSelector) cssSelector).getSqCssCondition();
+        SQCssStartsWithAttributeCondition cssCondition = parseFirstCssCondition(selector, SQCssStartsWithAttributeCondition.class);
         // then
-        assertThat(sqCssSelector, instanceOf(SQCssTagNameSelector.class));
-        assertThat(sqCssCondition, instanceOf(SQCssStartsWithAttributeCondition.class));
-        assertThat(((SQCssTagNameSelector) sqCssSelector).getTagName(), is("*"));
-        assertThat(((SQCssStartsWithAttributeCondition) sqCssCondition).getAttributeName(), is("abc"));
-        assertThat(((SQCssStartsWithAttributeCondition) sqCssCondition).getWantedValue(), is("def"));
+        assertThat(cssCondition.getAttributeName(), is("abc"));
+        assertThat(cssCondition.getWantedValue(), is("def"));
     }
 
 }
