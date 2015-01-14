@@ -1,14 +1,9 @@
 package io.github.seleniumquery.by.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.attribute.SQCssClassAttributeCondition;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssConditionalSelector;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssTagNameSelector;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
+import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -68,16 +63,11 @@ public class SQCssClassAttributeConditionTranslatorTest {
 
     private void assertSelectorIsCompiledToClassName(String actualSelector, String expectedClassName) {
         // given
-        SQCssSelector cssSelector = SQParseTreeBuilder.parse(actualSelector).firstSelector();
-        assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));
+        // selector arg
         // when
-        SQCssSelector sqCssSelector = ((SQCssConditionalSelector) cssSelector).getSqCssSelector();
-        SQCssCondition sqCssCondition = ((SQCssConditionalSelector) cssSelector).getSqCssCondition();
+        SQCssClassAttributeCondition cssCondition = parseFirstCssCondition(actualSelector, SQCssClassAttributeCondition.class);
         // then
-        assertThat(sqCssSelector, instanceOf(SQCssTagNameSelector.class));
-        assertThat(sqCssCondition, instanceOf(SQCssClassAttributeCondition.class));
-        assertThat(((SQCssTagNameSelector) sqCssSelector).getTagName(), is("*"));
-        assertThat(((SQCssClassAttributeCondition) sqCssCondition).getClassName(), is(expectedClassName));
+        assertThat(cssCondition.getClassName(), is(expectedClassName));
     }
 
 }

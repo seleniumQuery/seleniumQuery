@@ -11,6 +11,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class TranslatorsTestUtils {
+
     @SuppressWarnings("unchecked")
     public static <T extends SQCssCondition> T parseFirstCssCondition(String selector, Class<T> conditionClass) {
         SQCssSelector cssSelector = SQParseTreeBuilder.parse(selector).firstSelector();
@@ -24,4 +25,5 @@ public class TranslatorsTestUtils {
         assertThat(((SQCssTagNameSelector) sqCssSelector).getTagName(), is("*"));
         return (T) sqCssCondition;
     }
+
 }
