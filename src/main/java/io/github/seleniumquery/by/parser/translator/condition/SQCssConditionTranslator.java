@@ -10,6 +10,8 @@ import org.w3c.css.sac.*;
 import java.util.Map;
 
 /**
+ * Translates a SAC {@link Condition} selector into a {@link SQCssCondition}.
+ *
  * @author acdcjunior
  * @since 0.10.0
  */
@@ -39,11 +41,11 @@ public class SQCssConditionTranslator {
 		    			"classpath.");
 		    	
 		    case Condition.SAC_ATTRIBUTE_CONDITION:
-		    	if (condition instanceof com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl) {
-		    		return startsWithAttributeConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
+				if (condition instanceof com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl) {
+		    		return startsWithAttributeConditionTranslator.translate((AttributeCondition) condition);
 		    	}
 		    	if (condition instanceof com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl) {
-		    		return endsWithAttributeConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
+		    		return endsWithAttributeConditionTranslator.translate((AttributeCondition) condition);
 		    	}
 		    	if (condition instanceof com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl) {
 		    		return containsSubstringAttributeConditionTranslator.translate((AttributeCondition) condition);
