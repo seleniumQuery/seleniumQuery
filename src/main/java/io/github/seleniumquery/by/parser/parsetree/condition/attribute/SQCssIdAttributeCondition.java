@@ -12,4 +12,14 @@ import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
  */
 public class SQCssIdAttributeCondition implements SQCssCondition {
 
+    private String id;
+
+    public SQCssIdAttributeCondition(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
 }

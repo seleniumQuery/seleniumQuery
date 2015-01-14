@@ -16,56 +16,57 @@ public class SQCssClassAttributeConditionTranslatorTest {
 
     @Test
     public void translate__should_translate_regular_classes() {
-        assertSelectorIsCompiledToClassSelector(".abc", "abc");
+        assertSelectorIsCompiledToClassName(".abc", "abc");
     }
 
     @Test
     public void translate__should_translate_escaped_classes() {
-        assertSelectorIsCompiledToClassSelector(".x\\+y", "x+y");
-        assertSelectorIsCompiledToClassSelector(".x\\2b y", "x+y");
-        assertSelectorIsCompiledToClassSelector(".x\\00002by", "x+y");
-        assertSelectorIsCompiledToClassSelector(".\\0000E9fg", "éfg");
-        assertSelectorIsCompiledToClassSelector(".\\3A \\`\\(", ":`(");
-        assertSelectorIsCompiledToClassSelector(".\\31 a2b3c", "1a2b3c");
+        assertSelectorIsCompiledToClassName(".x\\+y", "x+y");
+        assertSelectorIsCompiledToClassName(".x\\2b y", "x+y");
+        assertSelectorIsCompiledToClassName(".x\\00002by", "x+y");
+        assertSelectorIsCompiledToClassName(".\\0000E9fg", "éfg");
+        assertSelectorIsCompiledToClassName(".\\3A \\`\\(", ":`(");
+        assertSelectorIsCompiledToClassName(".\\31 a2b3c", "1a2b3c");
 
-        assertSelectorIsCompiledToClassSelector(".\\\"", "\"");
-        assertSelectorIsCompiledToClassSelector(".♥", "♥");
-        assertSelectorIsCompiledToClassSelector(".©", "©");
-//        assertSelectorIsCompiledToClassSelector(".“‘’”", "“‘’”");
-//        assertSelectorIsCompiledToClassSelector(".☺☃", "☺☃");
-//        assertSelectorIsCompiledToClassSelector(".⌘⌥", "⌘⌥");
-//        assertSelectorIsCompiledToClassSelector(".𝄞♪♩♫♬", "𝄞♪♩♫♬");
-//        assertSelectorIsCompiledToClassSelector(".💩", "💩");
-        assertSelectorIsCompiledToClassSelector(".\\?", "?");
-        assertSelectorIsCompiledToClassSelector(".\\@", "@");
-        assertSelectorIsCompiledToClassSelector(".\\.", ".");
-        assertSelectorIsCompiledToClassSelector(".\\3A \\)", ":)");
-        assertSelectorIsCompiledToClassSelector(".\\3A \\`\\(", ":`(");
-        assertSelectorIsCompiledToClassSelector(".\\31 23", "123");
-        assertSelectorIsCompiledToClassSelector(".\\31 a2b3c", "1a2b3c");
-        assertSelectorIsCompiledToClassSelector(".\\<p\\>", "<p>");
-        assertSelectorIsCompiledToClassSelector(".\\<\\>\\<\\<\\<\\>\\>\\<\\>", "<><<<>><>");
-        assertSelectorIsCompiledToClassSelector(".\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\[\\>\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\>\\+\\<\\<\\<\\<\\-\\]\\>\\+\\+\\.\\>\\+\\.\\+\\+\\+\\+\\+\\+\\+\\.\\.\\+\\+\\+\\.\\>\\+\\+\\.\\<\\<\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\.\\>\\.\\+\\+\\+\\.\\-\\-\\-\\-\\-\\-\\.\\-\\-\\-\\-\\-\\-\\-\\-\\.\\>\\+\\.\\>\\.", "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
-        assertSelectorIsCompiledToClassSelector(".\\#", "#");
-        assertSelectorIsCompiledToClassSelector(".\\#\\#", "##");
-        assertSelectorIsCompiledToClassSelector(".\\#\\.\\#\\.\\#", "#.#.#");
-        assertSelectorIsCompiledToClassSelector(".\\_", "_");
-        assertSelectorIsCompiledToClassSelector(".\\{\\}", "{}");
-        assertSelectorIsCompiledToClassSelector(".\\#fake\\-id", "#fake-id");
-        assertSelectorIsCompiledToClassSelector(".foo\\.bar", "foo.bar");
-        assertSelectorIsCompiledToClassSelector(".\\3A hover", ":hover");
-        assertSelectorIsCompiledToClassSelector(".\\3A hover\\3A focus\\3A active", ":hover:focus:active");
-        assertSelectorIsCompiledToClassSelector(".\\[attr\\=value\\]", "[attr=value]");
-        assertSelectorIsCompiledToClassSelector(".f\\/o\\/o", "f/o/o");
-        assertSelectorIsCompiledToClassSelector(".f\\\\o\\\\o", "f\\o\\o");
-        assertSelectorIsCompiledToClassSelector(".f\\*o\\*o", "f*o*o");
-        assertSelectorIsCompiledToClassSelector(".f\\!o\\!o", "f!o!o");
-        assertSelectorIsCompiledToClassSelector(".f\\'o\\'o", "f'o'o");
-        assertSelectorIsCompiledToClassSelector(".f\\~o\\~o", "f~o~o");
-        assertSelectorIsCompiledToClassSelector(".f\\+o\\+o", "f+o+o");
+        assertSelectorIsCompiledToClassName(".\\\"a\\\"b\\\"c\\\"", "\"a\"b\"c\"");
+        assertSelectorIsCompiledToClassName(".\\\"", "\"");
+        assertSelectorIsCompiledToClassName(".♥", "♥");
+        assertSelectorIsCompiledToClassName(".©", "©");
+//        assertSelectorIsCompiledToClassName(".“‘’”", "“‘’”");
+//        assertSelectorIsCompiledToClassName(".☺☃", "☺☃");
+//        assertSelectorIsCompiledToClassName(".⌘⌥", "⌘⌥");
+//        assertSelectorIsCompiledToClassName(".𝄞♪♩♫♬", "𝄞♪♩♫♬");
+//        assertSelectorIsCompiledToClassName(".💩", "💩");
+        assertSelectorIsCompiledToClassName(".\\?", "?");
+        assertSelectorIsCompiledToClassName(".\\@", "@");
+        assertSelectorIsCompiledToClassName(".\\.", ".");
+        assertSelectorIsCompiledToClassName(".\\3A \\)", ":)");
+        assertSelectorIsCompiledToClassName(".\\3A \\`\\(", ":`(");
+        assertSelectorIsCompiledToClassName(".\\31 23", "123");
+        assertSelectorIsCompiledToClassName(".\\31 a2b3c", "1a2b3c");
+        assertSelectorIsCompiledToClassName(".\\<p\\>", "<p>");
+        assertSelectorIsCompiledToClassName(".\\<\\>\\<\\<\\<\\>\\>\\<\\>", "<><<<>><>");
+        assertSelectorIsCompiledToClassName(".\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\[\\>\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\>\\+\\<\\<\\<\\<\\-\\]\\>\\+\\+\\.\\>\\+\\.\\+\\+\\+\\+\\+\\+\\+\\.\\.\\+\\+\\+\\.\\>\\+\\+\\.\\<\\<\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\.\\>\\.\\+\\+\\+\\.\\-\\-\\-\\-\\-\\-\\.\\-\\-\\-\\-\\-\\-\\-\\-\\.\\>\\+\\.\\>\\.", "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
+        assertSelectorIsCompiledToClassName(".\\#", "#");
+        assertSelectorIsCompiledToClassName(".\\#\\#", "##");
+        assertSelectorIsCompiledToClassName(".\\#\\.\\#\\.\\#", "#.#.#");
+        assertSelectorIsCompiledToClassName(".\\_", "_");
+        assertSelectorIsCompiledToClassName(".\\{\\}", "{}");
+        assertSelectorIsCompiledToClassName(".\\#fake\\-id", "#fake-id");
+        assertSelectorIsCompiledToClassName(".foo\\.bar", "foo.bar");
+        assertSelectorIsCompiledToClassName(".\\3A hover", ":hover");
+        assertSelectorIsCompiledToClassName(".\\3A hover\\3A focus\\3A active", ":hover:focus:active");
+        assertSelectorIsCompiledToClassName(".\\[attr\\=value\\]", "[attr=value]");
+        assertSelectorIsCompiledToClassName(".f\\/o\\/o", "f/o/o");
+        assertSelectorIsCompiledToClassName(".f\\\\o\\\\o", "f\\o\\o");
+        assertSelectorIsCompiledToClassName(".f\\*o\\*o", "f*o*o");
+        assertSelectorIsCompiledToClassName(".f\\!o\\!o", "f!o!o");
+        assertSelectorIsCompiledToClassName(".f\\'o\\'o", "f'o'o");
+        assertSelectorIsCompiledToClassName(".f\\~o\\~o", "f~o~o");
+        assertSelectorIsCompiledToClassName(".f\\+o\\+o", "f+o+o");
     }
 
-    private void assertSelectorIsCompiledToClassSelector(String actualSelector, String expectedClassName) {
+    private void assertSelectorIsCompiledToClassName(String actualSelector, String expectedClassName) {
         // given
         SQCssSelector cssSelector = SQParseTreeBuilder.parse(actualSelector).firstSelector();
         assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));

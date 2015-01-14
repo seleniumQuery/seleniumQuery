@@ -11,6 +11,17 @@ package io.github.seleniumquery.by.parser.parsetree.condition.attribute;
  */
 public class SQCssEqualsOrHasAttributeCondition extends SQCssAttributeCondition {
 
+    /**
+     * [simple]
+     * Attribute value is null in this case.
+     */
+    public SQCssEqualsOrHasAttributeCondition(String attributeName) {
+        super(attributeName, null);
+    }
+
+    /**
+     * [restart="never"]
+     */
     public SQCssEqualsOrHasAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
     }
