@@ -51,9 +51,9 @@ public class SQCssConditionTranslator {
 		    		return containsSubstringAttributeConditionTranslator.translate((AttributeCondition) condition);
 		    	}
 		    	// else: condition is most probably a instance of com.steadystate.css.parser.selectors.AttributeConditionImpl
-		    	return equalsOrHasAttributeConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
+		    	return equalsOrHasAttributeConditionTranslator.translate((AttributeCondition) condition);
 	        case Condition.SAC_ID_CONDITION:
-				return idAttridAttributeConditionTranslatorbuteCssSelector.translate(simpleSelector, stringMap, (AttributeCondition) condition);
+				return idAttridAttributeConditionTranslatorbuteCssSelector.translate((AttributeCondition) condition);
 	        case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
 	        	return containsWordAttributeConditionTranslator.translate((AttributeCondition) condition);
 	        case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
