@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass;
+package io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form;
 
 import org.junit.Test;
 
@@ -7,14 +7,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-public class SQCssSelectedPseudoClassTest {
+public class SQCssCheckedPseudoClassTest {
 
     @Test
     public void translate() {
         // given
-        String selector = ":selected";
+        String selector = ":checked";
         // when
-        SQCssSelectedPseudoClass cssCondition = parseFirstCssCondition(selector, SQCssSelectedPseudoClass.class);
+        SQCssCheckedPseudoClass cssCondition = parseFirstCssCondition(selector, SQCssCheckedPseudoClass.class);
         // then
         assertThat(cssCondition, is(notNullValue()));
     }
