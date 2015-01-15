@@ -4,10 +4,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssCheckedPseudoClass;
-import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssDisabledPseudoClass;
-import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssEnabledPseudoClass;
-import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssSelectedPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.*;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.SimpleSelector;
 
@@ -28,21 +25,21 @@ public class SQCssPseudoClassConditionTranslator {
 
 	public SQCssPseudoClassConditionTranslator() {
 		// form
-		//new ButtonPseudoClass()
-		//new CheckboxPseudoClass()
+		pseudoClasses.put(SQCssButtonPseudoClass.PSEUDO, SQCssButtonPseudoClass.class);
+		pseudoClasses.put(SQCssCheckboxPseudoClass.PSEUDO, SQCssCheckboxPseudoClass.class);
 		pseudoClasses.put(SQCssCheckedPseudoClass.PSEUDO, SQCssCheckedPseudoClass.class);
 		pseudoClasses.put(SQCssEnabledPseudoClass.PSEUDO, SQCssEnabledPseudoClass.class);
 		pseudoClasses.put(SQCssDisabledPseudoClass.PSEUDO, SQCssDisabledPseudoClass.class);
-		//new FilePseudoClass()
-		//new FocusPseudoClass()
-		//new ImagePseudoClass(),
-		//new InputPseudoClass(),
-		//new PasswordPseudoClass()
-		//new RadioPseudoClass()
-		//new ResetPseudoClass()
+		pseudoClasses.put(SQCssFilePseudoClass.PSEUDO, SQCssFilePseudoClass.class);
+		pseudoClasses.put(SQCssFocusPseudoClass.PSEUDO, SQCssFocusPseudoClass.class);
+		pseudoClasses.put(SQCssImagePseudoClass.PSEUDO, SQCssImagePseudoClass.class);
+		pseudoClasses.put(SQCssInputPseudoClass.PSEUDO, SQCssInputPseudoClass.class);
+		pseudoClasses.put(SQCssPasswordPseudoClass.PSEUDO, SQCssPasswordPseudoClass.class);
+		pseudoClasses.put(SQCssRadioPseudoClass.PSEUDO, SQCssRadioPseudoClass.class);
+		pseudoClasses.put(SQCssResetPseudoClass.PSEUDO, SQCssResetPseudoClass.class);
 		pseudoClasses.put(SQCssSelectedPseudoClass.PSEUDO, SQCssSelectedPseudoClass.class);
-		//new SubmitPseudoClass(),
-		//new TextPseudoClass()
+		pseudoClasses.put(SQCssSubmitPseudoClass.PSEUDO, SQCssSubmitPseudoClass.class);
+		pseudoClasses.put(SQCssTextPseudoClass.PSEUDO, SQCssTextPseudoClass.class);
 
 		// basic filter
 		// :animated
