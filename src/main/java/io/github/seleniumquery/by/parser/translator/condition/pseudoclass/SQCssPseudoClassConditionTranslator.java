@@ -4,7 +4,8 @@ import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.SQCssSelectedPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssCheckedPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssSelectedPseudoClass;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.SimpleSelector;
 
@@ -24,45 +25,68 @@ public class SQCssPseudoClassConditionTranslator {
 	private Map<String, Class<? extends SQCssPseudoClassCondition>> pseudoClasses = new HashMap<String, Class<? extends SQCssPseudoClassCondition>>();
 
 	public SQCssPseudoClassConditionTranslator() {
-		//new CheckedPseudoClass(),
-		pseudoClasses.put(SQCssSelectedPseudoClass.PSEUDO, SQCssSelectedPseudoClass.class);
-		//new EqPseudoClass()
-		//new OnlyChildPseudoClass(),
-		//new ContainsPseudoClass()
-		//new FirstChildPseudoClass()
-		//new NotPseudoClass(),
-		//new OnlyOfTypePseudoClass()
-		//new RootPseudoClass()
-		//new PresentPseudoClass(),
+		// form
+		//new ButtonPseudoClass()
+		//new CheckboxPseudoClass()
+		//new ()
+		pseudoClasses.put(SQCssCheckedPseudoClass.PSEUDO, SQCssCheckedPseudoClass.class);
 		//new EnabledPseudoClass()
 		//new DisabledPseudoClass()
-		//new VisiblePseudoClass(),
-		//new HiddenPseudoClass()
-		//new FirstPseudoClass()
-		//new LastPseudoClass(),
-		//new CheckboxPseudoClass()
-		//new RadioPseudoClass()
-		//new ImagePseudoClass(),
-		//new PasswordPseudoClass()
 		//new FilePseudoClass()
-		//new SubmitPseudoClass(),
-		//new ResetPseudoClass()
-		//new ButtonPseudoClass()
-		//new InputPseudoClass(),
-		//new HeaderPseudoClass()
-		//new LtPseudoClass()
-		//new GtPseudoClass(),
 		//new FocusPseudoClass()
+		//new ImagePseudoClass(),
+		//new InputPseudoClass(),
+		//new PasswordPseudoClass()
+		//new RadioPseudoClass()
+		//new ResetPseudoClass()
+		pseudoClasses.put(SQCssSelectedPseudoClass.PSEUDO, SQCssSelectedPseudoClass.class);
+		//new SubmitPseudoClass(),
+		//new TextPseudoClass()
+
+		// basic filter
+		// :animated
+		//new EqPseudoClass()
+		//new EvenPseudoClass(),
+		//new FirstPseudoClass()
+		//new GtPseudoClass(),
+		//new HeaderPseudoClass()
+		//new LastPseudoClass(),
+		//new LtPseudoClass()
+		//new NotPseudoClass(),
+		//new OddPseudoClass()
+		//new RootPseudoClass()
+		// :target
+
+		// child filter
+		//new FirstChildPseudoClass()
+		// :first-of-type
+		// :last-child
+		// :last-of-type
+		//new NthChildPseudoClass()
+		// :nth-last-child()
+		// :nth-last-of-type()
+		// :nth-of-type()
+		//new OnlyChildPseudoClass(),
+		//new OnlyOfTypePseudoClass()
+
+		// content filter
+		//new ContainsPseudoClass()
+		//new EmptyPseudoClass()
+		//new HasPseudoClass()
+		//new ParentPseudoClass(),
+
+		//new LangPseudoClass()
+
+		// jquery-ui
 		//new FocusablePseudoClass()
 		//new TabbablePseudoClass(),
-		//new HasPseudoClass()
-		//new LangPseudoClass()
-		//new ParentPseudoClass(),
-		//new EmptyPseudoClass()
-		//new TextPseudoClass()
-		//new EvenPseudoClass(),
-		//new OddPseudoClass()
-		//new NthChildPseudoClass()
+
+		// visibility
+		//new VisiblePseudoClass(),
+		//new HiddenPseudoClass()
+
+		// seleniumQuery additions
+		//new PresentPseudoClass(),
 	}
 
 	public SQCssCondition translate(SimpleSelector selectorUpToThisPoint, Map<String, String> stringMap, AttributeCondition attributeCondition) {
