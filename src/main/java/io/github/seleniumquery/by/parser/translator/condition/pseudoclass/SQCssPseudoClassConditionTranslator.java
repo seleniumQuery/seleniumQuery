@@ -85,6 +85,9 @@ public class SQCssPseudoClassConditionTranslator {
 
 		// seleniumQuery additions
 		//new PresentPseudoClass(),
+		// :blank
+		// :filled
+		// :unchecked
 	}
 
 	public SQCssCondition translate(SimpleSelector selectorUpToThisPoint, Map<String, String> stringMap, AttributeCondition attributeCondition) {
