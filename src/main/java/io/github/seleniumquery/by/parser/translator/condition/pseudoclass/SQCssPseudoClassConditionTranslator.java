@@ -5,6 +5,8 @@ import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassExcept
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssCheckedPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssDisabledPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssEnabledPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.SQCssSelectedPseudoClass;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.SimpleSelector;
@@ -28,10 +30,9 @@ public class SQCssPseudoClassConditionTranslator {
 		// form
 		//new ButtonPseudoClass()
 		//new CheckboxPseudoClass()
-		//new ()
 		pseudoClasses.put(SQCssCheckedPseudoClass.PSEUDO, SQCssCheckedPseudoClass.class);
-		//new EnabledPseudoClass()
-		//new DisabledPseudoClass()
+		pseudoClasses.put(SQCssEnabledPseudoClass.PSEUDO, SQCssEnabledPseudoClass.class);
+		pseudoClasses.put(SQCssDisabledPseudoClass.PSEUDO, SQCssDisabledPseudoClass.class);
 		//new FilePseudoClass()
 		//new FocusPseudoClass()
 		//new ImagePseudoClass(),
