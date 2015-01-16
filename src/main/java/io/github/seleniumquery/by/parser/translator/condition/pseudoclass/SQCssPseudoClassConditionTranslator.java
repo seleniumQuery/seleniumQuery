@@ -5,9 +5,16 @@ import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassExcept
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.basicfilter.*;
-import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.childfilter.SQCssFirstChildPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.childfilter.*;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.contentfilter.SQCssEmptyPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.contentfilter.SQCssParentPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.*;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.jqueryui.SQCssFocusablePseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.jqueryui.SQCssTabbablePseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.seleniumquery.SQCssBlankPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.seleniumquery.SQCssFilledPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.seleniumquery.SQCssPresentPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.seleniumquery.SQCssUncheckedPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.visibility.SQCssHiddenPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.visibility.SQCssVisiblePseudoClass;
 import org.w3c.css.sac.AttributeCondition;
@@ -63,27 +70,27 @@ public class SQCssPseudoClassConditionTranslator {
 
 		// child filter
 		pseudoClasses.put(SQCssFirstChildPseudoClass.PSEUDO, SQCssFirstChildPseudoClass.class);
-		// :first-of-type
-		// :last-child
-		// :last-of-type
+		pseudoClasses.put(SQCssFirstOfTypePseudoClass.PSEUDO, SQCssFirstOfTypePseudoClass.class);
+		pseudoClasses.put(SQCssLastChildPseudoClass.PSEUDO, SQCssLastChildPseudoClass.class);
+		pseudoClasses.put(SQCssLastOfTypePseudoClass.PSEUDO, SQCssLastOfTypePseudoClass.class);
 		//new NthChildPseudoClass()
 		// :nth-last-child()
 		// :nth-last-of-type()
 		// :nth-of-type()
-		//new OnlyChildPseudoClass(),
-		//new OnlyOfTypePseudoClass()
+		pseudoClasses.put(SQCssOnlyChildPseudoClass.PSEUDO, SQCssOnlyChildPseudoClass.class);
+		pseudoClasses.put(SQCssOnlyOfTypePseudoClass.PSEUDO, SQCssOnlyOfTypePseudoClass.class);
 
 		// content filter
 		//new ContainsPseudoClass()
-		//new EmptyPseudoClass()
+		pseudoClasses.put(SQCssEmptyPseudoClass.PSEUDO, SQCssEmptyPseudoClass.class);
 		//new HasPseudoClass()
-		//new ParentPseudoClass(),
+		pseudoClasses.put(SQCssParentPseudoClass.PSEUDO, SQCssParentPseudoClass.class);
 
 		//new LangPseudoClass()
 
 		// jquery-ui
-		//new FocusablePseudoClass()
-		//new TabbablePseudoClass(),
+		pseudoClasses.put(SQCssFocusablePseudoClass.PSEUDO, SQCssFocusablePseudoClass.class);
+		pseudoClasses.put(SQCssTabbablePseudoClass.PSEUDO, SQCssTabbablePseudoClass.class);
 
 		// visibility
 		pseudoClasses.put(SQCssHiddenPseudoClass.PSEUDO, SQCssHiddenPseudoClass.class);
@@ -91,9 +98,9 @@ public class SQCssPseudoClassConditionTranslator {
 
 		// seleniumQuery additions
 		pseudoClasses.put(SQCssPresentPseudoClass.PSEUDO, SQCssPresentPseudoClass.class);
-		// :blank
-		// :filled
-		// :unchecked
+		pseudoClasses.put(SQCssBlankPseudoClass.PSEUDO, SQCssBlankPseudoClass.class);
+		pseudoClasses.put(SQCssFilledPseudoClass.PSEUDO, SQCssFilledPseudoClass.class);
+		pseudoClasses.put(SQCssUncheckedPseudoClass.PSEUDO, SQCssUncheckedPseudoClass.class);
 	}
 
 	public SQCssCondition translate(SimpleSelector selectorUpToThisPoint, Map<String, String> stringMap, AttributeCondition attributeCondition) {
