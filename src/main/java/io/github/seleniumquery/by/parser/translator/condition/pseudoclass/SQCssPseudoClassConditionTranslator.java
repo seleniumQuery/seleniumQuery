@@ -6,7 +6,9 @@ import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.basicfilter.*;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.childfilter.*;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.contentfilter.SQCssContainsPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.contentfilter.SQCssEmptyPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.contentfilter.SQCssHasPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.contentfilter.SQCssParentPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.*;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.jqueryui.SQCssFocusablePseudoClass;
@@ -75,20 +77,18 @@ public class SQCssPseudoClassConditionTranslator {
 		pseudoClasses.put(SQCssFirstOfTypePseudoClass.PSEUDO, SQCssFirstOfTypePseudoClass.class);
 		pseudoClasses.put(SQCssLastChildPseudoClass.PSEUDO, SQCssLastChildPseudoClass.class);
 		pseudoClasses.put(SQCssLastOfTypePseudoClass.PSEUDO, SQCssLastOfTypePseudoClass.class);
-		//new NthChildPseudoClass()
-		// :nth-last-child()
-		// :nth-last-of-type()
-		// :nth-of-type()
+		pseudoClasses.put(SQCssNthChildPseudoClass.PSEUDO, SQCssNthChildPseudoClass.class);
+		pseudoClasses.put(SQCssNthLastChildPseudoClass.PSEUDO, SQCssNthLastChildPseudoClass.class);
+		pseudoClasses.put(SQCssNthLastOfTypePseudoClass.PSEUDO, SQCssNthLastOfTypePseudoClass.class);
+		pseudoClasses.put(SQCssNthOfTypePseudoClass.PSEUDO, SQCssNthOfTypePseudoClass.class);
 		pseudoClasses.put(SQCssOnlyChildPseudoClass.PSEUDO, SQCssOnlyChildPseudoClass.class);
 		pseudoClasses.put(SQCssOnlyOfTypePseudoClass.PSEUDO, SQCssOnlyOfTypePseudoClass.class);
 
 		// content filter
-		//new ContainsPseudoClass()
+		pseudoClasses.put(SQCssContainsPseudoClass.PSEUDO, SQCssContainsPseudoClass.class);
 		pseudoClasses.put(SQCssEmptyPseudoClass.PSEUDO, SQCssEmptyPseudoClass.class);
-		//new HasPseudoClass()
+		pseudoClasses.put(SQCssHasPseudoClass.PSEUDO, SQCssHasPseudoClass.class);
 		pseudoClasses.put(SQCssParentPseudoClass.PSEUDO, SQCssParentPseudoClass.class);
-
-		//new LangPseudoClass()
 
 		// jquery-ui
 		pseudoClasses.put(SQCssFocusablePseudoClass.PSEUDO, SQCssFocusablePseudoClass.class);
