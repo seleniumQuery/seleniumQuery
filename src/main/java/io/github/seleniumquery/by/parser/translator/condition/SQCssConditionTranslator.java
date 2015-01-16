@@ -3,9 +3,11 @@ package io.github.seleniumquery.by.parser.translator.condition;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssUnknownConditionException;
 import io.github.seleniumquery.by.parser.translator.condition.attribute.*;
-import io.github.seleniumquery.by.parser.translator.condition.pseudoclass.SQCssLangPseudoClassTranslator;
 import io.github.seleniumquery.by.parser.translator.condition.pseudoclass.SQCssPseudoClassConditionTranslator;
-import org.w3c.css.sac.*;
+import org.w3c.css.sac.AttributeCondition;
+import org.w3c.css.sac.CombinatorCondition;
+import org.w3c.css.sac.Condition;
+import org.w3c.css.sac.SimpleSelector;
 
 import java.util.Map;
 
@@ -27,20 +29,15 @@ public class SQCssConditionTranslator {
     private final SQCssContainsPrefixAttributeConditionTranslator containsPrefixAttributeConditionTranslator = new SQCssContainsPrefixAttributeConditionTranslator();
     private final SQCssClassAttributeConditionTranslator classAttributeConditionTranslator = new SQCssClassAttributeConditionTranslator();
     private final SQCssPseudoClassConditionTranslator pseudoClassCssSelector = new SQCssPseudoClassConditionTranslator();
-    private final SQCssLangPseudoClassTranslator langPseudoClassEvaluator = new SQCssLangPseudoClassTranslator();
 
 	public SQCssCondition translate(SimpleSelector simpleSelector, Map<String, String> stringMap, Condition condition) {
 	    switch (condition.getConditionType()) {
 		    case Condition.SAC_AND_CONDITION:
 		    	return andConditionTranslator.translate(simpleSelector, stringMap, (CombinatorCondition) condition);
 		    case Condition.SAC_OR_CONDITION:
-		    	// if the exception below gets thrown, this means the CSS Parser has changed and
-		    	// we must update our code as well.
-		    	throw new RuntimeException("The Condition.SAC_OR_CONDITION is not used by the CSS Parser. " +
-		    			"This version of seleniumQuery is not compatible with the CSS Parser present in the" +
-		    			"classpath.");
-		    	
-		    case Condition.SAC_ATTRIBUTE_CONDITION:
+				return incompatible("Condition.SAC_OR_CONDITION");
+
+			case Condition.SAC_ATTRIBUTE_CONDITION:
 				if (condition instanceof com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl) {
 		    		return startsWithAttributeConditionTranslator.translate((AttributeCondition) condition);
 		    	}
@@ -64,11 +61,19 @@ public class SQCssConditionTranslator {
 	        case Condition.SAC_PSEUDO_CLASS_CONDITION:
 	        	return pseudoClassCssSelector.translate(simpleSelector, stringMap, (AttributeCondition) condition);
 	        case Condition.SAC_LANG_CONDITION:
-	        	return langPseudoClassEvaluator.translate(simpleSelector, stringMap, (LangCondition) condition);
+				return incompatible("Condition.SAC_LANG_CONDITION");
 	            
 	        default:
 				throw new SQCssUnknownConditionException(condition);
 		}
+	}
+
+	private SQCssCondition incompatible(String s) {
+		// if the exception below gets thrown, this means the CSS Parser has changed and
+		// we must update our code as well.
+		throw new RuntimeException("The condition "+s+" is not used by the CSS Parser. " +
+                "This version of seleniumQuery is not compatible with the CSS Parser present in the" +
+                "classpath.");
 	}
 
 }
