@@ -60,6 +60,8 @@ public class SQCssPseudoClassConditionTranslator {
 		pseudoClasses.put(SQCssFirstPseudoClass.PSEUDO, SQCssFirstPseudoClass.class);
 		pseudoClasses.put(SQCssGtPseudoClass.PSEUDO, SQCssGtPseudoClass.class);
 		pseudoClasses.put(SQCssHeaderPseudoClass.PSEUDO, SQCssHeaderPseudoClass.class);
+		pseudoClasses.put(SQCssLangPseudoClass.PSEUDO, SQCssLangPseudoClass.class);
+		pseudoClasses.put(SQCssLangPseudoClass.PSEUDO_PURE_LANG, SQCssLangPseudoClass.class);
 		pseudoClasses.put(SQCssLastPseudoClass.PSEUDO, SQCssLastPseudoClass.class);
 		pseudoClasses.put(SQCssLtPseudoClass.PSEUDO, SQCssLtPseudoClass.class);
 		pseudoClasses.put(SQCssNotPseudoClass.PSEUDO, SQCssNotPseudoClass.class);
