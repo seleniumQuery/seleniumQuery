@@ -8,6 +8,8 @@ import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.basicfi
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.childfilter.SQCssFirstChildPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.*;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.seleniumquery.SQCssPresentPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.visibility.SQCssHiddenPseudoClass;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.visibility.SQCssVisiblePseudoClass;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.SimpleSelector;
 
@@ -84,8 +86,8 @@ public class SQCssPseudoClassConditionTranslator {
 		//new TabbablePseudoClass(),
 
 		// visibility
-		//new VisiblePseudoClass(),
-		//new HiddenPseudoClass()
+		pseudoClasses.put(SQCssHiddenPseudoClass.PSEUDO, SQCssHiddenPseudoClass.class);
+		pseudoClasses.put(SQCssVisiblePseudoClass.PSEUDO, SQCssVisiblePseudoClass.class);
 
 		// seleniumQuery additions
 		pseudoClasses.put(SQCssPresentPseudoClass.PSEUDO, SQCssPresentPseudoClass.class);
