@@ -4,6 +4,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.basicfilter.SQCssFirstPseudoClass;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.form.*;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.SimpleSelector;
@@ -45,7 +46,7 @@ public class SQCssPseudoClassConditionTranslator {
 		// :animated
 		//new EqPseudoClass()
 		//new EvenPseudoClass(),
-		//new FirstPseudoClass()
+		pseudoClasses.put(SQCssFirstPseudoClass.PSEUDO, SQCssFirstPseudoClass.class);
 		//new GtPseudoClass(),
 		//new HeaderPseudoClass()
 		//new LastPseudoClass(),
