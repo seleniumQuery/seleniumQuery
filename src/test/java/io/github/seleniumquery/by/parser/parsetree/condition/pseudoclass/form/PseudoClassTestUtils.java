@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
 
 public class PseudoClassTestUtils {
 
-    static <T extends SQCssCondition> void assertPseudo(String selector, Class<T> pseudoClassClass) {
+    public static <T extends SQCssCondition> void assertPseudo(String selector, Class<T> pseudoClassClass) {
         // given
         // selector
         // when
