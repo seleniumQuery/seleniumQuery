@@ -44,14 +44,15 @@ public class SQCssPseudoClassConditionTranslator {
 
 		// basic filter
 		// :animated
-		//new EqPseudoClass()
+		pseudoClasses.put(SQCssEqPseudoClass.PSEUDO, SQCssEqPseudoClass.class);
 		pseudoClasses.put(SQCssEvenPseudoClass.PSEUDO, SQCssEvenPseudoClass.class);
 		pseudoClasses.put(SQCssFirstPseudoClass.PSEUDO, SQCssFirstPseudoClass.class);
-		//new GtPseudoClass(),
+		pseudoClasses.put(SQCssGtPseudoClass.PSEUDO, SQCssGtPseudoClass.class);
 		pseudoClasses.put(SQCssHeaderPseudoClass.PSEUDO, SQCssHeaderPseudoClass.class);
 		pseudoClasses.put(SQCssLastPseudoClass.PSEUDO, SQCssLastPseudoClass.class);
-		//new LtPseudoClass()
-		//new NotPseudoClass(),
+		pseudoClasses.put(SQCssLtPseudoClass.PSEUDO, SQCssLtPseudoClass.class);
+		pseudoClasses.put(SQCssNotPseudoClass.PSEUDO, SQCssNotPseudoClass.class);
+		pseudoClasses.put(SQCssNotPseudoClass.PSEUDO_PURE_NOT, SQCssNotPseudoClass.class);
 		pseudoClasses.put(SQCssOddPseudoClass.PSEUDO, SQCssOddPseudoClass.class);
 		pseudoClasses.put(SQCssRootPseudoClass.PSEUDO, SQCssRootPseudoClass.class);
 		pseudoClasses.put(SQCssTargetPseudoClass.PSEUDO, SQCssTargetPseudoClass.class);
@@ -95,7 +96,7 @@ public class SQCssPseudoClassConditionTranslator {
 		String pseudoClassName = getPseudoClassName(attributeCondition);
 		Class<? extends SQCssPseudoClassCondition> pseudoClass = pseudoClasses.get(pseudoClassName);
 		if (pseudoClass != null) {
-			return instantiate(pseudoClass, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassName));
+			return instantiate(pseudoClass, new PseudoClassSelector(stringMap, selectorUpToThisPoint, attributeCondition.getValue()));
 		}
 		throw new UnsupportedPseudoClassException(stringMap, selectorUpToThisPoint, pseudoClassName);
 	}
