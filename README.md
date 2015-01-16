@@ -253,4 +253,4 @@ Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
 
 #Contributing
 
-Feel free to [request, suggest](https://github.com/seleniumQuery/seleniumQuery/issues), create pull requests. The project is currently in a fast pace and any opinions/help is more than welcome!
+Feel free to [request, suggest](https://github.com/seleniumQuery/seleniumQuery/issues/new), create pull requests. The project is currently in a fast pace and any opinions/help is more than welcome!
