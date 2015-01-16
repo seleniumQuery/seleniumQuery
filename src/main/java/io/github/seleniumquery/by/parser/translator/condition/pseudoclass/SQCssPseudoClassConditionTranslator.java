@@ -43,7 +43,7 @@ public class SQCssPseudoClassConditionTranslator {
 		pseudoClasses.put(SQCssTextPseudoClass.PSEUDO, SQCssTextPseudoClass.class);
 
 		// basic filter
-		// :animated
+		pseudoClasses.put(SQCssAnimatedPseudoClass.PSEUDO, SQCssAnimatedPseudoClass.class);
 		pseudoClasses.put(SQCssEqPseudoClass.PSEUDO, SQCssEqPseudoClass.class);
 		pseudoClasses.put(SQCssEvenPseudoClass.PSEUDO, SQCssEvenPseudoClass.class);
 		pseudoClasses.put(SQCssFirstPseudoClass.PSEUDO, SQCssFirstPseudoClass.class);
