@@ -3,8 +3,6 @@ package io.github.seleniumquery.by.parser.translator.selector;
 import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
 import org.w3c.css.sac.ElementSelector;
 
-import java.util.Map;
-
 /**
  * $("tagname")
  *
@@ -13,8 +11,8 @@ import java.util.Map;
  */
 public class SQCssTagNameSelectorTranslator {
 
-	public SQCssTagNameSelector translate(Map<String, String> stringMap, ElementSelector selector) {
-		String tagName = selector.toString();
+	public SQCssTagNameSelector translate(ElementSelector elementSelector) {
+		String tagName = elementSelector.toString();
 		return new SQCssTagNameSelector(tagName);
 	}
 

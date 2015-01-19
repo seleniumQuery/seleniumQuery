@@ -31,7 +31,7 @@ public class SQCssSelectorTranslator {
 				return conditionalCssSelector.translate(stringMap, (ConditionalSelector) selector);
 
 			case Selector.SAC_ELEMENT_NODE_SELECTOR:
-				return tagNameSelector.translate(stringMap, (ElementSelector) selector);
+				return tagNameSelector.translate((ElementSelector) selector);
 
 			// COMBINATORS
 			case Selector.SAC_DESCENDANT_SELECTOR:
