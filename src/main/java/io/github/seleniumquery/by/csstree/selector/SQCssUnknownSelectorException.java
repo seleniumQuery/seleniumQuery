@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.parser.parsetree.selector;
+package io.github.seleniumquery.by.csstree.selector;
 
 import org.w3c.css.sac.Selector;
 

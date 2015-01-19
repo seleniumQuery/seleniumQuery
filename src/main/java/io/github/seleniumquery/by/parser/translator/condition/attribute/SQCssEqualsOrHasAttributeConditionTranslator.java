@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.parser.translator.condition.attribute;
 
+import io.github.seleniumquery.by.csstree.condition.attribute.SQCssEqualsOrHasAttributeCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
-import io.github.seleniumquery.by.parser.parsetree.condition.attribute.SQCssEqualsOrHasAttributeCondition;
 import org.w3c.css.sac.AttributeCondition;
 
 /**

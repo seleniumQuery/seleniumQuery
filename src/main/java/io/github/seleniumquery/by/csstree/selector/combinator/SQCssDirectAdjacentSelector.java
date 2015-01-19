@@ -1,13 +1,13 @@
-package io.github.seleniumquery.by.parser.parsetree.selector.combinator;
+package io.github.seleniumquery.by.csstree.selector.combinator;
 
 import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
 
-public class SQCssGeneralAdjacentSelector implements SQCssSelector {
+public class SQCssDirectAdjacentSelector implements SQCssSelector {
 
     private SQCssSelector ancestorSelector;
     private SQCssSelector descendantSelector;
 
-    public SQCssGeneralAdjacentSelector(SQCssSelector ancestorSelector, SQCssSelector descendantSelector) {
+    public SQCssDirectAdjacentSelector(SQCssSelector ancestorSelector, SQCssSelector descendantSelector) {
         this.ancestorSelector = ancestorSelector;
         this.descendantSelector = descendantSelector;
     }

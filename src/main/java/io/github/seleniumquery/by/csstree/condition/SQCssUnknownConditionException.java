@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.parser.parsetree.condition;
+package io.github.seleniumquery.by.csstree.condition;
 
 import org.w3c.css.sac.Condition;
 

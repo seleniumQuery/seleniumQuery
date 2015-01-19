@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.parser.parsetree;
+package io.github.seleniumquery.by.csstree;
 
 import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
 

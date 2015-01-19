@@ -1,4 +1,4 @@
-package io.github.seleniumquery.by.parser.parsetree.condition.attribute;
+package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 
