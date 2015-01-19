@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass;
 
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
+import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 
 import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
 import static org.hamcrest.CoreMatchers.*;

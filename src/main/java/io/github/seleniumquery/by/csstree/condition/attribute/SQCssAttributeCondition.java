@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
+import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 
 /**
  * A class that holds an attribute name and a wanted value.

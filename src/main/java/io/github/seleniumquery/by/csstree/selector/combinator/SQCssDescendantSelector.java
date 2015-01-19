@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.csstree.selector.combinator;
 
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
+import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
 
 public class SQCssDescendantSelector implements SQCssSelector {
 

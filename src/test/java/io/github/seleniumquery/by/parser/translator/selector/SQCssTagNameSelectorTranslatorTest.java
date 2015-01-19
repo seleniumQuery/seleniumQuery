@@ -1,8 +1,8 @@
 package io.github.seleniumquery.by.parser.translator.selector;
 
+import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
 import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;

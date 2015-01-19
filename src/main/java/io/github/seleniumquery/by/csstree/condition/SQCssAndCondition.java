@@ -1,7 +1,5 @@
 package io.github.seleniumquery.by.csstree.condition;
 
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
-
 /**
  * Chains conditions.
  * Example:

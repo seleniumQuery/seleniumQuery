@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.parser.translator.condition.pseudoclass;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
+import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.basicfilter.*;
 import io.github.seleniumquery.by.parser.parsetree.condition.pseudoclass.childfilter.*;

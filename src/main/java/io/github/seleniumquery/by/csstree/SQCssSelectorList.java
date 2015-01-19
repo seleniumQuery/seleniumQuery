@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.csstree;
 
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
+import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.parser.translator.selector.combinator;
 
+import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by.csstree.selector.combinator.SQCssDescendantSelector;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
 import io.github.seleniumquery.by.parser.translator.selector.SQCssSelectorTranslator;
 import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.Selector;
