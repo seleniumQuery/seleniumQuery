@@ -1,6 +1,7 @@
 package io.github.seleniumquery.by.parser.translator.selector;
 
 import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
+import io.github.seleniumquery.by.parser.parsetree.condition.SQCssAndCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.attribute.SQCssClassAttributeCondition;
 import io.github.seleniumquery.by.parser.parsetree.selector.SQCssConditionalSelector;
@@ -15,19 +16,47 @@ import static org.junit.Assert.assertThat;
 public class SQCssConditionalSelectorTranslatorTest {
 
     @Test
-    public void translate() {
+    public void translate__simple_condition() {
         // given
-        SQCssSelector cssSelector = SQParseTreeBuilder.parse("a.condition").firstSelector();
-        assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));
+        String simpleConditionSelector = "a.condition";
         // when
+        SQCssSelector cssSelector = SQParseTreeBuilder.parse(simpleConditionSelector).firstSelector();
+        // then
+        assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));
         SQCssSelector sqCssSelector = ((SQCssConditionalSelector) cssSelector).getSqCssSelector();
         SQCssCondition sqCssCondition = ((SQCssConditionalSelector) cssSelector).getSqCssCondition();
-        // then
+
         assertThat(sqCssSelector, instanceOf(SQCssTagNameSelector.class));
         assertThat(((SQCssTagNameSelector) sqCssSelector).getTagName(), is("a"));
 
         assertThat(sqCssCondition, instanceOf(SQCssClassAttributeCondition.class));
         assertThat(((SQCssClassAttributeCondition) sqCssCondition).getClassName(), is("condition"));
+    }
+
+    @Test
+    public void translate__compound_condition() {
+        // given
+        String compoundConditionSelector = "a.conditionA.conditionB";
+        // when
+        SQCssSelector cssSelector = SQParseTreeBuilder.parse(compoundConditionSelector).firstSelector();
+        // then
+        assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));
+
+        SQCssSelector sqCssSelector = ((SQCssConditionalSelector) cssSelector).getSqCssSelector();
+        SQCssCondition sqCssCondition = ((SQCssConditionalSelector) cssSelector).getSqCssCondition();
+
+        assertThat(sqCssSelector, instanceOf(SQCssTagNameSelector.class));
+        assertThat(((SQCssTagNameSelector) sqCssSelector).getTagName(), is("a"));
+
+        assertThat(sqCssCondition, instanceOf(SQCssAndCondition.class));
+        SQCssCondition sqCssFirstCondition = ((SQCssAndCondition) sqCssCondition).getFirstCondition();
+        SQCssCondition sqCssSecondCondition = ((SQCssAndCondition) sqCssCondition).getSecondCondition();
+
+        assertThat(sqCssFirstCondition, instanceOf(SQCssClassAttributeCondition.class));
+        assertThat(((SQCssClassAttributeCondition) sqCssFirstCondition).getClassName(), is("conditionA"));
+
+        assertThat(sqCssSecondCondition, instanceOf(SQCssClassAttributeCondition.class));
+        assertThat(((SQCssClassAttributeCondition) sqCssSecondCondition).getClassName(), is("conditionB"));
     }
 
 }
