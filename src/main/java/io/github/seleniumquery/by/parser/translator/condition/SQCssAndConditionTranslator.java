@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.parser.translator.condition;
 
 import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
 import io.github.seleniumquery.by.csstree.condition.SQCssAndCondition;
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
+import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.SimpleSelector;
 
