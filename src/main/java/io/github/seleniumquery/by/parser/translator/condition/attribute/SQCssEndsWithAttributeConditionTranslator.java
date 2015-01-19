@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.parser.parsetree.condition.attribute.SQCssEndsWithAttributeCondition;
+import io.github.seleniumquery.by.csstree.condition.attribute.SQCssEndsWithAttributeCondition;
 import org.w3c.css.sac.AttributeCondition;
 
 /**

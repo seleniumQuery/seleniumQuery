@@ -1,6 +1,7 @@
-package io.github.seleniumquery.by.parser.parsetree.selector;
+package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
+import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
 
 public class SQCssConditionalSelector implements SQCssSelector {
 

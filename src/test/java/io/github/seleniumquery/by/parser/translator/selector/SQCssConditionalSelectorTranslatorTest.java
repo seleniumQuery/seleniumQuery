@@ -1,12 +1,12 @@
 package io.github.seleniumquery.by.parser.translator.selector;
 
+import io.github.seleniumquery.by.csstree.condition.SQCssAndCondition;
+import io.github.seleniumquery.by.csstree.condition.attribute.SQCssClassAttributeCondition;
+import io.github.seleniumquery.by.csstree.selector.SQCssConditionalSelector;
+import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
 import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
-import io.github.seleniumquery.by.parser.parsetree.condition.SQCssAndCondition;
 import io.github.seleniumquery.by.parser.parsetree.condition.SQCssCondition;
-import io.github.seleniumquery.by.parser.parsetree.condition.attribute.SQCssClassAttributeCondition;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssConditionalSelector;
 import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssTagNameSelector;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;

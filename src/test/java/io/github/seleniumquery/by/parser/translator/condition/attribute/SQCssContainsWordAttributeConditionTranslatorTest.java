@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.parser.parsetree.condition.attribute.SQCssContainsWordAttributeCondition;
+import io.github.seleniumquery.by.csstree.condition.attribute.SQCssContainsWordAttributeCondition;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;

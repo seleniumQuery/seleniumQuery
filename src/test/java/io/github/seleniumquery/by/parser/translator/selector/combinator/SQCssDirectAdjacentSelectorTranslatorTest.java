@@ -1,9 +1,9 @@
 package io.github.seleniumquery.by.parser.translator.selector.combinator;
 
+import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.csstree.selector.combinator.SQCssDirectAdjacentSelector;
 import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
 import io.github.seleniumquery.by.parser.parsetree.selector.SQCssSelector;
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssTagNameSelector;
-import io.github.seleniumquery.by.parser.parsetree.selector.combinator.SQCssDirectAdjacentSelector;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;

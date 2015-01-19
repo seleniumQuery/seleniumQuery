@@ -1,6 +1,6 @@
 package io.github.seleniumquery.by.parser.translator.selector;
 
-import io.github.seleniumquery.by.parser.parsetree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
 import org.w3c.css.sac.ElementSelector;
 
 import java.util.Map;
