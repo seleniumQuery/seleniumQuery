@@ -218,13 +218,15 @@ $(":input[name='email']").val("seleniumQuery@example.com");
 We don't change  the `value` attribute directly like jQuery does. We actually do as a user would: We **clear** the input
 and **type, key by key**, the string provided as argument!
 
-And we go the *extra mile*: Our **`$().val()` even works on `contenteditable` elements**: They don't have `value`, but we type
-the text in them, again, key by key, as an user would!
+And we go the *extra mile* whenever possible:
+- Our **`$().val()` even works on `contenteditable` elements**: They don't have `value`, but we type the text in them, again, key by key, as an user would;
+- If it is an `<input type="file">` we select the file;
+- When the element is a `<select>`, we choose the `<option>` by the value given (same as `$("selector").as().select().selectByValue("123")`).
 
 ###Always from the user perspective
 
 On the same tone, when selecting/checking `<option>`s or checkboxes or radios, try not to use `$().prop("selected", true)` directly to them (which to work, of course, would need JS to be enabled on the driver).
-Do as an user would: call `.click()`!
+Do as an user would: call `.click()`! Or, better yet, use seleniumQuery's `.as().select()` functions: `$().as().select().selectByVisibleText("My Option")` or `$().as().select().selectByValue("123")`.
 
 <br><br>
 
