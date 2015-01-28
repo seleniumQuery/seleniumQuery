@@ -1,6 +1,8 @@
 package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.csstree.condition.attribute.SQCssClassAttributeCondition;
+import io.github.seleniumquery.by.locator.SQLocator;
 
 public class SQCssConditionalSelector implements SQCssSelector {
 
@@ -18,6 +20,11 @@ public class SQCssConditionalSelector implements SQCssSelector {
 
     public SQCssCondition getSqCssCondition() {
         return sqCssCondition;
+    }
+
+    public SQLocator toSQLocator() {
+        SQLocator sqLocator = ((SQCssTagNameSelector) sqCssSelector).toSQLocator();
+        return ((SQCssClassAttributeCondition) sqCssCondition).toSQLocator(sqLocator);
     }
 
 }
