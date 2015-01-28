@@ -2,13 +2,12 @@ package io.github.seleniumquery.by.filter;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
-
-import java.util.Collections;
-import java.util.List;
-
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.Collections;
+import java.util.List;
 
 public class ElementFilterList {
 	
@@ -33,6 +32,10 @@ public class ElementFilterList {
 			elements = elementFilter.filterElements(driver, elements);
 		}
 		return elements;
+	}
+
+	public List<ElementFilter> getElementFilters() {
+		return elementFilters;
 	}
 
 }
