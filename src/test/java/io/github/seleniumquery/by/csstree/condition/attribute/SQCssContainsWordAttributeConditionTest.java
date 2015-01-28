@@ -32,42 +32,31 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtils;
+import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import org.junit.Test;
 
-/**
- * .class
- *
- * @author acdcjunior
- * @since 0.10.0
- */
-public class SQCssClassAttributeCondition implements SQCssCondition, SQCssConditionImplementedLocators {
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.junit.Assert.assertThat;
 
-    private String unescapedClassName;
+public class SQCssContainsWordAttributeConditionTest {
 
-    public SQCssClassAttributeCondition(String unescapedClassName) {
-        this.unescapedClassName = unescapedClassName;
-    }
-
-    public String getClassName() {
-        return unescapedClassName;
-    }
-
-    @Override
-    public SQLocator toSQLocator(SQLocator leftLocator) {
-        String newCssSelector = SQLocatorUtils.cssMerge(leftLocator.getCssSelector(), toCSS());
-        String newXPathExpression = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
-        return new SQLocator(newCssSelector, newXPathExpression, leftLocator);
-    }
-
-    private String toCSS() {
-        return "." + this.unescapedClassName;
-    }
-
-    private String toXPath() {
-        return "contains(concat(' ', normalize-space(@class), ' '), ' " + unescapedClassName + " ')";
+    @Test
+    public void toSQLocator() {
+        // given
+        SQCssContainsWordAttributeCondition containsWordAttributeCondition = new SQCssContainsWordAttributeCondition("values", "10");
+        SQLocator previous = SQLocatorUtilsTest.TAG_ASTERISK;
+        // when
+        SQLocator locator = containsWordAttributeCondition.toSQLocator(previous);
+        // then
+        assertThat(locator.getCssSelector(), is("[values~='10']"));
+        String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'values']";
+        assertThat(locator.getXPathExpression(), is(".//*[contains(concat(' ', normalize-space("+attrName+"), ' '), ' 10 ')]"));
+        assertThat(locator.canPureCss(), is(true));
+        assertThat(locator.canPureXPath(), is(true));
+        assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
     }
 
 }
