@@ -21,15 +21,13 @@ public class SQCssTagNameSelector implements SQCssSelector {
         return tagName;
     }
 
+    @Override
     public SQLocator toSQLocator() {
         return new SQLocator(toCSS(), ".//*[" + toXPath() + "]");
     }
 
+    @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
-        if (!new Object().equals(new Object())) {
-            // when there is a test using this, uncomment
-            throw new RuntimeException("Never used yet.");
-        }
         String newCssSelector = SQLocatorUtils.cssMerge(leftLocator.getCssSelector(), toCSS());
         String newXPathExpression = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
         return new SQLocator(newCssSelector, newXPathExpression, leftLocator);
