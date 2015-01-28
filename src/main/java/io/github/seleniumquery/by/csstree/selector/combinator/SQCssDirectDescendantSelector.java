@@ -2,22 +2,18 @@ package io.github.seleniumquery.by.csstree.selector.combinator;
 
 import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
 
-public class SQCssDirectDescendantSelector implements SQCssSelector {
+public class SQCssDirectDescendantSelector extends SQCssCombinationSelector {
 
-    private SQCssSelector ancestorSelector;
-    private SQCssSelector descendantSelector;
-
-    public SQCssDirectDescendantSelector(SQCssSelector ancestorSelector, SQCssSelector descendantSelector) {
-        this.ancestorSelector = ancestorSelector;
-        this.descendantSelector = descendantSelector;
+    public SQCssDirectDescendantSelector(SQCssSelector leftSideSelector, SQCssSelector rightSideSelector) {
+        super(">", "/*[true()]", leftSideSelector, rightSideSelector);
     }
 
     public SQCssSelector getAncestorSelector() {
-        return ancestorSelector;
+        return leftSideSelector;
     }
 
     public SQCssSelector getDescendantSelector() {
-        return descendantSelector;
+        return rightSideSelector;
     }
 
 }

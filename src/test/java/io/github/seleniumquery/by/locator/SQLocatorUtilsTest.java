@@ -22,6 +22,12 @@ public class SQLocatorUtilsTest {
     }
 
     @Test
+    public void conditionalSimpleXPathMerge__should_remove_last_previous_condition_if_it_was_just_true_ALTERNATE() {
+        String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge(".//*[self::a]/*[true()]", "newStuff");
+        assertThat(mergedXPath, is(".//*[self::a]/*[newStuff]"));
+    }
+
+    @Test
     public void conditionalSimpleXPathMerge__should_remove_last_previous_condition_if_it_was_just_true_even_if_there_was_something_else() {
         String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge(".//*[previousStuff and true()]", "newStuff");
         assertThat(mergedXPath, is(".//*[previousStuff and newStuff]"));

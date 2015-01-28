@@ -18,8 +18,8 @@ public class SQCssDirectAdjacentSelectorTranslatorTest {
         SQCssSelector cssSelector = SQParseTreeBuilder.parse("a + b").firstSelector();
         assertThat(cssSelector, instanceOf(SQCssDirectAdjacentSelector.class));
         // when
-        SQCssSelector ancestorSelector = ((SQCssDirectAdjacentSelector) cssSelector).getAncestorSelector();
-        SQCssSelector descendantSelector = ((SQCssDirectAdjacentSelector) cssSelector).getDescendantSelector();
+        SQCssSelector ancestorSelector = ((SQCssDirectAdjacentSelector) cssSelector).getLeftSideSelector();
+        SQCssSelector descendantSelector = ((SQCssDirectAdjacentSelector) cssSelector).getRightSideSelector();
         // then
         assertThat(ancestorSelector, instanceOf(SQCssTagNameSelector.class));
         assertThat(((SQCssTagNameSelector) ancestorSelector).getTagName(), is("a"));

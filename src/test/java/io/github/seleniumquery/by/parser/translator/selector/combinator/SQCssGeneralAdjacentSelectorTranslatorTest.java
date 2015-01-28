@@ -18,8 +18,8 @@ public class SQCssGeneralAdjacentSelectorTranslatorTest {
         SQCssSelector cssSelector = SQParseTreeBuilder.parse("a ~ b").firstSelector();
         assertThat(cssSelector, instanceOf(SQCssGeneralAdjacentSelector.class));
         // when
-        SQCssSelector ancestorSelector = ((SQCssGeneralAdjacentSelector) cssSelector).getAncestorSelector();
-        SQCssSelector descendantSelector = ((SQCssGeneralAdjacentSelector) cssSelector).getDescendantSelector();
+        SQCssSelector ancestorSelector = ((SQCssGeneralAdjacentSelector) cssSelector).getLeftSideSelector();
+        SQCssSelector descendantSelector = ((SQCssGeneralAdjacentSelector) cssSelector).getRightSideSelector();
         // then
         assertThat(ancestorSelector, instanceOf(SQCssTagNameSelector.class));
         assertThat(((SQCssTagNameSelector) ancestorSelector).getTagName(), is("a"));
