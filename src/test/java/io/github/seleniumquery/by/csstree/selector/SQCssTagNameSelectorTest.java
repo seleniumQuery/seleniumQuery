@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
@@ -15,13 +31,13 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("myTag");
         // when
-        SQLocator xPath = tagNameSelector.toSQLocator();
+        SQLocator locator = tagNameSelector.toSQLocator();
         // then
-        assertThat(xPath.getCssSelector(), is("myTag"));
-        assertThat(xPath.getXPathExpression(), is(".//*[self::myTag]"));
-        assertThat(xPath.canPureCss(), is(true));
-        assertThat(xPath.canPureXPath(), is(true));
-        assertThat(xPath.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
+        assertThat(locator.getCssSelector(), is("myTag"));
+        assertThat(locator.getXPathExpression(), is(".//*[self::myTag]"));
+        assertThat(locator.canPureCss(), is(true));
+        assertThat(locator.canPureXPath(), is(true));
+        assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
     }
 
     @Test
