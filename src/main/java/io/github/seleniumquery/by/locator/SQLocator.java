@@ -14,12 +14,29 @@
  * limitations under the License.
  */
 
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by.locator;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -38,13 +55,19 @@ import static java.util.Arrays.asList;
  */
 public class SQLocator {
 
+    /**
+     * The driver here is used to test for selector support. This is *not* the {@link SearchContext}
+     * the elements will be searched on.
+     */
+    private WebDriver webDriver;
     private String cssSelector;
     private String xPathExpression;
     private boolean canPureCss;
     private boolean canPureXPath;
     private ElementFilterList elementFilterList;
 
-    public SQLocator(String cssSelector, String xPathExpression, boolean canPureCss, boolean canPureXPath, ElementFilterList elementFilterList) {
+    public SQLocator(WebDriver webDriver, String cssSelector, String xPathExpression, boolean canPureCss, boolean canPureXPath, ElementFilterList elementFilterList) {
+        this.webDriver = webDriver;
         this.cssSelector = cssSelector;
         this.xPathExpression = xPathExpression;
         this.canPureCss = canPureCss;
@@ -52,12 +75,12 @@ public class SQLocator {
         this.elementFilterList = elementFilterList;
     }
 
-    public SQLocator(String cssSelector, String xPathExpression) {
-        this(cssSelector, xPathExpression, true, true, new ElementFilterList(asList(ElementFilter.FILTER_NOTHING)));
+    public SQLocator(WebDriver webDriver, String cssSelector, String xPathExpression) {
+        this(webDriver, cssSelector, xPathExpression, true, true, new ElementFilterList(asList(ElementFilter.FILTER_NOTHING)));
     }
 
     public SQLocator(String newCssSelector, String newXPathExpression, SQLocator previous) {
-        this(newCssSelector, newXPathExpression, previous.canPureCss(), previous.canPureXPath(), previous.getElementFilterList());
+        this(previous.webDriver, newCssSelector, newXPathExpression, previous.canPureCss, previous.canPureXPath, previous.elementFilterList);
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
@@ -88,6 +111,10 @@ public class SQLocator {
     private List<WebElement> findElementsByXPath(SearchContext context) {
         String finalXPathExpression = "(" + this.xPathExpression + ")";
         return new By.ByXPath(finalXPathExpression).findElements(context);
+    }
+
+    public WebDriver getWebDriver() {
+        return webDriver;
     }
 
     public String getCssSelector() {

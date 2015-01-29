@@ -1,13 +1,50 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by.locator;
 
+import io.github.seleniumquery.by.DriverVersionUtils;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class SQLocatorUtilsTest {
 
-    public static final SQLocator TAG_ASTERISK = new SQLocator("*", ".//*[true()]");
+    public static final SQLocator TAG_ASTERISK = tagAsterisk(mock(WebDriver.class));
+    public static SQLocator tagAsterisk(WebDriver driver) {
+        return new SQLocator(driver, "*", ".//*[true()]");
+    }
+
+    public static WebDriver createMockDriverWithNativeSupportFor(String pseudoClass) {
+        return createMockDriver(pseudoClass, true);
+    }
+    public static WebDriver createMockDriverWithoutNativeSupportFor(String pseudoClass) {
+        return createMockDriver(pseudoClass, false);
+    }
+    public static WebDriver createMockDriver(String pseudoClass, boolean support) {
+        WebDriver webDriverMock = mock(WebDriver.class);
+        DriverVersionUtils driverVersionUtilsMock = mock(DriverVersionUtils.class);
+        DriverVersionUtils.setInstance(driverVersionUtilsMock);
+        when(driverVersionUtilsMock.hasNativeSupportForPseudo(webDriverMock, pseudoClass)).thenReturn(support);
+        return webDriverMock;
+    }
 
     @Test
     public void conditionalSimpleXPathMerge__should_merge_XPath_condition_adding_and() {
