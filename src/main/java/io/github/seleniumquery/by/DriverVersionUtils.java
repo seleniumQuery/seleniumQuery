@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -22,26 +38,37 @@ import java.util.Map;
  */
 public class DriverVersionUtils {
 
+	private static DriverVersionUtils instance = new DriverVersionUtils();
+
+	public static DriverVersionUtils getInstance() {
+		return instance;
+	}
+
+	// for test purposes
+	public static void setInstance(DriverVersionUtils instance) {
+		DriverVersionUtils.instance = instance;
+	}
+
 	private static final Log LOGGER = LogFactory.getLog(DriverVersionUtils.class);
 	
 	private Map<WebDriver, Map<String, Boolean>> driverSupportedPseudos = new HashMap<WebDriver, Map<String, Boolean>>();
 	
-	public boolean supportsNatively(WebDriver driver, String pseudoClass) {
+	public boolean hasNativeSupportForPseudo(WebDriver driver, String pseudoClass) {
 		Map<String, Boolean> driverMap = getDriverMap(driver);
 		Boolean supports = driverMap.get(pseudoClass);
 		if (supports == null) {
 			boolean supported = testPseudoClassNativeSupport(pseudoClass, driver);
-			driverMap.put(pseudoClass, supports);
+			driverMap.put(pseudoClass, supported);
 			return supported;
 		}
 		return supports;
 	}
 	
-	static boolean testPseudoClassNativeSupport(String pseudo, SearchContext context) {
+	private boolean testPseudoClassNativeSupport(String pseudo, SearchContext context) {
 		try {
 			By.cssSelector("#AAA_SomeIdThatShouldNotExist"+pseudo).findElements(context);
 			return true;
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 			return false;
 		}
 	}
