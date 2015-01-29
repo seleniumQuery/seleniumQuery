@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.browser.driver.builders;
 
 import io.github.seleniumquery.SeleniumQueryException;
@@ -8,8 +24,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.lang.IllegalStateException;
 
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.*;
 import static java.lang.String.format;
@@ -36,9 +50,9 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
     private static final String BAD_PATH_PROVIDED_EXCEPTION_MESSAGE = "The ChromeDriver Server executable file was not found (or is a directory) at \"%s\"." + EXCEPTION_MESSAGE;
 
-    // package visibility so they can be changed during test
-    static String CHROMEDRIVER_EXECUTABLE_WINDOWS = "chromedriver.exe";
-    static String CHROMEDRIVER_EXECUTABLE_LINUX = "chromedriver";
+    // not final so they can be changed during test
+    public static String CHROMEDRIVER_EXECUTABLE_WINDOWS = "chromedriver.exe";
+    public static String CHROMEDRIVER_EXECUTABLE_LINUX = "chromedriver";
 
 
     private String customPathToChromeDriver;

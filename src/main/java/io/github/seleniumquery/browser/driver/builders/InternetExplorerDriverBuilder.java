@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.browser.driver.builders;
 
 import io.github.seleniumquery.SeleniumQueryException;
@@ -7,11 +23,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.SessionNotFoundException;
 
-import java.lang.IllegalStateException;
-
-import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.customPathWasProvidedAndExecutableExistsThere;
-import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPath;
-import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.*;
 import static java.lang.String.format;
 
 /**
@@ -34,7 +46,7 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
 
     private static final String BAD_PATH_PROVIDED_EXCEPTION_MESSAGE = "The IEDriverServer executable file was not found (or is a directory) at \"%s\"." + EXCEPTION_MESSAGE;
 
-    static String IEDRIVERSERVER_EXE = "IEDriverServer.exe"; // package visibility so it can be changed during test
+    public static String IEDRIVERSERVER_EXE = "IEDriverServer.exe"; // not final so it can be changed during test
 
     private String customPathToIEDriverServerExe;
 
