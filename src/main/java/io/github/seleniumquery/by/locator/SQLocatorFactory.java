@@ -32,6 +32,12 @@
 
 package io.github.seleniumquery.by.locator;
 
+import io.github.seleniumquery.by.filter.ElementFilter;
+import io.github.seleniumquery.by.filter.ElementFilterList;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author acdcjunior
  * @since 0.10.0
@@ -41,6 +47,19 @@ public class SQLocatorFactory {
     public static SQLocator createPureXPathOnly(SQLocator locator, String newXPathExpression) {
         return new SQLocator(locator.getWebDriver(), locator.getCssSelector(), newXPathExpression,
                 false, locator.canPureXPath(), locator.getElementFilterList());
+    }
+
+    public static SQLocator createPureFilterLocator(SQLocator locator, ElementFilter newFilter) {
+        ElementFilterList elementFilterList = locator.getElementFilterList();
+        List<ElementFilter> newFilters = new ArrayList<ElementFilter>(elementFilterList.getElementFilters().size());
+        for (ElementFilter elementFilter : elementFilterList.getElementFilters()) {
+            if (elementFilter != ElementFilter.FILTER_NOTHING) {
+                newFilters.add(elementFilter);
+            }
+        }
+        newFilters.add(newFilter);
+        return new SQLocator(locator.getWebDriver(), locator.getCssSelector(), locator.getXPathExpression(),
+                false, false, new ElementFilterList(newFilters));
     }
 
 }
