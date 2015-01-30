@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
@@ -59,30 +75,28 @@ public class FocusablePseudoClass implements PseudoClass<ConditionSimpleComponen
 	
 	
 	// upon changing the expression below, check also the one at :tabbable
-	public static final String FOCUSABLE_XPATH = "("
-			+ VisiblePseudoClass.NOT_DISPLAY_NONE_XPATH
-			+ " and "
-				+ " ("
-					+ " ("
-						+ " (local-name() = 'input' or local-name() = 'button' or local-name() = 'optgroup' or local-name() = 'option' or local-name() = 'select' or local-name() = 'textarea')"
-						+ " and "
-						+ EnabledPseudoClass.ENABLED_XPATH
-					+ " ) "
-					+ " or "
-					+ " (local-name() = 'a' and @href) "
-					+ " or "
-					+ " (local-name() = 'area' and @href)"
-					+ " or "
-					+ " @tabindex"
-				+ ")"
-			+ ")";
+	public static final String FOCUSABLE_XPATH =
+		// is visible and...
+		" ("
+			+ " ("
+				+ " (local-name() = 'input' or local-name() = 'button' or local-name() = 'optgroup' or local-name() = 'option' or local-name() = 'select' or local-name() = 'textarea')"
+				+ " and "
+				+ EnabledPseudoClass.ENABLED_XPATH
+			+ " ) "
+			+ " or "
+			+ " (local-name() = 'a' and @href) "
+			+ " or "
+			+ " (local-name() = 'area' and @href)"
+			+ " or "
+			+ " @tabindex"
+		+ ")";
 	
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":focusable");
 		
 		// #no-xpath
-		System.err.println(":focusable is not fully XPath supported (if the 'display:none' is in a CSS class, it won't know)!!!");
+		// after filtering with XPath, we still must check visibility
 		return new ConditionSimpleComponent("[" + FOCUSABLE_XPATH + "]", focusablePseudoClassFilter);
 	}
 	

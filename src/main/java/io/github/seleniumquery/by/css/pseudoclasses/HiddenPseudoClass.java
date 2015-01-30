@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
@@ -16,7 +32,9 @@ public class HiddenPseudoClass implements PseudoClass<ConditionSimpleComponent> 
 	
 	private static final String HIDDEN_PSEUDO_CLASS_NO_COLON = "hidden";
 
-    private final ElementFilter hiddenPseudoClassFilter = new PseudoClassFilter(this);
+	public static final HiddenPseudoClass HIDDEN_PSEUDO_CLASS = new HiddenPseudoClass();
+
+    public final ElementFilter hiddenPseudoClassFilter = new PseudoClassFilter(this);
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -28,24 +46,13 @@ public class HiddenPseudoClass implements PseudoClass<ConditionSimpleComponent> 
 		return !SelectorUtils.isVisible(element);
 	}
 
-	public static final String HIDDEN_XPATH_MUST_FILTER = "("
-			// we consider an element to be hidden when...
-			
-			// element itself or ancestor have 'display: none'
-			+ " ancestor-or-self::*[contains(normalize-space(@style),'display: none') or contains(normalize-space(@style),'display:none')] "
-			// element itself or ancestor have a class (a class itself won't hide the element, but it could! The filter exists to check exactly if
-			// the class' style is hiding the element or its children)
-			+ " or ancestor-or-self::*[@class] "
-			// it is not under body (and is not <html> itself), because all <head> elements are not visible!
-			+ " or (count(ancestor-or-self::body) = 0 and local-name() != 'html')"
-			+ ")";
-	
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":hidden");
 
-		// #not-pure-xpath // it is not pure because XPath can't see the styles affecting the element's classes
-		return new ConditionSimpleComponent("[" + HIDDEN_XPATH_MUST_FILTER + "]", hiddenPseudoClassFilter);
+		// we can't use XPath because it can't see the styles affecting the element's classes, which can pretty much
+		// turn any element, including <html> itself or <head>, visible.
+		return new ConditionSimpleComponent(hiddenPseudoClassFilter);
 	}
 	
 }
