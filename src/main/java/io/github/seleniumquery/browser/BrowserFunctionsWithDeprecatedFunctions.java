@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.browser;
 
 import io.github.seleniumquery.browser.driver.SeleniumQueryDriver;
@@ -19,10 +35,20 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 public class BrowserFunctionsWithDeprecatedFunctions extends BrowserFunctions {
 	
 	/**
-	 * Series of functions that set the default browser behavior.<br>
+	 * <p>
+	 * Series of functions that set the default browser behavior.
+	 * </p>
 	 *
-	 * This field has been deprecated.<br>
-	 *     You'll find the functions for this object in <b><code>$.function();</code</b> or <b><code>$.driver().function();</code></b>.
+	 * <p>
+	 * This field has been deprecated.
+	 * </p>
+	 *
+	 * <p>
+	 * The new place for the functions that were in this object is either {@code $.} or {@code $.driver()}.<br>
+	 * In other words, the function {@code $.browser.function();} will either be {@code $.function();} or
+	 * {@code $.driver().function();}.<br>
+	 * The name may also have changed. To be sure, check the old function's docs for the new name.
+	 * </p>
 	 *
 	 * @since 0.9.0
 	 */
@@ -30,8 +56,6 @@ public class BrowserFunctionsWithDeprecatedFunctions extends BrowserFunctions {
 
 	/**
 	 * The seleniumQuery browser. Adds several utility functions to the WebDriver class.
-	 *
-	 * @author acdcjunior
 	 *
 	 * @since 0.9.0
 	 *
