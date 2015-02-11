@@ -32,9 +32,10 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 
-public class SQCssImagePseudoClass extends SQCssPseudoClassCondition {
+public class SQCssImagePseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
 
     public static final String PSEUDO = "image";
 
