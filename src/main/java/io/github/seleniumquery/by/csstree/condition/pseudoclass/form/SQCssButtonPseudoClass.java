@@ -32,9 +32,10 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 
-public class SQCssButtonPseudoClass extends SQCssPseudoClassCondition {
+public class SQCssButtonPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
 
     public static final String PSEUDO = "button";
 
