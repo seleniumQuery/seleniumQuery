@@ -87,6 +87,31 @@ public class PseudoClassAssertLocatorUtils {
         );
     }
 
+    /**
+     * Pseudos that are tested using this method are not expected to be supported by browsers in any time soon.
+     * so this assert function makes it clear that they wont even check for browser support!!!
+     *
+     * In other words, the not testing for browser support is INTENTIONAL, not an accident!
+     * IF they begin to be supported natively, we will enable the check, but until then, checking is just
+     * silly (and an indicator that we were not really CERTAIN of what we were doing).
+     */
+    public static void assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, String expectedXPath) {
+        assertPseudoOnlySupportsPureXPathWhenNativelySupported(pseudoClassObject, pseudoClass, expectedXPath);
+        assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(pseudoClassObject, pseudoClass, expectedXPath);
+    }
+
+    public static void assertPseudoOnlySupportsPureXPathWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, String expectedXPath) {
+        assertPseudoClassHasLocatorWhenNativelySupported(
+                pseudoClassObject,
+                pseudoClass,
+                PURE_CSS_IS_NOT_SUPPORTED,
+                "*",
+                PURE_XPATH_IS_SUPPORTED,
+                expectedXPath,
+                contains(ElementFilter.FILTER_NOTHING)
+        );
+    }
+
     public static void assertPseudoClassHasLocator(SQCssConditionImplementedLocators pseudoClassObject, SQLocator previous, String expectedCss, String expectedXPath, boolean canPureCss, boolean canPureXPath, Matcher<Iterable<? extends ElementFilter>> elementFilterMatcher) {
         // given
         // args
