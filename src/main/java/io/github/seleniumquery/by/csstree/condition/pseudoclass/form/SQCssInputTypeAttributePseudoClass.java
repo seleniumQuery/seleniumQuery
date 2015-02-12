@@ -29,7 +29,7 @@ import io.github.seleniumquery.by.locator.SQLocatorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
+abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
 
     private String typeAttributeValue;
 
