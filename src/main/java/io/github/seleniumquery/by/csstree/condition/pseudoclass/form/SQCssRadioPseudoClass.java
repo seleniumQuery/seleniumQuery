@@ -16,11 +16,12 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-
-public class SQCssRadioPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssRadioPseudoClass extends SQCssInputTypeAttributePseudoClass {
 
     public static final String PSEUDO = "radio";
+
+    public SQCssRadioPseudoClass() {
+        super(PSEUDO);
+    }
 
 }

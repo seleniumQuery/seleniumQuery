@@ -18,13 +18,26 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 
 public class SQCssImagePseudoClassTest {
 
+    public static final String IMAGE_PSEUDO = ":image";
+    public static final String IMAGE_XPATH_EXPRESSION = ".//*[" + "(self::input and @type = 'image')" + "]";
+
     @Test
     public void translate() {
-        assertPseudo(":image", SQCssImagePseudoClass.class);
+        assertPseudo(IMAGE_PSEUDO, SQCssImagePseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__when_driver_does_NOT_have_native_support() {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
+                new SQCssImagePseudoClass(),
+                IMAGE_PSEUDO,
+                IMAGE_XPATH_EXPRESSION
+        );
     }
 
 }
