@@ -32,11 +32,27 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorFactory;
+import io.github.seleniumquery.by.locator.SQLocatorUtils;
 
-public class SQCssFilePseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssFilePseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
 
     public static final String PSEUDO = "file";
+
+    @Override
+    public SQLocator toSQLocator(SQLocator leftLocator) {
+        return SQLocatorFactory.createPureXPathOnly(leftLocator, mergeXPath(leftLocator));
+    }
+
+    private String mergeXPath(SQLocator leftLocator) {
+        return SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
+    }
+
+    private String toXPath() {
+        return "(self::input and @type = '" + PSEUDO + "')";
+    }
 
 }
