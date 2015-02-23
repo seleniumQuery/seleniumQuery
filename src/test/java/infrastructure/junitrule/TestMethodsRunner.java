@@ -33,7 +33,9 @@ class TestMethodsRunner {
 
 	public void reportFailures() throws Throwable {
 		if (this.firstFailure != null) {
-			throw new AssertionError("There are test failures in some drivers: "+failed, this.firstFailure);
+            AssertionError assertionError = new AssertionError("There are test failures in some drivers: " + failed);
+            assertionError.initCause(this.firstFailure);
+            throw assertionError;
 		}
 	}
 
