@@ -45,6 +45,12 @@ public class SQLocatorUtilsTest {
         when(driverVersionUtilsMock.hasNativeSupportForPseudo(webDriverMock, pseudoClass)).thenReturn(support);
         return webDriverMock;
     }
+    public static WebDriver createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(String checkedPseudo) {
+        WebDriver mockDriverWithNativeSupportFor = SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(checkedPseudo);
+        DriverVersionUtils driverVersionUtilsMock = DriverVersionUtils.getInstance();
+        when(driverVersionUtilsMock.isPhantomJSDriver(mockDriverWithNativeSupportFor)).thenReturn(true);
+        return mockDriverWithNativeSupportFor;
+    }
 
     @Test
     public void conditionalSimpleXPathMerge__should_merge_XPath_condition_adding_and() {

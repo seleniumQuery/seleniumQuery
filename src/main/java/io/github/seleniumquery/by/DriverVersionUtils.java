@@ -23,6 +23,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -121,5 +122,9 @@ public class DriverVersionUtils {
 			return "";
 		}
 	}
+
+    public boolean isPhantomJSDriver(WebDriver driver) {
+        return driver instanceof PhantomJSDriver;
+    }
 
 }

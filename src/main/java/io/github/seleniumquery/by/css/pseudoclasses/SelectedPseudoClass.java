@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
@@ -15,7 +31,11 @@ import static io.github.seleniumquery.by.WebElementUtils.isOptionTag;
  */
 public class SelectedPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
-	public static final String SELECTED_PSEUDO_CONDITION = "local-name() = 'option' and (@selected or (ancestor::select[not(@multiple) and not(option[@selected])] and position() = 1))";
+    // NOTE: This XPath does not work. Sometimes an element is selected WITHOUT having a selected attribute
+	public static final String SELECTED_PSEUDO_CONDITION = "self::option and " +
+            "(" +
+                "@selected or (ancestor::select[not(@multiple) and not(option[@selected])] and position() = 1)" +
+            ")";
 	private static final String SELECTED_PSEUDO_CONDITIONAL_EXPRESSION = "[" + SELECTED_PSEUDO_CONDITION + "]";
 
 	private static final String SELECTED_PSEUDO_CLASS_NO_COLON = "selected";
