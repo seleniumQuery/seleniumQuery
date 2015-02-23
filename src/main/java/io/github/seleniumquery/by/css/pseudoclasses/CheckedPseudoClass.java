@@ -1,5 +1,22 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by.css.pseudoclasses;
 
+import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +42,8 @@ public class CheckedPseudoClass implements PseudoClass<ConditionSimpleComponent>
 
 	private static final String CHECKED_PSEUDO_CLASS_NO_COLON = "checked";
 
+    public static final ElementFilter CHECKED_FILTER = new PseudoClassFilter(new CheckedPseudoClass());
+
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return CHECKED_PSEUDO_CLASS_NO_COLON.equalsIgnoreCase(pseudoClassValue);
@@ -48,9 +67,10 @@ public class CheckedPseudoClass implements PseudoClass<ConditionSimpleComponent>
 
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+        // NOTE: This XPath does not work. Sometimes an element is checked WITHOUT having a checked attribute
 		return new ConditionSimpleComponent("[" +
 				"(" +
-				"(local-name() = 'input' and (@type = 'radio' or @type = 'checkbox') and @checked) " +
+				"(self::input and (@type = 'radio' or @type = 'checkbox') and @checked) " +
 				"or " +
 				"(" + SELECTED_PSEUDO_CONDITION + ")" +
 				")" +

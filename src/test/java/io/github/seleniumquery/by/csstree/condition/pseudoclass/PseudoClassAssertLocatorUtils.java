@@ -35,16 +35,42 @@ public class PseudoClassAssertLocatorUtils {
     public static final boolean PURE_CSS_IS_SUPPORTED = true;
     public static final boolean PURE_XPATH_IS_SUPPORTED = true;
     public static final boolean PURE_CSS_IS_NOT_SUPPORTED = false;
-//    public static final boolean PURE_XPATH_IS_NOT_SUPPORTED = false;
+    public static final boolean PURE_XPATH_IS_NOT_SUPPORTED = false;
+    public static final String CSS_ALL_TAGS_SELECTOR = "*";
 
     public static void assertPseudoClassHasLocatorWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, boolean canPureCss, String expectedCss, boolean canPureXPath, String expectedXPath, Matcher<Iterable<? extends ElementFilter>> elementFilterMatcher) {
-        SQLocator previous = SQLocatorUtilsTest.tagAsterisk(SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(pseudoClass));
-        assertPseudoClassHasLocator(pseudoClassObject, previous, expectedCss, expectedXPath, canPureCss, canPureXPath, elementFilterMatcher);
+        SQLocator previousLocator = SQLocatorUtilsTest.tagAsterisk(SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(pseudoClass));
+        assertPseudoClassHasLocator(
+                pseudoClassObject,
+                previousLocator,
+                canPureCss, expectedCss,
+                canPureXPath, expectedXPath,
+                elementFilterMatcher
+        );
     }
 
     public static void assertPseudoClassHasLocatorWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, boolean canPureCss, String expectedCss, boolean canPureXPath, String expectedXPath, Matcher<Iterable<? extends ElementFilter>> elementFilterMatcher) {
-        SQLocator previous = SQLocatorUtilsTest.tagAsterisk(SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoClass));
-        assertPseudoClassHasLocator(pseudoClassObject, previous, expectedCss, expectedXPath, canPureCss, canPureXPath, elementFilterMatcher);
+        SQLocator previousLocator = SQLocatorUtilsTest.tagAsterisk(SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoClass));
+        assertPseudoClassHasLocator(
+                pseudoClassObject,
+                previousLocator,
+                canPureCss, expectedCss,
+                canPureXPath, expectedXPath,
+                elementFilterMatcher
+        );
+    }
+
+    public static void assertPseudoSupportsOnlyPureCssAndNotPureXPathWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject,
+                                                                                           String pseudoClass, String expectedXPath, ElementFilter filter) {
+        assertPseudoClassHasLocatorWhenNativelySupported(
+                pseudoClassObject,
+                pseudoClass,
+                PURE_CSS_IS_SUPPORTED,
+                pseudoClass,
+                PURE_XPATH_IS_NOT_SUPPORTED,
+                expectedXPath,
+                contains(filter)
+        );
     }
 
     public static void assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, String expectedXPath) {
@@ -59,12 +85,25 @@ public class PseudoClassAssertLocatorUtils {
         );
     }
 
+    public static void assertPseudoClassDoesNotSupportAnythingPurelyWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject,
+                                                                                             String pseudoClass, String expectedXPath, ElementFilter filter) {
+        assertPseudoClassHasLocatorWhenNotNativelySupported(
+                pseudoClassObject,
+                pseudoClass,
+                PURE_CSS_IS_NOT_SUPPORTED,
+                CSS_ALL_TAGS_SELECTOR,
+                PURE_XPATH_IS_NOT_SUPPORTED,
+                expectedXPath,
+                contains(filter)
+        );
+    }
+
     public static void assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, String expectedXPath) {
         assertPseudoClassHasLocatorWhenNotNativelySupported(
                 pseudoClassObject,
                 pseudoClass,
                 PURE_CSS_IS_NOT_SUPPORTED,
-                "*",
+                CSS_ALL_TAGS_SELECTOR,
                 PURE_XPATH_IS_SUPPORTED,
                 expectedXPath,
                 contains(ElementFilter.FILTER_NOTHING)
@@ -89,24 +128,30 @@ public class PseudoClassAssertLocatorUtils {
                 pseudoClassObject,
                 pseudoClass,
                 PURE_CSS_IS_NOT_SUPPORTED,
-                "*",
+                CSS_ALL_TAGS_SELECTOR,
                 PURE_XPATH_IS_SUPPORTED,
                 expectedXPath,
                 contains(ElementFilter.FILTER_NOTHING)
         );
     }
 
-    public static void assertPseudoClassHasLocator(SQCssConditionImplementedLocators pseudoClassObject, SQLocator previous, String expectedCss, String expectedXPath, boolean canPureCss, boolean canPureXPath, Matcher<Iterable<? extends ElementFilter>> elementFilterMatcher) {
+    public static void assertPseudoClassHasLocator(SQCssConditionImplementedLocators pseudoClassObject,
+                                                   SQLocator previous,
+                                                   boolean canPureCss,
+                                                   String expectedCss,
+                                                   boolean canPureXPath,
+                                                   String expectedXPath,
+                                                   Matcher<Iterable<? extends ElementFilter>> elementFilterMatcher) {
         // given
         // args
         // when
         SQLocator locator = pseudoClassObject.toSQLocator(previous);
         // then
-        assertThat(locator.getCssSelector(), is(expectedCss));
-        assertThat(locator.getXPathExpression(), is(expectedXPath));
-        assertThat(locator.canPureCss(), is(canPureCss));
-        assertThat(locator.canPureXPath(), is(canPureXPath));
-        assertThat(locator.getElementFilterList().getElementFilters(), elementFilterMatcher);
+        assertThat("CSS selector", locator.getCssSelector(), is(expectedCss));
+        assertThat("XPath Expression", locator.getXPathExpression(), is(expectedXPath));
+        assertThat("Can pure CSS?", locator.canPureCss(), is(canPureCss));
+        assertThat("Can pure XPath?", locator.canPureXPath(), is(canPureXPath));
+        assertThat("ElementFilterList", locator.getElementFilterList().getElementFilters(), elementFilterMatcher);
     }
 
 }
