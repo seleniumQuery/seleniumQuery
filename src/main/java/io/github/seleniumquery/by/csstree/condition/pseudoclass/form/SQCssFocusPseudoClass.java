@@ -19,6 +19,10 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 
+/**
+ * PhantomJS may have problems with this:
+ * https://github.com/ariya/phantomjs/issues/10427
+ */
 public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
 
     public static final String PSEUDO = "focus";
