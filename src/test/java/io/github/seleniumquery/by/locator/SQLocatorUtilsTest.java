@@ -54,7 +54,7 @@ public class SQLocatorUtilsTest {
     public static WebDriver createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(String checkedPseudo) {
         WebDriver mockDriverWithNativeSupportFor = SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(checkedPseudo);
         DriverVersionUtils driverVersionUtilsMock = DriverVersionUtils.getInstance();
-        when(driverVersionUtilsMock.isHtmlUnitDriverNotStatic(mockDriverWithNativeSupportFor)).thenReturn(true);
+        when(driverVersionUtilsMock.isHtmlUnitDriver(mockDriverWithNativeSupportFor)).thenReturn(true);
         return mockDriverWithNativeSupportFor;
     }
 

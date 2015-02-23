@@ -1,12 +1,28 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.functions.jquery.attributes;
 
-import java.util.List;
-
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.DriverVersionUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.DriverVersionUtils;
+
+import java.util.List;
 
 public class AttrFunction {
 	
@@ -31,7 +47,7 @@ public class AttrFunction {
 			// In HtmlUnit, the checked/selected attributes are changed when the checked/selected
 			// prop changes. (E.g. if checked is false, the checked attribute becomes null -- while remains unchanged on other browsers)
 			// that way, we check for the prop here and return the attribute according to it
-			if (DriverVersionUtils.isHtmlUnitDriver(driver)) {
+            if (DriverVersionUtils.getInstance().isHtmlUnitDriver(driver)) {
 				System.err.println("WARNING: HtmlUnitDriver does not consider the checked/selected properties to be " +
 						"something other than the checked/selected attributes! In other words, in latest browsers " +
 						"when you change the checked/selected properties, the checked/selected attributes remain unchanged, " +
