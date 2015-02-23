@@ -18,9 +18,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.visibility;
 
 import io.github.seleniumquery.by.css.pseudoclasses.HiddenPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorFactory;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.filter.ElementFilter;
 
 /**
  * :hidden
@@ -28,13 +27,13 @@ import io.github.seleniumquery.by.locator.SQLocatorFactory;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssHiddenPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
+public class SQCssHiddenPseudoClass extends SQCssPseudoNeverNativelySupported implements SQCssConditionImplementedLocators {
 
     public static final String PSEUDO = "hidden";
 
     @Override
-    public SQLocator toSQLocator(SQLocator leftLocator) {
-        return SQLocatorFactory.createPureFilterLocator(leftLocator, HiddenPseudoClass.HIDDEN_FILTER);
+    public ElementFilter toElementFilter() {
+        return HiddenPseudoClass.HIDDEN_FILTER;
     }
 
 }
