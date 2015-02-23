@@ -131,6 +131,27 @@ Check out what else `.waitUntil()` can do in the [seleniumQuery API wiki page](h
 
 <br>
 
+###Plugin System
+
+seleniumQuery supports plugins through the `.as(PLUGIN)` function, such as:
+
+```java
+$("div").as(YOURPLUGIN).someMethodFromYourPlugin();
+```
+
+There are some default plugins. To check them out, call `.as()` without arguments. Example:
+
+```java
+// the .select() plugin
+$("#citiesSelect").as().select().selectByVisibleText("New York");
+// picks an <option> in the <select> based in the <option>'s visible text
+```
+
+For an example of how to create your own plugin, check the [seleniumQuery Plugin wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Plugin-Support---.as()-function).
+
+
+<br>
+
 ###Flexible WebDriver builder system
 
 How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only when first used.
