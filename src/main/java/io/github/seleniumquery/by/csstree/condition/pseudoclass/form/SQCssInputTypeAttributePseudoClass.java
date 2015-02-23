@@ -16,11 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorFactory;
-import io.github.seleniumquery.by.locator.SQLocatorUtils;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 
 /**
  * This represents the pseudoclasses that check for the type attribute, such as
@@ -29,7 +25,7 @@ import io.github.seleniumquery.by.locator.SQLocatorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
+abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoNeverNativelySupported {
 
     private String typeAttributeValue;
 
@@ -38,15 +34,12 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
     }
 
     @Override
-    public SQLocator toSQLocator(SQLocator leftLocator) {
-        return SQLocatorFactory.createPureXPathOnly(leftLocator, mergeXPath(leftLocator));
+    public boolean canPureXPath() {
+        return true;
     }
 
-    private String mergeXPath(SQLocator leftLocator) {
-        return SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
-    }
-
-    private String toXPath() {
+    @Override
+    public String toXPath() {
         return "(self::input and @type = '" + typeAttributeValue + "')";
     }
 
