@@ -3,6 +3,7 @@ package integration.sizzle;
 import infrastructure.junitrule.JavaScriptOnly;
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.DriverVersionUtils;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriver;
 import static java.util.Arrays.asList;
 
 public class SizzleElement extends SizzleTest {
@@ -110,7 +110,7 @@ public class SizzleElement extends SizzleTest {
         executeJS("document.getElementById('qunit-fixture').appendChild(document.createElement('toString')).id = 'toString';");
         t("Element name matches Object.prototype property", "tostring#toString", new String[]{"toString"});
 
-        if (!isHtmlUnitDriver($.driver().get())) {
+        if (!DriverVersionUtils.getInstance().isHtmlUnitDriver($.driver().get())) {
             t("Element name matches Object.prototype property", "toString#toString", new String[]{"toString"});
         } else {
             // #Cross-Driver

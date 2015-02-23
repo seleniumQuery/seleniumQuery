@@ -63,7 +63,7 @@ public class DisabledPseudoClass implements PseudoClass<ConditionSimpleComponent
 		// #Cross-Driver
 		// When there is a not disabled <option> under a disabled <optgroup>, HtmlUnitDriver considers
 		// the <option> to be enabled, when it is not
-		if (DriverVersionUtils.isHtmlUnitDriver(driver) && OPTION.equals(element.getTagName())) {
+        if (DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && OPTION.equals(element.getTagName())) {
 			WebElement optionParent = SelectorUtils.parent(element);
 			if (OPTGROUP.equals(optionParent.getTagName()) && !optionParent.isEnabled()) {
 				return true;

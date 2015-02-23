@@ -86,16 +86,12 @@ public class DriverVersionUtils {
 		return driverMap;
 	}
 
-	public static boolean isHtmlUnitDriver(WebDriver driver) {
-		return driver instanceof HtmlUnitDriver;
-	}
-
-	public static boolean isHtmlUnitDriverEmulatingIE(WebDriver driver) {
-		return isHtmlUnitDriver(driver) && getEmulatedBrowser((HtmlUnitDriver) driver).startsWith("IE");
+    public static boolean isHtmlUnitDriverEmulatingIE(WebDriver driver) {
+        return DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && getEmulatedBrowser((HtmlUnitDriver) driver).startsWith("IE");
 	}
 
 	public static boolean isHtmlUnitDriverEmulatingIEBelow11(WebDriver driver) {
-		if (!isHtmlUnitDriver(driver)) {
+        if (!DriverVersionUtils.getInstance().isHtmlUnitDriver(driver)) {
 			return false;
 		}
 		String emulatedBrowser = getEmulatedBrowser((HtmlUnitDriver) driver);
@@ -127,7 +123,7 @@ public class DriverVersionUtils {
         return driver instanceof PhantomJSDriver;
     }
 
-    public boolean isHtmlUnitDriverNotStatic(WebDriver driver) {
+    public boolean isHtmlUnitDriver(WebDriver driver) {
         return driver instanceof HtmlUnitDriver;
     }
 
