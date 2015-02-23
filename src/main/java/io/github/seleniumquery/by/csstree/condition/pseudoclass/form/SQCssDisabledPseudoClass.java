@@ -16,44 +16,27 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.css.pseudoclasses.DisabledPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorFactory;
-import io.github.seleniumquery.by.locator.SQLocatorUtils;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
 
-public class SQCssDisabledPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
+public class SQCssDisabledPseudoClass extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
 
     public static final String PSEUDO = "disabled";
     public static final String DISABLED_PSEUDO = ":" + PSEUDO;
 
     @Override
-    public SQLocator toSQLocator(SQLocator leftLocator) {
-        if (!supportsNatively(leftLocator)) {
-            return SQLocatorFactory.createPureXPathOnly(leftLocator, mergeXPath(leftLocator));
-        }
-        return new SQLocator(mergeCss(leftLocator), mergeXPath(leftLocator), leftLocator);
-    }
-
-    private boolean supportsNatively(SQLocator leftLocator) {
-        return DriverVersionUtils.getInstance().hasNativeSupportForPseudo(leftLocator.getWebDriver(), DISABLED_PSEUDO);
-    }
-
-    private String mergeCss(SQLocator leftLocator) {
-        return SQLocatorUtils.cssMerge(leftLocator.getCssSelector(), toCSS());
-    }
-
-    private String toCSS() {
+    public String toCssWhenNativelySupported() {
         return DISABLED_PSEUDO;
     }
 
-    private String mergeXPath(SQLocator leftLocator) {
-        return SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
+    @Override
+    public boolean canPureXPath() {
+        return true;
     }
 
-    private String toXPath() {
+    @Override
+    public String toXPath() {
         return "(@disabled and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")";
     }
 
