@@ -89,7 +89,7 @@ public class DriverVersionUtils {
 	public static boolean isHtmlUnitDriver(WebDriver driver) {
 		return driver instanceof HtmlUnitDriver;
 	}
-	
+
 	public static boolean isHtmlUnitDriverEmulatingIE(WebDriver driver) {
 		return isHtmlUnitDriver(driver) && getEmulatedBrowser((HtmlUnitDriver) driver).startsWith("IE");
 	}
@@ -125,6 +125,10 @@ public class DriverVersionUtils {
 
     public boolean isPhantomJSDriver(WebDriver driver) {
         return driver instanceof PhantomJSDriver;
+    }
+
+    public boolean isHtmlUnitDriverNotStatic(WebDriver driver) {
+        return driver instanceof HtmlUnitDriver;
     }
 
 }
