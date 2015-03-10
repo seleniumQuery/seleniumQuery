@@ -25,7 +25,6 @@ import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorFactory;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoUtils.mergeCss;
 import static io.github.seleniumquery.by.locator.SQLocatorCss.universalSelector;
 
 public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
@@ -35,7 +34,7 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
         if (isThisSelectorNativelySupportedOn(leftLocator.getWebDriver())) {
             return new SQLocator(
                     leftLocator.getWebDriver(),
-                    mergeCss(leftLocator, toCssWhenNativelySupported()),
+                    leftLocator.getSQCssSelector().merge(toCssWhenNativelySupported()),
                     xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
                     true,
                     canPureXPath(),
@@ -43,7 +42,7 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
         } else {
             return new SQLocator(
                     leftLocator.getWebDriver(),
-                    mergeCss(leftLocator, toCssWhenNotNativelySupported()),
+                    leftLocator.getSQCssSelector().merge(toCssWhenNotNativelySupported()),
                     xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
                     canPureCssWhenNotNativelySupported(), // this can still be true if, somehow, the CSS selector can be translated into another CSS
                     canPureXPath(),
