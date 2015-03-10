@@ -19,6 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorUtils;
 
 /**
@@ -43,13 +44,13 @@ public class SQCssIdAttributeCondition implements SQCssCondition, SQCssCondition
 
     @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
-        String newCssSelector = SQLocatorUtils.cssMerge(leftLocator.getCssSelector(), toCSS());
+        SQLocatorCss newCssSelector = leftLocator.getSQCssSelector().merge(toCSS());
         String newXPathExpression = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
         return new SQLocator(newCssSelector, newXPathExpression, leftLocator);
     }
 
-    private String toCSS() {
-        return "#" + this.id;
+    private SQLocatorCss toCSS() {
+        return new SQLocatorCss("#" + this.id);
     }
 
     private String toXPath() {

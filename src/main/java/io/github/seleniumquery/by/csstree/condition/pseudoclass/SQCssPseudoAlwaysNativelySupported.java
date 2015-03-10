@@ -33,6 +33,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import org.openqa.selenium.WebDriver;
 
 public abstract class SQCssPseudoAlwaysNativelySupported extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
@@ -43,6 +44,6 @@ public abstract class SQCssPseudoAlwaysNativelySupported extends SQCssPseudoMayb
     }
 
     @Override
-    public abstract String toCssWhenNativelySupported();
+    public abstract SQLocatorCss toCssWhenNativelySupported();
 
 }

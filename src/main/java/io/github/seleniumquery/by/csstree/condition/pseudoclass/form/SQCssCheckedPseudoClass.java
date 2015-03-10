@@ -20,6 +20,7 @@ import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
 import io.github.seleniumquery.by.filter.ElementFilter;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -57,8 +58,8 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoMaybeNativelySupported {
     }
 
     @Override
-    public String toCssWhenNativelySupported() {
-        return CHECKED_PSEUDO;
+    public SQLocatorCss toCssWhenNativelySupported() {
+        return new SQLocatorCss(CHECKED_PSEUDO);
     }
 
     @Override
