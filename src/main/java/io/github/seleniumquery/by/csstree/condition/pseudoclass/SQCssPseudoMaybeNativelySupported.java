@@ -21,10 +21,12 @@ import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLoc
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorFactory;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoUtils.mergeCss;
+import static io.github.seleniumquery.by.locator.SQLocatorCss.universalSelector;
 
 public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
 
@@ -54,7 +56,7 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
     }
 
     public String getSelectorForPseudoClassNativeSupportTest() {
-        return toCssWhenNativelySupported();
+        return toCssWhenNativelySupported().toString();
     }
 
     private ElementFilterList mergeFilter(SQLocator leftLocator) {
@@ -70,12 +72,12 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
         return false;
     }
 
-    public String toCssWhenNativelySupported() {
-        return "*";
+    public SQLocatorCss toCssWhenNativelySupported() {
+        return universalSelector();
     }
 
-    public String toCssWhenNotNativelySupported() {
-        return "*";
+    public SQLocatorCss toCssWhenNotNativelySupported() {
+        return universalSelector();
     }
 
     public boolean canPureXPath() {

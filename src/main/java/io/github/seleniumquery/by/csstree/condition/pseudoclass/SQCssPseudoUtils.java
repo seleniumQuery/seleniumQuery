@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtils;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 
 /**
  * @author acdcjunior
@@ -25,8 +25,8 @@ import io.github.seleniumquery.by.locator.SQLocatorUtils;
  */
 public class SQCssPseudoUtils {
 
-    static String mergeCss(SQLocator leftLocator, String cssWhenNativelySupported) {
-        return SQLocatorUtils.cssMerge(leftLocator.getCssSelector(), cssWhenNativelySupported);
+    static SQLocatorCss mergeCss(SQLocator leftLocator, SQLocatorCss cssWhenNativelySupported) {
+        return leftLocator.getSQCssSelector().merge(cssWhenNativelySupported);
     }
 
 }

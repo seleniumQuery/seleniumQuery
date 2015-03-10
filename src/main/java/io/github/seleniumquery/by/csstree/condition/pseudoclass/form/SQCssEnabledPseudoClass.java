@@ -19,6 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.css.pseudoclasses.DisabledPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 
 public class SQCssEnabledPseudoClass extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
 
@@ -26,8 +27,8 @@ public class SQCssEnabledPseudoClass extends SQCssPseudoMaybeNativelySupported i
     public static final String ENABLED_PSEUDO = ":" + PSEUDO;
 
     @Override
-    public String toCssWhenNativelySupported() {
-        return ENABLED_PSEUDO;
+    public SQLocatorCss toCssWhenNativelySupported() {
+        return new SQLocatorCss(ENABLED_PSEUDO);
     }
 
     @Override

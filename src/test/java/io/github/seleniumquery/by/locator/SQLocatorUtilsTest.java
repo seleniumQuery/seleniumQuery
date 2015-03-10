@@ -20,6 +20,7 @@ import io.github.seleniumquery.by.DriverVersionUtils;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
+import static io.github.seleniumquery.by.locator.SQLocatorCss.universalSelector;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -29,7 +30,7 @@ public class SQLocatorUtilsTest {
 
     public static final SQLocator TAG_ASTERISK = tagAsterisk(mock(WebDriver.class));
     public static SQLocator tagAsterisk(WebDriver driver) {
-        return new SQLocator(driver, "*", ".//*[true()]");
+        return new SQLocator(driver, universalSelector(), ".//*[true()]");
     }
 
     public static WebDriver createMockDriverWithNativeSupportFor(String pseudoClass) {
@@ -102,18 +103,6 @@ public class SQLocatorUtilsTest {
     @Test(expected = IllegalArgumentException.class)
     public void conditionalSimpleXPathMerge__should_validate_the_left_expression_for_nullity() {
         SQLocatorUtils.conditionalSimpleXPathMerge(null, "newStuff");
-    }
-
-    @Test
-    public void cssMerge__should_merge() {
-        String mergedCss = SQLocatorUtils.cssMerge("div", ".clz");
-        assertThat(mergedCss, is("div.clz"));
-    }
-
-    @Test
-    public void cssMerge__should_remove_asterisk() {
-        String mergedCss = SQLocatorUtils.cssMerge("*", ".clz");
-        assertThat(mergedCss, is(".clz"));
     }
 
 }

@@ -44,13 +44,13 @@ public class SQLocator {
      * the elements will be searched on.
      */
     private WebDriver webDriver;
-    private String cssSelector;
+    private SQLocatorCss cssSelector;
     private String xPathExpression;
     private boolean canPureCss;
     private boolean canPureXPath;
     private ElementFilterList elementFilterList;
 
-    public SQLocator(WebDriver webDriver, String cssSelector, String xPathExpression, boolean canPureCss, boolean canPureXPath, ElementFilterList elementFilterList) {
+    public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, String xPathExpression, boolean canPureCss, boolean canPureXPath, ElementFilterList elementFilterList) {
         this.webDriver = webDriver;
         this.cssSelector = cssSelector;
         this.xPathExpression = xPathExpression;
@@ -59,11 +59,11 @@ public class SQLocator {
         this.elementFilterList = elementFilterList;
     }
 
-    public SQLocator(WebDriver webDriver, String cssSelector, String xPathExpression) {
+    public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, String xPathExpression) {
         this(webDriver, cssSelector, xPathExpression, true, true, new ElementFilterList(asList(ElementFilter.FILTER_NOTHING)));
     }
 
-    public SQLocator(String newCssSelector, String newXPathExpression, SQLocator previous) {
+    public SQLocator(SQLocatorCss newCssSelector, String newXPathExpression, SQLocator previous) {
         this(previous.webDriver, newCssSelector, newXPathExpression, previous.canPureCss, previous.canPureXPath, previous.elementFilterList);
     }
 
@@ -88,8 +88,8 @@ public class SQLocator {
     }
 
     private List<WebElement> findElementsByCss(SearchContext context) {
-        String finalXPathExpression = this.cssSelector;
-        return new By.ByXPath(finalXPathExpression).findElements(context);
+        String finalCssSelector = this.cssSelector.toString();
+        return new By.ByCssSelector(finalCssSelector).findElements(context);
     }
 
     private List<WebElement> findElementsByXPath(SearchContext context) {
@@ -102,6 +102,10 @@ public class SQLocator {
     }
 
     public String getCssSelector() {
+        return cssSelector.toString();
+    }
+
+    public SQLocatorCss getSQCssSelector() {
         return cssSelector;
     }
 
