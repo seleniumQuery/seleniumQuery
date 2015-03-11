@@ -27,24 +27,24 @@ public class SQLocatorCssTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void cssMerge__should_throw_exception_if_both_css_havent_universalSelector_as_tag() {
-        fromTag("div").merge(fromTag("span"));
+        fromTag("div").mergeUsingCurrentNativeness(fromTag("span"));
     }
 
     @Test
     public void cssMerge__should_let_it_be_if_both_tags_are_not_universalSelector__but_are_equal() {
-        SQLocatorCss mergedCss = fromTag("div").merge(fromTag("div"));
+        SQLocatorCss mergedCss = fromTag("div").mergeUsingCurrentNativeness(fromTag("div"));
         assertThat(mergedCss.toString(), is("div"));
     }
 
     @Test
     public void cssMerge__should_merge() {
-        SQLocatorCss mergedCss = fromTag("div").merge( new SQLocatorCss(".clz"));
+        SQLocatorCss mergedCss = fromTag("div").mergeUsingCurrentNativeness(new SQLocatorCss(".clz"));
         assertThat(mergedCss.toString(), is("div.clz"));
     }
 
     @Test
     public void cssMerge__should_remove_asterisk() {
-        SQLocatorCss mergedCss = universalSelector().merge(new SQLocatorCss(".clz"));
+        SQLocatorCss mergedCss = universalSelector().mergeUsingCurrentNativeness(new SQLocatorCss(".clz"));
         assertThat(mergedCss.toString(), is(".clz"));
     }
 

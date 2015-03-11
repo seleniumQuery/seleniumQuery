@@ -34,17 +34,22 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
         if (isThisSelectorNativelySupportedOn(leftLocator.getWebDriver())) {
             return new SQLocator(
                     leftLocator.getWebDriver(),
-                    leftLocator.getSQCssSelector().merge(toCssWhenNativelySupported()),
+                    leftLocator.getSQCssSelector().merge(
+                            toCssWhenNativelySupported(),
+                            true
+                    ),
                     xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
-                    true,
                     canPureXPath(),
                     mergeFilter(leftLocator));
         } else {
             return new SQLocator(
                     leftLocator.getWebDriver(),
-                    leftLocator.getSQCssSelector().merge(toCssWhenNotNativelySupported()),
+                    leftLocator.getSQCssSelector().merge(
+                            toCssWhenNotNativelySupported(),
+                            // this can still be true if, somehow, the CSS selector can be translated into another CSS
+                            canPureCssWhenNotNativelySupported()
+                    ),
                     xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
-                    canPureCssWhenNotNativelySupported(), // this can still be true if, somehow, the CSS selector can be translated into another CSS
                     canPureXPath(),
                     mergeFilter(leftLocator));
         }
