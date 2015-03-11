@@ -46,25 +46,23 @@ public class SQLocator {
     private WebDriver webDriver;
     private SQLocatorCss cssSelector;
     private String xPathExpression;
-    private boolean canPureCss;
     private boolean canPureXPath;
     private ElementFilterList elementFilterList;
 
-    public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, String xPathExpression, boolean canPureCss, boolean canPureXPath, ElementFilterList elementFilterList) {
+    public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, String xPathExpression, boolean canPureXPath, ElementFilterList elementFilterList) {
         this.webDriver = webDriver;
         this.cssSelector = cssSelector;
         this.xPathExpression = xPathExpression;
-        this.canPureCss = canPureCss;
         this.canPureXPath = canPureXPath;
         this.elementFilterList = elementFilterList;
     }
 
     public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, String xPathExpression) {
-        this(webDriver, cssSelector, xPathExpression, true, true, new ElementFilterList(asList(ElementFilter.FILTER_NOTHING)));
+        this(webDriver, cssSelector, xPathExpression, true, new ElementFilterList(asList(ElementFilter.FILTER_NOTHING)));
     }
 
     public SQLocator(SQLocatorCss newCssSelector, String newXPathExpression, SQLocator previous) {
-        this(previous.webDriver, newCssSelector, newXPathExpression, previous.canPureCss, previous.canPureXPath, previous.elementFilterList);
+        this(previous.webDriver, newCssSelector, newXPathExpression, previous.canPureXPath, previous.elementFilterList);
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
@@ -114,7 +112,7 @@ public class SQLocator {
     }
 
     public boolean canPureCss() {
-        return canPureCss;
+        return cssSelector.isPureCss();
     }
 
     public boolean canPureXPath() {

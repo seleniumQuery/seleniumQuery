@@ -45,7 +45,7 @@ abstract class SQCssCombinationSelector implements SQCssSelector {
     @Override
     public SQLocator toSQLocator(WebDriver webDriver) {
         SQLocator sqLocator = leftSideSelector.toSQLocator(webDriver);
-        SQLocatorCss combinatorLocator = SQLocatorCss.fromLeftPart(sqLocator.getSQCssSelector() + this.cssCombinator);
+        SQLocatorCss combinatorLocator = SQLocatorCss.fromLeftPart(sqLocator.getSQCssSelector() + this.cssCombinator, sqLocator.canPureCss());
         SQLocator directAdjacentIntermediateLocator = new SQLocator(combinatorLocator,
                 sqLocator.getXPathExpression() + this.xPathCombinator, sqLocator);
         return rightSideSelector.toSQLocator(directAdjacentIntermediateLocator);

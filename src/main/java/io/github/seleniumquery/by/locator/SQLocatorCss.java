@@ -31,24 +31,26 @@ public class SQLocatorCss {
 
     public static final String UNIVERSAL_SELECTOR = "*";
 
-    public static SQLocatorCss fromLeftPart(String leftPart) {
-        return new SQLocatorCss(leftPart, UNIVERSAL_SELECTOR, "");
+    public static SQLocatorCss fromLeftPart(String leftPart, boolean canPureCss) {
+        return new SQLocatorCss(leftPart, UNIVERSAL_SELECTOR, "", canPureCss);
     }
     public static SQLocatorCss fromTag(String tag) {
-        return new SQLocatorCss("", tag, "");
+        return new SQLocatorCss("", tag, "", true);
     }
     public static SQLocatorCss universalSelector() {
-        return new SQLocatorCss("", UNIVERSAL_SELECTOR, "");
+        return fromTag(UNIVERSAL_SELECTOR);
     }
 
     private String leftPart;
     private String tag;
     private String rightPart;
+    private boolean canPureCss;
 
-    public SQLocatorCss(String leftPart, String tag, String rightPart) {
+    public SQLocatorCss(String leftPart, String tag, String rightPart, boolean canPureCss) {
         this.leftPart = leftPart;
         this.tag = tag;
         this.rightPart = rightPart;
+        this.canPureCss = canPureCss;
     }
 
     public SQLocatorCss(String tag, String rightPart) {
@@ -87,27 +89,36 @@ public class SQLocatorCss {
         return leftPart + tag + rightPart;
     }
 
+    public SQLocatorCss mergeUsingCurrentNativeness(SQLocatorCss rightSCssSelector) {
+        return merge(rightSCssSelector, this.canPureCss);
+    }
+
     /**
      * Merges two CSS selector parts into one.
      * The current instance will be the left part of the merged selector.
      * @param rightSCssSelector The right part of the merged selector.
+     * @param canPureCss If the ending selector is a natively suported CSS selector.
      * @return The two parts merged as a CSS selector.
      */
-    public SQLocatorCss merge(SQLocatorCss rightSCssSelector) {
+    public SQLocatorCss merge(SQLocatorCss rightSCssSelector, boolean canPureCss) {
         if (selectorsHaveDifferentTags(this, rightSCssSelector) &&
                 noneOfTheTagsIsTheUniversalSelector(this, rightSCssSelector)) {
             throw new IllegalArgumentException("The attempted selector has two element (tag) selectors at the same level. " +
                     "It is incorrect and would never fetch any elements (as no element has more than one tag).");
         }
         if (this.hasUniversalSelector()) {
-            return new SQLocatorCss(this.getLeftPart(),
+            return new SQLocatorCss(
+                    this.getLeftPart(),
                     rightSCssSelector.getTag(),
-                    this.getRightPart() + rightSCssSelector.getRightPart()
+                    this.getRightPart() + rightSCssSelector.getRightPart(),
+                    canPureCss
             );
         } else {
-            return new SQLocatorCss(this.getLeftPart(),
+            return new SQLocatorCss(
+                    this.getLeftPart(),
                     this.getTag(),
-                    this.getRightPart() + rightSCssSelector.getRightPart()
+                    this.getRightPart() + rightSCssSelector.getRightPart(),
+                    canPureCss
             );
         }
     }
@@ -118,6 +129,10 @@ public class SQLocatorCss {
 
     private static boolean noneOfTheTagsIsTheUniversalSelector(SQLocatorCss leftCssSelector, SQLocatorCss rightSCssSelector) {
         return !leftCssSelector.hasUniversalSelector() && !rightSCssSelector.hasUniversalSelector();
+    }
+
+    public boolean isPureCss() {
+        return canPureCss;
     }
 
 }
