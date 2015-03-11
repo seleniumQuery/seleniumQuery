@@ -36,7 +36,7 @@ public class SQCssEndsWithAttributeCondition extends SQCssAttributeCondition imp
     }
 
     protected SQLocatorCss toCSS() {
-        return new SQLocatorCss("[" + this.attributeName + "$='" + this.wantedValue + "']");
+        return new SQLocatorCss("[" + this.attributeName + "$='" + this.wantedValue + "']", true);
     }
 
     protected String toXPath() {

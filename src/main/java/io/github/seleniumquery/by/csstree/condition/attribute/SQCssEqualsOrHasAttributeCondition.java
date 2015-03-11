@@ -49,9 +49,9 @@ public class SQCssEqualsOrHasAttributeCondition extends SQCssAttributeCondition 
 
     protected SQLocatorCss toCSS() {
         if (this.wantedValue != null) {
-            return new SQLocatorCss("[" + this.attributeName + "=" + this.wantedValue + "]");
+            return new SQLocatorCss("[" + this.attributeName + "=" + this.wantedValue + "]", true);
         }
-        return new SQLocatorCss("[" + this.attributeName + "]");
+        return new SQLocatorCss("[" + this.attributeName + "]", true);
     }
 
     protected String toXPath() {

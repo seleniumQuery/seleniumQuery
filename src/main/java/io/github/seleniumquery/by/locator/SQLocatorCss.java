@@ -53,16 +53,12 @@ public class SQLocatorCss {
         this.canPureCss = canPureCss;
     }
 
-    public SQLocatorCss(String tag, String rightPart) {
-        this.leftPart = "";
-        this.tag = tag;
-        this.rightPart = rightPart;
+    public SQLocatorCss(String tag, String rightPart, boolean canPureCss) {
+        this("", tag, rightPart, canPureCss);
     }
 
-    public SQLocatorCss(String rightPart) {
-        this.leftPart = "";
-        this.tag = UNIVERSAL_SELECTOR;
-        this.rightPart = rightPart;
+    public SQLocatorCss(String rightPart, boolean canPureCss) {
+        this("", UNIVERSAL_SELECTOR, rightPart, canPureCss);
     }
 
     public boolean hasUniversalSelector() {
