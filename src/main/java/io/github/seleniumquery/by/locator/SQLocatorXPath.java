@@ -31,7 +31,7 @@ public class SQLocatorXPath {
         return new SQLocatorXPath(xPathExpression, true, new ElementFilterList(asList(FILTER_NOTHING)));
     }
 
-    public static SQLocatorXPath fromPrevious(String newXPathExpression, SQLocator previous) {
+    public static SQLocatorXPath takePurityFromPrevious(String newXPathExpression, SQLocator previous) {
         return new SQLocatorXPath(newXPathExpression, previous.canPureXPath(), previous.getElementFilterList());
     }
 
