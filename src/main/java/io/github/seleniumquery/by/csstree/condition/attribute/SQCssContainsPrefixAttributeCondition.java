@@ -34,7 +34,7 @@ public class SQCssContainsPrefixAttributeCondition extends SQCssAttributeConditi
     }
 
     protected SQLocatorCss toCSS() {
-        return new SQLocatorCss("[" + this.attributeName + "|='" + this.wantedValue + "']", SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES);
+        return new SQLocatorCss("[" + this.attributeName + "|='" + this.wantedValue + "']");
     }
 
     protected String toXPath() {

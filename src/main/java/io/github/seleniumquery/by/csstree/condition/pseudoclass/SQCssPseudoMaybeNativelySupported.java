@@ -26,7 +26,7 @@ import io.github.seleniumquery.by.locator.SQLocatorFactory;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.locator.SQLocatorCss.universalSelector;
+import static io.github.seleniumquery.by.locator.SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED;
 
 public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
 
@@ -35,23 +35,16 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
         if (isThisSelectorNativelySupportedOn(leftLocator.getWebDriver())) {
             return new SQLocator(
                     leftLocator.getWebDriver(),
-                    leftLocator.getSQCssSelector().merge(
-                            toCssWhenNativelySupported(),
-                            SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES
-                    ),
+                    leftLocator.getSQCssSelector().merge(toCssWhenNativelySupported()),
                     new SQLocatorXPath(
-                            xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
-                            canPureXPath(),
-                            mergeFilter(leftLocator)
+                        xPathMergeStrategy().mergeXPath(leftLocator, toXPath()), // TODO move this mergeXPath() to SQLocatorXPath, obviously
+                        canPureXPath(),
+                        mergeFilter(leftLocator)
                     ));
         } else {
             return new SQLocator(
                     leftLocator.getWebDriver(),
-                    leftLocator.getSQCssSelector().merge(
-                            toCssWhenNotNativelySupported(),
-                            // this can still be true if, somehow, the CSS selector can be translated into another CSS
-                            canPureCssWhenNotNativelySupported()
-                    ),
+                    CSS_NOT_NATIVELY_SUPPORTED,
                     new SQLocatorXPath(
                         xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
                         canPureXPath(),
@@ -82,17 +75,7 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
         return SQLocatorFactory.createPureFilterLocator(leftLocator, filter).getElementFilterList();
     }
 
-    public SQLocatorCss.CanFetchAllElementsOfTheQueryByItself canPureCssWhenNotNativelySupported() {
-        return SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.NO;
-    }
-
-    public SQLocatorCss toCssWhenNativelySupported() {
-        return universalSelector();
-    }
-
-    public SQLocatorCss toCssWhenNotNativelySupported() {
-        return universalSelector();
-    }
+    public abstract SQLocatorCss toCssWhenNativelySupported();
 
     public boolean canPureXPath() {
         return false;

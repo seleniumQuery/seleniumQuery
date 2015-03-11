@@ -20,7 +20,6 @@ import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
-import io.github.seleniumquery.by.locator.SQLocatorCss.CanFetchAllElementsOfTheQueryByItself;
 
 /**
  * [attribute$=stringToEnd]
@@ -37,7 +36,7 @@ public class SQCssEndsWithAttributeCondition extends SQCssAttributeCondition imp
     }
 
     protected SQLocatorCss toCSS() {
-        return new SQLocatorCss("[" + this.attributeName + "$='" + this.wantedValue + "']", CanFetchAllElementsOfTheQueryByItself.YES);
+        return new SQLocatorCss("[" + this.attributeName + "$='" + this.wantedValue + "']");
     }
 
     protected String toXPath() {

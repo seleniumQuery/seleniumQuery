@@ -20,7 +20,6 @@ import io.github.seleniumquery.by.csstree.condition.attribute.SQCssClassAttribut
 import io.github.seleniumquery.by.csstree.selector.combinator.SQCssDescendantSelector;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -43,8 +42,8 @@ public class SQCssConditionalSelectorTest {
         // then
         assertThat(locator.getCssSelector(), is("tagg.clz"));
         assertThat(locator.getXPathExpression(), is(".//*[self::tagg and contains(concat(' ', normalize-space(@class), ' '), ' clz ')]"));
-        assertThat(locator.canPureCss(), is(SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
-        assertThat(locator.canPureXPath(), is(true));
+        assertThat(locator.canFetchThroughCssAlone(), is(true));
+        assertThat(locator.canFetchThroughXPathAlone(), is(true));
         assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
     }
 
@@ -62,8 +61,8 @@ public class SQCssConditionalSelectorTest {
         // then
         assertThat(locator.getCssSelector(), is("a b.condition"));
         assertThat(locator.getXPathExpression(), is(".//*[self::a]//*[self::b and contains(concat(' ', normalize-space(@class), ' '), ' condition ')]"));
-        assertThat(locator.canPureCss(), is(SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
-        assertThat(locator.canPureXPath(), is(true));
+        assertThat(locator.canFetchThroughCssAlone(), is(true));
+        assertThat(locator.canFetchThroughXPathAlone(), is(true));
         assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
     }
 

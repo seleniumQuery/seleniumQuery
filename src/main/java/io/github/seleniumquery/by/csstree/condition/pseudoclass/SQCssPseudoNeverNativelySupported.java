@@ -65,6 +65,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -85,6 +86,16 @@ public abstract class SQCssPseudoNeverNativelySupported extends SQCssPseudoMaybe
     @Override
     public boolean isThisSelectorNativelySupportedOn(WebDriver webDriver) {
         return false;
+    }
+
+    /**
+     * Due to the {@link SQCssPseudoNeverNativelySupported#isThisSelectorNativelySupportedOn(org.openqa.selenium.WebDriver)}
+     * always returning false, this method will actually never be called.
+     * I do know this smells like a violation of LSP, but I, for the love of Yoda, couldn't figure out a better way!
+     */
+    @Override
+    public SQLocatorCss toCssWhenNativelySupported() {
+        throw new UnsupportedOperationException();
     }
 
 }
