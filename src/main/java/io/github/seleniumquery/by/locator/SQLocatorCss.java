@@ -31,34 +31,36 @@ public class SQLocatorCss {
 
     public static final String UNIVERSAL_SELECTOR = "*";
 
-    public static SQLocatorCss fromLeftPart(String leftPart, boolean canPureCss) {
+    public static SQLocatorCss fromLeftPart(String leftPart, CanFetchAllElementsOfTheQueryByItself canPureCss) {
         return new SQLocatorCss(leftPart, UNIVERSAL_SELECTOR, "", canPureCss);
     }
     public static SQLocatorCss fromTag(String tag) {
-        return new SQLocatorCss("", tag, "", true);
+        return new SQLocatorCss("", tag, "", CanFetchAllElementsOfTheQueryByItself.YES);
     }
     public static SQLocatorCss universalSelector() {
         return fromTag(UNIVERSAL_SELECTOR);
     }
 
+    public static enum CanFetchAllElementsOfTheQueryByItself { YES, NO }
+
     private String leftPart;
     private String tag;
     private String rightPart;
-    private boolean canPureCss;
+    private CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself;
 
-    public SQLocatorCss(String leftPart, String tag, String rightPart, boolean canPureCss) {
+    public SQLocatorCss(String leftPart, String tag, String rightPart, CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself) {
         this.leftPart = leftPart;
         this.tag = tag;
         this.rightPart = rightPart;
-        this.canPureCss = canPureCss;
+        this.canFetchAllElementsOfTheQueryByItself = canFetchAllElementsOfTheQueryByItself;
     }
 
-    public SQLocatorCss(String tag, String rightPart, boolean canPureCss) {
-        this("", tag, rightPart, canPureCss);
+    public SQLocatorCss(String tag, String rightPart, CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself) {
+        this("", tag, rightPart, canFetchAllElementsOfTheQueryByItself);
     }
 
-    public SQLocatorCss(String rightPart, boolean canPureCss) {
-        this("", UNIVERSAL_SELECTOR, rightPart, canPureCss);
+    public SQLocatorCss(String rightPart, CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself) {
+        this("", UNIVERSAL_SELECTOR, rightPart, canFetchAllElementsOfTheQueryByItself);
     }
 
     public boolean hasUniversalSelector() {
@@ -86,7 +88,7 @@ public class SQLocatorCss {
     }
 
     public SQLocatorCss mergeUsingCurrentNativeness(SQLocatorCss rightSCssSelector) {
-        return merge(rightSCssSelector, this.canPureCss);
+        return merge(rightSCssSelector, this.canFetchAllElementsOfTheQueryByItself);
     }
 
     /**
@@ -96,7 +98,7 @@ public class SQLocatorCss {
      * @param canPureCss If the ending selector is a natively suported CSS selector.
      * @return The two parts merged as a CSS selector.
      */
-    public SQLocatorCss merge(SQLocatorCss rightSCssSelector, boolean canPureCss) {
+    public SQLocatorCss merge(SQLocatorCss rightSCssSelector, CanFetchAllElementsOfTheQueryByItself canPureCss) {
         if (selectorsHaveDifferentTags(this, rightSCssSelector) &&
                 noneOfTheTagsIsTheUniversalSelector(this, rightSCssSelector)) {
             throw new IllegalArgumentException("The attempted selector has two element (tag) selectors at the same level. " +
@@ -127,8 +129,8 @@ public class SQLocatorCss {
         return !leftCssSelector.hasUniversalSelector() && !rightSCssSelector.hasUniversalSelector();
     }
 
-    public boolean isPureCss() {
-        return canPureCss;
+    public CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself() {
+        return canFetchAllElementsOfTheQueryByItself;
     }
 
 }

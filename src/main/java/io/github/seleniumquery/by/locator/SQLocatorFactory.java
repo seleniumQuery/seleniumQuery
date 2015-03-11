@@ -36,7 +36,7 @@ public class SQLocatorFactory {
 
     private static SQLocatorCss sameCssLocatorButWithoutPureCss(SQLocator locator) {
         SQLocatorCss current = locator.getSQCssSelector();
-        return new SQLocatorCss(current.getLeftPart(), current.getTag(), current.getRightPart(), false);
+        return new SQLocatorCss(current.getLeftPart(), current.getTag(), current.getRightPart(), SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.NO);
     }
 
     public static SQLocator createPureFilterLocator(SQLocator locator, ElementFilter newFilter) {

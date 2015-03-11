@@ -38,13 +38,13 @@ public class SQLocatorCssTest {
 
     @Test
     public void cssMerge__should_merge() {
-        SQLocatorCss mergedCss = fromTag("div").mergeUsingCurrentNativeness(new SQLocatorCss(".clz", true));
+        SQLocatorCss mergedCss = fromTag("div").mergeUsingCurrentNativeness(new SQLocatorCss(".clz", SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
         assertThat(mergedCss.toString(), is("div.clz"));
     }
 
     @Test
     public void cssMerge__should_remove_asterisk() {
-        SQLocatorCss mergedCss = universalSelector().mergeUsingCurrentNativeness(new SQLocatorCss(".clz", true));
+        SQLocatorCss mergedCss = universalSelector().mergeUsingCurrentNativeness(new SQLocatorCss(".clz", SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
         assertThat(mergedCss.toString(), is(".clz"));
     }
 

@@ -19,6 +19,7 @@ package io.github.seleniumquery.by.csstree.selector.combinator;
 import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -40,7 +41,7 @@ public class SQCssDirectDescendantSelectorTest {
         // then
         assertThat(locator.getCssSelector(), is("a>b"));
         assertThat(locator.getXPathExpression(), is(".//*[self::a]/*[self::b]"));
-        assertThat(locator.canPureCss(), is(true));
+        assertThat(locator.canPureCss(), is(SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
         assertThat(locator.canPureXPath(), is(true));
         assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
     }

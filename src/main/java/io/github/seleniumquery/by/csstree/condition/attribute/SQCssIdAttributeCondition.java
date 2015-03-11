@@ -50,7 +50,7 @@ public class SQCssIdAttributeCondition implements SQCssCondition, SQCssCondition
     }
 
     private SQLocatorCss toCSS() {
-        return new SQLocatorCss("#" + this.id, true);
+        return new SQLocatorCss("#" + this.id, SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES);
     }
 
     private String toXPath() {

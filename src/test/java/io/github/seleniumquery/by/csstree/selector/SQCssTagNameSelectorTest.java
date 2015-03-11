@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -37,7 +38,7 @@ public class SQCssTagNameSelectorTest {
         // then
         assertThat(locator.getCssSelector(), is("myTag"));
         assertThat(locator.getXPathExpression(), is(".//*[self::myTag]"));
-        assertThat(locator.canPureCss(), is(true));
+        assertThat(locator.canPureCss(), is(SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
         assertThat(locator.canPureXPath(), is(true));
         assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
     }

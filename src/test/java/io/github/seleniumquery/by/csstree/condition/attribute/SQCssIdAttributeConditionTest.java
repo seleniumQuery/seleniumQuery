@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class SQCssIdAttributeConditionTest {
         // then
         assertThat(locator.getCssSelector(), is("#idz"));
         assertThat(locator.getXPathExpression(), is(".//*[@id = 'idz']"));
-        assertThat(locator.canPureCss(), is(true));
+        assertThat(locator.canPureCss(), is(SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
         assertThat(locator.canPureXPath(), is(true));
         assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
     }

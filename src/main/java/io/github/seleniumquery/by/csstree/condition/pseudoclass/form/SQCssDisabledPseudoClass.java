@@ -28,7 +28,7 @@ public class SQCssDisabledPseudoClass extends SQCssPseudoMaybeNativelySupported 
 
     @Override
     public SQLocatorCss toCssWhenNativelySupported() {
-        return new SQLocatorCss(DISABLED_PSEUDO, true);
+        return new SQLocatorCss(DISABLED_PSEUDO, SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES);
     }
 
     @Override

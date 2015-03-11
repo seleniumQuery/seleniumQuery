@@ -19,6 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
 import org.hamcrest.Matcher;
 
@@ -32,13 +33,13 @@ import static org.junit.Assert.assertThat;
  */
 public class PseudoClassAssertLocatorUtils {
 
-    public static final boolean PURE_CSS_IS_SUPPORTED = true;
+    public static final SQLocatorCss.CanFetchAllElementsOfTheQueryByItself PURE_CSS_IS_SUPPORTED = SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES;
     public static final boolean PURE_XPATH_IS_SUPPORTED = true;
-    public static final boolean PURE_CSS_IS_NOT_SUPPORTED = false;
+    public static final SQLocatorCss.CanFetchAllElementsOfTheQueryByItself PURE_CSS_IS_NOT_SUPPORTED = SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.NO;
     public static final boolean PURE_XPATH_IS_NOT_SUPPORTED = false;
     public static final String CSS_ALL_TAGS_SELECTOR = "*";
 
-    public static void assertPseudoClassHasLocatorWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, boolean canPureCss, String expectedCss, boolean canPureXPath, String expectedXPath, Matcher<Iterable<? extends ElementFilter>> elementFilterMatcher) {
+    public static void assertPseudoClassHasLocatorWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, SQLocatorCss.CanFetchAllElementsOfTheQueryByItself canPureCss, String expectedCss, boolean canPureXPath, String expectedXPath, Matcher<Iterable<? extends ElementFilter>> elementFilterMatcher) {
         SQLocator previousLocator = SQLocatorUtilsTest.tagAsterisk(SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(pseudoClass));
         assertPseudoClassHasLocator(
                 pseudoClassObject,
@@ -49,7 +50,7 @@ public class PseudoClassAssertLocatorUtils {
         );
     }
 
-    public static void assertPseudoClassHasLocatorWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, boolean canPureCss, String expectedCss, boolean canPureXPath, String expectedXPath, Matcher<Iterable<? extends ElementFilter>> elementFilterMatcher) {
+    public static void assertPseudoClassHasLocatorWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, SQLocatorCss.CanFetchAllElementsOfTheQueryByItself canPureCss, String expectedCss, boolean canPureXPath, String expectedXPath, Matcher<Iterable<? extends ElementFilter>> elementFilterMatcher) {
         SQLocator previousLocator = SQLocatorUtilsTest.tagAsterisk(SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoClass));
         assertPseudoClassHasLocator(
                 pseudoClassObject,
@@ -137,7 +138,7 @@ public class PseudoClassAssertLocatorUtils {
 
     public static void assertPseudoClassHasLocator(SQCssConditionImplementedLocators pseudoClassObject,
                                                    SQLocator previous,
-                                                   boolean canPureCss,
+                                                   SQLocatorCss.CanFetchAllElementsOfTheQueryByItself canPureCss,
                                                    String expectedCss,
                                                    boolean canPureXPath,
                                                    String expectedXPath,
