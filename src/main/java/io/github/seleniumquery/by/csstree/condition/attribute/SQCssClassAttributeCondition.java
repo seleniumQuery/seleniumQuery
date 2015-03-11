@@ -48,7 +48,7 @@ public class SQCssClassAttributeCondition implements SQCssCondition, SQCssCondit
     }
 
     private SQLocatorCss toCSS() {
-        return new SQLocatorCss("." + this.unescapedClassName);
+        return new SQLocatorCss("." + this.unescapedClassName, true);
     }
 
     private String toXPath() {
