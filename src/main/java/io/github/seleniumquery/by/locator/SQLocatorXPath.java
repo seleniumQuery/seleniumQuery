@@ -45,7 +45,7 @@ public class SQLocatorXPath {
         this.elementFilterList = elementFilterList;
     }
 
-    public String getxPathExpression() {
+    public String getXPathExpression() {
         return xPathExpression;
     }
 
