@@ -97,7 +97,7 @@ public class SQLocator {
     }
 
     public String getXPathExpression() {
-        return xPathLocator.getxPathExpression();
+        return xPathLocator.getXPathExpression();
     }
 
     public boolean canPureCss() {
