@@ -24,6 +24,12 @@ package io.github.seleniumquery.by.locator;
  * "p" would be tag
  * ":visible" would be rightPart
  *
+ *
+ * If, during the time the locator is being built, at some point it decides the CSS Selector asked
+ * by the user can't be translated directly into another CSS Selector, then
+ * {@link SQLocatorCss#CSS_NOT_NATIVELY_SUPPORTED} (the "Null Object") should be returned, what will
+ * mean the locator will use XPath+Filter instead of CSS to fetch the elements.
+ *
  * @author acdcjunior
  * @since 0.10.0
  */
@@ -31,36 +37,42 @@ public class SQLocatorCss {
 
     public static final String UNIVERSAL_SELECTOR = "*";
 
-    public static SQLocatorCss fromLeftPart(String leftPart, CanFetchAllElementsOfTheQueryByItself canPureCss) {
-        return new SQLocatorCss(leftPart, UNIVERSAL_SELECTOR, "", canPureCss);
-    }
     public static SQLocatorCss fromTag(String tag) {
-        return new SQLocatorCss("", tag, "", CanFetchAllElementsOfTheQueryByItself.YES);
+        return new SQLocatorCss("", tag, "");
     }
     public static SQLocatorCss universalSelector() {
         return fromTag(UNIVERSAL_SELECTOR);
     }
+
+    public static final SQLocatorCss CSS_NOT_NATIVELY_SUPPORTED = new SQLocatorCss("", UNIVERSAL_SELECTOR, "") {
+        @Override
+        public SQLocatorCss merge(SQLocatorCss rightSCssSelector) {
+            return this;
+        }
+        @Override
+        public boolean canFetchAllElementsOfTheQueryByItself() {
+            return false;
+        }
+    };
 
     public static enum CanFetchAllElementsOfTheQueryByItself { YES, NO }
 
     private String leftPart;
     private String tag;
     private String rightPart;
-    private CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself;
 
-    public SQLocatorCss(String leftPart, String tag, String rightPart, CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself) {
+    public SQLocatorCss(String leftPart, String tag, String rightPart) {
         this.leftPart = leftPart;
         this.tag = tag;
         this.rightPart = rightPart;
-        this.canFetchAllElementsOfTheQueryByItself = canFetchAllElementsOfTheQueryByItself;
     }
 
-    public SQLocatorCss(String tag, String rightPart, CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself) {
-        this("", tag, rightPart, canFetchAllElementsOfTheQueryByItself);
+    public SQLocatorCss(String tag, String rightPart) {
+        this("", tag, rightPart);
     }
 
-    public SQLocatorCss(String rightPart, CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself) {
-        this("", UNIVERSAL_SELECTOR, rightPart, canFetchAllElementsOfTheQueryByItself);
+    public SQLocatorCss(String rightPart) {
+        this("", UNIVERSAL_SELECTOR, rightPart);
     }
 
     public boolean hasUniversalSelector() {
@@ -87,18 +99,21 @@ public class SQLocatorCss {
         return leftPart + tag + rightPart;
     }
 
+    // TODO inline
     public SQLocatorCss mergeUsingCurrentNativeness(SQLocatorCss rightSCssSelector) {
-        return merge(rightSCssSelector, this.canFetchAllElementsOfTheQueryByItself);
+        return merge(rightSCssSelector);
     }
 
     /**
      * Merges two CSS selector parts into one.
      * The current instance will be the left part of the merged selector.
      * @param rightSCssSelector The right part of the merged selector.
-     * @param canPureCss If the ending selector is a natively suported CSS selector.
      * @return The two parts merged as a CSS selector.
      */
-    public SQLocatorCss merge(SQLocatorCss rightSCssSelector, CanFetchAllElementsOfTheQueryByItself canPureCss) {
+    public SQLocatorCss merge(SQLocatorCss rightSCssSelector) {
+        if (!rightSCssSelector.canFetchAllElementsOfTheQueryByItself()) {
+            return CSS_NOT_NATIVELY_SUPPORTED;
+        }
         if (selectorsHaveDifferentTags(this, rightSCssSelector) &&
                 noneOfTheTagsIsTheUniversalSelector(this, rightSCssSelector)) {
             throw new IllegalArgumentException("The attempted selector has two element (tag) selectors at the same level. " +
@@ -108,15 +123,13 @@ public class SQLocatorCss {
             return new SQLocatorCss(
                     this.getLeftPart(),
                     rightSCssSelector.getTag(),
-                    this.getRightPart() + rightSCssSelector.getRightPart(),
-                    canPureCss
+                    this.getRightPart() + rightSCssSelector.getRightPart()
             );
         } else {
             return new SQLocatorCss(
                     this.getLeftPart(),
                     this.getTag(),
-                    this.getRightPart() + rightSCssSelector.getRightPart(),
-                    canPureCss
+                    this.getRightPart() + rightSCssSelector.getRightPart()
             );
         }
     }
@@ -129,8 +142,19 @@ public class SQLocatorCss {
         return !leftCssSelector.hasUniversalSelector() && !rightSCssSelector.hasUniversalSelector();
     }
 
-    public CanFetchAllElementsOfTheQueryByItself canFetchAllElementsOfTheQueryByItself() {
-        return canFetchAllElementsOfTheQueryByItself;
+    public boolean canFetchAllElementsOfTheQueryByItself() {
+        return true;
+    }
+
+    // TODO this method is not unit tested, it was inserted during refactoring, so it MAY have some test (I'm too lazy to check).
+    // we need to test the IF condition, though, as it was kind of inserted during refactoring
+    // so, yeah, just do the unit test for the if and then be happy!
+    // TODO actually, maybe this method should be inlined (and the test moved to the class as well)
+    public SQLocatorCss combineAsLeftPart(String combinator) {
+        if (this.canFetchAllElementsOfTheQueryByItself()) {
+            return new SQLocatorCss(this.toString() + combinator, UNIVERSAL_SELECTOR, "");
+        }
+        return CSS_NOT_NATIVELY_SUPPORTED;
     }
 
 }

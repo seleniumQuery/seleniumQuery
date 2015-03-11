@@ -29,14 +29,9 @@ import java.util.List;
 public class SQLocatorFactory {
 
     public static SQLocator createPureXPathOnly(SQLocator locator, String newXPathExpression) {
-        return new SQLocator(locator.getWebDriver(), sameCssLocatorButWithoutPureCss(locator),
-                new SQLocatorXPath(newXPathExpression, locator.canPureXPath(), locator.getElementFilterList())
+        return new SQLocator(locator.getWebDriver(), SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED,
+                new SQLocatorXPath(newXPathExpression, locator.canFetchThroughXPathAlone(), locator.getElementFilterList())
         );
-    }
-
-    private static SQLocatorCss sameCssLocatorButWithoutPureCss(SQLocator locator) {
-        SQLocatorCss current = locator.getSQCssSelector();
-        return new SQLocatorCss(current.getLeftPart(), current.getTag(), current.getRightPart(), SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.NO);
     }
 
     public static SQLocator createPureFilterLocator(SQLocator locator, ElementFilter newFilter) {
@@ -48,7 +43,7 @@ public class SQLocatorFactory {
             }
         }
         newFilters.add(newFilter);
-        return new SQLocator(locator.getWebDriver(), sameCssLocatorButWithoutPureCss(locator),
+        return new SQLocator(locator.getWebDriver(), SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED,
                 new SQLocatorXPath(locator.getXPathExpression(), false, new ElementFilterList(newFilters))
         );
     }

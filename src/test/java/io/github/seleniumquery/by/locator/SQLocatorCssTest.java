@@ -38,14 +38,26 @@ public class SQLocatorCssTest {
 
     @Test
     public void cssMerge__should_merge() {
-        SQLocatorCss mergedCss = fromTag("div").mergeUsingCurrentNativeness(new SQLocatorCss(".clz", SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
+        SQLocatorCss mergedCss = fromTag("div").mergeUsingCurrentNativeness(new SQLocatorCss(".clz"));
         assertThat(mergedCss.toString(), is("div.clz"));
     }
 
     @Test
     public void cssMerge__should_remove_asterisk() {
-        SQLocatorCss mergedCss = universalSelector().mergeUsingCurrentNativeness(new SQLocatorCss(".clz", SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
+        SQLocatorCss mergedCss = universalSelector().mergeUsingCurrentNativeness(new SQLocatorCss(".clz"));
         assertThat(mergedCss.toString(), is(".clz"));
+    }
+
+    @Test
+    public void cssMerge__when_merging_to_NULL_OBJECT_should_return_NULL_OBJECT() {
+        SQLocatorCss mergedCss = universalSelector().mergeUsingCurrentNativeness(SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED);
+        assertThat(mergedCss, is(SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED));
+    }
+
+    @Test
+    public void cssMerge__when_merging_to_NULL_OBJECT_should_return_NULL_OBJECT2() {
+        SQLocatorCss mergedCss = SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED.merge(universalSelector());
+        assertThat(mergedCss, is(SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED));
     }
 
 }

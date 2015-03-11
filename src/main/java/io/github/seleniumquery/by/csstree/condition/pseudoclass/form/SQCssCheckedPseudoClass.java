@@ -59,7 +59,7 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoMaybeNativelySupported {
 
     @Override
     public SQLocatorCss toCssWhenNativelySupported() {
-        return new SQLocatorCss(CHECKED_PSEUDO, SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES);
+        return new SQLocatorCss(CHECKED_PSEUDO);
     }
 
     @Override

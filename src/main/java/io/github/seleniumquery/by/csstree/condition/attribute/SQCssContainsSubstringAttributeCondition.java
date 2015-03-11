@@ -34,7 +34,7 @@ public class SQCssContainsSubstringAttributeCondition extends SQCssAttributeCond
     }
 
     protected SQLocatorCss toCSS() {
-        return new SQLocatorCss("[" + this.attributeName + "*='" + this.wantedValue + "']", SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES);
+        return new SQLocatorCss("[" + this.attributeName + "*='" + this.wantedValue + "']");
     }
 
     protected String toXPath() {

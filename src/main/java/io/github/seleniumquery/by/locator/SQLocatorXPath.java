@@ -32,7 +32,7 @@ public class SQLocatorXPath {
     }
 
     public static SQLocatorXPath takePurityFromPrevious(String newXPathExpression, SQLocator previous) {
-        return new SQLocatorXPath(newXPathExpression, previous.canPureXPath(), previous.getElementFilterList());
+        return new SQLocatorXPath(newXPathExpression, previous.canFetchThroughXPathAlone(), previous.getElementFilterList());
     }
 
     private String xPathExpression;
