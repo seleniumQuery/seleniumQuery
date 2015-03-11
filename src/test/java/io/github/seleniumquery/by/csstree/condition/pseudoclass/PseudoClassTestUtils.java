@@ -20,6 +20,7 @@ import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
 
 import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
@@ -85,7 +86,7 @@ public class PseudoClassTestUtils {
         // then
         assertThat(locator.getCssSelector(), is(previous.getCssSelector()));
         assertThat(locator.getXPathExpression(), is(previous.getXPathExpression()));
-        assertThat(locator.canPureCss(), is(false));
+        assertThat(locator.canPureCss(), is(SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.NO));
         assertThat(locator.canPureXPath(), is(false));
         assertThat(locator.getElementFilterList().getElementFilters(), contains(pseudoClassFilter));
     }

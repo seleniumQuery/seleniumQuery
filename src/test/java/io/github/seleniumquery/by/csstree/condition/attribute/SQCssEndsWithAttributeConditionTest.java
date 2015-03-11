@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
 import org.junit.Test;
 
@@ -38,7 +39,7 @@ public class SQCssEndsWithAttributeConditionTest {
         assertThat(locator.getCssSelector(), is("[attribute$='stringToEnd']"));
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";
         assertThat(locator.getXPathExpression(), is(".//*[substring("+attrName+", string-length("+attrName+")-10) = 'stringToEnd']"));
-        assertThat(locator.canPureCss(), is(true));
+        assertThat(locator.canPureCss(), is(SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES));
         assertThat(locator.canPureXPath(), is(true));
         assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
     }

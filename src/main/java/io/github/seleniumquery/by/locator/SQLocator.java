@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.locator;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
+import io.github.seleniumquery.by.locator.SQLocatorCss.CanFetchAllElementsOfTheQueryByItself;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -55,7 +56,7 @@ public class SQLocator {
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
-        if (canPureCss()) {
+        if (canPureCss() == CanFetchAllElementsOfTheQueryByItself.YES) {
             return findElementsByCss(context);
         }
         if (canPureXPath()) {
@@ -100,8 +101,8 @@ public class SQLocator {
         return xPathLocator.getXPathExpression();
     }
 
-    public boolean canPureCss() {
-        return cssSelector.isPureCss();
+    public CanFetchAllElementsOfTheQueryByItself canPureCss() {
+        return cssSelector.canFetchAllElementsOfTheQueryByItself();
     }
 
     public boolean canPureXPath() {

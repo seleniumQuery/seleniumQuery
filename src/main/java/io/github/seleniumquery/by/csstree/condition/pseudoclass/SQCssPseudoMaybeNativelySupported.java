@@ -37,7 +37,7 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
                     leftLocator.getWebDriver(),
                     leftLocator.getSQCssSelector().merge(
                             toCssWhenNativelySupported(),
-                            true
+                            SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.YES
                     ),
                     new SQLocatorXPath(
                             xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
@@ -82,8 +82,8 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
         return SQLocatorFactory.createPureFilterLocator(leftLocator, filter).getElementFilterList();
     }
 
-    public boolean canPureCssWhenNotNativelySupported() {
-        return false;
+    public SQLocatorCss.CanFetchAllElementsOfTheQueryByItself canPureCssWhenNotNativelySupported() {
+        return SQLocatorCss.CanFetchAllElementsOfTheQueryByItself.NO;
     }
 
     public SQLocatorCss toCssWhenNativelySupported() {
