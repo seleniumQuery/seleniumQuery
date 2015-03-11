@@ -23,6 +23,7 @@ import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorFactory;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.SQLocatorCss.universalSelector;
@@ -38,9 +39,11 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
                             toCssWhenNativelySupported(),
                             true
                     ),
-                    xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
-                    canPureXPath(),
-                    mergeFilter(leftLocator));
+                    new SQLocatorXPath(
+                            xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
+                            canPureXPath(),
+                            mergeFilter(leftLocator)
+                    ));
         } else {
             return new SQLocator(
                     leftLocator.getWebDriver(),
@@ -49,9 +52,11 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
                             // this can still be true if, somehow, the CSS selector can be translated into another CSS
                             canPureCssWhenNotNativelySupported()
                     ),
-                    xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
-                    canPureXPath(),
-                    mergeFilter(leftLocator));
+                    new SQLocatorXPath(
+                        xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
+                        canPureXPath(),
+                        mergeFilter(leftLocator))
+                    );
         }
     }
 

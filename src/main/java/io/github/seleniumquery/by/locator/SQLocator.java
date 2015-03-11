@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery.by.locator;
 
-import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -24,8 +23,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  * Cabaple of locating {@link WebElement}s on a given {@link SearchContext}.
@@ -45,24 +42,20 @@ public class SQLocator {
      */
     private WebDriver webDriver;
     private SQLocatorCss cssSelector;
-    private String xPathExpression;
-    private boolean canPureXPath;
-    private ElementFilterList elementFilterList;
+    private SQLocatorXPath xPathLocator;
 
-    public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, String xPathExpression, boolean canPureXPath, ElementFilterList elementFilterList) {
+    public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, SQLocatorXPath xPathLocator) {
         this.webDriver = webDriver;
         this.cssSelector = cssSelector;
-        this.xPathExpression = xPathExpression;
-        this.canPureXPath = canPureXPath;
-        this.elementFilterList = elementFilterList;
+        this.xPathLocator = xPathLocator;
     }
 
     public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, String xPathExpression) {
-        this(webDriver, cssSelector, xPathExpression, true, new ElementFilterList(asList(ElementFilter.FILTER_NOTHING)));
+        this(webDriver, cssSelector, SQLocatorXPath.pureXPath(xPathExpression));
     }
 
     public SQLocator(SQLocatorCss newCssSelector, String newXPathExpression, SQLocator previous) {
-        this(previous.webDriver, newCssSelector, newXPathExpression, previous.canPureXPath, previous.elementFilterList);
+        this(previous.webDriver, newCssSelector, SQLocatorXPath.fromPrevious(newXPathExpression, previous));
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
@@ -78,7 +71,7 @@ public class SQLocator {
         } else {
             elements = findElementsByXPath(context);
         }
-        return elementFilterList.filter(context, elements);
+        return xPathLocator.getElementFilterList().filter(context, elements);
     }
 
     private boolean isCssTheBestStrategy() {
@@ -91,7 +84,7 @@ public class SQLocator {
     }
 
     private List<WebElement> findElementsByXPath(SearchContext context) {
-        String finalXPathExpression = "(" + this.xPathExpression + ")";
+        String finalXPathExpression = this.xPathLocator.getFinalXPathExpression();
         return new By.ByXPath(finalXPathExpression).findElements(context);
     }
 
@@ -108,7 +101,7 @@ public class SQLocator {
     }
 
     public String getXPathExpression() {
-        return xPathExpression;
+        return xPathLocator.getxPathExpression();
     }
 
     public boolean canPureCss() {
@@ -116,11 +109,11 @@ public class SQLocator {
     }
 
     public boolean canPureXPath() {
-        return canPureXPath;
+        return xPathLocator.isCanPureXPath();
     }
 
     public ElementFilterList getElementFilterList() {
-        return elementFilterList;
+        return xPathLocator.getElementFilterList();
     }
 
 }
