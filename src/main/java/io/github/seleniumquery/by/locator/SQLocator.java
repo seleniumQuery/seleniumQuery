@@ -50,12 +50,8 @@ public class SQLocator {
         this.xPathLocator = xPathLocator;
     }
 
-    public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, String xPathExpression) {
-        this(webDriver, cssSelector, SQLocatorXPath.pureXPath(xPathExpression));
-    }
-
     public SQLocator(SQLocatorCss newCssSelector, String newXPathExpression, SQLocator previous) {
-        this(previous.webDriver, newCssSelector, SQLocatorXPath.fromPrevious(newXPathExpression, previous));
+        this(previous.webDriver, newCssSelector, SQLocatorXPath.takePurityFromPrevious(newXPathExpression, previous));
     }
 
     public List<WebElement> findWebElements(SearchContext context) {

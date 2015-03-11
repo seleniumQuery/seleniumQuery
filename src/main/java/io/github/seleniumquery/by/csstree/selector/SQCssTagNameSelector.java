@@ -22,6 +22,7 @@ import io.github.seleniumquery.by.locator.SQLocatorUtils;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.SQLocatorCss.fromTag;
+import static io.github.seleniumquery.by.locator.SQLocatorXPath.pureXPath;
 
 /**
  * Element or tag selector. Example: {@code "div"}.
@@ -43,7 +44,7 @@ public class SQCssTagNameSelector implements SQCssSelector {
 
     @Override
     public SQLocator toSQLocator(WebDriver webDriver) {
-        return new SQLocator(webDriver, toCSS(), ".//*[" + toXPath() + "]");
+        return new SQLocator(webDriver, toCSS(), pureXPath(".//*[" + toXPath() + "]"));
     }
 
     @Override

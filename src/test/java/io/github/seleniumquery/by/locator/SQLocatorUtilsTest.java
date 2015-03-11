@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.SQLocatorCss.universalSelector;
+import static io.github.seleniumquery.by.locator.SQLocatorXPath.pureXPath;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -30,7 +31,7 @@ public class SQLocatorUtilsTest {
 
     public static final SQLocator TAG_ASTERISK = tagAsterisk(mock(WebDriver.class));
     public static SQLocator tagAsterisk(WebDriver driver) {
-        return new SQLocator(driver, universalSelector(), ".//*[true()]");
+        return new SQLocator(driver, universalSelector(), pureXPath(".//*[true()]"));
     }
 
     public static WebDriver createMockDriverWithNativeSupportFor(String pseudoClass) {
