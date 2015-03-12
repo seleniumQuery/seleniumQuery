@@ -20,11 +20,12 @@ import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTRIBUTE_LOWER_CASE;
 
 public class SQCssPasswordPseudoClassTest {
 
     public static final String PASSWORD_PSEUDO = ":password";
-    public static final String PASSWORD_XPATH_EXPRESSION = ".//*[" + "(self::input and @type = 'password')" + "]";
+    public static final String PASSWORD_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTRIBUTE_LOWER_CASE + " = 'password')" + "]";
 
     @Test
     public void translate() {

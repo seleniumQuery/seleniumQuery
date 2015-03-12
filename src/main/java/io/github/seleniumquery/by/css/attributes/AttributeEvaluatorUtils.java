@@ -35,7 +35,11 @@ public class AttributeEvaluatorUtils {
 
 	public static String toXPathAttribute(String attributeName) {
 		String escapedAttributeName = SelectorUtils.intoEscapedXPathString(attributeName).toLowerCase();
-		return "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = "+ escapedAttributeName +"]";
+        return "@*[" + toLowerCase("name()") + " = " + escapedAttributeName + "]";
 	}
+
+    public static String toLowerCase(String s) {
+        return "translate(" + s + ", 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')";
+    }
 
 }
