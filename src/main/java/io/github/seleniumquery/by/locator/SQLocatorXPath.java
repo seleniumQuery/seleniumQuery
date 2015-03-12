@@ -31,6 +31,10 @@ public class SQLocatorXPath {
         return new SQLocatorXPath(xPathExpression, ElementFilterList.FILTER_NOTHING_LIST);
     }
 
+    public static SQLocatorXPath filterOnly(ElementFilter elementFilter) {
+        return new SQLocatorXPath("true()", elementFilter);
+    }
+
     private String xPathExpression;
 
     private ElementFilterList elementFilterList;
