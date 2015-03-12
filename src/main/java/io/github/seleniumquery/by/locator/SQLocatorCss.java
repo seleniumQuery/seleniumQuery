@@ -97,14 +97,10 @@ public class SQLocatorCss {
         return leftPart + tag + rightPart;
     }
 
-    // TODO inline
-    public SQLocatorCss mergeUsingCurrentNativeness(SQLocatorCss rightSCssSelector) {
-        return merge(rightSCssSelector);
-    }
-
     /**
      * Merges two CSS selector parts into one.
      * The current instance will be the left part of the merged selector.
+     *
      * @param rightSCssSelector The right part of the merged selector.
      * @return The two parts merged as a CSS selector.
      */

@@ -52,15 +52,18 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
     }
 
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
-        return DriverVersionUtils.getInstance().hasNativeSupportForPseudo(webDriver, selectorForPseudoClassNativeSupportCheck());
+        return DriverVersionUtils.getInstance().hasNativeSupportForPseudo(webDriver, pseudoClassForCSSNativeSupportCheck());
     }
 
     /**
      * <p>Returns the pseudo-class selector that will be used to check if the driver supports this pseudo.</p>
      * <p>Example: {@code ":nth-child(1)"}</p>
+     * <p>This will be appended to an id selector for the checking, e.g., if the value returned for this
+     * method is {@code ":my-crazy-pseudo(1)"}, then we will send to the browser something like
+     * {@code "#randomId:my-crazy-pseudo(1)"} which will be considered supported if no exception is thrown.</p>
      * @return The css selector to be appended to an id selector for checking if the selector is supported.
      */
-    public String selectorForPseudoClassNativeSupportCheck() {
+    public String pseudoClassForCSSNativeSupportCheck() {
         return toCssWhenNativelySupported().toString();
     }
 
