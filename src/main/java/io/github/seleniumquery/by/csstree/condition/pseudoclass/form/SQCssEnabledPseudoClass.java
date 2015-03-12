@@ -34,11 +34,7 @@ public class SQCssEnabledPseudoClass extends SQCssPseudoMaybeNativelySupported i
 
     @Override
     public SQLocatorXPath toXPath() {
-        return SQLocatorXPath.pureXPath(xPathEpression());
-    }
-
-    private String xPathEpression() {
-        return "(not(@disabled) and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")";
+        return SQLocatorXPath.pureXPath("(not(@disabled) and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")");
     }
 
 }
