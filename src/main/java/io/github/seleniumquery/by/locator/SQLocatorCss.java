@@ -55,8 +55,6 @@ public class SQLocatorCss {
         }
     };
 
-    public static enum CanFetchAllElementsOfTheQueryByItself { YES, NO }
-
     private String leftPart;
     private String tag;
     private String rightPart;

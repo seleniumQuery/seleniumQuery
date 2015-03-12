@@ -65,17 +65,15 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 import org.openqa.selenium.WebDriver;
 
 /**
  * <p>
- * When extending this class, implement the {@link SQCssPseudoMaybeNativelySupported#toXPath()}
- * or the {@link SQCssPseudoMaybeNativelySupported#toElementFilter()}, or both, but AT LEAST of them.
- * </p>
- * <p>
- * Also, don't forget to override the {@link SQCssPseudoMaybeNativelySupported#canPureXPath()}, if that's
- * the case.
+ * When extending this class, implement the {@link SQCssPseudoNeverNativelySupported#toXPath()}
+ * or the {@link SQCssPseudoNeverNativelySupported#toElementFilter()}, or both, but AT LEAST ONE of them.
  * </p>
  *
  * @author acdcjunior
@@ -84,18 +82,31 @@ import org.openqa.selenium.WebDriver;
 public abstract class SQCssPseudoNeverNativelySupported extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
 
     @Override
-    public boolean isThisSelectorNativelySupportedOn(WebDriver webDriver) {
+    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
         return false;
     }
 
     /**
-     * Due to the {@link SQCssPseudoNeverNativelySupported#isThisSelectorNativelySupportedOn(org.openqa.selenium.WebDriver)}
+     * Due to the {@link SQCssPseudoNeverNativelySupported#isThisCSSPseudoClassNativelySupportedOn(org.openqa.selenium.WebDriver)}
      * always returning false, this method will actually never be called.
      * I do know this smells like a violation of LSP, but I, for the love of Yoda, couldn't figure out a better way!
      */
     @Override
     public SQLocatorCss toCssWhenNativelySupported() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SQLocatorXPath toXPath() {
+        return new SQLocatorXPath(xPathExpression(), toElementFilter());
+    }
+
+    public String xPathExpression() {
+        return "true()";
+    }
+
+    public ElementFilter toElementFilter() {
+        return ElementFilter.FILTER_NOTHING;
     }
 
 }

@@ -20,6 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.DisabledPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 public class SQCssDisabledPseudoClass extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
 
@@ -32,12 +33,11 @@ public class SQCssDisabledPseudoClass extends SQCssPseudoMaybeNativelySupported 
     }
 
     @Override
-    public boolean canPureXPath() {
-        return true;
+    public SQLocatorXPath toXPath() {
+        return SQLocatorXPath.pureXPath(xPathExpression());
     }
 
-    @Override
-    public String toXPath() {
+    private String xPathExpression() {
         return "(@disabled and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")";
     }
 

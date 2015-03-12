@@ -39,7 +39,7 @@ import org.openqa.selenium.WebDriver;
 public abstract class SQCssPseudoAlwaysNativelySupported extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
 
     @Override
-    public boolean isThisSelectorNativelySupportedOn(WebDriver webDriver) {
+    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
         return true;
     }
 

@@ -58,10 +58,8 @@ public class SQLocator {
         if (canFetchThroughCssAlone()) {
             return findElementsByCss(context);
         }
+        // TODO move this whole thing to SQLocatorXPath
         List<WebElement> elementsByXPath = findElementsByXPath(context);
-        if (canFetchThroughXPathAlone()) {
-            return elementsByXPath;
-        }
         return xPathLocator.getElementFilterList().filter(context, elementsByXPath);
     }
 
@@ -97,10 +95,6 @@ public class SQLocator {
 
     public boolean canFetchThroughCssAlone() {
         return cssSelector.canFetchAllElementsOfTheQueryByItself();
-    }
-
-    public boolean canFetchThroughXPathAlone() {
-        return xPathLocator.isCanPureXPath();
     }
 
     public ElementFilterList getElementFilterList() {

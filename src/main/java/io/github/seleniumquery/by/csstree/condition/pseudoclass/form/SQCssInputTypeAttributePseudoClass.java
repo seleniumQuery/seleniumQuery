@@ -34,12 +34,7 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoNeverNative
     }
 
     @Override
-    public boolean canPureXPath() {
-        return true;
-    }
-
-    @Override
-    public String toXPath() {
+    public String xPathExpression() {
         return "(self::input and @type = '" + typeAttributeValue + "')";
     }
 

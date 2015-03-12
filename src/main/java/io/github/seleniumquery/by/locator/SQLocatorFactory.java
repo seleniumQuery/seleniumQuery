@@ -28,9 +28,11 @@ import java.util.List;
  */
 public class SQLocatorFactory {
 
+    // These two methods below may be pointless. They are here since a long time.
+    // If you are intending to use them, check them carefully (and write tests for them!)
     public static SQLocator createPureXPathOnly(SQLocator locator, String newXPathExpression) {
         return new SQLocator(locator.getWebDriver(), SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED,
-                new SQLocatorXPath(newXPathExpression, locator.canFetchThroughXPathAlone(), locator.getElementFilterList())
+                new SQLocatorXPath(newXPathExpression, locator.getElementFilterList())
         );
     }
 
@@ -38,7 +40,7 @@ public class SQLocatorFactory {
         ElementFilterList elementFilterList = locator.getElementFilterList();
         ElementFilterList newElementFilterList = mergeFilterIntoFilterList(elementFilterList, newFilter);
         return new SQLocator(locator.getWebDriver(), SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED,
-                new SQLocatorXPath(locator.getXPathExpression(), false, newElementFilterList)
+                new SQLocatorXPath(locator.getXPathExpression(), newElementFilterList)
         );
     }
 

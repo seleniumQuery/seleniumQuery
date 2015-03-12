@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
@@ -30,28 +29,29 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
 
     @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
-        if (isThisSelectorNativelySupportedOn(leftLocator.getWebDriver())) {
+        if (isThisCSSPseudoClassNativelySupportedOn(leftLocator.getWebDriver())) {
             return new SQLocator(
                     leftLocator.getWebDriver(),
                     leftLocator.getSQCssSelector().merge(toCssWhenNativelySupported()),
-                    new SQLocatorXPath(
-                        xPathMergeStrategy().mergeXPath(leftLocator, toXPath()), // TODO move this mergeXPath() to SQLocatorXPath, obviously
-                        canPureXPath(),
-                        SQLocatorXPath.mergeFilter(this, leftLocator)
-                    ));
+                    mergeXPath(leftLocator));
         } else {
             return new SQLocator(
                     leftLocator.getWebDriver(),
                     CSS_NOT_NATIVELY_SUPPORTED,
-                    new SQLocatorXPath(
-                        xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
-                        canPureXPath(),
-                        SQLocatorXPath.mergeFilter(this, leftLocator))
-                    );
+                    mergeXPath(leftLocator));
         }
     }
 
-    public boolean isThisSelectorNativelySupportedOn(WebDriver webDriver) {
+    private SQLocatorXPath mergeXPath(SQLocator leftLocator) {
+        SQLocatorXPath sqLocatorXPath = toXPath();
+        return new SQLocatorXPath(
+            // TODO move this mergeXPath() to SQLocatorXPath
+            xPathMergeStrategy().mergeXPath(leftLocator, sqLocatorXPath.getXPathExpression()),
+            leftLocator.getElementFilterList().merge(sqLocatorXPath.getElementFilterList())
+        );
+    }
+
+    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
         return DriverVersionUtils.getInstance().hasNativeSupportForPseudo(webDriver, selectorForPseudoClassNativeSupportCheck());
     }
 
@@ -66,20 +66,10 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
 
     public abstract SQLocatorCss toCssWhenNativelySupported();
 
-    public boolean canPureXPath() {
-        return false;
-    }
-
-    public String toXPath() {
-        return "true()";
-    }
-
     public XPathMergeStrategy xPathMergeStrategy() {
         return XPathMergeStrategy.CONDITIONAL_SIMPLE_XPATH_MERGE;
     }
 
-    public ElementFilter toElementFilter() {
-        return ElementFilter.FILTER_NOTHING;
-    }
+    public abstract SQLocatorXPath toXPath();
 
 }
