@@ -22,6 +22,11 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybe
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
+/**
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public class SQCssDisabledPseudoClass extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
 
     public static final String PSEUDO = "disabled";

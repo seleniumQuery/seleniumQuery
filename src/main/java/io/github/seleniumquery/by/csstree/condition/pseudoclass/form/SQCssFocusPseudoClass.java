@@ -22,6 +22,9 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClass
 /**
  * PhantomJS may have problems with this:
  * https://github.com/ariya/phantomjs/issues/10427
+ *
+ * @author acdcjunior
+ * @since 0.10.0
  */
 public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
 
