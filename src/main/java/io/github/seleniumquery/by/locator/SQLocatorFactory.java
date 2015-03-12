@@ -36,6 +36,13 @@ public class SQLocatorFactory {
 
     public static SQLocator createPureFilterLocator(SQLocator locator, ElementFilter newFilter) {
         ElementFilterList elementFilterList = locator.getElementFilterList();
+        ElementFilterList newElementFilterList = mergeFilterIntoFilterList(elementFilterList, newFilter);
+        return new SQLocator(locator.getWebDriver(), SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED,
+                new SQLocatorXPath(locator.getXPathExpression(), false, newElementFilterList)
+        );
+    }
+
+    public static ElementFilterList mergeFilterIntoFilterList(ElementFilterList elementFilterList, ElementFilter newFilter) {
         List<ElementFilter> newFilters = new ArrayList<ElementFilter>(elementFilterList.getElementFilters().size());
         for (ElementFilter elementFilter : elementFilterList.getElementFilters()) {
             if (elementFilter != ElementFilter.FILTER_NOTHING) {
@@ -43,9 +50,7 @@ public class SQLocatorFactory {
             }
         }
         newFilters.add(newFilter);
-        return new SQLocator(locator.getWebDriver(), SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED,
-                new SQLocatorXPath(locator.getXPathExpression(), false, new ElementFilterList(newFilters))
-        );
+        return new ElementFilterList(newFilters);
     }
 
 }

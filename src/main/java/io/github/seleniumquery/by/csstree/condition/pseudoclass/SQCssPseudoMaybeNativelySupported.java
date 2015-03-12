@@ -19,10 +19,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
-import io.github.seleniumquery.by.locator.SQLocatorFactory;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 import org.openqa.selenium.WebDriver;
 
@@ -39,7 +37,7 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
                     new SQLocatorXPath(
                         xPathMergeStrategy().mergeXPath(leftLocator, toXPath()), // TODO move this mergeXPath() to SQLocatorXPath, obviously
                         canPureXPath(),
-                        mergeFilter(leftLocator)
+                        SQLocatorXPath.mergeFilter(this, leftLocator)
                     ));
         } else {
             return new SQLocator(
@@ -48,7 +46,7 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
                     new SQLocatorXPath(
                         xPathMergeStrategy().mergeXPath(leftLocator, toXPath()),
                         canPureXPath(),
-                        mergeFilter(leftLocator))
+                        SQLocatorXPath.mergeFilter(this, leftLocator))
                     );
         }
     }
@@ -64,15 +62,6 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
      */
     public String selectorForPseudoClassNativeSupportCheck() {
         return toCssWhenNativelySupported().toString();
-    }
-
-    private ElementFilterList mergeFilter(SQLocator leftLocator) {
-        // If this locator can be evaluated by pure XPath, then it won't have any filters
-        if (canPureXPath()) {
-            return leftLocator.getElementFilterList();
-        }
-        ElementFilter filter = toElementFilter();
-        return SQLocatorFactory.createPureFilterLocator(leftLocator, filter).getElementFilterList();
     }
 
     public abstract SQLocatorCss toCssWhenNativelySupported();
