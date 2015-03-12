@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
@@ -36,7 +37,9 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoNeverNative
 
     @Override
     public SQLocatorXPath toXPath() {
-        return SQLocatorXPath.pureXPath("(self::input and @type = '" + typeAttributeValue + "')");
+        String typeAttribute = AttributeEvaluatorUtils.toXPathAttribute("type");
+        String lowerCaseTypeAttributeValue = AttributeEvaluatorUtils.toLowerCase(typeAttribute);
+        return SQLocatorXPath.pureXPath("(self::input and " + lowerCaseTypeAttributeValue + " = '" + typeAttributeValue + "')");
     }
 
 }
