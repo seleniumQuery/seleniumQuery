@@ -34,7 +34,6 @@ public class SQCssRadioPseudoClassTest {
 
     @Test
     public void toSQLocator__when_driver_does_NOT_have_native_support() {
-
         assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
                 new SQCssRadioPseudoClass(),
                 RADIO_PSEUDO,
