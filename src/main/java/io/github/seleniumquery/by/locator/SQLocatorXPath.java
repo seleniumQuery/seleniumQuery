@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.locator;
 
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
+import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 
 import static io.github.seleniumquery.by.filter.ElementFilter.FILTER_NOTHING;
@@ -27,15 +29,22 @@ import static java.util.Arrays.asList;
  */
 public class SQLocatorXPath {
 
+    public static ElementFilterList mergeFilter(SQCssPseudoMaybeNativelySupported pseudo, SQLocator leftLocator) {
+        // If this locator can be evaluated by pure XPath, then it won't have any filters
+        if (pseudo.canPureXPath()) {
+            return leftLocator.getElementFilterList();
+        }
+        ElementFilter filter = pseudo.toElementFilter();
+        ElementFilterList filterList = leftLocator.getElementFilterList();
+        return SQLocatorFactory.mergeFilterIntoFilterList(filterList, filter);
+    }
+
     public static SQLocatorXPath pureXPath(String xPathExpression) {
         return new SQLocatorXPath(xPathExpression, true, new ElementFilterList(asList(FILTER_NOTHING)));
     }
 
-    public static SQLocatorXPath takePurityFromPrevious(String newXPathExpression, SQLocator previous) {
-        return new SQLocatorXPath(newXPathExpression, previous.canFetchThroughXPathAlone(), previous.getElementFilterList());
-    }
-
     private String xPathExpression;
+
     private boolean canPureXPath;
     private ElementFilterList elementFilterList;
 
@@ -59,6 +68,10 @@ public class SQLocatorXPath {
 
     public String getFinalXPathExpression() {
         return "(" + this.xPathExpression + ")";
+    }
+
+    public SQLocatorXPath newXPathExpressionKeepingEverythingElse(String newXPathExpression) {
+        return new SQLocatorXPath(newXPathExpression, this.isCanPureXPath(), this.getElementFilterList());
     }
 
 }

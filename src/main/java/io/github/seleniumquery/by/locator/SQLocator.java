@@ -27,9 +27,9 @@ import java.util.List;
 /**
  * Cabaple of locating {@link WebElement}s on a given {@link SearchContext}.
  *
- * Attempts to find the elements by CSS if driver/browser supports. If not, will use XPath, it it suffices.
- * If it is still not enough, it will use the strategy (CSS or XPath) that brings less elements and them
- * filter them manually to match the desired original selector.
+ * Attempts to find the elements by CSS if driver/browser supports.
+ * If not, will use XPath. If the XPath expression is known NOT able of bringing all elements, then
+ * the locator also filters the results found by XPath.
  *
  * @author acdcjunior
  * @since 0.10.0
@@ -51,27 +51,18 @@ public class SQLocator {
     }
 
     public SQLocator(SQLocatorCss newCssSelector, String newXPathExpression, SQLocator previous) {
-        this(previous.webDriver, newCssSelector, SQLocatorXPath.takePurityFromPrevious(newXPathExpression, previous));
+        this(previous.webDriver, newCssSelector, previous.getSQLocatorXPath().newXPathExpressionKeepingEverythingElse(newXPathExpression));
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
         if (canFetchThroughCssAlone()) {
             return findElementsByCss(context);
         }
+        List<WebElement> elementsByXPath = findElementsByXPath(context);
         if (canFetchThroughXPathAlone()) {
-            return findElementsByXPath(context);
+            return elementsByXPath;
         }
-        List<WebElement> elements;
-        if (isCssTheBestStrategy()) {
-            elements = findElementsByCss(context);
-        } else {
-            elements = findElementsByXPath(context);
-        }
-        return xPathLocator.getElementFilterList().filter(context, elements);
-    }
-
-    private boolean isCssTheBestStrategy() {
-        return new Object().equals(new Object());
+        return xPathLocator.getElementFilterList().filter(context, elementsByXPath);
     }
 
     private List<WebElement> findElementsByCss(SearchContext context) {
@@ -94,6 +85,10 @@ public class SQLocator {
 
     public SQLocatorCss getSQCssSelector() {
         return cssSelector;
+    }
+
+    public SQLocatorXPath getSQLocatorXPath() {
+        return xPathLocator;
     }
 
     public String getXPathExpression() {
