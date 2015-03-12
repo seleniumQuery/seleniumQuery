@@ -19,6 +19,11 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.jqueryui;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 
+/**
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public class SQCssFocusablePseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
 
     public static final String PSEUDO = "focusable";

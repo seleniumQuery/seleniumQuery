@@ -16,6 +16,11 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
+/**
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public class SQCssPasswordPseudoClass extends SQCssInputTypeAttributePseudoClass {
 
     public static final String PSEUDO = "password";
