@@ -19,8 +19,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
-import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -48,8 +48,8 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoMaybeNativelySupported {
     public static final String CHECKED_PSEUDO = ":checked";
 
     @Override
-    public boolean isThisSelectorNativelySupportedOn(WebDriver webDriver) {
-        return isDriverWhereCheckedSelectorHasNoBugs(webDriver) && super.isThisSelectorNativelySupportedOn(webDriver);
+    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
+        return isDriverWhereCheckedSelectorHasNoBugs(webDriver) && super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
     }
 
     private boolean isDriverWhereCheckedSelectorHasNoBugs(WebDriver webDriver) {
@@ -63,13 +63,12 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoMaybeNativelySupported {
     }
 
     @Override
-    public String toXPath() {
-        return "((self::input and (@type = 'radio' or @type = 'checkbox')) or self::option)";
+    public SQLocatorXPath toXPath() {
+        return new SQLocatorXPath(xPathExpression(), CheckedPseudoClass.CHECKED_FILTER);
     }
 
-    @Override
-    public ElementFilter toElementFilter() {
-        return CheckedPseudoClass.CHECKED_FILTER;
+    private String xPathExpression() {
+        return "((self::input and (@type = 'radio' or @type = 'checkbox')) or self::option)";
     }
 
 }

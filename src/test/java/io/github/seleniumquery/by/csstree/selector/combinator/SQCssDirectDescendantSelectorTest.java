@@ -17,13 +17,12 @@
 package io.github.seleniumquery.by.csstree.selector.combinator;
 
 import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
-import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
@@ -39,10 +38,9 @@ public class SQCssDirectDescendantSelectorTest {
         SQLocator locator = directDescendantSelector.toSQLocator(mock(WebDriver.class));
         // then
         assertThat(locator.getCssSelector(), is("a>b"));
-        assertThat(locator.getXPathExpression(), is(".//*[self::a]/*[self::b]"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.canFetchThroughXPathAlone(), is(true));
-        assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
+        assertThat(locator.getXPathExpression(), is(".//*[self::a]/*[self::b]"));
+        assertThat(locator.getElementFilterList().getElementFilters(), empty());
     }
 
 }

@@ -16,13 +16,12 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
 
 public class SQCssEndsWithAttributeConditionTest {
@@ -36,11 +35,12 @@ public class SQCssEndsWithAttributeConditionTest {
         SQLocator locator = endsWithAttributeCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCssSelector(), is("[attribute$='stringToEnd']"));
+        assertThat(locator.canFetchThroughCssAlone(), is(true));
+
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";
         assertThat(locator.getXPathExpression(), is(".//*[substring("+attrName+", string-length("+attrName+")-10) = 'stringToEnd']"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.canFetchThroughXPathAlone(), is(true));
-        assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
+
+        assertThat(locator.getElementFilterList().getElementFilters(), empty());
     }
 
 }

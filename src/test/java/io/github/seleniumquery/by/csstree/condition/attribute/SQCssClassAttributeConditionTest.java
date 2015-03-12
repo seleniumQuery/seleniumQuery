@@ -16,13 +16,12 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
 
 public class SQCssClassAttributeConditionTest {
@@ -36,10 +35,9 @@ public class SQCssClassAttributeConditionTest {
         SQLocator locator = classAttributeCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCssSelector(), is(".clazz"));
-        assertThat(locator.getXPathExpression(), is(".//*[contains(concat(' ', normalize-space(@class), ' '), ' clazz ')]"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.canFetchThroughXPathAlone(), is(true));
-        assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
+        assertThat(locator.getXPathExpression(), is(".//*[contains(concat(' ', normalize-space(@class), ' '), ' clazz ')]"));
+        assertThat(locator.getElementFilterList().getElementFilters(), empty());
     }
 
 }

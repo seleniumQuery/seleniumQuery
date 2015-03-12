@@ -16,13 +16,12 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
 
 public class SQCssContainsPrefixAttributeConditionTest {
@@ -36,11 +35,12 @@ public class SQCssContainsPrefixAttributeConditionTest {
         SQLocator locator = containsPrefixAttributeCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCssSelector(), is("[hreflang|='en']"));
+        assertThat(locator.canFetchThroughCssAlone(), is(true));
+
         String hreflang = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'hreflang']";
         assertThat(locator.getXPathExpression(), is(String.format(".//*[(%s = 'en' or starts-with(%s, 'en-'))]", hreflang, hreflang)));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.canFetchThroughXPathAlone(), is(true));
-        assertThat(locator.getElementFilterList().getElementFilters(), contains(ElementFilter.FILTER_NOTHING));
+
+        assertThat(locator.getElementFilterList().getElementFilters(), empty());
     }
 
 }
