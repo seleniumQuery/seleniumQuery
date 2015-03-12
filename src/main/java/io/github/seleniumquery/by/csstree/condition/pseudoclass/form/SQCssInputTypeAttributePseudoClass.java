@@ -16,9 +16,10 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
+
+import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.lowerCaseTypeAttrVal;
 
 /**
  * This represents the pseudoclasses that check for the type attribute, such as
@@ -37,9 +38,7 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoNeverNative
 
     @Override
     public SQLocatorXPath toXPath() {
-        String typeAttribute = AttributeEvaluatorUtils.toXPathAttribute("type");
-        String lowerCaseTypeAttributeValue = AttributeEvaluatorUtils.toLowerCase(typeAttribute);
-        return SQLocatorXPath.pureXPath("(self::input and " + lowerCaseTypeAttributeValue + " = '" + typeAttributeValue + "')");
+        return SQLocatorXPath.pureXPath("(self::input and " + lowerCaseTypeAttrVal() + " = '" + typeAttributeValue + "')");
     }
 
 }
