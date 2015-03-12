@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.css.pseudoclasses;
 
+import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,6 +31,8 @@ import static io.github.seleniumquery.by.WebElementUtils.isOptionTag;
  * @since 0.9.0
  */
 public class SelectedPseudoClass implements PseudoClass<ConditionSimpleComponent> {
+
+    public static final ElementFilter SELECTED_FILTER = new PseudoClassFilter(new SelectedPseudoClass());
 
     // NOTE: This XPath does not work. Sometimes an element is selected WITHOUT having a selected attribute
 	public static final String SELECTED_PSEUDO_CONDITION = "self::option and " +
