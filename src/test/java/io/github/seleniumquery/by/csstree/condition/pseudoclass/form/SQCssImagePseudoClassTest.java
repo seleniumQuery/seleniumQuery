@@ -20,12 +20,12 @@ import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTRIBUTE_LOWER_CASE;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 
 public class SQCssImagePseudoClassTest {
 
     public static final String IMAGE_PSEUDO = ":image";
-    public static final String IMAGE_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTRIBUTE_LOWER_CASE + " = 'image')" + "]";
+    public static final String IMAGE_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'image')" + "]";
 
     @Test
     public void translate() {

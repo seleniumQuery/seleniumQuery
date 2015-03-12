@@ -19,6 +19,6 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 public class SQCssInputTypeAttributePseudoClassTest {
 
     public static final String TYPE_ATTRIBUTE = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'type']";
-    public static final String TYPE_ATTRIBUTE_LOWER_CASE = "translate(" + TYPE_ATTRIBUTE + ", 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')";
+    public static final String TYPE_ATTR_LOWER_CASE = "translate(" + TYPE_ATTRIBUTE + ", 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')";
 
 }
