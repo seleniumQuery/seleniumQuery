@@ -42,4 +42,13 @@ public class AttributeEvaluatorUtils {
         return "translate(" + s + ", 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')";
     }
 
+    /**
+     * Returns a XPath expression that finds the value of the {@code type} attribute and return
+     * its lowercased value.
+     * @return The XPath expression for the lowercased value of the {@code type} attribute.
+     */
+    public static String lowerCaseTypeAttrVal() {
+        String typeAttribute = toXPathAttribute("type");
+        return toLowerCase(typeAttribute);
+    }
 }
