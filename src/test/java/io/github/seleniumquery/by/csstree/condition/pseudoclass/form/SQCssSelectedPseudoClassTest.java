@@ -16,15 +16,70 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
+import io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass;
+import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.*;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
+import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.tagAsterisk;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class SQCssSelectedPseudoClassTest {
 
+    private static final String SELECTED_PSEUDO = ":selected";
+    private static final String SELECTED_XPATH_EXPRESSION = ".//*[self::option]";
+    private static final String CHECKED_AND_SELECTED_XPATH_EXPRESSION = ".//*[" +
+            "((self::input and ("+ TYPE_ATTR_LOWER_CASE +" = 'radio' or "+ TYPE_ATTR_LOWER_CASE +" = 'checkbox')) or self::option) and self::option" +
+            "]";
+
     @Test
     public void translate() {
-        assertPseudo(":selected", SQCssSelectedPseudoClass.class);
+        assertPseudo(SELECTED_PSEUDO, SQCssSelectedPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__when_driver_has_native_support() {
+        // supports pure CSS, but it is a translated one
+        SQLocator previousLocator = tagAsterisk(SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(":checked"));
+        assertPseudoClassHasLocator(
+                new SQCssSelectedPseudoClass(),
+                previousLocator,
+                "option:checked", PURE_CSS_IS_SUPPORTED,
+                SELECTED_XPATH_EXPRESSION,
+                contains(SelectedPseudoClass.SELECTED_FILTER)
+        );
+    }
+
+    @Test
+    public void toSQLocator__when_driver_does_NOT_have_native_support() {
+        assertPseudoClassHasLocatorWhenNotNativelySupported(
+                new SQCssSelectedPseudoClass(),
+                SELECTED_PSEUDO,
+                "*", PURE_CSS_IS_NOT_SUPPORTED,
+                SELECTED_XPATH_EXPRESSION,
+                contains(SelectedPseudoClass.SELECTED_FILTER)
+        );
+    }
+
+    @Test
+    public void toSQLocator__when_driver_has_native_supportx() {
+        // supports pure CSS, but it is a translated one
+        WebDriver mockDriverWithNativeSupportForChecked = SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(":checked");
+        SQLocator locatorAfterChecked = new SQCssCheckedPseudoClass().toSQLocator(tagAsterisk(mockDriverWithNativeSupportForChecked));
+
+        assertPseudoClassHasLocator(
+                new SQCssSelectedPseudoClass(),
+                locatorAfterChecked,
+                "option:checked:checked",
+                PURE_CSS_IS_SUPPORTED,
+                CHECKED_AND_SELECTED_XPATH_EXPRESSION,
+                contains(CheckedPseudoClass.CHECKED_FILTER, SelectedPseudoClass.SELECTED_FILTER)
+        );
     }
 
 }

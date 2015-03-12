@@ -16,11 +16,35 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
-public class SQCssSelectedPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :selected can be translated into option:checked.
+ * We need to expand how SQLocator handles the CSS selector, as we needed to override the previously set tag.
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssSelectedPseudoClass extends SQCssPseudoMaybeNativelySupported {
 
     public static final String PSEUDO = "selected";
+
+    @Override
+    public String pseudoClassForCSSNativeSupportCheck() {
+        return SQCssCheckedPseudoClass.CHECKED_PSEUDO;
+    }
+
+    @Override
+    public SQLocatorCss toCssWhenNativelySupported() {
+        return new SQLocatorCss("option", ":checked");
+    }
+
+    @Override
+    public SQLocatorXPath toXPath() {
+        return new SQLocatorXPath("self::option", SelectedPseudoClass.SELECTED_FILTER);
+    }
 
 }
