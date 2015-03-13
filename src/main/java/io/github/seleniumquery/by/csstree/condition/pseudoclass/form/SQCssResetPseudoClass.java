@@ -16,8 +16,10 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
+
+import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
  * :reset selector
@@ -26,8 +28,13 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClass
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssResetPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssResetPseudoClass extends SQCssPseudoNeverNativelySupported {
 
     public static final String PSEUDO = "reset";
+
+    @Override
+    public SQLocatorXPath toXPath() {
+        return SQLocatorXPath.pureXPath("((self::input or self::button) and "+ TYPE_ATTR_LC_VAL +" = 'reset')");
+    }
 
 }
