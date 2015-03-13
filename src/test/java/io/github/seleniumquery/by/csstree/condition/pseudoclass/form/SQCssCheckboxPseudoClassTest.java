@@ -18,13 +18,14 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 
 public class SQCssCheckboxPseudoClassTest {
 
     public static final String CHECKBOX_PSEUDO = ":checkbox";
+    public static final String CHECKBOX_CSS_SELECTOR = "input[type=\"checkbox\"]";
     public static final String CHECKBOX_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'checkbox')" + "]";
 
     @Test
@@ -34,9 +35,10 @@ public class SQCssCheckboxPseudoClassTest {
 
     @Test
     public void toSQLocator__when_driver_does_NOT_have_native_support() {
-        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
+        assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(
                 new SQCssCheckboxPseudoClass(),
                 CHECKBOX_PSEUDO,
+                CHECKBOX_CSS_SELECTOR,
                 CHECKBOX_XPATH_EXPRESSION
         );
     }

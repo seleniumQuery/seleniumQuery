@@ -16,7 +16,8 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoAlwaysNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
@@ -28,12 +29,17 @@ import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.
  * @author acdcjunior
  * @since 0.10.0
  */
-abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoNeverNativelySupported {
+abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoAlwaysNativelySupported {
 
     private String typeAttributeValue;
 
     protected SQCssInputTypeAttributePseudoClass(String typeAttributeValue) {
         this.typeAttributeValue = typeAttributeValue;
+    }
+
+    @Override
+    public SQLocatorCss toCssWhenNativelySupported() {
+        return new SQLocatorCss("input", "[type=\"" + typeAttributeValue + "\"]");
     }
 
     @Override

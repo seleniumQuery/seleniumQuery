@@ -18,13 +18,14 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 
 public class SQCssFilePseudoClassTest {
 
     public static final String FILE_PSEUDO = ":file";
+    public static final String FILE_CSS_SELECTOR = "input[type=\"file\"]";
     public static final String FILE_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'file')" + "]";
 
     @Test
@@ -34,10 +35,11 @@ public class SQCssFilePseudoClassTest {
 
     @Test
     public void toSQLocator__when_driver_does_NOT_have_native_support() {
-        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
-            new SQCssFilePseudoClass(),
-            FILE_PSEUDO,
-            FILE_XPATH_EXPRESSION
+        assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(
+                new SQCssFilePseudoClass(),
+                FILE_PSEUDO,
+                FILE_CSS_SELECTOR,
+                FILE_XPATH_EXPRESSION
         );
     }
 
