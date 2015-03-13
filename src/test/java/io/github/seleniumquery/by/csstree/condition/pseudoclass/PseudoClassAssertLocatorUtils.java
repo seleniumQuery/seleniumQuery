@@ -123,6 +123,26 @@ public class PseudoClassAssertLocatorUtils {
         assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(pseudoClassObject, pseudoClass, expectedXPath);
     }
 
+    public static void assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(SQCssConditionImplementedLocators pseudoClassObject,
+                                                                                                    String pseudoClass,
+                                                                                                    String expectedCss,
+                                                                                                    String expectedXPath) {
+        assertPseudoClassHasLocatorWhenNativelySupported(
+                pseudoClassObject,
+                pseudoClass,
+                expectedCss, PURE_CSS_IS_SUPPORTED,
+                expectedXPath,
+                empty()
+        );
+        assertPseudoClassHasLocatorWhenNotNativelySupported(
+                pseudoClassObject,
+                pseudoClass,
+                expectedCss, PURE_CSS_IS_SUPPORTED,
+                expectedXPath,
+                empty()
+        );
+    }
+
     public static void assertPseudoOnlySupportsPureXPathWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass,
                                                                               String expectedXPath) {
         assertPseudoClassHasLocatorWhenNativelySupported(
