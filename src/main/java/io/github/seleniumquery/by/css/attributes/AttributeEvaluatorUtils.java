@@ -28,7 +28,13 @@ import org.w3c.css.sac.AttributeCondition;
  */
 public class AttributeEvaluatorUtils {
 
-	public static String getXPathAttribute(AttributeCondition attributeCondition) {
+    /**
+     * Returns a XPath expression that finds the value of the {@code type} attribute and return
+     * its lowercased value.
+     */
+    public static final String TYPE_ATTR_LC_VAL = toLowerCase(toXPathAttribute("type"));
+
+    public static String getXPathAttribute(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		return toXPathAttribute(attributeName);
 	}
@@ -42,13 +48,4 @@ public class AttributeEvaluatorUtils {
         return "translate(" + s + ", 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')";
     }
 
-    /**
-     * Returns a XPath expression that finds the value of the {@code type} attribute and return
-     * its lowercased value.
-     * @return The XPath expression for the lowercased value of the {@code type} attribute.
-     */
-    public static String lowerCaseTypeAttrVal() {
-        String typeAttribute = toXPathAttribute("type");
-        return toLowerCase(typeAttribute);
-    }
 }

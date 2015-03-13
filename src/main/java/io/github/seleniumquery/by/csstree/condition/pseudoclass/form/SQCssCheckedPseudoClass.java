@@ -23,7 +23,7 @@ import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.lowerCaseTypeAttrVal;
+import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
  * <p>
@@ -70,7 +70,7 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoMaybeNativelySupported {
     }
 
     private String xPathExpression() {
-        return "((self::input and ("+ lowerCaseTypeAttrVal() +" = 'radio' or "+ lowerCaseTypeAttrVal() +" = 'checkbox')) or self::option)";
+        return "((self::input and ("+ TYPE_ATTR_LC_VAL +" = 'radio' or "+ TYPE_ATTR_LC_VAL +" = 'checkbox')) or self::option)";
     }
 
 }
