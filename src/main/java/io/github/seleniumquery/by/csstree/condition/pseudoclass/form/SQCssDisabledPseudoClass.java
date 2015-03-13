@@ -17,7 +17,6 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.DisabledPseudoClass;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
@@ -27,7 +26,7 @@ import io.github.seleniumquery.by.locator.SQLocatorXPath;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssDisabledPseudoClass extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
+public class SQCssDisabledPseudoClass extends SQCssPseudoMaybeNativelySupported {
 
     public static final String PSEUDO = "disabled";
     public static final String DISABLED_PSEUDO = ":" + PSEUDO;
