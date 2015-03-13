@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 
 /**
@@ -27,7 +26,7 @@ import io.github.seleniumquery.by.locator.SQLocatorCss;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssContainsSubstringAttributeCondition extends SQCssAttributeCondition implements SQCssConditionImplementedNotYet {
+public class SQCssContainsSubstringAttributeCondition extends SQCssAttributeCondition {
 
     public SQCssContainsSubstringAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
