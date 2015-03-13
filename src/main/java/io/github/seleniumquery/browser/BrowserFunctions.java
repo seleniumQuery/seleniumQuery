@@ -95,16 +95,16 @@ public class BrowserFunctions {
      * $.pause(200); // pauses for 200 milliseconds
      * $.pause(10 * 1000); // pauses for 10 seconds
      * </pre>
+     *
+     * <strong>IMPORTANT: 'Pause' is considered to be a bad design practice.</strong> It is better to write code
+     * based on what the user will expect, for that consider exploring the {@code .waitUntil()} functions, such as
+     * in <code>$("#someDivThatShouldComeOut").waitUntil().is(":visible");</code>.
+     *
      * @param timeToPauseInMillis Pause duration, in milliseconds.
      * @return A self reference.
      *
      * @since 0.9.0
-     *
-     * @deprecated 'Pause' is considered to be a bad design practice. It is better to write code based on what the user
-     *      will expect, for that consider using {@code .waitUntil()} functions, such as
-     *      <code>$("#someDivThatShouldComeOut").waitUntil().is(":visible");</code>.
      */
-    @Deprecated
     @SuppressWarnings("deprecation")
     public BrowserFunctions pause(long timeToPauseInMillis) {
         LOGGER.debug(format("Pausing for %d milliseconds.", timeToPauseInMillis));
