@@ -16,6 +16,12 @@
 
 package io.github.seleniumquery.by.locator;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+
 /**
  * Given the selector:
  * div > p:visible
@@ -149,6 +155,12 @@ public class SQLocatorCss {
             return new SQLocatorCss(this.toString() + combinator, UNIVERSAL_SELECTOR, "");
         }
         return CSS_NOT_NATIVELY_SUPPORTED;
+    }
+
+    // TODO dont know if this has unit tests
+    public List<WebElement> findElements(SearchContext context) {
+        String finalCssSelector = this.toString();
+        return new By.ByCssSelector(finalCssSelector).findElements(context);
     }
 
 }

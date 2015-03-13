@@ -18,6 +18,11 @@ package io.github.seleniumquery.by.locator;
 
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * If the ElementFilterList is empty, then it can fetch everything it needs through XPath alone.
@@ -61,12 +66,23 @@ public class SQLocatorXPath {
         return elementFilterList;
     }
 
-    public String getFinalXPathExpression() {
-        return "(" + this.xPathExpression + ")";
-    }
-
     public SQLocatorXPath newXPathExpressionKeepingEverythingElse(String newXPathExpression) {
         return new SQLocatorXPath(newXPathExpression, this.getElementFilterList());
+    }
+
+    // TODO dont know if this has unit tests
+    public List<WebElement> findElements(SearchContext context) {
+        List<WebElement> elementsByXPath = findElementsByXPath(context);
+        return this.getElementFilterList().filter(context, elementsByXPath);
+    }
+
+    private List<WebElement> findElementsByXPath(SearchContext context) {
+        String finalXPathExpression = this.getFinalXPathExpression();
+        return new By.ByXPath(finalXPathExpression).findElements(context);
+    }
+
+    public String getFinalXPathExpression() {
+        return "(" + this.xPathExpression + ")";
     }
 
 }

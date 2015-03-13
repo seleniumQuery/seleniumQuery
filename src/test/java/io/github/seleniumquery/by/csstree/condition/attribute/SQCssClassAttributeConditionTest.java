@@ -34,7 +34,7 @@ public class SQCssClassAttributeConditionTest {
         // when
         SQLocator locator = classAttributeCondition.toSQLocator(previous);
         // then
-        assertThat(locator.getCssSelector(), is(".clazz"));
+        assertThat(locator.getSqLocatorCss().toString(), is(".clazz"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[contains(concat(' ', normalize-space(@class), ' '), ' clazz ')]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

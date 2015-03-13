@@ -34,7 +34,7 @@ public class SQCssEqualsOrHasAttributeConditionTest {
         // when
         SQLocator locator = hasAttributeCondition.toSQLocator(previous);
         // then
-        assertThat(locator.getCssSelector(), is("[attrib]"));
+        assertThat(locator.getSqLocatorCss().toString(), is("[attrib]"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attrib']]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());
@@ -48,7 +48,7 @@ public class SQCssEqualsOrHasAttributeConditionTest {
         // when
         SQLocator locator = hasAttributeCondition.toSQLocator(previous);
         // then
-        assertThat(locator.getCssSelector(), is("[attrib=valz]"));
+        assertThat(locator.getSqLocatorCss().toString(), is("[attrib=valz]"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attrib']='valz']"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());
