@@ -18,13 +18,27 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 
 public class SQCssResetPseudoClassTest {
 
     @Test
     public void translate() {
         assertPseudo(":reset", SQCssResetPseudoClass.class);
+    }
+
+    public static final String RESET_PSEUDO = ":reset";
+    public static final String RESET_XPATH_EXPRESSION = ".//*[" + "((self::input or self::button) and " + TYPE_ATTR_LOWER_CASE + " = 'reset')" + "]";
+
+    @Test
+    public void toSQLocator__when_driver_does_NOT_have_native_support() {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
+                new SQCssResetPseudoClass(),
+                RESET_PSEUDO,
+                RESET_XPATH_EXPRESSION
+        );
     }
 
 }
