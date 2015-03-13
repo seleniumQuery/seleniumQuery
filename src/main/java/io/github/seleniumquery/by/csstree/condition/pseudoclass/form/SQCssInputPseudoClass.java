@@ -16,16 +16,25 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.css.pseudoclasses.InputPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
+
+import static org.apache.commons.lang3.StringUtils.join;
 
 /**
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssInputPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssInputPseudoClass extends SQCssPseudoNeverNativelySupported {
 
     public static final String PSEUDO = "input";
+    public static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";
+
+    @Override
+    public SQLocatorXPath toXPath() {
+        return SQLocatorXPath.pureXPath(INPUT_TAGS_XPATH);
+    }
 
 }
