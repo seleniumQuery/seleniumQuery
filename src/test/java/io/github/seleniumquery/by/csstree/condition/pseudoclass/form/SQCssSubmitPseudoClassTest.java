@@ -18,13 +18,35 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 
 public class SQCssSubmitPseudoClassTest {
 
+    public static final String SUBMIT_PSEUDO = ":submit";
+    public static final String SUBMIT_XPATH_EXPRESSION = ".//*[" +
+            "(" +
+                "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'submit')" +
+            " or " +
+                "(self::button and " +
+                                    "(" + TYPE_ATTR_LOWER_CASE + " = 'submit' or not(@type))" +
+                ")" +
+            ")" +
+        "]";
+
     @Test
     public void translate() {
-        assertPseudo(":submit", SQCssSubmitPseudoClass.class);
+        assertPseudo(SUBMIT_PSEUDO, SQCssSubmitPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__REGARDLESS_of_driver_native_support() {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
+                new SQCssSubmitPseudoClass(),
+                SUBMIT_PSEUDO,
+                SUBMIT_XPATH_EXPRESSION
+        );
     }
 
 }
