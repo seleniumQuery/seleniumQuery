@@ -16,15 +16,22 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
+import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.TAG_ASTERISK;
 
 public class SQCssAnimatedPseudoClassTest {
 
     @Test
     public void translate() {
         assertPseudo(":animated", SQCssAnimatedPseudoClass.class);
+    }
+
+    @Test(expected = UnsupportedPseudoClassException.class)
+    public void toSQLocator__should_just_throw_exception() {
+        new SQCssAnimatedPseudoClass().toSQLocator(TAG_ASTERISK);
     }
 
 }
