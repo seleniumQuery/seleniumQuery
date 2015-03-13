@@ -18,13 +18,33 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 
 public class SQCssTextPseudoClassTest {
 
+    public static final String TEXT_PSEUDO = ":text";
+    public static final String TEXT_XPATH_EXPRESSION = ".//*[" +
+                "(" +
+                    "self::input" +
+                        " and " +
+                    "(" + TYPE_ATTR_LOWER_CASE + " = 'text' or not(@type))" +
+                ")" +
+            "]";
+
     @Test
     public void translate() {
-        assertPseudo(":text", SQCssTextPseudoClass.class);
+        assertPseudo(TEXT_PSEUDO, SQCssTextPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__REGARDLESS_of_driver_native_support() {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
+                new SQCssTextPseudoClass(),
+                TEXT_PSEUDO,
+                TEXT_XPATH_EXPRESSION
+        );
     }
 
 }

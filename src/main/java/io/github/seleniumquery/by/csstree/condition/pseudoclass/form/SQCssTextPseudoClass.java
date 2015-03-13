@@ -16,16 +16,23 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
+
+import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssTextPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssTextPseudoClass extends SQCssPseudoNeverNativelySupported {
 
     public static final String PSEUDO = "text";
+
+    @Override
+    public SQLocatorXPath toXPath() {
+        return SQLocatorXPath.pureXPath("(self::input and ("+ TYPE_ATTR_LC_VAL +" = 'text' or not(@type)))");
+    }
 
 }
