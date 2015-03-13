@@ -164,7 +164,7 @@ public class PseudoClassAssertLocatorUtils {
         // when
         SQLocator locator = pseudoClassObject.toSQLocator(previous);
         // then
-        assertThat("CSS selector", locator.getCssSelector(), is(expectedCss));
+        assertThat("CSS selector", locator.getSqLocatorCss().toString(), is(expectedCss));
         assertThat("Can pure CSS?", locator.canFetchThroughCssAlone(), is(canPureCss));
         assertThat("XPath Expression", locator.getXPathExpression(), is(expectedXPath));
         assertThat("ElementFilterList", locator.getElementFilterList().getElementFilters(), elementFilterMatcher);

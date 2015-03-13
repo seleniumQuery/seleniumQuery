@@ -37,7 +37,7 @@ public class SQCssDirectDescendantSelectorTest {
         // when
         SQLocator locator = directDescendantSelector.toSQLocator(mock(WebDriver.class));
         // then
-        assertThat(locator.getCssSelector(), is("a>b"));
+        assertThat(locator.getSqLocatorCss().toString(), is("a>b"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[self::a]/*[self::b]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

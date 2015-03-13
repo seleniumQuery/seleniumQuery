@@ -44,7 +44,7 @@ public class SQCssIdAttributeCondition implements SQCssCondition, SQCssCondition
 
     @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
-        SQLocatorCss newCssSelector = leftLocator.getSQCssSelector().merge(toCSS());
+        SQLocatorCss newCssSelector = leftLocator.getSqLocatorCss().merge(toCSS());
         String newXPathExpression = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
         return new SQLocator(newCssSelector, newXPathExpression, leftLocator);
     }

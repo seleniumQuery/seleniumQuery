@@ -34,7 +34,7 @@ public class SQCssStartsWithAttributeConditionTest {
         // when
         SQLocator locator = startsWithAttributeCondition.toSQLocator(previous);
         // then
-        assertThat(locator.getCssSelector(), is("[attribute^='stringToStart']"));
+        assertThat(locator.getSqLocatorCss().toString(), is("[attribute^='stringToStart']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";

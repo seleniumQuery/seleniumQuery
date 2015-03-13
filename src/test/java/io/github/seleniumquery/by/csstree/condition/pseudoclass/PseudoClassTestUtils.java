@@ -83,7 +83,7 @@ public class PseudoClassTestUtils {
         // when
         SQLocator locator = ((SQCssConditionImplementedLocators) pseudoClassCondition).toSQLocator(previous);
         // then
-        assertThat(locator.getCssSelector(), is(previous.getCssSelector()));
+        assertThat(locator.getSqLocatorCss().toString(), is(previous.getSqLocatorCss().toString()));
         assertThat(locator.canFetchThroughCssAlone(), is(false));
         assertThat(locator.getXPathExpression(), is(previous.getXPathExpression()));
         assertThat(locator.getElementFilterList().getElementFilters(), contains(pseudoClassFilter));

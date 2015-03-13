@@ -32,7 +32,7 @@ public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClass
         if (isThisCSSPseudoClassNativelySupportedOn(leftLocator.getWebDriver())) {
             return new SQLocator(
                     leftLocator.getWebDriver(),
-                    leftLocator.getSQCssSelector().merge(toCssWhenNativelySupported()),
+                    leftLocator.getSqLocatorCss().merge(toCssWhenNativelySupported()),
                     mergeXPath(leftLocator));
         } else {
             return new SQLocator(

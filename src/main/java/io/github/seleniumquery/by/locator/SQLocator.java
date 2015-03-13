@@ -17,7 +17,6 @@
 package io.github.seleniumquery.by.locator;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
-import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,13 +40,13 @@ public class SQLocator {
      * the elements will be searched on.
      */
     private WebDriver webDriver;
-    private SQLocatorCss cssSelector;
-    private SQLocatorXPath xPathLocator;
+    private SQLocatorCss sqLocatorCss;
+    private SQLocatorXPath sqLocatorXPath;
 
-    public SQLocator(WebDriver webDriver, SQLocatorCss cssSelector, SQLocatorXPath xPathLocator) {
+    public SQLocator(WebDriver webDriver, SQLocatorCss sqLocatorCss, SQLocatorXPath sqLocatorXPath) {
         this.webDriver = webDriver;
-        this.cssSelector = cssSelector;
-        this.xPathLocator = xPathLocator;
+        this.sqLocatorCss = sqLocatorCss;
+        this.sqLocatorXPath = sqLocatorXPath;
     }
 
     public SQLocator(SQLocatorCss newCssSelector, String newXPathExpression, SQLocator previous) {
@@ -56,49 +55,33 @@ public class SQLocator {
 
     public List<WebElement> findWebElements(SearchContext context) {
         if (canFetchThroughCssAlone()) {
-            return findElementsByCss(context);
+            return sqLocatorCss.findElements(context);
         }
-        // TODO move this whole thing to SQLocatorXPath
-        List<WebElement> elementsByXPath = findElementsByXPath(context);
-        return xPathLocator.getElementFilterList().filter(context, elementsByXPath);
-    }
-
-    private List<WebElement> findElementsByCss(SearchContext context) {
-        String finalCssSelector = this.cssSelector.toString();
-        return new By.ByCssSelector(finalCssSelector).findElements(context);
-    }
-
-    private List<WebElement> findElementsByXPath(SearchContext context) {
-        String finalXPathExpression = this.xPathLocator.getFinalXPathExpression();
-        return new By.ByXPath(finalXPathExpression).findElements(context);
+        return sqLocatorXPath.findElements(context);
     }
 
     public WebDriver getWebDriver() {
         return webDriver;
     }
 
-    public String getCssSelector() {
-        return cssSelector.toString();
-    }
-
-    public SQLocatorCss getSQCssSelector() {
-        return cssSelector;
+    public SQLocatorCss getSqLocatorCss() {
+        return sqLocatorCss;
     }
 
     public SQLocatorXPath getSQLocatorXPath() {
-        return xPathLocator;
+        return sqLocatorXPath;
     }
 
     public String getXPathExpression() {
-        return xPathLocator.getXPathExpression();
+        return sqLocatorXPath.getXPathExpression();
     }
 
     public boolean canFetchThroughCssAlone() {
-        return cssSelector.canFetchAllElementsOfTheQueryByItself();
+        return sqLocatorCss.canFetchAllElementsOfTheQueryByItself();
     }
 
     public ElementFilterList getElementFilterList() {
-        return xPathLocator.getElementFilterList();
+        return sqLocatorXPath.getElementFilterList();
     }
 
 }
