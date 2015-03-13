@@ -7,7 +7,11 @@ import java.util.Map;
 public class UnsupportedPseudoClassException extends RuntimeException {
 	
 	public UnsupportedPseudoClassException(String pseudoClass) {
-		super("The pseudo-class \""+pseudoClass+"\" is not supported.");
+		this(pseudoClass, "");
+	}
+
+	public UnsupportedPseudoClassException(String pseudoClass, String reason) {
+		super("The pseudo-class \""+pseudoClass+"\" is not supported" + (reason.isEmpty() ? "." : ": "+reason));
 	}
 
 	public UnsupportedPseudoClassException(Map<String, String> stringMap, SimpleSelector selectorUpToThisPoint, String pseudoClassValue) {

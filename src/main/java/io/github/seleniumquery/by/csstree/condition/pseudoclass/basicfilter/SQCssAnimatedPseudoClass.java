@@ -16,16 +16,26 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.locator.SQLocator;
 
-public class SQCssAnimatedPseudoClass extends SQCssFunctionalPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * To implement this selector, we would need to use JavaScript and access jQuery's internals.
+ * Considering the utility of this selector (from the user's point of view) is minimal, we aren't including it.
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssAnimatedPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
 
     public static final String PSEUDO = "animated";
 
-    public SQCssAnimatedPseudoClass(PseudoClassSelector pseudoClassSelector) {
-        super(pseudoClassSelector);
+    @Override
+    public SQLocator toSQLocator(SQLocator leftLocator) {
+        throw new UnsupportedPseudoClassException(":animated", "This selector uses internals of jQuery that nor seleniumQuery, " +
+                "neither the user should access.");
     }
 
 }
