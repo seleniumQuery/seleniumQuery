@@ -16,16 +16,28 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
+
+import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssSubmitPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssSubmitPseudoClass extends SQCssPseudoNeverNativelySupported {
 
     public static final String PSEUDO = "submit";
+    public static final String SUBMIT_XPATH_EXPRESSION = "(" +
+            "(self::input and " + TYPE_ATTR_LC_VAL + " = 'submit')" +
+            " or " +
+            "(self::button and (" + TYPE_ATTR_LC_VAL + " = 'submit' or not(@type)))" +
+        ")";
+
+    @Override
+    public SQLocatorXPath toXPath() {
+        return SQLocatorXPath.pureXPath(SUBMIT_XPATH_EXPRESSION);
+    }
 
 }
