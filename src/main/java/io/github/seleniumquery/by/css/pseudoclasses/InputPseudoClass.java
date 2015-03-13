@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class InputPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
-	private static final List<String> FORM_ELEMENT_TAGS = Arrays.asList("input", "button", "select", "textarea");
+	public static final List<String> FORM_ELEMENT_TAGS = Arrays.asList("input", "button", "select", "textarea");
 	
 	private static final String INPUT = "input";
 	
