@@ -20,6 +20,8 @@ import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNot
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 
 /**
+ * :reset selector
+ * http://api.jquery.com/reset-selector/
  *
  * @author acdcjunior
  * @since 0.10.0
