@@ -31,8 +31,7 @@ import static org.junit.Assert.fail;
 
 public class ValFunctionTest {
 	
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(ValFunctionTest.class);
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(ValFunctionTest.class);
 
 	// http://jsbin.com/futuhipuhi/2/edit?html,js,output
     @Test
