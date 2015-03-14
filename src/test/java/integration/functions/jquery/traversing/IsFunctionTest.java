@@ -1,4 +1,4 @@
-package integration.functions;
+package integration.functions.jquery.traversing;
 
 import infrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
