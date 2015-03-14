@@ -30,8 +30,7 @@ import static org.junit.Assert.assertThat;
 
 public class TextFunctionTest {
 	
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(TextFunctionTest.class);
+	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(TextFunctionTest.class);
 
     @Test
     public void text_function() {
