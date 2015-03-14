@@ -65,13 +65,15 @@ public class SeleniumQueryConfig {
 	private static void loadPropertiesFileFromClasspath() throws IOException {
 		properties = new Properties();
 		LOGGER.debug("Attempting to load properties from seleniumQuery.properties in classpath.");
-		InputStream in = SeleniumQueryConfig.class.getClassLoader().getResourceAsStream("seleniumQuery.properties");
-		if (in == null) {
+		InputStream inputStream = SeleniumQueryConfig.class.getClassLoader().getResourceAsStream("seleniumQuery.properties");
+		if (inputStream == null) {
 			LOGGER.info("No seleniumQuery.properties found in classpath, falling back to defaults.");
 		}
-		properties.load(in);
-		in.close();
-	}
+		properties.load(inputStream);
+        if (inputStream != null) {
+            inputStream.close();
+        }
+    }
 	
 	private static long getLongProperty(String propertyName, long defaultValue) {
 		String propertyAsString = SeleniumQueryConfig.properties.getProperty(propertyName);
