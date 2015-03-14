@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package integration.functions;
+package integration.functions.jquery.traversing;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
