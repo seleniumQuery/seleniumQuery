@@ -28,7 +28,6 @@ import static java.lang.String.format;
  * Utilities for instantiating drivers.
  *
  * @author acdcjunior
- *
  * @since 0.9.0
  */
 public class DriverInstantiationUtils {
