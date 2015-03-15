@@ -16,11 +16,18 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
+import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
+import io.github.seleniumquery.by.preparser.CSSSelectorParser;
+import org.w3c.css.sac.Selector;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
 import static org.hamcrest.CoreMatchers.*;
@@ -95,6 +102,17 @@ public class PseudoClassTestUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * This method creates a {@link io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector} equivalent to {@code *:the-pseudo-class(ARGUMENT)}.
+     */
+    public static PseudoClassSelector createPseudoClassSelectorAppliedToUniversalSelector(String functionalPseudoClassArgument) {
+        CSSParsedSelectorList cssParsedSelectorList = CSSSelectorParser.parseSelector("*");
+        Selector universalSelector = cssParsedSelectorList.getSelectorList().item(0);
+        Map<String, String> stringMap = new HashMap<String, String>();
+        stringMap.put("1", functionalPseudoClassArgument);
+        return new PseudoClassSelector(stringMap, universalSelector, "(1)");
     }
 
 }

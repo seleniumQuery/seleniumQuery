@@ -25,10 +25,21 @@ import io.github.seleniumquery.by.locator.SQLocatorUtils;
  */
 public abstract class XPathMergeStrategy {
 
+    // TODO these methods do not have unit tests specific to them
+    // I'm leaving them without unit tests right now because I get a feeling they
+    // will be moved or the method they call will be inlined.
+    // Still, do something about it when you move them or inline those.
     public static final XPathMergeStrategy CONDITIONAL_SIMPLE_XPATH_MERGE = new XPathMergeStrategy() {
         @Override
         public String mergeXPath(SQLocator leftLocator, String xPathPart) {
             return SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), xPathPart);
+        }
+    };
+
+    public static final XPathMergeStrategy CONDITIONAL_TO_ALL_XPATH_MERGE = new XPathMergeStrategy() {
+        @Override
+        public String mergeXPath(SQLocator leftLocator, String xPathPart) {
+            return SQLocatorUtils.conditionalToAllXPathMerge(leftLocator.getXPathExpression(), xPathPart);
         }
     };
 

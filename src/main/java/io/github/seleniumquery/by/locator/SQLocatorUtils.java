@@ -32,4 +32,12 @@ public class SQLocatorUtils {
         return leftXPathExpression.substring(0, leftXPathExpression.length()-1) + " and " + rightXPathExpression + "]";
     }
 
+    public static String conditionalToAllXPathMerge(String leftXPathExpression, String rightXPathExpression) {
+        String resultingLeftXPathExpression = leftXPathExpression;
+        if (leftXPathExpression.endsWith("[true()]")) {
+            resultingLeftXPathExpression = leftXPathExpression.substring(0, leftXPathExpression.length()-8);
+        }
+        return "(" + resultingLeftXPathExpression + ")[" + rightXPathExpression + "]";
+    }
+
 }

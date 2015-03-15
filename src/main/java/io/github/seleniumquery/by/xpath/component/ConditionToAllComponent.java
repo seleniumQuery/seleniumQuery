@@ -25,6 +25,11 @@ public class ConditionToAllComponent extends ConditionComponent {
         return "(" + sourceXPathExpression + ")" + this.xPathExpression;
     }
 
+    /**
+     * // TODO the code below seems identical to
+     * {@link io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent#mergeAsCondition(String, String)}.
+     * Is it??
+     */
     @Override
     public String mergeExpressionAsCondition(String sourceXPathExpression) {
         if (sourceXPathExpression.equals(MATCH_EVERYTHING_XPATH_CONDITIONAL)) {
