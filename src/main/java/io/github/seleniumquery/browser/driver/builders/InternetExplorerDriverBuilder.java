@@ -27,10 +27,9 @@ import static io.github.seleniumquery.browser.driver.builders.DriverInstantiatio
 import static java.lang.String.format;
 
 /**
- * Builds InternetExplorerDriver instances for SeleniumQueryDriver.
+ * Builds {@link InternetExplorerDriver} instances for SeleniumQueryDriver.
  *
  * @author acdcjunior
- *
  * @since 0.9.0
  */
 public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplorerDriverBuilder> {

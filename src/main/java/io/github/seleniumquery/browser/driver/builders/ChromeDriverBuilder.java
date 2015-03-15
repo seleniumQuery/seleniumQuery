@@ -29,10 +29,9 @@ import static io.github.seleniumquery.browser.driver.builders.DriverInstantiatio
 import static java.lang.String.format;
 
 /**
- * Builds ChromeDriver instances for SeleniumQueryDriver.
+ * Builds {@link ChromeDriver} instances for SeleniumQueryDriver.
  *
  * @author acdcjunior
- *
  * @since 0.9.0
  */
 public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {

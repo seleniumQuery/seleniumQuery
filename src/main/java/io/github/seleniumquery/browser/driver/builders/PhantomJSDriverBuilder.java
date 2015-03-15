@@ -28,10 +28,9 @@ import static io.github.seleniumquery.browser.driver.builders.DriverInstantiatio
 import static java.lang.String.format;
 
 /**
- * Builds PhantomJSDriver instances for SeleniumQueryDriver.
+ * Builds {@link PhantomJSDriver} instances for SeleniumQueryDriver.
  *
  * @author acdcjunior
- *
  * @since 0.9.0
  */
 public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder> {
