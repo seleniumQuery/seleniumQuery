@@ -22,6 +22,7 @@ import io.github.seleniumquery.by.locator.SQLocatorXPath;
 import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
+ * :button
  *
  * @author acdcjunior
  * @since 0.10.0
