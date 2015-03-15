@@ -62,48 +62,59 @@ public class SQLocatorUtilsTest {
 
     @Test
     public void conditionalSimpleXPathMerge__should_merge_XPath_condition_adding_and() {
-        String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge(".//*[previousStuff]", "newStuff");
-        assertThat(mergedXPath, is(".//*[previousStuff and newStuff]"));
+        assertLeftAndRightExpressionsAreSimplyMergedTo(".//*[previousStuff]", "newStuff", ".//*[previousStuff and newStuff]");
+    }
+
+    private void assertLeftAndRightExpressionsAreSimplyMergedTo(String leftXPathExpression, String rightXPathExpression, String mergedExpression) {
+        String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge(leftXPathExpression, rightXPathExpression);
+        assertThat(mergedXPath, is(mergedExpression));
     }
 
     @Test
     public void conditionalSimpleXPathMerge__should_remove_last_previous_condition_if_it_was_just_true() {
-        String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge(".//*[true()]", "newStuff");
-        assertThat(mergedXPath, is(".//*[newStuff]"));
+        assertLeftAndRightExpressionsAreSimplyMergedTo(".//*[true()]", "newStuff", ".//*[newStuff]");
     }
 
     @Test
     public void conditionalSimpleXPathMerge__should_remove_last_previous_condition_if_it_was_just_true_ALTERNATE() {
-        String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge(".//*[self::a]/*[true()]", "newStuff");
-        assertThat(mergedXPath, is(".//*[self::a]/*[newStuff]"));
+        assertLeftAndRightExpressionsAreSimplyMergedTo(".//*[self::a]/*[true()]", "newStuff", ".//*[self::a]/*[newStuff]");
     }
 
     @Test
     public void conditionalSimpleXPathMerge__should_remove_last_previous_condition_if_it_was_just_true_even_if_there_was_something_else() {
-        String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge(".//*[previousStuff and true()]", "newStuff");
-        assertThat(mergedXPath, is(".//*[previousStuff and newStuff]"));
+        assertLeftAndRightExpressionsAreSimplyMergedTo(".//*[previousStuff and true()]", "newStuff", ".//*[previousStuff and newStuff]");
     }
 
     @Test
     public void conditionalSimpleXPathMerge__should_remove_last_previous_condition_if_it_was_just_true_but_with_care() {
-        String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge(".//*[xtrue()]", "newStuff");
-        assertThat(mergedXPath, is(".//*[xtrue() and newStuff]"));
+        assertLeftAndRightExpressionsAreSimplyMergedTo(".//*[xtrue()]", "newStuff", ".//*[xtrue() and newStuff]");
     }
 
     @Test
     public void conditionalSimpleXPathMerge__should_remove_last_previous_condition_if_it_was_just_true_but_with_care_even_if_there_was_something_else() {
-        String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge("[previousStuff and xtrue()]", "newStuff");
-        assertThat(mergedXPath, is("[previousStuff and xtrue() and newStuff]"));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void conditionalSimpleXPathMerge__should_validate_the_left_expression() {
-        SQLocatorUtils.conditionalSimpleXPathMerge("true()", "newStuff");
+        assertLeftAndRightExpressionsAreSimplyMergedTo("[previousStuff and xtrue()]", "newStuff", "[previousStuff and xtrue() and newStuff]");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void conditionalSimpleXPathMerge__should_validate_the_left_expression_for_nullity() {
         SQLocatorUtils.conditionalSimpleXPathMerge(null, "newStuff");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void conditionalSimpleXPathMerge__should_throw_exception_if_the_left_expression_does_not_end_in_square_braces() {
+        SQLocatorUtils.conditionalSimpleXPathMerge("true()", "newStuff");
+    }
+
+    @Test
+    public void conditionalToAllXPathMerge__should_merge_new_expression_with_left_expression_around_parenthesis() {
+        String mergedXPath = SQLocatorUtils.conditionalToAllXPathMerge(".//*[self::a]/*[@color = 'blue']", "newStuff");
+        assertThat(mergedXPath, is("(.//*[self::a]/*[@color = 'blue'])[newStuff]"));
+    }
+
+    @Test
+    public void conditionalToAllXPathMerge__should_remove_last_condition_of_the_left_expression_if_it_was_just_true() {
+        String mergedXPath = SQLocatorUtils.conditionalToAllXPathMerge(".//*[self::a]/*[true()]", "newStuff");
+        assertThat(mergedXPath, is("(.//*[self::a]/*)[newStuff]"));
     }
 
 }
