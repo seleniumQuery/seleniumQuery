@@ -34,7 +34,7 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
 
     private String typeAttributeValue;
 
-    public SQCssPseudoAlwaysNativelySupported buttonPseudoClassLocatorGenerationStrategy = new SQCssPseudoAlwaysNativelySupported() {
+    public SQCssPseudoAlwaysNativelySupported inputTypePseudoClassLocatorGenerationStrategy = new SQCssPseudoAlwaysNativelySupported() {
         @Override
         public SQLocatorCss toCssWhenNativelySupported() {
             return new SQLocatorCss("input", "[type=\"" + typeAttributeValue + "\"]");
@@ -52,7 +52,7 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
 
     @Override
     public SQCssPseudoAlwaysNativelySupported getSQCssLocatorGenerationStrategy() {
-        return buttonPseudoClassLocatorGenerationStrategy;
+        return inputTypePseudoClassLocatorGenerationStrategy;
     }
 
 }

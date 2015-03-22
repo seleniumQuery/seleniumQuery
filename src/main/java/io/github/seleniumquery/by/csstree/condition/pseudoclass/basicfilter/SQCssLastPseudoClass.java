@@ -20,11 +20,17 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClass
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
+/**
+ * :last
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public class SQCssLastPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "last";
 
-    public SQCssPseudoNeverNativelySupported buttonPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+    public SQCssPseudoNeverNativelySupported lastPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
         @Override
         public SQLocatorXPath toXPath() {
             return SQLocatorXPath.pureXPath("position() = last()");
@@ -33,7 +39,7 @@ public class SQCssLastPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
-        return buttonPseudoClassLocatorGenerationStrategy;
+        return lastPseudoClassLocatorGenerationStrategy;
     }
 
 }
