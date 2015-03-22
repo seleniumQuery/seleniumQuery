@@ -17,15 +17,29 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalIndexArgumentPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
-public class SQCssGtPseudoClass extends SQCssFunctionalPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssGtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassCondition {
 
     public static final String PSEUDO = "gt";
 
+    public SQCssPseudoNeverNativelySupported gtPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            getArgumentAsIndex();
+            return null;
+        }
+    };
+
     public SQCssGtPseudoClass(PseudoClassSelector pseudoClassSelector) {
         super(pseudoClassSelector);
+    }
+
+    @Override
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return gtPseudoClassLocatorGenerationStrategy;
     }
 
 }
