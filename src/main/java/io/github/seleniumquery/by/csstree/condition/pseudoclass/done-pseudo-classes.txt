@@ -25,7 +25,7 @@ childfilter
 	- :only-of-type
 contentfilter
 	- :contains()
-	- :empty
+	- OK :empty
 	- :has()
 	- :parent
 form

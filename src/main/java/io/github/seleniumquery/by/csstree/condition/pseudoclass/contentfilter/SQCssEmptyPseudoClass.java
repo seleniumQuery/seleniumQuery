@@ -16,11 +16,31 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.contentfilter;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
-public class SQCssEmptyPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :empty
+ * https://api.jquery.com/empty-selector/
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssEmptyPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "empty";
+
+    public SQCssPseudoNeverNativelySupported emptyPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath("count(.//*) = 0");
+        }
+    };
+
+    @Override
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return emptyPseudoClassLocatorGenerationStrategy;
+    }
 
 }
