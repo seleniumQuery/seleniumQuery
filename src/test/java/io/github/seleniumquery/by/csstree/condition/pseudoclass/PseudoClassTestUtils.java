@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
@@ -35,6 +34,13 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 
 public class PseudoClassTestUtils {
+
+    public static final PseudoClassSelector EMPTY = new PseudoClassSelector(null, null, "") {
+        @Override
+        public String getPseudoClassContent() {
+            return "";
+        }
+    };
 
     public static <T extends SQCssCondition> void assertPseudo(String selector, Class<T> pseudoClassClass) {
         // given
@@ -88,7 +94,7 @@ public class PseudoClassTestUtils {
     public static void assertFilterOnlyPseudoGeneratesFilter(SQCssPseudoClassCondition pseudoClassCondition, ElementFilter pseudoClassFilter) {
         SQLocator previous = SQLocatorUtilsTest.universalSelectorLocator(SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(getSelectorForPseudoClass(pseudoClassCondition)));
         // when
-        SQLocator locator = ((SQCssConditionImplementedLocators) pseudoClassCondition).toSQLocator(previous);
+        SQLocator locator = pseudoClassCondition.toSQLocator(previous);
         // then
         assertThat(locator.getSqLocatorCss().toString(), is(previous.getSqLocatorCss().toString()));
         assertThat(locator.canFetchThroughCssAlone(), is(false));
