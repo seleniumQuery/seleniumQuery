@@ -44,7 +44,7 @@ form
 	- OK :reset
 	- OK :selected
 	- OK :submit
-	- old :text
+	- OK :text
 jquery-ui
 	- :focusable
 	- :tabbable
