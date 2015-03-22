@@ -16,8 +16,10 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by.css.pseudoclasses.FocusPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 /**
  * PhantomJS may have problems with this:
@@ -26,8 +28,20 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClass
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "focus";
+
+    public SQCssPseudoNeverNativelySupported hiddenPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.filterOnly(FocusPseudoClass.FOCUS_FILTER);
+        }
+    };
+
+    @Override
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return hiddenPseudoClassLocatorGenerationStrategy;
+    }
 
 }
