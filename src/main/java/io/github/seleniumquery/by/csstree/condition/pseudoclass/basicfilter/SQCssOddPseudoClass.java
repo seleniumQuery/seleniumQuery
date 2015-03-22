@@ -16,11 +16,30 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
-public class SQCssOddPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :odd
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssOddPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "odd";
+
+    public SQCssPseudoNeverNativelySupported oddPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath("(position() mod 2) = 0");
+        }
+    };
+
+    @Override
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return oddPseudoClassLocatorGenerationStrategy;
+    }
 
 }

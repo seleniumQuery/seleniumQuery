@@ -9,7 +9,7 @@ basicfilter:
 	- OK :last
 	- OK :lt()
 	- :not()
-	- :odd
+	- OK :odd
 	- :root
 	- :target
 childfilter
