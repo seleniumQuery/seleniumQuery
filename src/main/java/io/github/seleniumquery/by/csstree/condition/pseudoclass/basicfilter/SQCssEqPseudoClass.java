@@ -23,6 +23,9 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.XPathMergeStrate
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 import org.openqa.selenium.InvalidSelectorException;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * :eq(index)
  *
@@ -32,15 +35,13 @@ import org.openqa.selenium.InvalidSelectorException;
 public class SQCssEqPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
     public static final String PSEUDO = "eq";
+    public static final Pattern REGEX = Pattern.compile("^\\s*([+-]?\\d+)\\s*$");
 
     public SQCssPseudoNeverNativelySupported eqPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
         @Override
         public SQLocatorXPath toXPath() {
-            String eqIndex = getArgument();
-            if (!eqIndex.matches("[+-]?\\d+")) {
-                throw new InvalidSelectorException("The :eq() pseudo-class requires an integer as argument but got: " + eqIndex);
-            }
-            return SQLocatorXPath.pureXPath("position() = " + eqIndex);
+            int index = getEqIndex();
+            return SQLocatorXPath.pureXPath("position() = " + (index + 1));
         }
         @Override
         public XPathMergeStrategy xPathMergeStrategy() {
@@ -55,6 +56,20 @@ public class SQCssEqPseudoClass extends SQCssFunctionalPseudoClassCondition {
     @Override
     public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
         return eqPseudoClassLocatorGenerationStrategy;
+    }
+
+    private int getEqIndex() {
+        String eqPseudoClassArgument = getArgument();
+        Matcher m = REGEX.matcher(eqPseudoClassArgument);
+        boolean isArgumentAnInteger = m.find();
+        if (!isArgumentAnInteger) {
+            throw new InvalidSelectorException("The :eq() pseudo-class requires an integer as argument but got: " + eqPseudoClassArgument);
+        }
+        String integerIndex = m.group(1);
+        if (integerIndex.startsWith("+")) {
+            integerIndex = integerIndex.substring(1);
+        }
+        return Integer.valueOf(integerIndex);
     }
 
 }
