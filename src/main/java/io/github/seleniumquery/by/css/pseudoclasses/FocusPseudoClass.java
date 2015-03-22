@@ -15,7 +15,7 @@ public class FocusPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
 	private static final String FOCUS_PSEUDO_CLASS_NO_COLON = "focus";
 
-    private final ElementFilter focusPseudoClassFilter = new PseudoClassFilter(this);
+    public static final ElementFilter FOCUS_FILTER = new PseudoClassFilter(new FocusPseudoClass());
 
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
@@ -33,7 +33,7 @@ public class FocusPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":focus");
 		
 		// #no-xpath
-		return new ConditionSimpleComponent(focusPseudoClassFilter);
+		return new ConditionSimpleComponent(FOCUS_FILTER);
 	}
 	
 }
