@@ -62,7 +62,7 @@ public class SQCssGtPseudoClassTest {
 
     @Test
     public void toSQLocator__gt_0__only_generates_XPath_regardless_of_native_support() {
-        String eq0XPathExpression = "(.//*)[position() = 1]";
+        String eq0XPathExpression = "(.//*)[position() > 1]";
         assertGtArgumentGeneratesXPath("0", eq0XPathExpression);
         assertGtArgumentGeneratesXPath("+0", eq0XPathExpression);
         assertGtArgumentGeneratesXPath("-0", eq0XPathExpression);
@@ -76,6 +76,26 @@ public class SQCssGtPseudoClassTest {
 
     private void assertGtArgumentGeneratesXPath(String eqArgument, String eqXPathExpression) {
         assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(gt(eqArgument), GT_PSEUDO, eqXPathExpression);
+    }
+
+    @Test
+    public void toSQLocator__gt_1__only_generates_XPath_regardless_of_native_support() {
+        String eq1XPathExpression = "(.//*)[position() > 2]";
+        assertGtArgumentGeneratesXPath("1", eq1XPathExpression);
+        assertGtArgumentGeneratesXPath("+1", eq1XPathExpression);
+        assertGtArgumentGeneratesXPath("  +1", eq1XPathExpression);
+        assertGtArgumentGeneratesXPath("+1  ", eq1XPathExpression);
+        assertGtArgumentGeneratesXPath("      +1     ", eq1XPathExpression);
+    }
+
+    @Test
+    public void toSQLocator__gt_2_NEGATIVE__only_generates_XPath_regardless_of_native_support() {
+        String eqNegative2XPathExpression = "(.//*)[position() > (last()-1)]";
+        assertGtArgumentGeneratesXPath("-2", eqNegative2XPathExpression);
+        assertGtArgumentGeneratesXPath("-2", eqNegative2XPathExpression);
+        assertGtArgumentGeneratesXPath("  -2", eqNegative2XPathExpression);
+        assertGtArgumentGeneratesXPath("-2  ", eqNegative2XPathExpression);
+        assertGtArgumentGeneratesXPath("      -2     ", eqNegative2XPathExpression);
     }
 
 }
