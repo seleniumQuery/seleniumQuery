@@ -18,13 +18,26 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.contentfilter;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 
 public class SQCssEmptyPseudoClassTest {
 
+    public static final String EMPTY_PSEUDO = ":empty";
+    public static final String EMPTY_XPATH_EXPRESSION = ".//*[count(.//*) = 0]";
+
     @Test
     public void translate() {
-        assertPseudo(":empty", SQCssEmptyPseudoClass.class);
+        assertPseudo(EMPTY_PSEUDO, SQCssEmptyPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__when_driver_does_NOT_have_native_support() {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
+                new SQCssEmptyPseudoClass(),
+                EMPTY_PSEUDO,
+                EMPTY_XPATH_EXPRESSION
+        );
     }
 
 }
