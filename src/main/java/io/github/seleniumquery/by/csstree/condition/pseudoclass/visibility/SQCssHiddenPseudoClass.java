@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.visibility;
 
 import io.github.seleniumquery.by.css.pseudoclasses.HiddenPseudoClass;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
@@ -27,13 +27,20 @@ import io.github.seleniumquery.by.locator.SQLocatorXPath;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssHiddenPseudoClass extends SQCssPseudoNeverNativelySupported implements SQCssConditionImplementedLocators {
+public class SQCssHiddenPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "hidden";
 
+    public SQCssPseudoNeverNativelySupported hiddenPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.filterOnly(HiddenPseudoClass.HIDDEN_FILTER);
+        }
+    };
+
     @Override
-    public SQLocatorXPath toXPath() {
-        return SQLocatorXPath.filterOnly(HiddenPseudoClass.HIDDEN_FILTER);
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return hiddenPseudoClassLocatorGenerationStrategy;
     }
 
 }
