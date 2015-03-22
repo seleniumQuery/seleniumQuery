@@ -17,14 +17,41 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import org.junit.Test;
+import org.openqa.selenium.InvalidSelectorException;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
+import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+import static org.junit.Assert.fail;
 
 public class SQCssGtPseudoClassTest {
 
+    public static final String GT_PSEUDO = ":gt";
+
     @Test
     public void translate() {
-        assertFunctionalPseudo(":gt", SQCssGtPseudoClass.class);
+        assertFunctionalPseudo(GT_PSEUDO, SQCssGtPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__gt_should_throw_exception_if_argument_is_not_an_integer() {
+        assertGtArgumentIsNotValid("a");
+        assertGtArgumentIsNotValid("");
+        assertGtArgumentIsNotValid("+");
+        assertGtArgumentIsNotValid("-");
+        assertGtArgumentIsNotValid("+ 1");
+        assertGtArgumentIsNotValid(" ");
+    }
+
+    private void assertGtArgumentIsNotValid(String eqArgument) {
+        try {
+            gt(eqArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
+            fail("Should consider *:gt("+eqArgument+") to be invalid.");
+        } catch (InvalidSelectorException ignored) { }
+    }
+
+    private SQCssGtPseudoClass gt(String eqArgument) {
+        return new SQCssGtPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(eqArgument));
     }
 
 }
