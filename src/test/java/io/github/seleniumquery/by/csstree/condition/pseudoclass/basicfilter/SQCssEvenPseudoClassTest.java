@@ -18,13 +18,27 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 
 public class SQCssEvenPseudoClassTest {
 
+    public static final String EVEN_PSEUDO = ":even";
+    public static final String EVEN_XPATH_EXPRESSION =
+            ".//*[(position() mod 2) = 1]";
+
     @Test
     public void translate() {
-        assertPseudo(":even", SQCssEvenPseudoClass.class);
+        assertPseudo(EVEN_PSEUDO, SQCssEvenPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__when_driver_does_NOT_have_native_support() {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
+                new SQCssEvenPseudoClass(),
+                EVEN_PSEUDO,
+                EVEN_XPATH_EXPRESSION
+        );
     }
 
 }
