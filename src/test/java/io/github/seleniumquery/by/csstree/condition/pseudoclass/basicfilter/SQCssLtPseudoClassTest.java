@@ -19,6 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
@@ -45,18 +46,56 @@ public class SQCssLtPseudoClassTest {
         assertLtArgumentIsNotValid(" ");
     }
 
-    private void assertLtArgumentIsNotValid(String eqArgument) {
+    private void assertLtArgumentIsNotValid(String ltArgument) {
         try {
-            lt(eqArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
-            fail("Should consider *:lt("+eqArgument+") to be invalid.");
+            lt(ltArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
+            fail("Should consider *:lt("+ltArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":lt()"));
-            assertThat(e.getMessage(), containsString(eqArgument));
+            assertThat(e.getMessage(), containsString(ltArgument));
         }
     }
 
-    private SQCssLtPseudoClass lt(String eqArgument) {
-        return new SQCssLtPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(eqArgument));
+    private SQCssLtPseudoClass lt(String ltArgument) {
+        return new SQCssLtPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(ltArgument));
+    }
+
+    @Test
+    public void toSQLocator__lt_0__only_generates_XPath_regardless_of_native_support() {
+        String lt0XPathExpression = "(.//*)[position() < 1]";
+        assertLtArgumentGeneratesXPath("0", lt0XPathExpression);
+        assertLtArgumentGeneratesXPath("+0", lt0XPathExpression);
+        assertLtArgumentGeneratesXPath("-0", lt0XPathExpression);
+        assertLtArgumentGeneratesXPath(" +0", lt0XPathExpression);
+        assertLtArgumentGeneratesXPath(" -0", lt0XPathExpression);
+        assertLtArgumentGeneratesXPath("+0 ", lt0XPathExpression);
+        assertLtArgumentGeneratesXPath("-0 ", lt0XPathExpression);
+        assertLtArgumentGeneratesXPath("  +0   ", lt0XPathExpression);
+        assertLtArgumentGeneratesXPath("  -0   ", lt0XPathExpression);
+    }
+
+    private void assertLtArgumentGeneratesXPath(String ltArgument, String ltXPathExpression) {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(lt(ltArgument), LT_PSEUDO, ltXPathExpression);
+    }
+
+    @Test
+    public void toSQLocator__lt_1__only_generates_XPath_regardless_of_native_support() {
+        String lt1XPathExpression = "(.//*)[position() < 2]";
+        assertLtArgumentGeneratesXPath("1", lt1XPathExpression);
+        assertLtArgumentGeneratesXPath("+1", lt1XPathExpression);
+        assertLtArgumentGeneratesXPath("  +1", lt1XPathExpression);
+        assertLtArgumentGeneratesXPath("+1  ", lt1XPathExpression);
+        assertLtArgumentGeneratesXPath("      +1     ", lt1XPathExpression);
+    }
+
+    @Test
+    public void toSQLocator__lt_2_NEGATIVE__only_generates_XPath_regardless_of_native_support() {
+        String ltNegative2XPathExpression = "(.//*)[position() < (last()-1)]";
+        assertLtArgumentGeneratesXPath("-2", ltNegative2XPathExpression);
+        assertLtArgumentGeneratesXPath("-2", ltNegative2XPathExpression);
+        assertLtArgumentGeneratesXPath("  -2", ltNegative2XPathExpression);
+        assertLtArgumentGeneratesXPath("-2  ", ltNegative2XPathExpression);
+        assertLtArgumentGeneratesXPath("      -2     ", ltNegative2XPathExpression);
     }
 
 }
