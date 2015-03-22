@@ -41,7 +41,10 @@ public class SQCssEqPseudoClass extends SQCssFunctionalPseudoClassCondition {
         @Override
         public SQLocatorXPath toXPath() {
             int index = getEqIndex();
-            return SQLocatorXPath.pureXPath("position() = " + (index + 1));
+            if (index >= 0) {
+                return SQLocatorXPath.pureXPath("position() = " + (index + 1));
+            }
+            return SQLocatorXPath.pureXPath("position() = (last()-" + (-index - 1) + ")");
         }
         @Override
         public XPathMergeStrategy xPathMergeStrategy() {

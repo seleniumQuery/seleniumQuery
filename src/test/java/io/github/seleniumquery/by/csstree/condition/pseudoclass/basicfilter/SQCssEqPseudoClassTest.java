@@ -83,4 +83,14 @@ public class SQCssEqPseudoClassTest {
         assertEqArgumentGeneratesXPath("      +1     ", eq1XPathExpression);
     }
 
+    @Test
+    public void toSQLocator__eq_2_NEGATIVE__only_generates_XPath_regardless_of_native_support() {
+        String eqNegative2XPathExpression = "(.//*)[position() = (last()-1)]";
+        assertEqArgumentGeneratesXPath("-2", eqNegative2XPathExpression);
+        assertEqArgumentGeneratesXPath("-2", eqNegative2XPathExpression);
+        assertEqArgumentGeneratesXPath("  -2", eqNegative2XPathExpression);
+        assertEqArgumentGeneratesXPath("-2  ", eqNegative2XPathExpression);
+        assertEqArgumentGeneratesXPath("      -2     ", eqNegative2XPathExpression);
+    }
+
 }
