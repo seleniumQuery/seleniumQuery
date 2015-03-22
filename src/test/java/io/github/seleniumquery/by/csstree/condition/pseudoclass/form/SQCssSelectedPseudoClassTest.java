@@ -52,7 +52,8 @@ public class SQCssSelectedPseudoClassTest {
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,
-                "option:checked", PURE_CSS_IS_SUPPORTED,
+                "option:checked",
+                PURE_CSS_IS_SUPPORTED,
                 SELECTED_XPATH_EXPRESSION,
                 contains(SelectedPseudoClass.SELECTED_FILTER)
         );
@@ -61,9 +62,10 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_does_NOT_have_native_support() {
         assertPseudoClassHasLocatorWhenNotNativelySupported(
-                new SQCssSelectedPseudoClass(),
                 SELECTED_PSEUDO,
-                "*", PURE_CSS_IS_NOT_SUPPORTED,
+                new SQCssSelectedPseudoClass(),
+                "*",
+                PURE_CSS_IS_NOT_SUPPORTED,
                 SELECTED_XPATH_EXPRESSION,
                 contains(SelectedPseudoClass.SELECTED_FILTER)
         );
@@ -97,7 +99,8 @@ public class SQCssSelectedPseudoClassTest {
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,
-                CSS_ALL_TAGS_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
+                CSS_UNIVERSAL_SELECTOR,
+                PURE_CSS_IS_NOT_SUPPORTED,
                 SELECTED_XPATH_EXPRESSION,
                 contains(SelectedPseudoClass.SELECTED_FILTER)
         );
@@ -115,7 +118,8 @@ public class SQCssSelectedPseudoClassTest {
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,
-                CSS_ALL_TAGS_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
+                CSS_UNIVERSAL_SELECTOR,
+                PURE_CSS_IS_NOT_SUPPORTED,
                 SELECTED_XPATH_EXPRESSION,
                 contains(SelectedPseudoClass.SELECTED_FILTER)
         );

@@ -71,7 +71,8 @@ public class SQCssCheckedPseudoClassTest {
         assertPseudoClassHasLocator(
                 new SQCssCheckedPseudoClass(),
                 previousLocator,
-                CSS_ALL_TAGS_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
+                CSS_UNIVERSAL_SELECTOR,
+                PURE_CSS_IS_NOT_SUPPORTED,
                 CHECKED_XPATH_EXPRESSION,
                 contains(CheckedPseudoClass.CHECKED_FILTER)
         );
@@ -88,7 +89,8 @@ public class SQCssCheckedPseudoClassTest {
         assertPseudoClassHasLocator(
                 new SQCssCheckedPseudoClass(),
                 previousLocator,
-                CSS_ALL_TAGS_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
+                CSS_UNIVERSAL_SELECTOR,
+                PURE_CSS_IS_NOT_SUPPORTED,
                 CHECKED_XPATH_EXPRESSION,
                 contains(CheckedPseudoClass.CHECKED_FILTER)
         );
