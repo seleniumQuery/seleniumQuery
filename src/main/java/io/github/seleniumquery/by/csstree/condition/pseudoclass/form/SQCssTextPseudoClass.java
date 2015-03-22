@@ -16,23 +16,33 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
+ * :text
+ * https://api.jquery.com/text-selector/
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssTextPseudoClass extends SQCssPseudoNeverNativelySupported {
+public class SQCssTextPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "text";
 
+    public SQCssPseudoNeverNativelySupported textPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath("(self::input and ("+ TYPE_ATTR_LC_VAL +" = 'text' or not(@type)))");
+        }
+    };
+
     @Override
-    public SQLocatorXPath toXPath() {
-        return SQLocatorXPath.pureXPath("(self::input and ("+ TYPE_ATTR_LC_VAL +" = 'text' or not(@type)))");
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return textPseudoClassLocatorGenerationStrategy;
     }
 
 }
