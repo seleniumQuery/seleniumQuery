@@ -17,15 +17,25 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 
-public class SQCssNthPseudoClass extends SQCssFunctionalPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :nth() is an alias to :eq().
+ * https://github.com/seleniumQuery/seleniumQuery/issues/27
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssNthPseudoClass extends SQCssEqPseudoClass {
 
     public static final String PSEUDO = "nth";
 
     public SQCssNthPseudoClass(PseudoClassSelector pseudoClassSelector) {
         super(pseudoClassSelector);
+    }
+
+    @Override
+    protected String getPseudoClassName() {
+        return PSEUDO;
     }
 
 }

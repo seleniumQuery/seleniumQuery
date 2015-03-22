@@ -85,6 +85,7 @@ public class SQCssPseudoClassConditionTranslator {
 		pseudoClasses.put(SQCssLtPseudoClass.PSEUDO, SQCssLtPseudoClass.class);
 		pseudoClasses.put(SQCssNotPseudoClass.PSEUDO, SQCssNotPseudoClass.class);
 		pseudoClasses.put(SQCssNotPseudoClass.PSEUDO_PURE_NOT, SQCssNotPseudoClass.class);
+		pseudoClasses.put(SQCssNthPseudoClass.PSEUDO, SQCssNthPseudoClass.class);
 		pseudoClasses.put(SQCssOddPseudoClass.PSEUDO, SQCssOddPseudoClass.class);
 		pseudoClasses.put(SQCssRootPseudoClass.PSEUDO, SQCssRootPseudoClass.class);
 		pseudoClasses.put(SQCssTargetPseudoClass.PSEUDO, SQCssTargetPseudoClass.class);
@@ -135,12 +136,11 @@ public class SQCssPseudoClassConditionTranslator {
 		return attributeCondition.getValue().replaceAll("\\(.*", "");
 	}
 
-	@SuppressWarnings("unchecked")
 	private <T extends SQCssPseudoClassCondition> T instantiate(Class<T> pseudoClass, PseudoClassSelector pseudoClassSelector) {
 		try {
 			// instantiates SQCssFunctionalPseudoClassCondition using pseudoClassSelector arg
 			if (SQCssFunctionalPseudoClassCondition.class.isAssignableFrom(pseudoClass)) {
-				return (T) pseudoClass.getConstructor(new Class[]{PseudoClassSelector.class}).newInstance(pseudoClassSelector);
+				return pseudoClass.getConstructor(new Class[]{PseudoClassSelector.class}).newInstance(pseudoClassSelector);
 			}
 			// instantiates non-functional SQCssPseudoClassCondition, which should not need an arg.
 			return pseudoClass.getConstructor().newInstance();
