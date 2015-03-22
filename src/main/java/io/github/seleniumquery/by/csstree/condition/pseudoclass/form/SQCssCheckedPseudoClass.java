@@ -56,11 +56,6 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
             return isDriverWhereCheckedSelectorHasNoBugs(webDriver) && super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
         }
 
-        private boolean isDriverWhereCheckedSelectorHasNoBugs(WebDriver webDriver) {
-            DriverVersionUtils driverVersionUtils = DriverVersionUtils.getInstance();
-            return !driverVersionUtils.isPhantomJSDriver(webDriver) && !driverVersionUtils.isHtmlUnitDriver(webDriver);
-        }
-
         @Override
         public SQLocatorCss toCssWhenNativelySupported() {
             return new SQLocatorCss(CHECKED_PSEUDO);
@@ -79,6 +74,11 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
     @Override
     public SQCssPseudoMaybeNativelySupported getSQCssLocatorGenerationStrategy() {
         return checkedPseudoClassLocatorGenerationStrategy;
+    }
+
+    public static boolean isDriverWhereCheckedSelectorHasNoBugs(WebDriver webDriver) {
+        DriverVersionUtils driverVsUtils = DriverVersionUtils.getInstance();
+        return !driverVsUtils.isPhantomJSDriver(webDriver) && !driverVsUtils.isHtmlUnitDriver(webDriver);
     }
 
 }
