@@ -36,7 +36,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
     }
 
     @Test
-    public void testToSQLocator__should_call_toSQLocator_in_object_returned_from_strategy_method() throws Exception {
+    public void toSQLocator__should_call_toSQLocator_in_object_returned_from_strategy_method() throws Exception {
         final SQLocator argLocator = new SQLocator((WebDriver) null, null, null);
         final SQLocator returningLocator = new SQLocator((WebDriver) null, null, null);
         final SQCssConditionImplementedLocators locatorGen = new SQCssConditionImplementedLocators() {
