@@ -43,7 +43,7 @@ public class PseudoClassAssertLocatorUtils {
                                                                         String expectedCss, boolean canPureCss,
                                                                         String expectedXPath,
                                                                         Matcher<? super List<ElementFilter>> elementFilterMatcher) {
-        SQLocator previousLocator = SQLocatorUtilsTest.tagAsterisk(SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(pseudoClass));
+        SQLocator previousLocator = SQLocatorUtilsTest.universalSelectorLocator(SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(pseudoClass));
         assertPseudoClassHasLocator(
                 pseudoClassObject,
                 previousLocator,
@@ -57,7 +57,7 @@ public class PseudoClassAssertLocatorUtils {
                                                                            String expectedCss, boolean canPureCss,
                                                                            String expectedXPath,
                                                                            Matcher<? super List<ElementFilter>> elementFilterMatcher) {
-        SQLocator previousLocator = SQLocatorUtilsTest.tagAsterisk(SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoClass));
+        SQLocator previousLocator = SQLocatorUtilsTest.universalSelectorLocator(SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoClass));
         assertPseudoClassHasLocator(
                 pseudoClassObject,
                 previousLocator,

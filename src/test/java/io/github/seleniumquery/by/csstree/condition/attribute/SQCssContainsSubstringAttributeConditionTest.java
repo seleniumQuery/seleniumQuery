@@ -30,7 +30,7 @@ public class SQCssContainsSubstringAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssContainsSubstringAttributeCondition containsSubstringAttributeCondition = new SQCssContainsSubstringAttributeCondition("attribute", "stringToContain");
-        SQLocator previous = SQLocatorUtilsTest.TAG_ASTERISK;
+        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
         SQLocator locator = containsSubstringAttributeCondition.toSQLocator(previous);
         // then

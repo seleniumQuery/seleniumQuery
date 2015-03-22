@@ -30,7 +30,7 @@ public class SQCssClassAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssClassAttributeCondition classAttributeCondition = new SQCssClassAttributeCondition("clazz");
-        SQLocator previous = SQLocatorUtilsTest.TAG_ASTERISK;
+        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
         SQLocator locator = classAttributeCondition.toSQLocator(previous);
         // then

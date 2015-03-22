@@ -86,7 +86,7 @@ public class PseudoClassTestUtils {
     }
 
     public static void assertFilterOnlyPseudoGeneratesFilter(SQCssPseudoClassCondition pseudoClassCondition, ElementFilter pseudoClassFilter) {
-        SQLocator previous = SQLocatorUtilsTest.tagAsterisk(SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(getSelectorForPseudoClass(pseudoClassCondition)));
+        SQLocator previous = SQLocatorUtilsTest.universalSelectorLocator(SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(getSelectorForPseudoClass(pseudoClassCondition)));
         // when
         SQLocator locator = ((SQCssConditionImplementedLocators) pseudoClassCondition).toSQLocator(previous);
         // then

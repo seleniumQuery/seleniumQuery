@@ -29,8 +29,8 @@ import static org.mockito.Mockito.when;
 
 public class SQLocatorUtilsTest {
 
-    public static final SQLocator TAG_ASTERISK = tagAsterisk(mock(WebDriver.class));
-    public static SQLocator tagAsterisk(WebDriver driver) {
+    public static final SQLocator UNIVERSAL_SELECTOR_LOCATOR = universalSelectorLocator(mock(WebDriver.class));
+    public static SQLocator universalSelectorLocator(WebDriver driver) {
         return new SQLocator(driver, universalSelector(), pureXPath(".//*[true()]"));
     }
 
