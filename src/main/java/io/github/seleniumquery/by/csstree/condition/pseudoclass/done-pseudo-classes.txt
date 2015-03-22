@@ -1,7 +1,7 @@
 basicfilter:
 	- :animated
 	- OK :eq()
-	- :even
+	- OK :even
 	- :first
 	- OK :gt()
 	- :header
@@ -31,7 +31,7 @@ contentfilter
 form
 	- OK :button
 	- OK :checkbox
-	- old :checked
+	- OK :checked
 	- old :disabled
 	- old :enabled
 	- OK :file

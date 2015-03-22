@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
@@ -44,33 +45,40 @@ import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssCheckedPseudoClass extends SQCssPseudoMaybeNativelySupported {
+public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "checked";
     public static final String CHECKED_PSEUDO = ":checked";
 
+    public SQCssPseudoMaybeNativelySupported checkedPseudoClassLocatorGenerationStrategy = new SQCssPseudoMaybeNativelySupported() {
+        @Override
+        public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
+            return isDriverWhereCheckedSelectorHasNoBugs(webDriver) && super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
+        }
+
+        private boolean isDriverWhereCheckedSelectorHasNoBugs(WebDriver webDriver) {
+            DriverVersionUtils driverVersionUtils = DriverVersionUtils.getInstance();
+            return !driverVersionUtils.isPhantomJSDriver(webDriver) && !driverVersionUtils.isHtmlUnitDriver(webDriver);
+        }
+
+        @Override
+        public SQLocatorCss toCssWhenNativelySupported() {
+            return new SQLocatorCss(CHECKED_PSEUDO);
+        }
+
+        @Override
+        public SQLocatorXPath toXPath() {
+            return new SQLocatorXPath(xPathExpression(), CheckedPseudoClass.CHECKED_FILTER);
+        }
+
+        private String xPathExpression() {
+            return "((self::input and ("+ TYPE_ATTR_LC_VAL +" = 'radio' or "+ TYPE_ATTR_LC_VAL +" = 'checkbox')) or self::option)";
+        }
+    };
+
     @Override
-    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
-        return isDriverWhereCheckedSelectorHasNoBugs(webDriver) && super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
-    }
-
-    private boolean isDriverWhereCheckedSelectorHasNoBugs(WebDriver webDriver) {
-        DriverVersionUtils driverVersionUtils = DriverVersionUtils.getInstance();
-        return !driverVersionUtils.isPhantomJSDriver(webDriver) && !driverVersionUtils.isHtmlUnitDriver(webDriver);
-    }
-
-    @Override
-    public SQLocatorCss toCssWhenNativelySupported() {
-        return new SQLocatorCss(CHECKED_PSEUDO);
-    }
-
-    @Override
-    public SQLocatorXPath toXPath() {
-        return new SQLocatorXPath(xPathExpression(), CheckedPseudoClass.CHECKED_FILTER);
-    }
-
-    private String xPathExpression() {
-        return "((self::input and ("+ TYPE_ATTR_LC_VAL +" = 'radio' or "+ TYPE_ATTR_LC_VAL +" = 'checkbox')) or self::option)";
+    public SQCssPseudoMaybeNativelySupported getSQCssLocatorGenerationStrategy() {
+        return checkedPseudoClassLocatorGenerationStrategy;
     }
 
 }
