@@ -64,4 +64,14 @@ public class SQCssEqPseudoClassTest {
         assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(eq(eqArgument), EQ_PSEUDO, eqXPathExpression);
     }
 
+    @Test
+    public void toSQLocator__eq_1__only_generates_XPath_regardless_of_native_support() {
+        String eq1XPathExpression = "(.//*)[position() = 1]";
+        assertEqArgumentGeneratesXPath("1", eq1XPathExpression);
+        assertEqArgumentGeneratesXPath("+1", eq1XPathExpression);
+        assertEqArgumentGeneratesXPath("  +1", eq1XPathExpression);
+        assertEqArgumentGeneratesXPath("+1  ", eq1XPathExpression);
+        assertEqArgumentGeneratesXPath("      +1     ", eq1XPathExpression);
+    }
+
 }
