@@ -37,9 +37,9 @@ public class PseudoClassAssertLocatorUtils {
 
     public static final boolean PURE_CSS_IS_SUPPORTED = true;
     public static final boolean PURE_CSS_IS_NOT_SUPPORTED = false;
-    public static final String CSS_ALL_TAGS_SELECTOR = "*"; // TODO rename to "universal selector"
+    public static final String CSS_UNIVERSAL_SELECTOR = "*";
 
-    public static void assertPseudoClassHasLocatorWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass,
+    public static void assertPseudoClassHasLocatorWhenNativelySupported(String pseudoClass, SQCssConditionImplementedLocators pseudoClassObject,
                                                                         String expectedCss, boolean canPureCss,
                                                                         String expectedXPath,
                                                                         Matcher<? super List<ElementFilter>> elementFilterMatcher) {
@@ -53,8 +53,7 @@ public class PseudoClassAssertLocatorUtils {
         );
     }
 
-    // TODO change parameter order, put pseudoClass first
-    public static void assertPseudoClassHasLocatorWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass,
+    public static void assertPseudoClassHasLocatorWhenNotNativelySupported(String pseudoClass, SQCssConditionImplementedLocators pseudoClassObject,
                                                                            String expectedCss, boolean canPureCss,
                                                                            String expectedXPath,
                                                                            Matcher<? super List<ElementFilter>> elementFilterMatcher) {
@@ -71,8 +70,7 @@ public class PseudoClassAssertLocatorUtils {
     public static void assertPseudoSupportsOnlyPureCssAndNotPureXPathWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject,
                                                                                            String pseudoClass, String expectedXPath, ElementFilter filter) {
         assertPseudoClassHasLocatorWhenNativelySupported(
-                pseudoClassObject,
-                pseudoClass,
+                pseudoClass, pseudoClassObject,
                 pseudoClass, PURE_CSS_IS_SUPPORTED,
                 expectedXPath,
                 contains(filter)
@@ -81,8 +79,7 @@ public class PseudoClassAssertLocatorUtils {
 
     public static void assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, String expectedXPath) {
         assertPseudoClassHasLocatorWhenNativelySupported(
-                pseudoClassObject,
-                pseudoClass,
+                pseudoClass, pseudoClassObject,
                 pseudoClass, PURE_CSS_IS_SUPPORTED,
                 expectedXPath,
                 empty()
@@ -92,9 +89,8 @@ public class PseudoClassAssertLocatorUtils {
     public static void assertPseudoClassDoesNotSupportAnythingPurelyWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject,
                                                                                              String pseudoClass, String expectedXPath, ElementFilter filter) {
         assertPseudoClassHasLocatorWhenNotNativelySupported(
-                pseudoClassObject,
-                pseudoClass,
-                CSS_ALL_TAGS_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
+                pseudoClass, pseudoClassObject,
+                CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
                 expectedXPath,
                 contains(filter)
         );
@@ -102,9 +98,8 @@ public class PseudoClassAssertLocatorUtils {
 
     public static void assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass, String expectedXPath) {
         assertPseudoClassHasLocatorWhenNotNativelySupported(
-                pseudoClassObject,
-                pseudoClass,
-                CSS_ALL_TAGS_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
+                pseudoClass, pseudoClassObject,
+                CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
                 expectedXPath,
                 empty()
         );
@@ -129,15 +124,13 @@ public class PseudoClassAssertLocatorUtils {
                                                                                                     String expectedCss,
                                                                                                     String expectedXPath) {
         assertPseudoClassHasLocatorWhenNativelySupported(
-                pseudoClassObject,
-                pseudoClass,
+                pseudoClass, pseudoClassObject,
                 expectedCss, PURE_CSS_IS_SUPPORTED,
                 expectedXPath,
                 empty()
         );
         assertPseudoClassHasLocatorWhenNotNativelySupported(
-                pseudoClassObject,
-                pseudoClass,
+                pseudoClass, pseudoClassObject,
                 expectedCss, PURE_CSS_IS_SUPPORTED,
                 expectedXPath,
                 empty()
@@ -147,9 +140,8 @@ public class PseudoClassAssertLocatorUtils {
     public static void assertPseudoOnlySupportsPureXPathWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass,
                                                                               String expectedXPath) {
         assertPseudoClassHasLocatorWhenNativelySupported(
-                pseudoClassObject,
-                pseudoClass,
-                CSS_ALL_TAGS_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
+                pseudoClass, pseudoClassObject,
+                CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
                 expectedXPath,
                 empty()
         );
