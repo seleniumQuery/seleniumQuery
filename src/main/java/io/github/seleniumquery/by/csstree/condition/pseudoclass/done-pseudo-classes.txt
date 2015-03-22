@@ -42,8 +42,8 @@ form
 	- OK :password
 	- OK :radio
 	- OK :reset
-	- old :selected
-	- old :submit
+	- OK :selected
+	- OK :submit
 	- old :text
 jquery-ui
 	- :focusable
