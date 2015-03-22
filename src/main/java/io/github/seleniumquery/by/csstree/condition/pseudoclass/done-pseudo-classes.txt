@@ -9,6 +9,7 @@ basicfilter:
 	- OK :last
 	- OK :lt()
 	- :not()
+	- OK :nth
 	- OK :odd
 	- :root
 	- :target
@@ -37,7 +38,7 @@ form
 	- OK :file
 	- OK :focus
 	- OK :image
-	- old :input
+	- OK :input
 	- OK :password
 	- OK :radio
 	- old :reset
