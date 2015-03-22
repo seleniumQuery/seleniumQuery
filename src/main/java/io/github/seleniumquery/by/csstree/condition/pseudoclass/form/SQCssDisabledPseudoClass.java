@@ -17,32 +17,43 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.DisabledPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 /**
+ * :disabled
+ * https://api.jquery.com/disabled-selector/
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:disabled
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssDisabledPseudoClass extends SQCssPseudoMaybeNativelySupported {
+public class SQCssDisabledPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "disabled";
     public static final String DISABLED_PSEUDO = ":" + PSEUDO;
 
-    @Override
-    public SQLocatorCss toCssWhenNativelySupported() {
-        return new SQLocatorCss(DISABLED_PSEUDO);
-    }
+    public SQCssPseudoMaybeNativelySupported disabledPseudoClassLocatorGenerationStrategy = new SQCssPseudoMaybeNativelySupported() {
+        @Override
+        public SQLocatorCss toCssWhenNativelySupported() {
+            return new SQLocatorCss(DISABLED_PSEUDO);
+        }
+
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath(xPathExpression());
+        }
+
+        private String xPathExpression() {
+            return "(@disabled and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")";
+        }
+    };
 
     @Override
-    public SQLocatorXPath toXPath() {
-        return SQLocatorXPath.pureXPath(xPathExpression());
-    }
-
-    private String xPathExpression() {
-        return "(@disabled and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")";
+    public SQCssPseudoMaybeNativelySupported getSQCssLocatorGenerationStrategy() {
+        return disabledPseudoClassLocatorGenerationStrategy;
     }
 
 }
