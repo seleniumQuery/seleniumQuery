@@ -98,4 +98,9 @@ public class SQCssEqPseudoClassTest {
         assertEqArgumentGeneratesXPath("      -2     ", eqNegative2XPathExpression);
     }
 
+    @Test
+    public void toSQLocator__eq_1_NEGATIVE__does_not_add_MINUS_ZERO_in_the_XPath_expression() {
+        assertEqArgumentGeneratesXPath("-1", "(.//*)[position() = last()]");
+    }
+
 }

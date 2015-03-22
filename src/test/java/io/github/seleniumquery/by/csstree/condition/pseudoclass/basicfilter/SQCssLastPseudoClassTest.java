@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
@@ -24,7 +25,7 @@ import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoCla
 public class SQCssLastPseudoClassTest {
 
     public static final String LAST_PSEUDO = ":last";
-    public static final String LAST_XPATH_EXPRESSION = ".//*[position() = last()]";
+    public static final String LAST_XPATH_EXPRESSION = "(.//*)[position() = last()]";
 
     @Test
     public void translate() {
@@ -34,7 +35,7 @@ public class SQCssLastPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_does_NOT_have_native_support() {
         assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
-                new SQCssLastPseudoClass(),
+                new SQCssLastPseudoClass(PseudoClassTestUtils.EMPTY),
                 LAST_PSEUDO,
                 LAST_XPATH_EXPRESSION
         );
