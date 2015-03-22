@@ -2,11 +2,11 @@ basicfilter:
 	- :animated
 	- OK :eq()
 	- OK :even
-	- :first
+	- OK :first
 	- OK :gt()
 	- :header
 	- :lang()
-	- :last
+	- OK :last
 	- OK :lt()
 	- :not()
 	- :odd
