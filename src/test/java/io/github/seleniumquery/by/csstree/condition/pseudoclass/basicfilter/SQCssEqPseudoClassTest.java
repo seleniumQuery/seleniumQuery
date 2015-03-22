@@ -17,10 +17,13 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import org.junit.Test;
+import org.openqa.selenium.InvalidSelectorException;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
+import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.TAG_ASTERISK;
+import static org.junit.Assert.fail;
 
 public class SQCssEqPseudoClassTest {
 
@@ -32,16 +35,33 @@ public class SQCssEqPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__when_driver_does_NOT_have_native_support() {
-        // *:eq(0)
-        final SQCssEqPseudoClass eq0 = new SQCssEqPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("0"));
-        final String eq0XPathExpression = "(.//*)[position() = 0]";
+    public void toSQLocator__eq_should_throw_exception_if_argument_is_not_an_integer() {
+        assertEqArgumentIsNotValid("a");
+        assertEqArgumentIsNotValid("");
+        assertEqArgumentIsNotValid("+");
+        assertEqArgumentIsNotValid("-");
+        assertEqArgumentIsNotValid("+ 1");
+        assertEqArgumentIsNotValid(" ");
+    }
 
-        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
-                eq0,
-                EQ_PSEUDO,
-                eq0XPathExpression
-        );
+    private void assertEqArgumentIsNotValid(String eqArgument) {
+        try {
+            eq(eqArgument).toSQLocator(TAG_ASTERISK);
+            fail("Should consider *:eq("+eqArgument+") to be invalid.");
+        } catch (InvalidSelectorException ignored) { }
+    }
+
+    private SQCssEqPseudoClass eq(String eqArgument) {
+        return new SQCssEqPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(eqArgument));
+    }
+
+    @Test
+    public void toSQLocator__eq_0__only_generates_XPath_regardless_of_native_support() {
+        assertEqArgumentGeneratesXPath("0", "(.//*)[position() = 0]");
+    }
+
+    private void assertEqArgumentGeneratesXPath(String eqArgument, String eqXPathExpression) {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(eq(eqArgument), EQ_PSEUDO, eqXPathExpression);
     }
 
 }
