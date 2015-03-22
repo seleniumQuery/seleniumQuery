@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoAlwaysNativelySupported;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
@@ -29,22 +30,29 @@ import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.
  * @author acdcjunior
  * @since 0.10.0
  */
-abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoAlwaysNativelySupported {
+abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondition {
 
     private String typeAttributeValue;
+
+    public SQCssPseudoAlwaysNativelySupported buttonPseudoClassLocatorGenerationStrategy = new SQCssPseudoAlwaysNativelySupported() {
+        @Override
+        public SQLocatorCss toCssWhenNativelySupported() {
+            return new SQLocatorCss("input", "[type=\"" + typeAttributeValue + "\"]");
+        }
+
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath("(self::input and " + TYPE_ATTR_LC_VAL + " = '" + typeAttributeValue + "')");
+        }
+    };
 
     protected SQCssInputTypeAttributePseudoClass(String typeAttributeValue) {
         this.typeAttributeValue = typeAttributeValue;
     }
 
     @Override
-    public SQLocatorCss toCssWhenNativelySupported() {
-        return new SQLocatorCss("input", "[type=\"" + typeAttributeValue + "\"]");
-    }
-
-    @Override
-    public SQLocatorXPath toXPath() {
-        return SQLocatorXPath.pureXPath("(self::input and " + TYPE_ATTR_LC_VAL + " = '" + typeAttributeValue + "')");
+    public SQCssPseudoAlwaysNativelySupported getSQCssLocatorGenerationStrategy() {
+        return buttonPseudoClassLocatorGenerationStrategy;
     }
 
 }
