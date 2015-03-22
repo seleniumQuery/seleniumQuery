@@ -24,6 +24,13 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+/**
+ * $("selector").attr("attribute-name");
+ * $("selector").attr("attribute-name", "new-attribute-value");
+ *
+ * @author acdcjunior
+ * @since 0.9.0
+ */
 public class AttrFunction {
 	
 	private static final String SELECTED = "selected";
