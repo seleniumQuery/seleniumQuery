@@ -16,11 +16,30 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
-public class SQCssEvenPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :even
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssEvenPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "even";
+
+    public SQCssPseudoNeverNativelySupported buttonPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath("(position() mod 2) = 1");
+        }
+    };
+
+    @Override
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return buttonPseudoClassLocatorGenerationStrategy;
+    }
 
 }
