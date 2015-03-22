@@ -1,0 +1,57 @@
+basicfilter:
+	- :animated
+	- OK :eq()
+	- :even
+	- :first
+	- OK :gt()
+	- :header
+	- :lang()
+	- :last
+	- OK :lt()
+	- :not()
+	- :odd
+	- :root
+	- :target
+childfilter
+	- :first-child
+	- :first-of-type
+	- :last-child
+	- :last-of-type
+	- :nth-child()
+	- :nth-last-child()
+	- :nth-last-of-type()
+	- :nth-of-type()
+	- :only-child
+	- :only-of-type
+contentfilter
+	- :contains()
+	- :empty
+	- :has()
+	- :parent
+form
+	- OK :button
+	- OK :checkbox
+	- old :checked
+	- old :disabled
+	- old :enabled
+	- OK :file
+	- OK :focus
+	- OK :image
+	- old :input
+	- OK :password
+	- OK :radio
+	- old :reset
+	- old :selected
+	- old :submit
+	- old :text
+jquery-ui
+	- :focusable
+	- :tabbable
+seleniumquery
+	- :blank
+	- :filled
+	- :present
+	- :unchecked
+visibility
+    - OK :hidden
+    - OK :visible
