@@ -16,11 +16,24 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
-public class SQCssLastPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssLastPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "last";
+
+    public SQCssPseudoNeverNativelySupported buttonPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath("position() = last()");
+        }
+    };
+
+    @Override
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return buttonPseudoClassLocatorGenerationStrategy;
+    }
 
 }
