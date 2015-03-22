@@ -16,8 +16,10 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.css.pseudoclasses.FocusPseudoClass;
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFilterOnlyPseudoGeneratesFilter;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 
 public class SQCssFocusPseudoClassTest {
@@ -25,6 +27,11 @@ public class SQCssFocusPseudoClassTest {
     @Test
     public void translate() {
         assertPseudo(":focus", SQCssFocusPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__no_browser_has_native_support() {
+        assertFilterOnlyPseudoGeneratesFilter(new SQCssFocusPseudoClass(), FocusPseudoClass.FOCUS_FILTER);
     }
 
 }
