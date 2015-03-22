@@ -17,24 +17,34 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.InputPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 import static org.apache.commons.lang3.StringUtils.join;
 
 /**
+ * :input
+ * https://api.jquery.com/input-selector/
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssInputPseudoClass extends SQCssPseudoNeverNativelySupported {
+public class SQCssInputPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "input";
     public static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";
 
+    public SQCssPseudoNeverNativelySupported inputPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath(INPUT_TAGS_XPATH);
+        }
+    };
+
     @Override
-    public SQLocatorXPath toXPath() {
-        return SQLocatorXPath.pureXPath(INPUT_TAGS_XPATH);
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return inputPseudoClassLocatorGenerationStrategy;
     }
 
 }
