@@ -30,7 +30,7 @@ public class SQCssIdAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssIdAttributeCondition idAttributeCondition = new SQCssIdAttributeCondition("idz");
-        SQLocator previous = SQLocatorUtilsTest.TAG_ASTERISK;
+        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
         SQLocator locator = idAttributeCondition.toSQLocator(previous);
         // then

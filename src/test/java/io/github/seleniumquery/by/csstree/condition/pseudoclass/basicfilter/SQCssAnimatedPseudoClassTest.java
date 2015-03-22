@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassExcept
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
-import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.TAG_ASTERISK;
+import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
 
 public class SQCssAnimatedPseudoClassTest {
 
@@ -31,7 +31,7 @@ public class SQCssAnimatedPseudoClassTest {
 
     @Test(expected = UnsupportedPseudoClassException.class)
     public void toSQLocator__should_just_throw_exception() {
-        new SQCssAnimatedPseudoClass().toSQLocator(TAG_ASTERISK);
+        new SQCssAnimatedPseudoClass().toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
     }
 
 }

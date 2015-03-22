@@ -26,7 +26,7 @@ import org.openqa.selenium.WebDriver;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.*;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
-import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.tagAsterisk;
+import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.universalSelectorLocator;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class SQCssSelectedPseudoClassTest {
@@ -45,7 +45,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_has_native_support() {
         // supports pure CSS, but it is a translated one
-        SQLocator previousLocator = tagAsterisk(SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(":checked"));
+        SQLocator previousLocator = universalSelectorLocator(SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(":checked"));
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,
@@ -70,7 +70,7 @@ public class SQCssSelectedPseudoClassTest {
     public void toSQLocator__when_driver_has_native_supportx() {
         // supports pure CSS, but it is a translated one
         WebDriver mockDriverWithNativeSupportForChecked = SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(":checked");
-        SQLocator locatorAfterChecked = new SQCssCheckedPseudoClass().toSQLocator(tagAsterisk(mockDriverWithNativeSupportForChecked));
+        SQLocator locatorAfterChecked = new SQCssCheckedPseudoClass().toSQLocator(universalSelectorLocator(mockDriverWithNativeSupportForChecked));
 
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),

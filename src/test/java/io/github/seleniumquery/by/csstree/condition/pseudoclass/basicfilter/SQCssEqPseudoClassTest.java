@@ -22,7 +22,7 @@ import org.openqa.selenium.InvalidSelectorException;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
-import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.TAG_ASTERISK;
+import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
 import static org.junit.Assert.fail;
 
 public class SQCssEqPseudoClassTest {
@@ -46,7 +46,7 @@ public class SQCssEqPseudoClassTest {
 
     private void assertEqArgumentIsNotValid(String eqArgument) {
         try {
-            eq(eqArgument).toSQLocator(TAG_ASTERISK);
+            eq(eqArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
             fail("Should consider *:eq("+eqArgument+") to be invalid.");
         } catch (InvalidSelectorException ignored) { }
     }

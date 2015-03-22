@@ -30,7 +30,7 @@ public class SQCssEqualsOrHasAttributeConditionTest {
     public void toSQLocator__has_attribute() {
         // given
         SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib");
-        SQLocator previous = SQLocatorUtilsTest.TAG_ASTERISK;
+        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
         SQLocator locator = hasAttributeCondition.toSQLocator(previous);
         // then
@@ -44,7 +44,7 @@ public class SQCssEqualsOrHasAttributeConditionTest {
     public void toSQLocator__equals_attribute() {
         // given
         SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib", "valz");
-        SQLocator previous = SQLocatorUtilsTest.TAG_ASTERISK;
+        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
         SQLocator locator = hasAttributeCondition.toSQLocator(previous);
         // then

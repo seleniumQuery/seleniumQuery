@@ -30,7 +30,7 @@ public class SQCssContainsPrefixAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new SQCssContainsPrefixAttributeCondition("hreflang", "en");
-        SQLocator previous = SQLocatorUtilsTest.TAG_ASTERISK;
+        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
         SQLocator locator = containsPrefixAttributeCondition.toSQLocator(previous);
         // then

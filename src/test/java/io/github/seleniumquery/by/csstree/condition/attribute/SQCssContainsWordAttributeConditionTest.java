@@ -30,7 +30,7 @@ public class SQCssContainsWordAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssContainsWordAttributeCondition containsWordAttributeCondition = new SQCssContainsWordAttributeCondition("values", "10");
-        SQLocator previous = SQLocatorUtilsTest.TAG_ASTERISK;
+        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
         SQLocator locator = containsWordAttributeCondition.toSQLocator(previous);
         // then

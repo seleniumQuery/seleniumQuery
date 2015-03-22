@@ -30,7 +30,7 @@ public class SQCssStartsWithAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssStartsWithAttributeCondition startsWithAttributeCondition = new SQCssStartsWithAttributeCondition("attribute", "stringToStart");
-        SQLocator previous = SQLocatorUtilsTest.TAG_ASTERISK;
+        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
         SQLocator locator = startsWithAttributeCondition.toSQLocator(previous);
         // then
