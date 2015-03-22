@@ -41,7 +41,7 @@ form
 	- OK :input
 	- OK :password
 	- OK :radio
-	- old :reset
+	- OK :reset
 	- old :selected
 	- old :submit
 	- old :text
