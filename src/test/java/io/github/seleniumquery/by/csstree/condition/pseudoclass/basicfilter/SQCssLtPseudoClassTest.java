@@ -17,14 +17,41 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import org.junit.Test;
+import org.openqa.selenium.InvalidSelectorException;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
+import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+import static org.junit.Assert.fail;
 
 public class SQCssLtPseudoClassTest {
 
+    public static final String LT_PSEUDO = ":lt";
+
     @Test
     public void translate() {
-        assertFunctionalPseudo(":lt", SQCssLtPseudoClass.class);
+        assertFunctionalPseudo(LT_PSEUDO, SQCssLtPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__lt_should_throw_exception_if_argument_is_not_an_integer() {
+        assertLtArgumentIsNotValid("a");
+        assertLtArgumentIsNotValid("");
+        assertLtArgumentIsNotValid("+");
+        assertLtArgumentIsNotValid("-");
+        assertLtArgumentIsNotValid("+ 1");
+        assertLtArgumentIsNotValid(" ");
+    }
+
+    private void assertLtArgumentIsNotValid(String eqArgument) {
+        try {
+            lt(eqArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
+            fail("Should consider *:lt("+eqArgument+") to be invalid.");
+        } catch (InvalidSelectorException ignored) { }
+    }
+
+    private SQCssLtPseudoClass lt(String eqArgument) {
+        return new SQCssLtPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(eqArgument));
     }
 
 }
