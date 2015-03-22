@@ -39,7 +39,11 @@ public class SQCssEqPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
             if (index >= 0) {
                 return SQLocatorXPath.pureXPath("position() = " + (index + 1));
             }
-            return SQLocatorXPath.pureXPath("position() = (last()-" + (-index - 1) + ")");
+            int positionFromLast = -index - 1;
+            if (positionFromLast == 0) {
+                return SQLocatorXPath.pureXPath("position() = last()");
+            }
+            return SQLocatorXPath.pureXPath("position() = (last()-" + positionFromLast + ")");
         }
         @Override
         public XPathMergeStrategy xPathMergeStrategy() {

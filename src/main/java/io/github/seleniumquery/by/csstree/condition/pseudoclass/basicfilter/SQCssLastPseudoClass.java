@@ -16,30 +16,26 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 
 /**
  * :last
+ * https://api.jquery.com/last-selector/
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssLastPseudoClass extends SQCssPseudoClassCondition {
+public class SQCssLastPseudoClass extends SQCssEqPseudoClass {
 
     public static final String PSEUDO = "last";
 
-    public SQCssPseudoNeverNativelySupported lastPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
-        @Override
-        public SQLocatorXPath toXPath() {
-            return SQLocatorXPath.pureXPath("position() = last()");
-        }
-    };
+    public SQCssLastPseudoClass(PseudoClassSelector pseudoClassSelector) {
+        super(pseudoClassSelector);
+    }
 
     @Override
-    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
-        return lastPseudoClassLocatorGenerationStrategy;
+    public String getArgument() {
+        return "-1";
     }
 
 }
