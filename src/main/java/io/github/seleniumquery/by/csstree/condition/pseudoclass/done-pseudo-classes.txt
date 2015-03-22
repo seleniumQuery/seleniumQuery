@@ -32,8 +32,8 @@ form
 	- OK :button
 	- OK :checkbox
 	- OK :checked
-	- old :disabled
-	- old :enabled
+	- OK :disabled
+	- OK :enabled
 	- OK :file
 	- OK :focus
 	- OK :image

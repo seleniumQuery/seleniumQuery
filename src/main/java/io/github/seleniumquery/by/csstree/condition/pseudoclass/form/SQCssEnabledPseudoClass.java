@@ -17,28 +17,39 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.DisabledPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 /**
+ * :enabled
+ * https://api.jquery.com/enabled-selector/
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:enabled
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssEnabledPseudoClass extends SQCssPseudoMaybeNativelySupported {
+public class SQCssEnabledPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "enabled";
     public static final String ENABLED_PSEUDO = ":" + PSEUDO;
 
-    @Override
-    public SQLocatorCss toCssWhenNativelySupported() {
-        return new SQLocatorCss(ENABLED_PSEUDO);
-    }
+    public SQCssPseudoMaybeNativelySupported enabledPseudoClassLocatorGenerationStrategy = new SQCssPseudoMaybeNativelySupported() {
+        @Override
+        public SQLocatorCss toCssWhenNativelySupported() {
+            return new SQLocatorCss(ENABLED_PSEUDO);
+        }
+
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath("(not(@disabled) and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")");
+        }
+    };
 
     @Override
-    public SQLocatorXPath toXPath() {
-        return SQLocatorXPath.pureXPath("(not(@disabled) and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")");
+    public SQCssPseudoMaybeNativelySupported getSQCssLocatorGenerationStrategy() {
+        return enabledPseudoClassLocatorGenerationStrategy;
     }
 
 }
