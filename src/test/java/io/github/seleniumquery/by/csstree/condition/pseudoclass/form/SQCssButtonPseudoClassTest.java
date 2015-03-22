@@ -32,7 +32,7 @@ public class SQCssButtonPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":button", SQCssButtonPseudoClass.class);
+        assertPseudo(BUTTON_PSEUDO, SQCssButtonPseudoClass.class);
     }
 
     @Test
