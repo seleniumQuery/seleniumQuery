@@ -30,7 +30,7 @@ public class SQCssFirstPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "first";
 
-    public SQCssPseudoNeverNativelySupported buttonPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+    public SQCssPseudoNeverNativelySupported firstPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
         @Override
         public SQLocatorXPath toXPath() {
             return SQLocatorXPath.pureXPath("position() = 1");
@@ -39,7 +39,7 @@ public class SQCssFirstPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
-        return buttonPseudoClassLocatorGenerationStrategy;
+        return firstPseudoClassLocatorGenerationStrategy;
     }
 
 }
