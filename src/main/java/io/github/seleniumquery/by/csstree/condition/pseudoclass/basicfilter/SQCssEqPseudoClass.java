@@ -21,9 +21,10 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalP
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.XPathMergeStrategy;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import org.openqa.selenium.InvalidSelectorException;
 
 /**
- * :eq
+ * :eq(index)
  *
  * @author acdcjunior
  * @since 0.10.0
@@ -35,7 +36,11 @@ public class SQCssEqPseudoClass extends SQCssFunctionalPseudoClassCondition {
     public SQCssPseudoNeverNativelySupported eqPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
         @Override
         public SQLocatorXPath toXPath() {
-            return SQLocatorXPath.pureXPath("position() = " + getArgument());
+            String eqIndex = getArgument();
+            if (!eqIndex.matches("[+-]?\\d+")) {
+                throw new InvalidSelectorException("The :eq() pseudo-class requires an integer as argument but got: " + eqIndex);
+            }
+            return SQLocatorXPath.pureXPath("position() = " + eqIndex);
         }
         @Override
         public XPathMergeStrategy xPathMergeStrategy() {
