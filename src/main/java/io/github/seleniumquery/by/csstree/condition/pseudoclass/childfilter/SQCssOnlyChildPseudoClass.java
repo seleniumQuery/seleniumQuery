@@ -16,11 +16,31 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
-public class SQCssOnlyChildPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :only-child
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:only-child
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssOnlyChildPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "only-child";
+
+    public SQCssPseudoNeverNativelySupported onlyChildPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath("../*[last() = 1]");
+        }
+    };
+
+    @Override
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return onlyChildPseudoClassLocatorGenerationStrategy;
+    }
 
 }
