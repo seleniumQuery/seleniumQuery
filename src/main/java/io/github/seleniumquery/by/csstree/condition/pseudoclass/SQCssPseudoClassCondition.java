@@ -17,7 +17,19 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.locator.SQLocator;
 
-public abstract class SQCssPseudoClassCondition implements SQCssCondition {
+public abstract class SQCssPseudoClassCondition implements SQCssCondition, SQCssConditionImplementedLocators {
+
+    @Override
+    public SQLocator toSQLocator(SQLocator leftLocator) {
+        return getSQCssLocatorGenerationStrategy().toSQLocator(leftLocator);
+    }
+
+    public SQCssConditionImplementedLocators getSQCssLocatorGenerationStrategy() {
+        throw new RuntimeException("This method will be abstract. It is not yet because I want the project " +
+                "to compile while I'm implementing everyone.");
+    }
 
 }
