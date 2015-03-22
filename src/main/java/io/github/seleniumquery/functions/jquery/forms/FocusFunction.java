@@ -26,6 +26,12 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+/**
+ * $("selector").focus();
+ *
+ * @author acdcjunior
+ * @since 0.9.0
+ */
 public class FocusFunction {
 	
 	private static final Log LOGGER = LogFactory.getLog(FocusFunction.class);
