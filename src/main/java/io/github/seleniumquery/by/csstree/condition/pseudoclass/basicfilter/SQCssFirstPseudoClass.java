@@ -16,30 +16,26 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 
 /**
  * :first
+ * https://api.jquery.com/first-selector/
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssFirstPseudoClass extends SQCssPseudoClassCondition {
+public class SQCssFirstPseudoClass extends SQCssEqPseudoClass {
 
     public static final String PSEUDO = "first";
 
-    public SQCssPseudoNeverNativelySupported firstPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
-        @Override
-        public SQLocatorXPath toXPath() {
-            return SQLocatorXPath.pureXPath("position() = 1");
-        }
-    };
+    public SQCssFirstPseudoClass(PseudoClassSelector pseudoClassSelector) {
+        super(pseudoClassSelector);
+    }
 
     @Override
-    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
-        return firstPseudoClassLocatorGenerationStrategy;
+    public String getArgument() {
+        return "0";
     }
 
 }
