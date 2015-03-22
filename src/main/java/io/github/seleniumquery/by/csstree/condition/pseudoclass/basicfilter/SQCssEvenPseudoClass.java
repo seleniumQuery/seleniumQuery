@@ -30,7 +30,7 @@ public class SQCssEvenPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "even";
 
-    public SQCssPseudoNeverNativelySupported buttonPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+    public SQCssPseudoNeverNativelySupported evenPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
         @Override
         public SQLocatorXPath toXPath() {
             return SQLocatorXPath.pureXPath("(position() mod 2) = 1");
@@ -39,7 +39,7 @@ public class SQCssEvenPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
-        return buttonPseudoClassLocatorGenerationStrategy;
+        return evenPseudoClassLocatorGenerationStrategy;
     }
 
 }
