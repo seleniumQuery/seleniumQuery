@@ -57,7 +57,16 @@ public class SQCssEqPseudoClassTest {
 
     @Test
     public void toSQLocator__eq_0__only_generates_XPath_regardless_of_native_support() {
-        assertEqArgumentGeneratesXPath("0", "(.//*)[position() = 0]");
+        String eq0XPathExpression = "(.//*)[position() = 1]";
+        assertEqArgumentGeneratesXPath("0", eq0XPathExpression);
+        assertEqArgumentGeneratesXPath("+0", eq0XPathExpression);
+        assertEqArgumentGeneratesXPath("-0", eq0XPathExpression);
+        assertEqArgumentGeneratesXPath(" +0", eq0XPathExpression);
+        assertEqArgumentGeneratesXPath(" -0", eq0XPathExpression);
+        assertEqArgumentGeneratesXPath("+0 ", eq0XPathExpression);
+        assertEqArgumentGeneratesXPath("-0 ", eq0XPathExpression);
+        assertEqArgumentGeneratesXPath("  +0   ", eq0XPathExpression);
+        assertEqArgumentGeneratesXPath("  -0   ", eq0XPathExpression);
     }
 
     private void assertEqArgumentGeneratesXPath(String eqArgument, String eqXPathExpression) {
@@ -66,7 +75,7 @@ public class SQCssEqPseudoClassTest {
 
     @Test
     public void toSQLocator__eq_1__only_generates_XPath_regardless_of_native_support() {
-        String eq1XPathExpression = "(.//*)[position() = 1]";
+        String eq1XPathExpression = "(.//*)[position() = 2]";
         assertEqArgumentGeneratesXPath("1", eq1XPathExpression);
         assertEqArgumentGeneratesXPath("+1", eq1XPathExpression);
         assertEqArgumentGeneratesXPath("  +1", eq1XPathExpression);
