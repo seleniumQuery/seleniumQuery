@@ -37,7 +37,7 @@ public class PseudoClassAssertLocatorUtils {
 
     public static final boolean PURE_CSS_IS_SUPPORTED = true;
     public static final boolean PURE_CSS_IS_NOT_SUPPORTED = false;
-    public static final String CSS_ALL_TAGS_SELECTOR = "*";
+    public static final String CSS_ALL_TAGS_SELECTOR = "*"; // TODO rename to "universal selector"
 
     public static void assertPseudoClassHasLocatorWhenNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass,
                                                                         String expectedCss, boolean canPureCss,
@@ -53,6 +53,7 @@ public class PseudoClassAssertLocatorUtils {
         );
     }
 
+    // TODO change parameter order, put pseudoClass first
     public static void assertPseudoClassHasLocatorWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject, String pseudoClass,
                                                                            String expectedCss, boolean canPureCss,
                                                                            String expectedXPath,

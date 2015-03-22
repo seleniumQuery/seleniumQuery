@@ -17,34 +17,52 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoMaybeNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import org.openqa.selenium.WebDriver;
 
 /**
- * :selected can be translated into option:checked.
- * We need to expand how SQLocator handles the CSS selector, as we needed to override the previously set tag.
+ * :selected
+ * https://api.jquery.com/selected-selector/
+ *
+ * :selected is a "maybe natively supported" because it can be translated into option:checked (but
+ * only if the browser supports - without bugs - the :checked pseudo).
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssSelectedPseudoClass extends SQCssPseudoMaybeNativelySupported {
+public class SQCssSelectedPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "selected";
 
-    @Override
-    public String pseudoClassForCSSNativeSupportCheck() {
-        return SQCssCheckedPseudoClass.CHECKED_PSEUDO;
-    }
+    public SQCssPseudoMaybeNativelySupported selectedPseudoClassLocatorGenerationStrategy = new SQCssPseudoMaybeNativelySupported() {
+        @Override
+        public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
+            return SQCssCheckedPseudoClass.isDriverWhereCheckedSelectorHasNoBugs(webDriver)
+                    && super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
+        }
+
+        @Override
+        public String pseudoClassForCSSNativeSupportCheck() {
+            return SQCssCheckedPseudoClass.CHECKED_PSEUDO;
+        }
+
+        @Override
+        public SQLocatorCss toCssWhenNativelySupported() {
+            return new SQLocatorCss("option", ":checked");
+        }
+
+        @Override
+        public SQLocatorXPath toXPath() {
+            return new SQLocatorXPath("self::option", SelectedPseudoClass.SELECTED_FILTER);
+        }
+    };
 
     @Override
-    public SQLocatorCss toCssWhenNativelySupported() {
-        return new SQLocatorCss("option", ":checked");
-    }
-
-    @Override
-    public SQLocatorXPath toXPath() {
-        return new SQLocatorXPath("self::option", SelectedPseudoClass.SELECTED_FILTER);
+    public SQCssPseudoMaybeNativelySupported getSQCssLocatorGenerationStrategy() {
+        return selectedPseudoClassLocatorGenerationStrategy;
     }
 
 }
