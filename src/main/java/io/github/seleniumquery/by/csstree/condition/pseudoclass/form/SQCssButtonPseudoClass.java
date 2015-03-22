@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
@@ -27,13 +28,20 @@ import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssButtonPseudoClass extends SQCssPseudoNeverNativelySupported {
+public class SQCssButtonPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "button";
 
+    public SQCssPseudoNeverNativelySupported buttonPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            return SQLocatorXPath.pureXPath("((self::input and " + TYPE_ATTR_LC_VAL + " = 'button') or self::button)");
+        }
+    };
+
     @Override
-    public SQLocatorXPath toXPath() {
-        return SQLocatorXPath.pureXPath("((self::input and " + TYPE_ATTR_LC_VAL + " = 'button') or self::button)");
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return buttonPseudoClassLocatorGenerationStrategy;
     }
 
 }
