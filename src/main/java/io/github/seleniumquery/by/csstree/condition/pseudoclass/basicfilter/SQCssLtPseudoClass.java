@@ -17,15 +17,40 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalIndexArgumentPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
-public class SQCssLtPseudoClass extends SQCssFunctionalPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :lt(index)
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssLtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassCondition {
 
     public static final String PSEUDO = "lt";
 
+    public SQCssPseudoNeverNativelySupported gtPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+        @Override
+        public SQLocatorXPath toXPath() {
+            getArgumentAsIndex();
+            return null;
+        }
+    };
+
     public SQCssLtPseudoClass(PseudoClassSelector pseudoClassSelector) {
         super(pseudoClassSelector);
+    }
+
+    @Override
+    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+        return gtPseudoClassLocatorGenerationStrategy;
+    }
+
+    @Override
+    protected String getPseudoClassName() {
+        return PSEUDO;
     }
 
 }
