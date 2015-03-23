@@ -22,6 +22,8 @@ import org.openqa.selenium.InvalidSelectorException;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class SQCssLtPseudoClassTest {
@@ -47,7 +49,10 @@ public class SQCssLtPseudoClassTest {
         try {
             lt(eqArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
             fail("Should consider *:lt("+eqArgument+") to be invalid.");
-        } catch (InvalidSelectorException ignored) { }
+        } catch (InvalidSelectorException e) {
+            assertThat(e.getMessage(), containsString(":lt()"));
+            assertThat(e.getMessage(), containsString(eqArgument));
+        }
     }
 
     private SQCssLtPseudoClass lt(String eqArgument) {
