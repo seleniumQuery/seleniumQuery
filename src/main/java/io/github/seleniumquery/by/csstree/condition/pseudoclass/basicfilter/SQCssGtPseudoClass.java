@@ -21,6 +21,12 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalI
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoNeverNativelySupported;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
+/**
+ * :gt(index)
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public class SQCssGtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassCondition {
 
     public static final String PSEUDO = "gt";

@@ -19,6 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
@@ -57,6 +58,24 @@ public class SQCssGtPseudoClassTest {
 
     private SQCssGtPseudoClass gt(String eqArgument) {
         return new SQCssGtPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(eqArgument));
+    }
+
+    @Test
+    public void toSQLocator__gt_0__only_generates_XPath_regardless_of_native_support() {
+        String eq0XPathExpression = "(.//*)[position() = 1]";
+        assertGtArgumentGeneratesXPath("0", eq0XPathExpression);
+        assertGtArgumentGeneratesXPath("+0", eq0XPathExpression);
+        assertGtArgumentGeneratesXPath("-0", eq0XPathExpression);
+        assertGtArgumentGeneratesXPath(" +0", eq0XPathExpression);
+        assertGtArgumentGeneratesXPath(" -0", eq0XPathExpression);
+        assertGtArgumentGeneratesXPath("+0 ", eq0XPathExpression);
+        assertGtArgumentGeneratesXPath("-0 ", eq0XPathExpression);
+        assertGtArgumentGeneratesXPath("  +0   ", eq0XPathExpression);
+        assertGtArgumentGeneratesXPath("  -0   ", eq0XPathExpression);
+    }
+
+    private void assertGtArgumentGeneratesXPath(String eqArgument, String eqXPathExpression) {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(gt(eqArgument), GT_PSEUDO, eqXPathExpression);
     }
 
 }
