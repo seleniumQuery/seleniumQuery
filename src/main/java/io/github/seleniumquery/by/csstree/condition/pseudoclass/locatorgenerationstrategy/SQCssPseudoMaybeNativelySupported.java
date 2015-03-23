@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass;
+package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy;
 
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
@@ -25,7 +25,7 @@ import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED;
 
-public abstract class SQCssPseudoMaybeNativelySupported extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
+public abstract class SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
 
     @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
