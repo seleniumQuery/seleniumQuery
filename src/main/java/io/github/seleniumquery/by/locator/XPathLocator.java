@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.locator;
 
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.XPathMergeStrategy;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import org.openqa.selenium.By;
@@ -86,6 +87,13 @@ public class XPathLocator {
 
     public String getFinalXPathExpression() {
         return "(" + this.xPathExpression + ")";
+    }
+
+    public XPathLocator merge(XPathLocator rightXPath, XPathMergeStrategy xPathMergeStrategy) {
+        return new XPathLocator(
+            xPathMergeStrategy.mergeXPath(this.getXPathExpression(), rightXPath.getXPathExpression()),
+            this.getElementFilterList().merge(rightXPath.getElementFilterList())
+        );
     }
 
 }

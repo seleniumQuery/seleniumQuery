@@ -25,6 +25,12 @@ import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.CSSLocator.CSS_NOT_NATIVELY_SUPPORTED;
 
+/**
+ * Represents a strategy where the selector may or may not be natively supported by the driver.
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
 
     @Override
@@ -33,22 +39,15 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
             return new SQLocator(
                     leftLocator.getWebDriver(),
                     leftLocator.getCSSLocator().merge(toCssWhenNativelySupported()),
-                    mergeXPath(leftLocator));
+                    leftLocator.getXPathLocator().merge(toXPath(), xPathMergeStrategy())
+            );
         } else {
             return new SQLocator(
                     leftLocator.getWebDriver(),
                     CSS_NOT_NATIVELY_SUPPORTED,
-                    mergeXPath(leftLocator));
+                    leftLocator.getXPathLocator().merge(toXPath(), xPathMergeStrategy())
+            );
         }
-    }
-
-    private XPathLocator mergeXPath(SQLocator leftLocator) {
-        XPathLocator XPathLocator = toXPath();
-        return new XPathLocator(
-            // TODO move this mergeXPath() to SQLocatorXPath
-            xPathMergeStrategy().mergeXPath(leftLocator, XPathLocator.getXPathExpression()),
-            leftLocator.getElementFilterList().merge(XPathLocator.getElementFilterList())
-        );
     }
 
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
