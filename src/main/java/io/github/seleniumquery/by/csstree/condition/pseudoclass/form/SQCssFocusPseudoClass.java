@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.FocusPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 /**
@@ -32,7 +32,7 @@ public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "focus";
 
-    public SQCssPseudoNeverNativelySupported hiddenPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+    public NeverNativelySupportedPseudoClass hiddenPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public SQLocatorXPath toXPath() {
             return SQLocatorXPath.filterOnly(FocusPseudoClass.FOCUS_FILTER);
@@ -40,7 +40,7 @@ public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition {
     };
 
     @Override
-    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+    public NeverNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
         return hiddenPseudoClassLocatorGenerationStrategy;
     }
 

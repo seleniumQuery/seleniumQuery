@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.DisabledPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.SQCssPseudoMaybeNativelySupported;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
@@ -35,7 +35,7 @@ public class SQCssEnabledPseudoClass extends SQCssPseudoClassCondition {
     public static final String PSEUDO = "enabled";
     public static final String ENABLED_PSEUDO = ":" + PSEUDO;
 
-    public SQCssPseudoMaybeNativelySupported enabledPseudoClassLocatorGenerationStrategy = new SQCssPseudoMaybeNativelySupported() {
+    public MaybeNativelySupportedPseudoClass enabledPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public SQLocatorCss toCssWhenNativelySupported() {
             return new SQLocatorCss(ENABLED_PSEUDO);
@@ -48,7 +48,7 @@ public class SQCssEnabledPseudoClass extends SQCssPseudoClassCondition {
     };
 
     @Override
-    public SQCssPseudoMaybeNativelySupported getSQCssLocatorGenerationStrategy() {
+    public MaybeNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
         return enabledPseudoClassLocatorGenerationStrategy;
     }
 

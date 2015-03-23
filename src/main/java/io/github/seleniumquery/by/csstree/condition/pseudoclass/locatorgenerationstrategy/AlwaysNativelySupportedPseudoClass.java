@@ -36,7 +36,7 @@ import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLoc
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import org.openqa.selenium.WebDriver;
 
-public abstract class SQCssPseudoAlwaysNativelySupported extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
+public abstract class AlwaysNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
 
     @Override
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {

@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.InputPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 import static org.apache.commons.lang3.StringUtils.join;
@@ -35,7 +35,7 @@ public class SQCssInputPseudoClass extends SQCssPseudoClassCondition {
     public static final String PSEUDO = "input";
     public static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";
 
-    public SQCssPseudoNeverNativelySupported inputPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+    public NeverNativelySupportedPseudoClass inputPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public SQLocatorXPath toXPath() {
             return SQLocatorXPath.pureXPath(INPUT_TAGS_XPATH);
@@ -43,7 +43,7 @@ public class SQCssInputPseudoClass extends SQCssPseudoClassCondition {
     };
 
     @Override
-    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+    public NeverNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
         return inputPseudoClassLocatorGenerationStrategy;
     }
 

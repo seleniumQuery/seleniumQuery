@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.SQCssPseudoAlwaysNativelySupported;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.AlwaysNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
@@ -34,7 +34,7 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
 
     private String typeAttributeValue;
 
-    public SQCssPseudoAlwaysNativelySupported inputTypePseudoClassLocatorGenerationStrategy = new SQCssPseudoAlwaysNativelySupported() {
+    public AlwaysNativelySupportedPseudoClass inputTypePseudoClassLocatorGenerationStrategy = new AlwaysNativelySupportedPseudoClass() {
         @Override
         public SQLocatorCss toCssWhenNativelySupported() {
             return new SQLocatorCss("input", "[type=\"" + typeAttributeValue + "\"]");
@@ -51,7 +51,7 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
     }
 
     @Override
-    public SQCssPseudoAlwaysNativelySupported getSQCssLocatorGenerationStrategy() {
+    public AlwaysNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
         return inputTypePseudoClassLocatorGenerationStrategy;
     }
 

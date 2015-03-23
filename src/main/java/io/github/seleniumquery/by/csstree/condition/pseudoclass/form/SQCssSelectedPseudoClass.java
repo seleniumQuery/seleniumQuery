@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.SQCssPseudoMaybeNativelySupported;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +37,7 @@ public class SQCssSelectedPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "selected";
 
-    public SQCssPseudoMaybeNativelySupported selectedPseudoClassLocatorGenerationStrategy = new SQCssPseudoMaybeNativelySupported() {
+    public MaybeNativelySupportedPseudoClass selectedPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
             return SQCssCheckedPseudoClass.isDriverWhereCheckedSelectorHasNoBugs(webDriver)
@@ -61,7 +61,7 @@ public class SQCssSelectedPseudoClass extends SQCssPseudoClassCondition {
     };
 
     @Override
-    public SQCssPseudoMaybeNativelySupported getSQCssLocatorGenerationStrategy() {
+    public MaybeNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
         return selectedPseudoClassLocatorGenerationStrategy;
     }
 

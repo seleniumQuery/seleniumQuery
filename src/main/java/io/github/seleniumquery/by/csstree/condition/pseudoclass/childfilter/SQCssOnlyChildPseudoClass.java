@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
 /**
@@ -31,7 +31,7 @@ public class SQCssOnlyChildPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "only-child";
 
-    public SQCssPseudoNeverNativelySupported onlyChildPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+    public NeverNativelySupportedPseudoClass onlyChildPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public SQLocatorXPath toXPath() {
             return SQLocatorXPath.pureXPath("../*[last() = 1]");
@@ -39,7 +39,7 @@ public class SQCssOnlyChildPseudoClass extends SQCssPseudoClassCondition {
     };
 
     @Override
-    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+    public NeverNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
         return onlyChildPseudoClassLocatorGenerationStrategy;
     }
 
