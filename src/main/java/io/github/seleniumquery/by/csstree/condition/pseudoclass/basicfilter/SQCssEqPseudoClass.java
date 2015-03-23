@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalIndexArgumentPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.SQCssPseudoNeverNativelySupported;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.XPathMergeStrategy;
 import io.github.seleniumquery.by.locator.SQLocatorXPath;
 
@@ -32,7 +32,7 @@ public class SQCssEqPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
 
     public static final String PSEUDO = "eq";
 
-    public SQCssPseudoNeverNativelySupported eqPseudoClassLocatorGenerationStrategy = new SQCssPseudoNeverNativelySupported() {
+    public NeverNativelySupportedPseudoClass eqPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public SQLocatorXPath toXPath() {
             int index = getArgumentAsIndex();
@@ -56,7 +56,7 @@ public class SQCssEqPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
     }
 
     @Override
-    public SQCssPseudoNeverNativelySupported getSQCssLocatorGenerationStrategy() {
+    public NeverNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
         return eqPseudoClassLocatorGenerationStrategy;
     }
 

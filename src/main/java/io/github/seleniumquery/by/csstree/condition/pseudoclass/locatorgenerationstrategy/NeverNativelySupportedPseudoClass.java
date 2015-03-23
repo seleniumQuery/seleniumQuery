@@ -26,7 +26,7 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class SQCssPseudoNeverNativelySupported extends SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
+public abstract class NeverNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
 
     @Override
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
@@ -34,7 +34,7 @@ public abstract class SQCssPseudoNeverNativelySupported extends SQCssPseudoMaybe
     }
 
     /**
-     * Due to the {@link SQCssPseudoNeverNativelySupported#isThisCSSPseudoClassNativelySupportedOn(org.openqa.selenium.WebDriver)}
+     * Due to the {@link NeverNativelySupportedPseudoClass#isThisCSSPseudoClassNativelySupportedOn(org.openqa.selenium.WebDriver)}
      * always returning false, this method will actually never be called.
      * I do know this smells like a violation of LSP, but I, for the love of Yoda, couldn't figure out a better way!
      */

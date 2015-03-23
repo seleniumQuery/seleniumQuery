@@ -25,7 +25,7 @@ import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED;
 
-public abstract class SQCssPseudoMaybeNativelySupported implements SQCssConditionImplementedLocators {
+public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
 
     @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
