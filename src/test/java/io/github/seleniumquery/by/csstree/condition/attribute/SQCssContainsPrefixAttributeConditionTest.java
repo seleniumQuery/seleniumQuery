@@ -34,7 +34,7 @@ public class SQCssContainsPrefixAttributeConditionTest {
         // when
         SQLocator locator = containsPrefixAttributeCondition.toSQLocator(previous);
         // then
-        assertThat(locator.getSqLocatorCss().toString(), is("[hreflang|='en']"));
+        assertThat(locator.getCSSLocator().toString(), is("[hreflang|='en']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
 
         String hreflang = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'hreflang']";

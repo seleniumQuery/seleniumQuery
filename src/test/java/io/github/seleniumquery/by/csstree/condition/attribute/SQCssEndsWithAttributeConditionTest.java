@@ -34,7 +34,7 @@ public class SQCssEndsWithAttributeConditionTest {
         // when
         SQLocator locator = endsWithAttributeCondition.toSQLocator(previous);
         // then
-        assertThat(locator.getSqLocatorCss().toString(), is("[attribute$='stringToEnd']"));
+        assertThat(locator.getCSSLocator().toString(), is("[attribute$='stringToEnd']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";

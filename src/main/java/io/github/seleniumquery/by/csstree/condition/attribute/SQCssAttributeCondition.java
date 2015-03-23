@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorUtils;
 
 /**
@@ -48,12 +48,12 @@ public abstract class SQCssAttributeCondition implements SQCssCondition, SQCssCo
 
     @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
-        SQLocatorCss newCssSelector = leftLocator.getSqLocatorCss().merge(toCSS());
+        CSSLocator newCssSelector = leftLocator.getCSSLocator().merge(toCSS());
         String newXPathExpression = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
         return new SQLocator(newCssSelector, newXPathExpression, leftLocator);
     }
 
-    protected abstract SQLocatorCss toCSS();
+    protected abstract CSSLocator toCSS();
 
     protected abstract String toXPath();
 

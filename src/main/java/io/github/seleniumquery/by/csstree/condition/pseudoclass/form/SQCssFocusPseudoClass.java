@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.css.pseudoclasses.FocusPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
 /**
  * PhantomJS may have problems with this:
@@ -34,8 +34,8 @@ public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition {
 
     public NeverNativelySupportedPseudoClass hiddenPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public SQLocatorXPath toXPath() {
-            return SQLocatorXPath.filterOnly(FocusPseudoClass.FOCUS_FILTER);
+        public XPathLocator toXPath() {
+            return XPathLocator.filterOnly(FocusPseudoClass.FOCUS_FILTER);
         }
     };
 

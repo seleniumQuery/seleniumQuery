@@ -19,8 +19,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.css.pseudoclasses.DisabledPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
 /**
  * :enabled
@@ -37,13 +37,13 @@ public class SQCssEnabledPseudoClass extends SQCssPseudoClassCondition {
 
     public MaybeNativelySupportedPseudoClass enabledPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
-        public SQLocatorCss toCssWhenNativelySupported() {
-            return new SQLocatorCss(ENABLED_PSEUDO);
+        public CSSLocator toCssWhenNativelySupported() {
+            return new CSSLocator(ENABLED_PSEUDO);
         }
 
         @Override
-        public SQLocatorXPath toXPath() {
-            return SQLocatorXPath.pureXPath("(not(@disabled) and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")");
+        public XPathLocator toXPath() {
+            return XPathLocator.pureXPath("(not(@disabled) and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")");
         }
     };
 

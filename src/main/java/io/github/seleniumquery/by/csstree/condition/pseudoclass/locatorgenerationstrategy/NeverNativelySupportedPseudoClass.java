@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
+import io.github.seleniumquery.by.locator.CSSLocator;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -39,7 +39,7 @@ public abstract class NeverNativelySupportedPseudoClass extends MaybeNativelySup
      * I do know this smells like a violation of LSP, but I, for the love of Yoda, couldn't figure out a better way!
      */
     @Override
-    public SQLocatorCss toCssWhenNativelySupported() {
+    public CSSLocator toCssWhenNativelySupported() {
         throw new UnsupportedOperationException();
     }
 

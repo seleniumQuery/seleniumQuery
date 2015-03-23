@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalIndexArgumentPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.XPathMergeStrategy;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
 /**
  * :eq(index)
@@ -34,16 +34,16 @@ public class SQCssEqPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
 
     public NeverNativelySupportedPseudoClass eqPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public SQLocatorXPath toXPath() {
+        public XPathLocator toXPath() {
             int index = getArgumentAsIndex();
             if (index >= 0) {
-                return SQLocatorXPath.pureXPath("position() = " + (index + 1));
+                return XPathLocator.pureXPath("position() = " + (index + 1));
             }
             int positionFromLast = -index - 1;
             if (positionFromLast == 0) {
-                return SQLocatorXPath.pureXPath("position() = last()");
+                return XPathLocator.pureXPath("position() = last()");
             }
-            return SQLocatorXPath.pureXPath("position() = (last()-" + positionFromLast + ")");
+            return XPathLocator.pureXPath("position() = (last()-" + positionFromLast + ")");
         }
         @Override
         public XPathMergeStrategy xPathMergeStrategy() {

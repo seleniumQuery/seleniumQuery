@@ -16,13 +16,13 @@
 
 package io.github.seleniumquery.by.csstree.selector;
 
+import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
 import io.github.seleniumquery.by.locator.SQLocatorUtils;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.locator.SQLocatorCss.fromTag;
-import static io.github.seleniumquery.by.locator.SQLocatorXPath.pureXPath;
+import static io.github.seleniumquery.by.locator.CSSLocator.fromTag;
+import static io.github.seleniumquery.by.locator.XPathLocator.pureXPath;
 
 /**
  * Element or tag selector. Example: {@code "div"}.
@@ -49,7 +49,7 @@ public class SQCssTagNameSelector implements SQCssSelector {
 
     @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
-        SQLocatorCss newCssSelector = leftLocator.getSqLocatorCss().merge(toCSS());
+        CSSLocator newCssSelector = leftLocator.getCSSLocator().merge(toCSS());
         String newXPathExpression = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
         return new SQLocator(newCssSelector, newXPathExpression, leftLocator);
     }
@@ -58,7 +58,7 @@ public class SQCssTagNameSelector implements SQCssSelector {
         return "*".equals(this.tagName) ? "true()" : "self::"+tagName;
     }
 
-    private SQLocatorCss toCSS() {
+    private CSSLocator toCSS() {
         return fromTag(this.tagName);
     }
 

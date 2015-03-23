@@ -18,12 +18,12 @@ package io.github.seleniumquery.by.locator;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.locator.SQLocatorCss.fromTag;
-import static io.github.seleniumquery.by.locator.SQLocatorCss.universalSelector;
+import static io.github.seleniumquery.by.locator.CSSLocator.fromTag;
+import static io.github.seleniumquery.by.locator.CSSLocator.universalSelector;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SQLocatorCssTest {
+public class CSSLocatorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void cssMerge__should_throw_exception_if_both_css_havent_universalSelector_as_tag() {
@@ -32,32 +32,32 @@ public class SQLocatorCssTest {
 
     @Test
     public void cssMerge__should_let_it_be_if_both_tags_are_not_universalSelector__but_are_equal() {
-        SQLocatorCss mergedCss = fromTag("div").merge(fromTag("div"));
+        CSSLocator mergedCss = fromTag("div").merge(fromTag("div"));
         assertThat(mergedCss.toString(), is("div"));
     }
 
     @Test
     public void cssMerge__should_merge() {
-        SQLocatorCss mergedCss = fromTag("div").merge(new SQLocatorCss(".clz"));
+        CSSLocator mergedCss = fromTag("div").merge(new CSSLocator(".clz"));
         assertThat(mergedCss.toString(), is("div.clz"));
     }
 
     @Test
     public void cssMerge__should_remove_asterisk() {
-        SQLocatorCss mergedCss = universalSelector().merge(new SQLocatorCss(".clz"));
+        CSSLocator mergedCss = universalSelector().merge(new CSSLocator(".clz"));
         assertThat(mergedCss.toString(), is(".clz"));
     }
 
     @Test
     public void cssMerge__when_merging_to_NULL_OBJECT_should_return_NULL_OBJECT() {
-        SQLocatorCss mergedCss = universalSelector().merge(SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED);
-        assertThat(mergedCss, is(SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED));
+        CSSLocator mergedCss = universalSelector().merge(CSSLocator.CSS_NOT_NATIVELY_SUPPORTED);
+        assertThat(mergedCss, is(CSSLocator.CSS_NOT_NATIVELY_SUPPORTED));
     }
 
     @Test
     public void cssMerge__when_merging_to_NULL_OBJECT_should_return_NULL_OBJECT2() {
-        SQLocatorCss mergedCss = SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED.merge(universalSelector());
-        assertThat(mergedCss, is(SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED));
+        CSSLocator mergedCss = CSSLocator.CSS_NOT_NATIVELY_SUPPORTED.merge(universalSelector());
+        assertThat(mergedCss, is(CSSLocator.CSS_NOT_NATIVELY_SUPPORTED));
     }
 
 }

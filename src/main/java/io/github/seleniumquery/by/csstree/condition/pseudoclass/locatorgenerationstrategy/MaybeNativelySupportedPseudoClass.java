@@ -18,12 +18,12 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerati
 
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.locator.SQLocatorCss.CSS_NOT_NATIVELY_SUPPORTED;
+import static io.github.seleniumquery.by.locator.CSSLocator.CSS_NOT_NATIVELY_SUPPORTED;
 
 public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
 
@@ -32,7 +32,7 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
         if (isThisCSSPseudoClassNativelySupportedOn(leftLocator.getWebDriver())) {
             return new SQLocator(
                     leftLocator.getWebDriver(),
-                    leftLocator.getSqLocatorCss().merge(toCssWhenNativelySupported()),
+                    leftLocator.getCSSLocator().merge(toCssWhenNativelySupported()),
                     mergeXPath(leftLocator));
         } else {
             return new SQLocator(
@@ -42,12 +42,12 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
         }
     }
 
-    private SQLocatorXPath mergeXPath(SQLocator leftLocator) {
-        SQLocatorXPath sqLocatorXPath = toXPath();
-        return new SQLocatorXPath(
+    private XPathLocator mergeXPath(SQLocator leftLocator) {
+        XPathLocator XPathLocator = toXPath();
+        return new XPathLocator(
             // TODO move this mergeXPath() to SQLocatorXPath
-            xPathMergeStrategy().mergeXPath(leftLocator, sqLocatorXPath.getXPathExpression()),
-            leftLocator.getElementFilterList().merge(sqLocatorXPath.getElementFilterList())
+            xPathMergeStrategy().mergeXPath(leftLocator, XPathLocator.getXPathExpression()),
+            leftLocator.getElementFilterList().merge(XPathLocator.getElementFilterList())
         );
     }
 
@@ -67,12 +67,12 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
         return toCssWhenNativelySupported().toString();
     }
 
-    public abstract SQLocatorCss toCssWhenNativelySupported();
+    public abstract CSSLocator toCssWhenNativelySupported();
 
     public XPathMergeStrategy xPathMergeStrategy() {
         return XPathMergeStrategy.CONDITIONAL_SIMPLE_XPATH_MERGE;
     }
 
-    public abstract SQLocatorXPath toXPath();
+    public abstract XPathLocator toXPath();
 
 }

@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.visibility;
 import io.github.seleniumquery.by.css.pseudoclasses.HiddenPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
 /**
  * :hidden
@@ -33,8 +33,8 @@ public class SQCssHiddenPseudoClass extends SQCssPseudoClassCondition {
 
     public NeverNativelySupportedPseudoClass hiddenPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public SQLocatorXPath toXPath() {
-            return SQLocatorXPath.filterOnly(HiddenPseudoClass.HIDDEN_FILTER);
+        public XPathLocator toXPath() {
+            return XPathLocator.filterOnly(HiddenPseudoClass.HIDDEN_FILTER);
         }
     };
 
