@@ -34,7 +34,7 @@ public class SQCssContainsSubstringAttributeConditionTest {
         // when
         SQLocator locator = containsSubstringAttributeCondition.toSQLocator(previous);
         // then
-        assertThat(locator.getSqLocatorCss().toString(), is("[attribute*='stringToContain']"));
+        assertThat(locator.getCSSLocator().toString(), is("[attribute*='stringToContain']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";

@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.AlwaysNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
 import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
@@ -36,13 +36,13 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
 
     public AlwaysNativelySupportedPseudoClass inputTypePseudoClassLocatorGenerationStrategy = new AlwaysNativelySupportedPseudoClass() {
         @Override
-        public SQLocatorCss toCssWhenNativelySupported() {
-            return new SQLocatorCss("input", "[type=\"" + typeAttributeValue + "\"]");
+        public CSSLocator toCssWhenNativelySupported() {
+            return new CSSLocator("input", "[type=\"" + typeAttributeValue + "\"]");
         }
 
         @Override
-        public SQLocatorXPath toXPath() {
-            return SQLocatorXPath.pureXPath("(self::input and " + TYPE_ATTR_LC_VAL + " = '" + typeAttributeValue + "')");
+        public XPathLocator toXPath() {
+            return XPathLocator.pureXPath("(self::input and " + TYPE_ATTR_LC_VAL + " = '" + typeAttributeValue + "')");
         }
     };
 

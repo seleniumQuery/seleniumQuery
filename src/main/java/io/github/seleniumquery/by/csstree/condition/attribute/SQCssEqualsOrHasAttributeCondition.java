@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
+import io.github.seleniumquery.by.locator.CSSLocator;
 
 /**
  * [simple]
@@ -46,11 +46,11 @@ public class SQCssEqualsOrHasAttributeCondition extends SQCssAttributeCondition 
         super(attributeName, wantedValue);
     }
 
-    protected SQLocatorCss toCSS() {
+    protected CSSLocator toCSS() {
         if (this.wantedValue != null) {
-            return new SQLocatorCss("[" + this.attributeName + "=" + this.wantedValue + "]");
+            return new CSSLocator("[" + this.attributeName + "=" + this.wantedValue + "]");
         }
-        return new SQLocatorCss("[" + this.attributeName + "]");
+        return new CSSLocator("[" + this.attributeName + "]");
     }
 
     protected String toXPath() {

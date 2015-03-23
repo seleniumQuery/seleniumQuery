@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalIndexArgumentPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.XPathMergeStrategy;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
 /**
  * :lt(index)
@@ -34,12 +34,12 @@ public class SQCssLtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
 
     public NeverNativelySupportedPseudoClass gtPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public SQLocatorXPath toXPath() {
+        public XPathLocator toXPath() {
             int index = getArgumentAsIndex();
             if (index >= 0) {
-                return SQLocatorXPath.pureXPath("position() < " + (index + 1));
+                return XPathLocator.pureXPath("position() < " + (index + 1));
             }
-            return SQLocatorXPath.pureXPath("position() < (last()-" + (-index - 1) + ")");
+            return XPathLocator.pureXPath("position() < (last()-" + (-index - 1) + ")");
         }
         @Override
         public XPathMergeStrategy xPathMergeStrategy() {

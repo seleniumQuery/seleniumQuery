@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
 import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
@@ -40,8 +40,8 @@ public class SQCssSubmitPseudoClass extends SQCssPseudoClassCondition {
 
     public NeverNativelySupportedPseudoClass submitPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public SQLocatorXPath toXPath() {
-            return SQLocatorXPath.pureXPath(SUBMIT_XPATH_EXPRESSION);
+        public XPathLocator toXPath() {
+            return XPathLocator.pureXPath(SUBMIT_XPATH_EXPRESSION);
         }
     };
 

@@ -37,7 +37,7 @@ public class SQCssDirectAdjacentSelectorTest {
         // when
         SQLocator locator = directAdjacentSelector.toSQLocator(mock(WebDriver.class));
         // then
-        assertThat(locator.getSqLocatorCss().toString(), is("a+b"));
+        assertThat(locator.getCSSLocator().toString(), is("a+b"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[self::a]/following-sibling::*[position() = 1 and self::b]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

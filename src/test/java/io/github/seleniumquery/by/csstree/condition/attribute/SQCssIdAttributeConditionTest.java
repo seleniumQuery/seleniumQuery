@@ -34,7 +34,7 @@ public class SQCssIdAttributeConditionTest {
         // when
         SQLocator locator = idAttributeCondition.toSQLocator(previous);
         // then
-        assertThat(locator.getSqLocatorCss().toString(), is("#idz"));
+        assertThat(locator.getCSSLocator().toString(), is("#idz"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[@id = 'idz']"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

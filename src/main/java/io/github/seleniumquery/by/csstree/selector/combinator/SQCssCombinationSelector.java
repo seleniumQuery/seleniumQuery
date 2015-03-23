@@ -17,8 +17,8 @@
 package io.github.seleniumquery.by.csstree.selector.combinator;
 
 import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -45,7 +45,7 @@ abstract class SQCssCombinationSelector implements SQCssSelector {
     @Override
     public SQLocator toSQLocator(WebDriver webDriver) {
         SQLocator sqLocator = leftSideSelector.toSQLocator(webDriver);
-        SQLocatorCss combinatorLocator = sqLocator.getSqLocatorCss().combineAsLeftPart(this.cssCombinator);
+        CSSLocator combinatorLocator = sqLocator.getCSSLocator().combineAsLeftPart(this.cssCombinator);
         SQLocator directAdjacentIntermediateLocator = new SQLocator(combinatorLocator,
                 sqLocator.getXPathExpression() + this.xPathCombinator, sqLocator);
         return rightSideSelector.toSQLocator(directAdjacentIntermediateLocator);

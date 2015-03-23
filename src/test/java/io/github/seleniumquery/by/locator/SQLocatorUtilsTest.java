@@ -20,8 +20,8 @@ import io.github.seleniumquery.by.DriverVersionUtils;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.locator.SQLocatorCss.universalSelector;
-import static io.github.seleniumquery.by.locator.SQLocatorXPath.pureXPath;
+import static io.github.seleniumquery.by.locator.CSSLocator.universalSelector;
+import static io.github.seleniumquery.by.locator.XPathLocator.pureXPath;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;

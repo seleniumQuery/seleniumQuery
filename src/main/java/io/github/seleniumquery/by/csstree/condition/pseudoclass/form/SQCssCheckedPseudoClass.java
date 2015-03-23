@@ -20,8 +20,8 @@ import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
@@ -57,13 +57,13 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
         }
 
         @Override
-        public SQLocatorCss toCssWhenNativelySupported() {
-            return new SQLocatorCss(CHECKED_PSEUDO);
+        public CSSLocator toCssWhenNativelySupported() {
+            return new CSSLocator(CHECKED_PSEUDO);
         }
 
         @Override
-        public SQLocatorXPath toXPath() {
-            return new SQLocatorXPath(xPathExpression(), CheckedPseudoClass.CHECKED_FILTER);
+        public XPathLocator toXPath() {
+            return new XPathLocator(xPathExpression(), CheckedPseudoClass.CHECKED_FILTER);
         }
 
         private String xPathExpression() {

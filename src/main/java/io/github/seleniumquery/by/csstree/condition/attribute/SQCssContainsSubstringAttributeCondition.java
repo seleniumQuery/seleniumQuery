@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils;
-import io.github.seleniumquery.by.locator.SQLocatorCss;
+import io.github.seleniumquery.by.locator.CSSLocator;
 
 /**
  * [attribute*=stringToContain]
@@ -32,8 +32,8 @@ public class SQCssContainsSubstringAttributeCondition extends SQCssAttributeCond
         super(attributeName, wantedValue);
     }
 
-    protected SQLocatorCss toCSS() {
-        return new SQLocatorCss("[" + this.attributeName + "*='" + this.wantedValue + "']");
+    protected CSSLocator toCSS() {
+        return new CSSLocator("[" + this.attributeName + "*='" + this.wantedValue + "']");
     }
 
     protected String toXPath() {

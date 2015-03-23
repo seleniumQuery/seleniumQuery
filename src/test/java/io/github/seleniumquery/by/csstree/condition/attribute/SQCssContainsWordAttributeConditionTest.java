@@ -34,7 +34,7 @@ public class SQCssContainsWordAttributeConditionTest {
         // when
         SQLocator locator = containsWordAttributeCondition.toSQLocator(previous);
         // then
-        assertThat(locator.getSqLocatorCss().toString(), is("[values~='10']"));
+        assertThat(locator.getCSSLocator().toString(), is("[values~='10']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'values']";

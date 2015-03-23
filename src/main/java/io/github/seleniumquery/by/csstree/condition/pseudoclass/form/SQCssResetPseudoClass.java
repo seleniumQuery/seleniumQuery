@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.SQLocatorXPath;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
 import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
@@ -35,8 +35,8 @@ public class SQCssResetPseudoClass extends SQCssPseudoClassCondition {
 
     public NeverNativelySupportedPseudoClass inputPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public SQLocatorXPath toXPath() {
-            return SQLocatorXPath.pureXPath("((self::input or self::button) and "+ TYPE_ATTR_LC_VAL +" = 'reset')");
+        public XPathLocator toXPath() {
+            return XPathLocator.pureXPath("((self::input or self::button) and " + TYPE_ATTR_LC_VAL + " = 'reset')");
         }
     };
 

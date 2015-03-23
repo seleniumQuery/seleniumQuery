@@ -40,48 +40,48 @@ public class SQLocator {
      * the elements will be searched on.
      */
     private WebDriver webDriver;
-    private SQLocatorCss sqLocatorCss;
-    private SQLocatorXPath sqLocatorXPath;
+    private CSSLocator CSSLocator;
+    private XPathLocator XPathLocator;
 
-    public SQLocator(WebDriver webDriver, SQLocatorCss sqLocatorCss, SQLocatorXPath sqLocatorXPath) {
+    public SQLocator(WebDriver webDriver, CSSLocator CSSLocator, XPathLocator XPathLocator) {
         this.webDriver = webDriver;
-        this.sqLocatorCss = sqLocatorCss;
-        this.sqLocatorXPath = sqLocatorXPath;
+        this.CSSLocator = CSSLocator;
+        this.XPathLocator = XPathLocator;
     }
 
-    public SQLocator(SQLocatorCss newCssSelector, String newXPathExpression, SQLocator previous) {
+    public SQLocator(CSSLocator newCssSelector, String newXPathExpression, SQLocator previous) {
         this(previous.webDriver, newCssSelector, previous.getSQLocatorXPath().newXPathExpressionKeepingEverythingElse(newXPathExpression));
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
         if (canFetchThroughCssAlone()) {
-            return sqLocatorCss.findElements(context);
+            return CSSLocator.findElements(context);
         }
-        return sqLocatorXPath.findElements(context);
+        return XPathLocator.findElements(context);
     }
 
     public WebDriver getWebDriver() {
         return webDriver;
     }
 
-    public SQLocatorCss getSqLocatorCss() {
-        return sqLocatorCss;
+    public CSSLocator getCSSLocator() {
+        return CSSLocator;
     }
 
-    public SQLocatorXPath getSQLocatorXPath() {
-        return sqLocatorXPath;
+    public XPathLocator getSQLocatorXPath() {
+        return XPathLocator;
     }
 
     public String getXPathExpression() {
-        return sqLocatorXPath.getXPathExpression();
+        return XPathLocator.getXPathExpression();
     }
 
     public boolean canFetchThroughCssAlone() {
-        return sqLocatorCss.canFetchAllElementsOfTheQueryByItself();
+        return CSSLocator.canFetchAllElementsOfTheQueryByItself();
     }
 
     public ElementFilterList getElementFilterList() {
-        return sqLocatorXPath.getElementFilterList();
+        return XPathLocator.getElementFilterList();
     }
 
 }

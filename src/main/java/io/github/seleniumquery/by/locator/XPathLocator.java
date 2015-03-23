@@ -25,26 +25,29 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * If the ElementFilterList is empty, then it can fetch everything it needs through XPath alone.
+ * Represents the necessary details (XPath expression + Filter) to find elements not using CSS.
+ *
+ * Important: If the ElementFilterList is empty, then it can fetch everything it needs through XPath alone (as
+ * the filter will filter nothing).
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQLocatorXPath {
+public class XPathLocator {
 
-    public static SQLocatorXPath pureXPath(String xPathExpression) {
-        return new SQLocatorXPath(xPathExpression, ElementFilterList.FILTER_NOTHING_LIST);
+    public static XPathLocator pureXPath(String xPathExpression) {
+        return new XPathLocator(xPathExpression, ElementFilterList.FILTER_NOTHING_LIST);
     }
 
-    public static SQLocatorXPath filterOnly(ElementFilter elementFilter) {
-        return new SQLocatorXPath("true()", elementFilter);
+    public static XPathLocator filterOnly(ElementFilter elementFilter) {
+        return new XPathLocator("true()", elementFilter);
     }
 
     private String xPathExpression;
 
     private ElementFilterList elementFilterList;
 
-    public SQLocatorXPath(String xPathExpression, ElementFilter elementFilter) {
+    public XPathLocator(String xPathExpression, ElementFilter elementFilter) {
         this.xPathExpression = xPathExpression;
         if (elementFilter == ElementFilter.FILTER_NOTHING) {
             this.elementFilterList = ElementFilterList.FILTER_NOTHING_LIST;
@@ -53,7 +56,7 @@ public class SQLocatorXPath {
         }
     }
 
-    public SQLocatorXPath(String xPathExpression, ElementFilterList elementFilterList) {
+    public XPathLocator(String xPathExpression, ElementFilterList elementFilterList) {
         this.xPathExpression = xPathExpression;
         this.elementFilterList = elementFilterList;
     }
@@ -66,8 +69,8 @@ public class SQLocatorXPath {
         return elementFilterList;
     }
 
-    public SQLocatorXPath newXPathExpressionKeepingEverythingElse(String newXPathExpression) {
-        return new SQLocatorXPath(newXPathExpression, this.getElementFilterList());
+    public XPathLocator newXPathExpressionKeepingEverythingElse(String newXPathExpression) {
+        return new XPathLocator(newXPathExpression, this.getElementFilterList());
     }
 
     // TODO dont know if this has unit tests
