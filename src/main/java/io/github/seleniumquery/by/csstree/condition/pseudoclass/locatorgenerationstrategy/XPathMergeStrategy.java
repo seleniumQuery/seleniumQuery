@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass;
+package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy;
 
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorUtils;
