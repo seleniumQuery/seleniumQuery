@@ -42,7 +42,9 @@ public abstract class SQCssFunctionalIndexArgumentPseudoClassCondition extends S
         Matcher m = INDEX_REGEX.matcher(eqPseudoClassArgument);
         boolean isArgumentAnInteger = m.find();
         if (!isArgumentAnInteger) {
-            throw new InvalidSelectorException("The :eq() pseudo-class requires an integer as argument but got: " + eqPseudoClassArgument);
+            String reason = String.format("The :%s() pseudo-class requires an integer as argument but got: \"%s\".",
+                    getPseudoClassName(), eqPseudoClassArgument);
+            throw new InvalidSelectorException(reason);
         }
         String integerIndex = m.group(1);
         if (integerIndex.startsWith("+")) {
@@ -50,5 +52,7 @@ public abstract class SQCssFunctionalIndexArgumentPseudoClassCondition extends S
         }
         return Integer.valueOf(integerIndex);
     }
+
+    protected abstract String getPseudoClassName();
 
 }

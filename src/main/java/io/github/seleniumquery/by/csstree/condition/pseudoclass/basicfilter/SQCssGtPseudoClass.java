@@ -42,4 +42,9 @@ public class SQCssGtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
         return gtPseudoClassLocatorGenerationStrategy;
     }
 
+    @Override
+    protected String getPseudoClassName() {
+        return PSEUDO;
+    }
+
 }

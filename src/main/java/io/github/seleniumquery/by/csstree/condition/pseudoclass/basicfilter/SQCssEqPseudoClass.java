@@ -56,4 +56,9 @@ public class SQCssEqPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
         return eqPseudoClassLocatorGenerationStrategy;
     }
 
+    @Override
+    protected String getPseudoClassName() {
+        return PSEUDO;
+    }
+
 }
