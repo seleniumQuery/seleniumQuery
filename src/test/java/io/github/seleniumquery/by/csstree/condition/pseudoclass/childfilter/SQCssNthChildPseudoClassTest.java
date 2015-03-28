@@ -100,15 +100,25 @@ public class SQCssNthChildPseudoClassTest {
     @Test
     public void toSQLocator__a_only_arguments() {
         assertNthChildArgumentYields("1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
+        assertNthChildArgumentYields("2n", ":nth-child(2n)", ".//*[(position() - 0) mod 2 = 0 and position() >= 0]");
+        assertNthChildArgumentYields("3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
     }
 
     @Test
     public void toSQLocator__a_and_b_arguments() {
         assertNthChildArgumentYields("1n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
+        assertNthChildArgumentYields("2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
+        assertNthChildArgumentYields("1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
+        assertNthChildArgumentYields("2n+1", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+    }
+
+    private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
+        assertNthChildArgumentYields2(nthChildArgument, expectedCSS, expectedXPath);
+        assertNthChildArgumentYields2(" "+nthChildArgument+" ", expectedCSS, expectedXPath);
     }
 
     @SuppressWarnings("UnnecessaryLocalVariable")
-    private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
+    private void assertNthChildArgumentYields2(String nthChildArgument, String expectedCSS, String expectedXPath) {
         String pseudoThatTheDriverWillTestForNativeSupport = NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK;
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
                 pseudoThatTheDriverWillTestForNativeSupport,
