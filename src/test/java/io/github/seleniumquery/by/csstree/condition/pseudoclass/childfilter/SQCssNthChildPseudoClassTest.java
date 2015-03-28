@@ -100,8 +100,8 @@ public class SQCssNthChildPseudoClassTest {
     @Test
     public void toSQLocator__a_only_arguments() {
         assertNthChildArgumentYields("1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
-        assertNthChildArgumentYields("2n", ":nth-child(2n)", ".//*[(position() - 0) mod 2 = 0 and position() >= 0]");
         assertNthChildArgumentYields("3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
+        assertNthChildArgumentYields("n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
     }
 
     @Test
@@ -110,6 +110,7 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYields("2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
         assertNthChildArgumentYields("1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
         assertNthChildArgumentYields("2n+1", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+        assertNthChildArgumentYields("n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
     }
 
     private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
