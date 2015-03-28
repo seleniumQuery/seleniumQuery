@@ -17,19 +17,29 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
+import io.github.seleniumquery.by.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
+import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
+import org.w3c.css.sac.SelectorList;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.*;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class SQCssNthChildPseudoClassTest {
 
     private static final String NTH_CHILD_PSEUDO = ":nth-child";
+    private static final String ENABLED_PSEUDO = ":nth-child";
+    private static final String NTH_CHILD_XPATH_EXPRESSION = ".//*[position() = 1]";
 
     private static final SQLocator UNIVERSAL_SELECTOR_LOCATOR_SUPPORTING_NTHCHILD_NATIVELY = universalSelectorLocator(
             createMockDriverWithNativeSupportFor(":nth-child(1)")
@@ -40,15 +50,6 @@ public class SQCssNthChildPseudoClassTest {
     public void translate() {
         assertFunctionalPseudo(NTH_CHILD_PSEUDO, SQCssNthChildPseudoClass.class);
     }
-
-//    @Test
-//    public void toSQLocator__when_driver_has_native_support() {
-//        assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
-//                new SQCssEnabledPseudoClass(),
-//                ENABLED_PSEUDO,
-//                ENABLED_XPATH_EXPRESSION
-//        );
-//    }
 
     @Test
     public void toSQLocator__nthChild_should_throw_exception_if_argument_is_not_valid() {
@@ -85,16 +86,37 @@ public class SQCssNthChildPseudoClassTest {
         return new SQCssNthChildPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthChildArgument));
     }
 
-//    @Test
-//    public void toXPathCondition__class() {
-//        TagComponent xPathExpr = selectorToExpression(":nth-child(odd)");
-//        String xPathCondition = xPathExpr.toXPathCondition();
-//        assertThat(xPathCondition, is("contains(concat(' ', normalize-space(@class), ' '), ' cls ')"));
-//    }
-//    public static TagComponent selectorToExpression(String selector) {
-//        CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
-//        SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
-//        return XPathComponentCompilerService.compileSelector(CSSParsedSelectorList.getStringMap(), selectorList.item(0));
-//    }
+    @Test
+    public void toSQLocator() {
+        assertNthChildArgumentYields("1", ":nth-child(1)", ".//*[position() = 1]");
+    }
+
+    @SuppressWarnings("UnnecessaryLocalVariable")
+    private void assertNthChildArgumentYields(String nthChildArgument, String nthChildCSS, String expectedXPath) {
+        String expectedCSS = nthChildCSS;
+        assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
+                nthChild(nthChildArgument),
+                expectedCSS,
+                expectedXPath
+        );
+        String pseudoThatTheDriverShouldNotSupportNatively = nthChildCSS;
+        assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(
+                nthChild(nthChildArgument),
+                pseudoThatTheDriverShouldNotSupportNatively,
+                expectedXPath
+        );
+    }
+
+    @Test
+    public void toXPathCondition__class() {
+        TagComponent xPathExpr = selectorToExpression(":nth-child(1)");
+        String xPathCondition = xPathExpr.toXPathCondition();
+        assertThat(xPathCondition, is("contains(concat(' ', normalize-space(@class), ' '), ' cls ')"));
+    }
+    public static TagComponent selectorToExpression(String selector) {
+        CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
+        SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
+        return XPathComponentCompilerService.compileSelector(CSSParsedSelectorList.getStringMap(), selectorList.item(0));
+    }
 
 }
