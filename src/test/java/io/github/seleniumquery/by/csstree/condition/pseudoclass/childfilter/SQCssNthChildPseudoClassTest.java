@@ -38,8 +38,6 @@ import static org.junit.Assert.fail;
 public class SQCssNthChildPseudoClassTest {
 
     private static final String NTH_CHILD_PSEUDO = ":nth-child";
-    private static final String ENABLED_PSEUDO = ":nth-child";
-    private static final String NTH_CHILD_XPATH_EXPRESSION = ".//*[position() = 1]";
 
     private static final SQLocator UNIVERSAL_SELECTOR_LOCATOR_SUPPORTING_NTHCHILD_NATIVELY = universalSelectorLocator(
             createMockDriverWithNativeSupportFor(":nth-child(1)")
@@ -89,20 +87,23 @@ public class SQCssNthChildPseudoClassTest {
     @Test
     public void toSQLocator() {
         assertNthChildArgumentYields("1", ":nth-child(1)", ".//*[position() = 1]");
+        assertNthChildArgumentYields(" 1 ", ":nth-child(1)", ".//*[position() = 1]");
+        assertNthChildArgumentYields("2", ":nth-child(2)", ".//*[position() = 2]");
+        assertNthChildArgumentYields(" 2 ", ":nth-child(2)", ".//*[position() = 2]");
     }
 
     @SuppressWarnings("UnnecessaryLocalVariable")
-    private void assertNthChildArgumentYields(String nthChildArgument, String nthChildCSS, String expectedXPath) {
-        String expectedCSS = nthChildCSS;
+    private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
+        String pseudoThatTheDriverWillTestForNativeSupport = ":nth-child(1)";
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
+                pseudoThatTheDriverWillTestForNativeSupport,
                 nthChild(nthChildArgument),
                 expectedCSS,
                 expectedXPath
         );
-        String pseudoThatTheDriverShouldNotSupportNatively = nthChildCSS;
         assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(
                 nthChild(nthChildArgument),
-                pseudoThatTheDriverShouldNotSupportNatively,
+                pseudoThatTheDriverWillTestForNativeSupport,
                 expectedXPath
         );
     }

@@ -54,28 +54,33 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
     }
 
     private static class NthChildArgument {
+
+        private final int b;
+
         public NthChildArgument(String argument) {
-            if (!"1".equals(argument)) {
+            String trimmedArg = argument.trim();
+            if (!trimmedArg.matches("\\d+")) {
                 reportInvalidArgument(argument);
             }
-//            this.b = 1;
+            this.b = Integer.parseInt(trimmedArg);
         }
 
         private void reportInvalidArgument(String argument) {
-            String reason = String.format("The :%s() pseudo-class requires an integer as argument but got: \"%s\".", PSEUDO, argument);
+            String reason = String.format("The :nth-child() pseudo-class must have an argument like" +
+                    " :nth-child(odd), :nth-child(even), :nth-child(an+b), :nth-child(an) or" +
+                    " :nth-child(b) - where a and b are integers -, but was :nth-child(%s).", argument);
             throw new InvalidSelectorException(reason);
         }
         public String toCSS() {
-            return ":nth-child(1)";
+            return ":nth-child("+b+")";
         }
         public String toXPath() {
-            return "position() = 1";
+            return "position() = "+b;
         }
 
         //        static final NthChildArgument ODD = new NthChildArgument(2,1);
 //        static final NthChildArgument EVEN = new NthChildArgument(2,0);
 //        final int a;
-//        final int b;
 //        NthChildArgument(int b) {
 //            this(0, b);
 //        }

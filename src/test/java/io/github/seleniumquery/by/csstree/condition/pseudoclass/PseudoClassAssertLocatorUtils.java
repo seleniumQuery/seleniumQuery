@@ -41,7 +41,8 @@ public class PseudoClassAssertLocatorUtils {
 
     public static void assertPseudoClassHasLocatorWhenNativelySupported(String pseudoClassThatShouldBeNativelySupported,
                                                                         SQCssConditionImplementedLocators pseudoClassObject,
-                                                                        String expectedCss, boolean canPureCss,
+                                                                        String expectedCss,
+                                                                        boolean canPureCss,
                                                                         String expectedXPath,
                                                                         Matcher<? super List<ElementFilter>> elementFilterMatcher) {
         SQLocator previousLocator = SQLocatorUtilsTest.universalSelectorLocator(
@@ -50,7 +51,8 @@ public class PseudoClassAssertLocatorUtils {
         assertPseudoClassHasLocator(
                 pseudoClassObject,
                 previousLocator,
-                expectedCss, canPureCss,
+                expectedCss,
+                canPureCss,
                 expectedXPath,
                 elementFilterMatcher
         );
@@ -95,6 +97,21 @@ public class PseudoClassAssertLocatorUtils {
                 pseudoClass,
                 pseudoClassObject,
                 pseudoClass,
+                PURE_CSS_IS_SUPPORTED,
+                expectedXPath,
+                empty()
+        );
+    }
+
+    public static void assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
+            String pseudoClassThatShouldBeNativelySupported,
+            SQCssConditionImplementedLocators pseudoClassObject,
+            String expectedCSS,
+            String expectedXPath) {
+        assertPseudoClassHasLocatorWhenNativelySupported(
+                pseudoClassThatShouldBeNativelySupported,
+                pseudoClassObject,
+                expectedCSS,
                 PURE_CSS_IS_SUPPORTED,
                 expectedXPath,
                 empty()
