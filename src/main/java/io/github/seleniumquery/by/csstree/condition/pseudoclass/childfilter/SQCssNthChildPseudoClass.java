@@ -34,13 +34,13 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
         }
         @Override
         public CSSLocator toCssWhenNativelySupported() {
-            getNthChildArgument();
-            return new CSSLocator(PSEUDO);
+            NthChildArgument nthChildArgument = getNthChildArgument();
+            return new CSSLocator(nthChildArgument.toCSS());
         }
         @Override
         public XPathLocator toXPath() {
-            getNthChildArgument();
-            return null;
+            NthChildArgument nthChildArgument = getNthChildArgument();
+            return XPathLocator.pureXPath(nthChildArgument.toXPath());
         }
     };
 
@@ -55,11 +55,24 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
 
     private static class NthChildArgument {
         public NthChildArgument(String argument) {
-            String reason = String.format("The :%s() pseudo-class requires an integer as argument but got: \"%s\".",
-                    PSEUDO, argument);
+            if (!"1".equals(argument)) {
+                reportInvalidArgument(argument);
+            }
+//            this.b = 1;
+        }
+
+        private void reportInvalidArgument(String argument) {
+            String reason = String.format("The :%s() pseudo-class requires an integer as argument but got: \"%s\".", PSEUDO, argument);
             throw new InvalidSelectorException(reason);
         }
-//        static final NthChildArgument ODD = new NthChildArgument(2,1);
+        public String toCSS() {
+            return ":nth-child(1)";
+        }
+        public String toXPath() {
+            return "position() = 1";
+        }
+
+        //        static final NthChildArgument ODD = new NthChildArgument(2,1);
 //        static final NthChildArgument EVEN = new NthChildArgument(2,0);
 //        final int a;
 //        final int b;
