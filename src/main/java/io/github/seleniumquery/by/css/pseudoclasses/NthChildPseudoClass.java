@@ -62,7 +62,7 @@ public class NthChildPseudoClass implements PseudoClass<ConditionSimpleComponent
 			String aString = m.group(1);
 			String bString = m.group(2);
 			int a = aString.matches("[+-]") ? parseInt(aString + "1") : parseInt(aString);
-			int b = (null == bString) ? 0 : parseInt(bString.replaceAll("\\s*", ""));
+			int b = (null == bString) ? 0 : parseInt(bString.replaceAll("\\s*", "").replaceAll("^\\+", ""));
 			return nthChild(a, b);
 		}
 		throw new IllegalArgumentException("The :nth-child() pseudo-class must have a content like :nth-child(odd), " +
