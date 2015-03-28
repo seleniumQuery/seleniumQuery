@@ -77,7 +77,7 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
                 }
                 this.a = toInt(aString);
                 this.b = null;
-            } else if (trimmedArg.matches("\\d*n[+-]?\\d+")) {
+            } else if (trimmedArg.matches("\\d*n\\s*[+-]\\s*\\d+")) {
 
                 Pattern p = Pattern.compile("(\\d*)n(?:\\s*([+-]\\s*\\d+))?");
                 Matcher m = p.matcher(trimmedArg);
@@ -102,7 +102,7 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
             if (firstChar == '+') {
                 return toInt(supposedInteger.substring(1));
             }
-            return Integer.parseInt(supposedInteger);
+            return Integer.parseInt(supposedInteger.trim());
         }
 
         private InvalidSelectorException createInvalidArgumentException(String argument) {

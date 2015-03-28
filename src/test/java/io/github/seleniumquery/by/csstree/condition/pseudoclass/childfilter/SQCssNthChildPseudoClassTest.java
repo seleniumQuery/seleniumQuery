@@ -111,6 +111,9 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYields("1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
         assertNthChildArgumentYields("2n+1", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
         assertNthChildArgumentYields("n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
+        assertNthChildArgumentYields("1n +1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
+        assertNthChildArgumentYields("1n+ 1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
+        assertNthChildArgumentYields("1n + 1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
     }
 
     private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
