@@ -59,10 +59,18 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
 
         public NthChildArgument(String argument) {
             String trimmedArg = argument.trim();
-            if (!trimmedArg.matches("\\d+")) {
+            if (!trimmedArg.matches("[+-]?\\d+")) {
                 reportInvalidArgument(argument);
             }
-            this.b = Integer.parseInt(trimmedArg);
+            this.b = toInt(trimmedArg);
+        }
+
+        private int toInt(String supposedInteger) {
+            char firstChar = supposedInteger.charAt(0);
+            if (firstChar == '+') {
+                return toInt(supposedInteger.substring(1));
+            }
+            return Integer.parseInt(supposedInteger);
         }
 
         private void reportInvalidArgument(String argument) {
