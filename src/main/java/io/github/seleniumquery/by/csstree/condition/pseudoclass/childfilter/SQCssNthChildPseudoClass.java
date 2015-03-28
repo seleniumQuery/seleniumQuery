@@ -58,8 +58,6 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
 
     private static class NthChildArgument {
 
-        private static final Pattern NTH_CHILD_REGEX = Pattern.compile("(\\d+)n(?:\\s*([+-]\\s*\\d+))?");
-
         private final Integer a;
         private final Integer b;
 
@@ -68,14 +66,26 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
             if (trimmedArg.matches("[+-]?\\d+")) {
                 this.a = null;
                 this.b = toInt(trimmedArg);
-            } else if (trimmedArg.matches("\\d+n")) {
-                this.a = toInt(trimmedArg.substring(0, trimmedArg.length()-1));
+            } else if (trimmedArg.matches("\\d*n")) {
+                Pattern p = Pattern.compile("(\\d*)n");
+                Matcher m = p.matcher(trimmedArg);
+                //noinspection ResultOfMethodCallIgnored
+                m.find();
+                String aString = m.group(1);
+                if (aString.isEmpty()) {
+                    aString = "1";
+                }
+                this.a = toInt(aString);
                 this.b = null;
-            } else if (trimmedArg.matches("\\d+n[+-]?\\d+")) {
+            } else if (trimmedArg.matches("\\d*n[+-]?\\d+")) {
 
-                Matcher m = NTH_CHILD_REGEX.matcher(trimmedArg);
+                Pattern p = Pattern.compile("(\\d*)n(?:\\s*([+-]\\s*\\d+))?");
+                Matcher m = p.matcher(trimmedArg);
                 if (m.find()) {
                     String aString = m.group(1);
+                    if (aString.isEmpty()) {
+                        aString = "1";
+                    }
                     String bString = m.group(2);
                     this.a = toInt(aString);
                     this.b = toInt(bString);
