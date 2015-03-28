@@ -39,8 +39,9 @@ public class SQCssNthChildPseudoClassTest {
 
     private static final String NTH_CHILD_PSEUDO = ":nth-child";
 
+    private static final String NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK = NTH_CHILD_PSEUDO+"(1)";
     private static final SQLocator UNIVERSAL_SELECTOR_LOCATOR_SUPPORTING_NTHCHILD_NATIVELY = universalSelectorLocator(
-            createMockDriverWithNativeSupportFor(":nth-child(1)")
+            createMockDriverWithNativeSupportFor(NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK)
     );
     private static final SQLocator UNIVERSAL_SELECTOR_LOCATOR_NOT_SUPPORTING_NTHCHILD_NATIVELY = UNIVERSAL_SELECTOR_LOCATOR;
 
@@ -90,11 +91,15 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYields(" 1 ", ":nth-child(1)", ".//*[position() = 1]");
         assertNthChildArgumentYields("2", ":nth-child(2)", ".//*[position() = 2]");
         assertNthChildArgumentYields(" 2 ", ":nth-child(2)", ".//*[position() = 2]");
+        assertNthChildArgumentYields("+1", ":nth-child(1)", ".//*[position() = 1]");
+        assertNthChildArgumentYields(" +1 ", ":nth-child(1)", ".//*[position() = 1]");
+        assertNthChildArgumentYields("-1", ":nth-child(-1)", ".//*[position() = -1]");
+        assertNthChildArgumentYields(" -1 ", ":nth-child(-1)", ".//*[position() = -1]");
     }
 
     @SuppressWarnings("UnnecessaryLocalVariable")
     private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
-        String pseudoThatTheDriverWillTestForNativeSupport = ":nth-child(1)";
+        String pseudoThatTheDriverWillTestForNativeSupport = NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK;
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
                 pseudoThatTheDriverWillTestForNativeSupport,
                 nthChild(nthChildArgument),
@@ -109,7 +114,7 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     @Test
-    public void toXPathCondition__class() {
+    public void old() {
         TagComponent xPathExpr = selectorToExpression(":nth-child(1)");
         String xPathCondition = xPathExpr.toXPathCondition();
         assertThat(xPathCondition, is("contains(concat(' ', normalize-space(@class), ' '), ' cls ')"));
