@@ -86,7 +86,7 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator() {
+    public void toSQLocator__b_only_arguments() {
         assertNthChildArgumentYields("1", ":nth-child(1)", ".//*[position() = 1]");
         assertNthChildArgumentYields(" 1 ", ":nth-child(1)", ".//*[position() = 1]");
         assertNthChildArgumentYields("2", ":nth-child(2)", ".//*[position() = 2]");
@@ -95,6 +95,16 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYields(" +1 ", ":nth-child(1)", ".//*[position() = 1]");
         assertNthChildArgumentYields("-1", ":nth-child(-1)", ".//*[position() = -1]");
         assertNthChildArgumentYields(" -1 ", ":nth-child(-1)", ".//*[position() = -1]");
+    }
+
+    @Test
+    public void toSQLocator__a_only_arguments() {
+        assertNthChildArgumentYields("1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
+    }
+
+    @Test
+    public void toSQLocator__a_and_b_arguments() {
+        assertNthChildArgumentYields("1n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
     }
 
     @SuppressWarnings("UnnecessaryLocalVariable")
@@ -117,7 +127,7 @@ public class SQCssNthChildPseudoClassTest {
     public void old() {
         TagComponent xPathExpr = selectorToExpression(":nth-child(1)");
         String xPathCondition = xPathExpr.toXPathCondition();
-        assertThat(xPathCondition, is("contains(concat(' ', normalize-space(@class), ' '), ' cls ')"));
+        assertThat(xPathCondition, is("position() = 1"));
     }
     public static TagComponent selectorToExpression(String selector) {
         CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);

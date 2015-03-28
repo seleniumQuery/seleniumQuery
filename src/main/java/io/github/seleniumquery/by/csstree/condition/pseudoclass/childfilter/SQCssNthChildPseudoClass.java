@@ -23,6 +23,9 @@ import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.InvalidSelectorException;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
     public static final String PSEUDO = "nth-child";
@@ -55,14 +58,33 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
 
     private static class NthChildArgument {
 
-        private final int b;
+        private static final Pattern NTH_CHILD_REGEX = Pattern.compile("(\\d+)n(?:\\s*([+-]\\s*\\d+))?");
+
+        private final Integer a;
+        private final Integer b;
 
         public NthChildArgument(String argument) {
             String trimmedArg = argument.trim();
-            if (!trimmedArg.matches("[+-]?\\d+")) {
-                reportInvalidArgument(argument);
+            if (trimmedArg.matches("[+-]?\\d+")) {
+                this.a = null;
+                this.b = toInt(trimmedArg);
+            } else if (trimmedArg.matches("\\d+n")) {
+                this.a = toInt(trimmedArg.substring(0, trimmedArg.length()-1));
+                this.b = null;
+            } else if (trimmedArg.matches("\\d+n[+-]?\\d+")) {
+
+                Matcher m = NTH_CHILD_REGEX.matcher(trimmedArg);
+                if (m.find()) {
+                    String aString = m.group(1);
+                    String bString = m.group(2);
+                    this.a = toInt(aString);
+                    this.b = toInt(bString);
+                } else {
+                    throw createInvalidArgumentException(argument);
+                }
+            } else {
+                throw createInvalidArgumentException(argument);
             }
-            this.b = toInt(trimmedArg);
         }
 
         private int toInt(String supposedInteger) {
@@ -73,17 +95,24 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
             return Integer.parseInt(supposedInteger);
         }
 
-        private void reportInvalidArgument(String argument) {
+        private InvalidSelectorException createInvalidArgumentException(String argument) {
             String reason = String.format("The :nth-child() pseudo-class must have an argument like" +
                     " :nth-child(odd), :nth-child(even), :nth-child(an+b), :nth-child(an) or" +
                     " :nth-child(b) - where a and b are integers -, but was :nth-child(%s).", argument);
-            throw new InvalidSelectorException(reason);
+            return new InvalidSelectorException(reason);
         }
         public String toCSS() {
-            return ":nth-child("+b+")";
+            String sa = a != null ? a+"n" : "";
+            String sb = b != null ? (b > 0 && a != null? "+"+b : ""+b) : "";
+            return ":nth-child("+sa+sb+")";
         }
         public String toXPath() {
-            return "position() = "+b;
+            int realA = a != null ? a : 0;
+            if (realA == 0) {
+                return "position() = "+b;
+            }
+            int realB = b != null ? b : 0;
+            return "(position() - " + realB + ") mod " + realA + " = 0 and position() >= " + realB;
         }
 
         //        static final NthChildArgument ODD = new NthChildArgument(2,1);
