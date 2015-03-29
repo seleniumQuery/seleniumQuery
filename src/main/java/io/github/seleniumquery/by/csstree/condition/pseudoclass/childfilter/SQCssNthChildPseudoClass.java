@@ -57,7 +57,6 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
     }
 
     private static class NthChildArgument {
-
         private final Integer a;
         private final Integer b;
 
@@ -66,34 +65,24 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
             if (trimmedArg.matches("[+-]?\\d+")) {
                 this.a = null;
                 this.b = toInt(trimmedArg);
-            } else if (trimmedArg.matches("\\d*n")) {
-                Pattern p = Pattern.compile("(\\d*)n");
-                Matcher m = p.matcher(trimmedArg);
-                //noinspection ResultOfMethodCallIgnored
-                m.find();
-                String aString = m.group(1);
-                if (aString.isEmpty()) {
-                    aString = "1";
-                }
-                this.a = toInt(aString);
-                this.b = null;
-            } else if (trimmedArg.matches("\\d*n\\s*[+-]\\s*\\d+")) {
-
+            } else {
                 Pattern p = Pattern.compile("(\\d*)n(?:\\s*([+-]\\s*\\d+))?");
                 Matcher m = p.matcher(trimmedArg);
-                if (m.find()) {
+                if (m.matches()) {
                     String aString = m.group(1);
                     if (aString.isEmpty()) {
                         aString = "1";
                     }
-                    String bString = m.group(2);
                     this.a = toInt(aString);
-                    this.b = toInt(bString);
+                    String bString = m.group(2);
+                    if (bString == null) {
+                        this.b = null;
+                    } else {
+                        this.b = toInt(bString);
+                    }
                 } else {
                     throw createInvalidArgumentException(argument);
                 }
-            } else {
-                throw createInvalidArgumentException(argument);
             }
         }
 
