@@ -87,17 +87,18 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
         }
 
         private int toInt(String supposedInteger) {
-            char firstChar = supposedInteger.charAt(0);
+            String supposedIntegerWithoutSpaces = supposedInteger.replaceAll("\\s", "");
+            char firstChar = supposedIntegerWithoutSpaces.charAt(0);
             if (firstChar == '+') {
-                return toInt(supposedInteger.substring(1));
+                return toInt(supposedIntegerWithoutSpaces.substring(1));
             }
-            return Integer.parseInt(supposedInteger.trim());
+            return Integer.parseInt(supposedIntegerWithoutSpaces);
         }
 
         private InvalidSelectorException createInvalidArgumentException(String argument) {
             String reason = String.format("The :nth-child() pseudo-class must have an argument like" +
                     " :nth-child(odd), :nth-child(even), :nth-child(an+b), :nth-child(an) or" +
-                    " :nth-child(b) - where a and b are integers -, but was :nth-child(%s).", argument);
+                    " :nth-child(b) - where a and b are positive or negative integers -, but was :nth-child(%s).", argument);
             return new InvalidSelectorException(reason);
         }
         public String toCSS() {
