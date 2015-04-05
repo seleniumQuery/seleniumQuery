@@ -87,42 +87,99 @@ public class SQCssNthChildPseudoClassTest {
 
     @Test
     public void toSQLocator__b_only_arguments() {
-        assertNthChildArgumentYields("1", ":nth-child(1)", ".//*[position() = 1]");
-        assertNthChildArgumentYields(" 1 ", ":nth-child(1)", ".//*[position() = 1]");
-        assertNthChildArgumentYields("2", ":nth-child(2)", ".//*[position() = 2]");
-        assertNthChildArgumentYields(" 2 ", ":nth-child(2)", ".//*[position() = 2]");
-        assertNthChildArgumentYields("+1", ":nth-child(1)", ".//*[position() = 1]");
-        assertNthChildArgumentYields(" +1 ", ":nth-child(1)", ".//*[position() = 1]");
-        assertNthChildArgumentYields("-1", ":nth-child(-1)", ".//*[position() = -1]");
-        assertNthChildArgumentYields(" -1 ", ":nth-child(-1)", ".//*[position() = -1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1", ":nth-child(1)", ".//*[position() = 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("2", ":nth-child(2)", ".//*[position() = 2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("+1", ":nth-child(1)", ".//*[position() = 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1", ":nth-child(-1)", ".//*[position() = -1]");
     }
 
     @Test
     public void toSQLocator__a_only_arguments() {
-        assertNthChildArgumentYields("1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
-        assertNthChildArgumentYields("3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
-        assertNthChildArgumentYields("n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
+//        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n", ":nth-child(-1n)", ".//*[(position() - 0) mod -1 = 0 and position() <= 0]");
+//        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n", ":nth-child(-1n)", ".//*[]");
+//        assertNthChildArgumentYieldsWithAndWithoutSpaces("-3n", ":nth-child(-1n)", ".//*[]");
+    }
+
+//    @Test
+    public void toSQLocator__a_and_b_arguments__WITH_BOTH_POSITIVE() {
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+1", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+        String nPlusFiveCSS = ":nth-child(1n+5)";
+        String nPlusFiveXPath = ".//*[(position() - 5) mod 1 = 0 and position() >= 5]";
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n+5", nPlusFiveCSS, nPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n +5", nPlusFiveCSS, nPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n+ 5", nPlusFiveCSS, nPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n + 5", nPlusFiveCSS, nPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n +5", nPlusFiveCSS, nPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+ 5", nPlusFiveCSS, nPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n + 5", nPlusFiveCSS, nPlusFiveXPath);
+    }
+
+//    @Test
+    public void toSQLocator__a_and_b_arguments__WITH_a_NEGATIVE() {
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n+1", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+        String minusNPlusFiveCSS = ":nth-child(-1n+5)";
+        String minusNPlusFiveXPath = ".//*[(position() - 5) mod 1 = 0 and position() >= 5]";
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n+5", minusNPlusFiveCSS, minusNPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n +5", minusNPlusFiveCSS, minusNPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n+ 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n + 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n +5", minusNPlusFiveCSS, minusNPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+ 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n + 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
     }
 
     @Test
-    public void toSQLocator__a_and_b_arguments() {
-        assertNthChildArgumentYields("1n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
-        assertNthChildArgumentYields("2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
-        assertNthChildArgumentYields("1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
-        assertNthChildArgumentYields("2n+1", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
-        assertNthChildArgumentYields("n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
-        assertNthChildArgumentYields("1n +1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
-        assertNthChildArgumentYields("1n+ 1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
-        assertNthChildArgumentYields("1n + 1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
+    public void toSQLocator__a_and_b_arguments__WITH_b_NEGATIVE() {
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-1", ":nth-child(1n-1)", ".//*[(position() - -1) mod 1 = 0 and position() >= -1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-2", ":nth-child(2n-2)", ".//*[(position() - -2) mod 2 = 0 and position() >= -2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-2", ":nth-child(1n-2)", ".//*[(position() - -2) mod 1 = 0 and position() >= -2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-1", ":nth-child(2n-1)", ".//*[(position() - -1) mod 2 = 0 and position() >= -1]");
+        String nMinusFiveCSS = ":nth-child(1n-5)";
+        String nMinusFiveXPath = ".//*[(position() - -5) mod 1 = 0 and position() >= -5]";
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n-5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n -5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n- 5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n - 5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n -5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n- 5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n - 5", nMinusFiveCSS, nMinusFiveXPath);
     }
 
-    private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
-        assertNthChildArgumentYields2(nthChildArgument, expectedCSS, expectedXPath);
-        assertNthChildArgumentYields2(" "+nthChildArgument+" ", expectedCSS, expectedXPath);
+//    @Test
+    public void toSQLocator__a_and_b_arguments__WITH_BOTH_NEGATIVE() {
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-1", ":nth-child(1n-1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n-2", ":nth-child(2n-2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-2", ":nth-child(1n-2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n-1", ":nth-child(2n-1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+        String minusNMinusFiveCSS = ":nth-child(-1n-5)";
+        String minusNMinusFiveXPath = ".//*[(position() - 5) mod 1 = 0 and position() >= 5]";
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n-5", minusNMinusFiveCSS, minusNMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n -5", minusNMinusFiveCSS, minusNMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n- 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n - 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n -5", minusNMinusFiveCSS, minusNMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n- 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n - 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
+    }
+
+    // missing: even and odd
+
+    private void assertNthChildArgumentYieldsWithAndWithoutSpaces(String nthChildArgument, String expectedCSS, String expectedXPath) {
+        assertNthChildArgumentYields(nthChildArgument, expectedCSS, expectedXPath);
+        assertNthChildArgumentYields(" " + nthChildArgument + " ", expectedCSS, expectedXPath);
     }
 
     @SuppressWarnings("UnnecessaryLocalVariable")
-    private void assertNthChildArgumentYields2(String nthChildArgument, String expectedCSS, String expectedXPath) {
+    private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
         String pseudoThatTheDriverWillTestForNativeSupport = NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK;
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
                 pseudoThatTheDriverWillTestForNativeSupport,
@@ -139,7 +196,7 @@ public class SQCssNthChildPseudoClassTest {
 
     @Test
     public void old() {
-        TagComponent xPathExpr = selectorToExpression(":nth-child(1)");
+        TagComponent xPathExpr = selectorToExpression(":nth-child(1n-5)");
         String xPathCondition = xPathExpr.toXPathCondition();
         assertThat(xPathCondition, is("position() = 1"));
     }
