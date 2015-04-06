@@ -62,7 +62,13 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
 
         public NthChildArgument(String argument) {
             String trimmedArg = argument.trim();
-            if (trimmedArg.matches("[+-]?\\d+")) {
+            if ("even".equals(trimmedArg)) {
+                this.a = 2;
+                this.b = null;
+            } else if ("odd".equals(trimmedArg)) {
+                this.a = 2;
+                this.b = 1;
+            } else if (trimmedArg.matches("[+-]?\\d+")) {
                 this.a = null;
                 this.b = toInt(trimmedArg);
             } else {
@@ -115,7 +121,7 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
         }
         public String toCSS() {
             String sa = a != null ? a+"n" : "";
-            String sb = b != null ? (b > 0 && a != null? "+"+b : ""+b) : "";
+            String sb = b != null && b != 0 ? (b > 0 && a != null? "+"+b : ""+b) : "";
             return ":nth-child("+sa+sb+")";
         }
         public String toXPath() {
@@ -127,17 +133,6 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
             char operator = realA < 0 ? '<' : '>';
             return "(position() - " + realB + ") mod " + realA + " = 0 and position() "+operator+"= " + realB;
         }
-
-        //        static final NthChildArgument ODD = new NthChildArgument(2,1);
-//        static final NthChildArgument EVEN = new NthChildArgument(2,0);
-//        final int a;
-//        NthChildArgument(int b) {
-//            this(0, b);
-//        }
-//        NthChildArgument(int a, int b) {
-//            this.a = a;
-//            this.b = b;
-//        }
     }
 
     private NthChildArgument getNthChildArgument() {
