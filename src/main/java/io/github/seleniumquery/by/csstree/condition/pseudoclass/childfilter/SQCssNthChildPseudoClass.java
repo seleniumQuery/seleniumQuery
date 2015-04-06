@@ -66,24 +66,33 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
                 this.a = null;
                 this.b = toInt(trimmedArg);
             } else {
-                Pattern p = Pattern.compile("(\\d*)n(?:\\s*([+-]\\s*\\d+))?");
+                Pattern p = Pattern.compile("([+-]?\\s*\\d*)n(?:\\s*([+-]\\s*\\d+))?");
                 Matcher m = p.matcher(trimmedArg);
                 if (m.matches()) {
-                    String aString = m.group(1);
-                    if (aString.isEmpty()) {
-                        aString = "1";
-                    }
-                    this.a = toInt(aString);
-                    String bString = m.group(2);
-                    if (bString == null) {
-                        this.b = null;
-                    } else {
-                        this.b = toInt(bString);
-                    }
+                    this.a = a(m.group(1));
+                    this.b = b(m.group(2));
                 } else {
                     throw createInvalidArgumentException(argument);
                 }
             }
+        }
+
+        private int a(String aString) {
+            if (aString.isEmpty()) {
+                aString = "1";
+            }
+            if ("-".equals(aString)) {
+                aString = "-1";
+            }
+            return toInt(aString);
+        }
+
+        private Integer b(String bString) {
+            Integer o = null;
+            if (bString != null) {
+                o = toInt(bString);
+            }
+            return o;
         }
 
         private int toInt(String supposedInteger) {
@@ -112,7 +121,8 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
                 return "position() = "+b;
             }
             int realB = b != null ? b : 0;
-            return "(position() - " + realB + ") mod " + realA + " = 0 and position() >= " + realB;
+            char operator = realA < 0 ? '<' : '>';
+            return "(position() - " + realB + ") mod " + realA + " = 0 and position() "+operator+"= " + realB;
         }
 
         //        static final NthChildArgument ODD = new NthChildArgument(2,1);

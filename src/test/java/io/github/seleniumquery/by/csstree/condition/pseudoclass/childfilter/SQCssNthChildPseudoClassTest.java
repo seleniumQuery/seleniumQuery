@@ -91,6 +91,8 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2", ":nth-child(2)", ".//*[position() = 2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("+1", ":nth-child(1)", ".//*[position() = 1]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1", ":nth-child(-1)", ".//*[position() = -1]");
+        // "+ 1"
+        // "- 1"
     }
 
     @Test
@@ -98,12 +100,15 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
-//        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n", ":nth-child(-1n)", ".//*[(position() - 0) mod -1 = 0 and position() <= 0]");
-//        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n", ":nth-child(-1n)", ".//*[]");
-//        assertNthChildArgumentYieldsWithAndWithoutSpaces("-3n", ":nth-child(-1n)", ".//*[]");
+        // "+n"
+        // "+1n"
+        // "+3n"
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n", ":nth-child(-1n)", ".//*[(position() - 0) mod -1 = 0 and position() <= 0]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n", ":nth-child(-1n)", ".//*[(position() - 0) mod -1 = 0 and position() <= 0]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-3n", ":nth-child(-3n)", ".//*[(position() - 0) mod -3 = 0 and position() <= 0]");
     }
 
-//    @Test
+    @Test
     public void toSQLocator__a_and_b_arguments__WITH_BOTH_POSITIVE() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
@@ -196,7 +201,7 @@ public class SQCssNthChildPseudoClassTest {
 
     @Test
     public void old() {
-        TagComponent xPathExpr = selectorToExpression(":nth-child(1n-5)");
+        TagComponent xPathExpr = selectorToExpression(":nth-child(1)");
         String xPathCondition = xPathExpr.toXPathCondition();
         assertThat(xPathCondition, is("position() = 1"));
     }
