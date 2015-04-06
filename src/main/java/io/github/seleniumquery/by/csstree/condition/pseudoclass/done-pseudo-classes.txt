@@ -18,7 +18,7 @@ childfilter
 	- :first-of-type
 	- :last-child
 	- :last-of-type
-	- :nth-child()
+	- OK :nth-child()
 	- :nth-last-child()
 	- :nth-last-of-type()
 	- :nth-of-type()

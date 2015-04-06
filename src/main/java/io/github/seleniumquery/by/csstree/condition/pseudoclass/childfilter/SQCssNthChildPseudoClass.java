@@ -26,6 +26,12 @@ import org.openqa.selenium.InvalidSelectorException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * :nth-child()
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
     public static final String PSEUDO = "nth-child";
@@ -35,11 +41,13 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
         public String pseudoClassForCSSNativeSupportCheck() {
             return ":"+PSEUDO+"(1)";
         }
+
         @Override
         public CSSLocator toCssWhenNativelySupported() {
             NthChildArgument nthChildArgument = getNthChildArgument();
             return new CSSLocator(nthChildArgument.toCSS());
         }
+
         @Override
         public XPathLocator toXPath() {
             NthChildArgument nthChildArgument = getNthChildArgument();
@@ -56,61 +64,101 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
         return nthChildPseudoClassLocatorGenerationStrategy;
     }
 
+    private NthChildArgument getNthChildArgument() {
+        return new NthChildArgument(super.getArgument());
+    }
+
+
     private static class NthChildArgument {
+
+        private static final Pattern B_REGEX = Pattern.compile("[+-]?\\d+");
+        private static final Pattern ANB_REGEX = Pattern.compile("([+-]?\\d*)n(?:\\s*([+-]\\s*\\d+))?");
+
         private final Integer a;
         private final Integer b;
 
         public NthChildArgument(String argument) {
             String trimmedArg = argument.trim();
-            if ("even".equals(trimmedArg)) {
+            if (even(trimmedArg)) {
                 this.a = 2;
                 this.b = null;
-            } else if ("odd".equals(trimmedArg)) {
+            } else if (odd(trimmedArg)) {
                 this.a = 2;
                 this.b = 1;
-            } else if (trimmedArg.matches("[+-]?\\d+")) {
+            } else if (bOnly(trimmedArg)) {
                 this.a = null;
-                this.b = toInt(trimmedArg);
+                this.b = parseSupposedInt(trimmedArg);
+            } else if (anb(trimmedArg)) {
+                Matcher m = extractArgumentsFromRegexGroups(trimmedArg);
+                this.a = a(m.group(1));
+                this.b = b(m.group(2));
             } else {
-                Pattern p = Pattern.compile("([+-]?\\d*)n(?:\\s*([+-]\\s*\\d+))?");
-                Matcher m = p.matcher(trimmedArg);
-                if (m.matches()) {
-                    this.a = a(m.group(1));
-                    this.b = b(m.group(2));
-                } else {
-                    throw createInvalidArgumentException(argument);
-                }
+                throw createInvalidArgumentException(argument);
             }
+        }
+
+        /**
+         * Tests if :nth-child(even)
+         */
+        private boolean even(String trimmedArg) {
+            return "even".equals(trimmedArg);
+        }
+
+        /**
+         * Tests if :nth-child(odd)
+         */
+        private boolean odd(String trimmedArg) {
+            return "odd".equals(trimmedArg);
+        }
+
+        /**
+         * Tests if arguments is under format :nth-child(b)
+         */
+        private boolean bOnly(String trimmedArg) {
+            return B_REGEX.matcher(trimmedArg).matches();
+        }
+
+        /**
+         * Tests if arguments is under format :nth-child(an+b)
+         */
+        private boolean anb(String trimmedArg) {
+            return ANB_REGEX.matcher(trimmedArg).matches();
         }
 
         private int a(String aString) {
             if (aString.isEmpty()) {
-                aString = "1";
+                return 1;
             }
             if ("-".equals(aString)) {
-                aString = "-1";
+                return -1;
             }
             if ("+".equals(aString)) {
-                aString = "1";
+                return 1;
             }
-            return toInt(aString);
+            return parseSupposedInt(aString);
         }
 
         private Integer b(String bString) {
-            Integer o = null;
-            if (bString != null) {
-                o = toInt(bString);
+            if (bString == null) {
+                return null;
             }
-            return o;
+            return parseSupposedInt(bString);
         }
 
-        private int toInt(String supposedInteger) {
-            String supposedIntegerWithoutSpaces = supposedInteger.replaceAll("\\s", "");
-            char firstChar = supposedIntegerWithoutSpaces.charAt(0);
-            if (firstChar == '+') {
-                return toInt(supposedIntegerWithoutSpaces.substring(1));
-            }
-            return Integer.parseInt(supposedIntegerWithoutSpaces);
+        private int parseSupposedInt(String supposedInteger) {
+            String intWithoutSpaces = supposedInteger.replaceAll("\\s", "");
+            String intWithoutSpacesAndLeadingPlusSign = intWithoutSpaces.replaceAll("^\\+", "");
+            return Integer.parseInt(intWithoutSpacesAndLeadingPlusSign);
+        }
+
+        private Matcher extractArgumentsFromRegexGroups(String trimmedArg) {
+            Matcher m = ANB_REGEX.matcher(trimmedArg);
+            // we know it matches, otherwise this method would not have been called
+            // I will not put an IF here "because another method may call this". If another method
+            // ever calls this, then whoever made it call this place an if here!
+            //noinspection ResultOfMethodCallIgnored
+            m.matches();
+            return m;
         }
 
         private InvalidSelectorException createInvalidArgumentException(String argument) {
@@ -119,11 +167,13 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
                     " :nth-child(b) - where a and b are positive or negative integers -, but was :nth-child(%s).", argument);
             return new InvalidSelectorException(reason);
         }
+
         public String toCSS() {
             String sa = a != null ? a+"n" : "";
             String sb = b != null && b != 0 ? (b > 0 && a != null? "+"+b : ""+b) : "";
             return ":nth-child("+sa+sb+")";
         }
+
         public String toXPath() {
             int realA = a != null ? a : 0;
             if (realA == 0) {
@@ -133,10 +183,6 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
             char operator = realA < 0 ? '<' : '>';
             return "(position() - " + realB + ") mod " + realA + " = 0 and position() "+operator+"= " + realB;
         }
-    }
-
-    private NthChildArgument getNthChildArgument() {
-        return new NthChildArgument(super.getArgument());
     }
 
 }
