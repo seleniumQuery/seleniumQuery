@@ -57,6 +57,11 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentIsNotValid("+");
         assertNthChildArgumentIsNotValid("-");
         assertNthChildArgumentIsNotValid("+ 1");
+        assertNthChildArgumentIsNotValid("- 1");
+        assertNthChildArgumentIsNotValid("+ n");
+        assertNthChildArgumentIsNotValid("- n");
+        assertNthChildArgumentIsNotValid("+ 3n");
+        assertNthChildArgumentIsNotValid("- 3n");
         assertNthChildArgumentIsNotValid(" ");
         assertNthChildArgumentIsNotValid("oddy");
         assertNthChildArgumentIsNotValid("eveny");
@@ -91,8 +96,6 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2", ":nth-child(2)", ".//*[position() = 2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("+1", ":nth-child(1)", ".//*[position() = 1]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1", ":nth-child(-1)", ".//*[position() = -1]");
-        // "+ 1"
-        // "- 1"
     }
 
     @Test
@@ -100,9 +103,11 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
-        // "+n"
-        // "+1n"
-        // "+3n"
+
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("+1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("+3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("+n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
+
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n", ":nth-child(-1n)", ".//*[(position() - 0) mod -1 = 0 and position() <= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n", ":nth-child(-1n)", ".//*[(position() - 0) mod -1 = 0 and position() <= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-3n", ":nth-child(-3n)", ".//*[(position() - 0) mod -3 = 0 and position() <= 0]");
