@@ -130,14 +130,19 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n + 5", nPlusFiveCSS, nPlusFiveXPath);
     }
 
-//    @Test
+    /**
+     * IMPORTANT: This test method was not necessary, that is, adding it did not provoke any code addition,
+     * but they are important cases. Anyway, if ever editing hard, you may disable this one until you finish
+     * or whatever -- just thought it was important to write this here.
+     */
+    @Test
     public void toSQLocator__a_and_b_arguments__WITH_a_NEGATIVE() {
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n+1", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+1", ":nth-child(-1n+1)", ".//*[(position() - 1) mod -1 = 0 and position() <= 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n+2", ":nth-child(-2n+2)", ".//*[(position() - 2) mod -2 = 0 and position() <= 2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+2", ":nth-child(-1n+2)", ".//*[(position() - 2) mod -1 = 0 and position() <= 2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n+1", ":nth-child(-2n+1)", ".//*[(position() - 1) mod -2 = 0 and position() <= 1]");
         String minusNPlusFiveCSS = ":nth-child(-1n+5)";
-        String minusNPlusFiveXPath = ".//*[(position() - 5) mod 1 = 0 and position() >= 5]";
+        String minusNPlusFiveXPath = ".//*[(position() - 5) mod -1 = 0 and position() <= 5]";
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n+5", minusNPlusFiveCSS, minusNPlusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n +5", minusNPlusFiveCSS, minusNPlusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n+ 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
@@ -164,14 +169,19 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n - 5", nMinusFiveCSS, nMinusFiveXPath);
     }
 
-//    @Test
+    /**
+     * IMPORTANT: This test method was not necessary, that is, adding it did not provoke any code addition,
+     * but they are important cases. Anyway, if ever editing hard, you may disable this one until you finish
+     * or whatever -- just thought it was important to write this here.
+     */
+    @Test
     public void toSQLocator__a_and_b_arguments__WITH_BOTH_NEGATIVE() {
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-1", ":nth-child(1n-1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n-2", ":nth-child(2n-2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-2", ":nth-child(1n-2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n-1", ":nth-child(2n-1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-1", ":nth-child(-1n-1)", ".//*[(position() - -1) mod -1 = 0 and position() <= -1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n-2", ":nth-child(-2n-2)", ".//*[(position() - -2) mod -2 = 0 and position() <= -2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-2", ":nth-child(-1n-2)", ".//*[(position() - -2) mod -1 = 0 and position() <= -2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n-1", ":nth-child(-2n-1)", ".//*[(position() - -1) mod -2 = 0 and position() <= -1]");
         String minusNMinusFiveCSS = ":nth-child(-1n-5)";
-        String minusNMinusFiveXPath = ".//*[(position() - 5) mod 1 = 0 and position() >= 5]";
+        String minusNMinusFiveXPath = ".//*[(position() - -5) mod -1 = 0 and position() <= -5]";
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n-5", minusNMinusFiveCSS, minusNMinusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n -5", minusNMinusFiveCSS, minusNMinusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n- 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
