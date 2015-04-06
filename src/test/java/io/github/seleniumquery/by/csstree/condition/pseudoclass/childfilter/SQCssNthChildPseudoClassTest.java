@@ -17,13 +17,8 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.CSSSelectorParser;
-import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
-import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
-import org.w3c.css.sac.SelectorList;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
@@ -31,7 +26,6 @@ import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoCla
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.*;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -119,6 +113,7 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+1", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+0", ":nth-child(2n)", ".//*[(position() - 0) mod 2 = 0 and position() >= 0]");
         String nPlusFiveCSS = ":nth-child(1n+5)";
         String nPlusFiveXPath = ".//*[(position() - 5) mod 1 = 0 and position() >= 5]";
         assertNthChildArgumentYieldsWithAndWithoutSpaces("n+5", nPlusFiveCSS, nPlusFiveXPath);
@@ -128,6 +123,24 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n +5", nPlusFiveCSS, nPlusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+ 5", nPlusFiveCSS, nPlusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n + 5", nPlusFiveCSS, nPlusFiveXPath);
+    }
+
+    @Test
+    public void toSQLocator__a_and_b_arguments__WITH_b_NEGATIVE() {
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-1", ":nth-child(1n-1)", ".//*[(position() - -1) mod 1 = 0 and position() >= -1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-2", ":nth-child(2n-2)", ".//*[(position() - -2) mod 2 = 0 and position() >= -2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-2", ":nth-child(1n-2)", ".//*[(position() - -2) mod 1 = 0 and position() >= -2]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-1", ":nth-child(2n-1)", ".//*[(position() - -1) mod 2 = 0 and position() >= -1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-0", ":nth-child(2n)", ".//*[(position() - 0) mod 2 = 0 and position() >= 0]");
+        String nMinusFiveCSS = ":nth-child(1n-5)";
+        String nMinusFiveXPath = ".//*[(position() - -5) mod 1 = 0 and position() >= -5]";
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n-5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n -5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n- 5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("n - 5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n -5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n- 5", nMinusFiveCSS, nMinusFiveXPath);
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n - 5", nMinusFiveCSS, nMinusFiveXPath);
     }
 
     /**
@@ -152,23 +165,6 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n + 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
     }
 
-    @Test
-    public void toSQLocator__a_and_b_arguments__WITH_b_NEGATIVE() {
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-1", ":nth-child(1n-1)", ".//*[(position() - -1) mod 1 = 0 and position() >= -1]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-2", ":nth-child(2n-2)", ".//*[(position() - -2) mod 2 = 0 and position() >= -2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-2", ":nth-child(1n-2)", ".//*[(position() - -2) mod 1 = 0 and position() >= -2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-1", ":nth-child(2n-1)", ".//*[(position() - -1) mod 2 = 0 and position() >= -1]");
-        String nMinusFiveCSS = ":nth-child(1n-5)";
-        String nMinusFiveXPath = ".//*[(position() - -5) mod 1 = 0 and position() >= -5]";
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("n-5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("n -5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("n- 5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("n - 5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n -5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n- 5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n - 5", nMinusFiveCSS, nMinusFiveXPath);
-    }
-
     /**
      * IMPORTANT: This test method was not necessary, that is, adding it did not provoke any code addition,
      * but they are important cases. Anyway, if ever editing hard, you may disable this one until you finish
@@ -191,14 +187,17 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n - 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
     }
 
-    // missing: even and odd
+    @Test
+    public void toSQLocator__even_and_odd_special_arguments() {
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("even", ":nth-child(2n)", ".//*[(position() - 0) mod 2 = 0 and position() >= 0]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("odd", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+    }
 
     private void assertNthChildArgumentYieldsWithAndWithoutSpaces(String nthChildArgument, String expectedCSS, String expectedXPath) {
         assertNthChildArgumentYields(nthChildArgument, expectedCSS, expectedXPath);
         assertNthChildArgumentYields(" " + nthChildArgument + " ", expectedCSS, expectedXPath);
     }
 
-    @SuppressWarnings("UnnecessaryLocalVariable")
     private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
         String pseudoThatTheDriverWillTestForNativeSupport = NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK;
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
@@ -212,18 +211,6 @@ public class SQCssNthChildPseudoClassTest {
                 pseudoThatTheDriverWillTestForNativeSupport,
                 expectedXPath
         );
-    }
-
-    @Test
-    public void old() {
-        TagComponent xPathExpr = selectorToExpression(":nth-child(1)");
-        String xPathCondition = xPathExpr.toXPathCondition();
-        assertThat(xPathCondition, is("position() = 1"));
-    }
-    public static TagComponent selectorToExpression(String selector) {
-        CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
-        SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
-        return XPathComponentCompilerService.compileSelector(CSSParsedSelectorList.getStringMap(), selectorList.item(0));
     }
 
 }
