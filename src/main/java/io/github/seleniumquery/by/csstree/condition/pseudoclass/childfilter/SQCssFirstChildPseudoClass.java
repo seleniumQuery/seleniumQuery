@@ -16,11 +16,26 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 
-public class SQCssFirstChildPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :first-child
+ * https://api.jquery.com/first-child-selector/
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssFirstChildPseudoClass extends SQCssNthChildPseudoClass {
 
     public static final String PSEUDO = "first-child";
+
+    public SQCssFirstChildPseudoClass(PseudoClassSelector pseudoClassSelector) {
+        super(pseudoClassSelector);
+    }
+
+    @Override
+    public String getArgument() {
+        return "1";
+    }
 
 }

@@ -14,7 +14,7 @@ basicfilter:
 	- :root
 	- :target
 childfilter
-	- :first-child
+	- OK :first-child
 	- :first-of-type
 	- :last-child
 	- :last-of-type

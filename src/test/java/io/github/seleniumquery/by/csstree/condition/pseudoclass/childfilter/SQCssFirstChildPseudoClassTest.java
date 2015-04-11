@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
@@ -34,7 +35,7 @@ public class SQCssFirstChildPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_does_NOT_have_native_support() {
         assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
-                new SQCssFirstChildPseudoClass(),
+                new SQCssFirstChildPseudoClass(PseudoClassTestUtils.EMPTY),
                 FIRST_CHILD_PSEUDO,
                 FIRST_CHILD_XPATH_EXPRESSION
         );
