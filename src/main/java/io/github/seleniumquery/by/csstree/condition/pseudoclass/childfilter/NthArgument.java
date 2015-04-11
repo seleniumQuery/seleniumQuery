@@ -24,6 +24,11 @@ import java.util.regex.Pattern;
 /**
  * This class represents arguments in the "nth" format, such as {@code even}, {@code odd} or {@code an+b}.
  *
+ * NOTE: The current implementation was built to work in a generic form and does the job perfectly. Still,
+ * it is a generic "raw" implementation, meaning it does no "optimizations", such as converting 2n+2 into 2n,
+ * or absurd arguments (e.g. -2n-2) into XPath's {@code false()}. We did this right now because we don't see
+ * the need those optimizations right now. If that changes in the future, they should be easy to add.
+ *
  * @author acdcjunior
  * @since 0.10.0
  */
