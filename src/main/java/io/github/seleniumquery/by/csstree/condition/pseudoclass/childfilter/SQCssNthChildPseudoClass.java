@@ -40,14 +40,14 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
 
         @Override
         public CSSLocator toCssWhenNativelySupported() {
-            NthChildArgument nthChildArgument = getNthChildArgument();
-            return new CSSLocator(nthChildArgument.toCSS());
+            NthArgument nthArgument = getNthChildArgument();
+            return new CSSLocator(nthArgument.toCSS());
         }
 
         @Override
         public XPathLocator toXPath() {
-            NthChildArgument nthChildArgument = getNthChildArgument();
-            return XPathLocator.pureXPath(nthChildArgument.toXPath());
+            NthArgument nthArgument = getNthChildArgument();
+            return XPathLocator.pureXPath(nthArgument.toXPath());
         }
     };
 
@@ -60,8 +60,8 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
         return nthChildPseudoClassLocatorGenerationStrategy;
     }
 
-    private NthChildArgument getNthChildArgument() {
-        return new NthChildArgument(getArgument());
+    private NthArgument getNthChildArgument() {
+        return new NthArgument(getArgument());
     }
 
 }
