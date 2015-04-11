@@ -22,12 +22,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This class represents arguments in the format {@code an+b}.
+ * This class represents arguments in the "nth" format, such as {@code even}, {@code odd} or {@code an+b}.
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-class NthChildArgument {
+class NthArgument {
 
     private static final Pattern B_REGEX = Pattern.compile("[+-]?\\d+");
     private static final Pattern ANB_REGEX = Pattern.compile("([+-]?\\d*)n(?:\\s*([+-]\\s*\\d+))?");
@@ -35,7 +35,7 @@ class NthChildArgument {
     private final Integer a;
     private final Integer b;
 
-    public NthChildArgument(String argument) {
+    public NthArgument(String argument) {
         String trimmedArg = argument.trim();
         if (even(trimmedArg)) {
             this.a = 2;
@@ -56,28 +56,28 @@ class NthChildArgument {
     }
 
     /**
-     * Tests if :nth-child(even)
+     * Tests if the argument is "even", as in :nth-child(even) or :nth-last-child(even)
      */
     private boolean even(String trimmedArg) {
         return "even".equals(trimmedArg);
     }
 
     /**
-     * Tests if :nth-child(odd)
+     * Tests if the argument is "odd", as in :nth-child(odd) or :nth-last-child(odd)
      */
     private boolean odd(String trimmedArg) {
         return "odd".equals(trimmedArg);
     }
 
     /**
-     * Tests if arguments is under format :nth-child(b)
+     * Tests if arguments is just b, as in :nth-child(5) or :nth-last-child(6)
      */
     private boolean bOnly(String trimmedArg) {
         return B_REGEX.matcher(trimmedArg).matches();
     }
 
     /**
-     * Tests if arguments is under format :nth-child(an+b)
+     * Tests if arguments is an+b, as in :nth-child(3n+8) or :nth-last-child(-2n+3)
      */
     private boolean anb(String trimmedArg) {
         return ANB_REGEX.matcher(trimmedArg).matches();
@@ -141,4 +141,5 @@ class NthChildArgument {
         char operator = realA < 0 ? '<' : '>';
         return "(position() - " + realB + ") mod " + realA + " = 0 and position() "+operator+"= " + realB;
     }
+
 }
