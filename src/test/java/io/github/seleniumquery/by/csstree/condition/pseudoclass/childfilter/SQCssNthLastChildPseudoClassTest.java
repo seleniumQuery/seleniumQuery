@@ -18,21 +18,54 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 
+/**
+ * IMPORTANT:
+ * This class has less tests than the :nth-child pseudo. This is intentional. They use the
+ * same implementation (see {@link NthArgument}) and there's no point in testing all degenerate
+ * cases here, as we did in :nth-child. We're lazy.
+ */
 public class SQCssNthLastChildPseudoClassTest {
+
+    private static final String NTH_LAST_CHILD_PSEUDO = ":nth-last-child";
+    private static final String NTH_LAST_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK = NTH_LAST_CHILD_PSEUDO + "(1)";
 
     @Test
     public void translate() {
-        assertFunctionalPseudo(":nth-last-child", SQCssNthLastChildPseudoClass.class);
+        assertFunctionalPseudo(NTH_LAST_CHILD_PSEUDO, SQCssNthLastChildPseudoClass.class);
     }
 
-    // ":nth-last-child(2)"     -> "//*[last()+1- position() = 2]"
-    // ":nth-last-child(3)"     -> "//*[last()+1- position() = 3]"
-    // ":nth-last-child(5n)"    -> "//*[(last()+1- position() - 0) mod 5 = 0 and last()+1- position() >= 0]"
-    // ":nth-last-child(-5n)"   -> "//*[(last()+1- position() - 0) mod -5 = 0 and last()+1- position() <= 0]"
-    // ":nth-last-child(2n+3)"  -> "//*[(last()+1- position() - 3) mod 2 = 0 and last()+1- position() >= 3]"
-    // ":nth-last-child(2n-3)"  -> "//*[(last()+1- position() - -3) mod 2 = 0 and last()+1- position() >= -3]"
-    // ":nth-last-child(-2n+3)" -> "//*[(last()+1- position() - 3) mod -2 = 0 and last()+1- position() <= 3]"
+    @Test
+    public void toSQLocator() {
+        assertNthLastChildArgumentYields("2",     ":nth-last-child(2)",     ".//*[(last()+1-position()) = 2]");
+        assertNthLastChildArgumentYields("3",     ":nth-last-child(3)",     ".//*[(last()+1-position()) = 3]");
+        assertNthLastChildArgumentYields("5n",    ":nth-last-child(5n)",    ".//*[((last()+1-position()) - 0) mod 5 = 0 and (last()+1-position()) >= 0]");
+        assertNthLastChildArgumentYields("-5n",   ":nth-last-child(-5n)",   ".//*[((last()+1-position()) - 0) mod -5 = 0 and (last()+1-position()) <= 0]");
+        assertNthLastChildArgumentYields("2n+3",  ":nth-last-child(2n+3)",  ".//*[((last()+1-position()) - 3) mod 2 = 0 and (last()+1-position()) >= 3]");
+        assertNthLastChildArgumentYields("2n-3",  ":nth-last-child(2n-3)",  ".//*[((last()+1-position()) - -3) mod 2 = 0 and (last()+1-position()) >= -3]");
+        assertNthLastChildArgumentYields("-2n+3", ":nth-last-child(-2n+3)", ".//*[((last()+1-position()) - 3) mod -2 = 0 and (last()+1-position()) <= 3]");
+    }
 
+    private void assertNthLastChildArgumentYields(String nthArgument, String expectedCSS, String expectedXPath) {
+        String pseudoThatTheDriverWillTestForNativeSupport = NTH_LAST_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK;
+        assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
+                pseudoThatTheDriverWillTestForNativeSupport,
+                nthLastChild(nthArgument),
+                expectedCSS,
+                expectedXPath
+        );
+        assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(
+                nthLastChild(nthArgument),
+                pseudoThatTheDriverWillTestForNativeSupport,
+                expectedXPath
+        );
+    }
+
+    private SQCssNthLastChildPseudoClass nthLastChild(String nthArgument) {
+        return new SQCssNthLastChildPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthArgument));
+    }
 }

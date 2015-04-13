@@ -17,15 +17,45 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
-public class SQCssNthLastChildPseudoClass extends SQCssFunctionalPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssNthLastChildPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
     public static final String PSEUDO = "nth-last-child";
 
+    public MaybeNativelySupportedPseudoClass nthLastChildPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
+        @Override
+        public String pseudoClassForCSSNativeSupportCheck() {
+            return ":"+PSEUDO+"(1)";
+        }
+
+        @Override
+        public CSSLocator toCssWhenNativelySupported() {
+            NthArgument nthArgument = getNthChildArgument();
+            return new CSSLocator(":"+PSEUDO+"("+nthArgument.toCSS()+")");
+        }
+
+        @Override
+        public XPathLocator toXPath() {
+            NthArgument nthArgument = getNthChildArgument();
+            return XPathLocator.pureXPath(nthArgument.toXPath("(last()+1-position())"));
+        }
+    };
+
     public SQCssNthLastChildPseudoClass(PseudoClassSelector pseudoClassSelector) {
         super(pseudoClassSelector);
+    }
+
+    @Override
+    public MaybeNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+        return nthLastChildPseudoClassLocatorGenerationStrategy;
+    }
+
+    private NthArgument getNthChildArgument() {
+        return new NthArgument(getArgument());
     }
 
 }
