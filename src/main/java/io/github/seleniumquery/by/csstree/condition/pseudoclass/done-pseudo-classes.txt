@@ -19,7 +19,7 @@ childfilter
 	- :last-child
 	- :last-of-type
 	- OK :nth-child()
-	- :nth-last-child()
+	- OK :nth-last-child()
 	- :nth-last-of-type()
 	- :nth-of-type()
 	- OK :only-child
