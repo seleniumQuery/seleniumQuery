@@ -41,13 +41,13 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
         @Override
         public CSSLocator toCssWhenNativelySupported() {
             NthArgument nthArgument = getNthChildArgument();
-            return new CSSLocator(nthArgument.toCSS());
+            return new CSSLocator(":"+PSEUDO+"("+nthArgument.toCSS()+")");
         }
 
         @Override
         public XPathLocator toXPath() {
             NthArgument nthArgument = getNthChildArgument();
-            return XPathLocator.pureXPath(nthArgument.toXPath());
+            return XPathLocator.pureXPath(nthArgument.toXPath("position()"));
         }
     };
 

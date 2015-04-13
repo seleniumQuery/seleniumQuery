@@ -26,8 +26,8 @@ import java.util.regex.Pattern;
  *
  * NOTE: The current implementation was built to work in a generic form and does the job perfectly. Still,
  * it is a generic "raw" implementation, meaning it does no "optimizations", such as converting 2n+2 into 2n,
- * or absurd arguments (e.g. -2n-2) into XPath's {@code false()}. We did this right now because we don't see
- * the need those optimizations right now. If that changes in the future, they should be easy to add.
+ * or absurd arguments (e.g. -2n-2) into XPath's {@code false()}. We did this this time now because we don't see
+ * the need for those optimizations right now. If that changes in the future, they should be easy to add.
  *
  * @author acdcjunior
  * @since 0.10.0
@@ -134,17 +134,17 @@ class NthArgument {
     public String toCSS() {
         String sa = a != null ? a+"n" : "";
         String sb = b != null && b != 0 ? (b > 0 && a != null? "+"+b : ""+b) : "";
-        return ":nth-child("+sa+sb+")";
+        return sa+sb;
     }
 
-    public String toXPath() {
+    public String toXPath(String function) {
         int realA = a != null ? a : 0;
         if (realA == 0) {
-            return "position() = "+b;
+            return function + " = "+b;
         }
         int realB = b != null ? b : 0;
         char operator = realA < 0 ? '<' : '>';
-        return "(position() - " + realB + ") mod " + realA + " = 0 and position() "+operator+"= " + realB;
+        return "(" + function + " - " + realB + ") mod " + realA + " = 0 and " + function + " "+operator+"= " + realB;
     }
 
 }
