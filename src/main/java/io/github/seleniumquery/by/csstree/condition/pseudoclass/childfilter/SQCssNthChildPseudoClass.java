@@ -24,6 +24,8 @@ import io.github.seleniumquery.by.locator.XPathLocator;
 
 /**
  * :nth-child()
+ * https://api.jquery.com/nth-child-selector/
+ * https://developer.mozilla.org/pt-BR/docs/Web/CSS/:nth-child
  *
  * @author acdcjunior
  * @since 0.10.0

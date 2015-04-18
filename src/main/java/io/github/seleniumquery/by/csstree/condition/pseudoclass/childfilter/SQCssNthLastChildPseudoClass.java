@@ -22,6 +22,14 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgeneratio
 import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.XPathLocator;
 
+/**
+ * :nth-last-child()
+ * https://api.jquery.com/nth-last-child-selector/
+ * https://developer.mozilla.org/pt-BR/docs/Web/CSS/:nth-last-child
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public class SQCssNthLastChildPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
     public static final String PSEUDO = "nth-last-child";

@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 /**
  * :first-child
  * https://api.jquery.com/first-child-selector/
+ * https://developer.mozilla.org/pt-BR/docs/Web/CSS/:first-child
  *
  * @author acdcjunior
  * @since 0.10.0
