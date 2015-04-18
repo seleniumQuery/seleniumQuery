@@ -18,6 +18,14 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 
+/**
+ * :last-child()
+ * https://api.jquery.com/last-child-selector/
+ * https://developer.mozilla.org/pt-BR/docs/Web/CSS/:last-child
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public class SQCssLastChildPseudoClass extends SQCssNthLastChildPseudoClass {
 
     public static final String PSEUDO = "last-child";
