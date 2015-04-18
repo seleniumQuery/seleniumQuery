@@ -16,7 +16,7 @@ basicfilter:
 childfilter
 	- OK :first-child
 	- :first-of-type
-	- :last-child
+	- OK :last-child
 	- :last-of-type
 	- OK :nth-child()
 	- OK :nth-last-child()
