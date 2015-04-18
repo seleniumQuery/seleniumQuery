@@ -16,11 +16,19 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 
-public class SQCssLastChildPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssLastChildPseudoClass extends SQCssNthLastChildPseudoClass {
 
     public static final String PSEUDO = "last-child";
+
+    public SQCssLastChildPseudoClass(PseudoClassSelector pseudoClassSelector) {
+        super(pseudoClassSelector);
+    }
+
+    @Override
+    public String getArgument() {
+        return "1";
+    }
 
 }
