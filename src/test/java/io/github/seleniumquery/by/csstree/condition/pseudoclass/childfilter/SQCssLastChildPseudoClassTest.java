@@ -16,15 +16,29 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils;
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 
 public class SQCssLastChildPseudoClassTest {
 
+    public static final String LAST_CHILD_PSEUDO = ":first-child";
+    public static final String LAST_CHILD_XPATH_EXPRESSION = ".//*[position() = last()]";
+
     @Test
     public void translate() {
-        assertPseudo(":last-child", SQCssLastChildPseudoClass.class);
+        assertPseudo(LAST_CHILD_PSEUDO, SQCssLastChildPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__when_driver_does_NOT_have_native_support() {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
+                new SQCssLastChildPseudoClass(PseudoClassTestUtils.EMPTY),
+                LAST_CHILD_PSEUDO,
+                LAST_CHILD_XPATH_EXPRESSION
+        );
     }
 
 }
