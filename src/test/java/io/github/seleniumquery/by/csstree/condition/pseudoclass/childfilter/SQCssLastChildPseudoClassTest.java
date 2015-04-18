@@ -24,8 +24,8 @@ import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoCla
 
 public class SQCssLastChildPseudoClassTest {
 
-    public static final String LAST_CHILD_PSEUDO = ":first-child";
-    public static final String LAST_CHILD_XPATH_EXPRESSION = ".//*[position() = last()]";
+    public static final String LAST_CHILD_PSEUDO = ":last-child";
+    public static final String LAST_CHILD_XPATH_EXPRESSION = ".//*[(last()+1-position()) = 1]";//".//*[position() = last()]";
 
     @Test
     public void translate() {
