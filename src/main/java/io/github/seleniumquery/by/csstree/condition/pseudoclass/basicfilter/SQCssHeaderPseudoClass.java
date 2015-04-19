@@ -16,11 +16,36 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
-public class SQCssHeaderPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :header
+ * https://api.jquery.com/header-selector/
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssHeaderPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "header";
+
+    public static final String HEADER_XPATH_EXPRESSION = "(" +
+            "self::h0 | self::h1 | self::h2 | self::h3 | self::h4 | " +
+            "self::h5 | self::h6 | self::h7 | self::h8 | self::h9" +
+        ")";
+
+    public NeverNativelySupportedPseudoClass headerPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+        @Override
+        public XPathLocator toXPath() {
+            return XPathLocator.pureXPath(HEADER_XPATH_EXPRESSION);
+        }
+    };
+
+    @Override
+    public NeverNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+        return headerPseudoClassLocatorGenerationStrategy;
+    }
 
 }

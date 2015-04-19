@@ -4,7 +4,7 @@ basicfilter:
 	- OK :even
 	- OK :first
 	- OK :gt()
-	- :header
+	- OK :header
 	- :lang()
 	- OK :last
 	- OK :lt()
