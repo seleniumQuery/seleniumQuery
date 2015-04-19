@@ -18,13 +18,29 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 
 public class SQCssHeaderPseudoClassTest {
 
+    private static final String HEADER_PSEUDO = ":header";
+    public static final String HEADER_XPATH_EXPRESSION = ".//*[" +
+                "(self::h0 | self::h1 | self::h2 | self::h3 | self::h4 | " +
+                 "self::h5 | self::h6 | self::h7 | self::h8 | self::h9)" +
+            "]";
+
     @Test
     public void translate() {
-        assertPseudo(":header", SQCssHeaderPseudoClass.class);
+        assertPseudo(HEADER_PSEUDO, SQCssHeaderPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__REGARDLESS_of_driver_native_support() {
+        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
+                new SQCssHeaderPseudoClass(),
+                HEADER_PSEUDO,
+                HEADER_XPATH_EXPRESSION
+        );
     }
 
 }
