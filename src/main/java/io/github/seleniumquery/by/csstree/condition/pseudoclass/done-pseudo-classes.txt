@@ -1,5 +1,5 @@
 basicfilter:
-	- :animated
+	- OK :animated (WILL-NOT-ADD: requires access to jQuery's internals)
 	- OK :eq()
 	- OK :even
 	- OK :first
