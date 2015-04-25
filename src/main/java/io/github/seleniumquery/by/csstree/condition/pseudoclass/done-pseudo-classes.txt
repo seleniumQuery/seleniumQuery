@@ -25,7 +25,7 @@ childfilter
 	- OK :only-child
 	- :only-of-type
 contentfilter
-	- :contains()
+	- OK :contains()
 	- OK :empty
 	- :has()
 	- :parent

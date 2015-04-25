@@ -16,16 +16,33 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.contentfilter;
 
+import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
-public class SQCssContainsPseudoClass extends SQCssFunctionalPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class SQCssContainsPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
     public static final String PSEUDO = "contains";
 
     public SQCssContainsPseudoClass(PseudoClassSelector pseudoClassSelector) {
         super(pseudoClassSelector);
+    }
+
+    public NeverNativelySupportedPseudoClass containsPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+        @Override
+        public XPathLocator toXPath() {
+            String textToContain = getArgument();
+            textToContain = SelectorUtils.unescapeString(textToContain);
+            String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
+            return XPathLocator.pureXPath("contains(string(.), " + wantedTextToContain + ")");
+        }
+    };
+
+    @Override
+    public NeverNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+        return containsPseudoClassLocatorGenerationStrategy;
     }
 
 }
