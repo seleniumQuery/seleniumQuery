@@ -111,7 +111,9 @@ public class PseudoClassTestUtils {
     }
 
     /**
-     * This method creates a {@link io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector} equivalent to {@code *:the-pseudo-class(ARGUMENT)}.
+     * This method creates a {@link PseudoClassSelector} equivalent to {@code *:the-pseudo-class(ARGUMENT)}.
+     *
+     * @param functionalPseudoClassArgument the ARGUMENT.
      */
     public static PseudoClassSelector createPseudoClassSelectorAppliedToUniversalSelector(String functionalPseudoClassArgument) {
         CSSParsedSelectorList cssParsedSelectorList = CSSSelectorParser.parseSelector("*");
