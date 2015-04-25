@@ -22,6 +22,13 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalP
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.XPathLocator;
 
+/**
+ * :contains()
+ * https://api.jquery.com/contains-selector/
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
 public class SQCssContainsPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
     public static final String PSEUDO = "contains";
