@@ -8,7 +8,7 @@ basicfilter:
 	- DELAYED :lang()
 	- OK :last
 	- OK :lt()
-	- :not()
+	- :not() ------------------------------------------------------ TODO
 	- OK :nth
 	- OK :odd
 	- DELAYED :root
@@ -27,8 +27,8 @@ childfilter
 contentfilter
 	- OK :contains()
 	- OK :empty
-	- :has()
-	- :parent
+	- :has() ------------------------------------------------------ TODO
+	- DELAYED :parent
 form
 	- OK :button
 	- OK :checkbox
@@ -51,7 +51,7 @@ jquery-ui
 seleniumquery
 	- DELAYED :blank
 	- DELAYED :filled
-	- :present
+	- :present ------------------------------------------------------ TODO
 	- DELAYED :unchecked
 visibility
     - OK :hidden
