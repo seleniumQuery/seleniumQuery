@@ -18,13 +18,28 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.seleniumquery;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 
 public class SQCssPresentPseudoClassTest {
 
+    private static final String PRESENT_PSEUDO = ":present";
+    public static final String PRESENT_XPATH_EXPRESSION = ".//*[" +
+            "true()" +
+            "]";
+
     @Test
     public void translate() {
-        assertPseudo(":present", SQCssPresentPseudoClass.class);
+        assertPseudo(PRESENT_PSEUDO, SQCssPresentPseudoClass.class);
+    }
+
+    @Test
+    public void toSQLocator__when_driver_has_native_support() {
+        assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
+                new SQCssPresentPseudoClass(),
+                PRESENT_PSEUDO,
+                PRESENT_XPATH_EXPRESSION
+        );
     }
 
 }
