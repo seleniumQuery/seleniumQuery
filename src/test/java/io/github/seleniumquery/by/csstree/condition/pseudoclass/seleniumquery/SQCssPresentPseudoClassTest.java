@@ -24,9 +24,8 @@ import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoCla
 public class SQCssPresentPseudoClassTest {
 
     private static final String PRESENT_PSEUDO = ":present";
-    public static final String PRESENT_XPATH_EXPRESSION = ".//*[" +
-            "true()" +
-            "]";
+    private static final String PRESENT_CSS_SELECTOR = "*";
+    private static final String PRESENT_XPATH_EXPRESSION = ".//*[true()]";
 
     @Test
     public void translate() {
@@ -37,7 +36,7 @@ public class SQCssPresentPseudoClassTest {
     public void toSQLocator__when_driver_has_native_support() {
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
                 new SQCssPresentPseudoClass(),
-                PRESENT_PSEUDO,
+                PRESENT_CSS_SELECTOR,
                 PRESENT_XPATH_EXPRESSION
         );
     }
