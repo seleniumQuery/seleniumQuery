@@ -16,11 +16,40 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.seleniumquery;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.AlwaysNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.XPathLocator;
 
-public class SQCssPresentPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+/**
+ * :present
+ * https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors#extra---seleniumquery-only-selectors
+ *
+ * Matches all elements that are attached to the DOM. It is the "identity" selector, basically. It
+ * should not affect the other selector it is used with.
+ *
+ * @author acdcjunior
+ * @since 0.10.0
+ */
+public class SQCssPresentPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "present";
+
+    public MaybeNativelySupportedPseudoClass presentPseudoClassLocatorGenerationStrategy = new AlwaysNativelySupportedPseudoClass() {
+        @Override
+        public CSSLocator toCssWhenNativelySupported() {
+            return CSSLocator.universalSelector();
+        }
+        @Override
+        public XPathLocator toXPath() {
+            return XPathLocator.pureXPath("true()");
+        }
+    };
+
+    @Override
+    public MaybeNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+        return presentPseudoClassLocatorGenerationStrategy;
+    }
 
 }

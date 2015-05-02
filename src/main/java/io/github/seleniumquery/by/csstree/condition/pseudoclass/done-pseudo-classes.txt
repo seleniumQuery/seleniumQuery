@@ -51,7 +51,7 @@ jquery-ui
 seleniumquery
 	- DELAYED :blank
 	- DELAYED :filled
-	- :present ------------------------------------------------------ TODO
+	- OK :present
 	- DELAYED :unchecked
 visibility
     - OK :hidden
