@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 /**
  * :contains()
@@ -39,7 +40,7 @@ public class SQCssContainsPseudoClass extends SQCssFunctionalPseudoClassConditio
 
     public NeverNativelySupportedPseudoClass containsPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             String textToContain = getArgument();
             textToContain = SelectorUtils.unescapeString(textToContain);
             String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);

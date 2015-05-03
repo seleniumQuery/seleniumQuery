@@ -57,12 +57,12 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
         }
 
         @Override
-        public CSSLocator toCssWhenNativelySupported() {
+        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
             return new CSSLocator(CHECKED_PSEUDO);
         }
 
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             return new XPathLocator(xPathExpression(), CheckedPseudoClass.CHECKED_FILTER);
         }
 

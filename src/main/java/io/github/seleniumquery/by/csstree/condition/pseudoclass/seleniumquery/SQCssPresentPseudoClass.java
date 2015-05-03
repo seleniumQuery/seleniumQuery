@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgeneratio
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 /**
  * :present
@@ -38,11 +39,11 @@ public class SQCssPresentPseudoClass extends SQCssPseudoClassCondition {
 
     public MaybeNativelySupportedPseudoClass presentPseudoClassLocatorGenerationStrategy = new AlwaysNativelySupportedPseudoClass() {
         @Override
-        public CSSLocator toCssWhenNativelySupported() {
+        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
             return CSSLocator.universalSelector();
         }
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             return XPathLocator.pureXPath("true()");
         }
     };

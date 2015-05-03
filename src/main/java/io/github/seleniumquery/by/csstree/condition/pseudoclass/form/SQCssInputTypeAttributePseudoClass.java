@@ -20,6 +20,7 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClass
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.AlwaysNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
@@ -36,12 +37,12 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
 
     public AlwaysNativelySupportedPseudoClass inputTypePseudoClassLocatorGenerationStrategy = new AlwaysNativelySupportedPseudoClass() {
         @Override
-        public CSSLocator toCssWhenNativelySupported() {
+        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
             return new CSSLocator("input", "[type=\"" + typeAttributeValue + "\"]");
         }
 
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             return XPathLocator.pureXPath("(self::input and " + TYPE_ATTR_LC_VAL + " = '" + typeAttributeValue + "')");
         }
     };

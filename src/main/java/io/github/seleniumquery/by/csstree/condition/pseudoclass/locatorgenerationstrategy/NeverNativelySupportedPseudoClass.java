@@ -37,9 +37,10 @@ public abstract class NeverNativelySupportedPseudoClass extends MaybeNativelySup
      * Due to the {@link NeverNativelySupportedPseudoClass#isThisCSSPseudoClassNativelySupportedOn(org.openqa.selenium.WebDriver)}
      * always returning false, this method will actually never be called.
      * I do know this smells like a violation of LSP, but I, for the love of Yoda, couldn't figure out a better way!
+     * @param webDriver ignored
      */
     @Override
-    public CSSLocator toCssWhenNativelySupported() {
+    public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
         throw new UnsupportedOperationException();
     }
 
