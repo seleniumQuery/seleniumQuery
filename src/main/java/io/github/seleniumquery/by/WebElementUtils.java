@@ -1,9 +1,25 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by;
 
 import org.openqa.selenium.WebElement;
 
 /**
- * Several functions for dealing with {@link WebElement}s.
+ * Several functions for simplified dealing with {@link WebElement}s.
  *
  * @author acdcjunior
  *
@@ -70,10 +86,10 @@ public class WebElementUtils {
         if ("".equals(contenteditable) || "true".equalsIgnoreCase(contenteditable)) {
             return true;
         }
-        // no contenteditable; or
-        // concontenteditable == "inherit"; or
-        // concontenteditable == "anything";
-        // then we consider as "inherit"
+        // no contenteditable attribute; or
+        // contenteditable == "inherit"; or
+        // contenteditable == "anything";
+        // then we consider as "inherit" - aka its value is the value of its father's contenteditable
         return isContentEditable(SelectorUtils.parent(element));
     }
 
