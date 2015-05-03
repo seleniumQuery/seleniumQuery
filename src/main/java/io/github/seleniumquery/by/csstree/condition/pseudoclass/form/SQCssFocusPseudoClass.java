@@ -20,6 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.FocusPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 /**
  * PhantomJS may have problems with this:
@@ -34,7 +35,7 @@ public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition {
 
     public NeverNativelySupportedPseudoClass hiddenPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             return XPathLocator.filterOnly(FocusPseudoClass.FOCUS_FILTER);
         }
     };

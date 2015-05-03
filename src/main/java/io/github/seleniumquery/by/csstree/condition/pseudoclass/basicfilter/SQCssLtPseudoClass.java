@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalI
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.XPathMergeStrategy;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 /**
  * :lt(index)
@@ -34,7 +35,7 @@ public class SQCssLtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
 
     public NeverNativelySupportedPseudoClass gtPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             int index = getArgumentAsIndex();
             if (index >= 0) {
                 return XPathLocator.pureXPath("position() < " + (index + 1));
