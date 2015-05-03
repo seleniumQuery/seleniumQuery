@@ -1,18 +1,18 @@
 /*
-Copyright (c) 2014 seleniumQuery authors
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package io.github.seleniumquery.browser;
 
@@ -25,7 +25,9 @@ import java.io.File;
 import static java.lang.String.format;
 
 /**
- * Set of functionality used both by user-managed browsers and global (static) browser.
+ * <p>Set of functions used both by user-managed browsers and global (static) browser.</p>
+ *
+ * They usually take the form <code>$.functionName();</code>
  *
  * @author acdcjunior
  * @author ricardo-sc
@@ -41,8 +43,8 @@ public class BrowserFunctions {
     /**
      * Obtains the seleniumQuery's driver tool instance. Through it you can:
      * <ul>
-     *     <li>.get() the current WebDriver instance;</li>
-     *     <li>call .use*() methods to change the WebDriver currently used</li>
+     *     <li><code>.get()</code> the current {@link org.openqa.selenium.WebDriver} instance;</li>
+     *     <li>call <code>.use*()</code> methods to change the {@link org.openqa.selenium.WebDriver} currently used</li>
      * </ul>
      *
      * @return The seleniumQuery's driver tool instance.
@@ -65,7 +67,7 @@ public class BrowserFunctions {
     /**
      * Opens the given URL in the default browser.
      *
-     * @param urlToOpen The URL to be opened. Example: "http://seleniumquery.github.io"
+     * @param urlToOpen The URL to be opened. Example: <code>$.url("http://seleniumquery.github.io");</code>
      * @return A self reference.
      *
      * @since 0.9.0
@@ -96,9 +98,11 @@ public class BrowserFunctions {
      * $.pause(10 * 1000); // pauses for 10 seconds
      * </pre>
      *
-     * <strong>IMPORTANT: 'Pause' is considered to be a bad design practice.</strong> It is better to write code
-     * based on what the user will expect, for that consider exploring the {@code .waitUntil()} functions, such as
-     * in <code>$("#someDivThatShouldComeOut").waitUntil().is(":visible");</code>.
+     * @deprecated <strong>IMPORTANT: 'Pause' is considered to be a bad design practice.</strong><br>It will lead to fragile,
+     * erratic, possibily non-repeatable tests tha can begin failing for no reason.
+     * <p>It is better to write code
+     * based on what the user will expect, for that consider leveraging the {@code .waitUntil()} functions, such as
+     * in <code>$("#someDivThatShouldComeOut").waitUntil().is(":visible");</code>.</p>
      *
      * @param timeToPauseInMillis Pause duration, in milliseconds.
      * @return A self reference.
