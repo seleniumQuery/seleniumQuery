@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.parser.translator.condition.attribute;
 import io.github.seleniumquery.by.csstree.condition.attribute.SQCssContainsSubstringAttributeCondition;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
+import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -14,7 +14,7 @@ public class SQCssContainsSubstringAttributeConditionTranslatorTest {
         // given
         String selector = "[attrib*=stringToContain]";
         // when
-        SQCssContainsSubstringAttributeCondition cssCondition = parseFirstCssCondition(selector, SQCssContainsSubstringAttributeCondition.class);
+        SQCssContainsSubstringAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, SQCssContainsSubstringAttributeCondition.class);
         // then
         assertThat(cssCondition.getAttributeName(), is("attrib"));
         assertThat(cssCondition.getWantedValue(), is("stringToContain"));

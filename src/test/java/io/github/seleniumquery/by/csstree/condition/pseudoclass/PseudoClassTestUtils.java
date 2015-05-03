@@ -28,7 +28,7 @@ import org.w3c.css.sac.Selector;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
+import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
@@ -46,7 +46,7 @@ public class PseudoClassTestUtils {
         // given
         // selector
         // when
-        T cssCondition = parseFirstCssCondition(selector, pseudoClassClass);
+        T cssCondition = parseAndAssertFirstCssCondition(selector, pseudoClassClass);
         // then
         assertThat(cssCondition, is(notNullValue()));
     }
@@ -82,7 +82,7 @@ public class PseudoClassTestUtils {
         // given
         // selector
         // when
-        T cssCondition = parseFirstCssCondition(selector+selectorSuffix, pseudoClassClass);
+        T cssCondition = parseAndAssertFirstCssCondition(selector + selectorSuffix, pseudoClassClass);
         // then
         if (expectedArgument != null) {
             assertThat(cssCondition.getArgument(), is(expectedArgument));
