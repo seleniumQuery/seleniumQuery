@@ -69,18 +69,22 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
     protected WebDriver build() {
         DesiredCapabilities capabilities = capabilities(new DesiredCapabilities());
 
+        configurePhantomJsExecutablePath();
+        try {
+            return new PhantomJSDriver(capabilities);
+        } catch (IllegalStateException e) {
+            throwCustomExceptionIfExecutableWasNotFound(e);
+            throw e;
+        }
+    }
+
+    private void configurePhantomJsExecutablePath() {
         if (customPathWasProvidedAndExecutableExistsThere(this.customPathToPhantomJs, BAD_PATH_PROVIDED_EXCEPTION_MESSAGE)) {
             setExecutableSystemProperty(getFullPath(this.customPathToPhantomJs));
         } else if (executableExistsInClasspath(PHANTOMJS_EXECUTABLE_WINDOWS)) {
             setExecutableSystemProperty(getFullPathForFileInClasspath(PHANTOMJS_EXECUTABLE_WINDOWS));
         } else if (executableExistsInClasspath(PHANTOMJS_EXECUTABLE_LINUX)) {
             setExecutableSystemProperty(getFullPathForFileInClasspath(PHANTOMJS_EXECUTABLE_LINUX));
-        }
-        try {
-            return new PhantomJSDriver(capabilities);
-        } catch (IllegalStateException e) {
-            throwCustomExceptionIfExecutableWasNotFound(e);
-            throw e;
         }
     }
 

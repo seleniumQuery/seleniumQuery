@@ -135,7 +135,6 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
      *
      * @since 0.9.0
      */
-    @SuppressWarnings("deprecation")
     public HtmlUnitDriverBuilder emulatingInternetExplorer8() {
         this.emulatedBrowserName = BrowserType.IE;
         this.emulatedBrowserVersion = "8";
