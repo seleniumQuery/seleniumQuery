@@ -8,7 +8,7 @@ import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
 import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
+import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -88,7 +88,7 @@ public class SQCssIdAttributeConditionTranslatorTest {
         // given
         // selector arg
         // when
-        SQCssIdAttributeCondition cssCondition = parseFirstCssCondition(actualSelector, SQCssIdAttributeCondition.class);
+        SQCssIdAttributeCondition cssCondition = parseAndAssertFirstCssCondition(actualSelector, SQCssIdAttributeCondition.class);
         // then
         assertThat(cssCondition.getId(), is(expectedId));
     }
