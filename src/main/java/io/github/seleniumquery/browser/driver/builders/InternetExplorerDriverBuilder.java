@@ -69,11 +69,7 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
     protected WebDriver build() {
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.chrome());
 
-        if (customPathWasProvidedAndExecutableExistsThere(this.customPathToIEDriverServerExe , BAD_PATH_PROVIDED_EXCEPTION_MESSAGE)) {
-            System.setProperty(IE_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPath(this.customPathToIEDriverServerExe));
-        } else if (DriverInstantiationUtils.executableExistsInClasspath(IEDRIVERSERVER_EXE)) {
-            System.setProperty(IE_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPathForFileInClasspath(IEDRIVERSERVER_EXE));
-        }
+        configureIEServerExecutablePath();
         try {
             return new InternetExplorerDriver(capabilities);
         } catch (IllegalStateException e) {
@@ -82,6 +78,14 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
         } catch (SessionNotFoundException e) {
             throwCustomExceptionIfProtectedModeMustBeTheSame(e);
             throw e;
+        }
+    }
+
+    private void configureIEServerExecutablePath() {
+        if (customPathWasProvidedAndExecutableExistsThere(this.customPathToIEDriverServerExe , BAD_PATH_PROVIDED_EXCEPTION_MESSAGE)) {
+            System.setProperty(IE_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPath(this.customPathToIEDriverServerExe));
+        } else if (DriverInstantiationUtils.executableExistsInClasspath(IEDRIVERSERVER_EXE)) {
+            System.setProperty(IE_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPathForFileInClasspath(IEDRIVERSERVER_EXE));
         }
     }
 

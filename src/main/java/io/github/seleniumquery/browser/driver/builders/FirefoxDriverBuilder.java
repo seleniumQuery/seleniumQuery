@@ -62,13 +62,17 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
     protected WebDriver build() {
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.firefox());
 
+        configureFirefoxProfile(capabilities);
+
+        return new FirefoxDriver(capabilities);
+    }
+
+    private void configureFirefoxProfile(DesiredCapabilities capabilities) {
         FirefoxProfile profile = this.firefoxProfile != null ? this.firefoxProfile : new FirefoxProfile();
         if (enableJavaScript != null) {
             profile.setPreference("javascript.enabled", this.enableJavaScript);
         }
         capabilities.setCapability(FirefoxDriver.PROFILE, profile);
-
-        return new FirefoxDriver(capabilities);
     }
 
 }

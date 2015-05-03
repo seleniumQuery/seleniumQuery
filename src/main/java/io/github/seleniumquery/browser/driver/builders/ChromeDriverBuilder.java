@@ -29,7 +29,7 @@ import static io.github.seleniumquery.browser.driver.builders.DriverInstantiatio
 import static java.lang.String.format;
 
 /**
- * Builds {@link ChromeDriver} instances for SeleniumQueryDriver.
+ * Builds {@link ChromeDriver} instances for {@link io.github.seleniumquery.browser.driver.SeleniumQueryDriver}.
  *
  * @author acdcjunior
  * @since 0.9.0
@@ -92,18 +92,22 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.chrome());
         overwriteCapabilityIfValueNotNull(capabilities, ChromeOptions.CAPABILITY, this.chromeOptions);
 
+        configureChromeServerExecutablePath();
+        try {
+            return new ChromeDriver(capabilities);
+        } catch (IllegalStateException e) {
+            throwCustomExceptionIfExecutableWasNotFound(e);
+            throw e;
+        }
+    }
+
+    private void configureChromeServerExecutablePath() {
         if (customPathWasProvidedAndExecutableExistsThere(this.customPathToChromeDriver, BAD_PATH_PROVIDED_EXCEPTION_MESSAGE)) {
             setExecutableSystemProperty(getFullPath(this.customPathToChromeDriver));
         } else if (executableExistsInClasspath(CHROMEDRIVER_EXECUTABLE_WINDOWS)) {
             setExecutableSystemProperty(getFullPathForFileInClasspath(CHROMEDRIVER_EXECUTABLE_WINDOWS));
         } else if (executableExistsInClasspath(CHROMEDRIVER_EXECUTABLE_LINUX)) {
             setExecutableSystemProperty(getFullPathForFileInClasspath(CHROMEDRIVER_EXECUTABLE_LINUX));
-        }
-        try {
-            return new ChromeDriver(capabilities);
-        } catch (IllegalStateException e) {
-            throwCustomExceptionIfExecutableWasNotFound(e);
-            throw e;
         }
     }
 
