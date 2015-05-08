@@ -39,13 +39,21 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, DescendantSelector descendantSelector) {
 		WebElement parent = SelectorUtils.parent(element);
 		//noinspection SimplifiableIfStatement
-		if (parent.getTagName().equals("html")) {
+		if (parent == null || parent.getTagName().equals("html")) {
 			return false;
 		}
-		return CssSelectorMatcherService.elementMatchesSelector(driver, element, argumentMap, descendantSelector.getSimpleSelector())
-				&& CssSelectorMatcherService.elementMatchesSelector(driver, parent, argumentMap, descendantSelector.getAncestorSelector());
+		return elementMatchesDescendantSelector(driver, element, descendantSelector, argumentMap)
+			   && parentMatchesAncestorSelector(driver, parent, descendantSelector, argumentMap);
 	}
-	
+
+	private boolean parentMatchesAncestorSelector(WebDriver driver, WebElement parent, DescendantSelector descendantSelector, ArgumentMap argumentMap) {
+		return CssSelectorMatcherService.elementMatchesSelector(driver, parent, argumentMap, descendantSelector.getAncestorSelector());
+	}
+
+	private boolean elementMatchesDescendantSelector(WebDriver driver, WebElement element, DescendantSelector descendantSelector, ArgumentMap argumentMap) {
+		return CssSelectorMatcherService.elementMatchesSelector(driver, element, argumentMap, descendantSelector.getSimpleSelector());
+	}
+
 	@Override
 	public TagComponent toXPath(ArgumentMap argumentMap, DescendantSelector descendantSelector) {
 		TagComponent parentComponent = XPathComponentCompilerService.compileSelector(argumentMap, descendantSelector.getAncestorSelector());
