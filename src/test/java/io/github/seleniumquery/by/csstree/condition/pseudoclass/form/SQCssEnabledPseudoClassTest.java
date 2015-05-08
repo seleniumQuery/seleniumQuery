@@ -47,7 +47,6 @@ public class SQCssEnabledPseudoClassTest {
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoSupportsPureXPathWhenNotNativelySupported(
             new SQCssEnabledPseudoClass(),
-            ENABLED_PSEUDO,
             ENABLED_XPATH_EXPRESSION
         );
     }

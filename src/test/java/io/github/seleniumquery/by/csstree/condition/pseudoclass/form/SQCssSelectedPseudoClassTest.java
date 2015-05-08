@@ -62,9 +62,8 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoClassHasFinderWhenNotNativelySupported(
-                SELECTED_PSEUDO,
                 new SQCssSelectedPseudoClass(),
-                "*",
+                CSS_UNIVERSAL_SELECTOR,
                 PURE_CSS_IS_NOT_SUPPORTED,
                 SELECTED_XPATH_EXPRESSION,
                 contains(SelectedPseudoClass.SELECTED_FILTER)
