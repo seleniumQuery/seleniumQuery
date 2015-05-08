@@ -118,7 +118,7 @@ public class PseudoClassTestUtils {
     }
 
     public static void assertFilterOnlyPseudoGeneratesFilter(SQCssPseudoClassCondition pseudoClassCondition, ElementFilter pseudoClassFilter) {
-        ElementFinder previous = ElementFinderUtilsTest.universalSelectorFinder(ElementFinderUtilsTest.createMockDriverWithoutNativeSupportFor(getSelectorForPseudoClass(pseudoClassCondition)));
+        ElementFinder previous = ElementFinderUtilsTest.universalSelectorFinder(ElementFinderUtilsTest.mockWebDriverWithNativeSupportForNoPseudoClass());
         // when
         ElementFinder elementFinder = pseudoClassCondition.toElementFinder(previous);
         // then
@@ -126,14 +126,6 @@ public class PseudoClassTestUtils {
         assertThat(elementFinder.canFetchThroughCssAlone(), is(false));
         assertThat(elementFinder.getXPathExpression(), is(previous.getXPathExpression()));
         assertThat(elementFinder.getElementFilterList().getElementFilters(), contains(pseudoClassFilter));
-    }
-
-    private static String getSelectorForPseudoClass(SQCssPseudoClassCondition pseudoClassCondition) {
-        try {
-            return ":" + pseudoClassCondition.getClass().getDeclaredField("PSEUDO").get(null);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**

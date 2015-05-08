@@ -47,7 +47,7 @@ public class PseudoClassAssertFinderUtils {
                                                                               String expectedXPath,
                                                                               Matcher<? super List<ElementFilter>> elementFilterMatcher) {
         ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(
-                ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(pseudoExpressionThatShouldPassNativeSupportCheck)
+                ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(pseudoExpressionThatShouldPassNativeSupportCheck)
         );
         assertPseudoClassHasFinder(
                 pseudoClassObject,
@@ -66,7 +66,7 @@ public class PseudoClassAssertFinderUtils {
                                                                           String expectedXPath,
                                                                           Matcher<? super List<ElementFilter>> elementFilterMatcher) {
         ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(
-                ElementFinderUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoExpressionThatShouldNotPassNativeSupportCheck)
+                ElementFinderUtilsTest.mockWebDriverWithNativeSupportForNoPseudoClass()
         );
         assertPseudoClassHasFinder(
                 pseudoClassObject,
