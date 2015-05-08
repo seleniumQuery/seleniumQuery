@@ -64,9 +64,7 @@ public class PseudoClassAssertFinderUtils {
                                                                           boolean canPureCss,
                                                                           String expectedXPath,
                                                                           Matcher<? super List<ElementFilter>> elementFilterMatcher) {
-        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(
-                ElementFinderUtilsTest.mockWebDriverWithNativeSupportForNoPseudoClass()
-        );
+        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(ElementFinderUtilsTest.mockWebDriverWithNativeSupportForNoPseudoClass());
         assertPseudoClassHasFinder(
                 pseudoClassObject,
                 previousFinder,
@@ -130,45 +128,23 @@ public class PseudoClassAssertFinderUtils {
         );
     }
 
-    /**
-     * The resulting CSS expected is the universal selector (*).
-     */
-    public static void assertPseudoSupportsPureXPathWhenNotNativelySupported(SQCssConditionImplementedFinders pseudoClassObject,
-                                                                             String expectedXPath) {
-        assertPseudoClassHasFinderWhenNotNativelySupported(
-                pseudoClassObject,
-                CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
-                expectedXPath, empty()
-        );
-    }
-
     public static class AssertPseudoClass {
-        public static AssertPseudoClass assertPseudoClass(SQCssConditionImplementedFinders pseudoClass) {
-            return new AssertPseudoClass(pseudoClass);
-        }
+        public static AssertPseudoClass assertPseudoClass(SQCssConditionImplementedFinders pseudoClass) { return new AssertPseudoClass(pseudoClass); }
+
         private final SQCssConditionImplementedFinders pseudoClass;
-        public AssertPseudoClass(SQCssConditionImplementedFinders pseudoClass) {
-            this.pseudoClass = pseudoClass;
-        }
-        public AssertPseudoClassWithOrWithoutNativeSupport whenNotNativelySupported() {
-            return new AssertPseudoClassWithOrWithoutNativeSupport(this.pseudoClass);
-        }
-        public AssertPseudoClassWithOrWithoutNativeSupport whenNativelySupported(String pseudoExpressionThatShouldPassNativeSupportCheck) {
-            return new AssertPseudoClassWithOrWithoutNativeSupport(this.pseudoClass, pseudoExpressionThatShouldPassNativeSupportCheck);
-        }
+        public AssertPseudoClass(SQCssConditionImplementedFinders pseudoClass) { this.pseudoClass = pseudoClass; }
+
+        public AssertPseudoClassWithoutNativeSupport whenNotNativelySupported() { return new AssertPseudoClassWithoutNativeSupport(this.pseudoClass); }
+//        public AssertPseudoClassWithOrWithoutNativeSupport whenNativelySupported(String pseudoExpressionThatShouldPassNativeSupportCheck) {
+//            return new AssertPseudoClassWithOrWithoutNativeSupport(this.pseudoClass, pseudoExpressionThatShouldPassNativeSupportCheck);
+//        }
     }
-    public static class AssertPseudoClassWithOrWithoutNativeSupport {
+    public static class AssertPseudoClassWithoutNativeSupport {
         private final SQCssConditionImplementedFinders pseudoClass;
-        private final String pseudoExpressionThatShouldPassNativeSupportCheck;
-        public AssertPseudoClassWithOrWithoutNativeSupport(SQCssConditionImplementedFinders pseudoClass) {
-            this(pseudoClass, "does-not-matter-as-by-default-the-mocked-webdriver-does-not-consider-anyone-natively-supported");
-        }
-        public AssertPseudoClassWithOrWithoutNativeSupport(SQCssConditionImplementedFinders pseudoClass, String pseudoExpressionThatShouldPassNativeSupportCheck) {
-            this.pseudoClass = pseudoClass;
-            this.pseudoExpressionThatShouldPassNativeSupportCheck = pseudoExpressionThatShouldPassNativeSupportCheck;
-        }
+        public AssertPseudoClassWithoutNativeSupport(SQCssConditionImplementedFinders pseudoClass) { this.pseudoClass = pseudoClass; }
+
         public void translatesToPureXPath(String expectedXPath) {
-            assertPseudoSupportsPureXPathWhenNotNativelySupported(this.pseudoClass, expectedXPath);
+            assertPseudoClassHasFinderWhenNotNativelySupported(this.pseudoClass, CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED, expectedXPath, empty());
         }
     }
 

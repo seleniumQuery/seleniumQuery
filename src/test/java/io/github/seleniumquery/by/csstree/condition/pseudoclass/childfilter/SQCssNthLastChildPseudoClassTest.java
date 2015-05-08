@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsPureXPathWhenNotNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 
@@ -58,10 +58,7 @@ public class SQCssNthLastChildPseudoClassTest {
                 expectedCSS,
                 expectedXPath
         );
-        assertPseudoSupportsPureXPathWhenNotNativelySupported(
-                nthLastChild(nthArgument),
-                expectedXPath
-        );
+        assertPseudoClass(nthLastChild(nthArgument)).whenNotNativelySupported().translatesToPureXPath(expectedXPath);
     }
 
     private SQCssNthLastChildPseudoClass nthLastChild(String nthArgument) {
