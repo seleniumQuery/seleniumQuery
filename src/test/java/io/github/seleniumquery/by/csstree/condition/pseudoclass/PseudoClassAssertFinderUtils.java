@@ -33,6 +33,7 @@ import static org.junit.Assert.assertThat;
  * @author acdcjunior
  * @since 0.10.0
  */
+@SuppressWarnings("deprecation")
 public class PseudoClassAssertFinderUtils {
 
     public static final boolean PURE_CSS_IS_SUPPORTED = true;
@@ -135,30 +136,44 @@ public class PseudoClassAssertFinderUtils {
     /**
      * The resulting CSS expected is the universal selector (*).
      */
-    public static void assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(SQCssConditionImplementedFinders pseudoClassObject,
-                                                                                      String pseudoClass, String expectedXPath) {
+    public static void assertPseudoSupportsPureXPathWhenNotNativelySupported(SQCssConditionImplementedFinders pseudoClassObject,
+                                                                             String pseudoClass, String expectedXPath) {
         assertPseudoClassHasFinderWhenNotNativelySupported(
                 pseudoClass,
                 pseudoClassObject,
-                CSS_UNIVERSAL_SELECTOR,
-                PURE_CSS_IS_NOT_SUPPORTED,
-                expectedXPath,
-                empty()
+                CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
+                expectedXPath, empty()
         );
     }
 
-    /**
-     * Pseudos that are tested using this method are not expected to be supported by browsers in any time soon.
-     * so this assert function makes it clear that they wont even check for browser support!!!
-     *
-     * In other words, the not testing for browser support is INTENTIONAL, not an accident!
-     * IF they begin to be supported natively, we will enable the check, but until then, checking is just
-     * silly (and an indicator that we were not really CERTAIN of what we were doing).
-     */
-    public static void assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(SQCssConditionImplementedFinders pseudoClassObject,
-                                                                                       String pseudoClass, String expectedXPath) {
-        assertPseudoOnlySupportsPureXPathWhenNativelySupported(pseudoClassObject, pseudoClass, expectedXPath);
-        assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(pseudoClassObject, pseudoClass, expectedXPath);
+    public static class AssertPseudoClass {
+        public static AssertPseudoClass assertPseudoClass(SQCssConditionImplementedFinders pseudoClass) {
+            return new AssertPseudoClass(pseudoClass);
+        }
+        private final SQCssConditionImplementedFinders pseudoClass;
+        public AssertPseudoClass(SQCssConditionImplementedFinders pseudoClass) {
+            this.pseudoClass = pseudoClass;
+        }
+        public AssertPseudoClassWithOrWithoutNativeSupport whenNotNativelySupported() {
+            return new AssertPseudoClassWithOrWithoutNativeSupport(this.pseudoClass);
+        }
+        public AssertPseudoClassWithOrWithoutNativeSupport whenNativelySupported(String pseudoExpressionThatShouldPassNativeSupportCheck) {
+            return new AssertPseudoClassWithOrWithoutNativeSupport(this.pseudoClass, pseudoExpressionThatShouldPassNativeSupportCheck);
+        }
+    }
+    public static class AssertPseudoClassWithOrWithoutNativeSupport {
+        private final SQCssConditionImplementedFinders pseudoClass;
+        private final String pseudoExpressionThatShouldPassNativeSupportCheck;
+        public AssertPseudoClassWithOrWithoutNativeSupport(SQCssConditionImplementedFinders pseudoClass) {
+            this(pseudoClass, "does-not-matter-as-by-default-the-mocked-webdriver-does-not-consider-anyone-natively-supported");
+        }
+        public AssertPseudoClassWithOrWithoutNativeSupport(SQCssConditionImplementedFinders pseudoClass, String pseudoExpressionThatShouldPassNativeSupportCheck) {
+            this.pseudoClass = pseudoClass;
+            this.pseudoExpressionThatShouldPassNativeSupportCheck = pseudoExpressionThatShouldPassNativeSupportCheck;
+        }
+        public void translatesToPureXPath(String expectedXPath) {
+            assertPseudoSupportsPureXPathWhenNotNativelySupported(this.pseudoClass, this.pseudoExpressionThatShouldPassNativeSupportCheck, expectedXPath);
+        }
     }
 
     public static void assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(SQCssConditionImplementedFinders pseudoClassObject,
@@ -179,8 +194,8 @@ public class PseudoClassAssertFinderUtils {
         );
     }
 
-    public static void assertPseudoOnlySupportsPureXPathWhenNativelySupported(SQCssConditionImplementedFinders pseudoClassObject, String pseudoClass,
-                                                                              String expectedXPath) {
+    public static void assertPseudoSupportsPureXPathWhenNativelySupported(SQCssConditionImplementedFinders pseudoClassObject, String pseudoClass,
+                                                                          String expectedXPath) {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 pseudoClass, pseudoClassObject,
                 CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,

@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
@@ -75,7 +75,7 @@ public class SQCssEqPseudoClassTest {
     }
 
     private void assertEqArgumentGeneratesXPath(String eqArgument, String eqXPathExpression) {
-        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(eq(eqArgument), EQ_PSEUDO, eqXPathExpression);
+        assertPseudoClass(eq(eqArgument)).whenNotNativelySupported().translatesToPureXPath(eqXPathExpression);
     }
 
     @Test

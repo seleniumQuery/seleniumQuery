@@ -20,8 +20,8 @@ import io.github.seleniumquery.by.finder.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsPureXPathWhenNotNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.*;
@@ -206,7 +206,7 @@ public class SQCssNthChildPseudoClassTest {
                 expectedCSS,
                 expectedXPath
         );
-        assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(
+        assertPseudoSupportsPureXPathWhenNotNativelySupported(
                 nthChild(nthChildArgument),
                 pseudoThatTheDriverWillTestForNativeSupport,
                 expectedXPath
