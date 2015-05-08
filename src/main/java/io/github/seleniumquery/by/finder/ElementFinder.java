@@ -42,16 +42,16 @@ public class ElementFinder {
      * the elements will be searched on.
      */
     private WebDriver webDriver;
-    private CSSFinder cssFinder;
+    private CssFinder cssFinder;
     private XPathAndFilterFinder xPathAndFilterFinder;
 
-    public ElementFinder(WebDriver webDriver, CSSFinder cssFinder, XPathAndFilterFinder xPathAndFilterFinder) {
+    public ElementFinder(WebDriver webDriver, CssFinder cssFinder, XPathAndFilterFinder xPathAndFilterFinder) {
         this.webDriver = webDriver;
         this.cssFinder = cssFinder;
         this.xPathAndFilterFinder = xPathAndFilterFinder;
     }
 
-    public ElementFinder(CSSFinder newCssSelector, String newXPathExpression, ElementFinder previous) {
+    public ElementFinder(CssFinder newCssSelector, String newXPathExpression, ElementFinder previous) {
         this(previous.webDriver, newCssSelector, previous.getXPathAndFilterFinder().newXPathExpressionKeepingEverythingElse(newXPathExpression));
     }
 
@@ -66,7 +66,7 @@ public class ElementFinder {
         return webDriver;
     }
 
-    public CSSFinder getCssFinder() {
+    public CssFinder getCssFinder() {
         return cssFinder;
     }
 

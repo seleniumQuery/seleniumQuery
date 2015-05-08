@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.DriverVersionUtils;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.finder.CSSFinder.universalSelector;
+import static io.github.seleniumquery.by.finder.CssFinder.universalSelector;
 import static io.github.seleniumquery.by.finder.XPathAndFilterFinder.pureXPath;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

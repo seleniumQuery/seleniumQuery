@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
-import io.github.seleniumquery.by.finder.CSSFinder;
+import io.github.seleniumquery.by.finder.CssFinder;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -40,7 +40,7 @@ public abstract class NeverNativelySupportedPseudoClass extends MaybeNativelySup
      * @param webDriver ignored
      */
     @Override
-    public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
+    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
         throw new UnsupportedOperationException();
     }
 

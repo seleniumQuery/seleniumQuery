@@ -17,13 +17,13 @@
 package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
-import io.github.seleniumquery.by.finder.CSSFinder;
+import io.github.seleniumquery.by.finder.CssFinder;
 import io.github.seleniumquery.by.finder.ElementFinder;
 import io.github.seleniumquery.by.finder.ElementFinderUtils;
 import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.finder.CSSFinder.fromTag;
+import static io.github.seleniumquery.by.finder.CssFinder.fromTag;
 
 /**
  * Element or tag selector. Example: {@code "div"}.
@@ -56,7 +56,7 @@ public class SQCssTagNameSelector implements SQCssSelector {
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {
-        CSSFinder combinedCssSelector = leftFinder.getCssFinder().merge(toCSS());
+        CssFinder combinedCssSelector = leftFinder.getCssFinder().merge(toCSS());
         String combinedXPathExp = ElementFinderUtils.conditionalSimpleXPathMerge(leftFinder.getXPathExpression(), toXPath());
         return new ElementFinder(combinedCssSelector, combinedXPathExp, leftFinder);
     }
@@ -65,7 +65,7 @@ public class SQCssTagNameSelector implements SQCssSelector {
         return "*".equals(this.tagName) ? "true()" : "self::"+tagName;
     }
 
-    private CSSFinder toCSS() {
+    private CssFinder toCSS() {
         return fromTag(this.tagName);
     }
 
