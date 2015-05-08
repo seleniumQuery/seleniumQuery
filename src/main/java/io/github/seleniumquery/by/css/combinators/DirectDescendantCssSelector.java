@@ -36,20 +36,20 @@ import org.w3c.css.sac.DescendantSelector;
 public class DirectDescendantCssSelector implements CssSelector<DescendantSelector, TagComponent> {
 	
 	@Override
-	public boolean is(WebDriver driver, WebElement element, ArgumentMap stringMap, DescendantSelector descendantSelector) {
+	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, DescendantSelector descendantSelector) {
 		WebElement parent = SelectorUtils.parent(element);
 		//noinspection SimplifiableIfStatement
 		if (parent.getTagName().equals("html")) {
 			return false;
 		}
-		return CssSelectorMatcherService.elementMatchesSelector(driver, element, stringMap, descendantSelector.getSimpleSelector())
-				&& CssSelectorMatcherService.elementMatchesSelector(driver, parent, stringMap, descendantSelector.getAncestorSelector());
+		return CssSelectorMatcherService.elementMatchesSelector(driver, element, argumentMap, descendantSelector.getSimpleSelector())
+				&& CssSelectorMatcherService.elementMatchesSelector(driver, parent, argumentMap, descendantSelector.getAncestorSelector());
 	}
 	
 	@Override
-	public TagComponent toXPath(ArgumentMap stringMap, DescendantSelector descendantSelector) {
-		TagComponent parentComponent = XPathComponentCompilerService.compileSelector(stringMap, descendantSelector.getAncestorSelector());
-		TagComponent childComponent = XPathComponentCompilerService.compileSelector(stringMap, descendantSelector.getSimpleSelector());
+	public TagComponent toXPath(ArgumentMap argumentMap, DescendantSelector descendantSelector) {
+		TagComponent parentComponent = XPathComponentCompilerService.compileSelector(argumentMap, descendantSelector.getAncestorSelector());
+		TagComponent childComponent = XPathComponentCompilerService.compileSelector(argumentMap, descendantSelector.getSimpleSelector());
 
 		return DescendantDirectComponent.combine(parentComponent, childComponent);
 	}

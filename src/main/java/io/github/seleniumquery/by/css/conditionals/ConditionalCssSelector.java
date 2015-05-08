@@ -36,35 +36,35 @@ public class ConditionalCssSelector implements CssSelector<ConditionalSelector, 
     private final ConditionalCssSelectorFactory conditionalCssSelectorFactory = new ConditionalCssSelectorFactory(this);
 
     @Override
-	public boolean is(WebDriver driver, WebElement element, ArgumentMap stringMap, ConditionalSelector conditionalSelector) {
+	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
-		return CssSelectorMatcherService.elementMatchesSelector(driver, element, stringMap, simpleSelector)
-				&& isCondition(driver, element, stringMap, simpleSelector, condition);
+		return CssSelectorMatcherService.elementMatchesSelector(driver, element, argumentMap, simpleSelector)
+				&& isCondition(driver, element, argumentMap, simpleSelector, condition);
 	}
 	
 	@Override
-	public TagComponent toXPath(ArgumentMap stringMap, ConditionalSelector conditionalSelector) {
+	public TagComponent toXPath(ArgumentMap argumentMap, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
-		TagComponent tagComponent = XPathComponentCompilerService.compileSelector(stringMap, simpleSelector);
-		ConditionComponent compiledCondition = conditionToXPath(stringMap, simpleSelector, condition);
+		TagComponent tagComponent = XPathComponentCompilerService.compileSelector(argumentMap, simpleSelector);
+		ConditionComponent compiledCondition = conditionToXPath(argumentMap, simpleSelector, condition);
 		return tagComponent.cloneAndCombineTo(compiledCondition);
 	}
 	
 	/**
 	 * Gets the given condition's CssSelector and tests if the element matches it. 
 	 */
-	boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector simpleSelector, Condition condition) {
+	boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector simpleSelector, Condition condition) {
 		@SuppressWarnings("unchecked")
 		CssConditionalSelector<Condition, ConditionComponent> evaluator = (CssConditionalSelector<Condition, ConditionComponent>) conditionalCssSelectorFactory.getSelector(condition);
-		return evaluator.isCondition(driver, element, stringMap, simpleSelector, condition);
+		return evaluator.isCondition(driver, element, argumentMap, simpleSelector, condition);
 	}
 
-	ConditionComponent conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, Condition condition) {
+	ConditionComponent conditionToXPath(ArgumentMap argumentMap, Selector simpleSelector, Condition condition) {
 		@SuppressWarnings("unchecked")
 		CssConditionalSelector<Condition, ConditionComponent> evaluator = (CssConditionalSelector<Condition, ConditionComponent>) conditionalCssSelectorFactory.getSelector(condition);
-		return evaluator.conditionToXPath(stringMap, simpleSelector, condition);
+		return evaluator.conditionToXPath(argumentMap, simpleSelector, condition);
 	}
 
 }

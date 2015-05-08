@@ -53,11 +53,11 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 			new OddPseudoClass(), new NthChildPseudoClass());
 
 	@Override
-	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String pseudoClassValue = attributeCondition.getValue();
 		for (PseudoClass pseudoClass : pseudoClasses) {
 			if (pseudoClass.isApplicable(pseudoClassValue)) {
-				return pseudoClass.isPseudoClass(driver, element, new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
+				return pseudoClass.isPseudoClass(driver, element, new PseudoClassSelector(argumentMap, selectorUpToThisPoint, pseudoClassValue));
 			}
 		}
 		System.err.println("Warning: Unsupported pseudo-class: " + pseudoClassValue);
@@ -65,14 +65,14 @@ public class PseudoClassCssSelector implements CssConditionalSelector<AttributeC
 	}
 	
 	@Override
-	public ConditionComponent conditionToXPath(ArgumentMap stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public ConditionComponent conditionToXPath(ArgumentMap argumentMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String pseudoClassValue = attributeCondition.getValue();
 		for (PseudoClass pseudoClass : pseudoClasses) {
 			if (pseudoClass.isApplicable(pseudoClassValue)) {
-				return pseudoClass.pseudoClassToXPath(new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue));
+				return pseudoClass.pseudoClassToXPath(new PseudoClassSelector(argumentMap, selectorUpToThisPoint, pseudoClassValue));
 			}
 		}
-		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue);
+		PseudoClassSelector pseudoClassSelector = new PseudoClassSelector(argumentMap, selectorUpToThisPoint, pseudoClassValue);
 		// right now we'll just exit, hoping to cause less problems
 		throw new UnsupportedPseudoClassException(pseudoClassSelector.getOriginalPseudoClassSelector());
 	}

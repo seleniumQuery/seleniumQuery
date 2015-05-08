@@ -124,24 +124,24 @@ public class SQCssPseudoClassConditionTranslator {
 		pseudoClasses.put(SQCssUncheckedPseudoClass.PSEUDO, SQCssUncheckedPseudoClass.class);
 	}
 
-	public SQCssCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap stringMap, AttributeCondition attributeCondition) {
+	public SQCssCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, AttributeCondition attributeCondition) {
 		String pseudoClassName = getPseudoClassName(attributeCondition);
 		Class<? extends SQCssPseudoClassCondition> pseudoClass = pseudoClasses.get(pseudoClassName);
 		if (pseudoClass != null) {
-			return instantiate(pseudoClass, new PseudoClassSelector(stringMap, selectorUpToThisPoint, attributeCondition.getValue()));
+			return instantiatePseudoClass(pseudoClass, new PseudoClassSelector(argumentMap, selectorUpToThisPoint, attributeCondition.getValue()));
 		}
-		throw new UnsupportedPseudoClassException(stringMap, selectorUpToThisPoint, pseudoClassName);
+		throw new UnsupportedPseudoClassException(argumentMap, selectorUpToThisPoint, pseudoClassName);
 	}
 
 	private String getPseudoClassName(AttributeCondition attributeCondition) {
 		return attributeCondition.getValue().replaceAll("\\(.*", "");
 	}
 
-	private <T extends SQCssPseudoClassCondition> T instantiate(Class<T> pseudoClass, PseudoClassSelector pseudoClassSelector) {
+	private <T extends SQCssPseudoClassCondition> T instantiatePseudoClass(Class<T> pseudoClass, PseudoClassSelector pseudoClassSelectorConstructorArgument) {
 		try {
-			// instantiates SQCssFunctionalPseudoClassCondition using pseudoClassSelector arg
+			// instantiates SQCssFunctionalPseudoClassCondition using pseudoClassSelectorConstructorArgument arg
 			if (SQCssFunctionalPseudoClassCondition.class.isAssignableFrom(pseudoClass)) {
-				return pseudoClass.getConstructor(new Class[]{PseudoClassSelector.class}).newInstance(pseudoClassSelector);
+				return pseudoClass.getConstructor(new Class[]{PseudoClassSelector.class}).newInstance(pseudoClassSelectorConstructorArgument);
 			}
 			// instantiates non-functional SQCssPseudoClassCondition, which should not need an arg.
 			return pseudoClass.getConstructor().newInstance();

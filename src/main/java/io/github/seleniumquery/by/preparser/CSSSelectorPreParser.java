@@ -43,13 +43,13 @@ public class CSSSelectorPreParser {
 
 	public static class PreParsedSelector {
 		private String transformedSelector;
-		private ArgumentMap stringMap;
-		private PreParsedSelector(String transformedSelector, Map<Integer, String> stringMap) {
+		private ArgumentMap argumentMap;
+		private PreParsedSelector(String transformedSelector, ArgumentMap argumentMap) {
 			this.transformedSelector = transformedSelector;
-			this.stringMap = new ArgumentMap(stringMap);
+			this.argumentMap = argumentMap;
 		}
 		public String getTransformedSelector() { return this.transformedSelector; }
-		public ArgumentMap getStringMap() { return this.stringMap; }
+		public ArgumentMap getArgumentMap() { return this.argumentMap; }
 	}
 
     private static final Character END_OF_STRING = null;
@@ -57,18 +57,18 @@ public class CSSSelectorPreParser {
 	private String selector;
 	private int selectorCurrentParsingIndex;
 	private StringBuilder transformedSelector;
-	private Map<Integer, String> stringMap;
+	private Map<Integer, String> argumentMap;
 
     public CSSSelectorPreParser(String selector) {
         this.selector = selector;
         this.selectorCurrentParsingIndex = 0;
         this.transformedSelector = new StringBuilder();
-        this.stringMap = new HashMap<Integer, String>();
+        this.argumentMap = new HashMap<Integer, String>();
     }
 
     private PreParsedSelector transformSelector() {
 		eatChar(getNextChar());
-		return new PreParsedSelector(transformedSelector.toString(), stringMap);
+		return new PreParsedSelector(transformedSelector.toString(), new ArgumentMap(argumentMap));
 	}
 	
 	private Character getNextChar() {
@@ -125,8 +125,8 @@ public class CSSSelectorPreParser {
 		}
 		if (nextChar != null && nextChar == '(') {
 			String bracerContent = eatEverythingUntilBracerEnd();
-			int index = stringMap.size();
-			stringMap.put(index, bracerContent);
+			int index = argumentMap.size();
+			argumentMap.put(index, bracerContent);
 			
 			String pseudoClassName = pseudoClass.toString();
 			if ("not".equals(pseudoClassName)) {

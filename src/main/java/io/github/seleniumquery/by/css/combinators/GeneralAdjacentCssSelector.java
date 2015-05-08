@@ -51,15 +51,15 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector, 
 	 * </div>
 	 */
 	@Override
-	public boolean is(WebDriver driver, WebElement element, ArgumentMap stringMap, SiblingSelector siblingSelector) {
-		boolean elementMatchesSelectorSecondPart = CssSelectorMatcherService.elementMatchesSelector(driver, element, stringMap, siblingSelector.getSiblingSelector());
+	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, SiblingSelector siblingSelector) {
+		boolean elementMatchesSelectorSecondPart = CssSelectorMatcherService.elementMatchesSelector(driver, element, argumentMap, siblingSelector.getSiblingSelector());
 		if (!elementMatchesSelectorSecondPart) {
 			return false;
 		}
 		
 		List<WebElement> previousSiblings = SelectorUtils.getPreviousSiblings(element);
 		for (WebElement previousSibling : previousSiblings) {
-			boolean previousSiblingMatchesSelectorFirstPart = CssSelectorMatcherService.elementMatchesSelector(driver, previousSibling, stringMap, siblingSelector.getSelector());
+			boolean previousSiblingMatchesSelectorFirstPart = CssSelectorMatcherService.elementMatchesSelector(driver, previousSibling, argumentMap, siblingSelector.getSelector());
 			if (previousSiblingMatchesSelectorFirstPart) {
 				return true;
 			}
@@ -68,9 +68,9 @@ public class GeneralAdjacentCssSelector implements CssSelector<SiblingSelector, 
 	}
 
 	@Override
-	public TagComponent toXPath(ArgumentMap stringMap, SiblingSelector siblingSelector) {
-		TagComponent previousElementCompiled = XPathComponentCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
-		TagComponent siblingElementCompiled = XPathComponentCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
+	public TagComponent toXPath(ArgumentMap argumentMap, SiblingSelector siblingSelector) {
+		TagComponent previousElementCompiled = XPathComponentCompilerService.compileSelector(argumentMap, siblingSelector.getSelector());
+		TagComponent siblingElementCompiled = XPathComponentCompilerService.compileSelector(argumentMap, siblingSelector.getSiblingSelector());
 
 		return AdjacentComponent.combine(previousElementCompiled, siblingElementCompiled);
 	}

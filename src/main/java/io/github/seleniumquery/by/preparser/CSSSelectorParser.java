@@ -31,13 +31,17 @@ public class CSSSelectorParser {
 	private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
 
 	public static CSSParsedSelectorList parseSelector(String selector) {
-		String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.turnAttributeNotEqualsIntoNotAttributeEquals(selector);
-		PreParsedSelector preParsedSelector = CSSSelectorPreParser.transformSelector(fixedSelector);
+        PreParsedSelector preParsedSelector = preParseSelector(selector);
 		SelectorList selectorList = parseSelectorIntoParseTree(preParsedSelector.getTransformedSelector());
-		return new CSSParsedSelectorList(selectorList, preParsedSelector.getStringMap());
+		return new CSSParsedSelectorList(selectorList, preParsedSelector.getArgumentMap());
 	}
 
-	/**
+    private static PreParsedSelector preParseSelector(String selector) {
+        String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.turnAttributeNotEqualsIntoNotAttributeEquals(selector);
+        return CSSSelectorPreParser.transformSelector(fixedSelector);
+    }
+
+    /**
 	 * Parses a selector into a parse tree using SAC CSS3 Parser.
 	 */
 	private static SelectorList parseSelectorIntoParseTree(String selector) {

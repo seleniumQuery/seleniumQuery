@@ -35,13 +35,13 @@ public class SQCssConditionalSelectorTranslator {
 		this.sqCssConditionTranslator = new SQCssConditionTranslator();
 	}
 
-	public SQCssConditionalSelector translate(ArgumentMap stringMap, ConditionalSelector conditionalSelector) {
+	public SQCssConditionalSelector translate(ArgumentMap argumentMap, ConditionalSelector conditionalSelector) {
 		Condition condition = conditionalSelector.getCondition();
 		SimpleSelector simpleSelector = conditionalSelector.getSimpleSelector();
 
-		SQCssSelector sqCssSelector = sqCssSelectorTranslator.translate(stringMap, simpleSelector);
+		SQCssSelector sqCssSelector = sqCssSelectorTranslator.translate(argumentMap, simpleSelector);
 
-		SQCssCondition sqCssCondition = sqCssConditionTranslator.translate(simpleSelector, stringMap, condition);
+		SQCssCondition sqCssCondition = sqCssConditionTranslator.translate(simpleSelector, argumentMap, condition);
 		return new SQCssConditionalSelector(sqCssSelector, sqCssCondition);
 	}
 

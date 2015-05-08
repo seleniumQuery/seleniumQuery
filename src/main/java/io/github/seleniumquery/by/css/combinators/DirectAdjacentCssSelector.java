@@ -37,16 +37,16 @@ import org.w3c.css.sac.SiblingSelector;
 public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector, TagComponent> {
 
 	@Override
-	public boolean is(WebDriver driver, WebElement element, ArgumentMap stringMap, SiblingSelector siblingSelector) {
+	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, SiblingSelector siblingSelector) {
 		WebElement previousElement = SelectorUtils.getPreviousSibling(element);
-		return CssSelectorMatcherService.elementMatchesSelector(driver, previousElement, stringMap, siblingSelector.getSelector())
-				&& CssSelectorMatcherService.elementMatchesSelector(driver, element, stringMap, siblingSelector.getSiblingSelector());
+		return CssSelectorMatcherService.elementMatchesSelector(driver, previousElement, argumentMap, siblingSelector.getSelector())
+				&& CssSelectorMatcherService.elementMatchesSelector(driver, element, argumentMap, siblingSelector.getSiblingSelector());
 	}
 
 	@Override
-	public TagComponent toXPath(ArgumentMap stringMap, SiblingSelector siblingSelector) {
-		TagComponent previousCompiledExpression = XPathComponentCompilerService.compileSelector(stringMap, siblingSelector.getSelector());
-		TagComponent siblingSelectorCompiledAdjacentExpression = XPathComponentCompilerService.compileSelector(stringMap, siblingSelector.getSiblingSelector());
+	public TagComponent toXPath(ArgumentMap argumentMap, SiblingSelector siblingSelector) {
+		TagComponent previousCompiledExpression = XPathComponentCompilerService.compileSelector(argumentMap, siblingSelector.getSelector());
+		TagComponent siblingSelectorCompiledAdjacentExpression = XPathComponentCompilerService.compileSelector(argumentMap, siblingSelector.getSiblingSelector());
 
 		ConditionSimpleComponent positionOne = new ConditionSimpleComponent("[position() = 1]");
 		TagComponent siblingAtPositionOne = siblingSelectorCompiledAdjacentExpression.cloneAndCombineTo(positionOne);

@@ -38,15 +38,15 @@ public class SQParseTreeBuilder {
 
     	List<SQCssSelector> css = new ArrayList<SQCssSelector>(selectorList.getLength());
     	for (int i = 0; i < selectorList.getLength(); i++) {
-			SQCssSelector cs = translate(cssParsedSelectorList.getStringMap(), selectorList.item(i));
+			SQCssSelector cs = translate(cssParsedSelectorList.getArgumentMap(), selectorList.item(i));
     		css.add(cs);
     	}
     	
     	return new SQCssSelectorList(css);
 	}
     
-	public static SQCssSelector translate(ArgumentMap stringMap, Selector selector) {
-		return sqCssSelectorTranslator.translate(stringMap, selector);
+	public static SQCssSelector translate(ArgumentMap argumentMap, Selector selector) {
+		return sqCssSelectorTranslator.translate(argumentMap, selector);
 	}
 
 }

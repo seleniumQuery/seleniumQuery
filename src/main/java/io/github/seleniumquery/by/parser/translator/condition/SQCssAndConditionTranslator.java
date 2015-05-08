@@ -40,13 +40,13 @@ public class SQCssAndConditionTranslator {
 		this.sqCssConditionTranslator = sqCssConditionTranslator;
 	}
 
-	public SQCssAndCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap stringMap, CombinatorCondition combinatorCondition) {
+	public SQCssAndCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, CombinatorCondition combinatorCondition) {
 		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
 																					selectorUpToThisPoint,
 																					combinatorCondition.getFirstCondition());
 
-		SQCssCondition firstCondition = sqCssConditionTranslator.translate(selectorUpToThisPoint, stringMap, combinatorCondition.getFirstCondition());
-		SQCssCondition secondCondition = sqCssConditionTranslator.translate(selectorUpToThisPointPlusFirstCondition, stringMap, combinatorCondition.getSecondCondition());
+		SQCssCondition firstCondition = sqCssConditionTranslator.translate(selectorUpToThisPoint, argumentMap, combinatorCondition.getFirstCondition());
+		SQCssCondition secondCondition = sqCssConditionTranslator.translate(selectorUpToThisPointPlusFirstCondition, argumentMap, combinatorCondition.getSecondCondition());
 		return new SQCssAndCondition(firstCondition, secondCondition);
 	}
 

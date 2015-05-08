@@ -38,12 +38,12 @@ public class SQCssDescendantSelectorTranslator {
 		this.sqCssSelectorTranslator = sqCssSelectorTranslator;
 	}
 
-	public SQCssDescendantSelector translate(ArgumentMap stringMap, DescendantSelector sacDescendantSelector) {
+	public SQCssDescendantSelector translate(ArgumentMap argumentMap, DescendantSelector sacDescendantSelector) {
 		Selector ancestorCSSSelector = sacDescendantSelector.getAncestorSelector();
-		SQCssSelector ancestorSelector = sqCssSelectorTranslator.translate(stringMap, ancestorCSSSelector);
+		SQCssSelector ancestorSelector = sqCssSelectorTranslator.translate(argumentMap, ancestorCSSSelector);
 
 		SimpleSelector descendantCSSSelector = sacDescendantSelector.getSimpleSelector();
-		SQCssSelector descendantSelector = sqCssSelectorTranslator.translate(stringMap, descendantCSSSelector);
+		SQCssSelector descendantSelector = sqCssSelectorTranslator.translate(argumentMap, descendantCSSSelector);
 
 		return new SQCssDescendantSelector(ancestorSelector, descendantSelector);
 	}

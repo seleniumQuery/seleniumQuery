@@ -37,18 +37,18 @@ public class AndConditionalCssSelectorTest {
 
     @Test
     public void testConditionToXPath() {
-        CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector("span.a.b");
-        SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
+        CSSParsedSelectorList cssParsedSelectorList = CSSSelectorParser.parseSelector("span.a.b");
+        SelectorList selectorList = cssParsedSelectorList.getSelectorList();
         ConditionalSelector selector = (ConditionalSelector) selectorList.item(0);
 
-//        XPathComponent cs = conditionalCssSelector.toXPath(parsedSelector.getStringMap(), selector);
-        ArgumentMap stringMap = CSSParsedSelectorList.getStringMap();
+//        XPathComponent cs = conditionalCssSelector.toXPath(cssParsedSelectorList.getArgumentMap(), selector);
+        ArgumentMap argumentMap = cssParsedSelectorList.getArgumentMap();
         SimpleSelector simpleSelector = selector.getSimpleSelector();
-        TagComponent spanTagComponent = XPathComponentCompilerService.compileSelector(stringMap, simpleSelector);
+        TagComponent spanTagComponent = XPathComponentCompilerService.compileSelector(argumentMap, simpleSelector);
 
-//        XPathComponent compiledCondition = conditionalCssSelector.conditionToXPath(stringMap, selector.getSimpleSelector(), selector.getCondition());
+//        XPathComponent compiledCondition = conditionalCssSelector.conditionToXPath(argumentMap, selector.getSimpleSelector(), selector.getCondition());
         CombinatorCondition combinatorCondition = (CombinatorCondition) selector.getCondition();
-        ConditionComponent compiledCondition = andConditionalCssSelector.conditionToXPath(stringMap, simpleSelector, combinatorCondition);
+        ConditionComponent compiledCondition = andConditionalCssSelector.conditionToXPath(argumentMap, simpleSelector, combinatorCondition);
 
         TagComponent cs = spanTagComponent.cloneAndCombineTo(compiledCondition);
         assertThat(cs.toXPath(), is("(.//*[self::span and contains(concat(' ', normalize-space(@class), ' '), ' a ') and contains(concat(' ', normalize-space(@class), ' '), ' b ')])"));

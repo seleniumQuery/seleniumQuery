@@ -36,9 +36,9 @@ public class SQCssGeneralAdjacentSelectorTranslator {
 		this.sqCssSelectorTranslator = sqCssSelectorTranslator;
 	}
 
-	public SQCssGeneralAdjacentSelector translate(ArgumentMap stringMap, SiblingSelector sacSiblingSelector) {
-		SQCssSelector previousSelector = sqCssSelectorTranslator.translate(stringMap, sacSiblingSelector.getSelector());
-		SQCssSelector siblingSelector = sqCssSelectorTranslator.translate(stringMap, sacSiblingSelector.getSiblingSelector());
+	public SQCssGeneralAdjacentSelector translate(ArgumentMap argumentMap, SiblingSelector sacSiblingSelector) {
+		SQCssSelector previousSelector = sqCssSelectorTranslator.translate(argumentMap, sacSiblingSelector.getSelector());
+		SQCssSelector siblingSelector = sqCssSelectorTranslator.translate(argumentMap, sacSiblingSelector.getSiblingSelector());
 
 		return new SQCssGeneralAdjacentSelector(previousSelector, siblingSelector);
 	}

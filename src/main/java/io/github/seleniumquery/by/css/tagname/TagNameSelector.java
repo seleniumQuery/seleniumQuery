@@ -32,13 +32,13 @@ import org.w3c.css.sac.ElementSelector;
 public class TagNameSelector implements CssSelector<ElementSelector, TagComponent> {
 
 	@Override
-	public boolean is(WebDriver driver, WebElement element, ArgumentMap stringMap, ElementSelector elementSelector) {
+	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, ElementSelector elementSelector) {
 		String name = elementSelector.getLocalName();
 		return name == null || name.equalsIgnoreCase(element.getTagName());
 	}
 
 	@Override
-	public TagComponent toXPath(ArgumentMap stringMap, ElementSelector selector) {
+	public TagComponent toXPath(ArgumentMap argumentMap, ElementSelector selector) {
 		String tagName = selector.toString();
 		return new TagComponent(tagName);
 	}

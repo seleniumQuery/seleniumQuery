@@ -36,9 +36,9 @@ public class SQCssDirectDescendantSelectorTranslator {
 		this.sqCssSelectorTranslator = sqCssSelectorTranslator;
 	}
 	
-	public SQCssDirectDescendantSelector translate(ArgumentMap stringMap, DescendantSelector sacDescendantSelector) {
-		SQCssSelector ancestorSelector = sqCssSelectorTranslator.translate(stringMap, sacDescendantSelector.getAncestorSelector());
-		SQCssSelector descendantSelector = sqCssSelectorTranslator.translate(stringMap, sacDescendantSelector.getSimpleSelector());
+	public SQCssDirectDescendantSelector translate(ArgumentMap argumentMap, DescendantSelector sacDescendantSelector) {
+		SQCssSelector ancestorSelector = sqCssSelectorTranslator.translate(argumentMap, sacDescendantSelector.getAncestorSelector());
+		SQCssSelector descendantSelector = sqCssSelectorTranslator.translate(argumentMap, sacDescendantSelector.getSimpleSelector());
 
 		return new SQCssDirectDescendantSelector(ancestorSelector, descendantSelector);
 	}

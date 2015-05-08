@@ -21,19 +21,19 @@ import org.w3c.css.sac.SelectorList;
 public class CSSParsedSelectorList {
 	
 	private final SelectorList selectorList;
-	private final ArgumentMap stringMap;
+	private final ArgumentMap argumentMap;
 
-	public CSSParsedSelectorList(SelectorList selectorList, ArgumentMap stringMap) {
+	public CSSParsedSelectorList(SelectorList selectorList, ArgumentMap argumentMap) {
 		this.selectorList = selectorList;
-		this.stringMap = stringMap;
+		this.argumentMap = argumentMap;
 	}
 
 	public SelectorList getSelectorList() {
 		return this.selectorList;
 	}
 
-	public ArgumentMap getStringMap() {
-		return this.stringMap;
+	public ArgumentMap getArgumentMap() {
+		return this.argumentMap;
 	}
 	
 }

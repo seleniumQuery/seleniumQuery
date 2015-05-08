@@ -38,9 +38,9 @@ public class CSSSelectorPreParserTest {
         // then
         assertThat(preParsedSelector.getTransformedSelector(), is(transformedSelector));
 
-        assertThat(preParsedSelector.getStringMap().size(), is(pseudoFuncionArguments.length));
+        assertThat(preParsedSelector.getArgumentMap().size(), is(pseudoFuncionArguments.length));
         for (int i = 0; i < pseudoFuncionArguments.length; i++) {
-            assertThat(preParsedSelector.getStringMap().get(i), is(pseudoFuncionArguments[i]));
+            assertThat(preParsedSelector.getArgumentMap().get(i), is(pseudoFuncionArguments[i]));
         }
     }
 

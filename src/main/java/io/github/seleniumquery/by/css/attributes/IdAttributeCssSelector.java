@@ -47,7 +47,7 @@ public class IdAttributeCssSelector implements CssConditionalSelector<AttributeC
 	 * CASE SENSITIVE!
 	 */
 	@Override
-	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		if (!SelectorUtils.hasAttribute(element, ID_ATTRIBUTE)) {
 			return false;
 		}
@@ -57,7 +57,7 @@ public class IdAttributeCssSelector implements CssConditionalSelector<AttributeC
 	}
 
 	@Override
-	public ConditionSimpleComponent conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public ConditionSimpleComponent conditionToXPath(ArgumentMap argumentMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedId = attributeCondition.getValue();
 		return new IdConditionComponent(wantedId);
 	}

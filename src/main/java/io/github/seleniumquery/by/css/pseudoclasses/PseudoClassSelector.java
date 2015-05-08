@@ -21,12 +21,12 @@ import org.w3c.css.sac.Selector;
 
 public class PseudoClassSelector {
 	
-	private ArgumentMap stringMap;
+	private ArgumentMap argumentMap;
 	private Selector selectorThisConditionShouldApply;
 	private String pseudoClassValue;
 
-	public PseudoClassSelector(ArgumentMap stringMap, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
-		this.stringMap = stringMap;
+	public PseudoClassSelector(ArgumentMap argumentMap, Selector selectorThisConditionShouldApply, String pseudoClassValue) {
+		this.argumentMap = argumentMap;
 		this.selectorThisConditionShouldApply = selectorThisConditionShouldApply;
 		this.pseudoClassValue = pseudoClassValue;
 	}
@@ -36,7 +36,7 @@ public class PseudoClassSelector {
 			throw new IllegalArgumentException("Functional pseudo-class has no parenthesis/arguments: "+pseudoClassValue);
 		}
 		String index = pseudoClassValue.substring(pseudoClassValue.indexOf('(')+1, pseudoClassValue.length()-1);
-		return this.stringMap.get(index);
+		return this.argumentMap.get(index);
 	}
 
 	/**
@@ -48,8 +48,8 @@ public class PseudoClassSelector {
 		return selectorThisConditionShouldApply;
 	}
 
-	public ArgumentMap getStringMap() {
-		return stringMap;
+	public ArgumentMap getArgumentMap() {
+		return argumentMap;
 	}
 
 	public String getOriginalPseudoClassSelector() {
