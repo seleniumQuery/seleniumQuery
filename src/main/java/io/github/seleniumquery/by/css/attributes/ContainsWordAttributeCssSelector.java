@@ -47,7 +47,7 @@ public class ContainsWordAttributeCssSelector implements CssConditionalSelector<
 	 * Case INsensitive!
 	 */
 	@Override
-	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		if (!SelectorUtils.hasAttribute(element, attributeName)) {
 			return false;
@@ -64,7 +64,7 @@ public class ContainsWordAttributeCssSelector implements CssConditionalSelector<
 	}
 	
 	@Override
-	public ConditionSimpleComponent conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public ConditionSimpleComponent conditionToXPath(ArgumentMap argumentMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValueSurroundedBySpaces = SelectorUtils.intoEscapedXPathString(" " + attributeCondition.getValue() + " ");
 

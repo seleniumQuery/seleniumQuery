@@ -45,7 +45,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	 * This condition checks for a specified class. Example: .example
 	 */
 	@Override
-	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		if (!SelectorUtils.hasAttribute(element, CLASS_ATTRIBUTE)) {
 			return false;
 		}
@@ -55,7 +55,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	}
 
 	@Override
-	public ConditionSimpleComponent conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public ConditionSimpleComponent conditionToXPath(ArgumentMap argumentMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		String unescapedClassName = StringEscapeUtils.unescapeJava(wantedClassName);
 		// nothing to do, everyone supports filtering by class

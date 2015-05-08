@@ -25,8 +25,8 @@ import org.w3c.css.sac.Selector;
 
 public interface CssConditionalSelector<T extends Condition, C extends ConditionComponent> {
 
-	boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selector, T condtition);
+	boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selector, T condtition);
 
-	C conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, T condition);
+	C conditionToXPath(ArgumentMap argumentMap, Selector simpleSelector, T condition);
 	
 }

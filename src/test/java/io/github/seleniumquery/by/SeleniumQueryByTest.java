@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 public class SeleniumQueryByTest {
 
 	@Test
-	public void isXPathExpression__should_guess_XPath_expressions_correctly() {
+	public void isXPathExpression__should_guess_if_arguments_are_XPath_expressions__and_not_CSS_selectors() {
 		assertIsXPathExpression("(//table//a)[1]");
 		assertIsXPathExpression("   ((   (   (   (			(			(/html");
 		assertIsXPathExpression("ancestor::*");

@@ -29,8 +29,8 @@ public class UnsupportedPseudoClassException extends RuntimeException {
 		super("The pseudo-class \""+pseudoClass+"\" is not supported" + (reason.isEmpty() ? "." : ": "+reason));
 	}
 
-	public UnsupportedPseudoClassException(ArgumentMap stringMap, SimpleSelector selectorUpToThisPoint, String pseudoClassValue) {
-		this(new PseudoClassSelector(stringMap, selectorUpToThisPoint, pseudoClassValue).getOriginalPseudoClassSelector());
+	public UnsupportedPseudoClassException(ArgumentMap argumentMap, SimpleSelector selectorUpToThisPoint, String pseudoClassValue) {
+		this(new PseudoClassSelector(argumentMap, selectorUpToThisPoint, pseudoClassValue).getOriginalPseudoClassSelector());
 	}
 
 }

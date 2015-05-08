@@ -45,23 +45,23 @@ public class AndConditionalCssSelector implements CssConditionalSelector<Combina
 	}
 
 	@Override
-	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
 		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
 																					(SimpleSelector) selectorUpToThisPoint,
 																						combinatorCondition.getFirstCondition());
 		
-		return conditionalEvaluator.isCondition(driver, element, stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition())
-		    && conditionalEvaluator.isCondition(driver, element, stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
+		return conditionalEvaluator.isCondition(driver, element, argumentMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition())
+		    && conditionalEvaluator.isCondition(driver, element, argumentMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
 	}
 
 	@Override
-	public ConditionComponent conditionToXPath(ArgumentMap stringMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
+	public ConditionComponent conditionToXPath(ArgumentMap argumentMap, Selector selectorUpToThisPoint, CombinatorCondition combinatorCondition) {
 		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
 				(SimpleSelector) selectorUpToThisPoint,
 				combinatorCondition.getFirstCondition());
 
-		ConditionComponent firstCondition = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
-		ConditionComponent secondCondition = conditionalEvaluator.conditionToXPath(stringMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
+		ConditionComponent firstCondition = conditionalEvaluator.conditionToXPath(argumentMap, selectorUpToThisPoint, combinatorCondition.getFirstCondition());
+		ConditionComponent secondCondition = conditionalEvaluator.conditionToXPath(argumentMap, selectorUpToThisPointPlusFirstCondition, combinatorCondition.getSecondCondition());
 		return firstCondition.cloneAndCombineTo(secondCondition);
 	}
 

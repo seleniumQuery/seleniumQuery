@@ -36,16 +36,16 @@ public class XPathComponentCompilerService {
 
     	List<TagComponent> css = new ArrayList<TagComponent>(selectorList.getLength());
     	for (int i = 0; i < selectorList.getLength(); i++) {
-			TagComponent cs = compileSelector(CSSParsedSelectorList.getStringMap(), selectorList.item(i));
+			TagComponent cs = compileSelector(CSSParsedSelectorList.getArgumentMap(), selectorList.item(i));
     		css.add(cs);
     	}
     	
     	return new TagComponentList(css);
 	}
     
-	public static TagComponent compileSelector(ArgumentMap stringMap, Selector selector) {
+	public static TagComponent compileSelector(ArgumentMap argumentMap, Selector selector) {
 		CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
-		return cssSelector.toXPath(stringMap, selector);
+		return cssSelector.toXPath(argumentMap, selector);
 	}
 
 }

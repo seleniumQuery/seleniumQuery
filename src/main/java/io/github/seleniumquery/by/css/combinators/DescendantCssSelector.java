@@ -38,13 +38,13 @@ import org.w3c.css.sac.SimpleSelector;
 public class DescendantCssSelector implements CssSelector<DescendantSelector, TagComponent> {
 
 	@Override
-	public boolean is(WebDriver driver, WebElement element, ArgumentMap stringMap, DescendantSelector descendantSelector) {
-		if (CssSelectorMatcherService.elementMatchesSelector(driver, element, stringMap, descendantSelector.getSimpleSelector())) {
+	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, DescendantSelector descendantSelector) {
+		if (CssSelectorMatcherService.elementMatchesSelector(driver, element, argumentMap, descendantSelector.getSimpleSelector())) {
 	
 			WebElement ancestor = SelectorUtils.parent(element);
 	
 			while (ancestor != null) {
-				if (CssSelectorMatcherService.elementMatchesSelector(driver, ancestor, stringMap, descendantSelector.getAncestorSelector())) {
+				if (CssSelectorMatcherService.elementMatchesSelector(driver, ancestor, argumentMap, descendantSelector.getAncestorSelector())) {
 					return true;
 				}
 				ancestor = SelectorUtils.parent(ancestor);
@@ -54,12 +54,12 @@ public class DescendantCssSelector implements CssSelector<DescendantSelector, Ta
 	}
 
 	@Override
-	public TagComponent toXPath(ArgumentMap stringMap, DescendantSelector descendantSelector) {
+	public TagComponent toXPath(ArgumentMap argumentMap, DescendantSelector descendantSelector) {
 		Selector ancestorCSSSelector = descendantSelector.getAncestorSelector();
-		TagComponent ancestorCompiled = XPathComponentCompilerService.compileSelector(stringMap, ancestorCSSSelector);
+		TagComponent ancestorCompiled = XPathComponentCompilerService.compileSelector(argumentMap, ancestorCSSSelector);
 		
 		SimpleSelector descendantCSSSelector = descendantSelector.getSimpleSelector();
-		TagComponent childrenCompiled = XPathComponentCompilerService.compileSelector(stringMap, descendantCSSSelector);
+		TagComponent childrenCompiled = XPathComponentCompilerService.compileSelector(argumentMap, descendantCSSSelector);
 
 		return DescendantGeneralComponent.combine(ancestorCompiled, childrenCompiled);
 	}

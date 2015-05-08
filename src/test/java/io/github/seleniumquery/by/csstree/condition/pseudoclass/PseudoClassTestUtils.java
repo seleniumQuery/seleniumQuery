@@ -35,10 +35,7 @@ import static org.junit.Assert.fail;
 public class PseudoClassTestUtils {
 
     public static final PseudoClassSelector EMPTY = new PseudoClassSelector(null, null, "") {
-        @Override
-        public String getPseudoClassContent() {
-            return "";
-        }
+        @Override public String getPseudoClassContent() { return ""; }
     };
 
     public static QueriesOnPseudoclassSelectorsTestAssertBuilder assertQueriesOnSelector(String selector) {
@@ -48,7 +45,7 @@ public class PseudoClassTestUtils {
     public static class QueriesOnPseudoclassSelectorsTestAssertBuilder {
         private final String selector;
 
-        public QueriesOnPseudoclassSelectorsTestAssertBuilder(String selector) { this.selector = selector; }
+        private QueriesOnPseudoclassSelectorsTestAssertBuilder(String selector) { this.selector = selector; }
 
         public <T extends SQCssCondition> void yieldPseudoClass(Class<T> pseudoClassClass) {
             assertQueryOnSelectorYieldsPseudoClass(this.selector, pseudoClassClass);
@@ -69,15 +66,22 @@ public class PseudoClassTestUtils {
 
     public static class QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder {
         private final String selector;
-        public QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder(String selector) { this.selector = selector; }
+        private QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder(String selector) { this.selector = selector; }
 
         public <T extends SQCssFunctionalPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(Class<T> pseudoClassClass) {
-            assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass2(this.selector, pseudoClassClass);
+            assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(this.selector, pseudoClassClass);
         }
     }
 
-    private static <T extends SQCssFunctionalPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass2(String selector,
-                                                                                                                                      Class<T> pseudoClassClass) {
+    private static <T extends SQCssFunctionalPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(String selector,
+                                                                                                                                       Class<T> pseudoClassClass) {
+        try {
+            assertSelectorTranslatesArgument(selector, pseudoClassClass, "", null);
+            fail("Functional Pseudo called without () should throw exception.");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), containsString("Functional pseudo"));
+        }
+
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(0)", "0");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(-0)", "-0");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(+0)", "+0");
@@ -87,12 +91,6 @@ public class PseudoClassTestUtils {
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(999999)", "999999");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(-999999)", "-999999");
 
-        try {
-            assertSelectorTranslatesArgument(selector, pseudoClassClass, "", null);
-            fail("Functional Pseudo called without () should throw exception.");
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), containsString("Functional pseudo"));
-        }
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "()", "");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "( )", " ");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(     )", "     ");
@@ -105,10 +103,8 @@ public class PseudoClassTestUtils {
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(\"a b c d e\")", "\"a b c d e\"");
     }
 
-    private static <T extends SQCssFunctionalPseudoClassCondition> void assertSelectorTranslatesArgument(String selector,
-                                                                                                         Class<T> pseudoClassClass,
-                                                                                                         String selectorSuffix,
-                                                                                                         String expectedArgument) {
+    private static <T extends SQCssFunctionalPseudoClassCondition> void assertSelectorTranslatesArgument(String selector, Class<T> pseudoClassClass,
+                                                                                                         String selectorSuffix, String expectedArgument) {
         // given
         // selector
         // when
@@ -148,9 +144,9 @@ public class PseudoClassTestUtils {
     public static PseudoClassSelector createPseudoClassSelectorAppliedToUniversalSelector(String functionalPseudoClassArgument) {
         CSSParsedSelectorList cssParsedSelectorList = CSSSelectorParser.parseSelector("*");
         Selector universalSelector = cssParsedSelectorList.getSelectorList().item(0);
-        FakeArgumentMap stringMap = new FakeArgumentMap();
-        stringMap.put(1, functionalPseudoClassArgument);
-        return new PseudoClassSelector(stringMap, universalSelector, "(1)");
+        FakeArgumentMap argumentMap = new FakeArgumentMap();
+        argumentMap.put(1, functionalPseudoClassArgument);
+        return new PseudoClassSelector(argumentMap, universalSelector, "(1)");
     }
 
 }

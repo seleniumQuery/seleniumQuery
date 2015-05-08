@@ -54,7 +54,7 @@ public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<A
 	 * Case INsensitive!
 	 */
 	@Override
-	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		// [attribute=wantedValue]
 		if (attributeCondition.getSpecified()) {
@@ -67,7 +67,7 @@ public class EqualsOrHasAttributeCssSelector implements CssConditionalSelector<A
 	}
 
 	@Override
-	public ConditionSimpleComponent conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public ConditionSimpleComponent conditionToXPath(ArgumentMap argumentMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		// [attribute=wantedValue]
 		if (attributeCondition.getSpecified()) {

@@ -37,12 +37,12 @@ public class UnknownCssSelector<T> implements CssSelector<T, ConditionSimpleComp
 	}
 
 	@Override
-	public boolean is(WebDriver driver, WebElement element, ArgumentMap stringMap, T selector) {
+	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, T selector) {
 		throw new RuntimeException("CSS "+selector.getClass().getSimpleName()+" of type "+type+" is invalid or not supported!");
 	}
 
 	@Override
-	public ConditionSimpleComponent toXPath(ArgumentMap stringMap, T selector) {
+	public ConditionSimpleComponent toXPath(ArgumentMap argumentMap, T selector) {
 		// if it is unknown, we can't convert it, so we simply ignore it
 		LOGGER.warn("CSS Selector '"+selector+"' is unknown. Ignoring it.");
 		return new ConditionSimpleComponent();

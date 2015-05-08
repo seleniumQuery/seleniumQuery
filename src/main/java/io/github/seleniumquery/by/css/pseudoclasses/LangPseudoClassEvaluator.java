@@ -39,16 +39,16 @@ public class LangPseudoClassEvaluator implements CssConditionalSelector<LangCond
 	 * This condition checks the language of the node. Example: :lang(fr)
 	 */
 	@Override
-	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selectorUpToThisPoint, LangCondition langCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selectorUpToThisPoint, LangCondition langCondition) {
 		String wantedLangIndex = langCondition.getLang();
-		String wantedLang = stringMap.get(wantedLangIndex);
+		String wantedLang = argumentMap.get(wantedLangIndex);
 		return wantedLang.equals(SelectorUtils.lang(element));
 	}
 
 	@Override
-	public ConditionSimpleComponent conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, LangCondition langCondition) {
+	public ConditionSimpleComponent conditionToXPath(ArgumentMap argumentMap, Selector simpleSelector, LangCondition langCondition) {
 		String wantedLangIndex = langCondition.getLang();
-		String wantedLang = stringMap.get(wantedLangIndex);
+		String wantedLang = argumentMap.get(wantedLangIndex);
 		return new ConditionSimpleComponent("[ancestor-or-self::*[@lang][1]/@lang = '" + wantedLang + "']");
 	}
 

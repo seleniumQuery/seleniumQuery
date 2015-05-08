@@ -44,10 +44,10 @@ public class SQCssConditionTranslator {
     private final SQCssClassAttributeConditionTranslator classAttributeConditionTranslator = new SQCssClassAttributeConditionTranslator();
     private final SQCssPseudoClassConditionTranslator pseudoClassConditionTranslator = new SQCssPseudoClassConditionTranslator();
 
-	public SQCssCondition translate(SimpleSelector simpleSelector, ArgumentMap stringMap, Condition condition) {
+	public SQCssCondition translate(SimpleSelector simpleSelector, ArgumentMap argumentMap, Condition condition) {
 	    switch (condition.getConditionType()) {
 		    case Condition.SAC_AND_CONDITION:
-		    	return andConditionTranslator.translate(simpleSelector, stringMap, (CombinatorCondition) condition);
+		    	return andConditionTranslator.translate(simpleSelector, argumentMap, (CombinatorCondition) condition);
 		    case Condition.SAC_OR_CONDITION:
 				return incompatible("Condition.SAC_OR_CONDITION");
 
@@ -73,7 +73,7 @@ public class SQCssConditionTranslator {
 	        	return classAttributeConditionTranslator.translate((AttributeCondition) condition);
 				
 	        case Condition.SAC_PSEUDO_CLASS_CONDITION:
-	        	return pseudoClassConditionTranslator.translate(simpleSelector, stringMap, (AttributeCondition) condition);
+	        	return pseudoClassConditionTranslator.translate(simpleSelector, argumentMap, (AttributeCondition) condition);
 	        case Condition.SAC_LANG_CONDITION:
 				return incompatible("Condition.SAC_LANG_CONDITION");
 	            

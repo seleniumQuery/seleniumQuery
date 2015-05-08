@@ -47,14 +47,14 @@ public class StartsWithAttributeCssSelector implements CssConditionalSelector<At
 	 * CASE INsensitive!
 	 */
 	@Override
-	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		String wantedValue = attributeCondition.getValue();
 		String actualValue = element.getAttribute(attributeCondition.getLocalName());
 		return startsWithIgnoreCase(actualValue, wantedValue);
 	}
 
 	@Override
-	public ConditionSimpleComponent conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public ConditionSimpleComponent conditionToXPath(ArgumentMap argumentMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String attributeName = AttributeEvaluatorUtils.getXPathAttribute(attributeCondition);
 		String wantedValue = SelectorUtils.intoEscapedXPathString(attributeCondition.getValue());
 		return new ConditionSimpleComponent("[starts-with(" + attributeName + ", " + wantedValue + ")]");

@@ -54,20 +54,20 @@ public class IsFunction {
 		}
 		CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
 		SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
-		ArgumentMap stringMap = CSSParsedSelectorList.getStringMap();
+		ArgumentMap argumentMap = CSSParsedSelectorList.getArgumentMap();
 
 		for (int i = 0; i < selectorList.getLength(); i++) {
     		Selector parsedSimpleSelector = selectorList.item(i);
     		
     		// If there is a :not(:present), then having no element is a expected status!
-    		if (hasNegatedPresent(stringMap, parsedSimpleSelector.toString()) && elements.isEmpty()) {
+    		if (hasNegatedPresent(argumentMap, parsedSimpleSelector.toString()) && elements.isEmpty()) {
     			return true;
     		}
 
     		CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(parsedSimpleSelector);
 			for (WebElement webElement : elements) {
     			// if any matches, then it returns true
-				if (cssSelector.is(driver, webElement, stringMap, parsedSimpleSelector)) {
+				if (cssSelector.is(driver, webElement, argumentMap, parsedSimpleSelector)) {
 					return true;
 				}
     		}
@@ -75,18 +75,18 @@ public class IsFunction {
 		return false;
 	}
 
-	private static boolean hasNegatedPresent(ArgumentMap stringMap, String parsedSimpleSelector) {
+	private static boolean hasNegatedPresent(ArgumentMap argumentMap, String parsedSimpleSelector) {
 		Matcher m = NOT_SQ_PATTERN.matcher(parsedSimpleSelector);
 		while (m.find()) {
-		    String stringMapId = m.group(1);
-		    String notPseudoClassContent = stringMap.get(stringMapId);
+		    String argumentMapIndex = m.group(1);
+		    String notPseudoClassContent = argumentMap.get(argumentMapIndex);
 		    
 			CSSParsedSelectorList parsedPseudoClassContent = CSSSelectorParser.parseSelector(notPseudoClassContent);
 			SelectorList parsedPseudoClassContentSelectorList = parsedPseudoClassContent.getSelectorList();
-			ArgumentMap parsedPseudoClassContentStringMap = parsedPseudoClassContent.getStringMap();
+			ArgumentMap parsedPseudoClassContentArgumentMap = parsedPseudoClassContent.getArgumentMap();
 			for (int i = 0; i < parsedPseudoClassContentSelectorList.getLength(); i++) {
 				Selector parsedPseudoClassContentSimpleSelector = parsedPseudoClassContentSelectorList.item(i);
-				if (!hasNegatedPresent(parsedPseudoClassContentStringMap, parsedPseudoClassContentSimpleSelector.toString())) {
+				if (!hasNegatedPresent(parsedPseudoClassContentArgumentMap, parsedPseudoClassContentSimpleSelector.toString())) {
 					return true;
 				}
 			}

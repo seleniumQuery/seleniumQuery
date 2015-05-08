@@ -40,24 +40,24 @@ public class SQCssSelectorTranslator {
     private final SQCssDirectAdjacentSelectorTranslator directAdjacentSelectorTranslator = new SQCssDirectAdjacentSelectorTranslator(this);
     private final SQCssGeneralAdjacentSelectorTranslator generalAdjacentSelectorTranslator = new SQCssGeneralAdjacentSelectorTranslator(this);
 
-	public SQCssSelector translate(ArgumentMap stringMap, Selector selector) {
+	public SQCssSelector translate(ArgumentMap argumentMap, Selector selector) {
 		switch (selector.getSelectorType()) {
 			case Selector.SAC_CONDITIONAL_SELECTOR:
-				return conditionalCssSelector.translate(stringMap, (ConditionalSelector) selector);
+				return conditionalCssSelector.translate(argumentMap, (ConditionalSelector) selector);
 
 			case Selector.SAC_ELEMENT_NODE_SELECTOR:
 				return tagNameSelector.translate((ElementSelector) selector);
 
 			// COMBINATORS
 			case Selector.SAC_DESCENDANT_SELECTOR:
-				return descendantSelectorTranslator.translate(stringMap, (DescendantSelector) selector);
+				return descendantSelectorTranslator.translate(argumentMap, (DescendantSelector) selector);
 			case Selector.SAC_CHILD_SELECTOR:
-				return directDescendantSelectorTranslator.translate(stringMap, (DescendantSelector) selector);
+				return directDescendantSelectorTranslator.translate(argumentMap, (DescendantSelector) selector);
 			case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
-				return directAdjacentSelectorTranslator.translate(stringMap, (SiblingSelector) selector);
+				return directAdjacentSelectorTranslator.translate(argumentMap, (SiblingSelector) selector);
 			// the parser returns this code for the "E ~ F" selector. Go figure...
 			case Selector.SAC_ANY_NODE_SELECTOR:
-				return generalAdjacentSelectorTranslator.translate(stringMap, (SiblingSelector) selector);
+				return generalAdjacentSelectorTranslator.translate(argumentMap, (SiblingSelector) selector);
 
 			case Selector.SAC_ROOT_NODE_SELECTOR:
 			case Selector.SAC_NEGATIVE_SELECTOR:

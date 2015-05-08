@@ -31,16 +31,16 @@ public class CssSelectorMatcherService {
 		CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
 		SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
         for (int i = 0; i < selectorList.getLength(); i++) {
-			if (CssSelectorMatcherService.elementMatchesSelector(driver, element, CSSParsedSelectorList.getStringMap(), selectorList.item(i))) {
+			if (CssSelectorMatcherService.elementMatchesSelector(driver, element, CSSParsedSelectorList.getArgumentMap(), selectorList.item(i))) {
 				return true;
 			}
 		}
         return false;
 	}
 
-	public static boolean elementMatchesSelector(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selector) {
+	public static boolean elementMatchesSelector(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selector) {
 		CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
-		return cssSelector.is(driver, element, stringMap, selector);	
+		return cssSelector.is(driver, element, argumentMap, selector);
 	}
 
 }
