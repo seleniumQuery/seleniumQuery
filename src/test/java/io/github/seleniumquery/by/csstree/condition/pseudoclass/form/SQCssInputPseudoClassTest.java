@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssInputPseudoClassTest {
@@ -33,11 +33,7 @@ public class SQCssInputPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
-                new SQCssInputPseudoClass(),
-                INPUT_PSEUDO,
-                INPUT_XPATH_EXPRESSION
-        );
+        assertPseudoClass(new SQCssInputPseudoClass()).whenNotNativelySupported().translatesToPureXPath(INPUT_XPATH_EXPRESSION);
     }
 
 }

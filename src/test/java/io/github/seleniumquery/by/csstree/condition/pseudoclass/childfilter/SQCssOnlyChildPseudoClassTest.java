@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssOnlyChildPseudoClassTest {
@@ -33,11 +33,7 @@ public class SQCssOnlyChildPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
-                new SQCssOnlyChildPseudoClass(),
-                ONLY_CHILD_PSEUDO,
-                ONLY_CHILD_XPATH_EXPRESSION
-        );
+        assertPseudoClass(new SQCssOnlyChildPseudoClass()).whenNotNativelySupported().translatesToPureXPath(ONLY_CHILD_XPATH_EXPRESSION);
     }
 
 }
