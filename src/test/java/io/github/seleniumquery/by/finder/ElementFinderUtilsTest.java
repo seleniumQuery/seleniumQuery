@@ -26,6 +26,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static testinfrastructure.testdouble.Mocks.mockWebDriver;
 
 public class ElementFinderUtilsTest {
 
@@ -34,27 +35,30 @@ public class ElementFinderUtilsTest {
         return new ElementFinder(driver, universalSelector(), pureXPath(".//*[true()]"));
     }
 
-    public static WebDriver createMockDriverWithNativeSupportFor(String pseudoClass) {
-        return createMockDriver(pseudoClass, true);
+    public static WebDriver mockWebDriverWithNativeSupportFor(String pseudoClass) {
+        WebDriver mockDriver = mockWebDriver();
+        DriverVersionUtils driverVersionUtilsMock = overrideDriverVersionUtilsWithMock();
+        when(driverVersionUtilsMock.hasNativeSupportForPseudo(mockDriver, pseudoClass)).thenReturn(true);
+        return mockDriver;
     }
-    public static WebDriver createMockDriverWithoutNativeSupportFor(String pseudoClass) {
-        return createMockDriver(pseudoClass, false);
-    }
-    public static WebDriver createMockDriver(String pseudoClass, boolean support) {
-        WebDriver webDriverMock = mock(WebDriver.class);
+    private static DriverVersionUtils overrideDriverVersionUtilsWithMock() {
         DriverVersionUtils driverVersionUtilsMock = mock(DriverVersionUtils.class);
         DriverVersionUtils.setInstance(driverVersionUtilsMock);
-        when(driverVersionUtilsMock.hasNativeSupportForPseudo(webDriverMock, pseudoClass)).thenReturn(support);
-        return webDriverMock;
+        return driverVersionUtilsMock;
     }
+    public static WebDriver mockWebDriverWithNativeSupportForNoPseudoClass() {
+        overrideDriverVersionUtilsWithMock();
+        return mockWebDriver();
+    }
+
     public static WebDriver createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(String checkedPseudo) {
-        WebDriver mockDriverWithNativeSupportFor = ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(checkedPseudo);
+        WebDriver mockDriverWithNativeSupportFor = ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(checkedPseudo);
         DriverVersionUtils driverVersionUtilsMock = DriverVersionUtils.getInstance();
         when(driverVersionUtilsMock.isPhantomJSDriver(mockDriverWithNativeSupportFor)).thenReturn(true);
         return mockDriverWithNativeSupportFor;
     }
     public static WebDriver createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(String checkedPseudo) {
-        WebDriver mockDriverWithNativeSupportFor = ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(checkedPseudo);
+        WebDriver mockDriverWithNativeSupportFor = ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(checkedPseudo);
         DriverVersionUtils driverVersionUtilsMock = DriverVersionUtils.getInstance();
         when(driverVersionUtilsMock.isHtmlUnitDriver(mockDriverWithNativeSupportFor)).thenReturn(true);
         return mockDriverWithNativeSupportFor;

@@ -48,7 +48,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toElementFinder__when_driver_has_native_support() {
         // supports pure CSS, but it is a translated one
-        ElementFinder previousFinder = universalSelectorFinder(ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO));
+        ElementFinder previousFinder = universalSelectorFinder(ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(CHECKED_PSEUDO));
         assertPseudoClassHasFinder(
                 new SQCssSelectedPseudoClass(),
                 previousFinder,
@@ -74,7 +74,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toElementFinder__when_driver_has_native_supportx() {
         // supports pure CSS, but it is a translated one
-        WebDriver mockDriverWithNativeSupportForChecked = ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO);
+        WebDriver mockDriverWithNativeSupportForChecked = ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(CHECKED_PSEUDO);
         ElementFinder finderAfterChecked = new SQCssCheckedPseudoClass().toElementFinder(universalSelectorFinder(mockDriverWithNativeSupportForChecked));
 
         assertPseudoClassHasFinder(

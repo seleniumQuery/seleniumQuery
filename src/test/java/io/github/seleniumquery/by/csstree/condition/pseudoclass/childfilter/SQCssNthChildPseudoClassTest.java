@@ -35,7 +35,7 @@ public class SQCssNthChildPseudoClassTest {
 
     private static final String NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK = NTH_CHILD_PSEUDO+"(1)";
     private static final ElementFinder UNIVERSAL_SELECTOR_FINDER_SUPPORTING_NTHCHILD_NATIVELY = universalSelectorFinder(
-            createMockDriverWithNativeSupportFor(NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK)
+            mockWebDriverWithNativeSupportFor(NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK)
     );
     private static final ElementFinder UNIVERSAL_SELECTOR_FINDER_NOT_SUPPORTING_NTHCHILD_NATIVELY = UNIVERSAL_SELECTOR_FINDER;
 

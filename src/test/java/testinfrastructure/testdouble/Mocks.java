@@ -16,6 +16,7 @@
 
 package testinfrastructure.testdouble;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.mockito.Mockito.mock;
@@ -24,6 +25,10 @@ public class Mocks {
 
     public static WebElement createWebElementMock() {
         return mock(WebElement.class);
+    }
+
+    public static WebDriver mockWebDriver() {
+        return mock(WebDriver.class);
     }
 
 }
