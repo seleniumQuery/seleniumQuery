@@ -19,8 +19,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils;
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasElementFinderWhenNativelySupported;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasFinderWhenNotNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
@@ -48,13 +48,8 @@ public class SQCssNotPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        assertPseudoClassHasFinderWhenNotNativelySupported(
-                new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("tag")), // :not(tag)
-                PseudoClassAssertFinderUtils.CSS_UNIVERSAL_SELECTOR,
-                PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
-                ".//*[not(self::tag)]",
-                empty()
-        );
+        SQCssNotPseudoClass notTag = new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("tag")); // :not(tag)
+        assertPseudoClass(notTag).whenNotNativelySupported().translatesToPureXPath(".//*[not(self::tag)]");
     }
 
     @Test
