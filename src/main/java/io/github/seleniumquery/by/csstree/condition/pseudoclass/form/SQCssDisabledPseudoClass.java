@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.css.pseudoclasses.DisabledPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.finder.CSSFinder;
+import io.github.seleniumquery.by.finder.CssFinder;
 import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
@@ -38,8 +38,8 @@ public class SQCssDisabledPseudoClass extends SQCssPseudoClassCondition {
 
     public MaybeNativelySupportedPseudoClass disabledPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
-        public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CSSFinder(DISABLED_PSEUDO);
+        public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+            return new CssFinder(DISABLED_PSEUDO);
         }
 
         @Override

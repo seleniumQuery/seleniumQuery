@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.selector.combinator;
 
 import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.finder.CSSFinder;
+import io.github.seleniumquery.by.finder.CssFinder;
 import io.github.seleniumquery.by.finder.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
@@ -45,7 +45,7 @@ abstract class SQCssCombinationSelector implements SQCssSelector {
     @Override
     public ElementFinder toElementFinder(WebDriver webDriver) {
         ElementFinder elementFinder = leftSideSelector.toElementFinder(webDriver);
-        CSSFinder combinatorFinder = elementFinder.getCssFinder().combineAsLeftPart(this.cssCombinator);
+        CssFinder combinatorFinder = elementFinder.getCssFinder().combineAsLeftPart(this.cssCombinator);
         ElementFinder directAdjacentIntermediateFinder = new ElementFinder(combinatorFinder,
                 elementFinder.getXPathExpression() + this.xPathCombinator, elementFinder);
         return rightSideSelector.toElementFinder(directAdjacentIntermediateFinder);

@@ -18,12 +18,12 @@ package io.github.seleniumquery.by.finder;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.finder.CSSFinder.fromTag;
-import static io.github.seleniumquery.by.finder.CSSFinder.universalSelector;
+import static io.github.seleniumquery.by.finder.CssFinder.fromTag;
+import static io.github.seleniumquery.by.finder.CssFinder.universalSelector;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class CSSFinderTest {
+public class CssFinderTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void cssMerge__should_throw_exception_if_both_css_havent_universalSelector_as_tag() {
@@ -32,32 +32,32 @@ public class CSSFinderTest {
 
     @Test
     public void cssMerge__should_let_it_be_if_both_tags_are_not_universalSelector__but_are_equal() {
-        CSSFinder mergedCss = fromTag("div").merge(fromTag("div"));
+        CssFinder mergedCss = fromTag("div").merge(fromTag("div"));
         assertThat(mergedCss.toString(), is("div"));
     }
 
     @Test
     public void cssMerge__should_merge() {
-        CSSFinder mergedCss = fromTag("div").merge(new CSSFinder(".clz"));
+        CssFinder mergedCss = fromTag("div").merge(new CssFinder(".clz"));
         assertThat(mergedCss.toString(), is("div.clz"));
     }
 
     @Test
     public void cssMerge__should_remove_asterisk() {
-        CSSFinder mergedCss = universalSelector().merge(new CSSFinder(".clz"));
+        CssFinder mergedCss = universalSelector().merge(new CssFinder(".clz"));
         assertThat(mergedCss.toString(), is(".clz"));
     }
 
     @Test
     public void cssMerge__when_merging_to_NULL_OBJECT_should_return_NULL_OBJECT() {
-        CSSFinder mergedCss = universalSelector().merge(CSSFinder.CSS_NOT_NATIVELY_SUPPORTED);
-        assertThat(mergedCss, is(CSSFinder.CSS_NOT_NATIVELY_SUPPORTED));
+        CssFinder mergedCss = universalSelector().merge(CssFinder.CSS_NOT_NATIVELY_SUPPORTED);
+        assertThat(mergedCss, is(CssFinder.CSS_NOT_NATIVELY_SUPPORTED));
     }
 
     @Test
     public void cssMerge__when_merging_to_NULL_OBJECT_should_return_NULL_OBJECT2() {
-        CSSFinder mergedCss = CSSFinder.CSS_NOT_NATIVELY_SUPPORTED.merge(universalSelector());
-        assertThat(mergedCss, is(CSSFinder.CSS_NOT_NATIVELY_SUPPORTED));
+        CssFinder mergedCss = CssFinder.CSS_NOT_NATIVELY_SUPPORTED.merge(universalSelector());
+        assertThat(mergedCss, is(CssFinder.CSS_NOT_NATIVELY_SUPPORTED));
     }
 
 }

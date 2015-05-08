@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils;
-import io.github.seleniumquery.by.finder.CSSFinder;
+import io.github.seleniumquery.by.finder.CssFinder;
 
 /**
  * [hreflang|="en"]
@@ -32,8 +32,8 @@ public class SQCssContainsPrefixAttributeCondition extends SQCssAttributeConditi
         super(attributeName, wantedValue);
     }
 
-    protected CSSFinder toCSS() {
-        return new CSSFinder("[" + this.attributeName + "|='" + this.wantedValue + "']");
+    protected CssFinder toCSS() {
+        return new CssFinder("[" + this.attributeName + "|='" + this.wantedValue + "']");
     }
 
     protected String toXPath() {

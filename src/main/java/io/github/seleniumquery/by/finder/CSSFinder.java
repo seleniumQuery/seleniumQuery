@@ -36,26 +36,26 @@ import java.util.List;
  *
  * If, during the time this finder is being built, at some point it decides the CSS Selector asked
  * by the user can't be translated directly into another CSS Selector (e.g. it is an extended selector, such as :hidden),
- * then {@link CSSFinder#CSS_NOT_NATIVELY_SUPPORTED} (the "Null Object") should be returned, what will
+ * then {@link CssFinder#CSS_NOT_NATIVELY_SUPPORTED} (the "Null Object") should be returned, what will
  * mean the element finder will use XPath(+Filter) instead of CSS to fetch the elements.
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CSSFinder {
+public class CssFinder {
 
     public static final String UNIVERSAL_SELECTOR = "*";
 
-    public static CSSFinder fromTag(String tag) {
-        return new CSSFinder("", tag, "");
+    public static CssFinder fromTag(String tag) {
+        return new CssFinder("", tag, "");
     }
-    public static CSSFinder universalSelector() {
+    public static CssFinder universalSelector() {
         return fromTag(UNIVERSAL_SELECTOR);
     }
 
-    public static final CSSFinder CSS_NOT_NATIVELY_SUPPORTED = new CSSFinder("", UNIVERSAL_SELECTOR, "") {
+    public static final CssFinder CSS_NOT_NATIVELY_SUPPORTED = new CssFinder("", UNIVERSAL_SELECTOR, "") {
         @Override
-        public CSSFinder merge(CSSFinder rightCSS) {
+        public CssFinder merge(CssFinder rightCSS) {
             return this;
         }
         @Override
@@ -68,17 +68,17 @@ public class CSSFinder {
     private String tag;
     private String rightPart;
 
-    public CSSFinder(String leftPart, String tag, String rightPart) {
+    public CssFinder(String leftPart, String tag, String rightPart) {
         this.leftPart = leftPart;
         this.tag = tag;
         this.rightPart = rightPart;
     }
 
-    public CSSFinder(String tag, String rightPart) {
+    public CssFinder(String tag, String rightPart) {
         this("", tag, rightPart);
     }
 
-    public CSSFinder(String rightPart) {
+    public CssFinder(String rightPart) {
         this("", UNIVERSAL_SELECTOR, rightPart);
     }
 
@@ -113,7 +113,7 @@ public class CSSFinder {
      * @param rightCSS The right part of the merged selector.
      * @return The two parts merged as a CSS selector.
      */
-    public CSSFinder merge(CSSFinder rightCSS) {
+    public CssFinder merge(CssFinder rightCSS) {
         if (!rightCSS.canFetchAllElementsOfTheQueryByItself()) {
             return CSS_NOT_NATIVELY_SUPPORTED;
         }
@@ -122,13 +122,13 @@ public class CSSFinder {
                     "It is incorrect and would never fetch any elements (as no element has more than one tag).");
         }
         if (this.hasUniversalSelector()) {
-            return new CSSFinder(
+            return new CssFinder(
                     this.getLeftPart(),
                     rightCSS.getTag(),
                     this.getRightPart() + rightCSS.getRightPart()
             );
         } else {
-            return new CSSFinder(
+            return new CssFinder(
                     this.getLeftPart(),
                     this.getTag(),
                     this.getRightPart() + rightCSS.getRightPart()
@@ -136,11 +136,11 @@ public class CSSFinder {
         }
     }
 
-    private static boolean selectorsHaveDifferentTags(CSSFinder leftCssSelector, CSSFinder rightSCssSelector) {
+    private static boolean selectorsHaveDifferentTags(CssFinder leftCssSelector, CssFinder rightSCssSelector) {
         return !leftCssSelector.getTag().equals(rightSCssSelector.getTag());
     }
 
-    private static boolean noneOfTheTagsIsTheUniversalSelector(CSSFinder leftCssSelector, CSSFinder rightSCssSelector) {
+    private static boolean noneOfTheTagsIsTheUniversalSelector(CssFinder leftCssSelector, CssFinder rightSCssSelector) {
         return !leftCssSelector.hasUniversalSelector() && !rightSCssSelector.hasUniversalSelector();
     }
 
@@ -152,9 +152,9 @@ public class CSSFinder {
     // we need to test the IF condition, though, as it was kind of inserted during refactoring
     // so, yeah, just do the unit test for the if and then be happy!
     // TODO actually, maybe this method should be inlined (and the test moved to the class as well)
-    public CSSFinder combineAsLeftPart(String combinator) {
+    public CssFinder combineAsLeftPart(String combinator) {
         if (this.canFetchAllElementsOfTheQueryByItself()) {
-            return new CSSFinder(this.toString() + combinator, UNIVERSAL_SELECTOR, "");
+            return new CssFinder(this.toString() + combinator, UNIVERSAL_SELECTOR, "");
         }
         return CSS_NOT_NATIVELY_SUPPORTED;
     }
