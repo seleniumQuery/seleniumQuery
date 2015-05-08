@@ -208,7 +208,6 @@ public class SQCssNthChildPseudoClassTest {
         );
         assertPseudoSupportsPureXPathWhenNotNativelySupported(
                 nthChild(nthChildArgument),
-                pseudoThatTheDriverWillTestForNativeSupport,
                 expectedXPath
         );
     }

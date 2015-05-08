@@ -59,8 +59,7 @@ public class PseudoClassAssertFinderUtils {
         );
     }
 
-    public static void assertPseudoClassHasFinderWhenNotNativelySupported(String pseudoExpressionThatShouldNotPassNativeSupportCheck,
-                                                                          SQCssConditionImplementedFinders pseudoClassObject,
+    public static void assertPseudoClassHasFinderWhenNotNativelySupported(SQCssConditionImplementedFinders pseudoClassObject,
                                                                           String expectedCss,
                                                                           boolean canPureCss,
                                                                           String expectedXPath,
@@ -120,11 +119,9 @@ public class PseudoClassAssertFinderUtils {
     }
 
     public static void assertPseudoClassDoesNotSupportAnythingPurelyWhenNotNativelySupported(SQCssConditionImplementedFinders pseudoClassObject,
-                                                                                             String pseudoClass,
                                                                                              String expectedXPath,
                                                                                              ElementFilter filter) {
         assertPseudoClassHasFinderWhenNotNativelySupported(
-                pseudoClass,
                 pseudoClassObject,
                 CSS_UNIVERSAL_SELECTOR,
                 PURE_CSS_IS_NOT_SUPPORTED,
@@ -137,9 +134,8 @@ public class PseudoClassAssertFinderUtils {
      * The resulting CSS expected is the universal selector (*).
      */
     public static void assertPseudoSupportsPureXPathWhenNotNativelySupported(SQCssConditionImplementedFinders pseudoClassObject,
-                                                                             String pseudoClass, String expectedXPath) {
+                                                                             String expectedXPath) {
         assertPseudoClassHasFinderWhenNotNativelySupported(
-                pseudoClass,
                 pseudoClassObject,
                 CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
                 expectedXPath, empty()
@@ -172,7 +168,7 @@ public class PseudoClassAssertFinderUtils {
             this.pseudoExpressionThatShouldPassNativeSupportCheck = pseudoExpressionThatShouldPassNativeSupportCheck;
         }
         public void translatesToPureXPath(String expectedXPath) {
-            assertPseudoSupportsPureXPathWhenNotNativelySupported(this.pseudoClass, this.pseudoExpressionThatShouldPassNativeSupportCheck, expectedXPath);
+            assertPseudoSupportsPureXPathWhenNotNativelySupported(this.pseudoClass, expectedXPath);
         }
     }
 
@@ -187,18 +183,8 @@ public class PseudoClassAssertFinderUtils {
                 empty()
         );
         assertPseudoClassHasFinderWhenNotNativelySupported(
-                pseudoClass, pseudoClassObject,
+                pseudoClassObject,
                 expectedCss, PURE_CSS_IS_SUPPORTED,
-                expectedXPath,
-                empty()
-        );
-    }
-
-    public static void assertPseudoSupportsPureXPathWhenNativelySupported(SQCssConditionImplementedFinders pseudoClassObject, String pseudoClass,
-                                                                          String expectedXPath) {
-        assertPseudoClassHasElementFinderWhenNativelySupported(
-                pseudoClass, pseudoClassObject,
-                CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED,
                 expectedXPath,
                 empty()
         );

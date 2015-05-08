@@ -60,7 +60,6 @@ public class SQCssNthLastChildPseudoClassTest {
         );
         assertPseudoSupportsPureXPathWhenNotNativelySupported(
                 nthLastChild(nthArgument),
-                pseudoThatTheDriverWillTestForNativeSupport,
                 expectedXPath
         );
     }
@@ -68,4 +67,5 @@ public class SQCssNthLastChildPseudoClassTest {
     private SQCssNthLastChildPseudoClass nthLastChild(String nthArgument) {
         return new SQCssNthLastChildPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthArgument));
     }
+
 }

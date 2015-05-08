@@ -54,7 +54,6 @@ public class SQCssCheckedPseudoClassTest {
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoClassDoesNotSupportAnythingPurelyWhenNotNativelySupported(
                 new SQCssCheckedPseudoClass(),
-                CHECKED_PSEUDO,
                 CHECKED_XPATH_EXPRESSION,
                 CheckedPseudoClass.CHECKED_FILTER
         );

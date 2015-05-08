@@ -49,7 +49,6 @@ public class SQCssNotPseudoClassTest {
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoClassHasFinderWhenNotNativelySupported(
-                ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("tag")), // :not(tag)
                 PseudoClassAssertFinderUtils.CSS_UNIVERSAL_SELECTOR,
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
