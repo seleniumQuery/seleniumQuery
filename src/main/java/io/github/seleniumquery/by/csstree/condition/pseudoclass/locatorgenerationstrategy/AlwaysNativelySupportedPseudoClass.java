@@ -44,6 +44,6 @@ public abstract class AlwaysNativelySupportedPseudoClass extends MaybeNativelySu
     }
 
     @Override
-    public abstract CSSLocator toCssWhenNativelySupported();
+    public abstract CSSLocator toCssWhenNativelySupported(WebDriver webDriver);
 
 }

@@ -12,8 +12,17 @@ import static org.junit.Assert.assertThat;
 
 public class TranslatorsTestUtils {
 
+    /**
+     * Parses {@code selector} and checks if it yields a CSS condition that is an instance of {@code conditionClass}.
+     * If so, returns it.
+     *
+     * @param selector The string selector to be parsed.
+     * @param conditionClass The class the condition is expected to be.
+     * @param <T> The type of the condition.
+     * @return The condition instance, after parse.
+     */
     @SuppressWarnings("unchecked")
-    public static <T extends SQCssCondition> T parseFirstCssCondition(String selector, Class<T> conditionClass) {
+    public static <T extends SQCssCondition> T parseAndAssertFirstCssCondition(String selector, Class<T> conditionClass) {
         SQCssSelector cssSelector = SQParseTreeBuilder.parse(selector).firstSelector();
         assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));
         // when

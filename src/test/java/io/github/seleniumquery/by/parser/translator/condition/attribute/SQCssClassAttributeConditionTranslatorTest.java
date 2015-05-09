@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.parser.translator.condition.attribute;
 import io.github.seleniumquery.by.csstree.condition.attribute.SQCssClassAttributeCondition;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
+import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -65,7 +65,7 @@ public class SQCssClassAttributeConditionTranslatorTest {
         // given
         // selector arg
         // when
-        SQCssClassAttributeCondition cssCondition = parseFirstCssCondition(actualSelector, SQCssClassAttributeCondition.class);
+        SQCssClassAttributeCondition cssCondition = parseAndAssertFirstCssCondition(actualSelector, SQCssClassAttributeCondition.class);
         // then
         assertThat(cssCondition.getClassName(), is(expectedClassName));
     }

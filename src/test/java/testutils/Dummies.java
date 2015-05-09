@@ -41,8 +41,8 @@ public class Dummies {
 
     /**
      * Creates a "smart" dummy {@link SeleniumQueryObject}. It's goal is to be a mere placeholder in a test
-     * fixture. It is "smart" because any method call to it will throw an exception (which indicates it is,
-     * after all, not a simple placeholder, since it is used in the test).
+     * fixture. It is "smart" because any method call to it will throw an exception (which indicates the dummy
+     * is actually not a simple placeholder - since it is being used by the SUT when it shouldn't).
      */
     public static SeleniumQueryObject createDummySeleniumQueryObject() {
         return createDummy(SeleniumQueryObject.class);

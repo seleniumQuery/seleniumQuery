@@ -20,6 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.InputPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 import static org.apache.commons.lang3.StringUtils.join;
 
@@ -37,7 +38,7 @@ public class SQCssInputPseudoClass extends SQCssPseudoClassCondition {
 
     public NeverNativelySupportedPseudoClass inputPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             return XPathLocator.pureXPath(INPUT_TAGS_XPATH);
         }
     };
