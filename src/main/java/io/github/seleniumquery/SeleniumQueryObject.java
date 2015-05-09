@@ -42,7 +42,10 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Represents the <strong>SeleniumQuery Object</strong>: a list of {@link WebElement}s with special methods.
@@ -424,7 +427,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public <T> T prop(String propertyName) {
-		return PropFunction.prop(this, elements, propertyName);
+		return PropFunction.prop(this, propertyName);
 	}
 
 	/**
@@ -438,7 +441,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject prop(String propertyName, Object value) {
-		return PropFunction.prop(this, elements, propertyName, value);
+		return PropFunction.prop(this, propertyName, value);
 	}
 
 	/**

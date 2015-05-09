@@ -16,12 +16,12 @@
 
 package io.github.seleniumquery.functions.jquery.attributes;
 
-import java.util.List;
-
+import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.SeleniumQueryObject;
+
+import java.util.List;
 
 /**
  * $("selector").prop("property-name");
@@ -32,7 +32,8 @@ import io.github.seleniumquery.SeleniumQueryObject;
  */
 public class PropFunction {
 	
-	public static <T> T prop(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String propertyName) {
+	public static <T> T prop(SeleniumQueryObject seleniumQueryObject, String propertyName) {
+		List<WebElement> elements = seleniumQueryObject.get();
 		return prop(seleniumQueryObject.getWebDriver(), elements, propertyName);
 	}
 	
@@ -50,27 +51,34 @@ public class PropFunction {
 		return propertyValue;
 	}
 	
-	public static SeleniumQueryObject prop(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements,
-												String propertyName, Object value) {
-		
-		if (value == null || !(value instanceof Boolean || value instanceof String || value instanceof Number ||
-				value instanceof WebElement)) {
-			throw new IllegalArgumentException("The value in $().prop(\"propertyName\", value) must not be null and can only " +
-					"be a String, Number, Boolean or WebElement.");
-		}
-		
-		JavascriptExecutor js = (JavascriptExecutor) seleniumQueryObject.getWebDriver();
+	public static SeleniumQueryObject prop(SeleniumQueryObject seleniumQueryObject,
+                                           String propertyName, Object value) {
+        assertValueIsNotNullAndOfAcceptableType(value);
+
+        JavascriptExecutor js = (JavascriptExecutor) seleniumQueryObject.getWebDriver();
 		// "false" is truthy and "0" is truthy, so we dont convert them to string: we keep them false and 0.
 		if (value instanceof Boolean || value instanceof Number || value instanceof WebElement) {
-			for (WebElement webElement : elements) {
+			for (WebElement webElement : seleniumQueryObject) {
 				js.executeScript("arguments[0][arguments[1]] = arguments[2]", webElement, propertyName, value);
 			}
 		} else {
-			for (WebElement webElement : elements) {
+			for (WebElement webElement : seleniumQueryObject) {
 				js.executeScript("arguments[0][arguments[1]] = arguments[2]", webElement, propertyName, value.toString());
 			}
 		}
 		return seleniumQueryObject;
 	}
+
+    private static void assertValueIsNotNullAndOfAcceptableType(Object value) {
+        if (value == null || !isValueOfAcceptableType(value)) {
+			throw new IllegalArgumentException("The value in $().prop(\"propertyName\", value) must not be null and can only " +
+					"be a String, Number, Boolean or WebElement.");
+		}
+    }
+
+    private static boolean isValueOfAcceptableType(Object value) {
+        return value instanceof Boolean || value instanceof String || value instanceof Number ||
+				value instanceof WebElement;
+    }
 
 }
