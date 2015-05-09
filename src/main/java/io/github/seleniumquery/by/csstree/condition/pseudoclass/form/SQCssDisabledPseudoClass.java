@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClass
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 /**
  * :disabled
@@ -37,12 +38,12 @@ public class SQCssDisabledPseudoClass extends SQCssPseudoClassCondition {
 
     public MaybeNativelySupportedPseudoClass disabledPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
-        public CSSLocator toCssWhenNativelySupported() {
+        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
             return new CSSLocator(DISABLED_PSEUDO);
         }
 
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             return XPathLocator.pureXPath("(@disabled and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")");
         }
     };

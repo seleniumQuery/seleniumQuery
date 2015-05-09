@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalP
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 /**
  * :nth-child()
@@ -36,18 +37,18 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
 
     public MaybeNativelySupportedPseudoClass nthChildPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
-        public String pseudoClassForCSSNativeSupportCheck() {
+        public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
             return ":"+PSEUDO+"(1)";
         }
 
         @Override
-        public CSSLocator toCssWhenNativelySupported() {
+        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
             NthArgument nthArgument = getNthChildArgument();
             return new CSSLocator(":"+PSEUDO+"("+nthArgument.toCSS()+")");
         }
 
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             NthArgument nthArgument = getNthChildArgument();
             return XPathLocator.pureXPath(nthArgument.toXPath("position()"));
         }

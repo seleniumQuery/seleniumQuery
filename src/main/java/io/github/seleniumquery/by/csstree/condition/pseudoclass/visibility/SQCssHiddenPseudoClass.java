@@ -20,6 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.HiddenPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 /**
  * :hidden
@@ -33,7 +34,7 @@ public class SQCssHiddenPseudoClass extends SQCssPseudoClassCondition {
 
     public NeverNativelySupportedPseudoClass hiddenPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             return XPathLocator.filterOnly(HiddenPseudoClass.HIDDEN_FILTER);
         }
     };

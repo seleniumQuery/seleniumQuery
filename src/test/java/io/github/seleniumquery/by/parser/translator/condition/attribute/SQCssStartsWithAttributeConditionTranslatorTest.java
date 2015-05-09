@@ -3,7 +3,7 @@ package io.github.seleniumquery.by.parser.translator.condition.attribute;
 import io.github.seleniumquery.by.csstree.condition.attribute.SQCssStartsWithAttributeCondition;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseFirstCssCondition;
+import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -14,7 +14,7 @@ public class SQCssStartsWithAttributeConditionTranslatorTest {
         // given
         String selector = "[abc^=\"def\"]";
         // when
-        SQCssStartsWithAttributeCondition cssCondition = parseFirstCssCondition(selector, SQCssStartsWithAttributeCondition.class);
+        SQCssStartsWithAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, SQCssStartsWithAttributeCondition.class);
         // then
         assertThat(cssCondition.getAttributeName(), is("abc"));
         assertThat(cssCondition.getWantedValue(), is("def"));

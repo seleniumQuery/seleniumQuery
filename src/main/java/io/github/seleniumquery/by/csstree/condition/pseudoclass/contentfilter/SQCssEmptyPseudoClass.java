@@ -19,6 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.contentfilter;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.XPathLocator;
+import org.openqa.selenium.WebDriver;
 
 /**
  * :empty
@@ -33,7 +34,7 @@ public class SQCssEmptyPseudoClass extends SQCssPseudoClassCondition {
 
     public NeverNativelySupportedPseudoClass emptyPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             return XPathLocator.pureXPath("count(.//*) = 0");
         }
     };

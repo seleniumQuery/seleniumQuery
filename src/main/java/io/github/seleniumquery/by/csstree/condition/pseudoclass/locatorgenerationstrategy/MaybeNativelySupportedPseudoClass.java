@@ -35,23 +35,24 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
 
     @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
-        if (isThisCSSPseudoClassNativelySupportedOn(leftLocator.getWebDriver())) {
+        WebDriver webDriver = leftLocator.getWebDriver();
+        if (isThisCSSPseudoClassNativelySupportedOn(webDriver)) {
             return new SQLocator(
-                    leftLocator.getWebDriver(),
-                    leftLocator.getCSSLocator().merge(toCssWhenNativelySupported()),
-                    leftLocator.getXPathLocator().merge(toXPath(), xPathMergeStrategy())
+                    webDriver,
+                    leftLocator.getCSSLocator().merge(toCssWhenNativelySupported(webDriver)),
+                    leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
             );
         } else {
             return new SQLocator(
-                    leftLocator.getWebDriver(),
+                    webDriver,
                     CSS_NOT_NATIVELY_SUPPORTED,
-                    leftLocator.getXPathLocator().merge(toXPath(), xPathMergeStrategy())
+                    leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
             );
         }
     }
 
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
-        return DriverVersionUtils.getInstance().hasNativeSupportForPseudo(webDriver, pseudoClassForCSSNativeSupportCheck());
+        return DriverVersionUtils.getInstance().hasNativeSupportForPseudo(webDriver, pseudoClassForCSSNativeSupportCheck(webDriver));
     }
 
     /**
@@ -60,18 +61,19 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
      * <p>This will be appended to an id selector for the checking, e.g., if the value returned for this
      * method is {@code ":my-crazy-pseudo(1)"}, then we will send to the browser something like
      * {@code "#randomId:my-crazy-pseudo(1)"} which will be considered supported if no exception is thrown.</p>
+     * @param webDriver The webDriver that should be used to generate the CSS.
      * @return The css selector to be appended to an id selector for checking if the selector is supported.
      */
-    public String pseudoClassForCSSNativeSupportCheck() {
-        return toCssWhenNativelySupported().toString();
+    public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
+        return toCssWhenNativelySupported(webDriver).toString();
     }
 
-    public abstract CSSLocator toCssWhenNativelySupported();
+    public abstract CSSLocator toCssWhenNativelySupported(WebDriver webDriver);
 
     public XPathMergeStrategy xPathMergeStrategy() {
         return XPathMergeStrategy.CONDITIONAL_SIMPLE_XPATH_MERGE;
     }
 
-    public abstract XPathLocator toXPath();
+    public abstract XPathLocator toXPath(WebDriver webDriver);
 
 }

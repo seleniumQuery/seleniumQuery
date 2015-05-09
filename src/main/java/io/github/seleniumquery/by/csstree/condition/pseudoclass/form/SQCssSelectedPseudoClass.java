@@ -45,17 +45,17 @@ public class SQCssSelectedPseudoClass extends SQCssPseudoClassCondition {
         }
 
         @Override
-        public String pseudoClassForCSSNativeSupportCheck() {
+        public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
             return SQCssCheckedPseudoClass.CHECKED_PSEUDO;
         }
 
         @Override
-        public CSSLocator toCssWhenNativelySupported() {
+        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
             return new CSSLocator("option", ":checked");
         }
 
         @Override
-        public XPathLocator toXPath() {
+        public XPathLocator toXPath(WebDriver webDriver) {
             return new XPathLocator("self::option", SelectedPseudoClass.SELECTED_FILTER);
         }
     };
