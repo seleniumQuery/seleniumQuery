@@ -18,30 +18,58 @@ package io.github.seleniumquery.functions.jquery.events;
 
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.SeleniumQueryObject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 /**
- * Clicks a bunch of elements, complaining when needed.
+ * Clicks on a bunch of elements, complaining when needed.
  *
  * @author acdcjunior
  * @since 0.9.0
  */
 public class ClickFunction {
 
+    private static final Log LOGGER = LogFactory.getLog(ClickFunction.class);
+
     public static SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements) {
+        int numberOfNotClickedElements = 0;
+        Exception lastCaughtException = null;
+        WebElement elementThatThrewLastCaughtException = null;
+
         for (WebElement element : elements) {
             try {
                 element.click();
             } catch (ElementNotVisibleException e) {
-                throw new SeleniumQueryException("The matched set from " + seleniumQueryObject + " contains at least one element " +
-                        "that is not visible and, as such, nor a user, nor seleniumQuery may interact with it." +
-                        "\n Referring element: " + toString(element), e);
+                numberOfNotClickedElements++;
+                lastCaughtException = e;
+                elementThatThrewLastCaughtException = element;
             }
         }
+
+        reportIfThereWasAnyElementNotClicked(seleniumQueryObject, elements, numberOfNotClickedElements, lastCaughtException, elementThatThrewLastCaughtException);
         return seleniumQueryObject;
+    }
+
+    private static void reportIfThereWasAnyElementNotClicked(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements,
+                                                             int numberOfNotClickedElements, Exception lastCaughtException, WebElement elementThatThrewLastCaughtException) {
+        if (numberOfNotClickedElements > 0) {
+            boolean noElementWasClicked = numberOfNotClickedElements == elements.size();
+            if (noElementWasClicked) {
+                throw new SeleniumQueryException(format("The matched set from %s only contains elements that are not visible " +
+                            "and, as such, nor a user, nor seleniumQuery may interact with it.\n Referring element: %s",
+                            seleniumQueryObject, toString(elementThatThrewLastCaughtException)), lastCaughtException);
+            } else {
+                LOGGER.info(format("The matched set from %s contains %d hidden element(s) " +
+                            "and, as such, nor a user, nor seleniumQuery may interact with it.\n Last non-clicked element: %s",
+                            seleniumQueryObject, numberOfNotClickedElements, toString(elementThatThrewLastCaughtException)), lastCaughtException);
+            }
+        }
     }
 
     private static String toString(WebElement element) {
