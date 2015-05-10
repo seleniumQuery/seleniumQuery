@@ -27,8 +27,10 @@ import java.util.List;
  * Cabaple of locating {@link WebElement}s on a given {@link SearchContext}.
  *
  * Attempts to find the elements by CSS if driver/browser supports.
- * If not, will use XPath. If the XPath expression is known NOT able of bringing all elements, then
- * the locator also filters the results found by XPath.
+ * If it doesn't, will use XPath.
+ *
+ * If the XPath expression alone is not able to bring the exact needed elements, then
+ * the locator also filters (iteratively) the results.
  *
  * @author acdcjunior
  * @since 0.10.0
