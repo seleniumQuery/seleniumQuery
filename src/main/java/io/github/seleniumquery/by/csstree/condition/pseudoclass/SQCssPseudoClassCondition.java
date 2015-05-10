@@ -28,8 +28,9 @@ public abstract class SQCssPseudoClassCondition implements SQCssCondition, SQCss
     }
 
     public SQCssConditionImplementedLocators getSQCssLocatorGenerationStrategy() {
-        throw new RuntimeException("This method will be abstract. It is not yet because I want the project " +
-                "to compile while I'm implementing everyone.");
+        throw new RuntimeException("\n\nThe method SQCssPseudoClassCondition#SQCssConditionImplementedLocators() - or" +
+                " whatever (if it was moved) -\nwill be abstract!\n" +
+                "It is not yet because we need the project to compile while implementing everything.\n\n");
     }
 
 }
