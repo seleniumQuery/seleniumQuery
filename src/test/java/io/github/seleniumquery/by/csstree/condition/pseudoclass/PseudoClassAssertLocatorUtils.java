@@ -39,14 +39,14 @@ public class PseudoClassAssertLocatorUtils {
     public static final boolean PURE_CSS_IS_NOT_SUPPORTED = false;
     public static final String CSS_UNIVERSAL_SELECTOR = "*";
 
-    public static void assertPseudoClassHasLocatorWhenNativelySupported(String pseudoClassThatShouldBeNativelySupported,
+    public static void assertPseudoClassHasLocatorWhenNativelySupported(String pseudoExpressionThatShouldPassNativeSupportCheck,
                                                                         SQCssConditionImplementedLocators pseudoClassObject,
                                                                         String expectedCss,
                                                                         boolean canPureCss,
                                                                         String expectedXPath,
                                                                         Matcher<? super List<ElementFilter>> elementFilterMatcher) {
         SQLocator previousLocator = SQLocatorUtilsTest.universalSelectorLocator(
-                SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(pseudoClassThatShouldBeNativelySupported)
+                SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(pseudoExpressionThatShouldPassNativeSupportCheck)
         );
         assertPseudoClassHasLocator(
                 pseudoClassObject,
@@ -58,14 +58,14 @@ public class PseudoClassAssertLocatorUtils {
         );
     }
 
-    public static void assertPseudoClassHasLocatorWhenNotNativelySupported(String pseudoClassThatShouldNotBeNativelySupported,
+    public static void assertPseudoClassHasLocatorWhenNotNativelySupported(String pseudoExpressionThatShouldNotPassNativeSupportCheck,
                                                                            SQCssConditionImplementedLocators pseudoClassObject,
                                                                            String expectedCss,
                                                                            boolean canPureCss,
                                                                            String expectedXPath,
                                                                            Matcher<? super List<ElementFilter>> elementFilterMatcher) {
         SQLocator previousLocator = SQLocatorUtilsTest.universalSelectorLocator(
-                SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoClassThatShouldNotBeNativelySupported)
+                SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoExpressionThatShouldNotPassNativeSupportCheck)
         );
         assertPseudoClassHasLocator(
                 pseudoClassObject,
