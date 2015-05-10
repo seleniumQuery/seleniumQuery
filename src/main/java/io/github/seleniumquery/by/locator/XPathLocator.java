@@ -26,7 +26,10 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * Represents the necessary details (XPath expression + Filter) to find elements not using CSS.
+ * Represents the necessary details (XPath expression + Filter) to find elements by not using CSS.
+ *
+ * We say "by not using CSS" and not "by XPath" because the XPath expression here may be very simple, with
+ * all the selection being made by the filter.
  *
  * Important: If the ElementFilterList is empty, then it can fetch everything it needs through XPath alone (as
  * the filter will filter nothing).
