@@ -37,18 +37,26 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
     public SQLocator toSQLocator(SQLocator leftLocator) {
         WebDriver webDriver = leftLocator.getWebDriver();
         if (isThisCSSPseudoClassNativelySupportedOn(webDriver)) {
-            return new SQLocator(
-                    webDriver,
-                    leftLocator.getCSSLocator().merge(toCssWhenNativelySupported(webDriver)),
-                    leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
-            );
+            return createLocatorForNativelySupportedPseudo(leftLocator, webDriver);
         } else {
-            return new SQLocator(
-                    webDriver,
-                    CSS_NOT_NATIVELY_SUPPORTED,
-                    leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
-            );
+            return createLocatorForUnsupportedPseudo(leftLocator, webDriver);
         }
+    }
+
+    private SQLocator createLocatorForNativelySupportedPseudo(SQLocator leftLocator, WebDriver webDriver) {
+        return new SQLocator(
+                webDriver,
+                leftLocator.getCSSLocator().merge(toCssWhenNativelySupported(webDriver)),
+                leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
+        );
+    }
+
+    private SQLocator createLocatorForUnsupportedPseudo(SQLocator leftLocator, WebDriver webDriver) {
+        return new SQLocator(
+                webDriver,
+                CSS_NOT_NATIVELY_SUPPORTED,
+                leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
+        );
     }
 
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
@@ -56,11 +64,16 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
     }
 
     /**
-     * <p>Returns the pseudo-class selector that will be used to check if the driver supports this pseudo.</p>
-     * <p>Example: {@code ":nth-child(1)"}</p>
-     * <p>This will be appended to an id selector for the checking, e.g., if the value returned for this
-     * method is {@code ":my-crazy-pseudo(1)"}, then we will send to the browser something like
+     * <p>Everytime sQ executes a selector, it has to check if it has native support or not by the WebDriver.</p>
+     *
+     * <p>This method returns the pseudo-class selector that will be used to check if the driver supports this pseudo.</p>
+     *
+     * <p>Example: return ":nth-child(1)"</p>
+     *
+     * <p>The value returned will be appended to an id selector for the checking, e.g., if the value returned for this
+     * method is {@code ":my-crazy-pseudo(1)"}, then we will send to the driver something like
      * {@code "#randomId:my-crazy-pseudo(1)"} which will be considered supported if no exception is thrown.</p>
+     *
      * @param webDriver The webDriver that should be used to generate the CSS.
      * @return The css selector to be appended to an id selector for checking if the selector is supported.
      */
