@@ -66,6 +66,10 @@ public class XPathLocator {
     }
 
     public String getXPathExpression() {
+        return getRawXPathExpression();
+    }
+
+    public String getRawXPathExpression() {
         return xPathExpression;
     }
 

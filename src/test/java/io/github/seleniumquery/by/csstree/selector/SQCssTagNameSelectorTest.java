@@ -50,4 +50,14 @@ public class SQCssTagNameSelectorTest {
         assertThat(xPath.getXPathExpression(), is(".//*[true()]"));
     }
 
+    @Test
+    public void toSQLocator__should_return_ONLY_true_as_raw_expression() {
+        // given
+        SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
+        // when
+        SQLocator xPath = tagNameSelector.toSQLocator(mock(WebDriver.class));
+        // then
+        assertThat(xPath.getXPathLocator().getRawXPathExpression(), is("true()"));
+    }
+
 }

@@ -16,13 +16,14 @@
 
 package io.github.seleniumquery.by.csstree.selector;
 
+import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.locator.CSSLocator;
 import io.github.seleniumquery.by.locator.SQLocator;
 import io.github.seleniumquery.by.locator.SQLocatorUtils;
+import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.CSSLocator.fromTag;
-import static io.github.seleniumquery.by.locator.XPathLocator.pureXPath;
 
 /**
  * Element or tag selector. Example: {@code "div"}.
@@ -44,14 +45,20 @@ public class SQCssTagNameSelector implements SQCssSelector {
 
     @Override
     public SQLocator toSQLocator(WebDriver webDriver) {
-        return new SQLocator(webDriver, toCSS(), pureXPath(".//*[" + toXPath() + "]"));
+        XPathLocator xPathLocator = new XPathLocator(toXPath(), ElementFilterList.FILTER_NOTHING_LIST) {
+            @Override
+            public String getXPathExpression() {
+                return ".//*[" + getRawXPathExpression() + "]";
+            }
+        };
+        return new SQLocator(webDriver, toCSS(), xPathLocator);
     }
 
     @Override
     public SQLocator toSQLocator(SQLocator leftLocator) {
-        CSSLocator newCssSelector = leftLocator.getCSSLocator().merge(toCSS());
-        String newXPathExpression = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
-        return new SQLocator(newCssSelector, newXPathExpression, leftLocator);
+        CSSLocator combinedCssSelector = leftLocator.getCSSLocator().merge(toCSS());
+        String combinedXPathExp = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
+        return new SQLocator(combinedCssSelector, combinedXPathExp, leftLocator);
     }
 
     private String toXPath() {
