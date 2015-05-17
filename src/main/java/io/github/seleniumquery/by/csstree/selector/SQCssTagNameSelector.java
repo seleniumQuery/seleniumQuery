@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.filter.ElementFilterList;
 import io.github.seleniumquery.by.locator.CSSFinder;
 import io.github.seleniumquery.by.locator.ElementFinder;
 import io.github.seleniumquery.by.locator.SQLocatorUtils;
-import io.github.seleniumquery.by.locator.XPathLocator;
+import io.github.seleniumquery.by.locator.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.CSSFinder.fromTag;
@@ -45,13 +45,13 @@ public class SQCssTagNameSelector implements SQCssSelector {
 
     @Override
     public ElementFinder toSQLocator(WebDriver webDriver) {
-        XPathLocator xPathLocator = new XPathLocator(toXPath(), ElementFilterList.FILTER_NOTHING_LIST) {
+        XPathAndFilterFinder xPathAndFilterFinder = new XPathAndFilterFinder(toXPath(), ElementFilterList.FILTER_NOTHING_LIST) {
             @Override
             public String getXPathExpression() {
                 return ".//*[" + getRawXPathExpression() + "]";
             }
         };
-        return new ElementFinder(webDriver, toCSS(), xPathLocator);
+        return new ElementFinder(webDriver, toCSS(), xPathAndFilterFinder);
     }
 
     @Override

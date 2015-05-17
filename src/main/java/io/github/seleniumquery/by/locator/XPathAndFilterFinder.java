@@ -26,41 +26,44 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * Represents the necessary details (XPath expression + Filter) to find elements by not using CSS.
+ * Represents the necessary details (XPath expression AND Filter) to find elements by not using CSS.
  *
- * We say "by not using CSS" and not "by XPath" because the XPath expression here may be very simple, with
- * all the selection being made by the filter.
+ * We say "by not using CSS" and not "by XPath" because the XPath expression here may be very simple,
+ * with all the selection being made by the filter.
  *
- * Important: If the ElementFilterList is empty, then it can fetch everything it needs through XPath alone (as
- * the filter will filter nothing).
+ * Important: If the ElementFilterList is empty, then it can fetch everything it needs through
+ * XPath alone (as the filter will filter nothing).
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class XPathLocator {
+public class XPathAndFilterFinder {
 
-    public static XPathLocator pureXPath(String xPathExpression) {
-        return new XPathLocator(xPathExpression, ElementFilterList.FILTER_NOTHING_LIST);
+    public static XPathAndFilterFinder pureXPath(String xPathExpression) {
+        return new XPathAndFilterFinder(xPathExpression, ElementFilterList.FILTER_NOTHING_LIST);
     }
 
-    public static XPathLocator filterOnly(ElementFilter elementFilter) {
-        return new XPathLocator("true()", elementFilter);
+    public static XPathAndFilterFinder filterOnly(ElementFilter elementFilter) {
+        return new XPathAndFilterFinder("true()", elementFilter);
     }
 
-    private String xPathExpression;
+    private final String xPathExpression;
+    private final ElementFilterList elementFilterList;
 
-    private ElementFilterList elementFilterList;
-
-    public XPathLocator(String xPathExpression, ElementFilter elementFilter) {
+    public XPathAndFilterFinder(String xPathExpression, ElementFilter elementFilter) {
         this.xPathExpression = xPathExpression;
+        this.elementFilterList = toElementFilterList(elementFilter);
+    }
+
+    private static ElementFilterList toElementFilterList(ElementFilter elementFilter) {
         if (elementFilter == ElementFilter.FILTER_NOTHING) {
-            this.elementFilterList = ElementFilterList.FILTER_NOTHING_LIST;
+            return ElementFilterList.FILTER_NOTHING_LIST;
         } else {
-            this.elementFilterList = ElementFilterList.asFilterList(elementFilter);
+            return ElementFilterList.asFilterList(elementFilter);
         }
     }
 
-    public XPathLocator(String xPathExpression, ElementFilterList elementFilterList) {
+    public XPathAndFilterFinder(String xPathExpression, ElementFilterList elementFilterList) {
         this.xPathExpression = xPathExpression;
         this.elementFilterList = elementFilterList;
     }
@@ -77,8 +80,8 @@ public class XPathLocator {
         return elementFilterList;
     }
 
-    public XPathLocator newXPathExpressionKeepingEverythingElse(String newXPathExpression) {
-        return new XPathLocator(newXPathExpression, this.getElementFilterList());
+    public XPathAndFilterFinder newXPathExpressionKeepingEverythingElse(String newXPathExpression) {
+        return new XPathAndFilterFinder(newXPathExpression, this.getElementFilterList());
     }
 
     // TODO dont know if this has unit tests
@@ -96,8 +99,8 @@ public class XPathLocator {
         return "(" + this.xPathExpression + ")";
     }
 
-    public XPathLocator merge(XPathLocator rightXPath, XPathMergeStrategy xPathMergeStrategy) {
-        return new XPathLocator(
+    public XPathAndFilterFinder merge(XPathAndFilterFinder rightXPath, XPathMergeStrategy xPathMergeStrategy) {
+        return new XPathAndFilterFinder(
             xPathMergeStrategy.mergeXPath(this.getXPathExpression(), rightXPath.getXPathExpression()),
             this.getElementFilterList().merge(rightXPath.getElementFilterList())
         );

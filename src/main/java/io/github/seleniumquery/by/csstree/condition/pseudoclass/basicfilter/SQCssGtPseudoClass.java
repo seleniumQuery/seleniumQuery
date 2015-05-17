@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalIndexArgumentPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.XPathMergeStrategy;
-import io.github.seleniumquery.by.locator.XPathLocator;
+import io.github.seleniumquery.by.locator.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -35,12 +35,12 @@ public class SQCssGtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
 
     public NeverNativelySupportedPseudoClass gtPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public XPathLocator toXPath(WebDriver webDriver) {
+        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             int index = getArgumentAsIndex();
             if (index >= 0) {
-                return XPathLocator.pureXPath("position() > " + (index + 1));
+                return XPathAndFilterFinder.pureXPath("position() > " + (index + 1));
             }
-            return XPathLocator.pureXPath("position() > (last()-" + (-index - 1) + ")");
+            return XPathAndFilterFinder.pureXPath("position() > (last()-" + (-index - 1) + ")");
         }
         @Override
         public XPathMergeStrategy xPathMergeStrategy() {
