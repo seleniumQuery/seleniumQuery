@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.csstree.condition.attribute.SQCssClassAttributeCondition;
 import io.github.seleniumquery.by.csstree.selector.combinator.SQCssDescendantSelector;
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -37,7 +37,7 @@ public class SQCssConditionalSelectorTest {
         // tagg.clz
         SQCssConditionalSelector conditionalSelector = new SQCssConditionalSelector(tagNameSelector, classAttributeCondition);
         // when
-        SQLocator locator = conditionalSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder locator = conditionalSelector.toSQLocator(mock(WebDriver.class));
         // then
         assertThat(locator.getCSSLocator().toString(), is("tagg.clz"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
@@ -55,7 +55,7 @@ public class SQCssConditionalSelectorTest {
         // a b.condition
         SQCssDescendantSelector descendantSelector = new SQCssDescendantSelector(aTagSelector, conditionalSelector);
         // when
-        SQLocator locator = descendantSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder locator = descendantSelector.toSQLocator(mock(WebDriver.class));
         // then
         assertThat(locator.getCSSLocator().toString(), is("a b.condition"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));

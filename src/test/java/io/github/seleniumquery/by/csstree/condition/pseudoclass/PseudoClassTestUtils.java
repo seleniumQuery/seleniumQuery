@@ -19,8 +19,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
 import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
 import io.github.seleniumquery.by.preparser.CSSSelectorParser;
 import org.w3c.css.sac.Selector;
@@ -92,9 +92,9 @@ public class PseudoClassTestUtils {
     }
 
     public static void assertFilterOnlyPseudoGeneratesFilter(SQCssPseudoClassCondition pseudoClassCondition, ElementFilter pseudoClassFilter) {
-        SQLocator previous = SQLocatorUtilsTest.universalSelectorLocator(SQLocatorUtilsTest.createMockDriverWithoutNativeSupportFor(getSelectorForPseudoClass(pseudoClassCondition)));
+        ElementFinder previous = ElementFinderUtilsTest.universalSelectorLocator(ElementFinderUtilsTest.createMockDriverWithoutNativeSupportFor(getSelectorForPseudoClass(pseudoClassCondition)));
         // when
-        SQLocator locator = pseudoClassCondition.toSQLocator(previous);
+        ElementFinder locator = pseudoClassCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCSSLocator().toString(), is(previous.getCSSLocator().toString()));
         assertThat(locator.canFetchThroughCssAlone(), is(false));

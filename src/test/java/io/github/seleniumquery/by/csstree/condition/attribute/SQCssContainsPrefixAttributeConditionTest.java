@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,9 +30,9 @@ public class SQCssContainsPrefixAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new SQCssContainsPrefixAttributeCondition("hreflang", "en");
-        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        SQLocator locator = containsPrefixAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = containsPrefixAttributeCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCSSLocator().toString(), is("[hreflang|='en']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));

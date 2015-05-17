@@ -35,7 +35,7 @@ import java.util.List;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQLocator {
+public class ElementFinder {
 
     /**
      * The driver here is used to test for selector support. This is *not* the {@link SearchContext}
@@ -45,13 +45,13 @@ public class SQLocator {
     private CSSLocator cssLocator;
     private XPathLocator xPathLocator;
 
-    public SQLocator(WebDriver webDriver, CSSLocator cssLocator, XPathLocator xPathLocator) {
+    public ElementFinder(WebDriver webDriver, CSSLocator cssLocator, XPathLocator xPathLocator) {
         this.webDriver = webDriver;
         this.cssLocator = cssLocator;
         this.xPathLocator = xPathLocator;
     }
 
-    public SQLocator(CSSLocator newCssSelector, String newXPathExpression, SQLocator previous) {
+    public ElementFinder(CSSLocator newCssSelector, String newXPathExpression, ElementFinder previous) {
         this(previous.webDriver, newCssSelector, previous.getXPathLocator().newXPathExpressionKeepingEverythingElse(newXPathExpression));
     }
 

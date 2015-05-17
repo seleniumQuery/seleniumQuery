@@ -27,11 +27,11 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SQLocatorUtilsTest {
+public class ElementFinderUtilsTest {
 
-    public static final SQLocator UNIVERSAL_SELECTOR_LOCATOR = universalSelectorLocator(mock(WebDriver.class));
-    public static SQLocator universalSelectorLocator(WebDriver driver) {
-        return new SQLocator(driver, universalSelector(), pureXPath(".//*[true()]"));
+    public static final ElementFinder UNIVERSAL_SELECTOR_LOCATOR = universalSelectorLocator(mock(WebDriver.class));
+    public static ElementFinder universalSelectorLocator(WebDriver driver) {
+        return new ElementFinder(driver, universalSelector(), pureXPath(".//*[true()]"));
     }
 
     public static WebDriver createMockDriverWithNativeSupportFor(String pseudoClass) {
@@ -48,13 +48,13 @@ public class SQLocatorUtilsTest {
         return webDriverMock;
     }
     public static WebDriver createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(String checkedPseudo) {
-        WebDriver mockDriverWithNativeSupportFor = SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(checkedPseudo);
+        WebDriver mockDriverWithNativeSupportFor = ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(checkedPseudo);
         DriverVersionUtils driverVersionUtilsMock = DriverVersionUtils.getInstance();
         when(driverVersionUtilsMock.isPhantomJSDriver(mockDriverWithNativeSupportFor)).thenReturn(true);
         return mockDriverWithNativeSupportFor;
     }
     public static WebDriver createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(String checkedPseudo) {
-        WebDriver mockDriverWithNativeSupportFor = SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(checkedPseudo);
+        WebDriver mockDriverWithNativeSupportFor = ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(checkedPseudo);
         DriverVersionUtils driverVersionUtilsMock = DriverVersionUtils.getInstance();
         when(driverVersionUtilsMock.isHtmlUnitDriver(mockDriverWithNativeSupportFor)).thenReturn(true);
         return mockDriverWithNativeSupportFor;

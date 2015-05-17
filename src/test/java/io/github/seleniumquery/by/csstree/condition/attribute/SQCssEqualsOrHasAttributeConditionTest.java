@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,9 +30,9 @@ public class SQCssEqualsOrHasAttributeConditionTest {
     public void toSQLocator__has_attribute() {
         // given
         SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib");
-        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        SQLocator locator = hasAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = hasAttributeCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCSSLocator().toString(), is("[attrib]"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
@@ -44,9 +44,9 @@ public class SQCssEqualsOrHasAttributeConditionTest {
     public void toSQLocator__equals_attribute() {
         // given
         SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib", "valz");
-        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        SQLocator locator = hasAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = hasAttributeCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCSSLocator().toString(), is("[attrib=valz]"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));

@@ -17,15 +17,15 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.*;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
-import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit;
-import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS;
+import static io.github.seleniumquery.by.locator.ElementFinderUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit;
+import static io.github.seleniumquery.by.locator.ElementFinderUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class SQCssCheckedPseudoClassTest {
@@ -67,7 +67,7 @@ public class SQCssCheckedPseudoClassTest {
      */
     @Test
     public void toSQLocator__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
-        SQLocator previousLocator = SQLocatorUtilsTest.universalSelectorLocator(createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(CHECKED_PSEUDO));
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(CHECKED_PSEUDO));
         assertPseudoClassHasLocator(
                 new SQCssCheckedPseudoClass(),
                 previousLocator,
@@ -85,7 +85,7 @@ public class SQCssCheckedPseudoClassTest {
      */
     @Test
     public void toSQLocator__when_driver_is_HTMLUNITDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
-        SQLocator previousLocator = SQLocatorUtilsTest.universalSelectorLocator(createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(CHECKED_PSEUDO));
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(CHECKED_PSEUDO));
         assertPseudoClassHasLocator(
                 new SQCssCheckedPseudoClass(),
                 previousLocator,
