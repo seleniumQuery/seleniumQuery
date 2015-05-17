@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 
 /**
  * To implement this selector, we would need to use JavaScript and access jQuery's internals.
@@ -33,7 +33,7 @@ public class SQCssAnimatedPseudoClass extends SQCssPseudoClassCondition implemen
     public static final String PSEUDO = "animated";
 
     @Override
-    public SQLocator toSQLocator(SQLocator leftLocator) {
+    public ElementFinder toSQLocator(ElementFinder leftLocator) {
         throw new UnsupportedPseudoClassException(":animated", "This selector uses internals of jQuery that nor seleniumQuery, " +
                 "neither the user should access.");
     }

@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
@@ -24,7 +24,7 @@ import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoCla
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
-import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.*;
+import static io.github.seleniumquery.by.locator.ElementFinderUtilsTest.*;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -34,10 +34,10 @@ public class SQCssNthChildPseudoClassTest {
     private static final String NTH_CHILD_PSEUDO = ":nth-child";
 
     private static final String NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK = NTH_CHILD_PSEUDO+"(1)";
-    private static final SQLocator UNIVERSAL_SELECTOR_LOCATOR_SUPPORTING_NTHCHILD_NATIVELY = universalSelectorLocator(
+    private static final ElementFinder UNIVERSAL_SELECTOR_LOCATOR_SUPPORTING_NTHCHILD_NATIVELY = universalSelectorLocator(
             createMockDriverWithNativeSupportFor(NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK)
     );
-    private static final SQLocator UNIVERSAL_SELECTOR_LOCATOR_NOT_SUPPORTING_NTHCHILD_NATIVELY = UNIVERSAL_SELECTOR_LOCATOR;
+    private static final ElementFinder UNIVERSAL_SELECTOR_LOCATOR_NOT_SUPPORTING_NTHCHILD_NATIVELY = UNIVERSAL_SELECTOR_LOCATOR;
 
     @Test
     public void translate() {
@@ -70,7 +70,7 @@ public class SQCssNthChildPseudoClassTest {
         assertNthChildArgumentIsNotValidOnLocator(nthChildArgument, UNIVERSAL_SELECTOR_LOCATOR_NOT_SUPPORTING_NTHCHILD_NATIVELY);
     }
 
-    private void assertNthChildArgumentIsNotValidOnLocator(String nthChildArgument, SQLocator universalSelectorLocator) {
+    private void assertNthChildArgumentIsNotValidOnLocator(String nthChildArgument, ElementFinder universalSelectorLocator) {
         try {
             nthChild(nthChildArgument).toSQLocator(universalSelectorLocator);
             fail("Should consider *:nth-child("+nthChildArgument+") to be invalid.");

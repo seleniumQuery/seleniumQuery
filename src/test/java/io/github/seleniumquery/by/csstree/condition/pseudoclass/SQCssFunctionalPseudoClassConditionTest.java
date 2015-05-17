@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -37,11 +37,11 @@ public class SQCssFunctionalPseudoClassConditionTest {
 
     @Test
     public void toSQLocator__should_call_toSQLocator_in_object_returned_from_strategy_method() throws Exception {
-        final SQLocator argLocator = new SQLocator((WebDriver) null, null, null);
-        final SQLocator returningLocator = new SQLocator((WebDriver) null, null, null);
+        final ElementFinder argLocator = new ElementFinder((WebDriver) null, null, null);
+        final ElementFinder returningLocator = new ElementFinder((WebDriver) null, null, null);
         final SQCssConditionImplementedLocators locatorGen = new SQCssConditionImplementedLocators() {
             @Override
-            public SQLocator toSQLocator(SQLocator leftLocator) {
+            public ElementFinder toSQLocator(ElementFinder leftLocator) {
                 if (leftLocator == argLocator)
                     return returningLocator;
                 return null;
@@ -55,7 +55,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
             }
         };
 
-        SQLocator returnedLocator = functionalPseudoClassCondition.toSQLocator(argLocator);
+        ElementFinder returnedLocator = functionalPseudoClassCondition.toSQLocator(argLocator);
         assertThat(returnedLocator, is(returningLocator));
     }
 

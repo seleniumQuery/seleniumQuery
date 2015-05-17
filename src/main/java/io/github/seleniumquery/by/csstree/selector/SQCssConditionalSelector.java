@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -46,14 +46,14 @@ public class SQCssConditionalSelector implements SQCssSelector {
     }
 
     @Override
-    public SQLocator toSQLocator(WebDriver webDriver) {
-        SQLocator locator = sqCssSelector.toSQLocator(webDriver);
+    public ElementFinder toSQLocator(WebDriver webDriver) {
+        ElementFinder locator = sqCssSelector.toSQLocator(webDriver);
         return ((SQCssConditionImplementedLocators) sqCssCondition).toSQLocator(locator);
     }
 
     @Override
-    public SQLocator toSQLocator(SQLocator leftLocator) {
-        SQLocator locator = sqCssSelector.toSQLocator(leftLocator);
+    public ElementFinder toSQLocator(ElementFinder leftLocator) {
+        ElementFinder locator = sqCssSelector.toSQLocator(leftLocator);
         return ((SQCssConditionImplementedLocators) sqCssCondition).toSQLocator(locator);
     }
 

@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,9 +30,9 @@ public class SQCssStartsWithAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssStartsWithAttributeCondition startsWithAttributeCondition = new SQCssStartsWithAttributeCondition("attribute", "stringToStart");
-        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        SQLocator locator = startsWithAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = startsWithAttributeCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCSSLocator().toString(), is("[attribute^='stringToStart']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));

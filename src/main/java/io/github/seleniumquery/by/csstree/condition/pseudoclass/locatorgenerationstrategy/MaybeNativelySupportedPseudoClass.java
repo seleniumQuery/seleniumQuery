@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerati
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.locator.CSSLocator;
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.WebDriver;
 
@@ -34,7 +34,7 @@ import static io.github.seleniumquery.by.locator.CSSLocator.CSS_NOT_NATIVELY_SUP
 public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
 
     @Override
-    public SQLocator toSQLocator(SQLocator leftLocator) {
+    public ElementFinder toSQLocator(ElementFinder leftLocator) {
         WebDriver webDriver = leftLocator.getWebDriver();
         if (isThisCSSPseudoClassNativelySupportedOn(webDriver)) {
             return createLocatorForNativelySupportedPseudo(leftLocator, webDriver);
@@ -43,16 +43,16 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
         }
     }
 
-    private SQLocator createLocatorForNativelySupportedPseudo(SQLocator leftLocator, WebDriver webDriver) {
-        return new SQLocator(
+    private ElementFinder createLocatorForNativelySupportedPseudo(ElementFinder leftLocator, WebDriver webDriver) {
+        return new ElementFinder(
                 webDriver,
                 leftLocator.getCSSLocator().merge(toCssWhenNativelySupported(webDriver)),
                 leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
         );
     }
 
-    private SQLocator createLocatorForUnsupportedPseudo(SQLocator leftLocator, WebDriver webDriver) {
-        return new SQLocator(
+    private ElementFinder createLocatorForUnsupportedPseudo(ElementFinder leftLocator, WebDriver webDriver) {
+        return new ElementFinder(
                 webDriver,
                 CSS_NOT_NATIVELY_SUPPORTED,
                 leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())

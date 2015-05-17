@@ -18,15 +18,15 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
 import io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass;
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.*;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
-import static io.github.seleniumquery.by.locator.SQLocatorUtilsTest.*;
+import static io.github.seleniumquery.by.locator.ElementFinderUtilsTest.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class SQCssSelectedPseudoClassTest {
@@ -48,7 +48,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_has_native_support() {
         // supports pure CSS, but it is a translated one
-        SQLocator previousLocator = universalSelectorLocator(SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO));
+        ElementFinder previousLocator = universalSelectorLocator(ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO));
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,
@@ -74,8 +74,8 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_has_native_supportx() {
         // supports pure CSS, but it is a translated one
-        WebDriver mockDriverWithNativeSupportForChecked = SQLocatorUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO);
-        SQLocator locatorAfterChecked = new SQCssCheckedPseudoClass().toSQLocator(universalSelectorLocator(mockDriverWithNativeSupportForChecked));
+        WebDriver mockDriverWithNativeSupportForChecked = ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO);
+        ElementFinder locatorAfterChecked = new SQCssCheckedPseudoClass().toSQLocator(universalSelectorLocator(mockDriverWithNativeSupportForChecked));
 
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
@@ -95,7 +95,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
         WebDriver driver = createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(CHECKED_PSEUDO);
-        SQLocator previousLocator = SQLocatorUtilsTest.universalSelectorLocator(driver);
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(driver);
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,
@@ -114,7 +114,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_is_HTMLUNITDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
         WebDriver driver = createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(CHECKED_PSEUDO);
-        SQLocator previousLocator = SQLocatorUtilsTest.universalSelectorLocator(driver);
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(driver);
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,

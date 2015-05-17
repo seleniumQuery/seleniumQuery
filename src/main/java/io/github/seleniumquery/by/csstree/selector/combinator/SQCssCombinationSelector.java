@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.selector.combinator;
 
 import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by.locator.CSSLocator;
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -43,16 +43,16 @@ abstract class SQCssCombinationSelector implements SQCssSelector {
     }
 
     @Override
-    public SQLocator toSQLocator(WebDriver webDriver) {
-        SQLocator sqLocator = leftSideSelector.toSQLocator(webDriver);
-        CSSLocator combinatorLocator = sqLocator.getCSSLocator().combineAsLeftPart(this.cssCombinator);
-        SQLocator directAdjacentIntermediateLocator = new SQLocator(combinatorLocator,
-                sqLocator.getXPathExpression() + this.xPathCombinator, sqLocator);
+    public ElementFinder toSQLocator(WebDriver webDriver) {
+        ElementFinder elementFinder = leftSideSelector.toSQLocator(webDriver);
+        CSSLocator combinatorLocator = elementFinder.getCSSLocator().combineAsLeftPart(this.cssCombinator);
+        ElementFinder directAdjacentIntermediateLocator = new ElementFinder(combinatorLocator,
+                elementFinder.getXPathExpression() + this.xPathCombinator, elementFinder);
         return rightSideSelector.toSQLocator(directAdjacentIntermediateLocator);
     }
 
     @Override
-    public SQLocator toSQLocator(SQLocator leftLocator) {
+    public ElementFinder toSQLocator(ElementFinder leftLocator) {
         throw new UnsupportedOperationException("Due to the way the CSS Tree is created by the CSS Parser, this " +
                 "order of evaluation should never occurr.");
     }

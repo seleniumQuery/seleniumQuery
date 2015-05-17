@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition;
 
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 
 /**
  * This is temporary.
@@ -27,5 +27,5 @@ import io.github.seleniumquery.by.locator.SQLocator;
  * After all of them are complete, I move this method to SQCssCondition and remove this interface.
  */
 public interface SQCssConditionImplementedLocators {
-    SQLocator toSQLocator(SQLocator leftLocator);
+    ElementFinder toSQLocator(ElementFinder leftLocator);
 }

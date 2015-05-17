@@ -18,12 +18,12 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 
 public abstract class SQCssPseudoClassCondition implements SQCssCondition, SQCssConditionImplementedLocators {
 
     @Override
-    public SQLocator toSQLocator(SQLocator leftLocator) {
+    public ElementFinder toSQLocator(ElementFinder leftLocator) {
         return getSQCssLocatorGenerationStrategy().toSQLocator(leftLocator);
     }
 

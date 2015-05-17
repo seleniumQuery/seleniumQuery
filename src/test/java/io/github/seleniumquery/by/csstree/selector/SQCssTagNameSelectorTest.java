@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.selector;
 
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -32,7 +32,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("myTag");
         // when
-        SQLocator locator = tagNameSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder locator = tagNameSelector.toSQLocator(mock(WebDriver.class));
         // then
         assertThat(locator.getCSSLocator().toString(), is("myTag"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
@@ -45,7 +45,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        SQLocator xPath = tagNameSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder xPath = tagNameSelector.toSQLocator(mock(WebDriver.class));
         // then
         assertThat(xPath.getXPathExpression(), is(".//*[true()]"));
     }
@@ -55,7 +55,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        SQLocator xPath = tagNameSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder xPath = tagNameSelector.toSQLocator(mock(WebDriver.class));
         // then
         assertThat(xPath.getXPathLocator().getRawXPathExpression(), is("true()"));
     }

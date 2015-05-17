@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,9 +30,9 @@ public class SQCssContainsWordAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssContainsWordAttributeCondition containsWordAttributeCondition = new SQCssContainsWordAttributeCondition("values", "10");
-        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        SQLocator locator = containsWordAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = containsWordAttributeCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCSSLocator().toString(), is("[values~='10']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));

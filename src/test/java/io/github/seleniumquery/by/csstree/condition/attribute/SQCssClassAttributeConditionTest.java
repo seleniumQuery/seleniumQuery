@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.locator.SQLocator;
-import io.github.seleniumquery.by.locator.SQLocatorUtilsTest;
+import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,9 +30,9 @@ public class SQCssClassAttributeConditionTest {
     public void toSQLocator() {
         // given
         SQCssClassAttributeCondition classAttributeCondition = new SQCssClassAttributeCondition("clazz");
-        SQLocator previous = SQLocatorUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        SQLocator locator = classAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = classAttributeCondition.toSQLocator(previous);
         // then
         assertThat(locator.getCSSLocator().toString(), is(".clazz"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));

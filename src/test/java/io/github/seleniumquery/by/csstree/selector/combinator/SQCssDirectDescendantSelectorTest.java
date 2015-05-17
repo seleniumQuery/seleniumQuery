@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.selector.combinator;
 
 import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
-import io.github.seleniumquery.by.locator.SQLocator;
+import io.github.seleniumquery.by.locator.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -35,7 +35,7 @@ public class SQCssDirectDescendantSelectorTest {
         SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
         SQCssDirectDescendantSelector directDescendantSelector = new SQCssDirectDescendantSelector(aTagSelector, bTagSelector);
         // when
-        SQLocator locator = directDescendantSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder locator = directDescendantSelector.toSQLocator(mock(WebDriver.class));
         // then
         assertThat(locator.getCSSLocator().toString(), is("a>b"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
