@@ -18,12 +18,12 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerati
 
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.CSSFinder;
 import io.github.seleniumquery.by.locator.ElementFinder;
 import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.locator.CSSLocator.CSS_NOT_NATIVELY_SUPPORTED;
+import static io.github.seleniumquery.by.locator.CSSFinder.CSS_NOT_NATIVELY_SUPPORTED;
 
 /**
  * Represents a strategy where the selector may or may not be natively supported by the driver.
@@ -81,7 +81,7 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
         return toCssWhenNativelySupported(webDriver).toString();
     }
 
-    public abstract CSSLocator toCssWhenNativelySupported(WebDriver webDriver);
+    public abstract CSSFinder toCssWhenNativelySupported(WebDriver webDriver);
 
     public XPathMergeStrategy xPathMergeStrategy() {
         return XPathMergeStrategy.CONDITIONAL_SIMPLE_XPATH_MERGE;

@@ -23,7 +23,7 @@ import io.github.seleniumquery.by.csstree.SQCssSelectorList;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.CSSFinder;
 import io.github.seleniumquery.by.locator.XPathLocator;
 import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
 import org.apache.commons.lang3.StringUtils;
@@ -52,10 +52,10 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
         }
 
         @Override
-        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
+        public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
             String cssString = toChainedNotSelectors(webDriver, getArgument());
             assertCssDoesNotContainUnsupportedSelectors(cssString);
-            return new CSSLocator(cssString);
+            return new CSSFinder(cssString);
         }
 
         private String toChainedNotSelectors(WebDriver webDriver, String argument) {

@@ -23,36 +23,39 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * Given the selector:
- * div > p:visible
+ * This object is capable of finding {@link WebElement}s through CSS on a given {@link SearchContext}.<br><br>
  *
- * "div > " would be leftPart
- * "p" would be tag
- * ":visible" would be rightPart
+ * Components:
+ *  Given the selector: "* div > p:visible"
+ *
+ *  Then:
+ *   "div > " would be leftPart
+ *   "p" would be tag
+ *   ":visible" would be rightPart
  *
  *
- * If, during the time the locator is being built, at some point it decides the CSS Selector asked
- * by the user can't be translated directly into another CSS Selector, then
- * {@link CSSLocator#CSS_NOT_NATIVELY_SUPPORTED} (the "Null Object") should be returned, what will
- * mean the locator will use XPath+Filter instead of CSS to fetch the elements.
+ * If, during the time this finder is being built, at some point it decides the CSS Selector asked
+ * by the user can't be translated directly into another CSS Selector (e.g. it is an extended selector, such as :hidden),
+ * then {@link CSSFinder#CSS_NOT_NATIVELY_SUPPORTED} (the "Null Object") should be returned, what will
+ * mean the element finder will use XPath(+Filter) instead of CSS to fetch the elements.
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CSSLocator {
+public class CSSFinder {
 
     public static final String UNIVERSAL_SELECTOR = "*";
 
-    public static CSSLocator fromTag(String tag) {
-        return new CSSLocator("", tag, "");
+    public static CSSFinder fromTag(String tag) {
+        return new CSSFinder("", tag, "");
     }
-    public static CSSLocator universalSelector() {
+    public static CSSFinder universalSelector() {
         return fromTag(UNIVERSAL_SELECTOR);
     }
 
-    public static final CSSLocator CSS_NOT_NATIVELY_SUPPORTED = new CSSLocator("", UNIVERSAL_SELECTOR, "") {
+    public static final CSSFinder CSS_NOT_NATIVELY_SUPPORTED = new CSSFinder("", UNIVERSAL_SELECTOR, "") {
         @Override
-        public CSSLocator merge(CSSLocator rightSCssSelector) {
+        public CSSFinder merge(CSSFinder rightCSS) {
             return this;
         }
         @Override
@@ -65,17 +68,17 @@ public class CSSLocator {
     private String tag;
     private String rightPart;
 
-    public CSSLocator(String leftPart, String tag, String rightPart) {
+    public CSSFinder(String leftPart, String tag, String rightPart) {
         this.leftPart = leftPart;
         this.tag = tag;
         this.rightPart = rightPart;
     }
 
-    public CSSLocator(String tag, String rightPart) {
+    public CSSFinder(String tag, String rightPart) {
         this("", tag, rightPart);
     }
 
-    public CSSLocator(String rightPart) {
+    public CSSFinder(String rightPart) {
         this("", UNIVERSAL_SELECTOR, rightPart);
     }
 
@@ -107,38 +110,37 @@ public class CSSLocator {
      * Merges two CSS selector parts into one.
      * The current instance will be the left part of the merged selector.
      *
-     * @param rightSCssSelector The right part of the merged selector.
+     * @param rightCSS The right part of the merged selector.
      * @return The two parts merged as a CSS selector.
      */
-    public CSSLocator merge(CSSLocator rightSCssSelector) {
-        if (!rightSCssSelector.canFetchAllElementsOfTheQueryByItself()) {
+    public CSSFinder merge(CSSFinder rightCSS) {
+        if (!rightCSS.canFetchAllElementsOfTheQueryByItself()) {
             return CSS_NOT_NATIVELY_SUPPORTED;
         }
-        if (selectorsHaveDifferentTags(this, rightSCssSelector) &&
-                noneOfTheTagsIsTheUniversalSelector(this, rightSCssSelector)) {
+        if (selectorsHaveDifferentTags(this, rightCSS) && noneOfTheTagsIsTheUniversalSelector(this, rightCSS)) {
             throw new IllegalArgumentException("The attempted selector has two element (tag) selectors at the same level. " +
                     "It is incorrect and would never fetch any elements (as no element has more than one tag).");
         }
         if (this.hasUniversalSelector()) {
-            return new CSSLocator(
+            return new CSSFinder(
                     this.getLeftPart(),
-                    rightSCssSelector.getTag(),
-                    this.getRightPart() + rightSCssSelector.getRightPart()
+                    rightCSS.getTag(),
+                    this.getRightPart() + rightCSS.getRightPart()
             );
         } else {
-            return new CSSLocator(
+            return new CSSFinder(
                     this.getLeftPart(),
                     this.getTag(),
-                    this.getRightPart() + rightSCssSelector.getRightPart()
+                    this.getRightPart() + rightCSS.getRightPart()
             );
         }
     }
 
-    private static boolean selectorsHaveDifferentTags(CSSLocator leftCssSelector, CSSLocator rightSCssSelector) {
+    private static boolean selectorsHaveDifferentTags(CSSFinder leftCssSelector, CSSFinder rightSCssSelector) {
         return !leftCssSelector.getTag().equals(rightSCssSelector.getTag());
     }
 
-    private static boolean noneOfTheTagsIsTheUniversalSelector(CSSLocator leftCssSelector, CSSLocator rightSCssSelector) {
+    private static boolean noneOfTheTagsIsTheUniversalSelector(CSSFinder leftCssSelector, CSSFinder rightSCssSelector) {
         return !leftCssSelector.hasUniversalSelector() && !rightSCssSelector.hasUniversalSelector();
     }
 
@@ -150,9 +152,9 @@ public class CSSLocator {
     // we need to test the IF condition, though, as it was kind of inserted during refactoring
     // so, yeah, just do the unit test for the if and then be happy!
     // TODO actually, maybe this method should be inlined (and the test moved to the class as well)
-    public CSSLocator combineAsLeftPart(String combinator) {
+    public CSSFinder combineAsLeftPart(String combinator) {
         if (this.canFetchAllElementsOfTheQueryByItself()) {
-            return new CSSLocator(this.toString() + combinator, UNIVERSAL_SELECTOR, "");
+            return new CSSFinder(this.toString() + combinator, UNIVERSAL_SELECTOR, "");
         }
         return CSS_NOT_NATIVELY_SUPPORTED;
     }
