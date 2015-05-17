@@ -24,13 +24,13 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * Cabaple of locating {@link WebElement}s on a given {@link SearchContext}.
+ * Cabaple of finding {@link WebElement}s on a given {@link SearchContext}.<br><br>
  *
- * Attempts to find the elements by CSS if driver/browser supports.
- * If it doesn't, will use XPath.
+ * Attempts to find the elements by CSS if driver/browser supports.<br>
+ * If it doesn't, will use XPath.<br><br>
  *
- * If the XPath expression alone is not able to bring the exact needed elements, then
- * the locator also filters (iteratively) the results.
+ * If the XPath expression alone is not able to bring the exact wanted elements, then
+ * the finder also filters (though iteration) the results brought by the XPath.
  *
  * @author acdcjunior
  * @since 0.10.0
