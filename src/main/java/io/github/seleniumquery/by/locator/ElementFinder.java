@@ -43,12 +43,12 @@ public class ElementFinder {
      */
     private WebDriver webDriver;
     private CSSFinder cssFinder;
-    private XPathLocator xPathLocator;
+    private XPathAndFilterFinder xPathAndFilterFinder;
 
-    public ElementFinder(WebDriver webDriver, CSSFinder cssFinder, XPathLocator xPathLocator) {
+    public ElementFinder(WebDriver webDriver, CSSFinder cssFinder, XPathAndFilterFinder xPathAndFilterFinder) {
         this.webDriver = webDriver;
         this.cssFinder = cssFinder;
-        this.xPathLocator = xPathLocator;
+        this.xPathAndFilterFinder = xPathAndFilterFinder;
     }
 
     public ElementFinder(CSSFinder newCssSelector, String newXPathExpression, ElementFinder previous) {
@@ -59,7 +59,7 @@ public class ElementFinder {
         if (canFetchThroughCssAlone()) {
             return cssFinder.findElements(context);
         }
-        return xPathLocator.findElements(context);
+        return xPathAndFilterFinder.findElements(context);
     }
 
     public WebDriver getWebDriver() {
@@ -70,12 +70,12 @@ public class ElementFinder {
         return cssFinder;
     }
 
-    public XPathLocator getXPathLocator() {
-        return xPathLocator;
+    public XPathAndFilterFinder getXPathLocator() {
+        return xPathAndFilterFinder;
     }
 
     public String getXPathExpression() {
-        return xPathLocator.getXPathExpression();
+        return xPathAndFilterFinder.getXPathExpression();
     }
 
     public boolean canFetchThroughCssAlone() {
@@ -83,7 +83,7 @@ public class ElementFinder {
     }
 
     public ElementFilterList getElementFilterList() {
-        return xPathLocator.getElementFilterList();
+        return xPathAndFilterFinder.getElementFilterList();
     }
 
 }

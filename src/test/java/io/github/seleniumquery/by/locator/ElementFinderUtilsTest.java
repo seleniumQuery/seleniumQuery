@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.CSSFinder.universalSelector;
-import static io.github.seleniumquery.by.locator.XPathLocator.pureXPath;
+import static io.github.seleniumquery.by.locator.XPathAndFilterFinder.pureXPath;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;

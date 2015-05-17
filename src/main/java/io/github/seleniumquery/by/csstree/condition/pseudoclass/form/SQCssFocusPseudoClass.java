@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.css.pseudoclasses.FocusPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.XPathLocator;
+import io.github.seleniumquery.by.locator.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -35,8 +35,8 @@ public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition {
 
     public NeverNativelySupportedPseudoClass hiddenPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
-        public XPathLocator toXPath(WebDriver webDriver) {
-            return XPathLocator.filterOnly(FocusPseudoClass.FOCUS_FILTER);
+        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+            return XPathAndFilterFinder.filterOnly(FocusPseudoClass.FOCUS_FILTER);
         }
     };
 

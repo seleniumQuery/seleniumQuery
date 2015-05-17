@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.locator.CSSFinder;
-import io.github.seleniumquery.by.locator.XPathLocator;
+import io.github.seleniumquery.by.locator.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -55,8 +55,8 @@ public class SQCssSelectedPseudoClass extends SQCssPseudoClassCondition {
         }
 
         @Override
-        public XPathLocator toXPath(WebDriver webDriver) {
-            return new XPathLocator("self::option", SelectedPseudoClass.SELECTED_FILTER);
+        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+            return new XPathAndFilterFinder("self::option", SelectedPseudoClass.SELECTED_FILTER);
         }
     };
 

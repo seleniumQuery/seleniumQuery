@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.locator.CSSFinder;
 import io.github.seleniumquery.by.locator.ElementFinder;
-import io.github.seleniumquery.by.locator.XPathLocator;
+import io.github.seleniumquery.by.locator.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.locator.CSSFinder.CSS_NOT_NATIVELY_SUPPORTED;
@@ -87,6 +87,6 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
         return XPathMergeStrategy.CONDITIONAL_SIMPLE_XPATH_MERGE;
     }
 
-    public abstract XPathLocator toXPath(WebDriver webDriver);
+    public abstract XPathAndFilterFinder toXPath(WebDriver webDriver);
 
 }

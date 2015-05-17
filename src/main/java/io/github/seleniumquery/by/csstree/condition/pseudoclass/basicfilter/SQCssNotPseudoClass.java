@@ -24,7 +24,7 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalP
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by.locator.CSSFinder;
-import io.github.seleniumquery.by.locator.XPathLocator;
+import io.github.seleniumquery.by.locator.XPathAndFilterFinder;
 import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -76,14 +76,14 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
         }
 
         @Override
-        public XPathLocator toXPath(WebDriver webDriver) {
+        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             SQCssSelectorList parse = SQParseTreeBuilder.parse(getArgument());
             List<String> xPathExpressions = new LinkedList<String>();
             for (SQCssSelector sqCssSelector : parse) {
                 xPathExpressions.add(sqCssSelector.toSQLocator(webDriver).getXPathLocator().getRawXPathExpression());
             }
             String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);
-            return XPathLocator.pureXPath("not("+joinedXPathExps+")");
+            return XPathAndFilterFinder.pureXPath("not("+joinedXPathExps+")");
         }
     };
 
