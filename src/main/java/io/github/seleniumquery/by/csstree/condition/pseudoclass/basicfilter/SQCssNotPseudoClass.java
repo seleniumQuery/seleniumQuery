@@ -16,11 +16,23 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
+import com.google.common.base.Joiner;
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
+import io.github.seleniumquery.by.csstree.SQCssSelectorList;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.XPathLocator;
+import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebDriver;
 
-public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition implements SQCssConditionImplementedNotYet {
+import java.util.LinkedList;
+import java.util.List;
+
+public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
     // :not() are translated into :not-sq() by the pre-parser
     public static final String PSEUDO = "not-sq";
@@ -31,6 +43,53 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition imp
 
     public SQCssNotPseudoClass(PseudoClassSelector pseudoClassSelector) {
         super(pseudoClassSelector);
+    }
+
+    public MaybeNativelySupportedPseudoClass notPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
+        @Override
+        public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
+            return ":"+PSEUDO_PURE_NOT+"(div)";
+        }
+
+        @Override
+        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
+            String cssString = toChainedNotSelectors(webDriver, getArgument());
+            assertCssDoesNotContainUnsupportedSelectors(cssString);
+            return new CSSLocator(cssString);
+        }
+
+        private String toChainedNotSelectors(WebDriver webDriver, String argument) {
+            SQCssSelectorList parse = SQParseTreeBuilder.parse(argument);
+            StringBuilder sb = new StringBuilder("");
+            for (SQCssSelector sqCssSelector : parse) {
+                sb.append(":"+PSEUDO_PURE_NOT+"(");
+                sb.append(sqCssSelector.toSQLocator(webDriver).getCSSLocator().toString());
+                sb.append(")");
+            }
+            return sb.toString();
+        }
+
+        private void assertCssDoesNotContainUnsupportedSelectors(String cssString) {
+            if (StringUtils.containsAny(cssString, ' ', '>', '~', '+')) {
+                throw new UnsupportedPseudoClassException(":not() with descendant (a b, a>b) or sibling (a+b, a~b) selecors as argument is not yet supported.");
+            }
+        }
+
+        @Override
+        public XPathLocator toXPath(WebDriver webDriver) {
+            SQCssSelectorList parse = SQParseTreeBuilder.parse(getArgument());
+            List<String> xPathExpressions = new LinkedList<String>();
+            for (SQCssSelector sqCssSelector : parse) {
+                xPathExpressions.add(sqCssSelector.toSQLocator(webDriver).getXPathLocator().getRawXPathExpression());
+            }
+            String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);
+            return XPathLocator.pureXPath("not("+joinedXPathExps+")");
+        }
+    };
+
+    @Override
+    public MaybeNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+        return notPseudoClassLocatorGenerationStrategy;
     }
 
 }
