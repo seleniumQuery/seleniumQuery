@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.CSSFinder;
 import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.WebDriver;
 
@@ -57,8 +57,8 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
         }
 
         @Override
-        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CSSLocator(CHECKED_PSEUDO);
+        public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
+            return new CSSFinder(CHECKED_PSEUDO);
         }
 
         @Override

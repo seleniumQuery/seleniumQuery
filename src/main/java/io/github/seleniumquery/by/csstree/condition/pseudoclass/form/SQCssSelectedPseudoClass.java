@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.CSSFinder;
 import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.WebDriver;
 
@@ -50,8 +50,8 @@ public class SQCssSelectedPseudoClass extends SQCssPseudoClassCondition {
         }
 
         @Override
-        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CSSLocator("option", ":checked");
+        public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
+            return new CSSFinder("option", ":checked");
         }
 
         @Override

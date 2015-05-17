@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.AlwaysNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.CSSFinder;
 import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.WebDriver;
 
@@ -37,8 +37,8 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
 
     public AlwaysNativelySupportedPseudoClass inputTypePseudoClassLocatorGenerationStrategy = new AlwaysNativelySupportedPseudoClass() {
         @Override
-        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CSSLocator("input", "[type=\"" + typeAttributeValue + "\"]");
+        public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
+            return new CSSFinder("input", "[type=\"" + typeAttributeValue + "\"]");
         }
 
         @Override

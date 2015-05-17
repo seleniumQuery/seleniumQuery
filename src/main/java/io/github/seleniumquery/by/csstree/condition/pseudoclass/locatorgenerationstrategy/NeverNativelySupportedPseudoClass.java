@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.CSSFinder;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -40,7 +40,7 @@ public abstract class NeverNativelySupportedPseudoClass extends MaybeNativelySup
      * @param webDriver ignored
      */
     @Override
-    public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
+    public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
         throw new UnsupportedOperationException();
     }
 

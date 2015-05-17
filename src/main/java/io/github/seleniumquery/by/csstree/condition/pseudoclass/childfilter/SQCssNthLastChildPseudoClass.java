@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.MaybeNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.CSSFinder;
 import io.github.seleniumquery.by.locator.XPathLocator;
 import org.openqa.selenium.WebDriver;
 
@@ -42,9 +42,9 @@ public class SQCssNthLastChildPseudoClass extends SQCssFunctionalPseudoClassCond
         }
 
         @Override
-        public CSSLocator toCssWhenNativelySupported(WebDriver webDriver) {
+        public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
             NthArgument nthArgument = getNthChildArgument();
-            return new CSSLocator(":"+PSEUDO+"("+nthArgument.toCSS()+")");
+            return new CSSFinder(":"+PSEUDO+"("+nthArgument.toCSS()+")");
         }
 
         @Override

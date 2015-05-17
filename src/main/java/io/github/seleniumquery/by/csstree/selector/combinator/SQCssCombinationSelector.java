@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.selector.combinator;
 
 import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.locator.CSSLocator;
+import io.github.seleniumquery.by.locator.CSSFinder;
 import io.github.seleniumquery.by.locator.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
@@ -45,7 +45,7 @@ abstract class SQCssCombinationSelector implements SQCssSelector {
     @Override
     public ElementFinder toSQLocator(WebDriver webDriver) {
         ElementFinder elementFinder = leftSideSelector.toSQLocator(webDriver);
-        CSSLocator combinatorLocator = elementFinder.getCSSLocator().combineAsLeftPart(this.cssCombinator);
+        CSSFinder combinatorLocator = elementFinder.getCSSLocator().combineAsLeftPart(this.cssCombinator);
         ElementFinder directAdjacentIntermediateLocator = new ElementFinder(combinatorLocator,
                 elementFinder.getXPathExpression() + this.xPathCombinator, elementFinder);
         return rightSideSelector.toSQLocator(directAdjacentIntermediateLocator);
