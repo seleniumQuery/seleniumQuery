@@ -80,7 +80,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
             SQCssSelectorList parse = SQParseTreeBuilder.parse(getArgument());
             List<String> xPathExpressions = new LinkedList<String>();
             for (SQCssSelector sqCssSelector : parse) {
-                xPathExpressions.add(sqCssSelector.toElementFinder(webDriver).getXPathLocator().getRawXPathExpression());
+                xPathExpressions.add(sqCssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression());
             }
             String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);
             return XPathAndFilterFinder.pureXPath("not("+joinedXPathExps+")");

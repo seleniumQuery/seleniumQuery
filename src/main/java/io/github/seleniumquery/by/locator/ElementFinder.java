@@ -52,7 +52,7 @@ public class ElementFinder {
     }
 
     public ElementFinder(CSSFinder newCssSelector, String newXPathExpression, ElementFinder previous) {
-        this(previous.webDriver, newCssSelector, previous.getXPathLocator().newXPathExpressionKeepingEverythingElse(newXPathExpression));
+        this(previous.webDriver, newCssSelector, previous.getXPathAndFilterFinder().newXPathExpressionKeepingEverythingElse(newXPathExpression));
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
@@ -70,7 +70,7 @@ public class ElementFinder {
         return cssFinder;
     }
 
-    public XPathAndFilterFinder getXPathLocator() {
+    public XPathAndFilterFinder getXPathAndFilterFinder() {
         return xPathAndFilterFinder;
     }
 
