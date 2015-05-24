@@ -28,36 +28,36 @@ import static org.mockito.Mockito.mock;
 public class SQCssTagNameSelectorTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("myTag");
         // when
-        ElementFinder locator = tagNameSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(locator.getCssFinder().toString(), is("myTag"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.getXPathExpression(), is(".//*[self::myTag]"));
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getCssFinder().toString(), is("myTag"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[self::myTag]"));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
     @Test
-    public void toSQLocator__should_return_true_for_XPath_if_tag_is_all() {
+    public void toElementFinder__should_return_true_for_XPath_if_tag_is_all() {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        ElementFinder xPath = tagNameSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(xPath.getXPathExpression(), is(".//*[true()]"));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[true()]"));
     }
 
     @Test
-    public void toSQLocator__should_return_ONLY_true_as_raw_expression() {
+    public void toElementFinder__should_return_ONLY_true_as_raw_expression() {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        ElementFinder xPath = tagNameSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(xPath.getXPathLocator().getRawXPathExpression(), is("true()"));
+        assertThat(elementFinder.getXPathLocator().getRawXPathExpression(), is("true()"));
     }
 
 }

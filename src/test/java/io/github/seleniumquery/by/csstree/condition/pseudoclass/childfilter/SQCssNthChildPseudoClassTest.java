@@ -20,8 +20,8 @@ import io.github.seleniumquery.by.locator.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.locator.ElementFinderUtilsTest.*;
@@ -45,7 +45,7 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__nthChild_should_throw_exception_if_argument_is_not_valid() {
+    public void toElementFinder__nthChild_should_throw_exception_if_argument_is_not_valid() {
         assertNthChildArgumentIsNotValid("a");
         assertNthChildArgumentIsNotValid("");
         assertNthChildArgumentIsNotValid("+");
@@ -85,7 +85,7 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__b_only_arguments() {
+    public void toElementFinder__b_only_arguments() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1", ":nth-child(1)", ".//*[position() = 1]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2", ":nth-child(2)", ".//*[position() = 2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("+1", ":nth-child(1)", ".//*[position() = 1]");
@@ -93,7 +93,7 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__a_only_arguments() {
+    public void toElementFinder__a_only_arguments() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
@@ -108,7 +108,7 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__a_and_b_arguments__WITH_BOTH_POSITIVE() {
+    public void toElementFinder__a_and_b_arguments__WITH_BOTH_POSITIVE() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
@@ -126,7 +126,7 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__a_and_b_arguments__WITH_b_NEGATIVE() {
+    public void toElementFinder__a_and_b_arguments__WITH_b_NEGATIVE() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-1", ":nth-child(1n-1)", ".//*[(position() - -1) mod 1 = 0 and position() >= -1]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-2", ":nth-child(2n-2)", ".//*[(position() - -2) mod 2 = 0 and position() >= -2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-2", ":nth-child(1n-2)", ".//*[(position() - -2) mod 1 = 0 and position() >= -2]");
@@ -149,7 +149,7 @@ public class SQCssNthChildPseudoClassTest {
      * or whatever -- just thought it was important to write this here.
      */
     @Test
-    public void toSQLocator__a_and_b_arguments__WITH_a_NEGATIVE() {
+    public void toElementFinder__a_and_b_arguments__WITH_a_NEGATIVE() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+1", ":nth-child(-1n+1)", ".//*[(position() - 1) mod -1 = 0 and position() <= 1]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n+2", ":nth-child(-2n+2)", ".//*[(position() - 2) mod -2 = 0 and position() <= 2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+2", ":nth-child(-1n+2)", ".//*[(position() - 2) mod -1 = 0 and position() <= 2]");
@@ -171,7 +171,7 @@ public class SQCssNthChildPseudoClassTest {
      * or whatever -- just thought it was important to write this here.
      */
     @Test
-    public void toSQLocator__a_and_b_arguments__WITH_BOTH_NEGATIVE() {
+    public void toElementFinder__a_and_b_arguments__WITH_BOTH_NEGATIVE() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-1", ":nth-child(-1n-1)", ".//*[(position() - -1) mod -1 = 0 and position() <= -1]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n-2", ":nth-child(-2n-2)", ".//*[(position() - -2) mod -2 = 0 and position() <= -2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-2", ":nth-child(-1n-2)", ".//*[(position() - -2) mod -1 = 0 and position() <= -2]");
@@ -188,7 +188,7 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__even_and_odd_special_arguments() {
+    public void toElementFinder__even_and_odd_special_arguments() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("even", ":nth-child(2n)", ".//*[(position() - 0) mod 2 = 0 and position() >= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("odd", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
     }

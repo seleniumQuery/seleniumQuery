@@ -29,18 +29,18 @@ import static org.mockito.Mockito.mock;
 public class SQCssDirectAdjacentSelectorTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssTagNameSelector aTagSelector = new SQCssTagNameSelector("a");
         SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
         SQCssDirectAdjacentSelector directAdjacentSelector = new SQCssDirectAdjacentSelector(aTagSelector, bTagSelector);
         // when
-        ElementFinder locator = directAdjacentSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder elementFinder = directAdjacentSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(locator.getCssFinder().toString(), is("a+b"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.getXPathExpression(), is(".//*[self::a]/following-sibling::*[position() = 1 and self::b]"));
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getCssFinder().toString(), is("a+b"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[self::a]/following-sibling::*[position() = 1 and self::b]"));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
 }

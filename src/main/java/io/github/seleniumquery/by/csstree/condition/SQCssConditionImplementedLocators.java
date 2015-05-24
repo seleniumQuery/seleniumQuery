@@ -22,10 +22,14 @@ import io.github.seleniumquery.by.locator.ElementFinder;
  * This is temporary.
  *
  * While I don't implement all SQCssConditions, I go applying this interface to those
- * that I implement the toSQLocator() method.
+ * that I implement the toElementFinder() method.
  *
  * After all of them are complete, I move this method to SQCssCondition and remove this interface.
+ *
+ * @deprecated temporary
  */
 public interface SQCssConditionImplementedLocators {
+
     ElementFinder toElementFinder(ElementFinder leftLocator);
+
 }

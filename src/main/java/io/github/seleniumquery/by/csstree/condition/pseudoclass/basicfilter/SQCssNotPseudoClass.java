@@ -63,7 +63,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
             StringBuilder sb = new StringBuilder("");
             for (SQCssSelector sqCssSelector : parse) {
                 sb.append(":"+PSEUDO_PURE_NOT+"(");
-                sb.append(sqCssSelector.toSQLocator(webDriver).getCssFinder().toString());
+                sb.append(sqCssSelector.toElementFinder(webDriver).getCssFinder().toString());
                 sb.append(")");
             }
             return sb.toString();
@@ -80,7 +80,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
             SQCssSelectorList parse = SQParseTreeBuilder.parse(getArgument());
             List<String> xPathExpressions = new LinkedList<String>();
             for (SQCssSelector sqCssSelector : parse) {
-                xPathExpressions.add(sqCssSelector.toSQLocator(webDriver).getXPathLocator().getRawXPathExpression());
+                xPathExpressions.add(sqCssSelector.toElementFinder(webDriver).getXPathLocator().getRawXPathExpression());
             }
             String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);
             return XPathAndFilterFinder.pureXPath("not("+joinedXPathExps+")");

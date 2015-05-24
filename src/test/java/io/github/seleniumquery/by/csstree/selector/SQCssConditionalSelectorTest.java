@@ -30,23 +30,23 @@ import static org.mockito.Mockito.mock;
 public class SQCssConditionalSelectorTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("tagg");
         SQCssClassAttributeCondition classAttributeCondition = new SQCssClassAttributeCondition("clz");
         // tagg.clz
         SQCssConditionalSelector conditionalSelector = new SQCssConditionalSelector(tagNameSelector, classAttributeCondition);
         // when
-        ElementFinder locator = conditionalSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder elementFinder = conditionalSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(locator.getCssFinder().toString(), is("tagg.clz"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.getXPathExpression(), is(".//*[self::tagg and contains(concat(' ', normalize-space(@class), ' '), ' clz ')]"));
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getCssFinder().toString(), is("tagg.clz"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[self::tagg and contains(concat(' ', normalize-space(@class), ' '), ' clz ')]"));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
     @Test
-    public void toSQLocator__with_SQLocator_arg() {
+    public void toElementFinder__with_SQLocator_arg() {
         // given
         SQCssTagNameSelector aTagSelector = new SQCssTagNameSelector("a");
         SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
@@ -55,12 +55,12 @@ public class SQCssConditionalSelectorTest {
         // a b.condition
         SQCssDescendantSelector descendantSelector = new SQCssDescendantSelector(aTagSelector, conditionalSelector);
         // when
-        ElementFinder locator = descendantSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder elementFinder = descendantSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(locator.getCssFinder().toString(), is("a b.condition"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.getXPathExpression(), is(".//*[self::a]//*[self::b and contains(concat(' ', normalize-space(@class), ' '), ' condition ')]"));
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getCssFinder().toString(), is("a b.condition"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[self::a]//*[self::b and contains(concat(' ', normalize-space(@class), ' '), ' condition ')]"));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
 }

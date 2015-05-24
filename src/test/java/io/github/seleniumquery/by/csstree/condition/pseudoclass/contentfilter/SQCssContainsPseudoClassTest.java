@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.contentfilter;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 
@@ -35,7 +35,7 @@ public class SQCssContainsPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__REGARDLESS_of_driver_native_support() {
+    public void toElementFinder__REGARDLESS_of_driver_native_support() {
         assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport(
                 new SQCssContainsPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("my stuff")),
                 CONTAINS_PSEUDO,
