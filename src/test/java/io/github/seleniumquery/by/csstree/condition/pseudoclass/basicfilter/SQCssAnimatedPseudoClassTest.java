@@ -30,7 +30,7 @@ public class SQCssAnimatedPseudoClassTest {
     }
 
     @Test(expected = UnsupportedPseudoClassException.class)
-    public void toSQLocator__should_just_throw_exception() {
+    public void toElementFinder__should_just_throw_exception() {
         new SQCssAnimatedPseudoClass().toElementFinder(UNIVERSAL_SELECTOR_LOCATOR);
     }
 

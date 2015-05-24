@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.locator.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
@@ -37,7 +37,7 @@ public class SQCssGtPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__gt_should_throw_exception_if_argument_is_not_an_integer() {
+    public void toElementFinder__gt_should_throw_exception_if_argument_is_not_an_integer() {
         assertGtArgumentIsNotValid("a");
         assertGtArgumentIsNotValid("");
         assertGtArgumentIsNotValid("+");
@@ -61,7 +61,7 @@ public class SQCssGtPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__gt_0__only_generates_XPath_regardless_of_native_support() {
+    public void toElementFinder__gt_0__only_generates_XPath_regardless_of_native_support() {
         String gt0XPathExpression = "(.//*)[position() > 1]";
         assertGtArgumentGeneratesXPath("0", gt0XPathExpression);
         assertGtArgumentGeneratesXPath("+0", gt0XPathExpression);
@@ -79,7 +79,7 @@ public class SQCssGtPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__gt_1__only_generates_XPath_regardless_of_native_support() {
+    public void toElementFinder__gt_1__only_generates_XPath_regardless_of_native_support() {
         String gt1XPathExpression = "(.//*)[position() > 2]";
         assertGtArgumentGeneratesXPath("1", gt1XPathExpression);
         assertGtArgumentGeneratesXPath("+1", gt1XPathExpression);
@@ -89,7 +89,7 @@ public class SQCssGtPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__gt_2_NEGATIVE__only_generates_XPath_regardless_of_native_support() {
+    public void toElementFinder__gt_2_NEGATIVE__only_generates_XPath_regardless_of_native_support() {
         String gtNegative2XPathExpression = "(.//*)[position() > (last()-1)]";
         assertGtArgumentGeneratesXPath("-2", gtNegative2XPathExpression);
         assertGtArgumentGeneratesXPath("-2", gtNegative2XPathExpression);

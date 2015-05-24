@@ -36,14 +36,14 @@ public class SQCssFunctionalPseudoClassConditionTest {
     }
 
     @Test
-    public void toSQLocator__should_call_toSQLocator_in_object_returned_from_strategy_method() throws Exception {
-        final ElementFinder argLocator = new ElementFinder((WebDriver) null, null, null);
-        final ElementFinder returningLocator = new ElementFinder((WebDriver) null, null, null);
-        final SQCssConditionImplementedLocators locatorGen = new SQCssConditionImplementedLocators() {
+    public void toElementFinder__should_call_toSQLocator_in_object_returned_from_strategy_method() throws Exception {
+        final ElementFinder argFinder = new ElementFinder((WebDriver) null, null, null);
+        final ElementFinder returningFinder = new ElementFinder((WebDriver) null, null, null);
+        final SQCssConditionImplementedLocators finderGen = new SQCssConditionImplementedLocators() {
             @Override
-            public ElementFinder toElementFinder(ElementFinder leftLocator) {
-                if (leftLocator == argLocator)
-                    return returningLocator;
+            public ElementFinder toElementFinder(ElementFinder leftFinder) {
+                if (leftFinder == argFinder)
+                    return returningFinder;
                 return null;
             }
         };
@@ -51,12 +51,12 @@ public class SQCssFunctionalPseudoClassConditionTest {
         SQCssFunctionalPseudoClassCondition functionalPseudoClassCondition = new SQCssFunctionalPseudoClassCondition(pseudoClassSelector) {
             @Override
             public SQCssConditionImplementedLocators getSQCssLocatorGenerationStrategy() {
-                return locatorGen;
+                return finderGen;
             }
         };
 
-        ElementFinder returnedLocator = functionalPseudoClassCondition.toElementFinder(argLocator);
-        assertThat(returnedLocator, is(returningLocator));
+        ElementFinder returnedLocator = functionalPseudoClassCondition.toElementFinder(argFinder);
+        assertThat(returnedLocator, is(returningFinder));
     }
 
 }

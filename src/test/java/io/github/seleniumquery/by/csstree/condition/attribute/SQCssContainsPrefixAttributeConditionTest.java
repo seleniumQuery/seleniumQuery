@@ -32,15 +32,15 @@ public class SQCssContainsPrefixAttributeConditionTest {
         SQCssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new SQCssContainsPrefixAttributeCondition("hreflang", "en");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = containsPrefixAttributeCondition.toElementFinder(previous);
+        ElementFinder elementFinder = containsPrefixAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCssFinder().toString(), is("[hreflang|='en']"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getCssFinder().toString(), is("[hreflang|='en']"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
 
         String hreflang = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'hreflang']";
-        assertThat(locator.getXPathExpression(), is(String.format(".//*[(%s = 'en' or starts-with(%s, 'en-'))]", hreflang, hreflang)));
+        assertThat(elementFinder.getXPathExpression(), is(String.format(".//*[(%s = 'en' or starts-with(%s, 'en-'))]", hreflang, hreflang)));
 
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
 }

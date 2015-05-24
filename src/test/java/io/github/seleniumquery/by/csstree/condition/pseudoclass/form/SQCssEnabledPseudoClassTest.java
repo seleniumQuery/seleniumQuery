@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 
 public class SQCssEnabledPseudoClassTest {
@@ -35,7 +35,7 @@ public class SQCssEnabledPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__when_driver_has_native_support() {
+    public void toElementFinder__when_driver_has_native_support() {
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
             new SQCssEnabledPseudoClass(),
             ENABLED_PSEUDO,
@@ -44,7 +44,7 @@ public class SQCssEnabledPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__when_driver_does_NOT_have_native_support() {
+    public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(
             new SQCssEnabledPseudoClass(),
             ENABLED_PSEUDO,

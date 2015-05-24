@@ -44,7 +44,7 @@ public class SQCssTagNameSelector implements SQCssSelector {
     }
 
     @Override
-    public ElementFinder toSQLocator(WebDriver webDriver) {
+    public ElementFinder toElementFinder(WebDriver webDriver) {
         XPathAndFilterFinder xPathAndFilterFinder = new XPathAndFilterFinder(toXPath(), ElementFilterList.FILTER_NOTHING_LIST) {
             @Override
             public String getXPathExpression() {
@@ -55,7 +55,7 @@ public class SQCssTagNameSelector implements SQCssSelector {
     }
 
     @Override
-    public ElementFinder toSQLocator(ElementFinder leftLocator) {
+    public ElementFinder toElementFinder(ElementFinder leftLocator) {
         CSSFinder combinedCssSelector = leftLocator.getCssFinder().merge(toCSS());
         String combinedXPathExp = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
         return new ElementFinder(combinedCssSelector, combinedXPathExp, leftLocator);

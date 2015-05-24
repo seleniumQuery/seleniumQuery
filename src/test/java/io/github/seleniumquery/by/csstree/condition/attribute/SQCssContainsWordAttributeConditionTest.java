@@ -32,15 +32,15 @@ public class SQCssContainsWordAttributeConditionTest {
         SQCssContainsWordAttributeCondition containsWordAttributeCondition = new SQCssContainsWordAttributeCondition("values", "10");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = containsWordAttributeCondition.toElementFinder(previous);
+        ElementFinder elementFinder = containsWordAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCssFinder().toString(), is("[values~='10']"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getCssFinder().toString(), is("[values~='10']"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'values']";
-        assertThat(locator.getXPathExpression(), is(".//*[contains(concat(' ', normalize-space("+attrName+"), ' '), ' 10 ')]"));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[contains(concat(' ', normalize-space("+attrName+"), ' '), ' 10 ')]"));
 
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
 }

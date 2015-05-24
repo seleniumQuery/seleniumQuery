@@ -27,31 +27,31 @@ import static org.junit.Assert.assertThat;
 public class SQCssEqualsOrHasAttributeConditionTest {
 
     @Test
-    public void toSQLocator__has_attribute() {
+    public void toElementFinder__has_attribute() {
         // given
         SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = hasAttributeCondition.toElementFinder(previous);
+        ElementFinder elementFinder = hasAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCssFinder().toString(), is("[attrib]"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.getXPathExpression(), is(".//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attrib']]"));
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getCssFinder().toString(), is("[attrib]"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attrib']]"));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
     @Test
-    public void toSQLocator__equals_attribute() {
+    public void toElementFinder__equals_attribute() {
         // given
         SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib", "valz");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = hasAttributeCondition.toElementFinder(previous);
+        ElementFinder elementFinder = hasAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCssFinder().toString(), is("[attrib=valz]"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.getXPathExpression(), is(".//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attrib']='valz']"));
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getCssFinder().toString(), is("[attrib=valz]"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attrib']='valz']"));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
 }

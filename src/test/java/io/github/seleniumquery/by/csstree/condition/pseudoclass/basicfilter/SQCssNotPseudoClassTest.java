@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassHasLocatorWhenNativelySupported;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassHasLocatorWhenNotNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasFinderWhenNotNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasLocatorWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
@@ -35,36 +35,36 @@ public class SQCssNotPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__when_driver_has_native_support() {
+    public void toElementFinder__when_driver_has_native_support() {
         assertPseudoClassHasLocatorWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("span")), // :not(span)
                 ":not(span)",
-                PseudoClassAssertLocatorUtils.PURE_CSS_IS_SUPPORTED,
+                PseudoClassAssertFinderUtils.PURE_CSS_IS_SUPPORTED,
                 ".//*[not(self::span)]",
                 empty()
         );
     }
 
     @Test
-    public void toSQLocator__when_driver_does_NOT_have_native_support() {
-        assertPseudoClassHasLocatorWhenNotNativelySupported(
+    public void toElementFinder__when_driver_does_NOT_have_native_support() {
+        assertPseudoClassHasFinderWhenNotNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("tag")), // :not(tag)
-                PseudoClassAssertLocatorUtils.CSS_UNIVERSAL_SELECTOR,
-                PseudoClassAssertLocatorUtils.PURE_CSS_IS_NOT_SUPPORTED,
+                PseudoClassAssertFinderUtils.CSS_UNIVERSAL_SELECTOR,
+                PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::tag)]",
                 empty()
         );
     }
 
     @Test
-    public void toSQLocator__when_driver_has_native_support_BUT_inner_css_can_be_separated() {
+    public void toElementFinder__when_driver_has_native_support_BUT_inner_css_can_be_separated() {
         assertPseudoClassHasLocatorWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h1,h2")), // :not(h1,h2)
                 ":not(h1):not(h2)",
-                PseudoClassAssertLocatorUtils.PURE_CSS_IS_SUPPORTED,
+                PseudoClassAssertFinderUtils.PURE_CSS_IS_SUPPORTED,
                 ".//*[not(self::h1 | self::h2)]",
                 empty()
         );
@@ -85,48 +85,48 @@ public class SQCssNotPseudoClassTest {
      */
 
     @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
-    public void toSQLocator__when_driver_has_native_support_BUT_inner_css_CANT_be_separated() {
+    public void toElementFinder__when_driver_has_native_support_BUT_inner_css_CANT_be_separated() {
         assertPseudoClassHasLocatorWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3 h4")), // :not(h3 h4)
                 "*",
-                PseudoClassAssertLocatorUtils.PURE_CSS_IS_NOT_SUPPORTED,
+                PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and ANY-ANCESTOR/*[self::h3])]",
                 empty()
         );
     }
 
     @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
-    public void toSQLocator__not_and_direct_ancestor() {
+    public void toElementFinder__not_and_direct_ancestor() {
         assertPseudoClassHasLocatorWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3>h4")), // :not(h3>h4)
                 "*",
-                PseudoClassAssertLocatorUtils.PURE_CSS_IS_NOT_SUPPORTED,
+                PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and DIRECT-ANCESTOR/*[self::h3])]",
                 empty()
         );
     }
 
     @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
-    public void toSQLocator__not_and_direct_sibling() {
+    public void toElementFinder__not_and_direct_sibling() {
         assertPseudoClassHasLocatorWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3+h4")), // :not(h3+h4)
                 "*",
-                PseudoClassAssertLocatorUtils.PURE_CSS_IS_NOT_SUPPORTED,
+                PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and DIRECT-SIBLING/*[self::h3])]",
                 empty()
         );
     }
 
     @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
-    public void toSQLocator__not_and_general_sibling() {
+    public void toElementFinder__not_and_general_sibling() {
         assertPseudoClassHasLocatorWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3+h4")), // :not(h3~h4)
                 "*",
-                PseudoClassAssertLocatorUtils.PURE_CSS_IS_NOT_SUPPORTED,
+                PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and GENERAL-SIBLING/*[self::h3])]",
                 empty()
         );

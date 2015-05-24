@@ -23,7 +23,7 @@ import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.*;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.*;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 import static io.github.seleniumquery.by.locator.ElementFinderUtilsTest.*;
@@ -46,12 +46,12 @@ public class SQCssSelectedPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__when_driver_has_native_support() {
+    public void toElementFinder__when_driver_has_native_support() {
         // supports pure CSS, but it is a translated one
-        ElementFinder previousLocator = universalSelectorFinder(ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO));
-        assertPseudoClassHasLocator(
+        ElementFinder previousFinder = universalSelectorFinder(ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO));
+        assertPseudoClassHasFinder(
                 new SQCssSelectedPseudoClass(),
-                previousLocator,
+                previousFinder,
                 "option:checked",
                 PURE_CSS_IS_SUPPORTED,
                 SELECTED_XPATH_EXPRESSION,
@@ -60,8 +60,8 @@ public class SQCssSelectedPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__when_driver_does_NOT_have_native_support() {
-        assertPseudoClassHasLocatorWhenNotNativelySupported(
+    public void toElementFinder__when_driver_does_NOT_have_native_support() {
+        assertPseudoClassHasFinderWhenNotNativelySupported(
                 SELECTED_PSEUDO,
                 new SQCssSelectedPseudoClass(),
                 "*",
@@ -72,14 +72,14 @@ public class SQCssSelectedPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__when_driver_has_native_supportx() {
+    public void toElementFinder__when_driver_has_native_supportx() {
         // supports pure CSS, but it is a translated one
         WebDriver mockDriverWithNativeSupportForChecked = ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO);
-        ElementFinder locatorAfterChecked = new SQCssCheckedPseudoClass().toElementFinder(universalSelectorFinder(mockDriverWithNativeSupportForChecked));
+        ElementFinder finderAfterChecked = new SQCssCheckedPseudoClass().toElementFinder(universalSelectorFinder(mockDriverWithNativeSupportForChecked));
 
-        assertPseudoClassHasLocator(
+        assertPseudoClassHasFinder(
                 new SQCssSelectedPseudoClass(),
-                locatorAfterChecked,
+                finderAfterChecked,
                 "option:checked:checked",
                 PURE_CSS_IS_SUPPORTED,
                 CHECKED_AND_SELECTED_XPATH_EXPRESSION,
@@ -93,12 +93,12 @@ public class SQCssSelectedPseudoClassTest {
      * See: {@link integration.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest}
      */
     @Test
-    public void toSQLocator__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
+    public void toElementFinder__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
         WebDriver driver = createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(CHECKED_PSEUDO);
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(driver);
-        assertPseudoClassHasLocator(
+        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(driver);
+        assertPseudoClassHasFinder(
                 new SQCssSelectedPseudoClass(),
-                previousLocator,
+                previousFinder,
                 CSS_UNIVERSAL_SELECTOR,
                 PURE_CSS_IS_NOT_SUPPORTED,
                 SELECTED_XPATH_EXPRESSION,
@@ -112,12 +112,12 @@ public class SQCssSelectedPseudoClassTest {
      * See: {@link integration.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest}
      */
     @Test
-    public void toSQLocator__when_driver_is_HTMLUNITDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
+    public void toElementFinder__when_driver_is_HTMLUNITDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
         WebDriver driver = createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(CHECKED_PSEUDO);
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(driver);
-        assertPseudoClassHasLocator(
+        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(driver);
+        assertPseudoClassHasFinder(
                 new SQCssSelectedPseudoClass(),
-                previousLocator,
+                previousFinder,
                 CSS_UNIVERSAL_SELECTOR,
                 PURE_CSS_IS_NOT_SUPPORTED,
                 SELECTED_XPATH_EXPRESSION,

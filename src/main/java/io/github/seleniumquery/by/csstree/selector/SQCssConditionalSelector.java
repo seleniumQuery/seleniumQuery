@@ -46,15 +46,15 @@ public class SQCssConditionalSelector implements SQCssSelector {
     }
 
     @Override
-    public ElementFinder toSQLocator(WebDriver webDriver) {
-        ElementFinder locator = sqCssSelector.toSQLocator(webDriver);
-        return ((SQCssConditionImplementedLocators) sqCssCondition).toElementFinder(locator);
+    public ElementFinder toElementFinder(WebDriver webDriver) {
+        ElementFinder elementFinder = sqCssSelector.toElementFinder(webDriver);
+        return ((SQCssConditionImplementedLocators) sqCssCondition).toElementFinder(elementFinder);
     }
 
     @Override
-    public ElementFinder toSQLocator(ElementFinder leftLocator) {
-        ElementFinder locator = sqCssSelector.toSQLocator(leftLocator);
-        return ((SQCssConditionImplementedLocators) sqCssCondition).toElementFinder(locator);
+    public ElementFinder toElementFinder(ElementFinder leftLocator) {
+        ElementFinder elementFinder = sqCssSelector.toElementFinder(leftLocator);
+        return ((SQCssConditionImplementedLocators) sqCssCondition).toElementFinder(elementFinder);
     }
 
 }

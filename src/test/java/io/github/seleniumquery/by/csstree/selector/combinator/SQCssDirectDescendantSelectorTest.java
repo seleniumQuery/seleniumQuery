@@ -35,12 +35,12 @@ public class SQCssDirectDescendantSelectorTest {
         SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
         SQCssDirectDescendantSelector directDescendantSelector = new SQCssDirectDescendantSelector(aTagSelector, bTagSelector);
         // when
-        ElementFinder locator = directDescendantSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder elementFinder = directDescendantSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(locator.getCssFinder().toString(), is("a>b"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.getXPathExpression(), is(".//*[self::a]/*[self::b]"));
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getCssFinder().toString(), is("a>b"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[self::a]/*[self::b]"));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
 }

@@ -35,12 +35,12 @@ public class SQCssDescendantSelectorTest {
         SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
         SQCssDescendantSelector descendantSelector = new SQCssDescendantSelector(aTagSelector, bTagSelector);
         // when
-        ElementFinder locator = descendantSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder elementFinder = descendantSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(locator.getCssFinder().toString(), is("a b"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.getXPathExpression(), is(".//*[self::a]//*[self::b]"));
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getCssFinder().toString(), is("a b"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[self::a]//*[self::b]"));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
     @Test
@@ -52,12 +52,12 @@ public class SQCssDescendantSelectorTest {
         SQCssTagNameSelector thirdSelector = new SQCssTagNameSelector("c");
         SQCssDescendantSelector descendantSelector = new SQCssDescendantSelector(firstAndSecondSelectors, thirdSelector);
         // when
-        ElementFinder locator = descendantSelector.toSQLocator(mock(WebDriver.class));
+        ElementFinder elementFinder = descendantSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(locator.getCssFinder().toString(), is("a b c"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
-        assertThat(locator.getXPathExpression(), is(".//*[self::a]//*[self::b]//*[self::c]"));
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getCssFinder().toString(), is("a b c"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[self::a]//*[self::b]//*[self::c]"));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
 }

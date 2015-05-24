@@ -27,20 +27,20 @@ import static org.junit.Assert.assertThat;
 public class SQCssEndsWithAttributeConditionTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssEndsWithAttributeCondition endsWithAttributeCondition = new SQCssEndsWithAttributeCondition("attribute", "stringToEnd");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = endsWithAttributeCondition.toElementFinder(previous);
+        ElementFinder elementFinder = endsWithAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCssFinder().toString(), is("[attribute$='stringToEnd']"));
-        assertThat(locator.canFetchThroughCssAlone(), is(true));
+        assertThat(elementFinder.getCssFinder().toString(), is("[attribute$='stringToEnd']"));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";
-        assertThat(locator.getXPathExpression(), is(".//*[substring("+attrName+", string-length("+attrName+")-10) = 'stringToEnd']"));
+        assertThat(elementFinder.getXPathExpression(), is(".//*[substring("+attrName+", string-length("+attrName+")-10) = 'stringToEnd']"));
 
-        assertThat(locator.getElementFilterList().getElementFilters(), empty());
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
     }
 
 }

@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.locator.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
@@ -42,7 +42,7 @@ public class SQCssNthPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__nth_should_throw_exception_if_argument_is_not_an_integer() {
+    public void toElementFinder__nth_should_throw_exception_if_argument_is_not_an_integer() {
         assertNthArgumentIsNotValid("a");
         assertNthArgumentIsNotValid("");
         assertNthArgumentIsNotValid("+");
@@ -66,7 +66,7 @@ public class SQCssNthPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__nth_0__only_generates_XPath_regardless_of_native_support() {
+    public void toElementFinder__nth_0__only_generates_XPath_regardless_of_native_support() {
         String nth0XPathExpression = "(.//*)[position() = 1]";
         assertNthArgumentGeneratesXPath("0", nth0XPathExpression);
         assertNthArgumentGeneratesXPath("+0", nth0XPathExpression);
@@ -84,7 +84,7 @@ public class SQCssNthPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__nth_1__only_generates_XPath_regardless_of_native_support() {
+    public void toElementFinder__nth_1__only_generates_XPath_regardless_of_native_support() {
         String nth1XPathExpression = "(.//*)[position() = 2]";
         assertNthArgumentGeneratesXPath("1", nth1XPathExpression);
         assertNthArgumentGeneratesXPath("+1", nth1XPathExpression);
@@ -94,7 +94,7 @@ public class SQCssNthPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__nth_2_NEGATIVE__only_generates_XPath_regardless_of_native_support() {
+    public void toElementFinder__nth_2_NEGATIVE__only_generates_XPath_regardless_of_native_support() {
         String nthNegative2XPathExpression = "(.//*)[position() = (last()-1)]";
         assertNthArgumentGeneratesXPath("-2", nthNegative2XPathExpression);
         assertNthArgumentGeneratesXPath("-2", nthNegative2XPathExpression);
@@ -104,7 +104,7 @@ public class SQCssNthPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__nth_1_NEGATIVE__does_not_add_MINUS_ZERO_in_the_XPath_expression() {
+    public void toElementFinder__nth_1_NEGATIVE__does_not_add_MINUS_ZERO_in_the_XPath_expression() {
         assertNthArgumentGeneratesXPath("-1", "(.//*)[position() = last()]");
     }
 

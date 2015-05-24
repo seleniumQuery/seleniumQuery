@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.seleniumquery;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertLocatorUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
 
 public class SQCssPresentPseudoClassTest {
@@ -33,7 +33,7 @@ public class SQCssPresentPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__when_driver_has_native_support() {
+    public void toElementFinder__when_driver_has_native_support() {
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
                 new SQCssPresentPseudoClass(),
                 PRESENT_CSS_SELECTOR,

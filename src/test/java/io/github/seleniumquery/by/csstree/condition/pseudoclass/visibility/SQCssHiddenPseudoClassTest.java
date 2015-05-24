@@ -30,7 +30,7 @@ public class SQCssHiddenPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator__no_browser_has_native_support() {
+    public void toElementFinder__no_browser_has_native_support() {
         assertFilterOnlyPseudoGeneratesFilter(new SQCssHiddenPseudoClass(), HiddenPseudoClass.HIDDEN_FILTER);
     }
 

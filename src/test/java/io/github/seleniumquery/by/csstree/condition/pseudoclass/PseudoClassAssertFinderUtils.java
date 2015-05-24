@@ -33,7 +33,7 @@ import static org.junit.Assert.assertThat;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class PseudoClassAssertLocatorUtils {
+public class PseudoClassAssertFinderUtils {
 
     public static final boolean PURE_CSS_IS_SUPPORTED = true;
     public static final boolean PURE_CSS_IS_NOT_SUPPORTED = false;
@@ -45,12 +45,12 @@ public class PseudoClassAssertLocatorUtils {
                                                                         boolean canPureCss,
                                                                         String expectedXPath,
                                                                         Matcher<? super List<ElementFilter>> elementFilterMatcher) {
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(
+        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(
                 ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(pseudoExpressionThatShouldPassNativeSupportCheck)
         );
-        assertPseudoClassHasLocator(
+        assertPseudoClassHasFinder(
                 pseudoClassObject,
-                previousLocator,
+                previousFinder,
                 expectedCss,
                 canPureCss,
                 expectedXPath,
@@ -58,18 +58,18 @@ public class PseudoClassAssertLocatorUtils {
         );
     }
 
-    public static void assertPseudoClassHasLocatorWhenNotNativelySupported(String pseudoExpressionThatShouldNotPassNativeSupportCheck,
-                                                                           SQCssConditionImplementedLocators pseudoClassObject,
-                                                                           String expectedCss,
-                                                                           boolean canPureCss,
-                                                                           String expectedXPath,
-                                                                           Matcher<? super List<ElementFilter>> elementFilterMatcher) {
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(
+    public static void assertPseudoClassHasFinderWhenNotNativelySupported(String pseudoExpressionThatShouldNotPassNativeSupportCheck,
+                                                                          SQCssConditionImplementedLocators pseudoClassObject,
+                                                                          String expectedCss,
+                                                                          boolean canPureCss,
+                                                                          String expectedXPath,
+                                                                          Matcher<? super List<ElementFilter>> elementFilterMatcher) {
+        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(
                 ElementFinderUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoExpressionThatShouldNotPassNativeSupportCheck)
         );
-        assertPseudoClassHasLocator(
+        assertPseudoClassHasFinder(
                 pseudoClassObject,
-                previousLocator,
+                previousFinder,
                 expectedCss, canPureCss,
                 expectedXPath,
                 elementFilterMatcher
@@ -122,7 +122,7 @@ public class PseudoClassAssertLocatorUtils {
                                                                                              String pseudoClass,
                                                                                              String expectedXPath,
                                                                                              ElementFilter filter) {
-        assertPseudoClassHasLocatorWhenNotNativelySupported(
+        assertPseudoClassHasFinderWhenNotNativelySupported(
                 pseudoClass,
                 pseudoClassObject,
                 CSS_UNIVERSAL_SELECTOR,
@@ -137,7 +137,7 @@ public class PseudoClassAssertLocatorUtils {
      */
     public static void assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported(SQCssConditionImplementedLocators pseudoClassObject,
                                                                                       String pseudoClass, String expectedXPath) {
-        assertPseudoClassHasLocatorWhenNotNativelySupported(
+        assertPseudoClassHasFinderWhenNotNativelySupported(
                 pseudoClass,
                 pseudoClassObject,
                 CSS_UNIVERSAL_SELECTOR,
@@ -171,7 +171,7 @@ public class PseudoClassAssertLocatorUtils {
                 expectedXPath,
                 empty()
         );
-        assertPseudoClassHasLocatorWhenNotNativelySupported(
+        assertPseudoClassHasFinderWhenNotNativelySupported(
                 pseudoClass, pseudoClassObject,
                 expectedCss, PURE_CSS_IS_SUPPORTED,
                 expectedXPath,
@@ -189,20 +189,20 @@ public class PseudoClassAssertLocatorUtils {
         );
     }
 
-    public static void assertPseudoClassHasLocator(SQCssConditionImplementedLocators pseudoClassObject,
-                                                   ElementFinder previous,
-                                                   String expectedCss, boolean canPureCss,
-                                                   String expectedXPath,
-                                                   Matcher<? super List<ElementFilter>> elementFilterMatcher) {
+    public static void assertPseudoClassHasFinder(SQCssConditionImplementedLocators pseudoClassObject,
+                                                  ElementFinder previous,
+                                                  String expectedCss, boolean canPureCss,
+                                                  String expectedXPath,
+                                                  Matcher<? super List<ElementFilter>> elementFilterMatcher) {
         // given
         // args
         // when
-        ElementFinder locator = pseudoClassObject.toElementFinder(previous);
+        ElementFinder elementFinder = pseudoClassObject.toElementFinder(previous);
         // then
-        assertThat("CSS selector", locator.getCssFinder().toString(), is(expectedCss));
-        assertThat("Can pure CSS?", locator.canFetchThroughCssAlone(), is(canPureCss));
-        assertThat("XPath Expression", locator.getXPathExpression(), is(expectedXPath));
-        assertThat("ElementFilterList", locator.getElementFilterList().getElementFilters(), elementFilterMatcher);
+        assertThat("CSS selector", elementFinder.getCssFinder().toString(), is(expectedCss));
+        assertThat("Can pure CSS?", elementFinder.canFetchThroughCssAlone(), is(canPureCss));
+        assertThat("XPath Expression", elementFinder.getXPathExpression(), is(expectedXPath));
+        assertThat("ElementFilterList", elementFinder.getElementFilterList().getElementFilters(), elementFilterMatcher);
     }
 
 }
