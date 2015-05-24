@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition;
 
-import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.finder.ElementFinder;
 
 /**
  * This is temporary.

@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.locator;
+package io.github.seleniumquery.by.finder;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.locator.CSSFinder.fromTag;
-import static io.github.seleniumquery.by.locator.CSSFinder.universalSelector;
+import static io.github.seleniumquery.by.finder.CSSFinder.fromTag;
+import static io.github.seleniumquery.by.finder.CSSFinder.universalSelector;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

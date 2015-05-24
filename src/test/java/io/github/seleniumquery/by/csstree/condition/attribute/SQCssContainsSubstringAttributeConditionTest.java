@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.locator.ElementFinder;
-import io.github.seleniumquery.by.locator.ElementFinderUtilsTest;
+import io.github.seleniumquery.by.finder.ElementFinder;
+import io.github.seleniumquery.by.finder.ElementFinderUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

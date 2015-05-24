@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.CSSFinder;
+import io.github.seleniumquery.by.finder.CSSFinder;
 import org.openqa.selenium.WebDriver;
 
 /**

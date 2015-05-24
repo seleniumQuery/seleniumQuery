@@ -18,12 +18,12 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerati
 
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.CSSFinder;
-import io.github.seleniumquery.by.locator.ElementFinder;
-import io.github.seleniumquery.by.locator.XPathAndFilterFinder;
+import io.github.seleniumquery.by.finder.CSSFinder;
+import io.github.seleniumquery.by.finder.ElementFinder;
+import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.locator.CSSFinder.CSS_NOT_NATIVELY_SUPPORTED;
+import static io.github.seleniumquery.by.finder.CSSFinder.CSS_NOT_NATIVELY_SUPPORTED;
 
 /**
  * Represents a strategy where the selector may or may not be natively supported by the driver.

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.locator;
+package io.github.seleniumquery.by.finder;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import org.openqa.selenium.SearchContext;

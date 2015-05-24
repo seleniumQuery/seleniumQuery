@@ -18,9 +18,9 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.CSSFinder;
-import io.github.seleniumquery.by.locator.ElementFinder;
-import io.github.seleniumquery.by.locator.SQLocatorUtils;
+import io.github.seleniumquery.by.finder.CSSFinder;
+import io.github.seleniumquery.by.finder.ElementFinder;
+import io.github.seleniumquery.by.finder.SQLocatorUtils;
 
 /**
  * A class that holds an attribute name and a wanted value.
