@@ -41,7 +41,7 @@ public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition {
     };
 
     @Override
-    public NeverNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
         return hiddenPseudoClassLocatorGenerationStrategy;
     }
 

@@ -72,7 +72,7 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
     };
 
     @Override
-    public MaybeNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
         return checkedPseudoClassLocatorGenerationStrategy;
     }
 

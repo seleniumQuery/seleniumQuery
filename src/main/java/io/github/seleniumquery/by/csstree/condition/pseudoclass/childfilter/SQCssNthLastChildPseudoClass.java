@@ -59,7 +59,7 @@ public class SQCssNthLastChildPseudoClass extends SQCssFunctionalPseudoClassCond
     }
 
     @Override
-    public MaybeNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
         return nthLastChildPseudoClassLocatorGenerationStrategy;
     }
 

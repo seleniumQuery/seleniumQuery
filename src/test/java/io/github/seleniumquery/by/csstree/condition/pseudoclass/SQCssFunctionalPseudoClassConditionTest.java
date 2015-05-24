@@ -50,7 +50,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
         PseudoClassSelector pseudoClassSelector = PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector("1");
         SQCssFunctionalPseudoClassCondition functionalPseudoClassCondition = new SQCssFunctionalPseudoClassCondition(pseudoClassSelector) {
             @Override
-            public SQCssConditionImplementedLocators getSQCssLocatorGenerationStrategy() {
+            public SQCssConditionImplementedLocators getElementFinderFactoryStrategy() {
                 return finderGen;
             }
         };

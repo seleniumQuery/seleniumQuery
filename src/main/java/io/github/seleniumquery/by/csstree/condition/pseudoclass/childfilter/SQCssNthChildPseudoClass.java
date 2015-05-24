@@ -35,7 +35,7 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
 
     public static final String PSEUDO = "nth-child";
 
-    public MaybeNativelySupportedPseudoClass nthChildPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
+    public MaybeNativelySupportedPseudoClass nthChildPseudoElementFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
             return ":"+PSEUDO+"(1)";
@@ -59,8 +59,8 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
     }
 
     @Override
-    public MaybeNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
-        return nthChildPseudoClassLocatorGenerationStrategy;
+    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
+        return nthChildPseudoElementFinderFactoryStrategy;
     }
 
     private NthArgument getNthChildArgument() {
