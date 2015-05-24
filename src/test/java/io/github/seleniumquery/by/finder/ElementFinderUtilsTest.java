@@ -66,7 +66,7 @@ public class ElementFinderUtilsTest {
     }
 
     private void assertLeftAndRightExpressionsAreSimplyMergedTo(String leftXPathExpression, String rightXPathExpression, String mergedExpression) {
-        String mergedXPath = SQLocatorUtils.conditionalSimpleXPathMerge(leftXPathExpression, rightXPathExpression);
+        String mergedXPath = ElementFinderUtils.conditionalSimpleXPathMerge(leftXPathExpression, rightXPathExpression);
         assertThat(mergedXPath, is(mergedExpression));
     }
 
@@ -97,23 +97,23 @@ public class ElementFinderUtilsTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void conditionalSimpleXPathMerge__should_validate_the_left_expression_for_nullity() {
-        SQLocatorUtils.conditionalSimpleXPathMerge(null, "newStuff");
+        ElementFinderUtils.conditionalSimpleXPathMerge(null, "newStuff");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void conditionalSimpleXPathMerge__should_throw_exception_if_the_left_expression_does_not_end_in_square_braces() {
-        SQLocatorUtils.conditionalSimpleXPathMerge("true()", "newStuff");
+        ElementFinderUtils.conditionalSimpleXPathMerge("true()", "newStuff");
     }
 
     @Test
     public void conditionalToAllXPathMerge__should_merge_new_expression_with_left_expression_around_parenthesis() {
-        String mergedXPath = SQLocatorUtils.conditionalToAllXPathMerge(".//*[self::a]/*[@color = 'blue']", "newStuff");
+        String mergedXPath = ElementFinderUtils.conditionalToAllXPathMerge(".//*[self::a]/*[@color = 'blue']", "newStuff");
         assertThat(mergedXPath, is("(.//*[self::a]/*[@color = 'blue'])[newStuff]"));
     }
 
     @Test
     public void conditionalToAllXPathMerge__should_remove_last_condition_of_the_left_expression_if_it_was_just_true() {
-        String mergedXPath = SQLocatorUtils.conditionalToAllXPathMerge(".//*[self::a]/*[true()]", "newStuff");
+        String mergedXPath = ElementFinderUtils.conditionalToAllXPathMerge(".//*[self::a]/*[true()]", "newStuff");
         assertThat(mergedXPath, is("(.//*[self::a]/*)[newStuff]"));
     }
 

@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.finder;
 /**
  * Utilities for SQCss* classes.
  */
-public class SQLocatorUtils {
+public class ElementFinderUtils {
 
     public static String conditionalSimpleXPathMerge(String leftXPathExpression, String rightXPathExpression) {
         if (leftXPathExpression == null || !leftXPathExpression.endsWith("]")) {
