@@ -32,7 +32,7 @@ public class SQCssEmptyPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "empty";
 
-    public NeverNativelySupportedPseudoClass emptyPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass emptyPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath("count(.//*) = 0");
@@ -41,7 +41,7 @@ public class SQCssEmptyPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return emptyPseudoClassLocatorGenerationStrategy;
+        return emptyPseudoClassFinderFactoryStrategy;
     }
 
 }

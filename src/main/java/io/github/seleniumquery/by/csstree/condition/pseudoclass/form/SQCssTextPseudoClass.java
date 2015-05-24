@@ -34,7 +34,7 @@ public class SQCssTextPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "text";
 
-    public NeverNativelySupportedPseudoClass textPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass textPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath("(self::input and (" + TYPE_ATTR_LC_VAL + " = 'text' or not(@type)))");
@@ -43,7 +43,7 @@ public class SQCssTextPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return textPseudoClassLocatorGenerationStrategy;
+        return textPseudoClassFinderFactoryStrategy;
     }
 
 }

@@ -35,7 +35,7 @@ public class SQCssNthLastChildPseudoClass extends SQCssFunctionalPseudoClassCond
 
     public static final String PSEUDO = "nth-last-child";
 
-    public MaybeNativelySupportedPseudoClass nthLastChildPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
+    public MaybeNativelySupportedPseudoClass nthLastChildPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
             return ":"+PSEUDO+"(1)";
@@ -60,7 +60,7 @@ public class SQCssNthLastChildPseudoClass extends SQCssFunctionalPseudoClassCond
 
     @Override
     public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return nthLastChildPseudoClassLocatorGenerationStrategy;
+        return nthLastChildPseudoClassFinderFactoryStrategy;
     }
 
     private NthArgument getNthChildArgument() {

@@ -50,7 +50,7 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
     public static final String PSEUDO = "checked";
     public static final String CHECKED_PSEUDO = ":checked";
 
-    public MaybeNativelySupportedPseudoClass checkedPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
+    public MaybeNativelySupportedPseudoClass checkedPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
             return isDriverWhereCheckedSelectorHasNoBugs(webDriver) && super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
@@ -73,7 +73,7 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return checkedPseudoClassLocatorGenerationStrategy;
+        return checkedPseudoClassFinderFactoryStrategy;
     }
 
     public static boolean isDriverWhereCheckedSelectorHasNoBugs(WebDriver webDriver) {

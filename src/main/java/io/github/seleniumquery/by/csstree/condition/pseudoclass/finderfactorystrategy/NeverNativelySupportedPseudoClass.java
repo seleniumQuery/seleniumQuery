@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.finder.CSSFinder;
 import org.openqa.selenium.WebDriver;
 
@@ -26,7 +26,7 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class NeverNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
+public abstract class NeverNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedFinders {
 
     @Override
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {

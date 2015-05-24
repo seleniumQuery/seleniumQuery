@@ -19,8 +19,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils;
 import org.junit.Test;
 
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasElementFinderWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasFinderWhenNotNativelySupported;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasLocatorWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
@@ -36,7 +36,7 @@ public class SQCssNotPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_has_native_support() {
-        assertPseudoClassHasLocatorWhenNativelySupported(
+        assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("span")), // :not(span)
                 ":not(span)",
@@ -60,7 +60,7 @@ public class SQCssNotPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_has_native_support_BUT_inner_css_can_be_separated() {
-        assertPseudoClassHasLocatorWhenNativelySupported(
+        assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h1,h2")), // :not(h1,h2)
                 ":not(h1):not(h2)",
@@ -86,7 +86,7 @@ public class SQCssNotPseudoClassTest {
 
     @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
     public void toElementFinder__when_driver_has_native_support_BUT_inner_css_CANT_be_separated() {
-        assertPseudoClassHasLocatorWhenNativelySupported(
+        assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3 h4")), // :not(h3 h4)
                 "*",
@@ -98,7 +98,7 @@ public class SQCssNotPseudoClassTest {
 
     @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
     public void toElementFinder__not_and_direct_ancestor() {
-        assertPseudoClassHasLocatorWhenNativelySupported(
+        assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3>h4")), // :not(h3>h4)
                 "*",
@@ -110,7 +110,7 @@ public class SQCssNotPseudoClassTest {
 
     @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
     public void toElementFinder__not_and_direct_sibling() {
-        assertPseudoClassHasLocatorWhenNativelySupported(
+        assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3+h4")), // :not(h3+h4)
                 "*",
@@ -122,7 +122,7 @@ public class SQCssNotPseudoClassTest {
 
     @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
     public void toElementFinder__not_and_general_sibling() {
-        assertPseudoClassHasLocatorWhenNativelySupported(
+        assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3+h4")), // :not(h3~h4)
                 "*",

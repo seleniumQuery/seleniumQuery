@@ -39,7 +39,7 @@ public class SQCssSubmitPseudoClass extends SQCssPseudoClassCondition {
             "(self::button and (" + TYPE_ATTR_LC_VAL + " = 'submit' or not(@type)))" +
         ")";
 
-    public NeverNativelySupportedPseudoClass submitPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass submitPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath(SUBMIT_XPATH_EXPRESSION);
@@ -48,7 +48,7 @@ public class SQCssSubmitPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return submitPseudoClassLocatorGenerationStrategy;
+        return submitPseudoClassFinderFactoryStrategy;
     }
 
 }

@@ -37,7 +37,7 @@ public class SQCssHeaderPseudoClass extends SQCssPseudoClassCondition {
             "self::h5 | self::h6 | self::h7 | self::h8 | self::h9" +
         ")";
 
-    public NeverNativelySupportedPseudoClass headerPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass headerPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath(HEADER_XPATH_EXPRESSION);
@@ -46,7 +46,7 @@ public class SQCssHeaderPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return headerPseudoClassLocatorGenerationStrategy;
+        return headerPseudoClassFinderFactoryStrategy;
     }
 
 }

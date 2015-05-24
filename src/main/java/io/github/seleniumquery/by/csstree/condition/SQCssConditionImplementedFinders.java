@@ -28,8 +28,8 @@ import io.github.seleniumquery.by.finder.ElementFinder;
  *
  * @deprecated temporary
  */
-public interface SQCssConditionImplementedLocators {
+public interface SQCssConditionImplementedFinders {
 
-    ElementFinder toElementFinder(ElementFinder leftLocator);
+    ElementFinder toElementFinder(ElementFinder leftFinder);
 
 }

@@ -31,7 +31,7 @@ public class SQCssEvenPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "even";
 
-    public NeverNativelySupportedPseudoClass evenPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass evenPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath("(position() mod 2) = 1");
@@ -40,7 +40,7 @@ public class SQCssEvenPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return evenPseudoClassLocatorGenerationStrategy;
+        return evenPseudoClassFinderFactoryStrategy;
     }
 
 }

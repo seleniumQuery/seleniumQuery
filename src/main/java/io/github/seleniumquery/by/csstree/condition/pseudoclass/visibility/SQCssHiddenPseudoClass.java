@@ -32,7 +32,7 @@ public class SQCssHiddenPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "hidden";
 
-    public NeverNativelySupportedPseudoClass hiddenPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass hiddenPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.filterOnly(HiddenPseudoClass.HIDDEN_FILTER);
@@ -41,7 +41,7 @@ public class SQCssHiddenPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return hiddenPseudoClassLocatorGenerationStrategy;
+        return hiddenPseudoClassFinderFactoryStrategy;
     }
 
 }

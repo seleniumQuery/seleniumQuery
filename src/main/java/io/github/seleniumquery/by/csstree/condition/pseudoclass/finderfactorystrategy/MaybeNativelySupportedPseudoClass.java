@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy;
 
 import io.github.seleniumquery.by.DriverVersionUtils;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.finder.CSSFinder;
 import io.github.seleniumquery.by.finder.ElementFinder;
 import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
@@ -31,31 +31,31 @@ import static io.github.seleniumquery.by.finder.CSSFinder.CSS_NOT_NATIVELY_SUPPO
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
+public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedFinders {
 
     @Override
-    public ElementFinder toElementFinder(ElementFinder leftLocator) {
-        WebDriver webDriver = leftLocator.getWebDriver();
+    public ElementFinder toElementFinder(ElementFinder leftFinder) {
+        WebDriver webDriver = leftFinder.getWebDriver();
         if (isThisCSSPseudoClassNativelySupportedOn(webDriver)) {
-            return createLocatorForNativelySupportedPseudo(leftLocator, webDriver);
+            return createFinderForNativelySupportedPseudo(leftFinder, webDriver);
         } else {
-            return createLocatorForUnsupportedPseudo(leftLocator, webDriver);
+            return createFinderForUnsupportedPseudo(leftFinder, webDriver);
         }
     }
 
-    private ElementFinder createLocatorForNativelySupportedPseudo(ElementFinder leftLocator, WebDriver webDriver) {
+    private ElementFinder createFinderForNativelySupportedPseudo(ElementFinder leftFinder, WebDriver webDriver) {
         return new ElementFinder(
                 webDriver,
-                leftLocator.getCssFinder().merge(toCssWhenNativelySupported(webDriver)),
-                leftLocator.getXPathAndFilterFinder().merge(toXPath(webDriver), xPathMergeStrategy())
+                leftFinder.getCssFinder().merge(toCssWhenNativelySupported(webDriver)),
+                leftFinder.getXPathAndFilterFinder().merge(toXPath(webDriver), xPathMergeStrategy())
         );
     }
 
-    private ElementFinder createLocatorForUnsupportedPseudo(ElementFinder leftLocator, WebDriver webDriver) {
+    private ElementFinder createFinderForUnsupportedPseudo(ElementFinder leftFinder, WebDriver webDriver) {
         return new ElementFinder(
                 webDriver,
                 CSS_NOT_NATIVELY_SUPPORTED,
-                leftLocator.getXPathAndFilterFinder().merge(toXPath(webDriver), xPathMergeStrategy())
+                leftFinder.getXPathAndFilterFinder().merge(toXPath(webDriver), xPathMergeStrategy())
         );
     }
 

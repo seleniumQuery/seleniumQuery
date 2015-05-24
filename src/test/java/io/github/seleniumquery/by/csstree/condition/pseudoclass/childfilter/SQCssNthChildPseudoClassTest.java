@@ -66,13 +66,13 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     private void assertNthChildArgumentIsNotValid(String nthChildArgument) {
-        assertNthChildArgumentIsNotValidOnLocator(nthChildArgument, UNIVERSAL_SELECTOR_FINDER_SUPPORTING_NTHCHILD_NATIVELY);
-        assertNthChildArgumentIsNotValidOnLocator(nthChildArgument, UNIVERSAL_SELECTOR_FINDER_NOT_SUPPORTING_NTHCHILD_NATIVELY);
+        assertNthChildArgumentIsNotValidOnFinder(nthChildArgument, UNIVERSAL_SELECTOR_FINDER_SUPPORTING_NTHCHILD_NATIVELY);
+        assertNthChildArgumentIsNotValidOnFinder(nthChildArgument, UNIVERSAL_SELECTOR_FINDER_NOT_SUPPORTING_NTHCHILD_NATIVELY);
     }
 
-    private void assertNthChildArgumentIsNotValidOnLocator(String nthChildArgument, ElementFinder universalSelectorLocator) {
+    private void assertNthChildArgumentIsNotValidOnFinder(String nthChildArgument, ElementFinder elementFinder) {
         try {
-            nthChild(nthChildArgument).toElementFinder(universalSelectorLocator);
+            nthChild(nthChildArgument).toElementFinder(elementFinder);
             fail("Should consider *:nth-child("+nthChildArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":nth-child()"));

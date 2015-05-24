@@ -35,7 +35,7 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
 
     private String typeAttributeValue;
 
-    public AlwaysNativelySupportedPseudoClass inputTypePseudoClassLocatorGenerationStrategy = new AlwaysNativelySupportedPseudoClass() {
+    public AlwaysNativelySupportedPseudoClass inputTypePseudoClassFinderFactoryStrategy = new AlwaysNativelySupportedPseudoClass() {
         @Override
         public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
             return new CSSFinder("input", "[type=\"" + typeAttributeValue + "\"]");
@@ -53,7 +53,7 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
 
     @Override
     public AlwaysNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return inputTypePseudoClassLocatorGenerationStrategy;
+        return inputTypePseudoClassFinderFactoryStrategy;
     }
 
 }

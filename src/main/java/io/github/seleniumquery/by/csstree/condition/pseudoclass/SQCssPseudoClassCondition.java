@@ -17,18 +17,18 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.finder.ElementFinder;
 
-public abstract class SQCssPseudoClassCondition implements SQCssCondition, SQCssConditionImplementedLocators {
+public abstract class SQCssPseudoClassCondition implements SQCssCondition, SQCssConditionImplementedFinders {
 
     @Override
-    public ElementFinder toElementFinder(ElementFinder leftLocator) {
-        return getElementFinderFactoryStrategy().toElementFinder(leftLocator);
+    public ElementFinder toElementFinder(ElementFinder leftFinder) {
+        return getElementFinderFactoryStrategy().toElementFinder(leftFinder);
     }
 
-    public SQCssConditionImplementedLocators getElementFinderFactoryStrategy() {
-        throw new RuntimeException("\n\nThe method SQCssPseudoClassCondition#SQCssConditionImplementedLocators() - or" +
+    public SQCssConditionImplementedFinders getElementFinderFactoryStrategy() {
+        throw new RuntimeException("\n\nThe method SQCssPseudoClassCondition#getElementFinderFactoryStrategy() - or" +
                 " whatever (if it was moved) -\nwill be abstract!\n" +
                 "It is not yet because we need the project to compile while implementing everything.\n\n");
     }
