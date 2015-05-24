@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
-import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.finder.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
 /**

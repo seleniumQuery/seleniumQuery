@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.csstree.condition.attribute.SQCssClassAttributeCondition;
 import io.github.seleniumquery.by.csstree.selector.combinator.SQCssDescendantSelector;
-import io.github.seleniumquery.by.locator.ElementFinder;
+import io.github.seleniumquery.by.finder.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 

@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils;
-import io.github.seleniumquery.by.locator.CSSFinder;
+import io.github.seleniumquery.by.finder.CSSFinder;
 
 /**
  * [attribute*=stringToContain]

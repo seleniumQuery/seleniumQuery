@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy;
 
-import io.github.seleniumquery.by.locator.SQLocatorUtils;
+import io.github.seleniumquery.by.finder.SQLocatorUtils;
 
 /**
  * @author acdcjunior
