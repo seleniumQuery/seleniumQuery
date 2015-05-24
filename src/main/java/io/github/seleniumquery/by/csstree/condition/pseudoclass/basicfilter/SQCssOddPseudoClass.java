@@ -31,7 +31,7 @@ public class SQCssOddPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "odd";
 
-    public NeverNativelySupportedPseudoClass oddPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass oddPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath("(position() mod 2) = 0");
@@ -40,7 +40,7 @@ public class SQCssOddPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return oddPseudoClassLocatorGenerationStrategy;
+        return oddPseudoClassFinderFactoryStrategy;
     }
 
 }

@@ -33,7 +33,7 @@ public class SQCssEqPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
 
     public static final String PSEUDO = "eq";
 
-    public NeverNativelySupportedPseudoClass eqPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass eqPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             int index = getArgumentAsIndex();
@@ -58,7 +58,7 @@ public class SQCssEqPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return eqPseudoClassLocatorGenerationStrategy;
+        return eqPseudoClassFinderFactoryStrategy;
     }
 
     @Override

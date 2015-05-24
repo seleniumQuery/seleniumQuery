@@ -45,7 +45,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
         super(pseudoClassSelector);
     }
 
-    public MaybeNativelySupportedPseudoClass notPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
+    public MaybeNativelySupportedPseudoClass notPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
             return ":"+PSEUDO_PURE_NOT+"(div)";
@@ -89,7 +89,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
     @Override
     public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return notPseudoClassLocatorGenerationStrategy;
+        return notPseudoClassFinderFactoryStrategy;
     }
 
 }

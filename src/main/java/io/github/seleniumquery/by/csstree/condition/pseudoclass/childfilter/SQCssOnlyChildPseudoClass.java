@@ -32,7 +32,7 @@ public class SQCssOnlyChildPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "only-child";
 
-    public NeverNativelySupportedPseudoClass onlyChildPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass onlyChildPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath("../*[last() = 1]");
@@ -41,7 +41,7 @@ public class SQCssOnlyChildPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return onlyChildPseudoClassLocatorGenerationStrategy;
+        return onlyChildPseudoClassFinderFactoryStrategy;
     }
 
 }

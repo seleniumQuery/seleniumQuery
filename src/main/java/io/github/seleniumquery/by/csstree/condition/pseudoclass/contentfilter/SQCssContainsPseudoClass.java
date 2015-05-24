@@ -38,7 +38,7 @@ public class SQCssContainsPseudoClass extends SQCssFunctionalPseudoClassConditio
         super(pseudoClassSelector);
     }
 
-    public NeverNativelySupportedPseudoClass containsPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass containsPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             String textToContain = getArgument();
@@ -50,7 +50,7 @@ public class SQCssContainsPseudoClass extends SQCssFunctionalPseudoClassConditio
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return containsPseudoClassLocatorGenerationStrategy;
+        return containsPseudoClassFinderFactoryStrategy;
     }
 
 }

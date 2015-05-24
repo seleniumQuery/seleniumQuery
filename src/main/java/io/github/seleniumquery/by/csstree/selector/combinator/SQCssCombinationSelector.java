@@ -45,14 +45,14 @@ abstract class SQCssCombinationSelector implements SQCssSelector {
     @Override
     public ElementFinder toElementFinder(WebDriver webDriver) {
         ElementFinder elementFinder = leftSideSelector.toElementFinder(webDriver);
-        CSSFinder combinatorLocator = elementFinder.getCssFinder().combineAsLeftPart(this.cssCombinator);
-        ElementFinder directAdjacentIntermediateLocator = new ElementFinder(combinatorLocator,
+        CSSFinder combinatorFinder = elementFinder.getCssFinder().combineAsLeftPart(this.cssCombinator);
+        ElementFinder directAdjacentIntermediateFinder = new ElementFinder(combinatorFinder,
                 elementFinder.getXPathExpression() + this.xPathCombinator, elementFinder);
-        return rightSideSelector.toElementFinder(directAdjacentIntermediateLocator);
+        return rightSideSelector.toElementFinder(directAdjacentIntermediateFinder);
     }
 
     @Override
-    public ElementFinder toElementFinder(ElementFinder leftLocator) {
+    public ElementFinder toElementFinder(ElementFinder leftFinder) {
         throw new UnsupportedOperationException("Due to the way the CSS Tree is created by the CSS Parser, this " +
                 "order of evaluation should never occurr.");
     }

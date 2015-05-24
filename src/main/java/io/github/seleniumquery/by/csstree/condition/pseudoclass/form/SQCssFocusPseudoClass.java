@@ -33,7 +33,7 @@ public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "focus";
 
-    public NeverNativelySupportedPseudoClass hiddenPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass hiddenPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.filterOnly(FocusPseudoClass.FOCUS_FILTER);
@@ -42,7 +42,7 @@ public class SQCssFocusPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return hiddenPseudoClassLocatorGenerationStrategy;
+        return hiddenPseudoClassFinderFactoryStrategy;
     }
 
 }

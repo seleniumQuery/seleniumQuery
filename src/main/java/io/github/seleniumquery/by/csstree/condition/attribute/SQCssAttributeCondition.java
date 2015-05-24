@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.finder.CSSFinder;
 import io.github.seleniumquery.by.finder.ElementFinder;
 import io.github.seleniumquery.by.finder.ElementFinderUtils;
@@ -28,7 +28,7 @@ import io.github.seleniumquery.by.finder.ElementFinderUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class SQCssAttributeCondition implements SQCssCondition, SQCssConditionImplementedLocators {
+public abstract class SQCssAttributeCondition implements SQCssCondition, SQCssConditionImplementedFinders {
 
     protected String attributeName;
     protected String wantedValue;
@@ -47,10 +47,10 @@ public abstract class SQCssAttributeCondition implements SQCssCondition, SQCssCo
     }
 
     @Override
-    public ElementFinder toElementFinder(ElementFinder leftLocator) {
-        CSSFinder newCssSelector = leftLocator.getCssFinder().merge(toCSS());
-        String newXPathExpression = ElementFinderUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
-        return new ElementFinder(newCssSelector, newXPathExpression, leftLocator);
+    public ElementFinder toElementFinder(ElementFinder leftFinder) {
+        CSSFinder newCssSelector = leftFinder.getCssFinder().merge(toCSS());
+        String newXPathExpression = ElementFinderUtils.conditionalSimpleXPathMerge(leftFinder.getXPathExpression(), toXPath());
+        return new ElementFinder(newCssSelector, newXPathExpression, leftFinder);
     }
 
     protected abstract CSSFinder toCSS();

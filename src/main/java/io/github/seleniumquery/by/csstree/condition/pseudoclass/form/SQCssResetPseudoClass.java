@@ -34,7 +34,7 @@ public class SQCssResetPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "reset";
 
-    public NeverNativelySupportedPseudoClass inputPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass inputPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath("((self::input or self::button) and " + TYPE_ATTR_LC_VAL + " = 'reset')");
@@ -43,7 +43,7 @@ public class SQCssResetPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return inputPseudoClassLocatorGenerationStrategy;
+        return inputPseudoClassFinderFactoryStrategy;
     }
 
 }

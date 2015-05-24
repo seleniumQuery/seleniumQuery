@@ -33,7 +33,7 @@ public class SQCssLtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
 
     public static final String PSEUDO = "lt";
 
-    public NeverNativelySupportedPseudoClass gtPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass gtPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             int index = getArgumentAsIndex();
@@ -54,7 +54,7 @@ public class SQCssLtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return gtPseudoClassLocatorGenerationStrategy;
+        return gtPseudoClassFinderFactoryStrategy;
     }
 
     @Override

@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.finder.ElementFinder;
 
@@ -28,12 +28,12 @@ import io.github.seleniumquery.by.finder.ElementFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssAnimatedPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedLocators {
+public class SQCssAnimatedPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedFinders {
 
     public static final String PSEUDO = "animated";
 
     @Override
-    public ElementFinder toElementFinder(ElementFinder leftLocator) {
+    public ElementFinder toElementFinder(ElementFinder leftFinder) {
         throw new UnsupportedPseudoClassException(":animated", "This selector uses internals of jQuery that nor seleniumQuery, " +
                 "neither the user should access.");
     }

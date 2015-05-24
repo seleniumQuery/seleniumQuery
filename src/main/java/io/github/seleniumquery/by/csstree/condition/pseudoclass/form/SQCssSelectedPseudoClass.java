@@ -37,7 +37,7 @@ public class SQCssSelectedPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "selected";
 
-    public MaybeNativelySupportedPseudoClass selectedPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
+    public MaybeNativelySupportedPseudoClass selectedPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
             return SQCssCheckedPseudoClass.isDriverWhereCheckedSelectorHasNoBugs(webDriver)
@@ -62,7 +62,7 @@ public class SQCssSelectedPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return selectedPseudoClassLocatorGenerationStrategy;
+        return selectedPseudoClassFinderFactoryStrategy;
     }
 
 }

@@ -33,7 +33,7 @@ public class SQCssButtonPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "button";
 
-    public NeverNativelySupportedPseudoClass buttonPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass buttonPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath("((self::input and " + TYPE_ATTR_LC_VAL + " = 'button') or self::button)");
@@ -42,7 +42,7 @@ public class SQCssButtonPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return buttonPseudoClassLocatorGenerationStrategy;
+        return buttonPseudoClassFinderFactoryStrategy;
     }
 
 }

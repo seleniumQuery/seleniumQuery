@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.finder.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
@@ -48,13 +48,13 @@ public class SQCssConditionalSelector implements SQCssSelector {
     @Override
     public ElementFinder toElementFinder(WebDriver webDriver) {
         ElementFinder elementFinder = sqCssSelector.toElementFinder(webDriver);
-        return ((SQCssConditionImplementedLocators) sqCssCondition).toElementFinder(elementFinder);
+        return ((SQCssConditionImplementedFinders) sqCssCondition).toElementFinder(elementFinder);
     }
 
     @Override
-    public ElementFinder toElementFinder(ElementFinder leftLocator) {
-        ElementFinder elementFinder = sqCssSelector.toElementFinder(leftLocator);
-        return ((SQCssConditionImplementedLocators) sqCssCondition).toElementFinder(elementFinder);
+    public ElementFinder toElementFinder(ElementFinder leftFinder) {
+        ElementFinder elementFinder = sqCssSelector.toElementFinder(leftFinder);
+        return ((SQCssConditionImplementedFinders) sqCssCondition).toElementFinder(elementFinder);
     }
 
 }

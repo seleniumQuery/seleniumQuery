@@ -36,7 +36,7 @@ public class SQCssInputPseudoClass extends SQCssPseudoClassCondition {
     public static final String PSEUDO = "input";
     public static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";
 
-    public NeverNativelySupportedPseudoClass inputPseudoClassLocatorGenerationStrategy = new NeverNativelySupportedPseudoClass() {
+    public NeverNativelySupportedPseudoClass inputPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath(INPUT_TAGS_XPATH);
@@ -45,7 +45,7 @@ public class SQCssInputPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return inputPseudoClassLocatorGenerationStrategy;
+        return inputPseudoClassFinderFactoryStrategy;
     }
 
 }

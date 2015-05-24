@@ -37,7 +37,7 @@ public class SQCssPresentPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "present";
 
-    public MaybeNativelySupportedPseudoClass presentPseudoClassLocatorGenerationStrategy = new AlwaysNativelySupportedPseudoClass() {
+    public MaybeNativelySupportedPseudoClass presentPseudoClassFinderFactoryStrategy = new AlwaysNativelySupportedPseudoClass() {
         @Override
         public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
             return CSSFinder.universalSelector();
@@ -50,7 +50,7 @@ public class SQCssPresentPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return presentPseudoClassLocatorGenerationStrategy;
+        return presentPseudoClassFinderFactoryStrategy;
     }
 
 }

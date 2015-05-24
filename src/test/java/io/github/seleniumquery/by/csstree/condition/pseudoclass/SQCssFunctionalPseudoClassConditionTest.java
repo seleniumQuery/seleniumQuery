@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
+import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.finder.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +39,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
     public void toElementFinder__should_call_toElementFinder_in_object_returned_from_strategy_method() throws Exception {
         final ElementFinder argFinder = new ElementFinder((WebDriver) null, null, null);
         final ElementFinder returningFinder = new ElementFinder((WebDriver) null, null, null);
-        final SQCssConditionImplementedLocators finderGen = new SQCssConditionImplementedLocators() {
+        final SQCssConditionImplementedFinders finderGen = new SQCssConditionImplementedFinders() {
             @Override
             public ElementFinder toElementFinder(ElementFinder leftFinder) {
                 if (leftFinder == argFinder)
@@ -50,13 +50,13 @@ public class SQCssFunctionalPseudoClassConditionTest {
         PseudoClassSelector pseudoClassSelector = PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector("1");
         SQCssFunctionalPseudoClassCondition functionalPseudoClassCondition = new SQCssFunctionalPseudoClassCondition(pseudoClassSelector) {
             @Override
-            public SQCssConditionImplementedLocators getElementFinderFactoryStrategy() {
+            public SQCssConditionImplementedFinders getElementFinderFactoryStrategy() {
                 return finderGen;
             }
         };
 
-        ElementFinder returnedLocator = functionalPseudoClassCondition.toElementFinder(argFinder);
-        assertThat(returnedLocator, is(returningFinder));
+        ElementFinder returnedFinder = functionalPseudoClassCondition.toElementFinder(argFinder);
+        assertThat(returnedFinder, is(returningFinder));
     }
 
 }

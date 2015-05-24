@@ -36,7 +36,7 @@ public class SQCssEnabledPseudoClass extends SQCssPseudoClassCondition {
     public static final String PSEUDO = "enabled";
     public static final String ENABLED_PSEUDO = ":" + PSEUDO;
 
-    public MaybeNativelySupportedPseudoClass enabledPseudoClassLocatorGenerationStrategy = new MaybeNativelySupportedPseudoClass() {
+    public MaybeNativelySupportedPseudoClass enabledPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
             return new CSSFinder(ENABLED_PSEUDO);
@@ -50,7 +50,7 @@ public class SQCssEnabledPseudoClass extends SQCssPseudoClassCondition {
 
     @Override
     public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return enabledPseudoClassLocatorGenerationStrategy;
+        return enabledPseudoClassFinderFactoryStrategy;
     }
 
 }
