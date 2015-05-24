@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 
 public class ElementFinderUtilsTest {
 
-    public static final ElementFinder UNIVERSAL_SELECTOR_LOCATOR = universalSelectorFinder(mock(WebDriver.class));
+    public static final ElementFinder UNIVERSAL_SELECTOR_FINDER = universalSelectorFinder(mock(WebDriver.class));
     public static ElementFinder universalSelectorFinder(WebDriver driver) {
         return new ElementFinder(driver, universalSelector(), pureXPath(".//*[true()]"));
     }

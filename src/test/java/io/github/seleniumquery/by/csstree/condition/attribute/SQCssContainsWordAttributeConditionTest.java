@@ -27,10 +27,10 @@ import static org.junit.Assert.assertThat;
 public class SQCssContainsWordAttributeConditionTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssContainsWordAttributeCondition containsWordAttributeCondition = new SQCssContainsWordAttributeCondition("values", "10");
-        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = containsWordAttributeCondition.toElementFinder(previous);
         // then

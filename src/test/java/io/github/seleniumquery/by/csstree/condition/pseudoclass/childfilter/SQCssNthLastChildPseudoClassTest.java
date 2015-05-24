@@ -40,7 +40,7 @@ public class SQCssNthLastChildPseudoClassTest {
     }
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         assertNthLastChildArgumentYields("2",     ":nth-last-child(2)",     ".//*[(last()+1-position()) = 2]");
         assertNthLastChildArgumentYields("3",     ":nth-last-child(3)",     ".//*[(last()+1-position()) = 3]");
         assertNthLastChildArgumentYields("5n",    ":nth-last-child(5n)",    ".//*[((last()+1-position()) - 0) mod 5 = 0 and (last()+1-position()) >= 0]");

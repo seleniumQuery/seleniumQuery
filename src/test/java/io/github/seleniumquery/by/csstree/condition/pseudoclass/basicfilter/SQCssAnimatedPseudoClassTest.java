@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassExcept
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
-import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 
 public class SQCssAnimatedPseudoClassTest {
 
@@ -31,7 +31,7 @@ public class SQCssAnimatedPseudoClassTest {
 
     @Test(expected = UnsupportedPseudoClassException.class)
     public void toElementFinder__should_just_throw_exception() {
-        new SQCssAnimatedPseudoClass().toElementFinder(UNIVERSAL_SELECTOR_LOCATOR);
+        new SQCssAnimatedPseudoClass().toElementFinder(UNIVERSAL_SELECTOR_FINDER);
     }
 
 }

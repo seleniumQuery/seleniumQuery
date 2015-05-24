@@ -22,7 +22,7 @@ import org.openqa.selenium.InvalidSelectorException;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
-import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -48,7 +48,7 @@ public class SQCssLtPseudoClassTest {
 
     private void assertLtArgumentIsNotValid(String ltArgument) {
         try {
-            lt(ltArgument).toElementFinder(UNIVERSAL_SELECTOR_LOCATOR);
+            lt(ltArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
             fail("Should consider *:lt("+ltArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":lt()"));

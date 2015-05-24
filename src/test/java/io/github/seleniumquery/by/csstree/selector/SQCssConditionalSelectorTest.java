@@ -46,7 +46,7 @@ public class SQCssConditionalSelectorTest {
     }
 
     @Test
-    public void toElementFinder__with_SQLocator_arg() {
+    public void toElementFinder__with_ElementFinder_arg() {
         // given
         SQCssTagNameSelector aTagSelector = new SQCssTagNameSelector("a");
         SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");

@@ -27,10 +27,10 @@ import static org.junit.Assert.assertThat;
 public class SQCssIdAttributeConditionTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssIdAttributeCondition idAttributeCondition = new SQCssIdAttributeCondition("idz");
-        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = idAttributeCondition.toElementFinder(previous);
         // then

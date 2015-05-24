@@ -36,7 +36,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
     }
 
     @Test
-    public void toElementFinder__should_call_toSQLocator_in_object_returned_from_strategy_method() throws Exception {
+    public void toElementFinder__should_call_toElementFinder_in_object_returned_from_strategy_method() throws Exception {
         final ElementFinder argFinder = new ElementFinder((WebDriver) null, null, null);
         final ElementFinder returningFinder = new ElementFinder((WebDriver) null, null, null);
         final SQCssConditionImplementedLocators finderGen = new SQCssConditionImplementedLocators() {
