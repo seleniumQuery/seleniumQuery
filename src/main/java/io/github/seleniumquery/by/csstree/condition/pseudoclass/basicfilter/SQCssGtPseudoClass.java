@@ -53,7 +53,7 @@ public class SQCssGtPseudoClass extends SQCssFunctionalIndexArgumentPseudoClassC
     }
 
     @Override
-    public NeverNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
         return gtPseudoClassLocatorGenerationStrategy;
     }
 

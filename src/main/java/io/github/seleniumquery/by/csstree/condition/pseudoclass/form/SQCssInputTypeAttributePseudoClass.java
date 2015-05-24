@@ -52,7 +52,7 @@ abstract class SQCssInputTypeAttributePseudoClass extends SQCssPseudoClassCondit
     }
 
     @Override
-    public AlwaysNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+    public AlwaysNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
         return inputTypePseudoClassLocatorGenerationStrategy;
     }
 

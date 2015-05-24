@@ -24,10 +24,10 @@ public abstract class SQCssPseudoClassCondition implements SQCssCondition, SQCss
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftLocator) {
-        return getSQCssLocatorGenerationStrategy().toElementFinder(leftLocator);
+        return getElementFinderFactoryStrategy().toElementFinder(leftLocator);
     }
 
-    public SQCssConditionImplementedLocators getSQCssLocatorGenerationStrategy() {
+    public SQCssConditionImplementedLocators getElementFinderFactoryStrategy() {
         throw new RuntimeException("\n\nThe method SQCssPseudoClassCondition#SQCssConditionImplementedLocators() - or" +
                 " whatever (if it was moved) -\nwill be abstract!\n" +
                 "It is not yet because we need the project to compile while implementing everything.\n\n");

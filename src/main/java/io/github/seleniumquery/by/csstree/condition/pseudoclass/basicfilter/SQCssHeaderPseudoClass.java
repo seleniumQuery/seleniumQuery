@@ -45,7 +45,7 @@ public class SQCssHeaderPseudoClass extends SQCssPseudoClassCondition {
     };
 
     @Override
-    public NeverNativelySupportedPseudoClass getSQCssLocatorGenerationStrategy() {
+    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
         return headerPseudoClassLocatorGenerationStrategy;
     }
 
