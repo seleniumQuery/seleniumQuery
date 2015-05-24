@@ -27,10 +27,10 @@ import static org.junit.Assert.assertThat;
 public class SQCssContainsSubstringAttributeConditionTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssContainsSubstringAttributeCondition containsSubstringAttributeCondition = new SQCssContainsSubstringAttributeCondition("attribute", "stringToContain");
-        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = containsSubstringAttributeCondition.toElementFinder(previous);
         // then

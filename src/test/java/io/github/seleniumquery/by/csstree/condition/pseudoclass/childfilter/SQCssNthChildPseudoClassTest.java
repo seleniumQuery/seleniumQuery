@@ -34,10 +34,10 @@ public class SQCssNthChildPseudoClassTest {
     private static final String NTH_CHILD_PSEUDO = ":nth-child";
 
     private static final String NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK = NTH_CHILD_PSEUDO+"(1)";
-    private static final ElementFinder UNIVERSAL_SELECTOR_LOCATOR_SUPPORTING_NTHCHILD_NATIVELY = universalSelectorFinder(
+    private static final ElementFinder UNIVERSAL_SELECTOR_FINDER_SUPPORTING_NTHCHILD_NATIVELY = universalSelectorFinder(
             createMockDriverWithNativeSupportFor(NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK)
     );
-    private static final ElementFinder UNIVERSAL_SELECTOR_LOCATOR_NOT_SUPPORTING_NTHCHILD_NATIVELY = UNIVERSAL_SELECTOR_LOCATOR;
+    private static final ElementFinder UNIVERSAL_SELECTOR_FINDER_NOT_SUPPORTING_NTHCHILD_NATIVELY = UNIVERSAL_SELECTOR_FINDER;
 
     @Test
     public void translate() {
@@ -66,8 +66,8 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     private void assertNthChildArgumentIsNotValid(String nthChildArgument) {
-        assertNthChildArgumentIsNotValidOnLocator(nthChildArgument, UNIVERSAL_SELECTOR_LOCATOR_SUPPORTING_NTHCHILD_NATIVELY);
-        assertNthChildArgumentIsNotValidOnLocator(nthChildArgument, UNIVERSAL_SELECTOR_LOCATOR_NOT_SUPPORTING_NTHCHILD_NATIVELY);
+        assertNthChildArgumentIsNotValidOnLocator(nthChildArgument, UNIVERSAL_SELECTOR_FINDER_SUPPORTING_NTHCHILD_NATIVELY);
+        assertNthChildArgumentIsNotValidOnLocator(nthChildArgument, UNIVERSAL_SELECTOR_FINDER_NOT_SUPPORTING_NTHCHILD_NATIVELY);
     }
 
     private void assertNthChildArgumentIsNotValidOnLocator(String nthChildArgument, ElementFinder universalSelectorLocator) {

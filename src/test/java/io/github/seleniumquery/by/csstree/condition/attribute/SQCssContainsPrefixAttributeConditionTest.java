@@ -27,10 +27,10 @@ import static org.junit.Assert.assertThat;
 public class SQCssContainsPrefixAttributeConditionTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new SQCssContainsPrefixAttributeCondition("hreflang", "en");
-        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
+        ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = containsPrefixAttributeCondition.toElementFinder(previous);
         // then

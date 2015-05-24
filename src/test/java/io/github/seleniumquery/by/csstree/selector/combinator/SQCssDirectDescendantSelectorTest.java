@@ -29,7 +29,7 @@ import static org.mockito.Mockito.mock;
 public class SQCssDirectDescendantSelectorTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssTagNameSelector aTagSelector = new SQCssTagNameSelector("a");
         SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");

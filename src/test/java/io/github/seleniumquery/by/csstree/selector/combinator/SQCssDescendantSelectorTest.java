@@ -29,7 +29,7 @@ import static org.mockito.Mockito.mock;
 public class SQCssDescendantSelectorTest {
 
     @Test
-    public void toSQLocator() {
+    public void toElementFinder() {
         // given
         SQCssTagNameSelector aTagSelector = new SQCssTagNameSelector("a");
         SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
@@ -44,7 +44,7 @@ public class SQCssDescendantSelectorTest {
     }
 
     @Test
-    public void toSQLocator_multiple() {
+    public void toElementFinder_multiple() {
         // given
         SQCssTagNameSelector firstSelector = new SQCssTagNameSelector("a");
         SQCssTagNameSelector secondSelector = new SQCssTagNameSelector("b");
