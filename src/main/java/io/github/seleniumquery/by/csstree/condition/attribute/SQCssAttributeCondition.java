@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.finder.CSSFinder;
 import io.github.seleniumquery.by.finder.ElementFinder;
-import io.github.seleniumquery.by.finder.SQLocatorUtils;
+import io.github.seleniumquery.by.finder.ElementFinderUtils;
 
 /**
  * A class that holds an attribute name and a wanted value.
@@ -49,7 +49,7 @@ public abstract class SQCssAttributeCondition implements SQCssCondition, SQCssCo
     @Override
     public ElementFinder toElementFinder(ElementFinder leftLocator) {
         CSSFinder newCssSelector = leftLocator.getCssFinder().merge(toCSS());
-        String newXPathExpression = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
+        String newXPathExpression = ElementFinderUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
         return new ElementFinder(newCssSelector, newXPathExpression, leftLocator);
     }
 

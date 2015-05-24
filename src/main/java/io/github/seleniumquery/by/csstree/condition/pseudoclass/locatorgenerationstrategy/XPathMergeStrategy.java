@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy;
 
-import io.github.seleniumquery.by.finder.SQLocatorUtils;
+import io.github.seleniumquery.by.finder.ElementFinderUtils;
 
 /**
  * @author acdcjunior
@@ -31,14 +31,14 @@ public abstract class XPathMergeStrategy {
     public static final XPathMergeStrategy CONDITIONAL_SIMPLE_XPATH_MERGE = new XPathMergeStrategy() {
         @Override
         public String mergeXPath(String leftXPathExpression, String rightXPathExpression) {
-            return SQLocatorUtils.conditionalSimpleXPathMerge(leftXPathExpression, rightXPathExpression);
+            return ElementFinderUtils.conditionalSimpleXPathMerge(leftXPathExpression, rightXPathExpression);
         }
     };
 
     public static final XPathMergeStrategy CONDITIONAL_TO_ALL_XPATH_MERGE = new XPathMergeStrategy() {
         @Override
         public String mergeXPath(String leftXPathExpression, String rightXPathExpression) {
-            return SQLocatorUtils.conditionalToAllXPathMerge(leftXPathExpression, rightXPathExpression);
+            return ElementFinderUtils.conditionalToAllXPathMerge(leftXPathExpression, rightXPathExpression);
         }
     };
 
