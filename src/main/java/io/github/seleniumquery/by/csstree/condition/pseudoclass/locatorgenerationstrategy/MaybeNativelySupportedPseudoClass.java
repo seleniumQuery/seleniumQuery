@@ -47,7 +47,7 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
         return new ElementFinder(
                 webDriver,
                 leftLocator.getCssFinder().merge(toCssWhenNativelySupported(webDriver)),
-                leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
+                leftLocator.getXPathAndFilterFinder().merge(toXPath(webDriver), xPathMergeStrategy())
         );
     }
 
@@ -55,7 +55,7 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
         return new ElementFinder(
                 webDriver,
                 CSS_NOT_NATIVELY_SUPPORTED,
-                leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
+                leftLocator.getXPathAndFilterFinder().merge(toXPath(webDriver), xPathMergeStrategy())
         );
     }
 

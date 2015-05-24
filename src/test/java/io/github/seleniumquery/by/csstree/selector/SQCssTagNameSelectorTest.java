@@ -57,7 +57,7 @@ public class SQCssTagNameSelectorTest {
         // when
         ElementFinder elementFinder = tagNameSelector.toElementFinder(mock(WebDriver.class));
         // then
-        assertThat(elementFinder.getXPathLocator().getRawXPathExpression(), is("true()"));
+        assertThat(elementFinder.getXPathAndFilterFinder().getRawXPathExpression(), is("true()"));
     }
 
 }
