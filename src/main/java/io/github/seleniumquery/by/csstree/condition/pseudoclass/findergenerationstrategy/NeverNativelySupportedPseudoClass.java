@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy;
+package io.github.seleniumquery.by.csstree.condition.pseudoclass.findergenerationstrategy;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.finder.CSSFinder;

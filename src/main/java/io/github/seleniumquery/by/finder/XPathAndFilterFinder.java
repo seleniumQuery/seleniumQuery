@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.finder;
 
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.locatorgenerationstrategy.XPathMergeStrategy;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.findergenerationstrategy.XPathMergeStrategy;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.filter.ElementFilterList;
 import org.openqa.selenium.By;
