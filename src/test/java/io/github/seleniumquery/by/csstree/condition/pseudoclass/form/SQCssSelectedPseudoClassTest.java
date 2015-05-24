@@ -48,7 +48,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_has_native_support() {
         // supports pure CSS, but it is a translated one
-        ElementFinder previousLocator = universalSelectorLocator(ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO));
+        ElementFinder previousLocator = universalSelectorFinder(ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO));
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,
@@ -75,7 +75,7 @@ public class SQCssSelectedPseudoClassTest {
     public void toSQLocator__when_driver_has_native_supportx() {
         // supports pure CSS, but it is a translated one
         WebDriver mockDriverWithNativeSupportForChecked = ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(CHECKED_PSEUDO);
-        ElementFinder locatorAfterChecked = new SQCssCheckedPseudoClass().toSQLocator(universalSelectorLocator(mockDriverWithNativeSupportForChecked));
+        ElementFinder locatorAfterChecked = new SQCssCheckedPseudoClass().toElementFinder(universalSelectorFinder(mockDriverWithNativeSupportForChecked));
 
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
@@ -95,7 +95,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
         WebDriver driver = createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(CHECKED_PSEUDO);
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(driver);
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(driver);
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,
@@ -114,7 +114,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toSQLocator__when_driver_is_HTMLUNITDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
         WebDriver driver = createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(CHECKED_PSEUDO);
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(driver);
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(driver);
         assertPseudoClassHasLocator(
                 new SQCssSelectedPseudoClass(),
                 previousLocator,

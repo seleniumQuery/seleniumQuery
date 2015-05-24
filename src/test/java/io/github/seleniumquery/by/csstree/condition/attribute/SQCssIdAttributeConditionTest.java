@@ -32,9 +32,9 @@ public class SQCssIdAttributeConditionTest {
         SQCssIdAttributeCondition idAttributeCondition = new SQCssIdAttributeCondition("idz");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = idAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = idAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCSSLocator().toString(), is("#idz"));
+        assertThat(locator.getCssFinder().toString(), is("#idz"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[@id = 'idz']"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

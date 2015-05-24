@@ -33,7 +33,7 @@ public class SQCssAnimatedPseudoClass extends SQCssPseudoClassCondition implemen
     public static final String PSEUDO = "animated";
 
     @Override
-    public ElementFinder toSQLocator(ElementFinder leftLocator) {
+    public ElementFinder toElementFinder(ElementFinder leftLocator) {
         throw new UnsupportedPseudoClassException(":animated", "This selector uses internals of jQuery that nor seleniumQuery, " +
                 "neither the user should access.");
     }

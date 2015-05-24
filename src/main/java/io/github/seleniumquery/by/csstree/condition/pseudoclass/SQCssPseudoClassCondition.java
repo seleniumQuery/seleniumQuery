@@ -23,8 +23,8 @@ import io.github.seleniumquery.by.locator.ElementFinder;
 public abstract class SQCssPseudoClassCondition implements SQCssCondition, SQCssConditionImplementedLocators {
 
     @Override
-    public ElementFinder toSQLocator(ElementFinder leftLocator) {
-        return getSQCssLocatorGenerationStrategy().toSQLocator(leftLocator);
+    public ElementFinder toElementFinder(ElementFinder leftLocator) {
+        return getSQCssLocatorGenerationStrategy().toElementFinder(leftLocator);
     }
 
     public SQCssConditionImplementedLocators getSQCssLocatorGenerationStrategy() {

@@ -41,8 +41,8 @@ public class SQCssClassAttributeCondition implements SQCssCondition, SQCssCondit
     }
 
     @Override
-    public ElementFinder toSQLocator(ElementFinder leftLocator) {
-        CSSFinder newCssSelector = leftLocator.getCSSLocator().merge(toCSS());
+    public ElementFinder toElementFinder(ElementFinder leftLocator) {
+        CSSFinder newCssSelector = leftLocator.getCssFinder().merge(toCSS());
         String newXPathExpression = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
         return new ElementFinder(newCssSelector, newXPathExpression, leftLocator);
     }

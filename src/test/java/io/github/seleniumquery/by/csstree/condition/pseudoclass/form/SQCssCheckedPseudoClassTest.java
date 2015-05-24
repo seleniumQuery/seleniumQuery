@@ -67,7 +67,7 @@ public class SQCssCheckedPseudoClassTest {
      */
     @Test
     public void toSQLocator__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(CHECKED_PSEUDO));
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(CHECKED_PSEUDO));
         assertPseudoClassHasLocator(
                 new SQCssCheckedPseudoClass(),
                 previousLocator,
@@ -85,7 +85,7 @@ public class SQCssCheckedPseudoClassTest {
      */
     @Test
     public void toSQLocator__when_driver_is_HTMLUNITDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(CHECKED_PSEUDO));
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(CHECKED_PSEUDO));
         assertPseudoClassHasLocator(
                 new SQCssCheckedPseudoClass(),
                 previousLocator,

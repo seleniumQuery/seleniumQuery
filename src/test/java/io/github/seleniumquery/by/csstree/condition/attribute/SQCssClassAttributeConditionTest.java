@@ -32,9 +32,9 @@ public class SQCssClassAttributeConditionTest {
         SQCssClassAttributeCondition classAttributeCondition = new SQCssClassAttributeCondition("clazz");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = classAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = classAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCSSLocator().toString(), is(".clazz"));
+        assertThat(locator.getCssFinder().toString(), is(".clazz"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[contains(concat(' ', normalize-space(@class), ' '), ' clazz ')]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

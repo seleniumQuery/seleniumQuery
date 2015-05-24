@@ -27,5 +27,5 @@ import io.github.seleniumquery.by.locator.ElementFinder;
  * After all of them are complete, I move this method to SQCssCondition and remove this interface.
  */
 public interface SQCssConditionImplementedLocators {
-    ElementFinder toSQLocator(ElementFinder leftLocator);
+    ElementFinder toElementFinder(ElementFinder leftLocator);
 }

@@ -32,9 +32,9 @@ public class SQCssContainsSubstringAttributeConditionTest {
         SQCssContainsSubstringAttributeCondition containsSubstringAttributeCondition = new SQCssContainsSubstringAttributeCondition("attribute", "stringToContain");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = containsSubstringAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = containsSubstringAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCSSLocator().toString(), is("[attribute*='stringToContain']"));
+        assertThat(locator.getCssFinder().toString(), is("[attribute*='stringToContain']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";

@@ -41,7 +41,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
         final ElementFinder returningLocator = new ElementFinder((WebDriver) null, null, null);
         final SQCssConditionImplementedLocators locatorGen = new SQCssConditionImplementedLocators() {
             @Override
-            public ElementFinder toSQLocator(ElementFinder leftLocator) {
+            public ElementFinder toElementFinder(ElementFinder leftLocator) {
                 if (leftLocator == argLocator)
                     return returningLocator;
                 return null;
@@ -55,7 +55,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
             }
         };
 
-        ElementFinder returnedLocator = functionalPseudoClassCondition.toSQLocator(argLocator);
+        ElementFinder returnedLocator = functionalPseudoClassCondition.toElementFinder(argLocator);
         assertThat(returnedLocator, is(returningLocator));
     }
 

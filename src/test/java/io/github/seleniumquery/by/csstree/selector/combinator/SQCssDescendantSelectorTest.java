@@ -37,7 +37,7 @@ public class SQCssDescendantSelectorTest {
         // when
         ElementFinder locator = descendantSelector.toSQLocator(mock(WebDriver.class));
         // then
-        assertThat(locator.getCSSLocator().toString(), is("a b"));
+        assertThat(locator.getCssFinder().toString(), is("a b"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[self::a]//*[self::b]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());
@@ -54,7 +54,7 @@ public class SQCssDescendantSelectorTest {
         // when
         ElementFinder locator = descendantSelector.toSQLocator(mock(WebDriver.class));
         // then
-        assertThat(locator.getCSSLocator().toString(), is("a b c"));
+        assertThat(locator.getCssFinder().toString(), is("a b c"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[self::a]//*[self::b]//*[self::c]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

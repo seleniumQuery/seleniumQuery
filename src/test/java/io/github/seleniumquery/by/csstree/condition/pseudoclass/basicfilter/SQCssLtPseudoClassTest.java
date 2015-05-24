@@ -48,7 +48,7 @@ public class SQCssLtPseudoClassTest {
 
     private void assertLtArgumentIsNotValid(String ltArgument) {
         try {
-            lt(ltArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
+            lt(ltArgument).toElementFinder(UNIVERSAL_SELECTOR_LOCATOR);
             fail("Should consider *:lt("+ltArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":lt()"));

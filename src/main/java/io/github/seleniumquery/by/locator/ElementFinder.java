@@ -66,7 +66,7 @@ public class ElementFinder {
         return webDriver;
     }
 
-    public CSSFinder getCSSLocator() {
+    public CSSFinder getCssFinder() {
         return cssFinder;
     }
 

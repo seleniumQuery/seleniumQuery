@@ -48,7 +48,7 @@ public class SQCssEqPseudoClassTest {
 
     private void assertEqArgumentIsNotValid(String eqArgument) {
         try {
-            eq(eqArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
+            eq(eqArgument).toElementFinder(UNIVERSAL_SELECTOR_LOCATOR);
             fail("Should consider *:eq("+eqArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":eq()"));

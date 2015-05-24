@@ -48,7 +48,7 @@ public class SQCssGtPseudoClassTest {
 
     private void assertGtArgumentIsNotValid(String gtArgument) {
         try {
-            gt(gtArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
+            gt(gtArgument).toElementFinder(UNIVERSAL_SELECTOR_LOCATOR);
             fail("Should consider *:gt("+gtArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":gt()"));

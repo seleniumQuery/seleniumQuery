@@ -32,9 +32,9 @@ public class SQCssEqualsOrHasAttributeConditionTest {
         SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = hasAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = hasAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCSSLocator().toString(), is("[attrib]"));
+        assertThat(locator.getCssFinder().toString(), is("[attrib]"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attrib']]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());
@@ -46,9 +46,9 @@ public class SQCssEqualsOrHasAttributeConditionTest {
         SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib", "valz");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = hasAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = hasAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCSSLocator().toString(), is("[attrib=valz]"));
+        assertThat(locator.getCssFinder().toString(), is("[attrib=valz]"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attrib']='valz']"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

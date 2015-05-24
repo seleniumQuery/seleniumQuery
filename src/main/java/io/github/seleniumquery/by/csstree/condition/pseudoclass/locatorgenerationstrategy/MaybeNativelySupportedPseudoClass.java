@@ -34,7 +34,7 @@ import static io.github.seleniumquery.by.locator.CSSFinder.CSS_NOT_NATIVELY_SUPP
 public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
 
     @Override
-    public ElementFinder toSQLocator(ElementFinder leftLocator) {
+    public ElementFinder toElementFinder(ElementFinder leftLocator) {
         WebDriver webDriver = leftLocator.getWebDriver();
         if (isThisCSSPseudoClassNativelySupportedOn(webDriver)) {
             return createLocatorForNativelySupportedPseudo(leftLocator, webDriver);
@@ -46,7 +46,7 @@ public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditio
     private ElementFinder createLocatorForNativelySupportedPseudo(ElementFinder leftLocator, WebDriver webDriver) {
         return new ElementFinder(
                 webDriver,
-                leftLocator.getCSSLocator().merge(toCssWhenNativelySupported(webDriver)),
+                leftLocator.getCssFinder().merge(toCssWhenNativelySupported(webDriver)),
                 leftLocator.getXPathLocator().merge(toXPath(webDriver), xPathMergeStrategy())
         );
     }

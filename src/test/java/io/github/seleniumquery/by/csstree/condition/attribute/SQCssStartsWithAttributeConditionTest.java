@@ -32,9 +32,9 @@ public class SQCssStartsWithAttributeConditionTest {
         SQCssStartsWithAttributeCondition startsWithAttributeCondition = new SQCssStartsWithAttributeCondition("attribute", "stringToStart");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = startsWithAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = startsWithAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCSSLocator().toString(), is("[attribute^='stringToStart']"));
+        assertThat(locator.getCssFinder().toString(), is("[attribute^='stringToStart']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";
