@@ -37,7 +37,7 @@ public class SQCssGeneralAdjacentSelectorTest {
         // when
         ElementFinder locator = generalAdjacentSelector.toSQLocator(mock(WebDriver.class));
         // then
-        assertThat(locator.getCSSLocator().toString(), is("a~b"));
+        assertThat(locator.getCssFinder().toString(), is("a~b"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[self::a]/following-sibling::*[self::b]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

@@ -92,14 +92,14 @@ public class PseudoClassTestUtils {
     }
 
     public static void assertFilterOnlyPseudoGeneratesFilter(SQCssPseudoClassCondition pseudoClassCondition, ElementFilter pseudoClassFilter) {
-        ElementFinder previous = ElementFinderUtilsTest.universalSelectorLocator(ElementFinderUtilsTest.createMockDriverWithoutNativeSupportFor(getSelectorForPseudoClass(pseudoClassCondition)));
+        ElementFinder previous = ElementFinderUtilsTest.universalSelectorFinder(ElementFinderUtilsTest.createMockDriverWithoutNativeSupportFor(getSelectorForPseudoClass(pseudoClassCondition)));
         // when
-        ElementFinder locator = pseudoClassCondition.toSQLocator(previous);
+        ElementFinder elementFinder = pseudoClassCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCSSLocator().toString(), is(previous.getCSSLocator().toString()));
-        assertThat(locator.canFetchThroughCssAlone(), is(false));
-        assertThat(locator.getXPathExpression(), is(previous.getXPathExpression()));
-        assertThat(locator.getElementFilterList().getElementFilters(), contains(pseudoClassFilter));
+        assertThat(elementFinder.getCssFinder().toString(), is(previous.getCssFinder().toString()));
+        assertThat(elementFinder.canFetchThroughCssAlone(), is(false));
+        assertThat(elementFinder.getXPathExpression(), is(previous.getXPathExpression()));
+        assertThat(elementFinder.getElementFilterList().getElementFilters(), contains(pseudoClassFilter));
     }
 
     private static String getSelectorForPseudoClass(SQCssPseudoClassCondition pseudoClassCondition) {

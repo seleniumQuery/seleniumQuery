@@ -63,7 +63,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
             StringBuilder sb = new StringBuilder("");
             for (SQCssSelector sqCssSelector : parse) {
                 sb.append(":"+PSEUDO_PURE_NOT+"(");
-                sb.append(sqCssSelector.toSQLocator(webDriver).getCSSLocator().toString());
+                sb.append(sqCssSelector.toSQLocator(webDriver).getCssFinder().toString());
                 sb.append(")");
             }
             return sb.toString();

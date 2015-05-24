@@ -39,7 +39,7 @@ public class SQCssConditionalSelectorTest {
         // when
         ElementFinder locator = conditionalSelector.toSQLocator(mock(WebDriver.class));
         // then
-        assertThat(locator.getCSSLocator().toString(), is("tagg.clz"));
+        assertThat(locator.getCssFinder().toString(), is("tagg.clz"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[self::tagg and contains(concat(' ', normalize-space(@class), ' '), ' clz ')]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());
@@ -57,7 +57,7 @@ public class SQCssConditionalSelectorTest {
         // when
         ElementFinder locator = descendantSelector.toSQLocator(mock(WebDriver.class));
         // then
-        assertThat(locator.getCSSLocator().toString(), is("a b.condition"));
+        assertThat(locator.getCssFinder().toString(), is("a b.condition"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[self::a]//*[self::b and contains(concat(' ', normalize-space(@class), ' '), ' condition ')]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

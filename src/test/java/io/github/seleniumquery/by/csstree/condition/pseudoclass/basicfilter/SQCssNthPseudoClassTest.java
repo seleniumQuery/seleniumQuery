@@ -53,7 +53,7 @@ public class SQCssNthPseudoClassTest {
 
     private void assertNthArgumentIsNotValid(String nthArgument) {
         try {
-            nth(nthArgument).toSQLocator(UNIVERSAL_SELECTOR_LOCATOR);
+            nth(nthArgument).toElementFinder(UNIVERSAL_SELECTOR_LOCATOR);
             fail("Should consider *:nth("+nthArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":nth()"));

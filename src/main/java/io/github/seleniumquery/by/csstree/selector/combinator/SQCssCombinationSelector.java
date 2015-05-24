@@ -45,7 +45,7 @@ abstract class SQCssCombinationSelector implements SQCssSelector {
     @Override
     public ElementFinder toSQLocator(WebDriver webDriver) {
         ElementFinder elementFinder = leftSideSelector.toSQLocator(webDriver);
-        CSSFinder combinatorLocator = elementFinder.getCSSLocator().combineAsLeftPart(this.cssCombinator);
+        CSSFinder combinatorLocator = elementFinder.getCssFinder().combineAsLeftPart(this.cssCombinator);
         ElementFinder directAdjacentIntermediateLocator = new ElementFinder(combinatorLocator,
                 elementFinder.getXPathExpression() + this.xPathCombinator, elementFinder);
         return rightSideSelector.toSQLocator(directAdjacentIntermediateLocator);

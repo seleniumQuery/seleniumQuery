@@ -45,7 +45,7 @@ public class PseudoClassAssertLocatorUtils {
                                                                         boolean canPureCss,
                                                                         String expectedXPath,
                                                                         Matcher<? super List<ElementFilter>> elementFilterMatcher) {
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(
                 ElementFinderUtilsTest.createMockDriverWithNativeSupportFor(pseudoExpressionThatShouldPassNativeSupportCheck)
         );
         assertPseudoClassHasLocator(
@@ -64,7 +64,7 @@ public class PseudoClassAssertLocatorUtils {
                                                                            boolean canPureCss,
                                                                            String expectedXPath,
                                                                            Matcher<? super List<ElementFilter>> elementFilterMatcher) {
-        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorLocator(
+        ElementFinder previousLocator = ElementFinderUtilsTest.universalSelectorFinder(
                 ElementFinderUtilsTest.createMockDriverWithoutNativeSupportFor(pseudoExpressionThatShouldNotPassNativeSupportCheck)
         );
         assertPseudoClassHasLocator(
@@ -197,9 +197,9 @@ public class PseudoClassAssertLocatorUtils {
         // given
         // args
         // when
-        ElementFinder locator = pseudoClassObject.toSQLocator(previous);
+        ElementFinder locator = pseudoClassObject.toElementFinder(previous);
         // then
-        assertThat("CSS selector", locator.getCSSLocator().toString(), is(expectedCss));
+        assertThat("CSS selector", locator.getCssFinder().toString(), is(expectedCss));
         assertThat("Can pure CSS?", locator.canFetchThroughCssAlone(), is(canPureCss));
         assertThat("XPath Expression", locator.getXPathExpression(), is(expectedXPath));
         assertThat("ElementFilterList", locator.getElementFilterList().getElementFilters(), elementFilterMatcher);

@@ -32,9 +32,9 @@ public class SQCssContainsPrefixAttributeConditionTest {
         SQCssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new SQCssContainsPrefixAttributeCondition("hreflang", "en");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = containsPrefixAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = containsPrefixAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCSSLocator().toString(), is("[hreflang|='en']"));
+        assertThat(locator.getCssFinder().toString(), is("[hreflang|='en']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
 
         String hreflang = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'hreflang']";

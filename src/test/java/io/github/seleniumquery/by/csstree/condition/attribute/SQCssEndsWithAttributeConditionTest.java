@@ -32,9 +32,9 @@ public class SQCssEndsWithAttributeConditionTest {
         SQCssEndsWithAttributeCondition endsWithAttributeCondition = new SQCssEndsWithAttributeCondition("attribute", "stringToEnd");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_LOCATOR;
         // when
-        ElementFinder locator = endsWithAttributeCondition.toSQLocator(previous);
+        ElementFinder locator = endsWithAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(locator.getCSSLocator().toString(), is("[attribute$='stringToEnd']"));
+        assertThat(locator.getCssFinder().toString(), is("[attribute$='stringToEnd']"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";

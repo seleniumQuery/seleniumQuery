@@ -34,7 +34,7 @@ public class SQCssTagNameSelectorTest {
         // when
         ElementFinder locator = tagNameSelector.toSQLocator(mock(WebDriver.class));
         // then
-        assertThat(locator.getCSSLocator().toString(), is("myTag"));
+        assertThat(locator.getCssFinder().toString(), is("myTag"));
         assertThat(locator.canFetchThroughCssAlone(), is(true));
         assertThat(locator.getXPathExpression(), is(".//*[self::myTag]"));
         assertThat(locator.getElementFilterList().getElementFilters(), empty());

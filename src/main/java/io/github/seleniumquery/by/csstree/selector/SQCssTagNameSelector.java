@@ -56,7 +56,7 @@ public class SQCssTagNameSelector implements SQCssSelector {
 
     @Override
     public ElementFinder toSQLocator(ElementFinder leftLocator) {
-        CSSFinder combinedCssSelector = leftLocator.getCSSLocator().merge(toCSS());
+        CSSFinder combinedCssSelector = leftLocator.getCssFinder().merge(toCSS());
         String combinedXPathExp = SQLocatorUtils.conditionalSimpleXPathMerge(leftLocator.getXPathExpression(), toXPath());
         return new ElementFinder(combinedCssSelector, combinedXPathExp, leftLocator);
     }
