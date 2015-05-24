@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalIndexArgumentPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.findergenerationstrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.findergenerationstrategy.XPathMergeStrategy;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
 import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 

@@ -17,8 +17,8 @@
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.seleniumquery;
 
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.findergenerationstrategy.AlwaysNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.findergenerationstrategy.MaybeNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.AlwaysNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.finder.CSSFinder;
 import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;

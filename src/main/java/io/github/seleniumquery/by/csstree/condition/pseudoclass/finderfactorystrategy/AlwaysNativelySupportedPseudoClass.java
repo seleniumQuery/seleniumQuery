@@ -14,34 +14,20 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.findergenerationstrategy;
+package io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedLocators;
 import io.github.seleniumquery.by.finder.CSSFinder;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Pseudos extending this class will never ever even check for native support.
- *
- * @author acdcjunior
- * @since 0.10.0
- */
-public abstract class NeverNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
+public abstract class AlwaysNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedLocators {
 
     @Override
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
-        return false;
+        return true;
     }
 
-    /**
-     * Due to the {@link NeverNativelySupportedPseudoClass#isThisCSSPseudoClassNativelySupportedOn(org.openqa.selenium.WebDriver)}
-     * always returning false, this method will actually never be called.
-     * I do know this smells like a violation of LSP, but I, for the love of Yoda, couldn't figure out a better way!
-     * @param webDriver ignored
-     */
     @Override
-    public CSSFinder toCssWhenNativelySupported(WebDriver webDriver) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract CSSFinder toCssWhenNativelySupported(WebDriver webDriver);
 
 }
