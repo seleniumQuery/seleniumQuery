@@ -18,13 +18,13 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.contentfilter;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssHasPseudoClassTest {
 
     @Test
     public void translate() {
-        assertFunctionalPseudo(":has", SQCssHasPseudoClass.class);
+        assertQueriesOnSelector(":has").withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssHasPseudoClass.class);
     }
 
 }

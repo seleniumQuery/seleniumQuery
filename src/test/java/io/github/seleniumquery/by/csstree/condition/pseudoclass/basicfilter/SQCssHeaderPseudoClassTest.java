@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssHeaderPseudoClassTest {
 
@@ -31,7 +31,7 @@ public class SQCssHeaderPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(HEADER_PSEUDO, SQCssHeaderPseudoClass.class);
+        assertQueriesOnSelector(HEADER_PSEUDO).yieldPseudoClass(SQCssHeaderPseudoClass.class);
     }
 
     @Test

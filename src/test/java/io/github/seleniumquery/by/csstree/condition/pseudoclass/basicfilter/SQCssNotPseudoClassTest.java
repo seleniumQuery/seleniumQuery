@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasElementFinderWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasFinderWhenNotNativelySupported;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 
@@ -31,7 +31,7 @@ public class SQCssNotPseudoClassTest {
 
     @Test
     public void translate() {
-        assertFunctionalPseudo(NOT_PSEUDO, SQCssNotPseudoClass.class);
+        assertQueriesOnSelector(NOT_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssNotPseudoClass.class);
     }
 
     @Test

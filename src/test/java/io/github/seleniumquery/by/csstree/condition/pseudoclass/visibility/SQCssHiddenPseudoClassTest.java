@@ -20,13 +20,13 @@ import io.github.seleniumquery.by.css.pseudoclasses.HiddenPseudoClass;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFilterOnlyPseudoGeneratesFilter;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssHiddenPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":hidden", SQCssHiddenPseudoClass.class);
+        assertQueriesOnSelector(":hidden").yieldPseudoClass(SQCssHiddenPseudoClass.class);
     }
 
     @Test

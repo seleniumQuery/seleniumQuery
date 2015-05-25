@@ -20,13 +20,13 @@ import io.github.seleniumquery.by.css.pseudoclasses.FocusPseudoClass;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFilterOnlyPseudoGeneratesFilter;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssFocusPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":focus", SQCssFocusPseudoClass.class);
+        assertQueriesOnSelector(":focus").yieldPseudoClass(SQCssFocusPseudoClass.class);
     }
 
     @Test

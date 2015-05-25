@@ -18,13 +18,13 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.seleniumquery;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssUncheckedPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":unchecked", SQCssUncheckedPseudoClass.class);
+        assertQueriesOnSelector(":unchecked").yieldPseudoClass(SQCssUncheckedPseudoClass.class);
     }
 
 }

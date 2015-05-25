@@ -22,7 +22,7 @@ import org.openqa.selenium.InvalidSelectorException;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathWhenNotNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.*;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -41,7 +41,7 @@ public class SQCssNthChildPseudoClassTest {
 
     @Test
     public void translate() {
-        assertFunctionalPseudo(NTH_CHILD_PSEUDO, SQCssNthChildPseudoClass.class);
+        assertQueriesOnSelector(NTH_CHILD_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssNthChildPseudoClass.class);
     }
 
     @Test

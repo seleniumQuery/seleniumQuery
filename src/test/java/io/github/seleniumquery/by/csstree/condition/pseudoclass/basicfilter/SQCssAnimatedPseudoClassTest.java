@@ -19,14 +19,14 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 
 public class SQCssAnimatedPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":animated", SQCssAnimatedPseudoClass.class);
+        assertQueriesOnSelector(":animated").yieldPseudoClass(SQCssAnimatedPseudoClass.class);
     }
 
     @Test(expected = UnsupportedPseudoClassException.class)

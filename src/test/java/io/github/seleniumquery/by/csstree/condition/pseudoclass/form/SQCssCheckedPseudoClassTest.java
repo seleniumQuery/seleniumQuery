@@ -22,7 +22,7 @@ import io.github.seleniumquery.by.finder.ElementFinderUtilsTest;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.*;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit;
 import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS;
@@ -37,7 +37,7 @@ public class SQCssCheckedPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(CHECKED_PSEUDO, SQCssCheckedPseudoClass.class);
+        assertQueriesOnSelector(CHECKED_PSEUDO).yieldPseudoClass(SQCssCheckedPseudoClass.class);
     }
 
     @Test
