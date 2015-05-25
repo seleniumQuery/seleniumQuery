@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 
 public class SQCssCheckboxPseudoClassTest {
@@ -30,7 +30,7 @@ public class SQCssCheckboxPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(CHECKBOX_PSEUDO, SQCssCheckboxPseudoClass.class);
+        assertQueriesOnSelector(CHECKBOX_PSEUDO).yieldPseudoClass(SQCssCheckboxPseudoClass.class);
     }
 
     @Test

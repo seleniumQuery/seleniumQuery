@@ -24,7 +24,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.*;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -42,7 +42,7 @@ public class SQCssSelectedPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(SELECTED_PSEUDO, SQCssSelectedPseudoClass.class);
+        assertQueriesOnSelector(SELECTED_PSEUDO).yieldPseudoClass(SQCssSelectedPseudoClass.class);
     }
 
     @Test

@@ -20,7 +20,7 @@ import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -33,7 +33,7 @@ public class SQCssGtPseudoClassTest {
 
     @Test
     public void translate() {
-        assertFunctionalPseudo(GT_PSEUDO, SQCssGtPseudoClass.class);
+        assertQueriesOnSelector(GT_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssGtPseudoClass.class);
     }
 
     @Test

@@ -18,13 +18,13 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssOnlyOfTypePseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":only-of-type", SQCssOnlyOfTypePseudoClass.class);
+        assertQueriesOnSelector(":only-of-type").yieldPseudoClass(SQCssOnlyOfTypePseudoClass.class);
     }
 
 }

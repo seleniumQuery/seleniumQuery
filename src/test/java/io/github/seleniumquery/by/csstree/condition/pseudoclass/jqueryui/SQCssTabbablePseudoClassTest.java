@@ -18,13 +18,13 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.jqueryui;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssTabbablePseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":tabbable", SQCssTabbablePseudoClass.class);
+        assertQueriesOnSelector(":tabbable").yieldPseudoClass(SQCssTabbablePseudoClass.class);
     }
 
 }

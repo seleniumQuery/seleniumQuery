@@ -18,13 +18,13 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFunctionalPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssNthOfTypePseudoClassTest {
 
     @Test
     public void translate() {
-        assertFunctionalPseudo(":nth-of-type", SQCssNthOfTypePseudoClass.class);
+        assertQueriesOnSelector(":nth-of-type").withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssNthOfTypePseudoClass.class);
     }
 
 }

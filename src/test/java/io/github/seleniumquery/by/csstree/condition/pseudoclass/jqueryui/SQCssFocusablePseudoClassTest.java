@@ -18,13 +18,13 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.jqueryui;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssFocusablePseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":focusable", SQCssFocusablePseudoClass.class);
+        assertQueriesOnSelector(":focusable").yieldPseudoClass(SQCssFocusablePseudoClass.class);
     }
 
 }

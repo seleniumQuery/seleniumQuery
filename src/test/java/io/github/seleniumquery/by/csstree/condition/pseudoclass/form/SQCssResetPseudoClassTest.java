@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassOnlySupportsPureXPathRegardlessOfNativeSupport;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 
 public class SQCssResetPseudoClassTest {
@@ -29,7 +29,7 @@ public class SQCssResetPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":reset", SQCssResetPseudoClass.class);
+        assertQueriesOnSelector(":reset").yieldPseudoClass(SQCssResetPseudoClass.class);
     }
 
     @Test

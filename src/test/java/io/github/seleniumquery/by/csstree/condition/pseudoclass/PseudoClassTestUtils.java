@@ -42,7 +42,24 @@ public class PseudoClassTestUtils {
         }
     };
 
-    public static <T extends SQCssCondition> void assertPseudo(String selector, Class<T> pseudoClassClass) {
+    public static QueriesOnPseudoclassSelectorsTestAssertBuilder assertQueriesOnSelector(String selector) {
+        return new QueriesOnPseudoclassSelectorsTestAssertBuilder(selector);
+    }
+
+    public static class QueriesOnPseudoclassSelectorsTestAssertBuilder {
+        private final String selector;
+
+        public QueriesOnPseudoclassSelectorsTestAssertBuilder(String selector) { this.selector = selector; }
+
+        public <T extends SQCssCondition> void yieldPseudoClass(Class<T> pseudoClassClass) {
+            assertQueryOnSelectorYieldsPseudoClass(this.selector, pseudoClassClass);
+        }
+        public QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder withAllKindsOfArguments() {
+            return new QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder(this.selector);
+        }
+    }
+
+    private static <T extends SQCssCondition> void assertQueryOnSelectorYieldsPseudoClass(String selector, Class<T> pseudoClassClass) {
         // given
         // selector
         // when
@@ -51,8 +68,17 @@ public class PseudoClassTestUtils {
         assertThat(cssCondition, is(notNullValue()));
     }
 
-    public static <T extends SQCssFunctionalPseudoClassCondition> void assertFunctionalPseudo(String selector,
-                                                                                              Class<T> pseudoClassClass) {
+    public static class QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder {
+        private final String selector;
+        public QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder(String selector) { this.selector = selector; }
+
+        public <T extends SQCssFunctionalPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(Class<T> pseudoClassClass) {
+            assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass2(this.selector, pseudoClassClass);
+        }
+    }
+
+    private static <T extends SQCssFunctionalPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass2(String selector,
+                                                                                                                                      Class<T> pseudoClassClass) {
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(0)", "0");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(-0)", "-0");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(+0)", "+0");

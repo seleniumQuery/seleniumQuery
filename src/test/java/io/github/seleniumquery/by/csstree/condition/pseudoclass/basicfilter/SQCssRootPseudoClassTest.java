@@ -18,13 +18,13 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertPseudo;
+import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssRootPseudoClassTest {
 
     @Test
     public void translate() {
-        assertPseudo(":root", SQCssRootPseudoClass.class);
+        assertQueriesOnSelector(":root").yieldPseudoClass(SQCssRootPseudoClass.class);
     }
 
 }
