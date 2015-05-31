@@ -1,11 +1,11 @@
 package endtoend.sizzle;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.SelectorUtils;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static infrastructure.IntegrationTestUtils.equal;
+import static testinfrastructure.IntegrationTestUtils.equal;
 
 public class SizzleID extends SizzleTest {
 

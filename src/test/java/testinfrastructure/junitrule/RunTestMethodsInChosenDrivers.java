@@ -1,8 +1,8 @@
-package infrastructure.junitrule;
+package testinfrastructure.junitrule;
 
 import org.junit.runners.model.Statement;
 
-import static infrastructure.junitrule.DriverInstantiator.*;
+import static testinfrastructure.junitrule.DriverInstantiator.*;
 import static io.github.seleniumquery.SeleniumQuery.$;
 
 @SuppressWarnings("deprecation")

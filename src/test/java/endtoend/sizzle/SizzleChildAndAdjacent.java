@@ -1,10 +1,10 @@
 package endtoend.sizzle;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static infrastructure.IntegrationTestUtils.equal;
+import static testinfrastructure.IntegrationTestUtils.equal;
 
 public class SizzleChildAndAdjacent extends SizzleTest {
 

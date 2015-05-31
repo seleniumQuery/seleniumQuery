@@ -22,7 +22,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
-import static infrastructure.IntegrationTestUtils.classNameToTestFileUrl;
+import static testinfrastructure.IntegrationTestUtils.classNameToTestFileUrl;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;

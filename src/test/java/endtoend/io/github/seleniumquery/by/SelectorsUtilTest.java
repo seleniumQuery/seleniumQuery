@@ -16,7 +16,7 @@
 
 package endtoend.io.github.seleniumquery.by;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.by.SelectorUtils;
 import org.junit.Before;

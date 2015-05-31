@@ -1,6 +1,6 @@
 package endtoend.selectors.pseudoclasses.content;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.Rule;
 import org.junit.Test;
 

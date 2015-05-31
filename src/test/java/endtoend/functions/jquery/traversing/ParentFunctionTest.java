@@ -16,11 +16,11 @@ limitations under the License.
 
 package endtoend.functions.jquery.traversing;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static infrastructure.IntegrationTestUtils.*;
+import static testinfrastructure.IntegrationTestUtils.*;
 import static io.github.seleniumquery.SeleniumQuery.jQuery;
 import static java.util.Arrays.asList;
 

@@ -20,8 +20,8 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import infrastructure.junitrule.JavaScriptOnly;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.JavaScriptOnly;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedXPathPseudoClassException;
 
 import org.junit.ClassRule;

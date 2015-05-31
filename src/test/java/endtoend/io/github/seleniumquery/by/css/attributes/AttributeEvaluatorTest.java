@@ -16,7 +16,7 @@
 
 package endtoend.io.github.seleniumquery.by.css.attributes;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.by.css.attributes.ContainsWordAttributeCssSelector;
 import io.github.seleniumquery.by.css.attributes.EndsWithAttributeCssSelector;
 import io.github.seleniumquery.by.css.attributes.EqualsOrHasAttributeCssSelector;

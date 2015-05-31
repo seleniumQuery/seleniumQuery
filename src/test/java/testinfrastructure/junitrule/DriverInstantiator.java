@@ -1,4 +1,4 @@
-package infrastructure.junitrule;
+package testinfrastructure.junitrule;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
 

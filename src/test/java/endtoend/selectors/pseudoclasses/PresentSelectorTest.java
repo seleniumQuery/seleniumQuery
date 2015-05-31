@@ -1,7 +1,7 @@
 package endtoend.selectors.pseudoclasses;
 
-import infrastructure.junitrule.JavaScriptOnly;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.JavaScriptOnly;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.ClassRule;
 import org.junit.Rule;
