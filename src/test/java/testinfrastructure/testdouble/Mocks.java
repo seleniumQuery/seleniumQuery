@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package testinfrastructure.testutils;
+package testinfrastructure.testdouble;
 
 import org.openqa.selenium.WebElement;
 

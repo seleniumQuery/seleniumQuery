@@ -30,9 +30,9 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
-import static testinfrastructure.testutils.Dummies.createDummySeleniumQueryObject;
-import static testinfrastructure.testutils.Dummies.createDummyToStringableSeleniumQueryObject;
-import static testinfrastructure.testutils.Mocks.createWebElementMock;
+import static testinfrastructure.testdouble.Dummies.createDummySeleniumQueryObject;
+import static testinfrastructure.testdouble.Dummies.createDummyToStringableSeleniumQueryObject;
+import static testinfrastructure.testdouble.Mocks.createWebElementMock;
 
 public class ClickFunctionTest {
 

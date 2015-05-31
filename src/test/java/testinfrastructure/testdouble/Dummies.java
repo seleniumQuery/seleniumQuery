@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package testinfrastructure.testutils;
+package testinfrastructure.testdouble;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.mockito.invocation.InvocationOnMock;

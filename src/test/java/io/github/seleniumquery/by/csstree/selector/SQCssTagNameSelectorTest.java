@@ -23,7 +23,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
-import static testinfrastructure.testutils.Dummies.dummyWebDriver;
+import static testinfrastructure.testdouble.Dummies.dummyWebDriver;
 
 public class SQCssTagNameSelectorTest {
 
