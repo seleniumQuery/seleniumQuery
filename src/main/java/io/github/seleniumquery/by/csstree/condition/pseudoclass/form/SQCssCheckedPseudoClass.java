@@ -38,7 +38,7 @@ import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.
  *    <br>
  *    Issue in PhantomJS: https://github.com/ariya/phantomjs/issues/11550
  *    <br>
- *    We have a test (integration.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest) that asserts these
+ *    We have a test (endtoend.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest) that asserts these
  *    bugs continue to exist.
  * </p>
  *

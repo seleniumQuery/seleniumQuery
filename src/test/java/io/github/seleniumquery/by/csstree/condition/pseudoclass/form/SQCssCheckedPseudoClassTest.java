@@ -63,7 +63,7 @@ public class SQCssCheckedPseudoClassTest {
     /**
      * #Cross-Driver
      * PhantomJSDriver's :checked has bugs!
-     * See: {@link integration.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest}
+     * See: {@link endtoend.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest}
      */
     @Test
     public void toElementFinder__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
@@ -81,7 +81,7 @@ public class SQCssCheckedPseudoClassTest {
     /**
      * #Cross-Driver
      * HtmlUnitDriver's :checked has bugs!
-     * See: {@link integration.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest}
+     * See: {@link endtoend.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest}
      */
     @Test
     public void toElementFinder__when_driver_is_HTMLUNITDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
