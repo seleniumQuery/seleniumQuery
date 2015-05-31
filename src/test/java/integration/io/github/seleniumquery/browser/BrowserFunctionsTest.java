@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.browser;
+package integration.io.github.seleniumquery.browser;
 
+import io.github.seleniumquery.browser.BrowserFunctions;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.closeTo;
