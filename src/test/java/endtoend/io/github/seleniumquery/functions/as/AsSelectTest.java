@@ -20,7 +20,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static testinfrastructure.IntegrationTestUtils.classNameToTestFileUrl;
+import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

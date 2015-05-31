@@ -4,7 +4,7 @@ import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static testinfrastructure.IntegrationTestUtils.equal;
+import static testinfrastructure.EndToEndTestUtils.equal;
 
 public class SizzleChildAndAdjacent extends SizzleTest {
 

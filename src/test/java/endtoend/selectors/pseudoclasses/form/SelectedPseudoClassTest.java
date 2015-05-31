@@ -1,6 +1,6 @@
 package endtoend.selectors.pseudoclasses.form;
 
-import static testinfrastructure.IntegrationTestUtils.t;
+import static testinfrastructure.EndToEndTestUtils.t;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

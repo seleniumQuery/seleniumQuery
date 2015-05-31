@@ -1,6 +1,6 @@
 package testinfrastructure.junitrule;
 
-import testinfrastructure.IntegrationTestUtils;
+import testinfrastructure.EndToEndTestUtils;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -29,13 +29,13 @@ public class SetUpAndTearDownDriver implements TestRule {
 	}
 
 	public SetUpAndTearDownDriver(Class<?> htmlTestUrlClass) {
-		this.testUrl = IntegrationTestUtils.classNameToTestFileUrl(htmlTestUrlClass);
+		this.testUrl = EndToEndTestUtils.classNameToTestFileUrl(htmlTestUrlClass);
 	}
 
 	private String url(Description description) {
 		//noinspection StringEquality
 		if (this.testUrl == NOT_SPECIFIED) {
-			return IntegrationTestUtils.classNameToTestFileUrl(description.getTestClass());
+			return EndToEndTestUtils.classNameToTestFileUrl(description.getTestClass());
 		}
 		return this.testUrl;
 	}
