@@ -19,7 +19,7 @@ package endtoend.io.github.seleniumquery;
 import io.github.seleniumquery.SeleniumQueryBrowser;
 import org.junit.Test;
 
-import static infrastructure.IntegrationTestUtils.classNameToTestFileUrl;
+import static testinfrastructure.IntegrationTestUtils.classNameToTestFileUrl;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 

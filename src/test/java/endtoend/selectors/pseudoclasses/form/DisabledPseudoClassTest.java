@@ -1,11 +1,11 @@
 package endtoend.selectors.pseudoclasses.form;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static infrastructure.IntegrationTestUtils.t;
+import static testinfrastructure.IntegrationTestUtils.t;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

@@ -1,4 +1,4 @@
-package infrastructure.junitrule;
+package testinfrastructure.junitrule;
 
 @SuppressWarnings("unused")
 public enum DriverToRunTestsIn {

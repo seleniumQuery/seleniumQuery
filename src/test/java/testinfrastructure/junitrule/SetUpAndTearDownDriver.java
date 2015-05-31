@@ -1,6 +1,6 @@
-package infrastructure.junitrule;
+package testinfrastructure.junitrule;
 
-import infrastructure.IntegrationTestUtils;
+import testinfrastructure.IntegrationTestUtils;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;

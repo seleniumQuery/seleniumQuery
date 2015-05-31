@@ -1,6 +1,6 @@
 package endtoend.functions.jquery.forms;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Test;
 

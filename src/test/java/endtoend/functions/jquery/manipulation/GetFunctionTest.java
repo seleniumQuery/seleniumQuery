@@ -16,7 +16,7 @@ limitations under the License.
 
 package endtoend.functions.jquery.manipulation;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;

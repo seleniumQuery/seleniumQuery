@@ -1,4 +1,4 @@
-package infrastructure;
+package testinfrastructure;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.WebElement;

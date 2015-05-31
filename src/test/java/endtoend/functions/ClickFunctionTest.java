@@ -16,8 +16,8 @@
 
 package endtoend.functions;
 
-import infrastructure.junitrule.JavaScriptOnly;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.JavaScriptOnly;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;

@@ -3,7 +3,7 @@ package endtoend.functions;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import org.junit.Rule;
 import org.junit.Test;

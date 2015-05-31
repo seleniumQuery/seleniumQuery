@@ -3,7 +3,7 @@ package endtoend.selectors.pseudoclasses.positional;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import org.junit.ClassRule;
 import org.junit.Rule;

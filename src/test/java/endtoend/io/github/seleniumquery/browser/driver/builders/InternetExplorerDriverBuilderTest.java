@@ -21,7 +21,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static infrastructure.IntegrationTestUtils.classNameToTestFileUrl;
+import static testinfrastructure.IntegrationTestUtils.classNameToTestFileUrl;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
 import static org.hamcrest.CoreMatchers.is;

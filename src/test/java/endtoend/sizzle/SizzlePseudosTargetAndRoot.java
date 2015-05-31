@@ -1,12 +1,12 @@
 package endtoend.sizzle;
 
-import infrastructure.junitrule.JavaScriptOnly;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.JavaScriptOnly;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static infrastructure.IntegrationTestUtils.equal;
+import static testinfrastructure.IntegrationTestUtils.equal;
 
 public class SizzlePseudosTargetAndRoot extends SizzleTest {
 

@@ -1,7 +1,7 @@
 package endtoend.sizzle;
 
-import infrastructure.junitrule.JavaScriptOnly;
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.JavaScriptOnly;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.DriverVersionUtils;
 import org.junit.ClassRule;

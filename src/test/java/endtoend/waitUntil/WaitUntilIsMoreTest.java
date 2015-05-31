@@ -1,6 +1,6 @@
 package endtoend.waitUntil;
 
-import infrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 import org.junit.ClassRule;
 import org.junit.Rule;
