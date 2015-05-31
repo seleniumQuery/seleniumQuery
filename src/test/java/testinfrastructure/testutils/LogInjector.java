@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package testutils;
+package testinfrastructure.testutils;
 
 import org.apache.commons.logging.Log;
 

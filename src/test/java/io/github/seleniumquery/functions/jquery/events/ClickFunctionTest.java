@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.junit.Test;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
-import testutils.LogInjector;
+import testinfrastructure.testutils.LogInjector;
 
 import java.util.Collections;
 
@@ -30,9 +30,9 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
-import static testutils.Dummies.createDummySeleniumQueryObject;
-import static testutils.Dummies.createDummyToStringableSeleniumQueryObject;
-import static testutils.Mocks.createWebElementMock;
+import static testinfrastructure.testutils.Dummies.createDummySeleniumQueryObject;
+import static testinfrastructure.testutils.Dummies.createDummyToStringableSeleniumQueryObject;
+import static testinfrastructure.testutils.Mocks.createWebElementMock;
 
 public class ClickFunctionTest {
 

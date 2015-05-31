@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package testutils;
+package testinfrastructure.testutils;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.mockito.invocation.InvocationOnMock;
