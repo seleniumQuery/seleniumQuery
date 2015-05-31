@@ -18,12 +18,12 @@ package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.finder.ElementFinder;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static testinfrastructure.testutils.Dummies.dummyWebDriver;
 
 public class SQCssTagNameSelectorTest {
 
@@ -32,7 +32,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("myTag");
         // when
-        ElementFinder elementFinder = tagNameSelector.toElementFinder(mock(WebDriver.class));
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(dummyWebDriver());
         // then
         assertThat(elementFinder.getCssFinder().toString(), is("myTag"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
@@ -41,21 +41,21 @@ public class SQCssTagNameSelectorTest {
     }
 
     @Test
-    public void toElementFinder__should_return_true_for_XPath_if_tag_is_all() {
+    public void toElementFinder__should_return_true_for_XPath_if_tag_is_universalSelector() {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        ElementFinder elementFinder = tagNameSelector.toElementFinder(mock(WebDriver.class));
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(dummyWebDriver());
         // then
         assertThat(elementFinder.getXPathExpression(), is(".//*[true()]"));
     }
 
     @Test
-    public void toElementFinder__should_return_ONLY_true_as_raw_expression() {
+    public void toElementFinder__should_return_ONLY_true_as_raw_XPathexpression() {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        ElementFinder elementFinder = tagNameSelector.toElementFinder(mock(WebDriver.class));
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(dummyWebDriver());
         // then
         assertThat(elementFinder.getXPathAndFilterFinder().getRawXPathExpression(), is("true()"));
     }

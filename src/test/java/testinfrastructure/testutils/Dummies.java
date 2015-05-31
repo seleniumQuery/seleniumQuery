@@ -19,6 +19,7 @@ package testinfrastructure.testutils;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.openqa.selenium.WebDriver;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -37,6 +38,10 @@ public class Dummies {
 
     private static <D> D createDummy(Class<D> classToDummy) {
         return mock(classToDummy, new NoMethodShouldBeCalledAnswer(classToDummy.getSimpleName()));
+    }
+
+    public static WebDriver dummyWebDriver() {
+        return createDummy(WebDriver.class);
     }
 
     /**
