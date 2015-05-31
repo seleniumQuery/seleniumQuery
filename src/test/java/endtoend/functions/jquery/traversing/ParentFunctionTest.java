@@ -20,7 +20,7 @@ import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static testinfrastructure.IntegrationTestUtils.*;
+import static testinfrastructure.EndToEndTestUtils.*;
 import static io.github.seleniumquery.SeleniumQuery.jQuery;
 import static java.util.Arrays.asList;
 

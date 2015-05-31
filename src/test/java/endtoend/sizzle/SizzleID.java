@@ -5,7 +5,7 @@ import io.github.seleniumquery.by.SelectorUtils;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static testinfrastructure.IntegrationTestUtils.equal;
+import static testinfrastructure.EndToEndTestUtils.equal;
 
 public class SizzleID extends SizzleTest {
 

@@ -6,7 +6,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static testinfrastructure.IntegrationTestUtils.equal;
+import static testinfrastructure.EndToEndTestUtils.equal;
 
 public class SizzlePseudosTargetAndRoot extends SizzleTest {
 
