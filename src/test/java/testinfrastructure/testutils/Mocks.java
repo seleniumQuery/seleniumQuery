@@ -14,25 +14,16 @@
  * limitations under the License.
  */
 
-package testutils;
+package testinfrastructure.testutils;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
+import org.openqa.selenium.WebElement;
 
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.mock;
 
-public class LogInjectorTest {
+public class Mocks {
 
-    private static final Log LOGGER = LogFactory.getLog(LogInjectorTest.class);
-
-    @Test
-    public void injectLogSpy__managesToInjectLog() {
-        // when
-        Log logSpy = LogInjector.injectLogSpy(LogInjectorTest.class);
-        // then
-        LOGGER.info("SomeMessage");
-        verify(logSpy).info("SomeMessage");
+    public static WebElement createWebElementMock() {
+        return mock(WebElement.class);
     }
 
 }
