@@ -36,6 +36,7 @@ import io.github.seleniumquery.by.csstree.condition.pseudoclass.seleniumquery.SQ
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.seleniumquery.SQCssUncheckedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.visibility.SQCssHiddenPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.visibility.SQCssVisiblePseudoClass;
+import io.github.seleniumquery.by.preparser.ArgumentMap;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.SimpleSelector;
 
@@ -123,7 +124,7 @@ public class SQCssPseudoClassConditionTranslator {
 		pseudoClasses.put(SQCssUncheckedPseudoClass.PSEUDO, SQCssUncheckedPseudoClass.class);
 	}
 
-	public SQCssCondition translate(SimpleSelector selectorUpToThisPoint, Map<String, String> stringMap, AttributeCondition attributeCondition) {
+	public SQCssCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap stringMap, AttributeCondition attributeCondition) {
 		String pseudoClassName = getPseudoClassName(attributeCondition);
 		Class<? extends SQCssPseudoClassCondition> pseudoClass = pseudoClasses.get(pseudoClassName);
 		if (pseudoClass != null) {

@@ -1,9 +1,25 @@
-package io.github.seleniumquery.by.preparser;
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import static java.lang.Character.isLetter;
+package io.github.seleniumquery.by.preparser;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.Character.isLetter;
 
 /**
  * Parses a selector string (such as "span.warn:not(.something)") into a {@link PreParsedSelector}.
@@ -16,38 +32,42 @@ import java.util.Map;
  * This is done to simplify some selectors and to enable others that the SAC Parser can't parse (we replace
  * those with something else here and deal with them later).
  *
+ * @author acdcjunior
+ * @since 1.0.0
  */
 public class CSSSelectorPreParser {
 
-	private static final Character END_OF_STRING = null;
+    public static PreParsedSelector transformSelector(String selector) {
+        return new CSSSelectorPreParser(selector).transformSelector();
+    }
 
 	public static class PreParsedSelector {
 		private String transformedSelector;
-		private Map<String, String> stringMap;
-		public PreParsedSelector(String transformedSelector, Map<String, String> stringMap) {
+		private ArgumentMap stringMap;
+		private PreParsedSelector(String transformedSelector, Map<Integer, String> stringMap) {
 			this.transformedSelector = transformedSelector;
-			this.stringMap = stringMap;
+			this.stringMap = new ArgumentMap(stringMap);
 		}
-		public String getTransformedSelector() {
-			return this.transformedSelector;
-		}
-		public Map<String, String> getStringMap() {
-			return this.stringMap;
-		}
+		public String getTransformedSelector() { return this.transformedSelector; }
+		public ArgumentMap getStringMap() { return this.stringMap; }
 	}
-	
+
+    private static final Character END_OF_STRING = null;
+
 	private String selector;
 	private int selectorCurrentParsingIndex;
-	
-	private StringBuilder transformedSelector = new StringBuilder();
-	private Map<String, String> stringMap = new HashMap<String, String>();
-	
-	public PreParsedSelector transformSelector(String selector) {
-		this.selector = selector;
-		this.selectorCurrentParsingIndex = 0;
+	private StringBuilder transformedSelector;
+	private Map<Integer, String> stringMap;
 
+    public CSSSelectorPreParser(String selector) {
+        this.selector = selector;
+        this.selectorCurrentParsingIndex = 0;
+        this.transformedSelector = new StringBuilder();
+        this.stringMap = new HashMap<Integer, String>();
+    }
+
+    private PreParsedSelector transformSelector() {
 		eatChar(getNextChar());
-		
 		return new PreParsedSelector(transformedSelector.toString(), stringMap);
 	}
 	
@@ -105,7 +125,7 @@ public class CSSSelectorPreParser {
 		}
 		if (nextChar != null && nextChar == '(') {
 			String bracerContent = eatEverythingUntilBracerEnd();
-			String index = String.valueOf(stringMap.size());
+			int index = stringMap.size();
 			stringMap.put(index, bracerContent);
 			
 			String pseudoClassName = pseudoClass.toString();

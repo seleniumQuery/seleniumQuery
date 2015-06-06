@@ -17,21 +17,20 @@
 package io.github.seleniumquery.functions.jquery.traversing.filtering;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.css.CssSelector;
 import io.github.seleniumquery.by.css.CssSelectorFactory;
-
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import io.github.seleniumquery.by.preparser.ArgumentMap;
+import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
+import io.github.seleniumquery.by.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * $("selector").is("selector")
@@ -55,7 +54,7 @@ public class IsFunction {
 		}
 		CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
 		SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
-		Map<String, String> stringMap = CSSParsedSelectorList.getStringMap();
+		ArgumentMap stringMap = CSSParsedSelectorList.getStringMap();
 
 		for (int i = 0; i < selectorList.getLength(); i++) {
     		Selector parsedSimpleSelector = selectorList.item(i);
@@ -76,7 +75,7 @@ public class IsFunction {
 		return false;
 	}
 
-	private static boolean hasNegatedPresent(Map<String, String> stringMap, String parsedSimpleSelector) {
+	private static boolean hasNegatedPresent(ArgumentMap stringMap, String parsedSimpleSelector) {
 		Matcher m = NOT_SQ_PATTERN.matcher(parsedSimpleSelector);
 		while (m.find()) {
 		    String stringMapId = m.group(1);
@@ -84,7 +83,7 @@ public class IsFunction {
 		    
 			CSSParsedSelectorList parsedPseudoClassContent = CSSSelectorParser.parseSelector(notPseudoClassContent);
 			SelectorList parsedPseudoClassContentSelectorList = parsedPseudoClassContent.getSelectorList();
-			Map<String, String> parsedPseudoClassContentStringMap = parsedPseudoClassContent.getStringMap();
+			ArgumentMap parsedPseudoClassContentStringMap = parsedPseudoClassContent.getStringMap();
 			for (int i = 0; i < parsedPseudoClassContentSelectorList.getLength(); i++) {
 				Selector parsedPseudoClassContentSimpleSelector = parsedPseudoClassContentSelectorList.item(i);
 				if (!hasNegatedPresent(parsedPseudoClassContentStringMap, parsedPseudoClassContentSimpleSelector.toString())) {
