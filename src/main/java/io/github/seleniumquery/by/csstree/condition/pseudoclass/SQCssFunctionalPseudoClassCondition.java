@@ -21,14 +21,16 @@ import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 public class SQCssFunctionalPseudoClassCondition extends SQCssPseudoClassCondition {
 
     protected PseudoClassSelector pseudoClassSelector;
-    protected String argument;
+    private String argument;
 
     public SQCssFunctionalPseudoClassCondition(PseudoClassSelector pseudoClassSelector) {
         this.pseudoClassSelector = pseudoClassSelector;
-        this.argument = pseudoClassSelector.getPseudoClassContent();
     }
 
     public String getArgument() {
+        if (this.argument == null) {
+            this.argument = pseudoClassSelector.getPseudoClassContent();
+        }
         return argument;
     }
 

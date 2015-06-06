@@ -30,6 +30,7 @@ import static io.github.seleniumquery.by.parser.translator.condition.attribute.T
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 public class PseudoClassTestUtils {
 
@@ -86,7 +87,12 @@ public class PseudoClassTestUtils {
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(999999)", "999999");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(-999999)", "-999999");
 
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "", null);
+        try {
+            assertSelectorTranslatesArgument(selector, pseudoClassClass, "", null);
+            fail("Functional Pseudo called without () should throw exception.");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), containsString("Functional pseudo"));
+        }
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "()", "");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "( )", " ");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(     )", "     ");
