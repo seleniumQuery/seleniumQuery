@@ -32,6 +32,9 @@ public class PseudoClassSelector {
 	}
 
 	public String getPseudoClassContent() {
+		if (!pseudoClassValue.contains("(")) {
+			throw new IllegalArgumentException("Functional pseudo-class has no parenthesis/arguments: "+pseudoClassValue);
+		}
 		String index = pseudoClassValue.substring(pseudoClassValue.indexOf('(')+1, pseudoClassValue.length()-1);
 		return this.stringMap.get(index);
 	}
