@@ -14,19 +14,28 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css;
+package io.github.seleniumquery.by.preparser;
 
-import io.github.seleniumquery.by.preparser.ArgumentMap;
-import io.github.seleniumquery.by.xpath.component.ConditionComponent;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.Condition;
-import org.w3c.css.sac.Selector;
+import java.util.Map;
 
-public interface CssConditionalSelector<T extends Condition, C extends ConditionComponent> {
+public class ArgumentMap {
 
-	boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selector, T condtition);
+    private Map<Integer, String> argumentMap;
 
-	C conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, T condition);
-	
+    ArgumentMap(Map<Integer, String> argumentMap) {
+        this.argumentMap = argumentMap;
+    }
+
+    public String get(int index) {
+        return argumentMap.get(index);
+    }
+
+    public String get(String index) {
+        return get(Integer.valueOf(index));
+    }
+
+    public int size() {
+        return argumentMap.size();
+    }
+
 }

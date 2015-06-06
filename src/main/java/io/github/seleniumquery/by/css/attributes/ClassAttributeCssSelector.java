@@ -1,7 +1,24 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssConditionalSelector;
+import io.github.seleniumquery.by.preparser.ArgumentMap;
 import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +27,6 @@ import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
 import java.util.Arrays;
-import java.util.Map;
 
 /**
  * .class
@@ -29,7 +45,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	 * This condition checks for a specified class. Example: .example
 	 */
 	@Override
-	public boolean isCondition(WebDriver driver, WebElement element, Map<String, String> stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
+	public boolean isCondition(WebDriver driver, WebElement element, ArgumentMap stringMap, Selector selectorUpToThisPoint, AttributeCondition attributeCondition) {
 		if (!SelectorUtils.hasAttribute(element, CLASS_ATTRIBUTE)) {
 			return false;
 		}
@@ -39,7 +55,7 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	}
 
 	@Override
-	public ConditionSimpleComponent conditionToXPath(Map<String, String> stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
+	public ConditionSimpleComponent conditionToXPath(ArgumentMap stringMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		String unescapedClassName = StringEscapeUtils.unescapeJava(wantedClassName);
 		// nothing to do, everyone supports filtering by class

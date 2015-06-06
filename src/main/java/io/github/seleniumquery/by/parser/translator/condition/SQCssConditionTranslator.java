@@ -19,12 +19,11 @@ package io.github.seleniumquery.by.parser.translator.condition;
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssUnknownConditionException;
 import io.github.seleniumquery.by.parser.translator.condition.attribute.*;
+import io.github.seleniumquery.by.preparser.ArgumentMap;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.SimpleSelector;
-
-import java.util.Map;
 
 /**
  * Translates a SAC {@link Condition} selector into a {@link SQCssCondition}.
@@ -45,7 +44,7 @@ public class SQCssConditionTranslator {
     private final SQCssClassAttributeConditionTranslator classAttributeConditionTranslator = new SQCssClassAttributeConditionTranslator();
     private final SQCssPseudoClassConditionTranslator pseudoClassCssSelector = new SQCssPseudoClassConditionTranslator();
 
-	public SQCssCondition translate(SimpleSelector simpleSelector, Map<String, String> stringMap, Condition condition) {
+	public SQCssCondition translate(SimpleSelector simpleSelector, ArgumentMap stringMap, Condition condition) {
 	    switch (condition.getConditionType()) {
 		    case Condition.SAC_AND_CONDITION:
 		    	return andConditionTranslator.translate(simpleSelector, stringMap, (CombinatorCondition) condition);
