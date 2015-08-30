@@ -1,17 +1,16 @@
-# ECLIPSE
-#
+# Maven
 /target
+
+# Eclipse
 /.settings
 .project
 .classpath
 
 # IntelliJ IDEA
-#
 *.iml
 /.idea
 
-# Others
-#
+# OTHERS
 errorPage.html
 phantomjsdriver.log
 errorPage.png
