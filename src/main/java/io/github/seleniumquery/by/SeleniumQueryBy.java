@@ -1,18 +1,18 @@
 /*
-Copyright (c) 2014 seleniumQuery authors
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package io.github.seleniumquery.by;
 
@@ -68,7 +68,6 @@ public class SeleniumQueryBy extends By {
 	}
 
 	private final String selector;
-	private boolean selectorIsXPathExpression;
 
 	
 	/**
@@ -77,7 +76,6 @@ public class SeleniumQueryBy extends By {
 	 */
 	private SeleniumQueryBy(String selector) {
 		this.selector = selector;
-		this.selectorIsXPathExpression = isXPathExpression(selector);
 	}
 	
 	
@@ -88,7 +86,7 @@ public class SeleniumQueryBy extends By {
 	 */
 	@Override
 	public List<WebElement> findElements(SearchContext context) {
-		if (this.selectorIsXPathExpression) {
+		if (this.isXPathExpression()) {
 			return new By.ByXPath(this.selector).findElements(context);
 		}
 		return this.enhancedCssFindElements(context);
@@ -107,8 +105,8 @@ public class SeleniumQueryBy extends By {
 	/**
 	 * If it begins with "/" or "(/" or "(((((/" or an XPath Axis, we assume the selector given is a XPath expression.
 	 */
-	static boolean isXPathExpression(String selector) {
-		return selector != null && XPATH_EXPRESSION_PATTERN.matcher(selector).matches();
+	boolean isXPathExpression() {
+		return XPATH_EXPRESSION_PATTERN.matcher(this.selector).matches();
 	}
 	
 	/**
@@ -119,7 +117,7 @@ public class SeleniumQueryBy extends By {
 	 * @since 0.9.0
 	 */
 	public String getSelectorForElementAtPosition(int position) {
-		if (this.selectorIsXPathExpression) {
+		if (this.isXPathExpression()) {
 			// notice that, in XPath, the position is one-based.
 			return "("+this.selector+")["+ (position+1) +"]";
 		}
