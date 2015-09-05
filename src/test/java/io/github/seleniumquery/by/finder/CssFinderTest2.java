@@ -23,7 +23,7 @@ import static io.github.seleniumquery.by.finder.CssFinder.universalSelector;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class CssFinderTest {
+public class CssFinderTest2 {
 
     @Test(expected = IllegalArgumentException.class)
     public void cssMerge__should_throw_exception_if_both_css_havent_universalSelector_as_tag() {
