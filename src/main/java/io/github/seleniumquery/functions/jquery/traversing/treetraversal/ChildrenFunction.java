@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 seleniumQuery authors
+ * Copyright (c) 2015 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,17 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
-import io.github.seleniumquery.ObjectLocalFactory;
+import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * $("selector").children()
@@ -39,7 +38,7 @@ public class ChildrenFunction {
 
 	public static SeleniumQueryObject children(SeleniumQueryObject caller, List<WebElement> elements) {
 		List<WebElement> children = getChildren(elements);
-		return ObjectLocalFactory.createWithInvalidSelector(caller.getWebDriver(), children, caller);
+		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(caller.getWebDriver(), children, caller);
 	}
 	
 	public static SeleniumQueryObject children(SeleniumQueryObject caller, List<WebElement> elements, String selector) {
@@ -51,7 +50,7 @@ public class ChildrenFunction {
 				iterator.remove();
 			}
 		}
-		return ObjectLocalFactory.createWithInvalidSelector(webDriver, children, caller);
+		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(webDriver, children, caller);
 	}
 	
 	private static List<WebElement> getChildren(List<WebElement> elements) {

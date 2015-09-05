@@ -80,7 +80,7 @@ public class SeleniumQueryBrowser {
      * @since 0.9.0
      */
     public SeleniumQueryObject $(String selector) {
-        return ObjectLocalFactory.createWithValidSelectorAndNoPrevious(this.$.driver().get(), selector);
+        return InternalSeleniumQueryObjectFactory.instance().createWithValidSelectorAndNoPrevious(this.$.driver().get(), selector);
     }
 
     /**
@@ -103,7 +103,7 @@ public class SeleniumQueryBrowser {
      * @since 0.9.0
      */
     public SeleniumQueryObject $(WebElement... elements) {
-        return ObjectLocalFactory.createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), elements);
+        return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), elements);
     }
 
     /**
@@ -126,7 +126,7 @@ public class SeleniumQueryBrowser {
      * @since 0.9.0
      */
     public SeleniumQueryObject $(List<WebElement> elements) {
-        return ObjectLocalFactory.createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), elements);
+        return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), elements);
     }
 
     /**

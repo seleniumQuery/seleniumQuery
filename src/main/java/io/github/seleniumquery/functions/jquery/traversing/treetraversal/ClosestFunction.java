@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 seleniumQuery authors
+ * Copyright (c) 2015 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,15 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
-import io.github.seleniumquery.ObjectLocalFactory;
+import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.css.CssSelectorMatcherService;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * $("selector").closest("selector")
@@ -45,8 +44,8 @@ public class ClosestFunction {
 				closests.add(closestElement);
 			}
 		}
-		
-		return ObjectLocalFactory.createWithInvalidSelector(caller.getWebDriver(), closests, caller);
+
+		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(caller.getWebDriver(), closests, caller);
 	}
 
 	public static WebElement closest(WebDriver driver, WebElement element, String selector) {
