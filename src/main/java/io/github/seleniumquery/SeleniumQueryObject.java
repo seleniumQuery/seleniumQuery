@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery;
 
-import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
 import io.github.seleniumquery.functions.jquery.attributes.AttrFunction;
@@ -36,14 +35,14 @@ import io.github.seleniumquery.functions.jquery.traversing.treetraversal.Childre
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.FindFunction;
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ParentFunction;
+import io.github.seleniumquery.utils.ListUtils;
 import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -85,9 +84,12 @@ import java.util.List;
 public class SeleniumQueryObject implements Iterable<WebElement> {
 	
 	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryObject.class);
-	
-	private SeleniumQueryBy by;
+
+    public static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
+
 	private WebDriver driver;
+
+    private By by;
 	private List<WebElement> elements;
 	
 	/**
@@ -99,35 +101,18 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 */
 	private SeleniumQueryObject previous;
 	
-	/**************************************************************************************************************************************
-	 * SeleniumQueryObject constrcutors
-	 **************************************************************************************************************************************/
-	
-	protected SeleniumQueryObject(WebDriver driver, String selector) {
+
+	protected SeleniumQueryObject(WebDriver driver, By by) {
+        this(driver, by, driver.findElements(by), NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
+	}
+
+	protected SeleniumQueryObject(WebDriver driver, By by, List<WebElement> webElements, SeleniumQueryObject previous) {
 		this.driver = driver;
-		this.by = SeleniumQueryBy.byEnhancedSelector(selector);
-		this.elements = toImmutableRandomAccessList(driver.findElements(this.by));
-		this.previous = null;
-	}
-
-	protected SeleniumQueryObject(WebDriver driver, String selector, List<WebElement> webElements, SeleniumQueryObject previous) {
-		this(driver, SeleniumQueryBy.byEnhancedSelector(selector), webElements, previous);
-	}
-
-	protected SeleniumQueryObject(WebDriver driver, List<WebElement> webElements, SeleniumQueryObject previous) {
-		this(driver, SeleniumQueryBy.NO_SELECTOR_INVALID_BY, webElements, previous);
-	}
-
-	private SeleniumQueryObject(WebDriver driver, SeleniumQueryBy seleniumQueryBy, List<WebElement> webElements, SeleniumQueryObject previous) {
-		this.driver = driver;
-		this.by = seleniumQueryBy;
-		this.elements = toImmutableRandomAccessList(webElements);
+		this.by = by;
+		this.elements = ListUtils.toImmutableRandomAccessList(webElements);
 		this.previous = previous;
 	}
 
-	private static List<WebElement> toImmutableRandomAccessList(List<WebElement> els) {
-		return Collections.unmodifiableList(new ArrayList<WebElement>(els));
-	}
 
 	/**************************************************************************************************************************************
 	 * Java SeleniumQueryObject waitUntil() and as() functions
@@ -202,6 +187,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return pluginFunction.as(this);
 	}
 
+
 	/**************************************************************************************************************************************
 	 * Java SeleniumQueryObject specific functions
 	 **************************************************************************************************************************************/
@@ -228,9 +214,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Returns the By used to search the matched elements of this seleniumQuery object.
 	 * @return the By used to search the matched elements of this seleniumQuery object.
 	 */
-	public SeleniumQueryBy getBy() {
+	public By getBy() {
 		return this.by;
 	}
+
 
 	/**************************************************************************************************************************************
 	 * jQuery-emulating functions

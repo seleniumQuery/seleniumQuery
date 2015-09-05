@@ -54,7 +54,11 @@ public class SeleniumQueryByTest {
 	}
 
 	private void assertIsXPathExpression(String selector) {
-		assertTrue("Selector \""+selector+"\" should be considered an XPathExpression.", SeleniumQueryBy.byEnhancedSelector(selector).isXPathExpression());
+		assertTrue("Selector \""+selector+"\" should be considered an XPathExpression.", isXPathExpression(selector));
+	}
+
+	private boolean isXPathExpression(String selector) {
+		return SeleniumQueryBy.byEnhancedSelector(selector).isXPathExpression();
 	}
 
 	@Test
@@ -68,7 +72,7 @@ public class SeleniumQueryByTest {
 	}
 
 	private void assertIsNotXPathExpression(String selector) {
-		assertFalse("Selector \"" + selector + "\" should NOT be considered an XPathExpression.", SeleniumQueryBy.byEnhancedSelector(selector).isXPathExpression());
+		assertFalse("Selector \"" + selector + "\" should NOT be considered an XPath expression.", isXPathExpression(selector));
 	}
 
 }

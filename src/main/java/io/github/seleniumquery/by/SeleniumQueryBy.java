@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
  * selectors are supported.
  * 
  * @author acdcjunior
- *
  * @since 0.9.0
  */
 public class SeleniumQueryBy extends By {
@@ -93,6 +92,16 @@ public class SeleniumQueryBy extends By {
 	}
 
 	/**
+	 * Compiles the selector for the given context (the context
+	 * will determinate what selectors are natively supported and what selectors should
+	 * be handled by SeleniumQuery) and matches elements based on it.
+	 */
+	private List<WebElement> enhancedCssFindElements(SearchContext context) {
+		TagComponentList xPathLocator = XPathComponentCompilerService.compileSelectorList(this.selector);
+		return xPathLocator.findWebElements(context);
+	}
+
+	/**
 	 * Returns the string representation of this By.
 	 * @return the string representation of this By.
 	 * @since 0.9.0
@@ -101,37 +110,12 @@ public class SeleniumQueryBy extends By {
 	public String toString() {
 		return "$(\"" + selector + "\")";
 	}
-	
+
 	/**
 	 * If it begins with "/" or "(/" or "(((((/" or an XPath Axis, we assume the selector given is a XPath expression.
 	 */
-	boolean isXPathExpression() {
+	public boolean isXPathExpression() {
 		return XPATH_EXPRESSION_PATTERN.matcher(this.selector).matches();
-	}
-	
-	/**
-	 * Zero-based.
-	 * 
-	 * @param position Zero-based index of the wanted element.
-	 * @return the selector string for the element at <code>position</code>.
-	 * @since 0.9.0
-	 */
-	public String getSelectorForElementAtPosition(int position) {
-		if (this.isXPathExpression()) {
-			// notice that, in XPath, the position is one-based.
-			return "("+this.selector+")["+ (position+1) +"]";
-		}
-		return this.selector+":eq("+position+")";
-	}
-	
-	/**
-	 * Compiles the selector for the given context (the context
-	 * will determinate what selectors are natively supported and what selectors should
-	 * be handled by SeleniumQuery) and matches elements based on it.
-	 */
-	private List<WebElement> enhancedCssFindElements(SearchContext context) {
-		TagComponentList xPathLocator = XPathComponentCompilerService.compileSelectorList(this.selector);
-		return xPathLocator.findWebElements(context);
 	}
 
 	/**

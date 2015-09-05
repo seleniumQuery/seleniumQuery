@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
-import io.github.seleniumquery.ObjectLocalFactory;
+import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SelectorUtils;
 import org.openqa.selenium.WebDriver;
@@ -57,7 +57,7 @@ public class ParentFunction {
 				alreadyInsertedParents.add(parentElement);
 			}
 		}
-		return ObjectLocalFactory.createWithInvalidSelector(callerWebDriver, parents, caller);
+		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(callerWebDriver, parents, caller);
 	}
 
 	private static boolean parentMatchesSelector(WebDriver callerWebDriver, String selector, WebElement parentElement) {
@@ -66,7 +66,7 @@ public class ParentFunction {
 	}
 
 	private static SeleniumQueryObject createParentElement(WebDriver callerWebDriver, WebElement parentElement) {
-		return ObjectLocalFactory.createWithInvalidSelectorAndNoPrevious(callerWebDriver, parentElement);
+		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelectorAndNoPrevious(callerWebDriver, parentElement);
 	}
 
 }
