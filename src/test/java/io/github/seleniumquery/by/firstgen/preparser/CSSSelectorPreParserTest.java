@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.preparser;
+package io.github.seleniumquery.by.firstgen.preparser;
 
-import io.github.seleniumquery.by.preparser.CSSSelectorPreParser.PreParsedSelector;
+import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorPreParser.PreParsedSelector;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;

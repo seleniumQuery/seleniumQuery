@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css.conditionals;
+package io.github.seleniumquery.by.firstgen.css.conditionals;
 
-import io.github.seleniumquery.by.css.CssConditionalSelector;
-import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.preparser.ArgumentMap;
-import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
+import io.github.seleniumquery.by.firstgen.css.CssConditionalSelector;
+import io.github.seleniumquery.by.firstgen.filter.ElementFilter;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;

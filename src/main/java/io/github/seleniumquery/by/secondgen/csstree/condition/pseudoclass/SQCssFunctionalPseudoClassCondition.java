@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
 
 public class SQCssFunctionalPseudoClassCondition extends SQCssPseudoClassCondition {
 

@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery.by.css.attributes;
+package endtoend.io.github.seleniumquery.by.firstgen.css.attributes;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.by.css.attributes.ContainsWordAttributeCssSelector;
-import io.github.seleniumquery.by.css.attributes.EndsWithAttributeCssSelector;
-import io.github.seleniumquery.by.css.attributes.EqualsOrHasAttributeCssSelector;
-import io.github.seleniumquery.by.css.attributes.StartsWithAttributeCssSelector;
-import io.github.seleniumquery.by.xpath.TagComponentList;
-import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
+import io.github.seleniumquery.by.firstgen.css.attributes.ContainsWordAttributeCssSelector;
+import io.github.seleniumquery.by.firstgen.css.attributes.EndsWithAttributeCssSelector;
+import io.github.seleniumquery.by.firstgen.css.attributes.EqualsOrHasAttributeCssSelector;
+import io.github.seleniumquery.by.firstgen.css.attributes.StartsWithAttributeCssSelector;
+import io.github.seleniumquery.by.firstgen.xpath.TagComponentList;
+import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import java.util.Iterator;
 import java.util.List;

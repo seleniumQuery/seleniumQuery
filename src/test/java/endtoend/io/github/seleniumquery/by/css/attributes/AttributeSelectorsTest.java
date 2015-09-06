@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery.by.css.attributes;
+package endtoend.io.github.seleniumquery.by.firstgen.css.attributes;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.by.css.CssSelectorMatcherService;
+import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -26,6 +25,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.CSSParseException;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;

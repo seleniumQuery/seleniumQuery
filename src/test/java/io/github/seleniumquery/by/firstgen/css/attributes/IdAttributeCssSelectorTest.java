@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css.attributes;
+package io.github.seleniumquery.by.firstgen.css.attributes;
 
-import io.github.seleniumquery.by.css.CssSelector;
-import io.github.seleniumquery.by.css.CssSelectorFactory;
-import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.CSSSelectorParser;
-import io.github.seleniumquery.by.xpath.component.TagComponent;
+import io.github.seleniumquery.by.firstgen.css.CssSelector;
+import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
+import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
+import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.w3c.css.sac.Selector;

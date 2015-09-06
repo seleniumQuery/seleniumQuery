@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass.finderfactorystrategy;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy;
 
 import io.github.seleniumquery.by.DriverVersionUtils;
-import io.github.seleniumquery.by2.csstree.condition.SQCssConditionImplementedFinders;
-import io.github.seleniumquery.by2.finder.CssFinder;
-import io.github.seleniumquery.by2.finder.ElementFinder;
-import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.finder.CssFinder;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by2.finder.CssFinder.CSS_NOT_NATIVELY_SUPPORTED;
+import static io.github.seleniumquery.by.secondgen.finder.CssFinder.CSS_NOT_NATIVELY_SUPPORTED;
 
 /**
  * Represents a strategy where the selector may or may not be natively supported by the driver.

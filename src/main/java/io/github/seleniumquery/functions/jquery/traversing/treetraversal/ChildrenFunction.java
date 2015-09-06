@@ -19,7 +19,7 @@ package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.css.CssSelectorMatcherService;
+import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

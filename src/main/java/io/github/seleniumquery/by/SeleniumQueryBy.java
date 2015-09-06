@@ -17,8 +17,8 @@
 package io.github.seleniumquery.by;
 
 import io.github.seleniumquery.SeleniumQueryException;
-import io.github.seleniumquery.by.xpath.TagComponentList;
-import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
+import io.github.seleniumquery.by.firstgen.xpath.TagComponentList;
+import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;

@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass.form;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.finderfactorystrategy.AlwaysNativelySupportedPseudoClass;
-import io.github.seleniumquery.by2.finder.CssFinder;
-import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.AlwaysNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.secondgen.finder.CssFinder;
+import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+import static io.github.seleniumquery.by.firstgen.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
  * This represents the pseudoclasses that check for the type attribute, such as

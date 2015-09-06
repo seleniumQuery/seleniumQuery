@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.finder;
+package io.github.seleniumquery.by.secondgen.finder;
 
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
-import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.filter.ElementFilterList;
+import io.github.seleniumquery.by.firstgen.filter.ElementFilter;
+import io.github.seleniumquery.by.firstgen.filter.ElementFilterList;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;

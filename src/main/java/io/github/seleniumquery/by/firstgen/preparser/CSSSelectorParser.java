@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.preparser;
+package io.github.seleniumquery.by.firstgen.preparser;
 
 import com.steadystate.css.parser.SACParserCSS3;
-import io.github.seleniumquery.by.preparser.CSSSelectorPreParser.PreParsedSelector;
+import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorPreParser.PreParsedSelector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.*;

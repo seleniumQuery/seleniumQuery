@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.parser.translator.selector;
+package io.github.seleniumquery.by.secondgen.parser.translator.selector;
 
-import io.github.seleniumquery.by2.csstree.condition.SQCssAndCondition;
-import io.github.seleniumquery.by2.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by2.csstree.condition.attribute.SQCssClassAttributeCondition;
-import io.github.seleniumquery.by2.csstree.selector.SQCssConditionalSelector;
-import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by2.csstree.selector.SQCssTagNameSelector;
-import io.github.seleniumquery.by2.parser.SQParseTreeBuilder;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssAndCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssConditionalSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;

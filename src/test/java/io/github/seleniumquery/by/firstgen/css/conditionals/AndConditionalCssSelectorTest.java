@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css.conditionals;
+package io.github.seleniumquery.by.firstgen.css.conditionals;
 
-import io.github.seleniumquery.by.preparser.ArgumentMap;
-import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.CSSSelectorParser;
-import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
-import io.github.seleniumquery.by.xpath.component.ConditionComponent;
-import io.github.seleniumquery.by.xpath.component.TagComponent;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
+import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
+import io.github.seleniumquery.by.firstgen.xpath.component.ConditionComponent;
+import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.junit.Test;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.ConditionalSelector;

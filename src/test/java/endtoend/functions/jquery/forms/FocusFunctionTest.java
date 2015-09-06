@@ -16,14 +16,7 @@
 
 package endtoend.functions.jquery.forms;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-
-import testinfrastructure.junitrule.JavaScriptOnly;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedXPathPseudoClassException;
-
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedXPathPseudoClassException;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,6 +25,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import testinfrastructure.junitrule.JavaScriptOnly;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class FocusFunctionTest {
 

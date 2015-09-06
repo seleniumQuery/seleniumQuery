@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.parser;
+package io.github.seleniumquery.by.secondgen.parser;
 
-import io.github.seleniumquery.by2.csstree.SQCssSelectorList;
-import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by2.parser.translator.selector.SQCssSelectorTranslator;
-import io.github.seleniumquery.by.preparser.ArgumentMap;
-import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
+import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.secondgen.csstree.SQCssSelectorList;
+import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.parser.translator.selector.SQCssSelectorTranslator;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 

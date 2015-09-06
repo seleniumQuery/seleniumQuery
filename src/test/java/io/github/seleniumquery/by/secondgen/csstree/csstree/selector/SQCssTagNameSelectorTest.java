@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.selector;
+package io.github.seleniumquery.by.secondgen.csstree.selector;
 
-import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css.pseudoclasses;
+package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
+import io.github.seleniumquery.by.firstgen.filter.ElementFilter;
+import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

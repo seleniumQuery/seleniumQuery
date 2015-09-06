@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.parser.translator.condition.attribute;
+package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by2.csstree.condition.attribute.SQCssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssClassAttributeCondition;
 import org.unbescape.css.CssEscape;
 import org.w3c.css.sac.AttributeCondition;
 

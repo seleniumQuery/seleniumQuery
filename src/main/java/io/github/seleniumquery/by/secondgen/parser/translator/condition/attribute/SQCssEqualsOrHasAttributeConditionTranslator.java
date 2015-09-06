@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.parser.translator.condition.attribute;
+package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by2.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by2.csstree.condition.attribute.SQCssEqualsOrHasAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssEqualsOrHasAttributeCondition;
 import org.w3c.css.sac.AttributeCondition;
 
 /**

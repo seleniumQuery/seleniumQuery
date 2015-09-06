@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass.basicfilter;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
 import com.google.common.base.Joiner;
-import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by2.csstree.SQCssSelectorList;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
-import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by2.parser.SQParseTreeBuilder;
-import io.github.seleniumquery.by2.finder.CssFinder;
-import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
+import io.github.seleniumquery.by.secondgen.csstree.SQCssSelectorList;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.finder.CssFinder;
+import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 

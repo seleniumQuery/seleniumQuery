@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.filter;
+package io.github.seleniumquery.by.firstgen.filter;
 
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;

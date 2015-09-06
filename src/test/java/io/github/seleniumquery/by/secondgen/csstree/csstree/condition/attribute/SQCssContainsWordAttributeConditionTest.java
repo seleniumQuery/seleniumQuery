@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.attribute;
+package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
-import io.github.seleniumquery.by2.finder.ElementFinder;
-import io.github.seleniumquery.by2.finder.ElementFinderUtilsTest;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

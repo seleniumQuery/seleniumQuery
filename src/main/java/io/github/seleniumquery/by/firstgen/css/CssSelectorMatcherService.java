@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css;
+package io.github.seleniumquery.by.firstgen.css;
 
-import io.github.seleniumquery.by.preparser.ArgumentMap;
-import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.preparser.CSSSelectorParser;
-import io.github.seleniumquery.by.xpath.component.TagComponent;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
+import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;

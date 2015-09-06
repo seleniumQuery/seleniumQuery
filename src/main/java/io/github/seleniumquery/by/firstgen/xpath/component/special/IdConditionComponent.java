@@ -1,10 +1,26 @@
-package io.github.seleniumquery.by.xpath.component.special;
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import io.github.seleniumquery.by.filter.ElementFilterList;
-import io.github.seleniumquery.by.xpath.component.Combinable;
-import io.github.seleniumquery.by.xpath.component.ComponentUtils;
-import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
-import io.github.seleniumquery.by.xpath.component.XPathComponent;
+package io.github.seleniumquery.by.firstgen.xpath.component.special;
+
+import io.github.seleniumquery.by.firstgen.filter.ElementFilterList;
+import io.github.seleniumquery.by.firstgen.xpath.component.Combinable;
+import io.github.seleniumquery.by.firstgen.xpath.component.ComponentUtils;
+import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
+import io.github.seleniumquery.by.firstgen.xpath.component.XPathComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;

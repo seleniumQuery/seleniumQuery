@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.parser.translator.condition.attribute;
+package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by2.csstree.condition.attribute.SQCssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssClassAttributeCondition;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by2.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
+import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

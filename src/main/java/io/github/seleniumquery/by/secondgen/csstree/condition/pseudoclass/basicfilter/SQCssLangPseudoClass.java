@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass.basicfilter;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by2.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
