@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.firstgen.xpath.component.special;
 
-import io.github.seleniumquery.by.firstgen.filter.ElementFilterList;
+import io.github.seleniumquery.by.common.elementfilter.ElementFilterList;
 import io.github.seleniumquery.by.firstgen.xpath.component.Combinable;
 import io.github.seleniumquery.by.firstgen.xpath.component.ComponentUtils;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;

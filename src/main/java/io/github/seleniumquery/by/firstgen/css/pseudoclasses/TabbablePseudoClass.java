@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 
-import io.github.seleniumquery.by.firstgen.filter.ElementFilter;
+import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

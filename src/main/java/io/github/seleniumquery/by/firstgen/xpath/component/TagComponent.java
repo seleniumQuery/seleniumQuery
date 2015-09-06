@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.firstgen.xpath.component;
 
-import io.github.seleniumquery.by.firstgen.filter.ElementFilterList;
+import io.github.seleniumquery.by.common.elementfilter.ElementFilterList;
 import io.github.seleniumquery.by.firstgen.xpath.component.special.IdConditionComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;

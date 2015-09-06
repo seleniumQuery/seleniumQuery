@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.finder;
 
-import io.github.seleniumquery.by.firstgen.filter.ElementFilter;
-import io.github.seleniumquery.by.firstgen.filter.ElementFilterList;
+import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
+import io.github.seleniumquery.by.common.elementfilter.ElementFilterList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;

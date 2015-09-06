@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-import io.github.seleniumquery.by.firstgen.filter.ElementFilter;
+import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;

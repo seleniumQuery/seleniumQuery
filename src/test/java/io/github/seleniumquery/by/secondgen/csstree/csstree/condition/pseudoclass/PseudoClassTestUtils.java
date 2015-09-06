@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
+import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.firstgen.filter.ElementFilter;
 import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
 import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.firstgen.preparser.FakeArgumentMap;

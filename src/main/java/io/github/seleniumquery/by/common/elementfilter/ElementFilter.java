@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.firstgen.filter;
+package io.github.seleniumquery.by.common.elementfilter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,7 +23,7 @@ import java.util.List;
 
 public interface ElementFilter {
 	
-	public static final ElementFilter FILTER_NOTHING = new ElementFilter() {
+	ElementFilter FILTER_NOTHING = new ElementFilter() {
 		@Override
 		public List<WebElement> filterElements(WebDriver driver, List<WebElement> elements) {
 			return elements;

@@ -21,7 +21,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finder
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.firstgen.css.attributes.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
  * :text

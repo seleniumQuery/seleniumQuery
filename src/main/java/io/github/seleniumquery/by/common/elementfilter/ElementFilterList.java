@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.firstgen.filter;
+package io.github.seleniumquery.by.common.elementfilter;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,7 +32,6 @@ import static java.util.Arrays.asList;
  *
  * @author acdcjunior
  * @author ricardo-sc
- *
  * @since 0.10.0
  */
 public class ElementFilterList {
@@ -55,6 +53,10 @@ public class ElementFilterList {
 
 	private List<ElementFilter> elementFilters;
 	
+	public ElementFilterList(ElementFilter... filters) {
+		this(asList(filters));
+	}
+
 	public ElementFilterList(List<ElementFilter> elementFilters) {
 		this.elementFilters = Collections.unmodifiableList(elementFilters);
 	}
@@ -66,9 +68,8 @@ public class ElementFilterList {
 
 	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
 		if (this.elementFilters.size() > 0) {
-			// we are currently disabling the filter support
-			// we will only take it back when the system is stable
-			throw new UnsupportedPseudoClassException("The current selector is not yet supported. Please try a simpler one.");
+            // TODO we are currently disabling the filter support -- we will only take it back when the system is stable
+			throw new UnsupportedOperationException("The current selector is not yet supported. Please try a simpler one.");
 		}
 		for (ElementFilter elementFilter : elementFilters) {
 			elements = elementFilter.filterElements(driver, elements);
