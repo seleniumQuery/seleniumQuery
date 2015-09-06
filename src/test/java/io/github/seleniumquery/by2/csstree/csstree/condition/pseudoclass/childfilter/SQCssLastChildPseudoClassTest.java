@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils;
+import io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassTestUtils;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
+import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
+import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssLastChildPseudoClassTest {
 

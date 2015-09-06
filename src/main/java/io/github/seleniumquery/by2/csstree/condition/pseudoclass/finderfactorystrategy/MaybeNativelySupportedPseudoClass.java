@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.finderfactorystrategy;
 
 import io.github.seleniumquery.by.DriverVersionUtils;
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
+import io.github.seleniumquery.by2.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by2.finder.CssFinder;
 import io.github.seleniumquery.by2.finder.ElementFinder;
 import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.jqueryui;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.jqueryui;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by2.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 
 /**
  *

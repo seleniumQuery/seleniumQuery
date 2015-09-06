@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by2.parser.translator.selector.combinator;
 
-import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.csstree.selector.combinator.SQCssGeneralAdjacentSelector;
+import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by2.csstree.selector.combinator.SQCssGeneralAdjacentSelector;
 import io.github.seleniumquery.by2.parser.translator.selector.SQCssSelectorTranslator;
 import io.github.seleniumquery.by.preparser.ArgumentMap;
 import org.w3c.css.sac.SiblingSelector;

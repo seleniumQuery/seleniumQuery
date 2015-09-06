@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by2.parser.translator.selector;
 
-import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.csstree.selector.SQCssUnknownSelectorException;
+import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by2.csstree.selector.SQCssUnknownSelectorException;
 import io.github.seleniumquery.by2.parser.translator.selector.combinator.SQCssDescendantSelectorTranslator;
 import io.github.seleniumquery.by2.parser.translator.selector.combinator.SQCssDirectAdjacentSelectorTranslator;
 import io.github.seleniumquery.by2.parser.translator.selector.combinator.SQCssDirectDescendantSelectorTranslator;

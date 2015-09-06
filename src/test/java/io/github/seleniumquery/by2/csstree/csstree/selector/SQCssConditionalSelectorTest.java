@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.selector;
+package io.github.seleniumquery.by2.csstree.selector;
 
-import io.github.seleniumquery.by.csstree.condition.attribute.SQCssClassAttributeCondition;
-import io.github.seleniumquery.by.csstree.selector.combinator.SQCssDescendantSelector;
+import io.github.seleniumquery.by2.csstree.condition.attribute.SQCssClassAttributeCondition;
+import io.github.seleniumquery.by2.csstree.selector.combinator.SQCssDescendantSelector;
 import io.github.seleniumquery.by2.finder.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;

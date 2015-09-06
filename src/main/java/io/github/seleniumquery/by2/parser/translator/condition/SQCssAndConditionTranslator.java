@@ -17,8 +17,8 @@
 package io.github.seleniumquery.by2.parser.translator.condition;
 
 import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
-import io.github.seleniumquery.by.csstree.condition.SQCssAndCondition;
-import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by2.csstree.condition.SQCssAndCondition;
+import io.github.seleniumquery.by2.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.preparser.ArgumentMap;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.SimpleSelector;

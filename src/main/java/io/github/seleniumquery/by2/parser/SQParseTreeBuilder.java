@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by2.parser;
 
-import io.github.seleniumquery.by.csstree.SQCssSelectorList;
-import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by2.csstree.SQCssSelectorList;
+import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by2.parser.translator.selector.SQCssSelectorTranslator;
 import io.github.seleniumquery.by.preparser.ArgumentMap;
 import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;

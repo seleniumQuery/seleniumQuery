@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
 import io.github.seleniumquery.by2.finder.ElementFinder;
 import io.github.seleniumquery.by2.finder.ElementFinderUtilsTest;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.*;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
+import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.*;
+import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
+import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
 import static io.github.seleniumquery.by2.finder.ElementFinderUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit;
 import static io.github.seleniumquery.by2.finder.ElementFinderUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
