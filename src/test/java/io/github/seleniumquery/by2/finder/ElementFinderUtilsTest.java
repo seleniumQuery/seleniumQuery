@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.finder;
+package io.github.seleniumquery.by2.finder;
 
 import io.github.seleniumquery.by.DriverVersionUtils;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.finder.CssFinder.universalSelector;
-import static io.github.seleniumquery.by.finder.XPathAndFilterFinder.pureXPath;
+import static io.github.seleniumquery.by2.finder.CssFinder.universalSelector;
+import static io.github.seleniumquery.by2.finder.XPathAndFilterFinder.pureXPath;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;

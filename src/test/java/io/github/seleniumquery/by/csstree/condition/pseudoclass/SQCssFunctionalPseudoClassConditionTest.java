@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
-import io.github.seleniumquery.by.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 

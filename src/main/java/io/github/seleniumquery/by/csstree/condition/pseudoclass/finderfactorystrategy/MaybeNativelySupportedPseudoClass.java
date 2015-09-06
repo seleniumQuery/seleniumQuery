@@ -18,12 +18,12 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactoryst
 
 import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
-import io.github.seleniumquery.by.finder.CssFinder;
-import io.github.seleniumquery.by.finder.ElementFinder;
-import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by2.finder.CssFinder;
+import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.finder.CssFinder.CSS_NOT_NATIVELY_SUPPORTED;
+import static io.github.seleniumquery.by2.finder.CssFinder.CSS_NOT_NATIVELY_SUPPORTED;
 
 /**
  * Represents a strategy where the selector may or may not be natively supported by the driver.

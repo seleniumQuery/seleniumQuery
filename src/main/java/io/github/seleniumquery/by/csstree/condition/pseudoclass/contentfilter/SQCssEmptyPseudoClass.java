@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.contentfilter;
 
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
 /**

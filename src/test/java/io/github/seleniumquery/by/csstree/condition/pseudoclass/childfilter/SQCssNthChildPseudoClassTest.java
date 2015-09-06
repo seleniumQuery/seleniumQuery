@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
@@ -24,7 +24,7 @@ import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoCla
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
-import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.*;
+import static io.github.seleniumquery.by2.finder.ElementFinderUtilsTest.*;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;

@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.finder.ElementFinder;
-import io.github.seleniumquery.by.finder.ElementFinderUtilsTest;
+import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.ElementFinderUtilsTest;
 import org.hamcrest.Matcher;
 
 import java.util.List;

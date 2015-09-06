@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassExcept
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
+import static io.github.seleniumquery.by2.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 
 public class SQCssAnimatedPseudoClassTest {
 

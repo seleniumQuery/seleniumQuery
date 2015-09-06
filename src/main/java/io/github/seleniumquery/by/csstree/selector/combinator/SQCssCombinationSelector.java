@@ -17,8 +17,8 @@
 package io.github.seleniumquery.by.csstree.selector.combinator;
 
 import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.finder.CssFinder;
-import io.github.seleniumquery.by.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.CssFinder;
+import io.github.seleniumquery.by2.finder.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
 /**

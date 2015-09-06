@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.finder;
+package io.github.seleniumquery.by2.finder;
 
 /**
  * Utilities for SQCss* classes.

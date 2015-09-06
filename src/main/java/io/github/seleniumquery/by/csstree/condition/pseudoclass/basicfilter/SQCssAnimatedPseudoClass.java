@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.ElementFinder;
 
 /**
  * To implement this selector, we would need to use JavaScript and access jQuery's internals.
