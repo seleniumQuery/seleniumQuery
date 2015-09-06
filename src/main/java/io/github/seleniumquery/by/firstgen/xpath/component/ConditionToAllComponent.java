@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.firstgen.xpath.component;
 
-import io.github.seleniumquery.by.firstgen.filter.ElementFilterList;
+import io.github.seleniumquery.by.common.elementfilter.ElementFilterList;
 
 import java.util.List;
 

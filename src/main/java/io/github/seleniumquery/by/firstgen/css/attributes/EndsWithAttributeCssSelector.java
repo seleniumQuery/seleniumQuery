@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.firstgen.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
+import io.github.seleniumquery.by.common.AttributeEvaluatorUtils;
 import io.github.seleniumquery.by.firstgen.css.CssConditionalSelector;
 import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.firstgen.filter;
+package io.github.seleniumquery.by.common.elementfilter;
 
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +22,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -31,7 +30,7 @@ public class ElementFilterListTest {
     @Test
     public void merge__should_return_itself_if_arg_is_emptyList() throws Exception {
         ElementFilter filter = createSomeElementFilter();
-        ElementFilterList elementFilterList = new ElementFilterList(asList(filter));
+        ElementFilterList elementFilterList = new ElementFilterList(filter);
 
         ElementFilterList mergedList = elementFilterList.merge(ElementFilterList.FILTER_NOTHING_LIST);
 
@@ -55,7 +54,7 @@ public class ElementFilterListTest {
     @Test
     public void merger__empty_should_merge_the_given_list_as_arg() throws Exception {
         ElementFilter filter = createSomeElementFilter();
-        ElementFilterList elementFilterList = new ElementFilterList(asList(filter));
+        ElementFilterList elementFilterList = new ElementFilterList(filter);
 
         ElementFilterList mergedList = ElementFilterList.FILTER_NOTHING_LIST.merge(elementFilterList);
 
