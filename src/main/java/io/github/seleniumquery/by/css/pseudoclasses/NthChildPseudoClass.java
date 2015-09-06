@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.by.css.pseudoclasses;
 
 import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
@@ -61,12 +77,16 @@ public class NthChildPseudoClass implements PseudoClass<ConditionSimpleComponent
 		if (m.find()) {
 			String aString = m.group(1);
 			String bString = m.group(2);
-			int a = aString.matches("[+-]") ? parseInt(aString + "1") : parseInt(aString);
-			int b = (null == bString) ? 0 : parseInt(bString.replaceAll("\\s*", "").replaceAll("^\\+", ""));
+			int a = aString.matches("[+-]") ? parseInt(aString + "1") : parseInt(removeLeadingPlusSign(aString));
+			int b = (null == bString) ? 0 : parseInt(removeLeadingPlusSign(bString.replaceAll("\\s*", "")));
 			return nthChild(a, b);
 		}
 		throw new IllegalArgumentException("The :nth-child() pseudo-class must have a content like :nth-child(odd), " +
 				":nth-child(even), :nth-child(an+b), :nth-child(an) or :nth-child(b), where a and b are integers.");
+	}
+
+	private String removeLeadingPlusSign(String aString) {
+		return aString.replaceAll("^\\+", "");
 	}
 
 	public static ConditionSimpleComponent nthChild(int a, int b) {
