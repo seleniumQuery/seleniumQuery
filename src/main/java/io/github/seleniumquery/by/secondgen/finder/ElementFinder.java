@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.finder;
+package io.github.seleniumquery.by.secondgen.finder;
 
-import io.github.seleniumquery.by.filter.ElementFilterList;
+import io.github.seleniumquery.by.firstgen.filter.ElementFilterList;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

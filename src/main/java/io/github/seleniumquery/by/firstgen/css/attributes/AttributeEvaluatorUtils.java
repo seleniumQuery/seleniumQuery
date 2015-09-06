@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css.attributes;
+package io.github.seleniumquery.by.firstgen.css.attributes;
 
 import io.github.seleniumquery.by.SelectorUtils;
 import org.w3c.css.sac.AttributeCondition;

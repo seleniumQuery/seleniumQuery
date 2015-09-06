@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-import io.github.seleniumquery.by2.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by2.csstree.condition.SQCssConditionImplementedFinders;
-import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
 public abstract class SQCssPseudoClassCondition implements SQCssCondition, SQCssConditionImplementedFinders {
 

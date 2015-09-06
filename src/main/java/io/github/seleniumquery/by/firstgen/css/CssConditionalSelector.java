@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css;
+package io.github.seleniumquery.by.firstgen.css;
 
-import io.github.seleniumquery.by.preparser.ArgumentMap;
-import io.github.seleniumquery.by.xpath.component.ConditionComponent;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.xpath.component.ConditionComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Condition;

@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass.basicfilter;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
-import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasElementFinderWhenNativelySupported;
-import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasElementFinderWhenNativelySupported;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 
 public class SQCssNotPseudoClassTest {
@@ -78,7 +78,7 @@ public class SQCssNotPseudoClassTest {
      * left them like this because I expect to get back to them as soon as possible.
      */
 
-    @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
+    @Test(expected = io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException.class)
     public void toElementFinder__when_driver_has_native_support_BUT_inner_css_CANT_be_separated() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
@@ -90,7 +90,7 @@ public class SQCssNotPseudoClassTest {
         );
     }
 
-    @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
+    @Test(expected = io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException.class)
     public void toElementFinder__not_and_direct_ancestor() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
@@ -102,7 +102,7 @@ public class SQCssNotPseudoClassTest {
         );
     }
 
-    @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
+    @Test(expected = io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException.class)
     public void toElementFinder__not_and_direct_sibling() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
@@ -114,7 +114,7 @@ public class SQCssNotPseudoClassTest {
         );
     }
 
-    @Test(expected = io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException.class)
+    @Test(expected = io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException.class)
     public void toElementFinder__not_and_general_sibling() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",

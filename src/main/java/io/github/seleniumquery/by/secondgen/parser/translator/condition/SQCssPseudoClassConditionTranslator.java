@@ -14,29 +14,29 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.parser.translator.condition;
+package io.github.seleniumquery.by.secondgen.parser.translator.condition;
 
-import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by2.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.basicfilter.*;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.childfilter.*;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.contentfilter.SQCssContainsPseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.contentfilter.SQCssEmptyPseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.contentfilter.SQCssHasPseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.contentfilter.SQCssParentPseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.form.*;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.jqueryui.SQCssFocusablePseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.jqueryui.SQCssTabbablePseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.seleniumquery.SQCssBlankPseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.seleniumquery.SQCssFilledPseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.seleniumquery.SQCssPresentPseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.seleniumquery.SQCssUncheckedPseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.visibility.SQCssHiddenPseudoClass;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.visibility.SQCssVisiblePseudoClass;
-import io.github.seleniumquery.by.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.*;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.*;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.SQCssContainsPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.SQCssEmptyPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.SQCssHasPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.SQCssParentPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.*;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.jqueryui.SQCssFocusablePseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.jqueryui.SQCssTabbablePseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery.SQCssBlankPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery.SQCssFilledPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery.SQCssPresentPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery.SQCssUncheckedPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility.SQCssHiddenPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility.SQCssVisiblePseudoClass;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.SimpleSelector;
 

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.selector.combinator;
+package io.github.seleniumquery.by.secondgen.csstree.selector.combinator;
 
-import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
 
 public class SQCssDescendantSelector  extends SQCssCombinationSelector {
 

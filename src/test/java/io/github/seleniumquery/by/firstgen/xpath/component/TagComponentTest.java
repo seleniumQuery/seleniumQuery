@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.xpath.component;
+package io.github.seleniumquery.by.firstgen.xpath.component;
 
-import io.github.seleniumquery.by.xpath.TagComponentList;
-import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
+import io.github.seleniumquery.by.firstgen.xpath.TagComponentList;
+import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
 import org.junit.Test;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;

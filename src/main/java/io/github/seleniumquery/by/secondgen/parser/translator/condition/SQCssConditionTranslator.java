@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.parser.translator.condition;
+package io.github.seleniumquery.by.secondgen.parser.translator.condition;
 
-import io.github.seleniumquery.by2.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by2.csstree.condition.SQCssUnknownConditionException;
-import io.github.seleniumquery.by2.parser.translator.condition.attribute.*;
-import io.github.seleniumquery.by.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssUnknownConditionException;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.*;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;

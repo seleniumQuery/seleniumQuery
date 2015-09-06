@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.preparser;
+package io.github.seleniumquery.by.firstgen.preparser;
 
 import java.util.Map;
 

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition;
+package io.github.seleniumquery.by.secondgen.csstree.condition;
 
-import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
 /**
  * This is temporary.

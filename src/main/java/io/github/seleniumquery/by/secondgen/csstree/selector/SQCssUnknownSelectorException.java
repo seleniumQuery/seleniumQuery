@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.selector;
+package io.github.seleniumquery.by.secondgen.csstree.selector;
 
 import org.w3c.css.sac.Selector;
 

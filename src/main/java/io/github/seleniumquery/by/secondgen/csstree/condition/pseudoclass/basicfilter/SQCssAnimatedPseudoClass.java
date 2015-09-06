@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass.basicfilter;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by2.csstree.condition.SQCssConditionImplementedFinders;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
 /**
  * To implement this selector, we would need to use JavaScript and access jQuery's internals.

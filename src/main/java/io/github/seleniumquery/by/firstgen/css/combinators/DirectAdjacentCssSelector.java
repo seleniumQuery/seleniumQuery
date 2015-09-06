@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css.combinators;
+package io.github.seleniumquery.by.firstgen.css.combinators;
 
 import io.github.seleniumquery.by.SelectorUtils;
-import io.github.seleniumquery.by.css.CssSelector;
-import io.github.seleniumquery.by.css.CssSelectorMatcherService;
-import io.github.seleniumquery.by.preparser.ArgumentMap;
-import io.github.seleniumquery.by.xpath.XPathComponentCompilerService;
-import io.github.seleniumquery.by.xpath.component.AdjacentComponent;
-import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
-import io.github.seleniumquery.by.xpath.component.TagComponent;
+import io.github.seleniumquery.by.firstgen.css.CssSelector;
+import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
+import io.github.seleniumquery.by.firstgen.xpath.component.AdjacentComponent;
+import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
+import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.SiblingSelector;

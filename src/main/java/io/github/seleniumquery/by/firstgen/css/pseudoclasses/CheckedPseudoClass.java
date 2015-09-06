@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css.pseudoclasses;
+package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 
-import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.xpath.component.ConditionSimpleComponent;
+import io.github.seleniumquery.by.firstgen.filter.ElementFilter;
+import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static io.github.seleniumquery.by.WebElementUtils.*;
-import static io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass.SELECTED_PSEUDO_CONDITION;
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.SelectedPseudoClass.SELECTED_PSEUDO_CONDITION;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:checked

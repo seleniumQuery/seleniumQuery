@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.selector.combinator;
+package io.github.seleniumquery.by.secondgen.csstree.selector.combinator;
 
-import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by2.finder.CssFinder;
-import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.finder.CssFinder;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
 /**

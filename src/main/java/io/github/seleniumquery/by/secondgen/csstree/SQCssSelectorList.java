@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree;
+package io.github.seleniumquery.by.secondgen.csstree;
 
-import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass.childfilter;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
 import org.openqa.selenium.InvalidSelectorException;
 

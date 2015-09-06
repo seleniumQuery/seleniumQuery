@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.csstree.condition.pseudoclass.seleniumquery;
+package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery;
 
-import io.github.seleniumquery.by2.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 
 public class SQCssFilledPseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
 

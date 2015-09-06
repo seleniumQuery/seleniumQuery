@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by2.parser.translator.selector.combinator;
+package io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator;
 
-import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by2.csstree.selector.combinator.SQCssDescendantSelector;
-import io.github.seleniumquery.by2.parser.translator.selector.SQCssSelectorTranslator;
-import io.github.seleniumquery.by.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.SQCssDescendantSelector;
+import io.github.seleniumquery.by.secondgen.parser.translator.selector.SQCssSelectorTranslator;
 import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SimpleSelector;

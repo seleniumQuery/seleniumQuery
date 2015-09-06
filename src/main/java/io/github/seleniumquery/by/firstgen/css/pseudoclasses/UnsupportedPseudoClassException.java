@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.css.pseudoclasses;
+package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 
-import io.github.seleniumquery.by.preparser.ArgumentMap;
+import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
 import org.w3c.css.sac.SimpleSelector;
 
 public class UnsupportedPseudoClassException extends RuntimeException {
