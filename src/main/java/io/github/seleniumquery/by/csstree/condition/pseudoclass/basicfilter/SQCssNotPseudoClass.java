@@ -23,7 +23,7 @@ import io.github.seleniumquery.by.csstree.SQCssSelectorList;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.parser.SQParseTreeBuilder;
+import io.github.seleniumquery.by2.parser.SQParseTreeBuilder;
 import io.github.seleniumquery.by2.finder.CssFinder;
 import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;
 import org.apache.commons.lang3.StringUtils;

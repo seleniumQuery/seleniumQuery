@@ -26,7 +26,7 @@ import io.github.seleniumquery.by2.finder.ElementFinder;
 import io.github.seleniumquery.by2.finder.ElementFinderUtilsTest;
 import org.w3c.css.sac.Selector;
 
-import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
+import static io.github.seleniumquery.by2.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
