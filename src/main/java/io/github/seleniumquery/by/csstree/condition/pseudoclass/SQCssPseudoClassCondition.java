@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedFinders;
-import io.github.seleniumquery.by.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.ElementFinder;
 
 public abstract class SQCssPseudoClassCondition implements SQCssCondition, SQCssConditionImplementedFinders {
 

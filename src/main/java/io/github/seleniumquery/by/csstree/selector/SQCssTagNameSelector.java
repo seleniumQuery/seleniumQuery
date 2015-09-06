@@ -17,13 +17,13 @@
 package io.github.seleniumquery.by.csstree.selector;
 
 import io.github.seleniumquery.by.filter.ElementFilterList;
-import io.github.seleniumquery.by.finder.CssFinder;
-import io.github.seleniumquery.by.finder.ElementFinder;
-import io.github.seleniumquery.by.finder.ElementFinderUtils;
-import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by2.finder.CssFinder;
+import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.ElementFinderUtils;
+import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.finder.CssFinder.fromTag;
+import static io.github.seleniumquery.by2.finder.CssFinder.fromTag;
 
 /**
  * Element or tag selector. Example: {@code "div"}.

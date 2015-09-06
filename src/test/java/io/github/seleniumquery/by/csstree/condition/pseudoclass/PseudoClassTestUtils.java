@@ -19,11 +19,11 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass;
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.filter.ElementFilter;
-import io.github.seleniumquery.by.finder.ElementFinder;
-import io.github.seleniumquery.by.finder.ElementFinderUtilsTest;
 import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
 import io.github.seleniumquery.by.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.preparser.FakeArgumentMap;
+import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.ElementFinderUtilsTest;
 import org.w3c.css.sac.Selector;
 
 import static io.github.seleniumquery.by.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;

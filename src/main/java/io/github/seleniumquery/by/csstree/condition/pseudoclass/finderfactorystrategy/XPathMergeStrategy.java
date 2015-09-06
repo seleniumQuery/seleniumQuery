@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy;
 
-import io.github.seleniumquery.by.finder.ElementFinderUtils;
+import io.github.seleniumquery.by2.finder.ElementFinderUtils;
 
 /**
  * @author acdcjunior

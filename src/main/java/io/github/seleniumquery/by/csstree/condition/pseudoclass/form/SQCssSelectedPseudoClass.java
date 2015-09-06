@@ -19,8 +19,8 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.finder.CssFinder;
-import io.github.seleniumquery.by.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by2.finder.CssFinder;
+import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;
 
 /**

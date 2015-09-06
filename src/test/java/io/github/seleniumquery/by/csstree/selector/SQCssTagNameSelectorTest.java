@@ -16,13 +16,12 @@
 
 package io.github.seleniumquery.by.csstree.selector;
 
-import io.github.seleniumquery.by.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.ElementFinder;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 import static testinfrastructure.testdouble.Dummies.dummyWebDriver;
 
 public class SQCssTagNameSelectorTest {

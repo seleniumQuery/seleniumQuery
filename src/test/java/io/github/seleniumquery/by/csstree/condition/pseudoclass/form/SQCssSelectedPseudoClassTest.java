@@ -18,15 +18,15 @@ package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.CheckedPseudoClass;
 import io.github.seleniumquery.by.css.pseudoclasses.SelectedPseudoClass;
-import io.github.seleniumquery.by.finder.ElementFinder;
-import io.github.seleniumquery.by.finder.ElementFinderUtilsTest;
+import io.github.seleniumquery.by2.finder.ElementFinder;
+import io.github.seleniumquery.by2.finder.ElementFinderUtilsTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.*;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
-import static io.github.seleniumquery.by.finder.ElementFinderUtilsTest.*;
+import static io.github.seleniumquery.by2.finder.ElementFinderUtilsTest.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class SQCssSelectedPseudoClassTest {
