@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.childfilter;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssConditionImplementedNotYet;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by2.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
 
 public class SQCssLastOfTypePseudoClass extends SQCssPseudoClassCondition implements SQCssConditionImplementedNotYet {
 

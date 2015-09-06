@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.seleniumquery;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.seleniumquery;
 
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.AlwaysNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
+import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssPseudoClassCondition;
+import io.github.seleniumquery.by2.csstree.condition.pseudoclass.finderfactorystrategy.AlwaysNativelySupportedPseudoClass;
+import io.github.seleniumquery.by2.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by2.finder.CssFinder;
 import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;
 import org.openqa.selenium.WebDriver;

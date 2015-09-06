@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.visibility;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.visibility;
 
 import io.github.seleniumquery.by.css.pseudoclasses.HiddenPseudoClass;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFilterOnlyPseudoGeneratesFilter;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
+import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFilterOnlyPseudoGeneratesFilter;
+import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssHiddenPseudoClassTest {
 

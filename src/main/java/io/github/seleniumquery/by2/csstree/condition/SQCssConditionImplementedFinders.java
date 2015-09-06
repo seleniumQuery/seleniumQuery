@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition;
+package io.github.seleniumquery.by2.csstree.condition;
 
 import io.github.seleniumquery.by2.finder.ElementFinder;
 

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by2.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.filter.ElementFilter;
 import io.github.seleniumquery.by.preparser.CSSParsedSelectorList;
 import io.github.seleniumquery.by.preparser.CSSSelectorParser;

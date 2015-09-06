@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.form;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.form;
 
 import io.github.seleniumquery.by.css.pseudoclasses.FocusPseudoClass;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFilterOnlyPseudoGeneratesFilter;
-import static io.github.seleniumquery.by.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
+import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassTestUtils.assertFilterOnlyPseudoGeneratesFilter;
+import static io.github.seleniumquery.by2.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 
 public class SQCssFocusPseudoClassTest {
 

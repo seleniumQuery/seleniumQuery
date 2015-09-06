@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by2.parser.translator.condition;
 
-import io.github.seleniumquery.by.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by.csstree.condition.SQCssUnknownConditionException;
+import io.github.seleniumquery.by2.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by2.csstree.condition.SQCssUnknownConditionException;
 import io.github.seleniumquery.by2.parser.translator.condition.attribute.*;
 import io.github.seleniumquery.by.preparser.ArgumentMap;
 import org.w3c.css.sac.AttributeCondition;

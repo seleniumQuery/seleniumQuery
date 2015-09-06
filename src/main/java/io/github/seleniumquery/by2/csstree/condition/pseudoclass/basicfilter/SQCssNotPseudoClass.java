@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.basicfilter;
 
 import com.google.common.base.Joiner;
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by.csstree.SQCssSelectorList;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
-import io.github.seleniumquery.by.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by2.csstree.SQCssSelectorList;
+import io.github.seleniumquery.by2.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by2.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
+import io.github.seleniumquery.by2.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by2.parser.SQParseTreeBuilder;
 import io.github.seleniumquery.by2.finder.CssFinder;
 import io.github.seleniumquery.by2.finder.XPathAndFilterFinder;

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.selector.combinator;
+package io.github.seleniumquery.by2.csstree.selector.combinator;
 
-import io.github.seleniumquery.by.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by2.csstree.selector.SQCssTagNameSelector;
 import io.github.seleniumquery.by2.finder.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;

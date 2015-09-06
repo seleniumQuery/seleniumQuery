@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.csstree.condition.pseudoclass.basicfilter;
+package io.github.seleniumquery.by2.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.css.pseudoclasses.PseudoClassSelector;
 
