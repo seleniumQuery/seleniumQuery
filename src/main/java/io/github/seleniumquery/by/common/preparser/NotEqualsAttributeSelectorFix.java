@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.firstgen.preparser;
+package io.github.seleniumquery.by.common.preparser;
 
 import org.apache.commons.lang3.StringUtils;
 

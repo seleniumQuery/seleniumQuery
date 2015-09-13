@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.firstgen.css.tagname;
 
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

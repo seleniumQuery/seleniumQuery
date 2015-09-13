@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator;
 
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.SQCssDescendantSelector;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.SQCssSelectorTranslator;

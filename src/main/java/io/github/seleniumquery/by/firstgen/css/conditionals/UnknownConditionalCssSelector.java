@@ -17,8 +17,8 @@
 package io.github.seleniumquery.by.firstgen.css.conditionals;
 
 import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.CssConditionalSelector;
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

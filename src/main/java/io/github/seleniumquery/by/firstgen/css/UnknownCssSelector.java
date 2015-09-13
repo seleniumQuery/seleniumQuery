@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.firstgen.css;
 
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.by.firstgen.css.conditionals;
 
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.CssConditionalSelector;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionComponent;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;

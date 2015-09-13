@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.by.firstgen.css.attributes;
 
+import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
-import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class IdAttributeCssSelectorTest {
 
     @Test
     public void testConditionToXPath() {
-        CSSParsedSelectorList cssParsedSelectorList = CSSSelectorParser.parseSelector("#idz");
+        CssParsedSelectorList cssParsedSelectorList = CssSelectorParser.parseSelector("#idz");
         SelectorList selectorList = cssParsedSelectorList.getSelectorList();
         Selector selector = selectorList.item(0);
 

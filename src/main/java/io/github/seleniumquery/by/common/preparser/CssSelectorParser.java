@@ -14,31 +14,31 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.firstgen.preparser;
+package io.github.seleniumquery.by.common.preparser;
 
 import com.steadystate.css.parser.SACParserCSS3;
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorPreParser.PreParsedSelector;
+import io.github.seleniumquery.by.common.preparser.CssSelectorPreParser.PreParsedSelector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.*;
 
 import java.io.StringReader;
 
-public class CSSSelectorParser {
+public class CssSelectorParser {
 
-	private static final Log LOGGER = LogFactory.getLog(CSSSelectorParser.class);
+	private static final Log LOGGER = LogFactory.getLog(CssSelectorParser.class);
 
 	private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
 
-	public static CSSParsedSelectorList parseSelector(String selector) {
+	public static CssParsedSelectorList parseSelector(String selector) {
         PreParsedSelector preParsedSelector = preParseSelector(selector);
 		SelectorList selectorList = parseSelectorIntoParseTree(preParsedSelector.getTransformedSelector());
-		return new CSSParsedSelectorList(selectorList, preParsedSelector.getArgumentMap());
+		return new CssParsedSelectorList(selectorList, preParsedSelector.getArgumentMap());
 	}
 
     private static PreParsedSelector preParseSelector(String selector) {
         String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.turnAttributeNotEqualsIntoNotAttributeEquals(selector);
-        return CSSSelectorPreParser.transformSelector(fixedSelector);
+        return CssSelectorPreParser.transformSelector(fixedSelector);
     }
 
     /**

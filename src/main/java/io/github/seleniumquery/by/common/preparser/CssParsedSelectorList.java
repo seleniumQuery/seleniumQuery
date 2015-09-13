@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.firstgen.preparser;
+package io.github.seleniumquery.by.common.preparser;
 
 import org.w3c.css.sac.SelectorList;
 
-public class CSSParsedSelectorList {
+public class CssParsedSelectorList {
 	
 	private final SelectorList selectorList;
 	private final ArgumentMap argumentMap;
 
-	public CSSParsedSelectorList(SelectorList selectorList, ArgumentMap argumentMap) {
+	public CssParsedSelectorList(SelectorList selectorList, ArgumentMap argumentMap) {
 		this.selectorList = selectorList;
 		this.argumentMap = argumentMap;
 	}

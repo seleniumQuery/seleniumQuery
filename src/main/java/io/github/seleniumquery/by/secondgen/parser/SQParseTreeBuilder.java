@@ -16,9 +16,9 @@
 
 package io.github.seleniumquery.by.secondgen.parser;
 
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
-import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.secondgen.csstree.SQCssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.SQCssSelectorTranslator;
@@ -33,7 +33,7 @@ public class SQParseTreeBuilder {
 	private static SQCssSelectorTranslator sqCssSelectorTranslator = new SQCssSelectorTranslator();
 	
 	public static SQCssSelectorList parse(String selector) {
-		CSSParsedSelectorList cssParsedSelectorList = CSSSelectorParser.parseSelector(selector);
+		CssParsedSelectorList cssParsedSelectorList = CssSelectorParser.parseSelector(selector);
 		SelectorList selectorList = cssParsedSelectorList.getSelectorList();
 
     	List<SQCssSelector> css = new ArrayList<SQCssSelector>(selectorList.getLength());
