@@ -71,7 +71,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
         private void assertCssDoesNotContainUnsupportedSelectors(String cssString) {
             if (StringUtils.containsAny(cssString, ' ', '>', '~', '+')) {
-                throw new UnsupportedPseudoClassException(":not() with descendant (a b, a>b) or sibling (a+b, a~b) selecors as argument is not yet supported.");
+                throw new UnsupportedPseudoClassException(":not() with descendant (a b, a>b) or sibling (a+b, a~b) selectors as argument is not yet supported.");
             }
         }
 
