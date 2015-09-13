@@ -60,4 +60,8 @@ public class CssParsedSelectorList implements Iterable<CssParsedSelector> {
         return cssParsedSelectorList.iterator();
     }
 
+    public CssParsedSelector get(int index) {
+        return cssParsedSelectorList.get(index);
+    }
+
 }

@@ -16,29 +16,16 @@
 
 package io.github.seleniumquery.by.firstgen.css.combinators;
 
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.junit.Test;
-import org.w3c.css.sac.SiblingSelector;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 public class DirectAdjacentCssSelectorTest {
 
     DirectAdjacentCssSelector directAdjacentCssSelector = new DirectAdjacentCssSelector();
 
     @Test
-    public void testToXPath() throws Exception {
+    public void testToXPath() {
         // given
-        CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector("a + b");
-        SiblingSelector siblingSelector = (SiblingSelector) CssParsedSelectorList2.getSelectorList().item(0);
-        // when
-        TagComponent xPathComponent = directAdjacentCssSelector.toXPath(CssParsedSelectorList2.getArgumentMap(), siblingSelector);
-        // then
-        String xPath = xPathComponent.toXPath();
-        assertThat(xPath, is("(.//*[self::a]/following-sibling::b[position() = 1])"));
+        SelectorsTestUtil.verifySelectorYieldsXPathExpression(directAdjacentCssSelector, "a + b", "(.//*[self::a]/following-sibling::b[position() = 1])");
     }
 
 }
