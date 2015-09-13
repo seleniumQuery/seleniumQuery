@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by;
+package io.github.seleniumquery.utils;
 
 import org.openqa.selenium.WebElement;
 
@@ -22,7 +22,6 @@ import org.openqa.selenium.WebElement;
  * Several functions for simplified dealing with {@link WebElement}s.
  *
  * @author acdcjunior
- *
  * @since 0.9.0
  */
 public class WebElementUtils {

@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.by.firstgen.css.attributes;
 
-import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.CssConditionalSelector;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
+import io.github.seleniumquery.utils.SelectorUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

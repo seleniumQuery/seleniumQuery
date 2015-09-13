@@ -21,7 +21,7 @@ import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleCompon
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static io.github.seleniumquery.by.SelectorUtils.isVisible;
+import static io.github.seleniumquery.utils.SelectorUtils.isVisible;
 
 /**
  * see -> http://api.jqueryui.com/focusable-selector/

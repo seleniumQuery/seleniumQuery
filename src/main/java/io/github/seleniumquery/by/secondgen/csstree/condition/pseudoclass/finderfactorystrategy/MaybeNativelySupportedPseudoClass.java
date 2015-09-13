@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy;
 
-import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.openqa.selenium.WebDriver;
 
 import static io.github.seleniumquery.by.secondgen.finder.CssFinder.CSS_NOT_NATIVELY_SUPPORTED;

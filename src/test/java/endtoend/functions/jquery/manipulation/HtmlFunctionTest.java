@@ -16,16 +16,16 @@
 
 package endtoend.functions.jquery.manipulation;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.by.DriverVersionUtils.isHtmlUnitDriverEmulatingIE;
+import static io.github.seleniumquery.utils.DriverVersionUtils.isHtmlUnitDriverEmulatingIE;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 

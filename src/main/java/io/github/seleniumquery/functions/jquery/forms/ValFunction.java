@@ -19,7 +19,7 @@ package io.github.seleniumquery.functions.jquery.forms;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.DriverVersionUtils;
+import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import static io.github.seleniumquery.by.WebElementUtils.*;
+import static io.github.seleniumquery.utils.WebElementUtils.*;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class ValFunction {

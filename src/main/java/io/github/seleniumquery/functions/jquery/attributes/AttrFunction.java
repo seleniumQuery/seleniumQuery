@@ -17,7 +17,7 @@
 package io.github.seleniumquery.functions.jquery.attributes;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.DriverVersionUtils;
+import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

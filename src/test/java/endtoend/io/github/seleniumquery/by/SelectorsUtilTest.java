@@ -16,9 +16,8 @@
 
 package endtoend.io.github.seleniumquery.by;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.SeleniumQuery;
-import io.github.seleniumquery.by.SelectorUtils;
+import io.github.seleniumquery.utils.SelectorUtils;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -26,6 +25,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import java.util.List;
 

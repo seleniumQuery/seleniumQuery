@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static io.github.seleniumquery.by.SelectorUtils.ESCAPED_SLASHES;
+import static io.github.seleniumquery.utils.SelectorUtils.ESCAPED_SLASHES;
 
 /**
  * See {@link NotEqualsAttributeSelectorFix#turnAttributeNotEqualsIntoNotAttributeEquals(String)} javadoc.

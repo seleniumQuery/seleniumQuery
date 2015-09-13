@@ -16,13 +16,13 @@
 
 package endtoend.functions.jquery.forms;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import io.github.seleniumquery.by.DriverVersionUtils;
+import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;

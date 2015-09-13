@@ -16,13 +16,13 @@
 
 package io.github.seleniumquery.by.firstgen.css.combinators;
 
-import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
 import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.firstgen.xpath.component.DescendantDirectComponent;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
+import io.github.seleniumquery.utils.SelectorUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.DescendantSelector;

@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery.by.firstgen.filter;
 
-import io.github.seleniumquery.by.SelectorUtils;
 import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
 import io.github.seleniumquery.by.common.elementfilter.ElementFilterList;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
+import io.github.seleniumquery.utils.SelectorUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

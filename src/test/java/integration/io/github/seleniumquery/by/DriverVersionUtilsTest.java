@@ -17,7 +17,7 @@
 package integration.io.github.seleniumquery.by;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import io.github.seleniumquery.by.DriverVersionUtils;
+import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;

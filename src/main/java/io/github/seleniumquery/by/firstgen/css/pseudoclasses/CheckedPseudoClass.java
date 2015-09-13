@@ -21,8 +21,8 @@ import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleCompon
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static io.github.seleniumquery.by.WebElementUtils.*;
 import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.SelectedPseudoClass.SELECTED_PSEUDO_CONDITION;
+import static io.github.seleniumquery.utils.WebElementUtils.*;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:checked
