@@ -17,8 +17,7 @@
 package io.github.seleniumquery.by;
 
 import io.github.seleniumquery.SeleniumQueryException;
-import io.github.seleniumquery.by.firstgen.xpath.TagComponentList;
-import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
+import io.github.seleniumquery.by.firstgen.FirstGenEnhancedElementFinder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -34,6 +33,8 @@ import java.util.regex.Pattern;
  * @since 0.9.0
  */
 public class SeleniumQueryBy extends By {
+
+    private static final EnhancedElementFinder ELEMENT_FINDER = new FirstGenEnhancedElementFinder();
 	
 	/**
 	 * A {@link By} to be used in an element created with no By. Attempting to filter elements through this
@@ -50,7 +51,6 @@ public class SeleniumQueryBy extends By {
 
 	private static final String STARTING_BRACES = "(\\s*\\(\\s*)*";
 	private static final String XPATH_AXES = "ancestor|ancestor-or-self|attribute|child|descendant|descendant-or-self|following|following-sibling|parent|preceding|preceding-sibling|self";
-
 	private static final Pattern XPATH_EXPRESSION_PATTERN = Pattern.compile(STARTING_BRACES + "(/|(" + XPATH_AXES + ")::).*");
 
 	/**
@@ -59,10 +59,7 @@ public class SeleniumQueryBy extends By {
 	 *
 	 * @since 0.9.0
 	 */
-	public static SeleniumQueryBy byEnhancedSelector(final String selector) {
-		if (selector == null) {
-			throw new IllegalArgumentException("Cannot find elements when the selector is null");
-		}
+	public static SeleniumQueryBy byEnhancedSelector(String selector) {
 		return new SeleniumQueryBy(selector);
 	}
 
@@ -73,7 +70,10 @@ public class SeleniumQueryBy extends By {
 	 * Constructs a SeleniumQueryBy for the given selector.
 	 * @param selector the selector you need the elements to match.
 	 */
-	private SeleniumQueryBy(String selector) {
+	public SeleniumQueryBy(String selector) {
+        if (selector == null) {
+            throw new IllegalArgumentException("Selector string cannot be null.");
+        }
 		this.selector = selector;
 	}
 	
@@ -88,17 +88,7 @@ public class SeleniumQueryBy extends By {
 		if (this.isXPathExpression()) {
 			return new By.ByXPath(this.selector).findElements(context);
 		}
-		return this.enhancedCssFindElements(context);
-	}
-
-	/**
-	 * Compiles the selector for the given context (the context
-	 * will determinate what selectors are natively supported and what selectors should
-	 * be handled by SeleniumQuery) and matches elements based on it.
-	 */
-	private List<WebElement> enhancedCssFindElements(SearchContext context) {
-		TagComponentList xPathLocator = XPathComponentCompilerService.compileSelectorList(this.selector);
-		return xPathLocator.findWebElements(context);
+		return ELEMENT_FINDER.findElements(context, this.selector);
 	}
 
 	/**
