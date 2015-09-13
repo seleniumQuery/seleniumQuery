@@ -16,14 +16,14 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 
 public class SQCssFunctionalPseudoClassCondition extends SQCssPseudoClassCondition {
 
-    protected PseudoClassSelector pseudoClassSelector;
+    private PseudoClass pseudoClassSelector;
     private String argument;
 
-    public SQCssFunctionalPseudoClassCondition(PseudoClassSelector pseudoClassSelector) {
+    public SQCssFunctionalPseudoClassCondition(PseudoClass pseudoClassSelector) {
         this.pseudoClassSelector = pseudoClassSelector;
     }
 

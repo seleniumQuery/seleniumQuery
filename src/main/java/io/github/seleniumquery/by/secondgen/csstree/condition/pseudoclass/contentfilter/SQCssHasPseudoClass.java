@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 
@@ -24,7 +24,7 @@ public class SQCssHasPseudoClass extends SQCssFunctionalPseudoClassCondition imp
 
     public static final String PSEUDO = "has";
 
-    public SQCssHasPseudoClass(PseudoClassSelector pseudoClassSelector) {
+    public SQCssHasPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 

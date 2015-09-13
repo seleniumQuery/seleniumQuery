@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
 import org.w3c.css.sac.Selector;
 
-public class PseudoClassSelector {
+public class PseudoClassSelector implements io.github.seleniumquery.by.common.pseudoclass.PseudoClass {
 	
 	private ArgumentMap argumentMap;
 	private Selector selectorThisConditionShouldApply;
@@ -31,6 +31,7 @@ public class PseudoClassSelector {
 		this.pseudoClassValue = pseudoClassValue;
 	}
 
+	@Override
 	public String getPseudoClassContent() {
 		if (!pseudoClassValue.contains("(")) {
 			throw new IllegalArgumentException("Functional pseudo-class has no parenthesis/arguments: "+pseudoClassValue);

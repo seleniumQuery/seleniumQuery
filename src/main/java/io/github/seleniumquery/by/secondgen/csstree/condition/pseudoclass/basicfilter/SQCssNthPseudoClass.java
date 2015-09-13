@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 
 /**
  * :nth() is an alias to :eq().
@@ -29,7 +29,7 @@ public class SQCssNthPseudoClass extends SQCssEqPseudoClass {
 
     public static final String PSEUDO = "nth";
 
-    public SQCssNthPseudoClass(PseudoClassSelector pseudoClassSelector) {
+    public SQCssNthPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 

@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
@@ -54,7 +54,7 @@ public class SQCssNthLastChildPseudoClass extends SQCssFunctionalPseudoClassCond
         }
     };
 
-    public SQCssNthLastChildPseudoClass(PseudoClassSelector pseudoClassSelector) {
+    public SQCssNthLastChildPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 

@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import org.openqa.selenium.InvalidSelectorException;
 
 import java.util.regex.Matcher;
@@ -33,7 +33,7 @@ public abstract class SQCssFunctionalIndexArgumentPseudoClassCondition extends S
 
     private static final Pattern INDEX_REGEX = Pattern.compile("^\\s*([+-]?\\d+)\\s*$");
 
-    public SQCssFunctionalIndexArgumentPseudoClassCondition(PseudoClassSelector pseudoClassSelector) {
+    public SQCssFunctionalIndexArgumentPseudoClassCondition(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 

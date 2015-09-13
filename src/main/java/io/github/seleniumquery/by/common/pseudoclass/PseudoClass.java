@@ -14,28 +14,16 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
-
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
+package io.github.seleniumquery.by.common.pseudoclass;
 
 /**
- * :last
- * https://api.jquery.com/last-selector/
+ * Interface extracted from PseudoClassSelector from firstgen, in order to decouple secondgen from it.
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssLastPseudoClass extends SQCssEqPseudoClass {
+public interface PseudoClass {
 
-    public static final String PSEUDO = "last";
-
-    public SQCssLastPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
-    }
-
-    @Override
-    public String getArgument() {
-        return "-1";
-    }
+    String getPseudoClassContent();
 
 }
