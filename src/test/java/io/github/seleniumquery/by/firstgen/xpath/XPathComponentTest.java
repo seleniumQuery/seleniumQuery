@@ -61,9 +61,9 @@ public class XPathComponentTest {
     }
 
     public static TagComponent selectorToExpression(String selector) {
-        CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector(selector);
-        SelectorList selectorList = CssParsedSelectorList2.getSelectorList();
-        return XPathComponentCompilerService.compileSelector(CssParsedSelectorList2.getArgumentMap(), selectorList.item(0));
+        CssParsedSelectorList cssParsedSelectors = CssSelectorParser.parseSelector(selector);
+        SelectorList selectorList = cssParsedSelectors.getSelectorList();
+        return XPathComponentCompilerService.compileSelector(cssParsedSelectors.getArgumentMap(), selectorList.item(0));
     }
 
     @Test

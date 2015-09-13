@@ -37,7 +37,6 @@ import java.util.regex.Pattern;
  *
  * @author acdcjunior
  * @author ricardo-sc
- *
  * @since 0.9.0
  */
 public class IsFunction {
@@ -52,9 +51,9 @@ public class IsFunction {
 		if (selector.trim().isEmpty()) {
 			return false;
 		}
-		CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector(selector);
-		SelectorList selectorList = CssParsedSelectorList2.getSelectorList();
-		ArgumentMap argumentMap = CssParsedSelectorList2.getArgumentMap();
+		CssParsedSelectorList cssParsedSelectorList = CssSelectorParser.parseSelector(selector);
+		SelectorList selectorList = cssParsedSelectorList.getSelectorList();
+		ArgumentMap argumentMap = cssParsedSelectorList.getArgumentMap();
 
 		for (int i = 0; i < selectorList.getLength(); i++) {
     		Selector parsedSimpleSelector = selectorList.item(i);

@@ -16,29 +16,17 @@
 
 package io.github.seleniumquery.by.firstgen.css.combinators;
 
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.junit.Test;
-import org.w3c.css.sac.DescendantSelector;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static io.github.seleniumquery.by.firstgen.css.combinators.SelectorsTestUtil.verifySelectorYieldsXPathExpression;
 
 public class DirectDescendantCssSelectorTest {
 
     DirectDescendantCssSelector directDescendantCssSelector = new DirectDescendantCssSelector();
 
     @Test
-    public void testToXPath() throws Exception {
-        // given
-        CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector("a > b");
-        DescendantSelector descendantSelector = (DescendantSelector) CssParsedSelectorList2.getSelectorList().item(0);
-        // when
-        TagComponent xPathComponent = directDescendantCssSelector.toXPath(CssParsedSelectorList2.getArgumentMap(), descendantSelector);
-        // then
-        String xPath = xPathComponent.toXPath();
-        assertThat(xPath, is("(.//*[self::a]/*[self::b])"));
+    public void testToXPath() {
+        verifySelectorYieldsXPathExpression(directDescendantCssSelector, "a > b", "(.//*[self::a]/*[self::b])");
     }
 
 }
