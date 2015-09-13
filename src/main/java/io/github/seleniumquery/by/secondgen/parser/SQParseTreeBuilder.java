@@ -32,13 +32,17 @@ public class SQParseTreeBuilder {
 	
 	public static SQCssSelectorList parse(String selector) {
 		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
-
-		List<SQCssSelector> cssSelectors = new ArrayList<SQCssSelector>(parsedSelectorList.size());
-		for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
-			cssSelectors.add(translate(cssParsedSelector));
-		}
+        List<SQCssSelector> cssSelectors = translate(parsedSelectorList);
 		return new SQCssSelectorList(cssSelectors);
 	}
+
+    private static List<SQCssSelector> translate(CssParsedSelectorList parsedSelectorList) {
+        List<SQCssSelector> cssSelectors = new ArrayList<SQCssSelector>(parsedSelectorList.size());
+        for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
+            cssSelectors.add(translate(cssParsedSelector));
+        }
+        return cssSelectors;
+    }
 
     private static SQCssSelector translate(CssParsedSelector cssParsedSelector) {
         return sqCssSelectorTranslator.translate(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
