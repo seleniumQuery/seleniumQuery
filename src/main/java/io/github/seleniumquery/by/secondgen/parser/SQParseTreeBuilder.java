@@ -16,14 +16,12 @@
 
 package io.github.seleniumquery.by.secondgen.parser;
 
-import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelector;
 import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.secondgen.csstree.SQCssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.SQCssSelectorTranslator;
-import org.w3c.css.sac.Selector;
-import org.w3c.css.sac.SelectorList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,20 +31,17 @@ public class SQParseTreeBuilder {
 	private static SQCssSelectorTranslator sqCssSelectorTranslator = new SQCssSelectorTranslator();
 	
 	public static SQCssSelectorList parse(String selector) {
-		CssParsedSelectorList cssParsedSelectorList = CssSelectorParser.parseSelector(selector);
-		SelectorList selectorList = cssParsedSelectorList.getSelectorList();
+		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
 
-    	List<SQCssSelector> css = new ArrayList<SQCssSelector>(selectorList.getLength());
-    	for (int i = 0; i < selectorList.getLength(); i++) {
-			SQCssSelector cs = translate(cssParsedSelectorList.getArgumentMap(), selectorList.item(i));
-    		css.add(cs);
-    	}
-    	
-    	return new SQCssSelectorList(css);
+		List<SQCssSelector> cssSelectors = new ArrayList<SQCssSelector>(parsedSelectorList.size());
+		for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
+			cssSelectors.add(translate(cssParsedSelector));
+		}
+		return new SQCssSelectorList(cssSelectors);
 	}
-    
-	public static SQCssSelector translate(ArgumentMap argumentMap, Selector selector) {
-		return sqCssSelectorTranslator.translate(argumentMap, selector);
-	}
+
+    private static SQCssSelector translate(CssParsedSelector cssParsedSelector) {
+        return sqCssSelectorTranslator.translate(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
+    }
 
 }

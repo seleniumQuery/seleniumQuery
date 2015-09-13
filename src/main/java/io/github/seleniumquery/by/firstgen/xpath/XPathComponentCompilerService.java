@@ -17,13 +17,13 @@
 package io.github.seleniumquery.by.firstgen.xpath;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelector;
 import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.w3c.css.sac.Selector;
-import org.w3c.css.sac.SelectorList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,19 +31,20 @@ import java.util.List;
 public class XPathComponentCompilerService {
 	
 	public static TagComponentList compileSelectorList(String selector) {
-		CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector(selector);
-		SelectorList selectorList = CssParsedSelectorList2.getSelectorList();
+		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
 
-    	List<TagComponent> css = new ArrayList<TagComponent>(selectorList.getLength());
-    	for (int i = 0; i < selectorList.getLength(); i++) {
-			TagComponent cs = compileSelector(CssParsedSelectorList2.getArgumentMap(), selectorList.item(i));
-    		css.add(cs);
-    	}
-    	
-    	return new TagComponentList(css);
+    	List<TagComponent> tagComponents = new ArrayList<TagComponent>(parsedSelectorList.size());
+        for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
+            tagComponents.add(compileIntoTagComponent(cssParsedSelector));
+        }
+    	return new TagComponentList(tagComponents);
 	}
-    
-	public static TagComponent compileSelector(ArgumentMap argumentMap, Selector selector) {
+
+    private static TagComponent compileIntoTagComponent(CssParsedSelector cssParsedSelector) {
+        return compileSelector(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
+    }
+
+    public static TagComponent compileSelector(ArgumentMap argumentMap, Selector selector) {
 		CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
 		return cssSelector.toXPath(argumentMap, selector);
 	}
