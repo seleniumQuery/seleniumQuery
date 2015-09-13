@@ -17,11 +17,11 @@
 package io.github.seleniumquery.functions.jquery.traversing.filtering;
 
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
-import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,9 +52,9 @@ public class IsFunction {
 		if (selector.trim().isEmpty()) {
 			return false;
 		}
-		CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
-		SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
-		ArgumentMap argumentMap = CSSParsedSelectorList.getArgumentMap();
+		CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector(selector);
+		SelectorList selectorList = CssParsedSelectorList2.getSelectorList();
+		ArgumentMap argumentMap = CssParsedSelectorList2.getArgumentMap();
 
 		for (int i = 0; i < selectorList.getLength(); i++) {
     		Selector parsedSimpleSelector = selectorList.item(i);
@@ -81,7 +81,7 @@ public class IsFunction {
 		    String argumentMapIndex = m.group(1);
 		    String notPseudoClassContent = argumentMap.get(argumentMapIndex);
 		    
-			CSSParsedSelectorList parsedPseudoClassContent = CSSSelectorParser.parseSelector(notPseudoClassContent);
+			CssParsedSelectorList parsedPseudoClassContent = CssSelectorParser.parseSelector(notPseudoClassContent);
 			SelectorList parsedPseudoClassContentSelectorList = parsedPseudoClassContent.getSelectorList();
 			ArgumentMap parsedPseudoClassContentArgumentMap = parsedPseudoClassContent.getArgumentMap();
 			for (int i = 0; i < parsedPseudoClassContentSelectorList.getLength(); i++) {

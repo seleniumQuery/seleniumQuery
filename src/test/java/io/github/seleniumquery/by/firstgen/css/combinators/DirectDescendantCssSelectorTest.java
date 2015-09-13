@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.firstgen.css.combinators;
 
-import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.junit.Test;
 import org.w3c.css.sac.DescendantSelector;
@@ -32,10 +32,10 @@ public class DirectDescendantCssSelectorTest {
     @Test
     public void testToXPath() throws Exception {
         // given
-        CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector("a > b");
-        DescendantSelector descendantSelector = (DescendantSelector) CSSParsedSelectorList.getSelectorList().item(0);
+        CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector("a > b");
+        DescendantSelector descendantSelector = (DescendantSelector) CssParsedSelectorList2.getSelectorList().item(0);
         // when
-        TagComponent xPathComponent = directDescendantCssSelector.toXPath(CSSParsedSelectorList.getArgumentMap(), descendantSelector);
+        TagComponent xPathComponent = directDescendantCssSelector.toXPath(CssParsedSelectorList2.getArgumentMap(), descendantSelector);
         // then
         String xPath = xPathComponent.toXPath();
         assertThat(xPath, is("(.//*[self::a]/*[self::b])"));

@@ -17,10 +17,10 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.FakeArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
-import io.github.seleniumquery.by.firstgen.preparser.FakeArgumentMap;
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
@@ -134,7 +134,7 @@ public class PseudoClassTestUtils {
      * @param functionalPseudoClassArgument the ARGUMENT.
      */
     public static PseudoClassSelector createPseudoClassSelectorAppliedToUniversalSelector(String functionalPseudoClassArgument) {
-        CSSParsedSelectorList cssParsedSelectorList = CSSSelectorParser.parseSelector("*");
+        CssParsedSelectorList cssParsedSelectorList = CssSelectorParser.parseSelector("*");
         Selector universalSelector = cssParsedSelectorList.getSelectorList().item(0);
         FakeArgumentMap argumentMap = new FakeArgumentMap();
         argumentMap.put(1, functionalPseudoClassArgument);

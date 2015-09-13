@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition;
 
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssPseudoClassCondition;

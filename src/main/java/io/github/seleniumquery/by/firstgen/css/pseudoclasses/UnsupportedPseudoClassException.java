@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import org.w3c.css.sac.SimpleSelector;
 
 public class UnsupportedPseudoClassException extends RuntimeException {

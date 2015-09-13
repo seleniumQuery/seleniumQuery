@@ -16,9 +16,9 @@
 
 package io.github.seleniumquery.by.firstgen.css;
 
-import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
-import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,10 +28,10 @@ import org.w3c.css.sac.SelectorList;
 public class CssSelectorMatcherService {
 	
 	public static boolean elementMatchesStringSelector(WebDriver driver, WebElement element, String selector) {
-		CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
-		SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
+		CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector(selector);
+		SelectorList selectorList = CssParsedSelectorList2.getSelectorList();
         for (int i = 0; i < selectorList.getLength(); i++) {
-			if (CssSelectorMatcherService.elementMatchesSelector(driver, element, CSSParsedSelectorList.getArgumentMap(), selectorList.item(i))) {
+			if (CssSelectorMatcherService.elementMatchesSelector(driver, element, CssParsedSelectorList2.getArgumentMap(), selectorList.item(i))) {
 				return true;
 			}
 		}

@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.firstgen.xpath;
 
-import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.junit.Test;
 import org.w3c.css.sac.SelectorList;
@@ -61,9 +61,9 @@ public class XPathComponentTest {
     }
 
     public static TagComponent selectorToExpression(String selector) {
-        CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector(selector);
-        SelectorList selectorList = CSSParsedSelectorList.getSelectorList();
-        return XPathComponentCompilerService.compileSelector(CSSParsedSelectorList.getArgumentMap(), selectorList.item(0));
+        CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector(selector);
+        SelectorList selectorList = CssParsedSelectorList2.getSelectorList();
+        return XPathComponentCompilerService.compileSelector(CssParsedSelectorList2.getArgumentMap(), selectorList.item(0));
     }
 
     @Test

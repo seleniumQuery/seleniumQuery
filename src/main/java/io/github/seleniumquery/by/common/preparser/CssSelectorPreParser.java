@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.firstgen.preparser;
+package io.github.seleniumquery.by.common.preparser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,10 +35,10 @@ import static java.lang.Character.isLetter;
  * @author acdcjunior
  * @since 1.0.0
  */
-public class CSSSelectorPreParser {
+public class CssSelectorPreParser {
 
     public static PreParsedSelector transformSelector(String selector) {
-        return new CSSSelectorPreParser(selector).transformSelector();
+        return new CssSelectorPreParser(selector).transformSelector();
     }
 
 	public static class PreParsedSelector {
@@ -59,7 +59,7 @@ public class CSSSelectorPreParser {
 	private StringBuilder transformedSelector;
 	private Map<Integer, String> argumentMap;
 
-    public CSSSelectorPreParser(String selector) {
+    public CssSelectorPreParser(String selector) {
         this.selector = selector;
         this.selectorCurrentParsingIndex = 0;
         this.transformedSelector = new StringBuilder();

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.firstgen.preparser;
+package io.github.seleniumquery.by.common.preparser;
 
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorPreParser.PreParsedSelector;
+import io.github.seleniumquery.by.common.preparser.CssSelectorPreParser.PreParsedSelector;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -34,7 +34,7 @@ public class CSSSelectorPreParserTest {
         // given
         // selector given as argument
         // when
-        PreParsedSelector preParsedSelector = CSSSelectorPreParser.transformSelector(selector);
+        PreParsedSelector preParsedSelector = CssSelectorPreParser.transformSelector(selector);
         // then
         assertThat(preParsedSelector.getTransformedSelector(), is(transformedSelector));
 

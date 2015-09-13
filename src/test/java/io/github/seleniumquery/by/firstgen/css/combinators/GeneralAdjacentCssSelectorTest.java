@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.firstgen.css.combinators;
 
-import io.github.seleniumquery.by.firstgen.preparser.CSSParsedSelectorList;
-import io.github.seleniumquery.by.firstgen.preparser.CSSSelectorParser;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.junit.Test;
 import org.w3c.css.sac.SiblingSelector;
@@ -32,10 +32,10 @@ public class GeneralAdjacentCssSelectorTest {
     @Test
     public void testToXPath() throws Exception {
         // given
-        CSSParsedSelectorList CSSParsedSelectorList = CSSSelectorParser.parseSelector("a ~ b");
-        SiblingSelector siblingSelector = (SiblingSelector) CSSParsedSelectorList.getSelectorList().item(0);
+        CssParsedSelectorList CssParsedSelectorList2 = CssSelectorParser.parseSelector("a ~ b");
+        SiblingSelector siblingSelector = (SiblingSelector) CssParsedSelectorList2.getSelectorList().item(0);
         // when
-        TagComponent xPathComponent = generalAdjacentCssSelector.toXPath(CSSParsedSelectorList.getArgumentMap(), siblingSelector);
+        TagComponent xPathComponent = generalAdjacentCssSelector.toXPath(CssParsedSelectorList2.getArgumentMap(), siblingSelector);
         // then
         String xPath = xPathComponent.toXPath();
         assertThat(xPath, is("(.//*[self::a]/following-sibling::b)"));
