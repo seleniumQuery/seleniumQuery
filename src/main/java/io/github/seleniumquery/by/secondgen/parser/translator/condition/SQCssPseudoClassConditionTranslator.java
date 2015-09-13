@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition;
 
+import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.firstgen.preparser.ArgumentMap;
@@ -141,7 +142,7 @@ public class SQCssPseudoClassConditionTranslator {
 		try {
 			// instantiates SQCssFunctionalPseudoClassCondition using pseudoClassSelectorConstructorArgument arg
 			if (SQCssFunctionalPseudoClassCondition.class.isAssignableFrom(pseudoClass)) {
-				return pseudoClass.getConstructor(new Class[]{PseudoClassSelector.class}).newInstance(pseudoClassSelectorConstructorArgument);
+				return pseudoClass.getConstructor(new Class[]{PseudoClass.class}).newInstance(pseudoClassSelectorConstructorArgument);
 			}
 			// instantiates non-functional SQCssPseudoClassCondition, which should not need an arg.
 			return pseudoClass.getConstructor().newInstance();

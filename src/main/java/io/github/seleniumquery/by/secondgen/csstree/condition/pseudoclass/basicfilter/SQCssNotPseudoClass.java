@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
 import com.google.common.base.Joiner;
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.secondgen.csstree.SQCssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
@@ -41,7 +41,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
        but we still match it, so we can return a proper error message */
     public static final String PSEUDO_PURE_NOT = "not";
 
-    public SQCssNotPseudoClass(PseudoClassSelector pseudoClassSelector) {
+    public SQCssNotPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 

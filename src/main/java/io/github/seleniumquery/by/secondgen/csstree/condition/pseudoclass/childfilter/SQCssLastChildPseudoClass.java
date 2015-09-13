@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
+import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 
 /**
  * :last-child()
@@ -30,7 +30,7 @@ public class SQCssLastChildPseudoClass extends SQCssNthLastChildPseudoClass {
 
     public static final String PSEUDO = "last-child";
 
-    public SQCssLastChildPseudoClass(PseudoClassSelector pseudoClassSelector) {
+    public SQCssLastChildPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 
