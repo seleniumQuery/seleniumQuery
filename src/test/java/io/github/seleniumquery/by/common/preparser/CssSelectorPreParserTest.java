@@ -22,7 +22,7 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class CSSSelectorPreParserTest {
+public class CssSelectorPreParserTest {
 	
 	@Test
 	public void transformSelector__should_not_transform_class_or_id_selectors() {
