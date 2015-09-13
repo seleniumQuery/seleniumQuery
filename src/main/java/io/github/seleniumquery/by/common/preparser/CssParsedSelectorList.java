@@ -18,14 +18,29 @@ package io.github.seleniumquery.by.common.preparser;
 
 import org.w3c.css.sac.SelectorList;
 
-public class CssParsedSelectorList {
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+public class CssParsedSelectorList implements Iterable<CssParsedSelector> {
 	
 	private final SelectorList selectorList;
 	private final ArgumentMap argumentMap;
+	private final List<CssParsedSelector> cssParsedSelectorList;
 
 	public CssParsedSelectorList(SelectorList selectorList, ArgumentMap argumentMap) {
 		this.selectorList = selectorList;
 		this.argumentMap = argumentMap;
+		this.cssParsedSelectorList = createParsedSelectorList();
+	}
+
+	private List<CssParsedSelector> createParsedSelectorList() {
+        List<CssParsedSelector> cssParsedSelectorList = new LinkedList<CssParsedSelector>();
+		for (int i = 0; i < selectorList.getLength(); i++) {
+			CssParsedSelector cssParsedSelector = new CssParsedSelector(selectorList.item(i), this.argumentMap);
+            cssParsedSelectorList.add(cssParsedSelector);
+		}
+        return cssParsedSelectorList;
 	}
 
 	public SelectorList getSelectorList() {
@@ -35,5 +50,14 @@ public class CssParsedSelectorList {
 	public ArgumentMap getArgumentMap() {
 		return this.argumentMap;
 	}
-	
+
+    public int size() {
+        return cssParsedSelectorList.size();
+    }
+
+    @Override
+    public Iterator<CssParsedSelector> iterator() {
+        return cssParsedSelectorList.iterator();
+    }
+
 }
