@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 
-import io.github.seleniumquery.by.DriverVersionUtils;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
+import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;

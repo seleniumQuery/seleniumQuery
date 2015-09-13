@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.common.elementfilter;
 
-import io.github.seleniumquery.by.SelectorUtils;
+import io.github.seleniumquery.utils.SelectorUtils;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

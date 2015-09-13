@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import static io.github.seleniumquery.by.WebElementUtils.isSelectTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isSelectTag;
 
 
 /**

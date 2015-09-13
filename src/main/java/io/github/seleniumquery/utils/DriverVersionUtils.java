@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by;
+package io.github.seleniumquery.utils;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.apache.commons.logging.Log;
@@ -34,7 +34,6 @@ import java.util.Map;
  *
  * @author acdcjunior
  * @author ricardo-sc
- *
  * @since 0.9.0
  */
 public class DriverVersionUtils {

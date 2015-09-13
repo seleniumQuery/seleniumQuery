@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.finder;
 
-import io.github.seleniumquery.by.DriverVersionUtils;
+import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 

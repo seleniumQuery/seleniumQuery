@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.common;
 
-import io.github.seleniumquery.by.SelectorUtils;
+import io.github.seleniumquery.utils.SelectorUtils;
 import org.w3c.css.sac.AttributeCondition;
 
 /**
