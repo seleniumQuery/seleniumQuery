@@ -51,8 +51,9 @@ public class DisabledPseudoClass implements PseudoClass<ConditionSimpleComponent
 	public static final List<String> DISABLEABLE_TAGS = Arrays.asList(INPUT, BUTTON, OPTGROUP, OPTION, SELECT, TEXTAREA);
 
 	public static final String DISABLEABLE_TAGS_XPATH = "(self::" + join(DISABLEABLE_TAGS, " or self::") + ")";
+    public static final String DISABLED_XPATH_CONDITION = "((@disabled and " + DISABLEABLE_TAGS_XPATH + ") or (self::option and ancestor::optgroup[@disabled]))";
 
-	@Override
+    @Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return DISABLED_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
 	}
@@ -74,7 +75,7 @@ public class DisabledPseudoClass implements PseudoClass<ConditionSimpleComponent
 
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new ConditionSimpleComponent("[((@disabled and " + DISABLEABLE_TAGS_XPATH + ") or (self::option and ancestor::optgroup[@disabled]))]");
+		return new ConditionSimpleComponent("["+DISABLED_XPATH_CONDITION+"]");
 	}
 
 }

@@ -55,14 +55,19 @@ public class EnabledPseudoClass implements PseudoClass<ConditionSimpleComponent>
 		// the <option> to be enabled, when it is not
         if (DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && OPTION_TAG.equals(element.getTagName())) {
 			WebElement optionParent = SelectorUtils.parent(element);
-			if (OPTGROUP_TAG.equals(optionParent.getTagName()) && !optionParent.isEnabled()) {
+            //noinspection ConstantConditions
+            if (OPTGROUP_TAG.equals(optionParent.getTagName()) && !optionParent.isEnabled()) {
 				return false;
 			}
 		}
 		return element.isEnabled() && ENABLEABLE_TAGS.contains(element.getTagName());
 	}
 	
-	public static final String ENABLED_XPATH = "(not(@disabled) and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")";
+	public static final String ENABLED_XPATH = "(" +
+                DisabledPseudoClass.DISABLEABLE_TAGS_XPATH +
+            " and " +
+			    "not("+ DisabledPseudoClass.DISABLED_XPATH_CONDITION+")" +
+            ")";
 	
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
