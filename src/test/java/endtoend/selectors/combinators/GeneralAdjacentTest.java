@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery.by.firstgen.css;
+package endtoend.selectors.combinators;
 
 import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
@@ -30,7 +30,7 @@ import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class CssSelectorMatcherServiceTest {
+public class GeneralAdjacentTest {
 
 	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
