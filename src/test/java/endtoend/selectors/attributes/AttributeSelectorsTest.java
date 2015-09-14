@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery.by.firstgen.css.attributes;
+package endtoend.selectors.attributes;
 
 import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
 import org.junit.Before;
