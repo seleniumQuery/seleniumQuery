@@ -35,7 +35,6 @@ import static org.apache.commons.lang3.StringUtils.join;
  * by "problems" we mean it is inconsistent, changing depending on what browser it is attempting to emulate
  *
  * @author acdcjunior
- *
  * @since 0.9.0
  */
 public class DisabledPseudoClass implements PseudoClass<ConditionSimpleComponent> {
@@ -65,7 +64,8 @@ public class DisabledPseudoClass implements PseudoClass<ConditionSimpleComponent
 		// the <option> to be enabled, when it is not
         if (DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && OPTION.equals(element.getTagName())) {
 			WebElement optionParent = SelectorUtils.parent(element);
-			if (OPTGROUP.equals(optionParent.getTagName()) && !optionParent.isEnabled()) {
+            //noinspection ConstantConditions
+            if (OPTGROUP.equals(optionParent.getTagName()) && !optionParent.isEnabled()) {
 				return true;
 			}
 		}
@@ -74,7 +74,7 @@ public class DisabledPseudoClass implements PseudoClass<ConditionSimpleComponent
 
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new ConditionSimpleComponent("[(@disabled and " + DISABLEABLE_TAGS_XPATH + ")]");
+		return new ConditionSimpleComponent("[((@disabled and " + DISABLEABLE_TAGS_XPATH + ") or (self::option and ancestor::optgroup[@disabled]))]");
 	}
 
 }
