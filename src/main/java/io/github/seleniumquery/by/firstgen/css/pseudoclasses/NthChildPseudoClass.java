@@ -64,7 +64,7 @@ public class NthChildPseudoClass implements PseudoClass<ConditionSimpleComponent
 			return nthChild(2, 0);
 		// b --> 0n+b
 		} else if (nthChildContent.matches("[+-]?\\d+")) {
-			return nthChild(0, parseInt(nthChildContent));
+			return nthChild(0, parseInt(removeLeadingPlusSign(nthChildContent)));
 		// n --> 1n --> everyone
 		} else if (nthChildContent.matches("n")) {
 			return new ConditionSimpleComponent("[true()]");
