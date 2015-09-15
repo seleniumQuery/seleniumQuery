@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery.by;
+package endtoend.selectors;
 
 import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.utils.SelectorUtils;

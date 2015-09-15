@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery;
+package endtoend.browser;
 
 import io.github.seleniumquery.SeleniumQueryBrowser;
 import org.junit.Test;
 
-import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
+import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
 public class SeleniumQueryBrowserTest {
 
