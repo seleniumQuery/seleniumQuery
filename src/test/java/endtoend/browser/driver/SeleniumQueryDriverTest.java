@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery.browser.driver;
+package endtoend.browser.driver;
 
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;

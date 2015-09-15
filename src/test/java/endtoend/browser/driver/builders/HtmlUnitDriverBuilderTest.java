@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery.browser.driver.builders;
+package endtoend.browser.driver.builders;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.junit.After;
@@ -26,8 +26,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.lang.reflect.Method;
 
-import static endtoend.io.github.seleniumquery.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOff;
-import static endtoend.io.github.seleniumquery.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOn;
+import static endtoend.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOff;
+import static endtoend.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOn;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

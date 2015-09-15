@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery.browser.driver.builders;
+package endtoend.browser.driver.builders;
 
 import org.junit.After;
 import org.junit.Test;
@@ -22,10 +22,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
-import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
+import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
 public class FirefoxDriverBuilderTest {
 
