@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package endtoend.io.github.seleniumquery.browser.driver.builders;
+package endtoend.browser.driver.builders;
 
 import io.github.seleniumquery.browser.driver.builders.InternetExplorerDriverBuilder;
 import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
 public class InternetExplorerDriverBuilderTest {
 
