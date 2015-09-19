@@ -88,7 +88,7 @@ public class SizzleTest {
     private List<String> extractIdsList(String selector) {
         SeleniumQueryObject f = $(selector);
 
-        List<String> actualIds = new ArrayList<String>();
+        List<String> actualIds = new ArrayList<>();
         for (WebElement webElement : f) {
             actualIds.add(webElement.getAttribute("id"));
         }
@@ -109,7 +109,7 @@ public class SizzleTest {
      * Result: [<div id="main">, <span id="foo">, <input id="bar">]
      */
     protected List<WebElement> q(String... ids) {
-        List<WebElement> els = new ArrayList<WebElement>();
+        List<WebElement> els = new ArrayList<>();
         for (String id : ids) {
             els.add(id(id));
         }

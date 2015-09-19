@@ -83,7 +83,7 @@ public class ConditionalCssSelectorFactory {
 	        	return langPseudoClassEvaluator;
 	            
 	        default:
-				return new UnknownConditionalCssSelector<Condition>(condition.getConditionType());
+				return new UnknownConditionalCssSelector<>(condition.getConditionType());
 		}
 	}
 	

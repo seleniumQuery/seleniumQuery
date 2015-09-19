@@ -78,7 +78,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             SQCssSelectorList parse = SQParseTreeBuilder.parse(getArgument());
-            List<String> xPathExpressions = new LinkedList<String>();
+            List<String> xPathExpressions = new LinkedList<>();
             for (SQCssSelector sqCssSelector : parse) {
                 xPathExpressions.add(sqCssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression());
             }

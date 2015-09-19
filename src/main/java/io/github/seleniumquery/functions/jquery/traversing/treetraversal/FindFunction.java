@@ -33,7 +33,7 @@ import java.util.List;
 public class FindFunction {
 
 	public static SeleniumQueryObject find(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String selector) {
-		List<WebElement> allElementsBelow = new LinkedList<WebElement>();
+		List<WebElement> allElementsBelow = new LinkedList<>();
 		SeleniumQueryBy by = SeleniumQueryBy.byEnhancedSelector(selector);
 		for (WebElement webElement : elements) {
 			List<WebElement> elementsBelowThisElement = webElement.findElements(by);

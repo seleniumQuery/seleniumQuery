@@ -45,11 +45,11 @@ public class ParentFunction {
 	}
 
 	public static SeleniumQueryObject parent(SeleniumQueryObject caller, String selector) {
-		Set<WebElement> alreadyInsertedParents = new HashSet<WebElement>();
+		Set<WebElement> alreadyInsertedParents = new HashSet<>();
 		WebDriver callerWebDriver = caller.getWebDriver();
 
 		List<WebElement> elements = caller.get();
-		List<WebElement> parents = new ArrayList<WebElement>(elements.size());
+		List<WebElement> parents = new ArrayList<>(elements.size());
 		for (WebElement element : elements) {
 			WebElement parentElement = SelectorUtils.parent(element);
 			if (parentElement != null && !alreadyInsertedParents.contains(parentElement) && parentMatchesSelector(callerWebDriver, selector, parentElement)) {

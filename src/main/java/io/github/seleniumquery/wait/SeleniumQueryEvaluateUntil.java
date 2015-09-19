@@ -1,12 +1,23 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.seleniumquery.wait;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.wait.evaluators.ContainsEvaluator;
-import io.github.seleniumquery.wait.evaluators.EqualsEvaluator;
-import io.github.seleniumquery.wait.evaluators.Evaluator;
-import io.github.seleniumquery.wait.evaluators.GreaterThanEvaluator;
-import io.github.seleniumquery.wait.evaluators.LessThanEvaluator;
-import io.github.seleniumquery.wait.evaluators.MatchesEvaluator;
+import io.github.seleniumquery.wait.evaluators.*;
 import io.github.seleniumquery.wait.getters.Getter;
 
 /**
@@ -44,7 +55,7 @@ public class SeleniumQueryEvaluateUntil<T> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryAndOrThen isEqualTo(T valueToEqual) {
-		Evaluator<T> equalsEvaluator = new EqualsEvaluator<T>(getter);
+		Evaluator<T> equalsEvaluator = new EqualsEvaluator<>(getter);
 		SeleniumQueryObject sq = fluentWait.waitUntil(equalsEvaluator, valueToEqual, seleniumQueryObject, this.negated);
 		return new SeleniumQueryAndOrThen(sq);
 	}
@@ -111,7 +122,7 @@ public class SeleniumQueryEvaluateUntil<T> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryEvaluateUntil<T> not() {
-		return new SeleniumQueryEvaluateUntil<T>(fluentWait, getter, seleniumQueryObject, !this.negated);
+		return new SeleniumQueryEvaluateUntil<>(fluentWait, getter, seleniumQueryObject, !this.negated);
 	}
 
 }

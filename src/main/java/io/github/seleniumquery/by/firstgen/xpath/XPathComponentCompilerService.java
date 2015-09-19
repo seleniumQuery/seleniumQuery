@@ -33,7 +33,7 @@ public class XPathComponentCompilerService {
 	public static TagComponentList compileSelectorList(String selector) {
 		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
 
-    	List<TagComponent> tagComponents = new ArrayList<TagComponent>(parsedSelectorList.size());
+    	List<TagComponent> tagComponents = new ArrayList<>(parsedSelectorList.size());
         for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
             tagComponents.add(compileIntoTagComponent(cssParsedSelector));
         }

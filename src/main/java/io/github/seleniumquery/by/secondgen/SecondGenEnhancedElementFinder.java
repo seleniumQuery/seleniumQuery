@@ -39,12 +39,12 @@ public class SecondGenEnhancedElementFinder implements EnhancedElementFinder {
     @Override
     public List<WebElement> findElements(SearchContext context, String selector) {
         SQCssSelectorList parse = SQParseTreeBuilder.parse(selector);
-        Set<WebElement> elements = new LinkedHashSet<WebElement>();
+        Set<WebElement> elements = new LinkedHashSet<>();
         for (SQCssSelector s : parse) {
             List<WebElement> elementsFound = s.toElementFinder((WebDriver) context).findWebElements(context);
             elements.addAll(elementsFound);
         }
-        return new ArrayList<WebElement>(elements);
+        return new ArrayList<>(elements);
     }
 
 }

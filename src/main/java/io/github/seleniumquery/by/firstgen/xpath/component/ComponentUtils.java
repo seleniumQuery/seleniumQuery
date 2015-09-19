@@ -25,7 +25,7 @@ import java.util.List;
 public class ComponentUtils {
 
     public static List<XPathComponent> joinComponents(List<XPathComponent> oneComponents, XPathComponent otherCopyWithModifiedType) {
-        List<XPathComponent> aggregatedComponents = new ArrayList<XPathComponent>(oneComponents);
+        List<XPathComponent> aggregatedComponents = new ArrayList<>(oneComponents);
         aggregatedComponents.add(otherCopyWithModifiedType);
         aggregatedComponents.addAll(otherCopyWithModifiedType.combinatedComponents);
         return aggregatedComponents;
@@ -41,7 +41,7 @@ public class ComponentUtils {
         if (filter == ElementFilter.FILTER_NOTHING) {
             return emptyElementFilterList();
         }
-        ArrayList<ElementFilter> elementFilters = new ArrayList<ElementFilter>();
+        ArrayList<ElementFilter> elementFilters = new ArrayList<>();
         elementFilters.add(filter);
         return new ElementFilterList(elementFilters);
     }

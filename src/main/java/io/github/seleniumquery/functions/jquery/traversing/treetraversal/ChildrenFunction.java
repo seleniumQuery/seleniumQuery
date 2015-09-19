@@ -54,11 +54,11 @@ public class ChildrenFunction {
 	}
 	
 	private static List<WebElement> getChildren(List<WebElement> elements) {
-		List<WebElement> children = new LinkedList<WebElement>();
+		List<WebElement> children = new LinkedList<>();
 		for (WebElement element : elements) {
 			children.addAll(SelectorUtils.getDirectChildren(element));
 		}
-		return new ArrayList<WebElement>(children);
+		return new ArrayList<>(children);
 	}
 
 }

@@ -73,7 +73,7 @@ public class CssSelectorFactory {
 			case Selector.SAC_COMMENT_NODE_SELECTOR:
 			case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
 			default:
-				return new UnknownCssSelector<Selector>(selector.getSelectorType());
+				return new UnknownCssSelector<>(selector.getSelectorType());
 		}
 	}
 

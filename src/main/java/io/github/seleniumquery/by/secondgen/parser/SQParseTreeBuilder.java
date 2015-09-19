@@ -37,7 +37,7 @@ public class SQParseTreeBuilder {
 	}
 
     private static List<SQCssSelector> translate(CssParsedSelectorList parsedSelectorList) {
-        List<SQCssSelector> cssSelectors = new ArrayList<SQCssSelector>(parsedSelectorList.size());
+        List<SQCssSelector> cssSelectors = new ArrayList<>(parsedSelectorList.size());
         for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
             cssSelectors.add(translate(cssParsedSelector));
         }

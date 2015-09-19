@@ -48,7 +48,7 @@ public class IdConditionComponent extends ConditionSimpleComponent {
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
-        ArrayList<WebElement> webElements = new ArrayList<WebElement>();
+        ArrayList<WebElement> webElements = new ArrayList<>();
         try {
             webElements.add(By.id(wantedId).findElement(context));
         } catch (NoSuchElementException ignored) { }

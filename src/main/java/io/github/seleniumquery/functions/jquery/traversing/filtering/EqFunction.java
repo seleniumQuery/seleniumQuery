@@ -36,7 +36,7 @@ import java.util.List;
 public class EqFunction {
 	
 	public static SeleniumQueryObject eq(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, int index) {
-		ArrayList<WebElement> eqElementList = new ArrayList<WebElement>();
+		ArrayList<WebElement> eqElementList = new ArrayList<>();
 		
 		By selectorAtIndex = getByForElementAtPosition(seleniumQueryObject.getBy(), index);
 		if (index < 0) {

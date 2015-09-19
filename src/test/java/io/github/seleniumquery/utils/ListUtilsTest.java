@@ -28,7 +28,7 @@ public class ListUtilsTest {
 
     @Test
     public void toImmutableRandomAccessList__returned_list_should_not_get_updated_if_source_list_does() {
-        List<String> sourceList = new ArrayList<String>();
+        List<String> sourceList = new ArrayList<>();
         String s1 = "just some random value to prove we can add strings to this list";
         sourceList.add(s1);
 
