@@ -35,7 +35,7 @@ public class CssParsedSelectorList implements Iterable<CssParsedSelector> {
 	}
 
 	private List<CssParsedSelector> createParsedSelectorList() {
-        List<CssParsedSelector> cssParsedSelectorList = new LinkedList<CssParsedSelector>();
+        List<CssParsedSelector> cssParsedSelectorList = new LinkedList<>();
 		for (int i = 0; i < selectorList.getLength(); i++) {
 			CssParsedSelector cssParsedSelector = new CssParsedSelector(selectorList.item(i), this.argumentMap);
             cssParsedSelectorList.add(cssParsedSelector);

@@ -19,12 +19,7 @@ package io.github.seleniumquery.wait;
 import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.wait.evaluators.IsEvaluator;
-import io.github.seleniumquery.wait.getters.AttrGetter;
-import io.github.seleniumquery.wait.getters.HtmlGetter;
-import io.github.seleniumquery.wait.getters.PropGetter;
-import io.github.seleniumquery.wait.getters.SizeGetter;
-import io.github.seleniumquery.wait.getters.TextGetter;
-import io.github.seleniumquery.wait.getters.ValGetter;
+import io.github.seleniumquery.wait.getters.*;
 
 /**
  * .waitUntil() functions.
@@ -86,7 +81,7 @@ public class SeleniumQueryWaitUntil {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryEvaluateUntil<String> val() {
-		return new SeleniumQueryEvaluateUntil<String>(this.fluentWait, ValGetter.VAL_GETTER, seleniumQueryObject);
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, ValGetter.VAL_GETTER, seleniumQueryObject);
 	}
 
 	/**
@@ -97,7 +92,7 @@ public class SeleniumQueryWaitUntil {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryEvaluateUntil<String> text() {
-		return new SeleniumQueryEvaluateUntil<String>(this.fluentWait, TextGetter.TEXT_GETTER, seleniumQueryObject);
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, TextGetter.TEXT_GETTER, seleniumQueryObject);
 	}
 
 	/**
@@ -108,7 +103,7 @@ public class SeleniumQueryWaitUntil {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryEvaluateUntil<String> attr(String attributeName) {
-		return new SeleniumQueryEvaluateUntil<String>(this.fluentWait, new AttrGetter(attributeName), seleniumQueryObject);
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, new AttrGetter(attributeName), seleniumQueryObject);
 	}
 
 	/**
@@ -119,7 +114,7 @@ public class SeleniumQueryWaitUntil {
 	 * @since 0.9.0
 	 */
 	public <T> SeleniumQueryEvaluateUntil<T> prop(String propertyName) {
-		return new SeleniumQueryEvaluateUntil<T>(this.fluentWait, new PropGetter<T>(propertyName), seleniumQueryObject);
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, new PropGetter<T>(propertyName), seleniumQueryObject);
 	}
 
 	/**
@@ -130,7 +125,7 @@ public class SeleniumQueryWaitUntil {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryEvaluateUntil<String> html() {
-		return new SeleniumQueryEvaluateUntil<String>(this.fluentWait, HtmlGetter.HTML_GETTER, seleniumQueryObject);
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, HtmlGetter.HTML_GETTER, seleniumQueryObject);
 	}
 
 	/**
@@ -141,7 +136,7 @@ public class SeleniumQueryWaitUntil {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryEvaluateUntil<Integer> size() {
-		return new SeleniumQueryEvaluateUntil<Integer>(this.fluentWait, SizeGetter.SIZE_GETTER, seleniumQueryObject);
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, SizeGetter.SIZE_GETTER, seleniumQueryObject);
 	}
 	
 }

@@ -28,7 +28,7 @@ public class SQCssSelectorList implements Iterable<SQCssSelector> {
     private List<SQCssSelector> sqCssSelectors;
 
     public SQCssSelectorList(List<SQCssSelector> sqCssSelectors) {
-        this.sqCssSelectors = Collections.unmodifiableList(new ArrayList<SQCssSelector>(sqCssSelectors));
+        this.sqCssSelectors = Collections.unmodifiableList(new ArrayList<>(sqCssSelectors));
     }
 
     public SQCssSelector selector(int i) {

@@ -147,7 +147,7 @@ public class SelectorUtils {
 		WebElement parent = SelectorUtils.parent(element);
 		// if parent is null, then element is <HTML>, thus have no siblings
 		if (parent == null) {
-			return new ArrayList<WebElement>(Arrays.asList(element));
+			return new ArrayList<>(Arrays.asList(element));
 		}
 		return getDirectChildren(parent);
 	}
@@ -159,7 +159,7 @@ public class SelectorUtils {
 	public static List<WebElement> getPreviousSiblings(WebElement elementItSelf) {
 		List<WebElement> itselfWithSiblings = SelectorUtils.itselfWithSiblings(elementItSelf);
 		
-		List<WebElement> previousSiblings = new ArrayList<WebElement>();
+		List<WebElement> previousSiblings = new ArrayList<>();
 		for (WebElement siblingOrItSelf : itselfWithSiblings) {
 			if (elementItSelf.equals(siblingOrItSelf)) {
 				break;

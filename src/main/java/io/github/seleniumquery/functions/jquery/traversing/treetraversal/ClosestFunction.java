@@ -37,7 +37,7 @@ public class ClosestFunction {
 	public static SeleniumQueryObject closest(SeleniumQueryObject caller, List<WebElement> elements, String selector) {
 		WebDriver driver = caller.getWebDriver();
 		
-		List<WebElement> closests = new ArrayList<WebElement>(elements.size());
+		List<WebElement> closests = new ArrayList<>(elements.size());
 		for (WebElement element : elements) {
 			WebElement closestElement = closest(driver, element, selector);
 			if (closestElement != null) {

@@ -29,7 +29,7 @@ import java.util.List;
 public class ListUtils {
 
     public static <T> List<T> toImmutableRandomAccessList(List<T> els) {
-        return Collections.unmodifiableList(new ArrayList<T>(els));
+        return Collections.unmodifiableList(new ArrayList<>(els));
     }
 
 }

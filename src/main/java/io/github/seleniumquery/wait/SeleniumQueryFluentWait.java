@@ -44,7 +44,7 @@ public class SeleniumQueryFluentWait {
 																	SeleniumQueryObject seleniumQueryObject, final boolean negated) {
 		final WebDriver driver = seleniumQueryObject.getWebDriver();
 		final By by = seleniumQueryObject.getBy();
-		List<WebElement> elements = fluentWait(seleniumQueryObject, new WaitFunction<T>(driver, value, evaluator, by, negated), "to "+evaluator.stringFor(value));
+		List<WebElement> elements = fluentWait(seleniumQueryObject, new WaitFunction<>(driver, value, evaluator, by, negated), "to "+evaluator.stringFor(value));
         return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
     }
 
@@ -53,7 +53,7 @@ public class SeleniumQueryFluentWait {
 	 */
 	private <T> T fluentWait(SeleniumQueryObject seleniumQueryObject, Function<By, T> function, String reason) {
 		try {
-			return new FluentWait<By>(seleniumQueryObject.getBy())
+			return new FluentWait<>(seleniumQueryObject.getBy())
 							.withTimeout(waitUntilTimeout, TimeUnit.MILLISECONDS)
 								.pollingEvery(waitUntilPollingInterval, TimeUnit.MILLISECONDS)
 									.ignoring(StaleElementReferenceException.class)

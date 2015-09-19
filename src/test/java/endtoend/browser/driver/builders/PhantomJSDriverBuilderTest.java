@@ -16,7 +16,7 @@
 
 package endtoend.browser.driver.builders;
 
-import endtoend.io.github.seleniumquery.SeleniumQueryBrowserTest;
+import endtoend.browser.SeleniumQueryBrowserTest;
 import io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder;
 import org.junit.After;
 import org.junit.BeforeClass;

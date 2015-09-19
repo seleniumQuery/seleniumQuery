@@ -91,7 +91,7 @@ public class ElementFilterList {
         }
         List<ElementFilter> myFilters = this.getElementFilters();
         List<ElementFilter> theirFilters = elementFilterList.getElementFilters();
-        List<ElementFilter> ourFilters = new ArrayList<ElementFilter>(myFilters.size()+theirFilters.size());
+        List<ElementFilter> ourFilters = new ArrayList<>(myFilters.size()+theirFilters.size());
         ourFilters.addAll(myFilters);
         ourFilters.addAll(theirFilters);
         return new ElementFilterList(ourFilters);

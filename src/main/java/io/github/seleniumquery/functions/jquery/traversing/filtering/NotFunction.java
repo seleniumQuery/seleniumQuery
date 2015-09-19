@@ -33,7 +33,7 @@ import java.util.List;
 public class NotFunction {
 	
 	public static SeleniumQueryObject not(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String selector) {
-		List<WebElement> filteredElements = new ArrayList<WebElement>(elements);
+		List<WebElement> filteredElements = new ArrayList<>(elements);
 		
 		List<WebElement> elementsToExclude = seleniumQueryObject.getWebDriver().findElements(SeleniumQueryBy.byEnhancedSelector(selector));
 		filteredElements.removeAll(elementsToExclude);

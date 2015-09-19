@@ -46,12 +46,12 @@ public class TagComponentList {
 	}
 	
 	public List<WebElement> findWebElements(SearchContext context) {
-		Set<WebElement> elements = new LinkedHashSet<WebElement>();
+		Set<WebElement> elements = new LinkedHashSet<>();
 		for (TagComponent tagComponent : tagComponents) {
 			List<WebElement> elementsFound = tagComponent.findWebElements(context);
 			elements.addAll(elementsFound);
 		}
-		return new ArrayList<WebElement>(elements);
+		return new ArrayList<>(elements);
 	}
 	
 	public String toXPath() {
