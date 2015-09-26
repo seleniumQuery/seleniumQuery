@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssIdA
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssConditionalSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
 import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ import static org.junit.Assert.assertThat;
 public class SQCssIdAttributeConditionTranslatorTest {
 
     @Test
-    public void translate() throws Exception {
+    public void translate() {
         // given
         SQCssSelector cssSelector = SQParseTreeBuilder.parse("#ball").firstSelector();
         assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));
@@ -49,64 +50,81 @@ public class SQCssIdAttributeConditionTranslatorTest {
 
     @Test
     public void translate__should_translate_regular_ids() {
-        assertSelectorIsCompiledToId("#abc", "abc");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#abc", "abc");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#a1b2c", "a1b2c");
     }
 
     @Test
     public void translate__should_translate_escaped_ids() {
-        assertSelectorIsCompiledToId("#x\\+y", "x+y");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#x\\+y", "x+y");
         assertSelectorIsCompiledToId("#x\\2b y", "x+y");
         assertSelectorIsCompiledToId("#x\\00002by", "x+y");
 //        assertSelectorIsCompiledToClassSelector("#\\0000E9fg", "éfg"); // I guess this is wrong anyway
-        assertSelectorIsCompiledToId("#\\E9 fg", "éfg");
-        assertSelectorIsCompiledToId("#\\3A \\`\\(", ":`(");
-        assertSelectorIsCompiledToId("#\\31 a2b3c", "1a2b3c");
-
-        assertSelectorIsCompiledToId("#\\\"", "\"");
-        assertSelectorIsCompiledToId("#\\\"a\\\"b\\\"c\\\"", "\"a\"b\"c\"");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\E9 fg", "éfg");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\\"", "\"");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\\"a\\\"b\\\"c\\\"", "\"a\"b\"c\"");
         assertSelectorIsCompiledToId("#♥", "♥");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\2665", "♥");
         assertSelectorIsCompiledToId("#©", "©");
-//        assertSelectorIsCompiledToId("#“‘’”", "“‘’”");
-//        assertSelectorIsCompiledToId("#☺☃", "☺☃");
-//        assertSelectorIsCompiledToId("#⌘⌥", "⌘⌥");
-//        assertSelectorIsCompiledToId("#𝄞♪♩♫♬", "𝄞♪♩♫♬");
-//        assertSelectorIsCompiledToId("#💩", "💩");
-        assertSelectorIsCompiledToId("#\\?", "?");
-        assertSelectorIsCompiledToId("#\\@", "@");
-        assertSelectorIsCompiledToId("#\\.", ".");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\A9", "©");
+//        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#“‘’”", "“‘’”");
+//        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#☺☃", "☺☃");
+//        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#⌘⌥", "⌘⌥");
+//        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#𝄞♪♩♫♬", "𝄞♪♩♫♬");
+//        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#💩", "💩");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\?", "?");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\@", "@");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\.", ".");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\3A\\)", ":)");
         assertSelectorIsCompiledToId("#\\3A \\)", ":)");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\3A\\`\\(", ":`(");
         assertSelectorIsCompiledToId("#\\3A \\`\\(", ":`(");
-        assertSelectorIsCompiledToId("#\\31 23", "123");
-        assertSelectorIsCompiledToId("#\\31 a2b3c", "1a2b3c");
-        assertSelectorIsCompiledToId("#\\<p\\>", "<p>");
-        assertSelectorIsCompiledToId("#\\<\\>\\<\\<\\<\\>\\>\\<\\>", "<><<<>><>");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\31 23", "123");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\31 a2b3c", "1a2b3c");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\<p\\>", "<p>");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\<\\>\\<\\<\\<\\>\\>\\<\\>", "<><<<>><>");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\[\\>\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\>\\+\\<\\<\\<\\<-\\]\\>\\+\\+\\.\\>\\+\\.\\+\\+\\+\\+\\+\\+\\+\\.\\.\\+\\+\\+\\.\\>\\+\\+\\.\\<\\<\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\.\\>\\.\\+\\+\\+\\.------\\.--------\\.\\>\\+\\.\\>\\.", "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
         assertSelectorIsCompiledToId("#\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\[\\>\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\>\\+\\<\\<\\<\\<\\-\\]\\>\\+\\+\\.\\>\\+\\.\\+\\+\\+\\+\\+\\+\\+\\.\\.\\+\\+\\+\\.\\>\\+\\+\\.\\<\\<\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\.\\>\\.\\+\\+\\+\\.\\-\\-\\-\\-\\-\\-\\.\\-\\-\\-\\-\\-\\-\\-\\-\\.\\>\\+\\.\\>\\.", "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
-        assertSelectorIsCompiledToId("#\\#", "#");
-        assertSelectorIsCompiledToId("#\\#\\#", "##");
-        assertSelectorIsCompiledToId("#\\#\\.\\#\\.\\#", "#.#.#");
-        assertSelectorIsCompiledToId("#\\_", "_");
-        assertSelectorIsCompiledToId("#\\{\\}", "{}");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\#", "#");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\#\\#", "##");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\#\\.\\#\\.\\#", "#.#.#");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\_", "_");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\{\\}", "{}");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\#fake-id", "#fake-id");
         assertSelectorIsCompiledToId("#\\#fake\\-id", "#fake-id");
-        assertSelectorIsCompiledToId("#foo\\.bar", "foo.bar");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#foo\\.bar", "foo.bar");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\3Ahover", ":hover");
         assertSelectorIsCompiledToId("#\\3A hover", ":hover");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\3Ahover\\3A focus\\3A active", ":hover:focus:active");
         assertSelectorIsCompiledToId("#\\3A hover\\3A focus\\3A active", ":hover:focus:active");
-        assertSelectorIsCompiledToId("#\\[attr\\=value\\]", "[attr=value]");
-        assertSelectorIsCompiledToId("#f\\/o\\/o", "f/o/o");
-        assertSelectorIsCompiledToId("#f\\\\o\\\\o", "f\\o\\o");
-        assertSelectorIsCompiledToId("#f\\*o\\*o", "f*o*o");
-        assertSelectorIsCompiledToId("#f\\!o\\!o", "f!o!o");
-        assertSelectorIsCompiledToId("#f\\'o\\'o", "f'o'o");
-        assertSelectorIsCompiledToId("#f\\~o\\~o", "f~o~o");
-        assertSelectorIsCompiledToId("#f\\+o\\+o", "f+o+o");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#\\[attr\\=value\\]", "[attr=value]");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#f\\/o\\/o", "f/o/o");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#f\\\\o\\\\o", "f\\o\\o");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#f\\*o\\*o", "f*o*o");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#f\\!o\\!o", "f!o!o");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#f\\'o\\'o", "f'o'o");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#f\\~o\\~o", "f~o~o");
+        assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt("#f\\+o\\+o", "f+o+o");
     }
 
-    private void assertSelectorIsCompiledToId(String actualSelector, String expectedId) {
+    private void assertSelectorIsCompiledToIdAndThenTurnedBackIntoIt(String actualSelector, String expectedId) {
+        SQCssIdAttributeCondition idAttributeCondition = assertSelectorIsCompiledToId(actualSelector, expectedId);
+        String cssStringGeneratedByCondition = getCssStringGeneratedByCondition(idAttributeCondition);
+        assertThat(cssStringGeneratedByCondition, is(actualSelector));
+    }
+
+    private String getCssStringGeneratedByCondition(SQCssIdAttributeCondition idAttributeCondition) {
+        return idAttributeCondition.toElementFinder(ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER).getCssFinder().toString();
+    }
+
+    private SQCssIdAttributeCondition assertSelectorIsCompiledToId(String actualSelector, String expectedId) {
         // given
         // selector arg
         // when
         SQCssIdAttributeCondition cssCondition = parseAndAssertFirstCssCondition(actualSelector, SQCssIdAttributeCondition.class);
         // then
         assertThat(cssCondition.getId(), is(expectedId));
+        return cssCondition;
     }
 
 }
