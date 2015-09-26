@@ -17,9 +17,11 @@
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssConditionalSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
 import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -49,6 +51,11 @@ public class TranslatorsTestUtils {
         assertThat(sqCssCondition, instanceOf(conditionClass));
         assertThat(((SQCssTagNameSelector) sqCssSelector).getTagName(), is("*"));
         return (T) sqCssCondition;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static String getCssStringGeneratedByCondition(SQCssConditionImplementedFinders condition) {
+        return condition.toElementFinder(ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER).getCssFinder().toString();
     }
 
 }
