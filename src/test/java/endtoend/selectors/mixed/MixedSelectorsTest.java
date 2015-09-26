@@ -1,10 +1,26 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package endtoend.selectors.mixed;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import java.util.List;
 
@@ -20,20 +36,24 @@ public class MixedSelectorsTest {
 	@Test
 	public void id() {
 		List<WebElement> elements = $("#d1").get();
-		
-		assertThat(elements, hasSize(1));
-    	assertThat(elements.get(0).getTagName(), is("div"));
-    	assertThat(elements.get(0).getAttribute("id"), is("d1"));
-    	assertThat(elements.get(0).getAttribute("class"), is("clz"));
+		assertIsOnlyOneElementWithDetails(elements, "div", "d1", "clz");
 	}
-	
+
+	private void assertIsOnlyOneElementWithDetails(List<WebElement> elements, String div, String idAttribute, String classAttribute) {
+		assertThat(elements, hasSize(1));
+		assertElementDetails(elements.get(0), div, idAttribute, classAttribute);
+	}
+
+	private void assertElementDetails(WebElement element, String div, String idAttribute, String classAttribute) {
+		assertThat(element.getTagName(), is(div));
+		assertThat(element.getAttribute("id"), is(idAttribute));
+		assertThat(element.getAttribute("class"), is(classAttribute));
+	}
+
 	@Test
 	public void id_with_escape() {
 		List<WebElement> elements = $("#must\\:escape").get();
-		
-		assertThat(elements, hasSize(1));
-    	assertThat(elements.get(0).getTagName(), is("h1"));
-    	assertThat(elements.get(0).getAttribute("id"), is("must:escape"));
+		assertIsOnlyOneElementWithDetails(elements, "h1", "must:escape", null);
 	}
 	
 	@Test
@@ -41,57 +61,34 @@ public class MixedSelectorsTest {
 		List<WebElement> elements = $("div").get();
 		
 		assertThat(elements, hasSize(3));
-    	assertThat(elements.get(0).getTagName(), is("div"));
-    	assertThat(elements.get(0).getAttribute("id"), is("d1"));
-    	assertThat(elements.get(0).getAttribute("class"), is("clz"));
-		
-    	assertThat(elements.get(1).getTagName(), is("div"));
-    	assertThat(elements.get(1).getAttribute("id"), is("d11"));
-    	assertThat(elements.get(1).getAttribute("class"), is("clz1"));
-    	
-    	assertThat(elements.get(2).getTagName(), is("div"));
-    	assertThat(elements.get(2).getAttribute("id"), is("d2"));
-    	assertThat(elements.get(2).getAttribute("class"), is("clzx"));
+		assertElementDetails(elements.get(0), "div", "d1", "clz");
+		assertElementDetails(elements.get(1), "div", "d11", "clz1");
+		assertElementDetails(elements.get(2), "div", "d2", "clzx");
 	}
 
     @Test
     public void tag_and_class() {
 		List<WebElement> elements = $("div.clz").get();
-		
-		assertThat(elements, hasSize(1));
-    	assertThat(elements.get(0).getTagName(), is("div"));
-    	assertThat(elements.get(0).getAttribute("id"), is("d1"));
-    	assertThat(elements.get(0).getAttribute("class"), is("clz"));
+		assertIsOnlyOneElementWithDetails(elements, "div", "d1", "clz");
     }
     
     @Test
     public void tag_and_tag_descendant() {
     	List<WebElement> elements = $("div div").get();
-    	
-    	assertThat(elements, hasSize(1));
-    	assertThat(elements.get(0).getTagName(), is("div"));
-    	assertThat(elements.get(0).getAttribute("id"), is("d11"));
-    	assertThat(elements.get(0).getAttribute("class"), is("clz1"));
+		assertIsOnlyOneElementWithDetails(elements, "div", "d11", "clz1");
     }
 
     @Test
     public void tag_and_class_AND_tag_and_class_descendant() {
 		List<WebElement> elements = $("div.clz select.clz").get();
-		
-		assertThat(elements, hasSize(1));
-    	assertThat(elements.get(0).getTagName(), is("select"));
-    	assertThat(elements.get(0).getAttribute("id"), is("s1"));
-    	assertThat(elements.get(0).getAttribute("class"), is("clz"));
+		assertIsOnlyOneElementWithDetails(elements, "select", "s1", "clz");
     }
     
     @Test(expected = RuntimeException.class)
     public void hidden_pseudo() {
     	List<WebElement> elements = $("p:hidden").get();
-    	
-    	assertThat(elements, hasSize(1));
-    	assertThat(elements.get(0).getTagName(), is("p"));
-    	assertThat(elements.get(0).getAttribute("id"), is("hiddenP"));
-    	assertThat(elements.get(0).getAttribute("class"), is("clz"));
+
+		assertIsOnlyOneElementWithDetails(elements, "p", "hiddenP", "clz");
     	assertThat(elements.get(0).getAttribute("style"), containsString("display: none"));
     }
     
@@ -113,16 +110,12 @@ public class MixedSelectorsTest {
     	List<WebElement> elements = $("option + option").get();
     	
     	assertThat(elements, hasSize(2));
-    	
-    	assertThat(elements.get(0).getTagName(), is("option"));
-    	assertThat(elements.get(0).getAttribute("id"), is("o11"));
-    	assertThat(elements.get(0).getAttribute("class"), is("opt"));
+
+		assertElementDetails(elements.get(0), "option", "o11", "opt");
     	assertThat(elements.get(0).getAttribute("value"), is(""));
     	assertThat(elements.get(0).getAttribute("selected"), is("true"));
-    	
-    	assertThat(elements.get(1).getTagName(), is("option"));
-    	assertThat(elements.get(1).getAttribute("id"), is("o22"));
-    	assertThat(elements.get(1).getAttribute("class"), is("opt"));
+
+		assertElementDetails(elements.get(1), "option", "o22", "opt");
     	assertThat(elements.get(1).getAttribute("value"), is(""));
     }
     
@@ -166,19 +159,15 @@ public class MixedSelectorsTest {
     	assertThat(elements.get(0).getTagName(), is("option"));
     	assertThat(elements.get(0).getAttribute("id"), is("o1"));
     	assertThat(elements.get(0).getAttribute("value"), is(""));
-    	
-    	assertThat(elements.get(1).getTagName(), is("option"));
-    	assertThat(elements.get(1).getAttribute("id"), is("o11"));
-    	assertThat(elements.get(1).getAttribute("class"), is("opt"));
+
+		assertElementDetails(elements.get(1), "option", "o11", "opt");
     	assertThat(elements.get(1).getAttribute("value"), is(""));
     	
     	assertThat(elements.get(2).getTagName(), is("option"));
     	assertThat(elements.get(2).getAttribute("id"), is("o2"));
     	assertThat(elements.get(2).getAttribute("value"), is(""));
-    	
-    	assertThat(elements.get(3).getTagName(), is("option"));
-    	assertThat(elements.get(3).getAttribute("id"), is("o22"));
-    	assertThat(elements.get(3).getAttribute("class"), is("opt"));
+
+		assertElementDetails(elements.get(3), "option", "o22", "opt");
     	assertThat(elements.get(3).getAttribute("value"), is(""));
     }
     
