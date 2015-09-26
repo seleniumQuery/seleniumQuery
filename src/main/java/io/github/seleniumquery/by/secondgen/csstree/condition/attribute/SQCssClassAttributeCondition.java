@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImpl
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
+import org.unbescape.css.CssEscape;
 
 /**
  * .class
@@ -48,7 +49,7 @@ public class SQCssClassAttributeCondition implements SQCssCondition, SQCssCondit
     }
 
     private CssFinder toCSS() {
-        return new CssFinder("." + this.unescapedClassName);
+        return new CssFinder("." + CssEscape.escapeCssIdentifier(this.unescapedClassName));
     }
 
     private String toXPath() {
