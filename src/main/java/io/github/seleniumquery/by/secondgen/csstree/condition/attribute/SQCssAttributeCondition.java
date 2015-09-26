@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImpl
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
+import org.unbescape.css.CssEscape;
 
 /**
  * A class that holds an attribute name and a wanted value.
@@ -53,7 +54,15 @@ public abstract class SQCssAttributeCondition implements SQCssCondition, SQCssCo
         return new ElementFinder(newCssSelector, newXPathExpression, leftFinder);
     }
 
-    protected abstract CssFinder toCSS();
+    protected CssFinder toCSS() {
+        return new CssFinder("[" + getCssEscapedAttributeName() + symbol() + "'" + CssEscape.escapeCssString(this.wantedValue) + "']");
+    }
+
+    protected String getCssEscapedAttributeName() {
+        return CssEscape.escapeCssIdentifier(this.attributeName);
+    }
+
+    protected abstract String symbol();
 
     protected abstract String toXPath();
 

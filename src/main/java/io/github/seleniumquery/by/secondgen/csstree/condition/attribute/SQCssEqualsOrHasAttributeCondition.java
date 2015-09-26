@@ -48,9 +48,14 @@ public class SQCssEqualsOrHasAttributeCondition extends SQCssAttributeCondition 
 
     protected CssFinder toCSS() {
         if (this.wantedValue != null) {
-            return new CssFinder("[" + this.attributeName + "=" + this.wantedValue + "]");
+            return super.toCSS();
         }
-        return new CssFinder("[" + this.attributeName + "]");
+        return new CssFinder("[" + this.getCssEscapedAttributeName() + "]");
+    }
+
+    @Override
+    protected String symbol() {
+        return "=";
     }
 
     protected String toXPath() {
