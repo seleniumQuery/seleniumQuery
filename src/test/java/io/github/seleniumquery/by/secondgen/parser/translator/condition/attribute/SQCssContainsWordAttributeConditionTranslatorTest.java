@@ -19,21 +19,13 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssContainsWordAttributeCondition;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public class SQCssContainsWordAttributeConditionTranslatorTest {
 
     @Test
     public void translate() {
-        // given
-        String selector = "[values~=\"10\"]";
-        // when
-        SQCssContainsWordAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, SQCssContainsWordAttributeCondition.class);
-        // then
-        assertThat(cssCondition.getAttributeName(), is("values"));
-        assertThat(cssCondition.getWantedValue(), is("10"));
+        AttributeConditionTestUtils.verifySelectorYieldsAttrCondition(SQCssContainsWordAttributeCondition.class, "[values~=\"10\"]", "values", is("10"));
     }
 
 }

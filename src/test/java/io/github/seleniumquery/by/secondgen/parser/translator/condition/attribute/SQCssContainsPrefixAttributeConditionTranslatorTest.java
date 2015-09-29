@@ -19,21 +19,13 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssContainsPrefixAttributeCondition;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public class SQCssContainsPrefixAttributeConditionTranslatorTest {
 
     @Test
     public void translate() {
-        // given
-        String selector = "[languages|=\"pt\"]";
-        // when
-        SQCssContainsPrefixAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, SQCssContainsPrefixAttributeCondition.class);
-        // then
-        assertThat(cssCondition.getAttributeName(), is("languages"));
-        assertThat(cssCondition.getWantedValue(), is("pt"));
+        AttributeConditionTestUtils.verifySelectorYieldsAttrCondition(SQCssContainsPrefixAttributeCondition.class, "[languages|=\"pt\"]", "languages", is("pt"));
     }
 
 }

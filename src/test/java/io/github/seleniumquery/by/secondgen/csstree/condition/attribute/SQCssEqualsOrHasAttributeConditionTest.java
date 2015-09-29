@@ -48,7 +48,7 @@ public class SQCssEqualsOrHasAttributeConditionTest {
         // when
         ElementFinder elementFinder = hasAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(elementFinder.getCssFinder().toString(), is("[attrib=valz]"));
+        assertThat(elementFinder.getCssFinder().toString(), is("[attrib='valz']"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
         assertThat(elementFinder.getXPathExpression(), is(".//*[@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attrib']='valz']"));
         assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
