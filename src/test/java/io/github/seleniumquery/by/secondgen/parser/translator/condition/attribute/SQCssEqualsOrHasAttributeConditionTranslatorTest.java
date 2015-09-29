@@ -19,33 +19,19 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssEqualsOrHasAttributeCondition;
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
 
 public class SQCssEqualsOrHasAttributeConditionTranslatorTest {
 
     @Test
     public void translate__should_translate_hasAttribute_selector() {
-        // given
-        String selector = "[hasAttribute]";
-        // when
-        SQCssEqualsOrHasAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, SQCssEqualsOrHasAttributeCondition.class);
-        // then
-        assertThat(cssCondition.getAttributeName(), is("hasAttribute"));
-        assertThat(cssCondition.getWantedValue(), is(nullValue()));
+        AttributeConditionTestUtils.verifySelectorYieldsAttrCondition(SQCssEqualsOrHasAttributeCondition.class, "[hasAttribute]", "hasAttribute", nullValue(String.class));
     }
 
     @Test
     public void translate__should_translate_attributeEquals_selector() {
-        // given
-        String selector = "[attrib=equals]";
-        // when
-        SQCssEqualsOrHasAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, SQCssEqualsOrHasAttributeCondition.class);
-        // then
-        assertThat(cssCondition.getAttributeName(), is("attrib"));
-        assertThat(cssCondition.getWantedValue(), is("equals"));
+        AttributeConditionTestUtils.verifySelectorYieldsAttrCondition(SQCssEqualsOrHasAttributeCondition.class, "[attrib=equals]", "attrib", is("equals"));
     }
 
 }
