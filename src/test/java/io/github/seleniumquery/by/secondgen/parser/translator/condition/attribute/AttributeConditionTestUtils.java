@@ -25,13 +25,15 @@ import static org.junit.Assert.assertThat;
 
 public class AttributeConditionTestUtils {
 
-    public static <T extends SQCssAttributeCondition> void verifySelectorYieldsAttrCondition(Class<T> conditionClass, String selector, String hasAttribute, Matcher<String> matcher) {
+    public static <T extends SQCssAttributeCondition> void verifySelectorYieldsAttrCondition(Class<T> conditionClass,
+                                                                                             String selector,
+                                                                                             String attributeName, Matcher<String> valueMatcher) {
         // given
         // when
         SQCssAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, conditionClass);
         // then
-        assertThat(cssCondition.getAttributeName(), is(hasAttribute));
-        assertThat(cssCondition.getWantedValue(), is(matcher));
+        assertThat(cssCondition.getAttributeName(), is(attributeName));
+        assertThat(cssCondition.getWantedValue(), is(valueMatcher));
     }
 
 }
