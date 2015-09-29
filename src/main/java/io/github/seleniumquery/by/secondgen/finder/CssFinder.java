@@ -118,6 +118,7 @@ public class CssFinder {
             return CSS_NOT_NATIVELY_SUPPORTED;
         }
         if (selectorsHaveDifferentTags(this, rightCSS) && noneOfTheTagsIsTheUniversalSelector(this, rightCSS)) {
+            // TODO throw custom exception here, catch somewhere above so we can warn the user about useless selectors (not fail silently like jQuery)
             throw new IllegalArgumentException("The attempted selector has two element (tag) selectors at the same level. " +
                     "It is incorrect and would never fetch any elements (as no element has more than one tag).");
         }
