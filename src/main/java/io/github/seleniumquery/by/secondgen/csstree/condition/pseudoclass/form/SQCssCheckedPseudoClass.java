@@ -78,7 +78,7 @@ public class SQCssCheckedPseudoClass extends SQCssPseudoClassCondition {
 
     public static boolean isDriverWhereCheckedSelectorHasNoBugs(WebDriver webDriver) {
         DriverVersionUtils driverVsUtils = DriverVersionUtils.getInstance();
-        return !driverVsUtils.isPhantomJSDriver(webDriver) && !driverVsUtils.isHtmlUnitDriver(webDriver);
+        return !driverVsUtils.isPhantomJSDriver(webDriver);
     }
 
 }

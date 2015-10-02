@@ -16,15 +16,14 @@
 
 package endtoend.crossdriver.driverbugs;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import java.util.List;
 
@@ -34,10 +33,10 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
 
 /**
- * This test exists so we can keep the workaround on :checked for PhantomJS and HtmlUnit (emulating anything) drivers.
- * The day this test fails is because one of them fixed the bugs and we can think about removing the workarounds.
+ * This test exists so we can keep the workaround on :checked for PhantomJS driver.
+ * The day this test fails is because they fixed the bug and we can think about removing the workaround.
  */
-public class PhantomJSAndHtmlUnitCheckedSelectorBugTest {
+public class PhantomJSCheckedSelectorBugTest {
 
     @ClassRule @Rule
     public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
@@ -56,11 +55,4 @@ public class PhantomJSAndHtmlUnitCheckedSelectorBugTest {
         assertThat(checkedElements, hasSize(2));
     }
 
-    @Test
-    public void confirm_CHECKED_has_a_bug_and_does_NOT_bring_the_checked_OPTION_in_HtmlUnit() {
-        assumeTrue($.driver().get() instanceof HtmlUnitDriver);
-        List<WebElement> checkedElements = $.driver().get().findElements(By.cssSelector(":checked"));
-        assertThat(checkedElements, hasSize(2));
-    }
-    
 }
