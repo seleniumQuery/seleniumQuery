@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
+import endtoend.crossdriver.driverbugs.PhantomJSCheckedSelectorBugTest;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.CheckedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
@@ -24,7 +25,6 @@ import org.junit.Test;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.*;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
-import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit;
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
@@ -62,29 +62,11 @@ public class SQCssCheckedPseudoClassTest {
     /**
      * #Cross-Driver
      * PhantomJSDriver's :checked has bugs!
-     * See: {@link endtoend.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest}
+     * See: {@link PhantomJSCheckedSelectorBugTest}
      */
     @Test
     public void toElementFinder__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
         ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(CHECKED_PSEUDO));
-        assertPseudoClassHasFinder(
-                new SQCssCheckedPseudoClass(),
-                previousFinder,
-                CSS_UNIVERSAL_SELECTOR,
-                PURE_CSS_IS_NOT_SUPPORTED,
-                CHECKED_XPATH_EXPRESSION,
-                contains(CheckedPseudoClass.CHECKED_FILTER)
-        );
-    }
-
-    /**
-     * #Cross-Driver
-     * HtmlUnitDriver's :checked has bugs!
-     * See: {@link endtoend.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest}
-     */
-    @Test
-    public void toElementFinder__when_driver_is_HTMLUNITDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
-        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(CHECKED_PSEUDO));
         assertPseudoClassHasFinder(
                 new SQCssCheckedPseudoClass(),
                 previousFinder,
