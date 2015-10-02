@@ -31,46 +31,40 @@ public class DriverVersionUtilsTest {
 	@Test
 	public void isHtmlUnitDriverEmulatingIE__chrome() {
 		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.CHROME);
-		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(htmlUnitDriver);
-		assertThat(isHtmlUnitDriverEmulatingIE, is(false));
+		assertDriverIsNotHtmlUnitDriverEmulatingIE(htmlUnitDriver);
 	}
 	
 	@Test
-	public void isHtmlUnitDriverEmulatingIE__firefox_24() {
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
+	public void isHtmlUnitDriverEmulatingIE__firefox_non_deprecated_versions() {
+		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_38));
+	}
+
+	private void assertDriverIsNotHtmlUnitDriverEmulatingIE(HtmlUnitDriver htmlUnitDriver) {
 		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(htmlUnitDriver);
 		assertThat(isHtmlUnitDriverEmulatingIE, is(false));
 	}
 
 	@Test
-	public void isHtmlUnitDriverEmulatingIE__firefox_17() {
-		@SuppressWarnings("deprecation")
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_17);
-		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(htmlUnitDriver);
-		assertThat(isHtmlUnitDriverEmulatingIE, is(false));
+	@SuppressWarnings("deprecation")
+	public void isHtmlUnitDriverEmulatingIE__firefox_deprecated_versions() {
+		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_24));
+		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_31));
 	}
 
 	@Test
-	public void isHtmlUnitDriverEmulatingIE__ie8() {
-		@SuppressWarnings("deprecation")
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_8);
+	@SuppressWarnings("deprecation")
+	public void isHtmlUnitDriverEmulatingIE__ie_deprecated_versions() {
+		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_8));
+	}
+
+	private void assertDriverIsHtmlUnitEmulatingIE(HtmlUnitDriver htmlUnitDriver) {
 		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(htmlUnitDriver);
 		assertThat(isHtmlUnitDriverEmulatingIE, is(true));
 	}
 
 	@Test
-	public void isHtmlUnitDriverEmulatingIE__ie9() {
-		@SuppressWarnings("deprecation")
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_9);
-		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(htmlUnitDriver);
-		assertThat(isHtmlUnitDriverEmulatingIE, is(true));
-	}
-	
-	@Test
-	public void isHtmlUnitDriverEmulatingIE__ie11() {
-		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_11);
-		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(htmlUnitDriver);
-		assertThat(isHtmlUnitDriverEmulatingIE, is(true));
+	public void isHtmlUnitDriverEmulatingIE__ie_non_deprecated_versions() {
+		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_11));
 	}
 	
 	@Test
