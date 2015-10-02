@@ -28,6 +28,7 @@
 
 	<properties>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<selenium-java.version>2.47.1</selenium-java.version>
 	</properties>
 
 	<dependencies>
@@ -50,7 +51,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>2.44.0</version>
+			<version>${selenium-java.version}</version>
 		</dependency>
 
 		<dependency>
