@@ -24,8 +24,8 @@
   <input type="text" id="i1">
   <input type="text" id="i2">
   <script>
-  var addEvent = (function( window, document ) { 
-      if ( document.addEventListener ) { 
+  var addEvent = (function() {
+      if (document.addEventListener) {
           return function( elem, type, cb ) { 
               if ( (elem && !elem.length) || elem === window ) { 
                   elem.addEventListener(type, cb, false ); 
@@ -38,7 +38,7 @@
               } 
           }; 
       } 
-      else if ( document.attachEvent ) { 
+      else if (document.attachEvent) {
           return function ( elem, type, cb ) { 
               if ( (elem && !elem.length) || elem === window ) { 
                   elem.attachEvent( 'on' + type, function() { return cb.call(elem, window.event); } ); 
@@ -51,31 +51,31 @@
               } 
           }; 
       } 
-  })( this, document );
+  })();
   function insertDiv(text) {
-    var div = document.createElement('div');
-    div.setAttribute('class', text);
-    div.innerHTML = text;
-    document.body.appendChild(div);
+      var div = document.createElement('div');
+      div.setAttribute('class', text);
+      div.innerHTML = text;
+      document.body.appendChild(div);
   }
 
   addEvent(document.getElementById('i1'), 'click', function() { 
-    insertDiv('click i1');
+      insertDiv('click i1');
   });
   addEvent(document.getElementById('i1'), 'focus', function() { 
-    insertDiv('focus i1');
+      insertDiv('focus i1');
   });
   addEvent(document.getElementById('i2'), 'click', function() { 
-    insertDiv('click i2');
+      insertDiv('click i2');
   });
   addEvent(document.getElementById('i2'), 'focus', function() { 
-    insertDiv('focus i2');
+      insertDiv('focus i2');
   });
   addEvent(document.getElementsByTagName('body')[0], 'click', function() { 
-    insertDiv('click body');
+      insertDiv('click body');
   });
   addEvent(document.getElementsByTagName('body')[0], 'focus', function() { 
-    insertDiv('focus body');
+      insertDiv('focus body');
   });
   </script>
 </body>
