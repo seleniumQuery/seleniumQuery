@@ -55,16 +55,21 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.detro.ghostdriver</groupId>
+			<!--
+			This is a workaround for PhantomJS to work with Selenium 2.44.0 and on.
+			Until a newer version of GhostDriver is released, this will be needed.
+			See: https://github.com/detro/ghostdriver/issues/397 https://github.com/detro/ghostdriver/pull/399
+			-->
+			<groupId>com.codeborne</groupId>
 			<artifactId>phantomjsdriver</artifactId>
-			<version>1.1.0</version>
+			<version>1.2.1</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>selenium-remote-driver</artifactId>
 					<groupId>org.seleniumhq.selenium</groupId>
 				</exclusion>
 				<exclusion>
-					<artifactId>selenium-server</artifactId>
+					<artifactId>selenium-java</artifactId>
 					<groupId>org.seleniumhq.selenium</groupId>
 				</exclusion>
 			</exclusions>
