@@ -29,7 +29,7 @@
 	<a id="a1" href="#" tabindex="2">a1</a>
 	
   <script>
-  var addEvent = (function( window, document ) { 
+  var addEvent = (function() {
       if ( document.addEventListener ) { 
           return function( elem, type, cb ) { 
               if ( (elem && !elem.length) || elem === window ) { 
@@ -56,7 +56,7 @@
               } 
           }; 
       } 
-  })( this, document );
+  })();
   function insertDiv(text) {
     var div = document.createElement('div');
     div.setAttribute('class', text);

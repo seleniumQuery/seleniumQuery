@@ -38,10 +38,8 @@ public class ClickFunctionTest {
 
     @Test @JavaScriptOnly
     public void click_function() {
+        removeDivAddedByIeWhenPageStarts();
 
-        // #CrossDriver
-        // IE, when STARTING, focuses the <BODY> by itself, so a div is generated and we don't want it, as we are using the number of generated divs in the test!
-        removeDivBodyFocusAddedByIe();
 
         assertThat($("div").size(), is(0));
 
@@ -69,26 +67,39 @@ public class ClickFunctionTest {
         assertThat($("div").size(), is(6));
 
         $("body").click();
+        removeDivAddedByIeWhenClickingBody();
+
+        assertThat($("div.i1.click").size(), is(1));
+        assertThat($("div.i1.focus").size(), is(1));
+        assertThat($("div.i2.click").size(), is(1));
+        assertThat($("div.i2.focus").size(), is(1));
         assertThat($("div.i1").size(), is(2));
         assertThat($("div.i2").size(), is(2));
-
-        // #CrossDriver: IE focuses <body> when clicking it, so it generates an additional DIV...
-        removeDivBodyFocusAddedByIe();
-
-        assertThat($("div").size(), is(7));
         assertThat($("div.body").size(), is(3));
         assertThat($("div.body.focus").size(), is(0));
         assertThat($("div.body.click").size(), is(3));
+        assertThat($("div").size(), is(7));
     }
 
-    private void removeDivBodyFocusAddedByIe() {
+    public static void removeDivAddedByIeWhenClickingBody() {
+        // #CrossDriver: IE focuses <body> when clicking it, so it generates an additional DIV...
+        removeDivBodyFocusAddedByIe();
+    }
+
+    public static void removeDivAddedByIeWhenPageStarts() {
+        // #CrossDriver
+        // IE, when STARTING, focuses the <BODY> by itself, so a div is generated and we don't want it, as we are using the number of generated divs in the test!
+        removeDivBodyFocusAddedByIe();
+    }
+
+    public static void removeDivBodyFocusAddedByIe() {
         boolean isIE = $.driver().get() instanceof InternetExplorerDriver;
         if (isIE) {
             removeDivBodyFocus();
         }
     }
 
-    private void removeDivBodyFocusAddedWhenDriverIsHtmlUnit() {
+    public static void removeDivBodyFocusAddedWhenDriverIsHtmlUnit() {
         WebDriver driver = $.driver().get();
 
         boolean isHtmlUnit = driver instanceof HtmlUnitDriver;
@@ -101,7 +112,7 @@ public class ClickFunctionTest {
         }
     }
 
-    private void removeDivBodyFocus() {
+    private static void removeDivBodyFocus() {
         JavascriptExecutor driver = ((JavascriptExecutor) $.driver().get());
         SeleniumQueryObject divBodyFocus = $("div.body.focus");
         assertThat(divBodyFocus.size(), is(1));
