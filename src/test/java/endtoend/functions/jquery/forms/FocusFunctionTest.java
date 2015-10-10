@@ -16,15 +16,12 @@
 
 package endtoend.functions.jquery.forms;
 
+import endtoend.functions.ClickFunctionTest;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedXPathPseudoClassException;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
@@ -40,21 +37,21 @@ public class FocusFunctionTest {
     public void focus_function() {
     	$("#i1").focus();
     	assertThat($("#i1").is(":focus"), is(true));
-    	
+
     	$("#bodyID").focus();
     	assertThat($("body").is(":focus"), is(true));
     	assertThat($("#bodyID").is(":focus"), is(true));
-    	
+
     	$("#i0").focus();
     	assertThat($("#i0").is(":focus"), is(true));
-    	
+
     	$("body").focus();
     	assertThat($("body").is(":focus"), is(true));
     	assertThat($("#bodyID").is(":focus"), is(true));
-    	
+
     	$("#i2").focus();
     	assertThat($("#i2").is(":focus"), is(true));
-    	
+
     	// html is not focusable on HtmlUnit, not even with tabindex!
     	// Due to that, there is not even the possibility of a workaround specific for HtmlUnitDriver.
     	// still, someone wanting to focus the html seems to be a highly unlikely operation, even more
@@ -68,31 +65,39 @@ public class FocusFunctionTest {
     	assertThat($("#i2").is(":focus"), is(true));
     	assertThat($("input").is(":focus"), is(true));
     }
-    
+
 
     @Test @JavaScriptOnly
     public void focus_function__should_make_sure_the_elements_are_just_focused_and_NOT_clicked() {
-		removeStartingFocusDivCreatedByIE();
+		ClickFunctionTest.removeDivAddedByIeWhenPageStarts();
 
     	// for each click or focus in those elements, there will be a div added to the body
     	// this tests makes sure only a div relative to the focus event is added
     	// (and not two divs, one for focus and one for click, if that happened, the it was a click+focus, not just focus)
     	assertThat($("div").size(), is(0));
-    	$("#i1").focus();
-    	assertThat($("#i1").is(":focus"), is(true));
-    	assertThat($("div").size(), is(1));
+
+        $("#i1").focus();
+        ClickFunctionTest.removeDivBodyFocusAddedWhenDriverIsHtmlUnit();
+        removeDivAddedToBodyByIeWhenFocusingInput();
+
+        assertThat($("#i1").is(":focus"), is(true));
     	assertThat($("div.i1").size(), is(1));
     	assertThat($("div.i1.focus").size(), is(1));
-    	
+    	assertThat($("div").size(), is(1));
+
     	$("#i2").focus();
+        ClickFunctionTest.removeDivBodyFocusAddedWhenDriverIsHtmlUnit();
+
     	assertThat($("#i2").is(":focus"), is(true));
     	assertThat($("div").size(), is(2));
     	assertThat($("div.i1").size(), is(1));
     	assertThat($("div.i1.focus").size(), is(1));
     	assertThat($("div.i2").size(), is(1));
     	assertThat($("div.i2.focus").size(), is(1));
-    	
+
     	$("#a1").focus();
+        ClickFunctionTest.removeDivBodyFocusAddedWhenDriverIsHtmlUnit();
+
     	assertThat($("#a1").is(":focus"), is(true));
     	assertThat($("div").size(), is(3));
     	assertThat($("div.i1").size(), is(1));
@@ -117,7 +122,7 @@ public class FocusFunctionTest {
 	    	assertThat($("div.i2").size(), is(1));
 	    	assertThat($("div.a1").size(), is(1));
     	}
-    	
+
     	$("body").focus();
     	assertThat($("body").is(":focus"), is(true));
     	if (!($.driver().get() instanceof HtmlUnitDriver)) {
@@ -137,24 +142,16 @@ public class FocusFunctionTest {
     	}
     }
 
-	private void removeStartingFocusDivCreatedByIE() {
-		WebDriver driver = $.driver().get();
-		boolean isIE = driver instanceof InternetExplorerDriver;
-		if (isIE) {
-			// IE, when STARTING, focuses the <BODY> by itself, so a div is generated and we don't want it, as we are using
-			// the number of generated divs in the test!
-			for (WebElement div : $("div")) {
-				((JavascriptExecutor) driver).executeScript("document.body.removeChild(arguments[0]);", div);
-			}
-		}
-	}
+    private void removeDivAddedToBodyByIeWhenFocusingInput() {
+        ClickFunctionTest.removeDivBodyFocusAddedByIe();
+    }
 
-	@Test(expected = UnsupportedXPathPseudoClassException.class)
+    @Test(expected = UnsupportedXPathPseudoClassException.class)
     public void focus_pseudoClass_selector() {
     	$("#i1").focus();
     	assertThat($("#i1").is(":focus"), is(true));
     	assertThat($(":focus").size(), is(1));
     	assertThat($(":focus").attr("id"), is("i1"));
     }
-    
+
 }
