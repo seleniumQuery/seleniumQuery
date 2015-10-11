@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package testinfrastructure.junitrule;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
@@ -58,8 +74,6 @@ abstract class DriverInstantiator {
     };
     static DriverInstantiator HTMLUNIT_IE8_JS_ON   = new DriverInstantiator("HtmlUnit (IE8) - JS ON")   { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer8(); } };
     static DriverInstantiator HTMLUNIT_IE8_JS_OFF  = new DriverInstantiator("HtmlUnit (IE8) - JS OFF")  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer8().withoutJavaScript(); } };
-    static DriverInstantiator HTMLUNIT_IE9_JS_ON   = new DriverInstantiator("HtmlUnit (IE9) - JS ON")   { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer9(); } };
-    static DriverInstantiator HTMLUNIT_IE9_JS_OFF  = new DriverInstantiator("HtmlUnit (IE9) - JS OFF")  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer9().withoutJavaScript(); } };
     static DriverInstantiator HTMLUNIT_IE11_JS_ON  = new DriverInstantiator("HtmlUnit (IE11) - JS ON")  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11(); } };
     static DriverInstantiator HTMLUNIT_IE11_JS_OFF = new DriverInstantiator("HtmlUnit (IE11) - JS OFF") { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11().withoutJavaScript(); } };
 
