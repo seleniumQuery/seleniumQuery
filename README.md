@@ -276,4 +276,39 @@ Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
 
 #Contributing
 
-Feel free to [request, suggest](https://github.com/seleniumQuery/seleniumQuery/issues/new), create pull requests. The project is currently in a fast pace and any opinions/help are more than welcome!
+The tool is just beginning, there's a lot of room for improvement. Some of its main functionalities were just made up (and didn't exist in jQuery), like the `.waitUntil()`, the `.as()` plugins, the driver builder and so on. So if you come up with an idea of something that could be useful, tell us, or, even better, do it yourself and join the team!
+
+##Goals and non-goals
+
+Goals:
+- Have a uniform behavior thoughout targeted WebDriver implementations
+    - A given code should behave the same in all WebDrivers.
+    - Selenium itself takes care of that, but it does leave some room for improvement
+    - This is important to our functions as well, they should behave the same regardless of WebDriver implementation (browser) used
+- Mimic jQuery's interface and behavior, but...
+    - Do it all, when possible, from the user's perspective
+        - e.g. `$().val("")` types content instead of setting the `value` attribute.
+    - Improve it a little (e.g. throw exception when invalid selectors, such as `"div:file"` are used)
+- Add functions that tackle common problems when dealing with web (testing) automation, such as waiting (`$().waitUntil()`)
+- Add quick commands for common usage patterns (such as driver builder does)
+- Simplify overall usage with convention over configuration
+
+Non-goals:
+- Add all jQuery's functions
+- Replace WebDriver
+
+
+##History
+- What went bad?
+    - The selector system is not pure CSS, it allows the extended CSS supported by jQuery (and implemented by Sizzle). To get it done is a challenge by itself.
+        - The first version used regexes, didn't work so well and never made it into a release
+        - The second version (released as 0.9.0) converts every CSS selector into a XPath expression and executes it.
+            - The problem with this approach is that not every CSS can be translated into an equivalent XPath expression (e.g. `:selected`)
+        - The third version (currently under development) will parse the selector and...
+            - If the selector is plain CSS or XPath, use it directly
+            - If the selector is an extended CSS that can be translated fully to an XPath expression, than translate it and use it
+            - Otherwise, translate the CSS to the XPath expression that brings the smallest numbers of element possible and then iteratively filter the results before returning
+
+##What else?
+
+Feel free to [request, suggest](https://github.com/seleniumQuery/seleniumQuery/issues/new), create pull requests. The project is currently in a fast pace and, as said, any opinions/help are more than welcome!
