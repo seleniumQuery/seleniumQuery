@@ -85,12 +85,12 @@ public class HtmlUnitDriverBuilderTest {
     }
 
     @Test
-    public void emulatingFirefox__should_emulate_latest_firefox__that_is__FIREFOX_24() throws Exception {
+    public void emulatingFirefox__should_emulate_latest_firefox__that_is__FIREFOX_38() throws Exception {
         // given
         // when
         $.driver().useHtmlUnit().emulatingFirefox();
         // then
-        assertThat(emulatedBrowser($.driver().get()), is("FF24"));
+        assertThat(emulatedBrowser($.driver().get()), is("FF38"));
     }
 
     @Test
@@ -120,16 +120,7 @@ public class HtmlUnitDriverBuilderTest {
         assertThat(emulatedBrowser($.driver().get()), is("IE11"));
     }
 
-    @Test @SuppressWarnings("deprecation")
-    public void emulatingInternetExplorer9__should_emulate_IE9() throws Exception {
-        // given
-        // when
-        $.driver().useHtmlUnit().emulatingInternetExplorer9();
-        // then
-        assertThat(emulatedBrowser($.driver().get()), is("IE9"));
-    }
-
-    @Test @SuppressWarnings("deprecation")
+    @Test
     public void emulatingInternetExplorer8__should_emulate_IE8() throws Exception {
         // given
         // when

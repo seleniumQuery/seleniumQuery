@@ -113,25 +113,9 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
     }
 
     /**
-     * Configures HtmlUnit to emulate Internet Explorer 9.
-     *
-     * @return A self reference.
-     * @deprecated as of HtmlUnit 2.14
-     *
-     * @since 0.9.0
-     */
-    @SuppressWarnings("deprecation")
-    public HtmlUnitDriverBuilder emulatingInternetExplorer9() {
-        this.emulatedBrowserName = BrowserType.IE;
-        this.emulatedBrowserVersion = "9";
-        return this;
-    }
-
-    /**
      * Configures HtmlUnit to emulate Internet Explorer 8.
      *
      * @return A self reference.
-     * @deprecated as of HtmlUnit 2.14
      *
      * @since 0.9.0
      */
