@@ -274,6 +274,15 @@ Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
 
 <br>
 
+#Changelog
+
+- Next release (0.10.0 or 1.0.0)
+    - Updated Selenium version to 2.48.2
+    - Changed PhantomJS dependency to 1.2.1.
+    - `$.driver().useHtmlUnit().emulatingInternetExplorer9();` removed (HtmlUnit does not emulate IE9 anymore);
+    - `$.driver().useHtmlUnit().emulatingFirefox();` now emulates FF38.
+
+
 #Contributing
 
 The tool is just beginning, there's a lot of room for improvement. Some of its main functionalities were just made up (and didn't exist in jQuery), like the `.waitUntil()`, the `.as()` plugins, the driver builder and so on. So if you come up with an idea of something that could be useful, tell us, or, even better, do it yourself and join the team!
