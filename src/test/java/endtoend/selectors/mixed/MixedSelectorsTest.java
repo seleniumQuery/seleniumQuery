@@ -20,6 +20,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import java.util.List;
@@ -39,23 +40,28 @@ public class MixedSelectorsTest {
 		assertIsOnlyOneElementWithDetails(elements, "div", "d1", "clz");
 	}
 
-	private void assertIsOnlyOneElementWithDetails(List<WebElement> elements, String div, String idAttribute, String classAttribute) {
+	private void assertIsOnlyOneElementWithDetails(List<WebElement> elements, String tagName, String idAttribute, String classAttribute) {
 		assertThat(elements, hasSize(1));
-		assertElementDetails(elements.get(0), div, idAttribute, classAttribute);
+		assertElementDetails(elements.get(0), tagName, idAttribute, classAttribute);
 	}
 
-	private void assertElementDetails(WebElement element, String div, String idAttribute, String classAttribute) {
-		assertThat(element.getTagName(), is(div));
+	private void assertElementDetails(WebElement element, String tagName, String idAttribute, String classAttribute) {
+		assertThat(element.getTagName(), is(tagName));
 		assertThat(element.getAttribute("id"), is(idAttribute));
-		assertThat(element.getAttribute("class"), is(classAttribute));
+        if (classAttribute == null) {
+            assertThat(element.getAttribute("class"), is(nullValue()));
+        } else {
+            assertThat(element.getAttribute("class"), is(classAttribute));
+        }
 	}
 
 	@Test
 	public void id_with_escape() {
 		List<WebElement> elements = $("#must\\:escape").get();
-		assertIsOnlyOneElementWithDetails(elements, "h1", "must:escape", null);
+        // latest selenium is not complying with getAttribute()'s javadoc, it is returning "" in chrome/ff/ie when the attr is absent
+		assertIsOnlyOneElementWithDetails(elements, "h1", "must:escape", $.driver().get() instanceof HtmlUnitDriver ? null : "");
 	}
-	
+
 	@Test
 	public void tag() {
 		List<WebElement> elements = $("div").get();
