@@ -20,7 +20,7 @@ package testinfrastructure.junitrule;
 public enum DriverToRunTestsIn {
 
 	ALL_DRIVERS_JS_ON_AND_OFF			(true,  true,  true,  true,  true,    true,  true),
-	ALL_DRIVERS_JS_ON_ONLY				(true,  true,  true,  false,  true,    true,  false),
+	ALL_DRIVERS_JS_ON_ONLY				(true,  true,  true,  true,  true,    true,  false),
 	HEADLESS_DRIVERS_JS_ON_AND_OFF      (false, false, false, true,  true,    true,  true),
 	HEADLESS_DRIVERS_JS_ON_ONLY         (false, false, false, true,  true,    true,  false),
 	NON_HEADLESS_DRIVERS_JS_ON_ONLY     (true,  true,  true,  false, false,   true,  false),
