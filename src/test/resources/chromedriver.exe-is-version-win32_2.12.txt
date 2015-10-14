@@ -1,5 +1,0 @@
-File: chromedriver_win32_2.12.zip
-Downloaded from: http://chromedriver.storage.googleapis.com/2.12/chromedriver_win32.zip
-When: 30/11/2014
-
-More: http://chromedriver.storage.googleapis.com/index.html
