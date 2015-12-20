@@ -16,10 +16,13 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
+import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.browser.driver.DriverBuilder;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
@@ -61,18 +64,35 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
     @Override
     protected WebDriver build() {
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.firefox());
-
         configureFirefoxProfile(capabilities);
-
-        return new FirefoxDriver(capabilities);
+        FirefoxDriver firefoxDriver = new FirefoxDriver(capabilities);
+        disableJavaScriptIfWanted(firefoxDriver);
+        return firefoxDriver;
     }
 
     private void configureFirefoxProfile(DesiredCapabilities capabilities) {
         FirefoxProfile profile = this.firefoxProfile != null ? this.firefoxProfile : new FirefoxProfile();
-        if (enableJavaScript != null) {
-            profile.setPreference("javascript.enabled", this.enableJavaScript);
-        }
         capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+    }
+
+    private void disableJavaScriptIfWanted(FirefoxDriver driver) {
+        if (shouldDisableJavaScript()) {
+            disableJavaScript(driver);
+        }
+    }
+
+    private boolean shouldDisableJavaScript() {
+        return Boolean.FALSE.equals(this.enableJavaScript);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void disableJavaScript(FirefoxDriver driver) {
+        driver.get("about:config");
+        Actions act = new Actions(driver);
+        act.sendKeys(Keys.RETURN).sendKeys("javascript.enabled").perform();
+        SeleniumQuery.$.pause(1000);
+        act.sendKeys(Keys.TAB).sendKeys(Keys.RETURN).sendKeys(Keys.F5).perform();
+        driver.get("about:blank");
     }
 
 }
