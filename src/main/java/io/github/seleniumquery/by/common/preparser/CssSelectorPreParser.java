@@ -33,7 +33,7 @@ import static java.lang.Character.isLetter;
  * those with something else here and deal with them later).
  *
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.10.0
  */
 public class CssSelectorPreParser {
 
@@ -63,7 +63,7 @@ public class CssSelectorPreParser {
         this.selector = selector;
         this.selectorCurrentParsingIndex = 0;
         this.transformedSelector = new StringBuilder();
-        this.argumentMap = new HashMap<Integer, String>();
+        this.argumentMap = new HashMap<>();
     }
 
     private PreParsedSelector transformSelector() {

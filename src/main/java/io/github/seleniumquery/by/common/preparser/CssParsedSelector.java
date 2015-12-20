@@ -20,7 +20,7 @@ import org.w3c.css.sac.Selector;
 
 /**
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.10.0
  */
 public class CssParsedSelector {
 
