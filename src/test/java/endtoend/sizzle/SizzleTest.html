@@ -1,3 +1,19 @@
+<!--
+  ~ Copyright (c) 2015 seleniumQuery authors
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" id="html" lang="en" xml:lang="en" dir="ltr">
 <head>
@@ -86,10 +102,11 @@
 			<option id="option5c" value="1">3</option>
 		</select>
 
-		<object id="object1" codebase="stupid">
+		<!-- issue#93 -->
+		<objectx id="object1" codebase="stupid">
 			<param name="p1" value="x1" />
 			<param name="p2" value="x2" />
-		</object>
+		</objectx>
 
 		<span id="台北Táiběi"></span>
 		<span id="台北" lang="中文"></span>
@@ -179,7 +196,8 @@ Z</textarea>
 		<div id="t12087">
 			<input type="hidden" id="el12087" data-comma="0,1"/>
 		</div>
-		<div id="no-clone-exception"><object><embed></embed></object></div>
+		<!-- issue#93 -->
+		<div id="no-clone-exception"><objectx><embedx></embedx></objectx></div>
 		<div id="names-group">
 			<span id="name-is-example" name="example"></span>
 			<span id="name-is-div" name="div"></span>
