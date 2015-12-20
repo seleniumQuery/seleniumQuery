@@ -33,7 +33,12 @@ public class SubmitPseudoClassTest {
 	// http://jsbin.com/mopireya/6/edit
 	@Test
 	public void submitPseudoClass() {
-		assertThat($("[type='submit']").size(), is(6));
+		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
+			assertThat($("[type='submit']").size(), is(7));
+		} else {
+			assertThat($("[type='submit']").size(), is(6));
+		}
+
 		assertThat($(":submit").size(), is(4));
 		assertThat($("*:submit").size(), is(4));
 		assertThat($("input:submit").size(), is(2));
@@ -50,22 +55,19 @@ public class SubmitPseudoClassTest {
 
 		assertThat($("#b1").is(":submit"), is(true));
 
-		// #Cross-Driver
-		// Not a workaround, just documenting a difference.
-		// Latest HtmlUnit, when emulating IE 8 abd 9, considers <button></button> to be <button type="button"></button>
-		// :submit and this example are affected. Check :submit implementation if you're curious about how it solves this
-		// problem (and, yes, it is nasty, it uses reflection and stuff).
-		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
-			assertThat($("#b1").is("[type='submit']"), is(false));
-		} else {
-			assertThat($("#b1").is("[type='submit']"), is(true));
-		}
+        assertThat($("#b1").is("[type='submit']"), is(true));
 
 		assertThat($("#b2").is(":submit"), is(true));
 		assertThat($("#b2").is("[type='submit']"), is(true));
 		
 		assertThat($(".clz:submit").size(), is(1));
 		assertThat($("#i1c").is(".clz:submit"), is(true));
+	}
+
+	@Test
+	public void in_button_elements__selenium_brings_type_attribute_equal_to_submit() {
+		String typeAttributeValue = $("#b1").get(0).getAttribute("type");
+		assertThat(typeAttributeValue, is("submit"));
 	}
 
 }

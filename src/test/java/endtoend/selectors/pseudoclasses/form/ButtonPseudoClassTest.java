@@ -22,7 +22,6 @@ import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.utils.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -52,22 +51,11 @@ public class ButtonPseudoClassTest {
 		assertThat($("#i3").is(":button"), is(false));
 		assertThat($("#i4").is(":button"), is(false));
 
-		assertThat($("#b1").is(":button"), is(true));
+		assertThat($("#buttonElementWithNoAttributesOtherThanId").is(":button"), is(true));
+		assertThat($("#buttonElementWithNoAttributesOtherThanId").is("[type='button']"), is(false));
 
-		// #Cross-Driver
-		// Not a workaround, just documenting a difference.
-		// Latest HtmlUnit, when emulating IE 8 abd 9, considers <button></button> to be <button type="button"></button>
-		// not really a problem here, as it doesn't affect :button's behavior.
-		// :submit, though, is affected. Check its implementation if you're curious about how it solves this
-		// problem (and, yes, it is nasty, it uses reflection and stuff).
-		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
-			assertThat($("#b1").is("[type='button']"), is(true));
-		} else {
-			assertThat($("#b1").is("[type='button']"), is(false));
-		}
-
-		assertThat($("#b2").is(":button"), is(true));
-		assertThat($("#b2").is("[type='button']"), is(true));
+		assertThat($("#buttonElementWithTypeAttributeEqualToButton").is(":button"), is(true));
+		assertThat($("#buttonElementWithTypeAttributeEqualToButton").is("[type='button']"), is(true));
 	}
 
 }

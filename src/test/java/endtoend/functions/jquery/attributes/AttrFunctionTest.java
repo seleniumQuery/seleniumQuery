@@ -16,6 +16,7 @@
 
 package endtoend.functions.jquery.attributes;
 
+import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -110,12 +111,30 @@ public class AttrFunctionTest {
     		assertThat($("#chk1").attr("checked"), is("checked"));
     	}
     	assertThat($("#chk1").<Boolean>prop("checked"), is(false));
+    }
 
-    	assertThat($("#chk1").attr("data-ball"), is("yo"));
-		assertThat($("#chk1").<String>prop("data-ball"), is(nullValue()));
+    @Test @JavaScriptOnly
+    public void attr_function__data_attribute() {
+        String dataBallAttributeValue = $("#chk1").attr("data-ball");
+        assertThat(dataBallAttributeValue, is("yo"));
 
-    	$("#chk1").attr("data-ball", "abc");
-    	assertThat($("#chk1").attr("data-ball"), is("abc"));
+		// HtmlUnit while emulating IE8 makes prop bring attribute...
+        String dataBallAttributeViaProp = $("#chk1").prop("data-ball");
+        if (DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
+			assertThat(dataBallAttributeViaProp, is("yo"));
+		} else {
+			assertThat(dataBallAttributeViaProp, is(nullValue()));
+		}
+    }
+
+    @Test @JavaScriptOnly
+    public void attr_function__setting() {
+        // given
+        // original test html file
+        // when
+        $("#chk1").attr("data-ball", "abc");
+        // then
+        assertThat($("#chk1").attr("data-ball"), is("abc"));
     }
 
 }
