@@ -63,11 +63,16 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
 
     @Override
     protected WebDriver build() {
-        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.firefox());
-        configureFirefoxProfile(capabilities);
+        DesiredCapabilities capabilities = createConfiguredCapabilities();
         FirefoxDriver firefoxDriver = new FirefoxDriver(capabilities);
         disableJavaScriptIfWanted(firefoxDriver);
         return firefoxDriver;
+    }
+
+    private DesiredCapabilities createConfiguredCapabilities() {
+        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.firefox());
+        configureFirefoxProfile(capabilities);
+        return capabilities;
     }
 
     private void configureFirefoxProfile(DesiredCapabilities capabilities) {
