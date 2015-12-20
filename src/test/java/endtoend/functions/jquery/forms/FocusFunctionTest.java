@@ -17,11 +17,14 @@
 package endtoend.functions.jquery.forms;
 
 import endtoend.functions.ClickFunctionTest;
+import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedXPathPseudoClassException;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
@@ -78,11 +81,11 @@ public class FocusFunctionTest {
 
         $("#i1").focus();
         ClickFunctionTest.removeDivBodyFocusAddedWhenDriverIsHtmlUnit();
-        removeDivAddedToBodyByIeWhenFocusingInput();
+        removeDivBodyFocusAddedWhenDriverIsIeAndWhenFocusingInput();
 
         assertThat($("#i1").is(":focus"), is(true));
-    	assertThat($("div.i1").size(), is(1));
     	assertThat($("div.i1.focus").size(), is(1));
+    	assertThat($("div.i1").size(), is(1));
     	assertThat($("div").size(), is(1));
 
     	$("#i2").focus();
@@ -142,9 +145,15 @@ public class FocusFunctionTest {
     	}
     }
 
-    private void removeDivAddedToBodyByIeWhenFocusingInput() {
-        ClickFunctionTest.removeDivBodyFocusAddedByIe();
-    }
+    private void removeDivBodyFocusAddedWhenDriverIsIeAndWhenFocusingInput() {
+        // If, when the test is run, the IE is the focused window, it adds a new div (due to the focus event). We then remove it.
+        // If not (that is, IE is being executed, but the window never gets focused), the div is not added and thus we don't have to remove anything
+		JavascriptExecutor driver = ((JavascriptExecutor) $.driver().get());
+		SeleniumQueryObject divBodyFocus = $("div.body.focus");
+		if (divBodyFocus.size() == 1 && driver instanceof InternetExplorerDriver) {
+			driver.executeScript("document.body.removeChild(arguments[0]);", divBodyFocus.get(0));
+		}
+	}
 
     @Test(expected = UnsupportedXPathPseudoClassException.class)
     public void focus_pseudoClass_selector() {
