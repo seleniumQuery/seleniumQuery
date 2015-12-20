@@ -39,7 +39,8 @@ public enum DriverToRunTestsIn {
 
 	HTMLUNIT_CHROME_JS_ON_AND_OFF       (false, false, false, false, false,   false,  false),
 	HTMLUNIT_CHROME_JS_ON_ONLY          (false, false, false, false, false,   false,  false),
-	HTMLUNIT_CHROME_JS_OFF_ONLY         (false, false, false, false, false,   false,  false);
+	HTMLUNIT_CHROME_JS_OFF_ONLY         (false, false, false, false, false,   false,  false),
+	HTMLUNIT_IE8_JS_ON_ONLY             (false, false, false, false, false,   false,  false);
 
 
 	DriverToRunTestsIn(boolean firefox, boolean chrome, boolean ie, boolean phantomJS, boolean htmlUnit, boolean javaScriptOn, boolean javaScriptOff) {

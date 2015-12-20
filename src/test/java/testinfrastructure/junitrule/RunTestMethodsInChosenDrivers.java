@@ -73,7 +73,9 @@ public class RunTestMethodsInChosenDrivers extends Statement {
 	}
 	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOn()  { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_ON); }
 	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOff() { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_OFF); }
-	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOn()      { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE8_JS_ON); }
+	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOn()      {
+		boolean shouldExecute = driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn() || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_IE8_JS_ON_ONLY;
+		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_IE8_JS_ON); }
 	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOff()     { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE8_JS_OFF); }
 	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOn()     { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE11_JS_ON); }
 	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOff()    { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE11_JS_OFF); }
