@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * @author acdcjunior
- * @since 1.0.0
+ * @since 0.10.0
  */
 public class FirstGenEnhancedElementFinder implements EnhancedElementFinder {
 
