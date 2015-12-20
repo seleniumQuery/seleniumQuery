@@ -59,8 +59,8 @@ public class AttrFunction {
 						"something other than the checked/selected attributes! In other words, in latest browsers " +
 						"when you change the checked/selected properties, the checked/selected attributes remain unchanged, " +
 						"while in HtmlUnitDriver they **are** changed. In the general case, you will probably want .prop() instead" +
-						" of .attr() for checked/selected. If you are using HtmlUnitDriver, though, using .prop() is almost " +
-						"mandatory, as there is very little utility in a .attr() that changes when .prop() is used!");
+						" of .attr() for checked/selected, but if you are using HtmlUnitDriver, though, using .prop() is almost " +
+						"mandatory, as there is very little utility in an .attr() that changes when .prop() is used!");
 			}
 			if (attributeValue != null) {
 				return attributeName; // returns checked or selected
