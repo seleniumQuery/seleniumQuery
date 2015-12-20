@@ -16,24 +16,28 @@ limitations under the License.
 
 package endtoend.functions.jquery.traversing;
 
+import org.junit.Rule;
+import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-
-import org.junit.Rule;
-import org.junit.Test;
 
 public class FindFunctionTest {
 
-	@Rule
+    private static final int COMBO_OPTIONS_COUNT = 4;
+    private static final int OTHER_OPTIONS_COUNT = 2;
+    @Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
 	
     @Test
     public void find_function() {
-        assertThat($("#combo").find("option").size(), is(6));
-        assertThat($("#combo").find("option:selected").size(), is(2));
-        assertThat($("#combo").find("option:selected").get(0).getText(), is("Shrubs"));
+        assertThat($("option").size(), is(COMBO_OPTIONS_COUNT + OTHER_OPTIONS_COUNT));
+
+        assertThat($("#combo").find("option").size(), is(COMBO_OPTIONS_COUNT));
+        assertThat($("#combo").find("option:contains(Howdy)").size(), is(1));
+        assertThat($("#combo").find("option:contains(Howdy)").attr("id"), is("howdy-option"));
         assertThat($("#combo").find(".non-existant-class").size(), is(0));
     }
 

@@ -15,19 +15,22 @@
   ~ limitations under the License.
   -->
 
+<!--suppress HtmlFormInputWithoutLabel -->
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>seleniumQuery .find() test page</title>
 </head>
 <body>
-	<select id="combo" name="garden" multiple="multiple">
-		<option>Flowers</option>
-		<option selected="selected">Shrubs</option>
-		<option>Trees</option>
-		<option selected="selected">Bushes</option>
-		<option>Grass</option>
-		<option>Dirt</option>
+	<select id="other">
+		<option>A</option>
+		<option>B</option>
+	</select>
+	<select id="combo">
+		<option>X</option>
+		<option>Y</option>
+		<option>Z</option>
+		<option id="howdy-option">Howdy</option>
 	</select>
 </body>
 </html>
