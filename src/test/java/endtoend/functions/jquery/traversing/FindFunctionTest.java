@@ -28,16 +28,24 @@ public class FindFunctionTest {
 
     private static final int COMBO_OPTIONS_COUNT = 4;
     private static final int OTHER_OPTIONS_COUNT = 2;
+
     @Rule
 	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
 	
     @Test
     public void find_function() {
         assertThat($("option").size(), is(COMBO_OPTIONS_COUNT + OTHER_OPTIONS_COUNT));
-
         assertThat($("#combo").find("option").size(), is(COMBO_OPTIONS_COUNT));
+    }
+
+    @Test
+    public void find_function__with_pseudoClasses() {
         assertThat($("#combo").find("option:contains(Howdy)").size(), is(1));
         assertThat($("#combo").find("option:contains(Howdy)").attr("id"), is("howdy-option"));
+    }
+
+    @Test
+    public void find_function__with_empty_result() {
         assertThat($("#combo").find(".non-existant-class").size(), is(0));
     }
 
