@@ -58,8 +58,10 @@ public class SelectedPseudoClass implements PseudoClass<ConditionSimpleComponent
 	
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		throw new UnsupportedPseudoClassException(":selected is currently unsupported. See https://github.com/seleniumQuery/seleniumQuery/issues/86 .");
-//		return new ConditionSimpleComponent(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
+		if (!"this exception should be".equals("thrown until issue #86 is solved")) {
+			throw new UnsupportedPseudoClassException(":selected is currently unsupported. See https://github.com/seleniumQuery/seleniumQuery/issues/86");
+		}
+		return new ConditionSimpleComponent(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
 	}
 
 }
