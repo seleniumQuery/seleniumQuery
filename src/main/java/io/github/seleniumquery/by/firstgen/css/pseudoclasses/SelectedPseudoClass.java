@@ -27,7 +27,6 @@ import static io.github.seleniumquery.utils.WebElementUtils.isOptionTag;
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:selected
  * 
  * @author acdcjunior
- *
  * @since 0.9.0
  */
 public class SelectedPseudoClass implements PseudoClass<ConditionSimpleComponent> {
@@ -59,7 +58,8 @@ public class SelectedPseudoClass implements PseudoClass<ConditionSimpleComponent
 	
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		return new ConditionSimpleComponent(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
+		throw new UnsupportedPseudoClassException(":selected is currently unsupported. See https://github.com/seleniumQuery/seleniumQuery/issues/86 .");
+//		return new ConditionSimpleComponent(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
 	}
 
 }
