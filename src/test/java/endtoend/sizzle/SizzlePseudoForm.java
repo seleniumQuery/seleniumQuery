@@ -35,9 +35,6 @@ public class SizzlePseudoForm extends SizzleTest {
         t("Form element :radio", "#form :radio", new String[]{"radio1", "radio2"});
         t("Form element :checkbox", "#form :checkbox", new String[]{"check1", "check2"});
         t("Form element :text", "#form :text", new String[]{"text1", "text2", "hidden2", "name", "impliedText", "capitalText"});
-        t("Form element :radio:checked", "#form :radio:checked", new String[]{"radio2"});
-        t("Form element :checkbox:checked", "#form :checkbox:checked", new String[]{"check1"});
-        t("Form element :radio:checked, :checkbox:checked", "#form :radio:checked, #form :checkbox:checked", new String[]{"radio2", "check1"});
         removeInputs();
     }
 
@@ -50,10 +47,18 @@ public class SizzlePseudoForm extends SizzleTest {
     }
 
     @Test
-    @Ignore("Issue#86")
-    public void pseudo_form__selectedAndCheckedPseudos() {
-        t("Selected Option Element", "#form option:selected", new String[]{"option1a", "option2d", "option3b", "option3c", "option4b", "option4c", "option4d", "option5a"});
+    @Ignore("Issue#94")
+    public void pseudo_form__checkedPseudoClass() {
+        t("Form element :radio:checked", "#form :radio:checked", new String[]{"radio2"});
+        t("Form element :checkbox:checked", "#form :checkbox:checked", new String[]{"check1"});
+        t("Form element :radio:checked, :checkbox:checked", "#form :radio:checked, #form :checkbox:checked", new String[]{"radio2", "check1"});
         t("Selected Option Element are also :checked", "#form option:checked", new String[]{"option1a", "option2d", "option3b", "option3c", "option4b", "option4c", "option4d", "option5a"});
+    }
+
+    @Test
+    @Ignore("Issue#86")
+    public void pseudo_form__selectedPseudoClass() {
+        t("Selected Option Element", "#form option:selected", new String[]{"option1a", "option2d", "option3b", "option3c", "option4b", "option4c", "option4d", "option5a"});
     }
 
     @Test

@@ -35,7 +35,6 @@ import static io.github.seleniumquery.utils.WebElementUtils.*;
  *
  * @author acdcjunior
  * @author ricardo-sc
- *
  * @since 0.9.0
  */
 public class CheckedPseudoClass implements PseudoClass<ConditionSimpleComponent> {
@@ -67,6 +66,9 @@ public class CheckedPseudoClass implements PseudoClass<ConditionSimpleComponent>
 
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
+		if (!"this exception should be".equals("thrown until issue #94 is solved")) {
+			throw new UnsupportedPseudoClassException(":checked is currently unsupported. See https://github.com/seleniumQuery/seleniumQuery/issues/94");
+		}
         // NOTE: This XPath does not work. Sometimes an element is checked WITHOUT having a checked attribute
 		return new ConditionSimpleComponent("[" +
 				"(" +
