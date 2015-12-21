@@ -16,18 +16,25 @@
 
 package endtoend.selectors.pseudoclasses.form;
 
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import org.junit.ClassRule;
 import org.junit.Ignore;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
 import static testinfrastructure.EndToEndTestUtils.t;
 
 public class SelectedPseudoClassTest {
 
 	@ClassRule
 	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SelectedPseudoClassTest.class);
-	
+
+    @Test(expected = UnsupportedPseudoClassException.class)
+    public void selected_pseudoClass__is_not_supported() {
+        $(":selected");
+    }
+
 	@Test
 	@Ignore("Issue#86")
 	public void selectedPseudoClass() {
