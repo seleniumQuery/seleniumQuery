@@ -1,15 +1,32 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package endtoend.sizzle;
 
-import testinfrastructure.junitrule.JavaScriptOnly;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.junitrule.JavaScriptOnly;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 public class SizzleAttributes extends SizzleTest {
 
@@ -60,10 +77,10 @@ public class SizzleAttributes extends SizzleTest {
         t("Attribute containing []", "input[name$='foo[bar]']", new String[]{"hidden2"});
         t("Attribute containing []", "input[name*='foo[bar]']", new String[]{"hidden2"});
 
-        deepEqual(Sizzle("input[data-comma='0,1']"), asList(id("el12087")), "Without context, single-quoted attribute containing ','");
-        deepEqual(Sizzle("input[data-comma=\"0,1\"]"), asList(id("el12087")), "Without context, double-quoted attribute containing ','");
-        deepEqual(Sizzle("input[data-comma='0,1']", id("t12087")), asList(id("el12087")), "With context, single-quoted attribute containing ','");
-        deepEqual(Sizzle("input[data-comma=\"0,1\"]", id("t12087")), asList(id("el12087")), "With context, double-quoted attribute containing ','");
+        deepEqual(Sizzle("input[data-comma='0,1']"), singletonList(id("el12087")), "Without context, single-quoted attribute containing ','");
+        deepEqual(Sizzle("input[data-comma=\"0,1\"]"), singletonList(id("el12087")), "Without context, double-quoted attribute containing ','");
+        deepEqual(Sizzle("input[data-comma='0,1']", id("t12087")), singletonList(id("el12087")), "With context, single-quoted attribute containing ','");
+        deepEqual(Sizzle("input[data-comma=\"0,1\"]", id("t12087")), singletonList(id("el12087")), "With context, double-quoted attribute containing ','");
 
         t("Multiple Attribute Equals", "#form input[type='radio'], #form input[type='hidden']", new String[]{"radio1", "radio2", "hidden1"});
         t("Multiple Attribute Equals", "#form input[type='radio'], #form input[type=\"hidden\"]", new String[]{"radio1", "radio2", "hidden1"});
@@ -89,13 +106,21 @@ public class SizzleAttributes extends SizzleTest {
 
         ok(Sizzle.matchesSelector(opt, "[id*=option1][type!=checkbox]"), "Attribute Is Not Equal Matches");
         ok(Sizzle.matchesSelector(opt, "[id*=option1]"), "Attribute With No Quotes Contains Matches");
-
-// TODO(issue#40)
-//        ok(Sizzle.matchesSelector(opt, "[test=]"), "Attribute With No Quotes No Content Matches");
-
-// TODO(issue#37)
-//        ok(!Sizzle.matchesSelector(opt, "[test^='']"), "Attribute with empty string value does not match startsWith selector (^=)");
     }
+
+    @Test @JavaScriptOnly
+    @Ignore("some attribute selectors that have problems: issues #7 and #40")
+    public void attribute_selectors__problematic() {
+        WebElement opt = id("option1a");
+        executeJS("arguments[0].setAttribute('test', '');", opt);
+
+        // TODO(issue#40)
+        ok(Sizzle.matchesSelector(opt, "[test=]"), "Attribute With No Quotes No Content Matches");
+
+        // TODO(issue#37)
+        ok(!Sizzle.matchesSelector(opt, "[test^='']"), "Attribute with empty string value does not match startsWith selector (^=)");
+    }
+
     @Test
     public void attribute_selectors_5() {
         ok(Sizzle.matchesSelector(id("option1a"), "[id=option1a]"), "Attribute With No Quotes Equals Matches");
@@ -104,14 +129,22 @@ public class SizzleAttributes extends SizzleTest {
 
         t("Empty values", "#select1 option[value='']", new String[]{"option1a"});
         t("Empty values", "#select1 option[value!='']", new String[]{"option1b", "option1c", "option1d"});
+    }
 
+    @Test
+    @Ignore("Issue#86")
+    public void attribute_selectors__selectedPseudoClass() {
         t("Select options via :selected", "#select1 option:selected", new String[]{"option1a"});
         t("Select options via :selected", "#select2 option:selected", new String[]{"option2d"});
         t("Select options via :selected", "#select3 option:selected", new String[]{"option3b", "option3c"});
         t("Select options via :selected", "select[name='select2'] option:selected", new String[]{"option2d"});
+    }
 
+    @Test
+    public void attribute_selectors__grouped_form_elements() {
         t("Grouped Form Elements", "input[name='foo[bar]']", new String[]{"hidden2"});
     }
+
     @Test @JavaScriptOnly
     public void attribute_selectors_6() {
         WebElement input = id("text1");
@@ -188,7 +221,7 @@ public class SizzleAttributes extends SizzleTest {
                                                 "document.getElementById('qunit-fixture').appendChild(div);");
         WebElement div = id("divPARENTSELENIUMQUERY");
         WebElement div_firstChild = (WebElement) executeJS("return arguments[0].firstChild;", div);
-        deepEqual(Sizzle("[xml\\:test]", div), asList(div_firstChild), "Finding by attribute with escaped characters.");
+        deepEqual(Sizzle("[xml\\:test]", div), singletonList(div_firstChild), "Finding by attribute with escaped characters.");
 
         t("Object.prototype property \"constructor\" (negative)", "[constructor]", new String[]{});
         t("Gecko Object.prototype property \"watch\" (negative)", "[watch]", new String[]{});

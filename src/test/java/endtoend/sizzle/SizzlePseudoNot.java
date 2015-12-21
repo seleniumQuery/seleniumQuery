@@ -1,8 +1,25 @@
+/*
+ * Copyright (c) 2015 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package endtoend.sizzle;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class SizzlePseudoNot extends SizzleTest {
 
@@ -10,13 +27,20 @@ public class SizzlePseudoNot extends SizzleTest {
     public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
-    public void pseudo_not() throws Exception {
+    public void pseudo_not() {
         t("Not", "a.blog:not(.link)", new String[]{"mark"});
         t(":not() with :first", "#foo p:not(:first) .link", new String[]{"simon"});
+    }
 
-//        t("Not - multiple", "#form option:not(:contains(Nothing),#option1b,:selected)", new String[]{"option1c", "option1d", "option2b", "option2c", "option3d", "option3e", "option4e", "option5b", "option5c"});
+    @Test
+    @Ignore("Issue#86")
+    public void pseudo_not__selectedPseudoClass() {
         t("Not - recursive", "#form option:not(:not(:selected))[id^='option3']", new String[]{"option3b", "option3c"});
+        t("Not - multiple", "#form option:not(:contains(Nothing),#option1b,:selected)", new String[]{"option1c", "option1d", "option2b", "option2c", "option3d", "option3e", "option4e", "option5b", "option5c"});
+    }
 
+    @Test
+    public void pseudo_not_2() {
         t(":not() failing interior", "#qunit-fixture p:not(.foo)", new String[]{"firstp", "ap", "sndp", "en", "sap", "first"});
         t(":not() failing interior", "#qunit-fixture p:not(div.foo)", new String[]{"firstp", "ap", "sndp", "en", "sap", "first"});
         t(":not() failing interior", "#qunit-fixture p:not(p.foo)", new String[]{"firstp", "ap", "sndp", "en", "sap", "first"});
