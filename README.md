@@ -63,7 +63,7 @@ To get seleniumQuery's the latest version, add to your **`pom.xml`**:
 <dependency>
     <groupId>io.github.seleniumquery</groupId>
     <artifactId>seleniumquery</artifactId>
-    <version>0.9.0</version>
+    <version>0.10.0</version>
 </dependency>
 ```
 
@@ -276,7 +276,7 @@ Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
 
 #Changelog/Roadmap
 
-- Next release 0.10.0
+- Current release 0.10.0
     - Updated Selenium version to 2.48.2
     - Changed PhantomJS dependency to 1.2.1.
     - `$.driver().useHtmlUnit().emulatingInternetExplorer9();` removed (HtmlUnit does not emulate IE9 anymore);
