@@ -219,16 +219,16 @@
 	<developers>
 		<developer>
 			<id>acdcjunior</id>
-			<name>Antonio C. Carvalho Jr.</name>
+			<name>Antonio "acdc" Junior.</name>
 			<email>acdcjunior@gmail.com</email>
-			<url>http://seleniumquery.github.io/</url>
+			<url>http://github.com/acdcjunior</url>
 			<timezone>-3</timezone>
 		</developer>
 		<developer>
-			<id>ricardo-sc</id>
+			<id>ricardoscr</id>
 			<name>Ricardo S. Carvalho</name>
 			<email>ricardosc@gmail.com</email>
-			<url>http://seleniumquery.github.io/</url>
+			<url>http://github.com/ricardoscr</url>
 			<timezone>-3</timezone>
 		</developer>
 	</developers>
