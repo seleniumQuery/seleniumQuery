@@ -285,21 +285,24 @@ Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
     - `$.driver().useHtmlUnit().emulatingInternetExplorer9();` removed (HtmlUnit does not emulate IE9 anymore);
     - `$.driver().useHtmlUnit().emulatingFirefox();` now emulates FF38.
     - Changed the way we disable JavaScript at `FirefoxDriver` (due to inability to ask for it at the profile)
+    - Disabled support for `:selected` and `:checked` selectors
 - Future releases (0.11.0 or 1.0.0+)
     - New selector system (more selectors, faster filtering)
 
 
 # Contributing
 
-The tool is just beginning, there's a lot of room for improvement. Some of its main functionalities were just made up (and didn't exist in jQuery), like the `.waitUntil()`, the `.as()` plugins, the driver builder and so on. So if you come up with an idea of something that could be useful, tell us, or, even better, do it yourself and join the team!
+The tool is just beginning, there's a lot of room for improvement. Some of its main functionalities were just made up (and didn't exist in
+jQuery), like the `.waitUntil()`, the `.as()` plugins, the driver builder and so on. So if you come up with an idea of something that could
+be useful, tell us, or, even better, do it yourself and join the team!
 
 ## Goals and non-goals
 
 Goals:
 - Have a uniform behavior thoughout targeted WebDriver implementations
-    - A given code should behave the same in all WebDrivers.
-    - Selenium itself takes care of that, but it does leave some room for improvement
-    - This is important to our functions as well, they should behave the same regardless of WebDriver implementation (browser) used
+    - A given code should behave as similar as possible in all WebDrivers.
+        - Selenium itself takes care of that, but it does leave some room for improvement
+        - This is important to our functions as well, they should behave the same regardless of WebDriver implementation (browser) used
 - Mimic jQuery's interface and behavior, but...
     - Do it all, when possible, from the user's perspective
         - e.g. `$().val("")` types content instead of setting the `value` attribute.
