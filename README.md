@@ -58,9 +58,9 @@ public class SeleniumQueryExample {
 
 ## Download and execute the [seleniumQuery showcase project](https://github.com/acdcjunior/seleniumQuery-showcase)
 
-...and see seleniumQuery in action [right now](https://github.com/acdcjunior/seleniumQuery-showcase).
+...and see it in action [right now](https://github.com/acdcjunior/seleniumQuery-showcase).
 
-To get the latest version, add to your **`pom.xml`**:
+To get the latest version of seleniumQuery, add to your **`pom.xml`**:
 
 ```xml
 <dependency>
