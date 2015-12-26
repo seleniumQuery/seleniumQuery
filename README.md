@@ -1,5 +1,5 @@
-#[seleniumQuery](http://seleniumquery.github.io)
-###*Cross-Driver* jQuery-like Java interface for Selenium WebDriver
+# [seleniumQuery](http://seleniumquery.github.io)
+### *Cross-Driver* jQuery-like Java interface for Selenium WebDriver
 
 seleniumQuery is a Java library/framework that brings a ***cross-driver*** **jQuery-like** interface for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
@@ -23,11 +23,11 @@ Built using Selenium WebDriver's native capabilities **only**:
 
 - No `jQuery.js` is embedded at the page, no side-effects are generated;
     - Doesn't matter if the page uses jQuery or not (or even if the JavaScript global variable `$` is other library like `Prototype.js`).
-- Capable of handling/testing **JavaScript-disabled pages**
+- Capable of handling/testing JavaScript-disabled pages
     - Test pages that use [Unobtrusive JavaScript](http://en.wikipedia.org/wiki/Unobtrusive_JavaScript).
     - Most functions don't even require the browser/driver to have JavaScript enabled!
 
-##Quickstart: A running example
+## Quickstart: A running example
 
 Try it out now with the running example below:
 
@@ -69,12 +69,12 @@ To get seleniumQuery's the latest version, add to your **`pom.xml`**:
 
 <br>
 
-#Features
+# Features
 
 seleniumQuery aims to implement all relevant jQuery functions, as well as adding some of our own. Our main goal is to make emulating user actions and reading the state of pages easier than ever, with a consistent behavior across drivers.
 
 
-###Readable jQuery syntax you already know
+### Readable jQuery syntax you already know
 
 Make your code/tests more readable and easier to maintain. Leverage your knowledge of jQuery.
 
@@ -89,7 +89,7 @@ $("#mySelect").val("ford");
 
 Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
-###Powerful selector system
+### Powerful selector system
 
 Let the tool do the hard work and find elements easily:
 
@@ -107,7 +107,7 @@ Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/
 
 <br>
 
-###Waiting capabilities for improved Ajax testing
+### Waiting capabilities for improved Ajax testing
 
 Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element (no boilerplate code!) through the use of the `.waitUntil()` function:
 
@@ -131,7 +131,7 @@ Check out what else `.waitUntil()` can do in the [seleniumQuery API wiki page](h
 
 <br>
 
-###Plugin System
+### Plugin System
 
 seleniumQuery supports plugins through the `.as(PLUGIN)` function, such as:
 
@@ -152,25 +152,25 @@ For an example of how to create your own plugin, check the [seleniumQuery Plugin
 
 <br>
 
-###Flexible WebDriver builder system
+### Flexible WebDriver builder system
 
 How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only when first used.
 
-#####Firefox
+##### Firefox
 
 ```java
 $.driver().useFirefox(); // Will set up firefox as driver
 $.url("http://seleniumquery.github.io"); //the driver will be instantiated when this executes
 ```
 
-#####Firefox driver with disabled JavaScript
+##### Firefox driver with disabled JavaScript
 
 Want `FirefoxDriver` without JavaScript? Just:
 ```java
 $.driver().useFirefox().withoutJavaScript(); // when started, Firefox will have JS OFF
 ```
 
-#####Chrome, InternetExplorer, PhantomJS drivers
+##### Chrome, InternetExplorer, PhantomJS drivers
 
 All you have to do is download [their executables](https://github.com/seleniumQuery/seleniumQuery-demos/tree/master/src/main/resources) before. Setting them up in seleniumQuery is all too easy:
 
@@ -191,7 +191,7 @@ $.driver().usePhantomJS(); // again, we'll find phantomjs[.exe] to you
 $.driver().usePhantomJS().withPathToPhantomJS("path/to/phantomjs.exe");
 ````
 
-#####HtmlUnit
+##### HtmlUnit
 
 So many possibilities to set up `HtmlUnitDriver`... If only there was a simple way to use them. Oh, wait:
 
@@ -213,7 +213,7 @@ $.driver().useHtmlUnit().emulatingInternetExplorer9(); // JS is disableable as w
 $.driver().useHtmlUnit().emulatingInternetExplorer(); // will pick latest IE
 ````
 
-####But there is more
+#### But there is more
 
 Explore the auto-complete. There are additional options to every driver, such as `.withCapabilities(DesiredCapabilities)` or some specific, such as `.withProfile(FirefoxProfile)` or `.withOptions(ChromeOptions)`.
 
@@ -226,7 +226,7 @@ $.driver().use(myDriver);
 
 <br>
 
-##seleniumQuery still is Selenium - with "just" a jQuery interface
+## seleniumQuery still is Selenium - with "just" a jQuery interface
 
 That's why it can work with disabled JavaScript!
 
@@ -244,14 +244,14 @@ And we go the *extra mile* whenever possible:
 - If it is an `<input type="file">` we select the file;
 - When the element is a `<select>`, we choose the `<option>` by the value given (same as `$("selector").as().select().selectByValue("123")`).
 
-###Always from the user perspective
+### Always from the user perspective
 
 On the same tone, when selecting/checking `<option>`s or checkboxes or radios, try not to use `$().prop("selected", true)` directly to them (which to work, of course, would need JS to be enabled on the driver).
 Do as an user would: call `.click()`! Or, better yet, use seleniumQuery's `.as().select()` functions: `$().as().select().selectByVisibleText("My Option")` or `$().as().select().selectByValue("123")`.
 
 <br><br>
 
-###Alternate symbols
+### Alternate symbols
 
 If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field). Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same goodies:
 
@@ -268,13 +268,13 @@ jQuery("input.street").val("5th St!");
 
 <br>
 
-#More
+# More
 
 Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
 
 <br>
 
-#Changelog/Roadmap
+# Changelog/Roadmap
 
 - Current release 0.10.0
     - Updated Selenium version to 2.48.2
@@ -286,11 +286,11 @@ Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
     - New selector system (more selectors, faster filtering)
 
 
-#Contributing
+# Contributing
 
 The tool is just beginning, there's a lot of room for improvement. Some of its main functionalities were just made up (and didn't exist in jQuery), like the `.waitUntil()`, the `.as()` plugins, the driver builder and so on. So if you come up with an idea of something that could be useful, tell us, or, even better, do it yourself and join the team!
 
-##Goals and non-goals
+## Goals and non-goals
 
 Goals:
 - Have a uniform behavior thoughout targeted WebDriver implementations
@@ -310,7 +310,7 @@ Non-goals:
 - Replace WebDriver
 
 
-##History
+## History
 - What went bad?
     - The selector system is not pure CSS, it allows the extended CSS supported by jQuery (and implemented by Sizzle). To get it done is a challenge by itself.
         - The first version used regexes, didn't work so well and never made it into a release
@@ -321,6 +321,6 @@ Non-goals:
             - If the selector is an extended CSS that can be translated fully to an XPath expression, than translate it and use it
             - Otherwise, translate the CSS to the XPath expression that brings the smallest numbers of element possible and then iteratively filter the results before returning
 
-##What else?
+## What else?
 
 Feel free to [request, suggest](https://github.com/seleniumQuery/seleniumQuery/issues/new), create pull requests. The project is currently in a fast pace and, as said, any opinions/help are more than welcome!
