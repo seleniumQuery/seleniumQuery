@@ -41,7 +41,7 @@ public class FindFunctionTest {
     @Test
     public void find_function__with_pseudoClasses() {
         assertThat($("#combo").find("option:contains(Howdy)").size(), is(1));
-        assertThat($("#combo").find("option:contains(Howdy)").attr("id"), is("howdy-option"));
+        assertThat($("#combo").find("option:contains(Howdy)").get(0).getAttribute("id"), is("howdy-option"));
     }
 
     @Test
