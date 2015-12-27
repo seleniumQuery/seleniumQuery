@@ -19,7 +19,9 @@ package testinfrastructure.testdouble;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -58,6 +60,14 @@ public class Dummies {
         //noinspection ResultOfMethodCallIgnored
         doReturn("Dummy SeleniumQueryObject").when(dummyToStringableSeleniumQueryObject).toString();
         return dummyToStringableSeleniumQueryObject;
+    }
+
+    public static By createDummyBy() {
+        return createDummy(By.class);
+    }
+
+    public static WebElement createDummyWebElement() {
+        return createDummy(WebElement.class);
     }
 
 }
