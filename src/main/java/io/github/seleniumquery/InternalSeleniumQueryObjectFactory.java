@@ -17,6 +17,7 @@
 package io.github.seleniumquery;
 
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,8 +44,10 @@ public class InternalSeleniumQueryObjectFactory {
         return instance;
     }
 
+    protected SeleniumQueryFunctions seleniumQueryFunctions = new SeleniumQueryFunctions();
+
     public SeleniumQueryObject create(WebDriver driver, By by, List<WebElement> elements, SeleniumQueryObject previous) {
-        return new SeleniumQueryObject(driver, by, elements, previous);
+        return new SeleniumQueryObject(seleniumQueryFunctions, driver, by, elements, previous);
     }
 
     public SeleniumQueryObject createWithInvalidSelector(WebDriver driver, List<WebElement> elements, SeleniumQueryObject previous) {
@@ -52,22 +55,22 @@ public class InternalSeleniumQueryObjectFactory {
     }
 
     public SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, List<WebElement> elements) {
-		return createWithInvalidSelector(driver, elements, SeleniumQueryObject.NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
-	}
+        return createWithInvalidSelector(driver, elements, SeleniumQueryObject.NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
+    }
 
-	public SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, WebElement... elements) {
-		return createWithInvalidSelectorAndNoPrevious(driver, asList(elements));
-	}
+    public SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, WebElement... elements) {
+        return createWithInvalidSelectorAndNoPrevious(driver, asList(elements));
+    }
 
-	SeleniumQueryObject createWithValidSelectorAndNoPrevious(WebDriver driver, String selector) {
-        return new SeleniumQueryObject(driver, getBy(selector));
-	}
+    SeleniumQueryObject createWithValidSelectorAndNoPrevious(WebDriver driver, String selector) {
+        return new SeleniumQueryObject(seleniumQueryFunctions, driver, getBy(selector));
+    }
 
-	By getBy(String selector) {
+    By getBy(String selector) {
         return SeleniumQueryBy.byEnhancedSelector(selector);
     }
 
-	By getNoSelectorInvalidBy() {
+    By getNoSelectorInvalidBy() {
         return SeleniumQueryBy.NO_SELECTOR_INVALID_BY;
     }
 

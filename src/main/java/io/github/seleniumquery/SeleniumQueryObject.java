@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery;
 
+import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
 import io.github.seleniumquery.functions.jquery.attributes.AttrFunction;
 import io.github.seleniumquery.functions.jquery.attributes.HasClassFunction;
-import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
 import io.github.seleniumquery.functions.jquery.attributes.RemoveAttrFunction;
 import io.github.seleniumquery.functions.jquery.events.ClickFunction;
 import io.github.seleniumquery.functions.jquery.forms.FocusFunction;
@@ -87,6 +87,8 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 
     public static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
 
+	private SeleniumQueryFunctions seleniumQueryFunctions;
+
 	private WebDriver driver;
 
     private By by;
@@ -102,11 +104,12 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	private SeleniumQueryObject previous;
 	
 
-	protected SeleniumQueryObject(WebDriver driver, By by) {
-        this(driver, by, driver.findElements(by), NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
+	protected SeleniumQueryObject(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by) {
+        this(seleniumQueryFunctions, driver, by, driver.findElements(by), NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
 	}
 
-	protected SeleniumQueryObject(WebDriver driver, By by, List<WebElement> webElements, SeleniumQueryObject previous) {
+	protected SeleniumQueryObject(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by, List<WebElement> webElements, SeleniumQueryObject previous) {
+        this.seleniumQueryFunctions = seleniumQueryFunctions;
 		this.driver = driver;
 		this.by = by;
 		this.elements = ListUtils.toImmutableRandomAccessList(webElements);
@@ -414,10 +417,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public <T> T prop(String propertyName) {
-		return PropFunction.prop(this, propertyName);
+		return seleniumQueryFunctions.propRead(this, propertyName);
 	}
 
-	/**
+    /**
 	 * Set one or more properties for <strong>every</strong> matched element
 	 *
 	 * <p><b>Note:</b> If interacting with an <code>&lt;input&gt;</code> element while in a UI test,
@@ -428,10 +431,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject prop(String propertyName, Object value) {
-		return PropFunction.prop(this, propertyName, value);
+		return seleniumQueryFunctions.propWrite(this, propertyName, value);
 	}
 
-	/**
+    /**
 	 * Retrieves one of the {@link WebElement} matched by the seleniumQuery object.
 	 *
 	 * @param index A zero-based integer indicating which element to retrieve.
