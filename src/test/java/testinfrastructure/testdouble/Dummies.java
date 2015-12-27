@@ -42,7 +42,7 @@ public class Dummies {
         return mock(classToDummy, new NoMethodShouldBeCalledAnswer(classToDummy.getSimpleName()));
     }
 
-    public static WebDriver dummyWebDriver() {
+    public static WebDriver createDummyWebDriver() {
         return createDummy(WebDriver.class);
     }
 

@@ -38,7 +38,7 @@ public class SeleniumQueryObjectTest {
     public static SeleniumQueryObject createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(SeleniumQueryFunctions seleniumQueryFunctions) {
         List<WebElement> dummyWebElements = asList(createDummyWebElement(), createDummyWebElement());
         SeleniumQueryObject DUMMY_PREVIOUS = createDummySeleniumQueryObject();
-        return new SeleniumQueryObject(seleniumQueryFunctions, dummyWebDriver(), createDummyBy(), dummyWebElements, DUMMY_PREVIOUS);
+        return new SeleniumQueryObject(seleniumQueryFunctions, createDummyWebDriver(), createDummyBy(), dummyWebElements, DUMMY_PREVIOUS);
     }
 
     @Test

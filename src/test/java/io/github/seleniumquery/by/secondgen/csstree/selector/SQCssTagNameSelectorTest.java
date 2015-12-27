@@ -22,7 +22,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
-import static testinfrastructure.testdouble.Dummies.dummyWebDriver;
+import static testinfrastructure.testdouble.Dummies.createDummyWebDriver;
 
 public class SQCssTagNameSelectorTest {
 
@@ -31,7 +31,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("myTag");
         // when
-        ElementFinder elementFinder = tagNameSelector.toElementFinder(dummyWebDriver());
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(createDummyWebDriver());
         // then
         assertThat(elementFinder.getCssFinder().toString(), is("myTag"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
@@ -44,7 +44,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        ElementFinder elementFinder = tagNameSelector.toElementFinder(dummyWebDriver());
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(createDummyWebDriver());
         // then
         assertThat(elementFinder.getXPathExpression(), is(".//*[true()]"));
     }
@@ -54,7 +54,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        ElementFinder elementFinder = tagNameSelector.toElementFinder(dummyWebDriver());
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(createDummyWebDriver());
         // then
         assertThat(elementFinder.getXPathAndFilterFinder().getRawXPathExpression(), is("true()"));
     }
