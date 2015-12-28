@@ -494,7 +494,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public boolean hasClass(String className) {
-		return HasClassFunction.hasClass(this, this.get(), className);
+		return HasClassFunction.hasClass(this, className);
 	}
 
 	/**
