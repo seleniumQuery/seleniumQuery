@@ -245,7 +245,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject not(String selector) {
-		return NotFunction.not(this, this.get(), selector);
+		return NotFunction.not(this, selector);
 	}
 
 	/**
