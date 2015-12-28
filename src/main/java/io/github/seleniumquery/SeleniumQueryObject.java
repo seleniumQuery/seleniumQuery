@@ -379,7 +379,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject find(String selector) {
-		return FindFunction.find(this, this.get(), selector);
+		return FindFunction.find(this, selector);
 	}
 
 	/**
