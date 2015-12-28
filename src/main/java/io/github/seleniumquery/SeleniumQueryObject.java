@@ -307,7 +307,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		// It is impossible to read text from hidden elements in Selenium:
 		// Since a user cannot read text in a hidden element, WebDriver will not allow access to it as well.
 		// More in WebDriver FAQs: https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_Why_is_it_not_possible_to_interact_with_hidden_elements?
-		return TextFunction.text(this.get());
+		return TextFunction.text(this);
 	}
 
 	/**
