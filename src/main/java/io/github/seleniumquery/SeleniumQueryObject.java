@@ -319,8 +319,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject click() {
-		LOGGER.debug("Clicking "+this+".");
-		return ClickFunction.click(this, this.get());
+		return ClickFunction.click(this);
 	}
 
 	/**

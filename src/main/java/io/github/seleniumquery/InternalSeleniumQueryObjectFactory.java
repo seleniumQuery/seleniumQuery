@@ -47,6 +47,10 @@ public class InternalSeleniumQueryObjectFactory {
     protected SeleniumQueryFunctions seleniumQueryFunctions = new SeleniumQueryFunctions();
 
     public SeleniumQueryObject create(WebDriver driver, By by, List<WebElement> elements, SeleniumQueryObject previous) {
+        return create(this.seleniumQueryFunctions, driver, by, elements, previous);
+    }
+
+    public SeleniumQueryObject create(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by, List<WebElement> elements, SeleniumQueryObject previous) {
         return new SeleniumQueryObject(seleniumQueryFunctions, driver, by, elements, previous);
     }
 
