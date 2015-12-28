@@ -17,11 +17,10 @@
 package io.github.seleniumquery.functions.jquery.attributes;
 
 import io.github.seleniumquery.SeleniumQueryObject;
+import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 import java.util.List;
-
-import org.openqa.selenium.WebElement;
 
 /**
  * $("selector").hasClass("a-class-name");
@@ -31,8 +30,8 @@ import org.openqa.selenium.WebElement;
  */
 public class HasClassFunction {
 	
-	public static boolean hasClass(@SuppressWarnings("unused") SeleniumQueryObject seleniumQueryObject,
-										List<WebElement> elements, String className) {
+	public static boolean hasClass(SeleniumQueryObject seleniumQueryObject, String className) {
+		List<WebElement> elements = seleniumQueryObject.get();
 		if (elements.isEmpty()) {
 			return false;
 		}
