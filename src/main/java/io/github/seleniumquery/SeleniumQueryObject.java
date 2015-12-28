@@ -519,7 +519,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject closest(String selector) {
-		return ClosestFunction.closest(this, this.get(), selector);
+		return ClosestFunction.closest(this, selector);
 	}
 
 	/**
