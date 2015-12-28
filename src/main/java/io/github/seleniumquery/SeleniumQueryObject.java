@@ -259,7 +259,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject first() {
-		return FirstFunction.first(this, this.get());
+		return FirstFunction.first(this);
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject last() {
-		return LastFunction.last(this, this.get());
+		return LastFunction.last(this);
 	}
 
 	/**
@@ -287,7 +287,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject eq(int index) {
-		return EqFunction.eq(this, this.get(), index);
+		return EqFunction.eq(this, index);
 	}
 
 	/**
