@@ -391,7 +391,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public String attr(String attributeName) {
-		return AttrFunction.attr(this, this.get(), attributeName);
+		return AttrFunction.attr(this, attributeName);
 	}
 
 	/**
@@ -405,7 +405,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject attr(String attributeName, Object value) {
-		return AttrFunction.attr(this, this.get(), attributeName, value);
+		return AttrFunction.attr(this, attributeName, value);
 	}
 
 	/**
