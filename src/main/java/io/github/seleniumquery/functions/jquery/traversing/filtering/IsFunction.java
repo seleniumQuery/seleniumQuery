@@ -43,8 +43,8 @@ public class IsFunction {
 
 	private static final Pattern NOT_SQ_PATTERN = Pattern.compile("not-sq\\((\\d+)\\)");
 
-	public static boolean is(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String selector) {
-		return is(seleniumQueryObject.getWebDriver(), elements, selector);
+	public static boolean is(SeleniumQueryObject seleniumQueryObject, String selector) {
+		return is(seleniumQueryObject.getWebDriver(), seleniumQueryObject.get(), selector);
 	}
 	
 	public static boolean is(WebDriver driver, List<WebElement> elements, String selector) {
