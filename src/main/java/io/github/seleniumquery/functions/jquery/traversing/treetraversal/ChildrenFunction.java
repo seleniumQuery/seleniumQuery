@@ -36,12 +36,14 @@ import java.util.List;
  */
 public class ChildrenFunction {
 
-	public static SeleniumQueryObject children(SeleniumQueryObject caller, List<WebElement> elements) {
+	public static SeleniumQueryObject children(SeleniumQueryObject caller) {
+		List<WebElement> elements = caller.get();
 		List<WebElement> children = getChildren(elements);
 		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(caller.getWebDriver(), children, caller);
 	}
 	
-	public static SeleniumQueryObject children(SeleniumQueryObject caller, List<WebElement> elements, String selector) {
+	public static SeleniumQueryObject children(SeleniumQueryObject caller, String selector) {
+		List<WebElement> elements = caller.get();
 		WebDriver webDriver = caller.getWebDriver();
 		List<WebElement> children = getChildren(elements);
 		for (Iterator<WebElement> iterator = children.iterator(); iterator.hasNext();) {
