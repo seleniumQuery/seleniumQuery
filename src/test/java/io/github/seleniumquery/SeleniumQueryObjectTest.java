@@ -74,4 +74,51 @@ public class SeleniumQueryObjectTest {
         assertThat(returnedObject, is(configuredReturningObject));
     }
 
+    @Test
+    public void valRead() {
+        // given
+        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+
+        SeleniumQueryObject seleniumQueryObject = createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(seleniumQueryFunctions);
+
+        String configuredValue = "configuredValue";
+        given(seleniumQueryFunctions.valRead(seleniumQueryObject)).willReturn(configuredValue);
+        // when
+        String returnedValue = seleniumQueryObject.val();
+        // then
+        assertThat(returnedValue, is(configuredValue));
+    }
+
+    @Test
+    public void valWriteString() {
+        // given
+        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+
+        SeleniumQueryObject seleniumQueryObject = createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(seleniumQueryFunctions);
+
+        String propertyValue = "propertyValue";
+        SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
+        given(seleniumQueryFunctions.valWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
+        // when
+        SeleniumQueryObject returnedObject = seleniumQueryObject.val(propertyValue);
+        // then
+        assertThat(returnedObject, is(configuredReturningObject));
+    }
+
+    @Test
+    public void valWriteNumber() {
+        // given
+        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+
+        SeleniumQueryObject seleniumQueryObject = createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(seleniumQueryFunctions);
+
+        Number propertyValue = 1.0;
+        SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
+        given(seleniumQueryFunctions.valWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
+        // when
+        SeleniumQueryObject returnedObject = seleniumQueryObject.val(propertyValue);
+        // then
+        assertThat(returnedObject, is(configuredReturningObject));
+    }
+
 }

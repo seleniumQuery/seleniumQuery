@@ -25,7 +25,6 @@ import io.github.seleniumquery.functions.jquery.attributes.RemoveAttrFunction;
 import io.github.seleniumquery.functions.jquery.events.ClickFunction;
 import io.github.seleniumquery.functions.jquery.forms.FocusFunction;
 import io.github.seleniumquery.functions.jquery.forms.SubmitFunction;
-import io.github.seleniumquery.functions.jquery.forms.ValFunction;
 import io.github.seleniumquery.functions.jquery.manipulation.HtmlFunction;
 import io.github.seleniumquery.functions.jquery.manipulation.TextFunction;
 import io.github.seleniumquery.functions.jquery.miscellaneous.GetFunction;
@@ -83,7 +82,7 @@ import java.util.List;
  */
 public class SeleniumQueryObject implements Iterable<WebElement> {
 	
-	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryObject.class);
+	public static final Log LOGGER = LogFactory.getLog(SeleniumQueryObject.class);
 
     public static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
 
@@ -333,11 +332,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject val(String value) {
-		LOGGER.debug("Setting value of "+this+" to: \""+value+"\".");
-		return ValFunction.val(this, this.elements, value);
+        return seleniumQueryFunctions.valWrite(this, value);
 	}
 
-	/**
+    /**
 	 * Sets the value of <strong>all</strong> elements in the set of matched elements.
 	 *
 	 * @param value The (number) value to be set.
@@ -346,11 +344,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject val(Number value) {
-		LOGGER.debug("Setting value of "+this+" to: "+value+".");
-		return ValFunction.val(this, this.elements, value);
+        return seleniumQueryFunctions.valWrite(this, value);
 	}
 
-	/**
+    /**
 	 * Gets the current value of the first element in the set of matched elements.
 	 *
 	 * @return The value of the first element.
@@ -358,10 +355,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public String val() {
-		return ValFunction.val(this.elements);
+		return seleniumQueryFunctions.valRead(this);
 	}
 
-	/**
+    /**
 	 * Ends the most recent filtering operation in the current chain and returns the set of matched
 	 * elements to its previous state.
 	 *
