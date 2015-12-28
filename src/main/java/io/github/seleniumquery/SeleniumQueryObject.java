@@ -532,7 +532,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject focus() {
-		return FocusFunction.focus(this, this.get());
+		return FocusFunction.focus(this);
 	}
 
 	/**
