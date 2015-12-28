@@ -36,8 +36,10 @@ public class AttrFunction {
 	private static final String SELECTED = "selected";
 	private static final String CHECKED = "checked";
 
-	public static String attr(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String attributeName) {
-		return attr(seleniumQueryObject.getWebDriver(), elements, attributeName);
+	public static String attr(SeleniumQueryObject seleniumQueryObject, String attributeName) {
+        WebDriver webDriver = seleniumQueryObject.getWebDriver();
+        List<WebElement> elements = seleniumQueryObject.get();
+        return attr(webDriver, elements, attributeName);
 	}
 	
 	public static String attr(WebDriver driver, List<WebElement> elements, String attributeName) {
@@ -69,8 +71,8 @@ public class AttrFunction {
 		return (attributeValue != null ? attributeValue.toString() : null);
 	}
 	
-	public static SeleniumQueryObject attr(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements,
-												String attributeName, Object value) {
+	public static SeleniumQueryObject attr(SeleniumQueryObject seleniumQueryObject, String attributeName, Object value) {
+		List<WebElement> elements = seleniumQueryObject.get();
 		if (value == null || !(value instanceof Boolean || value instanceof String || value instanceof Number ||
 				value instanceof WebElement)) {
 			// calling $().attr("attributeName", undefined); in jQuery has no effect
