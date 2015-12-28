@@ -279,16 +279,7 @@ Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
 
 # Changelog/Roadmap
 
-- Current release 0.10.0
-    - Updated Selenium version to 2.48.2
-    - Changed PhantomJS dependency to 1.2.1.
-    - `$.driver().useHtmlUnit().emulatingInternetExplorer9();` removed (HtmlUnit does not emulate IE9 anymore);
-    - `$.driver().useHtmlUnit().emulatingFirefox();` now emulates FF38.
-    - Changed the way we disable JavaScript at `FirefoxDriver` (due to inability to ask for it at the profile)
-    - Disabled support for `:selected` and `:checked` selectors
-- Future releases (0.11.0 or 1.0.0+)
-    - New selector system (more selectors, faster filtering)
-
+See [releases](https://github.com/seleniumQuery/seleniumQuery/releases).
 
 # Contributing
 
