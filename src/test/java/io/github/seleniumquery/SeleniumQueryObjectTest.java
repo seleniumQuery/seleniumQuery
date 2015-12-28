@@ -18,16 +18,13 @@ package io.github.seleniumquery;
 
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static testinfrastructure.testdouble.Dummies.*;
+import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createDummySeleniumQueryObject;
+import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithSeleniumQueryFunctions;
 
 public class SeleniumQueryObjectTest {
 
@@ -35,18 +32,11 @@ public class SeleniumQueryObjectTest {
         return mock(SeleniumQueryFunctions.class);
     }
 
-    public static SeleniumQueryObject createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(SeleniumQueryFunctions seleniumQueryFunctions) {
-        List<WebElement> dummyWebElements = asList(createDummyWebElement(), createDummyWebElement());
-        SeleniumQueryObject DUMMY_PREVIOUS = createDummySeleniumQueryObject();
-        return new SeleniumQueryObject(seleniumQueryFunctions, createDummyWebDriver(), createDummyBy(), dummyWebElements, DUMMY_PREVIOUS);
-    }
-
     @Test
     public void propRead() {
         // given
         SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
-
-        SeleniumQueryObject seleniumQueryObject = createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(seleniumQueryFunctions);
+        SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String propertyName = "propertyName";
         String configuredPropertyValue = "propertyValue";
@@ -61,8 +51,7 @@ public class SeleniumQueryObjectTest {
     public void propWrite() {
         // given
         SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
-
-        SeleniumQueryObject seleniumQueryObject = createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(seleniumQueryFunctions);
+        SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String propertyName = "propertyName";
         String propertyValue = "propertyValue";
@@ -78,8 +67,7 @@ public class SeleniumQueryObjectTest {
     public void valRead() {
         // given
         SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
-
-        SeleniumQueryObject seleniumQueryObject = createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(seleniumQueryFunctions);
+        SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String configuredValue = "configuredValue";
         given(seleniumQueryFunctions.valRead(seleniumQueryObject)).willReturn(configuredValue);
@@ -93,8 +81,7 @@ public class SeleniumQueryObjectTest {
     public void valWriteString() {
         // given
         SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
-
-        SeleniumQueryObject seleniumQueryObject = createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(seleniumQueryFunctions);
+        SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String propertyValue = "propertyValue";
         SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
@@ -109,8 +96,7 @@ public class SeleniumQueryObjectTest {
     public void valWriteNumber() {
         // given
         SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
-
-        SeleniumQueryObject seleniumQueryObject = createSeleniumQueryObjectWithGivenFunctionsButDummyEverythingElse(seleniumQueryFunctions);
+        SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         Number propertyValue = 1.0;
         SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();

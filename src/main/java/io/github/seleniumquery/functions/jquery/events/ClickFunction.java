@@ -37,7 +37,10 @@ public class ClickFunction {
 
     private static final Log LOGGER = LogFactory.getLog(ClickFunction.class);
 
-    public static SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements) {
+    public static SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject) {
+        LOGGER.debug("Clicking "+seleniumQueryObject+".");
+        List<WebElement> elements = seleniumQueryObject.get();
+
         int numberOfNotClickedElements = 0;
         Exception lastCaughtException = null;
         WebElement elementThatThrewLastCaughtException = null;

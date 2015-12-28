@@ -16,7 +16,6 @@
 
 package testinfrastructure.testdouble;
 
-import io.github.seleniumquery.SeleniumQueryObject;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.openqa.selenium.By;
@@ -38,32 +37,23 @@ public class Dummies {
         }
     }
 
-    private static <D> D createDummy(Class<D> classToDummy) {
+    public static <D> D createDummy(Class<D> classToDummy) {
         return mock(classToDummy, new NoMethodShouldBeCalledAnswer(classToDummy.getSimpleName()));
+    }
+
+    public static <D> D createToStringableDummy(Class<D> classToDummy) {
+        D toStringableDummy = createDummy(classToDummy);
+        //noinspection ResultOfMethodCallIgnored
+        doReturn("Dummy "+classToDummy.getSimpleName()).when(toStringableDummy).toString();
+        return toStringableDummy;
     }
 
     public static WebDriver createDummyWebDriver() {
         return createDummy(WebDriver.class);
     }
 
-    /**
-     * Creates a "smart" dummy {@link SeleniumQueryObject}. It's goal is to be a mere placeholder in a test
-     * fixture. It is "smart" because any method call to it will throw an exception (which indicates the dummy
-     * is actually not a simple placeholder - since it is being used by the SUT when it shouldn't).
-     */
-    public static SeleniumQueryObject createDummySeleniumQueryObject() {
-        return createDummy(SeleniumQueryObject.class);
-    }
-
-    public static SeleniumQueryObject createDummyToStringableSeleniumQueryObject() {
-        SeleniumQueryObject dummyToStringableSeleniumQueryObject = createDummySeleniumQueryObject();
-        //noinspection ResultOfMethodCallIgnored
-        doReturn("Dummy SeleniumQueryObject").when(dummyToStringableSeleniumQueryObject).toString();
-        return dummyToStringableSeleniumQueryObject;
-    }
-
-    public static By createDummyBy() {
-        return createDummy(By.class);
+    public static By createToStringableDummyBy() {
+        return createToStringableDummy(By.class);
     }
 
     public static WebElement createDummyWebElement() {

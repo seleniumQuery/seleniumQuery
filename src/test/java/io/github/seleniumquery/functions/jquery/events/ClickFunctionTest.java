@@ -24,24 +24,20 @@ import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.testutils.LogInjector;
 
-import java.util.Collections;
-
-import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
-import static testinfrastructure.testdouble.Dummies.createDummySeleniumQueryObject;
-import static testinfrastructure.testdouble.Dummies.createDummyToStringableSeleniumQueryObject;
 import static testinfrastructure.testdouble.Mocks.createWebElementMock;
+import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
 
 public class ClickFunctionTest {
 
     @Test
     public void click__shouldReturnPassedSeleniumQueryObject() {
         // given
-        SeleniumQueryObject sqo = createDummySeleniumQueryObject();
+        SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements();
         // when
-        SeleniumQueryObject returnedSqo = ClickFunction.click(sqo, Collections.<WebElement>emptyList());
+        SeleniumQueryObject returnedSqo = ClickFunction.click(sqo);
         // then
         assertThat(returnedSqo, is(sqo));
     }
@@ -51,8 +47,9 @@ public class ClickFunctionTest {
         // given
         WebElement webElementClickSpyOne = createWebElementClickSpy();
         WebElement webElementClickSpyTwo = createWebElementClickSpy();
+        SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(webElementClickSpyOne, webElementClickSpyTwo);
         // when
-        ClickFunction.click(createDummySeleniumQueryObject(), asList(webElementClickSpyOne, webElementClickSpyTwo));
+        ClickFunction.click(sqo);
         // then
         assertNumberOfTimesClicked(webElementClickSpyOne, 1);
         assertNumberOfTimesClicked(webElementClickSpyTwo, 1);
@@ -63,8 +60,9 @@ public class ClickFunctionTest {
         // given
         WebElement unclickableHiddenWebElement = createUnclickableHiddenWebElement();
         WebElement webElementClickSpy = createWebElementClickSpy();
+        SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(unclickableHiddenWebElement, webElementClickSpy);
         // when
-        ClickFunction.click(createDummyToStringableSeleniumQueryObject(), asList(unclickableHiddenWebElement, webElementClickSpy));
+        ClickFunction.click(sqo);
         // then
         assertNumberOfTimesClicked(webElementClickSpy, 1);
     }
@@ -73,8 +71,9 @@ public class ClickFunctionTest {
     public void click__shouldLogInfoIfAnyElementThrewException() {
         // given
         Log logSpy = LogInjector.injectLogSpy(ClickFunction.class);
+        SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(createUnclickableHiddenWebElement(), createWebElementMock());
         // when
-        ClickFunction.click(createDummyToStringableSeleniumQueryObject(), asList(createUnclickableHiddenWebElement(), createWebElementMock()));
+        ClickFunction.click(sqo);
         // then
         verify(logSpy).info(anyString(), any(ElementNotVisibleException.class));
     }
@@ -84,8 +83,9 @@ public class ClickFunctionTest {
         // given
         WebElement unclickableHiddenWebElement = createUnclickableHiddenWebElement();
         WebElement unclickableHiddenWebElementTwo = createUnclickableHiddenWebElement();
+        SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(unclickableHiddenWebElement, unclickableHiddenWebElementTwo);
         // when
-        ClickFunction.click(createDummyToStringableSeleniumQueryObject(), asList(unclickableHiddenWebElement, unclickableHiddenWebElementTwo));
+        ClickFunction.click(sqo);
         // then
         // exception is thrown
     }
