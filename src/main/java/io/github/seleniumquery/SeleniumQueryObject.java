@@ -463,7 +463,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject removeAttr(String attributeNames) {
-		return RemoveAttrFunction.removeAttr(this, this.get(), attributeNames);
+		return RemoveAttrFunction.removeAttr(this, attributeNames);
 	}
 
 	/**

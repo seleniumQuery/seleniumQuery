@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery.functions.jquery.attributes;
 
-import java.util.List;
-
+import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import io.github.seleniumquery.SeleniumQueryObject;
+
+import java.util.List;
 
 /**
  * $("selector").removeAttr("attribute-name");
@@ -30,8 +30,8 @@ import io.github.seleniumquery.SeleniumQueryObject;
  */
 public class RemoveAttrFunction {
 	
-	public static SeleniumQueryObject removeAttr(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements,
-												String attributeNames) {
+	public static SeleniumQueryObject removeAttr(SeleniumQueryObject seleniumQueryObject, String attributeNames) {
+		List<WebElement> elements = seleniumQueryObject.get();
 		JavascriptExecutor js = (JavascriptExecutor) seleniumQueryObject.getWebDriver();
 		String[] attributes = attributeNames.split(" ");
 		for (WebElement webElement : elements) {
