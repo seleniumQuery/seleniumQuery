@@ -505,7 +505,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public WebElement[] toArray() {
-		return ToArrayFunction.toArray(this, this.get());
+		return ToArrayFunction.toArray(this);
 	}
 
 	/**
