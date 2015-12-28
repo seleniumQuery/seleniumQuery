@@ -32,7 +32,8 @@ import java.util.List;
  */
 public class FindFunction {
 
-	public static SeleniumQueryObject find(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String selector) {
+	public static SeleniumQueryObject find(SeleniumQueryObject seleniumQueryObject, String selector) {
+		List<WebElement> elements = seleniumQueryObject.get();
 		List<WebElement> allElementsBelow = new LinkedList<>();
 		SeleniumQueryBy by = SeleniumQueryBy.byEnhancedSelector(selector);
 		for (WebElement webElement : elements) {
