@@ -17,9 +17,6 @@
 package io.github.seleniumquery.functions.jquery.traversing.filtering;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * http://api.jquery.com/first/
@@ -32,9 +29,11 @@ import java.util.List;
  * @since 0.9.0
  */
 public class FirstFunction {
-	
-	public static SeleniumQueryObject first(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements) {
-		return EqFunction.eq(seleniumQueryObject, elements, 0);
+
+	private static final int FIRST_ELEMENT_INDEX = 0;
+
+	public static SeleniumQueryObject first(SeleniumQueryObject seleniumQueryObject) {
+		return EqFunction.eq(seleniumQueryObject, FIRST_ELEMENT_INDEX);
 	}
 
 }

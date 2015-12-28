@@ -19,6 +19,8 @@ package io.github.seleniumquery.functions.jquery.manipulation;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 /**
  * $("#selector").text();
  *  
@@ -29,8 +31,12 @@ import org.openqa.selenium.WebElement;
 public class TextFunction {
 	
 	public static String text(SeleniumQueryObject seleniumQueryObject) {
+		return text(seleniumQueryObject.get());
+	}
+
+	public static String text(List<WebElement> webElements) {
 		StringBuilder sb = new StringBuilder();
-		for (WebElement element : seleniumQueryObject) {
+		for (WebElement element : webElements) {
 			// Warning!
 			// It is impossible to read text from hidden elements in Selenium:
 			// Since a user cannot read text in a hidden element, WebDriver will not allow access to it as well.
