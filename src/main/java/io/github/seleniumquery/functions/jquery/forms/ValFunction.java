@@ -74,6 +74,7 @@ public class ValFunction {
 	 * $(".selector").val(123);
 	 */
 	public static SeleniumQueryObject val(SeleniumQueryObject caller, List<WebElement> elements, Number value) {
+        SeleniumQueryObject.LOGGER.debug("Setting value of "+ caller +" to: "+value+".");
 		return val(caller, elements, value.toString());
 	}
 
@@ -81,6 +82,7 @@ public class ValFunction {
 	 * $(".selector").val("string");
 	 */
 	public static SeleniumQueryObject val(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String value) {
+		SeleniumQueryObject.LOGGER.debug("Setting value of "+ seleniumQueryObject +" to: \""+value+"\".");
 		for (WebElement element : elements) {
 			val(seleniumQueryObject.getWebDriver(), element, value);
 		}

@@ -18,6 +18,7 @@ package io.github.seleniumquery.functions;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
+import io.github.seleniumquery.functions.jquery.forms.ValFunction;
 
 public class SeleniumQueryFunctions {
 
@@ -27,6 +28,18 @@ public class SeleniumQueryFunctions {
 
     public SeleniumQueryObject propWrite(SeleniumQueryObject seleniumQueryObject, String propertyName, Object value) {
         return PropFunction.prop(seleniumQueryObject, propertyName, value);
+    }
+
+    public String valRead(SeleniumQueryObject seleniumQueryObject) {
+        return ValFunction.val(seleniumQueryObject.get());
+    }
+
+    public SeleniumQueryObject valWrite(SeleniumQueryObject seleniumQueryObject, String value) {
+        return ValFunction.val(seleniumQueryObject, seleniumQueryObject.get(), value);
+    }
+
+    public SeleniumQueryObject valWrite(SeleniumQueryObject seleniumQueryObject, Number value) {
+        return ValFunction.val(seleniumQueryObject, seleniumQueryObject.get(), value);
     }
 
 }
