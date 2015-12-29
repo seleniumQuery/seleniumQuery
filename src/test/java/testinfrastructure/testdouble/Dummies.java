@@ -16,6 +16,7 @@
 
 package testinfrastructure.testdouble;
 
+import com.google.common.base.Predicate;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.openqa.selenium.By;
@@ -58,6 +59,11 @@ public class Dummies {
 
     public static WebElement createDummyWebElement() {
         return createDummy(WebElement.class);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Predicate<WebElement> createDummyWebElementPredicate() {
+        return createDummy(Predicate.class);
     }
 
 }
