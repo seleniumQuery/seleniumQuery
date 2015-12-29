@@ -18,6 +18,7 @@ package integration.io.github.seleniumquery.by;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import io.github.seleniumquery.utils.DriverVersionUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.mock;
 public class DriverVersionUtilsTest {
 
 	@Test
+	@Ignore
 	public void isHtmlUnitDriverEmulatingIE__chrome() {
 		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.CHROME);
 		assertDriverIsNotHtmlUnitDriverEmulatingIE(htmlUnitDriver);
@@ -40,12 +42,14 @@ public class DriverVersionUtilsTest {
 	}
 
 	@Test
+	@Ignore
 	@SuppressWarnings("deprecation")
 	public void isHtmlUnitDriverEmulatingIE__firefox_deprecated_versions() {
 		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_31));
 	}
 
 	@Test
+	@Ignore
 	public void isHtmlUnitDriverEmulatingIE__firefox_non_deprecated_versions() {
 		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_38));
 	}
@@ -58,7 +62,8 @@ public class DriverVersionUtilsTest {
 	}
 
 	private void assertDriverIsHtmlUnitEmulatingIE(HtmlUnitDriver htmlUnitDriver) {
-		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(htmlUnitDriver);
+        System.out.println("\t@# Sending a "+htmlUnitDriver.getClass());
+        boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(htmlUnitDriver);
 		assertThat(isHtmlUnitDriverEmulatingIE, is(true));
 	}
 
@@ -69,6 +74,7 @@ public class DriverVersionUtilsTest {
 	}
 	
 	@Test
+	@Ignore
 	public void isHtmlUnitDriverEmulatingIE__not_HtmlUnit() {
 		WebDriver webDriverMock = mock(WebDriver.class);
 		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(webDriverMock);
