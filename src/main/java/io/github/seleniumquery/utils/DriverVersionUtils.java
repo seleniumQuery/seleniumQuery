@@ -17,6 +17,7 @@
 package io.github.seleniumquery.utils;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -44,7 +45,7 @@ public class DriverVersionUtils {
 		return instance;
 	}
 
-	// for test purposes
+    @VisibleForTesting // this method only exists for test purposes (as this class is a singleton)
 	public static void setInstance(DriverVersionUtils instance) {
 		DriverVersionUtils.instance = instance;
 	}
@@ -86,13 +87,7 @@ public class DriverVersionUtils {
 	}
 
     public static boolean isHtmlUnitDriverEmulatingIE(WebDriver driver) {
-        System.out.println("\t\t@# Received a "+driver.getClass());
-		boolean htmlUnitDriver = DriverVersionUtils.getInstance().isHtmlUnitDriver(driver);
-		System.out.println("\t\t@# --- Is htmlUnit? "+htmlUnitDriver);
-		System.out.println("\t\t@# --- Is htmlUnit MANUALLY? "+ (driver instanceof HtmlUnitDriver));
-		String emulatedBrowser = getEmulatedBrowser((HtmlUnitDriver) driver);
-		System.out.println("\t\t@# --- emulatedBrowser? "+emulatedBrowser);
-		return htmlUnitDriver && emulatedBrowser.startsWith("IE");
+        return DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && getEmulatedBrowser((HtmlUnitDriver) driver).startsWith("IE");
 	}
 
 	public static boolean isHtmlUnitDriverEmulatingIEBelow11(WebDriver driver) {
@@ -119,7 +114,6 @@ public class DriverVersionUtils {
 			getWebClientMethod.setAccessible(wasAccessibleBefore);
 			return webClient.getBrowserVersion().toString();
 		} catch (Exception e) {
-			System.out.println("Error while inspecting HtmlUnitDriver version. " + e.getMessage());
 			LOGGER.debug("Error while inspecting HtmlUnitDriver version.", e);
 			return "";
 		}
