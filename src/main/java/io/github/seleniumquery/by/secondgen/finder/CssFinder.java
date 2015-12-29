@@ -26,14 +26,14 @@ import java.util.List;
  * This object is capable of finding {@link WebElement}s through CSS on a given {@link SearchContext}.<br><br>
  *
  * Components:
- *  Given the selector: "* div > p:visible"
+ *  Given the selector: {@code "* div > p:visible"}
  *
  *  Then:
- *  <code>
+ *  <pre>
  *   "div > " would be leftPart
  *   "p" would be tag
  *   ":visible" would be rightPart
- * </code>
+ * </pre>
  *
  * If, during the time this finder is being built, at some point it decides the CSS Selector asked
  * by the user can't be translated directly into another CSS Selector (e.g. it is an extended selector, such as :hidden),

@@ -28,7 +28,7 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.DescendantSelector;
 
 /**
- * PARENT > ELEMENT
+ * {@code PARENT > ELEMENT }
  *
  * @author acdcjunior
  * @since 0.9.0

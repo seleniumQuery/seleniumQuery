@@ -31,16 +31,15 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:checked
  * </p>
  *
- * <p>
- *    <h1>#Cross-Driver</h1>
- *    In PhantomJSDriver and HtmlUnitDriver, <code>document.querySelectorAll(":checked")</code> does not work
- *    for {@code <option>} tags, so we should consider it as not supported!
- *    <br>
- *    Issue in PhantomJS: https://github.com/ariya/phantomjs/issues/11550
- *    <br>
- *    We have a test (endtoend.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest) that asserts these
- *    bugs continue to exist.
- * </p>
+ * <br>
+ * <h1>#Cross-Driver</h1>
+ * In PhantomJSDriver and HtmlUnitDriver, <code>document.querySelectorAll(":checked")</code> does not work
+ * for {@code <option>} tags, so we should consider it as not supported!
+ * <br>
+ * Issue in PhantomJS: https://github.com/ariya/phantomjs/issues/11550
+ * <br>
+ * We have a test (endtoend.crossdriver.driverbugs.PhantomJSAndHtmlUnitCheckedSelectorBugTest) that asserts these
+ * bugs continue to exist.
  *
  * @author acdcjunior
  * @since 0.10.0

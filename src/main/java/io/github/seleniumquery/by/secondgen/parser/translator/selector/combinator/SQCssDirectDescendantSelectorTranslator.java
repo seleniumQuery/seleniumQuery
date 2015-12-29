@@ -23,7 +23,7 @@ import io.github.seleniumquery.by.secondgen.parser.translator.selector.SQCssSele
 import org.w3c.css.sac.DescendantSelector;
 
 /**
- * PARENT > ELEMENT
+ * {@code PARENT > ELEMENT}
  *
  * @author acdcjunior
  * @since 0.10.0
