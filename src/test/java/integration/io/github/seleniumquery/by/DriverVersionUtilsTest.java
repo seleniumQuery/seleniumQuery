@@ -18,7 +18,7 @@ package integration.io.github.seleniumquery.by;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import io.github.seleniumquery.utils.DriverVersionUtils;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -29,8 +29,13 @@ import static org.mockito.Mockito.mock;
 
 public class DriverVersionUtilsTest {
 
-	@Test
-	@Ignore
+    @Before
+    public void setUp() {
+        // restore an eventually overriden (during other tests) instance
+        DriverVersionUtils.setInstance(new DriverVersionUtils());
+    }
+
+    @Test
 	public void isHtmlUnitDriverEmulatingIE__chrome() {
 		HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(BrowserVersion.CHROME);
 		assertDriverIsNotHtmlUnitDriverEmulatingIE(htmlUnitDriver);
@@ -42,14 +47,12 @@ public class DriverVersionUtilsTest {
 	}
 
 	@Test
-	@Ignore
 	@SuppressWarnings("deprecation")
 	public void isHtmlUnitDriverEmulatingIE__firefox_deprecated_versions() {
 		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_31));
 	}
 
 	@Test
-	@Ignore
 	public void isHtmlUnitDriverEmulatingIE__firefox_non_deprecated_versions() {
 		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_38));
 	}
@@ -57,24 +60,20 @@ public class DriverVersionUtilsTest {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void isHtmlUnitDriverEmulatingIE__ie_deprecated_versions() {
-		System.out.println("#@ Test if is IE8");
 		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_8));
 	}
 
 	private void assertDriverIsHtmlUnitEmulatingIE(HtmlUnitDriver htmlUnitDriver) {
-        System.out.println("\t@# Sending a "+htmlUnitDriver.getClass());
         boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(htmlUnitDriver);
 		assertThat(isHtmlUnitDriverEmulatingIE, is(true));
 	}
 
 	@Test
 	public void isHtmlUnitDriverEmulatingIE__ie_non_deprecated_versions() {
-		System.out.println("#@ Test if is IE11");
 		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_11));
 	}
 	
 	@Test
-	@Ignore
 	public void isHtmlUnitDriverEmulatingIE__not_HtmlUnit() {
 		WebDriver webDriverMock = mock(WebDriver.class);
 		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(webDriverMock);
