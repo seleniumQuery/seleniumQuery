@@ -20,11 +20,13 @@ import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
-import testinfrastructure.testdouble.Dummies;
-import testinfrastructure.testdouble.SeleniumQueryObjectMother;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
+import static testinfrastructure.testdouble.Dummies.createDummyWebElement;
+import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObject;
+import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
 
 public class FilterFunctionTest {
 
@@ -33,15 +35,35 @@ public class FilterFunctionTest {
     FilterFunction filterFunction = new FilterFunction();
 
     @Test
-    public void filter_null_should_return_same_elements() {
+    public void null_predicate__should_return_same_elements() {
         // given
-        WebElement dummyWebElement = Dummies.createDummyWebElement();
-        WebElement dummyWebElement2 = Dummies.createDummyWebElement();
-        SeleniumQueryObject sqo = SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements(dummyWebElement, dummyWebElement2);
+        WebElement dummyWebElement = createDummyWebElement();
+        WebElement dummyWebElement2 = createDummyWebElement();
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithElements(dummyWebElement, dummyWebElement2);
         // when
-        SeleniumQueryObject filteredObject = filterFunction.filter(sqo, NULL_PREDICATE);
+        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
         // then
-        assertThat(filteredObject.get(), containsInAnyOrder(dummyWebElement, dummyWebElement2));
+        assertThat(resultSQO.get(), containsInAnyOrder(dummyWebElement, dummyWebElement2));
+    }
+
+    @Test
+    public void resultSQO_should_have_targetSQO_as_previous_object() {
+        // given
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObject();
+        // when
+        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
+        // then
+        assertThat(resultSQO.end(), is(targetSQO));
+    }
+
+    @Test
+    public void resultSQO_should_have_same_SQFunctions_as_targetSQO() {
+        // given
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObject();
+        // when
+        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
+        // then
+        assertThat(resultSQO.getSeleniumQueryFunctions(), is(targetSQO.getSeleniumQueryFunctions()));
     }
 
 }

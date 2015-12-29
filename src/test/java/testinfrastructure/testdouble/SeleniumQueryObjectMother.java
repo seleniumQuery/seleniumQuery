@@ -42,6 +42,10 @@ public class SeleniumQueryObjectMother {
         return createStubSeleniumQueryObject(new SeleniumQueryFunctions(), asList(elements));
     }
 
+    public static SeleniumQueryObject createStubSeleniumQueryObject() {
+        return createStubSeleniumQueryObjectWithElements();
+    }
+
     /**
      * Creates a "smart" dummy {@link SeleniumQueryObject}. It's goal is to be a mere placeholder in a test
      * fixture. It is "smart" because any method call to it will throw an exception (which indicates the dummy
