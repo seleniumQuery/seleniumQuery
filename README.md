@@ -1,4 +1,6 @@
 # [seleniumQuery](http://seleniumquery.github.io)
+[![Build Status](https://travis-ci.org/seleniumQuery/seleniumQuery.svg?branch=master)](https://travis-ci.org/seleniumQuery/seleniumQuery)
+
 ### *Cross-Driver* jQuery-like Java interface for Selenium WebDriver
 
 seleniumQuery is a Java library/framework that brings a ***cross-driver*** **jQuery-like** interface for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
