@@ -18,19 +18,27 @@ package endtoend.browser.driver.builders;
 
 import io.github.seleniumquery.browser.driver.builders.InternetExplorerDriverBuilder;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
 public class InternetExplorerDriverBuilderTest {
 
+    @Before
+    public void setUp() {
+        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunIE());
+    }
+
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         $.quit();
     }
 

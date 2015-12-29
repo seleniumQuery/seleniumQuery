@@ -17,12 +17,20 @@
 package endtoend.showcase;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 public class SeleniumQueryExampleTest {
+
+    @Before
+    public void setUp() {
+        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunFirefox());
+    }
 
     @Test
     public void showcase_should_work() {
