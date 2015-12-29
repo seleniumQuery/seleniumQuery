@@ -31,7 +31,7 @@ import io.github.seleniumquery.utils.SelectorUtils;
  */
 public class SQCssEqualsOrHasAttributeCondition extends SQCssAttributeCondition {
 
-    /**
+    /*
      * [simple]
      * Attribute value is null in this case.
      */
@@ -39,7 +39,7 @@ public class SQCssEqualsOrHasAttributeCondition extends SQCssAttributeCondition 
         super(attributeName, null);
     }
 
-    /**
+    /*
      * [restart="never"]
      */
     public SQCssEqualsOrHasAttributeCondition(String attributeName, String wantedValue) {

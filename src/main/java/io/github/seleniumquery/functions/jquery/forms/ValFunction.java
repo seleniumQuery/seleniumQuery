@@ -37,7 +37,7 @@ public class ValFunction {
 
 	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryObject.class);
 	
-	/**
+	/*
 	 * $(".selector").val();
 	 */
 	public static String val(List<WebElement> elements) {
@@ -70,7 +70,7 @@ public class ValFunction {
 		return "";
 	}
 	
-	/**
+	/*
 	 * $(".selector").val(123);
 	 */
 	public static SeleniumQueryObject val(SeleniumQueryObject caller, List<WebElement> elements, Number value) {
@@ -78,7 +78,7 @@ public class ValFunction {
 		return val(caller, elements, value.toString());
 	}
 
-	/**
+	/*
 	 * $(".selector").val("string");
 	 */
 	public static SeleniumQueryObject val(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String value) {

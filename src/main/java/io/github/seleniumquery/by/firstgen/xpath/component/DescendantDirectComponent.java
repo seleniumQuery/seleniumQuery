@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.firstgen.xpath.component;
 
 import io.github.seleniumquery.by.firstgen.xpath.UnsupportedConditionalSelector;
 
-/**
- * cssA > cssB -> "/" -> xpathA/xpathB
+/*
+ * cssA > cssB  ->  "/" -> xpathA/xpathB
  */
 public class DescendantDirectComponent extends XPathComponent {
 
