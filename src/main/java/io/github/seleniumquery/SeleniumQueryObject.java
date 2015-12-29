@@ -222,6 +222,14 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return this.by;
 	}
 
+    /**
+     * Returns the seleniumQueryFunctions service used by this object.
+     * @return the seleniumQueryFunctions service used by this object.
+     */
+    public SeleniumQueryFunctions getSeleniumQueryFunctions() {
+        return seleniumQueryFunctions;
+    }
+
 
 	/**************************************************************************************************************************************
 	 * jQuery-emulating functions
@@ -471,9 +479,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Removes an attribute from each element in the set of matched elements.
 	 * It can be a space-separated list of attributes.
 	 *
+     * @param attributeNames An attribute to remove; it can be a space-separated list of attributes.
 	 * @return A self reference.
 	 *
-	 * @since 0.9.0
+	 * @since 0.9.0]
 	 */
 	public SeleniumQueryObject removeAttr(String attributeNames) {
 		return RemoveAttrFunction.removeAttr(this, attributeNames);
@@ -664,7 +673,4 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return seleniumQueryFunctions.filterFunction(this, filterFunction);
 	}
 
-    public SeleniumQueryFunctions getSeleniumQueryFunctions() {
-        return seleniumQueryFunctions;
-    }
 }

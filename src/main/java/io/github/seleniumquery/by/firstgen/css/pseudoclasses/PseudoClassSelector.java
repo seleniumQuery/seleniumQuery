@@ -43,7 +43,9 @@ public class PseudoClassSelector implements io.github.seleniumquery.by.common.ps
 	/**
 	 * Represents the selector this pseudo class condition should apply to.
 	 * 
-	 * In other words, the selector up to the point of this pseudo class ---> #i.mean.this.selector:before-this-pseudo
+	 * In other words, the selector up to the point of this pseudo class, that is, #i.mean.this.selector:before-this-pseudo
+	 *
+	 * @return the selector this condition should be applied to.
 	 */
 	public Selector getSelector() {
 		return selectorThisConditionShouldApply;

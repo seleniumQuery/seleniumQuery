@@ -57,7 +57,8 @@ public class SeleniumQueryBy extends By {
 	 * Enhanced selector is not just the CSS selector, it also supports XPath expressions and some
 	 * Sizzle enhancements.
 	 *
-	 * @return a By which locates elements via seleniumQuery's enhanced selector.
+     * @param selector The selector string
+	 * @return a By which locates elements via seleniumQuery's enhanced selector
 	 *
 	 * @since 0.9.0
 	 */
@@ -105,6 +106,7 @@ public class SeleniumQueryBy extends By {
 
 	/**
 	 * If it begins with "/" or "(/" or "(((((/" or an XPath Axis, we assume the selector given is a XPath expression.
+     * @return If this By's selector is actually an XPath expression.
 	 */
 	public boolean isXPathExpression() {
 		return XPATH_EXPRESSION_PATTERN.matcher(this.selector).matches();

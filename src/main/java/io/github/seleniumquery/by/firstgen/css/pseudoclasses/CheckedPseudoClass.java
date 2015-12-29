@@ -30,7 +30,7 @@ import static io.github.seleniumquery.utils.WebElementUtils.*;
  * #Cross-Driver
  * In HtmlUnitDriver, document.querySelectorAll(":checked") is not consistent, so we should consider it as
  * not supported;
- * In PhantomJSDriver, document.querySelectorAll(":checked") does not work for <option> tags, so we should
+ * In PhantomJSDriver, document.querySelectorAll(":checked") does not work for {@code <option>} tags, so we should
  * consider it as not supported as well!
  *
  * @author acdcjunior

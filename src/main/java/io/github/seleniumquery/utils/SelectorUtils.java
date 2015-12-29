@@ -30,8 +30,9 @@ import org.openqa.selenium.internal.WrapsDriver;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import static java.util.Collections.singletonList;
 
 /**
  * Contains some utility functions for dealing with WebDrivers, such as inspecting their version.
@@ -73,7 +74,8 @@ public class SelectorUtils {
 		}
 	}
 	
-	public static List<WebElement> parents(WebElement element) {
+	@SuppressWarnings("unused")
+    public static List<WebElement> parents(WebElement element) {
 		return element.findElements(By.xpath("ancestor::node()[count(ancestor-or-self::html) > 0]"));
 	}
 
@@ -96,7 +98,8 @@ public class SelectorUtils {
 	public static boolean hasAttribute(WebElement element, String localName) {
 		return element.getAttribute(localName) != null;
 	}
-	
+
+    @SuppressWarnings("UnnecessaryLocalVariable")
 	public static boolean isVisible(WebElement element) {
 		boolean elementIsNotVisible = !element.isDisplayed();
 		if (elementIsNotVisible) {
@@ -147,7 +150,7 @@ public class SelectorUtils {
 		WebElement parent = SelectorUtils.parent(element);
 		// if parent is null, then element is <HTML>, thus have no siblings
 		if (parent == null) {
-			return new ArrayList<>(Arrays.asList(element));
+			return singletonList(element);
 		}
 		return getDirectChildren(parent);
 	}
@@ -186,6 +189,9 @@ public class SelectorUtils {
 	 * http://mathiasbynens.be/notes/css-escapes
 	 * http://mothereff.in/css-escapes
 	 * https://github.com/mathiasbynens/mothereff.in/blob/master/css-escapes/eff.js
+	 *
+	 * @param unescapedSelector The CSS selector to escape
+     * @return The CSS selector escaped
 	 */
 	public static String escapeSelector(String unescapedSelector) {
 		String escapedSelector = unescapedSelector;
@@ -207,6 +213,9 @@ public class SelectorUtils {
 	/**
 	 * Escapes the attributes values into a valid CSS string.
 	 * Deals with the way the CSS parser gives the attributes' values to us.
+     *
+     * @param attributeValue The CSS attribute value to escape
+     * @return The CSS attribute value escaped
 	 */
 	public static String escapeAttributeValue(String attributeValue) {
 		// " comes escaped already, so we unescape them (otherwise the next step will escape its \)
@@ -233,6 +242,9 @@ public class SelectorUtils {
 	/**
 	 * Escapes the attributes values into a valid CSS string.
 	 * Deals with the way the CSS parser gives the attributes' values to us.
+     *
+     * @param stringValue The string value to escape into a valid CSS string
+     * @return The string value escaped to into a valid CSS string
 	 */
 	public static String unescapeString(String stringValue) {
 		String escapedString = stringValue;

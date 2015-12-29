@@ -36,6 +36,7 @@ public class SeleniumQueryWaitUntil {
 	/**
 	 * Creates a waitUntil object for the given seleniumQueryObject, with timeout and polling interval
 	 * as defined in the config files.
+	 * @param seleniumQueryObject The object to wait for.
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryWaitUntil(SeleniumQueryObject seleniumQueryObject) {
@@ -45,16 +46,22 @@ public class SeleniumQueryWaitUntil {
 	/**
 	 * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval
 	 * as defined in the config files.
+	 * @param seleniumQueryObject The object to wait for.
+	 * @param waitUntilTimeout Time, in ms, to wait.
 	 * @since 0.9.0
-	 */
+     */
 	public SeleniumQueryWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout) {
 		this(seleniumQueryObject, waitUntilTimeout, SeleniumQueryConfig.getWaitUntilPollingInterval());
 	}
 	
 	/**
 	 * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval.
+	 *
+	 * @param seleniumQueryObject The object to wait for.
+	 * @param waitUntilTimeout Time, in ms, to wait.
+	 * @param waitUntilPollingInterval Interval, in ms, to poll the object.
 	 * @since 0.9.0
-	 */
+     */
 	public SeleniumQueryWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout, long waitUntilPollingInterval) {
 		this.seleniumQueryObject = seleniumQueryObject;
 		this.fluentWait = new SeleniumQueryFluentWait(waitUntilTimeout, waitUntilPollingInterval);
@@ -64,6 +71,7 @@ public class SeleniumQueryWaitUntil {
 	 * Waits until <b>at least one element returned</b> - by a query to the selector used
 	 * to construct this seleniumQuery object - <b>is matched by the selector given</b>.
 	 *
+     * @param selector The selector to test.
 	 * @return An object for specifying other waiting conditions (<code>.and()</code>) or to execute usual functions (<code>.then()</code>).
 	 * 
 	 * @since 0.9.0
@@ -98,6 +106,7 @@ public class SeleniumQueryWaitUntil {
 	/**
 	 * Waits until every matched element has the given attribute meeting the specified criteria.
 	 *
+     * @param attributeName The name of the attribute to evaluate.
 	 * @return An object for specifying the criteria which the attributes of the elements must meet.
 	 *
 	 * @since 0.9.0
@@ -109,11 +118,13 @@ public class SeleniumQueryWaitUntil {
 	/**
 	 * Waits until every matched element has the given attribute property the specified criteria.
 	 *
+     * @param propertyName The name of the property to evaluate.
+     * @param <T>  The expected type of the property.
 	 * @return An object for specifying the criteria which the properties of the elements must meet.
 	 *
 	 * @since 0.9.0
 	 */
-	public <T> SeleniumQueryEvaluateUntil<T> prop(String propertyName) {
+    public <T> SeleniumQueryEvaluateUntil<T> prop(String propertyName) {
 		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, new PropGetter<T>(propertyName), seleniumQueryObject);
 	}
 

@@ -24,7 +24,7 @@ import org.openqa.selenium.WebElement;
 import static io.github.seleniumquery.utils.SelectorUtils.isVisible;
 
 /**
- * see -> http://api.jqueryui.com/focusable-selector/
+ * see http://api.jqueryui.com/focusable-selector/
  * No browser supports :focusable natively.
  * 
  * Some elements are natively focusable, while others require explicitly setting a tab index. In all cases, the element must be visible in order to be focusable.
