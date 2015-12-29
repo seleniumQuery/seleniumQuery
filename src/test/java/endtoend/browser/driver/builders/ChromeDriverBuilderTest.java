@@ -18,15 +18,18 @@ package endtoend.browser.driver.builders;
 
 import io.github.seleniumquery.browser.driver.builders.ChromeDriverBuilder;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
 public class ChromeDriverBuilderTest {
@@ -36,7 +39,7 @@ public class ChromeDriverBuilderTest {
     static String originalPathLinux;
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void beforeClass() {
         if (!System.getProperty("os.name").toLowerCase().contains("win")) {
             chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX;
         }
@@ -44,8 +47,13 @@ public class ChromeDriverBuilderTest {
         originalPathLinux = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX;
     }
 
+    @Before
+    public void setUp() {
+        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunChrome());
+    }
+
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS = originalPathWindows;
         ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX = originalPathLinux;
         $.quit();

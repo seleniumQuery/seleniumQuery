@@ -23,11 +23,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.Mockito.*;
 
 public class SeleniumQueryDriverTest {
@@ -117,6 +119,7 @@ public class SeleniumQueryDriverTest {
 
     @Test // I know this test asserts two things, but instantiating a FirefoxDriver is expensive!
     public void useFirefox__should_create_a_FirefoxDriver_upon_first_use___and___should_quit_the_previous_driver() {
+        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunFirefox());
         // given
         WebDriver previousDriver = mock(WebDriver.class);
         $.driver().use(previousDriver);
@@ -135,6 +138,7 @@ public class SeleniumQueryDriverTest {
 
     @Test // I know this test asserts two things, but instantiating a ChromeDriver is expensive!
     public void useChrome__should_create_a_ChromeDriver_upon_first_use___and___should_quit_the_previous_driver() {
+        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunChrome());
         // given
         WebDriver previousDriver = mock(WebDriver.class);
         $.driver().use(previousDriver);
@@ -153,6 +157,7 @@ public class SeleniumQueryDriverTest {
 
     @Test // I know this test asserts two things, but instantiating a InternetExplorerDriver is expensive!
     public void useInternetExplorer__should_create_a_InternetExplorerDriver_upon_first_use___and___should_quit_the_previous_driver() {
+        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunIE());
         // given
         WebDriver previousDriver = mock(WebDriver.class);
         $.driver().use(previousDriver);
@@ -171,6 +176,7 @@ public class SeleniumQueryDriverTest {
 
     @Test // I know this test asserts two things, but instantiating a PhantomJSDriver is expensive!
     public void usePhantomJS__should_create_a_PhantomJSDriver_upon_first_use___and___should_quit_the_previous_driver() {
+        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunPhantomJS());
         // given
         WebDriver previousDriver = mock(WebDriver.class);
         $.driver().use(previousDriver);

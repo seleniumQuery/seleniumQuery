@@ -17,21 +17,29 @@
 package endtoend.browser.driver.builders;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
 public class FirefoxDriverBuilderTest {
 
+    @Before
+    public void setUp() {
+        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunFirefox());
+    }
+
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         $.driver().quit();
     }
 
