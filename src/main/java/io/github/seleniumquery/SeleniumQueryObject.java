@@ -644,4 +644,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return seleniumQueryFunctions.filterFunction(this, filterFunction);
 	}
 
+    public SeleniumQueryFunctions getSeleniumQueryFunctions() {
+        return seleniumQueryFunctions;
+    }
 }

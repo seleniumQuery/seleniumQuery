@@ -20,10 +20,16 @@ import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.WebElement;
 
+import static io.github.seleniumquery.InternalSeleniumQueryObjectFactory.instance;
+
 public class FilterFunction {
 
     public SeleniumQueryObject filter(SeleniumQueryObject seleniumQueryObject, Predicate<WebElement> filterFunction) {
-        return seleniumQueryObject;
+        return instance().create(seleniumQueryObject.getSeleniumQueryFunctions(),
+                                 seleniumQueryObject.getWebDriver(),
+                                 seleniumQueryObject.getBy(),
+                                 seleniumQueryObject.get(),
+                                 seleniumQueryObject);
     }
 
 }
