@@ -195,7 +195,7 @@ public class SeleniumQueryDriver {
      * Note that the PhantomJS Driver needs a <i>PhantomJS executable</i> to act as browser and as such
      * Selenium must know the path to it. It is a file usually named <code>phantomjs.exe</code> (windows) or <code>phantomjs</code> (linux)
      * and its latest version can be downloaded from
-     * <a href="http://phantomjs.org/download.html ">PhantomJS download page</a>.
+     * <a href="http://phantomjs.org/download.html">PhantomJS download page</a>.
      * </p>
      * <br>
      * <b> This method looks for the PhantomJS executable (<code>phantomjs.exe</code>/<code>phantomjs</code>) at the CLASSPATH
