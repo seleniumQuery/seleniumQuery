@@ -23,18 +23,17 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * This object is capable of finding {@link WebElement}s through CSS on a given {@link SearchContext}.<br><br>
- *
- * Components:
+ * This object is capable of finding {@link WebElement}s through CSS on a given {@link SearchContext}.
+ * <br><br>
+ * Components:<br>
  *  Given the selector: {@code "* div > p:visible"}
+ * <br><br>
+ *  Then:<br>
+ *   {@code "div > "} would be leftPart<br>
+ *   {@code "p"} would be tag<br>
+ *   {@code ":visible"} would be rightPart<br>
  *
- *  Then:
- *  <pre>
- *   "div > " would be leftPart
- *   "p" would be tag
- *   ":visible" would be rightPart
- * </pre>
- *
+ * <br><br>
  * If, during the time this finder is being built, at some point it decides the CSS Selector asked
  * by the user can't be translated directly into another CSS Selector (e.g. it is an extended selector, such as :hidden),
  * then {@link CssFinder#CSS_NOT_NATIVELY_SUPPORTED} (the "Null Object") should be returned, what will
