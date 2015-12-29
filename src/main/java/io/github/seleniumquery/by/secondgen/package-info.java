@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/**
+/*
  *
  * "parser" package
  * --> Gets a selector string

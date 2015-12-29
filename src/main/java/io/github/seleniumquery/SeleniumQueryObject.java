@@ -182,6 +182,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * Enables the execution of functions defined by the plugin sent as argument.
 	 *
 	 * @param pluginFunction The plugin instance this object will be handed to.
+     * @param <PLUGIN> The plugin class.
 	 * @return An object provided by the plugin.
 	 *
 	 * @since 0.9.0
@@ -401,6 +402,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * it is preferable to use {@link #click()} instead of setting the attributes
 	 * through this function, as selenium tests should verify the pages from the user point of
 	 * view.</p>
+     *
+     * @param attributeName Name of the attribute to set.
+     * @param value Value to set.
+     * @return The same seleniumQuery object.
 	 *
 	 * @since 0.9.0
 	 */
@@ -411,6 +416,10 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Gets the value of a property for the first element in the set of matched elements.
 	 *
+     * @param propertyName Name of the property to read.
+     * @param <T> Property expected value's type.
+     * @return Property value.
+     *
 	 * @since 0.9.0
 	 */
 	public <T> T prop(String propertyName) {
@@ -425,8 +434,12 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * through this function, as selenium tests should verify the pages from the user point of
 	 * view.</p>
 	 *
+     * @param propertyName Name of the property to write.
+     * @param value The value to set for the property.
+     * @return The same seleniumQueryObject.
+     *
 	 * @since 0.9.0
-	 */
+     */
 	public SeleniumQueryObject prop(String propertyName, Object value) {
 		return seleniumQueryFunctions.propWrite(this, propertyName, value);
 	}
@@ -491,6 +504,9 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	/**
 	 * Determines whether any of the matched elements are assigned the given class.
 	 *
+     * @param className The class name to search for.
+     * @return If any of the matched elements is assigned to the given class.
+     *
 	 * @since 0.9.0
 	 */
 	public boolean hasClass(String className) {
