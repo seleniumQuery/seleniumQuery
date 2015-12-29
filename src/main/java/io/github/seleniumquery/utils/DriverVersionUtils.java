@@ -86,10 +86,12 @@ public class DriverVersionUtils {
 	}
 
     public static boolean isHtmlUnitDriverEmulatingIE(WebDriver driver) {
+        System.out.println("\t\t@# Received a "+driver.getClass());
 		boolean htmlUnitDriver = DriverVersionUtils.getInstance().isHtmlUnitDriver(driver);
-		System.out.println("@# --- Is htmlUnit? "+htmlUnitDriver);
+		System.out.println("\t\t@# --- Is htmlUnit? "+htmlUnitDriver);
+		System.out.println("\t\t@# --- Is htmlUnit MANUALLY? "+ (driver instanceof HtmlUnitDriver));
 		String emulatedBrowser = getEmulatedBrowser((HtmlUnitDriver) driver);
-		System.out.println("@# --- emulatedBrowser? "+emulatedBrowser);
+		System.out.println("\t\t@# --- emulatedBrowser? "+emulatedBrowser);
 		return htmlUnitDriver && emulatedBrowser.startsWith("IE");
 	}
 
