@@ -16,9 +16,12 @@
 
 package io.github.seleniumquery.functions;
 
+import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
 import io.github.seleniumquery.functions.jquery.forms.ValFunction;
+import io.github.seleniumquery.functions.jquery.traversing.filtering.FilterFunction;
+import org.openqa.selenium.WebElement;
 
 public class SeleniumQueryFunctions {
 
@@ -40,6 +43,10 @@ public class SeleniumQueryFunctions {
 
     public SeleniumQueryObject valWrite(SeleniumQueryObject seleniumQueryObject, Number value) {
         return ValFunction.val(seleniumQueryObject, seleniumQueryObject.get(), value);
+    }
+
+    public SeleniumQueryObject filterFunction(SeleniumQueryObject seleniumQueryObject, Predicate<WebElement> filterFunction) {
+        return new FilterFunction().filter(seleniumQueryObject, filterFunction);
     }
 
 }

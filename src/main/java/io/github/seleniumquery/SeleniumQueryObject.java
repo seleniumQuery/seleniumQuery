@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery;
 
+import com.google.common.base.Predicate;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
@@ -630,6 +631,17 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	@Override
 	public String toString() {
 		return this.by.toString();
+	}
+
+    /**
+     * Reduce the set of matched elements to those that pass the predicate's test.
+     *
+     * @param filterFunction A predicate used as a test for each element in the set.
+     * @return An object with the elements that passed the predicate's test.
+     * @since 0.11.0
+     */
+	public SeleniumQueryObject filter(Predicate<WebElement> filterFunction) {
+		return seleniumQueryFunctions.filterFunction(this, filterFunction);
 	}
 
 }
