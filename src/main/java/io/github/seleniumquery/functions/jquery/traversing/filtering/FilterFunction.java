@@ -27,7 +27,7 @@ public class FilterFunction {
     public SeleniumQueryObject filter(SeleniumQueryObject seleniumQueryObject, Predicate<WebElement> filterFunction) {
         return instance().create(seleniumQueryObject.getSeleniumQueryFunctions(),
                                  seleniumQueryObject.getWebDriver(),
-                                 seleniumQueryObject.getBy(),
+                                 null,
                                  seleniumQueryObject.get(),
                                  seleniumQueryObject);
     }
