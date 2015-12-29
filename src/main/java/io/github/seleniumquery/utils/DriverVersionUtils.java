@@ -51,7 +51,7 @@ public class DriverVersionUtils {
 
 	private static final Log LOGGER = LogFactory.getLog(DriverVersionUtils.class);
 	
-	private Map<WebDriver, Map<String, Boolean>> driverSupportedPseudos = new HashMap<WebDriver, Map<String, Boolean>>();
+	private Map<WebDriver, Map<String, Boolean>> driverSupportedPseudos = new HashMap<>();
 	
 	public boolean hasNativeSupportForPseudo(WebDriver driver, String pseudoClass) {
 		Map<String, Boolean> driverMap = getDriverMap(driver);
@@ -79,7 +79,7 @@ public class DriverVersionUtils {
 	private Map<String, Boolean> getDriverMap(WebDriver driver) {
 		Map<String, Boolean> driverMap = driverSupportedPseudos.get(driver);
 		if (driverMap == null) {
-			driverMap = new HashMap<String, Boolean>();
+			driverMap = new HashMap<>();
 			driverSupportedPseudos.put(driver, driverMap);
 		}
 		return driverMap;
@@ -113,6 +113,7 @@ public class DriverVersionUtils {
 			getWebClientMethod.setAccessible(wasAccessibleBefore);
 			return webClient.getBrowserVersion().toString();
 		} catch (Exception e) {
+			System.out.println("Error while inspecting HtmlUnitDriver version. " + e.getMessage());
 			LOGGER.debug("Error while inspecting HtmlUnitDriver version.", e);
 			return "";
 		}
