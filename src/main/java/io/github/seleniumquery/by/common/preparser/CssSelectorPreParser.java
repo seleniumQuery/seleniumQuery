@@ -26,7 +26,7 @@ import static java.lang.Character.isLetter;
  *
  * A "Pre-Parsed Selector" is a:
  * - Transformed Selector (String), repesenting the original selector string, but with some information taken out;
- * - and a Map<String, String>, which will contain the information taken out from the original selector (and not
+ * - and a {@code Map<String, String>}, which will contain the information taken out from the original selector (and not
  * present in the Transformed Selector).
  *
  * This is done to simplify some selectors and to enable others that the SAC Parser can't parse (we replace

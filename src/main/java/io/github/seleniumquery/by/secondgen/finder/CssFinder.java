@@ -29,10 +29,11 @@ import java.util.List;
  *  Given the selector: "* div > p:visible"
  *
  *  Then:
+ *  <code>
  *   "div > " would be leftPart
  *   "p" would be tag
  *   ":visible" would be rightPart
- *
+ * </code>
  *
  * If, during the time this finder is being built, at some point it decides the CSS Selector asked
  * by the user can't be translated directly into another CSS Selector (e.g. it is an extended selector, such as :hidden),

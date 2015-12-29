@@ -495,6 +495,8 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * if at least one of these elements matches the given arguments.
 	 *
 	 * @param selector	A string containing a selector expression to match elements against.
+     * @return If AT LEAS ONE of the elements matches the given selector.
+     *
 	 * @since 0.9.0
 	 */
 	public boolean is(String selector) {
@@ -544,6 +546,8 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * <p><b>Note:</b> The order of the triggering is the order of the elements in the
 	 * matched list. The last one will end up with the focus, though all of them
 	 * will have it at some point.</p>
+     *
+     * @return A self reference.
 	 *
 	 * @since 0.9.0
 	 */

@@ -57,6 +57,8 @@ public class SeleniumQueryBy extends By {
 	 * Enhanced selector is not just the CSS selector, it also supports XPath expressions and some
 	 * Sizzle enhancements.
 	 *
+	 * @return a By which locates elements via seleniumQuery's enhanced selector.
+	 *
 	 * @since 0.9.0
 	 */
 	public static SeleniumQueryBy byEnhancedSelector(String selector) {

@@ -30,8 +30,12 @@ public interface CssSelector<T, C extends XPathComponent> {
 	/**
 	 * Tests if the given element, under the given driver, matches the selector.
 	 * 
+	 * @param driver The driver enviroment to check
+	 * @param element The element that will be tested
 	 * @param argumentMap map of strings that were extracted from the selector
-	 */
+	 * @param selector The selector that will be tested
+     * @return If the element matches the selector under the given driver.
+     */
 	boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, T selector);
 
 	C toXPath(ArgumentMap argumentMap, T selector);
