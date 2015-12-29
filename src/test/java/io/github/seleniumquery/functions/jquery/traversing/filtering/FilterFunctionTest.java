@@ -66,4 +66,14 @@ public class FilterFunctionTest {
         assertThat(resultSQO.getSeleniumQueryFunctions(), is(targetSQO.getSeleniumQueryFunctions()));
     }
 
+    @Test
+    public void resultSQO_should_have_same_WebDriver_as_targetSQO() {
+        // given
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObject();
+        // when
+        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
+        // then
+        assertThat(resultSQO.getWebDriver(), is(targetSQO.getWebDriver()));
+    }
+
 }
