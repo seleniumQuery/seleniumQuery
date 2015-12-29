@@ -86,7 +86,11 @@ public class DriverVersionUtils {
 	}
 
     public static boolean isHtmlUnitDriverEmulatingIE(WebDriver driver) {
-        return DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && getEmulatedBrowser((HtmlUnitDriver) driver).startsWith("IE");
+		boolean htmlUnitDriver = DriverVersionUtils.getInstance().isHtmlUnitDriver(driver);
+		System.out.println("@# --- Is htmlUnit? "+htmlUnitDriver);
+		String emulatedBrowser = getEmulatedBrowser((HtmlUnitDriver) driver);
+		System.out.println("@# --- emulatedBrowser? "+emulatedBrowser);
+		return htmlUnitDriver && emulatedBrowser.startsWith("IE");
 	}
 
 	public static boolean isHtmlUnitDriverEmulatingIEBelow11(WebDriver driver) {

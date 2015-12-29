@@ -53,6 +53,7 @@ public class DriverVersionUtilsTest {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void isHtmlUnitDriverEmulatingIE__ie_deprecated_versions() {
+		System.out.println("#@ Test if is IE8");
 		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_8));
 	}
 
@@ -63,6 +64,7 @@ public class DriverVersionUtilsTest {
 
 	@Test
 	public void isHtmlUnitDriverEmulatingIE__ie_non_deprecated_versions() {
+		System.out.println("#@ Test if is IE11");
 		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_11));
 	}
 	
