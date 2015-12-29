@@ -32,6 +32,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
+import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
 
 public class PhantomJSDriverBuilderTest {
 
@@ -41,7 +42,7 @@ public class PhantomJSDriverBuilderTest {
 
     @BeforeClass
     public static void beforeClass() {
-        if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+        if (isNotWindowsOS()) {
             phantomExecutable = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX;
         }
         originalPathWindows = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS;

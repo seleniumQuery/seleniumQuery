@@ -31,6 +31,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
+import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
 
 public class ChromeDriverBuilderTest {
 
@@ -40,7 +41,7 @@ public class ChromeDriverBuilderTest {
 
     @BeforeClass
     public static void beforeClass() {
-        if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+        if (isNotWindowsOS()) {
             chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX;
         }
         originalPathWindows = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS;
