@@ -16,13 +16,13 @@
 
 package endtoend.functions.jquery.forms;
 
-import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -40,7 +40,7 @@ public class ValFunctionTest {
 
 		try {
 			$("#div-with-text-bozo").val("SHOULD HAVE NO EFFECT");
-            if (!DriverVersionUtils.getInstance().isHtmlUnitDriver($.driver().get())) {
+            if (DriverInTest.isNotHtmlUnitDriver($.driver().get())) {
 				fail($.driver().get().getClass().toString());
 			}
 		} catch (Exception ignore) { }

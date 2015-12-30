@@ -19,9 +19,9 @@ package endtoend.selectors.pseudoclasses.form;
 import org.junit.ClassRule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.utils.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -33,7 +33,7 @@ public class SubmitPseudoClassTest {
 	// http://jsbin.com/mopireya/6/edit
 	@Test
 	public void submitPseudoClass() {
-		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
+		if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat($("[type='submit']").size(), is(7));
 		} else {
 			assertThat($("[type='submit']").size(), is(6));

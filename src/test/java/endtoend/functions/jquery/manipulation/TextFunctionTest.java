@@ -16,15 +16,13 @@
 
 package endtoend.functions.jquery.manipulation;
 
-import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.utils.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -36,9 +34,9 @@ public class TextFunctionTest {
     public void text_function() {
 		WebDriver driver = $.driver().get();
 
-        if (isHtmlUnitDriverEmulatingIEBelow11(driver)) {
+        if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11(driver)) {
     		assertThat($("div.demo-container").text().replaceAll("\\s+", " "), is("Demonstration Box list item 1list item 2"));
-    	} else if (DriverVersionUtils.getInstance().isHtmlUnitDriver(driver)) {
+    	} else if (DriverInTest.isHtmlUnitDriver(driver)) {
     			assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1 list item 2"));
     	} else {
     		assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1\nlist item 2"));
@@ -56,7 +54,7 @@ public class TextFunctionTest {
 		// This is OK, as it is the SAME behavior presented by jQuery!
 		//
 		// Well, HtmlUnit follows IE...
-        if (driver instanceof InternetExplorerDriver || DriverVersionUtils.getInstance().isHtmlUnitDriver(driver)) {
+        if (DriverInTest.isIEDriver(driver) || DriverInTest.isHtmlUnitDriver(driver)) {
     		assertThat($("#myTextArea").text().trim(), is("Typed stuff in textarea"));
 		} else {
 			assertThat($("#myTextArea").text().trim(), is("Initial value for textarea"));

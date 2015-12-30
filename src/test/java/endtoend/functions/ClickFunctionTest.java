@@ -17,16 +17,15 @@
 package endtoend.functions;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -102,12 +101,10 @@ public class ClickFunctionTest {
     public static void removeDivBodyFocusAddedWhenDriverIsHtmlUnit() {
         WebDriver driver = $.driver().get();
 
-        boolean isHtmlUnit = driver instanceof HtmlUnitDriver;
-        boolean isHtmlUnitEmulatingIeBelow11 = DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11(driver);
-        if (isHtmlUnit && !isHtmlUnitEmulatingIeBelow11) {
+        if (DriverInTest.isHtmlUnitDriver(driver) && !DriverInTest.isHtmlUnitDriverEmulatingIEBelow11(driver)) {
             // #CrossDriver
-            // HtmlUnit emmits a focus on body when i1 is clicked (other browsers just emmit a focus on i1)
-            // when HtmlUnit is emulating IE8 it doesnt do this, this the condition in the if
+            // HtmlUnit emits a focus on body when i1 is clicked (other browsers just emit a focus on i1)
+            // when HtmlUnit is emulating IE8 it doesn't do this, this the condition in the if
             removeDivBodyFocus();
         }
     }

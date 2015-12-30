@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import testinfrastructure.testutils.DriverInTest;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -31,8 +32,7 @@ public class DriverVersionUtilsTest {
 
     @Before
     public void setUp() {
-        // restore an eventually overriden (during other tests) instance
-        DriverVersionUtils.setInstance(new DriverVersionUtils());
+        DriverInTest.restoreDriverVersionUtilsInstance();
     }
 
     @Test
