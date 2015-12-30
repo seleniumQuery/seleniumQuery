@@ -16,41 +16,49 @@
 
 package testinfrastructure.junitrule;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun.*;
+
 @SuppressWarnings("unused")
 public enum DriverToRunTestsIn {
 
-	ALL_DRIVERS_JS_ON_AND_OFF			(true,  true,  true,  true,  true,    true,  true),
-	ALL_DRIVERS_JS_ON_ONLY				(true,  true,  true,  true,  true,    true,  false),
-	HEADLESS_DRIVERS_JS_ON_AND_OFF      (false, false, false, true,  true,    true,  true),
-	HEADLESS_DRIVERS_JS_ON_ONLY         (false, false, false, true,  true,    true,  false),
-	NON_HEADLESS_DRIVERS_JS_ON_ONLY     (true,  true,  true,  false, false,   true,  false),
+	ALL_DRIVERS_JS_ON_AND_OFF			(_FIREFOX, _CHROME, _IE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF),
+	ALL_DRIVERS_JS_ON_ONLY				(_FIREFOX, _CHROME, _IE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON),
 
-	FIREFOX_JS_ON_ONLY                  (true,  false, false, false, false,   true,  false),
-	FIREFOX_JS_ON_AND_OFF               (true,  false, false, false, false,   true,  true),
-	FIREFOX_JS_OFF_ONLY                 (true,  false, false, false, false,   false, true),
+	HEADLESS_DRIVERS_JS_ON_AND_OFF      (_PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF),
+	HEADLESS_DRIVERS_JS_ON_ONLY         (_PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON),
+	NON_HEADLESS_DRIVERS_JS_ON_ONLY     (_FIREFOX, _CHROME, _IE, _JAVASCRIPT_ON),
 
-	CHROME                              (false, true,  false, false, false,   true,  false),
-	IE                                  (false, false, true,  false, false,   true,  false),
-	PHANTOMJS                           (false, false, false, true,  false,   true,  false),
+	FIREFOX_JS_ON_ONLY                  (_FIREFOX, _JAVASCRIPT_ON),
+	FIREFOX_JS_ON_AND_OFF               (_FIREFOX, _JAVASCRIPT_ON, _JAVASCRIPT_OFF),
+	FIREFOX_JS_OFF_ONLY                 (_FIREFOX, _JAVASCRIPT_OFF),
 
-	HTMLUNIT_ALL_JS_ON_AND_OFF          (false, false, false, false, true,    true,  true),
-	HTMLUNIT_ALL_JS_ON_ONLY             (false, false, false, false, true,    true,  false),
-	HTMLUNIT_ALL_JS_OFF_ONLY            (false, false, false, false, true,    false, true),
+	CHROME                              (_CHROME, _JAVASCRIPT_ON),
+	IE                                  (_IE, _JAVASCRIPT_ON),
+	PHANTOMJS                           (_PHANTOMJS, _JAVASCRIPT_ON),
 
-	HTMLUNIT_CHROME_JS_ON_AND_OFF       (false, false, false, false, false,   false,  false),
-	HTMLUNIT_CHROME_JS_ON_ONLY          (false, false, false, false, false,   false,  false),
-	HTMLUNIT_CHROME_JS_OFF_ONLY         (false, false, false, false, false,   false,  false),
-	HTMLUNIT_IE8_JS_ON_ONLY             (false, false, false, false, false,   false,  false);
+	HTMLUNIT_ALL_JS_ON_AND_OFF          (_HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF),
+	HTMLUNIT_ALL_JS_ON_ONLY             (_HTMLUNIT, _JAVASCRIPT_ON),
+	HTMLUNIT_ALL_JS_OFF_ONLY            (_HTMLUNIT, _JAVASCRIPT_OFF),
 
+	HTMLUNIT_CHROME_JS_ON_AND_OFF       (),
+	HTMLUNIT_CHROME_JS_ON_ONLY          (),
+	HTMLUNIT_CHROME_JS_OFF_ONLY         (),
+	HTMLUNIT_IE8_JS_ON_ONLY             ();
 
-	DriverToRunTestsIn(boolean firefox, boolean chrome, boolean ie, boolean phantomJS, boolean htmlUnit, boolean javaScriptOn, boolean javaScriptOff) {
-		this.firefox = firefox;
-		this.chrome = chrome;
-		this.ie = ie;
-		this.phantomJS = phantomJS;
-		this.htmlUnit = htmlUnit;
-		this.javaScriptOn = javaScriptOn;
-		this.javaScriptOff = javaScriptOff;
+	enum ShouldRun {_FIREFOX, _CHROME, _IE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
+
+	DriverToRunTestsIn(ShouldRun... shouldRuns) {
+        List<ShouldRun> shouldRunList = asList(shouldRuns);
+        this.firefox = shouldRunList.contains(_FIREFOX);
+		this.chrome = shouldRunList.contains(_CHROME);
+		this.ie = shouldRunList.contains(_IE);
+		this.phantomJS = shouldRunList.contains(_PHANTOMJS);
+		this.htmlUnit = shouldRunList.contains(_HTMLUNIT);
+		this.javaScriptOn = shouldRunList.contains(_JAVASCRIPT_ON);
+		this.javaScriptOff = shouldRunList.contains(_JAVASCRIPT_OFF);
 	}
 
 	private final boolean htmlUnit;
