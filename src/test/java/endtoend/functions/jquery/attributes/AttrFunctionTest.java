@@ -16,13 +16,13 @@
 
 package endtoend.functions.jquery.attributes;
 
-import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -120,7 +120,7 @@ public class AttrFunctionTest {
 
 		// HtmlUnit while emulating IE8 makes prop bring attribute...
         String dataBallAttributeViaProp = $("#chk1").prop("data-ball");
-        if (DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
+        if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat(dataBallAttributeViaProp, is("yo"));
 		} else {
 			assertThat(dataBallAttributeViaProp, is(nullValue()));

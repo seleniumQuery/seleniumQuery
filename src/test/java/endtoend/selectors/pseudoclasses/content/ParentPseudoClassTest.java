@@ -19,9 +19,9 @@ package endtoend.selectors.pseudoclasses.content;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.utils.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -36,7 +36,7 @@ public class ParentPseudoClassTest {
 		assertThat($("#d1").is(":parent"), is(true));
 		assertThat($("#d2").is(":parent"), is(false));
 
-		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
+		if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat($("#d3").is(":parent"), is(false));
 			assertThat($("#d4").is(":parent"), is(false));
 		} else {
@@ -50,7 +50,7 @@ public class ParentPseudoClassTest {
 		assertThat($("#d12").is(":parent"), is(true));
 		assertThat($("#d13").is(":parent"), is(false));
 		
-		if (isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
+		if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
 			assertThat($("#d14").is(":parent"), is(false));
 		} else {
 			assertThat($("#d14").is(":parent"), is(true));
