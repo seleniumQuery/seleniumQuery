@@ -1,5 +1,6 @@
 # [seleniumQuery](http://seleniumquery.github.io)
 [![Build Status](https://travis-ci.org/seleniumQuery/seleniumQuery.svg?branch=master)](https://travis-ci.org/seleniumQuery/seleniumQuery)
+[![codecov.io](https://codecov.io/github/seleniumQuery/seleniumQuery/coverage.svg?branch=master)](https://codecov.io/github/seleniumQuery/seleniumQuery?branch=master)
 
 ### *Cross-Driver* jQuery-like Java interface for Selenium WebDriver
 
