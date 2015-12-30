@@ -35,7 +35,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 @SuppressWarnings("unused")
 public class SetUpAndTearDownDriver implements TestRule {
 
-	public static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
+	public static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.HTMLUNIT_ALL_JS_ON_AND_OFF;
 	private static final String NOT_SPECIFIED = null;
 
 	private final String testUrl;
