@@ -1,0 +1,1 @@
+This file is used in tests that check driver server executables. They must find a file (this one) in the classpath (even if a fake one) for the tests.

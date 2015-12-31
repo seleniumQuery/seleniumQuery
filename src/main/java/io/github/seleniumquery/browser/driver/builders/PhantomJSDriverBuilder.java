@@ -16,8 +16,10 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
+import com.google.common.annotations.VisibleForTesting;
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.browser.driver.DriverBuilder;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +39,7 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
 
     private static final Log LOGGER = LogFactory.getLog(PhantomJSDriverBuilder.class);
 
-    private static final String PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY = "phantomjs.binary.path";
+    public static final String PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY = "phantomjs.binary.path";
 
     private static final String EXCEPTION_MESSAGE = " \nDownload the latest release at http://phantomjs.org/download.html and place it: \n" +
             "(1) on the classpath of this project; or\n" +
@@ -49,11 +51,24 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
 
     private static final String BAD_PATH_PROVIDED_EXCEPTION_MESSAGE = "The PhantomJS executable file was not found (or is a directory) at \"%s\"." + EXCEPTION_MESSAGE;
 
-    // not final so they can be changed during test
-    public static String PHANTOMJS_EXECUTABLE_WINDOWS = "phantomjs.exe";
-    public static String PHANTOMJS_EXECUTABLE_LINUX = "phantomjs";
+    private static final String PHANTOMJS_EXECUTABLE_WINDOWS = "phantomjs.exe";
+    private static final String PHANTOMJS_EXECUTABLE_LINUX = "phantomjs";
 
     private String customPathToPhantomJs;
+
+    private final boolean isWindowsOS;
+    private final String phantomjsExecutableWindows;
+    private final String phantomjsExecutableLinux;
+
+    public PhantomJSDriverBuilder() {
+        this(SystemUtils.IS_OS_WINDOWS, PHANTOMJS_EXECUTABLE_WINDOWS, PHANTOMJS_EXECUTABLE_LINUX);
+    }
+
+    public PhantomJSDriverBuilder(boolean isWindowsOS, String phantomjsExecutableWindows, String phantomjsExecutableLinux) {
+        this.isWindowsOS = isWindowsOS;
+        this.phantomjsExecutableWindows = phantomjsExecutableWindows;
+        this.phantomjsExecutableLinux = phantomjsExecutableLinux;
+    }
 
     /**
      * Sets the path used by the PhantomJSDriver to find the PhantomJS executable.
@@ -78,13 +93,14 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
         }
     }
 
-    private void configurePhantomJsExecutablePath() {
+    @VisibleForTesting
+    protected void configurePhantomJsExecutablePath() {
         if (customPathWasProvidedAndExecutableExistsThere(this.customPathToPhantomJs, BAD_PATH_PROVIDED_EXCEPTION_MESSAGE)) {
             setExecutableSystemProperty(getFullPath(this.customPathToPhantomJs));
-        } else if (executableExistsInClasspath(PHANTOMJS_EXECUTABLE_WINDOWS)) {
-            setExecutableSystemProperty(getFullPathForFileInClasspath(PHANTOMJS_EXECUTABLE_WINDOWS));
-        } else if (executableExistsInClasspath(PHANTOMJS_EXECUTABLE_LINUX)) {
-            setExecutableSystemProperty(getFullPathForFileInClasspath(PHANTOMJS_EXECUTABLE_LINUX));
+        } else if (this.isWindowsOS && executableExistsInClasspath(phantomjsExecutableWindows)) {
+            setExecutableSystemProperty(getFullPathForFileInClasspath(phantomjsExecutableWindows));
+        } else if (!this.isWindowsOS && executableExistsInClasspath(phantomjsExecutableLinux)) {
+            setExecutableSystemProperty(getFullPathForFileInClasspath(phantomjsExecutableLinux));
         }
     }
 
@@ -98,7 +114,7 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
             throw new SeleniumQueryException(
                     format(
                             "The PhantomJS executable (%s/%s) was not found in the classpath, in the \"%s\" system property or in the system's PATH variable. %s",
-                            PHANTOMJS_EXECUTABLE_WINDOWS, PHANTOMJS_EXECUTABLE_LINUX, PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY, EXCEPTION_MESSAGE
+                            phantomjsExecutableWindows, phantomjsExecutableLinux, PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY, EXCEPTION_MESSAGE
                     ), e);
         }
     }

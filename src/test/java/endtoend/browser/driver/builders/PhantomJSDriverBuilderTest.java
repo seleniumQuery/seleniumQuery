@@ -20,46 +20,28 @@ import endtoend.browser.SeleniumQueryBrowserTest;
 import io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.testutils.EnvironmentTestUtils;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
-import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
-import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverTestExecutableExistsForThisOS;
+import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverTestExecutableExists;
 
 public class PhantomJSDriverBuilderTest {
 
-    static String phantomExecutable = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS;
-    static String originalPathWindows;
-    static String originalPathLinux;
-
-    @BeforeClass
-    public static void beforeClass() {
-        if (isNotWindowsOS()) {
-            phantomExecutable = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX;
-        }
-        originalPathWindows = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS;
-        originalPathLinux = PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX;
-    }
-
     @Before
     public void setUp() {
-        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunPhantomJS());
+        assumeTrue("SetUpAndTearDownDriver should authorize to run tests in PhantomJS", SetUpAndTearDownDriver.driverToRunTestsIn.canRunPhantomJS());
     }
 
     @After
     public void tearDown() {
-        PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS = originalPathWindows;
-        PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX = originalPathLinux;
         $.quit();
     }
 
@@ -77,29 +59,20 @@ public class PhantomJSDriverBuilderTest {
 
     @Test
     public void withCapabilities__should_return_the_current_PhantomJSDriverBuilder_instance_to_allow_further_chaining() {
-        $.driver().usePhantomJS().withCapabilities(null).withPathToPhantomJS(null); // should compile
+        // given
+        PhantomJSDriverBuilder phantomJSDriverBuilderAfterFirstCall = $.driver().usePhantomJS().withCapabilities(null);
+        // when
+        PhantomJSDriverBuilder phantomJSDriverBuilderAfterSecondCall = phantomJSDriverBuilderAfterFirstCall.withPathToPhantomJS(null);
+        // then
+        assertThat(phantomJSDriverBuilderAfterSecondCall, is(phantomJSDriverBuilderAfterFirstCall));
     }
 
     @Test
     public void withPathToPhantomJS() {
-        onlyRunIfDriverTestExecutableExistsForThisOS(phantomExecutable);
+        onlyRunIfDriverTestExecutableExists("phantomjs.exe");
         // given
-        $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/" + phantomExecutable);
+        $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/phantomjs.exe");
         // when
-        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
-        // then
-        // no exception is thrown while opening a page
-    }
-
-    @Test
-    public void usePhantomJS__should_fall_back_to_systemProperty_when_executable_not_found_in_classpath() {
-        onlyRunIfDriverTestExecutableExistsForThisOS(phantomExecutable);
-        // given
-        PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS = "not-in-classpath.txt";
-        PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX = "not-in-classpath.txt";
-        System.setProperty("phantomjs.binary.path", getFullPathForFileInClasspath(phantomExecutable));
-        // when
-        $.driver().usePhantomJS();
         $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
         // then
         // no exception is thrown while opening a page
