@@ -77,7 +77,7 @@ public class NthChildPseudoClass implements PseudoClass<ConditionSimpleComponent
 		if (m.find()) {
 			String aString = m.group(1);
 			String bString = m.group(2);
-			int a = aString.matches("[+-]") ? parseInt(aString + "1") : parseInt(removeLeadingPlusSign(aString));
+			int a = aString.matches("[+-]?") ? parseInt(aString + "1") : parseInt(removeLeadingPlusSign(aString));
 			int b = (null == bString) ? 0 : parseInt(removeLeadingPlusSign(bString.replaceAll("\\s*", "")));
 			return nthChild(a, b);
 		}
