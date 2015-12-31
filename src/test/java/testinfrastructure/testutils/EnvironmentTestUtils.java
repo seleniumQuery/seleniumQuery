@@ -26,7 +26,7 @@ public class EnvironmentTestUtils {
         return !System.getProperty("os.name").toLowerCase().contains("win");
     }
 
-    public static void onlyRunIfDriverTestExecutableExistsForThisOS(String driverTestExecutable) {
+    public static void onlyRunIfDriverTestExecutableExists(String driverTestExecutable) {
         assumeTrue("This test will only run if '"+driverTestExecutable+"' exists.", new File("src/test/resources/" + driverTestExecutable).exists());
     }
 

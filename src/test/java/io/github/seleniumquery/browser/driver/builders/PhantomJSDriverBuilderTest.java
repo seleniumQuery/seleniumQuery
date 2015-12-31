@@ -1,0 +1,103 @@
+package io.github.seleniumquery.browser.driver.builders;
+
+import org.apache.commons.lang3.SystemUtils;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX;
+import static io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY;
+import static io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assume.assumeTrue;
+import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverTestExecutableExists;
+
+public class PhantomJSDriverBuilderTest {
+
+    private static final String DUMMY_STRING = "this string does not matter for this test";
+
+    private static final String EXECUTABLE_THAT_EXISTS_IN_CLASSPATH = "executable-that-exists-in-classpath";
+    private static final String EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH = "executable-that-DOESN'T-exist-in-classpath";
+
+    private static final boolean IS_WINDOWS_OS = true;
+    private static final boolean IS_LINUX_OS = false;
+    PhantomJSDriverBuilder phantomJSDriverBuilder = new PhantomJSDriverBuilder();
+
+    @Before
+    public void setUp() throws Exception {
+        System.setProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY, "");
+    }
+
+    @Test
+    public void underWindows__propertyShouldBeSet__ifWindowsExecutableFoundInClasspath() {
+        // given
+        PhantomJSDriverBuilder driverBuilder = new PhantomJSDriverBuilder(IS_WINDOWS_OS, EXECUTABLE_THAT_EXISTS_IN_CLASSPATH, EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH);
+        // when
+        driverBuilder.configurePhantomJsExecutablePath();
+        // then
+        assertPhantomJSExecutablePropertyPointsToExecutableInClasspath();
+    }
+
+    private void assertPhantomJSExecutablePropertyPointsToExecutableInClasspath() {
+        String property = System.getProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY);
+        assertThat(property, endsWith("seleniumQuery/target/test-classes/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH));
+    }
+
+    @Test
+    public void underLinux__propertyShouldBeSet__ifWindowsExecutableFoundInClasspath() {
+        // given
+        PhantomJSDriverBuilder driverBuilder = new PhantomJSDriverBuilder(IS_LINUX_OS, EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH, EXECUTABLE_THAT_EXISTS_IN_CLASSPATH);
+        // when
+        driverBuilder.configurePhantomJsExecutablePath();
+        // then
+        assertPhantomJSExecutablePropertyPointsToExecutableInClasspath();
+    }
+
+    @Test
+    public void underWindows__propertyShouldNotBeSet__whenWindowsExecutableIsNotFound__evenIfItFindsLinuxExecutable() {
+        // given
+        PhantomJSDriverBuilder driverBuilder = new PhantomJSDriverBuilder(IS_WINDOWS_OS, EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH, EXECUTABLE_THAT_EXISTS_IN_CLASSPATH);
+        // when
+        driverBuilder.configurePhantomJsExecutablePath();
+        // then
+        String property = System.getProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY);
+        assertThat(property, is(""));
+    }
+
+    @Test
+    public void underLinux__propertyShouldNotBeSet__whenLinuxExecutableIsNotFound__evenIfItFindsWindowsExecutable() {
+        // given
+        PhantomJSDriverBuilder driverBuilder = new PhantomJSDriverBuilder(IS_LINUX_OS, EXECUTABLE_THAT_EXISTS_IN_CLASSPATH, EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH);
+        // when
+        driverBuilder.configurePhantomJsExecutablePath();
+        // then
+        String property = System.getProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY);
+        assertThat(property, is(""));
+    }
+
+    @Test
+    public void underWindows__propertyShouldBeSet__whenCustomPathIsProvided__andExecutableExistsThere() {
+        verifyCustomPathIsSetUnderOs(IS_WINDOWS_OS);
+    }
+
+    @Test
+    public void underLinux__propertyShouldBeSet__whenCustomPathIsProvided__andExecutableExistsThere() {
+        verifyCustomPathIsSetUnderOs(IS_LINUX_OS);
+    }
+
+    private void verifyCustomPathIsSetUnderOs(boolean isWindowsOs) {
+        // given
+        PhantomJSDriverBuilder driverBuilder = new PhantomJSDriverBuilder(isWindowsOs, EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH, EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH);
+        String customPathToPhantomJs = "src\\test\\resources\\" + EXECUTABLE_THAT_EXISTS_IN_CLASSPATH;
+        driverBuilder.withPathToPhantomJS(customPathToPhantomJs);
+        // when
+        driverBuilder.configurePhantomJsExecutablePath();
+        // then
+        String property = System.getProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY);
+        assertThat(property, endsWith(customPathToPhantomJs));
+    }
+
+}
