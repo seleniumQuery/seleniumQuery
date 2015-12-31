@@ -92,7 +92,8 @@ public class PhantomJSDriverBuilderTest {
     private void verifyCustomPathIsSetUnderOs(boolean isWindowsOs) {
         // given
         PhantomJSDriverBuilder driverBuilder = new PhantomJSDriverBuilder(isWindowsOs, EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH, EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH);
-        String customPathToPhantomJs = "src\\test\\resources\\" + EXECUTABLE_THAT_EXISTS_IN_CLASSPATH;
+        String customPathToPhantomJs = "src/test/resources/" + EXECUTABLE_THAT_EXISTS_IN_CLASSPATH;
+        if (isWindowsOs) customPathToPhantomJs = customPathToPhantomJs.replace('/', '\\');
         driverBuilder.withPathToPhantomJS(customPathToPhantomJs);
         // when
         driverBuilder.configurePhantomJsExecutablePath();
