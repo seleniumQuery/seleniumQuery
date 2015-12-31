@@ -19,26 +19,17 @@ package testinfrastructure.junitrule;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.remote.CommandExecutor;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import testinfrastructure.EndToEndTestUtils;
-
-import java.lang.reflect.Field;
-import java.util.Map;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 
-@SuppressWarnings("unused")
 public class SetUpAndTearDownDriver implements TestRule {
 
-	public static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.HTMLUNIT_ALL_JS_ON_AND_OFF;
+	public static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.FIREFOX_JS_OFF_ONLY;
 	private static final String NOT_SPECIFIED = null;
 
 	private final String testUrl;
+	public boolean driverHasJavaScriptEnabled = false;
 
 	public SetUpAndTearDownDriver() {
 		this.testUrl = NOT_SPECIFIED;
@@ -63,21 +54,13 @@ public class SetUpAndTearDownDriver implements TestRule {
 		if (description.isSuite()) {
 			browserWasStarted = true;
 			// TODO check if all methods of the class are annotated with JSOnly and skip driver creation when it wont have JS ON
-			return new RunTestMethodsInChosenDrivers(driverToRunTestsIn, base, url(description));
-			/*return new Statement() {
-				@Override
-				public void evaluate() throws Throwable {
-					beforeClass();
-					base.evaluate();
-					afterClass();
-				}
-			};*/
+			return new RunTestMethodsInChosenDrivers(driverToRunTestsIn, base, url(description), this);
 		}
 		Statement runTestMethodStatement = new Statement() {
 			@Override
 			public void evaluate() throws Throwable {
 				boolean isJavaScriptOnlyTest = description.getAnnotation(JavaScriptOnly.class) != null;
-				if (isJavaScriptOnlyTest && !isJavaScriptOn()) {
+				if (isJavaScriptOnlyTest && !SetUpAndTearDownDriver.this.driverHasJavaScriptEnabled) {
 					System.out.println("\t\t-> Skipping JavaScript-only test: " + description);
 					return;
 				}
@@ -86,50 +69,25 @@ public class SetUpAndTearDownDriver implements TestRule {
 				afterMethod(description);
 			}
 		};
-		if (!browserWasStarted) { // the test class has this as @Rule only and not as @ClassRule/@Rule, so we restart the browser every method
-			return new RunTestMethodsInChosenDrivers(driverToRunTestsIn, runTestMethodStatement, url(description));
+
+		if (!browserWasStarted) {
+            // The test class has this as @Rule only and not as @ClassRule/@Rule, so we restart the browser every method
+            // because if it had a @ClassRule, the if above would have been triggered and the browser would be already started
+			return new RunTestMethodsInChosenDrivers(driverToRunTestsIn, runTestMethodStatement, url(description), this);
 		}
 		return runTestMethodStatement;
 	}
 
-	private void beforeClass() { }
-	private void afterClass() { }
+    @SuppressWarnings("unused") private void beforeClass() { }
+    @SuppressWarnings("unused") private void afterClass() { }
+
 	private void beforeMethod(Description description) {
 		$.url(url(description));
 	}
-	private void afterMethod(Description description) { }
 
-	private boolean isJavaScriptOn() {
-		WebDriver webDriver = $.driver().get();
-		if (webDriver instanceof HtmlUnitDriver) {
-			return ((HtmlUnitDriver) webDriver).isJavascriptEnabled();
-		}
-		if (webDriver instanceof FirefoxDriver) {
-			try {
-				CommandExecutor commandExecutor = ((RemoteWebDriver) webDriver).getCommandExecutor();
-				Class<?> innerClass = FirefoxDriver.class.getDeclaredClasses()[0];
-				Field profileField = innerClass.getDeclaredField("profile");
-				profileField.setAccessible(true);
-				FirefoxProfile firefoxProfile = (FirefoxProfile) profileField.get(commandExecutor);
+    @SuppressWarnings("unused") private void afterMethod(Description description) { }
 
-				Field additionalPrefsField = FirefoxProfile.class.getDeclaredField("additionalPrefs");
-				additionalPrefsField.setAccessible(true);
-				Object additionalPrefs = additionalPrefsField.get(firefoxProfile);
-
-				Field allPrefsField = additionalPrefs.getClass().getDeclaredField("allPrefs");
-				allPrefsField.setAccessible(true);
-				@SuppressWarnings("unchecked")
-				Map<String, Object> allPrefs = (Map<String, Object>) allPrefsField.get(additionalPrefs);
-				Object javaScriptEnabledPref = allPrefs.get("javascript.enabled");
-				return javaScriptEnabledPref == null || !javaScriptEnabledPref.toString().equals("false");
-			} catch (Exception e) {
-				System.out.println("Unable to determine if JS is on or OFF in Firefox. Returning IS ON.");
-				return true;
-			}
-		}
-		return true;
-	}
-
+    @SuppressWarnings("unused")
 	private void dump(Description description) {
 		final String methodName = description.getMethodName();
 		System.out.println("***************************************************");

@@ -20,17 +20,22 @@ import org.junit.runners.model.Statement;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static testinfrastructure.junitrule.DriverInstantiator.*;
+import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.*;
 
 @SuppressWarnings("deprecation")
 public class RunTestMethodsInChosenDrivers extends Statement {
 
+	enum DriverHasJavaScriptEnabled { YES, NO }
+
 	private final TestMethodsRunner testMethodsRunner;
 	private final DriverToRunTestsIn driverToRunTestsIn;
+    private final SetUpAndTearDownDriver setUpAndTearDownDriver;
 
-	public RunTestMethodsInChosenDrivers(DriverToRunTestsIn driverToRunTestsIn, Statement base, String url) {
+	public RunTestMethodsInChosenDrivers(DriverToRunTestsIn driverToRunTestsIn, Statement base, String url, SetUpAndTearDownDriver setUpAndTearDownDriver) {
 		super();
 		this.driverToRunTestsIn = driverToRunTestsIn;
 		this.testMethodsRunner = new TestMethodsRunner(base, url);
+        this.setUpAndTearDownDriver = setUpAndTearDownDriver;
 	}
 
 	@Override
@@ -55,33 +60,54 @@ public class RunTestMethodsInChosenDrivers extends Statement {
 		executeTestOnHtmlUnitEmulatingIE11JavaScriptOff();
 	}
 
-	private void executeTestOnChrome() { executeTestOn(driverToRunTestsIn.canRunChrome(), DriverInstantiator.CHROME); }
-	private void executeTestOnIE() { executeTestOn(driverToRunTestsIn.canRunIE(), DriverInstantiator.IE); }
-	private void executeTestOnFirefoxWithJS() { executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOn(), FIREFOX_JS_ON); }
-	private void executeTestOnFirefoxWithoutJS() { executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOff(), FIREFOX_JS_OFF); }
-	private void executeTestOnPhantomJS() { executeTestOn(driverToRunTestsIn.canRunPhantomJS(), PHANTOMJS); }
-
+	private void executeTestOnChrome() {
+		executeTestOn(driverToRunTestsIn.canRunChrome(), DriverInstantiator.CHROME, YES);
+	}
+	private void executeTestOnIE() {
+		executeTestOn(driverToRunTestsIn.canRunIE(), DriverInstantiator.IE, YES);
+	}
+	private void executeTestOnFirefoxWithJS() {
+		executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOn(), FIREFOX_JS_ON, YES);
+	}
+	private void executeTestOnFirefoxWithoutJS() {
+		executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOff(), FIREFOX_JS_OFF, NO);
+	}
+	private void executeTestOnPhantomJS() {
+		executeTestOn(driverToRunTestsIn.canRunPhantomJS(), PHANTOMJS, YES);
+	}
 	private void executeTestOnHtmlUnitEmulatingChromeJavaScriptOn() {
 		boolean shouldExecute = driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn()  || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY
 																					 || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_AND_OFF;
-		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_CHROME_JS_ON);
+		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_CHROME_JS_ON, YES);
 	}
 	private void executeTestOnHtmlUnitEmulatingChromeJavaScriptOff() {
 		boolean shouldExecute = driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff() || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_CHROME_JS_OFF_ONLY
 																					 || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_AND_OFF;
-		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_CHROME_JS_OFF);
+		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_CHROME_JS_OFF, NO);
 	}
-	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOn()  { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_ON); }
-	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOff() { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_OFF); }
+	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOn()  {
+		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_ON, YES);
+	}
+	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOff() {
+		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_OFF, NO);
+	}
 	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOn()      {
 		boolean shouldExecute = driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn() || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_IE8_JS_ON_ONLY;
-		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_IE8_JS_ON); }
-	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOff()     { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE8_JS_OFF); }
-	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOn()     { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE11_JS_ON); }
-	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOff()    { executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE11_JS_OFF); }
+		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_IE8_JS_ON, YES);
+	}
+	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOff()     {
+		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE8_JS_OFF, NO);
+	}
+	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOn()     {
+		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE11_JS_ON, YES);
+	}
+	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOff()    {
+		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE11_JS_OFF, NO);
+	}
 
-	private void executeTestOn(boolean shouldExecute, DriverInstantiator driverInstantiator) {
+	private void executeTestOn(boolean shouldExecute, DriverInstantiator driverInstantiator, DriverHasJavaScriptEnabled driverHasJavaScriptEnabled) {
 		if (shouldExecute) {
+            this.setUpAndTearDownDriver.driverHasJavaScriptEnabled = driverHasJavaScriptEnabled == YES;
 			System.out.println("@## > Instantiating " + driverInstantiator.getDriverDescription());
 			driverInstantiator.instantiateDriver($);
 			testMethodsRunner.executeMethodForDriver(driverInstantiator.getDriverDescription());
