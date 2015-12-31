@@ -1,30 +1,20 @@
 package io.github.seleniumquery.browser.driver.builders;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX;
 import static io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY;
-import static io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assume.assumeTrue;
-import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverTestExecutableExists;
 
 public class PhantomJSDriverBuilderTest {
-
-    private static final String DUMMY_STRING = "this string does not matter for this test";
 
     private static final String EXECUTABLE_THAT_EXISTS_IN_CLASSPATH = "executable-that-exists-in-classpath";
     private static final String EXECUTABLE_THAT_DOESNT_EXIST_IN_CLASSPATH = "executable-that-DOESN'T-exist-in-classpath";
 
     private static final boolean IS_WINDOWS_OS = true;
     private static final boolean IS_LINUX_OS = false;
-    PhantomJSDriverBuilder phantomJSDriverBuilder = new PhantomJSDriverBuilder();
 
     @Before
     public void setUp() throws Exception {
