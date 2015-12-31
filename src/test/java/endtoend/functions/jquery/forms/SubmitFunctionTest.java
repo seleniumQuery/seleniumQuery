@@ -16,6 +16,7 @@
 
 package endtoend.functions.jquery.forms;
 
+import org.junit.Before;
 import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
@@ -31,20 +32,24 @@ public class SubmitFunctionTest {
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test @JavaScriptOnly
-    public void submit_function() {
-        assertOutput("");
+    public void submit__input_element() {
         $("#input-a").submit();
         assertOutput("a");
+    }
+    @Test @JavaScriptOnly
+    public void submit__non_input_element() {
         $("#div-a").submit();
-        assertOutput("aa");
-        $("#input-b").submit();
-        assertOutput("aab");
-        $("#div-b").submit();
-        assertOutput("aabb");
+        assertOutput("a");
+    }
+    @Test @JavaScriptOnly
+    public void submit__several_input_elements() {
         $("input").submit();
-        assertOutput("aabbab");
+        assertOutput("ab");
+    }
+    @Test @JavaScriptOnly
+    public void submit__several_non_input_elements() {
         $("div").submit();
-        assertOutput("aabbabab");
+        assertOutput("ab");
     }
 
     private void assertOutput(String value) {
