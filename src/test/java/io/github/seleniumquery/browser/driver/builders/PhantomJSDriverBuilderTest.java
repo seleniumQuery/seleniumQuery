@@ -7,6 +7,7 @@ import org.junit.Test;
 import static io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class PhantomJSDriverBuilderTest {
@@ -28,7 +29,7 @@ public class PhantomJSDriverBuilderTest {
     }
 
     private void resetPhantomJSExecutablePathSystemProperty() {
-        System.setProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY, "");
+        System.clearProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY);
     }
 
     @Test
@@ -64,7 +65,7 @@ public class PhantomJSDriverBuilderTest {
         driverBuilder.configurePhantomJsExecutablePath();
         // then
         String property = System.getProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY);
-        assertThat(property, is(""));
+        assertThat(property, is(nullValue()));
     }
 
     @Test
@@ -75,7 +76,7 @@ public class PhantomJSDriverBuilderTest {
         driverBuilder.configurePhantomJsExecutablePath();
         // then
         String property = System.getProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY);
-        assertThat(property, is(""));
+        assertThat(property, is(nullValue()));
     }
 
     @Test
