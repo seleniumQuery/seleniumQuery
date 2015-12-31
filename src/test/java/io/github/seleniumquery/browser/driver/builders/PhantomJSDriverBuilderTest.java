@@ -1,5 +1,6 @@
 package io.github.seleniumquery.browser.driver.builders;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +18,16 @@ public class PhantomJSDriverBuilderTest {
     private static final boolean IS_LINUX_OS = false;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
+        resetPhantomJSExecutablePathSystemProperty();
+    }
+
+    @After
+    public void tearDown() {
+        resetPhantomJSExecutablePathSystemProperty();
+    }
+
+    private void resetPhantomJSExecutablePathSystemProperty() {
         System.setProperty(PHANTOMJS_EXECUTABLE_SYSTEM_PROPERTY, "");
     }
 
