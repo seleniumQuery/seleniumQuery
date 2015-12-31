@@ -19,4 +19,13 @@ public class SeleniumQueryObjectTestUtils {
         }
     }
 
+    public static void verifySeleniumQueryObjectHasElements(SeleniumQueryObject seleniumQueryObject, WebElement... elements) {
+        assertThat(seleniumQueryObject.size(), is(elements.length));
+        for (int i = 0; i < elements.length; i++) {
+            WebElement expectedElement = elements[i];
+            WebElement actualElement = seleniumQueryObject.get(i);
+            assertThat(actualElement, is(expectedElement));
+        }
+    }
+
 }
