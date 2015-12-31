@@ -27,7 +27,7 @@ public class EnvironmentTestUtils {
     }
 
     public static void onlyRunIfDriverTestExecutableExistsForThisOS(String driverTestExecutable) {
-        assumeTrue(new File("src/test/resources/" + driverTestExecutable).exists());
+        assumeTrue("This test will only run if '"+driverTestExecutable+"' exists.", new File("src/test/resources/" + driverTestExecutable).exists());
     }
 
 }
