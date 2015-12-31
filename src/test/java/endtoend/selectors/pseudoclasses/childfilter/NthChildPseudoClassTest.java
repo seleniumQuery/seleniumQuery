@@ -1,29 +1,15 @@
 package endtoend.selectors.pseudoclasses.childfilter;
 
-import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static testinfrastructure.testutils.SeleniumQueryObjectTestUtils.verifySelectorGeneratesSeleniumQueryObjectWithElementsWhoseIdsAre;
 
 public class NthChildPseudoClassTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-
-    private void verifySelectorGeneratesSeleniumQueryObjectWithElementsWhoseIdsAre(String selector, String... ids) {
-        SeleniumQueryObject seleniumQueryObject = $(selector);
-        assertThat(seleniumQueryObject.size(), is(ids.length));
-        for (int i = 0; i < ids.length; i++) {
-            WebElement webElement = seleniumQueryObject.get(i);
-            String expectedId = ids[i];
-            assertThat(webElement.getAttribute("id"), is(expectedId));
-        }
-    }
 
     @Test
     public void nth_child__2n_b() {
