@@ -16,10 +16,18 @@
 
 package testinfrastructure.testutils;
 
+import java.io.File;
+
+import static org.junit.Assume.assumeTrue;
+
 public class EnvironmentTestUtils {
 
     public static boolean isNotWindowsOS() {
         return !System.getProperty("os.name").toLowerCase().contains("win");
+    }
+
+    public static void onlyRunIfDriverTestExecutableExistsForThisOS(String driverTestExecutable) {
+        assumeTrue(new File("src/test/resources/" + driverTestExecutable).exists());
     }
 
 }

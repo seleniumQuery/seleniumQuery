@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.testutils.EnvironmentTestUtils;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
@@ -33,6 +34,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
+import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverTestExecutableExistsForThisOS;
 
 public class PhantomJSDriverBuilderTest {
 
@@ -80,8 +82,9 @@ public class PhantomJSDriverBuilderTest {
 
     @Test
     public void withPathToPhantomJS() {
+        onlyRunIfDriverTestExecutableExistsForThisOS(phantomExecutable);
         // given
-        $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/"+ phantomExecutable);
+        $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/" + phantomExecutable);
         // when
         $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
         // then
@@ -90,6 +93,7 @@ public class PhantomJSDriverBuilderTest {
 
     @Test
     public void usePhantomJS__should_fall_back_to_systemProperty_when_executable_not_found_in_classpath() {
+        onlyRunIfDriverTestExecutableExistsForThisOS(phantomExecutable);
         // given
         PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_WINDOWS = "not-in-classpath.txt";
         PhantomJSDriverBuilder.PHANTOMJS_EXECUTABLE_LINUX = "not-in-classpath.txt";
