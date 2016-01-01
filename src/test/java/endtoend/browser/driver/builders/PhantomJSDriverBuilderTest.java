@@ -18,6 +18,7 @@ package endtoend.browser.driver.builders;
 
 import endtoend.browser.SeleniumQueryBrowserTest;
 import io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder;
+import org.apache.commons.lang3.SystemUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,6 +70,7 @@ public class PhantomJSDriverBuilderTest {
 
     @Test
     public void withPathToPhantomJS() {
+        assumeTrue(SystemUtils.IS_OS_WINDOWS);
         onlyRunIfDriverTestExecutableExists("phantomjs.exe");
         // given
         $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/phantomjs.exe");
