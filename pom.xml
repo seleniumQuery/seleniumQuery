@@ -39,13 +39,10 @@
 			<version>0.9.12</version>
 		</dependency>
 
-		<!-- commons-lang3 is also a HtmlUnit dependency, so no harm here, it'd be there anyway.
-		Currently used mainly for escaping the string for :contains() and selectors, but also on
-		several case-insensitive equals/contains -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
+			<version>3.4</version>
 		</dependency>
 
 		<!-- The selenium dependency -->
@@ -79,7 +76,7 @@
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1.3</version>
+			<version>1.2</version>
 		</dependency>
 
 		<!-- Used for escaping CSS selectors -->
