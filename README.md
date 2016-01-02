@@ -1,7 +1,10 @@
 # [seleniumQuery](http://seleniumquery.github.io)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.seleniumquery/seleniumquery.svg)]()
 [![Build Status](https://travis-ci.org/seleniumQuery/seleniumQuery.svg?branch=master)](https://travis-ci.org/seleniumQuery/seleniumQuery)
 [![codecov.io](https://codecov.io/github/seleniumQuery/seleniumQuery/coverage.svg?branch=master)](https://codecov.io/github/seleniumQuery/seleniumQuery?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/56861ab2eb4f47003c000e43/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56861ab2eb4f47003c000e43)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/seleniumQuery/seleniumQuery/master/LICENSE.txt)
+[![GitHub release](https://img.shields.io/github/release/seleniumquery/seleniumquery.svg)]()
 
 ### *Cross-Driver* jQuery-like Java interface for Selenium WebDriver
 
