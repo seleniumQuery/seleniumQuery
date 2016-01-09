@@ -25,7 +25,15 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 
 public class SetUpAndTearDownDriver implements TestRule {
 
-	public static final DriverToRunTestsIn driverToRunTestsIn = DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
+	public static final DriverToRunTestsIn driverToRunTestsIn = whatDriversShouldTestsRun();
+
+	private static DriverToRunTestsIn whatDriversShouldTestsRun() {
+		if ("true".equals(System.getProperty("CI"))) {
+			return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
+		}
+		return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
+	}
+
 	private static final String NOT_SPECIFIED = null;
 
 	private final String testUrl;
