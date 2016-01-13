@@ -1,8 +1,6 @@
 language: java
 sudo: false
 install: mvn install -DskipTests=true
-env:
-  - CI=true
 jdk:
 - oraclejdk8
 - oraclejdk7
