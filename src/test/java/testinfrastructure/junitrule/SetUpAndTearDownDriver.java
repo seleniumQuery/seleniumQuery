@@ -28,11 +28,10 @@ public class SetUpAndTearDownDriver implements TestRule {
 	public static final DriverToRunTestsIn driverToRunTestsIn = whatDriversShouldTestsRun();
 
 	private static DriverToRunTestsIn whatDriversShouldTestsRun() {
-		System.out.println("@# Property is: "+System.getProperty("CI"));
-		//if ("true".equals(System.getProperty("CI"))) {
+		if ("true".equals(System.getenv("CONTINUOUS_INTEGRATION"))) {
 			return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
-		//}
-		//return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
+		}
+		return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
 	}
 
 	private static final String NOT_SPECIFIED = null;
