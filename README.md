@@ -1,4 +1,6 @@
 # [seleniumQuery](http://seleniumquery.github.io)
+
+[![Join the chat at https://gitter.im/seleniumQuery/seleniumQuery](https://badges.gitter.im/seleniumQuery/seleniumQuery.svg)](https://gitter.im/seleniumQuery/seleniumQuery?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.seleniumquery/seleniumquery.svg)]()
 [![Build Status](https://travis-ci.org/seleniumQuery/seleniumQuery.svg?branch=master)](https://travis-ci.org/seleniumQuery/seleniumQuery)
 [![codecov.io](https://codecov.io/github/seleniumQuery/seleniumQuery/coverage.svg?branch=master)](https://codecov.io/github/seleniumQuery/seleniumQuery?branch=master)
