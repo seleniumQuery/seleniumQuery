@@ -20,13 +20,16 @@ import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.testdouble.Stubs;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static testinfrastructure.testdouble.Dummies.createDummyWebElement;
 import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObject;
 import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
+import static testinfrastructure.testdouble.Stubs.createStubWebElementWithTag;
 
 public class FilterFunctionTest {
 
@@ -74,6 +77,26 @@ public class FilterFunctionTest {
         SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
         // then
         assertThat(resultSQO.getWebDriver(), is(targetSQO.getWebDriver()));
+    }
+
+    @Test
+    public void resultSQO_should_onlyKeepElementsThatPassThePredicateFunction() {
+        // given
+        WebElement spanOne = createStubWebElementWithTag("span");
+        WebElement notSpan = createStubWebElementWithTag("div");
+        WebElement spanTwo = createStubWebElementWithTag("span");
+
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithElements(spanOne, notSpan, spanTwo);
+        // when
+        Predicate<WebElement> keepSpansPredicate = new Predicate<WebElement>() {
+            @Override
+            public boolean apply(WebElement webElement) {
+                return "span".equals(webElement.getTagName());
+            }
+        };
+        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, keepSpansPredicate);
+        // then
+        assertThat(resultSQO.get(), contains(spanOne, spanTwo));
     }
 
 }
