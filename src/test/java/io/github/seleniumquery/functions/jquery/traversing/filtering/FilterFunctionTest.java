@@ -20,7 +20,6 @@ import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
-import testinfrastructure.testdouble.Stubs;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
@@ -98,5 +97,9 @@ public class FilterFunctionTest {
         // then
         assertThat(resultSQO.get(), contains(spanOne, spanTwo));
     }
+
+    // TODO filter(this, null) --> should return empty ==> CHANGE THIS FOR THE PREDICATE VERSION ALSO, it is returning the original matched set
+    // TODO filter(this, "") --> should return empty
+    // TODO filter(this, "selector") --> should keep everyone that matches the isFunction("selector")
 
 }
