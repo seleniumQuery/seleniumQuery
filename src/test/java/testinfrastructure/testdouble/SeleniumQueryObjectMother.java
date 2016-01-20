@@ -33,9 +33,9 @@ public class SeleniumQueryObjectMother {
         return createStubSeleniumQueryObject(seleniumQueryFunctions, dummyWebElements);
     }
 
-    private static SeleniumQueryObject createStubSeleniumQueryObject(SeleniumQueryFunctions seleniumQueryFunctions, List<WebElement> dummyWebElements) {
+    private static SeleniumQueryObject createStubSeleniumQueryObject(SeleniumQueryFunctions seleniumQueryFunctions, List<WebElement> webElements) {
         SeleniumQueryObject DUMMY_PREVIOUS = createDummySeleniumQueryObject();
-        return InternalSeleniumQueryObjectFactory.instance().create(seleniumQueryFunctions, createDummyWebDriver(), createToStringableDummyBy(), dummyWebElements, DUMMY_PREVIOUS);
+        return InternalSeleniumQueryObjectFactory.instance().create(seleniumQueryFunctions, createDummyWebDriver(), createToStringableDummyBy(), webElements, DUMMY_PREVIOUS);
     }
 
     public static SeleniumQueryObject createStubSeleniumQueryObjectWithElements(WebElement... elements) {
