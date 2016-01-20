@@ -31,21 +31,25 @@ public class IsFunctionTest {
 
     @Test
     public void is_function() {
-    	assertThat($("#myDiv").is("div"), is(true));
+        assertThat($("#myDiv").is("div"), is(true));
         assertThat($("#myDiv").is(".classOne"), is(true));
         assertThat($("#myDiv").is(".classTwo"), is(true));
         assertThat($("#myDiv").is(":not(.classThree)"), is(true));
         assertThat($("#myDiv").is(".classOne.classTwo"), is(true));
         assertThat($("#myDiv").is(".classOne.classTwo:not(.classThree)"), is(true));
-        
+
         assertThat($("#otherDiv").is(".classThree"), is(true));
         assertThat($("#otherDiv").is(":not(.classOne)"), is(true));
-        
+
         assertThat($("#o1").is("option"), is(true));
         assertThat($("#o2").is("option"), is(true));
         assertThat($("#o1").is(":not(:selected)"), is(true));
         assertThat($("#o2").is(":selected"), is(true));
-        
+
+    }
+
+    @Test
+    public void is_function__with_deep_composed_pseudos() {
         assertThat($("#o1").is(":not(:not(:not(:selected)))"), is(true));
         assertThat($("#o2").is(":not(:not(:selected))"), is(true));
     }

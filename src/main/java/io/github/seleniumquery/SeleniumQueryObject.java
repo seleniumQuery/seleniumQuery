@@ -509,7 +509,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public boolean is(String selector) {
-		return IsFunction.is(this, selector);
+		return seleniumQueryFunctions.isFunction(this, selector);
 	}
 
 	/**
