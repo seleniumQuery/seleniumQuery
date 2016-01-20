@@ -21,6 +21,7 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
 import io.github.seleniumquery.functions.jquery.forms.ValFunction;
 import io.github.seleniumquery.functions.jquery.traversing.filtering.FilterFunction;
+import io.github.seleniumquery.functions.jquery.traversing.filtering.IsFunction;
 import org.openqa.selenium.WebElement;
 
 public class SeleniumQueryFunctions {
@@ -47,6 +48,10 @@ public class SeleniumQueryFunctions {
 
     public SeleniumQueryObject filterFunction(SeleniumQueryObject seleniumQueryObject, Predicate<WebElement> filterFunction) {
         return new FilterFunction().filter(seleniumQueryObject, filterFunction);
+    }
+
+    public boolean isFunction(SeleniumQueryObject seleniumQueryObject, String selector) {
+        return IsFunction.is(seleniumQueryObject, selector);
     }
 
 }
