@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,11 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssCla
 import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.SQCssDescendantSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
 
 public class SQCssConditionalSelectorTest {
 
@@ -37,7 +36,7 @@ public class SQCssConditionalSelectorTest {
         // tagg.clz
         SQCssConditionalSelector conditionalSelector = new SQCssConditionalSelector(tagNameSelector, classAttributeCondition);
         // when
-        ElementFinder elementFinder = conditionalSelector.toElementFinder(mock(WebDriver.class));
+        ElementFinder elementFinder = conditionalSelector.toElementFinder(createWebDriverDummy());
         // then
         assertThat(elementFinder.getCssFinder().toString(), is("tagg.clz"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
@@ -55,7 +54,7 @@ public class SQCssConditionalSelectorTest {
         // a b.condition
         SQCssDescendantSelector descendantSelector = new SQCssDescendantSelector(aTagSelector, conditionalSelector);
         // when
-        ElementFinder elementFinder = descendantSelector.toElementFinder(mock(WebDriver.class));
+        ElementFinder elementFinder = descendantSelector.toElementFinder(createWebDriverDummy());
         // then
         assertThat(elementFinder.getCssFinder().toString(), is("a b.condition"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));

@@ -30,7 +30,7 @@ import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.c
 
 public class ElementFinderUtilsTest {
 
-    public static final ElementFinder UNIVERSAL_SELECTOR_FINDER = universalSelectorFinder(mock(WebDriver.class));
+    public static final ElementFinder UNIVERSAL_SELECTOR_FINDER = universalSelectorFinder(createWebDriverDummy());
     public static ElementFinder universalSelectorFinder(WebDriver driver) {
         return new ElementFinder(driver, universalSelector(), pureXPath(".//*[true()]"));
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
 
 public class SQCssDirectAdjacentSelectorTest {
 
@@ -35,7 +36,7 @@ public class SQCssDirectAdjacentSelectorTest {
         SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
         SQCssDirectAdjacentSelector directAdjacentSelector = new SQCssDirectAdjacentSelector(aTagSelector, bTagSelector);
         // when
-        ElementFinder elementFinder = directAdjacentSelector.toElementFinder(mock(WebDriver.class));
+        ElementFinder elementFinder = directAdjacentSelector.toElementFinder(createWebDriverDummy());
         // then
         assertThat(elementFinder.getCssFinder().toString(), is("a+b"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
