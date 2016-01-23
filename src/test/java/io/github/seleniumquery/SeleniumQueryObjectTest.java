@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static testinfrastructure.testdouble.Dummies.createDummyWebElementPredicate;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createDummySeleniumQueryObject;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithSeleniumQueryFunctions;
+import static testinfrastructure.testdouble.com.google.common.base.PredicateMother.createDummyWebElementPredicate;
+import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithSeleniumQueryFunctions;
+import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectDummy.createSeleniumQueryObjectDummy;
 
 public class SeleniumQueryObjectTest {
 
@@ -58,7 +58,7 @@ public class SeleniumQueryObjectTest {
 
         String propertyName = "propertyName";
         String propertyValue = "propertyValue";
-        SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
+        SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
         given(seleniumQueryFunctions.propertyWrite(seleniumQueryObject, propertyName, propertyValue)).willReturn(configuredReturningObject);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.prop(propertyName, propertyValue);
@@ -87,7 +87,7 @@ public class SeleniumQueryObjectTest {
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String propertyValue = "propertyValue";
-        SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
+        SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
         given(seleniumQueryFunctions.valueWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.val(propertyValue);
@@ -102,7 +102,7 @@ public class SeleniumQueryObjectTest {
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         Number propertyValue = 1.0;
-        SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
+        SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
         given(seleniumQueryFunctions.valueWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.val(propertyValue);
@@ -115,7 +115,7 @@ public class SeleniumQueryObjectTest {
         // given
         SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
-        SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
+        SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
 
         Predicate<WebElement> filterFunction = createDummyWebElementPredicate();
         given(seleniumQueryFunctions.filterPredicate(seleniumQueryObject, filterFunction)).willReturn(configuredReturningObject);

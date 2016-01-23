@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
-import static testinfrastructure.testdouble.Dummies.createDummyWebDriver;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
 
 public class SQCssTagNameSelectorTest {
 
@@ -31,7 +31,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("myTag");
         // when
-        ElementFinder elementFinder = tagNameSelector.toElementFinder(createDummyWebDriver());
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(createWebDriverDummy());
         // then
         assertThat(elementFinder.getCssFinder().toString(), is("myTag"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
@@ -44,7 +44,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        ElementFinder elementFinder = tagNameSelector.toElementFinder(createDummyWebDriver());
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(createWebDriverDummy());
         // then
         assertThat(elementFinder.getXPathExpression(), is(".//*[true()]"));
     }
@@ -54,7 +54,7 @@ public class SQCssTagNameSelectorTest {
         // given
         SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
         // when
-        ElementFinder elementFinder = tagNameSelector.toElementFinder(createDummyWebDriver());
+        ElementFinder elementFinder = tagNameSelector.toElementFinder(createWebDriverDummy());
         // then
         assertThat(elementFinder.getXPathAndFilterFinder().getRawXPathExpression(), is("true()"));
     }

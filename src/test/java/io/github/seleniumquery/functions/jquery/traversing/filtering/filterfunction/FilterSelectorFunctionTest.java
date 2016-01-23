@@ -23,7 +23,7 @@ import testinfrastructure.testutils.FunctionsTestUtils;
 
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.*;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithAtLeastOneElement;
+import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithAtLeastOneElement;
 
 public class FilterSelectorFunctionTest {
 
