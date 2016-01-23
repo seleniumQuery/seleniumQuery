@@ -20,21 +20,6 @@ import com.google.common.base.Predicate;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
-import io.github.seleniumquery.functions.jquery.attributes.AttrFunction;
-import io.github.seleniumquery.functions.jquery.attributes.HasClassFunction;
-import io.github.seleniumquery.functions.jquery.attributes.RemoveAttrFunction;
-import io.github.seleniumquery.functions.jquery.events.ClickFunction;
-import io.github.seleniumquery.functions.jquery.forms.FocusFunction;
-import io.github.seleniumquery.functions.jquery.forms.SubmitFunction;
-import io.github.seleniumquery.functions.jquery.manipulation.HtmlFunction;
-import io.github.seleniumquery.functions.jquery.manipulation.TextFunction;
-import io.github.seleniumquery.functions.jquery.miscellaneous.GetFunction;
-import io.github.seleniumquery.functions.jquery.miscellaneous.ToArrayFunction;
-import io.github.seleniumquery.functions.jquery.traversing.filtering.*;
-import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ChildrenFunction;
-import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
-import io.github.seleniumquery.functions.jquery.traversing.treetraversal.FindFunction;
-import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ParentFunction;
 import io.github.seleniumquery.utils.ListUtils;
 import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
 import org.apache.commons.logging.Log;
@@ -255,7 +240,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject not(String selector) {
-		return NotFunction.not(this, selector);
+		return seleniumQueryFunctions.notSelector(this, selector);
 	}
 
 	/**
@@ -269,7 +254,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject first() {
-		return FirstFunction.first(this);
+		return seleniumQueryFunctions.first(this);
 	}
 
 	/**
@@ -283,7 +268,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject last() {
-		return LastFunction.last(this);
+		return seleniumQueryFunctions.last(this);
 	}
 
 	/**
@@ -297,7 +282,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject eq(int index) {
-		return EqFunction.eq(this, index);
+		return seleniumQueryFunctions.eqIndex(this, index);
 	}
 
 	/**
@@ -317,7 +302,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		// It is impossible to read text from hidden elements in Selenium:
 		// Since a user cannot read text in a hidden element, WebDriver will not allow access to it as well.
 		// More in WebDriver FAQs: https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_Why_is_it_not_possible_to_interact_with_hidden_elements?
-		return TextFunction.text(this);
+		return seleniumQueryFunctions.text(this);
 	}
 
 	/**
@@ -329,7 +314,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject click() {
-		return ClickFunction.click(this);
+		return seleniumQueryFunctions.click(this);
 	}
 
 	/**
@@ -341,7 +326,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject val(String value) {
-        return seleniumQueryFunctions.valWrite(this, value);
+        return seleniumQueryFunctions.valueWrite(this, value);
 	}
 
     /**
@@ -353,7 +338,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject val(Number value) {
-        return seleniumQueryFunctions.valWrite(this, value);
+        return seleniumQueryFunctions.valueWrite(this, value);
 	}
 
     /**
@@ -364,7 +349,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public String val() {
-		return seleniumQueryFunctions.valRead(this);
+		return seleniumQueryFunctions.valueRead(this);
 	}
 
     /**
@@ -388,7 +373,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject find(String selector) {
-		return FindFunction.find(this, selector);
+		return seleniumQueryFunctions.findSelector(this, selector);
 	}
 
 	/**
@@ -400,7 +385,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public String attr(String attributeName) {
-		return AttrFunction.attr(this, attributeName);
+		return seleniumQueryFunctions.attributeRead(this, attributeName);
 	}
 
 	/**
@@ -418,7 +403,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject attr(String attributeName, Object value) {
-		return AttrFunction.attr(this, attributeName, value);
+		return seleniumQueryFunctions.attributeWrite(this, attributeName, value);
 	}
 
 	/**
@@ -431,7 +416,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public <T> T prop(String propertyName) {
-		return seleniumQueryFunctions.propRead(this, propertyName);
+		return seleniumQueryFunctions.propertyRead(this, propertyName);
 	}
 
     /**
@@ -449,7 +434,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
      */
 	public SeleniumQueryObject prop(String propertyName, Object value) {
-		return seleniumQueryFunctions.propWrite(this, propertyName, value);
+		return seleniumQueryFunctions.propertyWrite(this, propertyName, value);
 	}
 
     /**
@@ -461,7 +446,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public WebElement get(int index) {
-		return GetFunction.get(this, index);
+		return seleniumQueryFunctions.getIndex(this, index);
 	}
 
 	/**
@@ -485,7 +470,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0]
 	 */
 	public SeleniumQueryObject removeAttr(String attributeNames) {
-		return RemoveAttrFunction.removeAttr(this, attributeNames);
+		return seleniumQueryFunctions.removeAttribute(this, attributeNames);
 	}
 
 	/**
@@ -496,7 +481,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public String html() {
-		return HtmlFunction.html(this);
+		return seleniumQueryFunctions.html(this);
 	}
 
 	/**
@@ -509,7 +494,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public boolean is(String selector) {
-		return seleniumQueryFunctions.isFunction(this, selector);
+		return seleniumQueryFunctions.isSelector(this, selector);
 	}
 
 	/**
@@ -521,7 +506,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public boolean hasClass(String className) {
-		return HasClassFunction.hasClass(this, className);
+		return seleniumQueryFunctions.hasClass(this, className);
 	}
 
 	/**
@@ -532,7 +517,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public WebElement[] toArray() {
-		return ToArrayFunction.toArray(this);
+		return seleniumQueryFunctions.toArray(this);
 	}
 
 	/**
@@ -546,7 +531,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject closest(String selector) {
-		return ClosestFunction.closest(this, selector);
+		return seleniumQueryFunctions.closestSelector(this, selector);
 	}
 
 	/**
@@ -561,7 +546,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject focus() {
-		return FocusFunction.focus(this);
+		return seleniumQueryFunctions.focus(this);
 	}
 
 	/**
@@ -572,7 +557,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject children() {
-		return ChildrenFunction.children(this);
+		return seleniumQueryFunctions.children(this);
 	}
 
 	/**
@@ -584,7 +569,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject children(String selector) {
-		return ChildrenFunction.children(this, selector);
+		return seleniumQueryFunctions.childrenSelector(this, selector);
 	}
 
 	/**
@@ -597,7 +582,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject parent() {
-		return ParentFunction.parent(this);
+		return seleniumQueryFunctions.parent(this);
 	}
 
 	/**
@@ -613,7 +598,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject parent(String selector) {
-		return ParentFunction.parent(this, selector);
+		return seleniumQueryFunctions.parentSelector(this, selector);
 	}
 
 	/**
@@ -629,8 +614,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	public SeleniumQueryObject submit() {
-		SubmitFunction.submit(this);
-		return this;
+		return seleniumQueryFunctions.submit(this);
 	}
 
 	/**
@@ -670,7 +654,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
      * @since 0.11.0
      */
 	public SeleniumQueryObject filter(Predicate<WebElement> filterFunction) {
-		return seleniumQueryFunctions.filterFunction(this, filterFunction);
+		return seleniumQueryFunctions.filterPredicate(this, filterFunction);
 	}
 
 }

@@ -43,7 +43,7 @@ public class SeleniumQueryObjectTest {
 
         String propertyName = "propertyName";
         String configuredPropertyValue = "propertyValue";
-        given(seleniumQueryFunctions.propRead(seleniumQueryObject, propertyName)).willReturn(configuredPropertyValue);
+        given(seleniumQueryFunctions.propertyRead(seleniumQueryObject, propertyName)).willReturn(configuredPropertyValue);
         // when
         Object returnedPropertyValue = seleniumQueryObject.prop(propertyName);
         // then
@@ -59,7 +59,7 @@ public class SeleniumQueryObjectTest {
         String propertyName = "propertyName";
         String propertyValue = "propertyValue";
         SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
-        given(seleniumQueryFunctions.propWrite(seleniumQueryObject, propertyName, propertyValue)).willReturn(configuredReturningObject);
+        given(seleniumQueryFunctions.propertyWrite(seleniumQueryObject, propertyName, propertyValue)).willReturn(configuredReturningObject);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.prop(propertyName, propertyValue);
         // then
@@ -73,7 +73,7 @@ public class SeleniumQueryObjectTest {
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String configuredValue = "configuredValue";
-        given(seleniumQueryFunctions.valRead(seleniumQueryObject)).willReturn(configuredValue);
+        given(seleniumQueryFunctions.valueRead(seleniumQueryObject)).willReturn(configuredValue);
         // when
         String returnedValue = seleniumQueryObject.val();
         // then
@@ -88,7 +88,7 @@ public class SeleniumQueryObjectTest {
 
         String propertyValue = "propertyValue";
         SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
-        given(seleniumQueryFunctions.valWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
+        given(seleniumQueryFunctions.valueWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.val(propertyValue);
         // then
@@ -103,7 +103,7 @@ public class SeleniumQueryObjectTest {
 
         Number propertyValue = 1.0;
         SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
-        given(seleniumQueryFunctions.valWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
+        given(seleniumQueryFunctions.valueWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.val(propertyValue);
         // then
@@ -118,7 +118,7 @@ public class SeleniumQueryObjectTest {
         SeleniumQueryObject configuredReturningObject = createDummySeleniumQueryObject();
 
         Predicate<WebElement> filterFunction = createDummyWebElementPredicate();
-        given(seleniumQueryFunctions.filterFunction(seleniumQueryObject, filterFunction)).willReturn(configuredReturningObject);
+        given(seleniumQueryFunctions.filterPredicate(seleniumQueryObject, filterFunction)).willReturn(configuredReturningObject);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.filter(filterFunction);
         // then
@@ -134,7 +134,7 @@ public class SeleniumQueryObjectTest {
         boolean configuredReturningValue = true;
 
         String configuredSelector = "selector";
-        given(seleniumQueryFunctions.isFunction(seleniumQueryObject, configuredSelector)).willReturn(configuredReturningValue);
+        given(seleniumQueryFunctions.isSelector(seleniumQueryObject, configuredSelector)).willReturn(configuredReturningValue);
         // when
         boolean returnedValue = seleniumQueryObject.is(configuredSelector);
         // then
