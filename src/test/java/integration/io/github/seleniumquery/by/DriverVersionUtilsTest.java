@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import testinfrastructure.testutils.DriverInTest;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
 
 public class DriverVersionUtilsTest {
 
@@ -75,7 +76,7 @@ public class DriverVersionUtilsTest {
 	
 	@Test
 	public void isHtmlUnitDriverEmulatingIE__not_HtmlUnit() {
-		WebDriver webDriverMock = mock(WebDriver.class);
+		WebDriver webDriverMock = createWebDriverDummy();
 		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(webDriverMock);
 		assertThat(isHtmlUnitDriverEmulatingIE, is(false));
 	}

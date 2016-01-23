@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,20 +24,21 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.testdouble.org.openqa.selenium.WebDriverQuitSpy;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
-import static org.mockito.Mockito.*;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverQuitSpy.createWebDriverQuitSpy;
 
 public class SeleniumQueryDriverTest {
 
     @Test
     public void use__should_set_the_argument_as_current_WebDriver_____and___get__should_return_it() {
         // given
-        WebDriver driver = mock(WebDriver.class);
+        WebDriver driver = createWebDriverQuitSpy();
         // when
         $.driver().use(driver);
         // then
@@ -48,40 +49,32 @@ public class SeleniumQueryDriverTest {
     @Test
     public void quit__should_quit_the_current_webDriver() {
         // given
-        WebDriver driver = mock(WebDriver.class);
+        WebDriverQuitSpy driver = createWebDriverQuitSpy();
         $.driver().use(driver);
-        assertDriverWasNotQuit(driver);
+        driver.assertDriverWasNotQuit();
         // when
         $.driver().quit();
         // then
-        assertDriverWasQuit(driver);
+        driver.assertDriverWasQuit();
     }
 
     @Test
     public void use__should_quit_the_previous_driver() {
         // given
-        WebDriver previousDriver = mock(WebDriver.class);
+        WebDriverQuitSpy previousDriver = createWebDriverQuitSpy();
         $.driver().use(previousDriver);
-        assertDriverWasNotQuit(previousDriver);
+        previousDriver.assertDriverWasNotQuit();
         // when
-        WebDriver newDriver = mock(WebDriver.class);
+        WebDriver newDriver = createWebDriverQuitSpy();
         $.driver().use(newDriver);
         // then
-        assertDriverWasQuit(previousDriver);
-    }
-
-    private void assertDriverWasQuit(WebDriver previousDriver) {
-        verify(previousDriver).quit();
-    }
-
-    private void assertDriverWasNotQuit(WebDriver previousDriver) {
-        verify(previousDriver, never()).quit();
+        previousDriver.assertDriverWasQuit();
     }
 
     @Test
     public void get__should_return_the_same_WebDriver_upon_multiple_calls() {
         // given
-        WebDriver previousDriver = mock(WebDriver.class);
+        WebDriver previousDriver = createWebDriverQuitSpy();
         $.driver().use(previousDriver);
         WebDriver driverGetOnce = $.driver().get();
         // when
@@ -108,28 +101,28 @@ public class SeleniumQueryDriverTest {
     @Test
     public void useHtmlUnit__should_quit_the_previous_driver() {
         // given
-        WebDriver previousDriver = mock(WebDriver.class);
+        WebDriverQuitSpy previousDriver = createWebDriverQuitSpy();
         $.driver().use(previousDriver);
-        assertDriverWasNotQuit(previousDriver);
+        previousDriver.assertDriverWasNotQuit();
         // when
         $.driver().useHtmlUnit();
         // then
-        assertDriverWasQuit(previousDriver);
+        previousDriver.assertDriverWasQuit();
     }
 
     @Test // I know this test asserts two things, but instantiating a FirefoxDriver is expensive!
     public void useFirefox__should_create_a_FirefoxDriver_upon_first_use___and___should_quit_the_previous_driver() {
         assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunFirefox());
         // given
-        WebDriver previousDriver = mock(WebDriver.class);
+        WebDriverQuitSpy previousDriver = createWebDriverQuitSpy();
         $.driver().use(previousDriver);
-        assertDriverWasNotQuit(previousDriver);
+        previousDriver.assertDriverWasNotQuit();
         try {
             // when
             $.driver().useFirefox();
             WebDriver driver = $.driver().get();
             // then
-            assertDriverWasQuit(previousDriver);
+            previousDriver.assertDriverWasQuit();
             assertThat(driver, instanceOf(FirefoxDriver.class));
         } finally {
             $.driver().quit();
@@ -140,15 +133,15 @@ public class SeleniumQueryDriverTest {
     public void useChrome__should_create_a_ChromeDriver_upon_first_use___and___should_quit_the_previous_driver() {
         assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunChrome());
         // given
-        WebDriver previousDriver = mock(WebDriver.class);
+        WebDriverQuitSpy previousDriver = createWebDriverQuitSpy();
         $.driver().use(previousDriver);
-        assertDriverWasNotQuit(previousDriver);
+        previousDriver.assertDriverWasNotQuit();
         try {
             // when
             $.driver().useChrome();
             WebDriver driver = $.driver().get();
             // then
-            assertDriverWasQuit(previousDriver);
+            previousDriver.assertDriverWasQuit();
             assertThat(driver, instanceOf(ChromeDriver.class));
         } finally {
             $.driver().quit();
@@ -159,15 +152,15 @@ public class SeleniumQueryDriverTest {
     public void useInternetExplorer__should_create_a_InternetExplorerDriver_upon_first_use___and___should_quit_the_previous_driver() {
         assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunIE());
         // given
-        WebDriver previousDriver = mock(WebDriver.class);
+        WebDriverQuitSpy previousDriver = createWebDriverQuitSpy();
         $.driver().use(previousDriver);
-        assertDriverWasNotQuit(previousDriver);
+        previousDriver.assertDriverWasNotQuit();
         try {
             // when
             $.driver().useInternetExplorer();
             WebDriver driver = $.driver().get();
             // then
-            assertDriverWasQuit(previousDriver);
+            previousDriver.assertDriverWasQuit();
             assertThat(driver, instanceOf(InternetExplorerDriver.class));
         } finally {
             $.driver().quit();
@@ -178,15 +171,15 @@ public class SeleniumQueryDriverTest {
     public void usePhantomJS__should_create_a_PhantomJSDriver_upon_first_use___and___should_quit_the_previous_driver() {
         assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunPhantomJS());
         // given
-        WebDriver previousDriver = mock(WebDriver.class);
+        WebDriverQuitSpy previousDriver = createWebDriverQuitSpy();
         $.driver().use(previousDriver);
-        assertDriverWasNotQuit(previousDriver);
+        previousDriver.assertDriverWasNotQuit();
         try {
             // when
             $.driver().usePhantomJS();
             WebDriver driver = $.driver().get();
             // then
-            assertDriverWasQuit(previousDriver);
+            previousDriver.assertDriverWasQuit();
             assertThat(driver, instanceOf(PhantomJSDriver.class));
         } finally {
             $.driver().quit();
