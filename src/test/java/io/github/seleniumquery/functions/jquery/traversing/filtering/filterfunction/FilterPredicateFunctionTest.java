@@ -26,9 +26,9 @@ import testinfrastructure.testutils.FunctionsTestUtils;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithAtLeastOneElement;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
-import static testinfrastructure.testdouble.Stubs.createStubWebElementWithTag;
+import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithAtLeastOneElement;
+import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createWebElementWithTag;
 
 public class FilterPredicateFunctionTest {
 
@@ -60,9 +60,9 @@ public class FilterPredicateFunctionTest {
     @Test
     public void resultSQO_should_onlyKeepElementsThatPassThePredicateFunction() {
         // given
-        WebElement spanOne = createStubWebElementWithTag("span");
-        WebElement notSpan = createStubWebElementWithTag("div");
-        WebElement spanTwo = createStubWebElementWithTag("span");
+        WebElement spanOne = createWebElementWithTag("span");
+        WebElement notSpan = createWebElementWithTag("div");
+        WebElement spanTwo = createWebElementWithTag("span");
 
         SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithElements(spanOne, notSpan, spanTwo);
         // when

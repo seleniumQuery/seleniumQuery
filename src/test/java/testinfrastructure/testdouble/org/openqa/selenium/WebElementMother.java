@@ -39,4 +39,13 @@ public class WebElementMother {
         };
     }
 
+    public static WebElement createWebElementWithTag(final String tagName) {
+        return new WebElementStub() {
+            @Override
+            public String getTagName() {
+                return tagName;
+            }
+        };
+    }
+
 }

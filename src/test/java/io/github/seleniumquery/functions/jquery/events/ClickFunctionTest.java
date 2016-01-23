@@ -28,7 +28,7 @@ import testinfrastructure.testutils.LogInjector;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
+import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebElementClickSpy.createWebElementClickSpy;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createClickableWebElement;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createUnclickableHiddenWebElement;
