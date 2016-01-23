@@ -21,6 +21,12 @@ import static org.junit.Assert.assertThat;
 
 public class WebElementClickSpy extends WebElementDummy {
 
+    public static WebElementClickSpy createWebElementClickSpy() {
+        return new WebElementClickSpy();
+    }
+
+    WebElementClickSpy() { /* package visibility to contain widespread inheritance */ }
+
     private int clickCount = 0;
 
     @Override

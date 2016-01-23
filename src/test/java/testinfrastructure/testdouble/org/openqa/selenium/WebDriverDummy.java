@@ -26,6 +26,12 @@ import java.util.Set;
 
 public class WebDriverDummy implements WebDriver {
 
+    public static WebDriver createWebDriverDummy() {
+        return new WebDriverDummy();
+    }
+
+    WebDriverDummy() { /* package visibility to contain widespread inheritance */ }
+
     @Override public void get(String s) { throw new PseudoTestDoubleException(); }
     @Override public String getCurrentUrl() { throw new PseudoTestDoubleException(); }
     @Override public String getTitle() { throw new PseudoTestDoubleException(); }

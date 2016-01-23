@@ -23,6 +23,8 @@ import java.util.List;
 
 public class WebElementDummy implements WebElement {
 
+    WebElementDummy() { /* package visibility to contain widespread inheritance */ }
+
     @Override public void click() { throw new PseudoTestDoubleException(); }
     @Override public void submit() { throw new PseudoTestDoubleException(); }
     @Override public void sendKeys(CharSequence... charSequences) { throw new PseudoTestDoubleException(); }

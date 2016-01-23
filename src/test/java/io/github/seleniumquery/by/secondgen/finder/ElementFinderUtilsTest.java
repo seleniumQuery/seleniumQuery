@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static testinfrastructure.testdouble.Mocks.mockWebDriver;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
 
 public class ElementFinderUtilsTest {
 
@@ -36,7 +36,7 @@ public class ElementFinderUtilsTest {
     }
 
     public static WebDriver mockWebDriverWithNativeSupportFor(String pseudoClass) {
-        WebDriver mockDriver = mockWebDriver();
+        WebDriver mockDriver = createWebDriverDummy();
         DriverVersionUtils driverVersionUtilsMock = overrideDriverVersionUtilsWithMock();
         when(driverVersionUtilsMock.hasNativeSupportForPseudo(mockDriver, pseudoClass)).thenReturn(true);
         return mockDriver;
@@ -48,7 +48,7 @@ public class ElementFinderUtilsTest {
     }
     public static WebDriver mockWebDriverWithNativeSupportForNoPseudoClass() {
         overrideDriverVersionUtilsWithMock();
-        return mockWebDriver();
+        return createWebDriverDummy();
     }
 
     public static WebDriver createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(String checkedPseudo) {
