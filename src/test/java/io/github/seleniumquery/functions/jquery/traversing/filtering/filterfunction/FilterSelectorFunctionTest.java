@@ -23,8 +23,16 @@ public class FilterSelectorFunctionTest {
         assertThat(resultSQO.get(), empty());
     }
 
-    // TODO filter(this, null) --> should return empty
-    // TODO filter(this, "") --> should return empty
+    @Test
+    public void emptyString_selector__should_return_EMPTY_element_set() {
+        // given
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithAtLeastOneElement();
+        // when
+        SeleniumQueryObject resultSQO = filterSelectorFunction.filter(targetSQO, "");
+        // then
+        assertThat(resultSQO.get(), empty());
+    }
+
     // TODO filter(this, "selector") --> should keep everyone that matches the isFunction("selector")
 
 }

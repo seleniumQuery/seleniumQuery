@@ -35,7 +35,7 @@ public class FilterPredicateFunctionTest {
     FilterPredicateFunction filterPredicateFunction = new FilterPredicateFunction();
 
     @Test
-    public void null_predicate__should_return_EMPTY_elements() {
+    public void null_predicate__should_return_EMPTY_element_set() {
         // given
         SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithAtLeastOneElement();
         // when
