@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.functions.jquery.traversing.filtering;
+package io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -27,7 +27,7 @@ import java.util.List;
 import static io.github.seleniumquery.InternalSeleniumQueryObjectFactory.instance;
 import static java.util.Collections.emptyList;
 
-public class FilterFunction {
+public class FilterPredicateFunction {
 
     public SeleniumQueryObject filter(SeleniumQueryObject seleniumQueryObject, Predicate<WebElement> filterFunction) {
         List<WebElement> filteredWebElements = filterWebElements(seleniumQueryObject.get(), filterFunction);

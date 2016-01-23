@@ -14,37 +14,32 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.functions.jquery.traversing.filtering;
+package io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction;
 
 import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
-import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
-import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
-import static testinfrastructure.testdouble.Dummies.createDummyWebElement;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObject;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithAtLeastOneElement;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
+import static testinfrastructure.testdouble.SeleniumQueryObjectMother.*;
 import static testinfrastructure.testdouble.Stubs.createStubWebElementWithTag;
 
-public class FilterFunctionTest {
+public class FilterPredicateFunctionTest {
 
     private static final Predicate<WebElement> NULL_PREDICATE = null;
 
-    FilterFunction filterFunction = new FilterFunction();
+    FilterPredicateFunction filterPredicateFunction = new FilterPredicateFunction();
 
     @Test
     public void null_predicate__should_return_EMPTY_elements() {
         // given
         SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithAtLeastOneElement();
         // when
-        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
+        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, NULL_PREDICATE);
         // then
         assertThat(resultSQO.get(), empty());
     }
@@ -54,7 +49,7 @@ public class FilterFunctionTest {
         // given
         SeleniumQueryObject targetSQO = createStubSeleniumQueryObject();
         // when
-        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
+        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, NULL_PREDICATE);
         // then
         assertThat(resultSQO.end(), is(targetSQO));
     }
@@ -64,7 +59,7 @@ public class FilterFunctionTest {
         // given
         SeleniumQueryObject targetSQO = createStubSeleniumQueryObject();
         // when
-        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
+        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, NULL_PREDICATE);
         // then
         assertThat(resultSQO.getSeleniumQueryFunctions(), is(targetSQO.getSeleniumQueryFunctions()));
     }
@@ -74,7 +69,7 @@ public class FilterFunctionTest {
         // given
         SeleniumQueryObject targetSQO = createStubSeleniumQueryObject();
         // when
-        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
+        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, NULL_PREDICATE);
         // then
         assertThat(resultSQO.getWebDriver(), is(targetSQO.getWebDriver()));
     }
@@ -94,7 +89,7 @@ public class FilterFunctionTest {
                 return "span".equals(webElement.getTagName());
             }
         };
-        SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, keepSpansPredicate);
+        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, keepSpansPredicate);
         // then
         assertThat(resultSQO.get(), contains(spanOne, spanTwo));
     }
