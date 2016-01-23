@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,11 +101,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		this.previous = previous;
 	}
 
-
-	/**************************************************************************************************************************************
-	 * Java SeleniumQueryObject waitUntil() and as() functions
-	 **************************************************************************************************************************************/
-	
 	/**
 	 * <p>List of functions that will halt the execution and requery the selector until the specified condition is met, returning
 	 * a new seleniumQuery object at the end.</p>
@@ -176,11 +171,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return pluginFunction.as(this);
 	}
 
-
-	/**************************************************************************************************************************************
-	 * Java SeleniumQueryObject specific functions
-	 **************************************************************************************************************************************/
-
 	/**
 	 * Returns an iterator over the matched elements of this seleniumQuery object.
 	 *
@@ -214,11 +204,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
     public SeleniumQueryFunctions getSeleniumQueryFunctions() {
         return seleniumQueryFunctions;
     }
-
-
-	/**************************************************************************************************************************************
-	 * jQuery-emulating functions
-	 **************************************************************************************************************************************/
 
 	/**
 	 * Returns the number of elements in the seleniumQuery object.
