@@ -16,13 +16,5 @@
 
 package testinfrastructure.testdouble;
 
-import org.openqa.selenium.WebDriver;
-import testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy;
-
-public class Mocks {
-
-    public static WebDriver mockWebDriver() {
-        return new WebDriverDummy();
-    }
-
+public class PseudoTestDoubleException extends RuntimeException {
 }

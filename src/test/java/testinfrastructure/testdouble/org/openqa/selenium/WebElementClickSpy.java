@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-package testinfrastructure.testdouble;
+package testinfrastructure.testdouble.org.openqa.selenium;
 
-import org.openqa.selenium.WebDriver;
-import testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
-public class Mocks {
+public class WebElementClickSpy extends WebElementDummy {
 
-    public static WebDriver mockWebDriver() {
-        return new WebDriverDummy();
+    private int clickCount = 0;
+
+    @Override
+    public void click() {
+        clickCount++;
+    }
+
+    public void assertNumberOfTimesClicked(int numberOfTimesClicked) {
+        assertThat(clickCount, is(numberOfTimesClicked));
     }
 
 }
