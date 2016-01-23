@@ -29,6 +29,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebElementClickSpy.createWebElementClickSpy;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createClickableWebElement;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createUnclickableHiddenWebElement;
 
@@ -47,8 +48,8 @@ public class ClickFunctionTest {
     @Test
     public void click__shouldCallClickOnEveryElementIfNoneThrowsException() {
         // given
-        WebElementClickSpy webElementClickSpyOne = new WebElementClickSpy();
-        WebElementClickSpy webElementClickSpyTwo = new WebElementClickSpy();
+        WebElementClickSpy webElementClickSpyOne = createWebElementClickSpy();
+        WebElementClickSpy webElementClickSpyTwo = createWebElementClickSpy();
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(webElementClickSpyOne, webElementClickSpyTwo);
         // when
         ClickFunction.click(sqo);
@@ -61,7 +62,7 @@ public class ClickFunctionTest {
     public void click__shouldCallClickOnEveryElementEvenIfSomeThrowExceptions() {
         // given
         WebElement unclickableHiddenWebElement = createUnclickableHiddenWebElement();
-        WebElementClickSpy webElementClickSpy = new WebElementClickSpy();
+        WebElementClickSpy webElementClickSpy = createWebElementClickSpy();
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(unclickableHiddenWebElement, webElementClickSpy);
         // when
         ClickFunction.click(sqo);
