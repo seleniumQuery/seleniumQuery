@@ -25,6 +25,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static io.github.seleniumquery.InternalSeleniumQueryObjectFactory.instance;
+import static java.util.Collections.emptyList;
 
 public class FilterFunction {
 
@@ -39,7 +40,7 @@ public class FilterFunction {
 
     private List<WebElement> filterWebElements(List<WebElement> unfiltered, Predicate<WebElement> filterFunction) {
         if (filterFunction == null) {
-            return unfiltered;
+            return emptyList();
         }
         Iterable<WebElement> filter = Iterables.filter(unfiltered, filterFunction);
         return Lists.newArrayList(filter);
