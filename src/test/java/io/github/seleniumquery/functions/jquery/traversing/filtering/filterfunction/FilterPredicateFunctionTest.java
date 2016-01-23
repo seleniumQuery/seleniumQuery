@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,24 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.testutils.FunctionsTestUtils;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
-import static testinfrastructure.testdouble.SeleniumQueryObjectMother.*;
+import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithAtLeastOneElement;
+import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
 import static testinfrastructure.testdouble.Stubs.createStubWebElementWithTag;
 
 public class FilterPredicateFunctionTest {
 
     private static final Predicate<WebElement> NULL_PREDICATE = null;
+    private static final Predicate<WebElement> PREDICATE_DOES_NOT_MATTER_IN_THIS_TEST = null;
 
     FilterPredicateFunction filterPredicateFunction = new FilterPredicateFunction();
 
@@ -45,33 +48,13 @@ public class FilterPredicateFunctionTest {
     }
 
     @Test
-    public void resultSQO_should_have_targetSQO_as_previous_object() {
-        // given
-        SeleniumQueryObject targetSQO = createStubSeleniumQueryObject();
-        // when
-        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, NULL_PREDICATE);
-        // then
-        assertThat(resultSQO.end(), is(targetSQO));
-    }
-
-    @Test
-    public void resultSQO_should_have_same_SQFunctions_as_targetSQO() {
-        // given
-        SeleniumQueryObject targetSQO = createStubSeleniumQueryObject();
-        // when
-        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, NULL_PREDICATE);
-        // then
-        assertThat(resultSQO.getSeleniumQueryFunctions(), is(targetSQO.getSeleniumQueryFunctions()));
-    }
-
-    @Test
-    public void resultSQO_should_have_same_WebDriver_as_targetSQO() {
-        // given
-        SeleniumQueryObject targetSQO = createStubSeleniumQueryObject();
-        // when
-        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, NULL_PREDICATE);
-        // then
-        assertThat(resultSQO.getWebDriver(), is(targetSQO.getWebDriver()));
+    public void resultSQO_should_have_targetSQO_as_previous_object__and_same_SQFunctions_as_targetSQO__and_same_WebDriver_as_targetSQO() {
+        FunctionsTestUtils.verifyFunctionReturnsSQOWithCorrectWebDriverAndFunctionsAndPrevious(new Function<SeleniumQueryObject, SeleniumQueryObject>() {
+            @Override
+            public SeleniumQueryObject apply(SeleniumQueryObject targetSQO) {
+                return filterPredicateFunction.filter(targetSQO, PREDICATE_DOES_NOT_MATTER_IN_THIS_TEST);
+            }
+        });
     }
 
     @Test
