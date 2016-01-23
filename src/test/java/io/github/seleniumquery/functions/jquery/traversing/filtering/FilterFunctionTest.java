@@ -18,15 +18,18 @@ package io.github.seleniumquery.functions.jquery.traversing.filtering;
 
 import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
+import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static testinfrastructure.testdouble.Dummies.createDummyWebElement;
 import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObject;
+import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithAtLeastOneElement;
 import static testinfrastructure.testdouble.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
 import static testinfrastructure.testdouble.Stubs.createStubWebElementWithTag;
 
@@ -37,15 +40,13 @@ public class FilterFunctionTest {
     FilterFunction filterFunction = new FilterFunction();
 
     @Test
-    public void null_predicate__should_return_same_elements() {
+    public void null_predicate__should_return_EMPTY_elements() {
         // given
-        WebElement dummyWebElement = createDummyWebElement();
-        WebElement dummyWebElement2 = createDummyWebElement();
-        SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithElements(dummyWebElement, dummyWebElement2);
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithAtLeastOneElement();
         // when
         SeleniumQueryObject resultSQO = filterFunction.filter(targetSQO, NULL_PREDICATE);
         // then
-        assertThat(resultSQO.get(), containsInAnyOrder(dummyWebElement, dummyWebElement2));
+        assertThat(resultSQO.get(), empty());
     }
 
     @Test
@@ -97,9 +98,5 @@ public class FilterFunctionTest {
         // then
         assertThat(resultSQO.get(), contains(spanOne, spanTwo));
     }
-
-    // TODO filter(this, null) --> should return empty ==> CHANGE THIS FOR THE PREDICATE VERSION ALSO, it is returning the original matched set
-    // TODO filter(this, "") --> should return empty
-    // TODO filter(this, "selector") --> should keep everyone that matches the isFunction("selector")
 
 }

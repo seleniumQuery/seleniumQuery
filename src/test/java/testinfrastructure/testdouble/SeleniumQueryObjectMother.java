@@ -42,6 +42,10 @@ public class SeleniumQueryObjectMother {
         return createStubSeleniumQueryObject(new SeleniumQueryFunctions(), asList(elements));
     }
 
+    public static SeleniumQueryObject createStubSeleniumQueryObjectWithAtLeastOneElement() {
+        return createStubSeleniumQueryObjectWithElements(createDummyWebElement(), createDummyWebElement());
+    }
+
     public static SeleniumQueryObject createStubSeleniumQueryObject() {
         return createStubSeleniumQueryObjectWithElements();
     }
