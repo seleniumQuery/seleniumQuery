@@ -24,8 +24,7 @@ import static io.github.seleniumquery.by.secondgen.finder.CssFinder.universalSel
 import static io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder.pureXPath;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static testinfrastructure.testdouble.io.github.seleniumquery.utils.DriverVersionUtilsTestBuilder.createDriverVersionUtils;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
 
 public class ElementFinderUtilsTest {
@@ -35,33 +34,23 @@ public class ElementFinderUtilsTest {
         return new ElementFinder(driver, universalSelector(), pureXPath(".//*[true()]"));
     }
 
-    public static WebDriver mockWebDriverWithNativeSupportFor(String pseudoClass) {
-        WebDriver mockDriver = createWebDriverDummy();
-        DriverVersionUtils driverVersionUtilsMock = overrideDriverVersionUtilsWithMock();
-        when(driverVersionUtilsMock.hasNativeSupportForPseudo(mockDriver, pseudoClass)).thenReturn(true);
-        return mockDriver;
+    public static WebDriver createWebDriverWithNativeSupportForPseudo(String pseudoClass) {
+        WebDriver webDriverDummy = createWebDriverDummy();
+        DriverVersionUtils driverVersionUtils = createDriverVersionUtils().withNativeSupportForPseudo(webDriverDummy, pseudoClass).build();
+        DriverVersionUtils.overrideSingletonInstance(driverVersionUtils);
+        return webDriverDummy;
     }
-    private static DriverVersionUtils overrideDriverVersionUtilsWithMock() {
-        DriverVersionUtils driverVersionUtilsMock = mock(DriverVersionUtils.class);
-        DriverVersionUtils.setInstance(driverVersionUtilsMock);
-        return driverVersionUtilsMock;
-    }
-    public static WebDriver mockWebDriverWithNativeSupportForNoPseudoClass() {
-        overrideDriverVersionUtilsWithMock();
+
+    public static WebDriver createWebDriverWithNativeSupportForNoPseudoClass() {
+        DriverVersionUtils.overrideSingletonInstance(createDriverVersionUtils().build());
         return createWebDriverDummy();
     }
 
-    public static WebDriver createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(String checkedPseudo) {
-        WebDriver mockDriverWithNativeSupportFor = ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(checkedPseudo);
-        DriverVersionUtils driverVersionUtilsMock = DriverVersionUtils.getInstance();
-        when(driverVersionUtilsMock.isPhantomJSDriver(mockDriverWithNativeSupportFor)).thenReturn(true);
-        return mockDriverWithNativeSupportFor;
-    }
-    public static WebDriver createMockDriverWithNativeSupporForSelectorAndEmulatingHtmlUnit(String checkedPseudo) {
-        WebDriver mockDriverWithNativeSupportFor = ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(checkedPseudo);
-        DriverVersionUtils driverVersionUtilsMock = DriverVersionUtils.getInstance();
-        when(driverVersionUtilsMock.isHtmlUnitDriver(mockDriverWithNativeSupportFor)).thenReturn(true);
-        return mockDriverWithNativeSupportFor;
+    public static WebDriver createWebDriverEmulatingPhantomJSAndWithNativeSupporForPseudo(String checkedPseudo) {
+        WebDriver webDriverDummy = createWebDriverDummy();
+        DriverVersionUtils driverVersionUtils = createDriverVersionUtils().withNativeSupportForPseudo(webDriverDummy, checkedPseudo).emulatingPhantomJS().build();
+        DriverVersionUtils.overrideSingletonInstance(driverVersionUtils);
+        return webDriverDummy;
     }
 
     @Test

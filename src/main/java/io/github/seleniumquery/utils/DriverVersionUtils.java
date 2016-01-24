@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,8 +45,8 @@ public class DriverVersionUtils {
 		return instance;
 	}
 
-    @VisibleForTesting // this method only exists for test purposes (as this class is a singleton)
-	public static void setInstance(DriverVersionUtils instance) {
+    @VisibleForTesting // this method only exists for testing purposes (as this class is a singleton)
+	public static void overrideSingletonInstance(DriverVersionUtils instance) {
 		DriverVersionUtils.instance = instance;
 	}
 

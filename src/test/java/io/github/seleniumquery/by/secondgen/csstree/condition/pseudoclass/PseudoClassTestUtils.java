@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,10 @@ import io.github.seleniumquery.by.common.preparser.FakeArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
-import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
 import org.w3c.css.sac.Selector;
 
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.createWebDriverWithNativeSupportForNoPseudoClass;
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.universalSelectorFinder;
 import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -118,7 +119,7 @@ public class PseudoClassTestUtils {
     }
 
     public static void assertFilterOnlyPseudoGeneratesFilter(SQCssPseudoClassCondition pseudoClassCondition, ElementFilter pseudoClassFilter) {
-        ElementFinder previous = ElementFinderUtilsTest.universalSelectorFinder(ElementFinderUtilsTest.mockWebDriverWithNativeSupportForNoPseudoClass());
+        ElementFinder previous = universalSelectorFinder(createWebDriverWithNativeSupportForNoPseudoClass());
         // when
         ElementFinder elementFinder = pseudoClassCondition.toElementFinder(previous);
         // then

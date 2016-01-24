@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
-import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
 import org.hamcrest.Matcher;
 
 import java.util.List;
 
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -59,8 +59,8 @@ public class PseudoClassAssertFinderUtils {
                                                                               SQCssConditionImplementedFinders pseudoClassObject,
                                                                               String expectedCss, boolean canPureCss,
                                                                               String expectedXPath, Matcher<? super List<ElementFilter>> elementFilterMatcher) {
-        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(
-                ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(pseudoExpressionThatShouldPassNativeSupportCheck)
+        ElementFinder previousFinder = universalSelectorFinder(
+                createWebDriverWithNativeSupportForPseudo(pseudoExpressionThatShouldPassNativeSupportCheck)
         );
         assertPseudoClassHasFinder(
                 pseudoClassObject,
@@ -77,7 +77,7 @@ public class PseudoClassAssertFinderUtils {
                                                                           boolean canPureCss,
                                                                           String expectedXPath,
                                                                           Matcher<? super List<ElementFilter>> elementFilterMatcher) {
-        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(ElementFinderUtilsTest.mockWebDriverWithNativeSupportForNoPseudoClass());
+        ElementFinder previousFinder = universalSelectorFinder(createWebDriverWithNativeSupportForNoPseudoClass());
         assertPseudoClassHasFinder(
                 pseudoClassObject,
                 previousFinder,

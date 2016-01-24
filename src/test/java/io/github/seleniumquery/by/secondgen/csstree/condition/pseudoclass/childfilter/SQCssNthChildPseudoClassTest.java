@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class SQCssNthChildPseudoClassTest {
 
     private static final String NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK = NTH_CHILD_PSEUDO+"(1)";
     private static final ElementFinder UNIVERSAL_SELECTOR_FINDER_SUPPORTING_NTHCHILD_NATIVELY = universalSelectorFinder(
-            mockWebDriverWithNativeSupportFor(NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK)
+            createWebDriverWithNativeSupportForPseudo(NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK)
     );
     private static final ElementFinder UNIVERSAL_SELECTOR_FINDER_NOT_SUPPORTING_NTHCHILD_NATIVELY = UNIVERSAL_SELECTOR_FINDER;
 
