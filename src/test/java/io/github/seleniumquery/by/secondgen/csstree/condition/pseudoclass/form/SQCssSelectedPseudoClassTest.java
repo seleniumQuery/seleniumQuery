@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import org.openqa.selenium.WebDriver;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.*;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.SQCssInputTypeAttributePseudoClassTest.TYPE_ATTR_LOWER_CASE;
-import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS;
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.createWebDriverEmulatingPhantomJSAndWithNativeSupporForPseudo;
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.universalSelectorFinder;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
@@ -50,7 +50,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toElementFinder__when_driver_has_native_support() {
         // supports pure CSS, but it is a translated one
-        ElementFinder previousFinder = universalSelectorFinder(ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(CHECKED_PSEUDO));
+        ElementFinder previousFinder = universalSelectorFinder(ElementFinderUtilsTest.createWebDriverWithNativeSupportForPseudo(CHECKED_PSEUDO));
         assertPseudoClassHasFinder(
                 new SQCssSelectedPseudoClass(),
                 previousFinder,
@@ -73,7 +73,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toElementFinder__when_driver_has_native_supportx() {
         // supports pure CSS, but it is a translated one
-        WebDriver mockDriverWithNativeSupportForChecked = ElementFinderUtilsTest.mockWebDriverWithNativeSupportFor(CHECKED_PSEUDO);
+        WebDriver mockDriverWithNativeSupportForChecked = ElementFinderUtilsTest.createWebDriverWithNativeSupportForPseudo(CHECKED_PSEUDO);
         ElementFinder finderAfterChecked = new SQCssCheckedPseudoClass().toElementFinder(universalSelectorFinder(mockDriverWithNativeSupportForChecked));
 
         assertPseudoClassHasFinder(
@@ -93,7 +93,7 @@ public class SQCssSelectedPseudoClassTest {
      */
     @Test
     public void toElementFinder__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
-        WebDriver driver = createMockDriverWithNativeSupporForSelectorAndEmulatingPhantomJS(CHECKED_PSEUDO);
+        WebDriver driver = createWebDriverEmulatingPhantomJSAndWithNativeSupporForPseudo(CHECKED_PSEUDO);
         ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(driver);
         assertPseudoClassHasFinder(
                 new SQCssSelectedPseudoClass(),
