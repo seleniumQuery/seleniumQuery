@@ -26,7 +26,6 @@ import testinfrastructure.testutils.DriverInTest;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
 
 public class DriverVersionUtilsTest {
