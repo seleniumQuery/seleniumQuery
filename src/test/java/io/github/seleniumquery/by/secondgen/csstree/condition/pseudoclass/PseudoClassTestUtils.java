@@ -89,19 +89,11 @@ public class PseudoClassTestUtils {
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(1)", "1");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(-1)", "-1");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(+1)", "+1");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(999999)", "999999");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(-999999)", "-999999");
 
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "()", "");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "( )", " ");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(     )", "     ");
 
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(a)", "a");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "('a')", "'a'");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(\"a\")", "\"a\"");
-
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(a b c d e)", "a b c d e");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(\"a b c d e\")", "\"a b c d e\"");
+        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(\"a 'c' b\")", "\"a 'c' b\"");
     }
 
     private static <T extends SQCssFunctionalPseudoClassCondition> void assertSelectorTranslatesArgument(String selector, Class<T> pseudoClassClass,
