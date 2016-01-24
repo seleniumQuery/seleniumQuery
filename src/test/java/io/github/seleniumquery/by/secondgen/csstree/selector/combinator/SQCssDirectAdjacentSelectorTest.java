@@ -19,12 +19,10 @@ package io.github.seleniumquery.by.secondgen.csstree.selector.combinator;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
 
 public class SQCssDirectAdjacentSelectorTest {

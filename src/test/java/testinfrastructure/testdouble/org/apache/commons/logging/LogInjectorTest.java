@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package testinfrastructure.testutils;
+package testinfrastructure.testdouble.org.apache.commons.logging;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,10 +29,10 @@ public class LogInjectorTest {
     @Test
     public void injectLogSpy__managesToInjectLog() {
         // when
-        Log logSpy = LogInjector.injectLogSpy(LogInjectorTest.class);
+        LogSpy logSpy = LogInjector.injectLogSpy(LogInjectorTest.class);
         // then
-        LOGGER.info("SomeMessage");
-        verify(logSpy).info("SomeMessage");
+        LOGGER.info("SomeMessage", new Exception());
+        logSpy.assertInfoWithExceptionWasLogged(Exception.class);
     }
 
 }
