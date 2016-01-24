@@ -18,16 +18,15 @@ package io.github.seleniumquery.functions.jquery.events;
 
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.SeleniumQueryObject;
-import org.apache.commons.logging.Log;
 import org.junit.Test;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.testdouble.org.apache.commons.logging.LogInjector;
+import testinfrastructure.testdouble.org.apache.commons.logging.LogSpy;
 import testinfrastructure.testdouble.org.openqa.selenium.WebElementClickSpy;
-import testinfrastructure.testutils.LogInjector;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
 import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebElementClickSpy.createWebElementClickSpy;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createWebElementClickable;
@@ -73,12 +72,12 @@ public class ClickFunctionTest {
     @Test
     public void click__shouldLogInfoIfAnyElementThrewException() {
         // given
-        Log logSpy = LogInjector.injectLogSpy(ClickFunction.class);
+        LogSpy logSpy = LogInjector.injectLogSpy(ClickFunction.class);
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(createWebElementUnclickableHidden(), createWebElementClickable());
         // when
         ClickFunction.click(sqo);
         // then
-        verify(logSpy).info(anyString(), any(ElementNotVisibleException.class));
+        logSpy.assertInfoWithExceptionWasLogged(ElementNotVisibleException.class);
     }
 
     @Test(expected = SeleniumQueryException.class)

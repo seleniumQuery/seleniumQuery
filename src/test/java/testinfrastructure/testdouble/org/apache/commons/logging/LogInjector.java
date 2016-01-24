@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,15 @@
  * limitations under the License.
  */
 
-package testinfrastructure.testutils;
-
-import org.apache.commons.logging.Log;
+package testinfrastructure.testdouble.org.apache.commons.logging;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import static org.mockito.Mockito.mock;
-
 public class LogInjector {
 
-    private static Log createLogSpy() {
-        return mock(Log.class);
-    }
-
-    public static Log injectLogSpy(Class<?> clazz) {
-        Log logSpy = createLogSpy();
+    public static LogSpy injectLogSpy(Class<?> clazz) {
+        LogSpy logSpy = new LogSpy();
         setFinalStaticField(clazz, "LOGGER", logSpy);
         return logSpy;
     }
