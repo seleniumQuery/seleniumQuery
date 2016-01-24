@@ -87,7 +87,6 @@ public class SQCssNthChildPseudoClassTest {
     @Test
     public void toElementFinder__b_only_arguments() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1", ":nth-child(1)", ".//*[position() = 1]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("2", ":nth-child(2)", ".//*[position() = 2]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("+1", ":nth-child(1)", ".//*[position() = 1]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1", ":nth-child(-1)", ".//*[position() = -1]");
     }
@@ -95,51 +94,36 @@ public class SQCssNthChildPseudoClassTest {
     @Test
     public void toElementFinder__a_only_arguments() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
 
         assertNthChildArgumentYieldsWithAndWithoutSpaces("+1n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("+3n", ":nth-child(3n)", ".//*[(position() - 0) mod 3 = 0 and position() >= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("+n", ":nth-child(1n)", ".//*[(position() - 0) mod 1 = 0 and position() >= 0]");
 
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n", ":nth-child(-1n)", ".//*[(position() - 0) mod -1 = 0 and position() <= 0]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n", ":nth-child(-1n)", ".//*[(position() - 0) mod -1 = 0 and position() <= 0]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-3n", ":nth-child(-3n)", ".//*[(position() - 0) mod -3 = 0 and position() <= 0]");
     }
 
     @Test
     public void toElementFinder__a_and_b_arguments__WITH_BOTH_POSITIVE() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+1", ":nth-child(1n+1)", ".//*[(position() - 1) mod 1 = 0 and position() >= 1]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+2", ":nth-child(2n+2)", ".//*[(position() - 2) mod 2 = 0 and position() >= 2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+2", ":nth-child(1n+2)", ".//*[(position() - 2) mod 1 = 0 and position() >= 2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+1", ":nth-child(2n+1)", ".//*[(position() - 1) mod 2 = 0 and position() >= 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("33n+7777", ":nth-child(33n+7777)", ".//*[(position() - 7777) mod 33 = 0 and position() >= 7777]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2n+0", ":nth-child(2n)", ".//*[(position() - 0) mod 2 = 0 and position() >= 0]");
         String nPlusFiveCSS = ":nth-child(1n+5)";
         String nPlusFiveXPath = ".//*[(position() - 5) mod 1 = 0 and position() >= 5]";
         assertNthChildArgumentYieldsWithAndWithoutSpaces("n+5", nPlusFiveCSS, nPlusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("n +5", nPlusFiveCSS, nPlusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("n+ 5", nPlusFiveCSS, nPlusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("n + 5", nPlusFiveCSS, nPlusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n +5", nPlusFiveCSS, nPlusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n+ 5", nPlusFiveCSS, nPlusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n + 5", nPlusFiveCSS, nPlusFiveXPath);
     }
 
     @Test
     public void toElementFinder__a_and_b_arguments__WITH_b_NEGATIVE() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-1", ":nth-child(1n-1)", ".//*[(position() - -1) mod 1 = 0 and position() >= -1]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-2", ":nth-child(2n-2)", ".//*[(position() - -2) mod 2 = 0 and position() >= -2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n-2", ":nth-child(1n-2)", ".//*[(position() - -2) mod 1 = 0 and position() >= -2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-1", ":nth-child(2n-1)", ".//*[(position() - -1) mod 2 = 0 and position() >= -1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("28n-21", ":nth-child(28n-21)", ".//*[(position() - -21) mod 28 = 0 and position() >= -21]");
         assertNthChildArgumentYieldsWithAndWithoutSpaces("2n-0", ":nth-child(2n)", ".//*[(position() - 0) mod 2 = 0 and position() >= 0]");
         String nMinusFiveCSS = ":nth-child(1n-5)";
         String nMinusFiveXPath = ".//*[(position() - -5) mod 1 = 0 and position() >= -5]";
         assertNthChildArgumentYieldsWithAndWithoutSpaces("n-5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("n -5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("n- 5", nMinusFiveCSS, nMinusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("n - 5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n -5", nMinusFiveCSS, nMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("1n- 5", nMinusFiveCSS, nMinusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("1n - 5", nMinusFiveCSS, nMinusFiveXPath);
     }
 
@@ -151,17 +135,11 @@ public class SQCssNthChildPseudoClassTest {
     @Test
     public void toElementFinder__a_and_b_arguments__WITH_a_NEGATIVE() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+1", ":nth-child(-1n+1)", ".//*[(position() - 1) mod -1 = 0 and position() <= 1]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n+2", ":nth-child(-2n+2)", ".//*[(position() - 2) mod -2 = 0 and position() <= 2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+2", ":nth-child(-1n+2)", ".//*[(position() - 2) mod -1 = 0 and position() <= 2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n+1", ":nth-child(-2n+1)", ".//*[(position() - 1) mod -2 = 0 and position() <= 1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-62n+41", ":nth-child(-62n+41)", ".//*[(position() - 41) mod -62 = 0 and position() <= 41]");
         String minusNPlusFiveCSS = ":nth-child(-1n+5)";
         String minusNPlusFiveXPath = ".//*[(position() - 5) mod -1 = 0 and position() <= 5]";
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n+5", minusNPlusFiveCSS, minusNPlusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n +5", minusNPlusFiveCSS, minusNPlusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n+ 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n + 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n +5", minusNPlusFiveCSS, minusNPlusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n+ 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n + 5", minusNPlusFiveCSS, minusNPlusFiveXPath);
     }
 
@@ -173,17 +151,11 @@ public class SQCssNthChildPseudoClassTest {
     @Test
     public void toElementFinder__a_and_b_arguments__WITH_BOTH_NEGATIVE() {
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-1", ":nth-child(-1n-1)", ".//*[(position() - -1) mod -1 = 0 and position() <= -1]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n-2", ":nth-child(-2n-2)", ".//*[(position() - -2) mod -2 = 0 and position() <= -2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n-2", ":nth-child(-1n-2)", ".//*[(position() - -2) mod -1 = 0 and position() <= -2]");
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-2n-1", ":nth-child(-2n-1)", ".//*[(position() - -1) mod -2 = 0 and position() <= -1]");
+        assertNthChildArgumentYieldsWithAndWithoutSpaces("-238n-751", ":nth-child(-238n-751)", ".//*[(position() - -751) mod -238 = 0 and position() <= -751]");
         String minusNMinusFiveCSS = ":nth-child(-1n-5)";
         String minusNMinusFiveXPath = ".//*[(position() - -5) mod -1 = 0 and position() <= -5]";
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n-5", minusNMinusFiveCSS, minusNMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n -5", minusNMinusFiveCSS, minusNMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-n- 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-n - 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n -5", minusNMinusFiveCSS, minusNMinusFiveXPath);
-        assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n- 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
         assertNthChildArgumentYieldsWithAndWithoutSpaces("-1n - 5", minusNMinusFiveCSS, minusNMinusFiveXPath);
     }
 
