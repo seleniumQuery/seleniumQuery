@@ -20,8 +20,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import static org.mockito.Mockito.verify;
-
 public class LogInjectorTest {
 
     private static final Log LOGGER = LogFactory.getLog(LogInjectorTest.class);

@@ -17,33 +17,32 @@
 package io.github.seleniumquery;
 
 import com.google.common.base.Predicate;
-import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.testdouble.io.github.seleniumquery.functions.SeleniumQueryFunctionsMock;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 import static testinfrastructure.testdouble.com.google.common.base.PredicateMother.createDummyWebElementPredicate;
-import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithSeleniumQueryFunctions;
 import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectDummy.createSeleniumQueryObjectDummy;
+import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithSeleniumQueryFunctions;
+import static testinfrastructure.testdouble.io.github.seleniumquery.functions.MethodMockConfiguration.configureReturnValue;
 
 public class SeleniumQueryObjectTest {
 
-    public static SeleniumQueryFunctions createMockSeleniumQueryFunctions() {
-        return mock(SeleniumQueryFunctions.class);
+    public static SeleniumQueryFunctionsMock createMockSeleniumQueryFunctions() {
+        return new SeleniumQueryFunctionsMock();
     }
 
     @Test
     public void propRead() {
         // given
-        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = new SeleniumQueryFunctionsMock();
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String propertyName = "propertyName";
         String configuredPropertyValue = "propertyValue";
-        given(seleniumQueryFunctions.propertyRead(seleniumQueryObject, propertyName)).willReturn(configuredPropertyValue);
+        seleniumQueryFunctions.propertyReadMethod = configureReturnValue(configuredPropertyValue).forArgs(seleniumQueryObject, propertyName);
         // when
         Object returnedPropertyValue = seleniumQueryObject.prop(propertyName);
         // then
@@ -53,13 +52,13 @@ public class SeleniumQueryObjectTest {
     @Test
     public void propWrite() {
         // given
-        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = new SeleniumQueryFunctionsMock();
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String propertyName = "propertyName";
         String propertyValue = "propertyValue";
         SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
-        given(seleniumQueryFunctions.propertyWrite(seleniumQueryObject, propertyName, propertyValue)).willReturn(configuredReturningObject);
+        seleniumQueryFunctions.propertyWriteMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject, propertyName, propertyValue);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.prop(propertyName, propertyValue);
         // then
@@ -69,11 +68,11 @@ public class SeleniumQueryObjectTest {
     @Test
     public void valRead() {
         // given
-        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = new SeleniumQueryFunctionsMock();
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String configuredValue = "configuredValue";
-        given(seleniumQueryFunctions.valueRead(seleniumQueryObject)).willReturn(configuredValue);
+        seleniumQueryFunctions.valueReadMethod = configureReturnValue(configuredValue).forArgs(seleniumQueryObject);
         // when
         String returnedValue = seleniumQueryObject.val();
         // then
@@ -83,12 +82,12 @@ public class SeleniumQueryObjectTest {
     @Test
     public void valWriteString() {
         // given
-        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = createMockSeleniumQueryFunctions();
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         String propertyValue = "propertyValue";
         SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
-        given(seleniumQueryFunctions.valueWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
+        seleniumQueryFunctions.valueWriteStringMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject, propertyValue);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.val(propertyValue);
         // then
@@ -98,12 +97,12 @@ public class SeleniumQueryObjectTest {
     @Test
     public void valWriteNumber() {
         // given
-        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = createMockSeleniumQueryFunctions();
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
 
         Number propertyValue = 1.0;
         SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
-        given(seleniumQueryFunctions.valueWrite(seleniumQueryObject, propertyValue)).willReturn(configuredReturningObject);
+        seleniumQueryFunctions.valueWriteNumberMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject, propertyValue);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.val(propertyValue);
         // then
@@ -113,12 +112,12 @@ public class SeleniumQueryObjectTest {
     @Test
     public void filterPredicateFunction() {
         // given
-        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = createMockSeleniumQueryFunctions();
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
         SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
 
         Predicate<WebElement> filterFunction = createDummyWebElementPredicate();
-        given(seleniumQueryFunctions.filterPredicate(seleniumQueryObject, filterFunction)).willReturn(configuredReturningObject);
+        seleniumQueryFunctions.filterPredicateMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject, filterFunction);
         // when
         SeleniumQueryObject returnedObject = seleniumQueryObject.filter(filterFunction);
         // then
@@ -129,12 +128,12 @@ public class SeleniumQueryObjectTest {
     @SuppressWarnings("ConstantConditions")
     public void isSelectorFunction() {
         // given
-        SeleniumQueryFunctions seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = createMockSeleniumQueryFunctions();
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
         boolean configuredReturningValue = true;
 
         String configuredSelector = "selector";
-        given(seleniumQueryFunctions.isSelector(seleniumQueryObject, configuredSelector)).willReturn(configuredReturningValue);
+        seleniumQueryFunctions.isSelectorMethod = configureReturnValue(configuredReturningValue).forArgs(seleniumQueryObject, configuredSelector);
         // when
         boolean returnedValue = seleniumQueryObject.is(configuredSelector);
         // then

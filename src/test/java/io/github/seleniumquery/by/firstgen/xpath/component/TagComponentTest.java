@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,7 @@ import io.github.seleniumquery.by.firstgen.xpath.TagComponentList;
 import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
 import org.junit.Test;
 import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.FindsById;
-import org.openqa.selenium.internal.FindsByXPath;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,24 +28,25 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
+import static testinfrastructure.testdouble.org.openqa.selenium.SearchContextMother.createSearchContextThatReturnsWebElementForId;
+import static testinfrastructure.testdouble.org.openqa.selenium.SearchContextMother.createSearchContextThatReturnsWebElementsForXPath;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebElementDummy.createWebElementDummy;
 
 public class TagComponentTest {
 
-    final WebElement firstWebElementMock = mock(WebElement.class);
-    final List<WebElement> fakeElements = Arrays.asList(firstWebElementMock, mock(WebElement.class), mock(WebElement.class));
+    final WebElement firstDummyWebElement = createWebElementDummy();
+    final List<WebElement> dummyWebElements = Arrays.asList(firstDummyWebElement, createWebElementDummy(), createWebElementDummy());
 
     @Test
     public void findWebElements_should_call_findElementsByXPath() {
         // given
         TagComponentList tagComponentList = XPathComponentCompilerService.compileSelectorList("span");
 
-        SearchContext searchContext = mock(SearchContext.class, withSettings().extraInterfaces(FindsByXPath.class, WebDriver.class));
-        when(((FindsByXPath)searchContext).findElementsByXPath("(.//*[self::span])")).thenReturn(fakeElements);
+        SearchContext searchContext = createSearchContextThatReturnsWebElementsForXPath("(.//*[self::span])", dummyWebElements);
         // when
         List<WebElement> webElements = tagComponentList.findWebElements(searchContext);
         // then
-        assertThat(webElements, is(fakeElements));
+        assertThat(webElements, is(dummyWebElements));
     }
 
     @Test
@@ -56,12 +54,11 @@ public class TagComponentTest {
         // given
         TagComponent tagComponent = new TagComponent("span");
 
-        SearchContext searchContext = mock(SearchContext.class, withSettings().extraInterfaces(FindsByXPath.class, WebDriver.class));
-        when(((FindsByXPath)searchContext).findElementsByXPath("(.//*[self::span])")).thenReturn(fakeElements);
+        SearchContext searchContext = createSearchContextThatReturnsWebElementsForXPath("(.//*[self::span])", dummyWebElements);
         // when
         List<WebElement> webElements = tagComponent.findWebElements(searchContext);
         // then
-        assertThat(webElements, is(fakeElements));
+        assertThat(webElements, is(dummyWebElements));
     }
 
     @Test
@@ -69,12 +66,12 @@ public class TagComponentTest {
         // given
         TagComponentList tagComponentList = XPathComponentCompilerService.compileSelectorList("#idz");
 
-        SearchContext searchContext = mock(SearchContext.class, withSettings().extraInterfaces(FindsById.class, WebDriver.class));
-        when(((FindsById)searchContext).findElementById("idz")).thenReturn(firstWebElementMock);
+        SearchContext searchContext = createSearchContextThatReturnsWebElementForId("idz", firstDummyWebElement);
         // when
         List<WebElement> webElements = tagComponentList.findWebElements(searchContext);
         // then
-        assertThat(webElements, contains(firstWebElementMock));
+        assertThat(webElements, contains(firstDummyWebElement));
     }
 
 }
+
