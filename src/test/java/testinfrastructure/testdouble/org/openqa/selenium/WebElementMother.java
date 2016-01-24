@@ -21,7 +21,7 @@ import org.openqa.selenium.WebElement;
 
 public class WebElementMother {
 
-    public static WebElement createUnclickableHiddenWebElement() {
+    public static WebElement createWebElementUnclickableHidden() {
         return new WebElementStub() {
             // this has to be a STUB and not a DUMMY because when the $().click() function fails, it
             // call a series of other functions on WebElement just to print a more complete error message
@@ -32,7 +32,7 @@ public class WebElementMother {
         };
     }
 
-    public static WebElement createClickableWebElement() {
+    public static WebElement createWebElementClickable() {
         return new WebElementDummy() {
             @Override
             public void click() { }

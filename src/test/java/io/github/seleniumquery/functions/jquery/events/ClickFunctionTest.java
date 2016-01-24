@@ -30,8 +30,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebElementClickSpy.createWebElementClickSpy;
-import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createClickableWebElement;
-import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createUnclickableHiddenWebElement;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createWebElementClickable;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createWebElementUnclickableHidden;
 
 public class ClickFunctionTest {
 
@@ -61,7 +61,7 @@ public class ClickFunctionTest {
     @Test
     public void click__shouldCallClickOnEveryElementEvenIfSomeThrowExceptions() {
         // given
-        WebElement unclickableHiddenWebElement = createUnclickableHiddenWebElement();
+        WebElement unclickableHiddenWebElement = createWebElementUnclickableHidden();
         WebElementClickSpy webElementClickSpy = createWebElementClickSpy();
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(unclickableHiddenWebElement, webElementClickSpy);
         // when
@@ -74,7 +74,7 @@ public class ClickFunctionTest {
     public void click__shouldLogInfoIfAnyElementThrewException() {
         // given
         Log logSpy = LogInjector.injectLogSpy(ClickFunction.class);
-        SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(createUnclickableHiddenWebElement(), createClickableWebElement());
+        SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(createWebElementUnclickableHidden(), createWebElementClickable());
         // when
         ClickFunction.click(sqo);
         // then
@@ -84,8 +84,8 @@ public class ClickFunctionTest {
     @Test(expected = SeleniumQueryException.class)
     public void click__shouldThrowExceptionIfNoElementIsClickable() {
         // given
-        WebElement unclickableHiddenWebElement = createUnclickableHiddenWebElement();
-        WebElement unclickableHiddenWebElementTwo = createUnclickableHiddenWebElement();
+        WebElement unclickableHiddenWebElement = createWebElementUnclickableHidden();
+        WebElement unclickableHiddenWebElementTwo = createWebElementUnclickableHidden();
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(unclickableHiddenWebElement, unclickableHiddenWebElementTwo);
         // when
         ClickFunction.click(sqo);
