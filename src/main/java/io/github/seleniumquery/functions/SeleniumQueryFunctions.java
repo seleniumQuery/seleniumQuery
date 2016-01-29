@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import io.github.seleniumquery.functions.jquery.miscellaneous.GetFunction;
 import io.github.seleniumquery.functions.jquery.miscellaneous.ToArrayFunction;
 import io.github.seleniumquery.functions.jquery.traversing.filtering.*;
 import io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction.FilterPredicateFunction;
+import io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction.FilterSelectorFunction;
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ChildrenFunction;
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ClosestFunction;
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.FindFunction;
@@ -62,6 +63,10 @@ public class SeleniumQueryFunctions {
 
     public SeleniumQueryObject filterPredicate(SeleniumQueryObject seleniumQueryObject, Predicate<WebElement> filterFunction) {
         return new FilterPredicateFunction().filter(seleniumQueryObject, filterFunction);
+    }
+
+    public SeleniumQueryObject filterSelector(SeleniumQueryObject seleniumQueryObject, String selector) {
+        return new FilterSelectorFunction().filter(seleniumQueryObject, selector);
     }
 
     public boolean isSelector(SeleniumQueryObject seleniumQueryObject, String selector) {

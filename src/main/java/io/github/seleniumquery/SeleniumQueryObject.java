@@ -642,4 +642,15 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return seleniumQueryFunctions.filterPredicate(this, filterFunction);
 	}
 
+    /**
+     * Reduce the set of matched elements to those that match the given selector.
+     *
+     * @param selector A string containing a selector expression to match the current set of elements against.
+     * @return An object with the elements that matched the selector.
+     * @since 0.11.0
+     */
+	public SeleniumQueryObject filter(String selector) {
+		return seleniumQueryFunctions.filterSelector(this, selector);
+	}
+
 }
