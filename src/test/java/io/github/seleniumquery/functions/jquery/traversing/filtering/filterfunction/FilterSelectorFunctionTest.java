@@ -19,11 +19,15 @@ package io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunc
 import com.google.common.base.Function;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import testinfrastructure.testutils.FunctionsTestUtils;
 
 import static org.hamcrest.collection.IsEmptyCollection.empty;
-import static org.junit.Assert.*;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.junit.Assert.assertThat;
 import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithAtLeastOneElement;
+import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithElements;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebElementMother.createWebElementWithTag;
 
 public class FilterSelectorFunctionTest {
 
@@ -62,6 +66,18 @@ public class FilterSelectorFunctionTest {
         });
     }
 
-    // TODO filter(this, "selector") --> should keep everyone that matches the isFunction("selector")
+    @Test
+    public void resultSQO_should_onlyKeepElementsThatMatchTheSelector() {
+        // given
+        WebElement spanOne = createWebElementWithTag("span");
+        WebElement notSpan = createWebElementWithTag("div");
+        WebElement spanTwo = createWebElementWithTag("span");
+
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithElements(spanOne, notSpan, spanTwo);
+        // when
+        SeleniumQueryObject resultSQO = filterSelectorFunction.filter(targetSQO, "span");
+        // then
+        assertThat(resultSQO.get(), contains(spanOne, spanTwo));
+    }
 
 }

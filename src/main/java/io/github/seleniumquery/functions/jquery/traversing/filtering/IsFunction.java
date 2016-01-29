@@ -70,12 +70,19 @@ public class IsFunction {
 
         private boolean emptySelector = false;
         private List<CompiledCssSelector> compiledCssSelectors;
+        private boolean hasNegatedPresent = false;
 
         public CompiledSelector(String selector) {
-            if (selector.trim().isEmpty()) {
+            if (selector == null || selector.trim().isEmpty()) {
                 this.emptySelector = true;
             } else {
                 compiledCssSelectors = compileCssSelector(selector);
+
+                for (CompiledCssSelector s : compiledCssSelectors) {
+                    if (s.hasNegatedPresent) {
+                        this.hasNegatedPresent = true;
+                    }
+                }
             }
         }
 
@@ -99,22 +106,32 @@ public class IsFunction {
                 return false;
             }
             // If there is a :not(:present), then having no element is a expected status!
-            if (elements.isEmpty()) {
-                for (CompiledCssSelector s : compiledCssSelectors) {
-                    if (s.hasNegatedPresent) {
-                        return true;
-                    }
-                }
+            if (this.hasNegatedPresent && elements.isEmpty()) {
+                return true;
             }
             for (CompiledCssSelector s : compiledCssSelectors) {
                 for (WebElement webElement : elements) {
-                    // if any matches, then it returns true
                     if (s.cssSelector.is(driver, webElement, s.argumentMap, s.parsedSimpleSelector)) {
                         return true;
                     }
                 }
             }
             return false;
+        }
+
+        public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
+            List<WebElement> filteredElements = new ArrayList<>();
+            if (emptySelector || hasNegatedPresent) {
+                return filteredElements;
+            }
+            for (CompiledCssSelector s : compiledCssSelectors) {
+                for (WebElement webElement : elements) {
+                    if (s.cssSelector.is(driver, webElement, s.argumentMap, s.parsedSimpleSelector)) {
+                        filteredElements.add(webElement);
+                    }
+                }
+            }
+            return filteredElements;
         }
 
     }
