@@ -42,6 +42,9 @@ public class SeleniumQueryFunctionsMock extends SeleniumQueryFunctions {
     public MethodMockConfiguration<SeleniumQueryObject> filterPredicateMethod;
     @Override public SeleniumQueryObject filterPredicate(SeleniumQueryObject s, Predicate<WebElement> f) { return filterPredicateMethod.executeMethodMock(s, f); }
 
+    public MethodMockConfiguration<SeleniumQueryObject> filterSelectorMethod;
+    @Override public SeleniumQueryObject filterSelector(SeleniumQueryObject s, String e) { return filterSelectorMethod.executeMethodMock(s, e); }
+
     public MethodMockConfiguration<Boolean> isSelectorMethod;
     @Override public boolean isSelector(SeleniumQueryObject s, String e) { return isSelectorMethod.executeMethodMock(s, e); }
 
