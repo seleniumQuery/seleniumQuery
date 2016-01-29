@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 
 package endtoend.functions.jquery.traversing;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -65,6 +65,12 @@ public class IsFunctionTest {
 		assertThat($("div").is("div"), is(true)); 
 		assertThat($("div").is("*"), is(true)); 
 		assertThat($("*").is("div"), is(true));
+	}
+
+	@Test
+	public void is_function__with_not_present() {
+		assertThat($("*").is(":not(:present)"), is(false));
+		assertThat($("#some-non-existant-id").is(":not(:present)"), is(true));
 	}
     
 }
