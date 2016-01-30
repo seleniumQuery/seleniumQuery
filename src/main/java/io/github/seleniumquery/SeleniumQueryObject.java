@@ -603,7 +603,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	 * This method will be removed in {@code 0.10.0}.
+	 * This method will be removed in {@code 1.0.0}.
 	 * @deprecated Use: <code>$("selector").as().select().selectByVisibleText(text);</code>
 	 * @param text The visible text to match against.
 	 * @return A self reference.
@@ -615,7 +615,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	}
 
 	/**
-	 * This method will be removed in {@code 0.10.0}.
+	 * This method will be removed in {@code 1.0.0}.
 	 * @deprecated Use: <code>$("selector").as().select().selectByValue(value);</code>
 	 * @param value The value to match against.
 	 * @return A self reference.
