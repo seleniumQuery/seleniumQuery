@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import io.github.seleniumquery.utils.SelectorUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException.pseudoClassNotSupportedWhenUsedDirectly;
+
 /**
  * :visible
  *
@@ -30,7 +32,7 @@ import org.openqa.selenium.WebElement;
  */
 public class VisiblePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
-	public static final String VISIBLE_PSEUDO_CLASS_NO_COLON = "visible";
+	private static final String VISIBLE_PSEUDO_CLASS_NO_COLON = "visible";
 
     public static final ElementFilter VISIBLE_FILTER = new PseudoClassFilter(new VisiblePseudoClass());
 
@@ -46,9 +48,8 @@ public class VisiblePseudoClass implements PseudoClass<ConditionSimpleComponent>
 
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":visible");
+		pseudoClassNotSupportedWhenUsedDirectly(VISIBLE_PSEUDO_CLASS_NO_COLON);
 		
-		// #no-xpath
 		// we can't use XPath because it can't see the styles affecting the element's classes, which can pretty much
 		// turn any element, including <html> itself or <head>, visible.
 		return new ConditionSimpleComponent(VISIBLE_FILTER);

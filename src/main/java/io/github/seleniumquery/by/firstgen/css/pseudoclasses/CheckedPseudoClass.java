@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleCompon
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException.pseudoClassNotSupportedWhenUsedDirectly;
 import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.SelectedPseudoClass.SELECTED_PSEUDO_CONDITION;
 import static io.github.seleniumquery.utils.WebElementUtils.*;
 
@@ -53,7 +54,7 @@ public class CheckedPseudoClass implements PseudoClass<ConditionSimpleComponent>
 		return isChecked(element);
 	}
 
-	public boolean isChecked(WebElement element) {
+	private boolean isChecked(WebElement element) {
 		// #Cross-Driver
 		// PhantomJS: When we call element.isSelected() on an element that is not selectable,
 		// PhantomJS throws an exception, so we must check the element type before calling isSelected().
@@ -66,9 +67,8 @@ public class CheckedPseudoClass implements PseudoClass<ConditionSimpleComponent>
 
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		if (!"this exception should be".equals("thrown until issue #94 is solved")) {
-			throw new UnsupportedPseudoClassException(":checked is currently unsupported. See https://github.com/seleniumQuery/seleniumQuery/issues/94");
-		}
+		pseudoClassNotSupportedWhenUsedDirectly(CHECKED_PSEUDO_CLASS_NO_COLON);
+
         // NOTE: This XPath does not work. Sometimes an element is checked WITHOUT having a checked attribute
 		return new ConditionSimpleComponent("[" +
 				"(" +

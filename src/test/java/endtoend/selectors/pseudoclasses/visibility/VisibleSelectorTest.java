@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package endtoend.selectors.pseudoclasses.visibility;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedXPathPseudoClassException;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,21 +28,25 @@ import static org.junit.Assert.assertThat;
 
 public class VisibleSelectorTest {
 	
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-	@Test(expected = UnsupportedXPathPseudoClassException.class)
-    public void visiblePseudoClass() throws Exception {
-    	assertThat($(":visible").size(), is(99999));
+	@Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
+    public void visible_directly() {
+    	assertThat($(":visible").size(), is(-99999));
     }
 
 	@Test
-	public void is_visiblePseudoClass() {
+	public void visible_is() {
 		assertThat($("#visibleDiv").is(":visible"), is(true));
 		assertThat($("#visibleDiv2").is(":visible"), is(true));
 		assertThat($("#invisibleDiv").is(":visible"), is(false));
     	assertThat($("#invisibleParentDiv").is(":visible"), is(false));
     	assertThat($("#almostVisibleDiv").is(":visible"), is(false));
+    }
+
+	@Test
+	public void visible_filter() {
+		assertThat($("div").filter(":visible").get(), is($("#visibleDiv,#visibleDiv2").get()));
     }
 
 }
