@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package endtoend.selectors.pseudoclasses.form;
+package endtoend.selectors.pseudoclasses.childfilter;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
+import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,26 +25,25 @@ import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
-public class TabbablePseudoClassTest {
-	
-	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	
-	@Test
-	public void tabbable_is() {
-		assertThat($("input:eq(0)").is(":tabbable"), is(true));
-		assertThat($("input:eq(2)").is(":tabbable"), is(false));
-	}
+public class OnlyOfTypePseudoClassTest {
 
-	@Test
-	public void tabbable_filter() {
-		assertThat($("input").filter(":tabbable").get(), is($(".tabbable-yes").get()));
-	}
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-	@Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
-	public void tabbablePseudoClass() {
-		assertThat($(":tabbable").get(), is($(".tabbable-yes").get()));
-	}
-	
+    @Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
+    public void onlyOfType_directly() {
+        Assert.assertThat($("span:only-of-type").get(), is($("#s1").get()));
+    }
+
+    @Test
+    public void onlyOfType_filter() {
+        Assert.assertThat($("body > *").filter(":only-of-type").get(), is($("#s1").get()));
+    }
+
+    @Test
+    public void onlyOfType_is() {
+        Assert.assertThat($("#s1").is(":only-of-type"), is(true));
+        Assert.assertThat($("#d1").is(":only-of-type"), is(false));
+    }
+
 }

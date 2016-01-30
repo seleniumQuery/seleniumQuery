@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
 
 package endtoend.selectors.pseudoclasses.form;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
 import org.junit.ClassRule;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -32,10 +33,9 @@ import static org.junit.Assert.assertThat;
  */
 public class CheckedPseudoClassTest {
 
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-	@Test(expected = UnsupportedPseudoClassException.class)
+	@Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
 	public void checked_pseudoClass__is_not_supported() {
 		$(":checked");
 	}
@@ -51,6 +51,11 @@ public class CheckedPseudoClassTest {
 	@Ignore("Issue#94")
 	public void checkedPseudo_with_tag_option() {
 		assertThat($("option:checked").size(), is(2));
+	}
+
+	@Test
+	public void checked_filter() {
+		assertThat($("option").filter(":checked").get(), is($("#opt1,#opt3").get()));
 	}
 
 	@Test
@@ -78,7 +83,6 @@ public class CheckedPseudoClassTest {
     }
 
     @Test
-	@Ignore("Issue#94")
     public void  checked_selector_with_IS() {
     	assertThat($("#chk1").is(":checked"), is(true));
     	assertThat($("#chk2").is(":checked"), is(false));
@@ -98,10 +102,10 @@ public class CheckedPseudoClassTest {
     }
 
 	@Test
-	@Ignore("Issue#94")
 	public void checkedPseudo__must_be_aware_of_input_type_but_not_checked_value() {
-		assertThat($(".c").size(), is(17));
-		assertThat($(".c:checked").size(), is(14));
+		SeleniumQueryObject $cClass = $(".c");
+		assertThat($cClass.size(), is(17));
+		assertThat($cClass.filter(":checked").size(), is(14));
 	}
 	
 }

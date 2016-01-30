@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleCompon
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException.pseudoClassNotSupportedWhenUsedDirectly;
 import static io.github.seleniumquery.utils.SelectorUtils.isVisible;
 
 /**
@@ -39,10 +40,9 @@ import static io.github.seleniumquery.utils.SelectorUtils.isVisible;
  * - ALL OTHER elements are focusable based solely on their tabindex attribute and visibility.
  * 
  * @author acdcjunior
- *
  * @since 0.9.0
  */
-public class FocusablePseudoClass implements PseudoClass<ConditionSimpleComponent> {
+class FocusablePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String FOCUSABLE_PSEUDO_CLASS_NO_COLON = "focusable";
 	
@@ -75,7 +75,7 @@ public class FocusablePseudoClass implements PseudoClass<ConditionSimpleComponen
 	
 	
 	// upon changing the expression below, check also the one at :tabbable
-	public static final String FOCUSABLE_XPATH =
+	static final String FOCUSABLE_XPATH =
 		// is visible and...
 		" ("
 			+ " ("
@@ -93,10 +93,9 @@ public class FocusablePseudoClass implements PseudoClass<ConditionSimpleComponen
 	
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":focusable");
+		pseudoClassNotSupportedWhenUsedDirectly(FOCUSABLE_PSEUDO_CLASS_NO_COLON);
 		
-		// #no-xpath
-		// after filtering with XPath, we still must check visibility
+		// after filtering with XPath, we still have to check visibility (filter)...
 		return new ConditionSimpleComponent("[" + FOCUSABLE_XPATH + "]", focusablePseudoClassFilter);
 	}
 	

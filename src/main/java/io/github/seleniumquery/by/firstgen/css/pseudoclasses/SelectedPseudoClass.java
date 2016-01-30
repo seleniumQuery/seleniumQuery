@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleCompon
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException.pseudoClassNotSupportedWhenUsedDirectly;
 import static io.github.seleniumquery.utils.WebElementUtils.isOptionTag;
 
 /**
@@ -34,7 +35,7 @@ public class SelectedPseudoClass implements PseudoClass<ConditionSimpleComponent
     public static final ElementFilter SELECTED_FILTER = new PseudoClassFilter(new SelectedPseudoClass());
 
     // NOTE: This XPath does not work. Sometimes an element is selected WITHOUT having a selected attribute
-	public static final String SELECTED_PSEUDO_CONDITION = "self::option and " +
+	static final String SELECTED_PSEUDO_CONDITION = "self::option and " +
             "(" +
                 "@selected or (ancestor::select[not(@multiple) and not(option[@selected])] and position() = 1)" +
             ")";
@@ -52,16 +53,14 @@ public class SelectedPseudoClass implements PseudoClass<ConditionSimpleComponent
 		return isSelected(element);
 	}
 	
-	public boolean isSelected(WebElement element) {
+	private boolean isSelected(WebElement element) {
 		return isOptionTag(element) && element.isSelected();
 	}
 	
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		if (!"this exception should be".equals("thrown until issue #86 is solved")) {
-			throw new UnsupportedPseudoClassException(":selected is currently unsupported. See https://github.com/seleniumQuery/seleniumQuery/issues/86");
-		}
-		return new ConditionSimpleComponent(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
+        pseudoClassNotSupportedWhenUsedDirectly(SELECTED_PSEUDO_CLASS_NO_COLON);
+        return new ConditionSimpleComponent(SELECTED_PSEUDO_CONDITIONAL_EXPRESSION);
 	}
 
 }

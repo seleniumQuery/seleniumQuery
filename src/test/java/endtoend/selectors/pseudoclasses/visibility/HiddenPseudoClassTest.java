@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
 
 package endtoend.selectors.pseudoclasses.visibility;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedXPathPseudoClassException;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -31,13 +32,22 @@ import static org.junit.Assert.assertThat;
 
 public class HiddenPseudoClassTest {
 	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@Test(expected = UnsupportedXPathPseudoClassException.class)
-	public void hiddenPseudoClass() {
+	@Test
+	public void hidden_is() {
+		assertThat($("p").is(":hidden"), is(true));
+	}
+
+	@Test
+	public void hidden_filter() {
+		assertThat($("p").filter(":hidden").get(0), is($("#hiddenPar").get(0)));
+	}
+
+	@Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
+	public void hidden_used_directly() {
 		List<WebElement> elements = $(":hidden").get();
-		
+
 		assertThat(elements, hasSize(11));
 		assertThat(elements.get(0).getTagName(), is("head"));
 		assertThat(elements.get(1).getTagName(), is("meta"));

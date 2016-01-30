@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package endtoend.functions.jquery.forms;
 
 import endtoend.functions.ClickFunctionTest;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedXPathPseudoClassException;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -155,12 +155,22 @@ public class FocusFunctionTest {
 		}
 	}
 
-    @Test(expected = UnsupportedXPathPseudoClassException.class)
-    public void focus_pseudoClass_selector() {
+    @Test
+    public void focus_is() {
     	$("#i1").focus();
     	assertThat($("#i1").is(":focus"), is(true));
-    	assertThat($(":focus").size(), is(1));
-    	assertThat($(":focus").attr("id"), is("i1"));
+    }
+
+    @Test
+    public void focus_filter() {
+    	$("#i1").focus();
+    	assertThat($("*").filter(":focus").get(0).getAttribute("id"), is("i1"));
+    }
+
+    @Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
+    public void focus_directly() {
+		$("#i1").focus();
+		assertThat($(":focus").get(0).getAttribute("id"), is("i1"));
     }
 
 }

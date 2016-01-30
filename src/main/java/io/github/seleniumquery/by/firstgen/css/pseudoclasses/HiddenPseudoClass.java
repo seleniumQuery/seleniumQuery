@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleCompon
 import io.github.seleniumquery.utils.SelectorUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException.pseudoClassNotSupportedWhenUsedDirectly;
 
 /**
  * :hidden
@@ -46,7 +48,7 @@ public class HiddenPseudoClass implements PseudoClass<ConditionSimpleComponent> 
 
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":hidden");
+		pseudoClassNotSupportedWhenUsedDirectly(HIDDEN_PSEUDO_CLASS_NO_COLON);
 
 		// we can't use XPath because it can't see the styles affecting the element's classes, which can pretty much
 		// turn any element, including <html> itself or <head>, visible.

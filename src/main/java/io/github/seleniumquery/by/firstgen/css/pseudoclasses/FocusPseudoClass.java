@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException.pseudoClassNotSupportedWhenUsedDirectly;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:focus
@@ -46,9 +48,9 @@ public class FocusPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":focus");
+		pseudoClassNotSupportedWhenUsedDirectly(FOCUS_PSEUDO_CLASS_NO_COLON);
 		
-		// #no-xpath
+        // there is no XPath construct for checking focus...
 		return new ConditionSimpleComponent(FOCUS_FILTER);
 	}
 	

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,14 @@
 
 package endtoend.selectors.pseudoclasses.form;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedXPathPseudoClassException;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+
+import java.util.List;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -27,24 +31,32 @@ import static org.junit.Assert.assertThat;
 
 public class FocusablePseudoClassTest {
 	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
-	@Test(expected = UnsupportedXPathPseudoClassException.class)
-	public void focusablePseudoClass() {
-		assertThat($("body > *").size(), is(6));
-		assertThat($(":focusable").size(), is(3));
-		
-		assertThat($("input:focusable").size(), is(1));
-		assertThat($("a:focusable").size(), is(1));
-		assertThat($("p:focusable").size(), is(1));
-		
+	@Test
+	public void focusablePseudoClass_through_is() {
 		assertThat($("#i1").is(":focusable"), is(false));
 		assertThat($("#i2").is(":focusable"), is(true));
 		assertThat($("#a1").is(":focusable"), is(false));
 		assertThat($("#a2").is(":focusable"), is(true));
 		assertThat($("#p1").is(":focusable"), is(false));
 		assertThat($("#p2").is(":focusable"), is(true));
+	}
+
+	@Test
+	public void focusablePseudoClass_through_filter() {
+        List<WebElement> focusableWebElements = $("#i2,#a2,#p2").get();
+		assertThat($("input,a,p").filter(":focusable").get(), is(focusableWebElements));
+	}
+
+	@Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
+	public void focusablePseudoClass__directly() {
+		assertThat($("body > *").size(), is(6));
+		assertThat($(":focusable").size(), is(3));
+
+		assertThat($("input:focusable").size(), is(1));
+		assertThat($("a:focusable").size(), is(1));
+		assertThat($("p:focusable").size(), is(1));
 	}
 	
 }

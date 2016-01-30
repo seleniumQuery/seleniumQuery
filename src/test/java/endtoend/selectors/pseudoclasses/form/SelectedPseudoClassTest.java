@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,28 +16,41 @@
 
 package endtoend.selectors.pseudoclasses.form;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
 import org.junit.ClassRule;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static testinfrastructure.EndToEndTestUtils.t;
 
 public class SelectedPseudoClassTest {
 
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SelectedPseudoClassTest.class);
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-    @Test(expected = UnsupportedPseudoClassException.class)
-    public void selected_pseudoClass__is_not_supported() {
+    @Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
+    public void selected_directly() {
         $(":selected");
     }
 
-	@Test
+    @Test
+    public void selected_filter() {
+        assertThat($("option").filter(":selected").get(), is($("#opt1,#opt3,#opt4,#s1o1").get()));
+    }
+
+    @Test
+    public void selected_is() {
+        assertThat($("#opt1").is(":selected"), is(true));
+        assertThat($("#opt2").is(":selected"), is(false));
+    }
+
+    @Test
 	@Ignore("Issue#86")
-	public void selectedPseudoClass() {
+	public void selectedPseudoClass__directly() {
 		t(":selected pseudo should not work on checkboxes", "input[type=checkbox]:selected").negative("input[type=checkbox]", "chk1", "chk2");
 		t(":selected pseudo should not work on radios", "input[type=radio]:selected").negative("input[type=radio]", "rad1", "rad2");
 		t(":selected pseudo should not work on inputs", "input[type=checkbox]:selected").negative("input", 4);

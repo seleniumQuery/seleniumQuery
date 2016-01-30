@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +22,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException.pseudoClassNotSupportedWhenUsedDirectly;
+
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:only-of-type
  * 
  * @author acdcjunior
  * @since 0.9.0
  */
-public class OnlyOfTypePseudoClass implements PseudoClass<ConditionSimpleComponent> {
+class OnlyOfTypePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String ONLY_OF_TYPE_PSEUDO_CLASS_NO_COLON = "only-of-type";
 
@@ -47,9 +49,9 @@ public class OnlyOfTypePseudoClass implements PseudoClass<ConditionSimpleCompone
 
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
-		UnsupportedXPathPseudoClassException.xPathFiltersAreNotImplementedYed(":only-of-type");
+		pseudoClassNotSupportedWhenUsedDirectly(ONLY_OF_TYPE_PSEUDO_CLASS_NO_COLON);
 		
-		// #no-xpath
+		// we haven't implemented this using XPath yet...
 		return new ConditionSimpleComponent(onlyOfTypePseudoClassFilter);
 	}
 	
