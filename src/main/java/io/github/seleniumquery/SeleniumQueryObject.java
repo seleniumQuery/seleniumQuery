@@ -70,7 +70,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	
 	public static final Log LOGGER = LogFactory.getLog(SeleniumQueryObject.class);
 
-    public static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
+    static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
 
 	private SeleniumQueryFunctions seleniumQueryFunctions;
 

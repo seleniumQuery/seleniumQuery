@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,12 +39,16 @@ public class InternalSeleniumQueryObjectFactory {
 
     public static InternalSeleniumQueryObjectFactory instance() {
         if (instance == null) {
-            instance = new InternalSeleniumQueryObjectFactory();
+            instance = new InternalSeleniumQueryObjectFactory(new SeleniumQueryFunctions());
         }
         return instance;
     }
 
-    protected SeleniumQueryFunctions seleniumQueryFunctions = new SeleniumQueryFunctions();
+    public InternalSeleniumQueryObjectFactory(SeleniumQueryFunctions seleniumQueryFunctions) {
+        this.seleniumQueryFunctions = seleniumQueryFunctions;
+    }
+
+    private final SeleniumQueryFunctions seleniumQueryFunctions;
 
     public SeleniumQueryObject create(WebDriver driver, By by, List<WebElement> elements, SeleniumQueryObject previous) {
         return create(this.seleniumQueryFunctions, driver, by, elements, previous);
@@ -58,7 +62,7 @@ public class InternalSeleniumQueryObjectFactory {
         return create(driver, getNoSelectorInvalidBy(), elements, previous);
     }
 
-    public SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, List<WebElement> elements) {
+    SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, List<WebElement> elements) {
         return createWithInvalidSelector(driver, elements, SeleniumQueryObject.NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
     }
 
@@ -70,11 +74,11 @@ public class InternalSeleniumQueryObjectFactory {
         return new SeleniumQueryObject(seleniumQueryFunctions, driver, getBy(selector));
     }
 
-    By getBy(String selector) {
+    private By getBy(String selector) {
         return SeleniumQueryBy.byEnhancedSelector(selector);
     }
 
-    By getNoSelectorInvalidBy() {
+    private By getNoSelectorInvalidBy() {
         return SeleniumQueryBy.NO_SELECTOR_INVALID_BY;
     }
 
