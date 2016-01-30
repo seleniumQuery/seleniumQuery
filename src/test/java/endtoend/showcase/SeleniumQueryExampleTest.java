@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@ public class SeleniumQueryExampleTest {
         $.url("http://www.google.com/?hl=en");
 
         $(":text[name='q']").val("selenium"); // the keys are actually typed!
+        $(":button[name=btnG]").click(); // simulates a real user click (not just the JS event)
 
         // Besides the short syntax and the jQuery behavior you already know,
         // other very useful function in seleniumQuery is .waitUntil(),

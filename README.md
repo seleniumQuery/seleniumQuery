@@ -50,6 +50,7 @@ public class SeleniumQueryExample {
     $.url("http://www.google.com/?hl=en");
 
     $(":text[name='q']").val("selenium"); // the keys are actually typed!
+    $(":button[name=btnG]").click(); // simulates a real user click (not just the JS event)
 
     // Besides the short syntax and the jQuery behavior you already know,
     // other very useful function in seleniumQuery is .waitUntil(),
