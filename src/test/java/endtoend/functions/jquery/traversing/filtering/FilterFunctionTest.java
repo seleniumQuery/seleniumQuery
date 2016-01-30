@@ -87,7 +87,7 @@ public class FilterFunctionTest {
 
     @Test
     public void filterSelector_with_pseudo() {
-        assertThat($("div").filter(":empty").attr("id"), is("id-empty"));
+        assertThat($("div").filter(":empty").get(0).getAttribute("id"), is("id-empty"));
     }
 
 }
