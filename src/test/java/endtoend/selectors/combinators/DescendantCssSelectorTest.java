@@ -1,9 +1,25 @@
+/*
+ * Copyright (c) 2016 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package endtoend.selectors.combinators;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -11,19 +27,23 @@ import static org.junit.Assert.assertThat;
 
 public class DescendantCssSelectorTest {
 
-	@ClassRule
-	public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(DescendantCssSelectorTest.class);
-	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+
+    private static final String SPAN_ID = "#sp";
 
     @Test
-    public void visiblePseudoClass() throws Exception {
-		// negative
-    	assertThat($("div").size(), is(3));
-    	assertThat($("span").size(), is(2));
+    public void descendant() {
+    	assertThat($("div span").get(), is($(SPAN_ID).get()));
+    }
 
-		// the test:
-    	assertThat($("div span").size(), is(1));
-    	assertThat($("div span").get(0).getAttribute("id"), is("s2"));
+    @Test
+    public void descendant_is() {
+    	assertThat($(SPAN_ID).is("div span"), is(true));
+    }
+
+    @Test
+    public void descendant_filter() {
+    	assertThat($("*").filter("div span").get(), is($(SPAN_ID).get()));
     }
 
 }

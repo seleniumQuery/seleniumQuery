@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,9 @@ import static io.github.seleniumquery.by.firstgen.css.combinators.SelectorsTestU
 
 public class DescendantCssSelectorTest {
 
-    DescendantCssSelector descendantCssSelector = new DescendantCssSelector();
-
     @Test
     public void testToXPath() {
-        verifySelectorYieldsXPathExpression(descendantCssSelector, "a b", "(.//*[self::a]//*[self::b])");
+        verifySelectorYieldsXPathExpression(new DescendantCssSelector(), "a b", "(.//*[self::a]//*[self::b])");
     }
 
 }
