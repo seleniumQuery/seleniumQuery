@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ import static org.junit.Assert.assertThat;
 
 public class ButtonPseudoClassTest {
 
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
-	
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+
 	// http://jsbin.com/yacerelo/1/edit
 	@Test
 	public void buttonPseudoClass_selector() {
@@ -37,6 +36,9 @@ public class ButtonPseudoClassTest {
 		assertThat($(":button").size(), is(5));
 		assertThat($("*:button").size(), is(5));
 		assertThat($("input:button").size(), is(1));
+	}
+	@Test
+	public void buttonPseudoClass_empty() {
 		assertThat($("div:button").size(), is(0));
 		assertThat($("span:button").size(), is(0));
 	}
