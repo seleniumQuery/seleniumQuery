@@ -1,18 +1,36 @@
+/*
+ * Copyright (c) 2016 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package endtoend.sizzle;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
+import static endtoend.sizzle.SizzleTest.Sizzle;
+import static endtoend.sizzle.SizzleTest.t;
 import static testinfrastructure.EndToEndTestUtils.equal;
 
-public class SizzleChildAndAdjacent extends SizzleTest {
+public class SizzleChildAndAdjacent {
 
-    @Rule
-    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
-    public void child_and_adjacent_selectors() throws Exception {
+    public void child_and_adjacent_selectors() {
         t("Child", "p > a", new String[]{"simon1", "google", "groups", "mark", "yahoo", "simon"});
         t("Child", "p> a", new String[]{"simon1", "google", "groups", "mark", "yahoo", "simon"});
         t("Child", "p >a", new String[]{"simon1", "google", "groups", "mark", "yahoo", "simon"});
@@ -20,16 +38,14 @@ public class SizzleChildAndAdjacent extends SizzleTest {
         t("Child w/ Class", "p > a.blog", new String[]{"mark", "simon"});
         t("All Children", "code > *", new String[]{"anchor1", "anchor2"});
         t("All Grandchildren", "p > * > *", new String[]{"anchor1", "anchor2"});
-// TODO(issue#55)
-//        t("Adjacent", "#qunit-fixture a + a", new String[]{"groups", "tName2ID"});
-//        t("Adjacent", "#qunit-fixture a +a", new String[]{"groups", "tName2ID"});
-//        t("Adjacent", "#qunit-fixture a+ a", new String[]{"groups", "tName2ID"});
-//        t("Adjacent", "#qunit-fixture a+a", new String[]{"groups", "tName2ID"});
-//        t("Adjacent", "p + p", new String[]{"ap", "en", "sap"});
+        t("Adjacent", "#qunit-fixture a + a", new String[]{"groups", "tName2ID"});
+        t("Adjacent", "#qunit-fixture a +a", new String[]{"groups", "tName2ID"});
+        t("Adjacent", "#qunit-fixture a+ a", new String[]{"groups", "tName2ID"});
+        t("Adjacent", "#qunit-fixture a+a", new String[]{"groups", "tName2ID"});
+        t("Adjacent", "p + p", new String[]{"ap", "en", "sap"});
         t("Adjacent", "p#firstp + p", new String[]{"ap"});
         t("Adjacent", "p[lang=en] + p", new String[]{"sap"});
         t("Adjacent", "a.GROUPS + code + a", new String[]{"mark"});
-//        t("Comma, Child, and Adjacent", "#qunit-fixture a + a, code > a", new String[]{"groups", "anchor1", "anchor2", "tName2ID"});
         t("Element Preceded By", "#qunit-fixture p ~ div", new String[]{"foo", "nothiddendiv", "moretests", "tabindex-tests", "liveHandlerOrder", "siblingTest"});
         t("Element Preceded By", "#first ~ div", new String[]{"moretests", "tabindex-tests", "liveHandlerOrder", "siblingTest"});
         t("Element Preceded By", "#groups ~ a", new String[]{"mark"});
@@ -37,12 +53,12 @@ public class SizzleChildAndAdjacent extends SizzleTest {
         t("Element Preceded By", "#siblingfirst ~ em", new String[]{"siblingnext", "siblingthird"});
         t("Element Preceded By (multiple)", "#siblingTest em ~ em ~ em ~ span", new String[]{"siblingspan"});
         t("Element Preceded By, Containing", "#liveHandlerOrder ~ div em:contains('1')", new String[]{"siblingfirst"});
-/*
-        WebElement siblingFirst = id("siblingfirst");
-        deepEqual(Sizzle("~ em", siblingFirst), q("siblingnext", "siblingthird"), "Element Preceded By with a context.");
-        deepEqual(Sizzle("+ em", siblingFirst), q("siblingnext"), "Element Directly Preceded By with a context.");
-        deepEqual(Sizzle("~ em:first", siblingFirst), q("siblingnext"), "Element Preceded By positional with a context.");
-*/
+
+//        WebElement siblingFirst = id("siblingfirst");
+//        deepEqual(Sizzle("~ em", siblingFirst), q("siblingnext", "siblingthird"), "Element Preceded By with a context.");
+//        deepEqual(Sizzle("+ em", siblingFirst), q("siblingnext"), "Element Directly Preceded By with a context.");
+//        deepEqual(Sizzle("~ em:first", siblingFirst), q("siblingnext"), "Element Preceded By positional with a context.");
+
         t("Element Preceded By with a context.", "#siblingfirst ~ em", new String[]{"siblingnext", "siblingthird"});
         t("Element Directly Preceded By with a context.", "#siblingfirst + em", new String[]{"siblingnext"});
         t("Element Preceded By positional with a context.", "#siblingfirst ~ em:first", new String[]{"siblingnext"});
