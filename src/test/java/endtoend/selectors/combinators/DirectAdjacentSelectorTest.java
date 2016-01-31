@@ -29,7 +29,7 @@ public class DirectAdjacentSelectorTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-    private static final String SPAN_DIRECTLY_ADJACENT_TO_P_ID = "#directly-adjacent-to-p";
+    static final String SPAN_DIRECTLY_ADJACENT_TO_P_ID = "#directly-adjacent-to-p";
 
     @Test
     public void directAdjacent() {

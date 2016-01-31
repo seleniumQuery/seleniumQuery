@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,10 +32,9 @@ import static org.junit.Assert.assertThat;
 
 public class GeneralAdjacentTest {
 
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-	WebDriver driver;
+	private WebDriver driver;
 	
 	@Before
 	public void before() {
@@ -46,33 +45,37 @@ public class GeneralAdjacentTest {
 	@Test
 	public void general_adjacent() {
 		WebElement optionElement = driver.findElement(By.cssSelector(".e4"));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, optionElement, "option ~ option"), is(true));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, optionElement, "select ~ option"), is(false));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, optionElement, "option ~ select"), is(false));
-		
+		assertElementMatchesSelectorOrNot(optionElement, "option ~ option", true);
+		assertElementMatchesSelectorOrNot(optionElement, "select ~ option", false);
+		assertElementMatchesSelectorOrNot(optionElement, "option ~ select", false);
+
 		WebElement brazilian_p = driver.findElement(By.id("brazilian-p"));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, brazilian_p, "p ~ p"), is(false));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, brazilian_p, "body ~ p"), is(false));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, brazilian_p, "select ~ p"), is(false));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, brazilian_p, "p ~ select"), is(false));
-		
+		assertElementMatchesSelectorOrNot(brazilian_p, "p ~ p", false);
+		assertElementMatchesSelectorOrNot(brazilian_p, "body ~ p", false);
+		assertElementMatchesSelectorOrNot(brazilian_p, "select ~ p", false);
+		assertElementMatchesSelectorOrNot(brazilian_p, "p ~ select", false);
+
 		WebElement french_p = driver.findElement(By.id("french-p"));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, french_p, "p ~ p"), is(true));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, french_p, "body ~ p"), is(false));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, french_p, "select ~ p"), is(false));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, french_p, "p ~ select"), is(false));
-		
+		assertElementMatchesSelectorOrNot(french_p, "p ~ p", true);
+		assertElementMatchesSelectorOrNot(french_p, "body ~ p", false);
+		assertElementMatchesSelectorOrNot(french_p, "select ~ p", false);
+		assertElementMatchesSelectorOrNot(french_p, "p ~ select", false);
+
 		WebElement hero_combo = driver.findElement(By.id("hero-combo"));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, hero_combo, "p ~ select"), is(true));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, hero_combo, "select ~ option"), is(false));
-		
+		assertElementMatchesSelectorOrNot(hero_combo, "p ~ select", true);
+		assertElementMatchesSelectorOrNot(hero_combo, "select ~ option", false);
+
 		WebElement containsDiv = driver.findElement(By.id("containsDiv"));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, containsDiv, "p ~ div"), is(true));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, containsDiv, "select ~ div"), is(true));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, containsDiv, "div ~ div"), is(true));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, containsDiv, "div ~ *"), is(true));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, containsDiv, "p ~ p ~ *"), is(true));
-		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, containsDiv, "p ~ p ~ div"), is(true));
+		assertElementMatchesSelectorOrNot(containsDiv, "p ~ div", true);
+		assertElementMatchesSelectorOrNot(containsDiv, "select ~ div", true);
+		assertElementMatchesSelectorOrNot(containsDiv, "div ~ div", true);
+		assertElementMatchesSelectorOrNot(containsDiv, "div ~ *", true);
+		assertElementMatchesSelectorOrNot(containsDiv, "p ~ p ~ *", true);
+		assertElementMatchesSelectorOrNot(containsDiv, "p ~ p ~ div", true);
+	}
+
+	private void assertElementMatchesSelectorOrNot(WebElement containsDiv, String selector, boolean matchesOrNot) {
+		assertThat(CssSelectorMatcherService.elementMatchesStringSelector(driver, containsDiv, selector), is(matchesOrNot));
 	}
 
 }
