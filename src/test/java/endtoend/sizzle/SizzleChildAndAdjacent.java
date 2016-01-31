@@ -96,4 +96,10 @@ public class SizzleChildAndAdjacent {
         t("Non-existant ancestors", ".fototab > .thumbnails > a", new String[]{});
     }
 
+    @Test
+    public void multiple_selectors_work__but_dont_bring_correct_order() {
+        // order should be "groups", "anchor1", "anchor2", "tName2ID"
+        t("Comma, Child, and Adjacent", "#qunit-fixture a + a, code > a", new String[]{"groups", "tName2ID", "anchor1", "anchor2"});
+    }
+
 }
