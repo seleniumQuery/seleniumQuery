@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,26 +36,26 @@ import static org.junit.Assert.assertTrue;
  */
 public class SizzleTest {
 
-    protected SeleniumQueryObject Sizzle(String selector) {
+    protected static SeleniumQueryObject Sizzle(String selector) {
         return $(selector);
     }
 
     @SuppressWarnings("unused")
-    protected SeleniumQueryObject Sizzle(String selector, Boolean b, Boolean c, List<WebElement> x) {
+    protected static SeleniumQueryObject Sizzle(String selector, Boolean b, Boolean c, List<WebElement> x) {
         return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector($.driver().get(), x, null).find(selector);
     }
 
-    protected SeleniumQueryObject Sizzle(WebElement we) {
+    protected static SeleniumQueryObject Sizzle(WebElement we) {
         return $(we);
     }
 
-    protected SeleniumQueryObject Sizzle(String selector, WebElement we) {
+    protected static SeleniumQueryObject Sizzle(String selector, WebElement we) {
         SeleniumQueryObject sq = $(we);
         return sq.find(selector);
     }
 
     protected static final class Sizzle {
-        public static boolean matchesSelector(WebElement el, String selector) {
+        static boolean matchesSelector(WebElement el, String selector) {
             return $(el).is(selector);
         }
     }
@@ -68,7 +68,7 @@ public class SizzleTest {
      * -example t("Check for something", "//[a]", ["foo", "baar"]);
      * -result returns true if "//[a]" return two elements with the IDs 'foo' and 'baar'
      */
-    protected void t(String assertionName, String selector, String[] expectedIds) {
+    protected static void t(String assertionName, String selector, String[] expectedIds) {
         List<String> actualIds = extractIdsList(selector);
         List<String> expectedIdsList = asList(expectedIds);
         assertEquals(assertionName + " --> Lists differ!", expectedIdsList.toString(), actualIds.toString());
@@ -77,7 +77,7 @@ public class SizzleTest {
     /**
      * Same as {@link #t(String, String, String[])}, except that this one [I]gnores expected ids [O]rder.
      */
-    protected void tio(String assertionName, String selector, String[] expectedIds) {
+    static void tio(String assertionName, String selector, String[] expectedIds) {
         List<String> actualIds = extractIdsList(selector);
         List<String> expectedIdsList = asList(expectedIds);
         Collections.sort(actualIds);
@@ -85,7 +85,7 @@ public class SizzleTest {
         assertEquals(assertionName + " --> Lists differ!", expectedIdsList.toString(), actualIds.toString());
     }
 
-    private List<String> extractIdsList(String selector) {
+    private static List<String> extractIdsList(String selector) {
         SeleniumQueryObject f = $(selector);
 
         List<String> actualIds = new ArrayList<>();
@@ -95,11 +95,11 @@ public class SizzleTest {
         return actualIds;
     }
 
-    protected void deepEqual(SeleniumQueryObject o1, List<WebElement> o2, String msg) {
+    protected static void deepEqual(SeleniumQueryObject o1, List<WebElement> o2, String msg) {
         assertEquals(msg, o2, o1.get());
     }
 
-    protected Object executeJS(String javaScriptCode, Object... args) {
+    static Object executeJS(String javaScriptCode, Object... args) {
         return ((JavascriptExecutor) $.driver().get()).executeScript(javaScriptCode, args);
     }
 
@@ -108,7 +108,7 @@ public class SizzleTest {
      * Example: q("main", "foo", "bar")
      * Result: [<div id="main">, <span id="foo">, <input id="bar">]
      */
-    protected List<WebElement> q(String... ids) {
+    protected static List<WebElement> q(String... ids) {
         List<WebElement> els = new ArrayList<>();
         for (String id : ids) {
             els.add(id(id));
@@ -116,11 +116,11 @@ public class SizzleTest {
         return els;
     }
 
-    protected WebElement id(String id) {
+    protected static WebElement id(String id) {
         return $.driver().get().findElement(By.id(id));
     }
 
-    protected void ok(boolean b, String msg) {
+    static void ok(boolean b, String msg) {
         assertTrue(msg, b);
     }
 
