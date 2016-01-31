@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.firstgen.css.combinators;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
-import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
 import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.firstgen.xpath.component.AdjacentComponent;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
@@ -27,6 +26,8 @@ import io.github.seleniumquery.utils.SelectorUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.SiblingSelector;
+
+import static io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService.elementMatchesSelector;
 
 /**
  * E + F
@@ -39,8 +40,13 @@ public class DirectAdjacentCssSelector implements CssSelector<SiblingSelector, T
 	@Override
 	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, SiblingSelector siblingSelector) {
 		WebElement previousElement = SelectorUtils.getPreviousSibling(element);
-		return CssSelectorMatcherService.elementMatchesSelector(driver, previousElement, argumentMap, siblingSelector.getSelector())
-				&& CssSelectorMatcherService.elementMatchesSelector(driver, element, argumentMap, siblingSelector.getSiblingSelector());
+		return aPreviousElementExists(previousElement) &&
+				elementMatchesSelector(driver, previousElement, argumentMap, siblingSelector.getSelector()) &&
+				elementMatchesSelector(driver, element, argumentMap, siblingSelector.getSiblingSelector());
+	}
+
+	private boolean aPreviousElementExists(WebElement previousElement) {
+		return previousElement != null;
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,9 @@ import org.junit.Test;
 
 public class GeneralAdjacentCssSelectorTest {
 
-    GeneralAdjacentCssSelector generalAdjacentCssSelector = new GeneralAdjacentCssSelector();
-
     @Test
     public void testToXPath() {
-        SelectorsTestUtil.verifySelectorYieldsXPathExpression(generalAdjacentCssSelector, "a ~ b", "(.//*[self::a]/following-sibling::b)");
+        SelectorsTestUtil.verifySelectorYieldsXPathExpression(new GeneralAdjacentCssSelector(), "a ~ b", "(.//*[self::a]/following-sibling::*[self::b])");
     }
 
 }

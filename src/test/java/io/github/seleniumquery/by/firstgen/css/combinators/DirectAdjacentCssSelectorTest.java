@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,10 @@ import org.junit.Test;
 
 public class DirectAdjacentCssSelectorTest {
 
-    DirectAdjacentCssSelector directAdjacentCssSelector = new DirectAdjacentCssSelector();
-
     @Test
     public void testToXPath() {
         // given
-        SelectorsTestUtil.verifySelectorYieldsXPathExpression(directAdjacentCssSelector, "a + b", "(.//*[self::a]/following-sibling::b[position() = 1])");
+        SelectorsTestUtil.verifySelectorYieldsXPathExpression(new DirectAdjacentCssSelector(), "a + b", "(.//*[self::a]/following-sibling::*[self::b and position() = 1])");
     }
 
 }
