@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package testinfrastructure.junitrule;
 
 import org.junit.runners.model.Statement;
@@ -11,12 +27,12 @@ class TestMethodsRunner {
 	private Statement base;
 	private String url;
 
-	public TestMethodsRunner(Statement base, String url) {
+	TestMethodsRunner(Statement base, String url) {
 		this.base = base;
 		this.url = url;
 	}
 
-	public void executeMethodForDriver(String driver) {
+	void executeMethodForDriver(String driver) {
 		System.out.println("   @## >>> Running on "+driver);
 		$.url(url); // this wont be needed when everyone use this both as @Rule and @ClassRule
 		try {
@@ -31,11 +47,9 @@ class TestMethodsRunner {
 		System.out.println("   @## <<< Done on "+driver);
 	}
 
-	public void reportFailures() throws Throwable {
+	void reportFailures() throws Throwable {
 		if (this.firstFailure != null) {
-            AssertionError assertionError = new AssertionError("There are test failures in some drivers: " + failed);
-            assertionError.initCause(this.firstFailure);
-            throw assertionError;
+			throw new AssertionError("There are test failures in some drivers: " + failed, this.firstFailure);
 		}
 	}
 
