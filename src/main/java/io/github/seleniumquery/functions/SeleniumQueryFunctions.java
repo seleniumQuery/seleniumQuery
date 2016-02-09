@@ -73,6 +73,11 @@ public class SeleniumQueryFunctions {
         return IsFunction.is(seleniumQueryObject, selector);
     }
 
+    public SeleniumQueryObject each(SeleniumQueryObject seleniumQueryObject, SeleniumQueryObject.EachFunction function) {
+        // TODO #124
+        return null;
+    }
+
     public SeleniumQueryObject notSelector(SeleniumQueryObject seleniumQueryObject, String selector) {
         return NotFunction.not(seleniumQueryObject, selector);
     }

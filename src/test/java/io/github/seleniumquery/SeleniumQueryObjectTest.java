@@ -19,6 +19,7 @@ package io.github.seleniumquery;
 import com.google.common.base.Predicate;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother;
 import testinfrastructure.testdouble.io.github.seleniumquery.functions.SeleniumQueryFunctionsMock;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,7 +31,7 @@ import static testinfrastructure.testdouble.io.github.seleniumquery.functions.Me
 
 public class SeleniumQueryObjectTest {
 
-    public static SeleniumQueryFunctionsMock createMockSeleniumQueryFunctions() {
+    private static SeleniumQueryFunctionsMock createMockSeleniumQueryFunctions() {
         return new SeleniumQueryFunctionsMock();
     }
 
@@ -138,6 +139,21 @@ public class SeleniumQueryObjectTest {
         boolean returnedValue = seleniumQueryObject.is(configuredSelector);
         // then
         assertThat(returnedValue, is(configuredReturningValue));
+    }
+
+    @Test
+    public void eachFunction() {
+        // given
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
+        SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
+
+        SeleniumQueryObject.EachFunction eachFunctionArgument = SeleniumQueryObjectMother.createDummyEachFunction();
+        seleniumQueryFunctions.eachMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject, eachFunctionArgument);
+        // when
+        SeleniumQueryObject returnedObject = seleniumQueryObject.each(eachFunctionArgument);
+        // then
+        assertThat(returnedObject, is(configuredReturningObject));
     }
 
 }

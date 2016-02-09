@@ -653,4 +653,28 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return seleniumQueryFunctions.filterSelector(this, selector);
 	}
 
+	public interface EachFunction {
+        /**
+         * A function that will be executed for each matched element.
+         * @param index The position of the element in the matched set.
+         * @param element The element from the matched set.
+         * @return false if the iteration should stop. true if it should continue.
+         */
+		boolean apply(int index, WebElement element);
+	}
+
+	/**
+	 * Iterate over a seleniumQuery object, executing a function for each matched element.
+	 * <br><br>
+	 * You can stop the loop from within the callback function by returning false.<br>
+	 * Returning true will continue the iteration as usual.
+	 *
+	 * @param function A function to execute for each matched element.
+	 * @return The object that was iterated.
+	 * @since 0.13.0
+     */
+	public SeleniumQueryObject each(EachFunction function) {
+		return seleniumQueryFunctions.each(this, function);
+	}
+
 }
