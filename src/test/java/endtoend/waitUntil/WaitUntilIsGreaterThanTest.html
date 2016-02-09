@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2016 seleniumQuery authors
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html>
+<body>
+<div id="btn" class="clickable">10</div>
+<script type="text/javascript">
+
+    var addEvent = (function () {
+        if (document.addEventListener) {
+            return function (elem, type, cb) {
+                if ((elem && !elem.length) || elem === window) {
+                    elem.addEventListener(type, cb, false);
+                } else if (elem && elem.length) {
+                    var len = elem.length;
+                    for (var i = 0; i < len; i++) {
+                        addEvent(elem[i], type, cb);
+                    }
+                }
+            };
+        } else if (document.attachEvent) {
+            return function (elem, type, cb) {
+                if ((elem && !elem.length) || elem === window) {
+                    elem.attachEvent('on' + type, function () {
+                        return cb.call(elem, window.event);
+                    });
+                } else if (elem.length) {
+                    var len = elem.length;
+                    for (var i = 0; i < len; i++) {
+                        addEvent(elem[i], type, cb);
+                    }
+                }
+            };
+        }
+    })();
+
+
+    var btnDIV = document.getElementById('btn');
+
+    function incrementDivText() {
+        btnDIV.innerHTML = parseInt(btnDIV.innerHTML, 10) + 1;
+    }
+
+    addEvent(btnDIV, 'click', function (event) {
+        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+
+        setTimeout(incrementDivText, 500); // 0.5 seconds after click ---> 11
+        setTimeout(incrementDivText, 1000); // 1 second after click  ----> 12
+        setTimeout(incrementDivText, 1500); // 1.5 seconds after click --> 13
+    });
+</script>
+</body>
+</html>
