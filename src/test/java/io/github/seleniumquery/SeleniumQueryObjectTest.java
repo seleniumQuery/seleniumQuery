@@ -126,6 +126,21 @@ public class SeleniumQueryObjectTest {
     }
 
     @Test
+    public void filterSelectorFunction() {
+        // given
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
+        SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
+
+        String selector = "selector";
+        seleniumQueryFunctions.filterSelectorMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject, selector);
+        // when
+        SeleniumQueryObject returnedObject = seleniumQueryObject.filter(selector);
+        // then
+        assertThat(returnedObject, is(configuredReturningObject));
+    }
+
+    @Test
     @SuppressWarnings("ConstantConditions")
     public void isSelectorFunction() {
         // given
