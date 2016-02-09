@@ -18,6 +18,9 @@ package io.github.seleniumquery.functions.jquery.traversing;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.apache.commons.lang3.Validate;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * $().each(EachFunction);
@@ -29,7 +32,18 @@ public class SqEachFunction {
 
     public SeleniumQueryObject each(SeleniumQueryObject targetSQO, SeleniumQueryObject.EachFunction eachFunction) {
         Validate.notNull(eachFunction, "$().each(function): function argument must not be null.");
-        return null;
+        List<WebElement> webElements = targetSQO.get();
+        applyEachFunctionToAllElements(eachFunction, webElements);
+        return targetSQO;
+    }
+
+    private void applyEachFunctionToAllElements(SeleniumQueryObject.EachFunction eachFunction, List<WebElement> webElements) {
+        for (int i = 0; i < webElements.size(); i++) {
+            boolean shouldContinue = eachFunction.apply(i, webElements.get(i));
+            if (!shouldContinue) {
+                break;
+            }
+        }
     }
 
 }
