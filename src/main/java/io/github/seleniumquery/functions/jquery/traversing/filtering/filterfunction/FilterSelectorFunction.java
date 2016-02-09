@@ -24,6 +24,12 @@ import java.util.List;
 
 import static io.github.seleniumquery.InternalSeleniumQueryObjectFactory.instance;
 
+/**
+ * $("selector").filter("selector")
+ *
+ * @author acdcjunior
+ * @since 0.11.0
+ */
 public class FilterSelectorFunction {
 
     public SeleniumQueryObject filter(SeleniumQueryObject seleniumQueryObject, String selector) {
