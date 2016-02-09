@@ -19,18 +19,19 @@ package testinfrastructure.testdouble.org.openqa.selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.FindsByCssSelector;
 import testinfrastructure.testdouble.PseudoTestDoubleException;
 
 import java.util.List;
 import java.util.Set;
 
-public class WebDriverDummy implements WebDriver {
+public class WebDriverDummy implements WebDriver, FindsByCssSelector{
 
     public static WebDriver createWebDriverDummy() {
         return new WebDriverDummy();
     }
 
-    WebDriverDummy() { /* package visibility to contain widespread inheritance */ }
+    public WebDriverDummy() { /* package visibility to contain widespread inheritance */ }
 
     @Override public void get(String s) { throw new PseudoTestDoubleException(); }
     @Override public String getCurrentUrl() { throw new PseudoTestDoubleException(); }
@@ -45,5 +46,7 @@ public class WebDriverDummy implements WebDriver {
     @Override public WebDriver.TargetLocator switchTo() { throw new PseudoTestDoubleException(); }
     @Override public WebDriver.Navigation navigate() { throw new PseudoTestDoubleException(); }
     @Override public WebDriver.Options manage() { throw new PseudoTestDoubleException(); }
+    @Override public WebElement findElementByCssSelector(String s) { throw new PseudoTestDoubleException(); }
+    @Override public List<WebElement> findElementsByCssSelector(String s) { throw new PseudoTestDoubleException(); }
 
 }
