@@ -21,7 +21,9 @@ import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy;
 import testinfrastructure.testutils.DriverInTest;
 
 import static org.hamcrest.Matchers.is;
@@ -79,5 +81,35 @@ public class DriverVersionUtilsTest {
 		boolean isHtmlUnitDriverEmulatingIE = DriverVersionUtils.isHtmlUnitDriverEmulatingIE(webDriverMock);
 		assertThat(isHtmlUnitDriverEmulatingIE, is(false));
 	}
+
+	@Test
+	public void hasNativeSupportForPseudo__should_return_true_if_driver_doesnt_throw_exception() {
+        // given
+        final String supportedPseudo = ":some-supported-pseudo";
+        class WebDriverThatSupportsSomePseudo extends WebDriverDummy {
+            @Override public WebElement findElementByCssSelector(String s) { assertThat(s, is("#AAA_SomeIdThatShouldNotExist" + supportedPseudo)); return null; }
+        }
+        DriverVersionUtils driverVersionUtils = new DriverVersionUtils();
+        WebDriver webDriver = new WebDriverThatSupportsSomePseudo();
+        // when
+        boolean hasNativeSupportForPseudo = driverVersionUtils.hasNativeSupportForPseudo(webDriver, supportedPseudo);
+        // then
+        assertThat(hasNativeSupportForPseudo, is(true));
+    }
+
+	@Test
+	public void hasNativeSupportForPseudo__should_return_false_if_driver_throws_exception() {
+        // given
+        final String supportedPseudo = ":some-unsupported-pseudo";
+        class WebDriverThatSupportsNoPseudo extends WebDriverDummy {
+            @Override public WebElement findElementByCssSelector(String s) { throw new RuntimeException(); }
+        }
+        DriverVersionUtils driverVersionUtils = new DriverVersionUtils();
+        WebDriver webDriver = new WebDriverThatSupportsNoPseudo();
+        // when
+        boolean hasNativeSupportForPseudo = driverVersionUtils.hasNativeSupportForPseudo(webDriver, supportedPseudo);
+        // then
+        assertThat(hasNativeSupportForPseudo, is(false));
+    }
 
 }

@@ -67,7 +67,7 @@ public class DriverVersionUtils {
 	
 	private boolean testPseudoClassNativeSupport(String pseudo, SearchContext context) {
 		try {
-			By.cssSelector("#AAA_SomeIdThatShouldNotExist"+pseudo).findElements(context);
+			By.cssSelector("#AAA_SomeIdThatShouldNotExist"+pseudo).findElement(context);
 			return true;
 		} catch (Exception ignored) {
 			return false;
