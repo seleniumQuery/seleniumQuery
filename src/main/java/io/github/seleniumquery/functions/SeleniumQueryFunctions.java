@@ -30,6 +30,7 @@ import io.github.seleniumquery.functions.jquery.manipulation.HtmlFunction;
 import io.github.seleniumquery.functions.jquery.manipulation.TextFunction;
 import io.github.seleniumquery.functions.jquery.miscellaneous.GetFunction;
 import io.github.seleniumquery.functions.jquery.miscellaneous.ToArrayFunction;
+import io.github.seleniumquery.functions.jquery.traversing.SqEachFunction;
 import io.github.seleniumquery.functions.jquery.traversing.filtering.*;
 import io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction.FilterPredicateFunction;
 import io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction.FilterSelectorFunction;
@@ -74,8 +75,7 @@ public class SeleniumQueryFunctions {
     }
 
     public SeleniumQueryObject each(SeleniumQueryObject seleniumQueryObject, SeleniumQueryObject.EachFunction function) {
-        // TODO #124
-        return null;
+        return new SqEachFunction().each(seleniumQueryObject, function);
     }
 
     public SeleniumQueryObject notSelector(SeleniumQueryObject seleniumQueryObject, String selector) {
