@@ -1,9 +1,25 @@
+/*
+ * Copyright (c) 2016 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package endtoend.waitUntil;
 
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -11,41 +27,40 @@ import static org.junit.Assert.assertThat;
 
 public class WaitUntilIsTest {
 	
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(WaitUntilIsMoreTest.class);
-	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(WaitUntilIsMoreTest.class);
 
 	@Test
-	public void queryUntil_not_enabled() {
+	public void waitUntil_not_enabled() {
 		assertThat($("input.disabledInput").waitUntil().is(":not(:enabled)").then().size(), is(1));
 	}
 	
 	@Test
-	public void queryUntil_disabled() {
+	public void waitUntil_disabled() {
 		assertThat($("input.disabledInput").waitUntil().is(":disabled").then().size(), is(1));
 	}
 
 	@Test
-	public void queryUntil_visible() {
+	public void waitUntil_visible() {
 		assertThat($("input.enabledInput").waitUntil().is(":visible").then().size(), is(1));
 	}
 
 	@Test
-	public void queryUntil_enabled() {
+	public void waitUntil_enabled() {
 		assertThat($("input.enabledInput").waitUntil().is(":enabled").then().size(), is(1));
 	}
 
 	@Test
-	public void queryUntil_present() {
+	public void waitUntil_present() {
 		assertThat($("input.enabledInput").waitUntil().is(":present").then().size(), is(1));
 	}
 
 	@Test
-	public void queryUntil_visible_enabled() {
+	public void waitUntil_visible_enabled() {
 		assertThat($("input.enabledInput").waitUntil().is(":visible:enabled").then().size(), is(1));
 	}
 	
 	@Test
-	public void queryUntil_hidden() {
+	public void waitUntil_hidden() {
 		assertThat($("div.invisibleDiv").waitUntil().is(":hidden").then().size(), is(1));
 	}
 
