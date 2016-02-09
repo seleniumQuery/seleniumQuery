@@ -48,6 +48,8 @@ public class SeleniumQueryFunctionsMock extends SeleniumQueryFunctions {
     public MethodMockConfiguration<Boolean> isSelectorMethod;
     @Override public boolean isSelector(SeleniumQueryObject s, String e) { return isSelectorMethod.executeMethodMock(s, e); }
 
+    public MethodMockConfiguration<SeleniumQueryObject> eachMethod;
+    @Override public SeleniumQueryObject each(SeleniumQueryObject s, SeleniumQueryObject.EachFunction f) { return eachMethod.executeMethodMock(s, f); }
 
     @Override public SeleniumQueryObject notSelector(SeleniumQueryObject seleniumQueryObject, String selector) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject first(SeleniumQueryObject seleniumQueryObject) { throw new PseudoTestDoubleException(); }

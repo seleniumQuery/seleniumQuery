@@ -53,4 +53,12 @@ public class SeleniumQueryObjectMother {
         return createStubSeleniumQueryObjectWithElements();
     }
 
+    public static SeleniumQueryObject.EachFunction createDummyEachFunction() {
+        return new SeleniumQueryObject.EachFunction() {
+            @Override public boolean apply(int index, WebElement element) {
+                return false;
+            }
+        };
+    }
+
 }
