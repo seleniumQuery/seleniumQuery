@@ -653,12 +653,17 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 		return seleniumQueryFunctions.filterSelector(this, selector);
 	}
 
+    /**
+     * Interface for the functions used in $().each().
+     * @since 0.13.0
+     */
 	public interface EachFunction {
         /**
          * A function that will be executed for each matched element.
          * @param index The position of the element in the matched set.
          * @param element The element from the matched set.
          * @return false if the iteration should stop. true if it should continue.
+         * @since 0.13.0
          */
 		boolean apply(int index, WebElement element);
 	}
