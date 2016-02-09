@@ -75,7 +75,7 @@ To get the latest version of seleniumQuery, add to your **`pom.xml`**:
 <dependency>
     <groupId>io.github.seleniumquery</groupId>
     <artifactId>seleniumquery</artifactId>
-    <version>0.12.0</version>
+    <version>0.13.0</version>
 </dependency>
 ```
 
