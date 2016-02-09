@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,24 +17,30 @@
 package io.github.seleniumquery.wait;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.wait.evaluators.*;
+import io.github.seleniumquery.wait.evaluators.ContainsEvaluator;
+import io.github.seleniumquery.wait.evaluators.EqualsEvaluator;
+import io.github.seleniumquery.wait.evaluators.Evaluator;
+import io.github.seleniumquery.wait.evaluators.MatchesEvaluator;
+import io.github.seleniumquery.wait.evaluators.comparison.GreaterThanEvaluator;
+import io.github.seleniumquery.wait.evaluators.comparison.LessThanEvaluator;
 import io.github.seleniumquery.wait.getters.Getter;
 
 /**
- * @author acdcjunior
+ * Functions used in the waitUntil().
  *
  * @param <T> The type returned by the getter and TYPE OF THE ARGUMENT used in the end function.
  *
+ * @author acdcjunior
  * @since 0.9.0
  */
 public class SeleniumQueryEvaluateUntil<T> {
-	
-	protected SeleniumQueryFluentWait fluentWait;
+
+	private SeleniumQueryFluentWait fluentWait;
 	protected Getter<T> getter;
 	protected SeleniumQueryObject seleniumQueryObject;
-	protected boolean negated;
-	
-	public SeleniumQueryEvaluateUntil(SeleniumQueryFluentWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
+	private boolean negated;
+
+	SeleniumQueryEvaluateUntil(SeleniumQueryFluentWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
 		this(fluentWait, getter, seleniumQueryObject, false);
 	}
 
