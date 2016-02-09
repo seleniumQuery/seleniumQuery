@@ -57,10 +57,10 @@ public class IsFunction {
 
         private class CompiledCssSelector {
             public final CssSelector<Selector, TagComponent> cssSelector;
-            public final boolean hasNegatedPresent;
+            final boolean hasNegatedPresent;
             private final ArgumentMap argumentMap;
-            public final Selector parsedSimpleSelector;
-            public CompiledCssSelector(CssSelector<Selector, TagComponent> cssSelector, boolean hasNegatedPresent, ArgumentMap argumentMap, Selector parsedSimpleSelector) {
+            final Selector parsedSimpleSelector;
+            CompiledCssSelector(CssSelector<Selector, TagComponent> cssSelector, boolean hasNegatedPresent, ArgumentMap argumentMap, Selector parsedSimpleSelector) {
                 this.cssSelector = cssSelector;
                 this.hasNegatedPresent = hasNegatedPresent;
                 this.argumentMap = argumentMap;
