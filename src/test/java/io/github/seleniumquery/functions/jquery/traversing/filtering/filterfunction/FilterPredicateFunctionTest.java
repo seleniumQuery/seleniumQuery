@@ -35,7 +35,7 @@ public class FilterPredicateFunctionTest {
     private static final Predicate<WebElement> NULL_PREDICATE = null;
     private static final Predicate<WebElement> PREDICATE_DOES_NOT_MATTER_IN_THIS_TEST = null;
 
-    FilterPredicateFunction filterPredicateFunction = new FilterPredicateFunction();
+    private FilterPredicateFunction filterPredicateFunction = new FilterPredicateFunction();
 
     @Test
     public void null_predicate__should_return_EMPTY_element_set() {
