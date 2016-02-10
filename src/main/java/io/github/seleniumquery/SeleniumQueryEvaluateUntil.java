@@ -35,7 +35,7 @@ public interface SeleniumQueryEvaluateUntil<T> {
      *
      * @since 0.9.0
      */
-    SeleniumQueryAndOrThen isEqualTo(T valueToEqual);
+    SeleniumQueryWaitAndOrThen isEqualTo(T valueToEqual);
 
     /**
      * Tests if the result of the preceding function contains the given argument.
@@ -45,7 +45,7 @@ public interface SeleniumQueryEvaluateUntil<T> {
      *
      * @since 0.9.0
      */
-    SeleniumQueryAndOrThen contains(String string);
+    SeleniumQueryWaitAndOrThen contains(String string);
 
     /**
      * Tests if the result of the preceding function matches the given regex.
@@ -55,7 +55,7 @@ public interface SeleniumQueryEvaluateUntil<T> {
      *
      * @since 0.9.0
      */
-    SeleniumQueryAndOrThen matches(String regex);
+    SeleniumQueryWaitAndOrThen matches(String regex);
 
     /**
      * <p>Tests if the result of the preceding function is greater than the given argument.</p>
@@ -65,7 +65,7 @@ public interface SeleniumQueryEvaluateUntil<T> {
      *
      * @since 0.9.0
      */
-    SeleniumQueryAndOrThen isGreaterThan(Number valueToCompare);
+    SeleniumQueryWaitAndOrThen isGreaterThan(Number valueToCompare);
 
     /**
      * <p>Tests if the result of the preceding function is less than the given argument.</p>
@@ -75,7 +75,7 @@ public interface SeleniumQueryEvaluateUntil<T> {
      *
      * @since 0.9.0
      */
-    SeleniumQueryAndOrThen isLessThan(Number valueToCompare);
+    SeleniumQueryWaitAndOrThen isLessThan(Number valueToCompare);
 
     /**
      * Negates the criteria that follows.
