@@ -18,6 +18,7 @@ package io.github.seleniumquery;
 
 import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
+import io.github.seleniumquery.internal.SqObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,7 +56,7 @@ public class InternalSeleniumQueryObjectFactory {
     }
 
     public SeleniumQueryObject create(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by, List<WebElement> elements, SeleniumQueryObject previous) {
-        return new SeleniumQueryObject(seleniumQueryFunctions, driver, by, elements, previous);
+        return new SqObject(seleniumQueryFunctions, driver, by, elements, previous);
     }
 
     public SeleniumQueryObject createWithInvalidSelector(WebDriver driver, List<WebElement> elements, SeleniumQueryObject previous) {
@@ -63,7 +64,7 @@ public class InternalSeleniumQueryObjectFactory {
     }
 
     SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, List<WebElement> elements) {
-        return createWithInvalidSelector(driver, elements, SeleniumQueryObject.NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
+        return createWithInvalidSelector(driver, elements, SqObject.NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
     }
 
     public SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, WebElement... elements) {
@@ -71,7 +72,7 @@ public class InternalSeleniumQueryObjectFactory {
     }
 
     SeleniumQueryObject createWithValidSelectorAndNoPrevious(WebDriver driver, String selector) {
-        return new SeleniumQueryObject(seleniumQueryFunctions, driver, getBy(selector));
+        return new SqObject(seleniumQueryFunctions, driver, getBy(selector));
     }
 
     private By getBy(String selector) {
