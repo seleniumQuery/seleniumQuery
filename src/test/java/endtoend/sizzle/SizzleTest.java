@@ -16,8 +16,8 @@
 
 package endtoend.sizzle;
 
-import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.internal.SqObjectFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -42,7 +42,7 @@ public class SizzleTest {
 
     @SuppressWarnings("unused")
     protected static SeleniumQueryObject Sizzle(String selector, Boolean b, Boolean c, List<WebElement> x) {
-        return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector($.driver().get(), x, null).find(selector);
+        return SqObjectFactory.instance().createWithInvalidSelector($.driver().get(), x, null).find(selector);
     }
 
     protected static SeleniumQueryObject Sizzle(WebElement we) {

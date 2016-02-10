@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package io.github.seleniumquery;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
+import io.github.seleniumquery.internal.SqObjectFactory;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -80,7 +81,7 @@ public class SeleniumQueryBrowser {
      * @since 0.9.0
      */
     public SeleniumQueryObject $(String selector) {
-        return InternalSeleniumQueryObjectFactory.instance().createWithValidSelectorAndNoPrevious(this.$.driver().get(), selector);
+        return getSeleniumQueryObjectFactory().createWithValidSelectorAndNoPrevious(this.$.driver().get(), selector);
     }
 
     /**
@@ -103,7 +104,7 @@ public class SeleniumQueryBrowser {
      * @since 0.9.0
      */
     public SeleniumQueryObject $(WebElement... elements) {
-        return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), elements);
+        return getSeleniumQueryObjectFactory().createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), elements);
     }
 
     /**
@@ -126,7 +127,7 @@ public class SeleniumQueryBrowser {
      * @since 0.9.0
      */
     public SeleniumQueryObject $(List<WebElement> elements) {
-        return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), elements);
+        return getSeleniumQueryObjectFactory().createWithInvalidSelectorAndNoPrevious(this.$.driver().get(), elements);
     }
 
     /**
@@ -204,5 +205,9 @@ public class SeleniumQueryBrowser {
     public SeleniumQueryObject jQuery(List<WebElement> elements) {
         return $(elements);
     }
-    
+
+    private SqObjectFactory getSeleniumQueryObjectFactory() {
+        return SqObjectFactory.instance();
+    }
+
 }

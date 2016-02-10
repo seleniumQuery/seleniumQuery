@@ -16,9 +16,9 @@
 
 package testinfrastructure.testdouble.io.github.seleniumquery;
 
-import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
+import io.github.seleniumquery.internal.SqObjectFactory;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class SeleniumQueryObjectMother {
 
     private static SeleniumQueryObject createStubSeleniumQueryObject(SeleniumQueryFunctions seleniumQueryFunctions, List<WebElement> webElements) {
         SeleniumQueryObject DUMMY_PREVIOUS = createSeleniumQueryObjectDummy();
-        return InternalSeleniumQueryObjectFactory.instance().create(seleniumQueryFunctions, createWebDriverDummy(), createByToStringableDummy(), webElements, DUMMY_PREVIOUS);
+        return SqObjectFactory.instance().create(seleniumQueryFunctions, createWebDriverDummy(), createByToStringableDummy(), webElements, DUMMY_PREVIOUS);
     }
 
     public static SeleniumQueryObject createStubSeleniumQueryObjectWithElements(WebElement... elements) {

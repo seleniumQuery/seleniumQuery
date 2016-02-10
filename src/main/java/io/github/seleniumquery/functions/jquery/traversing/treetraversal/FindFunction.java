@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
-import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.internal.SqObjectFactory;
 import org.openqa.selenium.WebElement;
 
 import java.util.LinkedList;
@@ -40,7 +40,7 @@ public class FindFunction {
 			List<WebElement> elementsBelowThisElement = webElement.findElements(by);
 			allElementsBelow.addAll(elementsBelowThisElement);
 		}
-		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), allElementsBelow, seleniumQueryObject);
+		return SqObjectFactory.instance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), allElementsBelow, seleniumQueryObject);
 	}
 
 }

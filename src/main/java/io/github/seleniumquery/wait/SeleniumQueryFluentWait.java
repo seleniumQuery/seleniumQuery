@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 package io.github.seleniumquery.wait;
 
 import com.google.common.base.Function;
-import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.internal.SqObjectFactory;
 import io.github.seleniumquery.wait.evaluators.Evaluator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -30,12 +30,12 @@ import java.util.concurrent.TimeUnit;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class SeleniumQueryFluentWait {
+class SeleniumQueryFluentWait {
 	
 	private long waitUntilTimeout;
 	private long waitUntilPollingInterval;
 
-	public SeleniumQueryFluentWait(long waitUntilTimeout, long waitUntilPollingInterval) {
+	SeleniumQueryFluentWait(long waitUntilTimeout, long waitUntilPollingInterval) {
 		this.waitUntilTimeout = waitUntilTimeout;
 		this.waitUntilPollingInterval = waitUntilPollingInterval;
 	}
@@ -45,7 +45,7 @@ public class SeleniumQueryFluentWait {
 		final WebDriver driver = seleniumQueryObject.getWebDriver();
 		final By by = seleniumQueryObject.getBy();
 		List<WebElement> elements = fluentWait(seleniumQueryObject, new WaitFunction<>(driver, value, evaluator, by, negated), "to "+evaluator.stringFor(value));
-        return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
+        return SqObjectFactory.instance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
     }
 
 	/**

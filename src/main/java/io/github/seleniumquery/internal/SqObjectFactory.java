@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery;
+package io.github.seleniumquery.internal;
 
+import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
-import io.github.seleniumquery.internal.SqObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,24 +28,25 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 /**
- * This factory builds {@link io.github.seleniumquery.SeleniumQueryObject}s. Necessary because all
- * constructors in that class have protected visibility (we don't want them public).
+ * This factory builds {@link io.github.seleniumquery.SeleniumQueryObject}s.
+ *
+ * The actual implementation is {@link SqObject}s.
  *
  * @author acdcjunior
  * @since 0.9.0
  */
-public class InternalSeleniumQueryObjectFactory {
+public class SqObjectFactory {
 
-    private static InternalSeleniumQueryObjectFactory instance;
+    private static SqObjectFactory instance;
 
-    public static InternalSeleniumQueryObjectFactory instance() {
+    public static SqObjectFactory instance() {
         if (instance == null) {
-            instance = new InternalSeleniumQueryObjectFactory(new SeleniumQueryFunctions());
+            instance = new SqObjectFactory(new SeleniumQueryFunctions());
         }
         return instance;
     }
 
-    public InternalSeleniumQueryObjectFactory(SeleniumQueryFunctions seleniumQueryFunctions) {
+    public SqObjectFactory(SeleniumQueryFunctions seleniumQueryFunctions) {
         this.seleniumQueryFunctions = seleniumQueryFunctions;
     }
 
@@ -63,7 +64,7 @@ public class InternalSeleniumQueryObjectFactory {
         return create(driver, getNoSelectorInvalidBy(), elements, previous);
     }
 
-    SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, List<WebElement> elements) {
+    public SeleniumQueryObject createWithInvalidSelectorAndNoPrevious(WebDriver driver, List<WebElement> elements) {
         return createWithInvalidSelector(driver, elements, SqObject.NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
     }
 
@@ -71,7 +72,7 @@ public class InternalSeleniumQueryObjectFactory {
         return createWithInvalidSelectorAndNoPrevious(driver, asList(elements));
     }
 
-    SeleniumQueryObject createWithValidSelectorAndNoPrevious(WebDriver driver, String selector) {
+    public SeleniumQueryObject createWithValidSelectorAndNoPrevious(WebDriver driver, String selector) {
         return new SqObject(seleniumQueryFunctions, driver, getBy(selector));
     }
 

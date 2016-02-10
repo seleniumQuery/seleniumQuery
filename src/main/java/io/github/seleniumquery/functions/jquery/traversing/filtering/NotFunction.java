@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.filtering;
 
-import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.internal.SqObjectFactory;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class NotFunction {
 		List<WebElement> elementsToExclude = seleniumQueryObject.getWebDriver().findElements(SeleniumQueryBy.byEnhancedSelector(selector));
 		filteredElements.removeAll(elementsToExclude);
 
-		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), filteredElements, seleniumQueryObject);
+		return SqObjectFactory.instance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), filteredElements, seleniumQueryObject);
 	}
 
 }
