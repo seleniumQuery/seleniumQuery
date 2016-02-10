@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.wait;
 
+import io.github.seleniumquery.SeleniumQueryAndOrThen;
 import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.wait.evaluators.IsEvaluator;
@@ -70,7 +71,7 @@ public class SqWaitUntil implements io.github.seleniumquery.SeleniumQueryWaitUnt
 	@Override
 	public SeleniumQueryAndOrThen is(String selector) {
 		SeleniumQueryObject seleniumQueryObjectAfterWait = this.fluentWait.waitUntil(IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, false);
-		return new SeleniumQueryAndOrThen(seleniumQueryObjectAfterWait);
+		return new SqAndOrThen(seleniumQueryObjectAfterWait);
 	}
 
 	@Override

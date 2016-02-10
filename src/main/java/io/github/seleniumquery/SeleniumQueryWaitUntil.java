@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery;
 
-import io.github.seleniumquery.wait.SeleniumQueryAndOrThen;
 import io.github.seleniumquery.wait.SeleniumQueryEvaluateUntil;
 
 /**
