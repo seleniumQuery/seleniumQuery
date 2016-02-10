@@ -21,12 +21,12 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
+import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.testdouble.PseudoTestDoubleException;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,16 +35,17 @@ import java.util.List;
  * fixture. It is "smart" because any method call to it will throw an exception (which indicates the dummy
  * is actually not a simple placeholder - since it is being used by the SUT when it shouldn't).
  */
-public class SeleniumQueryObjectDummy extends SeleniumQueryObject {
+public class SeleniumQueryObjectDummy implements SeleniumQueryObject {
 
     public static SeleniumQueryObject createSeleniumQueryObjectDummy() {
         return new SeleniumQueryObjectDummy();
     }
 
-    private SeleniumQueryObjectDummy() {
-        super(null, null, null, Collections.<WebElement>emptyList(), null);
-    }
+    private SeleniumQueryObjectDummy() { }
 
+    @Override public SeleniumQueryWaitUntil waitUntil() { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) { throw new PseudoTestDoubleException(); }
     @Override public StandardPlugins as() { throw new PseudoTestDoubleException(); }
     @Override public <PLUGIN> PLUGIN as(SeleniumQueryPlugin<PLUGIN> pluginFunction) { throw new PseudoTestDoubleException(); }
     @Override public Iterator<WebElement> iterator() { throw new PseudoTestDoubleException(); }
@@ -85,5 +86,7 @@ public class SeleniumQueryObjectDummy extends SeleniumQueryObject {
     @SuppressWarnings("deprecation") @Override public SeleniumQueryObject selectOptionByValue(String value) { throw new PseudoTestDoubleException(); }
     @Override public String toString() { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject filter(Predicate<WebElement> filterFunction) { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryObject filter(String selector) { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryObject each(EachFunction function) { throw new PseudoTestDoubleException(); }
 
 }

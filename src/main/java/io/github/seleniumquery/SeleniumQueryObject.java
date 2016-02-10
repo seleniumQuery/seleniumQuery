@@ -20,10 +20,7 @@ import com.google.common.base.Predicate;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
-import io.github.seleniumquery.utils.ListUtils;
 import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -61,45 +58,12 @@ import java.util.List;
  * A seleniumQuery object may be empty, containing no elements. It is not an error; any further methods called on that
  * seleniumQuery object simply have no effect since they have no elements to act upon.
  * </p>
- *  
+ *
  * @author acdcjunior
  * @author ricardo-sc
  * @since 0.9.0
  */
-public class SeleniumQueryObject implements Iterable<WebElement> {
-	
-	public static final Log LOGGER = LogFactory.getLog(SeleniumQueryObject.class);
-
-    static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
-
-	private SeleniumQueryFunctions seleniumQueryFunctions;
-
-	private WebDriver driver;
-
-    private By by;
-	private List<WebElement> elements;
-	
-	/**
-	 * The previous (or "parent") element, meaning this SeleniumQueryObject was created as result
-	 * of calling a "destructive" function (such as {@link #not(String)}) on that element.<br>
-	 * This property is retrieved by a call to {@link #end()}.
-	 * 
-	 * @since 0.9.0
-	 */
-	private SeleniumQueryObject previous;
-	
-
-	protected SeleniumQueryObject(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by) {
-        this(seleniumQueryFunctions, driver, by, driver.findElements(by), NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
-	}
-
-	protected SeleniumQueryObject(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by, List<WebElement> webElements, SeleniumQueryObject previous) {
-        this.seleniumQueryFunctions = seleniumQueryFunctions;
-		this.driver = driver;
-		this.by = by;
-		this.elements = ListUtils.toImmutableRandomAccessList(webElements);
-		this.previous = previous;
-	}
+public interface SeleniumQueryObject extends Iterable<WebElement> {
 
 	/**
 	 * <p>List of functions that will halt the execution and requery the selector until the specified condition is met, returning
@@ -115,9 +79,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public final SeleniumQueryWaitUntil waitUntil() {
-		return new SeleniumQueryWaitUntil(this);
-	}
+	SeleniumQueryWaitUntil waitUntil();
 
 	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
@@ -128,9 +90,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) {
-		return new SeleniumQueryWaitUntil(this, waitUntilTimeout);
-	}
+	SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout);
 
 	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
@@ -142,9 +102,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) {
-		return new SeleniumQueryWaitUntil(this, waitUntilTimeout, waitUntilPollingInterval);
-	}
+	SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval);
 
 	/**
 	 * Enables several functions (plugins) that allow executing specific tasks, from specific points of view, on
@@ -154,9 +112,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public StandardPlugins as() {
-		return new StandardPlugins(this);
-	}
+	StandardPlugins as();
 
 	/**
 	 * Enables the execution of functions defined by the plugin sent as argument.
@@ -167,9 +123,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public <PLUGIN> PLUGIN as(SeleniumQueryPlugin<PLUGIN> pluginFunction) {
-		return pluginFunction.as(this);
-	}
+	<PLUGIN> PLUGIN as(SeleniumQueryPlugin<PLUGIN> pluginFunction);
 
 	/**
 	 * Returns an iterator over the matched elements of this seleniumQuery object.
@@ -177,33 +131,25 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @return an iterator over the matched elements of this seleniumQuery object.
 	 */
 	@Override
-	public Iterator<WebElement> iterator() {
-		return this.elements.iterator();
-	}
+	Iterator<WebElement> iterator();
 
 	/**
 	 * Returns the driver used to create this seleniumQuery object.
 	 * @return the driver used to create this seleniumQuery object.
 	 */
-	public WebDriver getWebDriver() {
-		return this.driver;
-	}
+	WebDriver getWebDriver();
 
 	/**
 	 * Returns the By used to search the matched elements of this seleniumQuery object.
 	 * @return the By used to search the matched elements of this seleniumQuery object.
 	 */
-	public By getBy() {
-		return this.by;
-	}
+	By getBy();
 
-    /**
+	/**
      * Returns the seleniumQueryFunctions service used by this object.
      * @return the seleniumQueryFunctions service used by this object.
      */
-    public SeleniumQueryFunctions getSeleniumQueryFunctions() {
-        return seleniumQueryFunctions;
-    }
+	SeleniumQueryFunctions getSeleniumQueryFunctions();
 
 	/**
 	 * Returns the number of elements in the seleniumQuery object.
@@ -212,9 +158,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public int size() {
-		return this.elements.size();
-	}
+	int size();
 
 	/**
 	 * Removes elements from the set of matched elements.
@@ -224,9 +168,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject not(String selector) {
-		return seleniumQueryFunctions.notSelector(this, selector);
-	}
+	SeleniumQueryObject not(String selector);
 
 	/**
 	 * <p>Reduces the set of matched elements to the first in the set.</p>
@@ -238,9 +180,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject first() {
-		return seleniumQueryFunctions.first(this);
-	}
+	SeleniumQueryObject first();
 
 	/**
 	 * <p>Reduces the set of matched elements to the final one in the set.</p>
@@ -252,9 +192,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject last() {
-		return seleniumQueryFunctions.last(this);
-	}
+	SeleniumQueryObject last();
 
 	/**
 	 * Reduce the set of matched elements to the one at the specified index.
@@ -266,9 +204,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject eq(int index) {
-		return seleniumQueryFunctions.eqIndex(this, index);
-	}
+	SeleniumQueryObject eq(int index);
 
 	/**
 	 * <p>Gets the combined text contents of each element in the set of matched elements, including
@@ -277,18 +213,19 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * <p><b>Note:</b> This functions uses Selenium's <code>{@link WebElement#getText()}</code>, and, as
 	 * jQuery, <i>"due to variations in the HTML parsers in different browsers, the text returned may vary
 	 * in newlines and other white space."</i></p>
+     *
+     * <p><b>IMPORTANT:</b>
+     * It is impossible to read text from hidden elements in Selenium:<br>
+     * Since a user cannot read text in a hidden element, WebDriver will not allow access to
+     * it as well.<br>
+     * More in <a href="https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_Why_is_it_not_possible_to_interact_with_hidden_elements?">WebDriver FAQs</a>.
+     * </p>
 	 *
 	 * @return the text from all elements in the matched set.
 	 *
 	 * @since 0.9.0
 	 */
-	public String text() {
-		// Warning!
-		// It is impossible to read text from hidden elements in Selenium:
-		// Since a user cannot read text in a hidden element, WebDriver will not allow access to it as well.
-		// More in WebDriver FAQs: https://code.google.com/p/selenium/wiki/FrequentlyAskedQuestions#Q:_Why_is_it_not_possible_to_interact_with_hidden_elements?
-		return seleniumQueryFunctions.text(this);
-	}
+	String text();
 
 	/**
 	 * Clicks <strong>all</strong> elements in the set of matched elements, in the
@@ -298,9 +235,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject click() {
-		return seleniumQueryFunctions.click(this);
-	}
+	SeleniumQueryObject click();
 
 	/**
 	 * Sets the value of <strong>all</strong> elements in the set of matched elements.
@@ -310,9 +245,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject val(String value) {
-        return seleniumQueryFunctions.valueWrite(this, value);
-	}
+	SeleniumQueryObject val(String value);
 
     /**
 	 * Sets the value of <strong>all</strong> elements in the set of matched elements.
@@ -322,9 +255,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject val(Number value) {
-        return seleniumQueryFunctions.valueWrite(this, value);
-	}
+	SeleniumQueryObject val(Number value);
 
     /**
 	 * Gets the current value of the first element in the set of matched elements.
@@ -333,9 +264,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public String val() {
-		return seleniumQueryFunctions.valueRead(this);
-	}
+	String val();
 
     /**
 	 * Ends the most recent filtering operation in the current chain and returns the set of matched
@@ -345,9 +274,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject end() {
-		return this.previous;
-	}
+	SeleniumQueryObject end();
 
 	/**
 	 * Gets the descendants of each element in the current set of matched elements, filtered by a selector.
@@ -357,9 +284,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject find(String selector) {
-		return seleniumQueryFunctions.findSelector(this, selector);
-	}
+	SeleniumQueryObject find(String selector);
 
 	/**
 	 * Gets the value of an attribute for the first element in the set of matched elements.
@@ -369,9 +294,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public String attr(String attributeName) {
-		return seleniumQueryFunctions.attributeRead(this, attributeName);
-	}
+	String attr(String attributeName);
 
 	/**
 	 * Sets one or more attributes for <strong>every</strong> matched element.
@@ -387,9 +310,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject attr(String attributeName, Object value) {
-		return seleniumQueryFunctions.attributeWrite(this, attributeName, value);
-	}
+	SeleniumQueryObject attr(String attributeName, Object value);
 
 	/**
 	 * Gets the value of a property for the first element in the set of matched elements.
@@ -400,9 +321,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
      *
 	 * @since 0.9.0
 	 */
-	public <T> T prop(String propertyName) {
-		return seleniumQueryFunctions.propertyRead(this, propertyName);
-	}
+	<T> T prop(String propertyName);
 
     /**
 	 * Set one or more properties for <strong>every</strong> matched element
@@ -418,9 +337,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
      *
 	 * @since 0.9.0
      */
-	public SeleniumQueryObject prop(String propertyName, Object value) {
-		return seleniumQueryFunctions.propertyWrite(this, propertyName, value);
-	}
+	SeleniumQueryObject prop(String propertyName, Object value);
 
     /**
 	 * Retrieves one of the {@link WebElement} matched by the seleniumQuery object.
@@ -430,9 +347,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public WebElement get(int index) {
-		return seleniumQueryFunctions.getIndex(this, index);
-	}
+	WebElement get(int index);
 
 	/**
 	 * Retrieves the {@link WebElement}s matched by the seleniumQuery object.
@@ -441,9 +356,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public List<WebElement> get() {
-		return this.elements;
-	}
+	List<WebElement> get();
 
 	/**
 	 * Removes an attribute from each element in the set of matched elements.
@@ -454,9 +367,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0]
 	 */
-	public SeleniumQueryObject removeAttr(String attributeNames) {
-		return seleniumQueryFunctions.removeAttribute(this, attributeNames);
-	}
+	SeleniumQueryObject removeAttr(String attributeNames);
 
 	/**
 	 * Gets the HTML contents of the first element in the set of matched elements.
@@ -465,9 +376,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public String html() {
-		return seleniumQueryFunctions.html(this);
-	}
+	String html();
 
 	/**
 	 * Checks the current matched set of elements against a selector and returns <code>true</code>
@@ -478,9 +387,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
      *
 	 * @since 0.9.0
 	 */
-	public boolean is(String selector) {
-		return seleniumQueryFunctions.isSelector(this, selector);
-	}
+	boolean is(String selector);
 
 	/**
 	 * Determines whether any of the matched elements are assigned the given class.
@@ -490,9 +397,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
      *
 	 * @since 0.9.0
 	 */
-	public boolean hasClass(String className) {
-		return seleniumQueryFunctions.hasClass(this, className);
-	}
+	boolean hasClass(String className);
 
 	/**
 	 * Retrieves all the elements contained in the seleniumQuery set, as an array.
@@ -501,9 +406,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public WebElement[] toArray() {
-		return seleniumQueryFunctions.toArray(this);
-	}
+	WebElement[] toArray();
 
 	/**
 	 * For each element in the set, gets the first element that matches the selector by
@@ -515,9 +418,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject closest(String selector) {
-		return seleniumQueryFunctions.closestSelector(this, selector);
-	}
+	SeleniumQueryObject closest(String selector);
 
 	/**
 	 * <p>Triggers the <code>focus</code> event on <b>every</b> element of the matched set.</p>
@@ -530,9 +431,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject focus() {
-		return seleniumQueryFunctions.focus(this);
-	}
+	SeleniumQueryObject focus();
 
 	/**
 	 * Gets the children of each element in the set of matched elements.
@@ -541,9 +440,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject children() {
-		return seleniumQueryFunctions.children(this);
-	}
+	SeleniumQueryObject children();
 
 	/**
 	 * Gets the children of each element in the set of matched elements, filtered by a selector.
@@ -553,9 +450,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject children(String selector) {
-		return seleniumQueryFunctions.childrenSelector(this, selector);
-	}
+	SeleniumQueryObject children(String selector);
 
 	/**
 	 * Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
@@ -566,9 +461,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject parent() {
-		return seleniumQueryFunctions.parent(this);
-	}
+	SeleniumQueryObject parent();
 
 	/**
 	 * Get the parent of each element in the current set of matched elements, filtered by a selector.
@@ -582,9 +475,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject parent(String selector) {
-		return seleniumQueryFunctions.parentSelector(this, selector);
-	}
+	SeleniumQueryObject parent(String selector);
 
 	/**
 	 * <p>Attempts to submits, in the current order, every element in the matched set.</p>
@@ -598,9 +489,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 *
 	 * @since 0.9.0
 	 */
-	public SeleniumQueryObject submit() {
-		return seleniumQueryFunctions.submit(this);
-	}
+	SeleniumQueryObject submit();
 
 	/**
 	 * This method will be removed in {@code 1.0.0}.
@@ -610,9 +499,7 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unused")
-	public SeleniumQueryObject selectOptionByVisibleText(String text) {
-		return as().select().selectByVisibleText(text);
-	}
+	SeleniumQueryObject selectOptionByVisibleText(String text);
 
 	/**
 	 * This method will be removed in {@code 1.0.0}.
@@ -622,25 +509,16 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unused")
-	public SeleniumQueryObject selectOptionByValue(String value) {
-		return as().select().selectByValue(value);
-	}
+	SeleniumQueryObject selectOptionByValue(String value);
 
-	@Override
-	public String toString() {
-		return this.by.toString();
-	}
-
-    /**
+	/**
      * Reduce the set of matched elements to those that pass the predicate's test.
      *
      * @param filterFunction A predicate used as a test for each element in the set.
      * @return An object with the elements that passed the predicate's test.
      * @since 0.11.0
      */
-	public SeleniumQueryObject filter(Predicate<WebElement> filterFunction) {
-		return seleniumQueryFunctions.filterPredicate(this, filterFunction);
-	}
+	SeleniumQueryObject filter(Predicate<WebElement> filterFunction);
 
     /**
      * Reduce the set of matched elements to those that match the given selector.
@@ -649,15 +527,13 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
      * @return An object with the elements that matched the selector.
      * @since 0.11.0
      */
-	public SeleniumQueryObject filter(String selector) {
-		return seleniumQueryFunctions.filterSelector(this, selector);
-	}
+	SeleniumQueryObject filter(String selector);
 
     /**
      * Interface for the functions used in $().each().
      * @since 0.13.0
      */
-	public interface EachFunction {
+	interface EachFunction {
         /**
          * A function that will be executed for each matched element.
          * @param index The position of the element in the matched set.
@@ -678,8 +554,6 @@ public class SeleniumQueryObject implements Iterable<WebElement> {
 	 * @return The object that was iterated.
 	 * @since 0.13.0
      */
-	public SeleniumQueryObject each(EachFunction function) {
-		return seleniumQueryFunctions.each(this, function);
-	}
+	SeleniumQueryObject each(EachFunction function);
 
 }
