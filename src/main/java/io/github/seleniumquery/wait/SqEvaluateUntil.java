@@ -16,9 +16,9 @@
 
 package io.github.seleniumquery.wait;
 
-import io.github.seleniumquery.SeleniumQueryEvaluateUntil;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
+import io.github.seleniumquery.SeleniumQueryWaitEvaluateUntil;
 import io.github.seleniumquery.wait.evaluators.ContainsEvaluator;
 import io.github.seleniumquery.wait.evaluators.EqualsEvaluator;
 import io.github.seleniumquery.wait.evaluators.Evaluator;
@@ -35,7 +35,7 @@ import io.github.seleniumquery.wait.getters.Getter;
  * @author acdcjunior
  * @since 0.9.0
  */
-class SqEvaluateUntil<T> implements io.github.seleniumquery.SeleniumQueryEvaluateUntil<T> {
+class SqEvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 
 	private SeleniumQueryFluentWait fluentWait;
 	protected Getter<T> getter;
@@ -87,7 +87,7 @@ class SqEvaluateUntil<T> implements io.github.seleniumquery.SeleniumQueryEvaluat
 	}
 
 	@Override
-	public SeleniumQueryEvaluateUntil<T> not() {
+	public SeleniumQueryWaitEvaluateUntil<T> not() {
 		return new SqEvaluateUntil<>(fluentWait, getter, seleniumQueryObject, !this.negated);
 	}
 
