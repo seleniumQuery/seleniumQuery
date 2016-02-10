@@ -23,7 +23,7 @@ package io.github.seleniumquery;
  * @author acdcjunior
  * @since 0.9.0
  */
-public interface SeleniumQueryAndOrThen {
+public interface SeleniumQueryWaitAndOrThen {
 
     /**
      * Allows the chaining of additional waiting conditions.

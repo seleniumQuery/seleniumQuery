@@ -33,7 +33,7 @@ public interface SeleniumQueryWaitUntil {
 	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryAndOrThen is(String selector);
+	SeleniumQueryWaitAndOrThen is(String selector);
 
 	/**
 	 * Waits until every matched element's value meets the specified criteria.

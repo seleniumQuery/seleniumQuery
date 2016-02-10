@@ -17,6 +17,7 @@
 package io.github.seleniumquery.wait;
 
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import io.github.seleniumquery.SeleniumQueryWaitUntil;
 
 /**
@@ -26,7 +27,7 @@ import io.github.seleniumquery.SeleniumQueryWaitUntil;
  * @author acdcjunior
  * @since 0.9.0
  */
-class SqAndOrThen implements io.github.seleniumquery.SeleniumQueryAndOrThen {
+class SqAndOrThen implements SeleniumQueryWaitAndOrThen {
 	
 	private SeleniumQueryObject seleniumQueryObject;
 	
