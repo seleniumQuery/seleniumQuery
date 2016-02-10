@@ -39,12 +39,11 @@ import java.util.List;
  * @author ricardo-sc
  * @since 0.14.0
  */
-public class SqObject implements SeleniumQueryObject {
+class SqObject implements SeleniumQueryObject {
 	
 	public static final Log LOGGER = LogFactory.getLog(SqObject.class);
 
-    // TODO temp public
-    public static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
+    static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
 
 	private SeleniumQueryFunctions seleniumQueryFunctions;
 
@@ -62,13 +61,11 @@ public class SqObject implements SeleniumQueryObject {
 	 */
 	private SeleniumQueryObject previous;
 
-    // TODO temp public
-	public SqObject(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by) {
+    SqObject(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by) {
         this(seleniumQueryFunctions, driver, by, driver.findElements(by), NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT);
 	}
 
-    // TODO temp public
-    public SqObject(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by, List<WebElement> webElements, SeleniumQueryObject previous) {
+    SqObject(SeleniumQueryFunctions seleniumQueryFunctions, WebDriver driver, By by, List<WebElement> webElements, SeleniumQueryObject previous) {
         this.seleniumQueryFunctions = seleniumQueryFunctions;
 		this.driver = driver;
 		this.by = by;

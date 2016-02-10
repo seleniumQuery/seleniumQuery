@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
-import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
+import io.github.seleniumquery.internal.SqObjectFactory;
 import io.github.seleniumquery.utils.SelectorUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,7 +39,7 @@ public class ChildrenFunction {
 	public static SeleniumQueryObject children(SeleniumQueryObject caller) {
 		List<WebElement> elements = caller.get();
 		List<WebElement> children = getChildren(elements);
-		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(caller.getWebDriver(), children, caller);
+		return SqObjectFactory.instance().createWithInvalidSelector(caller.getWebDriver(), children, caller);
 	}
 	
 	public static SeleniumQueryObject children(SeleniumQueryObject caller, String selector) {
@@ -52,7 +52,7 @@ public class ChildrenFunction {
 				iterator.remove();
 			}
 		}
-		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(webDriver, children, caller);
+		return SqObjectFactory.instance().createWithInvalidSelector(webDriver, children, caller);
 	}
 	
 	private static List<WebElement> getChildren(List<WebElement> elements) {

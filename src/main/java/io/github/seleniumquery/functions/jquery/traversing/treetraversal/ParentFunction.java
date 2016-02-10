@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
-import io.github.seleniumquery.InternalSeleniumQueryObjectFactory;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.internal.SqObjectFactory;
 import io.github.seleniumquery.utils.SelectorUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -57,7 +57,7 @@ public class ParentFunction {
 				alreadyInsertedParents.add(parentElement);
 			}
 		}
-		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelector(callerWebDriver, parents, caller);
+		return SqObjectFactory.instance().createWithInvalidSelector(callerWebDriver, parents, caller);
 	}
 
 	private static boolean parentMatchesSelector(WebDriver callerWebDriver, String selector, WebElement parentElement) {
@@ -66,7 +66,7 @@ public class ParentFunction {
 	}
 
 	private static SeleniumQueryObject createParentElement(WebDriver callerWebDriver, WebElement parentElement) {
-		return InternalSeleniumQueryObjectFactory.instance().createWithInvalidSelectorAndNoPrevious(callerWebDriver, parentElement);
+		return SqObjectFactory.instance().createWithInvalidSelectorAndNoPrevious(callerWebDriver, parentElement);
 	}
 
 }

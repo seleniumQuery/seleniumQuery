@@ -22,7 +22,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static io.github.seleniumquery.InternalSeleniumQueryObjectFactory.instance;
+import static io.github.seleniumquery.internal.SqObjectFactory.instance;
 
 /**
  * $("selector").filter("selector")
