@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class ValFunction {
 
-	private static final Log LOGGER = LogFactory.getLog(SeleniumQueryObject.class);
+	private static final Log LOGGER = LogFactory.getLog(ValFunction.class);
 	
 	/*
 	 * $(".selector").val();
@@ -74,7 +74,7 @@ public class ValFunction {
 	 * $(".selector").val(123);
 	 */
 	public static SeleniumQueryObject val(SeleniumQueryObject caller, List<WebElement> elements, Number value) {
-        SeleniumQueryObject.LOGGER.debug("Setting value of "+ caller +" to: "+value+".");
+        LOGGER.debug("Setting value of "+ caller +" to: "+value+".");
 		return val(caller, elements, value.toString());
 	}
 
@@ -82,7 +82,7 @@ public class ValFunction {
 	 * $(".selector").val("string");
 	 */
 	public static SeleniumQueryObject val(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String value) {
-		SeleniumQueryObject.LOGGER.debug("Setting value of "+ seleniumQueryObject +" to: \""+value+"\".");
+		LOGGER.debug("Setting value of "+ seleniumQueryObject +" to: \""+value+"\".");
 		for (WebElement element : elements) {
 			val(seleniumQueryObject.getWebDriver(), element, value);
 		}
