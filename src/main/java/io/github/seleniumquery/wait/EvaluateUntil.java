@@ -35,18 +35,18 @@ import io.github.seleniumquery.wait.getters.Getter;
  * @author acdcjunior
  * @since 0.9.0
  */
-class SqEvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
+class EvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 
 	private FluentSqWait fluentWait;
 	protected Getter<T> getter;
 	protected SeleniumQueryObject seleniumQueryObject;
 	private boolean negated;
 
-	SqEvaluateUntil(FluentSqWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
+	EvaluateUntil(FluentSqWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
 		this(fluentWait, getter, seleniumQueryObject, false);
 	}
 
-	private SqEvaluateUntil(FluentSqWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject, boolean negated) {
+	private EvaluateUntil(FluentSqWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject, boolean negated) {
 		this.fluentWait = fluentWait;
 		this.getter = getter;
 		this.seleniumQueryObject = seleniumQueryObject;
@@ -57,38 +57,38 @@ class SqEvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 	public SeleniumQueryWaitAndOrThen isEqualTo(T valueToEqual) {
 		Evaluator<T> equalsEvaluator = new EqualsEvaluator<>(getter);
 		SeleniumQueryObject sq = fluentWait.waitUntil(equalsEvaluator, valueToEqual, seleniumQueryObject, this.negated);
-		return new SqAndOrThen(sq);
+		return new AndOrThen(sq);
 	}
 
 	@Override
 	public SeleniumQueryWaitAndOrThen contains(String string) {
 		Evaluator<String> containsEvaluator = new ContainsEvaluator(getter);
-		return new SqAndOrThen(fluentWait.waitUntil(containsEvaluator, string, seleniumQueryObject, this.negated));
+		return new AndOrThen(fluentWait.waitUntil(containsEvaluator, string, seleniumQueryObject, this.negated));
 	}
 
 	@Override
 	public SeleniumQueryWaitAndOrThen matches(String regex) {
 		Evaluator<String> matchesEvaluator = new MatchesEvaluator(getter);
-		return new SqAndOrThen(fluentWait.waitUntil(matchesEvaluator, regex, seleniumQueryObject, this.negated));
+		return new AndOrThen(fluentWait.waitUntil(matchesEvaluator, regex, seleniumQueryObject, this.negated));
 	}
 
 	@Override
 	public SeleniumQueryWaitAndOrThen isGreaterThan(Number valueToCompare) {
 		Evaluator<Number> greaterThanEvaluator = new GreaterThanEvaluator(getter);
 		SeleniumQueryObject sq = fluentWait.waitUntil(greaterThanEvaluator, valueToCompare, seleniumQueryObject, this.negated);
-		return new SqAndOrThen(sq);
+		return new AndOrThen(sq);
 	}
 
 	@Override
 	public SeleniumQueryWaitAndOrThen isLessThan(Number valueToCompare) {
 		Evaluator<Number> lessThanEvaluator = new LessThanEvaluator(getter);
 		SeleniumQueryObject sq = fluentWait.waitUntil(lessThanEvaluator, valueToCompare, seleniumQueryObject, this.negated);
-		return new SqAndOrThen(sq);
+		return new AndOrThen(sq);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<T> not() {
-		return new SqEvaluateUntil<>(fluentWait, getter, seleniumQueryObject, !this.negated);
+		return new EvaluateUntil<>(fluentWait, getter, seleniumQueryObject, !this.negated);
 	}
 
 }

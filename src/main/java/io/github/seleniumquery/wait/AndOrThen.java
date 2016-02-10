@@ -27,11 +27,11 @@ import io.github.seleniumquery.SeleniumQueryWaitUntil;
  * @author acdcjunior
  * @since 0.9.0
  */
-class SqAndOrThen implements SeleniumQueryWaitAndOrThen {
+class AndOrThen implements SeleniumQueryWaitAndOrThen {
 	
 	private SeleniumQueryObject seleniumQueryObject;
 	
-	SqAndOrThen(SeleniumQueryObject seleniumQueryObject) {
+	AndOrThen(SeleniumQueryObject seleniumQueryObject) {
 		this.seleniumQueryObject = seleniumQueryObject;
 	}
 

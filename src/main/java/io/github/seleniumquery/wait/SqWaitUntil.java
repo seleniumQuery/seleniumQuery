@@ -72,37 +72,37 @@ public class SqWaitUntil implements io.github.seleniumquery.SeleniumQueryWaitUnt
 	@Override
 	public SeleniumQueryWaitAndOrThen is(String selector) {
 		SeleniumQueryObject seleniumQueryObjectAfterWait = this.fluentWait.waitUntil(IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, false);
-		return new SqAndOrThen(seleniumQueryObjectAfterWait);
+		return new AndOrThen(seleniumQueryObjectAfterWait);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<String> val() {
-		return new SqEvaluateUntil<>(this.fluentWait, ValGetter.VAL_GETTER, seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentWait, ValGetter.VAL_GETTER, seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<String> text() {
-		return new SqEvaluateUntil<>(this.fluentWait, TextGetter.TEXT_GETTER, seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentWait, TextGetter.TEXT_GETTER, seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<String> attr(String attributeName) {
-		return new SqEvaluateUntil<>(this.fluentWait, new AttrGetter(attributeName), seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentWait, new AttrGetter(attributeName), seleniumQueryObject);
 	}
 
 	@Override
 	public <T> SeleniumQueryWaitEvaluateUntil<T> prop(String propertyName) {
-		return new SqEvaluateUntil<>(this.fluentWait, new PropGetter<T>(propertyName), seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentWait, new PropGetter<T>(propertyName), seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<String> html() {
-		return new SqEvaluateUntil<>(this.fluentWait, HtmlGetter.HTML_GETTER, seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentWait, HtmlGetter.HTML_GETTER, seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<Integer> size() {
-		return new SqEvaluateUntil<>(this.fluentWait, SizeGetter.SIZE_GETTER, seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentWait, SizeGetter.SIZE_GETTER, seleniumQueryObject);
 	}
 	
 }
