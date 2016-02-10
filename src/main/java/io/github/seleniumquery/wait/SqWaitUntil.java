@@ -33,7 +33,7 @@ public class SqWaitUntil implements io.github.seleniumquery.SeleniumQueryWaitUnt
 	
 	private SeleniumQueryObject seleniumQueryObject;
 	
-	private SeleniumQueryFluentWait fluentWait;
+	private FluentSqWait fluentWait;
 	
 	/**
 	 * Creates a waitUntil object for the given seleniumQueryObject, with timeout and polling interval
@@ -66,7 +66,7 @@ public class SqWaitUntil implements io.github.seleniumquery.SeleniumQueryWaitUnt
      */
 	public SqWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout, long waitUntilPollingInterval) {
 		this.seleniumQueryObject = seleniumQueryObject;
-		this.fluentWait = new SeleniumQueryFluentWait(waitUntilTimeout, waitUntilPollingInterval);
+		this.fluentWait = new FluentSqWait(waitUntilTimeout, waitUntilPollingInterval);
 	}
 	
 	@Override
