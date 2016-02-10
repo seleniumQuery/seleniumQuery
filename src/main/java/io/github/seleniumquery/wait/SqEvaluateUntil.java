@@ -37,16 +37,16 @@ import io.github.seleniumquery.wait.getters.Getter;
  */
 class SqEvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 
-	private SeleniumQueryFluentWait fluentWait;
+	private FluentSqWait fluentWait;
 	protected Getter<T> getter;
 	protected SeleniumQueryObject seleniumQueryObject;
 	private boolean negated;
 
-	SqEvaluateUntil(SeleniumQueryFluentWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
+	SqEvaluateUntil(FluentSqWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
 		this(fluentWait, getter, seleniumQueryObject, false);
 	}
 
-	private SqEvaluateUntil(SeleniumQueryFluentWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject, boolean negated) {
+	private SqEvaluateUntil(FluentSqWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject, boolean negated) {
 		this.fluentWait = fluentWait;
 		this.getter = getter;
 		this.seleniumQueryObject = seleniumQueryObject;
