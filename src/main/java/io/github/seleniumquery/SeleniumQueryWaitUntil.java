@@ -16,8 +16,6 @@
 
 package io.github.seleniumquery;
 
-import io.github.seleniumquery.wait.SeleniumQueryEvaluateUntil;
-
 /**
  * .waitUntil() functions.
  *

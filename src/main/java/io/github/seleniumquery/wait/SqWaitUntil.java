@@ -18,6 +18,7 @@ package io.github.seleniumquery.wait;
 
 import io.github.seleniumquery.SeleniumQueryAndOrThen;
 import io.github.seleniumquery.SeleniumQueryConfig;
+import io.github.seleniumquery.SeleniumQueryEvaluateUntil;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.wait.evaluators.IsEvaluator;
 import io.github.seleniumquery.wait.getters.*;
@@ -76,32 +77,32 @@ public class SqWaitUntil implements io.github.seleniumquery.SeleniumQueryWaitUnt
 
 	@Override
 	public SeleniumQueryEvaluateUntil<String> val() {
-		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, ValGetter.VAL_GETTER, seleniumQueryObject);
+		return new SqEvaluateUntil<>(this.fluentWait, ValGetter.VAL_GETTER, seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryEvaluateUntil<String> text() {
-		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, TextGetter.TEXT_GETTER, seleniumQueryObject);
+		return new SqEvaluateUntil<>(this.fluentWait, TextGetter.TEXT_GETTER, seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryEvaluateUntil<String> attr(String attributeName) {
-		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, new AttrGetter(attributeName), seleniumQueryObject);
+		return new SqEvaluateUntil<>(this.fluentWait, new AttrGetter(attributeName), seleniumQueryObject);
 	}
 
 	@Override
 	public <T> SeleniumQueryEvaluateUntil<T> prop(String propertyName) {
-		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, new PropGetter<T>(propertyName), seleniumQueryObject);
+		return new SqEvaluateUntil<>(this.fluentWait, new PropGetter<T>(propertyName), seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryEvaluateUntil<String> html() {
-		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, HtmlGetter.HTML_GETTER, seleniumQueryObject);
+		return new SqEvaluateUntil<>(this.fluentWait, HtmlGetter.HTML_GETTER, seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryEvaluateUntil<Integer> size() {
-		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, SizeGetter.SIZE_GETTER, seleniumQueryObject);
+		return new SqEvaluateUntil<>(this.fluentWait, SizeGetter.SIZE_GETTER, seleniumQueryObject);
 	}
 	
 }
