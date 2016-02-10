@@ -18,10 +18,10 @@ package testinfrastructure.testdouble.io.github.seleniumquery;
 
 import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.SeleniumQueryWaitUntil;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
-import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
