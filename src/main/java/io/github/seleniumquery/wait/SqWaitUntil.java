@@ -1,0 +1,106 @@
+/*
+ * Copyright (c) 2016 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package io.github.seleniumquery.wait;
+
+import io.github.seleniumquery.SeleniumQueryConfig;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.wait.evaluators.IsEvaluator;
+import io.github.seleniumquery.wait.getters.*;
+
+/**
+ * .waitUntil() functions.
+ *
+ * @author acdcjunior
+ * @since 0.9.0
+ */
+public class SqWaitUntil implements io.github.seleniumquery.SeleniumQueryWaitUntil {
+	
+	private SeleniumQueryObject seleniumQueryObject;
+	
+	private SeleniumQueryFluentWait fluentWait;
+	
+	/**
+	 * Creates a waitUntil object for the given seleniumQueryObject, with timeout and polling interval
+	 * as defined in the config files.
+	 * @param seleniumQueryObject The object to wait for.
+	 * @since 0.9.0
+	 */
+	public SqWaitUntil(SeleniumQueryObject seleniumQueryObject) {
+		this(seleniumQueryObject, SeleniumQueryConfig.getWaitUntilTimeout(), SeleniumQueryConfig.getWaitUntilPollingInterval());
+	}
+	
+	/**
+	 * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval
+	 * as defined in the config files.
+	 * @param seleniumQueryObject The object to wait for.
+	 * @param waitUntilTimeout Time, in ms, to wait.
+	 * @since 0.9.0
+     */
+	public SqWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout) {
+		this(seleniumQueryObject, waitUntilTimeout, SeleniumQueryConfig.getWaitUntilPollingInterval());
+	}
+	
+	/**
+	 * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval.
+	 *
+	 * @param seleniumQueryObject The object to wait for.
+	 * @param waitUntilTimeout Time, in ms, to wait.
+	 * @param waitUntilPollingInterval Interval, in ms, to poll the object.
+	 * @since 0.9.0
+     */
+	public SqWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout, long waitUntilPollingInterval) {
+		this.seleniumQueryObject = seleniumQueryObject;
+		this.fluentWait = new SeleniumQueryFluentWait(waitUntilTimeout, waitUntilPollingInterval);
+	}
+	
+	@Override
+	public SeleniumQueryAndOrThen is(String selector) {
+		SeleniumQueryObject seleniumQueryObjectAfterWait = this.fluentWait.waitUntil(IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, false);
+		return new SeleniumQueryAndOrThen(seleniumQueryObjectAfterWait);
+	}
+
+	@Override
+	public SeleniumQueryEvaluateUntil<String> val() {
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, ValGetter.VAL_GETTER, seleniumQueryObject);
+	}
+
+	@Override
+	public SeleniumQueryEvaluateUntil<String> text() {
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, TextGetter.TEXT_GETTER, seleniumQueryObject);
+	}
+
+	@Override
+	public SeleniumQueryEvaluateUntil<String> attr(String attributeName) {
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, new AttrGetter(attributeName), seleniumQueryObject);
+	}
+
+	@Override
+	public <T> SeleniumQueryEvaluateUntil<T> prop(String propertyName) {
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, new PropGetter<T>(propertyName), seleniumQueryObject);
+	}
+
+	@Override
+	public SeleniumQueryEvaluateUntil<String> html() {
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, HtmlGetter.HTML_GETTER, seleniumQueryObject);
+	}
+
+	@Override
+	public SeleniumQueryEvaluateUntil<Integer> size() {
+		return new SeleniumQueryEvaluateUntil<>(this.fluentWait, SizeGetter.SIZE_GETTER, seleniumQueryObject);
+	}
+	
+}

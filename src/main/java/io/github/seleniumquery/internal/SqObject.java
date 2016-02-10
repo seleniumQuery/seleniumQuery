@@ -18,11 +18,12 @@ package io.github.seleniumquery.internal;
 
 import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.SeleniumQueryWaitUntil;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
 import io.github.seleniumquery.utils.ListUtils;
-import io.github.seleniumquery.wait.SeleniumQueryWaitUntil;
+import io.github.seleniumquery.wait.SqWaitUntil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -75,17 +76,17 @@ class SqObject implements SeleniumQueryObject {
 
 	@Override
     public final SeleniumQueryWaitUntil waitUntil() {
-		return new SeleniumQueryWaitUntil(this);
+		return new SqWaitUntil(this);
 	}
 
 	@Override
     public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) {
-		return new SeleniumQueryWaitUntil(this, waitUntilTimeout);
+		return new SqWaitUntil(this, waitUntilTimeout);
 	}
 
 	@Override
     public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) {
-		return new SeleniumQueryWaitUntil(this, waitUntilTimeout, waitUntilPollingInterval);
+		return new SqWaitUntil(this, waitUntilTimeout, waitUntilPollingInterval);
 	}
 
 	@Override
