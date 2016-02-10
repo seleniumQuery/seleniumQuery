@@ -42,7 +42,7 @@ public interface SeleniumQueryWaitUntil {
 	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryEvaluateUntil<String> val();
+	SeleniumQueryWaitEvaluateUntil<String> val();
 
 	/**
 	 * Waits until every matched element's text meets the specified criteria.
@@ -51,7 +51,7 @@ public interface SeleniumQueryWaitUntil {
 	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryEvaluateUntil<String> text();
+	SeleniumQueryWaitEvaluateUntil<String> text();
 
 	/**
 	 * Waits until every matched element has the given attribute meeting the specified criteria.
@@ -61,7 +61,7 @@ public interface SeleniumQueryWaitUntil {
 	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryEvaluateUntil<String> attr(String attributeName);
+	SeleniumQueryWaitEvaluateUntil<String> attr(String attributeName);
 
 	/**
 	 * Waits until every matched element has the given attribute property the specified criteria.
@@ -72,7 +72,7 @@ public interface SeleniumQueryWaitUntil {
 	 *
 	 * @since 0.9.0
 	 */
-	<T> SeleniumQueryEvaluateUntil<T> prop(String propertyName);
+	<T> SeleniumQueryWaitEvaluateUntil<T> prop(String propertyName);
 
 	/**
 	 * Waits until every matched element's html meets the specified criteria.
@@ -81,7 +81,7 @@ public interface SeleniumQueryWaitUntil {
 	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryEvaluateUntil<String> html();
+	SeleniumQueryWaitEvaluateUntil<String> html();
 
 	/**
 	 * Waits until the quantity of matched elements meets the specified criteria.
@@ -90,6 +90,6 @@ public interface SeleniumQueryWaitUntil {
 	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryEvaluateUntil<Integer> size();
+	SeleniumQueryWaitEvaluateUntil<Integer> size();
 
 }

@@ -24,7 +24,7 @@ package io.github.seleniumquery;
  * @author acdcjunior
  * @since 0.9.0
  */
-public interface SeleniumQueryEvaluateUntil<T> {
+public interface SeleniumQueryWaitEvaluateUntil<T> {
 
     /**
      * <p>Tests if the result of the preceding function is equal to the given argument.</p>
@@ -84,6 +84,6 @@ public interface SeleniumQueryEvaluateUntil<T> {
      *
      * @since 0.9.0
      */
-    SeleniumQueryEvaluateUntil<T> not();
+    SeleniumQueryWaitEvaluateUntil<T> not();
 
 }
