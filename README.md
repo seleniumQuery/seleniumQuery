@@ -11,7 +11,7 @@
 
 seleniumQuery is a Java library/framework that brings a ***cross-driver*** **jQuery-like** interface for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
-Example snippet:
+### Example snippet:
 
 ```java
 // getting the value
@@ -19,6 +19,36 @@ String oldStreet = $("input.street").val();
 // setting the value
 $("input.street").val("4th St!");
 ```
+
+### Use it in your project right now
+
+On a regular `WebElement`...
+
+```java
+// an existing WebElement...
+WebElement existingWebElement = driver.findElement(By.id("myId"));
+// call jQuery functions
+String elementVal = $(existingWebElement).val();
+boolean isButton = $(existingWebElement).is(":button"); // enhanced selector!
+for (WebElement child: $(existingWebElement).children()) {
+  System.out.println("That element's child: "+child);
+}
+```
+
+Or an existing `WebDriver`...
+
+```java
+// an existing WebDriver...
+WebDriver driver = new FirefoxDriver();
+// set it up
+$.driver().use(driver);
+// and use all the goods
+for (WebElement e: $(".myClass:contains('My Text!'):not(:button)")) {
+  System.out.println("That element: " + e);
+}
+```
+
+## What can you do with it?
 
 Allows querying elements by:
 
