@@ -52,11 +52,11 @@ import java.util.Map;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssPseudoClassConditionTranslator {
+class SQCssPseudoClassConditionTranslator {
 
-	private Map<String, Class<? extends SQCssPseudoClassCondition>> pseudoClasses = new HashMap<String, Class<? extends SQCssPseudoClassCondition>>();
+	private Map<String, Class<? extends SQCssPseudoClassCondition>> pseudoClasses = new HashMap<>();
 
-	public SQCssPseudoClassConditionTranslator() {
+	SQCssPseudoClassConditionTranslator() {
 		// form
 		pseudoClasses.put(SQCssButtonPseudoClass.PSEUDO, SQCssButtonPseudoClass.class);
 		pseudoClasses.put(SQCssCheckboxPseudoClass.PSEUDO, SQCssCheckboxPseudoClass.class);
