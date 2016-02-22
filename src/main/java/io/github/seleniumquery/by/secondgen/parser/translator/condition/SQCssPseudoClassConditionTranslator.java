@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -142,17 +142,11 @@ public class SQCssPseudoClassConditionTranslator {
 		try {
 			// instantiates SQCssFunctionalPseudoClassCondition using pseudoClassSelectorConstructorArgument arg
 			if (SQCssFunctionalPseudoClassCondition.class.isAssignableFrom(pseudoClass)) {
-				return pseudoClass.getConstructor(new Class[]{PseudoClass.class}).newInstance(pseudoClassSelectorConstructorArgument);
+				return pseudoClass.getConstructor(PseudoClass.class).newInstance(pseudoClassSelectorConstructorArgument);
 			}
 			// instantiates non-functional SQCssPseudoClassCondition, which should not need an arg.
 			return pseudoClass.getConstructor().newInstance();
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e);
-		} catch (NoSuchMethodException e) {
+		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			throw new RuntimeException(e);
 		}
 	}
