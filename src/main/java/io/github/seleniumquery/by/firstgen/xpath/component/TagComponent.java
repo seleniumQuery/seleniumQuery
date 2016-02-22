@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public class TagComponent extends XPathComponent implements Combinable<TagCompon
     }
 
     TagComponent(String xPathExpression, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
-        super(xPathExpression, combinatedComponents, elementFilterList);
+        super("".equals(xPathExpression) ? "*" : xPathExpression, combinatedComponents, elementFilterList);
     }
 
     public List<WebElement> findWebElements(SearchContext context) {
