@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,11 +32,11 @@ import org.w3c.css.sac.SimpleSelector;
  *
  * @since 0.10.0
  */
-public class SQCssAndConditionTranslator {
+class SQCssAndConditionTranslator {
 
 	private SQCssConditionTranslator sqCssConditionTranslator;
 
-	public SQCssAndConditionTranslator(SQCssConditionTranslator sqCssConditionTranslator) {
+	SQCssAndConditionTranslator(SQCssConditionTranslator sqCssConditionTranslator) {
 		this.sqCssConditionTranslator = sqCssConditionTranslator;
 	}
 
