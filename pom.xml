@@ -34,9 +34,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>net.sourceforge.cssparser</groupId>
-			<artifactId>cssparser</artifactId>
-			<version>0.9.12</version>
+			<groupId>io.github.seleniumquery</groupId>
+			<artifactId>extended-css-selector-parser</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
