@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/seleniumQuery/seleniumQuery](https://badges.gitter.im/seleniumQuery/seleniumQuery.svg)](https://gitter.im/seleniumQuery/seleniumQuery?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.seleniumquery/seleniumquery.svg)]()
-[![Build Status](https://travis-ci.org/seleniumQuery/seleniumQuery.svg?branch=master)](https://travis-ci.org/seleniumQuery/seleniumQuery)
+<!-- [![Build Status](https://travis-ci.org/seleniumQuery/seleniumQuery.svg?branch=master)](https://travis-ci.org/seleniumQuery/seleniumQuery) -->
 [![codecov.io](https://codecov.io/github/seleniumQuery/seleniumQuery/coverage.svg?branch=master)](https://codecov.io/github/seleniumQuery/seleniumQuery?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/56861ab2eb4f47003c000e43/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56861ab2eb4f47003c000e43)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/seleniumQuery/seleniumQuery/master/LICENSE.txt)
@@ -11,7 +11,7 @@
 
 seleniumQuery is a Java library/framework that brings a ***cross-driver*** **jQuery-like** interface for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
-Example snippet:
+### Example snippet:
 
 ```java
 // getting the value
@@ -19,6 +19,36 @@ String oldStreet = $("input.street").val();
 // setting the value
 $("input.street").val("4th St!");
 ```
+
+### Use it in your project right now
+
+On a regular `WebElement`...
+
+```java
+// an existing WebElement...
+WebElement existingWebElement = driver.findElement(By.id("myId"));
+// call jQuery functions
+String elementVal = $(existingWebElement).val();
+boolean isButton = $(existingWebElement).is(":button"); // enhanced selector!
+for (WebElement child: $(existingWebElement).children()) {
+  System.out.println("That element's child: "+child);
+}
+```
+
+Or an existing `WebDriver`...
+
+```java
+// an existing WebDriver...
+WebDriver driver = new FirefoxDriver();
+// set it up
+$.driver().use(driver);
+// and use all the goods
+for (WebElement e: $(".myClass:contains('My Text!'):not(:button)")) {
+  System.out.println("That element: " + e);
+}
+```
+
+## What can you do with it?
 
 Allows querying elements by:
 
