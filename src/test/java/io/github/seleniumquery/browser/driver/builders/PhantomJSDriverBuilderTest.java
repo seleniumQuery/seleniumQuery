@@ -28,7 +28,7 @@ public class PhantomJSDriverBuilderTest {
     }
 
     private void assertPhantomJSExecutablePropertyPointsToExecutableInClasspath(String resolvedPath) {
-        assertThat(resolvedPath, endsWith("seleniumQuery/target/test-classes/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH));
+        assertThat(resolvedPath, endsWithIgnoringCase("seleniumQuery/target/test-classes/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH));
     }
 
     @Test
