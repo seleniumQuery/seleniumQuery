@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,8 @@ public class SQCssClassAttributeConditionTranslatorTest {
     }
 
     @SuppressWarnings("deprecation")
-    static class ClassNameVerifier extends ConditionTranslatorVerifier {
-        public ClassNameVerifier() { super("."); }
+    private static class ClassNameVerifier extends ConditionTranslatorVerifier {
+        ClassNameVerifier() { super("."); }
         @Override
         public SQCssClassAttributeCondition verifyTranslation(String actualSelector, String expectedClassName) {
             // given
