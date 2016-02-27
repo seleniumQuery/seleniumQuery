@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,14 @@ import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.CssConditionalSelector;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
 import io.github.seleniumquery.utils.SelectorUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Selector;
 
 import java.util.Arrays;
+
+import static io.github.seleniumquery.utils.SelectorUtils.intoEscapedXPathString;
 
 /**
  * .class
@@ -57,9 +58,9 @@ public class ClassAttributeCssSelector implements CssConditionalSelector<Attribu
 	@Override
 	public ConditionSimpleComponent conditionToXPath(ArgumentMap argumentMap, Selector simpleSelector, AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
-		String unescapedClassName = StringEscapeUtils.unescapeJava(wantedClassName);
-		// nothing to do, everyone supports filtering by class
-		return new ConditionSimpleComponent("[contains(concat(' ', normalize-space(@class), ' '), ' " + unescapedClassName + " ')]");
+		String backslashEscapedClassName = wantedClassName.replaceAll("\\\\\"", "\"");
+		String xPathEscapedClassName = intoEscapedXPathString(" "+backslashEscapedClassName+" ");
+		return new ConditionSimpleComponent("[contains(concat(' ', normalize-space(@class), ' '), " + xPathEscapedClassName + ")]");
 	}
 	
 }
