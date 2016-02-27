@@ -28,7 +28,8 @@ public class SetUpAndTearDownDriver implements TestRule {
 	public static final DriverToRunTestsIn driverToRunTestsIn = whatDriversShouldTestsRun();
 
 	private static DriverToRunTestsIn whatDriversShouldTestsRun() {
-		if ("true".equals(System.getenv("CONTINUOUS_INTEGRATION"))) {
+		if ("true".equalsIgnoreCase(System.getenv("CI"))) {
+			System.out.println("CI VAR: "+System.getenv("CI"));
 			return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
 		}
 		return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
