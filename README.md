@@ -365,5 +365,5 @@ Non-goals:
 
 Feel free to [request, suggest](https://github.com/seleniumQuery/seleniumQuery/issues/new), create pull requests. As said, any opinions/help are more than welcome!
 
-[![Linux Build Status](https://img.shields.io/travis/seleniumquery/seleniumquery/master.svg?label=Linux Build)](https://travis-ci.org/seleniumquery/seleniumquery)
-[![Windows Build Status](https://img.shields.io/appveyor/ci/seleniumquery/seleniumquery/master.svg?label=Windows Build)](https://ci.appveyor.com/project/seleniumquery/seleniumquery/branch/master)
+[![Linux Build Status](https://img.shields.io/travis/seleniumQuery/seleniumQuery/master.svg?label=Linux Build)](https://travis-ci.org/seleniumQuery/seleniumQuery)
+[![Windows Build Status](https://img.shields.io/appveyor/ci/seleniumQuery/seleniumQuery/master.svg?label=Windows Build)](https://ci.appveyor.com/project/seleniumQuery/seleniumQuery/branch/master)
