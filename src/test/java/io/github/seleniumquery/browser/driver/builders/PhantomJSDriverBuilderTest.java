@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.endsWithIgnoringCase;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -28,7 +28,7 @@ public class PhantomJSDriverBuilderTest {
     }
 
     private void assertPhantomJSExecutablePropertyPointsToExecutableInClasspath(String resolvedPath) {
-        assertThat(resolvedPath, endsWith("seleniumQuery/target/test-classes/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH));
+        assertThat(resolvedPath, endsWithIgnoringCase("seleniumQuery/target/test-classes/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class PhantomJSDriverBuilderTest {
         // when
         String resolvedPath = driverBuilder.resolvePhantomJsExecutablePath();
         // then
-        assertThat(resolvedPath, endsWith(customPathToPhantomJs));
+        assertThat(resolvedPath, endsWithIgnoringCase(customPathToPhantomJs));
     }
 
 }
