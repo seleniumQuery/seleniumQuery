@@ -79,8 +79,8 @@ public class PseudoClassTestUtils {
         try {
             assertSelectorTranslatesArgument(selector, pseudoClassClass, "", null);
             fail("Functional Pseudo called without () should throw exception.");
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), containsString("Functional pseudo"));
+        } catch (IllegalArgumentException | org.w3c.css.sac.CSSParseException e) {
+            assertThat(e.getMessage(), anyOf(containsString("Functional pseudo"), containsString("(Invalid token \"not\".")));
         }
 
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(0)", "0");
