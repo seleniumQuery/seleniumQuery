@@ -18,6 +18,8 @@ package io.github.seleniumquery.wait.evaluators.comparison;
 
 import io.github.seleniumquery.wait.evaluators.Evaluator;
 import io.github.seleniumquery.wait.getters.Getter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -33,6 +35,8 @@ import java.util.List;
 abstract class ComparisonEvaluator implements Evaluator<Number> {
 	protected Getter<?> getter;
 
+    private static final Log LOGGER = LogFactory.getLog(ComparisonEvaluator.class);
+
 	ComparisonEvaluator(Getter<?> getter) {
 		this.getter = getter;
 	}
@@ -41,10 +45,15 @@ abstract class ComparisonEvaluator implements Evaluator<Number> {
 	public boolean evaluate(WebDriver driver, List<WebElement> elements, Number valueToCompare) {
         BigDecimal numberToCompare = ComparisonEvaluatorUtils.parseNumber(valueToCompare);
 
-		Object elementValue = getter.get(driver, elements);
-        BigDecimal elementValueAsNumber = ComparisonEvaluatorUtils.parseNumber(elementValue);
+        Object elementValue = getter.get(driver, elements);
+		try {
+			BigDecimal elementValueAsNumber = ComparisonEvaluatorUtils.parseNumber(elementValue);
 
-        return compare(elementValueAsNumber, numberToCompare);
+			return compare(elementValueAsNumber, numberToCompare);
+		} catch (Exception e) {
+            LOGGER.warn("Invalid value when trying to compare as number.\nElement value: "+elementValue, e);
+			return false;
+		}
 	}
 
 	protected abstract boolean compare(BigDecimal elementValueAsNumber, BigDecimal numberToCompare);
