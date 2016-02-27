@@ -50,8 +50,8 @@ abstract class ComparisonEvaluator implements Evaluator<Number> {
 			BigDecimal elementValueAsNumber = ComparisonEvaluatorUtils.parseNumber(elementValue);
 
 			return compare(elementValueAsNumber, numberToCompare);
-		} catch (Exception e) {
-            LOGGER.warn("Invalid value when trying to compare as number.\nElement value: "+elementValue, e);
+		} catch (IllegalArgumentException e) {
+            LOGGER.debug("Invalid value when trying to compare as number.\nElement value: "+elementValue, e);
 			return false;
 		}
 	}
