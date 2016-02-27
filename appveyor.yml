@@ -15,5 +15,5 @@ test_script:
   - mvn test
  
 deploy: off
-cache:
-  - C:\Users\appveyor\.m2
+#cache:
+#  - C:\Users\appveyor\.m2
