@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package testinfrastructure.testutils;
 
+import org.apache.commons.lang3.SystemUtils;
+
 import java.io.File;
 
 import static org.junit.Assume.assumeTrue;
@@ -23,11 +25,15 @@ import static org.junit.Assume.assumeTrue;
 public class EnvironmentTestUtils {
 
     public static boolean isNotWindowsOS() {
-        return !System.getProperty("os.name").toLowerCase().contains("win");
+        return !SystemUtils.IS_OS_WINDOWS;
     }
 
     public static void onlyRunIfDriverTestExecutableExists(String driverTestExecutable) {
         assumeTrue("This test will only run if '"+driverTestExecutable+"' exists.", new File("src/test/resources/" + driverTestExecutable).exists());
+    }
+
+    public static boolean isRunningAtContinuousIntegrationServer() {
+        return "true".equalsIgnoreCase(System.getenv("CI"));
     }
 
 }

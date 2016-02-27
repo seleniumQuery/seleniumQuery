@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,14 @@ import org.junit.runners.model.Statement;
 import testinfrastructure.EndToEndTestUtils;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static testinfrastructure.testutils.EnvironmentTestUtils.isRunningAtContinuousIntegrationServer;
 
 public class SetUpAndTearDownDriver implements TestRule {
 
 	public static final DriverToRunTestsIn driverToRunTestsIn = whatDriversShouldTestsRun();
 
 	private static DriverToRunTestsIn whatDriversShouldTestsRun() {
-		if ("true".equalsIgnoreCase(System.getenv("CI"))) {
-			System.out.println("CI VAR: "+System.getenv("CI"));
+		if (isRunningAtContinuousIntegrationServer()) {
 			return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
 		}
 		return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
@@ -38,7 +38,7 @@ public class SetUpAndTearDownDriver implements TestRule {
 	private static final String NOT_SPECIFIED = null;
 
 	private final String testUrl;
-	public boolean driverHasJavaScriptEnabled = false;
+	boolean driverHasJavaScriptEnabled = false;
 
 	public SetUpAndTearDownDriver() {
 		this.testUrl = NOT_SPECIFIED;
