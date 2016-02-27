@@ -2,7 +2,6 @@
 
 [![Join the chat at https://gitter.im/seleniumQuery/seleniumQuery](https://badges.gitter.im/seleniumQuery/seleniumQuery.svg)](https://gitter.im/seleniumQuery/seleniumQuery?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.seleniumquery/seleniumquery.svg)]()
-<!-- [![Build Status](https://travis-ci.org/seleniumQuery/seleniumQuery.svg?branch=master)](https://travis-ci.org/seleniumQuery/seleniumQuery) -->
 [![codecov.io](https://codecov.io/github/seleniumQuery/seleniumQuery/coverage.svg?branch=master)](https://codecov.io/github/seleniumQuery/seleniumQuery?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/56861ab2eb4f47003c000e43/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56861ab2eb4f47003c000e43)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/seleniumQuery/seleniumQuery/master/LICENSE.txt)
@@ -364,4 +363,7 @@ Non-goals:
 
 ## What else?
 
-Feel free to [request, suggest](https://github.com/seleniumQuery/seleniumQuery/issues/new), create pull requests. The project is currently in a fast pace and, as said, any opinions/help are more than welcome!
+Feel free to [request, suggest](https://github.com/seleniumQuery/seleniumQuery/issues/new), create pull requests. As said, any opinions/help are more than welcome!
+
+[![Linux Build Status](https://img.shields.io/travis/seleniumquery/seleniumquery/master.svg?label=Linux Build)](https://travis-ci.org/seleniumquery/seleniumquery)
+[![Windows Build Status](https://img.shields.io/appveyor/ci/seleniumquery/seleniumquery/master.svg?label=Windows Build)](https://ci.appveyor.com/project/seleniumquery/seleniumquery/branch/master)
