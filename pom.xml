@@ -61,16 +61,6 @@
 			<groupId>com.codeborne</groupId>
 			<artifactId>phantomjsdriver</artifactId>
 			<version>1.2.1</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>selenium-remote-driver</artifactId>
-					<groupId>org.seleniumhq.selenium</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>selenium-java</artifactId>
-					<groupId>org.seleniumhq.selenium</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
