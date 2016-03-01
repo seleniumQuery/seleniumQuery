@@ -10,7 +10,7 @@ branches:
   only:
     - master
 
-os: Windows Server 2012 R2
+os: Visual Studio 2015
 
 install:
   - cinst PhantomJS -y -Version 1.9.8
