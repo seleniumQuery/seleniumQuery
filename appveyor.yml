@@ -12,19 +12,11 @@ branches:
 
 os: Windows Server 2012
 
-#install:
-#  - ps: choco install maven
-#  - cmd: SET PATH=C:\tools\apache-maven-3.3.3\bin;%JAVA_HOME%\bin;%PATH%
-#  - mvn --version
 install:
-  - ps: |
-      Add-Type -AssemblyName System.IO.Compression.FileSystem
-      if (!(Test-Path -Path "C:\maven" )) {
-        (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.zip', 'C:\maven-bin.zip')
-        [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
-      }
-  - cmd: SET PATH=C:\maven\apache-maven-3.2.5\bin;%JAVA_HOME%\bin;%PATH:C:\Ruby193\bin;=%
-  - cmd: SET MAVEN_OPTS=-XX:MaxPermSize=2g -Xmx4g
+  - cinst PhantomJS -y -Version 1.9.8
+  - set path=%path%;C:\tools\PhantomJS\
+  - ps: choco install maven
+  - cmd: SET PATH=C:\tools\apache-maven-3.3.3\bin;%JAVA_HOME%\bin;%PATH%
   - cmd: SET JAVA_OPTS=-XX:MaxPermSize=2g -Xmx4g
   - cmd: mvn --version
   - cmd: java -version
@@ -36,6 +28,6 @@ test_script:
 
 #cache:
 #  - C:\Users\appveyor\.m2
-cache:
-  - C:\maven\
-  - C:\Users\appveyor\.m2
+#cache:
+#  - C:\maven\
+#  - C:\Users\appveyor\.m2
