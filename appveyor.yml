@@ -26,8 +26,7 @@ build_script:
 test_script:
   - mvn clean test
 
-#cache:
-#  - C:\Users\appveyor\.m2
-#cache:
-#  - C:\maven\
-#  - C:\Users\appveyor\.m2
+cache:
+  - C:\tools\PhantomJS\
+  - C:\tools\apache-maven-3.3.3\
+  - C:\Users\appveyor\.m2
