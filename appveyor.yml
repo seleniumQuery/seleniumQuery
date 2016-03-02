@@ -18,9 +18,6 @@ install:
   - set path=%path%;C:\tools\PhantomJS\
   - ps: choco install maven
   - cmd: SET PATH=C:\tools\apache-maven-3.3.3\bin;%JAVA_HOME%\bin;%PATH%
-  - cmd: SET JAVA_OPTS=-XX:MaxPermSize=2g -Xmx4g
-  - cmd: mvn --version
-  - cmd: java -version
 
 build_script:
   - mvn clean package -DskipTests
