@@ -23,7 +23,7 @@ String oldStreet = $("input.street").val();
 $("input.street").val("4th St!");
 ```
 
-### Use it in your project right now
+### No special configuration needed - use it in your project right now:
 
 On a regular `WebElement`...
 
