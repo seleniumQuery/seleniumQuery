@@ -14,7 +14,7 @@ branches:
 os: Visual Studio 2015
 
 install:
-  - cinst PhantomJS -y -Version 1.9.8
+  - cinst PhantomJS -y -Version 2.1.1
   - set path=%path%;C:\tools\PhantomJS\
   - ps: choco install maven
   - cmd: SET PATH=C:\tools\apache-maven-3.3.3\bin;%JAVA_HOME%\bin;%PATH%
