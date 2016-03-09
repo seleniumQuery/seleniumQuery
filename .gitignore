@@ -1,14 +1,14 @@
 # Maven
-/target
+target/
 
 # Eclipse
-/.settings
+.settings/
 .project
 .classpath
 
 # IntelliJ IDEA
 *.iml
-/.idea
+.idea/
 
 # OTHERS
 errorPage.html
