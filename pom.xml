@@ -28,9 +28,11 @@
 
 	<properties>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<selenium-java.version>2.52.0</selenium-java.version>
 		<jdk.version>1.7</jdk.version>
-	</properties>
+
+		<selenium-java.version>2.53.0</selenium-java.version>
+        <htmlunit-driver.version>2.20</htmlunit-driver.version>
+    </properties>
 
 	<dependencies>
         <dependency>
@@ -51,6 +53,12 @@
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium-java.version}</version>
 		</dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>${htmlunit-driver.version}</version>
+        </dependency>
 
 		<dependency>
 			<!--
