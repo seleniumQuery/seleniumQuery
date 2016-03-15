@@ -33,11 +33,11 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>io.github.seleniumquery</groupId>
-			<artifactId>extended-css-selector-parser</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+        <dependency>
+            <groupId>net.sourceforge.cssparser</groupId>
+            <artifactId>cssparser</artifactId>
+            <version>0.9.18</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>

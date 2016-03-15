@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,11 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.github.seleniumquery.utils.SelectorUtils.intoEscapedXPathString;
+
+/**
+ * @author acdcjunior
+ */
 public class IdConditionComponent extends ConditionSimpleComponent {
 
     private final String wantedId;
@@ -39,7 +44,7 @@ public class IdConditionComponent extends ConditionSimpleComponent {
     }
 
     private static String idXpath(String id) {
-        return "[@id = '" + id + "']";
+        return "[@id = " + intoEscapedXPathString(id) + "]";
     }
 
     private IdConditionComponent(String id, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
