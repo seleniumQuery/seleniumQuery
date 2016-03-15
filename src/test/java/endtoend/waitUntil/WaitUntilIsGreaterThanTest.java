@@ -51,7 +51,7 @@ public class WaitUntilIsGreaterThanTest {
 	}
 
 	@JavaScriptOnly
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = SeleniumQueryTimeoutException.class)
 	public void isGreaterThan__should_fail_if_text_is_not_a_number() {
 		// given
 		$(DIV_CLICKABLE_SELECTOR).prop("innerHTML", "not a number");

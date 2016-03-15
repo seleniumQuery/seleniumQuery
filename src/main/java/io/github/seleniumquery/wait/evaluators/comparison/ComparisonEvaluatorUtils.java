@@ -38,8 +38,12 @@ class ComparisonEvaluatorUtils {
     }
 
     static BigDecimal parseNumber(Object elementValue) {
+        String elementValueAsString = elementValue.toString();
+        if (elementValueAsString.isEmpty()) {
+            throw new IllegalArgumentException("Element's value is an empty string.");
+        }
         try {
-            return (BigDecimal) DECIMAL_FORMAT.parse(elementValue.toString());
+            return (BigDecimal) DECIMAL_FORMAT.parse(elementValueAsString);
         } catch (ParseException e) {
             throw handleException(elementValue, e);
         }
@@ -49,7 +53,7 @@ class ComparisonEvaluatorUtils {
 		return new IllegalArgumentException(format(
 				"Error parsing \"%s\" into a number. " +
                 "The conversion function uses the default Locale. " +
-                "If your number uses a diferent format, try changing the default Locale through \"Locale.setDefaultLocale(Locale.<SOME_OTHER_LOCALE>);\".",
+                "If your number uses a diferent format, try changing the default Locale through \"Locale.setDefaultLocale(Locale.<SOME_OTHER_LOCALE>);\" before executing the comparison.",
                 failedParsingObject), e);
 	}
 
