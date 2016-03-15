@@ -1,3 +1,0 @@
-File: phantomjs-1.9.7-windows.zip
-Downloaded from: http://cdn.bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-windows.zip
-When: 21/05/2014

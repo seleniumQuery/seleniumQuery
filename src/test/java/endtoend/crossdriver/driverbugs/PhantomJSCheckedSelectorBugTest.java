@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import java.util.List;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
+import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
 
 /**
  * This test exists so we can keep the workaround on :checked for PhantomJS driver.
@@ -50,9 +51,22 @@ public class PhantomJSCheckedSelectorBugTest {
 
     @Test
     public void confirm_CHECKED_has_a_bug_and_does_NOT_bring_the_checked_OPTION_in_PhantomJS() {
+        /*
+         * Currently, these tests are only running under linux at Travis-CI.
+         * There, the PhantomJS version is pre-2.0 and thus this bug still exists.
+         *
+         * Under appveryor, OTOH, the phantomJS used is the one at src/test/resources.
+         * That one is v2.1, and the bug is fixed
+         */
         if ($.driver().get() instanceof PhantomJSDriver) {
             List<WebElement> checkedElements = $.driver().get().findElements(By.cssSelector(":checked"));
-            assertThat(checkedElements, hasSize(2));
+            if (isNotWindowsOS()) {
+                // so, under linux (Travis-CI), there is a bug
+                assertThat(checkedElements, hasSize(2));
+            } else {
+                // and under windows (Appveyor), it works
+                assertThat(checkedElements, hasSize(3));
+            }
         }
     }
 

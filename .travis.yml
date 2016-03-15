@@ -1,5 +1,4 @@
 language: java
-sudo: true
 install: mvn install -DskipTests=true
 jdk:
 - oraclejdk8
