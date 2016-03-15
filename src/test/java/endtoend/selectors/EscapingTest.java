@@ -35,23 +35,20 @@ public class EscapingTest {
 
     @Test
     public void d1() {
-        List<WebElement> d1 = $("#d1").get();
-        assertThat($(".foo").get(), is(d1));
-        assertThat($(".f\\o\\o").get(), is(d1));
+        assertSelectorBringsElementsEvenIfWithTagBefore(".foo", "#d1");
+        assertSelectorBringsElementsEvenIfWithTagBefore(".f\\o\\o", "#d1");
     }
 
     @Test
     public void d2() {
-        List<WebElement> d2 = $("#d2").get();
-        assertThat($(".f\\\\o\\\\o").get(), is(d2));
-        assertThat($(".f\\\\\\o\\\\\\o").get(), is(d2));
+        assertSelectorBringsElementsEvenIfWithTagBefore(".f\\\\o\\\\o", "#d2");
+        assertSelectorBringsElementsEvenIfWithTagBefore(".f\\\\\\o\\\\\\o", "#d2");
     }
 
     @Test
     public void d3() {
-        List<WebElement> d3 = $("#d3").get();
-        assertThat($(".f\\\\\\\\o\\\\\\\\o").get(), is(d3));
-        assertThat($(".f\\\\\\\\\\o\\\\\\\\\\o").get(), is(d3));
+        assertSelectorBringsElementsEvenIfWithTagBefore(".f\\\\\\\\o\\\\\\\\o", "#d3");
+        assertSelectorBringsElementsEvenIfWithTagBefore(".f\\\\\\\\\\o\\\\\\\\\\o", "#d3");
     }
 
     @Test
@@ -61,23 +58,20 @@ public class EscapingTest {
 
     @Test
     public void s1() {
-        List<WebElement> s1 = $(".s1").get();
-        assertThat($("#foo").get(), is(s1));
-        assertThat($("#f\\o\\o").get(), is(s1));
+        assertSelectorBringsElementsEvenIfWithTagBefore("#foo", ".s1");
+        assertSelectorBringsElementsEvenIfWithTagBefore("#f\\o\\o", ".s1");
     }
 
     @Test
     public void a2() {
-        List<WebElement> s2 = $(".s2").get();
-        assertThat($("#f\\\\o\\\\o").get(), is(s2));
-        assertThat($("#f\\\\\\o\\\\\\o").get(), is(s2));
+        assertSelectorBringsElementsEvenIfWithTagBefore("#f\\\\o\\\\o", ".s2");
+        assertSelectorBringsElementsEvenIfWithTagBefore("#f\\\\\\o\\\\\\o", ".s2");
     }
 
     @Test
     public void s3() {
-        List<WebElement> s3 = $(".s3").get();
-        assertThat($("#f\\\\\\\\o\\\\\\\\o").get(), is(s3));
-        assertThat($("#f\\\\\\\\\\o\\\\\\\\\\o").get(), is(s3));
+        assertSelectorBringsElementsEvenIfWithTagBefore("#f\\\\\\\\o\\\\\\\\o", ".s3");
+        assertSelectorBringsElementsEvenIfWithTagBefore("#f\\\\\\\\\\o\\\\\\\\\\o", ".s3");
     }
 
     @Test
@@ -87,50 +81,51 @@ public class EscapingTest {
 
     @Test
     public void d4() {
-        List<WebElement> d4 = $("#d4").get();
-        assertThat($(".\\\"").get(), is(d4));
+        assertSelectorBringsElementsEvenIfWithTagBefore(".\\\"", "#d4");
     }
 
     @Test
     public void d5() {
-        List<WebElement> d5 = $("#d5").get();
-        assertThat($(".\\\"a\\\"b\\\"c\\\"").get(), is(d5));
+        assertSelectorBringsElementsEvenIfWithTagBefore(".\\\"a\\\"b\\\"c\\\"", "#d5");
     }
 
     @Test
     public void d6() {
-        List<WebElement> d6 = $(".d6").get();
-        assertThat($("#\\\"").get(), is(d6));
+        assertSelectorBringsElementsEvenIfWithTagBefore("#\\\"", ".d6");
     }
 
     @Test
     public void d7() {
-        List<WebElement> d7 = $(".d7").get();
-        assertThat($("#\\\"a\\\"b\\\"c\\\"").get(), is(d7));
+        assertSelectorBringsElementsEvenIfWithTagBefore("#\\\"a\\\"b\\\"c\\\"", ".d7");
     }
 
     @Test
     public void s4() {
-        List<WebElement> s4 = $("#s4").get();
-        assertThat($(".\\\'").get(), is(s4));
+        assertSelectorBringsElementsEvenIfWithTagBefore(".\\\'", "#s4");
     }
 
     @Test
     public void s5() {
-        List<WebElement> s5 = $("#s5").get();
-        assertThat($(".\\\'a\\\'b\\\'c\\\'").get(), is(s5));
+        assertSelectorBringsElementsEvenIfWithTagBefore(".\\\'a\\\'b\\\'c\\\'", "#s5");
     }
 
     @Test
     public void s6() {
-        List<WebElement> s6 = $(".s6").get();
-        assertThat($("#\\\'").get(), is(s6));
+        assertSelectorBringsElementsEvenIfWithTagBefore("#\\\'", ".s6");
     }
 
     @Test
     public void s7() {
-        List<WebElement> s7 = $(".s7").get();
-        assertThat($("#\\\'a\\\'b\\\'c\\\'").get(), is(s7));
+        assertSelectorBringsElementsEvenIfWithTagBefore("#\\\'a\\\'b\\\'c\\\'", ".s7");
+    }
+
+    private void assertSelectorBringsElementsEvenIfWithTagBefore(String selector, String expectedElementsSelector) {
+        List<WebElement> expectedElements = $(expectedElementsSelector).get();
+        // selector brings expectedElements...
+        assertThat($(selector).get(), is(expectedElements));
+        // ...even if with tag before...
+        String firstElementTag = expectedElements.get(0).getTagName();
+        assertThat($(firstElementTag+ selector).get(), is(expectedElements));
     }
 
 }
