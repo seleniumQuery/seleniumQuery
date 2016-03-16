@@ -17,7 +17,6 @@
 package io.github.seleniumquery.functions.jquery.attributes;
 
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,18 +51,6 @@ public class AttrFunction {
 		Object attributeValue = js.executeScript("return arguments[0].getAttribute(arguments[1])", firstElement, attributeName);
 		
 		if (CHECKED.equals(attributeName) || SELECTED.equals(attributeName)) {
-			// #Cross-Driver
-			// In HtmlUnit, the checked/selected attributes are changed when the checked/selected
-			// prop changes. (E.g. if checked is false, the checked attribute becomes null -- while remains unchanged on other browsers)
-			// that way, we check for the prop here and return the attribute according to it
-            if (DriverVersionUtils.getInstance().isHtmlUnitDriver(driver)) {
-				System.err.println("WARNING: HtmlUnitDriver does not consider the checked/selected properties to be " +
-						"something other than the checked/selected attributes! In other words, in latest browsers " +
-						"when you change the checked/selected properties, the checked/selected attributes remain unchanged, " +
-						"while in HtmlUnitDriver they **are** changed. In the general case, you will probably want .prop() instead" +
-						" of .attr() for checked/selected, but if you are using HtmlUnitDriver, though, using .prop() is almost " +
-						"mandatory, as there is very little utility in an .attr() that changes when .prop() is used!");
-			}
 			if (attributeValue != null) {
 				return attributeName; // returns checked or selected
 			}

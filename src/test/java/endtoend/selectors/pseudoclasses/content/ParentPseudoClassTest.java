@@ -16,19 +16,18 @@
 
 package endtoend.selectors.pseudoclasses.content;
 
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ParentPseudoClassTest {
-	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
 	// http://jsbin.com/lutim/6/edit
 	@Test
@@ -36,13 +35,9 @@ public class ParentPseudoClassTest {
 		assertThat($("#d1").is(":parent"), is(true));
 		assertThat($("#d2").is(":parent"), is(false));
 
-		if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
-			assertThat($("#d3").is(":parent"), is(false));
-			assertThat($("#d4").is(":parent"), is(false));
-		} else {
-			assertThat($("#d3").is(":parent"), is(true));
-			assertThat($("#d4").is(":parent"), is(true));
-		}
+		assertThat($("#d3").is(":parent"), is(true));
+		assertThat($("#d4").is(":parent"), is(true));
+
 		assertThat($("#d5").is(":parent"), is(true));
 
 		assertThat($("#d10").is(":parent"), is(true));
@@ -50,11 +45,7 @@ public class ParentPseudoClassTest {
 		assertThat($("#d12").is(":parent"), is(true));
 		assertThat($("#d13").is(":parent"), is(false));
 		
-		if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
-			assertThat($("#d14").is(":parent"), is(false));
-		} else {
-			assertThat($("#d14").is(":parent"), is(true));
-		}
+		assertThat($("#d14").is(":parent"), is(true));
 	}
 	
 }

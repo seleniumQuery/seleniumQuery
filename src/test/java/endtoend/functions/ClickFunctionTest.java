@@ -39,7 +39,6 @@ public class ClickFunctionTest {
     public void click_function() {
         removeDivAddedByIeWhenPageStarts();
 
-
         assertThat($("div").size(), is(0));
 
         $("#i1").click();
@@ -80,7 +79,7 @@ public class ClickFunctionTest {
         assertThat($("div").size(), is(7));
     }
 
-    public static void removeDivAddedByIeWhenClickingBody() {
+    private static void removeDivAddedByIeWhenClickingBody() {
         // #CrossDriver: IE focuses <body> when clicking it, so it generates an additional DIV...
         removeDivBodyFocusAddedByIe();
     }
@@ -91,7 +90,7 @@ public class ClickFunctionTest {
         removeDivBodyFocusAddedByIe();
     }
 
-    public static void removeDivBodyFocusAddedByIe() {
+    private static void removeDivBodyFocusAddedByIe() {
         boolean isIE = $.driver().get() instanceof InternetExplorerDriver;
         if (isIE) {
             removeDivBodyFocus();
@@ -101,10 +100,9 @@ public class ClickFunctionTest {
     public static void removeDivBodyFocusAddedWhenDriverIsHtmlUnit() {
         WebDriver driver = $.driver().get();
 
-        if (DriverInTest.isHtmlUnitDriver(driver) && !DriverInTest.isHtmlUnitDriverEmulatingIEBelow11(driver)) {
+        if (DriverInTest.isHtmlUnitDriver(driver)) {
             // #CrossDriver
             // HtmlUnit emits a focus on body when i1 is clicked (other browsers just emit a focus on i1)
-            // when HtmlUnit is emulating IE8 it doesn't do this, this the condition in the if
             removeDivBodyFocus();
         }
     }

@@ -32,11 +32,6 @@ public class DriverInTest {
         DriverVersionUtils.overrideSingletonInstance(new DriverVersionUtils());
     }
 
-    public static boolean isHtmlUnitDriverEmulatingIEBelow11(WebDriver driver) {
-        restoreDriverVersionUtilsInstance();
-        return DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11(driver);
-    }
-
     public static boolean isHtmlUnitDriver(WebDriver driver) {
         restoreDriverVersionUtilsInstance();
         return DriverVersionUtils.getInstance().isHtmlUnitDriver(driver);

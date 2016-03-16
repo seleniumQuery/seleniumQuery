@@ -17,9 +17,6 @@
 package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
-import io.github.seleniumquery.utils.DriverVersionUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,9 +27,7 @@ import org.openqa.selenium.WebElement;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class ParentPseudoClass implements PseudoClass<ConditionSimpleComponent> {
-	
-	private static final Log LOGGER = LogFactory.getLog(ParentPseudoClass.class);
+class ParentPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String PARENT_PSEUDO_CLASS_NO_COLON = "parent";
 	
@@ -43,17 +38,7 @@ public class ParentPseudoClass implements PseudoClass<ConditionSimpleComponent> 
 	
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		boolean isParent = isParent(element);
-		// #Cross-Driver
-		if (!isParent && DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11(driver)) {
-			LOGGER.warn("The outcome of the selector with the pseudo-class \":parent\" could be affected:" +
-					" HtmlUnidDriver emulating IE below 11 considers elements " +
-					" with space-only content (e.g. \"<div> </div>\") to be empty, while for other browsers" +
-					" they are not! There is no workaround for this, as HtmlUnitDriver ignored the spaces during" +
-					" the DOM parsing phase, and we have no means to know now if the elements had spaces (that" +
-					" were ignored) or if they were just empty.");
-		}
-		return isParent;
+		return isParent(element);
 	}
 
     /**
