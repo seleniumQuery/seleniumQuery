@@ -17,6 +17,7 @@
 package endtoend.functions.jquery.manipulation;
 
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
@@ -27,17 +28,15 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class TextFunctionTest {
-	
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(TextFunctionTest.class);
+
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
     public void text_function() {
 		WebDriver driver = $.driver().get();
 
-        if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11(driver)) {
-    		assertThat($("div.demo-container").text().replaceAll("\\s+", " "), is("Demonstration Box list item 1list item 2"));
-    	} else if (DriverInTest.isHtmlUnitDriver(driver)) {
-    			assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1 list item 2"));
+    	if (DriverInTest.isHtmlUnitDriver(driver)) {
+			assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1 list item 2"));
     	} else {
     		assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1\nlist item 2"));
     	}

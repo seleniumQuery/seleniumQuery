@@ -16,19 +16,18 @@
 
 package endtoend.selectors.pseudoclasses.content;
 
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class EmptyPseudoClassTest {
-	
-	@Rule
-	public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(getClass());
+
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 	
 	// http://jsbin.com/fuzuj/1/edit
 	@Test
@@ -36,13 +35,9 @@ public class EmptyPseudoClassTest {
 		assertThat($("#d1").is(":empty"), is(false));
 		assertThat($("#d2").is(":empty"), is(true));
 
-		if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
-			assertThat($("#d3").is(":empty"), is(true));
-			assertThat($("#d4").is(":empty"), is(true));
-		} else {
-			assertThat($("#d3").is(":empty"), is(false));
-			assertThat($("#d4").is(":empty"), is(false));
-		}
+		assertThat($("#d3").is(":empty"), is(false));
+		assertThat($("#d4").is(":empty"), is(false));
+
 		assertThat($("#d5").is(":empty"), is(false));
 
 		assertThat($("#d10").is(":empty"), is(false));
@@ -50,11 +45,7 @@ public class EmptyPseudoClassTest {
 		assertThat($("#d12").is(":empty"), is(false));
 		assertThat($("#d13").is(":empty"), is(true));
 		
-		if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
-			assertThat($("#d14").is(":empty"), is(true));
-		} else {
-			assertThat($("#d14").is(":empty"), is(false));
-		}
+		assertThat($("#d14").is(":empty"), is(false));
 	}
 	
 }

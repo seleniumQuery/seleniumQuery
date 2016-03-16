@@ -16,18 +16,9 @@
 
 package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 
-import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
-
-import java.lang.reflect.Method;
-
-import static io.github.seleniumquery.utils.DriverVersionUtils.isHtmlUnitDriverEmulatingIEBelow11;
 
 /**
  * <p>
@@ -43,10 +34,8 @@ import static io.github.seleniumquery.utils.DriverVersionUtils.isHtmlUnitDriverE
  *
  * @since 0.9.0
  */
-public class SubmitPseudoClass implements PseudoClass<ConditionSimpleComponent> {
+class SubmitPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 
-	private static final Log LOGGER = LogFactory.getLog(SubmitPseudoClass.class);
-	
 	private static final String SUBMIT = "submit";
 	private static final String INPUT = "input";
 	private static final String BUTTON = "button";
@@ -70,40 +59,11 @@ public class SubmitPseudoClass implements PseudoClass<ConditionSimpleComponent> 
 		if (!isButtonTag) {
 			return false;
 		}
-		boolean isTypeSubmit = SUBMIT.equalsIgnoreCase(element.getAttribute("type"));
-		if (isTypeSubmit) {
-			return true;
-		}
-		if (isHtmlUnitDriverEmulatingIEBelow11(driver)) {
-			return getDeclaredTypeAttributeFromHtmlUnitButton(element) == null;
-		} else {
-			return element.getAttribute("type") == null;
-		}
-	}
 
-	/**
-	 * Latest HtmlUnit returns @type=button when type is not set and browser is <=IE9. We don't want that,
-	 * we want null if it is not set, so we can decide if it is submit or not. Because if it is null,
-	 * then it is :submit. If type is "button", though, it is not.
-	 *
-	 * #Cross-Driver
-	 * #HtmlUnit #reflection #hack
-	 */
-	private String getDeclaredTypeAttributeFromHtmlUnitButton(WebElement element) {
-		try {
-			if (element instanceof HtmlUnitWebElement) {
-				Method getElementMethod = HtmlUnitWebElement.class.getDeclaredMethod("getElement");
-				getElementMethod.setAccessible(true);
-				Object htmlUnitElement = getElementMethod.invoke(element);
-				if (htmlUnitElement instanceof DomElement) {
-					DomAttr domAttr = ((DomElement) htmlUnitElement).getAttributesMap().get("type");
-					return domAttr == null ? null : domAttr.getNodeValue();
-				}
-			}
-		} catch (Exception e) {
-			LOGGER.debug("Unable to retrieve declared \"type\" attribute from HtmlUnitWebElement "+element+".", e);
-		}
-		return element.getAttribute("type");
+        boolean isTypeSubmit = SUBMIT.equalsIgnoreCase(element.getAttribute("type"));
+        boolean isTypeNull = element.getAttribute("type") == null;
+
+        return isTypeSubmit || isTypeNull;
 	}
 
 	@Override

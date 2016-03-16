@@ -90,20 +90,6 @@ public class DriverVersionUtils {
         return DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && getEmulatedBrowser((HtmlUnitDriver) driver).startsWith("IE");
 	}
 
-	public static boolean isHtmlUnitDriverEmulatingIEBelow11(WebDriver driver) {
-        if (!DriverVersionUtils.getInstance().isHtmlUnitDriver(driver)) {
-			return false;
-		}
-		String emulatedBrowser = getEmulatedBrowser((HtmlUnitDriver) driver);
-		try {
-			int ieVersion = Integer.parseInt(emulatedBrowser.substring(2));
-			return ieVersion < 11;
-		} catch (NumberFormatException e) {
-			LOGGER.debug("Error while inspecting HtmlUnitDriver IE version.", e);
-			return false;
-		}
-	}
-	
 	private static String getEmulatedBrowser(HtmlUnitDriver htmlUnitDriver) {
 		try {
 			// #HtmlUnit #reflection #hack

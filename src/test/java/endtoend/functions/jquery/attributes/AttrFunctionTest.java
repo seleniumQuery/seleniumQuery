@@ -19,10 +19,8 @@ package endtoend.functions.jquery.attributes;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -31,8 +29,7 @@ import static org.junit.Assert.assertThat;
 
 public class AttrFunctionTest {
 
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
 	// http://jsbin.com/pupoj/5/edit
     @Test @JavaScriptOnly
@@ -99,32 +96,17 @@ public class AttrFunctionTest {
     	assertThat($("#chk1").attr("checked"), is("checked"));
     	$("#chk1").prop("checked", false);
     	
-    	// in other browsers, this returns "checked"
-    	// in HtmlUnitDriver, this returns null, because the attr follows the value of the property (when it shouldnt!)
-    	// There is no possible workaround for this, as to that we would have to store the value of the attribute
-    	// before it was changed via property. We cant do that, since the value can be changed from means that are
-    	// not seleniumQuery, thus we cant track it!
-    	// We added a warning in the .attr() function, though!
-    	if ($.driver().get() instanceof HtmlUnitDriver) {
-    		assertThat($("#chk1").attr("checked"), is(nullValue()));
-    	} else {
-    		assertThat($("#chk1").attr("checked"), is("checked"));
-    	}
+		assertThat($("#chk1").attr("checked"), is("checked"));
     	assertThat($("#chk1").<Boolean>prop("checked"), is(false));
     }
 
     @Test @JavaScriptOnly
-    public void attr_function__data_attribute() {
+    public void attr_function__reads_attribute_well__AND__attribute_is_not_read_by_prop_function() {
         String dataBallAttributeValue = $("#chk1").attr("data-ball");
         assertThat(dataBallAttributeValue, is("yo"));
 
-		// HtmlUnit while emulating IE8 makes prop bring attribute...
         String dataBallAttributeViaProp = $("#chk1").prop("data-ball");
-        if (DriverInTest.isHtmlUnitDriverEmulatingIEBelow11($.driver().get())) {
-			assertThat(dataBallAttributeViaProp, is("yo"));
-		} else {
-			assertThat(dataBallAttributeViaProp, is(nullValue()));
-		}
+		assertThat(dataBallAttributeViaProp, is(nullValue()));
     }
 
     @Test @JavaScriptOnly
