@@ -62,7 +62,7 @@ public class DriverVersionUtilsTest {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void isHtmlUnitDriverEmulatingIE__ie_deprecated_versions() {
-		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_8));
+		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_11));
 	}
 
 	private void assertDriverIsHtmlUnitEmulatingIE(HtmlUnitDriver htmlUnitDriver) {
@@ -72,7 +72,7 @@ public class DriverVersionUtilsTest {
 
 	@Test
 	public void isHtmlUnitDriverEmulatingIE__ie_non_deprecated_versions() {
-		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER_11));
+		assertDriverIsHtmlUnitEmulatingIE(new HtmlUnitDriver(BrowserVersion.INTERNET_EXPLORER));
 	}
 	
 	@Test
