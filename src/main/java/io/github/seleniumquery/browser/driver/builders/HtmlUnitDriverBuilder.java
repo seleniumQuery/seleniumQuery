@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static org.openqa.selenium.remote.CapabilityType.*;
+import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
+import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
+import static org.openqa.selenium.remote.CapabilityType.VERSION;
 
 /**
  * Builds {@link HtmlUnitDriver} instances for SeleniumQueryDriver.
@@ -109,19 +111,6 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
     public HtmlUnitDriverBuilder emulatingInternetExplorer11() {
         this.emulatedBrowserName = BrowserType.IE;
         this.emulatedBrowserVersion = "11";
-        return this;
-    }
-
-    /**
-     * Configures HtmlUnit to emulate Internet Explorer 8.
-     *
-     * @return A self reference.
-     *
-     * @since 0.9.0
-     */
-    public HtmlUnitDriverBuilder emulatingInternetExplorer8() {
-        this.emulatedBrowserName = BrowserType.IE;
-        this.emulatedBrowserVersion = "8";
         return this;
     }
 

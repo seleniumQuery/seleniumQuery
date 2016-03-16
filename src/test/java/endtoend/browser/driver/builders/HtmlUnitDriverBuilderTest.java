@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,15 +118,6 @@ public class HtmlUnitDriverBuilderTest {
         $.driver().useHtmlUnit().emulatingInternetExplorer11();
         // then
         assertThat(emulatedBrowser($.driver().get()), is("IE11"));
-    }
-
-    @Test
-    public void emulatingInternetExplorer8__should_emulate_IE8() throws Exception {
-        // given
-        // when
-        $.driver().useHtmlUnit().emulatingInternetExplorer8();
-        // then
-        assertThat(emulatedBrowser($.driver().get()), is("IE8"));
     }
 
 }
