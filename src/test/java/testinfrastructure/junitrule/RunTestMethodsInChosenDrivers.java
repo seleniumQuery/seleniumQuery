@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,14 @@ package testinfrastructure.junitrule;
 import org.junit.runners.model.Statement;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static testinfrastructure.junitrule.DriverInstantiator.*;
-import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.*;
+import static testinfrastructure.junitrule.DriverInstantiator.FIREFOX_JS_OFF;
+import static testinfrastructure.junitrule.DriverInstantiator.FIREFOX_JS_ON;
+import static testinfrastructure.junitrule.DriverInstantiator.PHANTOMJS;
+import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.NO;
+import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.YES;
 
 @SuppressWarnings("deprecation")
-public class RunTestMethodsInChosenDrivers extends Statement {
+class RunTestMethodsInChosenDrivers extends Statement {
 
 	enum DriverHasJavaScriptEnabled { YES, NO }
 
@@ -31,7 +34,7 @@ public class RunTestMethodsInChosenDrivers extends Statement {
 	private final DriverToRunTestsIn driverToRunTestsIn;
     private final SetUpAndTearDownDriver setUpAndTearDownDriver;
 
-	public RunTestMethodsInChosenDrivers(DriverToRunTestsIn driverToRunTestsIn, Statement base, String url, SetUpAndTearDownDriver setUpAndTearDownDriver) {
+	RunTestMethodsInChosenDrivers(DriverToRunTestsIn driverToRunTestsIn, Statement base, String url, SetUpAndTearDownDriver setUpAndTearDownDriver) {
 		super();
 		this.driverToRunTestsIn = driverToRunTestsIn;
 		this.testMethodsRunner = new TestMethodsRunner(base, url);
@@ -54,8 +57,6 @@ public class RunTestMethodsInChosenDrivers extends Statement {
 		executeTestOnHtmlUnitEmulatingChromeJavaScriptOff();
 		executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOn();
 		executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOff();
-		executeTestOnHtmlUnitEmulatingIE8JavaScriptOn();
-		executeTestOnHtmlUnitEmulatingIE8JavaScriptOff();
 		executeTestOnHtmlUnitEmulatingIE11JavaScriptOn();
 		executeTestOnHtmlUnitEmulatingIE11JavaScriptOff();
 	}
@@ -90,13 +91,6 @@ public class RunTestMethodsInChosenDrivers extends Statement {
 	}
 	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOff() {
 		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_OFF, NO);
-	}
-	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOn()      {
-		boolean shouldExecute = driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn() || driverToRunTestsIn == DriverToRunTestsIn.HTMLUNIT_IE8_JS_ON_ONLY;
-		executeTestOn(shouldExecute, DriverInstantiator.HTMLUNIT_IE8_JS_ON, YES);
-	}
-	private void executeTestOnHtmlUnitEmulatingIE8JavaScriptOff()     {
-		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE8_JS_OFF, NO);
 	}
 	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOn()     {
 		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE11_JS_ON, YES);

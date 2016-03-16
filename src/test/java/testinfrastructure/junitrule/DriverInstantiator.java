@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,8 @@ import io.github.seleniumquery.browser.BrowserFunctions;
 abstract class DriverInstantiator {
 
     private String driverDescription;
-    public DriverInstantiator(String driverDescription) { this.driverDescription = driverDescription; }
-    public String getDriverDescription() { return driverDescription; }
+    private DriverInstantiator(String driverDescription) { this.driverDescription = driverDescription; }
+    String getDriverDescription() { return driverDescription; }
 
     abstract void instantiateDriver(BrowserFunctions browser);
 
@@ -72,8 +72,6 @@ abstract class DriverInstantiator {
             $.driver().useHtmlUnit().emulatingFirefox().withoutJavaScript();
         }
     };
-    static DriverInstantiator HTMLUNIT_IE8_JS_ON   = new DriverInstantiator("HtmlUnit (IE8) - JS ON")   { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer8(); } };
-    static DriverInstantiator HTMLUNIT_IE8_JS_OFF  = new DriverInstantiator("HtmlUnit (IE8) - JS OFF")  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer8().withoutJavaScript(); } };
     static DriverInstantiator HTMLUNIT_IE11_JS_ON  = new DriverInstantiator("HtmlUnit (IE11) - JS ON")  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11(); } };
     static DriverInstantiator HTMLUNIT_IE11_JS_OFF = new DriverInstantiator("HtmlUnit (IE11) - JS OFF") { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11().withoutJavaScript(); } };
 

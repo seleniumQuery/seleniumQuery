@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,13 @@ package testinfrastructure.junitrule;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun.*;
+import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._CHROME;
+import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._FIREFOX;
+import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._HTMLUNIT;
+import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._IE;
+import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._JAVASCRIPT_OFF;
+import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._JAVASCRIPT_ON;
+import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._PHANTOMJS;
 
 @SuppressWarnings("unused")
 public enum DriverToRunTestsIn {
@@ -45,8 +51,7 @@ public enum DriverToRunTestsIn {
 
 	HTMLUNIT_CHROME_JS_ON_AND_OFF       (),
 	HTMLUNIT_CHROME_JS_ON_ONLY          (),
-	HTMLUNIT_CHROME_JS_OFF_ONLY         (),
-	HTMLUNIT_IE8_JS_ON_ONLY             ();
+	HTMLUNIT_CHROME_JS_OFF_ONLY         ();
 
 	enum ShouldRun {_FIREFOX, _CHROME, _IE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
 
