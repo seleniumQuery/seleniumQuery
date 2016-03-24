@@ -1,5 +1,14 @@
 Stories are not necessarily prioritized.
 
+## Complete seleniumQuery.properties options file
+
+Add options like:
+
+- Should auto quit (when that functionality is implemented)
+- if the `$('.stuff')` has no elements, calling something like `.val('other')` should
+	- do nothing silently
+	- do nothing, but warn if log level is higher
+
 ## `$.url(File)` should fail if argument file does not exist
 
 That would be all of it.
