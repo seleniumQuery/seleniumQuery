@@ -27,7 +27,7 @@ childfilter
 contentfilter
 	- OK :contains()
 	- OK :empty
-	- :has() ------------------------------------------------------ TODO
+	- :has() ------------------------------------------------------ TODO -- test: #yo div[id]:not(:has(div, span)):not(:has(*))
 	- DELAYED :parent
 form
 	- OK :button
