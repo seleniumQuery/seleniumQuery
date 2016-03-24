@@ -27,7 +27,7 @@ import static org.junit.Assert.assertThat;
 
 public class LastPseudoClassTest {
 	
-	@ClassRule @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(EqPseudoClassTest.class);
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(EqPseudoClassTest.class);
 	
 	@Test
 	public void lastPseudoClass() {
