@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,7 +73,7 @@ public class SeleniumQueryBy extends By {
 	 * Constructs a SeleniumQueryBy for the given selector.
 	 * @param selector the selector you need the elements to match.
 	 */
-	public SeleniumQueryBy(String selector) {
+	protected SeleniumQueryBy(String selector) {
         if (selector == null) {
             throw new IllegalArgumentException("Selector string cannot be null.");
         }

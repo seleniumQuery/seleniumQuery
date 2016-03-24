@@ -16,6 +16,7 @@
 
 package testinfrastructure.testdouble.org.openqa.selenium;
 
+import io.github.seleniumquery.by.SeleniumQueryBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -26,13 +27,15 @@ import java.util.List;
 /**
  * This is a By that will throw exception at any method call, except .toString()
  */
-public class ByToStringableDummy extends By {
+public class ByToStringableDummy extends SeleniumQueryBy {
 
     public static By createByToStringableDummy() {
         return new ByToStringableDummy();
     }
 
-    private ByToStringableDummy() { }
+    private ByToStringableDummy() {
+        super("dummy#by");
+    }
 
     @Override
     public List<WebElement> findElements(SearchContext searchContext) {
@@ -52,11 +55,6 @@ public class ByToStringableDummy extends By {
     @Override
     public int hashCode() {
         throw new PseudoTestDoubleException();
-    }
-
-    @Override
-    public String toString() {
-        return "Dummy By";
     }
 
 }

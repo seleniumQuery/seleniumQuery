@@ -18,10 +18,13 @@ package io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunc
 
 import com.google.common.base.Function;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.testutils.FunctionsTestUtils;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
@@ -34,7 +37,7 @@ public class FilterSelectorFunctionTest {
     private static final String NULL_SELECTOR = null;
     private static final String SELECTOR_DOES_NOT_MATTER_IN_THIS_TEST = null;
 
-    FilterSelectorFunction filterSelectorFunction = new FilterSelectorFunction();
+    private FilterSelectorFunction filterSelectorFunction = new FilterSelectorFunction();
 
     @Test
     public void null_selector__should_return_EMPTY_element_set() {
@@ -64,6 +67,17 @@ public class FilterSelectorFunctionTest {
                 return filterSelectorFunction.filter(targetSQO, SELECTOR_DOES_NOT_MATTER_IN_THIS_TEST);
             }
         });
+    }
+
+    @Test
+    public void filterred_object_should_have_invalidBy_as_by() {
+        // given
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithElements(createWebElementWithTag("doesnt-matter"));
+        // when
+        SeleniumQueryObject resultSQO = filterSelectorFunction.filter(targetSQO, "div#bob.yes:some-selector");
+        // then
+        assertThat(resultSQO.getBy(), instanceOf(SeleniumQueryInvalidBy.class));
+        assertThat(resultSQO.getBy().toString(), equalTo("$(\"dummy#by\").filter(\"div#bob.yes:some-selector\")") );
     }
 
     @Test

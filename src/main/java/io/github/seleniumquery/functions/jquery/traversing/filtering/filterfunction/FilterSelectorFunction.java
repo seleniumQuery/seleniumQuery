@@ -17,6 +17,7 @@
 package io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction;
 
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import io.github.seleniumquery.functions.jquery.traversing.filtering.IsFunction;
 import org.openqa.selenium.WebElement;
 
@@ -36,7 +37,7 @@ public class FilterSelectorFunction {
         List<WebElement> filteredWebElements = filterElements(seleniumQueryObject, selector);
         return instance().create(seleniumQueryObject.getSeleniumQueryFunctions(),
                 seleniumQueryObject.getWebDriver(),
-                null,
+                new SeleniumQueryInvalidBy(seleniumQueryObject.getBy(), ".filter(\""+selector+"\")"),
                 filteredWebElements,
                 seleniumQueryObject);
     }
