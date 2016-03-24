@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package endtoend.functions.jquery.forms;
 
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -31,7 +32,7 @@ import static org.junit.Assert.fail;
 
 public class ValFunctionTest {
 	
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(ValFunctionTest.class);
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(ValFunctionTest.class);
 
 	// http://jsbin.com/futuhipuhi/2/edit?html,js,output
     @Test

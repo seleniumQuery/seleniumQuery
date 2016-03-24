@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package endtoend.sizzle;
 
 import io.github.seleniumquery.utils.SelectorUtils;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
@@ -25,8 +26,7 @@ import static testinfrastructure.EndToEndTestUtils.equal;
 
 public class SizzleID extends SizzleTest {
 
-    @Rule
-    public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
     public void id_selectors() throws Exception {
