@@ -31,8 +31,19 @@ import java.util.List;
  */
 public class SeleniumQueryInvalidBy extends SeleniumQueryBy {
 
+    /**
+     * A {@link By} to be used in an element created with no By. Attempting to filter elements through this
+     * will throw an exception.
+     * @since 0.9.0
+     */
+    public static final SeleniumQueryBy UNAVAILABLE_BY = new SeleniumQueryInvalidBy();
+
     private String sourceString;
     private String suffix;
+
+    private SeleniumQueryInvalidBy() {
+        super("<unavailable selector>");
+    }
 
     public SeleniumQueryInvalidBy(By sourceBy, String suffix) {
         super(sourceBy.toString());

@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery.by;
 
-import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.firstgen.FirstGenEnhancedElementFinder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -35,19 +34,6 @@ import java.util.regex.Pattern;
 public class SeleniumQueryBy extends By {
 
     private static final EnhancedElementFinder ELEMENT_FINDER = new FirstGenEnhancedElementFinder();
-	
-	/**
-	 * A {@link By} to be used in an element created with no By. Attempting to filter elements through this
-	 * will throw an exception.
-	 * @since 0.9.0
-	 */
-	public static final SeleniumQueryBy NO_SELECTOR_INVALID_BY = new SeleniumQueryBy("NO_SELECTOR_INVALID_BY") {
-		@Override public List<WebElement> findElements(SearchContext context) {
-			throw new SeleniumQueryException("This object was instantiated without a selector, you cannot search " +
-					"elements based on it as the string used to match it is unavailable.\n" +
-					"Try not using more than one .waitUntil() in a single line.");
-		}
-	};
 
 	private static final String STARTING_BRACES = "(\\s*\\(\\s*)*";
 	private static final String XPATH_AXES = "ancestor|ancestor-or-self|attribute|child|descendant|descendant-or-self|following|following-sibling|parent|preceding|preceding-sibling|self";
