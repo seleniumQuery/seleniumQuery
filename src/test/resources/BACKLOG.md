@@ -37,6 +37,10 @@ also `as().input()` or `as().radio()` to deal with groups.
 
 `.as().table()`.
 
+## Add `.withProxy()` to browser builder
+
+See closed issue #67: https://github.com/seleniumQuery/seleniumQuery/issues/67
+
 ## allow escaping for tag names
 
 This is super-advanced stuff, don't know if we'll ever have time to make it.
