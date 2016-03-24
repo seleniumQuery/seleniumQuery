@@ -65,6 +65,14 @@ Functions from `driver.switchTo()` can deal with frames.
 
 Maybe we should add functions in the `SeleniumQueryObject` to incorporate those functionalities and make them easily accessible.
 
+## CSS selectors combination (comma selector) rearranges element order
+
+jQuery brings the elements in the order they are at the DOM.
+We currently don't make such promise - though we probably should.
+See if we can do better at least for the `,` selector.
+
+See issue #121, it has commits referencing it.
+
 ## Add `.withProxy()` to browser builder
 
 See closed issue #67: https://github.com/seleniumQuery/seleniumQuery/issues/67
