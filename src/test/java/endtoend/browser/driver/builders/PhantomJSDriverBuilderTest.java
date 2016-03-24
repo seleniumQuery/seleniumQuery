@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,12 +50,12 @@ public class PhantomJSDriverBuilderTest {
     public void withCapabilities() {
         // given
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX+"userAgent", "JustAnotherAgent");
+        capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX+"userAgent", "JustAnotherAgent WebKit");
         // when
         $.driver().usePhantomJS().withCapabilities(capabilities);
         // then
         $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
-        assertThat($("#agent").html(), containsString("JustAnotherAgent"));
+        assertThat($("#agent").text(), containsString("JustAnotherAgent"));
     }
 
     @Test
