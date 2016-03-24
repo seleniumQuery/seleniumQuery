@@ -10,6 +10,28 @@ Functions from `driver.switchTo()` can deal with frames.
 
 Maybe we should add functions in the `SeleniumQueryObject` to incorporate those functionalities and make them easily accessible.
 
+## Add more .as() functions
+
+SHOULD BE DIVIDED INTO MORE STORIES WHEN IMPLEMENTING.
+
+`$("selector").as().select().selectByText("Ball");`
+`$("selector").as().select().selectByValue("Ball");`
+`$("selector").as().select().selectByIndex(1);`
+`$("selector").as().select().selectByIndex(-1);`
+`$("selector").as().select().getSelectedOptionText();`
+`$("selector").as().select().getSelectedOptionValue();`
+`$("selector").as().select().getSelectedOptionIndex();`
+`$("selector").as().select().getSelectedOptionCount();`
+`$("selector").as().select().getOptionCount();`
+`$("selector").as().select().size();`
+`$("selector").as().select().selectFirst();`
+`$("selector").as().select().selectLast();`
+`$("selector").as().select().selectMatching(Matcher<String>);`
+`$("selector").as().select().selectFirstMatching(Matcher<String>);`
+
+also `as().input()` or `as().radio()` to deal with groups.
+
+`.as().table()`.
 
 ## allow escaping for tag names
 
@@ -17,7 +39,9 @@ This is super-advanced stuff, don't know if we'll ever have time to make it.
 
 ## Enable attribute quoting flexibility
 
-This is a very complex story. See (closed) issue #40: https://github.com/seleniumQuery/seleniumQuery/issues/40
+This is a very complex story. Should probably be divided into many.
+
+See (closed) issue #40: https://github.com/seleniumQuery/seleniumQuery/issues/40
 
 
 ## Have `^=` and `$=` match sizzle's behavior for empty strings
