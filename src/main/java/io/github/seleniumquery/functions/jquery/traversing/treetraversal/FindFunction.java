@@ -18,6 +18,7 @@ package io.github.seleniumquery.functions.jquery.traversing.treetraversal;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import io.github.seleniumquery.internal.SqObjectFactory;
 import org.openqa.selenium.WebElement;
 
@@ -34,13 +35,22 @@ public class FindFunction {
 
 	public static SeleniumQueryObject find(SeleniumQueryObject seleniumQueryObject, String selector) {
 		List<WebElement> elements = seleniumQueryObject.get();
-		List<WebElement> allElementsBelow = new LinkedList<>();
 		SeleniumQueryBy by = SeleniumQueryBy.byEnhancedSelector(selector);
-		for (WebElement webElement : elements) {
-			List<WebElement> elementsBelowThisElement = webElement.findElements(by);
-			allElementsBelow.addAll(elementsBelowThisElement);
-		}
-		return SqObjectFactory.instance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), allElementsBelow, seleniumQueryObject);
+        List<WebElement> allElementsBelow = findOnElements(elements, by);
+		return SqObjectFactory.instance().create(
+				seleniumQueryObject.getWebDriver(),
+                new SeleniumQueryInvalidBy(seleniumQueryObject.getBy(), ".find(\""+selector+"\")"),
+                allElementsBelow,
+                seleniumQueryObject);
 	}
+
+    private static List<WebElement> findOnElements(List<WebElement> elements, SeleniumQueryBy by) {
+        List<WebElement> allElementsBelow = new LinkedList<>();
+        for (WebElement webElement : elements) {
+            List<WebElement> elementsBelowThisElement = webElement.findElements(by);
+            allElementsBelow.addAll(elementsBelowThisElement);
+        }
+        return allElementsBelow;
+    }
 
 }

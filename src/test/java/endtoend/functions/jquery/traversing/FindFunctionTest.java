@@ -16,6 +16,7 @@
 
 package endtoend.functions.jquery.traversing;
 
+import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,6 +37,17 @@ public class FindFunctionTest {
     public void find_function() {
         assertThat($("option").size(), is(COMBO_OPTIONS_COUNT + OTHER_OPTIONS_COUNT));
         assertThat($("#combo").find("option").size(), is(COMBO_OPTIONS_COUNT));
+    }
+
+    @Test
+    public void find_function_toString() {
+        // given
+        String crazySelector = "some-tag#some-id.some-class:contains(1)";
+        SeleniumQueryObject seleniumQueryObject = $(crazySelector).find(crazySelector);
+        // when
+        String seleniumQueryObjectToString = seleniumQueryObject.toString();
+        // then
+        assertThat(seleniumQueryObjectToString, is(String.format("$(\"%s\").find(\"%s\")", crazySelector, crazySelector)));
     }
 
     @Test
