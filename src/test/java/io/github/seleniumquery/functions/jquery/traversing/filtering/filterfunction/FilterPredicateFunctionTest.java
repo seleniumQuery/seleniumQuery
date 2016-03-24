@@ -19,10 +19,13 @@ package io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunc
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.testutils.FunctionsTestUtils;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
@@ -55,6 +58,17 @@ public class FilterPredicateFunctionTest {
                 return filterPredicateFunction.filter(targetSQO, PREDICATE_DOES_NOT_MATTER_IN_THIS_TEST);
             }
         });
+    }
+
+    @Test
+    public void filterred_object_should_have_invalidBy_as_by() {
+        // given
+        SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithElements(createWebElementWithTag("doesnt-matter"));
+        // when
+        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, NULL_PREDICATE);
+        // then
+        assertThat(resultSQO.getBy(), instanceOf(SeleniumQueryInvalidBy.class));
+        assertThat(resultSQO.getBy().toString(), equalTo("$(\"dummy#by\").filter(<function>)") );
     }
 
     @Test

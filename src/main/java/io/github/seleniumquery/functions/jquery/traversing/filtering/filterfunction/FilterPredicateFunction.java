@@ -20,6 +20,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class FilterPredicateFunction {
         List<WebElement> filteredWebElements = filterWebElements(seleniumQueryObject.get(), filterFunction);
         return instance().create(seleniumQueryObject.getSeleniumQueryFunctions(),
                                  seleniumQueryObject.getWebDriver(),
-                                 null,
+                                 new SeleniumQueryInvalidBy(seleniumQueryObject.getBy(), ".filter(<function>)"),
                                  filteredWebElements,
                                  seleniumQueryObject);
     }

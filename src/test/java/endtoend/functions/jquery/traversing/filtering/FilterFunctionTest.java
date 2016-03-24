@@ -99,4 +99,16 @@ public class FilterFunctionTest {
         assertThat(seleniumQueryObject.toString(), is(format("$(\"%s\").filter(\"%s\")", selector, selector)));
     }
 
+    @Test
+    public void filterPredicate_toString() {
+        String selector = "crazy-tag#crazy-id.some-class:contains('withArgs')";
+        SeleniumQueryObject seleniumQueryObject = $(selector).filter(new Predicate<WebElement>() {
+            @Override
+            public boolean apply(WebElement input) {
+                return false;
+            }
+        });
+        assertThat(seleniumQueryObject.toString(), is(format("$(\"%s\").filter(<function>)", selector)));
+    }
+
 }
