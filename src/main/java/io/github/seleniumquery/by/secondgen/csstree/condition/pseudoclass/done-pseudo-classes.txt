@@ -8,7 +8,7 @@ basicfilter:
 	- DELAYED :lang()
 	- OK :last
 	- OK :lt()
-	- :not() ------------------------------------------------------ TODO
+	- :not() ------------------------------------------------------ TODO -- test: $("div:not(div em)")
 	- OK :nth
 	- OK :odd
 	- DELAYED :root
@@ -49,10 +49,25 @@ jquery-ui
 	- DELAYED :focusable
 	- DELAYED :tabbable
 seleniumquery
-	- DELAYED :blank
-	- DELAYED :filled
 	- OK :present
-	- DELAYED :unchecked
 visibility
     - OK :hidden
     - OK :visible
+
+
+---
+
+OTHER SELECTORS - SUGGESTIONS (NONE OF THEM ARE IMPLEMENTED, NOR IT MEANS THEY WILL):
+
+	- :blank
+	- :filled
+	- :unchecked
+	As seen in:
+    http://jqueryvalidation.org/documentation/
+    http://ejohn.org/blog/selectors-that-people-actually-use/
+    http://ejohn.org/files/selectors.html
+
+Others not supported by Sizzle:
+    Some selectors that are not fully supported by Sizzle: https://developer.mozilla.org/en-US/docs/Web/CSS/:required
+    Maybe add them.
+    :required and :optional are easy to add. The others, maybe in the future.
