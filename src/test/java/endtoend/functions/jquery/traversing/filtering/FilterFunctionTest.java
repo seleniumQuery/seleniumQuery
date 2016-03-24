@@ -26,12 +26,14 @@ import org.openqa.selenium.WebElement;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static java.lang.String.format;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class FilterFunctionTest {
 
     private static final String MY_DIV_ID = "#myDiv";
+
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     private SeleniumQueryObject $myDiv;
@@ -88,6 +90,13 @@ public class FilterFunctionTest {
     @Test
     public void filterSelector_with_pseudo() {
         assertThat($("div").filter(":empty").get(0).getAttribute("id"), is("id-empty"));
+    }
+
+    @Test
+    public void filterSelector_toString() {
+        String selector = "crazy-tag#crazy-id.some-class:contains('withArgs')";
+        SeleniumQueryObject seleniumQueryObject = $(selector).filter(selector);
+        assertThat(seleniumQueryObject.toString(), is(format("$(\"%s\").filter(\"%s\")", selector, selector)));
     }
 
 }
