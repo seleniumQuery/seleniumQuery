@@ -15,6 +15,10 @@ Maybe we should add functions in the `SeleniumQueryObject` to incorporate those 
 
 This is super-advanced stuff, don't know if we'll ever have time to make it.
 
+## Enable attribute quoting flexibility
+
+This is a very complex story. See (closed) issue #40: https://github.com/seleniumQuery/seleniumQuery/issues/40
+
 
 ## Have `^=` and `$=` match sizzle's behavior for empty strings
 
