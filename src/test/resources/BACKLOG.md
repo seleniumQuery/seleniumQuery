@@ -1,5 +1,9 @@
 Stories are not necessarily prioritized.
 
+## Have empty selectors `$("")` return an empty list right off the bat
+
+That simple.
+
 ## Complete seleniumQuery.properties options file
 
 Add options like:
