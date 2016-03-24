@@ -1,5 +1,9 @@
 Stories are not necessarily prioritized.
 
+## Add HtmlUnit EDGE to browserBuilder
+
+HtmlUnit now supports it.
+
 ## Have empty selectors `$("")` return an empty list right off the bat
 
 That simple.
