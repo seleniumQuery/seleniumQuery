@@ -1,7 +1,7 @@
 # [seleniumQuery](http://seleniumquery.github.io)
 
 [![Join the chat at https://gitter.im/seleniumQuery/seleniumQuery](https://badges.gitter.im/seleniumQuery/seleniumQuery.svg)](https://gitter.im/seleniumQuery/seleniumQuery?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.seleniumquery/seleniumquery.svg)]()
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.seleniumquery/seleniumquery.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.github.seleniumquery%22%20AND%20a%3A%22seleniumquery%22)
 
 [![Linux Build Status](https://img.shields.io/travis/seleniumQuery/seleniumQuery/master.svg?label=Linux Build)](https://travis-ci.org/seleniumQuery/seleniumQuery)
 [![Windows Build Status](https://img.shields.io/appveyor/ci/acdcjunior/seleniumQuery/master.svg?label=Windows Build)](https://ci.appveyor.com/project/acdcjunior/seleniumQuery/branch/master)
