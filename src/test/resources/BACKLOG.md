@@ -1,5 +1,9 @@
 Stories are not necessarily prioritized.
 
+## `$.url(File)` should fail if argument file does not exist
+
+That would be all of it.
+
 ## Chrome driver builder should test for OS when trying to locate executable
 
 This applies to Chrome builder.
