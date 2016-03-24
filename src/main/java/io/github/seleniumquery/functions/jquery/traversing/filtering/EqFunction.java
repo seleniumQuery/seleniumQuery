@@ -18,6 +18,7 @@ package io.github.seleniumquery.functions.jquery.traversing.filtering;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import io.github.seleniumquery.internal.SqObjectFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -65,7 +66,7 @@ public class EqFunction {
 	 */
 	private static By getByForElementAtPosition(By by, int position) {
         if (!(by instanceof SeleniumQueryBy)) {
-            return SeleniumQueryBy.NO_SELECTOR_INVALID_BY;
+            return SeleniumQueryInvalidBy.UNAVAILABLE_BY;
         }
         SeleniumQueryBy seleniumQueryBy = (SeleniumQueryBy) by;
         if (seleniumQueryBy.isXPathExpression()) {

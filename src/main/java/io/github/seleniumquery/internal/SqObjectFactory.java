@@ -18,6 +18,7 @@ package io.github.seleniumquery.internal;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -60,6 +61,10 @@ public class SqObjectFactory {
         return new SqObject(seleniumQueryFunctions, driver, by, elements, previous);
     }
 
+    /**
+     * @deprecated
+     * Don't build with this invalid selector. Construct a {@link SeleniumQueryInvalidBy} yourself, with better selector string.
+     */
     public SeleniumQueryObject createWithInvalidSelector(WebDriver driver, List<WebElement> elements, SeleniumQueryObject previous) {
         return create(driver, getNoSelectorInvalidBy(), elements, previous);
     }
@@ -81,7 +86,7 @@ public class SqObjectFactory {
     }
 
     private By getNoSelectorInvalidBy() {
-        return SeleniumQueryBy.NO_SELECTOR_INVALID_BY;
+        return SeleniumQueryInvalidBy.UNAVAILABLE_BY;
     }
 
 }
