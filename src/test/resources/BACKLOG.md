@@ -10,6 +10,10 @@ Functions from `driver.switchTo()` can deal with frames.
 
 Maybe we should add functions in the `SeleniumQueryObject` to incorporate those functionalities and make them easily accessible.
 
+## Add `$.driver().useSameAs(SeleniumQueryBrowser)`
+
+Not much to say.
+
 ## Add SeleniumQueryBrowser#quitAll()
 
 So we can quit'em all.
