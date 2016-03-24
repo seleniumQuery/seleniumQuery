@@ -1,14 +1,11 @@
-There is no prioritization here.#
+Stories are not necessarily prioritized.
 
-## Incorporate functions from `WebDriver#.switchTo()` and `Action`s
+## Chrome driver builder should test for OS when trying to locate executable
 
-Functions from `driver.switchTo()` can deal with frames.
+This applies to Chrome builder.
 
-`Actions` has some very useful commands:
-
-    new Actions(driver).moveToElement(elements).click().perform();
-
-Maybe we should add functions in the `SeleniumQueryObject` to incorporate those functionalities and make them easily accessible.
+External-world description of this issue:
+> Driver builder will not look for chromedriver.exe executable if OS is not windows.
 
 ## Add `$.driver().useSameAs(SeleniumQueryBrowser)`
 
@@ -40,6 +37,16 @@ SHOULD BE DIVIDED INTO MORE STORIES WHEN IMPLEMENTING.
 also `as().input()` or `as().radio()` to deal with groups.
 
 `.as().table()`.
+
+## Incorporate functions from `WebDriver#.switchTo()` and `Action`s
+
+Functions from `driver.switchTo()` can deal with frames.
+
+`Actions` has some very useful commands:
+
+    new Actions(driver).moveToElement(elements).click().perform();
+
+Maybe we should add functions in the `SeleniumQueryObject` to incorporate those functionalities and make them easily accessible.
 
 ## Add `.withProxy()` to browser builder
 
