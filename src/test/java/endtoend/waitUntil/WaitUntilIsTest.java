@@ -16,6 +16,7 @@
 
 package endtoend.waitUntil;
 
+import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -62,6 +63,16 @@ public class WaitUntilIsTest {
 	@Test
 	public void waitUntil_hidden() {
 		assertThat($("div.invisibleDiv").waitUntil().is(":hidden").then().size(), is(1));
+	}
+
+	@Test
+	public void waitUntil_is_toString() {
+		// when
+		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div.invisibleDiv").waitUntil().is(":hidden");
+		// then
+		String expectedToString = "$(\"div.invisibleDiv\").waitUntil().is(\":hidden\")";
+		assertThat(waitAndOrThen.toString(), is(expectedToString));
+		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
 
 }
