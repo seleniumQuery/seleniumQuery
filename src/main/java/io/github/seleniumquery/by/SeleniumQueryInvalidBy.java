@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by;
 
 import io.github.seleniumquery.SeleniumQueryException;
+import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -43,6 +44,10 @@ public class SeleniumQueryInvalidBy extends SeleniumQueryBy {
 
     private SeleniumQueryInvalidBy() {
         super("<unavailable selector>");
+    }
+
+    public SeleniumQueryInvalidBy(SeleniumQueryObject sourceSeleniumQueryObject, String suffix) {
+        this(sourceSeleniumQueryObject.getBy(), suffix);
     }
 
     public SeleniumQueryInvalidBy(By sourceBy, String suffix) {
