@@ -16,6 +16,7 @@
 
 package endtoend.waitUntil;
 
+import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -24,6 +25,8 @@ import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class WaitUntilIsLessThanTest {
 
@@ -61,5 +64,17 @@ public class WaitUntilIsLessThanTest {
 	    // then
         // should throw exception
 	}
-	
+
+	@Test @JavaScriptOnly
+	public void waitUntil_isLessThan__toString() {
+        // given
+        $(DIV_CLICKABLE_SELECTOR).click();
+        // when
+        SeleniumQueryWaitAndOrThen waitAndOrThen = $(DIV_CLICKABLE_SELECTOR).waitUntil(2000, 200).text().isLessThan(8);
+        // then
+        String expectedToString = "$(\"" + DIV_CLICKABLE_SELECTOR + "\").waitUntil().text().isLessThan(8)";
+        assertThat(waitAndOrThen.toString(), is(expectedToString));
+        assertThat(waitAndOrThen.then().toString(), is(expectedToString));
+	}
+
 }
