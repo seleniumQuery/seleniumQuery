@@ -18,6 +18,7 @@ package io.github.seleniumquery.wait;
 
 import com.google.common.base.Function;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import io.github.seleniumquery.internal.SqObjectFactory;
 import io.github.seleniumquery.wait.evaluators.Evaluator;
 import org.openqa.selenium.*;
@@ -45,8 +46,11 @@ class FluentSqWait {
 		final WebDriver driver = seleniumQueryObject.getWebDriver();
 		final By by = seleniumQueryObject.getBy();
 		List<WebElement> elements = fluentWait(seleniumQueryObject, new FluentSqWaitFunction<>(driver, value, evaluator, by, negated), "to "+evaluator.stringFor(value));
-        return SqObjectFactory.instance().createWithInvalidSelector(seleniumQueryObject.getWebDriver(), elements, seleniumQueryObject);
-    }
+		return SqObjectFactory.instance().create(
+				seleniumQueryObject.getWebDriver(),
+                new SeleniumQueryInvalidBy(seleniumQueryObject, ".waitUntil()." + evaluator.stringFor(value)),
+                elements, seleniumQueryObject);
+	}
 
 	/**
 	 * @since 0.9.0
