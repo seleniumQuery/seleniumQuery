@@ -43,7 +43,7 @@ public class MatchesEvaluator implements Evaluator<String> {
 
 	@Override
 	public String stringFor(String regex) {
-		return getter + " matches(\"" + regex + "\")";
+		return getter + ".matches(\"" + regex + "\")";
 	}
 
 }

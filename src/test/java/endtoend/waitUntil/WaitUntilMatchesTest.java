@@ -16,6 +16,7 @@
 
 package endtoend.waitUntil;
 
+import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -46,6 +47,16 @@ public class WaitUntilMatchesTest {
 	@Test(expected = SeleniumQueryTimeoutException.class)
 	public void waitUntil_matches__not_everyone_meet() {
 		$("input").waitUntil(500).val().matches("abcdef");
+	}
+
+	@Test
+	public void waitUntil_matches_toString() {
+		// when
+		SeleniumQueryWaitAndOrThen waitAndOrThen = $("input").waitUntil().val().matches("[ba]{2}c?.*");
+        // then
+		String expectedToString = "$(\"input\").waitUntil().val().matches(\"[ba]{2}c?.*\")";
+		assertThat(waitAndOrThen.toString(), is(expectedToString));
+		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
 
 }

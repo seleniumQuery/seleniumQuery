@@ -60,7 +60,7 @@ abstract class ComparisonEvaluator implements Evaluator<Number> {
 
 	@Override
     public String stringFor(Number valueToCompare) {
-        return String.format("%s %s(\"%s\")", getter, getFunctionName(), valueToCompare);
+        return String.format("%s.%s(%s)", getter, getFunctionName(), valueToCompare);
     }
 
 	protected abstract String getFunctionName();

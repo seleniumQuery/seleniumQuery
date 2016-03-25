@@ -45,4 +45,9 @@ class AndOrThen implements SeleniumQueryWaitAndOrThen {
 		return this.seleniumQueryObject;
 	}
 
+	@Override
+	public String toString() {
+		return this.seleniumQueryObject.toString();
+	}
+
 }
