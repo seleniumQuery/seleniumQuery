@@ -44,7 +44,11 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
 
 	@Override
 	public String stringFor(T valueToEqual) {
-		return getter + ".isEqualTo(\"" + valueToEqual + "\")";
+        String valueAsString = "\"" + valueToEqual + "\"";
+        if (valueToEqual instanceof Number) {
+            valueAsString = valueToEqual.toString();
+        }
+        return getter + ".isEqualTo(" + valueAsString + ")";
 	}
 
 }
