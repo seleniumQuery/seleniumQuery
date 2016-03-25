@@ -16,6 +16,7 @@
 
 package endtoend.waitUntil.getters;
 
+import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -64,6 +65,56 @@ public class WaitUntilGettersTest {
 	@Test
 	public void text_getter() {
 		assertThat($("div").waitUntil().text().isEqualTo(">< ><").then().get(), is(divs));
+	}
+
+	@Test
+	public void size_getter_toString() {
+		// when
+		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().size().isEqualTo(2);
+		// then
+		String expectedToString = "$(\"div\").waitUntil().size().isEqualTo(2)";
+		assertThat(waitAndOrThen.toString(), is(expectedToString));
+		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
+	}
+
+	@Test @JavaScriptOnly
+	public void attr_getter_toString() {
+        // when
+		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().attr("data-attr").isEqualTo("data-attr-value");
+        // then
+		String expectedToString = "$(\"div\").waitUntil().attr(\"data-attr\").isEqualTo(\"data-attr-value\")";
+		assertThat(waitAndOrThen.toString(), is(expectedToString));
+		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
+	}
+
+	@Test @JavaScriptOnly
+	public void prop_getter_toString() {
+        // when
+		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().prop("tagName").isEqualTo("DIV");
+        // then
+        String expectedToString = "$(\"div\").waitUntil().prop(\"tagName\").isEqualTo(\"DIV\")";
+        assertThat(waitAndOrThen.toString(), is(expectedToString));
+		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
+	}
+
+	@Test
+	public void html_getter_toString() {
+        // when
+		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().html().isEqualTo("&gt;&lt;");
+        // then
+        String expectedToString = "$(\"div\").waitUntil().html().isEqualTo(\"&gt;&lt;\")";
+        assertThat(waitAndOrThen.toString(), is(expectedToString));
+		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
+	}
+
+	@Test
+	public void text_getter_toString() {
+        // when
+		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().text().contains("< >");
+        // then
+        String expectedToString = "$(\"div\").waitUntil().text().contains(\"< >\")";
+        assertThat(waitAndOrThen.toString(), is(expectedToString));
+		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
 
 }
