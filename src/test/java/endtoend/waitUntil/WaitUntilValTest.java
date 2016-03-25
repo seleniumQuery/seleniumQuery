@@ -16,6 +16,7 @@
 
 package endtoend.waitUntil;
 
+import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -55,5 +56,15 @@ public class WaitUntilValTest {
 		$("#i1").val("abcdef");
 		assertThat($("input").waitUntil(500).val().isEqualTo("abcdef").then().size(), is(2));
 	}
-	
+
+	@Test
+	public void waitUntil_val_toString() {
+        // when
+		SeleniumQueryWaitAndOrThen waitAndOrThen = $("#i1").waitUntil().val().isEqualTo("abc");
+		// then
+		String expectedToString = "$(\"#i1\").waitUntil().val().isEqualTo(\"abc\")";
+		assertThat(waitAndOrThen.toString(), is(expectedToString));
+		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
+	}
+
 }
