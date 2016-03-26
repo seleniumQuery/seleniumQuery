@@ -27,5 +27,5 @@ box: maven:latest
 #          echo "hello world!"
 build:
   steps:
-    - seleniumquery/maven:
+    - seleniumQuery/maven:
         goals: test
