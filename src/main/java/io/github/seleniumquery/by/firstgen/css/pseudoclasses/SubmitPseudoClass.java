@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,14 +47,14 @@ class SubmitPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		return inputWithTypeSubmit(element) || buttonWithTypeSubmitOrWithoutType(driver, element);
+		return inputWithTypeSubmit(element) || buttonWithTypeSubmitOrWithoutType(element);
 	}
 
 	private boolean inputWithTypeSubmit(WebElement element) {
 		return INPUT.equals(element.getTagName()) && SUBMIT.equalsIgnoreCase(element.getAttribute("type"));
 	}
 
-	private boolean buttonWithTypeSubmitOrWithoutType(WebDriver driver, WebElement element) {
+	private boolean buttonWithTypeSubmitOrWithoutType(WebElement element) {
 		boolean isButtonTag = BUTTON.equals(element.getTagName());
 		if (!isButtonTag) {
 			return false;
