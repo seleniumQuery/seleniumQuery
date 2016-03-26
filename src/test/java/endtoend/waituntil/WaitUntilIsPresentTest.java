@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.waitUntil;
+package endtoend.waituntil;
 
 import org.junit.ClassRule;
 import org.junit.Rule;

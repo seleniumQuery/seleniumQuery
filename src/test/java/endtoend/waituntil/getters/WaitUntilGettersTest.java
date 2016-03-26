@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.waitUntil.getters;
+package endtoend.waituntil.getters;
 
 import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import org.junit.Before;
