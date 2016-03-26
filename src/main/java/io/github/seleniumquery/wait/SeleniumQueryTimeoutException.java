@@ -22,6 +22,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,37 +31,28 @@ import java.io.PrintWriter;
 
 public class SeleniumQueryTimeoutException extends TimeoutException {
 
-	private static final long serialVersionUID = 3L;
-	
-	private SeleniumQueryObject seleniumQueryObject;
-	
 	SeleniumQueryTimeoutException(TimeoutException sourceException, SeleniumQueryObject seleniumQueryObject, String reason) {
-		super("Timeout while waiting for selector '"+seleniumQueryObject.getBy()+"' "+reason, sourceException);
-		this.seleniumQueryObject = seleniumQueryObject;
-		
-		saveErrorPage();
-		saveErrorScreenshot();
-	}
+		super("Timeout while waiting for "+seleniumQueryObject+" "+reason, sourceException);
 
-	private void saveErrorScreenshot() {
-		if (this.seleniumQueryObject.getWebDriver() instanceof TakesScreenshot) {
-			try {
-				File srcFile = ((TakesScreenshot) this.seleniumQueryObject.getWebDriver()).getScreenshotAs(OutputType.FILE);
-				FileUtils.copyFile(srcFile, new File(SeleniumQueryConfig.get("ERROR_PAGE_SCREENSHOT_LOCATION")));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+        try {
+            saveErrorPage(seleniumQueryObject.getWebDriver());
+            saveErrorScreenshot(seleniumQueryObject.getWebDriver());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+	private void saveErrorScreenshot(WebDriver webDriver) throws IOException {
+		if (webDriver instanceof TakesScreenshot) {
+			File srcFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(srcFile, new File(SeleniumQueryConfig.get("ERROR_PAGE_SCREENSHOT_LOCATION")));
 		}
 	}
 
-	private void saveErrorPage() {
-		try {
-			PrintWriter out = new PrintWriter(SeleniumQueryConfig.get("ERROR_PAGE_HTML_LOCATION"));
-			out.println(this.seleniumQueryObject.getWebDriver().getPageSource());
-			out.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+	private void saveErrorPage(WebDriver webDriver) throws FileNotFoundException {
+		PrintWriter out = new PrintWriter(SeleniumQueryConfig.get("ERROR_PAGE_HTML_LOCATION"));
+		out.println(webDriver.getPageSource());
+		out.close();
 	}
 
 }
