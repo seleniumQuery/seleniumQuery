@@ -17,11 +17,10 @@
 package testinfrastructure.testdouble.org.openqa.selenium;
 
 import org.openqa.selenium.*;
-import testinfrastructure.testdouble.PseudoTestDoubleException;
 
 import java.util.List;
 
-public class WebElementStub implements WebElement {
+class WebElementStub implements WebElement {
 
     @Override public void click() { }
     @Override public void submit() { }
