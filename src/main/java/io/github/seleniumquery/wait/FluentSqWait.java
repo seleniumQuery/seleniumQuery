@@ -47,7 +47,7 @@ class FluentSqWait {
 		final WebDriver driver = seleniumQueryObject.getWebDriver();
 		final By by = seleniumQueryObject.getBy();
         FluentSqWaitFunction<T> fluentSqWaitFunction = new FluentSqWaitFunction<>(driver, value, evaluator, by, waitingBehaviorModifier);
-        List<WebElement> elements = fluentWait(seleniumQueryObject, fluentSqWaitFunction, "to "+evaluator.stringFor(value, waitingBehaviorModifier));
+        List<WebElement> elements = fluentWait(seleniumQueryObject, fluentSqWaitFunction, "to .waitUntil()."+evaluator.stringFor(value, waitingBehaviorModifier));
 		return SqObjectFactory.instance().create(
 				seleniumQueryObject.getWebDriver(),
                 new SeleniumQueryInvalidBy(seleniumQueryObject, ".waitUntil()." + evaluator.stringFor(value, waitingBehaviorModifier)),
