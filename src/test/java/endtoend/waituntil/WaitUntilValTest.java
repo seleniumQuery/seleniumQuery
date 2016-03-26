@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.waitUntil;
+package endtoend.waituntil;
 
 import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
