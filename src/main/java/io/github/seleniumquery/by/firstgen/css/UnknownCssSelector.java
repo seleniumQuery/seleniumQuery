@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.firstgen.css;
 
+import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionSimpleComponent;
 import org.apache.commons.logging.Log;
@@ -26,19 +27,19 @@ import org.openqa.selenium.WebElement;
 /**
  * Represents an unknown CSS selector type.
  */
-public class UnknownCssSelector<T> implements CssSelector<T, ConditionSimpleComponent> {
+class UnknownCssSelector<T> implements CssSelector<T, ConditionSimpleComponent> {
 	
 	private static final Log LOGGER = LogFactory.getLog(UnknownCssSelector.class);
 	
 	private short type;
 	
-	public UnknownCssSelector(short type) {
+	UnknownCssSelector(short type) {
 		this.type = type;
 	}
 
 	@Override
 	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, T selector) {
-		throw new RuntimeException("CSS "+selector.getClass().getSimpleName()+" of type "+type+" is invalid or not supported!");
+		throw new SeleniumQueryException("CSS "+selector.getClass().getSimpleName()+" of type "+type+" is invalid or not supported!");
 	}
 
 	@Override
