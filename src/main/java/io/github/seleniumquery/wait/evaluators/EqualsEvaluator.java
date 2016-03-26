@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.wait.evaluators;
 
+import io.github.seleniumquery.wait.WaitingBehaviorModifier;
 import io.github.seleniumquery.wait.getters.Getter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,12 +44,12 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
 	}
 
 	@Override
-	public String stringFor(T valueToEqual) {
+	public String stringFor(T valueToEqual, WaitingBehaviorModifier waitingBehaviorModifier) {
         String valueAsString = "\"" + valueToEqual + "\"";
         if (valueToEqual instanceof Number) {
             valueAsString = valueToEqual.toString();
         }
-        return getter + ".isEqualTo(" + valueAsString + ")";
+        return getter.toString() + waitingBehaviorModifier + ".isEqualTo(" + valueAsString + ")";
 	}
 
 }

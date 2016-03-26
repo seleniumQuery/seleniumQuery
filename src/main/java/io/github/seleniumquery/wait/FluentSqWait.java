@@ -43,12 +43,14 @@ class FluentSqWait {
 
 	public <T> SeleniumQueryObject waitUntil(final Evaluator<T> evaluator, final T value,
 																	SeleniumQueryObject seleniumQueryObject, final boolean negated) {
+        WaitingBehaviorModifier waitingBehaviorModifier = WaitingBehaviorModifier.fromBoolean(negated);
 		final WebDriver driver = seleniumQueryObject.getWebDriver();
 		final By by = seleniumQueryObject.getBy();
-		List<WebElement> elements = fluentWait(seleniumQueryObject, new FluentSqWaitFunction<>(driver, value, evaluator, by, negated), "to "+evaluator.stringFor(value));
+        FluentSqWaitFunction<T> fluentSqWaitFunction = new FluentSqWaitFunction<>(driver, value, evaluator, by, waitingBehaviorModifier);
+        List<WebElement> elements = fluentWait(seleniumQueryObject, fluentSqWaitFunction, "to "+evaluator.stringFor(value, waitingBehaviorModifier));
 		return SqObjectFactory.instance().create(
 				seleniumQueryObject.getWebDriver(),
-                new SeleniumQueryInvalidBy(seleniumQueryObject, ".waitUntil()." + evaluator.stringFor(value)),
+                new SeleniumQueryInvalidBy(seleniumQueryObject, ".waitUntil()." + evaluator.stringFor(value, waitingBehaviorModifier)),
                 elements, seleniumQueryObject);
 	}
 
