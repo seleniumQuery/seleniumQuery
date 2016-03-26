@@ -6,5 +6,8 @@ jdk:
 - openjdk7
 before_install:
   - pip install --user codecov
+  - curl https://www.jpm4j.org/install/script | sh
+  - jpm install com.codacy:codacy-coverage-reporter:assembly
 after_success:
   - codecov
+  - codacy-coverage-reporter -l Java -r coverage.xml
