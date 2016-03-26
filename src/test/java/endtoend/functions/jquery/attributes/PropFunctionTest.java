@@ -1,21 +1,35 @@
+/*
+ * Copyright (c) 2016 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package endtoend.functions.jquery.attributes;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import testinfrastructure.junitrule.JavaScriptOnly;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-import testinfrastructure.junitrule.JavaScriptOnly;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
 public class PropFunctionTest {
 
-    @ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-    @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
 	// http://jsbin.com/zofekalo/1/edit
     @Test @JavaScriptOnly
@@ -41,19 +55,19 @@ public class PropFunctionTest {
     
     // http://jsbin.com/ceqijima/2/edit
     @Test @JavaScriptOnly
-    public void prop_function__setting() throws Exception {
+    public void prop_function__setting_SELECTED_prop() throws Exception {
     	setPropAndVerify(true, true);
-//    	setPropAndVerify(1, true);
-//    	setPropAndVerify(0, false);
-//    	setPropAndVerify("1", true);
-//    	setPropAndVerify("0", true);
-//    	setPropAndVerify("a", true);
-//    	setPropAndVerify("", false);
-//    	setPropAndVerify(false, false);
+    	setPropAndVerify(1, true);
+    	setPropAndVerify(0, false);
+    	setPropAndVerify("1", true);
+    	setPropAndVerify("0", true);
+    	setPropAndVerify("a", true);
+    	setPropAndVerify("", false);
+    	setPropAndVerify(false, false);
     }
 	
 	private void setPropAndVerify(Object val, Object expected) {
-//		reset();
+		reset();
 		$("#c1 .other").prop("selected", val);
 		assertThat($("#c1 .other").prop("selected"), is(expected));
 	}
