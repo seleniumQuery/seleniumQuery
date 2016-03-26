@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@ package io.github.seleniumquery.browser.driver.builders;
 
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.browser.driver.DriverBuilder;
+import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.SessionNotFoundException;
 
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.*;
 import static java.lang.String.format;
@@ -75,7 +75,7 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
         } catch (IllegalStateException e) {
             throwCustomExceptionIfExecutableNotFound(e);
             throw e;
-        } catch (SessionNotFoundException e) {
+        } catch (NoSuchSessionException e) {
             throwCustomExceptionIfProtectedModeMustBeTheSame(e);
             throw e;
         }
@@ -84,7 +84,7 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
     private void configureIEServerExecutablePath() {
         if (customPathWasProvidedAndExecutableExistsThere(this.customPathToIEDriverServerExe , BAD_PATH_PROVIDED_EXCEPTION_MESSAGE)) {
             System.setProperty(IE_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPath(this.customPathToIEDriverServerExe));
-        } else if (DriverInstantiationUtils.executableExistsInClasspath(IEDRIVERSERVER_EXE)) {
+        } else if (executableExistsInClasspath(IEDRIVERSERVER_EXE)) {
             System.setProperty(IE_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, getFullPathForFileInClasspath(IEDRIVERSERVER_EXE));
         }
     }
@@ -99,7 +99,7 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
         }
     }
 
-    private void throwCustomExceptionIfProtectedModeMustBeTheSame(SessionNotFoundException e) {
+    private void throwCustomExceptionIfProtectedModeMustBeTheSame(NoSuchSessionException e) {
         String message = e.getLocalizedMessage();
         if (message != null && message.contains("Protected Mode")) {
             throw new SeleniumQueryException("IE Driver requires Protected Mode settings to be the same for all zones. Go to\n\t\t" +
