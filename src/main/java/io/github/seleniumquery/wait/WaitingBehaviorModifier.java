@@ -14,18 +14,29 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.wait.evaluators;
+package io.github.seleniumquery.wait;
 
-import io.github.seleniumquery.wait.WaitingBehaviorModifier;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+public enum WaitingBehaviorModifier {
 
-import java.util.List;
+    USUAL_BEHAVIOR(""),
+    NEGATED_BEHAVIOR(".not()");
 
-public interface Evaluator<T> {
+    private final String toString;
 
-	boolean evaluate(WebDriver driver, List<WebElement> elements, T valueArgument);
+    public static WaitingBehaviorModifier fromBoolean(boolean negated) {
+        if (negated) {
+            return NEGATED_BEHAVIOR;
+        }
+        return USUAL_BEHAVIOR;
+    }
 
-	String stringFor(T valueArgument, WaitingBehaviorModifier waitingBehaviorModifier);
+    WaitingBehaviorModifier(String toString) {
+        this.toString = toString;
+    }
+
+    @Override
+    public String toString() {
+        return this.toString;
+    }
 
 }

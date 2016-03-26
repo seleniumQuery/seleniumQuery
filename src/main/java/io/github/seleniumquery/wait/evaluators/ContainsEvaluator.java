@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.wait.evaluators;
 
+import io.github.seleniumquery.wait.WaitingBehaviorModifier;
 import io.github.seleniumquery.wait.getters.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,8 +38,8 @@ public class ContainsEvaluator implements Evaluator<String> {
 	}
 
 	@Override
-	public String stringFor(String valueToEqual) {
-		return getter + ".contains(\"" + valueToEqual + "\")";
+	public String stringFor(String valueToEqual, WaitingBehaviorModifier waitingBehaviorModifier) {
+		return getter.toString() + waitingBehaviorModifier + ".contains(\"" + valueToEqual + "\")";
 	}
 
 }
