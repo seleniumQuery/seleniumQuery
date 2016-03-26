@@ -71,10 +71,11 @@ public class ElementFilterList {
             // TODO we are currently disabling the filter support -- we will only take it back when the system is stable
 			throw new UnsupportedOperationException("The current selector is not yet supported. Please try a simpler one.");
 		}
+        List<WebElement> filteredElements = new ArrayList<>(elements);
 		for (ElementFilter elementFilter : elementFilters) {
-			elements = elementFilter.filterElements(driver, elements);
+            filteredElements = elementFilter.filterElements(driver, filteredElements);
 		}
-		return elements;
+		return filteredElements;
 	}
 
     public boolean isEmpty() {
