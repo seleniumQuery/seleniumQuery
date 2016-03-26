@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,14 +44,7 @@ import java.util.List;
  */
 public class CssFinder {
 
-    public static final String UNIVERSAL_SELECTOR = "*";
-
-    public static CssFinder fromTag(String tag) {
-        return new CssFinder("", tag, "");
-    }
-    public static CssFinder universalSelector() {
-        return fromTag(UNIVERSAL_SELECTOR);
-    }
+    private static final String UNIVERSAL_SELECTOR = "*";
 
     public static final CssFinder CSS_NOT_NATIVELY_SUPPORTED = new CssFinder("", UNIVERSAL_SELECTOR, "") {
         @Override
@@ -82,11 +75,19 @@ public class CssFinder {
         this("", UNIVERSAL_SELECTOR, rightPart);
     }
 
-    public boolean hasUniversalSelector() {
+    public static CssFinder fromTag(String tag) {
+        return new CssFinder("", tag, "");
+    }
+
+    public static CssFinder universalSelector() {
+        return fromTag(UNIVERSAL_SELECTOR);
+    }
+
+    private boolean hasUniversalSelector() {
         return UNIVERSAL_SELECTOR.equals(tag);
     }
 
-    public String getLeftPart() {
+    private String getLeftPart() {
         return leftPart;
     }
 
@@ -94,7 +95,7 @@ public class CssFinder {
         return tag;
     }
 
-    public String getRightPart() {
+    private String getRightPart() {
         return rightPart;
     }
 
