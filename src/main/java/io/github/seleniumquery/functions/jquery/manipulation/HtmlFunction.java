@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,11 +94,11 @@ public class HtmlFunction {
 		// (this method is not preferred as it relies on HtmlUnit's internals, which can change without notice)
 		try {
 			// #HtmlUnit #reflection #hack
-			Method getElementMethod = org.openqa.selenium.htmlunit.HtmlUnitWebElement.class.getDeclaredMethod("getElement");
+			Method getElementMethod = HtmlUnitWebElement.class.getDeclaredMethod("getElement");
 			getElementMethod.setAccessible(true);
 			
 			HtmlElement he = (HtmlElement) getElementMethod.invoke(element);
-			HTMLElement e = (HTMLElement) he.getScriptObject();
+			HTMLElement e = (HTMLElement) he.getScriptableObject();
 			
 			return e.getInnerHTML();
 		} catch (Exception e) {
