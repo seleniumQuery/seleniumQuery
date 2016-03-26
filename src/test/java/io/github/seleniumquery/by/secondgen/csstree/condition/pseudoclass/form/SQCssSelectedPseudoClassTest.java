@@ -94,7 +94,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toElementFinder__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
         WebDriver driver = createWebDriverEmulatingPhantomJSAndWithNativeSupporForPseudo(CHECKED_PSEUDO);
-        ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(driver);
+        ElementFinder previousFinder = universalSelectorFinder(driver);
         assertPseudoClassHasFinder(
                 new SQCssSelectedPseudoClass(),
                 previousFinder,
