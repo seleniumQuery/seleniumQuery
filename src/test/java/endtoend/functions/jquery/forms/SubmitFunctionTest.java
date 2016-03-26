@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,11 @@
 
 package endtoend.functions.jquery.forms;
 
-import org.junit.Before;
-import testinfrastructure.junitrule.JavaScriptOnly;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.junitrule.JavaScriptOnly;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.CoreMatchers.is;
