@@ -1,18 +1,33 @@
-package endtoend.selectors.pseudoclasses.content;
+/*
+ * Copyright (c) 2016 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+package endtoend.selectors.pseudoclasses.content;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class ContainsPseudoClassTest {
 
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
 	// http://jsbin.com/siwapeqe/1/edit
     @Test
@@ -51,6 +66,10 @@ public class ContainsPseudoClassTest {
     	//
     	// To me, the CSS parser does the right thing, but jQuery disagrees.
     	// There's not much we can do here without changing the CSS Parser...
+        //
+        // its another chapter from the escaping-problem
+        // leaving it as it is now
+        // TODO escaping contains
     	assertThat($("div:contains('a\\'b)c')").size(), is(4));
     	assertThat($("div:contains('a\\\'b)c')").size(), is(4));
     }
@@ -62,5 +81,5 @@ public class ContainsPseudoClassTest {
     	assertThat($("html:contains(abc)").size(), is(1));
     	assertThat($(":contains(abc)").size(), is(14));
     }
-	
+
 }
