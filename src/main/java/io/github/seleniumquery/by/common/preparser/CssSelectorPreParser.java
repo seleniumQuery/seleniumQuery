@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 
 package io.github.seleniumquery.by.common.preparser;
+
+import io.github.seleniumquery.SeleniumQueryException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,20 +37,20 @@ import static java.lang.Character.isLetter;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssSelectorPreParser {
+class CssSelectorPreParser {
 
-    public static PreParsedSelector transformSelector(String selector) {
+    static PreParsedSelector transformSelector(String selector) {
         return new CssSelectorPreParser(selector).transformSelector();
     }
 
-	public static class PreParsedSelector {
+	static class PreParsedSelector {
 		private String transformedSelector;
 		private ArgumentMap argumentMap;
 		private PreParsedSelector(String transformedSelector, ArgumentMap argumentMap) {
 			this.transformedSelector = transformedSelector;
 			this.argumentMap = argumentMap;
 		}
-		public String getTransformedSelector() { return this.transformedSelector; }
+		String getTransformedSelector() { return this.transformedSelector; }
 		public ArgumentMap getArgumentMap() { return this.argumentMap; }
 	}
 
@@ -59,7 +61,7 @@ public class CssSelectorPreParser {
 	private StringBuilder transformedSelector;
 	private Map<Integer, String> argumentMap;
 
-    public CssSelectorPreParser(String selector) {
+    private CssSelectorPreParser(String selector) {
         this.selector = selector;
         this.selectorCurrentParsingIndex = 0;
         this.transformedSelector = new StringBuilder();
@@ -113,7 +115,7 @@ public class CssSelectorPreParser {
 
 	private void eatPseudoClass() {
 		Character firstCharOfPseudoClass = getNextChar();
-		if (!Character.isLetter(firstCharOfPseudoClass)) { throw new RuntimeException("Parsing error. First char of pseudoclass is not a letter! -> "+firstCharOfPseudoClass); }
+		if (!isLetter(firstCharOfPseudoClass)) { throw new SeleniumQueryException("Parsing error. First char of pseudoclass is not a letter! -> "+firstCharOfPseudoClass); }
 		
 		StringBuilder pseudoClass = new StringBuilder();
 		pseudoClass.append(firstCharOfPseudoClass);
@@ -174,7 +176,7 @@ public class CssSelectorPreParser {
 			nextChar = getNextChar();
 		}
 		// if we reached here, nextChar is null!
-		throw new RuntimeException("End of string reached while expecting a ).");
+		throw new SeleniumQueryException("End of string reached while expecting a ).");
 	}
 
 	private String eatEverythingUntilStringEnd(char quote) {
@@ -199,7 +201,7 @@ public class CssSelectorPreParser {
 			nextChar = getNextChar();
 		}
 		// if we reached here, nextChar is null!
-		throw new RuntimeException("End of string reached while closing quote: "+quote);
+		throw new SeleniumQueryException("End of string reached while closing quote: "+quote);
 	}
 
 	private StringBuilder appendToFinalSelector(Character c) {
