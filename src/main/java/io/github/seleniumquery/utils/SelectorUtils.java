@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -219,13 +219,13 @@ public class SelectorUtils {
 	 */
 	public static String escapeAttributeValue(String attributeValue) {
 		// " comes escaped already, so we unescape them (otherwise the next step will escape its \)
-		attributeValue = attributeValue.replace("\\\"", "\"");
+        String escapedAttributeValue = attributeValue.replace("\\\"", "\"");
 		// now we escape all \
-		attributeValue = attributeValue.replace("\\", "\\\\");
+		escapedAttributeValue = escapedAttributeValue.replace("\\", "\\\\");
 		// and escape "
-		attributeValue = attributeValue.replace("\"", "\\\"");
+		escapedAttributeValue = escapedAttributeValue.replace("\"", "\\\"");
 		// finally, surround with "s
-		return '"'+attributeValue+'"';
+		return '"'+escapedAttributeValue+'"';
 	}
 	
 	public static WebDriver getWebDriver(SearchContext context) {
