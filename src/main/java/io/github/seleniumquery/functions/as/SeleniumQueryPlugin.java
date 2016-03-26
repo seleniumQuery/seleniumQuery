@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,14 @@ import io.github.seleniumquery.SeleniumQueryObject;
 /**
  * Plugin interface for seleniumQuery.
  *
- * @param <PLUGIN> The plugin class, which will have an instance returned when .as() is called.
+ * @param <P> The plugin class, which will have an instance returned when .as() is called.
  *
  * @author acdcjunior
  * @author ricardo-sc
  * @since 0.9.0
  */
-public interface SeleniumQueryPlugin<PLUGIN> {
+public interface SeleniumQueryPlugin<P> {
 
-    PLUGIN as(SeleniumQueryObject seleniumQueryObject);
+    P as(SeleniumQueryObject seleniumQueryObject);
 
 }
