@@ -10,6 +10,8 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/seleniumQuery/seleniumQuery/master/LICENSE.txt)
 [![Join the chat at https://gitter.im/seleniumQuery/seleniumQuery](https://badges.gitter.im/seleniumQuery/seleniumQuery.svg)](https://gitter.im/seleniumQuery/seleniumQuery?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![Build status](https://codeship.com/projects/7b37d0c0-d5b4-0133-1efe-62329e93051f/status?branch=master)](https://codeship.com/projects/142644)
+[![wercker status](https://app.wercker.com/status/b772beb5c952865d659e548bf7d64f48/m "wercker status")](https://app.wercker.com/project/bykey/b772beb5c952865d659e548bf7d64f48)
 
 ### *Cross-Driver* jQuery-like Java interface for Selenium WebDriver
 
