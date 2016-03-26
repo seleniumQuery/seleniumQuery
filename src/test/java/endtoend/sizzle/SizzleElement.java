@@ -57,7 +57,7 @@ public class SizzleElement extends SizzleTest {
         SeleniumQueryObject all = Sizzle("*");
         for (int i = 0; i < all.size(); i++) {
             String nodeType = executeJS("return arguments[0].nodeType", all.get(i)).toString();
-            if (nodeType.equals("8")) {
+            if ("8".equals(nodeType)) {
                 ok(false, "Select all elements, no comment nodes");
             }
         }
