@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package endtoend.selectors.attributes;
 
+import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorMatcherService;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -24,7 +25,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.w3c.css.sac.CSSParseException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -33,10 +33,9 @@ import static org.junit.Assert.assertThat;
 
 public class AttributeSelectorsTest {
 
-	@ClassRule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
-	
-	WebDriver driver;
+	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+
+	private WebDriver driver;
 	
 	@Before
 	public void before() {
@@ -68,7 +67,7 @@ public class AttributeSelectorsTest {
 	 * Attribute values in selector expressions must follow the rules for W3C CSS selectors;
 	 * in general, that means anything other than a valid identifier should be surrounded by quotation marks.
 	 */
-	@Test(expected=CSSParseException.class)
+	@Test(expected= SeleniumQueryException.class)
 	public void attribute_equals_unquoted_space_is_not_valid() {
 		WebElement myA = driver.findElement(By.id("myA"));
 		CssSelectorMatcherService.elementMatchesStringSelector(driver, myA, "a[rel=nofollow self]"); // should throw exception
