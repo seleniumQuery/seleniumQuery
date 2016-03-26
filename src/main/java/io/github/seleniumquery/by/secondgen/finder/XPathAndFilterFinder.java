@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,14 +39,6 @@ import java.util.List;
  */
 public class XPathAndFilterFinder {
 
-    public static XPathAndFilterFinder pureXPath(String xPathExpression) {
-        return new XPathAndFilterFinder(xPathExpression, ElementFilterList.FILTER_NOTHING_LIST);
-    }
-
-    public static XPathAndFilterFinder filterOnly(ElementFilter elementFilter) {
-        return new XPathAndFilterFinder("true()", elementFilter);
-    }
-
     private final String xPathExpression;
     private final ElementFilterList elementFilterList;
 
@@ -55,17 +47,25 @@ public class XPathAndFilterFinder {
         this.elementFilterList = toElementFilterList(elementFilter);
     }
 
+    public XPathAndFilterFinder(String xPathExpression, ElementFilterList elementFilterList) {
+        this.xPathExpression = xPathExpression;
+        this.elementFilterList = elementFilterList;
+    }
+
+    public static XPathAndFilterFinder pureXPath(String xPathExpression) {
+        return new XPathAndFilterFinder(xPathExpression, ElementFilterList.FILTER_NOTHING_LIST);
+    }
+
+    public static XPathAndFilterFinder filterOnly(ElementFilter elementFilter) {
+        return new XPathAndFilterFinder("true()", elementFilter);
+    }
+
     private static ElementFilterList toElementFilterList(ElementFilter elementFilter) {
         if (elementFilter == ElementFilter.FILTER_NOTHING) {
             return ElementFilterList.FILTER_NOTHING_LIST;
         } else {
             return ElementFilterList.asFilterList(elementFilter);
         }
-    }
-
-    public XPathAndFilterFinder(String xPathExpression, ElementFilterList elementFilterList) {
-        this.xPathExpression = xPathExpression;
-        this.elementFilterList = elementFilterList;
     }
 
     public String getXPathExpression() {
@@ -80,7 +80,7 @@ public class XPathAndFilterFinder {
         return elementFilterList;
     }
 
-    public XPathAndFilterFinder newXPathExpressionKeepingEverythingElse(String newXPathExpression) {
+    XPathAndFilterFinder newXPathExpressionKeepingEverythingElse(String newXPathExpression) {
         return new XPathAndFilterFinder(newXPathExpression, this.getElementFilterList());
     }
 
@@ -95,7 +95,7 @@ public class XPathAndFilterFinder {
         return new By.ByXPath(finalXPathExpression).findElements(context);
     }
 
-    public String getFinalXPathExpression() {
+    private String getFinalXPathExpression() {
         return "(" + this.xPathExpression + ")";
     }
 
