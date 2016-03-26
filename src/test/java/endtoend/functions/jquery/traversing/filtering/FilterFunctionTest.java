@@ -76,7 +76,7 @@ public class FilterFunctionTest {
         assertThat($myDiv.filter(new Predicate<WebElement>() {
             @Override
             public boolean apply(WebElement input) {
-                return input == myDivWebElement;
+                return myDivWebElement.equals(input);
             }
         }).get(0), is(myDivWebElement));
         assertThat($("*").filter(new Predicate<WebElement>() {
