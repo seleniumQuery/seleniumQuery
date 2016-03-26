@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.common.preparser;
 
 import com.steadystate.css.parser.SACParserCSS3;
+import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.common.preparser.CssSelectorPreParser.PreParsedSelector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,10 +48,8 @@ public class CssSelectorParser {
 	private static SelectorList parseSelectorIntoParseTree(String selector) {
 		try {
             return SAC_CSS3_PARSER.parseSelectors(new InputSource(new StringReader(selector)));
-        } catch (RuntimeException e) {
-            throw e;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new SeleniumQueryException("Problem parsing selector: "+selector, e);
         }
 	}
 
