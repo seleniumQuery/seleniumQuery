@@ -55,6 +55,10 @@ public class IsFunction {
 
     public static class CompiledSelector {
 
+        private boolean emptySelector = false;
+        private List<CompiledCssSelector> compiledCssSelectors;
+        private boolean hasNegatedPresent = false;
+
         private class CompiledCssSelector {
             public final CssSelector<Selector, TagComponent> cssSelector;
             final boolean hasNegatedPresent;
@@ -67,10 +71,6 @@ public class IsFunction {
                 this.parsedSimpleSelector = parsedSimpleSelector;
             }
         }
-
-        private boolean emptySelector = false;
-        private List<CompiledCssSelector> compiledCssSelectors;
-        private boolean hasNegatedPresent = false;
 
         public CompiledSelector(String selector) {
             if (selector == null || selector.trim().isEmpty()) {
