@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import testinfrastructure.testdouble.PseudoTestDoubleException;
 import testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy;
 import testinfrastructure.testutils.DriverInTest;
 
@@ -102,7 +103,7 @@ public class DriverVersionUtilsTest {
         // given
         final String supportedPseudo = ":some-unsupported-pseudo";
         class WebDriverThatSupportsNoPseudo extends WebDriverDummy {
-            @Override public WebElement findElementByCssSelector(String s) { throw new RuntimeException(); }
+            @Override public WebElement findElementByCssSelector(String s) { throw new PseudoTestDoubleException(); }
         }
         DriverVersionUtils driverVersionUtils = new DriverVersionUtils();
         WebDriver webDriver = new WebDriverThatSupportsNoPseudo();
