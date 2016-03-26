@@ -19,6 +19,8 @@ package testinfrastructure.testdouble.org.apache.commons.logging;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import static org.junit.Assert.fail;
+
 public class LogInjector {
 
     public static LogSpy injectLogSpy(Class<?> clazz) {
@@ -30,23 +32,20 @@ public class LogInjector {
     private static void setFinalStaticField(Class<?> clazz, String fieldName, Object value) {
         try {
             setFinalStaticField(clazz.getDeclaredField(fieldName), value);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            fail(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    private static void setFinalStaticField(Field field, Object newValue) {
-        try {
-            field.setAccessible(true);
+    private static void setFinalStaticField(Field field, Object newValue) throws NoSuchFieldException, IllegalAccessException {
+        field.setAccessible(true);
 
-            Field modifiersField = Field.class.getDeclaredField("modifiers");
-            modifiersField.setAccessible(true);
-            modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        Field modifiersField = Field.class.getDeclaredField("modifiers");
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
 
-            field.set(null, newValue);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        field.set(null, newValue);
     }
 
 }
