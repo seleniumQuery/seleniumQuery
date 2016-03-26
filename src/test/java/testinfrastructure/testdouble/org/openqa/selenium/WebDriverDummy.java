@@ -31,8 +31,6 @@ public class WebDriverDummy implements WebDriver, FindsByCssSelector{
         return new WebDriverDummy();
     }
 
-    public WebDriverDummy() { /* package visibility to contain widespread inheritance */ }
-
     @Override public void get(String s) { throw new PseudoTestDoubleException(); }
     @Override public String getCurrentUrl() { throw new PseudoTestDoubleException(); }
     @Override public String getTitle() { throw new PseudoTestDoubleException(); }
