@@ -19,13 +19,7 @@ package testinfrastructure.junitrule;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._CHROME;
-import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._FIREFOX;
-import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._HTMLUNIT;
-import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._IE;
-import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._JAVASCRIPT_OFF;
-import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._JAVASCRIPT_ON;
-import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun._PHANTOMJS;
+import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun.*;
 
 @SuppressWarnings("unused")
 public enum DriverToRunTestsIn {
@@ -53,6 +47,14 @@ public enum DriverToRunTestsIn {
 	HTMLUNIT_CHROME_JS_ON_ONLY          (),
 	HTMLUNIT_CHROME_JS_OFF_ONLY         ();
 
+	private final boolean htmlUnit;
+	private final boolean firefox;
+	private final boolean chrome;
+	private final boolean ie;
+	private final boolean phantomJS;
+	private final boolean javaScriptOn;
+	private final boolean javaScriptOff;
+
 	enum ShouldRun {_FIREFOX, _CHROME, _IE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
 
 	DriverToRunTestsIn(ShouldRun... shouldRuns) {
@@ -65,14 +67,6 @@ public enum DriverToRunTestsIn {
 		this.javaScriptOn = shouldRunList.contains(_JAVASCRIPT_ON);
 		this.javaScriptOff = shouldRunList.contains(_JAVASCRIPT_OFF);
 	}
-
-	private final boolean htmlUnit;
-	private final boolean firefox;
-	private final boolean chrome;
-	private final boolean ie;
-	private final boolean phantomJS;
-	private final boolean javaScriptOn;
-	private final boolean javaScriptOff;
 
 	public boolean canRunHtmlUnit() { return htmlUnit; }
 	public boolean canRunFirefox() { return firefox; }
