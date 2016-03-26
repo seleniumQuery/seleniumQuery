@@ -26,16 +26,9 @@ import static testinfrastructure.testutils.EnvironmentTestUtils.isRunningAtConti
 
 public class SetUpAndTearDownDriver implements TestRule {
 
-	public static final DriverToRunTestsIn driverToRunTestsIn = whatDriversShouldTestsRun();
-
-	private static DriverToRunTestsIn whatDriversShouldTestsRun() {
-		if (isRunningAtContinuousIntegrationServer()) {
-			return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
-		}
-		return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
-	}
-
 	private static final String NOT_SPECIFIED = null;
+
+	public static final DriverToRunTestsIn driverToRunTestsIn = whatDriversShouldTestsRun();
 
 	private final String testUrl;
 	boolean driverHasJavaScriptEnabled = false;
@@ -46,6 +39,13 @@ public class SetUpAndTearDownDriver implements TestRule {
 
 	public SetUpAndTearDownDriver(Class<?> htmlTestUrlClass) {
 		this.testUrl = EndToEndTestUtils.classNameToTestFileUrl(htmlTestUrlClass);
+	}
+
+	private static DriverToRunTestsIn whatDriversShouldTestsRun() {
+		if (isRunningAtContinuousIntegrationServer()) {
+			return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
+		}
+		return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
 	}
 
 	private String url(Description description) {
