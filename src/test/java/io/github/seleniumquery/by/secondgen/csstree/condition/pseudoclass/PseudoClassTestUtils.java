@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
+import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
 import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
@@ -79,7 +80,7 @@ public class PseudoClassTestUtils {
         try {
             assertSelectorTranslatesArgument(selector, pseudoClassClass, "", null);
             fail("Functional Pseudo called without () should throw exception.");
-        } catch (IllegalArgumentException | org.w3c.css.sac.CSSParseException e) {
+        } catch (IllegalArgumentException | org.w3c.css.sac.CSSParseException | SeleniumQueryException e) {
             assertThat(e.getMessage(), anyOf(containsString("Functional pseudo"), containsString("(Invalid token \"not\".")));
         }
 
