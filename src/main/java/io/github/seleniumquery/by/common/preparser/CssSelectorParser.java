@@ -49,7 +49,7 @@ public class CssSelectorParser {
 		try {
             return SAC_CSS3_PARSER.parseSelectors(new InputSource(new StringReader(selector)));
         } catch (Exception e) {
-            throw new SeleniumQueryException("Problem parsing selector: "+selector, e);
+            throw new SeleniumQueryException("Impossible to parse selector \""+selector+"\": "+e.getMessage(), e);
         }
 	}
 
