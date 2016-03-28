@@ -359,11 +359,12 @@ Non-goals:
 
 ## History
 - What went bad?
-    - The selector system is not pure CSS, it allows the extended CSS supported by jQuery (and implemented by Sizzle). To get it done is a challenge by itself.
+    - Since the selector system supports not only pure CSS (it allows the extended CSS supported by jQuery- and implemented by Sizzle), its implementation is a challenge by itself.
         - The first version used regexes, didn't work so well and never made it into a release
         - The second version (released as 0.9.0) converts every CSS selector into a XPath expression and executes it.
-            - The problem with this approach is that not every CSS can be translated into an equivalent XPath expression (e.g. `:selected`)
-        - The third version (currently under development) will parse the selector and...
+            - The advantage is that this makes Selenium bring every element the user wanted already, without the need to iterate over them or anything.
+            - The problem with this approach is that not every CSS can be translated into an equivalent XPath expression (e.g. `:selected` or `:visible`)
+        - The third version (currently under development, called "secondgen") will parse the selector and...
             - If the selector is plain CSS or XPath, use it directly
             - If the selector is an extended CSS that can be translated fully to an XPath expression, than translate it and use it
             - Otherwise, translate the CSS to the XPath expression that brings the smallest numbers of element possible and then iteratively filter the results before returning
