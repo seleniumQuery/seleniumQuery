@@ -3,7 +3,7 @@
 # Read more about containers on our dev center
 # http://devcenter.wercker.com/docs/containers/index.html
 #box: debian
-box: maven:latest
+# box: maven:latest
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
 # services:
@@ -25,7 +25,13 @@ box: maven:latest
 #        name: echo
 #        code: |
 #          echo "hello world!"
+#build:
+#  steps:
+#    - seleniumQuery/maven:
+#        goals: test
+box: mies/java7-oracle@0.0.1
 build:
   steps:
-    - seleniumQuery/maven:
-        goals: test
+    - script:
+        name: mvn-install
+        code: mvn install
