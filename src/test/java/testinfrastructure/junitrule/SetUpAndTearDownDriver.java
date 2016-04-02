@@ -42,6 +42,9 @@ public class SetUpAndTearDownDriver implements TestRule {
 	}
 
 	private static DriverToRunTestsIn whatDriversShouldTestsRun() {
+		if (isRunningAtWindowsContinuousIntegrationServer()) {
+			return DriverToRunTestsIn.IE;
+		}
 		if (isRunningAtContinuousIntegrationServer()) {
 			return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
 		}
