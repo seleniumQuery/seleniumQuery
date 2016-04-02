@@ -16,6 +16,7 @@
 
 package testinfrastructure.testutils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 import java.io.File;
@@ -38,6 +39,21 @@ public class EnvironmentTestUtils {
 
     public static boolean isRunningAtWindowsContinuousIntegrationServer() {
         return "true".equalsIgnoreCase(System.getenv("APPVEYOR"));
+    }
+
+    private static String getGitLastCommitMessageIfAvailable() {
+        if (isRunningAtContinuousIntegrationServer()) {
+            return StringUtils.trimToEmpty(System.getenv("GIT_LAST_COMMIT_MESSAGE"));
+        }
+        return "";
+    }
+
+    public static boolean gitLastCommitMessageContains(String expected) {
+        String gitLastCommitMessageIfAvailable = getGitLastCommitMessageIfAvailable();
+        System.out.println("# GIT LAST COMMIT MSG WAS: "+gitLastCommitMessageIfAvailable);
+        System.out.println("# GIT LAST COMMIT MSG WAS: "+gitLastCommitMessageIfAvailable);
+        System.out.println("# GIT LAST COMMIT MSG WAS: "+gitLastCommitMessageIfAvailable);
+        return gitLastCommitMessageIfAvailable.contains(expected);
     }
 
 }

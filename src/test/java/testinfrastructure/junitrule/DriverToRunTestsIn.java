@@ -19,8 +19,8 @@ package testinfrastructure.junitrule;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.trim;
 import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun.*;
+import static testinfrastructure.testutils.EnvironmentTestUtils.gitLastCommitMessageContains;
 
 @SuppressWarnings("unused")
 public enum DriverToRunTestsIn {
@@ -78,6 +78,6 @@ public enum DriverToRunTestsIn {
 	public boolean shouldRunWithJavaScriptOff() { return javaScriptOff; }
 	public boolean canRunHtmlUnitWithJavaScriptOn() { return canRunHtmlUnit() && shouldRunWithJavaScriptOn(); }
 	public boolean canRunHtmlUnitWithJavaScriptOff() { return canRunHtmlUnit() && shouldRunWithJavaScriptOff(); }
-	public boolean canRunRemote() { return "0".equalsIgnoreCase(trim(System.getenv("TRAVIS_SKIP_SAUCE"))); }
+	public boolean canRunRemote() { return gitLastCommitMessageContains("[run sauce]"); }
 
 }
