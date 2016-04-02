@@ -14,8 +14,7 @@ before_install:
   #  - curl https://www.jpm4j.org/install/script | sh
   #  - jpm install com.codacy:codacy-coverage-reporter:assembly
 
-  - "export TRAVIS_COMMIT_MSG=\"$(git log --format=%B --no-merges -n 1)\""
-  - echo "$TRAVIS_COMMIT_MSG" | grep '\[run sauce\]'; export TRAVIS_SKIP_SAUCE=$?; true
+  - export GIT_LAST_COMMIT_MESSAGE=\"$(git log --format=%B --no-merges -n 1)\"
 after_success:
   - codecov
 
