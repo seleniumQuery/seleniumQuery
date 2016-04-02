@@ -126,7 +126,7 @@ public class EndToEndTestUtils {
     /**
      * The "negative" is just some assertion to make sure your test is really working (and not just silently failing).
      */
-    private static class NegativeAbleTest {
+    public static class NegativeAbleTest {
         private String originalAssertionName;
         private NegativeAbleTest(String originalAssertionName) {
             this.originalAssertionName = originalAssertionName;
