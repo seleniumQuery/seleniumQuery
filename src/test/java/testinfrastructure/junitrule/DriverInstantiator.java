@@ -88,7 +88,7 @@ abstract class DriverInstantiator {
                 String sauceUser = System.getenv("SAUCE_USERNAME");
                 String sauceKey = System.getenv("SAUCE_ACCESS_KEY");
 
-                RemoteWebDriver remoteChrome = new RemoteWebDriver(new URL(format("http://%s@%s@ondemand.saucelabs.com:80/wd/hub", sauceUser, sauceKey)), DesiredCapabilities.chrome());
+                RemoteWebDriver remoteChrome = new RemoteWebDriver(new URL(format("http://%s:%s@ondemand.saucelabs.com:80/wd/hub", sauceUser, sauceKey)), DesiredCapabilities.chrome());
                 $.driver().use(remoteChrome);
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
