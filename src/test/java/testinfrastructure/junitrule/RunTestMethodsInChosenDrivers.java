@@ -19,9 +19,7 @@ package testinfrastructure.junitrule;
 import org.junit.runners.model.Statement;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static testinfrastructure.junitrule.DriverInstantiator.FIREFOX_JS_OFF;
-import static testinfrastructure.junitrule.DriverInstantiator.FIREFOX_JS_ON;
-import static testinfrastructure.junitrule.DriverInstantiator.PHANTOMJS;
+import static testinfrastructure.junitrule.DriverInstantiator.*;
 import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.NO;
 import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.YES;
 
@@ -49,6 +47,7 @@ class RunTestMethodsInChosenDrivers extends Statement {
 		executeTestOnFirefoxWithJS();
 		executeTestOnFirefoxWithoutJS();
 		executeTestOnPhantomJS();
+		executeTestOnRemote();
 		testMethodsRunner.reportFailures();
 	}
 
@@ -97,6 +96,9 @@ class RunTestMethodsInChosenDrivers extends Statement {
 	}
 	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOff()    {
 		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE11_JS_OFF, NO);
+	}
+	private void executeTestOnRemote() {
+		executeTestOn(driverToRunTestsIn.canRunRemote(), DriverInstantiator.REMOTE, YES);
 	}
 
 	private void executeTestOn(boolean shouldExecute, DriverInstantiator driverInstantiator, DriverHasJavaScriptEnabled driverHasJavaScriptEnabled) {
