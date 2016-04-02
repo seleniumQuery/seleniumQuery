@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,15 @@ public class EndToEndTestUtils {
 
     public static String classNameToTestFileUrl(Class<?> clazz) {
         String classFullName = clazz.getName();
-        return classNameToTestFileUrl(classFullName);
+        return convertFileUrlToWebUrlWhenDriverIsRemote(classNameToTestFileUrl(classFullName));
+    }
+
+    private static String convertFileUrlToWebUrlWhenDriverIsRemote(String urlToOpen) {
+        // there should probably be a better way of getting this info!
+        if ($.driver().get().toString().startsWith("RemoteWebDriver: ")) {
+            return urlToOpen.replaceAll("^file:/.*?/src/", "https://rawgit.com/seleniumQuery/seleniumQuery/master/src/");
+        }
+        return urlToOpen;
     }
 
     public static String classNameToTestFileUrl(String classFullName) {
@@ -71,7 +79,7 @@ public class EndToEndTestUtils {
         }
     }
 
-    public static String[] ids(String selector) {
+    private static String[] ids(String selector) {
         SeleniumQueryObject f = $(selector);
         List<String> actualIds = new ArrayList<>();
         for (WebElement webElement : f) {
@@ -118,7 +126,7 @@ public class EndToEndTestUtils {
     /**
      * The "negative" is just some assertion to make sure your test is really working (and not just silently failing).
      */
-    public static class NegativeAbleTest {
+    private static class NegativeAbleTest {
         private String originalAssertionName;
         private NegativeAbleTest(String originalAssertionName) {
             this.originalAssertionName = originalAssertionName;

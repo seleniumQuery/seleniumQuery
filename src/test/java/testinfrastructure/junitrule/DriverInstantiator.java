@@ -17,6 +17,13 @@
 package testinfrastructure.junitrule;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static java.lang.String.format;
 
 @SuppressWarnings("deprecation")
 abstract class DriverInstantiator {
@@ -74,5 +81,19 @@ abstract class DriverInstantiator {
     };
     static DriverInstantiator HTMLUNIT_IE11_JS_ON  = new DriverInstantiator("HtmlUnit (IE11) - JS ON")  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11(); } };
     static DriverInstantiator HTMLUNIT_IE11_JS_OFF = new DriverInstantiator("HtmlUnit (IE11) - JS OFF") { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11().withoutJavaScript(); } };
+
+    static DriverInstantiator REMOTE = new DriverInstantiator("Remote Chrome") {
+        @Override public void instantiateDriver(BrowserFunctions $) {
+            try {
+                String sauceUser = System.getenv("SAUCE_USERNAME");
+                String sauceKey = System.getenv("SAUCE_ACCESS_KEY");
+
+                RemoteWebDriver remoteChrome = new RemoteWebDriver(new URL(format("http://%s@%s@ondemand.saucelabs.com:80/wd/hub", sauceUser, sauceKey)), DesiredCapabilities.chrome());
+                $.driver().use(remoteChrome);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
 
 }
