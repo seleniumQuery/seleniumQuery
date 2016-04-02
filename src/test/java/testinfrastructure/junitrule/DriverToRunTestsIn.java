@@ -46,7 +46,9 @@ public enum DriverToRunTestsIn {
 
 	HTMLUNIT_CHROME_JS_ON_AND_OFF       (),
 	HTMLUNIT_CHROME_JS_ON_ONLY          (),
-	HTMLUNIT_CHROME_JS_OFF_ONLY         ();
+	HTMLUNIT_CHROME_JS_OFF_ONLY         (),
+
+	REMOTE                              ();
 
 	private final boolean htmlUnit;
 	private final boolean firefox;
