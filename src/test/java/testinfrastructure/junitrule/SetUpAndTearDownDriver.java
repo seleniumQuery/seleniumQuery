@@ -23,6 +23,7 @@ import testinfrastructure.EndToEndTestUtils;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static testinfrastructure.testutils.EnvironmentTestUtils.isRunningAtContinuousIntegrationServer;
+import static testinfrastructure.testutils.EnvironmentTestUtils.isRunningAtWindowsContinuousIntegrationServer;
 
 public class SetUpAndTearDownDriver implements TestRule {
 
