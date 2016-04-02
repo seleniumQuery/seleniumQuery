@@ -36,4 +36,8 @@ public class EnvironmentTestUtils {
         return "true".equalsIgnoreCase(System.getenv("CI"));
     }
 
+    public static boolean isRunningAtWindowsContinuousIntegrationServer() {
+        return "true".equalsIgnoreCase(System.getenv("APPVEYOR"));
+    }
+
 }
