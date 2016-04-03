@@ -20,19 +20,13 @@
     # Steps make up the actions in your pipeline
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
-#  steps:
-#    - script:
-#        name: echo
-#        code: |
-#          echo "hello world!"
-#build:
-#  steps:
-#    - seleniumQuery/maven:
-#        goals: test
 box: maven:latest
 
 build:
   steps:
     - script:
-          code: |
-            mvn clean install
+      code: |
+        export GIT_LAST_COMMIT_MESSAGE=\"$(git log --format=%B --no-merges -n 1)\"
+    - script:
+        code: |
+          mvn clean install
