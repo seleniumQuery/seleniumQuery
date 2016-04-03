@@ -17,17 +17,19 @@
 package testinfrastructure.testdouble.org.openqa.selenium;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.internal.Locatable;
 import testinfrastructure.testdouble.PseudoTestDoubleException;
 
 import java.util.List;
 
-public class WebElementDummy implements WebElement {
+public class WebElementDummy implements WebElement, Locatable {
 
     public static WebElement createWebElementDummy() {
         return new WebElementDummy();
     }
 
-    WebElementDummy() { /* package visibility to contain widespread inheritance */ }
+    public WebElementDummy() { /* package visibility to contain widespread inheritance */ }
 
     @Override public void click() { throw new PseudoTestDoubleException(); }
     @Override public void submit() { throw new PseudoTestDoubleException(); }
@@ -46,5 +48,6 @@ public class WebElementDummy implements WebElement {
     @Override public Rectangle getRect() { throw new PseudoTestDoubleException(); }
     @Override public String getCssValue(String s) { throw new PseudoTestDoubleException(); }
     @Override public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException { throw new PseudoTestDoubleException(); }
+    @Override public Coordinates getCoordinates() { return null; }
 
 }
