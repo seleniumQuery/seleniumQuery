@@ -48,8 +48,11 @@ class TestMethodsRunner {
 
 	void reportFailures() throws Throwable {
 		if (this.firstFailure != null) {
+			EndToEndTestUtils.setJobStatusSuccessForRemoteDriver(false);
 			throw new AssertionError("There are test failures in some drivers: " + failed, this.firstFailure);
-		}
+		} else {
+            EndToEndTestUtils.setJobStatusSuccessForRemoteDriver(true);
+        }
 	}
 
 }
