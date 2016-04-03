@@ -59,10 +59,6 @@ public class SauceLabsUtils {
         }
     }
 
-    public static void jobName(String passed) {
-        jobName(passed, SeleniumQuery.$);
-    }
-
     public static void jobName(String urlToOpen, BrowserFunctions $) {
         WebDriver webDriver = $.driver().get();
         if (isRemoteWebDriver(webDriver)) {
