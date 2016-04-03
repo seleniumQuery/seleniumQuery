@@ -19,11 +19,8 @@ package testinfrastructure;
 import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.browser.BrowserFunctions;
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import testinfrastructure.testutils.SauceLabsUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -64,11 +61,6 @@ public class EndToEndTestUtils {
         return classNameToTestFileUrl(classFullName);
     }
 
-    static boolean isRemoteWebDriver(WebDriver webDriver) {
-        // there should probably be a better way of deciding this!
-        return webDriver instanceof RemoteWebDriver && webDriver.toString().startsWith("RemoteWebDriver: ");
-    }
-
     public static String classNameToTestFileUrl(String classFullName) {
         String classPath = classFullName.replace('.', '/');
         String htmlPath = TEST_SRC_FOLDER + classPath + ".html";
@@ -79,32 +71,13 @@ public class EndToEndTestUtils {
         openUrl(urlToOpen, SeleniumQuery.$);
     }
 
+    public static void openUrl(Class<?> clazz, BrowserFunctions $) {
+        openUrl(classNameToTestFileUrl(clazz), $);
+    }
+
     public static void openUrl(String urlToOpen, BrowserFunctions $) {
-        setJobNameForRemoteDriver(urlToOpen, $);
-        $.url(fixUrlForRemoteTest(urlToOpen));
-    }
-
-    private static void setJobNameForRemoteDriver(String urlToOpen, BrowserFunctions $) {
-        if (EndToEndTestUtils.isRemoteWebDriver($.driver().get())) {
-            String jobName = urlToOpen.replaceAll("^file:/.*?/src/test/java/(.*)\\.html$", "$1");
-            if (!StringUtils.trimToEmpty(System.getenv("CI_COMMIT_ID")).isEmpty()) {
-                ((JavascriptExecutor) $.driver().get()).executeScript("sauce:job-build=" + System.getenv("CI_COMMIT_ID"));
-            }
-            ((JavascriptExecutor) $.driver().get()).executeScript("sauce:job-name="+jobName);
-        }
-    }
-
-    public static void setJobStatusSuccessForRemoteDriver(boolean passed) {
-        if (EndToEndTestUtils.isRemoteWebDriver($.driver().get())) {
-            ((JavascriptExecutor) $.driver().get()).executeScript("sauce:job-status="+passed);
-        }
-    }
-
-    private static String fixUrlForRemoteTest(String urlToOpen) {
-        if (EndToEndTestUtils.isRemoteWebDriver($.driver().get())) {
-            return urlToOpen.replaceAll("^file:/.*?/src/test/java/", "https://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/");
-        }
-        return urlToOpen;
+        SauceLabsUtils.jobName(urlToOpen, $);
+        $.url(SauceLabsUtils.fixUrlForRemoteTest(urlToOpen));
     }
 
     @SuppressWarnings("unused")
