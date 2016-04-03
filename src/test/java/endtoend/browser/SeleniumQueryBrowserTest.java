@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
+import static testinfrastructure.EndToEndTestUtils.openUrl;
 
 public class SeleniumQueryBrowserTest {
 
@@ -29,11 +30,11 @@ public class SeleniumQueryBrowserTest {
     public void multiple_browser_instances_should_work_OK() {
         SeleniumQueryBrowser chrome = new SeleniumQueryBrowser();
         chrome.$.driver().useHtmlUnit().emulatingChrome();
-        chrome.$.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
+        openUrl(classNameToTestFileUrl(SeleniumQueryBrowserTest.class), chrome.$);
 
         SeleniumQueryBrowser firefox = new SeleniumQueryBrowser();
         firefox.$.driver().useHtmlUnit().emulatingFirefox();
-        firefox.$.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
+        openUrl(classNameToTestFileUrl(SeleniumQueryBrowserTest.class), firefox.$);
 
         assertThat(chrome.$("#agent").text(), containsString("Chrome"));
         assertThat(firefox.$("#agent").text(), containsString("Firefox"));
