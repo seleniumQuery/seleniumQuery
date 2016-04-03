@@ -13,8 +13,6 @@ before_install:
   - ${HOME}/jpm/bin/jpm install com.codacy:codacy-coverage-reporter:assembly
   #  - curl https://www.jpm4j.org/install/script | sh
   #  - jpm install com.codacy:codacy-coverage-reporter:assembly
-
-  - export GIT_LAST_COMMIT_MESSAGE=\"$(git log --format=%B --no-merges -n 1)\"
 after_success:
   - codecov
 
