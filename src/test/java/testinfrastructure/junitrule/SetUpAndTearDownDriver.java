@@ -43,7 +43,7 @@ public class SetUpAndTearDownDriver implements TestRule {
 
 	private static DriverToRunTestsIn whatDriversShouldTestsRun() {
 		if (isRunningAtCodeShip()) {
-			// will also run remote if [run sauce] is at last commit message
+			// will also run DriverToRunTestsIn.REMOTE if [run sauce] is at last commit message
 			return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
 		}
 		if (isRunningAtContinuousIntegrationServer()) {
