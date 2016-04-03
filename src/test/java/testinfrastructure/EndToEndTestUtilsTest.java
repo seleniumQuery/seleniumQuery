@@ -16,6 +16,7 @@
 
 package testinfrastructure;
 
+import io.github.seleniumquery.SeleniumQueryBrowser;
 import org.junit.Test;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -39,6 +40,33 @@ public class EndToEndTestUtilsTest {
         assertThat(remoteWebDriverUrlSpy.executedScript, is("sauce:job-name=testinfrastructure/EndToEndTestUtilsTest"));
     }
 
+    @Test
+    public void urlIsFixedCorrectlyWhenDriverIsRemote_codeship_CI_environment_example() {
+        // given
+        RemoteWebDriverUrlSpy remoteWebDriverUrlSpy = new RemoteWebDriverUrlSpy();
+        $.driver().use(remoteWebDriverUrlSpy);
+        System.out.println(EndToEndTestUtils.isRemoteWebDriver($.driver().get()));
+        // when
+        EndToEndTestUtils.openUrl("file:/home/rof/src/github.com/seleniumQuery/seleniumQuery/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html");
+        // then
+        assertThat(remoteWebDriverUrlSpy.visitedUrl, is("https://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html"));
+        assertThat(remoteWebDriverUrlSpy.executedScript, is("sauce:job-name=testinfrastructure/EndToEndTestUtilsTest"));
+    }
+
+    @Test
+    public void urlIsFixedCorrectlyWhenDriverIsRemote__nonGlobal_browser() {
+        // given
+        SeleniumQueryBrowser remoteBrowser = new SeleniumQueryBrowser();
+        RemoteWebDriverUrlSpy remoteWebDriverUrlSpy = new RemoteWebDriverUrlSpy();
+        remoteBrowser.$.driver().use(remoteWebDriverUrlSpy);
+        System.out.println(EndToEndTestUtils.isRemoteWebDriver($.driver().get()));
+        // when
+        EndToEndTestUtils.openUrl(classNameToTestFileUrl(EndToEndTestUtilsTest.class), remoteBrowser.$);
+        // then
+        assertThat(remoteWebDriverUrlSpy.visitedUrl, is("https://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html"));
+        assertThat(remoteWebDriverUrlSpy.executedScript, is("sauce:job-name=testinfrastructure/EndToEndTestUtilsTest"));
+    }
+
 }
 
 class RemoteWebDriverUrlSpy extends RemoteWebDriver {
@@ -56,5 +84,8 @@ class RemoteWebDriverUrlSpy extends RemoteWebDriver {
     @Override
     public String toString() {
         return "RemoteWebDriver: ";
+    }
+    @Override
+    public void quit() {
     }
 }

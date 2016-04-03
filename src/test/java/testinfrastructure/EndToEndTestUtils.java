@@ -16,7 +16,9 @@
 
 package testinfrastructure;
 
+import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.browser.BrowserFunctions;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -73,15 +75,18 @@ public class EndToEndTestUtils {
     }
 
     public static void openUrl(String urlToOpen) {
-        setJobNameForRemoteDriver(urlToOpen);
-        String urlToOpen1 = fixUrlForRemoteTest(urlToOpen);
-        $.url(urlToOpen1);
+        openUrl(urlToOpen, SeleniumQuery.$);
     }
 
-    private static void setJobNameForRemoteDriver(String urlToOpen) {
+    public static void openUrl(String urlToOpen, BrowserFunctions $) {
+        setJobNameForRemoteDriver(urlToOpen, $);
+        $.url(fixUrlForRemoteTest(urlToOpen));
+    }
+
+    private static void setJobNameForRemoteDriver(String urlToOpen, BrowserFunctions $) {
         if (EndToEndTestUtils.isRemoteWebDriver($.driver().get())) {
             String jobName = urlToOpen.replaceAll("^file:/.*?/src/test/java/(.*)\\.html$", "$1");
-            ((JavascriptExecutor)$.driver().get()).executeScript("sauce:job-name="+jobName);
+            ((JavascriptExecutor) $.driver().get()).executeScript("sauce:job-name="+jobName);
         }
     }
 
