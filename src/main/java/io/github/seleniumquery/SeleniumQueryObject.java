@@ -229,12 +229,25 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	/**
 	 * Clicks <strong>all</strong> elements in the set of matched elements, in the
 	 * order they were matched.
+     * <br><br>
+     * If any element throws exceptions while being clicked, the others will still be clicked.
 	 *
 	 * @return The same seleniumQuery object.
 	 *
 	 * @since 0.9.0
 	 */
 	SeleniumQueryObject click();
+
+    /**
+     * Double clicks <strong>all</strong> elements in the set of matched elements, in the
+     * order they were matched.
+     * <br><br>
+     * If any element throws exceptions while being clicked, the others will still be clicked.
+     *
+     * @return The same seleniumQuery object.
+     * @since 0.15.0
+     */
+    SeleniumQueryObject dblclick();
 
 	/**
 	 * Sets the value of <strong>all</strong> elements in the set of matched elements.
