@@ -155,6 +155,11 @@ class SqObject implements SeleniumQueryObject {
 	}
 
 	@Override
+	public SeleniumQueryObject dblclick() {
+		return seleniumQueryFunctions.dblclick(this);
+	}
+
+	@Override
     public SeleniumQueryObject val(String value) {
         return seleniumQueryFunctions.valueWrite(this, value);
 	}

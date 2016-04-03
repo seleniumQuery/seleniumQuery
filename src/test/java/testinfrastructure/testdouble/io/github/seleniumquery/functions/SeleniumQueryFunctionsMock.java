@@ -51,12 +51,17 @@ public class SeleniumQueryFunctionsMock extends SeleniumQueryFunctions {
     public MethodMockConfiguration<SeleniumQueryObject> eachMethod;
     @Override public SeleniumQueryObject each(SeleniumQueryObject s, SeleniumQueryObject.EachFunction f) { return eachMethod.executeMethodMock(s, f); }
 
+    public MethodMockConfiguration<SeleniumQueryObject> clickMethod;
+    @Override public SeleniumQueryObject click(SeleniumQueryObject s) { return clickMethod.executeMethodMock(s); }
+
+    public MethodMockConfiguration<SeleniumQueryObject> dblclickMethod;
+    @Override public SeleniumQueryObject dblclick(SeleniumQueryObject s) { return dblclickMethod.executeMethodMock(s); }
+
     @Override public SeleniumQueryObject notSelector(SeleniumQueryObject seleniumQueryObject, String selector) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject first(SeleniumQueryObject seleniumQueryObject) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject last(SeleniumQueryObject seleniumQueryObject) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject eqIndex(SeleniumQueryObject seleniumQueryObject, int index) { throw new PseudoTestDoubleException(); }
     @Override public String text(SeleniumQueryObject seleniumQueryObject) { throw new PseudoTestDoubleException(); }
-    @Override public SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject findSelector(SeleniumQueryObject seleniumQueryObject, String selector) { throw new PseudoTestDoubleException(); }
     @Override public String attributeRead(SeleniumQueryObject seleniumQueryObject, String attributeName) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject attributeWrite(SeleniumQueryObject seleniumQueryObject, String attributeName, Object value) { throw new PseudoTestDoubleException(); }

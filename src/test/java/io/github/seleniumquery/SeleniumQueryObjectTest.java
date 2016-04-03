@@ -171,4 +171,32 @@ public class SeleniumQueryObjectTest {
         assertThat(returnedObject, is(configuredReturningObject));
     }
 
+    @Test
+    public void clickFunction() {
+        // given
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
+
+        SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
+        seleniumQueryFunctions.clickMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject);
+        // when
+        SeleniumQueryObject returnedObject = seleniumQueryObject.click();
+        // then
+        assertThat(returnedObject, is(configuredReturningObject));
+    }
+
+    @Test
+    public void dblclickFunction() {
+        // given
+        SeleniumQueryFunctionsMock seleniumQueryFunctions = createMockSeleniumQueryFunctions();
+        SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
+
+        SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
+        seleniumQueryFunctions.dblclickMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject);
+        // when
+        SeleniumQueryObject returnedObject = seleniumQueryObject.dblclick();
+        // then
+        assertThat(returnedObject, is(configuredReturningObject));
+    }
+
 }

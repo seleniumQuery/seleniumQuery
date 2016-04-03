@@ -59,6 +59,7 @@ public class SeleniumQueryObjectDummy implements SeleniumQueryObject {
     @Override public SeleniumQueryObject eq(int index) { throw new PseudoTestDoubleException(); }
     @Override public String text() { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject click() { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryObject dblclick() { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject val(String value) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject val(Number value) { throw new PseudoTestDoubleException(); }
     @Override public String val() { throw new PseudoTestDoubleException(); }

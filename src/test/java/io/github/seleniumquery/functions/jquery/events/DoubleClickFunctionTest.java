@@ -46,7 +46,7 @@ public class DoubleClickFunctionTest {
         // given
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements();
         // when
-        SeleniumQueryObject returnedSqo = DoubleClickFunction.dblclick(sqo);
+        SeleniumQueryObject returnedSqo = new DoubleClickFunction().dblclick(sqo);
         // then
         assertThat(returnedSqo, is(sqo));
     }
@@ -61,7 +61,7 @@ public class DoubleClickFunctionTest {
 
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(new WebDriverMouseCoordinatesSpy(), firstElement, secondElement);
         // when
-        DoubleClickFunction.dblclick(sqo);
+        new DoubleClickFunction().dblclick(sqo);
         // then
         firstElementCoordinatesSpy.assertDoubleClickedAfterMovedTo();
         secondElementCoordinatesSpy.assertDoubleClickedAfterMovedTo();
@@ -76,7 +76,7 @@ public class DoubleClickFunctionTest {
 
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(new WebDriverMouseCoordinatesSpy(), elementThatCantBeDoubleClicked, secondElement);
         // when
-        DoubleClickFunction.dblclick(sqo);
+        new DoubleClickFunction().dblclick(sqo);
         // then
         secondElementCoordinatesSpy.assertDoubleClickedAfterMovedTo();
     }
@@ -92,7 +92,7 @@ public class DoubleClickFunctionTest {
 
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(new WebDriverMouseCoordinatesSpy(), elementThatCantBeDoubleClicked, secondElement);
         // when
-        DoubleClickFunction.dblclick(sqo);
+        new DoubleClickFunction().dblclick(sqo);
         // then
         logSpy.assertInfoWithExceptionWasLogged(ElementNotVisibleException.class);
     }
@@ -104,7 +104,7 @@ public class DoubleClickFunctionTest {
         WebElement unclickableHiddenWebElementTwo = new WebElementLocationSpy(new ThrowElementHiddenExceptionCoordinates());
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(new WebDriverMouseCoordinatesSpy(), unclickableHiddenWebElement, unclickableHiddenWebElementTwo);
         // when
-        DoubleClickFunction.dblclick(sqo);
+        new DoubleClickFunction().dblclick(sqo);
         // then
         // exception is thrown
     }

@@ -23,6 +23,7 @@ import io.github.seleniumquery.functions.jquery.attributes.HasClassFunction;
 import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
 import io.github.seleniumquery.functions.jquery.attributes.RemoveAttrFunction;
 import io.github.seleniumquery.functions.jquery.events.ClickFunction;
+import io.github.seleniumquery.functions.jquery.events.DoubleClickFunction;
 import io.github.seleniumquery.functions.jquery.forms.FocusFunction;
 import io.github.seleniumquery.functions.jquery.forms.SubmitFunction;
 import io.github.seleniumquery.functions.jquery.forms.ValFunction;
@@ -100,6 +101,10 @@ public class SeleniumQueryFunctions {
 
     public SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject) {
         return ClickFunction.click(seleniumQueryObject);
+    }
+
+    public SeleniumQueryObject dblclick(SeleniumQueryObject seleniumQueryObject) {
+        return new DoubleClickFunction().dblclick(seleniumQueryObject);
     }
 
     public SeleniumQueryObject findSelector(SeleniumQueryObject seleniumQueryObject, String selector) {

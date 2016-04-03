@@ -39,7 +39,7 @@ public class DoubleClickFunction {
 
     private static final Log LOGGER = LogFactory.getLog(DoubleClickFunction.class);
 
-    public static SeleniumQueryObject dblclick(SeleniumQueryObject seleniumQueryObject) {
+    public SeleniumQueryObject dblclick(SeleniumQueryObject seleniumQueryObject) {
         LOGGER.debug("Double-Clicking " + seleniumQueryObject);
         List<WebElement> elements = seleniumQueryObject.get();
 
@@ -61,10 +61,9 @@ public class DoubleClickFunction {
         return seleniumQueryObject;
     }
 
-    private static void doubleClick(SeleniumQueryObject seleniumQueryObject, WebElement element) {
+    private void doubleClick(SeleniumQueryObject seleniumQueryObject, WebElement element) {
         Actions actions = new Actions(seleniumQueryObject.getWebDriver());
         actions.doubleClick(element).perform();
     }
-
 
 }
