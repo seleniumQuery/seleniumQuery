@@ -17,28 +17,32 @@
 package endtoend.browser;
 
 import io.github.seleniumquery.SeleniumQueryBrowser;
+import org.junit.After;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
-import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 import static testinfrastructure.EndToEndTestUtils.openUrl;
 
 public class SeleniumQueryBrowserTest {
 
+    private SeleniumQueryBrowser chrome = new SeleniumQueryBrowser();
+    private SeleniumQueryBrowser firefox = new SeleniumQueryBrowser();
+
     @Test
     public void multiple_browser_instances_should_work_OK() {
-        SeleniumQueryBrowser chrome = new SeleniumQueryBrowser();
         chrome.$.driver().useHtmlUnit().emulatingChrome();
-        openUrl(classNameToTestFileUrl(SeleniumQueryBrowserTest.class), chrome.$);
+        openUrl(SeleniumQueryBrowserTest.class, chrome.$);
 
-        SeleniumQueryBrowser firefox = new SeleniumQueryBrowser();
         firefox.$.driver().useHtmlUnit().emulatingFirefox();
-        openUrl(classNameToTestFileUrl(SeleniumQueryBrowserTest.class), firefox.$);
+        openUrl(SeleniumQueryBrowserTest.class, firefox.$);
 
         assertThat(chrome.$("#agent").text(), containsString("Chrome"));
         assertThat(firefox.$("#agent").text(), containsString("Firefox"));
+    }
 
+    @After
+    public void tearDown() {
         chrome.$.quit();
         firefox.$.quit();
     }
