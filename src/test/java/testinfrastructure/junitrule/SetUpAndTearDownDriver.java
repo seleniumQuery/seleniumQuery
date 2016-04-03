@@ -21,7 +21,6 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 import testinfrastructure.EndToEndTestUtils;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
 import static testinfrastructure.testutils.EnvironmentTestUtils.isRunningAtContinuousIntegrationServer;
 import static testinfrastructure.testutils.EnvironmentTestUtils.isRunningAtWindowsContinuousIntegrationServer;
 
@@ -95,10 +94,11 @@ public class SetUpAndTearDownDriver implements TestRule {
     @SuppressWarnings("unused") private void afterClass() { }
 
 	private void beforeMethod(Description description) {
-		$.url(url(description));
+		String urlToOpen = url(description);
+		EndToEndTestUtils.openUrl(urlToOpen);
 	}
 
-    @SuppressWarnings("unused") private void afterMethod(Description description) { }
+	@SuppressWarnings("unused") private void afterMethod(Description description) { }
 
     @SuppressWarnings("unused")
 	private void dump(Description description) {

@@ -17,7 +17,10 @@
 package testinfrastructure;
 
 import io.github.seleniumquery.SeleniumQueryObject;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -55,21 +58,37 @@ public class EndToEndTestUtils {
 
     public static String classNameToTestFileUrl(Class<?> clazz) {
         String classFullName = clazz.getName();
-        return convertFileUrlToWebUrlWhenDriverIsRemote(classNameToTestFileUrl(classFullName));
+        return classNameToTestFileUrl(classFullName);
     }
 
-    private static String convertFileUrlToWebUrlWhenDriverIsRemote(String urlToOpen) {
-        // there should probably be a better way of getting this info!
-        if ($.driver().get().toString().startsWith("RemoteWebDriver: ")) {
-            return urlToOpen.replaceAll("^file:/.*?/src/", "https://rawgit.com/seleniumQuery/seleniumQuery/master/src/");
-        }
-        return urlToOpen;
+    public static boolean isRemoteWebDriver(WebDriver webDriver) {
+        // there should probably be a better way of deciding this!
+        return webDriver instanceof RemoteWebDriver && webDriver.toString().startsWith("RemoteWebDriver: ");
     }
 
     public static String classNameToTestFileUrl(String classFullName) {
         String classPath = classFullName.replace('.', '/');
         String htmlPath = TEST_SRC_FOLDER + classPath + ".html";
         return new File(htmlPath).toURI().toString();
+    }
+
+    public static void openUrl(String urlToOpen) {
+        setJobNameForRemoteDriver(urlToOpen);
+        $.url(fixUrlForRemoteTest(urlToOpen));
+    }
+
+    private static void setJobNameForRemoteDriver(String urlToOpen) {
+        if (EndToEndTestUtils.isRemoteWebDriver($.driver().get())) {
+            String jobName = urlToOpen.replaceAll("^file:/.*?/src/test/java/(.*)\\.html$", "$1");
+            ((JavascriptExecutor)$.driver().get()).executeScript("sauce:job-name="+jobName);
+        }
+    }
+
+    private static String fixUrlForRemoteTest(String urlToOpen) {
+        if (EndToEndTestUtils.isRemoteWebDriver($.driver().get())) {
+            return urlToOpen.replaceAll("^file:/.*?/src/", "https://rawgit.com/seleniumQuery/seleniumQuery/master/src/");
+        }
+        return urlToOpen;
     }
 
     protected void tIS(String assertionName, String selector, String[] expectedIds) {

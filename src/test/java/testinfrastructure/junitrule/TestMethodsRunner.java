@@ -17,8 +17,7 @@
 package testinfrastructure.junitrule;
 
 import org.junit.runners.model.Statement;
-
-import static io.github.seleniumquery.SeleniumQuery.$;
+import testinfrastructure.EndToEndTestUtils;
 
 class TestMethodsRunner {
 
@@ -34,7 +33,7 @@ class TestMethodsRunner {
 
 	void executeMethodForDriver(String driver) {
 		System.out.println("   @## >>> Running on "+driver);
-		$.url(url); // this wont be needed when everyone use this both as @Rule and @ClassRule
+		EndToEndTestUtils.openUrl(this.url); // this wont be needed when everyone use this both as @Rule and @ClassRule
 		try {
 			base.evaluate();
 		} catch (Throwable t) {
