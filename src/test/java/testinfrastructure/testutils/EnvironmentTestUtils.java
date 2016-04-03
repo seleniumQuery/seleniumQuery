@@ -42,7 +42,7 @@ public class EnvironmentTestUtils {
     }
 
     private static String getGitLastCommitMessageIfAvailable() {
-        if (isRunningAtContinuousIntegrationServer()) {
+        if (isRunningAtCodeShip()) {
             return StringUtils.trimToEmpty(System.getenv("CI_MESSAGE"));
         }
         return "";
