@@ -19,6 +19,7 @@ package testinfrastructure;
 import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.browser.BrowserFunctions;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -63,7 +64,7 @@ public class EndToEndTestUtils {
         return classNameToTestFileUrl(classFullName);
     }
 
-    public static boolean isRemoteWebDriver(WebDriver webDriver) {
+    static boolean isRemoteWebDriver(WebDriver webDriver) {
         // there should probably be a better way of deciding this!
         return webDriver instanceof RemoteWebDriver && webDriver.toString().startsWith("RemoteWebDriver: ");
     }
@@ -86,7 +87,16 @@ public class EndToEndTestUtils {
     private static void setJobNameForRemoteDriver(String urlToOpen, BrowserFunctions $) {
         if (EndToEndTestUtils.isRemoteWebDriver($.driver().get())) {
             String jobName = urlToOpen.replaceAll("^file:/.*?/src/test/java/(.*)\\.html$", "$1");
+            if (!StringUtils.trimToEmpty(System.getenv("CI_COMMIT_ID")).isEmpty()) {
+                ((JavascriptExecutor) $.driver().get()).executeScript("sauce:job-build=" + System.getenv("CI_COMMIT_ID"));
+            }
             ((JavascriptExecutor) $.driver().get()).executeScript("sauce:job-name="+jobName);
+        }
+    }
+
+    public static void setJobStatusSuccessForRemoteDriver(boolean passed) {
+        if (EndToEndTestUtils.isRemoteWebDriver($.driver().get())) {
+            ((JavascriptExecutor) $.driver().get()).executeScript("sauce:job-status="+passed);
         }
     }
 
@@ -97,6 +107,7 @@ public class EndToEndTestUtils {
         return urlToOpen;
     }
 
+    @SuppressWarnings("unused")
     protected void tIS(String assertionName, String selector, String[] expectedIds) {
         for (String expectedId : expectedIds) {
             System.out.println("$(\"#"+expectedId+"\").is(\""+selector+"\")");
@@ -151,6 +162,7 @@ public class EndToEndTestUtils {
     /**
      * The "negative" is just some assertion to make sure your test is really working (and not just silently failing).
      */
+    @SuppressWarnings("WeakerAccess")
     public static class NegativeAbleTest {
         private String originalAssertionName;
         private NegativeAbleTest(String originalAssertionName) {
