@@ -18,6 +18,7 @@ package testinfrastructure.junitrule;
 
 import org.junit.runners.model.Statement;
 import testinfrastructure.EndToEndTestUtils;
+import testinfrastructure.testutils.SauceLabsUtils;
 
 class TestMethodsRunner {
 
@@ -36,7 +37,9 @@ class TestMethodsRunner {
 		EndToEndTestUtils.openUrl(this.url); // this wont be needed when everyone use this both as @Rule and @ClassRule
 		try {
 			base.evaluate();
+            SauceLabsUtils.reportTestSuccess();
 		} catch (Throwable t) {
+            SauceLabsUtils.reportTestFailure();
 			if (this.firstFailure == null) {
 				this.firstFailure = t;
 			}
@@ -46,13 +49,11 @@ class TestMethodsRunner {
 		System.out.println("   @## <<< Done on "+driver);
 	}
 
-	void reportFailures() throws Throwable {
-		if (this.firstFailure != null) {
-			EndToEndTestUtils.setJobStatusSuccessForRemoteDriver(false);
+    void reportFailures() throws Throwable {
+        // at this point the driver already quit
+        if (this.firstFailure != null) {
 			throw new AssertionError("There are test failures in some drivers: " + failed, this.firstFailure);
-		} else {
-            EndToEndTestUtils.setJobStatusSuccessForRemoteDriver(true);
-        }
+		}
 	}
 
 }

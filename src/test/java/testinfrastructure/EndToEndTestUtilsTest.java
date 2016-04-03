@@ -32,7 +32,6 @@ public class EndToEndTestUtilsTest {
         // given
         RemoteWebDriverUrlSpy remoteWebDriverUrlSpy = new RemoteWebDriverUrlSpy();
         $.driver().use(remoteWebDriverUrlSpy);
-        System.out.println(EndToEndTestUtils.isRemoteWebDriver($.driver().get()));
         // when
         EndToEndTestUtils.openUrl(classNameToTestFileUrl(EndToEndTestUtilsTest.class));
         // then
@@ -45,7 +44,6 @@ public class EndToEndTestUtilsTest {
         // given
         RemoteWebDriverUrlSpy remoteWebDriverUrlSpy = new RemoteWebDriverUrlSpy();
         $.driver().use(remoteWebDriverUrlSpy);
-        System.out.println(EndToEndTestUtils.isRemoteWebDriver($.driver().get()));
         // when
         EndToEndTestUtils.openUrl("file:/home/rof/src/github.com/seleniumQuery/seleniumQuery/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html");
         // then
@@ -59,7 +57,6 @@ public class EndToEndTestUtilsTest {
         SeleniumQueryBrowser remoteBrowser = new SeleniumQueryBrowser();
         RemoteWebDriverUrlSpy remoteWebDriverUrlSpy = new RemoteWebDriverUrlSpy();
         remoteBrowser.$.driver().use(remoteWebDriverUrlSpy);
-        System.out.println(EndToEndTestUtils.isRemoteWebDriver($.driver().get()));
         // when
         EndToEndTestUtils.openUrl(classNameToTestFileUrl(EndToEndTestUtilsTest.class), remoteBrowser.$);
         // then
