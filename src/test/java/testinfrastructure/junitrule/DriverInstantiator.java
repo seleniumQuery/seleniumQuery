@@ -85,8 +85,8 @@ abstract class DriverInstantiator {
     static DriverInstantiator REMOTE = new DriverInstantiator("Remote Chrome") {
         @Override public void instantiateDriver(BrowserFunctions $) {
             try {
-                String sauceUser = System.getenv("SAUCE_USERNAME");
-                String sauceKey = System.getenv("SAUCE_ACCESS_KEY");
+                String sauceUser = "acdcjunior";//System.getenv("SAUCE_USERNAME");
+                String sauceKey = "3feda26e-56fc-426d-adb7-14dfd2df3f49";//System.getenv("SAUCE_ACCESS_KEY");
 
                 RemoteWebDriver remoteChrome = new RemoteWebDriver(new URL(format("http://%s:%s@ondemand.saucelabs.com:80/wd/hub", sauceUser, sauceKey)), DesiredCapabilities.chrome());
                 $.driver().use(remoteChrome);

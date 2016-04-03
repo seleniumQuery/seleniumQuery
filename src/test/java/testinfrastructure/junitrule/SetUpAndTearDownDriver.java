@@ -21,8 +21,8 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 import testinfrastructure.EndToEndTestUtils;
 
+import static testinfrastructure.testutils.EnvironmentTestUtils.isRunningAtCodeShip;
 import static testinfrastructure.testutils.EnvironmentTestUtils.isRunningAtContinuousIntegrationServer;
-import static testinfrastructure.testutils.EnvironmentTestUtils.isRunningAtWindowsContinuousIntegrationServer;
 
 public class SetUpAndTearDownDriver implements TestRule {
 
@@ -42,8 +42,9 @@ public class SetUpAndTearDownDriver implements TestRule {
 	}
 
 	private static DriverToRunTestsIn whatDriversShouldTestsRun() {
-		if (isRunningAtWindowsContinuousIntegrationServer()) {
-			return DriverToRunTestsIn.CHROME;
+		if (isRunningAtCodeShip()) {
+			// will also run remote if [run sauce] is at last commit message
+			return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
 		}
 		if (isRunningAtContinuousIntegrationServer()) {
 			return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
