@@ -41,9 +41,13 @@ public class EnvironmentTestUtils {
         return "true".equalsIgnoreCase(System.getenv("APPVEYOR"));
     }
 
+    public static boolean isRunningAtCodeShip() {
+        return "codeship".equalsIgnoreCase(System.getenv("CI_NAME"));
+    }
+
     private static String getGitLastCommitMessageIfAvailable() {
         if (isRunningAtContinuousIntegrationServer()) {
-            return StringUtils.trimToEmpty(System.getenv("GIT_LAST_COMMIT_MESSAGE"));
+            return StringUtils.trimToEmpty(System.getenv("CI_MESSAGE"));
         }
         return "";
     }
