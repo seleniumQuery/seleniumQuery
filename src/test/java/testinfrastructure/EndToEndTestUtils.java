@@ -74,7 +74,10 @@ public class EndToEndTestUtils {
 
     public static void openUrl(String urlToOpen) {
         setJobNameForRemoteDriver(urlToOpen);
-        $.url(fixUrlForRemoteTest(urlToOpen));
+        System.out.println("@# URL TO OPEN WAS: "+urlToOpen);
+        String urlToOpen1 = fixUrlForRemoteTest(urlToOpen);
+        System.out.println("@# FIXED TO OPEN WAS: "+urlToOpen1);
+        $.url(urlToOpen1);
     }
 
     private static void setJobNameForRemoteDriver(String urlToOpen) {
