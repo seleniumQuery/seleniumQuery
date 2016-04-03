@@ -74,9 +74,7 @@ public class EndToEndTestUtils {
 
     public static void openUrl(String urlToOpen) {
         setJobNameForRemoteDriver(urlToOpen);
-        System.out.println("@# URL TO OPEN WAS: "+urlToOpen);
         String urlToOpen1 = fixUrlForRemoteTest(urlToOpen);
-        System.out.println("@# FIXED TO OPEN WAS: "+urlToOpen1);
         $.url(urlToOpen1);
     }
 
@@ -89,7 +87,7 @@ public class EndToEndTestUtils {
 
     private static String fixUrlForRemoteTest(String urlToOpen) {
         if (EndToEndTestUtils.isRemoteWebDriver($.driver().get())) {
-            return urlToOpen.replaceAll("^file:/.*?/src/", "https://rawgit.com/seleniumQuery/seleniumQuery/master/src/");
+            return urlToOpen.replaceAll("^file:/.*?/src/test/java/", "https://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/");
         }
         return urlToOpen;
     }
