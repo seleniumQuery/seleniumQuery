@@ -21,25 +21,26 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
 import static io.github.seleniumquery.functions.jquery.events.ClickFunctionUtils.reportIfThereWasAnyElementNotClicked;
 
 /**
- * Clicks on a bunch of elements, complaining when needed.
+ * Double-clicks on a bunch of elements, complaining when needed.
  *
- * $("#element").click(); internals
+ * $("#element").dblclick(); internals
  *
  * @author acdcjunior
- * @since 0.9.0
+ * @since 0.15.0
  */
-public class ClickFunction {
+public class DoubleClickFunction {
 
-    private static final Log LOGGER = LogFactory.getLog(ClickFunction.class);
+    private static final Log LOGGER = LogFactory.getLog(DoubleClickFunction.class);
 
-    public static SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject) {
-        LOGGER.debug("Clicking "+seleniumQueryObject+".");
+    public static SeleniumQueryObject dblclick(SeleniumQueryObject seleniumQueryObject) {
+        LOGGER.debug("Double-Clicking " + seleniumQueryObject);
         List<WebElement> elements = seleniumQueryObject.get();
 
         int numberOfNotClickedElements = 0;
@@ -48,7 +49,7 @@ public class ClickFunction {
 
         for (WebElement element : elements) {
             try {
-                element.click();
+                doubleClick(seleniumQueryObject, element);
             } catch (ElementNotVisibleException e) {
                 numberOfNotClickedElements++;
                 lastCaughtException = e;
@@ -59,5 +60,11 @@ public class ClickFunction {
         reportIfThereWasAnyElementNotClicked(LOGGER, seleniumQueryObject, elements, numberOfNotClickedElements, lastCaughtException, elementThatThrewLastCaughtException);
         return seleniumQueryObject;
     }
+
+    private static void doubleClick(SeleniumQueryObject seleniumQueryObject, WebElement element) {
+        Actions actions = new Actions(seleniumQueryObject.getWebDriver());
+        actions.doubleClick(element).perform();
+    }
+
 
 }

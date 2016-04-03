@@ -20,7 +20,7 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
-class WebElementStub implements WebElement {
+public class WebElementStub extends WebElementDummy {
 
     @Override public void click() { }
     @Override public void submit() { }

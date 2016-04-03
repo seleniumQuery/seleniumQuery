@@ -19,13 +19,16 @@ package testinfrastructure.testdouble.org.openqa.selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.HasInputDevices;
+import org.openqa.selenium.interactions.Keyboard;
+import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.internal.FindsByCssSelector;
 import testinfrastructure.testdouble.PseudoTestDoubleException;
 
 import java.util.List;
 import java.util.Set;
 
-public class WebDriverDummy implements WebDriver, FindsByCssSelector{
+public class WebDriverDummy implements WebDriver, FindsByCssSelector, HasInputDevices {
 
     public static WebDriver createWebDriverDummy() {
         return new WebDriverDummy();
@@ -46,5 +49,7 @@ public class WebDriverDummy implements WebDriver, FindsByCssSelector{
     @Override public WebDriver.Options manage() { throw new PseudoTestDoubleException(); }
     @Override public WebElement findElementByCssSelector(String s) { throw new PseudoTestDoubleException(); }
     @Override public List<WebElement> findElementsByCssSelector(String s) { throw new PseudoTestDoubleException(); }
+    @Override public Keyboard getKeyboard() { throw new PseudoTestDoubleException(); }
+    @Override public Mouse getMouse() { throw new PseudoTestDoubleException(); }
 
 }
