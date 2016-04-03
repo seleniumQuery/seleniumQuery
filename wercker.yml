@@ -26,5 +26,4 @@ build:
   steps:
     - script:
         code: |
-          export GIT_LAST_COMMIT_MESSAGE=\"$(git log --format=%B --no-merges -n 1)\"
           mvn clean install
