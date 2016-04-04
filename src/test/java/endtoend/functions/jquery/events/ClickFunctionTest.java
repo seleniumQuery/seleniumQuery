@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.functions;
+package endtoend.functions.jquery.events;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.ClassRule;

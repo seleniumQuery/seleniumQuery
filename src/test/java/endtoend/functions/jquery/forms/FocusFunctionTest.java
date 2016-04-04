@@ -16,7 +16,7 @@
 
 package endtoend.functions.jquery.forms;
 
-import endtoend.functions.ClickFunctionTest;
+import endtoend.functions.jquery.events.ClickFunctionTest;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
 import org.junit.ClassRule;
