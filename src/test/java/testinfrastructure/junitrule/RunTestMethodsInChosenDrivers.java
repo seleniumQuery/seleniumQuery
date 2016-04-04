@@ -19,7 +19,9 @@ package testinfrastructure.junitrule;
 import org.junit.runners.model.Statement;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static testinfrastructure.junitrule.DriverInstantiator.*;
+import static testinfrastructure.junitrule.DriverInstantiator.FIREFOX_JS_OFF;
+import static testinfrastructure.junitrule.DriverInstantiator.FIREFOX_JS_ON;
+import static testinfrastructure.junitrule.DriverInstantiator.PHANTOMJS;
 import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.NO;
 import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.YES;
 
@@ -100,7 +102,8 @@ class RunTestMethodsInChosenDrivers extends Statement {
 	private void executeTestOnRemote() {
 		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_CHROME, YES);
 		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_FIREFOX, YES);
-		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_IE, YES);
+		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_IE_10, YES);
+		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_IE_11, YES);
 	}
 
 	private void executeTestOn(boolean shouldExecute, DriverInstantiator driverInstantiator, DriverHasJavaScriptEnabled driverHasJavaScriptEnabled) {
