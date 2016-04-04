@@ -29,7 +29,7 @@ import static java.lang.String.format;
 abstract class DriverInstantiator {
 
     private String driverDescription;
-    private DriverInstantiator(String driverDescription) { this.driverDescription = driverDescription; }
+    DriverInstantiator(String driverDescription) { this.driverDescription = driverDescription; }
     String getDriverDescription() { return driverDescription; }
 
     abstract void instantiateDriver(BrowserFunctions browser);
@@ -82,18 +82,30 @@ abstract class DriverInstantiator {
     static DriverInstantiator HTMLUNIT_IE11_JS_ON  = new DriverInstantiator("HtmlUnit (IE11) - JS ON")  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11(); } };
     static DriverInstantiator HTMLUNIT_IE11_JS_OFF = new DriverInstantiator("HtmlUnit (IE11) - JS OFF") { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11().withoutJavaScript(); } };
 
-    static DriverInstantiator REMOTE = new DriverInstantiator("Remote Chrome") {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            try {
-                String sauceUser = System.getenv("SAUCE_USERNAME");
-                String sauceKey = System.getenv("SAUCE_ACCESS_KEY");
+}
+class RemoteInstantiator extends DriverInstantiator {
 
-                RemoteWebDriver remoteChrome = new RemoteWebDriver(new URL(format("http://%s:%s@ondemand.saucelabs.com:80/wd/hub", sauceUser, sauceKey)), DesiredCapabilities.chrome());
-                $.driver().use(remoteChrome);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
+    static RemoteInstantiator REMOTE_CHROME = new RemoteInstantiator("Chrome", DesiredCapabilities.chrome());
+    static RemoteInstantiator REMOTE_FIREFOX = new RemoteInstantiator("Firefox", DesiredCapabilities.firefox());
+    static RemoteInstantiator REMOTE_IE = new RemoteInstantiator("IE", DesiredCapabilities.internetExplorer());
+
+    private final DesiredCapabilities capabilities;
+
+    private RemoteInstantiator(String driverDescription, DesiredCapabilities desiredCapabilities) {
+        super("Remote "+driverDescription);
+        capabilities = desiredCapabilities;
+    }
+
+    @Override public void instantiateDriver(BrowserFunctions $) {
+        try {
+            String sauceUser = System.getenv("SAUCE_USERNAME");
+            String sauceKey = System.getenv("SAUCE_ACCESS_KEY");
+
+            RemoteWebDriver remoteChrome = new RemoteWebDriver(new URL(format("http://%s:%s@ondemand.saucelabs.com:80/wd/hub", sauceUser, sauceKey)), capabilities);
+            $.driver().use(remoteChrome);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
         }
-    };
+    }
 
 }

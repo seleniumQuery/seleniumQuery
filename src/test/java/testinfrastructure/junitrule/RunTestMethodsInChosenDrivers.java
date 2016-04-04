@@ -98,7 +98,9 @@ class RunTestMethodsInChosenDrivers extends Statement {
 		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE11_JS_OFF, NO);
 	}
 	private void executeTestOnRemote() {
-		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, DriverInstantiator.REMOTE, YES);
+		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_CHROME, YES);
+		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_FIREFOX, YES);
+		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_IE, YES);
 	}
 
 	private void executeTestOn(boolean shouldExecute, DriverInstantiator driverInstantiator, DriverHasJavaScriptEnabled driverHasJavaScriptEnabled) {
