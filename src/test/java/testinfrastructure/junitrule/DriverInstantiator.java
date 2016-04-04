@@ -87,13 +87,14 @@ class RemoteInstantiator extends DriverInstantiator {
 
     static RemoteInstantiator REMOTE_CHROME = new RemoteInstantiator("Chrome", DesiredCapabilities.chrome());
     static RemoteInstantiator REMOTE_FIREFOX = new RemoteInstantiator("Firefox", DesiredCapabilities.firefox());
-    static RemoteInstantiator REMOTE_IE_10 = ie("10");
-    static RemoteInstantiator REMOTE_IE_11 = ie("11");
+    static RemoteInstantiator REMOTE_IE_10 = ie("10", "Windows 7");
+    static RemoteInstantiator REMOTE_IE_11 = ie("11", "Windows 8.1");
 
-    private static RemoteInstantiator ie(String version) {
+    private static RemoteInstantiator ie(String version, String platform) {
         DesiredCapabilities desiredCapabilities = DesiredCapabilities.internetExplorer();
-        desiredCapabilities.setVersion(version);
-        return new RemoteInstantiator("IE " + version, desiredCapabilities);
+        desiredCapabilities.setCapability("platform", platform);
+        desiredCapabilities.setCapability("version", version);
+        return new RemoteInstantiator("IE " + version + " on " + platform, desiredCapabilities);
     }
 
     private final DesiredCapabilities capabilities;
