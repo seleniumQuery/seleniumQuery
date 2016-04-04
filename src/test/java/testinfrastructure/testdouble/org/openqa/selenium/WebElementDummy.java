@@ -29,8 +29,6 @@ public class WebElementDummy implements WebElement, Locatable {
         return new WebElementDummy();
     }
 
-    public WebElementDummy() { /* package visibility to contain widespread inheritance */ }
-
     @Override public void click() { throw new PseudoTestDoubleException(); }
     @Override public void submit() { throw new PseudoTestDoubleException(); }
     @Override public void sendKeys(CharSequence... charSequences) { throw new PseudoTestDoubleException(); }
@@ -48,6 +46,6 @@ public class WebElementDummy implements WebElement, Locatable {
     @Override public Rectangle getRect() { throw new PseudoTestDoubleException(); }
     @Override public String getCssValue(String s) { throw new PseudoTestDoubleException(); }
     @Override public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException { throw new PseudoTestDoubleException(); }
-    @Override public Coordinates getCoordinates() { return null; }
+    @Override public Coordinates getCoordinates() { throw new PseudoTestDoubleException(); }
 
 }
