@@ -37,9 +37,7 @@ class TestMethodsRunner {
 		EndToEndTestUtils.openUrl(this.url); // this wont be needed when everyone use this both as @Rule and @ClassRule
 		try {
 			base.evaluate();
-            SauceLabsUtils.reportTestSuccess();
 		} catch (Throwable t) {
-            SauceLabsUtils.reportTestFailure();
 			if (this.firstFailure == null) {
 				this.firstFailure = t;
 			}
@@ -47,6 +45,11 @@ class TestMethodsRunner {
 			System.out.println("   @## %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FAILED on "+driver+"! -> "+t.getMessage());
 		}
 		System.out.println("   @## <<< Done on "+driver);
+		if (this.firstFailure != null) {
+            SauceLabsUtils.reportTestFailure();
+        } else {
+            SauceLabsUtils.reportTestSuccess();
+        }
 	}
 
     void reportFailures() throws Throwable {

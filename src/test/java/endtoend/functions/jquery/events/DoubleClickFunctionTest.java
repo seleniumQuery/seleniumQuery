@@ -22,7 +22,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
@@ -31,6 +30,7 @@ import testinfrastructure.testutils.DriverInTest;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static testinfrastructure.testutils.DriverInTest.isIEDriver;
 
 public class DoubleClickFunctionTest {
 
@@ -77,7 +77,7 @@ public class DoubleClickFunctionTest {
     private static void removeDivAddedWhenBySomeDrivers(String selector) {
         WebDriver driver = $.driver().get();
         if (DriverInTest.isHtmlUnitDriver(driver)
-                || driver instanceof InternetExplorerDriver
+                || isIEDriver($.driver().get())
                 || driver instanceof PhantomJSDriver) {
             remove($(selector));
         }
