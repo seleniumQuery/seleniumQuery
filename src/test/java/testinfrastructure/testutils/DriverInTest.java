@@ -19,6 +19,8 @@ package testinfrastructure.testutils;
 import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * No test code may use {@link DriverVersionUtils} directly to test the browser under test, because it may
@@ -42,7 +44,8 @@ public class DriverInTest {
     }
 
     public static boolean isIEDriver(WebDriver driver) {
-        return driver instanceof InternetExplorerDriver;
+        return driver instanceof InternetExplorerDriver
+                || (driver instanceof RemoteWebDriver && ((RemoteWebDriver) driver).getCapabilities().getBrowserName().equals(BrowserType.IE));
     }
 
     public static boolean isHtmlUnitDriverEmulatingIE(WebDriver webDriver) {

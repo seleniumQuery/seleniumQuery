@@ -24,13 +24,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static testinfrastructure.testutils.DriverInTest.isIEDriver;
 
 public class FocusFunctionTest {
 
@@ -150,7 +150,7 @@ public class FocusFunctionTest {
         // If not (that is, IE is being executed, but the window never gets focused), the div is not added and thus we don't have to remove anything
 		JavascriptExecutor driver = ((JavascriptExecutor) $.driver().get());
 		SeleniumQueryObject divBodyFocus = $("div.body.focus");
-		if (divBodyFocus.size() == 1 && driver instanceof InternetExplorerDriver) {
+		if (divBodyFocus.size() == 1 && isIEDriver($.driver().get())) {
 			driver.executeScript("document.body.removeChild(arguments[0]);", divBodyFocus.get(0));
 		}
 	}

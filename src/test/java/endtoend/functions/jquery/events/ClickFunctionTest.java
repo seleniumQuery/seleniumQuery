@@ -22,7 +22,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.testutils.DriverInTest;
@@ -30,6 +29,7 @@ import testinfrastructure.testutils.DriverInTest;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static testinfrastructure.testutils.DriverInTest.isIEDriver;
 
 public class ClickFunctionTest {
 
@@ -91,8 +91,7 @@ public class ClickFunctionTest {
     }
 
     private static void removeDivBodyFocusAddedByIe() {
-        boolean isIE = $.driver().get() instanceof InternetExplorerDriver;
-        if (isIE) {
+        if (isIEDriver($.driver().get())) {
             removeDivBodyFocus();
         }
     }

@@ -21,7 +21,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.testutils.DriverInTest;
 
@@ -29,6 +28,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static testinfrastructure.testutils.DriverInTest.isIEDriver;
 
 public class ValFunctionTest {
 	
@@ -133,7 +133,7 @@ public class ValFunctionTest {
 		assertThat($(editableDivId).val(), is("")); // #disagree - ...so the value must be the same
 		assertThat($(editableDivId).text(), is("TYPED <a>& STUFF"));
 
-		if ($.driver().get() instanceof InternetExplorerDriver) {
+		if (isIEDriver($.driver().get())) {
 			assertThat($(editableDivId).html(), is(" TYPED &lt;a&gt;&amp; STUFF")); // notice the space at the beginning
 		} else if ($.driver().get() instanceof FirefoxDriver) {
 			assertThat($(editableDivId).html(), is("TYPED &lt;a&gt;&amp; STUFF<br>")); // notice the <br> at the end
