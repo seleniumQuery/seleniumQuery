@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,13 +35,19 @@ public class TextFunctionTest {
     public void text_function() {
 		WebDriver driver = $.driver().get();
 
+		String text = "Demonstration Box\nlist item 1\nlist item 2";
     	if (DriverInTest.isHtmlUnitDriver(driver)) {
-			assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1 list item 2"));
-    	} else {
-    		assertThat($("div.demo-container").text(), is("Demonstration Box\nlist item 1\nlist item 2"));
+			text = "Demonstration Box\nlist item 1 list item 2";
+    	} else if (DriverInTest.isRemoteEdge(driver)) {
+			text = "Demonstration Box\r\nlist item 1\r\nlist item 2";
     	}
+		assertThat($("div.demo-container").text(), is(text));
 
-    	assertThat($("div.d").text(), is("Batman Spider Man yo Hulk"));
+		String divdText = "Batman Spider Man yo Hulk";
+		if (DriverInTest.isRemoteEdge(driver)) {
+			divdText = "Batman Spider Man yo Hulk";
+		}
+		assertThat($("div.d").text(), is(divdText));
 
     	assertThat($("#myTextArea").text().trim(), is("Initial value for textarea"));
     	assertThat($("#myTextArea").val().trim(), is("Initial value for textarea"));
