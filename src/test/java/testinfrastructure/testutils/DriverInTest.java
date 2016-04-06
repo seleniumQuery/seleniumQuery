@@ -17,7 +17,9 @@
 package testinfrastructure.testutils;
 
 import io.github.seleniumquery.utils.DriverVersionUtils;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -44,13 +46,28 @@ public class DriverInTest {
     }
 
     public static boolean isIEDriver(WebDriver driver) {
-        return driver instanceof InternetExplorerDriver
-                || (driver instanceof RemoteWebDriver && ((RemoteWebDriver) driver).getCapabilities().getBrowserName().equals(BrowserType.IE));
+        return driver instanceof InternetExplorerDriver || isDriverByName(driver, BrowserType.IE);
+    }
+
+    private static boolean isDriverByName(WebDriver driver, String browserName) {
+        return driver instanceof HasCapabilities && ((HasCapabilities) driver).getCapabilities().getBrowserName().equals(browserName);
     }
 
     public static boolean isHtmlUnitDriverEmulatingIE(WebDriver webDriver) {
         restoreDriverVersionUtilsInstance();
         return DriverVersionUtils.isHtmlUnitDriverEmulatingIE(webDriver);
+    }
+
+    public static boolean isFirefoxDriver(WebDriver webDriver) {
+        return webDriver instanceof FirefoxDriver || isDriverByName(webDriver, BrowserType.FIREFOX);
+    }
+
+    public static boolean isNotFirefoxDriver(WebDriver webDriver) {
+        return !isFirefoxDriver(webDriver);
+    }
+
+    public static boolean isRemoteDriver(WebDriver webDriver) {
+        return webDriver.getClass().equals(RemoteWebDriver.class);
     }
 
 }

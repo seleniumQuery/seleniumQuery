@@ -20,7 +20,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.HasCapabilities;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.testutils.DriverInTest;
 
@@ -28,7 +28,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-import static testinfrastructure.testutils.DriverInTest.isIEDriver;
+import static testinfrastructure.testutils.DriverInTest.*;
 
 public class ValFunctionTest {
 	
@@ -38,6 +38,7 @@ public class ValFunctionTest {
     @Test
     public void val() throws Exception {
 		assertThat($("#div-with-text-bozo").val(), is(""));
+		System.out.println("BROWSER NAME: "+((HasCapabilities) $.driver().get()).getCapabilities().getBrowserName());
 
 		try {
 			$("#div-with-text-bozo").val("SHOULD HAVE NO EFFECT");
@@ -118,7 +119,7 @@ public class ValFunctionTest {
 		try {
 			testEditableDiv("#editable-empty", "");
 		} catch (ElementNotVisibleException e) {
-			if (!($.driver().get() instanceof FirefoxDriver)) {
+			if (isNotFirefoxDriver($.driver().get())) {
 				throw e;
 			}
 		}
@@ -133,13 +134,19 @@ public class ValFunctionTest {
 		assertThat($(editableDivId).val(), is("")); // #disagree - ...so the value must be the same
 		assertThat($(editableDivId).text(), is("TYPED <a>& STUFF"));
 
-		if (isIEDriver($.driver().get())) {
-			assertThat($(editableDivId).html(), is(" TYPED &lt;a&gt;&amp; STUFF")); // notice the space at the beginning
-		} else if ($.driver().get() instanceof FirefoxDriver) {
-			assertThat($(editableDivId).html(), is("TYPED &lt;a&gt;&amp; STUFF<br>")); // notice the <br> at the end
-		} else {
-			assertThat($(editableDivId).html(), is("TYPED &lt;a&gt;&amp; STUFF"));
-		}
+        String endResultingHTML = figureOutResultingHtml("TYPED &lt;a&gt;&amp; STUFF");
+        assertThat($(editableDivId).html(), is(endResultingHTML));
 	}
+
+    private String figureOutResultingHtml(String resultingHtml) {
+        if (isIEDriver($.driver().get())) {
+            return " " + resultingHtml;
+		} else if (isFirefoxDriver($.driver().get()) && isRemoteDriver($.driver().get())) {
+            return resultingHtml + " ";
+        } else if (isFirefoxDriver($.driver().get())) {
+            return resultingHtml + "<br>";
+        }
+        return resultingHtml;
+    }
 
 }
