@@ -90,7 +90,10 @@ class RemoteInstantiator extends DriverInstantiator {
     static RemoteInstantiator REMOTE_IE_10 = ie("10", "Windows 7");
     static RemoteInstantiator REMOTE_IE_11 = ie("11", "Windows 8.1");
     static RemoteInstantiator REMOTE_SAFARI = new RemoteInstantiator("Safari", DesiredCapabilities.safari());
-    static RemoteInstantiator REMOTE_EDGE = new RemoteInstantiator("Edge", DesiredCapabilities.edge());
+    static RemoteInstantiator REMOTE_EDGE = new RemoteInstantiator("Edge", DesiredCapabilities.edge(), "Windows 10");
+
+    @SuppressWarnings("deprecation")
+    static RemoteInstantiator REMOTE_OPERA = new RemoteInstantiator("Opera", DesiredCapabilities.opera(), "Windows 7");
 
     private static RemoteInstantiator ie(String version, String platform) {
         DesiredCapabilities desiredCapabilities = DesiredCapabilities.internetExplorer();
@@ -104,6 +107,12 @@ class RemoteInstantiator extends DriverInstantiator {
     private RemoteInstantiator(String driverDescription, DesiredCapabilities desiredCapabilities) {
         super("Remote " + driverDescription);
         capabilities = desiredCapabilities;
+    }
+
+    private RemoteInstantiator(String driverDescription, DesiredCapabilities desiredCapabilities, String platform) {
+        super("Remote " + driverDescription + " on " + platform);
+        capabilities = desiredCapabilities;
+        capabilities.setCapability("platform", platform);
     }
 
     @Override public void instantiateDriver(BrowserFunctions $) {
