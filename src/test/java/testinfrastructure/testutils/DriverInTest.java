@@ -70,4 +70,8 @@ public class DriverInTest {
         return webDriver.getClass().equals(RemoteWebDriver.class);
     }
 
+    public static boolean isRemoteEdge(WebDriver driver) {
+        return isDriverByName(driver, BrowserType.EDGE) && isRemoteDriver(driver);
+    }
+
 }
