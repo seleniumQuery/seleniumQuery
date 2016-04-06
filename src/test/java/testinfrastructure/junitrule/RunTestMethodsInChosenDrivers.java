@@ -18,10 +18,14 @@ package testinfrastructure.junitrule;
 
 import org.junit.runners.model.Statement;
 
+import java.util.List;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static java.util.Arrays.asList;
 import static testinfrastructure.junitrule.DriverInstantiator.FIREFOX_JS_OFF;
 import static testinfrastructure.junitrule.DriverInstantiator.FIREFOX_JS_ON;
 import static testinfrastructure.junitrule.DriverInstantiator.PHANTOMJS;
+import static testinfrastructure.junitrule.RemoteInstantiator.*;
 import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.NO;
 import static testinfrastructure.junitrule.RunTestMethodsInChosenDrivers.DriverHasJavaScriptEnabled.YES;
 
@@ -100,11 +104,13 @@ class RunTestMethodsInChosenDrivers extends Statement {
 		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE11_JS_OFF, NO);
 	}
 	private void executeTestOnRemote() {
-		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_CHROME, YES);
-		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_FIREFOX, YES);
-		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_IE_10, YES);
-		executeTestOn(driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE, RemoteInstantiator.REMOTE_IE_11, YES);
-	}
+        boolean shouldRunRemoteTests = driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE;
+
+        List<RemoteInstantiator> remoteInstantiators = asList(REMOTE_CHROME, REMOTE_FIREFOX, REMOTE_IE_10, REMOTE_IE_11, REMOTE_SAFARI, REMOTE_EDGE);
+        for (RemoteInstantiator remote : remoteInstantiators) {
+            executeTestOn(shouldRunRemoteTests, remote, YES);
+        }
+    }
 
 	private void executeTestOn(boolean shouldExecute, DriverInstantiator driverInstantiator, DriverHasJavaScriptEnabled driverHasJavaScriptEnabled) {
 		if (shouldExecute) {
