@@ -3,17 +3,18 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.seleniumquery/seleniumquery.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.github.seleniumquery%22%20AND%20a%3A%22seleniumquery%22)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/6f25f5fe245746a4a7a53f426e0e1288)](https://www.codacy.com/app/acdcjunior/seleniumQuery)
-[![Linux Build Status](https://img.shields.io/travis/seleniumQuery/seleniumQuery/master.svg?label=Linux Build)](https://travis-ci.org/seleniumQuery/seleniumQuery)
-[![Windows Build Status](https://img.shields.io/appveyor/ci/acdcjunior/seleniumQuery/master.svg?label=Windows Build)](https://ci.appveyor.com/project/acdcjunior/seleniumQuery/branch/master)
 [![codecov.io](https://codecov.io/github/seleniumQuery/seleniumQuery/coverage.svg?branch=master)](https://codecov.io/github/seleniumQuery/seleniumQuery?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/56861ab2eb4f47003c000e43/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56861ab2eb4f47003c000e43)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/seleniumQuery/seleniumQuery/master/LICENSE.txt)
 [![Join the chat at https://gitter.im/seleniumQuery/seleniumQuery](https://badges.gitter.im/seleniumQuery/seleniumQuery.svg)](https://gitter.im/seleniumQuery/seleniumQuery?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![Linux Build Status](https://img.shields.io/travis/seleniumQuery/seleniumQuery/master.svg?label=Linux Build)](https://travis-ci.org/seleniumQuery/seleniumQuery)
+[![Windows Build Status](https://img.shields.io/appveyor/ci/acdcjunior/seleniumQuery/master.svg?label=Windows Build)](https://ci.appveyor.com/project/acdcjunior/seleniumQuery/branch/master)
 [![Build status](https://codeship.com/projects/7b37d0c0-d5b4-0133-1efe-62329e93051f/status?branch=master)](https://codeship.com/projects/142644)
 [![wercker status](https://app.wercker.com/status/b772beb5c952865d659e548bf7d64f48/s "wercker status")](https://app.wercker.com/project/bykey/b772beb5c952865d659e548bf7d64f48)
 [![Circle CI](https://circleci.com/gh/seleniumQuery/seleniumQuery.svg?style=svg)](https://circleci.com/gh/seleniumQuery/seleniumQuery)
-[![Sauce Test Status](https://saucelabs.com/buildstatus/acdcjunior)](https://saucelabs.com/u/acdcjunior)
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/acdcjunior.svg)](https://saucelabs.com/u/acdcjunior)
 
 ### *Cross-Driver* jQuery-like Java interface for Selenium WebDriver
 
