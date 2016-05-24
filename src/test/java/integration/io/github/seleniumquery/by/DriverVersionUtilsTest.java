@@ -50,14 +50,13 @@ public class DriverVersionUtilsTest {
 	}
 
 	@Test
-	@SuppressWarnings("deprecation")
-	public void isHtmlUnitDriverEmulatingIE__firefox_deprecated_versions() {
-		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_31));
+	public void isHtmlUnitDriverEmulatingIE__firefox_old_but_non_deprecated_versions() {
+		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_38));
 	}
 
 	@Test
 	public void isHtmlUnitDriverEmulatingIE__firefox_non_deprecated_versions() {
-		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_38));
+		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_45));
 	}
 
 	@Test
