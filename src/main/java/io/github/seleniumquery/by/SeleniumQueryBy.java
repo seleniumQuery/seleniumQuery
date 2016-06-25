@@ -106,5 +106,32 @@ public class SeleniumQueryBy extends By {
 	public String getSelector() {
 		return this.selector;
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((selector == null) ? 0 : selector.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SeleniumQueryBy other = (SeleniumQueryBy) obj;
+		if (selector == null) {
+			if (other.selector != null)
+				return false;
+		} else if (!selector.equals(other.selector))
+			return false;
+		return true;
+	}
 	
 }
