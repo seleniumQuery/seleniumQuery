@@ -34,10 +34,6 @@ package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
  */
 public class PseudoClassOnlySupportedThroughIsOrFilterException extends RuntimeException {
 
-    static void pseudoClassNotSupportedWhenUsedDirectly(String pseudoClass) {
-        throw new PseudoClassOnlySupportedThroughIsOrFilterException(pseudoClass);
-    }
-
     private PseudoClassOnlySupportedThroughIsOrFilterException(String pseudoClass) {
         super(String.format(
                 "Direct use of this pseudo-class is not supported.\n" +
@@ -47,6 +43,10 @@ public class PseudoClassOnlySupportedThroughIsOrFilterException extends RuntimeE
                 "\t\tUSE: $(\"my-selector\").filter(\":%s\").\n" +
                 "\tUsing .is() is also supported: $(\"my-selector\").is(\":%s\")\n",
                 pseudoClass, pseudoClass, pseudoClass, pseudoClass));
+    }
+    
+    static void pseudoClassNotSupportedWhenUsedDirectly(String pseudoClass) {
+        throw new PseudoClassOnlySupportedThroughIsOrFilterException(pseudoClass);
     }
 
 }

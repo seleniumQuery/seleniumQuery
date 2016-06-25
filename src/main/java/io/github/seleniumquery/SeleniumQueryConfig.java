@@ -45,6 +45,8 @@ public class SeleniumQueryConfig {
 	private static long waitUntilTimeout = 10001;
 	private static long waitUntilPollingInterval = 901;
 	
+	private static Properties properties;
+	
 	static {
 		loadPropertiesFiles();
 	}
@@ -82,8 +84,6 @@ public class SeleniumQueryConfig {
 		}
 		return Long.valueOf(propertyAsString);
 	}
-	
-	private static Properties properties;
 	
 	public static String get(String property) {
 		return properties.getProperty(property);
