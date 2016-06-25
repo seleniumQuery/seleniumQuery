@@ -25,6 +25,8 @@ import org.openqa.selenium.WebElement;
  * @since 0.9.0
  */
 public class WebElementUtils {
+	
+	private WebElementUtils() {}
 
     public static boolean elementHasAttribute(WebElement element, String attributeName, String attributeValue) {
         return attributeValue.equalsIgnoreCase(element.getAttribute(attributeName));

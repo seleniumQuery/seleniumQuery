@@ -22,6 +22,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class ToArrayFunction {
+	
+	private ToArrayFunction() {}
 
 	public static WebElement[] toArray(SeleniumQueryObject seleniumQueryObject) {
 		List<WebElement> elements = seleniumQueryObject.get();

@@ -40,6 +40,8 @@ public class CssSelectorFactory {
     private static final DirectDescendantCssSelector directDescendantCssSelector = new DirectDescendantCssSelector();
     private static final DirectAdjacentCssSelector directAdjacentCssSelector = new DirectAdjacentCssSelector();
     private static final GeneralAdjacentCssSelector generalAdjacentCssSelector = new GeneralAdjacentCssSelector();
+    
+    private CssSelectorFactory() {}
 
     @SuppressWarnings("unchecked")
 	public static CssSelector<Selector, TagComponent> parsedSelectorToCssSelector(Selector parsedSimpleSelector) {

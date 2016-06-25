@@ -37,6 +37,8 @@ public class ValFunction {
 
 	private static final Log LOGGER = LogFactory.getLog(ValFunction.class);
 	
+	private ValFunction() {}
+	
 	/*
 	 * $(".selector").val();
 	 */

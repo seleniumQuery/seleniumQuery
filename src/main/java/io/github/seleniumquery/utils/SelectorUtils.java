@@ -63,6 +63,8 @@ public class SelectorUtils {
 	 * </p>
 	 */
 	public static final String ESCAPED_SLASHES = "(?<!(?:^|[^\\\\])\\\\)";
+	
+	private SelectorUtils() {}
 
 	public static WebElement parent(WebElement element) {
 		try {

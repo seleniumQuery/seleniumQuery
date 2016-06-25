@@ -32,6 +32,8 @@ import java.util.List;
  * @since 0.9.0
  */
 public class FindFunction {
+	
+	private FindFunction() {}
 
 	public static SeleniumQueryObject find(SeleniumQueryObject seleniumQueryObject, String selector) {
 		List<WebElement> elements = seleniumQueryObject.get();

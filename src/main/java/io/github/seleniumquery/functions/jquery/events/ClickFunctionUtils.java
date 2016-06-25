@@ -26,6 +26,8 @@ import java.util.List;
 import static java.lang.String.format;
 
 class ClickFunctionUtils {
+	
+	private ClickFunctionUtils() {}
 
     static void reportIfThereWasAnyElementNotClicked(Log logger, SeleniumQueryObject seleniumQueryObject, List<WebElement> elements,
                                                      int numberOfNotClickedElements, Exception lastCaughtException, WebElement elementThatThrewLastCaughtException) {

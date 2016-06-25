@@ -31,6 +31,8 @@ import io.github.seleniumquery.SeleniumQueryObject;
 public class FirstFunction {
 
 	private static final int FIRST_ELEMENT_INDEX = 0;
+	
+	private FirstFunction() {}
 
 	public static SeleniumQueryObject first(SeleniumQueryObject seleniumQueryObject) {
 		return EqFunction.eq(seleniumQueryObject, FIRST_ELEMENT_INDEX);

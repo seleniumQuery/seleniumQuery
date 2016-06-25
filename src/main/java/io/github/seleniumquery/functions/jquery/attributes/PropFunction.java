@@ -32,6 +32,8 @@ import java.util.List;
  */
 public class PropFunction {
 	
+	private PropFunction() {}
+	
 	public static <T> T prop(SeleniumQueryObject seleniumQueryObject, String propertyName) {
 		List<WebElement> elements = seleniumQueryObject.get();
 		return prop(seleniumQueryObject.getWebDriver(), elements, propertyName);

@@ -20,6 +20,8 @@ package io.github.seleniumquery.by.secondgen.finder;
  * Utilities for SQCss* classes.
  */
 public class ElementFinderUtils {
+	
+	private ElementFinderUtils() {}
 
     public static String conditionalSimpleXPathMerge(String leftXPathExpression, String rightXPathExpression) {
         if (leftXPathExpression == null || !leftXPathExpression.endsWith("]")) {
