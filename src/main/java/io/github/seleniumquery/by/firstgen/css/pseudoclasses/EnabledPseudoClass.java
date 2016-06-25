@@ -41,7 +41,7 @@ public class EnabledPseudoClass implements PseudoClass<ConditionSimpleComponent>
 	
 	private static final String OPTGROUP_TAG = "optgroup";
 	private static final String OPTION_TAG = "option";
-	public static final List<String> ENABLEABLE_TAGS = DisabledPseudoClass.DISABLEABLE_TAGS;
+	protected static final List<String> ENABLEABLE_TAGS = DisabledPseudoClass.DISABLEABLE_TAGS;
 	
 	public static final String ENABLED_XPATH = "(" +
             DisabledPseudoClass.DISABLEABLE_TAGS_XPATH +
