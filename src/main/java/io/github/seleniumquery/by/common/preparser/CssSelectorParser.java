@@ -57,14 +57,17 @@ public class CssSelectorParser {
 
     static {
 	    SAC_CSS3_PARSER.setErrorHandler(new ErrorHandler() {
+	    	@Override
 			public void warning(final CSSParseException cssParseException) throws CSSException {
 				LOGGER.warn(cssParseException.toString(), cssParseException);
 			}
 
+	    	@Override
 			public void error(final CSSParseException cssParseException) throws CSSException {
 				throw cssParseException;
 			}
 
+	    	@Override
 			public void fatalError(final CSSParseException cssParseException) throws CSSException {
 				throw cssParseException;
 			}
