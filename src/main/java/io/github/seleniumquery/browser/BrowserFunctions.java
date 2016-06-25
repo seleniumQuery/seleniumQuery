@@ -110,6 +110,7 @@ public class BrowserFunctions {
      * @since 0.9.0
      */
     @SuppressWarnings("deprecation")
+    @Deprecated
     public BrowserFunctions pause(long timeToPauseInMillis) {
         LOGGER.debug(format("Pausing for %d milliseconds.", timeToPauseInMillis));
         new org.openqa.selenium.interactions.PauseAction(timeToPauseInMillis).perform();
