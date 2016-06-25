@@ -43,13 +43,13 @@ public class IdConditionComponent extends ConditionSimpleComponent {
         this.wantedId = id;
     }
 
-    private static String idXpath(String id) {
-        return "[@id = " + intoEscapedXPathString(id) + "]";
-    }
-
     private IdConditionComponent(String id, List<XPathComponent> combinatedComponents, ElementFilterList elementFilterList) {
         super(idXpath(id), combinatedComponents, elementFilterList);
         this.wantedId = id;
+    }
+
+    private static String idXpath(String id) {
+        return "[@id = " + intoEscapedXPathString(id) + "]";
     }
 
     public List<WebElement> findWebElements(SearchContext context) {

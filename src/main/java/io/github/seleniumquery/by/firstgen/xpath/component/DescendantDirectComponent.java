@@ -23,15 +23,16 @@ import io.github.seleniumquery.by.firstgen.xpath.UnsupportedConditionalSelector;
  */
 public class DescendantDirectComponent extends XPathComponent {
 
+
+    private DescendantDirectComponent(TagComponent other) {
+        super(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
+    }
+    
     public static TagComponent combine(TagComponent one, TagComponent other) {
         DescendantDirectComponent otherCopyWithModifiedType = new DescendantDirectComponent(other);
         return new TagComponent(one.xPathExpression,
                                 ComponentUtils.joinComponents(one.combinatedComponents, otherCopyWithModifiedType),
                                 ComponentUtils.joinFilters(one.elementFilterList, otherCopyWithModifiedType));
-    }
-
-    private DescendantDirectComponent(TagComponent other) {
-        super(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
     }
 
     @Override

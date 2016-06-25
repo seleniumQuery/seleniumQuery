@@ -26,15 +26,15 @@ package io.github.seleniumquery.by.firstgen.xpath.component;
  */
 public class AdjacentComponent extends XPathComponent {
 
+    private AdjacentComponent(TagComponent other) {
+        super(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
+    }
+    
     public static TagComponent combine(TagComponent one, TagComponent other) {
         AdjacentComponent otherCopyWithModifiedType = new AdjacentComponent(other);
         return new TagComponent(one.xPathExpression,
                                 ComponentUtils.joinComponents(one.combinatedComponents, otherCopyWithModifiedType),
                                 ComponentUtils.joinFilters(one.elementFilterList, otherCopyWithModifiedType));
-    }
-
-    private AdjacentComponent(TagComponent other) {
-        super(other.xPathExpression, other.combinatedComponents, other.elementFilterList);
     }
 
     @Override

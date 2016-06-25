@@ -30,6 +30,8 @@ public class CssSelectorParser {
 	private static final Log LOGGER = LogFactory.getLog(CssSelectorParser.class);
 
 	private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
+	
+	private static final SACParserCSS3 SAC_CSS3_PARSER = new SACParserCSS3();
 
 	public static CssParsedSelectorList parseSelector(String selector) {
         PreParsedSelector preParsedSelector = preParseSelector(selector);
@@ -52,8 +54,6 @@ public class CssSelectorParser {
             throw new SeleniumQueryException("Impossible to parse selector \""+selector+"\": "+e.getMessage(), e);
         }
 	}
-
-	private static final SACParserCSS3 SAC_CSS3_PARSER = new SACParserCSS3();
 
     static {
 	    SAC_CSS3_PARSER.setErrorHandler(new ErrorHandler() {

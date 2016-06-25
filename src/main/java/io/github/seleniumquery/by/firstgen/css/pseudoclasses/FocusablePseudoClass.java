@@ -46,6 +46,28 @@ class FocusablePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	private static final String FOCUSABLE_PSEUDO_CLASS_NO_COLON = "focusable";
 	
+	private final ElementFilter focusablePseudoClassFilter = new PseudoClassFilter(this);
+
+	// //button[.='OK' and not(ancestor::div[contains(@style,'display:none')]) and ]
+	
+	
+	// upon changing the expression below, check also the one at :tabbable
+	static final String FOCUSABLE_XPATH =
+		// is visible and...
+		" ("
+			+ " ("
+				+ " (local-name() = 'input' or local-name() = 'button' or local-name() = 'optgroup' or local-name() = 'option' or local-name() = 'select' or local-name() = 'textarea')"
+				+ " and "
+				+ EnabledPseudoClass.ENABLED_XPATH
+			+ " ) "
+			+ " or "
+			+ " (local-name() = 'a' and @href) "
+			+ " or "
+			+ " (local-name() = 'area' and @href)"
+			+ " or "
+			+ " @tabindex"
+		+ ")";
+	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return FOCUSABLE_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
@@ -68,28 +90,6 @@ class FocusablePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 		}
 		return element.getAttribute("tabindex") != null;
 	}
-	
-	private final ElementFilter focusablePseudoClassFilter = new PseudoClassFilter(this);
-
-	// //button[.='OK' and not(ancestor::div[contains(@style,'display:none')]) and ]
-	
-	
-	// upon changing the expression below, check also the one at :tabbable
-	static final String FOCUSABLE_XPATH =
-		// is visible and...
-		" ("
-			+ " ("
-				+ " (local-name() = 'input' or local-name() = 'button' or local-name() = 'optgroup' or local-name() = 'option' or local-name() = 'select' or local-name() = 'textarea')"
-				+ " and "
-				+ EnabledPseudoClass.ENABLED_XPATH
-			+ " ) "
-			+ " or "
-			+ " (local-name() = 'a' and @href) "
-			+ " or "
-			+ " (local-name() = 'area' and @href)"
-			+ " or "
-			+ " @tabindex"
-		+ ")";
 	
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {

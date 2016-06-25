@@ -39,10 +39,6 @@ import static java.lang.Character.isLetter;
  */
 class CssSelectorPreParser {
 
-    static PreParsedSelector transformSelector(String selector) {
-        return new CssSelectorPreParser(selector).transformSelector();
-    }
-
 	static class PreParsedSelector {
 		private String transformedSelector;
 		private ArgumentMap argumentMap;
@@ -60,6 +56,10 @@ class CssSelectorPreParser {
 	private int selectorCurrentParsingIndex;
 	private StringBuilder transformedSelector;
 	private Map<Integer, String> argumentMap;
+	
+    static PreParsedSelector transformSelector(String selector) {
+        return new CssSelectorPreParser(selector).transformSelector();
+    }
 
     private CssSelectorPreParser(String selector) {
         this.selector = selector;
