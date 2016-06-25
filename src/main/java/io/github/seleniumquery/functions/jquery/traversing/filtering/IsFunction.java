@@ -55,9 +55,9 @@ public class IsFunction {
 
     public static class CompiledSelector {
 
-        private boolean emptySelector = false;
+        private boolean emptySelector;
         private List<CompiledCssSelector> compiledCssSelectors;
-        private boolean hasNegatedPresent = false;
+        private boolean hasNegatedPresent;
 
         private class CompiledCssSelector {
             public final CssSelector<Selector, TagComponent> cssSelector;

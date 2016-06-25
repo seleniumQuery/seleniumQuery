@@ -47,17 +47,17 @@ public class SeleniumQueryBrowser {
      *
      * @since 0.9.0
      */
-    public final BrowserFunctions $ = new BrowserFunctions();
+    public static final BrowserFunctions $ = new BrowserFunctions();
 
     /**
      * <p>The seleniumQuery browser functions object.</p> This works as an alias to <code>$</code>.
      */
-    public final BrowserFunctions sQ = $;
+    public static final BrowserFunctions sQ = $;
 
     /**
      * <p>The seleniumQuery browser functions object.</p> This works as an alias to <code>$</code>.
      */
-    public final BrowserFunctions jQuery = $;
+    public static final BrowserFunctions jQuery = $;
 
     /**
      * <p>The seleniumQuery browser functions object.</p>
