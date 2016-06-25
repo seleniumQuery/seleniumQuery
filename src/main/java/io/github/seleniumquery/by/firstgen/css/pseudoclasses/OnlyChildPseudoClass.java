@@ -41,9 +41,9 @@ public class OnlyChildPseudoClass implements PseudoClass<ConditionSimpleComponen
 		WebElement parent = SelectorUtils.parent(element);
 		//noinspection SimplifiableIfStatement
 		if (parent == null // parent is null when element is <HTML>
-				|| parent.getTagName().equals("html")
-				|| parent.getTagName().equals("body")
-				|| parent.getTagName().equals("head")) {
+				|| "html".equals(parent.getTagName())
+				|| "body".equals(parent.getTagName())
+				|| "head".equals(parent.getTagName())) {
 			// I have tested and :only-child never worked direct children of those
 			return false;
 		}
