@@ -23,15 +23,15 @@ public enum WaitingBehaviorModifier {
 
     private final String toString;
 
+    WaitingBehaviorModifier(String toString) {
+        this.toString = toString;
+    }
+
     public static WaitingBehaviorModifier fromBoolean(boolean negated) {
         if (negated) {
             return NEGATED_BEHAVIOR;
         }
         return USUAL_BEHAVIOR;
-    }
-
-    WaitingBehaviorModifier(String toString) {
-        this.toString = toString;
     }
 
     @Override

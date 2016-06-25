@@ -41,6 +41,10 @@ public class DriverVersionUtils {
 
 	private static DriverVersionUtils instance = new DriverVersionUtils();
 
+	private static final Log LOGGER = LogFactory.getLog(DriverVersionUtils.class);
+	
+	private Map<WebDriver, Map<String, Boolean>> driverSupportedPseudos = new HashMap<>();
+
 	public static DriverVersionUtils getInstance() {
 		return instance;
 	}
@@ -49,10 +53,6 @@ public class DriverVersionUtils {
 	public static void overrideSingletonInstance(DriverVersionUtils instance) {
 		DriverVersionUtils.instance = instance;
 	}
-
-	private static final Log LOGGER = LogFactory.getLog(DriverVersionUtils.class);
-	
-	private Map<WebDriver, Map<String, Boolean>> driverSupportedPseudos = new HashMap<>();
 	
 	public boolean hasNativeSupportForPseudo(WebDriver driver, String pseudoClass) {
 		Map<String, Boolean> driverMap = getDriverMap(driver);

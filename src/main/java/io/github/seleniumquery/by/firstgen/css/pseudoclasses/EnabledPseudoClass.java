@@ -43,6 +43,12 @@ public class EnabledPseudoClass implements PseudoClass<ConditionSimpleComponent>
 	private static final String OPTION_TAG = "option";
 	public static final List<String> ENABLEABLE_TAGS = DisabledPseudoClass.DISABLEABLE_TAGS;
 	
+	public static final String ENABLED_XPATH = "(" +
+            DisabledPseudoClass.DISABLEABLE_TAGS_XPATH +
+        " and " +
+		    "not("+ DisabledPseudoClass.DISABLED_XPATH_CONDITION+")" +
+        ")";
+	
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return ENABLED_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
@@ -63,11 +69,6 @@ public class EnabledPseudoClass implements PseudoClass<ConditionSimpleComponent>
 		return element.isEnabled() && ENABLEABLE_TAGS.contains(element.getTagName());
 	}
 	
-	public static final String ENABLED_XPATH = "(" +
-                DisabledPseudoClass.DISABLEABLE_TAGS_XPATH +
-            " and " +
-			    "not("+ DisabledPseudoClass.DISABLED_XPATH_CONDITION+")" +
-            ")";
 	
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
