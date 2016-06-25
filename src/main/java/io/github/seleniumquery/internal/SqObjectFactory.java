@@ -65,6 +65,7 @@ public class SqObjectFactory {
      * @deprecated
      * Don't build with this invalid selector. Construct a {@link SeleniumQueryInvalidBy} yourself, with better selector string.
      */
+    @Deprecated
     public SeleniumQueryObject createWithInvalidSelector(WebDriver driver, List<WebElement> elements, SeleniumQueryObject previous) {
         return create(driver, getNoSelectorInvalidBy(), elements, previous);
     }

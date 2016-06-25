@@ -511,6 +511,7 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unused")
+	@Deprecated
 	SeleniumQueryObject selectOptionByVisibleText(String text);
 
 	/**
@@ -521,6 +522,7 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unused")
+	@Deprecated
 	SeleniumQueryObject selectOptionByValue(String value);
 
 	/**

@@ -28,6 +28,7 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
  *
  * @deprecated temporary
  */
+@Deprecated
 public interface SQCssConditionImplementedFinders {
 
     ElementFinder toElementFinder(ElementFinder leftFinder);
