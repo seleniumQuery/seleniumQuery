@@ -36,6 +36,8 @@ class ComparisonEvaluatorUtils {
         DECIMAL_FORMAT = (DecimalFormat) NumberFormat.getNumberInstance();
         DECIMAL_FORMAT.setParseBigDecimal(true);
     }
+    
+    private ComparisonEvaluatorUtils() {}
 
     static BigDecimal parseNumber(Object elementValue) {
         String elementValueAsString = elementValue.toString();

@@ -30,6 +30,8 @@ import java.util.List;
  */
 public class TextFunction {
 	
+	private TextFunction() {}
+	
 	public static String text(SeleniumQueryObject seleniumQueryObject) {
 		return text(seleniumQueryObject.get());
 	}

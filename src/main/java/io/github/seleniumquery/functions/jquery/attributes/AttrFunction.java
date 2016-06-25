@@ -34,6 +34,8 @@ public class AttrFunction {
 	
 	private static final String SELECTED = "selected";
 	private static final String CHECKED = "checked";
+	
+	private AttrFunction() {}
 
 	public static String attr(SeleniumQueryObject seleniumQueryObject, String attributeName) {
         WebDriver webDriver = seleniumQueryObject.getWebDriver();

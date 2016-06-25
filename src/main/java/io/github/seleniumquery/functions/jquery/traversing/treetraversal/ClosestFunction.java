@@ -33,6 +33,8 @@ import java.util.List;
  * @since 0.9.0
  */
 public class ClosestFunction {
+	
+	private ClosestFunction() {}
 
 	public static SeleniumQueryObject closest(SeleniumQueryObject caller, String selector) {
 		List<WebElement> elements = caller.get();

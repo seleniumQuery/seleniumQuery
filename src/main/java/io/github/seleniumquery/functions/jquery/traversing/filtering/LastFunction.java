@@ -31,6 +31,8 @@ import io.github.seleniumquery.SeleniumQueryObject;
 public class LastFunction {
 
 	private static final int LAST_ELEMENT_INDEX = -1;
+	
+	private LastFunction() {}
 
 	public static SeleniumQueryObject last(SeleniumQueryObject seleniumQueryObject) {
 		return EqFunction.eq(seleniumQueryObject, LAST_ELEMENT_INDEX);

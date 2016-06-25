@@ -39,6 +39,8 @@ import java.util.Set;
 public class ParentFunction {
 
 	private static final String NO_FILTER_SELECTOR_PROVIDED = null;
+	
+	private ParentFunction() {}
 
 	public static SeleniumQueryObject parent(SeleniumQueryObject caller) {
 		return parent(caller, NO_FILTER_SELECTOR_PROVIDED);

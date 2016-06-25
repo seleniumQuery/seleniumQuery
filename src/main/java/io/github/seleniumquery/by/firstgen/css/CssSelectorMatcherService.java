@@ -27,6 +27,8 @@ import org.w3c.css.sac.Selector;
 
 public class CssSelectorMatcherService {
 	
+	private CssSelectorMatcherService() {}
+	
 	public static boolean elementMatchesStringSelector(WebDriver driver, WebElement element, String selector) {
 		CssParsedSelectorList cssParsedSelectors = CssSelectorParser.parseSelector(selector);
 		for (CssParsedSelector cssParsedSelector : cssParsedSelectors) {

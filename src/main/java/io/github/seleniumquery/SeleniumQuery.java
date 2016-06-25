@@ -80,6 +80,8 @@ public class SeleniumQuery {
 	 * <p>The seleniumQuery global browser functions object.</p> This works as an alias to <code>$</code>.
 	 */
 	public static final BrowserFunctionsWithDeprecatedFunctions jQuery = $;
+	
+	private SeleniumQuery() {}
 
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p>

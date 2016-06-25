@@ -39,6 +39,8 @@ import java.util.List;
 public class HtmlFunction {
 
 	private static final Log LOGGER = LogFactory.getLog(HtmlFunction.class);
+	
+	private HtmlFunction() {}
 
 	public static String html(SeleniumQueryObject seleniumQueryObject) {
 		return html(seleniumQueryObject.get());
