@@ -48,7 +48,7 @@ public class DisabledPseudoClass implements PseudoClass<ConditionSimpleComponent
 	private static final String SELECT = "select";
 	private static final String TEXTAREA = "textarea";
 
-	public static final List<String> DISABLEABLE_TAGS = Arrays.asList(INPUT, BUTTON, OPTGROUP, OPTION, SELECT, TEXTAREA);
+	protected static final List<String> DISABLEABLE_TAGS = Arrays.asList(INPUT, BUTTON, OPTGROUP, OPTION, SELECT, TEXTAREA);
 
 	public static final String DISABLEABLE_TAGS_XPATH = "(self::" + join(DISABLEABLE_TAGS, " or self::") + ")";
     public static final String DISABLED_XPATH_CONDITION = "((@disabled and " + DISABLEABLE_TAGS_XPATH + ") or (self::option and ancestor::optgroup[@disabled]))";
