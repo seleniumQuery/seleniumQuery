@@ -39,7 +39,7 @@ public class DirectDescendantCssSelector implements CssSelector<DescendantSelect
 	public boolean is(WebDriver driver, WebElement element, ArgumentMap argumentMap, DescendantSelector descendantSelector) {
 		WebElement parent = SelectorUtils.parent(element);
 		//noinspection SimplifiableIfStatement
-		if (parent == null || parent.getTagName().equals("html")) {
+		if (parent == null || "html".equals(parent.getTagName())) {
 			return false;
 		}
 		return elementMatchesDescendantSelector(driver, element, descendantSelector, argumentMap)
