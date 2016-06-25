@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition;
 
 /**
- * This also very is temporary.
+ * @deprecated This also very is temporary.
  * Just used to mark not implemented yet pseudos, so my work to find them is easier.
  */
 @Deprecated

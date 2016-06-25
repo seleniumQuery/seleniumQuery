@@ -62,6 +62,7 @@ public class BrowserFunctionsWithDeprecatedFunctions extends BrowserFunctions {
 	 * @deprecated This class refers to a deprecated way of accessing some functions and will be removed by the next release.
 	 * You'll find the functions for this object in <b>{@code $.function();}</b> or <b>{@code $.driver().function();}</b>.
 	 */
+	@Deprecated
 	public class OldBrowserFunctions {
 
 		private BrowserFunctionsWithDeprecatedFunctions browser;
