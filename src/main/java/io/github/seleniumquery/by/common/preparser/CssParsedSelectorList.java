@@ -26,12 +26,12 @@ public class CssParsedSelectorList implements Iterable<CssParsedSelector> {
 	
 	private final SelectorList selectorList;
 	private final ArgumentMap argumentMap;
-	private final List<CssParsedSelector> cssParsedSelectorList;
+	private final List<CssParsedSelector> cssParsedSelectors;
 
 	public CssParsedSelectorList(SelectorList selectorList, ArgumentMap argumentMap) {
 		this.selectorList = selectorList;
 		this.argumentMap = argumentMap;
-		this.cssParsedSelectorList = createParsedSelectorList();
+		this.cssParsedSelectors = createParsedSelectorList();
 	}
 
 	private List<CssParsedSelector> createParsedSelectorList() {
@@ -52,16 +52,16 @@ public class CssParsedSelectorList implements Iterable<CssParsedSelector> {
 	}
 
     public int size() {
-        return cssParsedSelectorList.size();
+        return cssParsedSelectors.size();
     }
 
     @Override
     public Iterator<CssParsedSelector> iterator() {
-        return cssParsedSelectorList.iterator();
+        return cssParsedSelectors.iterator();
     }
 
     public CssParsedSelector get(int index) {
-        return cssParsedSelectorList.get(index);
+        return cssParsedSelectors.get(index);
     }
 
 }

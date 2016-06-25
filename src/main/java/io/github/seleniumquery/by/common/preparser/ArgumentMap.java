@@ -20,14 +20,14 @@ import java.util.Map;
 
 public class ArgumentMap {
 
-    private Map<Integer, String> argumentMap;
+    private Map<Integer, String> argsMap;
 
     ArgumentMap(Map<Integer, String> argumentMap) {
-        this.argumentMap = argumentMap;
+        this.argsMap = argumentMap;
     }
 
     public String get(int index) {
-        return argumentMap.get(index);
+        return argsMap.get(index);
     }
 
     public String get(String index) {
@@ -35,7 +35,7 @@ public class ArgumentMap {
     }
 
     public int size() {
-        return argumentMap.size();
+        return argsMap.size();
     }
 
 }
