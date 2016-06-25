@@ -46,7 +46,7 @@ public class EqPseudoClass implements PseudoClass<ConditionToAllComponent> {
 		if (eqIndex.charAt(0) == '+') {
 			eqIndex = eqIndex.substring(1);
 		}
-		int index = Integer.valueOf(eqIndex);
+		int index = Integer.parseInt(eqIndex);
 		
 		return EqPseudoClass.isEq(driver, element, pseudoClassSelector, index);
 	}
@@ -69,7 +69,7 @@ public class EqPseudoClass implements PseudoClass<ConditionToAllComponent> {
 		if (eqIndex.charAt(0) == '+') {
 			eqIndex = eqIndex.substring(1);
 		}
-		int index = Integer.valueOf(eqIndex);
+		int index = Integer.parseInt(eqIndex);
 		
 		if (index >= 0) {
 			return new ConditionToAllComponent("[position() = " + (index + 1) + "]");
