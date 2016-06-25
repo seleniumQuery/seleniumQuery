@@ -42,7 +42,7 @@ import java.util.List;
  */
 class SqObject implements SeleniumQueryObject {
 	
-	public static final Log LOGGER = LogFactory.getLog(SqObject.class);
+	private static final Log LOGGER = LogFactory.getLog(SqObject.class);
 
     static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
 

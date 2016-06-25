@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class ConditionSimpleComponent extends ConditionComponent {
 
-    private final static String EMPTY_XPATH_EXPRESSION = "";
+    private static final String EMPTY_XPATH_EXPRESSION = "";
 
     /**
      * Creates a XPath Component that is empty (has no XPath expression) and no Element Filter.
