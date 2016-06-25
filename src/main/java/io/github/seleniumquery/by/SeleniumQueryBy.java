@@ -38,6 +38,8 @@ public class SeleniumQueryBy extends By {
 	private static final String STARTING_BRACES = "(\\s*\\(\\s*)*";
 	private static final String XPATH_AXES = "ancestor|ancestor-or-self|attribute|child|descendant|descendant-or-self|following|following-sibling|parent|preceding|preceding-sibling|self";
 	private static final Pattern XPATH_EXPRESSION_PATTERN = Pattern.compile(STARTING_BRACES + "(/|(" + XPATH_AXES + ")::).*");
+	
+	private final String selector;
 
 	/**
 	 * Enhanced selector is not just the CSS selector, it also supports XPath expressions and some
@@ -51,8 +53,6 @@ public class SeleniumQueryBy extends By {
 	public static SeleniumQueryBy byEnhancedSelector(String selector) {
 		return new SeleniumQueryBy(selector);
 	}
-
-	private final String selector;
 
 	
 	/**

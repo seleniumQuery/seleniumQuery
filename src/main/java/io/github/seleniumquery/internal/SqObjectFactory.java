@@ -39,6 +39,11 @@ import static java.util.Arrays.asList;
 public class SqObjectFactory {
 
     private static SqObjectFactory instance;
+    private final SeleniumQueryFunctions seleniumQueryFunctions;
+
+    public SqObjectFactory(SeleniumQueryFunctions seleniumQueryFunctions) {
+        this.seleniumQueryFunctions = seleniumQueryFunctions;
+    }
 
     public static SqObjectFactory instance() {
         if (instance == null) {
@@ -46,12 +51,6 @@ public class SqObjectFactory {
         }
         return instance;
     }
-
-    public SqObjectFactory(SeleniumQueryFunctions seleniumQueryFunctions) {
-        this.seleniumQueryFunctions = seleniumQueryFunctions;
-    }
-
-    private final SeleniumQueryFunctions seleniumQueryFunctions;
 
     public SeleniumQueryObject create(WebDriver driver, By by, List<WebElement> elements, SeleniumQueryObject previous) {
         return create(this.seleniumQueryFunctions, driver, by, elements, previous);

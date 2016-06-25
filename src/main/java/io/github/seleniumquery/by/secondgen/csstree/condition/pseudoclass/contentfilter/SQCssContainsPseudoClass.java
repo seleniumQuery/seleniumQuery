@@ -34,10 +34,6 @@ public class SQCssContainsPseudoClass extends SQCssFunctionalPseudoClassConditio
 
     public static final String PSEUDO = "contains";
 
-    public SQCssContainsPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
-    }
-
     public NeverNativelySupportedPseudoClass containsPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
@@ -47,6 +43,10 @@ public class SQCssContainsPseudoClass extends SQCssFunctionalPseudoClassConditio
             return XPathAndFilterFinder.pureXPath("contains(string(.), " + wantedTextToContain + ")");
         }
     };
+
+    public SQCssContainsPseudoClass(PseudoClass pseudoClassSelector) {
+        super(pseudoClassSelector);
+    }
 
     @Override
     public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {

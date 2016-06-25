@@ -36,10 +36,6 @@ import static java.util.Arrays.asList;
  */
 public class ElementFilterList {
 
-    public static ElementFilterList asFilterList(ElementFilter... filters) {
-        return new ElementFilterList(asList(filters));
-    }
-
     public static final ElementFilterList FILTER_NOTHING_LIST = new ElementFilterList(Collections.<ElementFilter>emptyList()) {
         @Override
         public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
@@ -60,6 +56,11 @@ public class ElementFilterList {
 	public ElementFilterList(List<ElementFilter> elementFilters) {
 		this.elementFilters = Collections.unmodifiableList(elementFilters);
 	}
+	
+
+    public static ElementFilterList asFilterList(ElementFilter... filters) {
+        return new ElementFilterList(asList(filters));
+    }
 
 	public List<WebElement> filter(SearchContext context, List<WebElement> elements) {
 		WebDriver driver = SelectorUtils.getWebDriver(context);

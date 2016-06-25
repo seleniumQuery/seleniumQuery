@@ -41,10 +41,6 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
        but we still match it, so we can return a proper error message */
     public static final String PSEUDO_PURE_NOT = "not";
 
-    public SQCssNotPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
-    }
-
     public MaybeNativelySupportedPseudoClass notPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
@@ -86,6 +82,10 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
             return XPathAndFilterFinder.pureXPath("not("+joinedXPathExps+")");
         }
     };
+    
+    public SQCssNotPseudoClass(PseudoClass pseudoClassSelector) {
+        super(pseudoClassSelector);
+    }
 
     @Override
     public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
