@@ -37,7 +37,7 @@ public class RootPseudoClass implements PseudoClass<ConditionSimpleComponent> {
 	
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
-		return element.getTagName().equals("html");
+		return "html".equals(element.getTagName());
 	}
 	
 	@Override

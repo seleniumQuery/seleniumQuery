@@ -57,7 +57,7 @@ public class TagComponent extends XPathComponent implements Combinable<TagCompon
     private boolean canUseById() {
         //noinspection PointlessBooleanExpression,ConstantConditions
         return ID_OPTIMIZATION
-                && this.xPathExpression.equals("*")
+                && "*".equals(this.xPathExpression)
                 && this.combinatedComponents.size() == 1
                 && this.combinatedComponents.get(0) instanceof IdConditionComponent;
     }

@@ -81,11 +81,11 @@ class FocusablePseudoClass implements PseudoClass<ConditionSimpleComponent> {
 		if (DisabledPseudoClass.DISABLEABLE_TAGS.contains(element.getTagName())) {
 			return element.isEnabled();
 		}
-		if (element.getTagName().equals("a") && element.getAttribute("href") != null) {
+		if ("a".equals(element.getTagName()) && element.getAttribute("href") != null) {
 			return true;
 		}
 		//noinspection SimplifiableIfStatement
-		if (element.getTagName().equals("area") && element.getAttribute("href") != null /* && inside a named map */ /* && there is a visible image using the map */) {
+		if ("area".equals(element.getTagName()) && element.getAttribute("href") != null /* && inside a named map */ /* && there is a visible image using the map */) {
 			return true;
 		}
 		return element.getAttribute("tabindex") != null;
