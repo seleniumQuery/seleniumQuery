@@ -68,7 +68,7 @@ public class ElementFilterList {
 	}
 
 	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
-		if (this.elementFilters.size() > 0) {
+		if (!this.elementFilters.isEmpty()) {
             // TODO we are currently disabling the filter support -- we will only take it back when the system is stable
 			throw new UnsupportedOperationException("The current selector is not yet supported. Please try a simpler one.");
 		}
