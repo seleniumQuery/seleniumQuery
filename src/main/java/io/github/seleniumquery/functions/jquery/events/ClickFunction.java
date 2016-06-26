@@ -37,6 +37,8 @@ import static io.github.seleniumquery.functions.jquery.events.ClickFunctionUtils
 public class ClickFunction {
 
     private static final Log LOGGER = LogFactory.getLog(ClickFunction.class);
+    
+    private ClickFunction() {}
 
     public static SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject) {
         LOGGER.debug("Clicking "+seleniumQueryObject+".");

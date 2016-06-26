@@ -20,6 +20,8 @@ public class GetFunction {
 	
 	private static final Log LOGGER = LogFactory.getLog(GetFunction.class);
 	
+	private GetFunction() {}
+	
 	public static WebElement get(SeleniumQueryObject caller, int index) {
 		List<WebElement> elements = caller.get();
 		if (elements.size() <= index) {

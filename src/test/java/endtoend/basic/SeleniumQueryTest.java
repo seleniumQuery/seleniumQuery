@@ -37,11 +37,6 @@ public class SeleniumQueryTest {
     private WebElement d2;
 
     @Test
-    public void the_SeleniumQuery_constructor_should_not_throw_exception_or_do_anything_noticeable() {
-        new SeleniumQuery();
-    }
-
-    @Test
     public void $_field() {
         verifySeleniumQueryFieldAliasWorks(SeleniumQuery.$);
     }

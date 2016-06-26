@@ -35,6 +35,8 @@ import java.util.List;
  * @since 0.9.0
  */
 public class ChildrenFunction {
+	
+	private ChildrenFunction() {}
 
 	public static SeleniumQueryObject children(SeleniumQueryObject caller) {
 		List<WebElement> elements = caller.get();

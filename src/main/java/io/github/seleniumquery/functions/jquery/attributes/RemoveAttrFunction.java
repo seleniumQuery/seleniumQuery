@@ -30,6 +30,8 @@ import java.util.List;
  */
 public class RemoveAttrFunction {
 	
+	private RemoveAttrFunction() {}
+	
 	public static SeleniumQueryObject removeAttr(SeleniumQueryObject seleniumQueryObject, String attributeNames) {
 		List<WebElement> elements = seleniumQueryObject.get();
 		JavascriptExecutor js = (JavascriptExecutor) seleniumQueryObject.getWebDriver();
