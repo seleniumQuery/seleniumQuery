@@ -27,7 +27,7 @@ import java.util.Map;
 
 class PseudoClassFilter implements ElementFilter {
 	
-	public static final Map<String, String> STRING_MAP_NOT_USED = null;
+	protected static final Map<String, String> STRING_MAP_NOT_USED = null;
 	public static final Selector SELECTOR_NOT_USED = null;
 	public static final String PSEUDO_CLASS_VALUE_NOT_USED = null;
 	
