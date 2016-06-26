@@ -31,6 +31,8 @@ import static java.lang.String.format;
  * @since 0.9.0
  */
 public class DriverInstantiationUtils {
+	
+	private DriverInstantiationUtils() {}
 
 	public static String getFullPathForFileInClasspath(String executableFileName) {
 		String slashExecutableFileName = "/" + executableFileName;

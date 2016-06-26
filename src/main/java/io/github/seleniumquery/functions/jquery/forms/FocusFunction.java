@@ -35,6 +35,8 @@ import java.util.List;
 public class FocusFunction {
 	
 	private static final Log LOGGER = LogFactory.getLog(FocusFunction.class);
+	
+	private FocusFunction() {}
 
 	public static SeleniumQueryObject focus(SeleniumQueryObject caller) {
 		List<WebElement> elements = caller.get();

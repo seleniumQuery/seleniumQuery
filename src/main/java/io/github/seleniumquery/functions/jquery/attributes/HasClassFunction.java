@@ -30,6 +30,8 @@ import java.util.List;
  */
 public class HasClassFunction {
 	
+	private HasClassFunction() {}
+	
 	public static boolean hasClass(SeleniumQueryObject seleniumQueryObject, String className) {
 		List<WebElement> elements = seleniumQueryObject.get();
 		if (elements.isEmpty()) {

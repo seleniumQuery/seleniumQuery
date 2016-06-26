@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComponentUtils {
+	
+	private ComponentUtils() {}
 
     public static List<XPathComponent> joinComponents(List<XPathComponent> oneComponents, XPathComponent otherCopyWithModifiedType) {
         List<XPathComponent> aggregatedComponents = new ArrayList<>(oneComponents);

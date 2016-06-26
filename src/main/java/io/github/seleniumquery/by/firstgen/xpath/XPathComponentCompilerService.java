@@ -30,6 +30,8 @@ import java.util.List;
 
 public class XPathComponentCompilerService {
 	
+	private XPathComponentCompilerService() {}
+	
 	public static TagComponentList compileSelectorList(String selector) {
 		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
 

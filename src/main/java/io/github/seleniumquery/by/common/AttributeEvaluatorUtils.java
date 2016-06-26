@@ -33,6 +33,8 @@ public class AttributeEvaluatorUtils {
      * its lowercased value.
      */
     public static final String TYPE_ATTR_LC_VAL = toLowerCase(toXPathAttribute("type"));
+    
+    private AttributeEvaluatorUtils() {}
 
     public static String getXPathAttribute(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();

@@ -32,6 +32,8 @@ import java.util.List;
  */
 public class NotFunction {
 	
+	private NotFunction() {}
+	
 	public static SeleniumQueryObject not(SeleniumQueryObject seleniumQueryObject, String selector) {
 		List<WebElement> elements = seleniumQueryObject.get();
 		List<WebElement> filteredElements = new ArrayList<>(elements);

@@ -43,6 +43,8 @@ import java.util.regex.Pattern;
 public class IsFunction {
 
 	private static final Pattern NOT_SQ_PATTERN = Pattern.compile("not-sq\\((\\d+)\\)");
+	
+	private IsFunction() {}
 
 	public static boolean is(SeleniumQueryObject seleniumQueryObject, String selector) {
 		return is(seleniumQueryObject.getWebDriver(), seleniumQueryObject.get(), selector);

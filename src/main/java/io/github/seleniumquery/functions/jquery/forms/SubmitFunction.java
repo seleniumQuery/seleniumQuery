@@ -34,6 +34,8 @@ import org.openqa.selenium.WebElement;
 public class SubmitFunction {
 
     private static final Log LOGGER = LogFactory.getLog(SubmitFunction.class);
+    
+    private SubmitFunction() {}
 
     public static void submit(SeleniumQueryObject seleniumQueryObject) {
         for (WebElement webElement : seleniumQueryObject) {
