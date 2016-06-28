@@ -14,7 +14,7 @@
 [![wercker status](https://app.wercker.com/status/b772beb5c952865d659e548bf7d64f48/s "wercker status")](https://app.wercker.com/project/bykey/b772beb5c952865d659e548bf7d64f48)
 [![Circle CI](https://circleci.com/gh/seleniumQuery/seleniumQuery.svg?style=svg)](https://circleci.com/gh/seleniumQuery/seleniumQuery)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/acdcjunior.svg)](https://saucelabs.com/u/acdcjunior)
+[![Sauce Test Status](https://saucelabs.com/open_sauce/build_matrix/acdcjunior.svg)](https://saucelabs.com/u/acdcjunior)
 
 ### *Cross-Driver* jQuery-like Java interface for Selenium WebDriver
 
