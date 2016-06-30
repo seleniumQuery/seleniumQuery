@@ -36,9 +36,9 @@ import static org.apache.commons.lang3.StringUtils.capitalize;
 public class ValFunction {
 
 	private static final Log LOGGER = LogFactory.getLog(ValFunction.class);
-	
+
 	private ValFunction() {}
-	
+
 	/*
 	 * $(".selector").val();
 	 */
@@ -52,7 +52,7 @@ public class ValFunction {
 	/**
 	 * <p>Gets the value of the given element, if its tag name is INPUT, OPTION, SELECT or TEXTAREA.</p>
 	 * Otherwise it returns an empty string.
-	 * 
+	 *
 	 * @param element The element you want the value of.
 	 * @return The value of the element.
 	 * @since 0.9.0
@@ -71,7 +71,7 @@ public class ValFunction {
 		LOGGER.warn("Attempting to call .val() in an element of type '"+tagName+"': "+element+". Returning empty string.");
 		return "";
 	}
-	
+
 	/*
 	 * $(".selector").val(123);
 	 */
@@ -86,65 +86,73 @@ public class ValFunction {
 	public static SeleniumQueryObject val(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String value) {
 		LOGGER.debug("Setting value of "+ seleniumQueryObject +" to: \""+value+"\".");
 		for (WebElement element : elements) {
-			val(seleniumQueryObject.getWebDriver(), element, value);
+            changeElementValue(seleniumQueryObject.getWebDriver(), element, value);
 		}
 		return seleniumQueryObject;
 	}
-	
-	private static void val(WebDriver driver, WebElement element, String value) {
+
+	private static void changeElementValue(WebDriver driver, WebElement element, String value) {
 		if (isSelectTag(element)) {
-			new Select(element).selectByValue(value);
-		} else if (isInputTag(element) || isTextareaTag(element)) {
-			if (isInputWithTypeWeDontChangeValue(element)) {
-				String type = element.getAttribute("type");
-				warnAboutNotChangingValue("<input type=\"" + type + "\">", "#my" + capitalize(type));
-				return;
-			}
-			if (!isInputFileTag(element)) {
-				element.clear();
-			}
-			element.sendKeys(value);
-		} else if (isOptionTag(element)) {
-			warnAboutNotChangingValue("<option>", "#myOption");
+            changeValueOfSelectElement(element, value);
+        } else if (isInputTag(element) || isTextareaTag(element)) {
+            changeValueOfInputElement(element, value);
+        } else if (isOptionTag(element)) {
+			warnAboutNotChangingValueOfElement("<option>", "#myOption");
 		} else if (isContentEditable(element)) {
-			// #Cross-Driver
-            if (DriverVersionUtils.getInstance().isHtmlUnitDriver(driver)) {
-				changeContentEditableValueInHtmlUnit(driver, element, value);
-			} else {
-				if (driver instanceof FirefoxDriver) {
-					// #Cross-Driver
-					// in firefox, an editable div cannot be empty
-					try {
-						element.sendKeys(Keys.chord(Keys.CONTROL, Keys.HOME), Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END));
-						element.sendKeys(value);
-					} catch (ElementNotVisibleException e) {
-						// we could work it out, possibly via JavaScript, but we decided not to, as a user would not be able to edit it!
-						throw new ElementNotVisibleException("Empty contenteditable elements are not visible in Firefox, " +
-								"so a user can't directly interact with them. Try picking an element before the contenteditable one " +
-								"and sending the TAB key to it, so the focus is switched, and then try calling .val() to change its value.", e);
-					}
-				} else {
-					element.clear();
-					element.sendKeys(value);
-				}
-			}
+			changeValueOfContentEditableElement(driver, element, value);
 		} else {
-			LOGGER.warn("Function .val() called in element not known to be editable. Will attempt to send keys anyway. Element: "+element);
-			element.clear();
-			element.sendKeys(value);
+            changeValueOfUnknownElement(element, value);
 		}
 	}
 
-	private static boolean isInputWithTypeWeDontChangeValue(WebElement element) {
-		return isInputRadioTag(element) || isInputCheckboxTag(element) || isInputHiddenTag(element)
-                || isInputButtonTag(element) || isInputSubmitTag(element);
-	}
+    private static void changeValueOfSelectElement(WebElement element, String value) {
+        new Select(element).selectByValue(value);
+    }
 
-	private static void warnAboutNotChangingValue(String exampleHtml, String exampleId) {
-		LOGGER.warn("Users can't (and thus Selenium will not allow you to) change the 'value' attribute of " +
-                exampleHtml + " elements. seleniumQuery's $(\"" + exampleId + "\").val(\"str\") will have no " +
-				"effect on such elements. It is ill advised, but if you really have to," +
-                " use $(\"" + exampleId + "\").attr(\"value\", \"newValue\");");
+    private static void changeValueOfInputElement(WebElement element, String value) {
+        if (isAnInputWithTypeWhichUserCantChangeValue(element)) {
+            String type = element.getAttribute("type");
+            warnAboutNotChangingValueOfElement("<input type=\"" + type + "\">", "#my" + capitalize(type));
+        } else {
+            if (!isInputFileTag(element)) {
+                element.clear();
+            }
+            element.sendKeys(value);
+        }
+    }
+
+    private static boolean isAnInputWithTypeWhichUserCantChangeValue(WebElement element) {
+        return isInputRadioTag(element) || isInputCheckboxTag(element) || isInputHiddenTag(element)
+            || isInputButtonTag(element) || isInputSubmitTag(element);
+    }
+
+    private static void warnAboutNotChangingValueOfElement(String exampleHtml, String exampleId) {
+        LOGGER.warn("Users can't (and thus Selenium will not allow you to) change the 'value' attribute of " +
+            exampleHtml + " elements. seleniumQuery's $(\"" + exampleId + "\").val(\"str\") will have no " +
+            "effect on such elements. It is ill advised, but if you really have to," +
+            " use $(\"" + exampleId + "\").attr(\"value\", \"newValue\");");
+    }
+
+    private static void changeValueOfContentEditableElement(WebDriver driver, WebElement element, String value) {
+		// #Cross-Driver
+		if (DriverVersionUtils.getInstance().isHtmlUnitDriver(driver)) {
+            changeContentEditableValueInHtmlUnit(driver, element, value);
+        } else if (driver instanceof FirefoxDriver) {
+            // #Cross-Driver
+            // in firefox, an editable div cannot be empty
+            try {
+                element.sendKeys(Keys.chord(Keys.CONTROL, Keys.HOME), Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END));
+                element.sendKeys(value);
+            } catch (ElementNotVisibleException e) {
+                // we could work it out, possibly via JavaScript, but we decided not to, as a user would not be able to edit it!
+                throw new ElementNotVisibleException("Empty contenteditable elements are not visible in Firefox, " +
+                        "so a user can't directly interact with them. Try picking an element before the contenteditable one " +
+                        "and sending the TAB key to it, so the focus is switched, and then try calling .val() to change its value.", e);
+            }
+        } else {
+            element.clear();
+            element.sendKeys(value);
+        }
 	}
 
 	private static void changeContentEditableValueInHtmlUnit(WebDriver driver, WebElement element, String value) {
@@ -169,5 +177,31 @@ public class ValFunction {
 			}
 		}
 	}
+
+    private static void changeValueOfUnknownElement(WebElement element, String value) {
+        LOGGER.warn("Function .val() called in element not known to be editable. Will attempt to send keys anyway. Element: "+element);
+        try {
+            element.clear();
+            element.sendKeys(value);
+        } catch (org.openqa.selenium.InvalidElementStateException e) {
+            if (e.getMessage().startsWith("invalid element state: Element must be user-editable in order to clear it.")) {
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+                System.out.println("#");
+            } else {
+                System.out.println("'"+e.getMessage()+"'");
+            }
+
+        }
+    }
 
 }
