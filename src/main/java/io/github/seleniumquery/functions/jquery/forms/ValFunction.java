@@ -18,6 +18,7 @@ package io.github.seleniumquery.functions.jquery.forms;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.apache.commons.logging.Log;
@@ -180,28 +181,8 @@ public class ValFunction {
 
     private static void changeValueOfUnknownElement(WebElement element, String value) {
         LOGGER.warn("Function .val() called in element not known to be editable. Will attempt to send keys anyway. Element: "+element);
-        try {
-            element.clear();
-            element.sendKeys(value);
-        } catch (org.openqa.selenium.InvalidElementStateException e) {
-            if (e.getMessage().startsWith("invalid element state: Element must be user-editable in order to clear it.")) {
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-                System.out.println("#");
-            } else {
-                System.out.println("'"+e.getMessage()+"'");
-            }
-
-        }
+        element.clear();
+        element.sendKeys(value);
     }
 
 }
