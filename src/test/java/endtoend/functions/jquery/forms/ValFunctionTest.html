@@ -21,13 +21,18 @@
 	<title>seleniumQuery .val() test page</title>
 </head>
 <body>
-	<div id="div-with-text-bozo">BOZO</div>
-	<select id="s1" name="">
-		<option id="opt" value="a1">AA</option>
+    <div id="div-without-contenteditable-but-with-text">DIV INITIAL TEXT</div>
+
+	<select id="select-1" name="">
+		<option id="option-1-of-select-1" value="s1o1-value"         >s1o1-text</option>
+        <option id="option-2-of-select-1" value="s1o2-value" selected>s1o2-text</option>
+        <option id="option-3-of-select-1"                            >s1o3-text</option>
 	</select>
+
 	<textarea name="" id="ta" cols="30" rows="10">
 		bozo
 	</textarea>
+
 	<input type="text" id="i1" value="ii!">
 
 	<input type="radio" id="ir1" value="input-radio-value">
@@ -46,5 +51,18 @@
 	<select id="select-option-without-value">
 		<option selected="selected">selected option without value</option>
 	</select>
+
+
+    <!-- IFRAME DESIGN MODE ######################################################################### -->
+    <script>
+        function iframeOn() {
+            document.getElementById("iframe-with-design-mode-on").contentWindow.document.designMode = "on";
+            document.getElementById("iframe-debug").innerHTML = "loaded";
+        }
+    </script>
+    <div id="iframe-debug">not-loaded</div>
+    <iframe id="iframe-with-design-mode-on" srcdoc="srcdoc-on" onload="iframeOn()"></iframe>
+
+    <iframe id="iframe-with-design-mode-off" srcdoc="srcdoc-off"></iframe>
 </body>
 </html>

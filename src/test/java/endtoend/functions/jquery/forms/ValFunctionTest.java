@@ -20,9 +20,9 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.HasCapabilities;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -30,43 +30,60 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static testinfrastructure.testutils.DriverInTest.*;
 
+// http://jsbin.com/futuhipuhi/2/edit?html,js,output
 public class ValFunctionTest {
-	
-	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(ValFunctionTest.class);
 
-	// http://jsbin.com/futuhipuhi/2/edit?html,js,output
+    private static final String ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT = "#div-without-contenteditable-but-with-text";
+    private static final String ID_SELECT_1 = "#select-1";
+
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(ValFunctionTest.class);
+
+
     @Test
-    public void val() throws Exception {
-		assertThat($("#div-with-text-bozo").val(), is(""));
-		System.out.println("BROWSER NAME: "+((HasCapabilities) $.driver().get()).getCapabilities().getBrowserName());
+    public void val_read__divWithoutContentEditableAttribute___readsEmptyString() {
+        assertThat($(ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT).val(), is(""));
+    }
 
-		try {
-			$("#div-with-text-bozo").val("SHOULD HAVE NO EFFECT");
-            if (DriverInTest.isNotHtmlUnitDriver($.driver().get())) {
-				fail($.driver().get().getClass().toString());
-			}
-		} catch (Exception ignore) { }
-//		assertThat($("#div-with-text-bozo").val(), is("SHOULD HAVE NO EFFECT")); // #disagree jquery sets the val() in a div, but we want as below!
-	    assertThat($("#div-with-text-bozo").val(), is("")); // #disagree - this is what we want
-		assertThat($("#div-with-text-bozo").text(), is("BOZO"));
+    @Test
+    public void val_write__divWithoutContentEditableAttribute___hasNoEffect() {
+        // when
+        $(ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT).val("SHOULD HAVE NO EFFECT");
+        // then
+        assertThat($(ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT).val(), is(""));
+        assertThat($(ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT).text(), is("DIV INITIAL TEXT"));
+    }
 
-		// <select> and <option> ---------------------------------------------------------------------------------------
-		assertThat($("#s1").val(), is("a1"));
+    @Test
+    public void val_read__SELECT___readsSelectedOptionsValue() {
+        assertThat($(ID_SELECT_1).val(), is("s1o2-value"));
+    }
 
-		assertThat($("#opt").val(), is("a1"));
-		$("#opt").val("NEW-OPTION-VALUE"); // #disagree - this willhave no effect
+    @Test
+    public void val_read__OPTION__withValueAttribute__readsValueAttribute() {
+        assertThat($("#option-1-of-select-1").val(), is("s1o1-value"));
+        assertThat($("#option-2-of-select-1").val(), is("s1o2-value"));
+    }
 
-//		assertThat($("#opt").val(), is("NEW-OPTION-VALUE")); // #disagree - we don't set values of <option>s through val()
-		assertThat($("#opt").val(), is("a1"));
-//		assertThat($("#s1").val(), is("NEW-OPTION-VALUE")); // #disagree (it's be so as options's val() changed)
+    @Test
+    public void val_read__OPTION__withoutValueAttribute__readsText() {
+        assertThat($("#option-3-of-select-1").val(), is("s1o3-text"));
+    }
 
-//		$("#s1").val("NEW-SELECT-VALUE"); // #disagree we dont set selectos to non-existant options
-// 		assertThat($("#s1").val(), is(nullValue())); // #disagree so the option didnt change (it'd be null as there'd be no option with that value)
+    @Test(expected = NoSuchElementException.class)
+    public void val_write__SELECT___throwsException__ifThereIsNoOptionWithValue() {
+        $(ID_SELECT_1).val("NO OPTION WITH THIS STRING AS VALUE");
+    }
 
-//		$("#s1").val("NEW-OPTION-VALUE"); // #disagree, this option does not exist, as we didnt change its value above
-		//assertThat($("#s1").val(), is("NEW-OPTION-VALUE"));// #disagree, the value was not set
-//		assertThat($("#s1").val(), is(nullValue()));// #disagree, the value was not set
+    @Test
+    public void val_write__SELECT___changesValue__ifThere_Is_OptionWithValue() {
+        // when
+        $(ID_SELECT_1).val("s1o1-value");
+        // then
+        assertThat($(ID_SELECT_1).val(), is("s1o1-value"));
+    }
 
+    @Test
+    public void val_others() {
 		// TEXTAREA ----------------------------------------------------------------------------------------------------
 		assertThat($("#ta").val().trim(), is("bozo"));
 		assertThat($("#ta").val(), is("\t\tbozo\n\t")); // Firefox/Chrome/PhantomJS/IE10
@@ -94,7 +111,6 @@ public class ValFunctionTest {
 		// <input type="hidden"> ---------------------------------------------------------------------------------------
 		assertThat($("#ih1").val(), is("input-hidden-value"));
 		$("#ih1").val("new-hidden-value"); // #disagree - should have no effect
-		//assertThat($("#ih1").val(), is("new-hidden-value")); // #disagree - it didnt change as line above should have no effect
 		assertThat($("#ih1").val(), is("input-hidden-value")); // #disagree - so the value must be the same
 
 		// <input type="submit"> ---------------------------------------------------------------------------------------
@@ -111,39 +127,47 @@ public class ValFunctionTest {
 
 		// <select id="select-option-without-value"> -------------------------------------------------------------------
 		assertThat($("#select-option-without-value").val(), is("selected option without value"));
-
-		// <div id="editable" contenteditable="true"> ------------------------------------------------------------------
-		testEditableDiv("#editable", "DIZ EZ EDITABLE");
-
-		// <div id="editable-empty" contenteditable="true"> ------------------------------------------------------------
-		try {
-			testEditableDiv("#editable-empty", "");
-		} catch (ElementNotVisibleException e) {
-			if (isNotFirefoxDriver($.driver().get())) {
-				throw e;
-			}
-		}
 	}
 
-	private void testEditableDiv(String editableDivId, String initialValue) {
+    @Test
+    public void val_readAndWrite___divWithContentEditableAttribute___with_INITIAL_VALUE() throws Exception {
+        verifyEditableDivAcceptsHtmlCharsCorrectly("#editable", "DIZ EZ EDITABLE");
+    }
+
+    @Test
+    public void val_readAndWrite___divWithContentEditableAttribute___with_EMPTY_STARTING_VALUE__hasProblemsOnFirefox() {
+        if (isFirefoxDriver($.driver().get())) {
+            try {
+                verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
+                fail();
+            } catch (ElementNotVisibleException ignored) {
+                // success
+            }
+        } else {
+            verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
+        }
+    }
+
+    private void verifyEditableDivAcceptsHtmlCharsCorrectly(String editableDivId, String initialValue) {
+        // checks initial value
 		assertThat($(editableDivId).val(), is(""));
 		assertThat($(editableDivId).text(), is(initialValue));
+
+        // changes value to weird HTML text
 		$(editableDivId).val("TYPED <a>& STUFF");
-		assertThat($(editableDivId).text(), is("TYPED <a>& STUFF"));
-		//assertThat($("#editable").val(), is("SHOULD HAVE NO EFFECT")); // #disagree jquery sets the val() in a div, we dont want that...
-		assertThat($(editableDivId).val(), is("")); // #disagree - ...so the value must be the same
+		assertThat($(editableDivId).val(), is("")); // val() never changes value of contenteditable elements
 		assertThat($(editableDivId).text(), is("TYPED <a>& STUFF"));
 
-        String endResultingHTML = figureOutResultingHtml("TYPED &lt;a&gt;&amp; STUFF");
-        assertThat($(editableDivId).html(), is(endResultingHTML));
+        assertThat($(editableDivId).html(), is(addCharsDependingOnDriver("TYPED &lt;a&gt;&amp; STUFF")));
 	}
 
-    private String figureOutResultingHtml(String resultingHtml) {
-        if (isIEDriver($.driver().get())) {
+    private String addCharsDependingOnDriver(String resultingHtml) {
+        WebDriver driver = $.driver().get();
+        if (isIEDriver(driver)) {
             return " " + resultingHtml;
-		} else if (isFirefoxDriver($.driver().get()) && isRemoteDriver($.driver().get())) {
+		} else if (isFirefoxDriver(driver) && isRemoteDriver(driver)) {
             return resultingHtml + " ";
-        } else if (isFirefoxDriver($.driver().get())) {
+        } else if (isFirefoxDriver(driver)) {
             return resultingHtml + "<br>";
         }
         return resultingHtml;
