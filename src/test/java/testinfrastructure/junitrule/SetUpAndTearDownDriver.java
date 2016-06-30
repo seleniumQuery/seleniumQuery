@@ -101,17 +101,4 @@ public class SetUpAndTearDownDriver implements TestRule {
 
 	@SuppressWarnings("unused") private void afterMethod(Description description) { }
 
-    @SuppressWarnings("unused")
-	private void dump(Description description) {
-		final String methodName = description.getMethodName();
-		System.out.println("***************************************************");
-		System.out.println(" - isSuite: "+description.isSuite());
-		System.out.println(" - isTest: "+description.isTest());
-		System.out.println(" - annotations: "+description.getAnnotations());
-		System.out.println(" - TestClass: "+description.getTestClass());
-		System.out.println(" - class name: "+description.getClassName());
-		System.out.println(" - method name: "+description.getMethodName());
-		System.out.println("###################################################");
-	}
-
 }
