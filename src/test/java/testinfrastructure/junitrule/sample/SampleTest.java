@@ -17,6 +17,7 @@
 package testinfrastructure.junitrule.sample;
 
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
@@ -27,6 +28,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+@Ignore
 public class SampleTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver rule = new SetUpAndTearDownDriver(SampleTest.class);
