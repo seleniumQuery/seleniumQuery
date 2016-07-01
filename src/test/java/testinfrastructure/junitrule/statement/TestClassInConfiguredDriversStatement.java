@@ -19,7 +19,6 @@ package testinfrastructure.junitrule.statement;
 import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.browser.BrowserFunctions;
 import org.junit.runners.model.Statement;
-import testinfrastructure.EndToEndTestUtils;
 import testinfrastructure.junitrule.TestClassSession;
 import testinfrastructure.junitrule.config.DriverInstantiator;
 import testinfrastructure.junitrule.config.DriverToRunTestsIn;
@@ -43,16 +42,12 @@ public class TestClassInConfiguredDriversStatement extends Statement {
     private final TestClassSession testClassSession;
     private final DriverToRunTestsIn driverToRunTestsIn;
     private final Statement base;
-    private final String url;
 
-	public TestClassInConfiguredDriversStatement(TestClassSession testClassSession,
-                                                 Statement base,
-                                                 String url) {
+    public TestClassInConfiguredDriversStatement(TestClassSession testClassSession, Statement base) {
         this.testClassSession = testClassSession;
         this.driverToRunTestsIn = testClassSession.getDriverToRunTestsIn();
         this.base = base;
-        this.url = url;
-	}
+    }
 
 	@Override
 	public void evaluate() throws Throwable {
@@ -139,8 +134,6 @@ public class TestClassInConfiguredDriversStatement extends Statement {
             BrowserFunctions browser = SeleniumQuery.$;
             testClassSession.reportCurrentBrowser(driverDescription, driverHasJavaScriptEnabled, browser);
             driverInstantiator.instantiateDriver(browser);
-            testClassSession.log("\t@## > Opening URL " + url);
-            EndToEndTestUtils.openUrl(url);
             testClassSession.log("\t@## > Executing test class for driver " + driverDescription);
             try {
                 base.evaluate();

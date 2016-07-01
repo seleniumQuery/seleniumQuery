@@ -3,6 +3,7 @@ package testinfrastructure.junitrule.statement;
 import io.github.seleniumquery.browser.BrowserFunctions;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+import testinfrastructure.EndToEndTestUtils;
 import testinfrastructure.junitrule.TestClassSession;
 import testinfrastructure.junitrule.annotation.*;
 import testinfrastructure.testutils.DriverInTest;
@@ -29,6 +30,8 @@ public class TestMethodStatement extends Statement {
         if (shouldSkipTest()) {
             return;
         }
+        testClassSession.log("\t@## > Opening URL " + testClassSession.getUrl());
+        EndToEndTestUtils.openUrl(testClassSession.getUrl());
         try {
             base.evaluate();
             SauceLabsUtils.reportTestSuccess();
