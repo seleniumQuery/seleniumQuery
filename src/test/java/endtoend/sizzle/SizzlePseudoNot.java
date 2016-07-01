@@ -24,7 +24,7 @@ import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class SizzlePseudoNot extends SizzleTest {
 
-    @ClassRule @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
     public void pseudo_not() {
