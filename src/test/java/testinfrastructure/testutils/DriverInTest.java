@@ -22,6 +22,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -65,6 +66,10 @@ public class DriverInTest {
 
     public static boolean isFirefoxDriver(WebDriver webDriver) {
         return webDriver instanceof FirefoxDriver || isDriverByName(webDriver, BrowserType.FIREFOX);
+    }
+
+    public static boolean isPhantomJSDriver(WebDriver webDriver) {
+        return webDriver instanceof PhantomJSDriver || isDriverByName(webDriver, BrowserType.PHANTOMJS);
     }
 
     public static boolean isNotFirefoxDriver(WebDriver webDriver) {

@@ -4,9 +4,7 @@ import io.github.seleniumquery.browser.BrowserFunctions;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 import testinfrastructure.junitrule.TestClassSession;
-import testinfrastructure.junitrule.annotation.ChromeOnly;
-import testinfrastructure.junitrule.annotation.FirefoxOnly;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.*;
 import testinfrastructure.testutils.DriverInTest;
 import testinfrastructure.testutils.SauceLabsUtils;
 
@@ -52,6 +50,14 @@ public class TestMethodStatement extends Statement {
         }
         if (description.getAnnotation(ChromeOnly.class) != null && !DriverInTest.isChromeDriver(browser.driver().get())) {
             printSkipReason("Chrome-only", description);
+            return true;
+        }
+        if (description.getAnnotation(PhantomJSOnly.class) != null && !DriverInTest.isPhantomJSDriver(browser.driver().get())) {
+            printSkipReason("PhantomJS-only", description);
+            return true;
+        }
+        if (description.getAnnotation(IEOnly.class) != null && !DriverInTest.isIEDriver(browser.driver().get())) {
+            printSkipReason("IE-only", description);
             return true;
         }
         return false;
