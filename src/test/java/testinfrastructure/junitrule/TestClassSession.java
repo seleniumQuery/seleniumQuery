@@ -10,26 +10,26 @@ import java.util.List;
 public class TestClassSession {
 
     private final DriverToRunTestsIn driverToRunTestsIn;
-    private boolean itWasReportedThatTheRuleIsAnnotatedWithClassRule;
 
     private List<String> failedDrivers = new ArrayList<>();
     private Throwable firstFailure;
     private String currentDriverDescription;
     private TestClassInConfiguredDriversStatement.DriverHasJavaScriptEnabled currentDriverHasJavaScriptEnabled;
     private BrowserFunctions browser;
-    private Class<?> testClass;
+    private Class<?> testClassReportedByClassRule;
+    private String url;
 
     TestClassSession(DriverToRunTestsIn driverToRunTestsIn) {
         this.driverToRunTestsIn = driverToRunTestsIn;
     }
 
-    void reportRuleIsAnnotatedWithClassRule(Class<?> testClass) {
-        this.testClass = testClass;
-        this.itWasReportedThatTheRuleIsAnnotatedWithClassRule = true;
+    void initiateClassRule(Class<?> testClass, String url) {
+        this.testClassReportedByClassRule = testClass;
+        this.url = url;
     }
 
-    boolean thereWasNoReportThatRuleIsAnnotatedWithClassRule() {
-        return !itWasReportedThatTheRuleIsAnnotatedWithClassRule;
+    boolean classIsNotAnnotatedWithClassRule() {
+        return testClassReportedByClassRule == null;
     }
 
     public void log(String msg) {
@@ -84,6 +84,11 @@ public class TestClassSession {
     }
 
     public Class<?> getTestClass() {
-        return testClass;
+        return testClassReportedByClassRule;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
 }
