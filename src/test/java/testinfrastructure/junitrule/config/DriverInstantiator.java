@@ -17,62 +17,95 @@
 package testinfrastructure.junitrule.config;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
+import testinfrastructure.junitrule.annotation.*;
+
+import java.lang.annotation.Annotation;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 @SuppressWarnings("deprecation")
 public abstract class DriverInstantiator {
 
+    private static final List<Class<? extends Annotation>> DRIVER_ONLY_ANNOTATIONS = asList(ChromeOnly.class, EdgeOnly.class,
+        FirefoxOnly.class, HtmlUnitOnly.class, IEOnly.class, OperaOnly.class, PhantomJSOnly.class, SafariOnly.class);
+
     private String driverDescription;
-    DriverInstantiator(String driverDescription) { this.driverDescription = driverDescription; }
+    private final Class<? extends Annotation> driverAnnotation;
+
+    DriverInstantiator(String driverDescription, Class<? extends Annotation> driverOnlyAnnotation) {
+        this.driverDescription = driverDescription;
+        this.driverAnnotation = driverOnlyAnnotation;
+    }
     public String getDriverDescription() { return driverDescription; }
 
     public abstract void instantiateDriver(BrowserFunctions browser);
 
-    public static DriverInstantiator PHANTOMJS = new DriverInstantiator("PhantomJS") {
+    public static DriverInstantiator PHANTOMJS = new DriverInstantiator("PhantomJS", PhantomJSOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().usePhantomJS();
         }
     };
-    public static DriverInstantiator FIREFOX_JS_ON = new DriverInstantiator("Firefox - JS ON") {
+    public static DriverInstantiator FIREFOX_JS_ON = new DriverInstantiator("Firefox - JS ON", FirefoxOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useFirefox();
         }
     };
-    public static DriverInstantiator FIREFOX_JS_OFF = new DriverInstantiator("Firefox - JS OFF") {
+    public static DriverInstantiator FIREFOX_JS_OFF = new DriverInstantiator("Firefox - JS OFF", FirefoxOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useFirefox().withoutJavaScript();
         }
     };
-    public static DriverInstantiator IE = new DriverInstantiator("IE") {
+    public static DriverInstantiator IE = new DriverInstantiator("IE", IEOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useInternetExplorer();
         }
     };
-    public static DriverInstantiator CHROME = new DriverInstantiator("Chrome") {
+    public static DriverInstantiator CHROME = new DriverInstantiator("Chrome", ChromeOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useChrome();
         }
     };
-    public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = new DriverInstantiator("HtmlUnit (Chrome) - JS ON") {
+    public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = new DriverInstantiator("HtmlUnit (Chrome) - JS ON", HtmlUnitOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useHtmlUnit().emulatingChrome();
         }
     };
-    public static DriverInstantiator HTMLUNIT_CHROME_JS_OFF = new DriverInstantiator("HtmlUnit (Chrome) - JS OFF") {
+    public static DriverInstantiator HTMLUNIT_CHROME_JS_OFF = new DriverInstantiator("HtmlUnit (Chrome) - JS OFF", HtmlUnitOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useHtmlUnit().emulatingChrome().withoutJavaScript();
         }
     };
-    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_ON = new DriverInstantiator("HtmlUnit (Firefox) - JS ON") {
+    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_ON = new DriverInstantiator("HtmlUnit (Firefox) - JS ON", HtmlUnitOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useHtmlUnit().emulatingFirefox();
         }
     };
-    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_OFF = new DriverInstantiator("HtmlUnit (Firefox) - JS OFF") {
+    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_OFF = new DriverInstantiator("HtmlUnit (Firefox) - JS OFF", HtmlUnitOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useHtmlUnit().emulatingFirefox().withoutJavaScript();
         }
     };
-    public static DriverInstantiator HTMLUNIT_IE11_JS_ON  = new DriverInstantiator("HtmlUnit (IE11) - JS ON")  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11(); } };
-    public static DriverInstantiator HTMLUNIT_IE11_JS_OFF = new DriverInstantiator("HtmlUnit (IE11) - JS OFF") { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11().withoutJavaScript(); } };
+    public static DriverInstantiator HTMLUNIT_IE11_JS_ON  = new DriverInstantiator("HtmlUnit (IE11) - JS ON", HtmlUnitOnly.class)  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11(); } };
+    public static DriverInstantiator HTMLUNIT_IE11_JS_OFF = new DriverInstantiator("HtmlUnit (IE11) - JS OFF", HtmlUnitOnly.class) { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11().withoutJavaScript(); } };
+
+    public boolean shouldSkipTestClass(Class<?> testClass) {
+        return classHasAtLeastOneDriverAnnotationButNot(testClass, this.driverAnnotation);
+    }
+
+    private static boolean classHasAtLeastOneDriverAnnotationButNot(Class<?> testClass, Class<? extends Annotation> annotationClass) {
+        return classHasAtLeastOneDriverAnnotation(testClass) && !testClass.isAnnotationPresent(annotationClass);
+    }
+
+    private static boolean classHasAtLeastOneDriverAnnotation(Class<?> testClass) {
+        if (testClass.getAnnotations().length > 0) {
+            for (Class<? extends Annotation> annotation : DRIVER_ONLY_ANNOTATIONS) {
+                if (testClass.isAnnotationPresent(annotation)) {
+                    return true;
+                }
+            }
+        }
+        return  false;
+    }
 
 }

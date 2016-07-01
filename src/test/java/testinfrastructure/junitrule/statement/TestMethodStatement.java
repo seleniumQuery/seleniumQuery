@@ -44,22 +44,29 @@ public class TestMethodStatement extends Statement {
             printSkipReason("JavaScript-only", this.description);
             return true;
         }
-        if (description.getAnnotation(FirefoxOnly.class) != null && !DriverInTest.isFirefoxDriver(browser.driver().get())) {
-            printSkipReason("Firefox-only", description);
-            return true;
-        }
         if (description.getAnnotation(ChromeOnly.class) != null && !DriverInTest.isChromeDriver(browser.driver().get())) {
             printSkipReason("Chrome-only", description);
             return true;
         }
-        if (description.getAnnotation(PhantomJSOnly.class) != null && !DriverInTest.isPhantomJSDriver(browser.driver().get())) {
-            printSkipReason("PhantomJS-only", description);
+        // TODO edge
+        if (description.getAnnotation(FirefoxOnly.class) != null && !DriverInTest.isFirefoxDriver(browser.driver().get())) {
+            printSkipReason("Firefox-only", description);
+            return true;
+        }
+        if (description.getAnnotation(HtmlUnitOnly.class) != null && !DriverInTest.isHtmlUnitDriver(browser.driver().get())) {
+            printSkipReason("HtmlUnit-only", description);
             return true;
         }
         if (description.getAnnotation(IEOnly.class) != null && !DriverInTest.isIEDriver(browser.driver().get())) {
             printSkipReason("IE-only", description);
             return true;
         }
+        // TODO opera
+        if (description.getAnnotation(PhantomJSOnly.class) != null && !DriverInTest.isPhantomJSDriver(browser.driver().get())) {
+            printSkipReason("PhantomJS-only", description);
+            return true;
+        }
+        // TODO edge
         return false;
     }
 

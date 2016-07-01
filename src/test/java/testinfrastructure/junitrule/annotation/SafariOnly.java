@@ -6,10 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Specifies that the test method should only be run when the driver is Firefox.
+ * Specifies that the test method should only be run when the driver is Safari.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
-public @interface FirefoxOnly {
+public @interface SafariOnly {
 
 }

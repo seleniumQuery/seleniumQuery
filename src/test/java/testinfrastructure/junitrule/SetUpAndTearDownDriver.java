@@ -50,7 +50,7 @@ public class SetUpAndTearDownDriver implements TestRule {
 	@Override
 	public Statement apply(Statement base, Description description) {
         if (description.isSuite()) {
-            testClassSession.reportRuleIsAnnotatedWithClassRule();
+            testClassSession.reportRuleIsAnnotatedWithClassRule(description.getTestClass());
             return new TestClassInConfiguredDriversStatement(testClassSession, base, url(description));
 		}
         if (testClassSession.thereWasNoReportThatRuleIsAnnotatedWithClassRule()) {
