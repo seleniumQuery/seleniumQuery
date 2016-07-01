@@ -1,11 +1,11 @@
 package endtoend.selectors.pseudoclasses;
 
-import testinfrastructure.junitrule.JavaScriptOnly;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;

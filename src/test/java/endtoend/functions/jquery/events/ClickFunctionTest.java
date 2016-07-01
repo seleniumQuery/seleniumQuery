@@ -22,8 +22,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptOnly;
 import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;

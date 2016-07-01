@@ -46,6 +46,10 @@ public class ValFunctionTest {
 
     @Test
     public void val_write__divWithoutContentEditableAttribute___hasNoEffect() {
+        verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
+    }
+
+    private void verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect() {
         // when
         $(ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT).val("SHOULD HAVE NO EFFECT");
         // then

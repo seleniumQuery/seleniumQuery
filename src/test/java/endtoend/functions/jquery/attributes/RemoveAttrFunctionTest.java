@@ -1,16 +1,15 @@
 package endtoend.functions.jquery.attributes;
 
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
-
-import testinfrastructure.junitrule.JavaScriptOnly;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
 
 public class RemoveAttrFunctionTest {
 

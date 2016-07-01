@@ -19,8 +19,8 @@ package endtoend.functions.jquery.attributes;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -36,23 +36,23 @@ public class PropFunctionTest {
     public void prop_function__getting() throws Exception {
         assertThat($("#chk_checked").<Boolean>prop("checked"), is(true));
         assertThat($("#chk_not_checked").<Boolean>prop("checked"), is(false));
-        
+
         assertThat($("#rad_checked").<Boolean>prop("checked"), is(true));
         assertThat($("#rad_not_checked").<Boolean>prop("checked"), is(false));
-        
+
         assertThat($("#opt_selected").prop("checked"), is(nullValue()));
         assertThat($("#opt_not_selected").prop("checked"), is(nullValue()));
-        
+
         assertThat($("#chk_checked").prop("selected"), is(nullValue()));
         assertThat($("#chk_not_checked").prop("selected"), is(nullValue()));
-        
+
         assertThat($("#rad_checked").prop("selected"), is(nullValue()));
         assertThat($("#rad_not_checked").prop("selected"), is(nullValue()));
-        
+
         assertThat($("#opt_selected").<Boolean>prop("selected"), is(true));
         assertThat($("#opt_not_selected").<Boolean>prop("selected"), is(false));
     }
-    
+
     // http://jsbin.com/ceqijima/2/edit
     @Test @JavaScriptOnly
     public void prop_function__setting_SELECTED_prop() throws Exception {
@@ -65,13 +65,13 @@ public class PropFunctionTest {
     	setPropAndVerify("", false);
     	setPropAndVerify(false, false);
     }
-	
+
 	private void setPropAndVerify(Object val, Object expected) {
 		reset();
 		$("#c1 .other").prop("selected", val);
 		assertThat($("#c1 .other").prop("selected"), is(expected));
 	}
-	
+
 	private void reset() {
 		$("#c1 .initial").prop("selected", true);
 	}

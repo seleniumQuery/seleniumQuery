@@ -19,8 +19,8 @@ package endtoend.waituntil;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -40,27 +40,27 @@ public class WaitUntilIsPresentTest {
 		assertEquals(0, $("input.ball").size());
 		assertEquals("generated input starting value", $("input.ball").waitUntil().is(":present").then().val());
 	}
-	
+
 	@Test
 	public void waitUntil_not_present() {
 		$(".whatever").waitUntil().is(":not(:present)");
 	}
-	
+
 	@Test
 	public void waitUntil_enabled_not_present() {
 		$(".whatever").waitUntil().is(":enabled:not(:present)");
 	}
-	
+
 	@Test
 	public void waitUntil_not_present_enabled() {
 		$(".whatever").waitUntil().is(":not(:present):enabled");
 	}
-	
+
 	@Test
 	public void waitUntil_not_not_not_present_with_others() {
 		$(".whatever").waitUntil().is(".xyz:enabled:not(:not(:not(:present))):disabled");
 	}
-	
+
 	@Test
 	public void is_not_not_not_present() {
 		assertThat($(".whatever").is(".xyz:enabled:disabled"), is(false));

@@ -19,8 +19,8 @@ package endtoend.sizzle;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptOnly;
 
 public class SizzlePseudosChildAndOfType extends SizzleTest {
 
