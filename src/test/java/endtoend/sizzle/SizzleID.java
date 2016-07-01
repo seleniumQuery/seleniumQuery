@@ -26,7 +26,7 @@ import static testinfrastructure.EndToEndTestUtils.equal;
 
 public class SizzleID extends SizzleTest {
 
-    @ClassRule @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
     public void id_selectors() throws Exception {

@@ -23,10 +23,10 @@ import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class SizzlePseudoHas extends SizzleTest {
 
-    @ClassRule @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
-    public void pseudo_has() throws Exception {
+    public void pseudo_has() {
         t("Basic test", "p:has(a)", new String[]{"firstp", "ap", "en", "sap"});
         t("Basic test (irrelevant whitespace)", "p:has( a )", new String[]{"firstp", "ap", "en", "sap"});
         t("Nested with overlapping candidates", "#qunit-fixture div:has(div:has(div:not([id])))", new String[]{"moretests", "t2037"});

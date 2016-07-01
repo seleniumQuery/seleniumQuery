@@ -23,7 +23,7 @@ import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class SizzleClass extends SizzleTest {
 
-    @ClassRule @Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
+    @ClassRule @Rule static public SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
     @Test
     public void class_selectors() throws Exception {
