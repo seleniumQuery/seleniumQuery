@@ -21,8 +21,8 @@ import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -76,5 +76,5 @@ public class WaitUntilIsGreaterThanTest {
         assertThat(waitAndOrThen.toString(), is(expectedToString));
         assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
-	
+
 }

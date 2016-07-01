@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package testinfrastructure.junitrule;
+package testinfrastructure.junitrule.config;
 
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static testinfrastructure.junitrule.DriverToRunTestsIn.ShouldRun.*;
+import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun.*;
 import static testinfrastructure.testutils.EnvironmentTestUtils.gitLastCommitMessageContains;
 
 @SuppressWarnings("unused")
@@ -58,7 +58,7 @@ public enum DriverToRunTestsIn {
 	private final boolean javaScriptOn;
 	private final boolean javaScriptOff;
 
-	enum ShouldRun {_FIREFOX, _CHROME, _IE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
+	public enum ShouldRun {_FIREFOX, _CHROME, _IE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
 
 	DriverToRunTestsIn(ShouldRun... shouldRuns) {
         List<ShouldRun> shouldRunList = asList(shouldRuns);

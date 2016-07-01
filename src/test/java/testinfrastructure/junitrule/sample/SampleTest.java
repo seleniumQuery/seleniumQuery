@@ -14,45 +14,47 @@
  * limitations under the License.
  */
 
-package endtoend.functions.jquery.forms;
+package testinfrastructure.junitrule.sample;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.FirefoxOnly;
 import testinfrastructure.junitrule.annotation.JavaScriptOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SubmitFunctionTest {
+public class SampleTest {
 
-    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
+    @ClassRule @Rule public static SetUpAndTearDownDriver rule = new SetUpAndTearDownDriver(SampleTest.class);
 
-    @Test @JavaScriptOnly
-    public void submit__input_element() {
-        $("#input-a").submit();
-        assertOutput("a");
-    }
-    @Test @JavaScriptOnly
-    public void submit__non_input_element() {
-        $("#div-a").submit();
-        assertOutput("a");
-    }
-    @Test @JavaScriptOnly
-    public void submit__several_input_elements() {
-        $("input").submit();
-        assertOutput("ab");
-    }
-    @Test @JavaScriptOnly
-    public void submit__several_non_input_elements() {
-        $("div").submit();
-        assertOutput("ab");
+    @Test
+    public void m1__passes() {
+        System.out.println("\t\t\t m1__passes()");
+        assertThat($("body").text(), is("body-content"));
     }
 
-    private void assertOutput(String value) {
-        assertThat($("#out").text(), is(value));
+    @Test
+    @FirefoxOnly
+    public void m2__firefoxOnly() {
+        System.out.println("\t\t\t m2__firefoxOnly()");
+        assertThat($("body").text(), is("body-content"));
+    }
+
+    @Test
+    @JavaScriptOnly
+    public void m3__jsOnly() {
+        System.out.println("\t\t\t m3__jsOnly()");
+        assertThat($("body").text(), is("body-content"));
+    }
+
+    @Test
+    public void m4__fails() {
+        System.out.println("\t\t\t m4__fails()");
+        assertThat($("body").text(), is("xbody-content"));
     }
 
 }

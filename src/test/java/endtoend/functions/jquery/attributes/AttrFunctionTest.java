@@ -19,8 +19,8 @@ package endtoend.functions.jquery.attributes;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import testinfrastructure.junitrule.JavaScriptOnly;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -70,7 +70,7 @@ public class AttrFunctionTest {
     	$("#n1").attr("checked", "abc");
     	assertThat($("#n1").attr("checked"), is("checked"));
     }
-    
+
     @Test @JavaScriptOnly
     public void attr_function__does_the_same_CHECKED_stuff_to_SELECTED_no_matter_what_tag() {
     	// no matter what tag, the "checked" policy remains!
@@ -85,17 +85,17 @@ public class AttrFunctionTest {
     	$("#d1").attr("selected", "yo");
     	assertThat($("#d1").attr("selected"), is("selected"));
     }
-    
+
     @Test @JavaScriptOnly
     public void attr_function__getting_and_setting() {
     	assertThat($("#chk1").attr("checked"), is("checked"));
     	assertThat($("#chk1").<Boolean>prop("checked"), is(true));
-    	
+
     	$("#chk1").prop("checked", true);
     	assertThat($("#chk1").<Boolean>prop("checked"), is(true));
     	assertThat($("#chk1").attr("checked"), is("checked"));
     	$("#chk1").prop("checked", false);
-    	
+
 		assertThat($("#chk1").attr("checked"), is("checked"));
     	assertThat($("#chk1").<Boolean>prop("checked"), is(false));
     }
