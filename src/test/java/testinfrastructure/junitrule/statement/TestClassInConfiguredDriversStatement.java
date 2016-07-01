@@ -130,6 +130,10 @@ public class TestClassInConfiguredDriversStatement extends Statement {
 	private void executeTestOn(boolean shouldExecute, DriverInstantiator driverInstantiator, DriverHasJavaScriptEnabled driverHasJavaScriptEnabled) {
 		if (shouldExecute) {
             String driverDescription = driverInstantiator.getDriverDescription();
+            if (driverInstantiator.shouldSkipTestClass(testClassSession.getTestClass())) {
+                testClassSession.log("\t@## > Skipping test class for " + driverDescription + " due to annotation.");
+                return;
+            }
 
             testClassSession.log("\t@## > Instantiating " + driverDescription);
             BrowserFunctions browser = SeleniumQuery.$;

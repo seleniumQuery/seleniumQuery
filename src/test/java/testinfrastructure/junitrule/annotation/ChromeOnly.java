@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * Specifies that the test method should only be run when the driver is Chrome.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Target({ElementType.METHOD, ElementType.TYPE})
 public @interface ChromeOnly {
 
 }

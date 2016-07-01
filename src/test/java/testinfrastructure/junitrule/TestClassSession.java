@@ -17,12 +17,14 @@ public class TestClassSession {
     private String currentDriverDescription;
     private TestClassInConfiguredDriversStatement.DriverHasJavaScriptEnabled currentDriverHasJavaScriptEnabled;
     private BrowserFunctions browser;
+    private Class<?> testClass;
 
     TestClassSession(DriverToRunTestsIn driverToRunTestsIn) {
         this.driverToRunTestsIn = driverToRunTestsIn;
     }
 
-    void reportRuleIsAnnotatedWithClassRule() {
+    void reportRuleIsAnnotatedWithClassRule(Class<?> testClass) {
+        this.testClass = testClass;
         this.itWasReportedThatTheRuleIsAnnotatedWithClassRule = true;
     }
 
@@ -81,4 +83,7 @@ public class TestClassSession {
         return browser;
     }
 
+    public Class<?> getTestClass() {
+        return testClass;
+    }
 }
