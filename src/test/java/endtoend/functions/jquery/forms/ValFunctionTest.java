@@ -25,6 +25,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.junitrule.annotation.*;
+import testinfrastructure.testutils.SauceLabsUtils;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.*;
@@ -210,7 +211,7 @@ public class ValFunctionTest {
     public void iframe_with_DesignMode_ON___defaultValues__are__read__correctly__EDGE() { verifyIframeTextRead("iframe-body-content "); }
 
     private void verifyIframeTextRead(String expectedIframeText) {
-        $.url("http://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/endtoend/functions/jquery/forms/ValFunctionTest3.html");
+        $.url(SauceLabsUtils.fixUrlForRemoteTest($.url()));
         $.driver().get().switchTo().frame("iframe-with-design-mode-on");
         assertThat($("body").text(), is(expectedIframeText));
         assertThat($("body").val(), is(""));
@@ -244,7 +245,7 @@ public class ValFunctionTest {
     }
 
     private void verifyTypingAtIframeChangesValueAsExpected(Matcher<String> resultTextMatcher) {
-        $.url("http://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/endtoend/functions/jquery/forms/ValFunctionTest3.html");
+        $.url(SauceLabsUtils.remoteAddressForFile($.url()));
         $("#iframe-debug").waitUntil().text().isEqualTo("designMode successfully set to on by JavaScript");
         $.driver().get().switchTo().frame("iframe-with-design-mode-on");
         $("body").val("[typed-value]");
