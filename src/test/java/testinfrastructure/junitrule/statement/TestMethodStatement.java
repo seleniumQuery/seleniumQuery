@@ -69,6 +69,10 @@ public class TestMethodStatement extends Statement {
             printSkipReason("Firefox-only", description, currentDriver);
             return true;
         }
+        if (description.getAnnotation(FirefoxSkip.class) != null && DriverInTest.isFirefoxDriver(currentDriver)) {
+            printSkipReason("Firefox-skipped", description, currentDriver);
+            return true;
+        }
         if (description.getAnnotation(HtmlUnitOnly.class) != null && !DriverInTest.isHtmlUnitDriver(currentDriver)) {
             printSkipReason("HtmlUnit-only", description, currentDriver);
             return true;
@@ -77,7 +81,14 @@ public class TestMethodStatement extends Statement {
             printSkipReason("IE-only", description, currentDriver);
             return true;
         }
-        // TODO Safari
+        if (description.getAnnotation(SafariSkip.class) != null && DriverInTest.isSafariDriver(currentDriver)) {
+            printSkipReason("Safari-skipped", description, currentDriver);
+            return true;
+        }
+        if (description.getAnnotation(SafariOnly.class) != null && !DriverInTest.isSafariDriver(currentDriver)) {
+            printSkipReason("Safari-only", description, currentDriver);
+            return true;
+        }
         // TODO opera
         if (description.getAnnotation(PhantomJSOnly.class) != null && !DriverInTest.isPhantomJSDriver(currentDriver)) {
             printSkipReason("PhantomJS-only", description, currentDriver);
