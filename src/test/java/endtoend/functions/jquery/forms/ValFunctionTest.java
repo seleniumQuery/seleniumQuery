@@ -23,11 +23,14 @@ import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.ChromeOnly;
+import testinfrastructure.junitrule.annotation.ChromeShouldBeSkipped;
 import testinfrastructure.junitrule.annotation.JavaScriptDisabledOnly;
 import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static testinfrastructure.testutils.DriverInTest.*;
@@ -47,6 +50,7 @@ public class ValFunctionTest {
     }
 
     @Test
+    @ChromeShouldBeSkipped
     public void val_write__divWithoutContentEditableAttribute___hasNoEffect() {
         verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
     }
@@ -57,6 +61,16 @@ public class ValFunctionTest {
         // then
         assertThat($(ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT).val(), is(""));
         assertThat($(ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT).text(), is("DIV INITIAL TEXT"));
+    }
+
+    @Test
+    @ChromeOnly
+    public void val_write__divWithoutContentEditableAttribute___throws_exception() {
+        try {
+            verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
+        } catch (org.openqa.selenium.WebDriverException e) {
+            assertThat(e.getMessage(), startsWith("unknown error: cannot focus element"));
+        }
     }
 
     @Test
