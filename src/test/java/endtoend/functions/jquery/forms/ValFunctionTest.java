@@ -23,6 +23,8 @@ import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptDisabledOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -175,6 +177,35 @@ public class ValFunctionTest {
             return resultingHtml + "<br>";
         }
         return resultingHtml;
+    }
+
+    @Test
+    public void iframe_with_DesignMode_ON___defaultValues__are__read__correctly() {
+        $.driver().get().switchTo().frame("iframe-with-design-mode-on");
+        assertThat($("body").val(), is(""));
+        assertThat($("body").text(), is("srcdoc-on"));
+    }
+
+    @Test
+    @JavaScriptEnabledOnly
+    public void iframe_with_DesignMode_ON___values_are_CHANGED_correctly() {
+        $("#iframe-debug").waitUntil().text().isEqualTo("designMode successfully set to on by JavaScript");
+        $.driver().get().switchTo().frame("iframe-with-design-mode-on");
+        $("body").val("bob");
+        assertThat($("body").val(), is(""));
+        assertThat($("body").text(), is("bob"));
+    }
+
+    @Test
+    @JavaScriptDisabledOnly
+    public void iframe_with_DesignMode_ON____JS_OFF____values_DONT_change__but_no_exception_is_thrown_as_well() {
+        $.driver().get().switchTo().frame("iframe-with-design-mode-on");
+        $("body").val("bob");
+        assertThat($("body").val(), is(""));
+        assertThat($("body").text(), is("srcdoc-on"));
+
+        $.driver().get().switchTo().defaultContent();
+        assertThat($("#iframe-debug").text(), is("no-javascript")); // make sure JS didn't run!
     }
 
 }

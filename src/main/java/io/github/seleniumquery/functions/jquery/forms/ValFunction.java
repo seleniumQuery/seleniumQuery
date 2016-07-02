@@ -18,7 +18,6 @@ package io.github.seleniumquery.functions.jquery.forms;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.apache.commons.logging.Log;
@@ -142,10 +141,10 @@ public class ValFunction {
             // #Cross-Driver
             // in firefox, an editable div cannot be empty
             try {
-                element.sendKeys(Keys.chord(Keys.CONTROL, Keys.HOME), Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END));
+                selectAllText(element);
                 element.sendKeys(value);
             } catch (ElementNotVisibleException e) {
-                // we could work it out, possibly via JavaScript, but we decided not to, as a user would not be able to edit it!
+                // we could work it out, possibly via JavaScript, but we decided not to, as the END USER would not be able to edit it as well!
                 throw new ElementNotVisibleException("Empty contenteditable elements are not visible in Firefox, " +
                         "so a user can't directly interact with them. Try picking an element before the contenteditable one " +
                         "and sending the TAB key to it, so the focus is switched, and then try calling .val() to change its value.", e);
@@ -181,8 +180,27 @@ public class ValFunction {
 
     private static void changeValueOfUnknownElement(WebElement element, String value) {
         LOGGER.warn("Function .val() called in element not known to be editable. Will attempt to send keys anyway. Element: "+element);
-        element.clear();
+        clearElementOrSelectAllOfItsText(element);
         element.sendKeys(value);
+    }
+
+    /**
+     * We attempt to clear the element, but if an exception saying it can't be edited is thrown, we still
+     * try to select its whole text (with CTRL+HOME then CTRL+SHIFT+END (windows)), so the next typed keys
+     * erase the current value (so the resulting content will be as if it was cleared by this function anyway).
+     */
+    private static void clearElementOrSelectAllOfItsText(WebElement element) {
+        try {
+            element.clear();
+        } catch (WebDriverException e) {
+            if (e.getMessage().startsWith("Element must be user-editable in order to clear it.")) {
+                selectAllText(element);
+            }
+        }
+    }
+
+    private static void selectAllText(WebElement element) {
+        element.sendKeys(Keys.chord(Keys.CONTROL, Keys.HOME), Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END));
     }
 
 }
