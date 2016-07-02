@@ -51,6 +51,10 @@ public class TestMethodStatement extends Statement {
             printSkipReason("JavaScript Disabled-only", this.description);
             return true;
         }
+        if (description.getAnnotation(ChromeShouldBeSkipped.class) != null && DriverInTest.isChromeDriver(browser.driver().get())) {
+            printSkipReason("Chrome-skipped", description);
+            return true;
+        }
         if (description.getAnnotation(ChromeOnly.class) != null && !DriverInTest.isChromeDriver(browser.driver().get())) {
             printSkipReason("Chrome-only", description);
             return true;
