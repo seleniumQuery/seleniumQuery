@@ -48,8 +48,33 @@ public class ValFunctionTest {
     }
 
     @Test
-    @ChromeShouldBeSkipped
+    @ChromeShouldBeSkipped("chrome can't focus, see test below")
+    @JavaScriptEnabledOnly
     public void val_write__divWithoutContentEditableAttribute___hasNoEffect() {
+        verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
+    }
+
+    @Test
+    @FirefoxOnly
+    @JavaScriptDisabledOnly
+    public void val_write__divWithoutContentEditableAttribute___hasNoEffect__Firefox_JS_OFF() {
+        verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
+    }
+
+    @Test
+    @ChromeOnly
+    public void val_write__divWithoutContentEditableAttribute___throws_exception__CHROME() {
+        try {
+            verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
+        } catch (org.openqa.selenium.WebDriverException e) {
+            assertThat(e.getMessage(), startsWith("unknown error: cannot focus element"));
+        }
+    }
+
+    @Test(expected = java.lang.UnsupportedOperationException.class)
+    @HtmlUnitOnly
+    @JavaScriptDisabledOnly
+    public void val_write__divWithoutContentEditableAttribute___throws_exception__HtmlUnit_JS_OFF() {
         verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
     }
 
@@ -59,16 +84,6 @@ public class ValFunctionTest {
         // then
         assertThat($(ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT).val(), is(""));
         assertThat($(ID_DIV_WITHOUT_CONTENTEDITABLE_BUT_WITH_TEXT).text(), is("DIV INITIAL TEXT"));
-    }
-
-    @Test
-    @ChromeOnly
-    public void val_write__divWithoutContentEditableAttribute___throws_exception() {
-        try {
-            verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
-        } catch (org.openqa.selenium.WebDriverException e) {
-            assertThat(e.getMessage(), startsWith("unknown error: cannot focus element"));
-        }
     }
 
     @Test
