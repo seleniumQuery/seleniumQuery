@@ -22,7 +22,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 import testinfrastructure.testutils.DriverInTest;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class SizzleElement extends SizzleTest {
         SeleniumQueryObject all = Sizzle("*");
         ok(all.size() >= 30, "Select all");
     }
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void element_selectors_2() {
         SeleniumQueryObject all = Sizzle("*");
         for (int i = 0; i < all.size(); i++) {
@@ -85,7 +85,7 @@ public class SizzleElement extends SizzleTest {
         // Check for unique-ness and sort order
         deepEqual(Sizzle("p, div p"), Sizzle("p").get(), "Check for duplicates: p, div p");
     }
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void element_selectors_4() {
         executeJS("jQuery(\"<h1 id='h1'/><h2 id='h2'/><h2 id='h2-2'/>\").prependTo(\"#qunit-fixture\");");
         // the original tests checked the order, but we won't struggle for that...
@@ -109,7 +109,7 @@ public class SizzleElement extends SizzleTest {
 // TODO(issue#53)
 //        deepEqual(Sizzle("div em, em\\,", siblingTest), new ArrayList<WebElement>(), "Escaped commas do not get treated with an id in element-rooted QSA");
     }
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void element_selectors_6() {
 /*
         String html = "";

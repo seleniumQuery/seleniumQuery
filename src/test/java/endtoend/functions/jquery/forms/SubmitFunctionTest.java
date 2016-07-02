@@ -20,7 +20,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.CoreMatchers.is;
@@ -30,22 +30,22 @@ public class SubmitFunctionTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void submit__input_element() {
         $("#input-a").submit();
         assertOutput("a");
     }
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void submit__non_input_element() {
         $("#div-a").submit();
         assertOutput("a");
     }
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void submit__several_input_elements() {
         $("input").submit();
         assertOutput("ab");
     }
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void submit__several_non_input_elements() {
         $("div").submit();
         assertOutput("ab");

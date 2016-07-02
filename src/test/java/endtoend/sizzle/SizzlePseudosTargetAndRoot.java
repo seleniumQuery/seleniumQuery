@@ -21,7 +21,7 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static testinfrastructure.EndToEndTestUtils.equal;
 
@@ -43,7 +43,7 @@ public class SizzlePseudosTargetAndRoot extends SizzleTest {
     }
 
     // :root
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void root_pseudo() {
         Object documentElement = executeJS("return document.documentElement;");
         equal(Sizzle(":root").get(0), documentElement, ":root selector");

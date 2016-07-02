@@ -22,7 +22,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -34,7 +34,7 @@ public class WaitUntilIsLessThanTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-	@Test @JavaScriptOnly
+	@Test @JavaScriptEnabledOnly
 	public void isLessThan__should_wait_until_text_becomes_the_expected() {
 		// given
 		// when
@@ -43,7 +43,7 @@ public class WaitUntilIsLessThanTest {
 		$(DIV_CLICKABLE_SELECTOR).waitUntil(2000, 200).text().isLessThan(8);
 	}
 
-	@JavaScriptOnly
+	@JavaScriptEnabledOnly
 	@Test(expected = SeleniumQueryTimeoutException.class)
 	public void isLessThan__should_fail_if_text_never_becomes_the_expected() {
 		// given
@@ -53,7 +53,7 @@ public class WaitUntilIsLessThanTest {
 		$(DIV_CLICKABLE_SELECTOR).waitUntil(2000, 200).text().isLessThan(7);
 	}
 
-	@JavaScriptOnly
+	@JavaScriptEnabledOnly
 	@Test(expected = SeleniumQueryTimeoutException.class)
 	public void isLessThan__should_fail_if_text_is_not_a_number() {
 		// given
@@ -65,7 +65,7 @@ public class WaitUntilIsLessThanTest {
         // should throw exception
 	}
 
-	@Test @JavaScriptOnly
+	@Test @JavaScriptEnabledOnly
 	public void waitUntil_isLessThan__toString() {
         // given
         $(DIV_CLICKABLE_SELECTOR).click();

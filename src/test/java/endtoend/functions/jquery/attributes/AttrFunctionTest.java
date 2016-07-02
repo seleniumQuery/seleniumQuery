@@ -20,7 +20,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -32,7 +32,7 @@ public class AttrFunctionTest {
 	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
 	// http://jsbin.com/pupoj/5/edit
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void attr_function__getting_and_setting_whatever_to_CHECKED_is_like_setting_to_CHECKED_string() {
     	// whatever value checked is, if it exists, attr returns "checked"
     	assertThat($("#x1").attr("checked"), is("checked"));
@@ -71,7 +71,7 @@ public class AttrFunctionTest {
     	assertThat($("#n1").attr("checked"), is("checked"));
     }
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void attr_function__does_the_same_CHECKED_stuff_to_SELECTED_no_matter_what_tag() {
     	// no matter what tag, the "checked" policy remains!
     	$("#d1").attr("checked", "");
@@ -86,7 +86,7 @@ public class AttrFunctionTest {
     	assertThat($("#d1").attr("selected"), is("selected"));
     }
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void attr_function__getting_and_setting() {
     	assertThat($("#chk1").attr("checked"), is("checked"));
     	assertThat($("#chk1").<Boolean>prop("checked"), is(true));
@@ -100,7 +100,7 @@ public class AttrFunctionTest {
     	assertThat($("#chk1").<Boolean>prop("checked"), is(false));
     }
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void attr_function__reads_attribute_well__AND__attribute_is_not_read_by_prop_function() {
         String dataBallAttributeValue = $("#chk1").attr("data-ball");
         assertThat(dataBallAttributeValue, is("yo"));
@@ -109,7 +109,7 @@ public class AttrFunctionTest {
 		assertThat(dataBallAttributeViaProp, is(nullValue()));
     }
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void attr_function__setting() {
         // given
         // original test html file

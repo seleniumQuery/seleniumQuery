@@ -22,7 +22,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class SizzleAttributes extends SizzleTest {
 //        t("Attribute Equals Number", "#qunit-fixture li[tabIndex=-1]", new String[]{"foodWithNegativeTabIndex"});
 
     }
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void attribute_selectors_2() {
         executeJS("arguments[0].href = '#2';", id("anchor2"));
         t("href Attribute", "p a[href^='#']", new String[]{"anchor2"});
@@ -98,7 +98,7 @@ public class SizzleAttributes extends SizzleTest {
         t("Attribute Whitespace List Includes", "input[data-15233~='bar']", new String[]{"t15233-double", "t15233-double-tab", "t15233-double-nl", "t15233-triple"});
         t("Attribute Whitespace List Includes", "input[data-15233~='baz']", new String[]{"t15233-triple"});
     }
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void attribute_selectors_4() {
         WebElement opt = id("option1a");
         executeJS("arguments[0].setAttribute('test', '');", opt);
@@ -107,7 +107,7 @@ public class SizzleAttributes extends SizzleTest {
         ok(Sizzle.matchesSelector(opt, "[id*=option1]"), "Attribute With No Quotes Contains Matches");
     }
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     @Ignore("some attribute selectors that have problems: issues #7 and #40")
     public void attribute_selectors__problematic() {
         WebElement opt = id("option1a");
@@ -144,7 +144,7 @@ public class SizzleAttributes extends SizzleTest {
         t("Grouped Form Elements", "input[name='foo[bar]']", new String[]{"hidden2"});
     }
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void attribute_selectors_6() {
         WebElement input = id("text1");
         executeJS("arguments[0].title = 'Don\\'t click me';", input);
@@ -211,7 +211,7 @@ public class SizzleAttributes extends SizzleTest {
         t("input[type=search]", "#form input[type=search]", new String[]{"search"});
         t("script[src] (jQuery #13777)", "#moretests script[src]", new String[]{"script-src"});
     }
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void attribute_selectors_8() {
         // #3279
         executeJS("var div = document.createElement('div'); " +

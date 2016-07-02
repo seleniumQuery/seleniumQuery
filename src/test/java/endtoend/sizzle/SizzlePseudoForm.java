@@ -21,13 +21,13 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 public class SizzlePseudoForm extends SizzleTest {
 
     @ClassRule @Rule  public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SizzleTest.class);
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void pseudo_form() {
         createInputs();
         t("Form element :input", "#form :input", new String[]{"text1", "text2", "radio1", "radio2", "check1", "check2", "hidden1", "hidden2", "name", "search", "button", "area1", "select1", "select2", "select3", "select4", "select5", "impliedText", "capitalText"});

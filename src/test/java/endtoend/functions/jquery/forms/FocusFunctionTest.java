@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -36,7 +36,7 @@ public class FocusFunctionTest {
 
 	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void focus_function() {
     	$("#i1").focus();
     	assertThat($("#i1").is(":focus"), is(true));
@@ -70,7 +70,7 @@ public class FocusFunctionTest {
     }
 
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void focus_function__should_make_sure_the_elements_are_just_focused_and_NOT_clicked() {
 		ClickFunctionTest.removeDivAddedByIeWhenPageStarts();
 

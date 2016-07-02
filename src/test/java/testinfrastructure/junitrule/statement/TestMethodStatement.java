@@ -43,8 +43,12 @@ public class TestMethodStatement extends Statement {
     }
 
     private boolean shouldSkipTest() {
-        if (description.getAnnotation(JavaScriptOnly.class) != null && testClassSession.driverHasJavaScriptDisabled()) {
-            printSkipReason("JavaScript-only", this.description);
+        if (description.getAnnotation(JavaScriptEnabledOnly.class) != null && testClassSession.driverHasJavaScriptDisabled()) {
+            printSkipReason("JavaScript Enabled-only", this.description);
+            return true;
+        }
+        if (description.getAnnotation(JavaScriptDisabledOnly.class) != null && !testClassSession.driverHasJavaScriptDisabled()) {
+            printSkipReason("JavaScript Disabled-only", this.description);
             return true;
         }
         if (description.getAnnotation(ChromeOnly.class) != null && !DriverInTest.isChromeDriver(browser.driver().get())) {

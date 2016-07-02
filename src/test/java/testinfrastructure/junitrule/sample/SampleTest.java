@@ -22,7 +22,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.junitrule.annotation.FirefoxOnly;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -47,7 +47,7 @@ public class SampleTest {
     }
 
     @Test
-    @JavaScriptOnly
+    @JavaScriptEnabledOnly
     public void m3__jsOnly() {
         System.out.println("\t\t\t m3__jsOnly()");
         assertThat($("body").text(), is("body-content"));

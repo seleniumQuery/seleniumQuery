@@ -23,7 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import java.util.List;
 
@@ -47,12 +47,12 @@ public class WaitUntilGettersTest {
 		assertThat($("div").waitUntil().size().isEqualTo(2).then().get(), is(divs));
 	}
 
-	@Test @JavaScriptOnly
+	@Test @JavaScriptEnabledOnly
 	public void attr_getter() {
 		assertThat($("div").waitUntil().attr("data-attr").isEqualTo("data-attr-value").then().get(), is(divs));
 	}
 
-	@Test @JavaScriptOnly
+	@Test @JavaScriptEnabledOnly
 	public void prop_getter() {
 		assertThat($("div").waitUntil().prop("tagName").isEqualTo("DIV").then().get(), is(divs));
 	}
@@ -77,7 +77,7 @@ public class WaitUntilGettersTest {
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
 
-	@Test @JavaScriptOnly
+	@Test @JavaScriptEnabledOnly
 	public void attr_getter_toString() {
         // when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().attr("data-attr").isEqualTo("data-attr-value");
@@ -87,7 +87,7 @@ public class WaitUntilGettersTest {
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
 
-	@Test @JavaScriptOnly
+	@Test @JavaScriptEnabledOnly
 	public void prop_getter_toString() {
         // when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().prop("tagName").isEqualTo("DIV");

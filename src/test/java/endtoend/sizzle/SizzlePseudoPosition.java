@@ -21,7 +21,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 public class SizzlePseudoPosition extends SizzleTest {
 
@@ -70,7 +70,7 @@ public class SizzlePseudoPosition extends SizzleTest {
 //        deepEqual(Sizzle("*:lt(2) + *", null, null, Sizzle("#qunit-fixture > p").get()), q("ap"), "Seeded pos with trailing relative");
     }
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void pseudo_position_selectors_2() {
         // jQuery #12526
         WebElement context = (WebElement) executeJS("return jQuery('#qunit-fixture').append(\"<div id='jquery12526'></div>\")[0]");
