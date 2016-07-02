@@ -83,9 +83,13 @@ public class SauceLabsUtils {
 
     public static String fixUrlForRemoteTest(String urlToOpen) {
         if (isRemoteWebDriver($.driver().get())) {
-            return urlToOpen.replaceAll("^file:/.*?/src/test/java/", "http://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/");
+            return remoteAddressForFile(urlToOpen);
         }
         return urlToOpen;
+    }
+
+    public static String remoteAddressForFile(String urlToOpen) {
+        return urlToOpen.replaceAll("^file:/.*?/src/test/java/", "http://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/");
     }
 
 }
