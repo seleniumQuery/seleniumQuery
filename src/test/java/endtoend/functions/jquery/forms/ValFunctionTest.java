@@ -30,7 +30,6 @@ import testinfrastructure.testutils.SauceLabsUtils;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 import static testinfrastructure.testutils.DriverInTest.*;
 
 // http://jsbin.com/futuhipuhi/2/edit?html,js,output
@@ -163,22 +162,27 @@ public class ValFunctionTest {
 	}
 
     @Test
-    public void val_readAndWrite___divWithContentEditableAttribute___with_INITIAL_VALUE() throws Exception {
+    @SafariSkip("Due to WebDriverException: Cannot set the selection end")
+    public void val_readAndWrite___divWithContentEditableAttribute___with_INITIAL_VALUE() {
         verifyEditableDivAcceptsHtmlCharsCorrectly("#editable", "DIZ EZ EDITABLE");
     }
 
     @Test
+    @FirefoxSkip @SafariSkip
+    public void val_readAndWrite___divWithContentEditableAttribute___with_EMPTY_STARTING_VALUE() {
+        verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
+    }
+
+    @Test(expected = org.openqa.selenium.WebDriverException.class)
+    @SafariOnly
+    public void val_readAndWrite___divWithContentEditableAttribute___with_EMPTY_STARTING_VALUE__hasProblemsOnSafari() {
+        verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
+    }
+
+    @Test(expected = ElementNotVisibleException.class)
+    @FirefoxOnly
     public void val_readAndWrite___divWithContentEditableAttribute___with_EMPTY_STARTING_VALUE__hasProblemsOnFirefox() {
-        if (isFirefoxDriver($.driver().get())) {
-            try {
-                verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
-                fail();
-            } catch (ElementNotVisibleException ignored) {
-                // success
-            }
-        } else {
-            verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
-        }
+        verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
     }
 
     private void verifyEditableDivAcceptsHtmlCharsCorrectly(String editableDivId, String initialValue) {
