@@ -116,7 +116,15 @@ public class TestClassInConfiguredDriversStatement extends Statement {
 	private void executeTestOnRemote() {
         boolean shouldRunRemoteTests = driverToRunTestsIn.canRunRemote() || driverToRunTestsIn == DriverToRunTestsIn.REMOTE;
 
-        List<RemoteInstantiator> remoteInstantiators = asList(REMOTE_CHROME, REMOTE_FIREFOX, REMOTE_IE_10, REMOTE_IE_11, REMOTE_SAFARI, REMOTE_EDGE);
+        List<RemoteInstantiator> remoteInstantiators = asList(
+            REMOTE_CHROME,
+            REMOTE_FIREFOX,
+            REMOTE_IE_10,
+            REMOTE_IE_11,
+            REMOTE_SAFARI,
+            REMOTE_EDGE
+            // OPERA?
+        );
         for (RemoteInstantiator remote : remoteInstantiators) {
             executeTestOn(shouldRunRemoteTests, remote, YES);
         }

@@ -200,7 +200,10 @@ public class ValFunction {
     }
 
     private static void selectAllText(WebElement element) {
-        element.sendKeys(Keys.chord(Keys.CONTROL, Keys.HOME), Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END));
+        try {
+            element.sendKeys(Keys.chord(Keys.CONTROL, Keys.HOME), Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END));
+        } catch (WebDriverException ignored) {
+        }
     }
 
 }

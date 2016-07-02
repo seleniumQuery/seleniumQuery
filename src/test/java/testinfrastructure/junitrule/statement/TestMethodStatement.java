@@ -3,6 +3,7 @@ package testinfrastructure.junitrule.statement;
 import io.github.seleniumquery.browser.BrowserFunctions;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+import org.openqa.selenium.WebDriver;
 import testinfrastructure.EndToEndTestUtils;
 import testinfrastructure.junitrule.TestClassSession;
 import testinfrastructure.junitrule.annotation.*;
@@ -43,46 +44,50 @@ public class TestMethodStatement extends Statement {
     }
 
     private boolean shouldSkipTest() {
+        WebDriver currentDriver = browser.driver().get();
         if (description.getAnnotation(JavaScriptEnabledOnly.class) != null && testClassSession.driverHasJavaScriptDisabled()) {
-            printSkipReason("JavaScript Enabled-only", this.description);
+            printSkipReason("JavaScript Enabled-only", this.description, currentDriver);
             return true;
         }
         if (description.getAnnotation(JavaScriptDisabledOnly.class) != null && !testClassSession.driverHasJavaScriptDisabled()) {
-            printSkipReason("JavaScript Disabled-only", this.description);
+            printSkipReason("JavaScript Disabled-only", this.description, currentDriver);
             return true;
         }
-        if (description.getAnnotation(ChromeShouldBeSkipped.class) != null && DriverInTest.isChromeDriver(browser.driver().get())) {
-            printSkipReason("Chrome-skipped", description);
+        if (description.getAnnotation(ChromeShouldBeSkipped.class) != null && DriverInTest.isChromeDriver(currentDriver)) {
+            printSkipReason("Chrome-skipped", description, currentDriver);
             return true;
         }
-        if (description.getAnnotation(ChromeOnly.class) != null && !DriverInTest.isChromeDriver(browser.driver().get())) {
-            printSkipReason("Chrome-only", description);
+        if (description.getAnnotation(ChromeOnly.class) != null && !DriverInTest.isChromeDriver(currentDriver)) {
+            printSkipReason("Chrome-only", description, currentDriver);
             return true;
         }
-        // TODO edge
-        if (description.getAnnotation(FirefoxOnly.class) != null && !DriverInTest.isFirefoxDriver(browser.driver().get())) {
-            printSkipReason("Firefox-only", description);
+        if (description.getAnnotation(EdgeOnly.class) != null && !DriverInTest.isEdgeDriver(currentDriver)) {
+            printSkipReason("Edge-only", description, currentDriver);
             return true;
         }
-        if (description.getAnnotation(HtmlUnitOnly.class) != null && !DriverInTest.isHtmlUnitDriver(browser.driver().get())) {
-            printSkipReason("HtmlUnit-only", description);
+        if (description.getAnnotation(FirefoxOnly.class) != null && !DriverInTest.isFirefoxDriver(currentDriver)) {
+            printSkipReason("Firefox-only", description, currentDriver);
             return true;
         }
-        if (description.getAnnotation(IEOnly.class) != null && !DriverInTest.isIEDriver(browser.driver().get())) {
-            printSkipReason("IE-only", description);
+        if (description.getAnnotation(HtmlUnitOnly.class) != null && !DriverInTest.isHtmlUnitDriver(currentDriver)) {
+            printSkipReason("HtmlUnit-only", description, currentDriver);
             return true;
         }
+        if (description.getAnnotation(IEOnly.class) != null && !DriverInTest.isIEDriver(currentDriver)) {
+            printSkipReason("IE-only", description, currentDriver);
+            return true;
+        }
+        // TODO Safari
         // TODO opera
-        if (description.getAnnotation(PhantomJSOnly.class) != null && !DriverInTest.isPhantomJSDriver(browser.driver().get())) {
-            printSkipReason("PhantomJS-only", description);
+        if (description.getAnnotation(PhantomJSOnly.class) != null && !DriverInTest.isPhantomJSDriver(currentDriver)) {
+            printSkipReason("PhantomJS-only", description, currentDriver);
             return true;
         }
-        // TODO edge
         return false;
     }
 
-    private void printSkipReason(String reason, Description description) {
-        testClassSession.log(String.format("\t@## -> Skipping %s test: %s", reason, description));
+    private void printSkipReason(String reason, Description description, WebDriver driver) {
+        testClassSession.log(String.format("\t@## -> Skipping %s test: %s (driver %s)", reason, description, driver));
     }
 
 }

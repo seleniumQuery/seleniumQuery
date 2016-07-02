@@ -20,6 +20,7 @@ import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -62,6 +63,10 @@ public class DriverInTest {
 
     public static boolean isChromeDriver(WebDriver webDriver) {
         return webDriver instanceof ChromeDriver || isDriverByName(webDriver, BrowserType.CHROME);
+    }
+
+    public static boolean isEdgeDriver(WebDriver webDriver) {
+        return webDriver instanceof EdgeDriver || isDriverByName(webDriver, BrowserType.EDGE);
     }
 
     public static boolean isFirefoxDriver(WebDriver webDriver) {
