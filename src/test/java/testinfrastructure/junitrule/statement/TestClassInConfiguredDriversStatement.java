@@ -121,9 +121,9 @@ public class TestClassInConfiguredDriversStatement extends Statement {
             REMOTE_FIREFOX,
             REMOTE_IE_10,
             REMOTE_IE_11,
-            REMOTE_SAFARI,
-            REMOTE_EDGE
-            // OPERA?
+            REMOTE_SAFARI
+//            ,REMOTE_EDGE
+//            ,REMOTE_OPERA
         );
         for (RemoteInstantiator remote : remoteInstantiators) {
             executeTestOn(shouldRunRemoteTests, remote, YES);

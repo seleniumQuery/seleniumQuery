@@ -18,9 +18,10 @@ public class RemoteInstantiator extends DriverInstantiator {
     public static RemoteInstantiator REMOTE_IE_10 = ie("10", "Windows 7");
     public static RemoteInstantiator REMOTE_IE_11 = ie("11", "Windows 8.1");
     public static RemoteInstantiator REMOTE_SAFARI = new RemoteInstantiator("Safari", DesiredCapabilities.safari(), SafariOnly.class);
-    public static RemoteInstantiator REMOTE_EDGE = new RemoteInstantiator("Edge", DesiredCapabilities.edge(), "Windows 10", EdgeOnly.class);
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings("unused")
+    public static RemoteInstantiator REMOTE_EDGE = new RemoteInstantiator("Edge", DesiredCapabilities.edge(), "Windows 10", EdgeOnly.class);
+    @SuppressWarnings({"deprecation", "unused"})
     public static RemoteInstantiator REMOTE_OPERA = new RemoteInstantiator("Opera", DesiredCapabilities.opera(), "Windows 7", OperaOnly.class);
 
     private static RemoteInstantiator ie(String version, String platform) {
