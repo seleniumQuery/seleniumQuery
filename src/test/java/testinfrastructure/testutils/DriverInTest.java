@@ -26,6 +26,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 /**
  * No test code may use {@link DriverVersionUtils} directly to test the browser under test, because it may
@@ -48,6 +49,9 @@ public class DriverInTest {
         return !isHtmlUnitDriver(driver);
     }
 
+    public static boolean isSafariDriver(WebDriver driver) {
+        return driver instanceof SafariDriver || isDriverByName(driver, BrowserType.SAFARI);
+    }
     public static boolean isIEDriver(WebDriver driver) {
         return driver instanceof InternetExplorerDriver || isDriverByName(driver, BrowserType.IE);
     }
@@ -75,10 +79,6 @@ public class DriverInTest {
 
     public static boolean isPhantomJSDriver(WebDriver webDriver) {
         return webDriver instanceof PhantomJSDriver || isDriverByName(webDriver, BrowserType.PHANTOMJS);
-    }
-
-    public static boolean isNotFirefoxDriver(WebDriver webDriver) {
-        return !isFirefoxDriver(webDriver);
     }
 
     public static boolean isRemoteDriver(WebDriver webDriver) {
