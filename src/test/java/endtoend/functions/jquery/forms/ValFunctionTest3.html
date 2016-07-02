@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2015 seleniumQuery authors
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>seleniumQuery .val() test page</title>
+</head>
+<body>
+    <div id="div-without-contenteditable-but-with-text">DIV INITIAL TEXT</div>
+
+	<select id="select-1" name="">
+		<option id="option-1-of-select-1" value="s1o1-value"         >s1o1-text</option>
+        <option id="option-2-of-select-1" value="s1o2-value" selected>s1o2-text</option>
+        <option id="option-3-of-select-1"                            >s1o3-text</option>
+	</select>
+
+	<textarea name="" id="ta" cols="30" rows="10">
+		bozo
+	</textarea>
+
+	<input type="text" id="i1" value="ii!">
+
+	<input type="radio" id="ir1" value="input-radio-value">
+	<input type="checkbox" id="ic1" value="input-checkbox-value">
+	<input type="hidden" id="ih1" value="input-hidden-value">
+	<input type="button" id="ib1" value="input-button-value">
+	<input type="submit" id="is1" value="input-submit-value">
+
+	<div id="editable" contenteditable="true">DIZ EZ EDITABLE</div>
+
+	<div id="non-editable-preceding-div">Not Editable</div>
+	<div id="parent-of-editable-empty">
+		<div id="editable-empty" contenteditable="true"></div>
+	</div>
+
+	<select id="select-option-without-value">
+		<option selected="selected">selected option without value</option>
+	</select>
+
+
+    <!-- IFRAME DESIGN MODE ######################################################################### -->
+    <script>
+        function iframeOn() {
+            document.getElementById("iframe-with-design-mode-on").contentWindow.document.designMode = "on";
+            document.getElementById("iframe-debug").innerHTML = "designMode successfully set to on by JavaScript";
+        }
+    </script>
+    <div id="iframe-debug">no-javascript</div>
+    <iframe id="iframe-with-design-mode-on" src="ValFunctionTestIframe.html" onload="iframeOn()"></iframe>
+</body>
+</html>
