@@ -20,7 +20,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 public class SizzlePseudosChildAndOfType extends SizzleTest {
 
@@ -51,7 +51,7 @@ public class SizzlePseudosChildAndOfType extends SizzleTest {
 //        t("Only-of-type", "#qunit-fixture > :only-of-type", new String[]{"name+value", "firstUL", "empty", "floatTest", "iframe", "table", "last"});
     }
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void nth_child() {
         // Verify that the child position isn't being cached improperly
         t("Test before adding second child", "p:nth-child(2)", new String[]{"ap", "en"});

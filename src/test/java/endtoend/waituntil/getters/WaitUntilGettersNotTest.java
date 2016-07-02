@@ -23,7 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import java.util.List;
 
@@ -48,13 +48,13 @@ public class WaitUntilGettersNotTest {
     }
 
     @Test
-    @JavaScriptOnly
+    @JavaScriptEnabledOnly
     public void attr_getter() {
         assertThat($("div").waitUntil().attr("data-attr").not().isEqualTo("yadda").then().get(), is(divs));
     }
 
     @Test
-    @JavaScriptOnly
+    @JavaScriptEnabledOnly
     public void prop_getter() {
         assertThat($("div").waitUntil().prop("tagName").not().isEqualTo("NOT").then().get(), is(divs));
     }
@@ -90,7 +90,7 @@ public class WaitUntilGettersNotTest {
     }
 
     @Test
-    @JavaScriptOnly
+    @JavaScriptEnabledOnly
     public void attr_not_matches_toString() {
         // when
         SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().attr("data-attr").not().matches("x");
@@ -111,7 +111,7 @@ public class WaitUntilGettersNotTest {
     }
 
     @Test
-    @JavaScriptOnly
+    @JavaScriptEnabledOnly
     public void prop_not_isLessThan_toString() {
         // when
         SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().prop("tagName").not().isLessThan(-1);

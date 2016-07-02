@@ -20,7 +20,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -31,7 +31,7 @@ public class WaitUntilIsPresentTest {
 
 	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
-	@Test @JavaScriptOnly
+	@Test @JavaScriptEnabledOnly
 	public void isPresent__should_not_throw_an_exception_when_the_element_becomes_present__and__return_the_elements_val() throws Exception {
 		// given
 		// when

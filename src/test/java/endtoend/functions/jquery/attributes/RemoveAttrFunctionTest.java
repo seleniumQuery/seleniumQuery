@@ -4,7 +4,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -17,7 +17,7 @@ public class RemoveAttrFunctionTest {
 	@Rule public SetUpAndTearDownDriver setUpAndTearDownDriverRuleInstance = setUpAndTearDownDriverRule;
 
 	// http://jsbin.com/lexuyesu/1/edit
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void removeAttr_function() throws Exception {
 		assertThat($("#chk1").attr("data-ball"), is("yo"));
     	$("#chk1").attr("data-ball", "");

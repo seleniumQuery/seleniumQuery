@@ -20,7 +20,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -32,7 +32,7 @@ public class PropFunctionTest {
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
 	// http://jsbin.com/zofekalo/1/edit
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void prop_function__getting() throws Exception {
         assertThat($("#chk_checked").<Boolean>prop("checked"), is(true));
         assertThat($("#chk_not_checked").<Boolean>prop("checked"), is(false));
@@ -54,7 +54,7 @@ public class PropFunctionTest {
     }
 
     // http://jsbin.com/ceqijima/2/edit
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void prop_function__setting_SELECTED_prop() throws Exception {
     	setPropAndVerify(true, true);
     	setPropAndVerify(1, true);

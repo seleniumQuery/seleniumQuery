@@ -5,7 +5,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.JavaScriptOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -30,7 +30,7 @@ public class PresentSelectorTest {
         assertThat($("#bozo").is(":not(:present)"), is(true));
     }
 
-    @Test @JavaScriptOnly
+    @Test @JavaScriptEnabledOnly
     public void presentPseudoClass_while_removing_element_from_DOM() {
     	SeleniumQueryObject $presentDiv = $("#presentDiv");
     	SeleniumQueryObject $otherPresentDiv = $("#otherPresentDiv");
