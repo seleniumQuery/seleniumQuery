@@ -179,7 +179,6 @@ public class ValFunction {
 	}
 
     private static void changeValueOfUnknownElement(WebElement element, String value) {
-        LOGGER.warn("Function .val() called in element not known to be editable. Will attempt to send keys anyway. Element: "+element);
         clearElementOrSelectAllOfItsText(element);
         element.sendKeys(value);
     }
