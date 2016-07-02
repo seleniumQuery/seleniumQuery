@@ -35,7 +35,7 @@ public class EndToEndTestUtilsTest {
         // when
         EndToEndTestUtils.openUrl(classNameToTestFileUrl(EndToEndTestUtilsTest.class));
         // then
-        assertThat(remoteWebDriverUrlSpy.visitedUrl, is("https://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html"));
+        assertThat(remoteWebDriverUrlSpy.visitedUrl, is("http://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html"));
         assertThat(remoteWebDriverUrlSpy.executedScript, is("sauce:job-name=testinfrastructure/EndToEndTestUtilsTest"));
     }
 
@@ -47,7 +47,7 @@ public class EndToEndTestUtilsTest {
         // when
         EndToEndTestUtils.openUrl("file:/home/rof/src/github.com/seleniumQuery/seleniumQuery/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html");
         // then
-        assertThat(remoteWebDriverUrlSpy.visitedUrl, is("https://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html"));
+        assertThat(remoteWebDriverUrlSpy.visitedUrl, is("http://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html"));
         assertThat(remoteWebDriverUrlSpy.executedScript, is("sauce:job-name=testinfrastructure/EndToEndTestUtilsTest"));
     }
 
@@ -60,7 +60,7 @@ public class EndToEndTestUtilsTest {
         // when
         EndToEndTestUtils.openUrl(classNameToTestFileUrl(EndToEndTestUtilsTest.class), remoteBrowser.$);
         // then
-        assertThat(remoteWebDriverUrlSpy.visitedUrl, is("https://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html"));
+        assertThat(remoteWebDriverUrlSpy.visitedUrl, is("http://rawgit.com/seleniumQuery/seleniumQuery/master/src/test/java/testinfrastructure/EndToEndTestUtilsTest.html"));
         assertThat(remoteWebDriverUrlSpy.executedScript, is("sauce:job-name=testinfrastructure/EndToEndTestUtilsTest"));
     }
 
