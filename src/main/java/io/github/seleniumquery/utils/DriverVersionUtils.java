@@ -21,14 +21,20 @@ import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.apache.commons.lang3.ArrayUtils.contains;
 
 /**
  * Contains some utility functions for dealing with WebDrivers, such as inspecting their version.
@@ -42,7 +48,7 @@ public class DriverVersionUtils {
 	private static DriverVersionUtils instance = new DriverVersionUtils();
 
 	private static final Log LOGGER = LogFactory.getLog(DriverVersionUtils.class);
-	
+
 	private Map<WebDriver, Map<String, Boolean>> driverSupportedPseudos = new HashMap<>();
 
 	public static DriverVersionUtils getInstance() {
@@ -53,7 +59,7 @@ public class DriverVersionUtils {
 	public static void overrideSingletonInstance(DriverVersionUtils instance) {
 		DriverVersionUtils.instance = instance;
 	}
-	
+
 	public boolean hasNativeSupportForPseudo(WebDriver driver, String pseudoClass) {
 		Map<String, Boolean> driverMap = getDriverMap(driver);
 		Boolean supports = driverMap.get(pseudoClass);
@@ -64,7 +70,7 @@ public class DriverVersionUtils {
 		}
 		return supports;
 	}
-	
+
 	private boolean testPseudoClassNativeSupport(String pseudo, SearchContext context) {
 		try {
 			By.cssSelector("#AAA_SomeIdThatShouldNotExist"+pseudo).findElement(context);
@@ -111,6 +117,21 @@ public class DriverVersionUtils {
 
     public boolean isHtmlUnitDriver(WebDriver driver) {
         return driver instanceof HtmlUnitDriver;
+    }
+
+    public static boolean isSafariDriver(WebDriver driver) {
+        return isDriver(driver, SafariDriver.class, BrowserType.SAFARI);
+    }
+    public static boolean isEdgeDriver(WebDriver driver) {
+        return isDriver(driver, EdgeDriver.class, BrowserType.EDGE);
+    }
+
+    public static boolean isDriver(WebDriver driver, Class<?> clazz, String... browserNames) {
+        return clazz.isInstance(driver) || isDriverByName(driver, browserNames);
+    }
+
+    public static boolean isDriverByName(WebDriver driver, String... browserNames) {
+        return driver instanceof HasCapabilities && contains(browserNames, ((HasCapabilities) driver).getCapabilities().getBrowserName());
     }
 
 }

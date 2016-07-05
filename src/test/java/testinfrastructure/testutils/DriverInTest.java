@@ -17,16 +17,18 @@
 package testinfrastructure.testutils;
 
 import io.github.seleniumquery.utils.DriverVersionUtils;
-import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
+
+import static io.github.seleniumquery.utils.DriverVersionUtils.isDriver;
+import static io.github.seleniumquery.utils.DriverVersionUtils.isDriverByName;
 
 /**
  * No test code may use {@link DriverVersionUtils} directly to test the browser under test, because it may
@@ -50,14 +52,16 @@ public class DriverInTest {
     }
 
     public static boolean isSafariDriver(WebDriver driver) {
-        return driver instanceof SafariDriver || isDriverByName(driver, BrowserType.SAFARI);
-    }
-    public static boolean isIEDriver(WebDriver driver) {
-        return driver instanceof InternetExplorerDriver || isDriverByName(driver, BrowserType.IE);
+        return DriverVersionUtils.isSafariDriver(driver);
     }
 
-    private static boolean isDriverByName(WebDriver driver, String browserName) {
-        return driver instanceof HasCapabilities && ((HasCapabilities) driver).getCapabilities().getBrowserName().equals(browserName);
+    public static boolean isIEDriver(WebDriver driver) {
+        return isDriver(driver, InternetExplorerDriver.class, BrowserType.IE);
+    }
+
+    @SuppressWarnings("deprecation")
+    public static boolean isOperaDriver(WebDriver driver) {
+        return isDriver(driver, OperaDriver.class, BrowserType.OPERA, BrowserType.OPERA_BLINK);
     }
 
     public static boolean isHtmlUnitDriverEmulatingIE(WebDriver webDriver) {
@@ -66,19 +70,19 @@ public class DriverInTest {
     }
 
     public static boolean isChromeDriver(WebDriver webDriver) {
-        return webDriver instanceof ChromeDriver || isDriverByName(webDriver, BrowserType.CHROME);
+        return isDriver(webDriver, ChromeDriver.class, BrowserType.CHROME);
     }
 
     public static boolean isEdgeDriver(WebDriver webDriver) {
-        return webDriver instanceof EdgeDriver || isDriverByName(webDriver, BrowserType.EDGE);
+        return isDriver(webDriver, EdgeDriver.class, BrowserType.EDGE);
     }
 
     public static boolean isFirefoxDriver(WebDriver webDriver) {
-        return webDriver instanceof FirefoxDriver || isDriverByName(webDriver, BrowserType.FIREFOX);
+        return isDriver(webDriver, FirefoxDriver.class, BrowserType.FIREFOX);
     }
 
     public static boolean isPhantomJSDriver(WebDriver webDriver) {
-        return webDriver instanceof PhantomJSDriver || isDriverByName(webDriver, BrowserType.PHANTOMJS);
+        return isDriver(webDriver, PhantomJSDriver.class, BrowserType.PHANTOMJS);
     }
 
     public static boolean isRemoteDriver(WebDriver webDriver) {
