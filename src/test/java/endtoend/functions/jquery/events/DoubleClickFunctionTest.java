@@ -16,21 +16,17 @@
 
 package endtoend.functions.jquery.events;
 
-import io.github.seleniumquery.SeleniumQueryObject;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
-import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static testinfrastructure.testutils.DriverInTest.isIEDriver;
+import static testinfrastructure.testutils.DriverInTest.*;
 
 public class DoubleClickFunctionTest {
 
@@ -41,52 +37,45 @@ public class DoubleClickFunctionTest {
         assertThat($("div").size(), is(0));
 
         $("#i1").dblclick();
-        removeDivAddedWhenBySomeDrivers("div.click.i1:eq(0)");
-        removeDivAddedWhenBySomeDrivers("div.click.body:eq(0)");
 
-        assertThat($("div.click.i1").size(), is(1)); // 2 when simulated manually
-        assertThat($("div.click.body").size(), is(1)); // 2
+        int operaDiff = 0;
+        int otherDiff = 0;
+        WebDriver driver = $.driver().get();
+        if (isOperaDriver(driver)) {
+            operaDiff++;
+        } else if (isHtmlUnitDriver(driver)
+            || isIEDriver(driver)
+            || isPhantomJSDriver(driver)
+            || isSafariDriver(driver)
+            || isEdgeDriver(driver)) {
+            otherDiff++;
+        }
+
+        assertThat($("div.click.i1").size(), is(1 + operaDiff + otherDiff)); // 2 when simulated manually
+        assertThat($("div.click.body").size(), is(1 + operaDiff + otherDiff)); // 2
         assertThat($("div.dblclick.i1").size(), is(1));
         assertThat($("div.dblclick.body").size(), is(1));
-        assertThat($("div").size(), is(4)); // 6
+        assertThat($("div").size(), is(4 + operaDiff*2 + otherDiff*2)); // 6
 
         $("#i2").dblclick();
-        removeDivAddedWhenBySomeDrivers("div.click.i2:eq(0)");
-        removeDivAddedWhenBySomeDrivers("div.click.body:eq(0)");
 
-        assertThat($("div.click.i1").size(), is(1)); // 2
+        assertThat($("div.click.i1").size(), is(1 + operaDiff + otherDiff)); // 2
         assertThat($("div.dblclick.i1").size(), is(1));
-        assertThat($("div.click.i2").size(), is(1)); // 2
+        assertThat($("div.click.i2").size(), is(1 + operaDiff + otherDiff)); // 2
         assertThat($("div.dblclick.i2").size(), is(1));
-        assertThat($("div.click.body").size(), is(1+1)); // 2+2
+        assertThat($("div.click.body").size(), is(1+1 + operaDiff*2 + otherDiff*2)); // 2+2
         assertThat($("div.dblclick.body").size(), is(1+1));
-        assertThat($("div").size(), is(8)); // 12
+        assertThat($("div").size(), is(8 + operaDiff*4 + otherDiff*4)); // 12
 
         $("body").dblclick();
-        removeDivAddedWhenBySomeDrivers("div.click.body:eq(0)");
 
-        assertThat($("div.click.i1").size(), is(1)); // 2
-        assertThat($("div.dblclick.i1").size(), is(1));
-        assertThat($("div.click.i2").size(), is(1)); // 2
+        assertThat($("div.click.i1").size(), is(1 + operaDiff*3 + otherDiff)); // 2
+        assertThat($("div.dblclick.i1").size(), is(1 + operaDiff));
+        assertThat($("div.click.i2").size(), is(1 + operaDiff + otherDiff)); // 2
         assertThat($("div.dblclick.i2").size(), is(1));
-        assertThat($("div.click.body").size(), is(2+1)); // 4+2
+        assertThat($("div.click.body").size(), is(2+1 + operaDiff*3 + otherDiff*3)); // 4+2
         assertThat($("div.dblclick.body").size(), is(2+1));
-        assertThat($("div").size(), is(10)); // 15
-    }
-
-    private static void removeDivAddedWhenBySomeDrivers(String selector) {
-        WebDriver driver = $.driver().get();
-        if (DriverInTest.isHtmlUnitDriver(driver)
-                || isIEDriver($.driver().get())
-                || driver instanceof PhantomJSDriver) {
-            remove($(selector));
-        }
-    }
-
-    private static void remove(SeleniumQueryObject e) {
-        JavascriptExecutor driver = ((JavascriptExecutor) e.getWebDriver());
-        assertThat(e.size(), is(1));
-        driver.executeScript("document.body.removeChild(arguments[0]);", e.get(0));
+        assertThat($("div").size(), is(10 + operaDiff*8 + otherDiff*5)); // 15
     }
 
 }
