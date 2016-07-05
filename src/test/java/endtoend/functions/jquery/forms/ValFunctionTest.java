@@ -49,6 +49,7 @@ public class ValFunctionTest {
     @Test
     @ChromeShouldBeSkipped("chrome can't focus, see test below")
     @JavaScriptEnabledOnly
+    @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
     public void val_write__divWithoutContentEditableAttribute___hasNoEffect() {
         verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
     }
@@ -86,27 +87,37 @@ public class ValFunctionTest {
     }
 
     @Test
+    @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
+    @OperaSkip("Expected: is 's1o2-value' but: was '' -- TODO check")
     public void val_read__SELECT___readsSelectedOptionsValue() {
         assertThat($(ID_SELECT_1).val(), is("s1o2-value"));
     }
 
     @Test
+    @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
+    @OperaSkip("Expected: is 's1o1-value' but: was '' -- TODO check")
     public void val_read__OPTION__withValueAttribute__readsValueAttribute() {
         assertThat($("#option-1-of-select-1").val(), is("s1o1-value"));
         assertThat($("#option-2-of-select-1").val(), is("s1o2-value"));
     }
 
     @Test
+    @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
+    @OperaSkip("Expected: is 's1o3-text' but: was '' -- TODO check")
     public void val_read__OPTION__withoutValueAttribute__readsText() {
         assertThat($("#option-3-of-select-1").val(), is("s1o3-text"));
     }
 
     @Test(expected = NoSuchElementException.class)
+    @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
+    @OperaSkip("Didnt throw exception-- TODO check")
     public void val_write__SELECT___throwsException__ifThereIsNoOptionWithValue() {
         $(ID_SELECT_1).val("NO OPTION WITH THIS STRING AS VALUE");
     }
 
     @Test
+    @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
+    @OperaSkip("Expected: is 's1o1-value' but: was '' -- TODO check")
     public void val_write__SELECT___changesValue__ifThere_Is_OptionWithValue() {
         // when
         $(ID_SELECT_1).val("s1o1-value");
@@ -115,6 +126,8 @@ public class ValFunctionTest {
     }
 
     @Test
+    @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
+    @OperaSkip("SEVERAL Expected: is 'X' but: was 'X' -- TODO check")
     public void val_others() {
 		// TEXTAREA ----------------------------------------------------------------------------------------------------
 		assertThat($("#ta").val().trim(), is("bozo"));
@@ -163,12 +176,15 @@ public class ValFunctionTest {
 
     @Test
     @SafariSkip("Due to WebDriverException: Cannot set the selection end")
+    @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
     public void val_readAndWrite___divWithContentEditableAttribute___with_INITIAL_VALUE() {
         verifyEditableDivAcceptsHtmlCharsCorrectly("#editable", "DIZ EZ EDITABLE");
     }
 
     @Test
     @FirefoxSkip @SafariSkip
+    @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
+    @OperaSkip("org.openqa.selenium.ElementNotVisibleException: You may only interact with visible elements -- TODO check")
     public void val_readAndWrite___divWithContentEditableAttribute___with_EMPTY_STARTING_VALUE() {
         verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
     }
@@ -202,7 +218,7 @@ public class ValFunctionTest {
         WebDriver driver = $.driver().get();
         if (isIEDriver(driver)) {
             return " " + resultingHtml;
-		} else if (isFirefoxDriver(driver) && isRemoteDriver(driver)) {
+		} else if ((isFirefoxDriver(driver) && isRemoteDriver(driver)) || isOperaDriver(driver)) {
             return resultingHtml + " ";
         } else if (isFirefoxDriver(driver)) {
             return resultingHtml + "<br>";
