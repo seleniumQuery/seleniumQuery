@@ -65,6 +65,10 @@ public class TestMethodStatement extends Statement {
             printSkipReason("Edge-only", description, currentDriver);
             return true;
         }
+        if (description.getAnnotation(EdgeSkip.class) != null && DriverInTest.isEdgeDriver(currentDriver)) {
+            printSkipReason("Edge-skipped", description, currentDriver);
+            return true;
+        }
         if (description.getAnnotation(FirefoxOnly.class) != null && !DriverInTest.isFirefoxDriver(currentDriver)) {
             printSkipReason("Firefox-only", description, currentDriver);
             return true;
