@@ -89,7 +89,10 @@ public class TestMethodStatement extends Statement {
             printSkipReason("Safari-only", description, currentDriver);
             return true;
         }
-        // TODO opera
+        if (description.getAnnotation(OperaOnly.class) != null && !DriverInTest.isOperaDriver(currentDriver)) {
+            printSkipReason("Opera-only", description, currentDriver);
+            return true;
+        }
         if (description.getAnnotation(PhantomJSOnly.class) != null && !DriverInTest.isPhantomJSDriver(currentDriver)) {
             printSkipReason("PhantomJS-only", description, currentDriver);
             return true;
