@@ -11,17 +11,24 @@ import java.net.URL;
 
 import static java.lang.String.format;
 
+@SuppressWarnings("deprecation")
 public class RemoteInstantiator extends DriverInstantiator {
 
     public static RemoteInstantiator REMOTE_CHROME = new RemoteInstantiator("Chrome", DesiredCapabilities.chrome(), ChromeOnly.class);
+    public static RemoteInstantiator REMOTE_CHROME_OSX = new RemoteInstantiator("Chrome", DesiredCapabilities.chrome(), "OS X 10.11", ChromeOnly.class);
+    public static RemoteInstantiator REMOTE_CHROME_W7 = new RemoteInstantiator("Chrome", DesiredCapabilities.chrome(), "Windows 7", ChromeOnly.class);
+
     public static RemoteInstantiator REMOTE_FIREFOX = new RemoteInstantiator("Firefox", DesiredCapabilities.firefox(), FirefoxOnly.class);
+    public static RemoteInstantiator REMOTE_FIREFOX_OSX = new RemoteInstantiator("Firefox", DesiredCapabilities.firefox(), "OS X 10.11", FirefoxOnly.class);
+    public static RemoteInstantiator REMOTE_FIREFOX_W7 = new RemoteInstantiator("Firefox", DesiredCapabilities.firefox(), "Windows 7", FirefoxOnly.class);
+
     public static RemoteInstantiator REMOTE_IE_10 = ie("10", "Windows 7");
     public static RemoteInstantiator REMOTE_IE_11 = ie("11", "Windows 8.1");
+
     public static RemoteInstantiator REMOTE_SAFARI = new RemoteInstantiator("Safari", DesiredCapabilities.safari(), SafariOnly.class);
 
-    @SuppressWarnings("unused")
     public static RemoteInstantiator REMOTE_EDGE = new RemoteInstantiator("Edge", DesiredCapabilities.edge(), "Windows 10", EdgeOnly.class);
-    @SuppressWarnings({"deprecation", "unused"})
+
     public static RemoteInstantiator REMOTE_OPERA = new RemoteInstantiator("Opera", DesiredCapabilities.opera(), "Windows 7", OperaOnly.class);
 
     private static RemoteInstantiator ie(String version, String platform) {
