@@ -16,8 +16,8 @@ os: Visual Studio 2015
 install:
   - cinst PhantomJS -y -Version 2.1.1
   - set path=%path%;C:\tools\PhantomJS\
-  - ps: choco install maven --version 3.3.1
-  - cmd: SET PATH=C:\tools\apache-maven-3.3.1\bin;%JAVA_HOME%\bin;%PATH%
+  - ps: choco install maven
+  - cmd: SET PATH=C:\tools\apache-maven-3.3.3\bin;%JAVA_HOME%\bin;%PATH%
 
 build_script:
   - mvn clean package -DskipTests
@@ -26,5 +26,5 @@ test_script:
 
 cache:
   - C:\tools\PhantomJS\
-  - C:\tools\apache-maven-3.3.1\
+  - C:\tools\apache-maven-3.3.3\
   - C:\Users\appveyor\.m2
