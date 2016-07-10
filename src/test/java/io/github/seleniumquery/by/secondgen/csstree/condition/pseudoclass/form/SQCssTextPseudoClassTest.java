@@ -24,8 +24,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssTextPseudoClassTest {
 
-    public static final String TEXT_PSEUDO = ":text";
-    public static final String TEXT_XPATH_EXPRESSION = ".//*[" +
+    private static final String TEXT_PSEUDO = ":text";
+    private static final String TEXT_XPATH_EXPRESSION = ".//*[" +
                 "(" +
                     "self::input" +
                         " and " +

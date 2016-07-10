@@ -24,8 +24,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssSubmitPseudoClassTest {
 
-    public static final String SUBMIT_PSEUDO = ":submit";
-    public static final String SUBMIT_XPATH_EXPRESSION = ".//*[" +
+    private static final String SUBMIT_PSEUDO = ":submit";
+    private static final String SUBMIT_XPATH_EXPRESSION = ".//*[" +
             "(" +
                 "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'submit')" +
             " or " +

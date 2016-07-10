@@ -25,7 +25,7 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 public class SQCssContainsPseudoClassTest {
 
     private static final String CONTAINS_PSEUDO = ":contains";
-    public static final String CONTAINS_XPATH_EXPRESSION = ".//*[" +
+    private static final String CONTAINS_XPATH_EXPRESSION = ".//*[" +
             "contains(string(.), 'my stuff')" +
         "]";
 

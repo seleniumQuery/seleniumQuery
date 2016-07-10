@@ -171,12 +171,11 @@ public class SQCssNthChildPseudoClassTest {
     }
 
     private void assertNthChildArgumentYields(String nthChildArgument, String expectedCSS, String expectedXPath) {
-        String pseudoThatTheDriverWillTestForNativeSupport = NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK;
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
-                pseudoThatTheDriverWillTestForNativeSupport,
-                nthChild(nthChildArgument),
-                expectedCSS,
-                expectedXPath
+            NTH_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK,
+            nthChild(nthChildArgument),
+            expectedCSS,
+            expectedXPath
         );
         assertPseudoClass(nthChild(nthChildArgument)).whenNotNativelySupported().translatesToPureXPath(expectedXPath);
     }

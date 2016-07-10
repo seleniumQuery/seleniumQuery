@@ -24,8 +24,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssFirstPseudoClassTest {
 
-    public static final String FIRST_PSEUDO = ":first";
-    public static final String FIRST_XPATH_EXPRESSION = "(.//*)[position() = 1]";
+    private static final String FIRST_PSEUDO = ":first";
+    private static final String FIRST_XPATH_EXPRESSION = "(.//*)[position() = 1]";
 
     @Test
     public void translate() {

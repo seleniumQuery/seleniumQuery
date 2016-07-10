@@ -24,9 +24,9 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssCheckboxPseudoClassTest {
 
-    public static final String CHECKBOX_PSEUDO = ":checkbox";
-    public static final String CHECKBOX_CSS_SELECTOR = "input[type=\"checkbox\"]";
-    public static final String CHECKBOX_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'checkbox')" + "]";
+    private static final String CHECKBOX_PSEUDO = ":checkbox";
+    private static final String CHECKBOX_CSS_SELECTOR = "input[type=\"checkbox\"]";
+    private static final String CHECKBOX_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'checkbox')" + "]";
 
     @Test
     public void translate() {

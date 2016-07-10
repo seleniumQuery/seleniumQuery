@@ -23,8 +23,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssOnlyChildPseudoClassTest {
 
-    public static final String ONLY_CHILD_PSEUDO = ":only-child";
-    public static final String ONLY_CHILD_XPATH_EXPRESSION = ".//*[../*[last() = 1]]";
+    private static final String ONLY_CHILD_PSEUDO = ":only-child";
+    private static final String ONLY_CHILD_XPATH_EXPRESSION = ".//*[../*[last() = 1]]";
 
     @Test
     public void translate() {

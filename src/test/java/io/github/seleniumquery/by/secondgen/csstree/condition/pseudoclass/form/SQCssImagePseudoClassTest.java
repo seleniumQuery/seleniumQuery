@@ -24,9 +24,9 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssImagePseudoClassTest {
 
-    public static final String IMAGE_PSEUDO = ":image";
-    public static final String IMAGE_CSS_SELECTOR = "input[type=\"image\"]";
-    public static final String IMAGE_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'image')" + "]";
+    private static final String IMAGE_PSEUDO = ":image";
+    private static final String IMAGE_CSS_SELECTOR = "input[type=\"image\"]";
+    private static final String IMAGE_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'image')" + "]";
 
     @Test
     public void translate() {
