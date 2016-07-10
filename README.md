@@ -265,8 +265,6 @@ $.driver().useHtmlUnit().emulatingChrome().withoutJavaScript();
 $.driver().useHtmlUnit().emulatingFirefox(); // could disable JS here as well
 // And IE
 $.driver().useHtmlUnit().emulatingInternetExplorer11(); // JS is disableable as well
-$.driver().useHtmlUnit().emulatingInternetExplorer8(); // JS is disableable as well
-$.driver().useHtmlUnit().emulatingInternetExplorer9(); // JS is disableable as well
 $.driver().useHtmlUnit().emulatingInternetExplorer(); // will pick latest IE
 ````
 
@@ -297,7 +295,7 @@ We don't change  the `value` attribute directly like jQuery does. We actually do
 and **type, key by key**, the string provided as argument!
 
 And we go the *extra mile* whenever possible:
-- Our **`$().val()` even works on `contenteditable` elements**: They don't have `value`, but we type the text in them, again, key by key, as an user would;
+- Our **`$().val()` even works on `contenteditable` elements AND `documentMode=on <iframe>`s**: They don't have `value`, but we type the text in them, again, key by key, as an user would;
 - If it is an `<input type="file">` we select the file;
 - When the element is a `<select>`, we choose the `<option>` by the value given (same as `$("selector").as().select().selectByValue("123")`).
 
