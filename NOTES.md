@@ -25,6 +25,7 @@ This files lists **unresolved** bugs or issues related to the drivers of Seleniu
 - HtmlUnitDriver wont trigger the focus event for img or body (even with tabindex) (https://github.com/seleniumQuery/seleniumQuery/issues/7)
 - ChromeDriver has a bug on `<object>` and `<embedded>` (https://github.com/seleniumQuery/seleniumQuery/issues/93)
 
+
 # Wanted Features/Future
 
 - Add `$("#element").contextmenu()`;
@@ -43,3 +44,11 @@ This files lists **unresolved** bugs or issues related to the drivers of Seleniu
         - .waitUntil() API should be mature
         - All tests should pass for, at least, latest HtmlUnit, Chrome, Firefox, IE and PhantomJS.
         - Stacktraces should be reviewed, in order to provide easy-debugging for the end-user (programmer).
+
+
+# Technical debt
+
+- add test for .click() without JS
+    - Add a form, and test clicking a submit button, just like `.submit()` is being tested.
+- Rework .children() function, so it uses .filter()
+    - This is sort of a duplicated functionality there.
