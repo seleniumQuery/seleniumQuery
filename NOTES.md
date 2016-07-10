@@ -14,7 +14,8 @@ General notes about the project, including found external issues/bugs, wanted fe
     - If commit contains `[run sauce]`, it will run e2e tests for all remote (SauceLabs') drivers.
 - Wercker
 - CircleCI
-- Drone.io
+- [Drone.io](https://drone.io/github.com/seleniumQuery/seleniumQuery)
+    - Linux, Java 8, will run e2e tests for JBrowserDriver (not done yet)
 
 
 # Issues/bugs related to other drives
