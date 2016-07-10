@@ -116,7 +116,7 @@ public class PseudoClassTestUtils {
         // when
         ElementFinder elementFinder = pseudoClassCondition.toElementFinder(previous);
         // then
-        assertThat(elementFinder.getCssFinder().toString(), is(previous.getCssFinder().toString()));
+        assertThat(elementFinder.toCssString(), is(previous.toCssString()));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(false));
         assertThat(elementFinder.getXPathExpression(), is(previous.getXPathExpression()));
         assertThat(elementFinder.getElementFilterList().getElementFilters(), contains(pseudoClassFilter));

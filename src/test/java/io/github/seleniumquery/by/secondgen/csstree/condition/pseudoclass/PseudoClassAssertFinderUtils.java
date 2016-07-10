@@ -49,7 +49,7 @@ public class PseudoClassAssertFinderUtils {
         // when
         ElementFinder elementFinder = pseudoClassObject.toElementFinder(previous);
         // then
-        assertThat("CSS selector", elementFinder.getCssFinder().toString(), is(expectedCss));
+        assertThat("CSS selector", elementFinder.toCssString(), is(expectedCss));
         assertThat("Can pure CSS?", elementFinder.canFetchThroughCssAlone(), is(canPureCss));
         assertThat("XPath Expression", elementFinder.getXPathExpression(), is(expectedXPath));
         assertThat("ElementFilterList", elementFinder.getElementFilterList().getElementFilters(), elementFilterMatcher);
