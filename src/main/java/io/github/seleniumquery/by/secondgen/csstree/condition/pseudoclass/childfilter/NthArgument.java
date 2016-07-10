@@ -40,7 +40,7 @@ class NthArgument {
     private final Integer a;
     private final Integer b;
 
-    public NthArgument(String argument) {
+    NthArgument(String argument) {
         String trimmedArg = argument.trim();
         if (even(trimmedArg)) {
             this.a = 2;
@@ -127,11 +127,11 @@ class NthArgument {
     private InvalidSelectorException createInvalidArgumentException(String argument) {
         String reason = String.format("The :nth-child() pseudo-class must have an argument like" +
                 " :nth-child(odd), :nth-child(even), :nth-child(an+b), :nth-child(an) or" +
-                " :nth-child(b) - where a and b are positive or negative integers -, but was :nth-child(%s).", argument);
+                " :nth-child(b) - where a and b are positive or negative integers -, but was :nth-child(\"%s\").", argument);
         return new InvalidSelectorException(reason);
     }
 
-    public String toCSS() {
+    String toCSS() {
         String sa = a != null ? a+"n" : "";
         String sb = b != null && b != 0 ? (b > 0 && a != null? "+"+b : ""+b) : "";
         return sa+sb;

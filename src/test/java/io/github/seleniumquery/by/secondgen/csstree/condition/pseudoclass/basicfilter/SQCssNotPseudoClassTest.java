@@ -77,7 +77,6 @@ public class SQCssNotPseudoClassTest {
      * If throwing an exception was the final expected behavior, these tests could be much simpler, of course. I just
      * left them like this because I expect to get back to them as soon as possible.
      */
-
     @Test(expected = io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException.class)
     public void toElementFinder__not_and_general_ancestor() {
         assertPseudoClassHasElementFinderWhenNativelySupported(

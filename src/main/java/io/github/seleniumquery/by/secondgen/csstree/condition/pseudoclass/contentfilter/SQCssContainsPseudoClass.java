@@ -37,7 +37,7 @@ public class SQCssContainsPseudoClass extends SQCssFunctionalPseudoClassConditio
     public NeverNativelySupportedPseudoClass containsPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            String textToContain = getArgument();
+            String textToContain = getArgument().getArgumentAsString();
             textToContain = SelectorUtils.unescapeString(textToContain);
             String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
             return XPathAndFilterFinder.pureXPath("contains(string(.), " + wantedTextToContain + ")");

@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SqCssFunctionalPseudoClassArgument;
 
 /**
  * :first
@@ -29,13 +30,14 @@ public class SQCssFirstPseudoClass extends SQCssEqPseudoClass {
 
     public static final String PSEUDO = "first";
 
+    @SuppressWarnings("WeakerAccess") // constructor is invoked via reflection
     public SQCssFirstPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 
     @Override
-    public String getArgument() {
-        return "0";
+    public SqCssFunctionalPseudoClassArgument getArgument() {
+        return new SqCssFunctionalPseudoClassArgument("0");
     }
 
 }

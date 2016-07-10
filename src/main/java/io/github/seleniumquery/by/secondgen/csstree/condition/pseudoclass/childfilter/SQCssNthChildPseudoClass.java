@@ -64,7 +64,7 @@ public class SQCssNthChildPseudoClass extends SQCssFunctionalPseudoClassConditio
     }
 
     private NthArgument getNthChildArgument() {
-        return new NthArgument(getArgument());
+        return new NthArgument(getArgument().getArgumentAsString());
     }
 
 }
