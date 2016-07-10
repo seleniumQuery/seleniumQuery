@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,11 +44,11 @@ abstract class SQCssCombinationSelector implements SQCssSelector {
 
     @Override
     public ElementFinder toElementFinder(WebDriver webDriver) {
-        ElementFinder elementFinder = leftSideSelector.toElementFinder(webDriver);
-        CssFinder combinatorFinder = elementFinder.getCssFinder().combineAsLeftPart(this.cssCombinator);
-        ElementFinder directAdjacentIntermediateFinder = new ElementFinder(combinatorFinder,
-                elementFinder.getXPathExpression() + this.xPathCombinator, elementFinder);
-        return rightSideSelector.toElementFinder(directAdjacentIntermediateFinder);
+        ElementFinder leftSideElementFinder = leftSideSelector.toElementFinder(webDriver);
+        CssFinder combinatorFinder = leftSideElementFinder.getCssFinder().combineAsLeftPart(this.cssCombinator);
+        ElementFinder intermediateFinder = new ElementFinder(combinatorFinder,
+                leftSideElementFinder.getXPathExpression() + this.xPathCombinator, leftSideElementFinder);
+        return rightSideSelector.toElementFinder(intermediateFinder);
     }
 
     @Override
