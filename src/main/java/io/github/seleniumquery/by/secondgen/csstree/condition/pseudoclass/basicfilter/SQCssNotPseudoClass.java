@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
        but we still match it, so we can return a proper error message */
     public static final String PSEUDO_PURE_NOT = "not";
 
-    public MaybeNativelySupportedPseudoClass notPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
+    private MaybeNativelySupportedPseudoClass notPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
             return ":"+PSEUDO_PURE_NOT+"(div)";
@@ -59,7 +59,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
             StringBuilder sb = new StringBuilder("");
             for (SQCssSelector sqCssSelector : parse) {
                 sb.append(":"+PSEUDO_PURE_NOT+"(");
-                sb.append(sqCssSelector.toElementFinder(webDriver).getCssFinder().toString());
+                sb.append(sqCssSelector.toElementFinder(webDriver).toCssString());
                 sb.append(")");
             }
             return sb.toString();
@@ -81,9 +81,10 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
             String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);
             return XPathAndFilterFinder.pureXPath("not("+joinedXPathExps+")");
         }
+
     };
-    
-    public SQCssNotPseudoClass(PseudoClass pseudoClassSelector) {
+
+    SQCssNotPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 
