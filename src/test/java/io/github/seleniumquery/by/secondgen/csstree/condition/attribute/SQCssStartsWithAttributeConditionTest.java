@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class SQCssStartsWithAttributeConditionTest {
         // when
         ElementFinder elementFinder = startsWithAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(elementFinder.getCssFinder().toString(), is("[attribute^='stringToStart']"));
+        assertThat(elementFinder.toCssString(), is("[attribute^='stringToStart']"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";

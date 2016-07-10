@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class SQCssContainsSubstringAttributeConditionTest {
         // when
         ElementFinder elementFinder = containsSubstringAttributeCondition.toElementFinder(previous);
         // then
-        assertThat(elementFinder.getCssFinder().toString(), is("[attribute*='stringToContain']"));
+        assertThat(elementFinder.toCssString(), is("[attribute*='stringToContain']"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
 
         String attrName = "@*[translate(name(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'attribute']";

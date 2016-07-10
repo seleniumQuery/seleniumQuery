@@ -36,7 +36,7 @@ public class SQCssDirectDescendantSelectorTest {
         // when
         ElementFinder elementFinder = directDescendantSelector.toElementFinder(createWebDriverDummy());
         // then
-        assertThat(elementFinder.getCssFinder().toString(), is("a>b"));
+        assertThat(elementFinder.toCssString(), is("a>b"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
         assertThat(elementFinder.getXPathExpression(), is(".//*[self::a]/*[self::b]"));
         assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());

@@ -33,7 +33,7 @@ public class SQCssTagNameSelectorTest {
         // when
         ElementFinder elementFinder = tagNameSelector.toElementFinder(createWebDriverDummy());
         // then
-        assertThat(elementFinder.getCssFinder().toString(), is("myTag"));
+        assertThat(elementFinder.toCssString(), is("myTag"));
         assertThat(elementFinder.canFetchThroughCssAlone(), is(true));
         assertThat(elementFinder.getXPathExpression(), is(".//*[self::myTag]"));
         assertThat(elementFinder.getElementFilterList().getElementFilters(), empty());
