@@ -31,7 +31,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
     public void getArgument() throws Exception {
         PseudoClassSelector pseudoClassSelector = PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector("1");
         SQCssFunctionalPseudoClassCondition functionalPseudoClassCondition = new SQCssFunctionalPseudoClassCondition(pseudoClassSelector);
-        String argument = functionalPseudoClassCondition.getArgument();
+        String argument = functionalPseudoClassCondition.getArgument().getArgumentAsString();
         assertThat(argument, is("1"));
     }
 

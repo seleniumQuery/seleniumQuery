@@ -20,16 +20,16 @@ import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 
 public class SQCssFunctionalPseudoClassCondition extends SQCssPseudoClassCondition {
 
-    private PseudoClass pseudoClassSelector;
-    private String argument;
+    private final PseudoClass pseudoClassSelector;
+    private SqCssFunctionalPseudoClassArgument argument;
 
     public SQCssFunctionalPseudoClassCondition(PseudoClass pseudoClassSelector) {
         this.pseudoClassSelector = pseudoClassSelector;
     }
 
-    public String getArgument() {
+    public SqCssFunctionalPseudoClassArgument getArgument() {
         if (this.argument == null) {
-            this.argument = pseudoClassSelector.getPseudoClassContent();
+            this.argument = new SqCssFunctionalPseudoClassArgument(pseudoClassSelector.getPseudoClassContent());
         }
         return argument;
     }

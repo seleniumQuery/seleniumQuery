@@ -38,7 +38,7 @@ public abstract class SQCssFunctionalIndexArgumentPseudoClassCondition extends S
     }
 
     protected int getArgumentAsIndex() {
-        String eqPseudoClassArgument = getArgument();
+        String eqPseudoClassArgument = getArgument().getArgumentAsString();
         Matcher m = INDEX_REGEX.matcher(eqPseudoClassArgument);
         boolean isArgumentAnInteger = m.find();
         if (!isArgumentAnInteger) {
