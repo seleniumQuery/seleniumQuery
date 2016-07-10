@@ -2,6 +2,21 @@
 
 General notes about the project, including found external issues/bugs, wanted features and TODOs.
 
+# CI Jobs
+
+- Travis (3 jobs)
+    - OpenJDK8 @ linux: HtmlUnit + PhantomJS
+    - Oracle JDK7 @ linux: HtmlUnit + PhantomJS
+    - OpenJDK7 @ linux: HtmlUnit + PhantomJS
+- Appveyor
+    - Runs at Windows
+- Codeship
+    - If commit contains `[run sauce]`, it will run e2e tests for all remote (SauceLabs') drivers.
+- Wercker
+- CircleCI
+- Drone.io
+
+
 # Issues/bugs related to other drives
 
 This files lists **unresolved** bugs or issues related to the drivers of Selenium. Stuff that is outside the scope of seleniumQuery, that we can't have workarounds for.
