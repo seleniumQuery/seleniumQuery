@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2016 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,12 +74,12 @@ public class SQCssNotPseudoClassTest {
      *
      * The tests just expect that an exception is thrown, letting the user know that is not
      * a supported selector.
-     * If this was the final expected behavior, these tests could be much simpler, of course. I just
+     * If throwing an exception was the final expected behavior, these tests could be much simpler, of course. I just
      * left them like this because I expect to get back to them as soon as possible.
      */
 
     @Test(expected = io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException.class)
-    public void toElementFinder__when_driver_has_native_support_BUT_inner_css_CANT_be_separated() {
+    public void toElementFinder__not_and_general_ancestor() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
                 new SQCssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3 h4")), // :not(h3 h4)
