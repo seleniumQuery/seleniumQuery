@@ -24,9 +24,9 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssPasswordPseudoClassTest {
 
-    public static final String PASSWORD_PSEUDO = ":password";
-    public static final String PASSWORD_CSS_SELECTOR = "input[type=\"password\"]";
-    public static final String PASSWORD_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'password')" + "]";
+    private static final String PASSWORD_PSEUDO = ":password";
+    private static final String PASSWORD_CSS_SELECTOR = "input[type=\"password\"]";
+    private static final String PASSWORD_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'password')" + "]";
 
     @Test
     public void translate() {

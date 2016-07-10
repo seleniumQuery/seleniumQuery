@@ -23,8 +23,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssInputPseudoClassTest {
 
-    public static final String INPUT_PSEUDO = ":input";
-    public static final String INPUT_XPATH_EXPRESSION = ".//*[(self::input or self::button or self::select or self::textarea)]";
+    private static final String INPUT_PSEUDO = ":input";
+    private static final String INPUT_XPATH_EXPRESSION = ".//*[(self::input or self::button or self::select or self::textarea)]";
 
     @Test
     public void translate() {

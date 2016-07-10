@@ -24,9 +24,9 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssFilePseudoClassTest {
 
-    public static final String FILE_PSEUDO = ":file";
-    public static final String FILE_CSS_SELECTOR = "input[type=\"file\"]";
-    public static final String FILE_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'file')" + "]";
+    private static final String FILE_PSEUDO = ":file";
+    private static final String FILE_CSS_SELECTOR = "input[type=\"file\"]";
+    private static final String FILE_XPATH_EXPRESSION = ".//*[" + "(self::input and " + TYPE_ATTR_LOWER_CASE + " = 'file')" + "]";
 
     @Test
     public void translate() {

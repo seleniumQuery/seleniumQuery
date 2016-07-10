@@ -30,8 +30,8 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class SQCssCheckedPseudoClassTest {
 
-    public static final String CHECKED_PSEUDO = ":checked";
-    public static final String CHECKED_XPATH_EXPRESSION = ".//*[" +
+    private static final String CHECKED_PSEUDO = ":checked";
+    private static final String CHECKED_XPATH_EXPRESSION = ".//*[" +
             "((self::input and ("+ TYPE_ATTR_LOWER_CASE+" = 'radio' or "+TYPE_ATTR_LOWER_CASE+" = 'checkbox')) or self::option)" +
             "]";
 

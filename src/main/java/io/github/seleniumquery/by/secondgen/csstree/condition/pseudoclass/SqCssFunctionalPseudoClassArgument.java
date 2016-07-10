@@ -2,7 +2,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
 public class SqCssFunctionalPseudoClassArgument {
 
-
     private final String argument;
 
     public SqCssFunctionalPseudoClassArgument(String argument) {

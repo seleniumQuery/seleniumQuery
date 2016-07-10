@@ -24,8 +24,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssResetPseudoClassTest {
 
-    public static final String RESET_PSEUDO = ":reset";
-    public static final String RESET_XPATH_EXPRESSION = ".//*[" + "((self::input or self::button) and " + TYPE_ATTR_LOWER_CASE + " = 'reset')" + "]";
+    private static final String RESET_PSEUDO = ":reset";
+    private static final String RESET_XPATH_EXPRESSION = ".//*[" + "((self::input or self::button) and " + TYPE_ATTR_LOWER_CASE + " = 'reset')" + "]";
 
     @Test
     public void translate() {
