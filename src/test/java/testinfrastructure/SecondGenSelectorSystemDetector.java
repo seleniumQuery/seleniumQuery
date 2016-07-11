@@ -4,6 +4,10 @@ import io.github.seleniumquery.by.SeleniumQueryBy;
 
 import java.lang.reflect.Field;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 /**
@@ -16,22 +20,25 @@ import static org.junit.Assert.fail;
  *
  * At the same time, this code can't depend on the secondgen class at the compilation level, because we
  * delete them when releasing.
+ *
+ *
+Usage:
+
+ try {
+   assertThat($("div:file").size(), is(0));
+   assertThat($("span:file").size(), is(0));
+
+   SecondGenSelectorSystemDetector.failIfSecondGenSelectorSystem();
+ } catch (java.lang.IllegalArgumentException e) {
+   SecondGenSelectorSystemDetector.failIfFirstGenSelectorSystem(e);
+ }
+
+ *
+ *
  */
 public class SecondGenSelectorSystemDetector {
 
     private static final Boolean isSecondGenSelectorSystem = figureOutIfItsSecondGenSelectorSystem();
-
-    public static void failIfSecondGenSelectorSystem() {
-        if (isSecondGenSelectorSystem) {
-            fail();
-        }
-    }
-
-    public static void failIfFirstGenSelectorSystem(IllegalArgumentException e) {
-        if (!isSecondGenSelectorSystem) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private static boolean figureOutIfItsSecondGenSelectorSystem() {
         try {
@@ -41,6 +48,33 @@ public class SecondGenSelectorSystemDetector {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static void failIfSecondGenSelectorSystem() {
+        if (isSecondGenSelectorSystem) {
+            fail();
+        }
+    }
+
+    private static void failIfFirstGenSelectorSystem(IllegalArgumentException e) {
+        if (!isSecondGenSelectorSystem) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void assertEmptyOn1stGenAndThrowsExceptionOn2ndGen(String selector) {
+        try {
+            assertThat($(selector).size(), is(0));
+            SecondGenSelectorSystemDetector.failIfSecondGenSelectorSystem();
+        } catch (java.lang.IllegalArgumentException e) {
+            SecondGenSelectorSystemDetector.failIfFirstGenSelectorSystem(e);
+        }
+    }
+
+    public static void assertPseudoOnDivAndSpanIsEmptyOn1stGenAndThrowsExceptionOn2ndGen(String pseudoClass) {
+        assertThat("The pseudo should start with :", pseudoClass, startsWith(":"));
+        SecondGenSelectorSystemDetector.assertEmptyOn1stGenAndThrowsExceptionOn2ndGen("div"+pseudoClass);
+        SecondGenSelectorSystemDetector.assertEmptyOn1stGenAndThrowsExceptionOn2ndGen("span"+pseudoClass);
     }
 
 }
