@@ -48,14 +48,7 @@ public class FilePseudoClassTest {
 
     @Test
     public void invalid_filePseudoClass() {
-        try {
-            assertThat($("div:file").size(), is(0));
-            assertThat($("span:file").size(), is(0));
-
-            SecondGenSelectorSystemDetector.failIfSecondGenSelectorSystem();
-        } catch (java.lang.IllegalArgumentException e) {
-            SecondGenSelectorSystemDetector.failIfFirstGenSelectorSystem(e);
-        }
+        SecondGenSelectorSystemDetector.assertPseudoOnDivAndSpanIsEmptyOn1stGenAndThrowsExceptionOn2ndGen(":file");
     }
 
 }
