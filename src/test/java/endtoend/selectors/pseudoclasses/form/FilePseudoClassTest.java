@@ -19,6 +19,7 @@ package endtoend.selectors.pseudoclasses.form;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.SecondGenSelectorSystemDetector;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -35,8 +36,6 @@ public class FilePseudoClassTest {
 		assertThat($(":file").size(), is(1));
 		assertThat($("*:file").size(), is(1));
 		assertThat($("input:file").size(), is(1));
-		assertThat($("div:file").size(), is(0));
-		assertThat($("span:file").size(), is(0));
 
 		assertThat($("#i1").is(":file"), is(true));
 		assertThat($("#i1").is("*:file"), is(true));
@@ -46,5 +45,17 @@ public class FilePseudoClassTest {
 		assertThat($("#i3").is(":file"), is(false));
 		assertThat($("#i4").is(":file"), is(false));
 	}
+
+    @Test
+    public void invalid_filePseudoClass() {
+        try {
+            assertThat($("div:file").size(), is(0));
+            assertThat($("span:file").size(), is(0));
+
+            SecondGenSelectorSystemDetector.failIfSecondGenSelectorSystem();
+        } catch (java.lang.IllegalArgumentException e) {
+            SecondGenSelectorSystemDetector.failIfFirstGenSelectorSystem(e);
+        }
+    }
 
 }
