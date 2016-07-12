@@ -20,7 +20,10 @@ public class CheckboxPseudoClassTest {
 		assertThat($(":checkbox").size(), is(1));
 		assertThat($("*:checkbox").size(), is(1));
 		assertThat($("input:checkbox").size(), is(1));
+    }
 
+    @Test
+    public void checkboxPseudoClass_is() {
 		assertThat($("#i1").is(":checkbox"), is(true));
 		assertThat($("#i1").is("*:checkbox"), is(true));
 		assertThat($("#i1").is("input:checkbox"), is(true));

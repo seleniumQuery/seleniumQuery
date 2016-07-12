@@ -36,7 +36,10 @@ public class FilePseudoClassTest {
 		assertThat($(":file").size(), is(1));
 		assertThat($("*:file").size(), is(1));
 		assertThat($("input:file").size(), is(1));
+    }
 
+    @Test
+    public void filePseudoClass_is() {
 		assertThat($("#i1").is(":file"), is(true));
 		assertThat($("#i1").is("*:file"), is(true));
 		assertThat($("#i1").is("input:file"), is(true));

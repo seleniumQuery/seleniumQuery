@@ -39,7 +39,10 @@ public class SubmitPseudoClassTest {
 		assertThat($("input:submit").size(), is(2));
 		assertThat($("div:submit").size(), is(0));
 		assertThat($("span:submit").size(), is(0));
+    }
 
+    @Test
+    public void submitPseudoClass_is() {
 		assertThat($("#i1").is(":submit"), is(true));
 		assertThat($("#i1").is("*:submit"), is(true));
 		assertThat($("#i1").is("input:submit"), is(true));
@@ -54,7 +57,7 @@ public class SubmitPseudoClassTest {
 
 		assertThat($("#b2").is(":submit"), is(true));
 		assertThat($("#b2").is("[type='submit']"), is(true));
-		
+
 		assertThat($(".clz:submit").size(), is(1));
 		assertThat($("#i1c").is(".clz:submit"), is(true));
 	}
