@@ -24,9 +24,9 @@ import org.hamcrest.Matcher;
 import java.util.List;
 
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.*;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -49,9 +49,9 @@ public class PseudoClassAssertFinderUtils {
         // when
         ElementFinder elementFinder = pseudoClassObject.toElementFinder(previous);
         // then
-        assertThat("CSS selector", elementFinder.toCssString(), is(expectedCss));
-        assertThat("Can pure CSS?", elementFinder.canFetchThroughCssAlone(), is(canPureCss));
-        assertThat("XPath Expression", elementFinder.getXPathExpression(), is(expectedXPath));
+        assertEquals("CSS selector", expectedCss, elementFinder.toCssString());
+        assertEquals("Can pure CSS?", canPureCss, elementFinder.canFetchThroughCssAlone());
+        assertEquals("XPath Expression", expectedXPath, elementFinder.getXPathExpression());
         assertThat("ElementFilterList", elementFinder.getElementFilterList().getElementFilters(), elementFilterMatcher);
     }
 
