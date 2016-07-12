@@ -19,6 +19,7 @@ package endtoend.selectors.pseudoclasses.form;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.SecondGenSelectorSystemDetector;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -31,13 +32,14 @@ public class PasswordPseudoClassTest {
 
 	@Test
 	public void passwordPseudoClass() {
-		assertThat($("[type='password']").size(), is(4));
-		assertThat($(":password").size(), is(1));
-		assertThat($("*:password").size(), is(1));
-		assertThat($("input:password").size(), is(1));
-		assertThat($("div:password").size(), is(0));
-		assertThat($("span:password").size(), is(0));
+        assertThat($("[type='password']").size(), is(4));
+        assertThat($(":password").size(), is(1));
+        assertThat($("*:password").size(), is(1));
+        assertThat($("input:password").size(), is(1));
+    }
 
+    @Test
+    public void passwordPseudoClass_is() {
 		assertThat($("#i1").is(":password"), is(true));
 		assertThat($("#i1").is("*:password"), is(true));
 		assertThat($("#i1").is("input:password"), is(true));
@@ -46,5 +48,10 @@ public class PasswordPseudoClassTest {
 		assertThat($("#i3").is(":password"), is(false));
 		assertThat($("#i4").is(":password"), is(false));
 	}
+
+    @Test
+    public void passwordPseudoClass__invalid() {
+        SecondGenSelectorSystemDetector.assertPseudoOnDivAndSpanIsEmptyOn1stGenAndThrowsExceptionOn2ndGen(":password");
+    }
 
 }
