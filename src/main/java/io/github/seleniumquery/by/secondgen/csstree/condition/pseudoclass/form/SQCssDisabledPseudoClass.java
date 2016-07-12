@@ -34,9 +34,9 @@ import org.openqa.selenium.WebDriver;
 public class SQCssDisabledPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "disabled";
-    public static final String DISABLED_PSEUDO = ":" + PSEUDO;
+    private static final String DISABLED_PSEUDO = ":" + PSEUDO;
 
-    public MaybeNativelySupportedPseudoClass disabledPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
+    private MaybeNativelySupportedPseudoClass disabledPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
         @Override
         public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
             return new CssFinder(DISABLED_PSEUDO);
@@ -44,7 +44,7 @@ public class SQCssDisabledPseudoClass extends SQCssPseudoClassCondition {
 
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath("(@disabled and " + DisabledPseudoClass.DISABLEABLE_TAGS_XPATH + ")");
+            return XPathAndFilterFinder.pureXPath(DisabledPseudoClass.DISABLED_XPATH_CONDITION);
         }
     };
 

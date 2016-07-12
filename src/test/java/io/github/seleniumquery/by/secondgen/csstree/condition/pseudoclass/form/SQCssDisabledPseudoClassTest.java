@@ -24,10 +24,12 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 public class SQCssDisabledPseudoClassTest {
 
-    public static final String DISABLED_PSEUDO = ":disabled";
-    public static final String DISABLED_XPATH_EXPRESSION = ".//*[(" +
-            "@disabled and (self::input or self::button or self::optgroup or self::option or self::select or self::textarea)" +
-            ")]";
+    private static final String DISABLED_PSEUDO = ":disabled";
+    private static final String DISABLED_XPATH_EXPRESSION = ".//*[(" +
+            "(@disabled and (self::input or self::button or self::optgroup or self::option or self::select or self::textarea))" +
+            " or " +
+            "(self::option and ancestor::optgroup[@disabled])" +
+        ")]";
 
     @Test
     public void translate() {
