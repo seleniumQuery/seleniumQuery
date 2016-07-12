@@ -29,7 +29,11 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
  * Currently, it is implemented as never natively supported.
  * In the future we can try to chain to tag seletctor using not+not. Something like:
  *
- * .clazz:button --> (input[type=button],button).clazz {invalid} --> .clazz:not(:not(input[type=button]):not(button))
+ * .clazz:button
+ * that becomes 
+ * (input[type=button],button).clazz
+ * which is INVALID, that becomes
+ * .clazz:not(:not(input[type=button]):not(button))
  *
  * @author acdcjunior
  * @since 0.10.0
