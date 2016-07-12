@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:enabled
- * 
+ *
  * #Cross-Driver
  * HtmlUnitDriver has problems with :enabled, so we consider it can never be handler by the browser
  * by "problems" we mean it is inconsistent, changing depending on what browser it is attempting to emulate.
@@ -36,24 +36,24 @@ import java.util.List;
  * @since 0.9.0
  */
 public class EnabledPseudoClass implements PseudoClass<ConditionSimpleComponent> {
-	
+
 	private static final String ENABLED_PSEUDO_CLASS_NO_COLON = "enabled";
-	
+
 	private static final String OPTGROUP_TAG = "optgroup";
 	private static final String OPTION_TAG = "option";
-	protected static final List<String> ENABLEABLE_TAGS = DisabledPseudoClass.DISABLEABLE_TAGS;
-	
+	private static final List<String> ENABLEABLE_TAGS = DisabledPseudoClass.DISABLEABLE_TAGS;
+
 	public static final String ENABLED_XPATH = "(" +
             DisabledPseudoClass.DISABLEABLE_TAGS_XPATH +
         " and " +
-		    "not("+ DisabledPseudoClass.DISABLED_XPATH_CONDITION+")" +
+            "not(" + DisabledPseudoClass.DISABLED_XPATH_CONDITION + ")" +
         ")";
-	
+
 	@Override
 	public boolean isApplicable(String pseudoClassValue) {
 		return ENABLED_PSEUDO_CLASS_NO_COLON.equals(pseudoClassValue);
 	}
-	
+
 	@Override
 	public boolean isPseudoClass(WebDriver driver, WebElement element, PseudoClassSelector pseudoClassSelector) {
 		// #Cross-Driver
@@ -68,11 +68,11 @@ public class EnabledPseudoClass implements PseudoClass<ConditionSimpleComponent>
 		}
 		return element.isEnabled() && ENABLEABLE_TAGS.contains(element.getTagName());
 	}
-	
-	
+
+
 	@Override
 	public ConditionSimpleComponent pseudoClassToXPath(PseudoClassSelector pseudoClassSelector) {
 		return new ConditionSimpleComponent("[" + ENABLED_XPATH + "]");
 	}
-	
+
 }
