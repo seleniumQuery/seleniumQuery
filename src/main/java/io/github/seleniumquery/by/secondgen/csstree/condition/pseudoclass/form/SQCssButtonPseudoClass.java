@@ -26,6 +26,11 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
 /**
  * :button
  *
+ * Currently, it is implemented as never natively supported.
+ * In the future we can try to chain to tag seletctor using not+not. Something like:
+ *
+ * .clazz:button --> (input[type=button],button).clazz {invalid} --> .clazz:not(:not(input[type=button]):not(button))
+ *
  * @author acdcjunior
  * @since 0.10.0
  */
@@ -33,7 +38,7 @@ public class SQCssButtonPseudoClass extends SQCssPseudoClassCondition {
 
     public static final String PSEUDO = "button";
 
-    public NeverNativelySupportedPseudoClass buttonPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
+    private NeverNativelySupportedPseudoClass buttonPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             return XPathAndFilterFinder.pureXPath("((self::input and " + TYPE_ATTR_LC_VAL + " = 'button') or self::button)");

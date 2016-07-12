@@ -19,7 +19,6 @@ package endtoend.selectors.pseudoclasses.form;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import testinfrastructure.SecondGenSelectorSystemDetector;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -38,9 +37,11 @@ public class ButtonPseudoClassTest {
 		assertThat($("*:button").size(), is(5));
 		assertThat($("input:button").size(), is(1));
 	}
+
 	@Test
-	public void buttonPseudoClass_invalid() {
-        SecondGenSelectorSystemDetector.assertPseudoOnDivAndSpanIsEmptyOn1stGenAndThrowsExceptionOn2ndGen(":button");
+	public void buttonPseudoClass_empty() {
+		assertThat($("div:button").size(), is(0));
+		assertThat($("span:button").size(), is(0));
 	}
 
 	@Test
