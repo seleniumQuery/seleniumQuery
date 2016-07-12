@@ -49,7 +49,7 @@ public class EnabledPseudoClassTest {
 	}
 
 	@Test
-	public void enabledPseudo_with_class() {
+	public void enabledPseudo___with_class_and_not() {
 		assertThat($(".c").size(), is(3));
 		assertThat($(".c:enabled").size(), is(1));
 		assertThat($(".c:not(:enabled)").size(), is(2));
