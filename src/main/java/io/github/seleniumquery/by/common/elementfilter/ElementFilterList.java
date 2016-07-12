@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.common.elementfilter;
 
+import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.by.firstgen.FirstGenEnhancedElementFinder;
 import io.github.seleniumquery.utils.SelectorUtils;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -48,7 +50,7 @@ public class ElementFilterList {
     };
 
 	private List<ElementFilter> elementFilters;
-	
+
 	public ElementFilterList(ElementFilter... filters) {
 		this(asList(filters));
 	}
@@ -56,7 +58,7 @@ public class ElementFilterList {
 	public ElementFilterList(List<ElementFilter> elementFilters) {
 		this.elementFilters = Collections.unmodifiableList(elementFilters);
 	}
-	
+
 
     public static ElementFilterList asFilterList(ElementFilter... filters) {
         return new ElementFilterList(asList(filters));
@@ -68,7 +70,7 @@ public class ElementFilterList {
 	}
 
 	public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
-		if (!this.elementFilters.isEmpty()) {
+		if (!this.elementFilters.isEmpty() && SeleniumQueryBy.ELEMENT_FINDER instanceof FirstGenEnhancedElementFinder) {
             // TODO we are currently disabling the filter support -- we will only take it back when the system is stable
 			throw new UnsupportedOperationException("The current selector is not yet supported. Please try a simpler one.");
 		}
