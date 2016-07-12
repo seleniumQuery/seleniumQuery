@@ -18,9 +18,9 @@ package endtoend.selectors.pseudoclasses.form;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.SecondGenSelectorSystemDetector;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -34,6 +34,7 @@ public class SelectedPseudoClassTest {
 
     @Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
     public void selected_directly() {
+        SecondGenSelectorSystemDetector.assumeFirstGenSelectorSystem();
         $(":selected");
     }
 
@@ -49,8 +50,8 @@ public class SelectedPseudoClassTest {
     }
 
     @Test
-	@Ignore("Issue#86")
 	public void selectedPseudoClass__directly() {
+        SecondGenSelectorSystemDetector.assumeSecondGenSelectorSystem();
 		t(":selected pseudo should not work on checkboxes", "input[type=checkbox]:selected").negative("input[type=checkbox]", "chk1", "chk2");
 		t(":selected pseudo should not work on radios", "input[type=radio]:selected").negative("input[type=radio]", "rad1", "rad2");
 		t(":selected pseudo should not work on inputs", "input[type=checkbox]:selected").negative("input", 4);
@@ -58,5 +59,5 @@ public class SelectedPseudoClassTest {
 
 		t(":checked pseudo should return all selected <option>s plus the two selected <input>s", ":checked", "opt1", "opt3", "opt4", "chk1", "rad1", "s1o1").negative("option,input", 13);
 	}
-	
+
 }
