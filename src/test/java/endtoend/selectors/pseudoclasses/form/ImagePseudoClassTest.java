@@ -19,6 +19,7 @@ package endtoend.selectors.pseudoclasses.form;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.SecondGenSelectorSystemDetector;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -35,8 +36,6 @@ public class ImagePseudoClassTest {
 		assertThat($(":image").size(), is(1));
 		assertThat($("*:image").size(), is(1));
 		assertThat($("input:image").size(), is(1));
-		assertThat($("div:image").size(), is(0));
-		assertThat($("span:image").size(), is(0));
 	}
 
     @Test
@@ -49,5 +48,10 @@ public class ImagePseudoClassTest {
 		assertThat($("#i3").is(":image"), is(false));
 		assertThat($("#i4").is(":image"), is(false));
 	}
+
+    @Test
+    public void imagePseudoClass__invalid() {
+        SecondGenSelectorSystemDetector.assertPseudoOnDivAndSpanIsEmptyOn1stGenAndThrowsExceptionOn2ndGen(":image");
+    }
 
 }

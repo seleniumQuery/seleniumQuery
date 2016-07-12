@@ -19,6 +19,7 @@ package endtoend.selectors.pseudoclasses.form;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.SecondGenSelectorSystemDetector;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -28,17 +29,18 @@ import static org.junit.Assert.assertThat;
 public class RadioPseudoClassTest {
 
 	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	
+
 	@Test
 	public void radioPseudoClass() {
 		assertThat($("[type='radio']").size(), is(4));
 		assertThat($(":radio").size(), is(1));
 		assertThat($("*:radio").size(), is(1));
 		assertThat($("input:radio").size(), is(1));
-		assertThat($("div:radio").size(), is(0));
-		assertThat($("span:radio").size(), is(0));
+    }
 
-		assertThat($("#i1").is(":radio"), is(true));
+    @Test
+    public void radioPseudoClass_is() {
+        assertThat($("#i1").is(":radio"), is(true));
 		assertThat($("#i1").is("*:radio"), is(true));
 		assertThat($("#i1").is("input:radio"), is(true));
 
@@ -46,5 +48,10 @@ public class RadioPseudoClassTest {
 		assertThat($("#i3").is(":radio"), is(false));
 		assertThat($("#i4").is(":radio"), is(false));
 	}
-	
+
+    @Test
+    public void radioPseudoClass__invalid() {
+        SecondGenSelectorSystemDetector.assertPseudoOnDivAndSpanIsEmptyOn1stGenAndThrowsExceptionOn2ndGen(":radio");
+    }
+
 }
