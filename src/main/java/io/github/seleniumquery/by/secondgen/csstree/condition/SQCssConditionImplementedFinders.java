@@ -29,8 +29,15 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
  * @deprecated temporary
  */
 @Deprecated
-public interface SQCssConditionImplementedFinders {
+public interface SQCssConditionImplementedFinders extends SQCssCondition {
 
+    /**
+     * We have to document this better!
+     *
+     * This method turns a CSS Condition into an {@link ElementFinder}.
+     *
+     * The above is obvious... but why "LEFT" finder as argument??
+     */
     ElementFinder toElementFinder(ElementFinder leftFinder);
 
 }

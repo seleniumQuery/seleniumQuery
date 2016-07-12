@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition;
 
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+
 /**
  * Chains conditions.
  * Example:
@@ -26,7 +28,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssAndCondition implements SQCssCondition, SQCssConditionImplementedNotYet {
+public class SQCssAndCondition implements SQCssCondition, SQCssConditionImplementedFinders {
 
     private SQCssCondition firstCondition;
     private SQCssCondition secondCondition;
@@ -42,6 +44,15 @@ public class SQCssAndCondition implements SQCssCondition, SQCssConditionImplemen
 
     public SQCssCondition getSecondCondition() {
         return secondCondition;
+    }
+
+    @Override
+    public ElementFinder toElementFinder(ElementFinder leftFinder) {
+        SQCssConditionImplementedFinders firstCondition = (SQCssConditionImplementedFinders) this.firstCondition;
+        SQCssConditionImplementedFinders secondCondition = (SQCssConditionImplementedFinders) this.secondCondition;
+
+        ElementFinder elementFinder = firstCondition.toElementFinder(leftFinder);
+        return secondCondition.toElementFinder(elementFinder);
     }
 
 }
