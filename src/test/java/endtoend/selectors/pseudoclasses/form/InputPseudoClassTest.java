@@ -28,7 +28,7 @@ import static org.junit.Assert.assertThat;
 public class InputPseudoClassTest {
 
 	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	
+
 	// http://jsbin.com/nuhefeqi/1/edit
 	@Test
 	public void inputPseudoClass() {
@@ -45,7 +45,10 @@ public class InputPseudoClassTest {
 
 		assertThat($("div:input").size(), is(0));
 		assertThat($("span:input").size(), is(0));
+    }
 
+    @Test
+    public void inputPseudoClass_is() {
 		assertThat($("#i1").is(":input"), is(true));
 		assertThat($("#i1").is("*:input"), is(true));
 		assertThat($("#i1").is("input:input"), is(true));
@@ -55,5 +58,5 @@ public class InputPseudoClassTest {
 
 		assertThat($("#b1").is(":input"), is(true));
 	}
-	
+
 }

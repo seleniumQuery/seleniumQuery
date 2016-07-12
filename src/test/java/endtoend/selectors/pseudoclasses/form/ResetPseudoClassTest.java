@@ -28,7 +28,7 @@ import static org.junit.Assert.assertThat;
 public class ResetPseudoClassTest {
 
 	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	
+
 	// http://jsbin.com/kecoruga/1/edit
 	@Test
 	public void resetPseudoClass() {
@@ -38,7 +38,10 @@ public class ResetPseudoClassTest {
 		assertThat($("input:reset").size(), is(1));
 		assertThat($("div:reset").size(), is(0));
 		assertThat($("span:reset").size(), is(0));
+    }
 
+    @Test
+    public void resetPseudoClass_is() {
 		assertThat($("#i1").is(":reset"), is(true));
 		assertThat($("#i1").is("*:reset"), is(true));
 		assertThat($("#i1").is("input:reset"), is(true));
@@ -52,5 +55,5 @@ public class ResetPseudoClassTest {
 		assertThat($("#b2").is(":reset"), is(true));
 		assertThat($("#b2").is("[type='reset']"), is(true));
 	}
-	
+
 }
