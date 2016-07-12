@@ -33,7 +33,7 @@ import static org.junit.Assert.assertThat;
 
 public class AndConditionalCssSelectorTest {
 
-    AndConditionalCssSelector andConditionalCssSelector = new AndConditionalCssSelector(new ConditionalCssSelector());
+    private AndConditionalCssSelector andConditionalCssSelector = new AndConditionalCssSelector(new ConditionalCssSelector());
 
     @Test
     public void testConditionToXPath() {
@@ -41,12 +41,10 @@ public class AndConditionalCssSelectorTest {
         SelectorList selectorList = cssParsedSelectorList.getSelectorList();
         ConditionalSelector selector = (ConditionalSelector) selectorList.item(0);
 
-//        XPathComponent cs = conditionalCssSelector.toXPath(cssParsedSelectorList.getArgumentMap(), selector);
         ArgumentMap argumentMap = cssParsedSelectorList.getArgumentMap();
         SimpleSelector simpleSelector = selector.getSimpleSelector();
         TagComponent spanTagComponent = XPathComponentCompilerService.compileSelector(argumentMap, simpleSelector);
 
-//        XPathComponent compiledCondition = conditionalCssSelector.conditionToXPath(argumentMap, selector.getSimpleSelector(), selector.getCondition());
         CombinatorCondition combinatorCondition = (CombinatorCondition) selector.getCondition();
         ConditionComponent compiledCondition = andConditionalCssSelector.conditionToXPath(argumentMap, simpleSelector, combinatorCondition);
 
