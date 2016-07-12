@@ -38,10 +38,13 @@ public class TestClassSession {
         }
     }
 
-    public void recordFailure(Throwable t) {
-        recordFailureReason(t);
+    public void recordFailure(Throwable testFailureException) {
+        if (testFailureException instanceof org.junit.AssumptionViolatedException) {
+            return;
+        }
+        recordFailureReason(testFailureException);
         failedDrivers.add(this.currentDriverDescription);
-        log("@######### %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FAILED on "+this.currentDriverDescription +"! -> "+t.getMessage());
+        log("@######### %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FAILED on "+this.currentDriverDescription +"! -> "+testFailureException.getMessage());
     }
 
     private void recordFailureReason(Throwable t) {
