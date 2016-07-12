@@ -27,18 +27,18 @@ import java.util.regex.Pattern;
 /**
  * This By is a combination of the By.xpath and By.css, where the CSS3, XPath, jQuery/Sizzle and others
  * selectors are supported.
- * 
+ *
  * @author acdcjunior
  * @since 0.9.0
  */
 public class SeleniumQueryBy extends By {
 
-    private static final EnhancedElementFinder ELEMENT_FINDER = new FirstGenEnhancedElementFinder();
+    public static final EnhancedElementFinder ELEMENT_FINDER = new FirstGenEnhancedElementFinder();
 
 	private static final String STARTING_BRACES = "(\\s*\\(\\s*)*";
 	private static final String XPATH_AXES = "ancestor|ancestor-or-self|attribute|child|descendant|descendant-or-self|following|following-sibling|parent|preceding|preceding-sibling|self";
 	private static final Pattern XPATH_EXPRESSION_PATTERN = Pattern.compile(STARTING_BRACES + "(/|(" + XPATH_AXES + ")::).*");
-	
+
 	private final String selector;
 
 	/**
@@ -54,7 +54,6 @@ public class SeleniumQueryBy extends By {
 		return new SeleniumQueryBy(selector);
 	}
 
-	
 	/**
 	 * Constructs a SeleniumQueryBy for the given selector.
 	 * @param selector the selector you need the elements to match.
@@ -65,8 +64,7 @@ public class SeleniumQueryBy extends By {
         }
 		this.selector = selector;
 	}
-	
-	
+
 	/**
 	 * Returns the list of elements that match this By in the given context.
 	 * @return the list of elements that match this By in the given context.
@@ -107,31 +105,20 @@ public class SeleniumQueryBy extends By {
 		return this.selector;
 	}
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + selector.hashCode();
+        return result;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((selector == null) ? 0 : selector.hashCode());
-		return result;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        SeleniumQueryBy that = (SeleniumQueryBy) o;
+        return selector.equals(that.selector);
+    }
 
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SeleniumQueryBy other = (SeleniumQueryBy) obj;
-		if (selector == null) {
-			if (other.selector != null)
-				return false;
-		} else if (!selector.equals(other.selector))
-			return false;
-		return true;
-	}
-	
 }
