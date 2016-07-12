@@ -19,9 +19,9 @@ package endtoend.selectors.pseudoclasses.form;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import testinfrastructure.SecondGenSelectorSystemDetector;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -37,19 +37,20 @@ public class CheckedPseudoClassTest {
 
 	@Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
 	public void checked_pseudoClass__is_not_supported() {
+        SecondGenSelectorSystemDetector.assumeFirstGenSelectorSystem();
 		$(":checked");
 	}
 
 	@Test
-	@Ignore("Issue#94")
 	public void checkedPseudo() {
+        SecondGenSelectorSystemDetector.assumeSecondGenSelectorSystem();
 		assertThat($("*").size(), is(14+7+3+7));
 		assertThat($(":checked").size(), is(4+7+7));
 	}
 
 	@Test
-	@Ignore("Issue#94")
 	public void checkedPseudo_with_tag_option() {
+        SecondGenSelectorSystemDetector.assumeSecondGenSelectorSystem();
 		assertThat($("option:checked").size(), is(2));
 	}
 
@@ -59,31 +60,31 @@ public class CheckedPseudoClassTest {
 	}
 
 	@Test
-	@Ignore("Issue#94")
 	public void checkedPseudo_with_tag_input() {
+        SecondGenSelectorSystemDetector.assumeSecondGenSelectorSystem();
 		assertThat($("input:checked").size(), is(2+7+7));
 	}
 
 	@Test
-	@Ignore("Issue#94")
 	public void checkedPseudo_with_tag_input_checkbox() {
+        SecondGenSelectorSystemDetector.assumeSecondGenSelectorSystem();
 		assertThat($("input[type=checkbox]:checked").size(), is(1+7));
 	}
 
 	@Test
-	@Ignore("Issue#94")
 	public void checkedPseudo_with_tag_input_radio() {
+        SecondGenSelectorSystemDetector.assumeSecondGenSelectorSystem();
 		assertThat($("input[type=radio]:checked").size(), is(1+7));
 	}
 
     @Test
-	@Ignore("Issue#94")
-    public void  checked_selector_with_not() {
-    	assertThat($(":not(:checked)").size(), is(10+3));
+    public void checked_selector_with_not() {
+        SecondGenSelectorSystemDetector.assumeSecondGenSelectorSystem();
+    	assertThat($(":not(:checked)").size(), is(10+3)); // the number 13 is correct, in case you were wondering!!
     }
 
     @Test
-    public void  checked_selector_with_IS() {
+    public void checked_selector_with_IS() {
     	assertThat($("#chk1").is(":checked"), is(true));
     	assertThat($("#chk2").is(":checked"), is(false));
 
@@ -107,5 +108,5 @@ public class CheckedPseudoClassTest {
 		assertThat($cClass.size(), is(17));
 		assertThat($cClass.filter(":checked").size(), is(14));
 	}
-	
+
 }
