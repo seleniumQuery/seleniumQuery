@@ -1,6 +1,7 @@
 package testinfrastructure;
 
 import io.github.seleniumquery.by.SeleniumQueryBy;
+import org.junit.Assume;
 
 import java.lang.reflect.Field;
 
@@ -75,6 +76,14 @@ public class SecondGenSelectorSystemDetector {
         assertThat("The pseudo should start with :", pseudoClass, startsWith(":"));
         SecondGenSelectorSystemDetector.assertEmptyOn1stGenAndThrowsExceptionOn2ndGen("div"+pseudoClass);
         SecondGenSelectorSystemDetector.assertEmptyOn1stGenAndThrowsExceptionOn2ndGen("span"+pseudoClass);
+    }
+
+    public static void assumeFirstGenSelectorSystem() {
+        Assume.assumeFalse("This test only runs for the 1st-gen selector system", isSecondGenSelectorSystem);
+    }
+
+    public static void assumeSecondGenSelectorSystem() {
+        Assume.assumeTrue("This test only runs for the 2st-gen selector system", isSecondGenSelectorSystem);
     }
 
 }
