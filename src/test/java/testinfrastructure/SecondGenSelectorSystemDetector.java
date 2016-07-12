@@ -52,7 +52,7 @@ public class SecondGenSelectorSystemDetector {
 
     private static void failIfSecondGenSelectorSystem() {
         if (isSecondGenSelectorSystem) {
-            fail();
+            fail("This test should fail when the selector system is the 2nd Gen: it it less forgiving to malformed selectors!");
         }
     }
 
