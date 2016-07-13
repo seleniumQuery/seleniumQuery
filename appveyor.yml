@@ -34,6 +34,6 @@ test_script:
   - mvn clean test
 
 cache:
-  - C:\tools\PhantomJS\
-  - C:\tools\apache-maven-3.3.9\
+#  - C:\tools\PhantomJS\
+#  - C:\tools\apache-maven-3.3.9\
   - C:\Users\appveyor\.m2
