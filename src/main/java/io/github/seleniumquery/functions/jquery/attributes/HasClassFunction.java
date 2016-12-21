@@ -29,21 +29,12 @@ import java.util.List;
  * @since 0.9.0
  */
 public class HasClassFunction {
-	
+
 	private HasClassFunction() {}
-	
+
 	public static boolean hasClass(SeleniumQueryObject seleniumQueryObject, String className) {
 		List<WebElement> elements = seleniumQueryObject.get();
-		if (elements.isEmpty()) {
-			return false;
-		}
-		for (WebElement webElement : elements) {
-			boolean hasClass = hasClass(webElement, className);
-			if (hasClass) {
-				return true;
-			}
-		}
-		return false;
+        return elements.stream().anyMatch(e -> hasClass(e, className));
 	}
 
 	private static boolean hasClass(WebElement webElement, String className) {
@@ -54,5 +45,5 @@ public class HasClassFunction {
 		}
 		return Arrays.asList(classAttributeValue.split("\\s+")).contains(className);
 	}
-	
+
 }
