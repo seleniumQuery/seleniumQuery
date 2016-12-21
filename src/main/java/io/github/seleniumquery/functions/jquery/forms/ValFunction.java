@@ -169,7 +169,7 @@ public class ValFunction {
 				getElementMethod.setAccessible(true);
 
 				HtmlElement he = (HtmlElement) getElementMethod.invoke(element);
-				HTMLElement e = (HTMLElement) he.getScriptObject();
+				HTMLElement e = (HTMLElement) he.getScriptableObject();
 
 				e.setInnerText(value);
 			} catch (Exception e) {
