@@ -31,7 +31,7 @@
 		<jdk.version>1.8</jdk.version>
 
 		<selenium-java.version>3.0.0</selenium-java.version>
-        <htmlunit-driver.version>2.21</htmlunit-driver.version>
+        <htmlunit-driver.version>2.23</htmlunit-driver.version>
     </properties>
 
 	<dependencies>
