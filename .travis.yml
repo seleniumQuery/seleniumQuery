@@ -2,20 +2,14 @@ language: java
 install: mvn install -DskipTests=true
 jdk:
 - oraclejdk8
-- oraclejdk7
-- openjdk7
 before_install:
   - pip install --user codecov
 
-  # Code coverage for codecy
-  - curl -sL https://bndtools.ci.cloudbees.com/job/bnd.master/lastSuccessfulBuild/artifact/biz.aQute.jpm/generated/biz.aQute.jpm.run.jar >jpm4j.jar
-  - java -jar jpm4j.jar --user init
-  - ${HOME}/jpm/bin/jpm install com.codacy:codacy-coverage-reporter:assembly
-  #  - curl https://www.jpm4j.org/install/script | sh
-  #  - jpm install com.codacy:codacy-coverage-reporter:assembly
-after_success:
-  - codecov
+# Codacy - https://github.com/codacy/codacy-coverage-reporter#setup
+  - curl -sL https://github.com/jpm4j/jpm4j.installers/raw/master/dist/biz.aQute.jpm.run.jar >jpm4j.jar
+  - java -jar jpm4j.jar -u init
+  - ~/jpm/bin/jpm install com.codacy:codacy-coverage-reporter:assembly
 
-  # Code coverage for codecy
-  # - codacy-coverage-reporter -l Java -r coverage.xml
-  - ${HOME}/jpm/bin/codacy-coverage-reporter -l Java -r coverage.xml
+after_success:
+#  - codecov
+  - ~/jpm/bin/codacy-coverage-reporter -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
