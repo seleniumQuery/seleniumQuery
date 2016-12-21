@@ -4,9 +4,9 @@ shallow_clone: true
 
 environment:
   matrix:
-    - JAVA_HOME: C:\Program Files (x86)\Java\jdk1.7.0
+    #- JAVA_HOME: C:\Program Files (x86)\Java\jdk1.7.0
     #- JAVA_HOME: C:\Program Files\Java\jdk1.7.0
-    #- JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+    - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
 branches:
   only:
     - master
@@ -16,7 +16,7 @@ os: Visual Studio 2015
 install:
   - cinst PhantomJS -y -Version 2.1.1
   - set path=%path%;C:\tools\PhantomJS\
-  
+
   - ps: |
       Add-Type -AssemblyName System.IO.Compression.FileSystem
       if (!(Test-Path -Path "C:\maven" )) {
