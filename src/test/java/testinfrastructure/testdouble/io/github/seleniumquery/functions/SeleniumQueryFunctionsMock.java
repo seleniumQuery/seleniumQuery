@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,11 +16,12 @@
 
 package testinfrastructure.testdouble.io.github.seleniumquery.functions;
 
-import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.testdouble.PseudoTestDoubleException;
+
+import java.util.function.Predicate;
 
 public class SeleniumQueryFunctionsMock extends SeleniumQueryFunctions {
 

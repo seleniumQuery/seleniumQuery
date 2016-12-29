@@ -16,13 +16,13 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import testinfrastructure.testutils.FunctionsTestUtils;
+
+import java.util.function.Predicate;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
@@ -52,12 +52,7 @@ public class FilterPredicateFunctionTest {
 
     @Test
     public void resultSQO_should_have_targetSQO_as_previous_object__and_same_SQFunctions_as_targetSQO__and_same_WebDriver_as_targetSQO() {
-        FunctionsTestUtils.verifyFunctionReturnsSQOWithCorrectWebDriverAndFunctionsAndPrevious(new Function<SeleniumQueryObject, SeleniumQueryObject>() {
-            @Override
-            public SeleniumQueryObject apply(SeleniumQueryObject targetSQO) {
-                return filterPredicateFunction.filter(targetSQO, PREDICATE_DOES_NOT_MATTER_IN_THIS_TEST);
-            }
-        });
+        FunctionsTestUtils.verifyFunctionReturnsSQOWithCorrectWebDriverAndFunctionsAndPrevious(targetSQO -> filterPredicateFunction.filter(targetSQO, PREDICATE_DOES_NOT_MATTER_IN_THIS_TEST));
     }
 
     @Test
@@ -80,13 +75,7 @@ public class FilterPredicateFunctionTest {
 
         SeleniumQueryObject targetSQO = createStubSeleniumQueryObjectWithElements(spanOne, notSpan, spanTwo);
         // when
-        Predicate<WebElement> keepSpansPredicate = new Predicate<WebElement>() {
-            @Override
-            public boolean apply(WebElement webElement) {
-                return "span".equals(webElement.getTagName());
-            }
-        };
-        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, keepSpansPredicate);
+        SeleniumQueryObject resultSQO = filterPredicateFunction.filter(targetSQO, e -> "span".equals(e.getTagName()));
         // then
         assertThat(resultSQO.get(), contains(spanOne, spanTwo));
     }
