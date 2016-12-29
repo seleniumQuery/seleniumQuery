@@ -16,7 +16,9 @@
 
 package testinfrastructure.testdouble.io.github.seleniumquery.functions;
 
-import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
+import org.hamcrest.collection.IsArrayWithSize;
+import org.junit.Assert;
+
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 public class MethodMockConfiguration<T> {
@@ -28,7 +30,7 @@ public class MethodMockConfiguration<T> {
     private Object[] expectedArguments;
     private T returnValue;
 
-    public MethodMockConfiguration(T returnValue) {
+    private MethodMockConfiguration(T returnValue) {
         this.returnValue = returnValue;
     }
 
@@ -37,8 +39,14 @@ public class MethodMockConfiguration<T> {
         return this;
     }
 
-    public T executeMethodMock(Object... actualArguments) {
-        assertThat(actualArguments, arrayContaining(this.expectedArguments));
+    T executeMethodMock(Object... actualArguments) {
+        // we dont use assertThat(actualArguments, arrayContaining(this.expectedArguments)) because it
+        // calls actual.equals(expected) and we want expected.equals(actual), which enables us to manipulate
+        // the .equals() implementations during the tests (thus adding flexibility to our tests)
+        for (int i = 0; i < actualArguments.length; i++) {
+            Assert.assertEquals("Argument at (0-indexed) position: "+i, this.expectedArguments[i], actualArguments[i]);
+        }
+        assertThat(actualArguments, IsArrayWithSize.arrayWithSize(this.expectedArguments.length));
         return this.returnValue;
     }
 

@@ -16,14 +16,13 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.filtering.filterfunction;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static io.github.seleniumquery.internal.SqObjectFactory.instance;
 import static java.util.Collections.emptyList;
@@ -49,8 +48,7 @@ public class FilterPredicateFunction {
         if (filterFunction == null) {
             return emptyList();
         }
-        Iterable<WebElement> filter = Iterables.filter(unfiltered, filterFunction);
-        return Lists.newArrayList(filter);
+        return unfiltered.stream().filter(filterFunction).collect(Collectors.toList());
     }
 
 }

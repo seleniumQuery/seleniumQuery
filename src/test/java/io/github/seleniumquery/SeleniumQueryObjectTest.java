@@ -16,15 +16,17 @@
 
 package io.github.seleniumquery;
 
-import com.google.common.base.Predicate;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+import testinfrastructure.testdouble.PseudoTestDoubleException;
 import testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother;
 import testinfrastructure.testdouble.io.github.seleniumquery.functions.SeleniumQueryFunctionsMock;
 
+import java.util.function.Predicate;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static testinfrastructure.testdouble.com.google.common.base.PredicateMother.createDummyWebElementPredicate;
+import static org.junit.Assert.fail;
 import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectDummy.createSeleniumQueryObjectDummy;
 import static testinfrastructure.testdouble.io.github.seleniumquery.SeleniumQueryObjectMother.createStubSeleniumQueryObjectWithSeleniumQueryFunctions;
 import static testinfrastructure.testdouble.io.github.seleniumquery.functions.MethodMockConfiguration.configureReturnValue;
@@ -47,7 +49,7 @@ public class SeleniumQueryObjectTest {
         // when
         Object returnedPropertyValue = seleniumQueryObject.prop(propertyName);
         // then
-        assertThat((String) returnedPropertyValue, is(configuredPropertyValue));
+        assertThat(returnedPropertyValue, is(configuredPropertyValue));
     }
 
     @Test
@@ -117,10 +119,25 @@ public class SeleniumQueryObjectTest {
         SeleniumQueryObject seleniumQueryObject = createStubSeleniumQueryObjectWithSeleniumQueryFunctions(seleniumQueryFunctions);
         SeleniumQueryObject configuredReturningObject = createSeleniumQueryObjectDummy();
 
-        Predicate<WebElement> filterFunction = createDummyWebElementPredicate();
-        seleniumQueryFunctions.filterPredicateMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject, filterFunction);
+        @SuppressWarnings("Guava")
+        com.google.common.base.Predicate<WebElement> stubFilterFunction = input -> { throw new PseudoTestDoubleException(); };
+        Predicate<WebElement> stubFilterFunctionApplyMethod = new Predicate<WebElement>() {
+            @Override
+            public boolean test(WebElement webElement) { return false; }
+            @SuppressWarnings({"unchecked", "EqualsWhichDoesntCheckParameterClass"}) @Override
+            public boolean equals(Object actual) {
+                try {
+                    ((Predicate<WebElement>) actual).test(null);
+                    fail("stub is configured to throw exception");
+                } catch (PseudoTestDoubleException ignored) {
+                    // exception is expected
+                }
+                return true;
+            }
+        };
+        seleniumQueryFunctions.filterPredicateMethod = configureReturnValue(configuredReturningObject).forArgs(seleniumQueryObject, stubFilterFunctionApplyMethod);
         // when
-        SeleniumQueryObject returnedObject = seleniumQueryObject.filter(filterFunction);
+        SeleniumQueryObject returnedObject = seleniumQueryObject.filter(stubFilterFunction);
         // then
         assertThat(returnedObject, is(configuredReturningObject));
     }

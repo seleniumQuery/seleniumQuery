@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery.functions;
 
-import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.functions.jquery.attributes.AttrFunction;
 import io.github.seleniumquery.functions.jquery.attributes.HasClassFunction;
@@ -40,6 +39,8 @@ import io.github.seleniumquery.functions.jquery.traversing.treetraversal.Closest
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.FindFunction;
 import io.github.seleniumquery.functions.jquery.traversing.treetraversal.ParentFunction;
 import org.openqa.selenium.WebElement;
+
+import java.util.function.Predicate;
 
 public class SeleniumQueryFunctions {
 
