@@ -23,11 +23,16 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class SQCssSelectorList implements Iterable<SQCssSelector> {
+/**
+ * A list of CSS Selectors (objects that represent parsed CSS selectors).
+ *
+ * Each {@link SQCssSelector} ia a root of a CSS selector object tree.
+ */
+public class CssSelectorList implements Iterable<SQCssSelector> {
 
     private List<SQCssSelector> sqCssSelectors;
 
-    public SQCssSelectorList(List<SQCssSelector> sqCssSelectors) {
+    public CssSelectorList(List<SQCssSelector> sqCssSelectors) {
         this.sqCssSelectors = Collections.unmodifiableList(new ArrayList<>(sqCssSelectors));
     }
 

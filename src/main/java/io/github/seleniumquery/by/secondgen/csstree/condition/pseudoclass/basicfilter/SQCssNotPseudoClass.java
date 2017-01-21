@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 import com.google.common.base.Joiner;
 import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by.secondgen.csstree.SQCssSelectorList;
+import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SQCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SqCssFunctionalPseudoClassArgument;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
@@ -57,7 +57,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
         }
 
         private String toChainedNotSelectors(WebDriver webDriver, SqCssFunctionalPseudoClassArgument functionalPseudoClassArgument) {
-            SQCssSelectorList parsedNotPseudoClassArgument = SQParseTreeBuilder.parse(functionalPseudoClassArgument.getArgumentAsString());
+            CssSelectorList parsedNotPseudoClassArgument = SQParseTreeBuilder.parse(functionalPseudoClassArgument.getArgumentAsString());
             StringBuilder chainedNotSelectors = new StringBuilder();
             for (SQCssSelector sqCssSelector : parsedNotPseudoClassArgument) {
                 chainedNotSelectors.append(":").append(PSEUDO_PURE_NOT).append("(").append(sqCssSelector.toElementFinder(webDriver).toCssString()).append(")");
@@ -73,7 +73,7 @@ public class SQCssNotPseudoClass extends SQCssFunctionalPseudoClassCondition {
 
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            SQCssSelectorList parsedNotPseudoClassArgument = SQParseTreeBuilder.parse(getArgument().getArgumentAsString());
+            CssSelectorList parsedNotPseudoClassArgument = SQParseTreeBuilder.parse(getArgument().getArgumentAsString());
             List<String> xPathExpressions = new LinkedList<>();
             for (SQCssSelector sqCssSelector : parsedNotPseudoClassArgument) {
                 xPathExpressions.add(sqCssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression());
