@@ -24,13 +24,18 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * Cabaple of finding {@link WebElement}s on a given {@link SearchContext}.<br><br>
+ * An {@link ElementFinder} is an object that is cabaple of finding {@link WebElement}s on a
+ * given {@link SearchContext}.<br><br>
  *
- * Attempts to find the elements by CSS if driver/browser supports.<br>
- * If it doesn't, will use XPath.<br><br>
- *
- * If the XPath expression alone is not able to bring the exact wanted elements, then
- * the finder also filters (though iteration) the results brought by the XPath.
+ * Internally, when trying to find the elements:<br>
+ * <ul>
+ *     <li>it first attempts to find them by CSS if driver/browser supports.</li>
+ *     <li>If it doesn't, will use XPath.</li>
+ *     <ul>
+ *         <li>If the XPath expression alone is not able to bring the exact wanted elements, then the finder
+ *         also filters (though iteration) the results brought by the XPath.</li>
+ *     </ul>
+ * </ul>
  *
  * @author acdcjunior
  * @since 0.10.0
