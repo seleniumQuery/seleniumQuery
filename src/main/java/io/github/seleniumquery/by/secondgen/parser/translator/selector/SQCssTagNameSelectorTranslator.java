@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.selector;
 
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
 import org.w3c.css.sac.ElementSelector;
 
 /**
@@ -27,9 +27,9 @@ import org.w3c.css.sac.ElementSelector;
  */
 public class SQCssTagNameSelectorTranslator {
 
-	public SQCssTagNameSelector translate(ElementSelector elementSelector) {
+	public CssTagNameSelector translate(ElementSelector elementSelector) {
 		String tagName = elementSelector.toString();
-		return new SQCssTagNameSelector(tagName);
+		return new CssTagNameSelector(tagName);
 	}
 
 }

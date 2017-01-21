@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by;
 
-import io.github.seleniumquery.by.firstgen.FirstGenEnhancedElementFinder;
+import io.github.seleniumquery.by.secondgen.SecondGenEnhancedElementFinder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
  */
 public class SeleniumQueryBy extends By {
 
-    public static final EnhancedElementFinder ELEMENT_FINDER = new FirstGenEnhancedElementFinder();
+    public static final EnhancedElementFinder ELEMENT_FINDER = new SecondGenEnhancedElementFinder();
 
 	private static final String STARTING_BRACES = "(\\s*\\(\\s*)*";
 	private static final String XPATH_AXES = "ancestor|ancestor-or-self|attribute|child|descendant|descendant-or-self|following|following-sibling|parent|preceding|preceding-sibling|self";

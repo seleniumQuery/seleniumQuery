@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.selector;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssClassAttributeCondition;
-import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.SQCssDescendantSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.CssDescendantSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.junit.Test;
 
@@ -31,10 +31,10 @@ public class SQCssConditionalSelectorTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("tagg");
+        CssTagNameSelector tagNameSelector = new CssTagNameSelector("tagg");
         SQCssClassAttributeCondition classAttributeCondition = new SQCssClassAttributeCondition("clz");
         // tagg.clz
-        SQCssConditionalSelector conditionalSelector = new SQCssConditionalSelector(tagNameSelector, classAttributeCondition);
+        CssConditionalSelector conditionalSelector = new CssConditionalSelector(tagNameSelector, classAttributeCondition);
         // when
         ElementFinder elementFinder = conditionalSelector.toElementFinder(createWebDriverDummy());
         // then
@@ -47,12 +47,12 @@ public class SQCssConditionalSelectorTest {
     @Test
     public void toElementFinder__with_ElementFinder_arg() {
         // given
-        SQCssTagNameSelector aTagSelector = new SQCssTagNameSelector("a");
-        SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
+        CssTagNameSelector aTagSelector = new CssTagNameSelector("a");
+        CssTagNameSelector bTagSelector = new CssTagNameSelector("b");
         SQCssClassAttributeCondition classAttributeCondition = new SQCssClassAttributeCondition("condition");
-        SQCssConditionalSelector conditionalSelector = new SQCssConditionalSelector(bTagSelector, classAttributeCondition);
+        CssConditionalSelector conditionalSelector = new CssConditionalSelector(bTagSelector, classAttributeCondition);
         // a b.condition
-        SQCssDescendantSelector descendantSelector = new SQCssDescendantSelector(aTagSelector, conditionalSelector);
+        CssDescendantSelector descendantSelector = new CssDescendantSelector(aTagSelector, conditionalSelector);
         // when
         ElementFinder elementFinder = descendantSelector.toElementFinder(createWebDriverDummy());
         // then

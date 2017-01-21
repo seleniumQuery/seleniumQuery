@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.selector.combinator;
 
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.openqa.selenium.WebDriver;
@@ -27,15 +27,15 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-abstract class SQCssCombinationSelector implements SQCssSelector {
+abstract class CssCombinationSelector implements CssSelector {
 
     private final String cssCombinator;
     private final String xPathCombinator;
-    protected SQCssSelector leftSideSelector;
-    protected SQCssSelector rightSideSelector;
+    protected CssSelector leftSideSelector;
+    protected CssSelector rightSideSelector;
 
-    public SQCssCombinationSelector(String cssCombinator, String xPathCombinator,
-                                    SQCssSelector leftSideSelector, SQCssSelector rightSideSelector) {
+    public CssCombinationSelector(String cssCombinator, String xPathCombinator,
+                                  CssSelector leftSideSelector, CssSelector rightSideSelector) {
         this.cssCombinator = cssCombinator;
         this.xPathCombinator = xPathCombinator;
         this.leftSideSelector = leftSideSelector;

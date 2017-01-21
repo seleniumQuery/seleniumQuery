@@ -2,7 +2,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssClassAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssIdAttributeCondition;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
 import org.junit.Test;
@@ -33,7 +33,7 @@ public class SQCssAndConditionTest {
     public void toElementFinder__with_two_ands() {
         // given
         String tagClassClassSelector = "span.a.b";
-        SQCssSelector tagAndClassAndClassCondition = SQParseTreeBuilder.parse(tagClassClassSelector).firstSelector();
+        CssSelector tagAndClassAndClassCondition = SQParseTreeBuilder.parse(tagClassClassSelector).firstSelector();
         // when
         ElementFinder elementFinder = tagAndClassAndClassCondition.toElementFinder(UNIVERSAL_SELECTOR_FINDER);
         // then

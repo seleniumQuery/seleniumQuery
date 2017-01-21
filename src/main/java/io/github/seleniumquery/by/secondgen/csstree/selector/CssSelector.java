@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.secondgen.csstree.selector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
-public interface SQCssSelector {
+public interface CssSelector {
 
     /**
      * Converts this selector into a finder.

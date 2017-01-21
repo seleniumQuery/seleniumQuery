@@ -16,19 +16,19 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.selector.combinator;
 
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 
-public class SQCssDirectAdjacentSelector extends SQCssCombinationSelector {
+public class CssDescendantSelector extends CssCombinationSelector {
 
-    public SQCssDirectAdjacentSelector(SQCssSelector leftSideSelector, SQCssSelector rightSideSelector) {
-        super("+", "/following-sibling::*[position() = 1]", leftSideSelector, rightSideSelector);
+    public CssDescendantSelector(CssSelector leftSideSelector, CssSelector rightSideSelector) {
+        super(" ", "//*[true()]", leftSideSelector, rightSideSelector);
     }
 
-    public SQCssSelector getLeftSideSelector() {
+    public CssSelector getAncestorSelector() {
         return leftSideSelector;
     }
 
-    public SQCssSelector getRightSideSelector() {
+    public CssSelector getDescendantSelector() {
         return rightSideSelector;
     }
 

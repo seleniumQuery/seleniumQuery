@@ -31,11 +31,11 @@ import static io.github.seleniumquery.by.secondgen.finder.CssFinder.fromTag;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssTagNameSelector implements SQCssSelector {
+public class CssTagNameSelector implements CssSelector {
 
     private String tagName;
 
-    public SQCssTagNameSelector(String tagName) {
+    public CssTagNameSelector(String tagName) {
         this.tagName = "".equals(tagName) ? "*" : tagName;
     }
 
