@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.secondgen.parser.translator.selector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssUnknownSelectorException;
+import io.github.seleniumquery.by.secondgen.csstree.selector.UnknownCssSelectorException;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator.SQCssDescendantSelectorTranslator;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator.SQCssDirectAdjacentSelectorTranslator;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator.SQCssDirectDescendantSelectorTranslator;
@@ -67,7 +67,7 @@ public class SQCssSelectorTranslator {
 			case Selector.SAC_COMMENT_NODE_SELECTOR:
 			case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
 			default:
-				throw new SQCssUnknownSelectorException(selector);
+				throw new UnknownCssSelectorException(selector);
 		}
 	}
 
