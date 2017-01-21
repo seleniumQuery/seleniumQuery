@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.secondgen.parser.translator.selector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssUnknownSelectorException;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator.SQCssDescendantSelectorTranslator;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator.SQCssDirectAdjacentSelectorTranslator;
@@ -26,7 +26,7 @@ import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinato
 import org.w3c.css.sac.*;
 
 /**
- * Translates a Selector into a {@link SQCssSelector}.
+ * Translates a Selector into a {@link CssSelector}.
  *
  * @author acdcjunior
  * @since 0.10.0
@@ -40,7 +40,7 @@ public class SQCssSelectorTranslator {
     private final SQCssDirectAdjacentSelectorTranslator directAdjacentSelectorTranslator = new SQCssDirectAdjacentSelectorTranslator(this);
     private final SQCssGeneralAdjacentSelectorTranslator generalAdjacentSelectorTranslator = new SQCssGeneralAdjacentSelectorTranslator(this);
 
-	public SQCssSelector translate(ArgumentMap argumentMap, Selector selector) {
+	public CssSelector translate(ArgumentMap argumentMap, Selector selector) {
 		switch (selector.getSelectorType()) {
 			case Selector.SAC_CONDITIONAL_SELECTOR:
 				return conditionalCssSelector.translate(argumentMap, (ConditionalSelector) selector);

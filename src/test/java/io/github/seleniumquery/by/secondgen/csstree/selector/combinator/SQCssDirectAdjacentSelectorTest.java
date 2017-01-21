@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.selector.combinator;
 
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.junit.Test;
 
@@ -30,9 +30,9 @@ public class SQCssDirectAdjacentSelectorTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssTagNameSelector aTagSelector = new SQCssTagNameSelector("a");
-        SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
-        SQCssDirectAdjacentSelector directAdjacentSelector = new SQCssDirectAdjacentSelector(aTagSelector, bTagSelector);
+        CssTagNameSelector aTagSelector = new CssTagNameSelector("a");
+        CssTagNameSelector bTagSelector = new CssTagNameSelector("b");
+        CssDirectAdjacentSelector directAdjacentSelector = new CssDirectAdjacentSelector(aTagSelector, bTagSelector);
         // when
         ElementFinder elementFinder = directAdjacentSelector.toElementFinder(createWebDriverDummy());
         // then

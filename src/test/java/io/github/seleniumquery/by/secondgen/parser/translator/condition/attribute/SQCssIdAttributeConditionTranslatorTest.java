@@ -19,9 +19,9 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssIdAttributeCondition;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssConditionalSelector;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
 import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
 import org.junit.Test;
 
@@ -35,14 +35,14 @@ public class SQCssIdAttributeConditionTranslatorTest {
     @Test
     public void translate() {
         // given
-        SQCssSelector cssSelector = SQParseTreeBuilder.parse("#ball").firstSelector();
-        assertThat(cssSelector, instanceOf(SQCssConditionalSelector.class));
+        CssSelector cssSelector = SQParseTreeBuilder.parse("#ball").firstSelector();
+        assertThat(cssSelector, instanceOf(CssConditionalSelector.class));
         // when
-        SQCssSelector sqCssSelector = ((SQCssConditionalSelector) cssSelector).getSqCssSelector();
-        SQCssCondition sqCssCondition = ((SQCssConditionalSelector) cssSelector).getSqCssCondition();
+        CssSelector sqCssSelector = ((CssConditionalSelector) cssSelector).getCssSelector();
+        SQCssCondition sqCssCondition = ((CssConditionalSelector) cssSelector).getSqCssCondition();
         // then
-        assertThat(sqCssSelector, instanceOf(SQCssTagNameSelector.class));
-        assertThat(((SQCssTagNameSelector) sqCssSelector).getTagName(), is("*"));
+        assertThat(sqCssSelector, instanceOf(CssTagNameSelector.class));
+        assertThat(((CssTagNameSelector) sqCssSelector).getTagName(), is("*"));
 
         assertThat(sqCssCondition, instanceOf(SQCssIdAttributeCondition.class));
         assertThat(((SQCssIdAttributeCondition) sqCssCondition).getId(), is("ball"));

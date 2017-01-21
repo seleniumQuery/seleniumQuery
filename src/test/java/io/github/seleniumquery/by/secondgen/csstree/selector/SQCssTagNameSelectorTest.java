@@ -29,7 +29,7 @@ public class SQCssTagNameSelectorTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("myTag");
+        CssTagNameSelector tagNameSelector = new CssTagNameSelector("myTag");
         // when
         ElementFinder elementFinder = tagNameSelector.toElementFinder(createWebDriverDummy());
         // then
@@ -42,7 +42,7 @@ public class SQCssTagNameSelectorTest {
     @Test
     public void toElementFinder__should_return_true_for_XPath_if_tag_is_universalSelector() {
         // given
-        SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
+        CssTagNameSelector tagNameSelector = new CssTagNameSelector("*");
         // when
         ElementFinder elementFinder = tagNameSelector.toElementFinder(createWebDriverDummy());
         // then
@@ -52,7 +52,7 @@ public class SQCssTagNameSelectorTest {
     @Test
     public void toElementFinder__should_return_ONLY_true_as_raw_XPathexpression() {
         // given
-        SQCssTagNameSelector tagNameSelector = new SQCssTagNameSelector("*");
+        CssTagNameSelector tagNameSelector = new CssTagNameSelector("*");
         // when
         ElementFinder elementFinder = tagNameSelector.toElementFinder(createWebDriverDummy());
         // then

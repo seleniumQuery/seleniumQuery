@@ -17,8 +17,8 @@
 package io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.SQCssGeneralAdjacentSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.CssGeneralAdjacentSelector;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.SQCssSelectorTranslator;
 import org.w3c.css.sac.SiblingSelector;
 
@@ -36,11 +36,11 @@ public class SQCssGeneralAdjacentSelectorTranslator {
 		this.sqCssSelectorTranslator = sqCssSelectorTranslator;
 	}
 
-	public SQCssGeneralAdjacentSelector translate(ArgumentMap argumentMap, SiblingSelector sacSiblingSelector) {
-		SQCssSelector previousSelector = sqCssSelectorTranslator.translate(argumentMap, sacSiblingSelector.getSelector());
-		SQCssSelector siblingSelector = sqCssSelectorTranslator.translate(argumentMap, sacSiblingSelector.getSiblingSelector());
+	public CssGeneralAdjacentSelector translate(ArgumentMap argumentMap, SiblingSelector sacSiblingSelector) {
+		CssSelector previousSelector = sqCssSelectorTranslator.translate(argumentMap, sacSiblingSelector.getSelector());
+		CssSelector siblingSelector = sqCssSelectorTranslator.translate(argumentMap, sacSiblingSelector.getSiblingSelector());
 
-		return new SQCssGeneralAdjacentSelector(previousSelector, siblingSelector);
+		return new CssGeneralAdjacentSelector(previousSelector, siblingSelector);
 	}
 
 }

@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.selector;
 
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
 import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
 import org.junit.Test;
 
@@ -31,10 +31,10 @@ public class SQCssTagNameSelectorTranslatorTest {
     public void translate() {
         // given
         // when
-        SQCssSelector cssSelector = SQParseTreeBuilder.parse("tag").firstSelector();
+        CssSelector cssSelector = SQParseTreeBuilder.parse("tag").firstSelector();
         // then
-        assertThat(cssSelector, instanceOf(SQCssTagNameSelector.class));
-        assertThat(((SQCssTagNameSelector) cssSelector).getTagName(), is("tag"));
+        assertThat(cssSelector, instanceOf(CssTagNameSelector.class));
+        assertThat(((CssTagNameSelector) cssSelector).getTagName(), is("tag"));
     }
 
 }

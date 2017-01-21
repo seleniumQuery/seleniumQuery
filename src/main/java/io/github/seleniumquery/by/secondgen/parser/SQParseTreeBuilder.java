@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.common.preparser.CssParsedSelector;
 import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.SQCssSelectorTranslator;
 
 import java.util.ArrayList;
@@ -34,19 +34,19 @@ public class SQParseTreeBuilder {
 
 	public static CssSelectorList parse(String selector) {
 		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
-        List<SQCssSelector> cssSelectors = translate(parsedSelectorList);
+        List<CssSelector> cssSelectors = translate(parsedSelectorList);
 		return new CssSelectorList(cssSelectors);
 	}
 
-    private static List<SQCssSelector> translate(CssParsedSelectorList parsedSelectorList) {
-        List<SQCssSelector> cssSelectors = new ArrayList<>(parsedSelectorList.size());
+    private static List<CssSelector> translate(CssParsedSelectorList parsedSelectorList) {
+        List<CssSelector> cssSelectors = new ArrayList<>(parsedSelectorList.size());
         for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
             cssSelectors.add(translate(cssParsedSelector));
         }
         return cssSelectors;
     }
 
-    private static SQCssSelector translate(CssParsedSelector cssParsedSelector) {
+    private static CssSelector translate(CssParsedSelector cssParsedSelector) {
         return sqCssSelectorTranslator.translate(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
     }
 

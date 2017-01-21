@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.selector.combinator;
 
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.junit.Test;
 
@@ -30,9 +30,9 @@ public class SQCssDescendantSelectorTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssTagNameSelector aTagSelector = new SQCssTagNameSelector("a");
-        SQCssTagNameSelector bTagSelector = new SQCssTagNameSelector("b");
-        SQCssDescendantSelector descendantSelector = new SQCssDescendantSelector(aTagSelector, bTagSelector);
+        CssTagNameSelector aTagSelector = new CssTagNameSelector("a");
+        CssTagNameSelector bTagSelector = new CssTagNameSelector("b");
+        CssDescendantSelector descendantSelector = new CssDescendantSelector(aTagSelector, bTagSelector);
         // when
         ElementFinder elementFinder = descendantSelector.toElementFinder(createWebDriverDummy());
         // then
@@ -45,11 +45,11 @@ public class SQCssDescendantSelectorTest {
     @Test
     public void toElementFinder_multiple() {
         // given
-        SQCssTagNameSelector firstSelector = new SQCssTagNameSelector("a");
-        SQCssTagNameSelector secondSelector = new SQCssTagNameSelector("b");
-        SQCssDescendantSelector firstAndSecondSelectors = new SQCssDescendantSelector(firstSelector, secondSelector);
-        SQCssTagNameSelector thirdSelector = new SQCssTagNameSelector("c");
-        SQCssDescendantSelector descendantSelector = new SQCssDescendantSelector(firstAndSecondSelectors, thirdSelector);
+        CssTagNameSelector firstSelector = new CssTagNameSelector("a");
+        CssTagNameSelector secondSelector = new CssTagNameSelector("b");
+        CssDescendantSelector firstAndSecondSelectors = new CssDescendantSelector(firstSelector, secondSelector);
+        CssTagNameSelector thirdSelector = new CssTagNameSelector("c");
+        CssDescendantSelector descendantSelector = new CssDescendantSelector(firstAndSecondSelectors, thirdSelector);
         // when
         ElementFinder elementFinder = descendantSelector.toElementFinder(createWebDriverDummy());
         // then

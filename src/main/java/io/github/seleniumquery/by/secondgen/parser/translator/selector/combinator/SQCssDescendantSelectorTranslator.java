@@ -17,8 +17,8 @@
 package io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.SQCssDescendantSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.CssDescendantSelector;
 import io.github.seleniumquery.by.secondgen.parser.translator.selector.SQCssSelectorTranslator;
 import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.Selector;
@@ -38,14 +38,14 @@ public class SQCssDescendantSelectorTranslator {
 		this.sqCssSelectorTranslator = sqCssSelectorTranslator;
 	}
 
-	public SQCssDescendantSelector translate(ArgumentMap argumentMap, DescendantSelector sacDescendantSelector) {
+	public CssDescendantSelector translate(ArgumentMap argumentMap, DescendantSelector sacDescendantSelector) {
 		Selector ancestorCSSSelector = sacDescendantSelector.getAncestorSelector();
-		SQCssSelector ancestorSelector = sqCssSelectorTranslator.translate(argumentMap, ancestorCSSSelector);
+		CssSelector ancestorSelector = sqCssSelectorTranslator.translate(argumentMap, ancestorCSSSelector);
 
 		SimpleSelector descendantCSSSelector = sacDescendantSelector.getSimpleSelector();
-		SQCssSelector descendantSelector = sqCssSelectorTranslator.translate(argumentMap, descendantCSSSelector);
+		CssSelector descendantSelector = sqCssSelectorTranslator.translate(argumentMap, descendantCSSSelector);
 
-		return new SQCssDescendantSelector(ancestorSelector, descendantSelector);
+		return new CssDescendantSelector(ancestorSelector, descendantSelector);
 	}
-	
+
 }

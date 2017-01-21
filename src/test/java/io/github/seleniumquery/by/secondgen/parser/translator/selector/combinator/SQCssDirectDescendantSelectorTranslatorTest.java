@@ -16,9 +16,9 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator;
 
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssTagNameSelector;
-import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.SQCssDirectDescendantSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.CssDirectDescendantSelector;
 import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
 import org.junit.Test;
 
@@ -31,17 +31,17 @@ public class SQCssDirectDescendantSelectorTranslatorTest {
     @Test
     public void translate() {
         // given
-        SQCssSelector cssSelector = SQParseTreeBuilder.parse("a > b").firstSelector();
-        assertThat(cssSelector, instanceOf(SQCssDirectDescendantSelector.class));
+        CssSelector cssSelector = SQParseTreeBuilder.parse("a > b").firstSelector();
+        assertThat(cssSelector, instanceOf(CssDirectDescendantSelector.class));
         // when
-        SQCssSelector ancestorSelector = ((SQCssDirectDescendantSelector) cssSelector).getAncestorSelector();
-        SQCssSelector descendantSelector = ((SQCssDirectDescendantSelector) cssSelector).getDescendantSelector();
+        CssSelector ancestorSelector = ((CssDirectDescendantSelector) cssSelector).getAncestorSelector();
+        CssSelector descendantSelector = ((CssDirectDescendantSelector) cssSelector).getDescendantSelector();
         // then
-        assertThat(ancestorSelector, instanceOf(SQCssTagNameSelector.class));
-        assertThat(((SQCssTagNameSelector) ancestorSelector).getTagName(), is("a"));
+        assertThat(ancestorSelector, instanceOf(CssTagNameSelector.class));
+        assertThat(((CssTagNameSelector) ancestorSelector).getTagName(), is("a"));
 
-        assertThat(descendantSelector, instanceOf(SQCssTagNameSelector.class));
-        assertThat(((SQCssTagNameSelector) descendantSelector).getTagName(), is("b"));
+        assertThat(descendantSelector, instanceOf(CssTagNameSelector.class));
+        assertThat(((CssTagNameSelector) descendantSelector).getTagName(), is("b"));
     }
 
 }

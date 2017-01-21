@@ -27,18 +27,18 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssConditionalSelector implements SQCssSelector {
+public class CssConditionalSelector implements CssSelector {
 
-    private final SQCssSelector sqCssSelector;
+    private final CssSelector cssSelector;
     private final SQCssCondition sqCssCondition;
 
-    public SQCssConditionalSelector(SQCssSelector sqCssSelector, SQCssCondition sqCssCondition) {
-        this.sqCssSelector = sqCssSelector;
+    public CssConditionalSelector(CssSelector cssSelector, SQCssCondition sqCssCondition) {
+        this.cssSelector = cssSelector;
         this.sqCssCondition = sqCssCondition;
     }
 
-    public SQCssSelector getSqCssSelector() {
-        return sqCssSelector;
+    public CssSelector getCssSelector() {
+        return cssSelector;
     }
 
     public SQCssCondition getSqCssCondition() {
@@ -47,13 +47,13 @@ public class SQCssConditionalSelector implements SQCssSelector {
 
     @Override
     public ElementFinder toElementFinder(WebDriver webDriver) {
-        ElementFinder elementFinder = sqCssSelector.toElementFinder(webDriver);
+        ElementFinder elementFinder = cssSelector.toElementFinder(webDriver);
         return ((SQCssConditionImplementedFinders) sqCssCondition).toElementFinder(elementFinder);
     }
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {
-        ElementFinder elementFinder = sqCssSelector.toElementFinder(leftFinder);
+        ElementFinder elementFinder = cssSelector.toElementFinder(leftFinder);
         return ((SQCssConditionImplementedFinders) sqCssCondition).toElementFinder(elementFinder);
     }
 

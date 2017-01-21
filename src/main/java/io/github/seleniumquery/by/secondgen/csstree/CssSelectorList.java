@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree;
 
-import io.github.seleniumquery.by.secondgen.csstree.selector.SQCssSelector;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,27 +26,27 @@ import java.util.List;
 /**
  * A list of CSS Selectors (objects that represent parsed CSS selectors).
  *
- * Each {@link SQCssSelector} ia a root of a CSS selector object tree.
+ * Each {@link CssSelector} ia a root of a CSS selector object tree.
  */
-public class CssSelectorList implements Iterable<SQCssSelector> {
+public class CssSelectorList implements Iterable<CssSelector> {
 
-    private List<SQCssSelector> sqCssSelectors;
+    private List<CssSelector> cssSelectors;
 
-    public CssSelectorList(List<SQCssSelector> sqCssSelectors) {
-        this.sqCssSelectors = Collections.unmodifiableList(new ArrayList<>(sqCssSelectors));
+    public CssSelectorList(List<CssSelector> cssSelectors) {
+        this.cssSelectors = Collections.unmodifiableList(new ArrayList<>(cssSelectors));
     }
 
-    public SQCssSelector selector(int i) {
-        return sqCssSelectors.get(i);
+    public CssSelector selector(int i) {
+        return cssSelectors.get(i);
     }
 
-    public SQCssSelector firstSelector() {
+    public CssSelector firstSelector() {
         return selector(0);
     }
 
     @Override
-    public Iterator<SQCssSelector> iterator() {
-        return sqCssSelectors.iterator();
+    public Iterator<CssSelector> iterator() {
+        return cssSelectors.iterator();
     }
 
 }
