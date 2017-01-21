@@ -24,9 +24,9 @@ import org.w3c.css.sac.Selector;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class SQCssUnknownSelectorException extends RuntimeException {
+public class UnknownCssSelectorException extends RuntimeException {
 
-    public SQCssUnknownSelectorException(Selector selector) {
+    public UnknownCssSelectorException(Selector selector) {
         super("CSS selector \""+selector.getClass().getSimpleName() + "\" (type="+ selector.getSelectorType() + ") is invalid or not supported!");
     }
 
