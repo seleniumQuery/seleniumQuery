@@ -288,8 +288,9 @@ class SqObject implements SeleniumQueryObject {
 	}
 
     @Override
+    @SuppressWarnings("Guava")
     public SeleniumQueryObject filter(Predicate<WebElement> filterFunction) {
-		return seleniumQueryFunctions.filterPredicate(this, filterFunction::apply);
+		return seleniumQueryFunctions.filterPredicate(this, filterFunction == null ? null : filterFunction::apply);
 	}
 
     @Override
