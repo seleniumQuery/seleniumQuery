@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
 /**
@@ -26,7 +26,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFun
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssLangPseudoClass extends CssFunctionalPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class CssLangPseudoClass extends CssFunctionalPseudoClassCondition implements CssConditionImplementedNotYet {
 
     // :lang(), similar to :not(), gets translated into :lang-sq() by the pre-parser
     public static final String PSEUDO = "lang-sq";

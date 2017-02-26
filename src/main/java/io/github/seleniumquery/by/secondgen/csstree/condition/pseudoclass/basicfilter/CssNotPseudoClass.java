@@ -26,7 +26,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finder
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
+import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 
@@ -57,7 +57,7 @@ public class CssNotPseudoClass extends CssFunctionalPseudoClassCondition {
         }
 
         private String toChainedNotSelectors(WebDriver webDriver, SqCssFunctionalPseudoClassArgument functionalPseudoClassArgument) {
-            CssSelectorList parsedNotPseudoClassArgument = SQParseTreeBuilder.parse(functionalPseudoClassArgument.getArgumentAsString());
+            CssSelectorList parsedNotPseudoClassArgument = ParseTreeBuilder.parse(functionalPseudoClassArgument.getArgumentAsString());
             StringBuilder chainedNotSelectors = new StringBuilder();
             for (CssSelector cssSelector : parsedNotPseudoClassArgument) {
                 chainedNotSelectors.append(":").append(PSEUDO_PURE_NOT).append("(").append(cssSelector.toElementFinder(webDriver).toCssString()).append(")");
@@ -73,7 +73,7 @@ public class CssNotPseudoClass extends CssFunctionalPseudoClassCondition {
 
         @Override
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            CssSelectorList parsedNotPseudoClassArgument = SQParseTreeBuilder.parse(getArgument().getArgumentAsString());
+            CssSelectorList parsedNotPseudoClassArgument = ParseTreeBuilder.parse(getArgument().getArgumentAsString());
             List<String> xPathExpressions = new LinkedList<>();
             for (CssSelector cssSelector : parsedNotPseudoClassArgument) {
                 xPathExpressions.add(cssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression());

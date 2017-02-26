@@ -22,7 +22,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssIdAtt
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
-import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
+import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 import org.junit.Test;
 
 import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
@@ -35,7 +35,7 @@ public class CssIdAttributeConditionTranslatorTest {
     @Test
     public void translate() {
         // given
-        CssSelector cssSelector = SQParseTreeBuilder.parse("#ball").firstSelector();
+        CssSelector cssSelector = ParseTreeBuilder.parse("#ball").firstSelector();
         assertThat(cssSelector, instanceOf(CssConditionalSelector.class));
         // when
         CssSelector sqCssSelector = ((CssConditionalSelector) cssSelector).getCssSelector();
@@ -55,7 +55,7 @@ public class CssIdAttributeConditionTranslatorTest {
 
     @SuppressWarnings("deprecation")
     static class IdVerifier extends ConditionTranslatorVerifier {
-        public IdVerifier() { super("#"); }
+        IdVerifier() { super("#"); }
         @Override
         public CssConditionImplementedFinders verifyTranslation(String actualSelector, String expectedId) {
             // given

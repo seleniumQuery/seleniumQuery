@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssUnknownConditionException;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssUnknownConditionException;
 import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.*;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CombinatorCondition;
@@ -42,7 +42,7 @@ public class CssConditionTranslator {
     private final CssContainsWordAttributeConditionTranslator containsWordAttributeConditionTranslator = new CssContainsWordAttributeConditionTranslator();
     private final CssContainsPrefixAttributeConditionTranslator containsPrefixAttributeConditionTranslator = new CssContainsPrefixAttributeConditionTranslator();
     private final CssClassAttributeConditionTranslator classAttributeConditionTranslator = new CssClassAttributeConditionTranslator();
-    private final SQCssPseudoClassConditionTranslator pseudoClassConditionTranslator = new SQCssPseudoClassConditionTranslator();
+    private final CssPseudoClassConditionTranslator pseudoClassConditionTranslator = new CssPseudoClassConditionTranslator();
 
 	public CssCondition translate(SimpleSelector simpleSelector, ArgumentMap argumentMap, Condition condition) {
 	    switch (condition.getConditionType()) {
@@ -78,7 +78,7 @@ public class CssConditionTranslator {
 				return incompatible("Condition.SAC_LANG_CONDITION");
 
 	        default:
-				throw new SQCssUnknownConditionException(condition);
+				throw new CssUnknownConditionException(condition);
 		}
 	}
 
