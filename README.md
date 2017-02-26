@@ -323,6 +323,44 @@ jQuery("input.street").val("5th St!");
 
 <br>
 
+# Using multiple browsers/drivers simultaneously
+
+Typically, the `$` is a static variable, thus every command you issue only affects the one same instance of WebDriver.
+
+But... what if you want/need to use two WebDrivers at the same time?
+
+We've got your back, see the [example](src/test/java/endtoend/browser/SeleniumQueryBrowserTest.java):
+
+```java
+public class SeleniumQueryBrowserTest {
+
+    // using two drivers (chrome and firefox) at the same time
+    private SeleniumQueryBrowser chrome = new SeleniumQueryBrowser();
+    private SeleniumQueryBrowser firefox = new SeleniumQueryBrowser();
+
+    @Test
+    public void multiple_browser_instances_should_work_OK() {
+        chrome.$.driver().useHtmlUnit().emulatingChrome();
+        openUrl(SeleniumQueryBrowserTest.class, chrome.$);
+
+        firefox.$.driver().useHtmlUnit().emulatingFirefox();
+        openUrl(SeleniumQueryBrowserTest.class, firefox.$);
+
+        assertThat(chrome.$("#agent").text(), containsString("Chrome"));
+        assertThat(firefox.$("#agent").text(), containsString("Firefox"));
+    }
+
+    @After
+    public void tearDown() {
+        chrome.$.quit();
+        firefox.$.quit();
+    }
+
+}
+```
+
+<br>
+
 # More
 
 Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
