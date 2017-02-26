@@ -37,6 +37,9 @@ public interface CssConditionImplementedFinders extends CssCondition {
      * This method turns a CSS Condition into an {@link ElementFinder}.
      *
      * The above is obvious... but why "LEFT" finder as argument??
+     *
+     * @param leftFinder The expression left-side finder
+     * @return The condition as an element finder.
      */
     ElementFinder toElementFinder(ElementFinder leftFinder);
 
