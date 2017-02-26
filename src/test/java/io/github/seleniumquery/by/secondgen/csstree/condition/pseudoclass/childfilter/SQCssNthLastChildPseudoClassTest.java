@@ -36,7 +36,7 @@ public class SQCssNthLastChildPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(NTH_LAST_CHILD_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssNthLastChildPseudoClass.class);
+        assertQueriesOnSelector(NTH_LAST_CHILD_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssNthLastChildPseudoClass.class);
     }
 
     @Test
@@ -61,8 +61,8 @@ public class SQCssNthLastChildPseudoClassTest {
         assertPseudoClass(nthLastChild(nthArgument)).whenNotNativelySupported().translatesToPureXPath(expectedXPath);
     }
 
-    private SQCssNthLastChildPseudoClass nthLastChild(String nthArgument) {
-        return new SQCssNthLastChildPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthArgument));
+    private CssNthLastChildPseudoClass nthLastChild(String nthArgument) {
+        return new CssNthLastChildPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthArgument));
     }
 
 }

@@ -29,7 +29,7 @@ public class SQCssStartsWithAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssStartsWithAttributeCondition startsWithAttributeCondition = new SQCssStartsWithAttributeCondition("attribute", "stringToStart");
+        CssStartsWithAttributeCondition startsWithAttributeCondition = new CssStartsWithAttributeCondition("attribute", "stringToStart");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = startsWithAttributeCondition.toElementFinder(previous);

@@ -24,7 +24,7 @@ public class SQCssParentPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":parent").yieldPseudoClass(SQCssParentPseudoClass.class);
+        assertQueriesOnSelector(":parent").yieldPseudoClass(CssParentPseudoClass.class);
     }
 
 }

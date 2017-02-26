@@ -24,7 +24,7 @@ public class SQCssLangPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":lang").withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssLangPseudoClass.class);
+        assertQueriesOnSelector(":lang").withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssLangPseudoClass.class);
     }
 
 }

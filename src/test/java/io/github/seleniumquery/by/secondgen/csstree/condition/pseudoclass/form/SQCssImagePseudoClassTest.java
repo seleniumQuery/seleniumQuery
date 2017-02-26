@@ -30,13 +30,13 @@ public class SQCssImagePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(IMAGE_PSEUDO).yieldPseudoClass(SQCssImagePseudoClass.class);
+        assertQueriesOnSelector(IMAGE_PSEUDO).yieldPseudoClass(CssImagePseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(
-                new SQCssImagePseudoClass(),
+                new CssImagePseudoClass(),
                 IMAGE_PSEUDO,
                 IMAGE_CSS_SELECTOR,
                 IMAGE_XPATH_EXPRESSION

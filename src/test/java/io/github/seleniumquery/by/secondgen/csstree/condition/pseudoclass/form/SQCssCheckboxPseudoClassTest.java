@@ -30,13 +30,13 @@ public class SQCssCheckboxPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(CHECKBOX_PSEUDO).yieldPseudoClass(SQCssCheckboxPseudoClass.class);
+        assertQueriesOnSelector(CHECKBOX_PSEUDO).yieldPseudoClass(CssCheckboxPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(
-                new SQCssCheckboxPseudoClass(),
+                new CssCheckboxPseudoClass(),
                 CHECKBOX_PSEUDO,
                 CHECKBOX_CSS_SELECTOR,
                 CHECKBOX_XPATH_EXPRESSION

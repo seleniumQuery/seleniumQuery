@@ -28,12 +28,12 @@ public class SQCssEvenPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(EVEN_PSEUDO).yieldPseudoClass(SQCssEvenPseudoClass.class);
+        assertQueriesOnSelector(EVEN_PSEUDO).yieldPseudoClass(CssEvenPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        assertPseudoClass(new SQCssEvenPseudoClass()).whenNotNativelySupported().translatesToPureXPath(EVEN_XPATH_EXPRESSION);
+        assertPseudoClass(new CssEvenPseudoClass()).whenNotNativelySupported().translatesToPureXPath(EVEN_XPATH_EXPRESSION);
     }
 
 }

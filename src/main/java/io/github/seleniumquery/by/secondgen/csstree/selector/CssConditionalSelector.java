@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.selector;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.openqa.selenium.WebDriver;
 
@@ -30,31 +30,31 @@ import org.openqa.selenium.WebDriver;
 public class CssConditionalSelector implements CssSelector {
 
     private final CssSelector cssSelector;
-    private final SQCssCondition sqCssCondition;
+    private final CssCondition cssCondition;
 
-    public CssConditionalSelector(CssSelector cssSelector, SQCssCondition sqCssCondition) {
+    public CssConditionalSelector(CssSelector cssSelector, CssCondition cssCondition) {
         this.cssSelector = cssSelector;
-        this.sqCssCondition = sqCssCondition;
+        this.cssCondition = cssCondition;
     }
 
     public CssSelector getCssSelector() {
         return cssSelector;
     }
 
-    public SQCssCondition getSqCssCondition() {
-        return sqCssCondition;
+    public CssCondition getCssCondition() {
+        return cssCondition;
     }
 
     @Override
     public ElementFinder toElementFinder(WebDriver webDriver) {
         ElementFinder elementFinder = cssSelector.toElementFinder(webDriver);
-        return ((SQCssConditionImplementedFinders) sqCssCondition).toElementFinder(elementFinder);
+        return ((CssConditionImplementedFinders) cssCondition).toElementFinder(elementFinder);
     }
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {
         ElementFinder elementFinder = cssSelector.toElementFinder(leftFinder);
-        return ((SQCssConditionImplementedFinders) sqCssCondition).toElementFinder(elementFinder);
+        return ((CssConditionImplementedFinders) cssCondition).toElementFinder(elementFinder);
     }
 
 }

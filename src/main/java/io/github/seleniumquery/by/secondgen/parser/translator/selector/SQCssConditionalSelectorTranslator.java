@@ -17,10 +17,10 @@
 package io.github.seleniumquery.by.secondgen.parser.translator.selector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
-import io.github.seleniumquery.by.secondgen.parser.translator.condition.SQCssConditionTranslator;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.CssConditionTranslator;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.ConditionalSelector;
 import org.w3c.css.sac.SimpleSelector;
@@ -28,11 +28,11 @@ import org.w3c.css.sac.SimpleSelector;
 public class SQCssConditionalSelectorTranslator {
 
 	private final SQCssSelectorTranslator sqCssSelectorTranslator;
-	private final SQCssConditionTranslator sqCssConditionTranslator;
+	private final CssConditionTranslator cssConditionTranslator;
 
 	public SQCssConditionalSelectorTranslator(SQCssSelectorTranslator sqCssSelectorTranslator) {
 		this.sqCssSelectorTranslator = sqCssSelectorTranslator;
-		this.sqCssConditionTranslator = new SQCssConditionTranslator();
+		this.cssConditionTranslator = new CssConditionTranslator();
 	}
 
 	public CssConditionalSelector translate(ArgumentMap argumentMap, ConditionalSelector conditionalSelector) {
@@ -41,8 +41,8 @@ public class SQCssConditionalSelectorTranslator {
 
 		CssSelector cssSelector = sqCssSelectorTranslator.translate(argumentMap, simpleSelector);
 
-		SQCssCondition sqCssCondition = sqCssConditionTranslator.translate(simpleSelector, argumentMap, condition);
-		return new CssConditionalSelector(cssSelector, sqCssCondition);
+		CssCondition cssCondition = cssConditionTranslator.translate(simpleSelector, argumentMap, condition);
+		return new CssConditionalSelector(cssSelector, cssCondition);
 	}
 
 }

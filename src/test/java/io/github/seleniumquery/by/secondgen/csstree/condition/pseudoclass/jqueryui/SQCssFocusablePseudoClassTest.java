@@ -24,7 +24,7 @@ public class SQCssFocusablePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":focusable").yieldPseudoClass(SQCssFocusablePseudoClass.class);
+        assertQueriesOnSelector(":focusable").yieldPseudoClass(CssFocusablePseudoClass.class);
     }
 
 }

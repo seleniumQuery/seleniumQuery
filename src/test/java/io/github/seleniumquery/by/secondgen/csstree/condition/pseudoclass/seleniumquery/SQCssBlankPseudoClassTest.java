@@ -24,7 +24,7 @@ public class SQCssBlankPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":blank").yieldPseudoClass(SQCssBlankPseudoClass.class);
+        assertQueriesOnSelector(":blank").yieldPseudoClass(CssBlankPseudoClass.class);
     }
 
 }

@@ -29,12 +29,12 @@ public class SQCssResetPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":reset").yieldPseudoClass(SQCssResetPseudoClass.class);
+        assertQueriesOnSelector(":reset").yieldPseudoClass(CssResetPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__REGARDLESS_of_driver_native_support() {
-        assertPseudoClass(new SQCssResetPseudoClass()).whenNotNativelySupported().translatesToPureXPath(RESET_XPATH_EXPRESSION);
+        assertPseudoClass(new CssResetPseudoClass()).whenNotNativelySupported().translatesToPureXPath(RESET_XPATH_EXPRESSION);
     }
 
 }

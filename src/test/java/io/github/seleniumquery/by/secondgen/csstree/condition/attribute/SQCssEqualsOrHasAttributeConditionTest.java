@@ -29,7 +29,7 @@ public class SQCssEqualsOrHasAttributeConditionTest {
     @Test
     public void toElementFinder__has_attribute() {
         // given
-        SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib");
+        CssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition("attrib");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = hasAttributeCondition.toElementFinder(previous);
@@ -43,7 +43,7 @@ public class SQCssEqualsOrHasAttributeConditionTest {
     @Test
     public void toElementFinder__equals_attribute() {
         // given
-        SQCssEqualsOrHasAttributeCondition hasAttributeCondition = new SQCssEqualsOrHasAttributeCondition("attrib", "valz");
+        CssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition("attrib", "valz");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = hasAttributeCondition.toElementFinder(previous);

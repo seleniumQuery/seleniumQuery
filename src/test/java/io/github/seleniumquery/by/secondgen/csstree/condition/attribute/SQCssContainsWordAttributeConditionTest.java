@@ -29,7 +29,7 @@ public class SQCssContainsWordAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssContainsWordAttributeCondition containsWordAttributeCondition = new SQCssContainsWordAttributeCondition("values", "10");
+        CssContainsWordAttributeCondition containsWordAttributeCondition = new CssContainsWordAttributeCondition("values", "10");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = containsWordAttributeCondition.toElementFinder(previous);

@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssAttributeCondition;
 import org.hamcrest.Matcher;
 
 import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
@@ -25,12 +25,12 @@ import static org.junit.Assert.assertThat;
 
 public class AttributeConditionTestUtils {
 
-    public static <T extends SQCssAttributeCondition> void verifySelectorYieldsAttrCondition(Class<T> conditionClass,
-                                                                                             String selector,
-                                                                                             String attributeName, Matcher<String> valueMatcher) {
+    public static <T extends CssAttributeCondition> void verifySelectorYieldsAttrCondition(Class<T> conditionClass,
+                                                                                           String selector,
+                                                                                           String attributeName, Matcher<String> valueMatcher) {
         // given
         // when
-        SQCssAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, conditionClass);
+        CssAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, conditionClass);
         // then
         assertThat(cssCondition.getAttributeName(), is(attributeName));
         assertThat(cssCondition.getWantedValue(), is(valueMatcher));

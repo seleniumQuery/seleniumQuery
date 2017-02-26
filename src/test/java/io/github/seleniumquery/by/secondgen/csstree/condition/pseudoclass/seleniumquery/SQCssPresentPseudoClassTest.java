@@ -29,13 +29,13 @@ public class SQCssPresentPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(PRESENT_PSEUDO).yieldPseudoClass(SQCssPresentPseudoClass.class);
+        assertQueriesOnSelector(PRESENT_PSEUDO).yieldPseudoClass(CssPresentPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_has_native_support() {
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
-                new SQCssPresentPseudoClass(),
+                new CssPresentPseudoClass(),
                 PRESENT_CSS_SELECTOR,
                 PRESENT_XPATH_EXPRESSION
         );

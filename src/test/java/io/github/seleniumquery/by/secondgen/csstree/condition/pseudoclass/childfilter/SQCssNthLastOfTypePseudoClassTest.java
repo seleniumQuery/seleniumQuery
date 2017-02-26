@@ -24,7 +24,7 @@ public class SQCssNthLastOfTypePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":nth-last-of-type").withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssNthLastOfTypePseudoClass.class);
+        assertQueriesOnSelector(":nth-last-of-type").withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssNthLastOfTypePseudoClass.class);
     }
 
 }

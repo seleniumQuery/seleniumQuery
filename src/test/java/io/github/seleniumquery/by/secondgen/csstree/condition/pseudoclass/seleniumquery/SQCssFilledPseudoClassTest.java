@@ -24,7 +24,7 @@ public class SQCssFilledPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":filled").yieldPseudoClass(SQCssFilledPseudoClass.class);
+        assertQueriesOnSelector(":filled").yieldPseudoClass(CssFilledPseudoClass.class);
     }
 
 }

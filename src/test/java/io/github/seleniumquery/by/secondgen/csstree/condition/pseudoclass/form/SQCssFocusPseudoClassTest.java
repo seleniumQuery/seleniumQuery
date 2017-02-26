@@ -26,12 +26,12 @@ public class SQCssFocusPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":focus").yieldPseudoClass(SQCssFocusPseudoClass.class);
+        assertQueriesOnSelector(":focus").yieldPseudoClass(CssFocusPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__no_browser_has_native_support() {
-        assertFilterOnlyPseudoGeneratesFilter(new SQCssFocusPseudoClass(), FocusPseudoClass.FOCUS_FILTER);
+        assertFilterOnlyPseudoGeneratesFilter(new CssFocusPseudoClass(), FocusPseudoClass.FOCUS_FILTER);
     }
 
 }

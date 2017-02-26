@@ -26,12 +26,12 @@ public class SQCssAnimatedPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":animated").yieldPseudoClass(SQCssAnimatedPseudoClass.class);
+        assertQueriesOnSelector(":animated").yieldPseudoClass(CssAnimatedPseudoClass.class);
     }
 
     @Test(expected = UnsupportedPseudoClassException.class)
     public void toElementFinder__should_just_throw_exception() {
-        new SQCssAnimatedPseudoClass().toElementFinder(UNIVERSAL_SELECTOR_FINDER);
+        new CssAnimatedPseudoClass().toElementFinder(UNIVERSAL_SELECTOR_FINDER);
     }
 
 }

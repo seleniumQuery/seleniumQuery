@@ -29,7 +29,7 @@ public class SQCssEndsWithAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssEndsWithAttributeCondition endsWithAttributeCondition = new SQCssEndsWithAttributeCondition("attribute", "stringToEnd");
+        CssEndsWithAttributeCondition endsWithAttributeCondition = new CssEndsWithAttributeCondition("attribute", "stringToEnd");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = endsWithAttributeCondition.toElementFinder(previous);

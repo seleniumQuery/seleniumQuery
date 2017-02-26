@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
@@ -61,13 +61,13 @@ public class SQCssDescendantSelectorTranslatorTest {
 
         assertThat(descendantSelector, instanceOf(CssConditionalSelector.class));
         CssSelector sqCssSelector = ((CssConditionalSelector) descendantSelector).getCssSelector();
-        SQCssCondition sqCssCondition = ((CssConditionalSelector) descendantSelector).getSqCssCondition();
+        CssCondition cssCondition = ((CssConditionalSelector) descendantSelector).getCssCondition();
 
         assertThat(sqCssSelector, instanceOf(CssTagNameSelector.class));
         assertThat(((CssTagNameSelector) sqCssSelector).getTagName(), is("b"));
 
-        assertThat(sqCssCondition, instanceOf(SQCssClassAttributeCondition.class));
-        assertThat(((SQCssClassAttributeCondition) sqCssCondition).getClassName(), is("condition"));
+        assertThat(cssCondition, instanceOf(CssClassAttributeCondition.class));
+        assertThat(((CssClassAttributeCondition) cssCondition).getClassName(), is("condition"));
     }
 
     /**

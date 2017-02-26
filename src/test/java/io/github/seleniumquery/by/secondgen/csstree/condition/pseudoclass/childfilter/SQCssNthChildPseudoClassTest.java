@@ -41,7 +41,7 @@ public class SQCssNthChildPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(NTH_CHILD_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssNthChildPseudoClass.class);
+        assertQueriesOnSelector(NTH_CHILD_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssNthChildPseudoClass.class);
     }
 
     @Test
@@ -80,8 +80,8 @@ public class SQCssNthChildPseudoClassTest {
         }
     }
 
-    private SQCssNthChildPseudoClass nthChild(String nthChildArgument) {
-        return new SQCssNthChildPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthChildArgument));
+    private CssNthChildPseudoClass nthChild(String nthChildArgument) {
+        return new CssNthChildPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthChildArgument));
     }
 
     @Test

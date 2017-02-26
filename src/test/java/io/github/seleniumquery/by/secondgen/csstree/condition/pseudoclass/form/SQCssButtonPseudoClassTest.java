@@ -32,12 +32,12 @@ public class SQCssButtonPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(BUTTON_PSEUDO).yieldPseudoClass(SQCssButtonPseudoClass.class);
+        assertQueriesOnSelector(BUTTON_PSEUDO).yieldPseudoClass(CssButtonPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        assertPseudoClass(new SQCssButtonPseudoClass()).whenNotNativelySupported().translatesToPureXPath(BUTTON_XPATH_EXPRESSION);
+        assertPseudoClass(new CssButtonPseudoClass()).whenNotNativelySupported().translatesToPureXPath(BUTTON_XPATH_EXPRESSION);
     }
 
 }

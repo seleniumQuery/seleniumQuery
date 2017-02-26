@@ -24,7 +24,7 @@ public class SQCssTabbablePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":tabbable").yieldPseudoClass(SQCssTabbablePseudoClass.class);
+        assertQueriesOnSelector(":tabbable").yieldPseudoClass(CssTabbablePseudoClass.class);
     }
 
 }

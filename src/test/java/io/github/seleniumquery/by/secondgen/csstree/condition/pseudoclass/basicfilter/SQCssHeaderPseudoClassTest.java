@@ -31,12 +31,12 @@ public class SQCssHeaderPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(HEADER_PSEUDO).yieldPseudoClass(SQCssHeaderPseudoClass.class);
+        assertQueriesOnSelector(HEADER_PSEUDO).yieldPseudoClass(CssHeaderPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__REGARDLESS_of_driver_native_support() {
-        assertPseudoClass(new SQCssHeaderPseudoClass()).whenNotNativelySupported().translatesToPureXPath(HEADER_XPATH_EXPRESSION);
+        assertPseudoClass(new CssHeaderPseudoClass()).whenNotNativelySupported().translatesToPureXPath(HEADER_XPATH_EXPRESSION);
     }
 
 }

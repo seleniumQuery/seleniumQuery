@@ -1,7 +1,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssClassAttributeCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.SQCssIdAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssIdAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
@@ -17,9 +17,9 @@ public class SQCssAndConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssIdAttributeCondition idCondition = new SQCssIdAttributeCondition("my-id");
-        SQCssClassAttributeCondition classCondition = new SQCssClassAttributeCondition("class-name");
-        SQCssAndCondition andCondition = new SQCssAndCondition(idCondition, classCondition);
+        CssIdAttributeCondition idCondition = new CssIdAttributeCondition("my-id");
+        CssClassAttributeCondition classCondition = new CssClassAttributeCondition("class-name");
+        CssAndCondition andCondition = new CssAndCondition(idCondition, classCondition);
         // when
         ElementFinder elementFinder = andCondition.toElementFinder(UNIVERSAL_SELECTOR_FINDER);
         // then

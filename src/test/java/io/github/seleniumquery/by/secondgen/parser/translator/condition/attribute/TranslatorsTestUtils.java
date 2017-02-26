@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
@@ -40,21 +40,21 @@ public class TranslatorsTestUtils {
      * @return The condition instance, after parse.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends SQCssCondition> T parseAndAssertFirstCssCondition(String selector, Class<T> conditionClass) {
+    public static <T extends CssCondition> T parseAndAssertFirstCssCondition(String selector, Class<T> conditionClass) {
         CssSelector cssSelector = SQParseTreeBuilder.parse(selector).firstSelector();
         assertThat(cssSelector, instanceOf(CssConditionalSelector.class));
         // when
         CssSelector sqCssSelector = ((CssConditionalSelector) cssSelector).getCssSelector();
-        SQCssCondition sqCssCondition = ((CssConditionalSelector) cssSelector).getSqCssCondition();
+        CssCondition cssCondition = ((CssConditionalSelector) cssSelector).getCssCondition();
         // then
         assertThat(sqCssSelector, instanceOf(CssTagNameSelector.class));
-        assertThat(sqCssCondition, instanceOf(conditionClass));
+        assertThat(cssCondition, instanceOf(conditionClass));
         assertThat(((CssTagNameSelector) sqCssSelector).getTagName(), is("*"));
-        return (T) sqCssCondition;
+        return (T) cssCondition;
     }
 
     @SuppressWarnings("deprecation")
-    public static String getCssStringGeneratedByCondition(SQCssConditionImplementedFinders condition) {
+    public static String getCssStringGeneratedByCondition(CssConditionImplementedFinders condition) {
         return condition.toElementFinder(ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER).toCssString();
     }
 

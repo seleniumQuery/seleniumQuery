@@ -35,12 +35,12 @@ public class SQCssTextPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(TEXT_PSEUDO).yieldPseudoClass(SQCssTextPseudoClass.class);
+        assertQueriesOnSelector(TEXT_PSEUDO).yieldPseudoClass(CssTextPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__REGARDLESS_of_driver_native_support() {
-        assertPseudoClass(new SQCssTextPseudoClass()).whenNotNativelySupported().translatesToPureXPath(TEXT_XPATH_EXPRESSION);
+        assertPseudoClass(new CssTextPseudoClass()).whenNotNativelySupported().translatesToPureXPath(TEXT_XPATH_EXPRESSION);
     }
 
 }

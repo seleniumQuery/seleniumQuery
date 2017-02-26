@@ -37,12 +37,12 @@ public class SQCssSubmitPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(SUBMIT_PSEUDO).yieldPseudoClass(SQCssSubmitPseudoClass.class);
+        assertQueriesOnSelector(SUBMIT_PSEUDO).yieldPseudoClass(CssSubmitPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__REGARDLESS_of_driver_native_support() {
-        assertPseudoClass(new SQCssSubmitPseudoClass()).whenNotNativelySupported().translatesToPureXPath(SUBMIT_XPATH_EXPRESSION);
+        assertPseudoClass(new CssSubmitPseudoClass()).whenNotNativelySupported().translatesToPureXPath(SUBMIT_XPATH_EXPRESSION);
     }
 
 }

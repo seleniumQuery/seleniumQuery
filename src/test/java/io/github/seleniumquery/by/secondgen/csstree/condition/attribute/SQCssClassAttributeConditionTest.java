@@ -29,7 +29,7 @@ public class SQCssClassAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssClassAttributeCondition classAttributeCondition = new SQCssClassAttributeCondition("clazz");
+        CssClassAttributeCondition classAttributeCondition = new CssClassAttributeCondition("clazz");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = classAttributeCondition.toElementFinder(previous);

@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
@@ -31,7 +31,7 @@ import static io.github.seleniumquery.by.secondgen.finder.CssFinder.CSS_NOT_NATI
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class MaybeNativelySupportedPseudoClass implements SQCssConditionImplementedFinders {
+public abstract class MaybeNativelySupportedPseudoClass implements CssConditionImplementedFinders {
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {

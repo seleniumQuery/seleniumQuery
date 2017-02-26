@@ -29,7 +29,7 @@ public class SQCssContainsPrefixAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new SQCssContainsPrefixAttributeCondition("hreflang", "en");
+        CssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new CssContainsPrefixAttributeCondition("hreflang", "en");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = containsPrefixAttributeCondition.toElementFinder(previous);

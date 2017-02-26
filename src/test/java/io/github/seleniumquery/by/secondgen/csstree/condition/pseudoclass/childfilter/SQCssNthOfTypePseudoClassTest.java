@@ -24,7 +24,7 @@ public class SQCssNthOfTypePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":nth-of-type").withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssNthOfTypePseudoClass.class);
+        assertQueriesOnSelector(":nth-of-type").withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssNthOfTypePseudoClass.class);
     }
 
 }
