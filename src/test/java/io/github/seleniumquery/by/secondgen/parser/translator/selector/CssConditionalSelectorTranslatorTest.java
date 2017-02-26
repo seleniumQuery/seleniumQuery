@@ -22,7 +22,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClass
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
-import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
+import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -36,7 +36,7 @@ public class CssConditionalSelectorTranslatorTest {
         // given
         String simpleConditionSelector = "a.condition";
         // when
-        CssSelector cssSelector = SQParseTreeBuilder.parse(simpleConditionSelector).firstSelector();
+        CssSelector cssSelector = ParseTreeBuilder.parse(simpleConditionSelector).firstSelector();
         // then
         assertThat(cssSelector, instanceOf(CssConditionalSelector.class));
         CssSelector sqCssSelector = ((CssConditionalSelector) cssSelector).getCssSelector();
@@ -54,7 +54,7 @@ public class CssConditionalSelectorTranslatorTest {
         // given
         String compoundConditionSelector = "a.conditionA.conditionB";
         // when
-        CssSelector cssSelector = SQParseTreeBuilder.parse(compoundConditionSelector).firstSelector();
+        CssSelector cssSelector = ParseTreeBuilder.parse(compoundConditionSelector).firstSelector();
         // then
         assertThat(cssSelector, instanceOf(CssConditionalSelector.class));
 

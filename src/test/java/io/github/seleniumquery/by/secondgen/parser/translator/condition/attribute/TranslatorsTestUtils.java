@@ -22,7 +22,7 @@ import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelec
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
-import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
+import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -41,7 +41,7 @@ public class TranslatorsTestUtils {
      */
     @SuppressWarnings("unchecked")
     public static <T extends CssCondition> T parseAndAssertFirstCssCondition(String selector, Class<T> conditionClass) {
-        CssSelector cssSelector = SQParseTreeBuilder.parse(selector).firstSelector();
+        CssSelector cssSelector = ParseTreeBuilder.parse(selector).firstSelector();
         assertThat(cssSelector, instanceOf(CssConditionalSelector.class));
         // when
         CssSelector sqCssSelector = ((CssConditionalSelector) cssSelector).getCssSelector();
@@ -54,7 +54,7 @@ public class TranslatorsTestUtils {
     }
 
     @SuppressWarnings("deprecation")
-    public static String getCssStringGeneratedByCondition(CssConditionImplementedFinders condition) {
+    static String getCssStringGeneratedByCondition(CssConditionImplementedFinders condition) {
         return condition.toElementFinder(ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER).toCssString();
     }
 

@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.secondgen;
 import io.github.seleniumquery.by.EnhancedElementFinder;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
-import io.github.seleniumquery.by.secondgen.parser.SQParseTreeBuilder;
+import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,7 +38,7 @@ public class SecondGenEnhancedElementFinder implements EnhancedElementFinder {
     // TODO this code is not tested at all!
     @Override
     public List<WebElement> findElements(SearchContext context, String selector) {
-        CssSelectorList parse = SQParseTreeBuilder.parse(selector);
+        CssSelectorList parse = ParseTreeBuilder.parse(selector);
         Set<WebElement> elements = new LinkedHashSet<>();
         for (CssSelector s : parse) {
             List<WebElement> elementsFound = s.toElementFinder((WebDriver) context).findWebElements(context);

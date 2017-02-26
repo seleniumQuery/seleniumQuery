@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssFirstOfTypePseudoClass extends CssPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class CssFirstOfTypePseudoClass extends CssPseudoClassCondition implements CssConditionImplementedNotYet {
 
     public static final String PSEUDO = "first-of-type";
 

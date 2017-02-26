@@ -17,10 +17,10 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
 import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
-public class CssNthOfTypePseudoClass extends CssFunctionalPseudoClassCondition implements SQCssConditionImplementedNotYet {
+public class CssNthOfTypePseudoClass extends CssFunctionalPseudoClassCondition implements CssConditionImplementedNotYet {
 
     public static final String PSEUDO = "nth-of-type";
 
