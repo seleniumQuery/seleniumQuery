@@ -30,11 +30,12 @@ import java.util.List;
  * Internally, when trying to find the elements:<br>
  * <ul>
  *     <li>it first attempts to find them by CSS if driver/browser supports.</li>
- *     <li>If it doesn't, will use XPath.</li>
- *     <ul>
- *         <li>If the XPath expression alone is not able to bring the exact wanted elements, then the finder
- *         also filters (though iteration) the results brought by the XPath.</li>
- *     </ul>
+ *     <li>If it doesn't, will use XPath.
+ *         <ul>
+ *             <li>If the XPath expression alone is not able to bring the exact wanted elements, then the finder
+ *             also filters (though iteration) the results brought by the XPath.</li>
+ *         </ul>
+ *     </li>
  * </ul>
  *
  * @author acdcjunior
