@@ -26,12 +26,12 @@ public class SQCssVisiblePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":visible").yieldPseudoClass(SQCssVisiblePseudoClass.class);
+        assertQueriesOnSelector(":visible").yieldPseudoClass(CssVisiblePseudoClass.class);
     }
 
     @Test
     public void toElementFinder__no_browser_has_native_support() {
-        assertFilterOnlyPseudoGeneratesFilter(new SQCssVisiblePseudoClass(), VisiblePseudoClass.VISIBLE_FILTER);
+        assertFilterOnlyPseudoGeneratesFilter(new CssVisiblePseudoClass(), VisiblePseudoClass.VISIBLE_FILTER);
     }
 
 }

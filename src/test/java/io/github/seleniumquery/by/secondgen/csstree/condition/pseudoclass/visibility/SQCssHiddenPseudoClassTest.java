@@ -26,12 +26,12 @@ public class SQCssHiddenPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":hidden").yieldPseudoClass(SQCssHiddenPseudoClass.class);
+        assertQueriesOnSelector(":hidden").yieldPseudoClass(CssHiddenPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__no_browser_has_native_support() {
-        assertFilterOnlyPseudoGeneratesFilter(new SQCssHiddenPseudoClass(), HiddenPseudoClass.HIDDEN_FILTER);
+        assertFilterOnlyPseudoGeneratesFilter(new CssHiddenPseudoClass(), HiddenPseudoClass.HIDDEN_FILTER);
     }
 
 }

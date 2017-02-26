@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -30,10 +30,10 @@ abstract class ConditionTranslatorVerifier {
         this.prefix = prefix;
     }
 
-    public abstract SQCssConditionImplementedFinders verifyTranslation(String actualSelector, String expectedId);
+    public abstract CssConditionImplementedFinders verifyTranslation(String actualSelector, String expectedId);
 
     public void verifyTranslationAndReturn(String actualSelector, String expectedId) {
-        SQCssConditionImplementedFinders condition = verifyTranslation(actualSelector, expectedId);
+        CssConditionImplementedFinders condition = verifyTranslation(actualSelector, expectedId);
         String cssStringGeneratedByCondition = TranslatorsTestUtils.getCssStringGeneratedByCondition(condition);
         assertThat(cssStringGeneratedByCondition, is(prefix + actualSelector));
     }

@@ -33,13 +33,13 @@ public class SQCssDisabledPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(DISABLED_PSEUDO).yieldPseudoClass(SQCssDisabledPseudoClass.class);
+        assertQueriesOnSelector(DISABLED_PSEUDO).yieldPseudoClass(CssDisabledPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_has_native_support() {
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
-                new SQCssDisabledPseudoClass(),
+                new CssDisabledPseudoClass(),
                 DISABLED_PSEUDO,
                 DISABLED_XPATH_EXPRESSION
         );
@@ -47,7 +47,7 @@ public class SQCssDisabledPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        assertPseudoClass(new SQCssDisabledPseudoClass()).whenNotNativelySupported().translatesToPureXPath(DISABLED_XPATH_EXPRESSION);
+        assertPseudoClass(new CssDisabledPseudoClass()).whenNotNativelySupported().translatesToPureXPath(DISABLED_XPATH_EXPRESSION);
     }
 
 }

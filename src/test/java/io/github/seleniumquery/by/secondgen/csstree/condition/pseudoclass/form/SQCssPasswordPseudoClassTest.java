@@ -30,13 +30,13 @@ public class SQCssPasswordPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(PASSWORD_PSEUDO).yieldPseudoClass(SQCssPasswordPseudoClass.class);
+        assertQueriesOnSelector(PASSWORD_PSEUDO).yieldPseudoClass(CssPasswordPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(
-                new SQCssPasswordPseudoClass(),
+                new CssPasswordPseudoClass(),
                 PASSWORD_PSEUDO,
                 PASSWORD_CSS_SELECTOR,
                 PASSWORD_XPATH_EXPRESSION

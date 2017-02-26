@@ -24,7 +24,7 @@ public class SQCssRootPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":root").yieldPseudoClass(SQCssRootPseudoClass.class);
+        assertQueriesOnSelector(":root").yieldPseudoClass(CssRootPseudoClass.class);
     }
 
 }

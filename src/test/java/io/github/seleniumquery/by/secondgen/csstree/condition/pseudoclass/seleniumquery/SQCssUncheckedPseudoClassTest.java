@@ -24,7 +24,7 @@ public class SQCssUncheckedPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":unchecked").yieldPseudoClass(SQCssUncheckedPseudoClass.class);
+        assertQueriesOnSelector(":unchecked").yieldPseudoClass(CssUncheckedPseudoClass.class);
     }
 
 }

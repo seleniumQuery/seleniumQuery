@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -30,7 +30,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
     @Test
     public void getArgument() throws Exception {
         PseudoClassSelector pseudoClassSelector = PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector("1");
-        SQCssFunctionalPseudoClassCondition functionalPseudoClassCondition = new SQCssFunctionalPseudoClassCondition(pseudoClassSelector);
+        CssFunctionalPseudoClassCondition functionalPseudoClassCondition = new CssFunctionalPseudoClassCondition(pseudoClassSelector);
         String argument = functionalPseudoClassCondition.getArgument().getArgumentAsString();
         assertThat(argument, is("1"));
     }
@@ -39,7 +39,7 @@ public class SQCssFunctionalPseudoClassConditionTest {
     public void toElementFinder__should_call_toElementFinder_in_object_returned_from_strategy_method() throws Exception {
         final ElementFinder argFinder = new ElementFinder((WebDriver) null, null, null);
         final ElementFinder returningFinder = new ElementFinder((WebDriver) null, null, null);
-        final SQCssConditionImplementedFinders finderGen = new SQCssConditionImplementedFinders() {
+        final CssConditionImplementedFinders finderGen = new CssConditionImplementedFinders() {
             @Override
             public ElementFinder toElementFinder(ElementFinder leftFinder) {
                 if (argFinder.equals(leftFinder)) {
@@ -49,9 +49,9 @@ public class SQCssFunctionalPseudoClassConditionTest {
             }
         };
         PseudoClassSelector pseudoClassSelector = PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector("1");
-        SQCssFunctionalPseudoClassCondition functionalPseudoClassCondition = new SQCssFunctionalPseudoClassCondition(pseudoClassSelector) {
+        CssFunctionalPseudoClassCondition functionalPseudoClassCondition = new CssFunctionalPseudoClassCondition(pseudoClassSelector) {
             @Override
-            public SQCssConditionImplementedFinders getElementFinderFactoryStrategy() {
+            public CssConditionImplementedFinders getElementFinderFactoryStrategy() {
                 return finderGen;
             }
         };

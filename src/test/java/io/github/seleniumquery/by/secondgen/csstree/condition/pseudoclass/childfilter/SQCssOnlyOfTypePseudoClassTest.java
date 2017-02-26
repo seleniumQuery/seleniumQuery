@@ -24,7 +24,7 @@ public class SQCssOnlyOfTypePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":only-of-type").yieldPseudoClass(SQCssOnlyOfTypePseudoClass.class);
+        assertQueriesOnSelector(":only-of-type").yieldPseudoClass(CssOnlyOfTypePseudoClass.class);
     }
 
 }

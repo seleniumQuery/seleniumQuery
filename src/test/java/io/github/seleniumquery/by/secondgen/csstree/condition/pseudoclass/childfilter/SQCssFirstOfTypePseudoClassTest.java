@@ -24,7 +24,7 @@ public class SQCssFirstOfTypePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":first-of-type").yieldPseudoClass(SQCssFirstOfTypePseudoClass.class);
+        assertQueriesOnSelector(":first-of-type").yieldPseudoClass(CssFirstOfTypePseudoClass.class);
     }
 
 }

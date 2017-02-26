@@ -31,12 +31,12 @@ public class SQCssContainsPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(CONTAINS_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssContainsPseudoClass.class);
+        assertQueriesOnSelector(CONTAINS_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssContainsPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__REGARDLESS_of_driver_native_support() {
-        SQCssContainsPseudoClass containsPseudoClass = new SQCssContainsPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("my stuff"));
+        CssContainsPseudoClass containsPseudoClass = new CssContainsPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("my stuff"));
         assertPseudoClass(containsPseudoClass).whenNotNativelySupported().translatesToPureXPath(CONTAINS_XPATH_EXPRESSION);
     }
 

@@ -37,13 +37,13 @@ public class SQCssCheckedPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(CHECKED_PSEUDO).yieldPseudoClass(SQCssCheckedPseudoClass.class);
+        assertQueriesOnSelector(CHECKED_PSEUDO).yieldPseudoClass(CssCheckedPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_has_native_support() {
         assertPseudoSupportsOnlyPureCssAndNotPureXPathWhenNativelySupported(
-                new SQCssCheckedPseudoClass(),
+                new CssCheckedPseudoClass(),
                 CHECKED_PSEUDO,
                 CHECKED_XPATH_EXPRESSION,
                 CheckedPseudoClass.CHECKED_FILTER
@@ -53,7 +53,7 @@ public class SQCssCheckedPseudoClassTest {
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoClassDoesNotSupportAnythingPurelyWhenNotNativelySupported(
-                new SQCssCheckedPseudoClass(),
+                new CssCheckedPseudoClass(),
                 CHECKED_XPATH_EXPRESSION,
                 CheckedPseudoClass.CHECKED_FILTER
         );
@@ -68,7 +68,7 @@ public class SQCssCheckedPseudoClassTest {
     public void toElementFinder__when_driver_is_PHANTOMJSDRIVER_it_behaves_like_it_does_NOT_have_native_support() {
         ElementFinder previousFinder = ElementFinderUtilsTest.universalSelectorFinder(createWebDriverEmulatingPhantomJSAndWithNativeSupporForPseudo(CHECKED_PSEUDO));
         assertPseudoClassHasFinder(
-                new SQCssCheckedPseudoClass(),
+                new CssCheckedPseudoClass(),
                 previousFinder,
                 CSS_UNIVERSAL_SELECTOR,
                 PURE_CSS_IS_NOT_SUPPORTED,

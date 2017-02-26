@@ -44,7 +44,7 @@ public class SQCssSelectedPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(SELECTED_PSEUDO).yieldPseudoClass(SQCssSelectedPseudoClass.class);
+        assertQueriesOnSelector(SELECTED_PSEUDO).yieldPseudoClass(CssSelectedPseudoClass.class);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class SQCssSelectedPseudoClassTest {
         // supports pure CSS, but it is a translated one
         ElementFinder previousFinder = universalSelectorFinder(ElementFinderUtilsTest.createWebDriverWithNativeSupportForPseudo(CHECKED_PSEUDO));
         assertPseudoClassHasFinder(
-                new SQCssSelectedPseudoClass(),
+                new CssSelectedPseudoClass(),
                 previousFinder,
                 "option:checked",
                 PURE_CSS_IS_SUPPORTED,
@@ -64,7 +64,7 @@ public class SQCssSelectedPseudoClassTest {
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoClassDoesNotSupportAnythingPurelyWhenNotNativelySupported(
-                new SQCssSelectedPseudoClass(),
+                new CssSelectedPseudoClass(),
                 SELECTED_XPATH_EXPRESSION,
                 SelectedPseudoClass.SELECTED_FILTER
         );
@@ -74,10 +74,10 @@ public class SQCssSelectedPseudoClassTest {
     public void toElementFinder__when_driver_has_native_supportx() {
         // supports pure CSS, but it is a translated one
         WebDriver mockDriverWithNativeSupportForChecked = ElementFinderUtilsTest.createWebDriverWithNativeSupportForPseudo(CHECKED_PSEUDO);
-        ElementFinder finderAfterChecked = new SQCssCheckedPseudoClass().toElementFinder(universalSelectorFinder(mockDriverWithNativeSupportForChecked));
+        ElementFinder finderAfterChecked = new CssCheckedPseudoClass().toElementFinder(universalSelectorFinder(mockDriverWithNativeSupportForChecked));
 
         assertPseudoClassHasFinder(
-                new SQCssSelectedPseudoClass(),
+                new CssSelectedPseudoClass(),
                 finderAfterChecked,
                 "option:checked:checked",
                 PURE_CSS_IS_SUPPORTED,
@@ -96,7 +96,7 @@ public class SQCssSelectedPseudoClassTest {
         WebDriver driver = createWebDriverEmulatingPhantomJSAndWithNativeSupporForPseudo(CHECKED_PSEUDO);
         ElementFinder previousFinder = universalSelectorFinder(driver);
         assertPseudoClassHasFinder(
-                new SQCssSelectedPseudoClass(),
+                new CssSelectedPseudoClass(),
                 previousFinder,
                 CSS_UNIVERSAL_SELECTOR,
                 PURE_CSS_IS_NOT_SUPPORTED,

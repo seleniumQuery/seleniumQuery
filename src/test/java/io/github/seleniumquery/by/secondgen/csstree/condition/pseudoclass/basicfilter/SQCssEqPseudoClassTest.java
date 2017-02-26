@@ -33,7 +33,7 @@ public class SQCssEqPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(EQ_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(SQCssEqPseudoClass.class);
+        assertQueriesOnSelector(EQ_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssEqPseudoClass.class);
     }
 
     @Test
@@ -56,8 +56,8 @@ public class SQCssEqPseudoClassTest {
         }
     }
 
-    private SQCssEqPseudoClass eq(String eqArgument) {
-        return new SQCssEqPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(eqArgument));
+    private CssEqPseudoClass eq(String eqArgument) {
+        return new CssEqPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(eqArgument));
     }
 
     @Test

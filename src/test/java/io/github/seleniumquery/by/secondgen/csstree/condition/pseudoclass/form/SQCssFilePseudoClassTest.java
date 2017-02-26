@@ -30,13 +30,13 @@ public class SQCssFilePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(FILE_PSEUDO).yieldPseudoClass(SQCssFilePseudoClass.class);
+        assertQueriesOnSelector(FILE_PSEUDO).yieldPseudoClass(CssFilePseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(
-                new SQCssFilePseudoClass(),
+                new CssFilePseudoClass(),
                 FILE_PSEUDO,
                 FILE_CSS_SELECTOR,
                 FILE_XPATH_EXPRESSION

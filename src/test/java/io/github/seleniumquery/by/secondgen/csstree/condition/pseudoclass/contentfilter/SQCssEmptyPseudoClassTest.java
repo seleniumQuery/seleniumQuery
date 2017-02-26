@@ -28,12 +28,12 @@ public class SQCssEmptyPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(EMPTY_PSEUDO).yieldPseudoClass(SQCssEmptyPseudoClass.class);
+        assertQueriesOnSelector(EMPTY_PSEUDO).yieldPseudoClass(CssEmptyPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        assertPseudoClass(new SQCssEmptyPseudoClass()).whenNotNativelySupported().translatesToPureXPath(EMPTY_XPATH_EXPRESSION);
+        assertPseudoClass(new CssEmptyPseudoClass()).whenNotNativelySupported().translatesToPureXPath(EMPTY_XPATH_EXPRESSION);
     }
 
 }

@@ -30,13 +30,13 @@ public class SQCssRadioPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(RADIO_PSEUDO).yieldPseudoClass(SQCssRadioPseudoClass.class);
+        assertQueriesOnSelector(RADIO_PSEUDO).yieldPseudoClass(CssRadioPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
         assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(
-                new SQCssRadioPseudoClass(),
+                new CssRadioPseudoClass(),
                 RADIO_PSEUDO,
                 RADIO_CSS_SELECTOR,
                 RADIO_XPATH_EXPRESSION

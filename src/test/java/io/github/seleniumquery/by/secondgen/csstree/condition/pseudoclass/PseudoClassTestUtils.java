@@ -22,7 +22,7 @@ import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.common.preparser.FakeArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.secondgen.csstree.condition.SQCssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.w3c.css.sac.Selector;
 
@@ -49,7 +49,7 @@ public class PseudoClassTestUtils {
 
         private QueriesOnPseudoclassSelectorsTestAssertBuilder(String selector) { this.selector = selector; }
 
-        public <T extends SQCssCondition> void yieldPseudoClass(Class<T> pseudoClassClass) {
+        public <T extends CssCondition> void yieldPseudoClass(Class<T> pseudoClassClass) {
             assertQueryOnSelectorYieldsPseudoClass(this.selector, pseudoClassClass);
         }
         public QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder withAllKindsOfArguments() {
@@ -57,7 +57,7 @@ public class PseudoClassTestUtils {
         }
     }
 
-    private static <T extends SQCssCondition> void assertQueryOnSelectorYieldsPseudoClass(String selector, Class<T> pseudoClassClass) {
+    private static <T extends CssCondition> void assertQueryOnSelectorYieldsPseudoClass(String selector, Class<T> pseudoClassClass) {
         // given
         // selector
         // when
@@ -70,13 +70,13 @@ public class PseudoClassTestUtils {
         private final String selector;
         private QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder(String selector) { this.selector = selector; }
 
-        public <T extends SQCssFunctionalPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(Class<T> pseudoClassClass) {
+        public <T extends CssFunctionalPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(Class<T> pseudoClassClass) {
             assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(this.selector, pseudoClassClass);
         }
     }
 
-    private static <T extends SQCssFunctionalPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(String selector,
-                                                                                                                                       Class<T> pseudoClassClass) {
+    private static <T extends CssFunctionalPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(String selector,
+                                                                                                                                     Class<T> pseudoClassClass) {
         try {
             assertSelectorTranslatesArgument(selector, pseudoClassClass, "", null);
             fail("Functional Pseudo called without () should throw exception.");
@@ -97,8 +97,8 @@ public class PseudoClassTestUtils {
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(\"a 'c' b\")", "\"a 'c' b\"");
     }
 
-    private static <T extends SQCssFunctionalPseudoClassCondition> void assertSelectorTranslatesArgument(String selector, Class<T> pseudoClassClass,
-                                                                                                         String selectorSuffix, String expectedArgument) {
+    private static <T extends CssFunctionalPseudoClassCondition> void assertSelectorTranslatesArgument(String selector, Class<T> pseudoClassClass,
+                                                                                                       String selectorSuffix, String expectedArgument) {
         // given
         // selector
         // when
@@ -111,7 +111,7 @@ public class PseudoClassTestUtils {
         }
     }
 
-    public static void assertFilterOnlyPseudoGeneratesFilter(SQCssPseudoClassCondition pseudoClassCondition, ElementFilter pseudoClassFilter) {
+    public static void assertFilterOnlyPseudoGeneratesFilter(CssPseudoClassCondition pseudoClassCondition, ElementFilter pseudoClassFilter) {
         ElementFinder previous = universalSelectorFinder(createWebDriverWithNativeSupportForNoPseudoClass());
         // when
         ElementFinder elementFinder = pseudoClassCondition.toElementFinder(previous);

@@ -29,7 +29,7 @@ public class SQCssIdAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        SQCssIdAttributeCondition idAttributeCondition = new SQCssIdAttributeCondition("idz");
+        CssIdAttributeCondition idAttributeCondition = new CssIdAttributeCondition("idz");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = idAttributeCondition.toElementFinder(previous);

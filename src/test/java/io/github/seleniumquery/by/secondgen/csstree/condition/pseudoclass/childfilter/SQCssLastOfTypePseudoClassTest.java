@@ -24,7 +24,7 @@ public class SQCssLastOfTypePseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":last-of-type").yieldPseudoClass(SQCssLastOfTypePseudoClass.class);
+        assertQueriesOnSelector(":last-of-type").yieldPseudoClass(CssLastOfTypePseudoClass.class);
     }
 
 }
