@@ -42,7 +42,7 @@ public class PhantomJSDriverBuilderTest {
     }
 
     private void assertPhantomJSExecutablePropertyPointsToExecutableInClasspath(String resolvedPath) {
-        assertThat(resolvedPath, endsWithIgnoringCase("/target/test-classes/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH));
+        assertThat(resolvedPath.toUpperCase(), endsWith(("/target/test-classes/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH).toUpperCase()));
     }
 
     @Test
@@ -93,7 +93,7 @@ public class PhantomJSDriverBuilderTest {
         // when
         String resolvedPath = driverBuilder.resolvePhantomJsExecutablePath();
         // then
-        assertThat(resolvedPath, endsWithIgnoringCase(customPathToPhantomJs));
+        assertThat(resolvedPath.toUpperCase(), endsWith(customPathToPhantomJs.toUpperCase()));
     }
 
 }

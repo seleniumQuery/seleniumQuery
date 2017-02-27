@@ -71,10 +71,10 @@ public class ValFunctionTest {
         }
     }
 
-    @Test(expected = java.lang.UnsupportedOperationException.class)
+    @Test
     @HtmlUnitOnly
     @JavaScriptDisabledOnly
-    public void val_write__divWithoutContentEditableAttribute___throws_exception__HtmlUnit_JS_OFF() {
+    public void val_write__divWithoutContentEditableAttribute___hasNoEffect__HtmlUnit_JS_OFF() {
         verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
     }
 
