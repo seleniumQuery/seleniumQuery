@@ -16,6 +16,7 @@
 
 package testinfrastructure.testutils;
 
+import io.github.seleniumquery.browser.BrowserFunctions;
 import io.github.seleniumquery.utils.DriverVersionUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -47,8 +48,16 @@ public class DriverInTest {
         return DriverVersionUtils.getInstance().isHtmlUnitDriver(driver);
     }
 
+    public static boolean isHtmlUnitDriver(BrowserFunctions $) {
+        return isHtmlUnitDriver($.driver().get());
+    }
+
     public static boolean isNotHtmlUnitDriver(WebDriver driver) {
         return !isHtmlUnitDriver(driver);
+    }
+
+    public static boolean isNotHtmlUnitDriver(BrowserFunctions $) {
+        return isNotHtmlUnitDriver($.driver().get());
     }
 
     public static boolean isSafariDriver(WebDriver driver) {

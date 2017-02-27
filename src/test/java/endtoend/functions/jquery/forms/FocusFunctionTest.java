@@ -23,9 +23,9 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
+import testinfrastructure.testutils.DriverInTest;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
@@ -60,7 +60,7 @@ public class FocusFunctionTest {
     	// still, someone wanting to focus the html seems to be a highly unlikely operation, even more
     	// since the body IS focusable
     	$("html").focus();
-    	if (!($.driver().get() instanceof HtmlUnitDriver)) {
+    	if (DriverInTest.isNotHtmlUnitDriver($)) {
     		assertThat($("html").is(":focus"), is(true));
     	}
 
@@ -110,39 +110,25 @@ public class FocusFunctionTest {
 
     	$("#im1").focus();
     	assertThat($("#im1").is(":focus"), is(true));
+        ClickFunctionTest.removeDivBodyFocusAddedWhenDriverIsHtmlUnit();
 
-    	if (!($.driver().get() instanceof HtmlUnitDriver)) {
-	    	assertThat($("div").size(), is(4));
-	    	assertThat($("div.i1").size(), is(1));
-	    	assertThat($("div.i2").size(), is(1));
-	    	assertThat($("div.a1").size(), is(1));
-	    	assertThat($("div.im1").size(), is(1));
-	    	assertThat($("div.im1.focus").size(), is(1));
-    	} else {
-    		// HtmlUnitDriver will focus, but won't trigger the focus EVENT for the <img> tag... :/
-	    	assertThat($("div").size(), is(3));
-	    	assertThat($("div.i1").size(), is(1));
-	    	assertThat($("div.i2").size(), is(1));
-	    	assertThat($("div.a1").size(), is(1));
-    	}
+        assertThat($("div").size(), is(4));
+        assertThat($("div.i1").size(), is(1));
+        assertThat($("div.i2").size(), is(1));
+        assertThat($("div.a1").size(), is(1));
+        assertThat($("div.im1").size(), is(1));
+        assertThat($("div.im1.focus").size(), is(1));
 
     	$("body").focus();
     	assertThat($("body").is(":focus"), is(true));
-    	if (!($.driver().get() instanceof HtmlUnitDriver)) {
-	    	assertThat($("div").size(), is(5));
-	    	assertThat($("div.i1").size(), is(1));
-	    	assertThat($("div.i2").size(), is(1));
-	    	assertThat($("div.a1").size(), is(1));
-	    	assertThat($("div.im1").size(), is(1));
-	    	assertThat($("div.body.focus").size(), is(1));
-	    	assertThat($("div.body.click").size(), is(0));
-    	} else {
-    		// HtmlUnitDriver will focus, but won't trigger the focus event for the <body> tag either!
-	    	assertThat($("div").size(), is(3));
-	    	assertThat($("div.i1").size(), is(1));
-	    	assertThat($("div.i2").size(), is(1));
-	    	assertThat($("div.a1").size(), is(1));
-    	}
+
+        assertThat($("div").size(), is(5));
+        assertThat($("div.i1").size(), is(1));
+        assertThat($("div.i2").size(), is(1));
+        assertThat($("div.a1").size(), is(1));
+        assertThat($("div.im1").size(), is(1));
+        assertThat($("div.body.focus").size(), is(1));
+        assertThat($("div.body.click").size(), is(0));
     }
 
     private void removeDivBodyFocusAddedWhenDriverIsIeAndWhenFocusingInput() {
