@@ -42,7 +42,6 @@ public class ClickFunctionTest {
         assertThat($("div").size(), is(0));
 
         $("#i1").click();
-        removeDivBodyFocusAddedWhenDriverIsHtmlUnit();
 
         assertThat($("div.i1.click").size(), is(1));
         assertThat($("div.i1.focus").size(), is(1));
@@ -52,7 +51,6 @@ public class ClickFunctionTest {
         assertThat($("div").size(), is(3));
 
         $("#i2").click();
-        removeDivBodyFocusAddedWhenDriverIsHtmlUnit();
 
         assertThat($("div.i1.click").size(), is(1));
         assertThat($("div.i1.focus").size(), is(1));
@@ -99,7 +97,7 @@ public class ClickFunctionTest {
     public static void removeDivBodyFocusAddedWhenDriverIsHtmlUnit() {
         WebDriver driver = $.driver().get();
 
-        if (DriverInTest.isHtmlUnitDriver(driver)) {
+        if (DriverInTest.isHtmlUnitDriver($)) {
             // #CrossDriver
             // HtmlUnit emits a focus on body when i1 is clicked (other browsers just emit a focus on i1)
             removeDivBodyFocus();

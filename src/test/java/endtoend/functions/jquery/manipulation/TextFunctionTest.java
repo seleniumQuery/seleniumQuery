@@ -36,8 +36,8 @@ public class TextFunctionTest {
 		WebDriver driver = $.driver().get();
 
 		String text = "Demonstration Box\nlist item 1\nlist item 2";
-    	if (DriverInTest.isHtmlUnitDriver(driver)) {
-			text = "Demonstration Box\nlist item 1 list item 2";
+    	if (DriverInTest.isHtmlUnitDriver($)) {
+			text = "Demonstration Box\n\nlist item 1\nlist item 2";
     	} else if (DriverInTest.isRemoteEdge(driver)) {
 			text = "Demonstration Box\r\nlist item 1\r\nlist item 2";
     	}
@@ -57,9 +57,7 @@ public class TextFunctionTest {
 		// this is no fix, just documenting the difference
 		// IE (tested IE11) will make .text() follow the typed text. Other browsers will keep the original one.
 		// This is OK, as it is the SAME behavior presented by jQuery!
-		//
-		// Well, HtmlUnit follows IE...
-        if (DriverInTest.isIEDriver(driver) || DriverInTest.isHtmlUnitDriver(driver)) {
+        if (DriverInTest.isIEDriver(driver)) {
     		assertThat($("#myTextArea").text().trim(), is("Typed stuff in textarea"));
 		} else {
 			assertThat($("#myTextArea").text().trim(), is("Initial value for textarea"));
