@@ -32,6 +32,7 @@
 
 		<selenium-java.version>3.2.0</selenium-java.version>
         <htmlunit-driver.version>2.25</htmlunit-driver.version>
+        <phantomjsdriver.version>1.4.1</phantomjsdriver.version>
     </properties>
 
 	<dependencies>
@@ -64,11 +65,13 @@
 			<!--
 			This is a workaround for PhantomJS to work with Selenium 2.44.0 and on.
 			Until a newer version of GhostDriver is released, this will be needed.
-			See: https://github.com/detro/ghostdriver/issues/397 https://github.com/detro/ghostdriver/pull/399
+			See: https://github.com/detro/ghostdriver/issues/397
+			     https://github.com/detro/ghostdriver/pull/399
+			     https://github.com/codeborne/ghostdriver
 			-->
 			<groupId>com.codeborne</groupId>
 			<artifactId>phantomjsdriver</artifactId>
-			<version>1.3.0</version>
+			<version>${phantomjsdriver.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.seleniumhq.selenium</groupId>
