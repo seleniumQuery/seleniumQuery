@@ -11,9 +11,10 @@ branches:
   only:
     - master
 
-image: Visual Studio 2015
-platform:
-  - Win32
+os: Visual Studio 2015
+#image: Visual Studio 2015
+#platform:
+#  - Win32
 
 install:
   - cinst PhantomJS -y -Version 2.1.1
@@ -31,9 +32,9 @@ install:
   - cmd: SET PATH=C:\tools\apache-maven-3.3.9\bin;%JAVA_HOME%\bin;%PATH%
 
 build_script:
-  - mvn clean package -DskipTests -Dos.name=windows -Dmaven.javadoc.skip=true
+  - mvn clean package -DskipTests -Dmaven.javadoc.skip=true -Djna.nosys=true
 test_script:
-  - mvn test -Dos.name=windows -Dmaven.javadoc.skip=true
+  - mvn test -Dmaven.javadoc.skip=true -Djna.nosys=true
 
 cache:
 #  - C:\tools\PhantomJS\
