@@ -29,9 +29,9 @@ install:
   - cmd: SET PATH=C:\tools\apache-maven-3.3.9\bin;%JAVA_HOME%\bin;%PATH%
 
 build_script:
-  - mvn clean package -DskipTests -Dos.name=windows
+  - mvn clean package -DskipTests -Dos.name=windows -Dmaven.javadoc.skip=true
 test_script:
-  - mvn clean test -Dos.name=windows
+  - mvn clean test -Dos.name=windows -Dmaven.javadoc.skip=true
 
 cache:
 #  - C:\tools\PhantomJS\
