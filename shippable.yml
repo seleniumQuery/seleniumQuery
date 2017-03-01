@@ -20,7 +20,7 @@ build:
   ci:
     - echo $JAVA_HOME
     - echo $(google-chrome --version)
-    - echo $JAVA_HOME
     - mkdir -p shippable/codecoverage
-    - mvn install jacoco:report  -Dmaven.javadoc.skip=true
-    - cp -r target shippable/codecoverage
+    - chmod +x gradlew
+    - ./gradlew test jacocoTestReport 
+    - cp -r build shippable/codecoverage
