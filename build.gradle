@@ -1,5 +1,4 @@
-apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: "java"
 
 group = 'io.github.seleniumquery'
 version = '0.17.0-SNAPSHOT'
@@ -13,7 +12,7 @@ tasks.withType(JavaCompile) {
 }
 
 repositories {
-     mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
@@ -33,4 +32,10 @@ dependencies {
         exclude(module: 'hamcrest-core')
     }
     testCompile('org.hamcrest:hamcrest-junit:2.0.0.0')
+}
+
+// https://docs.gradle.org/current/userguide/jacoco_plugin.html
+apply plugin: "jacoco"
+jacoco {
+    toolVersion = "0.7.9"
 }
