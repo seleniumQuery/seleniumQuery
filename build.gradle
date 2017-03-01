@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'io.github.seleniumquery'
+version = '0.17.0-SNAPSHOT'
+
+description = "seleniumQuery"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+     mavenCentral()
+}
+
+dependencies {
+    compile('net.sourceforge.cssparser:cssparser:0.9.22')
+    compile('org.apache.commons:commons-lang3:3.5')
+    compile('org.seleniumhq.selenium:selenium-java:3.2.0')
+    compile('org.seleniumhq.selenium:selenium-remote-driver:3.2.0')
+    compile('org.seleniumhq.selenium:htmlunit-driver:2.25')
+    compile('com.codeborne:phantomjsdriver:1.4.1') {
+        exclude(module: 'selenium-java')
+        exclude(module: 'selenium-remote-driver')
+    }
+    compile('commons-logging:commons-logging:1.2')
+    compile('org.unbescape:unbescape:1.1.4.RELEASE')
+	
+    testCompile('junit:junit:4.12') {
+        exclude(module: 'hamcrest-core')
+    }
+    testCompile('org.hamcrest:hamcrest-junit:2.0.0.0')
+}
