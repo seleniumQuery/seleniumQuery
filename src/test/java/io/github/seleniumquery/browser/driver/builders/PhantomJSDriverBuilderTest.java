@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import java.io.File;
@@ -42,7 +43,10 @@ public class PhantomJSDriverBuilderTest {
     }
 
     private void assertPhantomJSExecutablePropertyPointsToExecutableInClasspath(String resolvedPath) {
-        assertThat(resolvedPath.toUpperCase(), endsWith(("/target/test-classes/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH).toUpperCase()));
+        assertThat(resolvedPath.toUpperCase(), Matchers.anyOf(
+            endsWith(("/target/test-classes/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH).toUpperCase()), // maven
+            endsWith(("/build/resources/test/"+EXECUTABLE_THAT_EXISTS_IN_CLASSPATH).toUpperCase()) // gradle
+        ));
     }
 
     @Test
