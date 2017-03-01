@@ -1,9 +1,26 @@
+# http://docs.shippable.com/tutorials/ci/hub-docker-pull-image/
+# https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&q=java8+chrome&starCount=0
+# https://github.com/search?utf8=%E2%9C%93&q=shippable+build+pre_ci++%22docker+pull%22+extension%3Ayml&type=Code&ref=searchresults
+
+# http://docs.shippable.com/ci/languages/java/
+# https://github.com/search?utf8=%E2%9C%93&q=shippable+jacoco++extension%3Ayml&type=Code&ref=searchresults
+
+#build:
+#  pre_ci:
+#    - docker pull siomiz/chrome:latest
+#    - echo $JAVA_HOME
+#    - echo $(google-chrome --version)
+#    - echo $JAVA_HOME
 build:
-  pre_ci:
-    - docker pull siomiz/chrome:latest
-    - "google-chrome --version"
+  pre_ci_boot:
+    image_name: siomiz/chrome
+    image_tag: latest
+    pull: true
   advancedReporting: true
   ci:
+    - echo $JAVA_HOME
+    - echo $(google-chrome --version)
+    - echo $JAVA_HOME
     - mkdir -p shippable/codecoverage
     - mvn install jacoco:report  -Dmaven.javadoc.skip=true
     - cp -r target shippable/codecoverage
