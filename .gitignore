@@ -14,3 +14,7 @@ target/
 errorPage.html
 phantomjsdriver.log
 errorPage.png
+
+# Gradle
+build/
+.gradle/
