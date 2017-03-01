@@ -1,0 +1,9 @@
+build:
+  pre_ci:
+    - docker pull siomiz/chrome:latest
+    - "google-chrome --version"
+  advancedReporting: true
+  ci:
+    - mkdir -p shippable/codecoverage
+    - mvn install jacoco:report  -Dmaven.javadoc.skip=true
+    - cp -r target shippable/codecoverage
