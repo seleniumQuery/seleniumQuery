@@ -1,3 +1,17 @@
+#machine:
+#  java:
+#    version: oraclejdk8
+
 machine:
-  java:
-    version: oraclejdk8
+  node:
+    version: 4
+  services:
+    - docker
+
+dependencies:
+  post:
+    - docker pull jamesdbloom/docker-java8-maven
+
+test:
+  post:
+    - mvn clean test
