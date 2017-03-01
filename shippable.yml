@@ -22,5 +22,5 @@ build:
     - echo $(google-chrome --version)
     - mkdir -p shippable/codecoverage
     - chmod +x gradlew
-    - ./gradlew test jacocoTestReport 
+    - ./gradlew test jacocoTestReport --debug --stacktrace
     - cp -r build shippable/codecoverage
