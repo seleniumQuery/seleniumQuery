@@ -13,7 +13,7 @@
 #    - echo $JAVA_HOME
 build:
   pre_ci_boot:
-    image_name: siomiz/chrome
+    image_name: jeroenknoops/java8-groovy-chrome-xvfb
     image_tag: latest
     pull: true
   advancedReporting: true
