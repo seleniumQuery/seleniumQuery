@@ -11,6 +11,10 @@
 #    - echo $JAVA_HOME
 #    - echo $(google-chrome --version)
 #    - echo $JAVA_HOME
+
+env:
+ - COMMITTER=ignored LAST_AUTHOR=ignored
+
 build:
   pre_ci_boot:
     image_name: jeroenknoops/java8-groovy-chrome-xvfb
