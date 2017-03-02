@@ -5,6 +5,9 @@ import testinfrastructure.testutils.EnvironmentTestUtils;
 public class EndToEndTestConfig {
 
     public static DriverToRunTestsIn whatDriversShouldTestsRun() {
+        if (EnvironmentTestUtils.isRunningAtShippable()) {
+            return DriverToRunTestsIn.CHROME;
+        }
         if (EnvironmentTestUtils.isRunningAtCodeShip()) {
             // will also run DriverToRunTestsIn.REMOTE if last commit message contains [run sauce]
             return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;

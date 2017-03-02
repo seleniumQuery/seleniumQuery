@@ -41,6 +41,10 @@ public class EnvironmentTestUtils {
         return "codeship".equalsIgnoreCase(System.getenv("CI_NAME"));
     }
 
+    public static boolean isRunningAtShippable() {
+        return "true".equalsIgnoreCase(System.getenv("SHIPPABLE"));
+    }
+
     private static String getGitLastCommitMessageIfAvailable() {
         if (isRunningAtCodeShip()) {
             return StringUtils.trimToEmpty(System.getenv("CI_MESSAGE"));
