@@ -23,7 +23,7 @@
 <body>
 <pre id="isMaximized"></pre>
 <script>
-    document.getElementById('isMaximized').innerHTML = ((screen.availWidth - window.innerWidth) === 0 ? "yes" : "no");
+    document.getElementById('isMaximized').innerHTML = ((screen.availWidth - window.innerWidth) === 0 ? "yes" : "no: " + (screen.availWidth - window.innerWidth));
 </script>
 </body>
 </html>
