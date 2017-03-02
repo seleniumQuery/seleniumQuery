@@ -5,19 +5,13 @@
 # http://docs.shippable.com/ci/languages/java/
 # https://github.com/search?utf8=%E2%9C%93&q=shippable+jacoco++extension%3Ayml&type=Code&ref=searchresults
 
-#build:
-#  pre_ci:
-#    - docker pull siomiz/chrome:latest
-#    - echo $JAVA_HOME
-#    - echo $(google-chrome --version)
-#    - echo $JAVA_HOME
-
 env:
+# shippable had issues with symbols in my name (which were in these env vars)
  - COMMITTER=ignored LAST_AUTHOR=ignored
 
 build:
   pre_ci_boot:
-    image_name: jeroenknoops/java8-groovy-chrome-xvfb
+    image_name: acdcjunior/java8-chromedriver
     image_tag: latest
     pull: true
   advancedReporting: true
@@ -26,5 +20,5 @@ build:
     - echo $(google-chrome --version)
     - mkdir -p shippable/codecoverage
     - chmod +x gradlew
-    - ./gradlew test jacocoTestReport --debug --stacktrace -Dfile.encoding=UTF-8
+    - ./gradlew test jacocoTestReport
     - cp -r build shippable/codecoverage
