@@ -17,10 +17,8 @@
 package endtoend.browser.driver.builders;
 
 import endtoend.browser.SeleniumQueryBrowserTest;
-import io.github.seleniumquery.browser.driver.builders.ChromeDriverBuilder;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -30,33 +28,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
-import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverTestExecutableExists;
 
 public class ChromeDriverBuilderTest {
 
     // https://code.google.com/p/chromium/codesearch#chromium/src/chrome/test/chromedriver/chrome/mobile_device_list.cc
     private static final String CHROME_MOBILE_EMULATION_DEVICE = "Apple iPad";
     private static final String CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING = "iPad";
-
-    private static String chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS;
-    private static String originalPathWindows;
-    private static String originalPathLinux;
-
-    @BeforeClass
-    public static void beforeClass() {
-        if (isNotWindowsOS()) {
-            chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX;
-        }
-        originalPathWindows = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS;
-        originalPathLinux = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX;
-    }
+    private static final String WINDOWS_TEST_CHROMEDRIVER_LOCATION = "D:\\usr\\local\\bin\\chromedriver.exe";
+    private static final String LINUX_TEST_CHROMEDRIVER_LOCATION = "/usr/local/bin/chromedriver";
 
     @Before
     public void setUp() {
@@ -65,8 +50,6 @@ public class ChromeDriverBuilderTest {
 
     @After
     public void tearDown() {
-        ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS = originalPathWindows;
-        ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX = originalPathLinux;
         $.quit();
     }
 
@@ -121,22 +104,28 @@ public class ChromeDriverBuilderTest {
 
     @Test
     public void withPathToChromeDriver() {
-        onlyRunIfDriverTestExecutableExists(chromeExecutable);
         // given
-        $.driver().useChrome().withPathToChromeDriver("src/test/resources/"+chromeExecutable);
+        // so this test is really effective, the chromedriver executable shouldnt be in $PATH
+        $.driver().useChrome().withPathToChromeDriver(getChromeDriverExecutablePath());
         // when
         $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
         // then
         // no exception is thrown while opening a page
     }
 
+    private String getChromeDriverExecutablePath() {
+        if (isNotWindowsOS()) {
+            return LINUX_TEST_CHROMEDRIVER_LOCATION;
+        } else {
+            return WINDOWS_TEST_CHROMEDRIVER_LOCATION;
+        }
+    }
+
     @Test
     public void useChrome__should_fall_back_to_systemProperty_when_executable_not_found_in_classpath() {
-        onlyRunIfDriverTestExecutableExists(chromeExecutable);
         // given
-        ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS = "not-in-classpath.txt";
-        ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_LINUX = "not-in-classpath.txt";
-        System.setProperty("webdriver.chrome.driver", getFullPathForFileInClasspath(chromeExecutable));
+        // so this test is really effective, the chromedriver executable shouldnt be in $PATH
+        System.setProperty("webdriver.chrome.driver", getChromeDriverExecutablePath());
         // when
         $.driver().useChrome();
         $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));

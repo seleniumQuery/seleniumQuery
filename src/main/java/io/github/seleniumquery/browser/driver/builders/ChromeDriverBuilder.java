@@ -49,9 +49,8 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
     private static final String BAD_PATH_PROVIDED_EXCEPTION_MESSAGE = "The ChromeDriver Server executable file was not found (or is a directory) at \"%s\"." + EXCEPTION_MESSAGE;
 
-    // not final so they can be changed during test
-    public static String CHROMEDRIVER_EXECUTABLE_WINDOWS = "chromedriver.exe";
-    public static String CHROMEDRIVER_EXECUTABLE_LINUX = "chromedriver";
+    private static final String CHROMEDRIVER_EXECUTABLE_LINUX = "chromedriver";
+    private static final String CHROMEDRIVER_EXECUTABLE_WINDOWS = "chromedriver.exe";
 
 
     private String customPathToChromeDriver;
@@ -121,7 +120,7 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
             throw new SeleniumQueryException(
                 format(
                         "The ChromeDriver server executable (%s/%s) was not found in the classpath, in the \"%s\" system property or in the system's PATH variable. %s",
-                        CHROMEDRIVER_EXECUTABLE_WINDOWS, CHROMEDRIVER_EXECUTABLE_LINUX, CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, EXCEPTION_MESSAGE
+                    CHROMEDRIVER_EXECUTABLE_WINDOWS, CHROMEDRIVER_EXECUTABLE_LINUX, CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, EXCEPTION_MESSAGE
                 ), e);
         }
     }
