@@ -110,10 +110,10 @@ public class SeleniumQueryDriver {
         return clearCurrentDriverAndAssignNewBuilder(new HtmlUnitDriverBuilder());
     }
 
-    private <T extends DriverBuilder> T clearCurrentDriverAndAssignNewBuilder(T htmlUnitDriverBuilder) {
+    private <T extends DriverBuilder> T clearCurrentDriverAndAssignNewBuilder(T newDriverBuilder) {
         quitAndClearCurrentWebDriver();
-        this.driverBuilder = htmlUnitDriverBuilder;
-        return htmlUnitDriverBuilder;
+        this.driverBuilder = newDriverBuilder;
+        return newDriverBuilder;
     }
 
     private void quitAndClearCurrentWebDriver() {
