@@ -16,6 +16,7 @@
 
 package endtoend.browser.driver.builders;
 
+import endtoend.browser.SeleniumQueryBrowserTest;
 import io.github.seleniumquery.browser.driver.builders.ChromeDriverBuilder;
 import org.junit.After;
 import org.junit.Before;
@@ -25,9 +26,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
@@ -35,6 +40,10 @@ import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
 import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverTestExecutableExists;
 
 public class ChromeDriverBuilderTest {
+
+    // https://code.google.com/p/chromium/codesearch#chromium/src/chrome/test/chromedriver/chrome/mobile_device_list.cc
+    private static final String CHROME_MOBILE_EMULATION_DEVICE = "Apple iPad";
+    private static final String CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING = "iPad";
 
     private static String chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS;
     private static String originalPathWindows;
@@ -64,27 +73,35 @@ public class ChromeDriverBuilderTest {
     @Test
     public void withOptions() {
         // given
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
+        ChromeOptions options = createChromeOptionsWithMobileEmulation();
         // when
         $.driver().useChrome().withOptions(options);
         // then
-        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
-        assertThat($("#isMaximized").text(), is("window.screenTop=0,window.screenY=0"));
+        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
+        assertThat($("#agent").text(), containsString(CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING));
     }
 
     @Test
     public void withCapabilities() {
         // given
+        ChromeOptions options = createChromeOptionsWithMobileEmulation();
+
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         // when
         $.driver().useChrome().withCapabilities(capabilities);
         // then
-        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
-        assertThat($("#isMaximized").text(), is("window.screenTop=0,window.screenY=0"));
+        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
+        assertThat($("#agent").text(), containsString(CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING));
+    }
+
+    private ChromeOptions createChromeOptionsWithMobileEmulation() {
+        Map<String, String> mobileEmulation = new HashMap<>();
+        mobileEmulation.put("deviceName", CHROME_MOBILE_EMULATION_DEVICE);
+
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("mobileEmulation", mobileEmulation);
+        return options;
     }
 
     @Test
@@ -93,8 +110,8 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome();
         // then
-        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
-        assertThat($("#isMaximized").text(), is("window.screenTop=10,window.screenY=10"));
+        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
+        assertThat($("#agent").text(), not(containsString(CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING)));
     }
 
     @Test
@@ -108,7 +125,7 @@ public class ChromeDriverBuilderTest {
         // given
         $.driver().useChrome().withPathToChromeDriver("src/test/resources/"+chromeExecutable);
         // when
-        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
+        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
         // then
         // no exception is thrown while opening a page
     }
@@ -122,7 +139,7 @@ public class ChromeDriverBuilderTest {
         System.setProperty("webdriver.chrome.driver", getFullPathForFileInClasspath(chromeExecutable));
         // when
         $.driver().useChrome();
-        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
+        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
         // then
         // no exception is thrown while opening a page
     }
