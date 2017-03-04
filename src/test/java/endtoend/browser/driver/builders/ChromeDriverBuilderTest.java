@@ -36,9 +36,9 @@ import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverT
 
 public class ChromeDriverBuilderTest {
 
-    static String chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS;
-    static String originalPathWindows;
-    static String originalPathLinux;
+    private static String chromeExecutable = ChromeDriverBuilder.CHROMEDRIVER_EXECUTABLE_WINDOWS;
+    private static String originalPathWindows;
+    private static String originalPathLinux;
 
     @BeforeClass
     public static void beforeClass() {
@@ -70,7 +70,7 @@ public class ChromeDriverBuilderTest {
         $.driver().useChrome().withOptions(options);
         // then
         $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
-        assertThat($("#isMaximized").text(), is("yes"));
+        assertThat($("#isMaximized").text(), is("window.screenTop=0,window.screenY=0"));
     }
 
     @Test
@@ -84,7 +84,17 @@ public class ChromeDriverBuilderTest {
         $.driver().useChrome().withCapabilities(capabilities);
         // then
         $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
-        assertThat($("#isMaximized").text(), is("yes"));
+        assertThat($("#isMaximized").text(), is("window.screenTop=0,window.screenY=0"));
+    }
+
+    @Test
+    public void withoutCapabilities() {
+        // given
+        // when
+        $.driver().useChrome();
+        // then
+        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
+        assertThat($("#isMaximized").text(), is("window.screenTop=10,window.screenY=10"));
     }
 
     @Test

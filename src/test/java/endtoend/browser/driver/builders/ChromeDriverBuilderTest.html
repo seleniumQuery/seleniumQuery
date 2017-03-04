@@ -23,7 +23,8 @@
 <body>
 <pre id="isMaximized"></pre>
 <script>
-    document.getElementById('isMaximized').innerHTML = ((screen.availWidth - window.innerWidth) === 0 ? "yes" : "no: " + (screen.availWidth - window.innerWidth));
+    //noinspection JSUnresolvedVariable
+    document.getElementById('isMaximized').innerHTML = "window.screenTop=" + window.screenTop + ",window.screenY=" + window.screenY
 </script>
 </body>
 </html>
