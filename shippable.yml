@@ -17,6 +17,10 @@ build:
   advancedReporting: true
   ci:
     - ps -aux
+    - pwd
+    - start-xvfb-via-exec-tini
+    - ps -aux
+    - pwd
     - mkdir -p shippable/codecoverage
     - chmod +x gradlew
     - ./gradlew test jacocoTestReport -i
