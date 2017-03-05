@@ -11,7 +11,7 @@ env:
 
 build:
   pre_ci_boot:
-    image_name: acdcjunior/docker-ubuntu-java8-chromedriver
+    image_name: acdcjunior/ubuntu-java8-chromedriver-lsb_release
     image_tag: latest
     pull: true
   advancedReporting: true
