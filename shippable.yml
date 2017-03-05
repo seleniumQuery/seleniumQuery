@@ -11,13 +11,11 @@ env:
 
 build:
   pre_ci_boot:
-    image_name: acdcjunior/java8-chromedriver
+    image_name: acdcjunior/docker-ubuntu-java8-chromedriver
     image_tag: latest
     pull: true
   advancedReporting: true
   ci:
-    - echo $JAVA_HOME
-    - echo $(google-chrome --version)
     - mkdir -p shippable/codecoverage
     - chmod +x gradlew
     - ./gradlew test jacocoTestReport
