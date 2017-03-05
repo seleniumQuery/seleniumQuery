@@ -16,7 +16,8 @@ build:
     pull: true
   advancedReporting: true
   ci:
+    - ps -aux
     - mkdir -p shippable/codecoverage
     - chmod +x gradlew
-    - ./gradlew test jacocoTestReport
+    - ./gradlew test jacocoTestReport -i
     - cp -r build shippable/codecoverage
