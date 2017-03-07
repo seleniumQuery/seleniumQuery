@@ -18,7 +18,7 @@ build:
   ci:
     - ps -aux
     - pwd
-    - start-xvfb-via-exec-tini
+    - xvfb-run --server-num "$(echo "$DISPLAY" | sed 's/:\([0-9][0-9]*\).*/\1/')" --server-args "-ac -screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_DEPTH}" bash
     - ps -aux
     - pwd
     - mkdir -p shippable/codecoverage
