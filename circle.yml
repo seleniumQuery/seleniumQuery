@@ -15,5 +15,3 @@ dependencies:
 test:
   post:
     - mvn clean test
-    this is teasing
-    
