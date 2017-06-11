@@ -11,17 +11,17 @@ env:
 
 build:
   pre_ci_boot:
-    image_name: acdcjunior/ubuntu-java8-chromedriver-lsb_release
+    image_name: acdcjunior/ubuntu-chromedriver-java8-lsb
     image_tag: latest
     pull: true
   advancedReporting: true
   ci:
-    - ps -aux
-    - pwd
-    - xvfb-run --server-num "$(echo "$DISPLAY" | sed 's/:\([0-9][0-9]*\).*/\1/')" --server-args "-ac -screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_DEPTH}" bash
+#    - ps -aux
+#    - pwd
+#    - xvfb-run --server-num "$(echo "$DISPLAY" | sed 's/:\([0-9][0-9]*\).*/\1/')" --server-args "-ac -screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_DEPTH}" bash
     - ps -aux
     - pwd
     - mkdir -p shippable/codecoverage
     - chmod +x gradlew
-    - ./gradlew test jacocoTestReport -i
+    - xvfb-run --server-num "$(echo "$DISPLAY" | sed 's/:\([0-9][0-9]*\).*/\1/')" --server-args "-ac -screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_DEPTH}" ./gradlew test jacocoTestReport -i
     - cp -r build shippable/codecoverage
