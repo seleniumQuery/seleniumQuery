@@ -22,9 +22,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
-import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
-import static org.openqa.selenium.remote.CapabilityType.VERSION;
+import static org.openqa.selenium.remote.CapabilityType.*;
 
 /**
  * Builds {@link HtmlUnitDriver} instances for SeleniumQueryDriver.
@@ -116,7 +114,7 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
 
     @Override
     protected WebDriver build() {
-        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.htmlUnitWithJs());
+        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.htmlUnit());
         overwriteCapabilityIfValueNotNull(capabilities, BROWSER_NAME, this.emulatedBrowserName);
         overwriteCapabilityIfValueNotNull(capabilities, VERSION, this.emulatedBrowserVersion);
         overwriteCapabilityIfValueNotNull(capabilities, SUPPORTS_JAVASCRIPT, this.javaScriptEnabled);
