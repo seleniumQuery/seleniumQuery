@@ -17,6 +17,7 @@
 package testinfrastructure.junitrule.config;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
+import org.openqa.selenium.chrome.ChromeOptions;
 import testinfrastructure.junitrule.annotation.*;
 
 import java.lang.annotation.Annotation;
@@ -64,6 +65,15 @@ public abstract class DriverInstantiator {
     public static DriverInstantiator CHROME = new DriverInstantiator("Chrome", ChromeOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useChrome();
+        }
+    };
+    public static DriverInstantiator CHROME_HEADLESS = new DriverInstantiator("Chrome Headless", ChromeOnly.class) {
+        @Override public void instantiateDriver(BrowserFunctions $) {
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("headless");
+            chromeOptions.addArguments("disable-gpu");
+            chromeOptions.addArguments("no-sandbox");
+            $.driver().useChrome().withOptions(chromeOptions);
         }
     };
     public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = new DriverInstantiator("HtmlUnit (Chrome) - JS ON", HtmlUnitOnly.class) {
