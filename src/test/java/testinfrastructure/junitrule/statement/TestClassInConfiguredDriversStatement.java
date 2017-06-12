@@ -95,6 +95,7 @@ public class TestClassInConfiguredDriversStatement extends Statement {
 
     private void executeTestOnChrome() {
         executeTestOn(driverToRunTestsIn.canRunChrome(), DriverInstantiator.CHROME, YES);
+        executeTestOn(driverToRunTestsIn.canRunChromeHeadless(), DriverInstantiator.CHROME_HEADLESS, YES);
     }
 
     private void executeTestOnIE() {
