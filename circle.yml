@@ -1,17 +1,7 @@
-#machine:
-#  java:
-#    version: oraclejdk8
-
 machine:
-  node:
-    version: 4
   services:
     - docker
-
-dependencies:
-  post:
-    - docker pull jamesdbloom/docker-java8-maven
-
 test:
-  post:
-    - mvn clean test
+  override:
+    # This one could definitely be a sequence of docker commands to setup a grid
+    - docker run -it --rm --name seleniumquery-test -v $(pwd):/project -w /project jamesdbloom/docker-java8-maven mvn clean test
