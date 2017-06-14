@@ -87,7 +87,7 @@ class OldDirectAdjacentFilter implements ElementFilter {
 			
 			WebElement previousSibling = SelectorUtils.getPreviousSibling(element);
 				
-			List<WebElement> psf = previousElementCompiled.filter(driver, new ArrayList<WebElement>(Arrays.asList(previousSibling)));
+			List<WebElement> psf = previousElementCompiled.filter(driver, new ArrayList<>(Arrays.asList(previousSibling)));
 			boolean previousSiblingMatchesTheFilter = !psf.isEmpty();
 			if (!previousSiblingMatchesTheFilter) {
 				// this element's previous sibling is NOT ok, dont keep it
@@ -116,7 +116,7 @@ class OldChildSelectorFilter implements ElementFilter {
 			
 			WebElement parent = SelectorUtils.parent(element);
 				
-			List<WebElement> pf = parentCompiledSelector.filter(driver, new ArrayList<WebElement>(Arrays.asList(parent)));
+			List<WebElement> pf = parentCompiledSelector.filter(driver, new ArrayList<>(Arrays.asList(parent)));
 			boolean parentMatchesTheFilter = !pf.isEmpty();
 			if (!parentMatchesTheFilter) {
 				// this element's parent is NOT ok, dont keep it
@@ -149,7 +149,7 @@ class OldDescendantFilter implements ElementFilter {
 			WebElement matchingAncestor = ClosestFunction.closest(driver, startingElement, ancestorCompiled.getCssSelector());
 			while (matchingAncestor != null) {
 				
-				List<WebElement> mas = ancestorCompiled.filter(driver, new ArrayList<WebElement>(Arrays.asList(matchingAncestor)));
+				List<WebElement> mas = ancestorCompiled.filter(driver, new ArrayList<>(Arrays.asList(matchingAncestor)));
 				boolean theMatchedAncestorMatchesTheFilter = !mas.isEmpty();
 				if (theMatchedAncestorMatchesTheFilter) {
 					continue outerFor; // this element's ancestor is ok, keep it, continue to next element
