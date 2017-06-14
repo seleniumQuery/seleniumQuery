@@ -54,10 +54,10 @@ public class SeleniumQueryPluginTest {
 }
 
 class Sizer {
-    public static final SeleniumQueryPlugin<Sizer> SIZER = new SeleniumQueryPlugin<Sizer>() {
+    public static final SeleniumQueryPlugin<Sizer> SIZER = new SeleniumQueryPlugin<>() {
         @Override
         public Sizer as(SeleniumQueryObject seleniumQueryObject) {
-            return new Sizer(seleniumQueryObject);
+            return new Sizer<>(seleniumQueryObject);
         }
     };
 

@@ -69,7 +69,7 @@ public class DescendantGeneralCombinatorFilter implements ElementFilter {
 			WebElement matchingAncestor = ClosestFunction.closest(driver, startingElement, cssSelector);
 			while (matchingAncestor != null) {
 				
-				List<WebElement> mas = ancestorFilters.filter(driver, new ArrayList<WebElement>(Arrays.asList(matchingAncestor)));
+				List<WebElement> mas = ancestorFilters.filter(driver, new ArrayList<>(Arrays.asList(matchingAncestor)));
 				boolean theMatchedAncestorMatchesTheFilter = !mas.isEmpty();
 				if (theMatchedAncestorMatchesTheFilter) {
 					continue outerFor; // this element's ancestor is OK, keep it, continue to next element
