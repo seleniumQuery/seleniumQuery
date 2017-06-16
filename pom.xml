@@ -32,7 +32,7 @@
 
 		<selenium-java.version>3.4.0</selenium-java.version>
         <htmlunit-driver.version>2.25</htmlunit-driver.version>
-        <phantomjsdriver.version>1.4.1</phantomjsdriver.version>
+        <phantomjsdriver.version>1.4.3</phantomjsdriver.version>
     </properties>
 
 	<dependencies>
