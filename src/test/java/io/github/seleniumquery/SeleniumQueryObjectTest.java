@@ -121,7 +121,7 @@ public class SeleniumQueryObjectTest {
 
         @SuppressWarnings("Guava")
         com.google.common.base.Predicate<WebElement> stubFilterFunction = input -> { throw new PseudoTestDoubleException(); };
-        Predicate<WebElement> stubFilterFunctionApplyMethod = new Predicate<>() {
+        Predicate<WebElement> stubFilterFunctionApplyMethod = new Predicate<WebElement>() {
             @Override
             public boolean test(WebElement webElement) { return false; }
             @SuppressWarnings({"unchecked", "EqualsWhichDoesntCheckParameterClass"}) @Override
