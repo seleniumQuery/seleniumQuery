@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
     compile('net.sourceforge.cssparser:cssparser:0.9.22')
-    compile('org.apache.commons:commons-lang3:3.5')
+    compile('org.apache.commons:commons-lang3:3.6')
     compile('org.seleniumhq.selenium:htmlunit-driver:2.27')
     compile('org.seleniumhq.selenium:selenium-java:3.4.0')
     compile('org.seleniumhq.selenium:selenium-remote-driver:3.4.0')
