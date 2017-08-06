@@ -16,23 +16,22 @@
 
 package endtoend.browser.driver.builders;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import org.junit.After;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.lang.reflect.Method;
-
 import static endtoend.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOff;
 import static endtoend.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOn;
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
+
+import org.junit.After;
+import org.junit.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import endtoend.infra.AgentHtml;
 
 public class HtmlUnitDriverBuilderTest {
+
+    private static final String HTMLUNIT_IE_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
+    private static final String HTMLUNIT_CHROME_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36";
+    private static final String HTMLUNIT_FF_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; rv:52.0) Gecko/20100101 Firefox/52.0";
 
     @After
     public void tearDown() throws Exception {
@@ -54,14 +53,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit();
         // then
-        assertThat(emulatedBrowser($.driver().get()), is("Chrome"));
-    }
-
-    private static String emulatedBrowser(WebDriver htmlUnitDriver) throws Exception {
-        Method getWebClientMethod = HtmlUnitDriver.class.getDeclaredMethod("getWebClient");
-        getWebClientMethod.setAccessible(true);
-        WebClient webClient = (WebClient) getWebClientMethod.invoke(htmlUnitDriver);
-        return webClient.getBrowserVersion().toString();
+        AgentHtml.assertAgentString(HTMLUNIT_CHROME_AGENT_STRING);
     }
 
     @Test
@@ -77,7 +69,7 @@ public class HtmlUnitDriverBuilderTest {
     public void withJavaScript__should_set_js_ON_overriding_given_capabilities() {
         // given
         DesiredCapabilities capabilitiesWithoutJavaScript = DesiredCapabilities.htmlUnit();
-        capabilitiesWithoutJavaScript.setBrowserName(BrowserType.FIREFOX);
+        capabilitiesWithoutJavaScript.setCapability(SUPPORTS_JAVASCRIPT, false);
         // when
         $.driver().useHtmlUnit().withCapabilities(capabilitiesWithoutJavaScript).withJavaScript();
         // then
@@ -85,39 +77,30 @@ public class HtmlUnitDriverBuilderTest {
     }
 
     @Test
-    public void emulatingFirefox__should_emulate_latest_firefox__that_is__FIREFOX_45() throws Exception {
+    public void emulatingFirefox__should_emulate_latest_firefox__that_is__FIREFOX_45() {
         // given
         // when
         $.driver().useHtmlUnit().emulatingFirefox();
         // then
-        assertThat(emulatedBrowser($.driver().get()), is("FF45"));
+        AgentHtml.assertAgentString(HTMLUNIT_FF_AGENT_STRING);
     }
 
     @Test
-    public void emulatingChrome__should_emulate_CHROME() throws Exception {
+    public void emulatingChrome__should_emulate_CHROME() {
         // given
         // when
         $.driver().useHtmlUnit().emulatingChrome();
         // then
-        assertThat(emulatedBrowser($.driver().get()), is("Chrome"));
+        AgentHtml.assertAgentString(HTMLUNIT_CHROME_AGENT_STRING);
     }
 
     @Test
-    public void emulatingInternetExplorer__should_emulate_latest_IE() throws Exception {
+    public void emulatingInternetExplorer__should_emulate_latest_IE() {
         // given
         // when
         $.driver().useHtmlUnit().emulatingInternetExplorer();
         // then
-        assertThat(emulatedBrowser($.driver().get()), is("IE"));
-    }
-
-    @Test
-    public void emulatingInternetExplorer11__should_emulate_IE() throws Exception {
-        // given
-        // when
-        $.driver().useHtmlUnit().emulatingInternetExplorer11();
-        // then
-        assertThat(emulatedBrowser($.driver().get()), is("IE"));
+        AgentHtml.assertAgentString(HTMLUNIT_IE_AGENT_STRING);
     }
 
 }
