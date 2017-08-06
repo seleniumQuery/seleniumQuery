@@ -48,23 +48,26 @@
 			<version>3.5</version>
 		</dependency>
 
-		<!-- The selenium dependency -->
-		<dependency>
+        <!-- should be above selenium-java because the htmlunit version it brings
+         is different and we want this one to be used instead (to take precedence) -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>${htmlunit-driver.version}</version>
+        </dependency>
+
+        <!-- The selenium dependency -->
+        <dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium-java.version}</version>
 		</dependency>
 
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-remote-driver</artifactId>
             <version>${selenium-java.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
-            <version>${htmlunit-driver.version}</version>
         </dependency>
 
 		<dependency>

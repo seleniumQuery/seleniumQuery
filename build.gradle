@@ -18,16 +18,16 @@ repositories {
 dependencies {
     compile('net.sourceforge.cssparser:cssparser:0.9.22')
     compile('org.apache.commons:commons-lang3:3.5')
-    compile('org.seleniumhq.selenium:selenium-java:3.2.0')
-    compile('org.seleniumhq.selenium:selenium-remote-driver:3.2.0')
-    compile('org.seleniumhq.selenium:htmlunit-driver:2.25')
+    compile('org.seleniumhq.selenium:htmlunit-driver:2.27')
+    compile('org.seleniumhq.selenium:selenium-java:3.4.0')
+    compile('org.seleniumhq.selenium:selenium-remote-driver:3.4.0')
     compile('com.codeborne:phantomjsdriver:1.4.1') {
         exclude(module: 'selenium-java')
         exclude(module: 'selenium-remote-driver')
     }
     compile('commons-logging:commons-logging:1.2')
     compile('org.unbescape:unbescape:1.1.4.RELEASE')
-	
+
     testCompile('junit:junit:4.12') {
         exclude(module: 'hamcrest-core')
     }
