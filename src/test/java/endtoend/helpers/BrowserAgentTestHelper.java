@@ -14,19 +14,26 @@
  * limitations under the License.
  */
 
-package endtoend.infra;
+package endtoend.helpers;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
-public class AgentHtml {
+import io.github.seleniumquery.SeleniumQuery;
+import io.github.seleniumquery.browser.BrowserFunctions;
 
-    private static final String AGENT_TEST_URL = classNameToTestFileUrl(AgentHtml.class);
+public class BrowserAgentTestHelper {
+
+    private static final String AGENT_TEST_URL = classNameToTestFileUrl(BrowserAgentTestHelper.class);
 
     public static void assertAgentString(String agentString) {
-        $.url(AgentHtml.AGENT_TEST_URL);
+        openAgentTestHelperUrl(SeleniumQuery.$);
         assertEquals(agentString, $("#agent").text());
+    }
+
+    public static void openAgentTestHelperUrl(BrowserFunctions $) {
+        $.url(BrowserAgentTestHelper.AGENT_TEST_URL);
     }
 
 }

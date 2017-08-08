@@ -25,7 +25,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import endtoend.infra.AgentHtml;
+import endtoend.helpers.BrowserAgentTestHelper;
 
 public class HtmlUnitDriverBuilderTest {
 
@@ -53,7 +53,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit();
         // then
-        AgentHtml.assertAgentString(HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestHelper.assertAgentString(HTMLUNIT_CHROME_AGENT_STRING);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingFirefox();
         // then
-        AgentHtml.assertAgentString(HTMLUNIT_FF_AGENT_STRING);
+        BrowserAgentTestHelper.assertAgentString(HTMLUNIT_FF_AGENT_STRING);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingChrome();
         // then
-        AgentHtml.assertAgentString(HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestHelper.assertAgentString(HTMLUNIT_CHROME_AGENT_STRING);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingInternetExplorer();
         // then
-        AgentHtml.assertAgentString(HTMLUNIT_IE_AGENT_STRING);
+        BrowserAgentTestHelper.assertAgentString(HTMLUNIT_IE_AGENT_STRING);
     }
 
 }
