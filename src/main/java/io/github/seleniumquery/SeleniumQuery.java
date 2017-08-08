@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package io.github.seleniumquery;
 
-import io.github.seleniumquery.browser.BrowserFunctionsWithDeprecatedFunctions;
-import io.github.seleniumquery.internal.SqObjectFactory;
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
+import io.github.seleniumquery.browser.BrowserFunctions;
+import io.github.seleniumquery.internal.SqObjectFactory;
 
 /**
  * The seleniumQuery objects factory.<br>
@@ -52,7 +53,7 @@ import java.util.List;
  * @since 0.9.0
  */
 public class SeleniumQuery {
-	
+
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p>
 	 * <p>
@@ -69,18 +70,18 @@ public class SeleniumQuery {
 	 *
 	 * @since 0.9.0
 	 */
-	public static final BrowserFunctionsWithDeprecatedFunctions $ = new BrowserFunctionsWithDeprecatedFunctions();
+	public static final BrowserFunctions $ = new BrowserFunctions();
 
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p> This works as an alias to <code>$</code>.
 	 */
-	public static final BrowserFunctionsWithDeprecatedFunctions sQ = $;
-	
+	public static final BrowserFunctions sQ = $;
+
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p> This works as an alias to <code>$</code>.
 	 */
-	public static final BrowserFunctionsWithDeprecatedFunctions jQuery = $;
-	
+	public static final BrowserFunctions jQuery = $;
+
 	private SeleniumQuery() {}
 
 	/**
