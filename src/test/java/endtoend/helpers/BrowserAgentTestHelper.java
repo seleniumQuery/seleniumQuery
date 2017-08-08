@@ -16,24 +16,28 @@
 
 package endtoend.helpers;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
 import io.github.seleniumquery.SeleniumQuery;
-import io.github.seleniumquery.browser.BrowserFunctions;
+import io.github.seleniumquery.SeleniumQueryBrowser;
 
 public class BrowserAgentTestHelper {
 
     private static final String AGENT_TEST_URL = classNameToTestFileUrl(BrowserAgentTestHelper.class);
 
     public static void assertAgentString(String agentString) {
-        openAgentTestHelperUrl(SeleniumQuery.$);
-        assertEquals(agentString, $("#agent").text());
+        SeleniumQueryBrowser globalBrowser = SeleniumQuery.seleniumQueryBrowser();
+        openAgentTestHelperUrl(globalBrowser);
+        assertBrowserAgent(globalBrowser, agentString);
     }
 
-    public static void openAgentTestHelperUrl(BrowserFunctions $) {
-        $.url(BrowserAgentTestHelper.AGENT_TEST_URL);
+    public static void assertBrowserAgent(SeleniumQueryBrowser browser, String agentString) {
+        assertEquals(agentString, browser.$("#agent").text());
+    }
+
+    public static void openAgentTestHelperUrl(SeleniumQueryBrowser browser) {
+        browser.$.url(BrowserAgentTestHelper.AGENT_TEST_URL);
     }
 
 }
