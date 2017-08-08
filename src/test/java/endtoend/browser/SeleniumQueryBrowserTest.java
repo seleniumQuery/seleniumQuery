@@ -30,12 +30,17 @@ public class SeleniumQueryBrowserTest {
 
     @Test
     public void multiple_browser_instances_should_work_OK() {
+        // given
         chrome.$.driver().useHtmlUnit().emulatingChrome();
-        BrowserAgentTestHelper.openAgentTestHelperUrl(chrome);
+        // when
+        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl(chrome);
 
+        // given
         firefox.$.driver().useHtmlUnit().emulatingFirefox();
-        BrowserAgentTestHelper.openAgentTestHelperUrl(firefox);
+        // when
+        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl(firefox);
 
+        // then
         BrowserAgentTestHelper.assertBrowserAgent(chrome, HtmlUnitDriverBuilderTest.HTMLUNIT_CHROME_AGENT_STRING);
         BrowserAgentTestHelper.assertBrowserAgent(firefox, HtmlUnitDriverBuilderTest.HTMLUNIT_FF_AGENT_STRING);
     }

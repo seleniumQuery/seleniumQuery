@@ -53,7 +53,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit();
         // then
-        BrowserAgentTestHelper.assertAgentString(HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestHelper.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_STRING);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingFirefox();
         // then
-        BrowserAgentTestHelper.assertAgentString(HTMLUNIT_FF_AGENT_STRING);
+        BrowserAgentTestHelper.assertBrowserAgent(HTMLUNIT_FF_AGENT_STRING);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingChrome();
         // then
-        BrowserAgentTestHelper.assertAgentString(HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestHelper.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_STRING);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingInternetExplorer();
         // then
-        BrowserAgentTestHelper.assertAgentString(HTMLUNIT_IE_AGENT_STRING);
+        BrowserAgentTestHelper.assertBrowserAgent(HTMLUNIT_IE_AGENT_STRING);
     }
 
 }

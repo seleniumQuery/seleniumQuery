@@ -16,8 +16,11 @@
 
 package endtoend.helpers;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
+
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.SeleniumQueryBrowser;
@@ -26,18 +29,30 @@ public class BrowserAgentTestHelper {
 
     private static final String AGENT_TEST_URL = classNameToTestFileUrl(BrowserAgentTestHelper.class);
 
-    public static void assertAgentString(String agentString) {
-        SeleniumQueryBrowser globalBrowser = SeleniumQuery.seleniumQueryBrowser();
-        openAgentTestHelperUrl(globalBrowser);
-        assertBrowserAgent(globalBrowser, agentString);
+    public static void assertBrowserAgent(String agentString) {
+        openBrowserAgentTestHelperUrl();
+        assertBrowserAgent(SeleniumQuery.seleniumQueryBrowser(), agentString);
+    }
+
+    public static void assertBrowserAgent(Matcher<String> agentMatcher) {
+        openBrowserAgentTestHelperUrl();
+        assertBrowserAgent(SeleniumQuery.seleniumQueryBrowser(), agentMatcher);
+    }
+
+    public static void openBrowserAgentTestHelperUrl() {
+        openBrowserAgentTestHelperUrl(SeleniumQuery.seleniumQueryBrowser());
+    }
+
+    public static void openBrowserAgentTestHelperUrl(SeleniumQueryBrowser browser) {
+        browser.$.url(BrowserAgentTestHelper.AGENT_TEST_URL);
     }
 
     public static void assertBrowserAgent(SeleniumQueryBrowser browser, String agentString) {
-        assertEquals(agentString, browser.$("#agent").text());
+        assertBrowserAgent(browser, Matchers.equalTo(agentString));
     }
 
-    public static void openAgentTestHelperUrl(SeleniumQueryBrowser browser) {
-        browser.$.url(BrowserAgentTestHelper.AGENT_TEST_URL);
+    public static void assertBrowserAgent(SeleniumQueryBrowser browser, Matcher<String> agentMatcher) {
+        assertThat(browser.$("#agent").text(), agentMatcher);
     }
 
 }
