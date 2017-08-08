@@ -340,11 +340,12 @@ public class SeleniumQueryBrowserTest {
     @Test
     public void multiple_browser_instances_should_work_OK() {
         chrome.$.driver().useHtmlUnit().emulatingChrome();
-        openUrl(SeleniumQueryBrowserTest.class, chrome.$);
+        chrome.$.url("http://google.com");
 
         firefox.$.driver().useHtmlUnit().emulatingFirefox();
-        openUrl(SeleniumQueryBrowserTest.class, firefox.$);
+        firefox.$.url("http://google.com");
 
+        // assuming, of course, that such #agent elements exist
         assertThat(chrome.$("#agent").text(), containsString("Chrome"));
         assertThat(firefox.$("#agent").text(), containsString("Firefox"));
     }
@@ -372,8 +373,8 @@ See [releases](https://github.com/seleniumQuery/seleniumQuery/releases).
 
 # Contributing
 
-The tool is just beginning, there's a lot of room for improvement. Some of its main functionalities were just made up (and didn't exist in
-jQuery), like the `.waitUntil()`, the `.as()` plugins, the driver builder and so on. So if you come up with an idea of something that could
+The tool quite simple, so there's a lot of room for improvement. Some of its main functionalities were just created (didn't exist in
+jQuery) for our specific needs, like the `.waitUntil()`, the `.as()` plugins, the driver builder and so on. So if you come up with an idea of something that could
 be useful, tell us, or, even better, do it yourself and join the team!
 
 ## Goals and non-goals
