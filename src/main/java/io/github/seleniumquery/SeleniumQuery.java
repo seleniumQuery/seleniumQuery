@@ -21,7 +21,6 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
-import io.github.seleniumquery.internal.SqObjectFactory;
 
 /**
  * The seleniumQuery objects factory.<br>
@@ -54,6 +53,8 @@ import io.github.seleniumquery.internal.SqObjectFactory;
  */
 public class SeleniumQuery {
 
+    private static final SeleniumQueryBrowser globalSeleniumQueryBrowser = new SeleniumQueryBrowser();
+
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p>
 	 * <p>
@@ -70,19 +71,27 @@ public class SeleniumQuery {
 	 *
 	 * @since 0.9.0
 	 */
-	public static final BrowserFunctions $ = new BrowserFunctions();
+	public static final BrowserFunctions $ = globalSeleniumQueryBrowser.$;
 
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p> This works as an alias to <code>$</code>.
 	 */
-	public static final BrowserFunctions sQ = $;
+	public static final BrowserFunctions sQ = globalSeleniumQueryBrowser.sQ;
 
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p> This works as an alias to <code>$</code>.
 	 */
-	public static final BrowserFunctions jQuery = $;
+	public static final BrowserFunctions jQuery = globalSeleniumQueryBrowser.jQuery;
 
-	private SeleniumQuery() {}
+    private SeleniumQuery() {}
+
+    /**
+     * The global {@link SeleniumQueryBrowser} instance, used by {@code SeleniumQuery.$}.
+     * @return the {@link SeleniumQueryBrowser} used by the static {@code $}.
+     */
+	public static SeleniumQueryBrowser seleniumQueryBrowser() {
+	    return globalSeleniumQueryBrowser;
+    }
 
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p>
@@ -106,7 +115,7 @@ public class SeleniumQuery {
 	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject $(String selector) {
-		return getSeleniumQueryObjectFactory().createWithValidSelectorAndNoPrevious($.driver().get(), selector);
+	    return globalSeleniumQueryBrowser.$(selector);
 	}
 
 	/**
@@ -129,7 +138,7 @@ public class SeleniumQuery {
 	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject $(WebElement... elements) {
-		return getSeleniumQueryObjectFactory().createWithInvalidSelectorAndNoPrevious($.driver().get(), elements);
+        return globalSeleniumQueryBrowser.$(elements);
 	}
 
 	/**
@@ -152,7 +161,7 @@ public class SeleniumQuery {
 	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject $(List<WebElement> elements) {
-		return getSeleniumQueryObjectFactory().createWithInvalidSelectorAndNoPrevious($.driver().get(), elements);
+        return globalSeleniumQueryBrowser.$(elements);
 	}
 
 	/**
@@ -229,10 +238,6 @@ public class SeleniumQuery {
 	 */
 	public static SeleniumQueryObject jQuery(List<WebElement> elements) {
 		return $(elements);
-	}
-
-	private static SqObjectFactory getSeleniumQueryObjectFactory() {
-		return SqObjectFactory.instance();
 	}
 
 }
