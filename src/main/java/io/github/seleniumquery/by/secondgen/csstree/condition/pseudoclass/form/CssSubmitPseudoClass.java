@@ -16,12 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
+import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
-
-import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
  * :submit
@@ -30,7 +31,7 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssSubmitPseudoClass extends CssPseudoClassCondition {
+public class CssSubmitPseudoClass implements CssPseudoClassCondition {
 
     public static final String PSEUDO = "submit";
     public static final String SUBMIT_XPATH_EXPRESSION = "(" +

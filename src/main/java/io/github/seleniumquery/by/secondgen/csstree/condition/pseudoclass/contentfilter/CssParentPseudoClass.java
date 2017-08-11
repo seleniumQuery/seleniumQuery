@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.conte
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssParentPseudoClass extends CssPseudoClassCondition implements CssConditionImplementedNotYet {
+public class CssParentPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
     public static final String PSEUDO = "parent";
 
