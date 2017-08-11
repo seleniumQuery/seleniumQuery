@@ -16,13 +16,14 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
+import static org.apache.commons.lang3.StringUtils.join;
+
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.InputPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
-
-import static org.apache.commons.lang3.StringUtils.join;
 
 /**
  * :input
@@ -31,7 +32,7 @@ import static org.apache.commons.lang3.StringUtils.join;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssInputPseudoClass extends CssPseudoClassCondition {
+public class CssInputPseudoClass implements CssPseudoClassCondition {
 
     public static final String PSEUDO = "input";
     public static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";

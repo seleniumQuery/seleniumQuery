@@ -28,7 +28,7 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssAnimatedPseudoClass extends CssPseudoClassCondition implements CssConditionImplementedFinders {
+public class CssAnimatedPseudoClass implements CssPseudoClassCondition, CssConditionImplementedFinders {
 
     public static final String PSEUDO = "animated";
 

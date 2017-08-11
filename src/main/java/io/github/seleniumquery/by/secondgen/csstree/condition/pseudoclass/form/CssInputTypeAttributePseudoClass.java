@@ -16,13 +16,15 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.AlwaysNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.secondgen.finder.CssFinder;
-import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy
+    .AlwaysNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.secondgen.finder.CssFinder;
+import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
 /**
  * This represents the pseudoclasses that check for the type attribute, such as
@@ -31,7 +33,7 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
  * @author acdcjunior
  * @since 0.10.0
  */
-abstract class CssInputTypeAttributePseudoClass extends CssPseudoClassCondition {
+abstract class CssInputTypeAttributePseudoClass implements CssPseudoClassCondition {
 
     private String typeAttributeValue;
 

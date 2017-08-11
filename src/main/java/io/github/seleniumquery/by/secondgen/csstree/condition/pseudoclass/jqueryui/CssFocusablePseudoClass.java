@@ -24,7 +24,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPse
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssFocusablePseudoClass extends CssPseudoClassCondition implements CssConditionImplementedNotYet {
+public class CssFocusablePseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
     public static final String PSEUDO = "focusable";
 

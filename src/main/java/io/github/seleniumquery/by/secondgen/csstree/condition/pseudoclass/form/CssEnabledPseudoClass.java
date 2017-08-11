@@ -16,13 +16,14 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.EnabledPseudoClass.ENABLED_XPATH;
+
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
-
-import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.EnabledPseudoClass.ENABLED_XPATH;
 
 /**
  * :enabled
@@ -32,7 +33,7 @@ import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.EnabledPseud
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEnabledPseudoClass extends CssPseudoClassCondition {
+public class CssEnabledPseudoClass implements CssPseudoClassCondition {
 
     public static final String PSEUDO = "enabled";
     private static final String ENABLED_PSEUDO = ":" + PSEUDO;

@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 
-public class CssFunctionalPseudoClassCondition extends CssPseudoClassCondition {
+public class CssFunctionalPseudoClassCondition implements CssPseudoClassCondition {
 
     private final PseudoClass pseudoClassSelector;
     private SqCssFunctionalPseudoClassArgument argument;
