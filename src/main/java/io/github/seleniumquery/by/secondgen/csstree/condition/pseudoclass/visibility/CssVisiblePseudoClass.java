@@ -19,7 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visib
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.VisiblePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -29,20 +28,13 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssVisiblePseudoClass implements CssPseudoClassCondition {
+public class CssVisiblePseudoClass implements NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "visible";
 
-    public NeverNativelySupportedPseudoClass visiblePseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.filterOnly(VisiblePseudoClass.VISIBLE_FILTER);
-        }
-    };
-
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return visiblePseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.filterOnly(VisiblePseudoClass.VISIBLE_FILTER);
     }
 
 }

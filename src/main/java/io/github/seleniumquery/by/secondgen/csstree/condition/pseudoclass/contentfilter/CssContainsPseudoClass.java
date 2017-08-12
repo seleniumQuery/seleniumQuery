@@ -16,12 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 import io.github.seleniumquery.utils.SelectorUtils;
-import org.openqa.selenium.WebDriver;
 
 /**
  * :contains()
@@ -30,27 +31,21 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsPseudoClass extends CssFunctionalPseudoClassCondition {
+public class CssContainsPseudoClass extends CssFunctionalPseudoClassCondition implements NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "contains";
 
-    public NeverNativelySupportedPseudoClass containsPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            String textToContain = getArgument().getArgumentAsString();
-            textToContain = SelectorUtils.unescapeString(textToContain);
-            String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
-            return XPathAndFilterFinder.pureXPath("contains(string(.), " + wantedTextToContain + ")");
-        }
-    };
-
+    @SuppressWarnings("WeakerAccess") // constructor invoked via reflection
     public CssContainsPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return containsPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        String textToContain = getArgument().getArgumentAsString();
+        textToContain = SelectorUtils.unescapeString(textToContain);
+        String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
+        return XPathAndFilterFinder.pureXPath("contains(string(.), " + wantedTextToContain + ")");
     }
 
 }

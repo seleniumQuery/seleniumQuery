@@ -20,7 +20,6 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy
     .AlwaysNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
@@ -33,29 +32,22 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-abstract class CssInputTypeAttributePseudoClass implements CssPseudoClassCondition {
+abstract class CssInputTypeAttributePseudoClass implements AlwaysNativelySupportedPseudoClass {
 
     private String typeAttributeValue;
 
-    public AlwaysNativelySupportedPseudoClass inputTypePseudoClassFinderFactoryStrategy = new AlwaysNativelySupportedPseudoClass() {
-        @Override
-        public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CssFinder("input", "[type=\"" + typeAttributeValue + "\"]");
-        }
-
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath("(self::input and " + TYPE_ATTR_LC_VAL + " = '" + typeAttributeValue + "')");
-        }
-    };
-
-    protected CssInputTypeAttributePseudoClass(String typeAttributeValue) {
+    CssInputTypeAttributePseudoClass(String typeAttributeValue) {
         this.typeAttributeValue = typeAttributeValue;
     }
 
     @Override
-    public AlwaysNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return inputTypePseudoClassFinderFactoryStrategy;
+    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+        return new CssFinder("input", "[type=\"" + typeAttributeValue + "\"]");
+    }
+
+    @Override
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath("(self::input and " + TYPE_ATTR_LC_VAL + " = '" + typeAttributeValue + "')");
     }
 
 }

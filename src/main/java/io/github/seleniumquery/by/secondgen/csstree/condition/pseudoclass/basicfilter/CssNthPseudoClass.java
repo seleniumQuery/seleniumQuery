@@ -29,6 +29,7 @@ public class CssNthPseudoClass extends CssEqPseudoClass {
 
     public static final String PSEUDO = "nth";
 
+    @SuppressWarnings("WeakerAccess") // constructor is invoked via reflection
     public CssNthPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }

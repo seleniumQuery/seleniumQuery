@@ -20,7 +20,6 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -31,25 +30,18 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssSubmitPseudoClass implements CssPseudoClassCondition {
+public class CssSubmitPseudoClass implements NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "submit";
-    public static final String SUBMIT_XPATH_EXPRESSION = "(" +
+    private static final String SUBMIT_XPATH_EXPRESSION = "(" +
             "(self::input and " + TYPE_ATTR_LC_VAL + " = 'submit')" +
             " or " +
             "(self::button and (" + TYPE_ATTR_LC_VAL + " = 'submit' or not(@type)))" +
         ")";
 
-    public NeverNativelySupportedPseudoClass submitPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath(SUBMIT_XPATH_EXPRESSION);
-        }
-    };
-
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return submitPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath(SUBMIT_XPATH_EXPRESSION);
     }
 
 }
