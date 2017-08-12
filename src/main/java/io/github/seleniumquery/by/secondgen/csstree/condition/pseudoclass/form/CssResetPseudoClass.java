@@ -20,7 +20,6 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -31,20 +30,13 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssResetPseudoClass implements CssPseudoClassCondition {
+public class CssResetPseudoClass implements NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "reset";
 
-    public NeverNativelySupportedPseudoClass inputPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath("((self::input or self::button) and " + TYPE_ATTR_LC_VAL + " = 'reset')");
-        }
-    };
-
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return inputPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath("((self::input or self::button) and " + TYPE_ATTR_LC_VAL + " = 'reset')");
     }
 
 }

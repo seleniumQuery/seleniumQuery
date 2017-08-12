@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.conte
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -29,20 +28,13 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEmptyPseudoClass implements CssPseudoClassCondition {
+public class CssEmptyPseudoClass implements NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "empty";
 
-    public NeverNativelySupportedPseudoClass emptyPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath("count(.//*) = 0");
-        }
-    };
-
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return emptyPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath("count(.//*) = 0");
     }
 
 }

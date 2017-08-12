@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -29,25 +28,18 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssHeaderPseudoClass implements CssPseudoClassCondition {
+public class CssHeaderPseudoClass implements NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "header";
 
-    public static final String HEADER_XPATH_EXPRESSION = "(" +
+    private static final String HEADER_XPATH_EXPRESSION = "(" +
             "self::h0 | self::h1 | self::h2 | self::h3 | self::h4 | " +
             "self::h5 | self::h6 | self::h7 | self::h8 | self::h9" +
         ")";
 
-    public NeverNativelySupportedPseudoClass headerPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath(HEADER_XPATH_EXPRESSION);
-        }
-    };
-
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return headerPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath(HEADER_XPATH_EXPRESSION);
     }
 
 }

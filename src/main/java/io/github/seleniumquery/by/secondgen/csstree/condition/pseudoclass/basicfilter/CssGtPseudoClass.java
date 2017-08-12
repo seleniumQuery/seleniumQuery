@@ -16,12 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalIndexArgumentPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
 
 /**
  * :gt(index)
@@ -29,37 +30,33 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssGtPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondition {
+public class CssGtPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondition implements
+    NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "gt";
 
-    public NeverNativelySupportedPseudoClass gtPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            int index = getArgumentAsIndex();
-            if (index >= 0) {
-                return XPathAndFilterFinder.pureXPath("position() > " + (index + 1));
-            }
-            return XPathAndFilterFinder.pureXPath("position() > (last()-" + (-index - 1) + ")");
-        }
-        @Override
-        public XPathMergeStrategy xPathMergeStrategy() {
-            return XPathMergeStrategy.CONDITIONAL_TO_ALL_XPATH_MERGE;
-        }
-    };
-
+    @SuppressWarnings("WeakerAccess") // constructor is invoked via reflection
     public CssGtPseudoClass(PseudoClass pseudoClassSelector) {
         super(pseudoClassSelector);
     }
 
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return gtPseudoClassFinderFactoryStrategy;
+    protected String getPseudoClassName() {
+        return PSEUDO;
     }
 
     @Override
-    protected String getPseudoClassName() {
-        return PSEUDO;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        int index = getArgumentAsIndex();
+        if (index >= 0) {
+            return XPathAndFilterFinder.pureXPath("position() > " + (index + 1));
+        }
+        return XPathAndFilterFinder.pureXPath("position() > (last()-" + (-index - 1) + ")");
+    }
+
+    @Override
+    public XPathMergeStrategy xPathMergeStrategy() {
+        return XPathMergeStrategy.CONDITIONAL_TO_ALL_XPATH_MERGE;
     }
 
 }

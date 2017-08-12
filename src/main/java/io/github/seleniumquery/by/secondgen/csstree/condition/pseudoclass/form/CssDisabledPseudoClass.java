@@ -19,7 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.DisabledPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
@@ -32,26 +31,19 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssDisabledPseudoClass implements CssPseudoClassCondition {
+public class CssDisabledPseudoClass implements MaybeNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "disabled";
     private static final String DISABLED_PSEUDO = ":" + PSEUDO;
 
-    private MaybeNativelySupportedPseudoClass disabledPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
-        @Override
-        public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CssFinder(DISABLED_PSEUDO);
-        }
-
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath(DisabledPseudoClass.DISABLED_XPATH_CONDITION);
-        }
-    };
+    @Override
+    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+        return new CssFinder(DISABLED_PSEUDO);
+    }
 
     @Override
-    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return disabledPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath(DisabledPseudoClass.DISABLED_XPATH_CONDITION);
     }
 
 }

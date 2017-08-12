@@ -16,12 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
 
 /**
  * :nth-child()
@@ -31,28 +32,9 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssNthChildPseudoClass extends CssFunctionalPseudoClassCondition {
+public class CssNthChildPseudoClass extends CssFunctionalPseudoClassCondition implements MaybeNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "nth-child";
-
-    private MaybeNativelySupportedPseudoClass nthChildPseudoElementFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
-        @Override
-        public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
-            return ":"+PSEUDO+"(1)";
-        }
-
-        @Override
-        public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
-            NthArgument nthArgument = getNthChildArgument();
-            return new CssFinder(":"+PSEUDO+"("+nthArgument.toCSS()+")");
-        }
-
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            NthArgument nthArgument = getNthChildArgument();
-            return XPathAndFilterFinder.pureXPath(nthArgument.toXPath("position()"));
-        }
-    };
 
     @SuppressWarnings("WeakerAccess") // constructor is invoked via reflection
     public CssNthChildPseudoClass(PseudoClass pseudoClassSelector) {
@@ -60,8 +42,20 @@ public class CssNthChildPseudoClass extends CssFunctionalPseudoClassCondition {
     }
 
     @Override
-    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return nthChildPseudoElementFinderFactoryStrategy;
+    public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
+        return ":"+PSEUDO+"(1)";
+    }
+
+    @Override
+    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+        NthArgument nthArgument = getNthChildArgument();
+        return new CssFinder(":"+PSEUDO+"("+nthArgument.toCSS()+")");
+    }
+
+    @Override
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        NthArgument nthArgument = getNthChildArgument();
+        return XPathAndFilterFinder.pureXPath(nthArgument.toXPath("position()"));
     }
 
     private NthArgument getNthChildArgument() {

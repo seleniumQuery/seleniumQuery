@@ -19,7 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.SelectedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
@@ -34,36 +33,29 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssSelectedPseudoClass implements CssPseudoClassCondition {
+public class CssSelectedPseudoClass implements MaybeNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "selected";
 
-    public MaybeNativelySupportedPseudoClass selectedPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
-        @Override
-        public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
-            return CssCheckedPseudoClass.isDriverWhereCheckedSelectorHasNoBugs(webDriver)
-                    && super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
-        }
-
-        @Override
-        public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
-            return CssCheckedPseudoClass.CHECKED_PSEUDO;
-        }
-
-        @Override
-        public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CssFinder("option", ":checked");
-        }
-
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return new XPathAndFilterFinder("self::option", SelectedPseudoClass.SELECTED_FILTER);
-        }
-    };
+    @Override
+    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
+        return CssCheckedPseudoClass.isDriverWhereCheckedSelectorHasNoBugs(webDriver)
+                && MaybeNativelySupportedPseudoClass.super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
+    }
 
     @Override
-    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return selectedPseudoClassFinderFactoryStrategy;
+    public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
+        return CssCheckedPseudoClass.CHECKED_PSEUDO;
+    }
+
+    @Override
+    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+        return new CssFinder("option", ":checked");
+    }
+
+    @Override
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return new XPathAndFilterFinder("self::option", SelectedPseudoClass.SELECTED_FILTER);
     }
 
 }
