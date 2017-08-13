@@ -19,8 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.DisabledPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
@@ -33,15 +31,9 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssDisabledPseudoClass implements AstCssPseudoClassCondition, MaybeNativelySupportedPseudoClass {
+public class CssDisabledPseudoClass extends AstCssDisabledPseudoClass implements MaybeNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "disabled";
     private static final String DISABLED_PSEUDO = ":" + PSEUDO;
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
 
     @Override
     public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {

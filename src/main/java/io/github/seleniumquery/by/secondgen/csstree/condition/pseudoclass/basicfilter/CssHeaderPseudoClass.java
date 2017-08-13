@@ -18,8 +18,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -30,19 +28,12 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssHeaderPseudoClass implements AstCssPseudoClassCondition, NeverNativelySupportedPseudoClass {
-
-    public static final String PSEUDO = "header";
+public class CssHeaderPseudoClass extends AstCssHeaderPseudoClass implements NeverNativelySupportedPseudoClass {
 
     private static final String HEADER_XPATH_EXPRESSION = "(" +
             "self::h0 | self::h1 | self::h2 | self::h3 | self::h4 | " +
             "self::h5 | self::h6 | self::h7 | self::h8 | self::h9" +
         ")";
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {

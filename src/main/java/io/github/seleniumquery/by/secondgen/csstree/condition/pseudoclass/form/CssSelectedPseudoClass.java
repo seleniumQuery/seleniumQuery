@@ -19,8 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.SelectedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
@@ -35,14 +33,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssSelectedPseudoClass implements AstCssPseudoClassCondition, MaybeNativelySupportedPseudoClass {
-
-    public static final String PSEUDO = "selected";
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
+public class CssSelectedPseudoClass extends AstCssSelectedPseudoClass implements MaybeNativelySupportedPseudoClass {
 
     @Override
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
@@ -52,7 +43,7 @@ public class CssSelectedPseudoClass implements AstCssPseudoClassCondition, Maybe
 
     @Override
     public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
-        return CssCheckedPseudoClass.CHECKED_PSEUDO;
+        return AstCssCheckedPseudoClass.CHECKED_PSEUDO;
     }
 
     @Override

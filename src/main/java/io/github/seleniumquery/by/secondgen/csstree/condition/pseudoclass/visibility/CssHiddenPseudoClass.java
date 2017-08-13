@@ -19,8 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visib
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.HiddenPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -30,14 +28,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssHiddenPseudoClass implements AstCssPseudoClassCondition, NeverNativelySupportedPseudoClass {
-
-    public static final String PSEUDO = "hidden";
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
+public class CssHiddenPseudoClass extends AstCssHiddenPseudoClass implements NeverNativelySupportedPseudoClass {
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {

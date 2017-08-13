@@ -16,8 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-
 /**
  * :first-child
  * https://api.jquery.com/first-child-selector/
@@ -26,14 +24,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssFirstChildPseudoClass extends CssNthChildPseudoClass {
-
-    public static final String PSEUDO = "first-child";
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
+public class CssFirstChildPseudoClass extends AstCssFirstChildPseudoClass {
 
     public CssFirstChildPseudoClass() {
         super("1");

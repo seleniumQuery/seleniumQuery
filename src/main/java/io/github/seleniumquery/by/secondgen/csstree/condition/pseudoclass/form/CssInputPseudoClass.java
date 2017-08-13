@@ -21,8 +21,6 @@ import static org.apache.commons.lang3.StringUtils.join;
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.InputPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -33,15 +31,9 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssInputPseudoClass implements AstCssPseudoClassCondition, NeverNativelySupportedPseudoClass {
+public class CssInputPseudoClass extends AstCssInputPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "input";
     private static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {

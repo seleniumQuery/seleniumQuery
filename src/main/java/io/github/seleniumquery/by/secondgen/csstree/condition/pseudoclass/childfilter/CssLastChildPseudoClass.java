@@ -16,8 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-
 /**
  * :last-child()
  * https://api.jquery.com/last-child-selector/
@@ -26,17 +24,10 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssLastChildPseudoClass extends CssNthLastChildPseudoClass {
-
-    public static final String PSEUDO = "last-child";
+public class CssLastChildPseudoClass extends AstCssLastChildPseudoClass {
 
     public CssLastChildPseudoClass() {
         super("1");
-    }
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
     }
 
 }

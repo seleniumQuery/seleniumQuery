@@ -17,17 +17,8 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssParentPseudoClass implements AstCssPseudoClassCondition, CssPseudoClassCondition, CssConditionImplementedNotYet {
-
-    public static final String PSEUDO = "parent";
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
+public class CssParentPseudoClass extends AstCssParentPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
 }

@@ -19,8 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.FocusPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -31,14 +29,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssFocusPseudoClass implements AstCssPseudoClassCondition, NeverNativelySupportedPseudoClass {
-
-    public static final String PSEUDO = "focus";
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
+public class CssFocusPseudoClass extends AstCssFocusPseudoClass implements NeverNativelySupportedPseudoClass {
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {

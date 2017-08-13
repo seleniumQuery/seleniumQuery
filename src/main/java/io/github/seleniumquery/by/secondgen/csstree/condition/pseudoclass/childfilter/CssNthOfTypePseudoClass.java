@@ -17,21 +17,11 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
-public class CssNthOfTypePseudoClass extends CssFunctionalPseudoClassCondition implements AstCssPseudoClassCondition,  CssConditionImplementedNotYet {
-
-    public static final String PSEUDO = "nth-of-type";
+public class CssNthOfTypePseudoClass extends AstCssNthOfTypePseudoClass implements CssConditionImplementedNotYet {
 
     public CssNthOfTypePseudoClass(String pseudoClassArgument) {
         super(pseudoClassArgument);
-    }
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
     }
 
 }
