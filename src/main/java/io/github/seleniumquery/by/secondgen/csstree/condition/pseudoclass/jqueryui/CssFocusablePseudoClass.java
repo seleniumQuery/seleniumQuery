@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.jqueryui;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
@@ -25,7 +26,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPse
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssFocusablePseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+public class CssFocusablePseudoClass implements AstCssPseudoClassCondition, CssPseudoClassCondition, CssConditionImplementedNotYet {
 
     public static final String PSEUDO = "focusable";
 

@@ -31,7 +31,6 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicf
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLangPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLastPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLtPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssNotPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssNthPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssOddPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssRootPseudoClass;
@@ -99,7 +98,7 @@ public class AstCssPseudoClassConditionVisitorTest {
         @Override public void visit(CssLangPseudoClass cssLangPseudoClass) { registerVisit(CssLangPseudoClass.class, cssLangPseudoClass); }
         @Override public void visit(CssLastPseudoClass cssLastPseudoClass) { registerVisit(CssLastPseudoClass.class, cssLastPseudoClass); }
         @Override public void visit(CssLtPseudoClass cssLtPseudoClass) { registerVisit(CssLtPseudoClass.class, cssLtPseudoClass); }
-        @Override public void visit(AstCssNotPseudoClass astCssNotPseudoClass) { registerVisit(CssNotPseudoClass.class, astCssNotPseudoClass); }
+        @Override public void visit(AstCssNotPseudoClass astCssNotPseudoClass) { registerVisit(AstCssNotPseudoClass.class, astCssNotPseudoClass); }
         @Override public void visit(CssNthPseudoClass cssNthPseudoClass) { registerVisit(CssNthPseudoClass.class, cssNthPseudoClass); }
         @Override public void visit(CssOddPseudoClass cssOddPseudoClass) { registerVisit(CssOddPseudoClass.class, cssOddPseudoClass); }
         @Override public void visit(CssRootPseudoClass cssRootPseudoClass) { registerVisit(CssRootPseudoClass.class, cssRootPseudoClass); }
@@ -247,11 +246,11 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssNotPseudoClass() {
         // given
-        AstCssNotPseudoClass astCssNotPseudoClass = new CssNotPseudoClass(ParseTreeBuilder.parse(".class"));
+        AstCssNotPseudoClass astCssNotPseudoClass = new AstCssNotPseudoClass(ParseTreeBuilder.parse(".class"));
         // when
         astCssNotPseudoClass.accept(visitor);
         // then
-        assertEquals(CssNotPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssNotPseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssNotPseudoClass, visitor.getVisitedInstance());
     }
 

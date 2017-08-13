@@ -29,7 +29,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
  * @author acdcjunior
  * @since 0.17.0
  */
-public abstract class AstCssNotPseudoClass implements AstCssPseudoClassCondition {
+public final class AstCssNotPseudoClass implements AstCssPseudoClassCondition {
 
     // :not() are translated into :not-sq() by the pre-parser
     public static final String PSEUDO = "not-sq";

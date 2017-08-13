@@ -124,8 +124,8 @@ class CssPseudoClassConditionTranslator {
 		pseudoClassesF.put(CssLangPseudoClass.PSEUDO_PURE_LANG, CssLangPseudoClass::new);
 		pseudoClassesF.put(CssLastPseudoClass.PSEUDO, (a) -> new CssLastPseudoClass());
 		pseudoClassesF.put(CssLtPseudoClass.PSEUDO, CssLtPseudoClass::new);
-		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO, (a) -> new CssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a)));
-		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO_PURE_NOT, (a) -> new CssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a)));
+		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO, (a) -> new CssNotPseudoClass(new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a))));
+		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO_PURE_NOT, (a) -> new CssNotPseudoClass(new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a))));
 		pseudoClassesF.put(CssNthPseudoClass.PSEUDO, CssNthPseudoClass::new);
 		pseudoClassesF.put(CssOddPseudoClass.PSEUDO, (a) -> new CssOddPseudoClass());
 		pseudoClassesF.put(CssRootPseudoClass.PSEUDO, (a) -> new CssRootPseudoClass());
