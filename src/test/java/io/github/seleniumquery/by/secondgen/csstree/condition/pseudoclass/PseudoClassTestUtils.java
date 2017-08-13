@@ -21,13 +21,19 @@ import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest
 import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils
     .parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matcher;
 
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
@@ -51,6 +57,9 @@ public class PseudoClassTestUtils {
         public QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder withAllKindsOfArguments() {
             return new QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder(this.selector);
         }
+        public QueriesOnFunctionalPseudoclassesThatExpectSelectorsArAsgumentsTestAssertBuilder withSelectorArguments() {
+            return new QueriesOnFunctionalPseudoclassesThatExpectSelectorsArAsgumentsTestAssertBuilder(this.selector);
+        }
     }
 
     private static <T extends CssCondition> void assertQueryOnSelectorYieldsPseudoClass(String selector, Class<T> pseudoClassClass) {
@@ -73,12 +82,7 @@ public class PseudoClassTestUtils {
 
     private static <T extends CssFunctionalPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(String selector,
                                                                                                                                      Class<T> pseudoClassClass) {
-        try {
-            assertSelectorTranslatesArgument(selector, pseudoClassClass, "", null);
-            fail("Functional Pseudo called without () should throw exception.");
-        } catch (IllegalArgumentException | org.w3c.css.sac.CSSParseException | SeleniumQueryException e) {
-            assertThat(e.getMessage(), anyOf(containsString("Functional pseudo"), containsString("(Invalid token \"not\".")));
-        }
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "", "Functional pseudo", "(Invalid token \"not\".");
 
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(0)", "0");
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(-0)", "-0");
@@ -91,6 +95,21 @@ public class PseudoClassTestUtils {
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(     )", "     ");
 
         assertSelectorTranslatesArgument(selector, pseudoClassClass, "(\"a 'c' b\")", "\"a 'c' b\"");
+    }
+
+    private static <T extends CssPseudoClassCondition> void assertSelectorFailsAtTranslatingArgument(String selector,
+                                                                                                               Class<T> pseudoClassClass,
+                                                                                                               String selectorSuffix,
+                                                                                                               String... possibleExceptions) {
+        try {
+            parseAndAssertFirstCssCondition(selector + selectorSuffix, pseudoClassClass);
+            fail("Functional Pseudo called like \":"+selector+selectorSuffix+"\" should throw exception.");
+        } catch (IllegalArgumentException | org.w3c.css.sac.CSSParseException | SeleniumQueryException e) {
+            List<Matcher<? super String>> containsStringsPossibleExceptions = Stream.of(possibleExceptions)
+                .map(CoreMatchers::containsString)
+                .collect(Collectors.toList());
+            assertThat(e.getMessage(), anyOf(containsStringsPossibleExceptions));
+        }
     }
 
     private static <T extends CssFunctionalPseudoClassCondition> void assertSelectorTranslatesArgument(String selector, Class<T> pseudoClassClass,
@@ -116,6 +135,44 @@ public class PseudoClassTestUtils {
         assertThat(elementFinder.canFetchThroughCssAlone(), is(false));
         assertThat(elementFinder.getXPathExpression(), is(previous.getXPathExpression()));
         assertThat(elementFinder.getElementFilterList().getElementFilters(), contains(pseudoClassFilter));
+    }
+
+    public static class QueriesOnFunctionalPseudoclassesThatExpectSelectorsArAsgumentsTestAssertBuilder {
+        private final String selector;
+        private QueriesOnFunctionalPseudoclassesThatExpectSelectorsArAsgumentsTestAssertBuilder(String selector) { this.selector = selector; }
+
+        public <T extends CssPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedSelectorArguments(Class<T> pseudoClassClass) {
+            assertQueriesOnSelectorWithSelectorArgumentsYieldFunctionalPseudoClass(this.selector, pseudoClassClass);
+        }
+    }
+
+    private static <T extends CssPseudoClassCondition> void assertQueriesOnSelectorWithSelectorArgumentsYieldFunctionalPseudoClass(String selector,
+                                                                                                                                   Class<T> pseudoClassClass) {
+        String possibleExceptionMessage = "Impossible to parse selector";
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "", possibleExceptionMessage);
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(0)", possibleExceptionMessage);
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(-0)", possibleExceptionMessage);
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(+0)", possibleExceptionMessage);
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(1)", possibleExceptionMessage);
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(-1)", possibleExceptionMessage);
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(+1)", possibleExceptionMessage);
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "()", possibleExceptionMessage);
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(     )", possibleExceptionMessage);
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(\"a 'c' b\")", possibleExceptionMessage);
+
+        assertSelectorTrowsNoExceptionWhileTranslatingArgument(selector, pseudoClassClass, "(tag)");
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static <T extends CssPseudoClassCondition> void assertSelectorTrowsNoExceptionWhileTranslatingArgument(String selector,
+                                                                                                                   Class<T> pseudoClassClass,
+                                                                                                                   String selectorSuffix) {
+        // given
+        // selector
+        // when
+        parseAndAssertFirstCssCondition(selector + selectorSuffix, pseudoClassClass);
+        // then
+        // no exception is thrown
     }
 
 }

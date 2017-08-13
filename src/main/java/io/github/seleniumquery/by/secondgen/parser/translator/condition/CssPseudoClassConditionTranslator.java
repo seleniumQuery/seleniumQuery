@@ -79,6 +79,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleni
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery.CssUncheckedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility.CssHiddenPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility.CssVisiblePseudoClass;
+import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 
 /**
  * :pseudo-classes
@@ -120,8 +121,8 @@ class CssPseudoClassConditionTranslator {
 		pseudoClassesF.put(CssLangPseudoClass.PSEUDO_PURE_LANG, CssLangPseudoClass::new);
 		pseudoClassesF.put(CssLastPseudoClass.PSEUDO, (a) -> new CssLastPseudoClass());
 		pseudoClassesF.put(CssLtPseudoClass.PSEUDO, CssLtPseudoClass::new);
-		pseudoClassesF.put(CssNotPseudoClass.PSEUDO, CssNotPseudoClass::new);
-		pseudoClassesF.put(CssNotPseudoClass.PSEUDO_PURE_NOT, CssNotPseudoClass::new);
+		pseudoClassesF.put(CssNotPseudoClass.PSEUDO, (a) -> new CssNotPseudoClass(ParseTreeBuilder.parse(a)));
+		pseudoClassesF.put(CssNotPseudoClass.PSEUDO_PURE_NOT, (a) -> new CssNotPseudoClass(ParseTreeBuilder.parse(a)));
 		pseudoClassesF.put(CssNthPseudoClass.PSEUDO, CssNthPseudoClass::new);
 		pseudoClassesF.put(CssOddPseudoClass.PSEUDO, (a) -> new CssOddPseudoClass());
 		pseudoClassesF.put(CssRootPseudoClass.PSEUDO, (a) -> new CssRootPseudoClass());
@@ -185,6 +186,5 @@ class CssPseudoClassConditionTranslator {
         String index = pseudoClassValue.substring(pseudoClassValue.indexOf('(')+1, pseudoClassValue.length()-1);
         return argumentMap.get(index);
     }
-
 
 }
