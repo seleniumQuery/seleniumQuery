@@ -16,16 +16,16 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import org.junit.Test;
-import org.openqa.selenium.InvalidSelectorException;
-
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass
+    .assertPseudoClass;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
+import org.junit.Test;
+import org.openqa.selenium.InvalidSelectorException;
 
 public class CssEqPseudoClassTest {
 
@@ -48,16 +48,12 @@ public class CssEqPseudoClassTest {
 
     private void assertEqArgumentIsNotValid(String eqArgument) {
         try {
-            eq(eqArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
+            new CssEqPseudoClass(eqArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
             fail("Should consider *:eq("+eqArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":eq()"));
             assertThat(e.getMessage(), containsString(eqArgument));
         }
-    }
-
-    private CssEqPseudoClass eq(String eqArgument) {
-        return new CssEqPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(eqArgument));
     }
 
     @Test
@@ -75,7 +71,7 @@ public class CssEqPseudoClassTest {
     }
 
     private void assertEqArgumentGeneratesXPath(String eqArgument, String eqXPathExpression) {
-        assertPseudoClass(eq(eqArgument)).whenNotNativelySupported().translatesToPureXPath(eqXPathExpression);
+        assertPseudoClass(new CssEqPseudoClass(eqArgument)).whenNotNativelySupported().translatesToPureXPath(eqXPathExpression);
     }
 
     @Test

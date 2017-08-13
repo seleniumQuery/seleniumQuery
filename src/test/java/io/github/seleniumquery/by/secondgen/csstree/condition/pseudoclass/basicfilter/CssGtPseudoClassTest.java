@@ -16,16 +16,16 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import org.junit.Test;
-import org.openqa.selenium.InvalidSelectorException;
-
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass
+    .assertPseudoClass;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
+import org.junit.Test;
+import org.openqa.selenium.InvalidSelectorException;
 
 public class CssGtPseudoClassTest {
 
@@ -48,16 +48,12 @@ public class CssGtPseudoClassTest {
 
     private void assertGtArgumentIsNotValid(String gtArgument) {
         try {
-            gt(gtArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
+            new CssGtPseudoClass(gtArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
             fail("Should consider *:gt("+gtArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":gt()"));
             assertThat(e.getMessage(), containsString(gtArgument));
         }
-    }
-
-    private CssGtPseudoClass gt(String gtArgument) {
-        return new CssGtPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(gtArgument));
     }
 
     @Test
@@ -75,7 +71,7 @@ public class CssGtPseudoClassTest {
     }
 
     private void assertGtArgumentGeneratesXPath(String gtArgument, String gtXPathExpression) {
-        assertPseudoClass(gt(gtArgument)).whenNotNativelySupported().translatesToPureXPath(gtXPathExpression);
+        assertPseudoClass(new CssGtPseudoClass(gtArgument)).whenNotNativelySupported().translatesToPureXPath(gtXPathExpression);
     }
 
     @Test

@@ -16,29 +16,25 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-import io.github.seleniumquery.SeleniumQueryException;
-import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.common.preparser.FakeArgumentMap;
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassSelector;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
-import org.w3c.css.sac.Selector;
-
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.createWebDriverWithNativeSupportForNoPseudoClass;
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.universalSelectorFinder;
-import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
-import static org.hamcrest.CoreMatchers.*;
+import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils
+    .parseAndAssertFirstCssCondition;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-public class PseudoClassTestUtils {
+import io.github.seleniumquery.SeleniumQueryException;
+import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
-    public static final PseudoClassSelector EMPTY = new PseudoClassSelector(null, null, "") {
-        @Override public String getPseudoClassContent() { return ""; }
-    };
+public class PseudoClassTestUtils {
 
     public static QueriesOnPseudoclassSelectorsTestAssertBuilder assertQueriesOnSelector(String selector) {
         return new QueriesOnPseudoclassSelectorsTestAssertBuilder(selector);
@@ -120,19 +116,6 @@ public class PseudoClassTestUtils {
         assertThat(elementFinder.canFetchThroughCssAlone(), is(false));
         assertThat(elementFinder.getXPathExpression(), is(previous.getXPathExpression()));
         assertThat(elementFinder.getElementFilterList().getElementFilters(), contains(pseudoClassFilter));
-    }
-
-    /**
-     * This method creates a {@link PseudoClassSelector} equivalent to {@code *:the-pseudo-class(ARGUMENT)}.
-     *
-     * @param functionalPseudoClassArgument the ARGUMENT.
-     */
-    public static PseudoClassSelector createPseudoClassSelectorAppliedToUniversalSelector(String functionalPseudoClassArgument) {
-        CssParsedSelectorList cssParsedSelectorList = CssSelectorParser.parseSelector("*");
-        Selector universalSelector = cssParsedSelectorList.getSelectorList().item(0);
-        FakeArgumentMap argumentMap = new FakeArgumentMap();
-        argumentMap.put(1, functionalPseudoClassArgument);
-        return new PseudoClassSelector(argumentMap, universalSelector, "(1)");
     }
 
 }

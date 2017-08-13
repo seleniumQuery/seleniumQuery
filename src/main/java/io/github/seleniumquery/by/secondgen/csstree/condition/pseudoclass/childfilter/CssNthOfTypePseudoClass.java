@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
@@ -24,8 +23,8 @@ public class CssNthOfTypePseudoClass extends CssFunctionalPseudoClassCondition i
 
     public static final String PSEUDO = "nth-of-type";
 
-    public CssNthOfTypePseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssNthOfTypePseudoClass(String pseudoClassArgument) {
+        super(pseudoClassArgument);
     }
 
 }

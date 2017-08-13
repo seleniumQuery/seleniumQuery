@@ -16,14 +16,16 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass
+    .assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils
+    .assertPseudoClassHasElementFinderWhenNativelySupported;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
+
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoClassHasElementFinderWhenNativelySupported;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
-import static org.hamcrest.collection.IsEmptyCollection.empty;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils;
 
 public class CssNotPseudoClassTest {
 
@@ -38,7 +40,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__when_driver_has_native_support() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("span")), // :not(span)
+                new CssNotPseudoClass("span"), // :not(span)
                 ":not(span)",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_SUPPORTED,
                 ".//*[not(self::span)]",
@@ -48,7 +50,7 @@ public class CssNotPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        CssNotPseudoClass notTag = new CssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("tag")); // :not(tag)
+        CssNotPseudoClass notTag = new CssNotPseudoClass("tag"); // :not(tag)
         assertPseudoClass(notTag).whenNotNativelySupported().translatesToPureXPath(".//*[not(self::tag)]");
     }
 
@@ -56,7 +58,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__when_driver_has_native_support_BUT_inner_css_can_be_separated() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h1,h2")), // :not(h1,h2)
+                new CssNotPseudoClass("h1,h2"), // :not(h1,h2)
                 ":not(h1):not(h2)",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_SUPPORTED,
                 ".//*[not(self::h1 | self::h2)]",
@@ -81,7 +83,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__not_and_general_ancestor() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3 h4")), // :not(h3 h4)
+                new CssNotPseudoClass("h3 h4"), // :not(h3 h4)
                 "*",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and ANY-ANCESTOR/*[self::h3])]",
@@ -93,7 +95,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__not_and_direct_ancestor() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3>h4")), // :not(h3>h4)
+                new CssNotPseudoClass("h3>h4"), // :not(h3>h4)
                 "*",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and DIRECT-ANCESTOR/*[self::h3])]",
@@ -105,7 +107,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__not_and_direct_sibling() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3+h4")), // :not(h3+h4)
+                new CssNotPseudoClass("h3+h4"), // :not(h3+h4)
                 "*",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and DIRECT-SIBLING/*[self::h3])]",
@@ -117,7 +119,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__not_and_general_sibling() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector("h3+h4")), // :not(h3~h4)
+                new CssNotPseudoClass("h3+h4"), // :not(h3~h4)
                 "*",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and GENERAL-SIBLING/*[self::h3])]",

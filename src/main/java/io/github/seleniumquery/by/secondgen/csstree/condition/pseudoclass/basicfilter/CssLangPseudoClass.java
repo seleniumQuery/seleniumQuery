@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
@@ -35,8 +34,8 @@ public class CssLangPseudoClass extends CssFunctionalPseudoClassCondition implem
       but we still match it, so we can return a proper error message */
     public static final String PSEUDO_PURE_LANG = "lang";
 
-    public CssLangPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssLangPseudoClass(String pseudoClassArgument) {
+        super(pseudoClassArgument);
     }
 
 }

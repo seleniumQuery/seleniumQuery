@@ -16,9 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SqCssFunctionalPseudoClassArgument;
-
 /**
  * :last-child()
  * https://api.jquery.com/last-child-selector/
@@ -31,14 +28,8 @@ public class CssLastChildPseudoClass extends CssNthLastChildPseudoClass {
 
     public static final String PSEUDO = "last-child";
 
-    @SuppressWarnings("WeakerAccess") // constructor is invoked via reflection
-    public CssLastChildPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
-    }
-
-    @Override
-    public SqCssFunctionalPseudoClassArgument getArgument() {
-        return new SqCssFunctionalPseudoClassArgument("1");
+    public CssLastChildPseudoClass() {
+        super("1");
     }
 
 }

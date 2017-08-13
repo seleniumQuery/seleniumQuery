@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
@@ -24,8 +23,8 @@ public class CssHasPseudoClass extends CssFunctionalPseudoClassCondition impleme
 
     public static final String PSEUDO = "has";
 
-    public CssHasPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssHasPseudoClass(String pseudoClassArgument) {
+        super(pseudoClassArgument);
     }
 
 }

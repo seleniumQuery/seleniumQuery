@@ -16,11 +16,12 @@
 
 package io.github.seleniumquery.by.firstgen.css.pseudoclasses;
 
-import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import org.w3c.css.sac.Selector;
 
-public class PseudoClassSelector implements io.github.seleniumquery.by.common.pseudoclass.PseudoClass {
-	
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+
+public class PseudoClassSelector {
+
 	private ArgumentMap argumentMap;
 	private Selector selectorThisConditionShouldApply;
 	private String pseudoClassValue;
@@ -31,7 +32,6 @@ public class PseudoClassSelector implements io.github.seleniumquery.by.common.ps
 		this.pseudoClassValue = pseudoClassValue;
 	}
 
-	@Override
 	public String getPseudoClassContent() {
 		if (!pseudoClassValue.contains("(")) {
 			throw new IllegalArgumentException("Functional pseudo-class has no parenthesis/arguments: "+pseudoClassValue);
@@ -42,7 +42,7 @@ public class PseudoClassSelector implements io.github.seleniumquery.by.common.ps
 
 	/**
 	 * Represents the selector this pseudo class condition should apply to.
-	 * 
+	 *
 	 * In other words, the selector up to the point of this pseudo class, that is, #i.mean.this.selector:before-this-pseudo
 	 *
 	 * @return the selector this condition should be applied to.
@@ -55,16 +55,16 @@ public class PseudoClassSelector implements io.github.seleniumquery.by.common.ps
 		return argumentMap;
 	}
 
-	public String getOriginalPseudoClassSelector() {
+	String getOriginalPseudoClassSelector() {
 		String pseudoClassBracesContent = getPseudoClassContent();
-		
+
 		String rawUsupportedSelector = ":"+getPseudoClass();
 		if (pseudoClassBracesContent != null) {
 			rawUsupportedSelector = ":"+getPseudoClass()+"("+pseudoClassBracesContent+")";
 		}
 		return rawUsupportedSelector;
 	}
-	
+
 	private String getPseudoClass() {
 		int openingBracket = pseudoClassValue.indexOf('(');
 		if (openingBracket == -1) {

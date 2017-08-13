@@ -23,7 +23,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 
 import com.google.common.base.Joiner;
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
@@ -34,6 +33,15 @@ import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 
+/**
+ * :not(selectorlist)
+ *
+ * Notice that the preparser turns :not() into :not-sq(), because SACCssParser doesn't accept commas
+ * inside :not().
+ *
+ * @author acdcjunior
+ * @since 0.17.0
+ */
 public class CssNotPseudoClass extends CssFunctionalPseudoClassCondition implements MaybeNativelySupportedPseudoClass {
 
     // :not() are translated into :not-sq() by the pre-parser
@@ -43,9 +51,8 @@ public class CssNotPseudoClass extends CssFunctionalPseudoClassCondition impleme
        but we still match it, so we can return a proper error message */
     public static final String PSEUDO_PURE_NOT = "not";
 
-    @SuppressWarnings("WeakerAccess") // constructor is invoked via reflection
-    public CssNotPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssNotPseudoClass(String pseudoClassArgument) {
+        super(pseudoClassArgument);
     }
 
     @Override

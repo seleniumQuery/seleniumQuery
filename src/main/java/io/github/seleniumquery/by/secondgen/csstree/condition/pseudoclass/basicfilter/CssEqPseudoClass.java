@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalIndexArgumentPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
@@ -35,9 +34,8 @@ public class CssEqPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondi
 
     public static final String PSEUDO = "eq";
 
-    @SuppressWarnings("WeakerAccess") // constructor invoked via reflection
-    public CssEqPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssEqPseudoClass(String pseudoClassArgument) {
+        super(pseudoClassArgument);
     }
 
     @Override

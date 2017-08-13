@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalIndexArgumentPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
@@ -34,9 +33,8 @@ public class CssLtPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondi
 
     public static final String PSEUDO = "lt";
 
-    @SuppressWarnings("WeakerAccess") // constructor is invoked via reflection
-    public CssLtPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssLtPseudoClass(String pseudoClassArgument) {
+        super(pseudoClassArgument);
     }
 
     @Override
