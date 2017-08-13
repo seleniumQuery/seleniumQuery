@@ -17,15 +17,15 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
 
 public class CssFirstOfTypePseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
     public static final String PSEUDO = "first-of-type";
 
     @Override
-    public void accept(CssPseudoClassConditionVisitor visitor) {
+    public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
 

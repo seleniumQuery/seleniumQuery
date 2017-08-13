@@ -17,8 +17,8 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.jqueryui;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
 
 /**
  *
@@ -30,7 +30,7 @@ public class CssTabbablePseudoClass implements CssPseudoClassCondition, CssCondi
     public static final String PSEUDO = "tabbable";
 
     @Override
-    public void accept(CssPseudoClassConditionVisitor visitor) {
+    public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
 

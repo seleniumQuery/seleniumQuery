@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
 /**
  * :not(selectorlist)
@@ -45,7 +45,7 @@ public abstract class AstCssNotPseudoClass implements AstCssPseudoClassCondition
     }
 
     @Override
-    public void accept(CssPseudoClassConditionVisitor visitor) {
+    public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
 

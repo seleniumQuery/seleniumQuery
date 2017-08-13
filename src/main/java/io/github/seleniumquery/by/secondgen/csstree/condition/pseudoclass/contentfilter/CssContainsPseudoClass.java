@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.conte
 
 import org.openqa.selenium.WebDriver;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 import io.github.seleniumquery.utils.SelectorUtils;
@@ -40,7 +40,7 @@ public class CssContainsPseudoClass extends CssFunctionalPseudoClassCondition im
     }
 
     @Override
-    public void accept(CssPseudoClassConditionVisitor visitor) {
+    public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
 

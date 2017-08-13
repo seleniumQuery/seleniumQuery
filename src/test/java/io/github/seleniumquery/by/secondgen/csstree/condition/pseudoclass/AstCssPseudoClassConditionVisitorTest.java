@@ -75,16 +75,16 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibi
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility.CssVisiblePseudoClass;
 import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 
-public class CssPseudoClassConditionVisitorTest {
+public class AstCssPseudoClassConditionVisitorTest {
 
-    class CssPseudoClassConditionVisitorMock implements CssPseudoClassConditionVisitor {
-        private Class<? extends CssPseudoClassCondition> visitedClass;
-        private CssPseudoClassCondition visitedInstance;
+    class AstCssPseudoClassConditionVisitorMock implements AstCssPseudoClassConditionVisitor {
+        private Class<? extends AstCssPseudoClassCondition> visitedClass;
+        private AstCssPseudoClassCondition visitedInstance;
 
-        Class<? extends CssPseudoClassCondition> getVisitedClass() { return visitedClass; }
-        CssPseudoClassCondition getVisitedInstance() { return visitedInstance; }
+        Class<? extends AstCssPseudoClassCondition> getVisitedClass() { return visitedClass; }
+        AstCssPseudoClassCondition getVisitedInstance() { return visitedInstance; }
 
-        void registerVisit(Class<? extends CssPseudoClassCondition> visitedClass, CssPseudoClassCondition visited) {
+        void registerVisit(Class<? extends AstCssPseudoClassCondition> visitedClass, AstCssPseudoClassCondition visited) {
             if (this.visitedClass != null) fail("Visitor has already registered a visit: " + this.visitedClass);
             this.visitedClass = visitedClass;
             this.visitedInstance = visited;
@@ -99,8 +99,7 @@ public class CssPseudoClassConditionVisitorTest {
         @Override public void visit(CssLangPseudoClass cssLangPseudoClass) { registerVisit(CssLangPseudoClass.class, cssLangPseudoClass); }
         @Override public void visit(CssLastPseudoClass cssLastPseudoClass) { registerVisit(CssLastPseudoClass.class, cssLastPseudoClass); }
         @Override public void visit(CssLtPseudoClass cssLtPseudoClass) { registerVisit(CssLtPseudoClass.class, cssLtPseudoClass); }
-        @Override public void visit(AstCssNotPseudoClass astCssNotPseudoClass) { registerVisit(CssNotPseudoClass.class,
-            astCssNotPseudoClass); }
+        @Override public void visit(AstCssNotPseudoClass astCssNotPseudoClass) { registerVisit(CssNotPseudoClass.class, astCssNotPseudoClass); }
         @Override public void visit(CssNthPseudoClass cssNthPseudoClass) { registerVisit(CssNthPseudoClass.class, cssNthPseudoClass); }
         @Override public void visit(CssOddPseudoClass cssOddPseudoClass) { registerVisit(CssOddPseudoClass.class, cssOddPseudoClass); }
         @Override public void visit(CssRootPseudoClass cssRootPseudoClass) { registerVisit(CssRootPseudoClass.class, cssRootPseudoClass); }
@@ -144,7 +143,7 @@ public class CssPseudoClassConditionVisitorTest {
         @Override public void visit(CssVisiblePseudoClass cssVisiblePseudoClass) { registerVisit(CssVisiblePseudoClass.class, cssVisiblePseudoClass); }
     }
 
-    private CssPseudoClassConditionVisitorMock visitor = new CssPseudoClassConditionVisitorMock();
+    private AstCssPseudoClassConditionVisitorMock visitor = new AstCssPseudoClassConditionVisitorMock();
 
     @Test
     public void visitCssAnimatedPseudoClass() {
