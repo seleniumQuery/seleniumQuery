@@ -26,6 +26,7 @@ import static org.hamcrest.collection.IsEmptyCollection.empty;
 import org.junit.Test;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils;
+import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 
 public class CssNotPseudoClassTest {
 
@@ -33,14 +34,14 @@ public class CssNotPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(NOT_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssNotPseudoClass.class);
+        assertQueriesOnSelector(NOT_PSEUDO).withSelectorArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedSelectorArguments(CssNotPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__when_driver_has_native_support() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass("span"), // :not(span)
+                new CssNotPseudoClass(ParseTreeBuilder.parse("span")), // :not(span)
                 ":not(span)",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_SUPPORTED,
                 ".//*[not(self::span)]",
@@ -50,7 +51,7 @@ public class CssNotPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        CssNotPseudoClass notTag = new CssNotPseudoClass("tag"); // :not(tag)
+        CssNotPseudoClass notTag = new CssNotPseudoClass(ParseTreeBuilder.parse("tag")); // :not(tag)
         assertPseudoClass(notTag).whenNotNativelySupported().translatesToPureXPath(".//*[not(self::tag)]");
     }
 
@@ -58,7 +59,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__when_driver_has_native_support_BUT_inner_css_can_be_separated() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass("h1,h2"), // :not(h1,h2)
+                new CssNotPseudoClass(ParseTreeBuilder.parse("h1,h2")), // :not(h1,h2)
                 ":not(h1):not(h2)",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_SUPPORTED,
                 ".//*[not(self::h1 | self::h2)]",
@@ -83,7 +84,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__not_and_general_ancestor() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass("h3 h4"), // :not(h3 h4)
+                new CssNotPseudoClass(ParseTreeBuilder.parse("h3 h4")), // :not(h3 h4)
                 "*",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and ANY-ANCESTOR/*[self::h3])]",
@@ -95,7 +96,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__not_and_direct_ancestor() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass("h3>h4"), // :not(h3>h4)
+                new CssNotPseudoClass(ParseTreeBuilder.parse("h3>h4")), // :not(h3>h4)
                 "*",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and DIRECT-ANCESTOR/*[self::h3])]",
@@ -107,7 +108,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__not_and_direct_sibling() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass("h3+h4"), // :not(h3+h4)
+                new CssNotPseudoClass(ParseTreeBuilder.parse("h3+h4")), // :not(h3+h4)
                 "*",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and DIRECT-SIBLING/*[self::h3])]",
@@ -119,7 +120,7 @@ public class CssNotPseudoClassTest {
     public void toElementFinder__not_and_general_sibling() {
         assertPseudoClassHasElementFinderWhenNativelySupported(
                 ":not(div)",
-                new CssNotPseudoClass("h3+h4"), // :not(h3~h4)
+                new CssNotPseudoClass(ParseTreeBuilder.parse("h3+h4")), // :not(h3~h4)
                 "*",
                 PseudoClassAssertFinderUtils.PURE_CSS_IS_NOT_SUPPORTED,
                 ".//*[not(self::h4 and GENERAL-SIBLING/*[self::h3])]",
