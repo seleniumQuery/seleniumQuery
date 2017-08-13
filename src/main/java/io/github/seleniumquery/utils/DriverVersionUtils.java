@@ -16,8 +16,12 @@
 
 package io.github.seleniumquery.utils;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.google.common.annotations.VisibleForTesting;
+import static org.apache.commons.lang3.ArrayUtils.contains;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -30,11 +34,8 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.safari.SafariDriver;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.apache.commons.lang3.ArrayUtils.contains;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.google.common.annotations.VisibleForTesting;
 
 /**
  * Contains some utility functions for dealing with WebDrivers, such as inspecting their version.
@@ -61,7 +62,7 @@ public class DriverVersionUtils {
 	}
 
 	public boolean hasNativeSupportForPseudo(WebDriver driver, String pseudoClass) {
-		Map<String, Boolean> driverMap = getDriverMap(driver);
+        Map<String, Boolean> driverMap = driverSupportedPseudos.putIfAbsent(driver, new HashMap<>());
 		Boolean supports = driverMap.get(pseudoClass);
 		if (supports == null) {
 			boolean supported = testPseudoClassNativeSupport(pseudoClass, driver);
@@ -73,23 +74,11 @@ public class DriverVersionUtils {
 
 	private boolean testPseudoClassNativeSupport(String pseudo, SearchContext context) {
 		try {
-			By.cssSelector("#AAA_SomeIdThatShouldNotExist"+pseudo).findElement(context);
+			By.cssSelector("#AAA_SomeIdThatShouldNotExist"+pseudo).findElements(context);
 			return true;
 		} catch (Exception ignored) {
 			return false;
 		}
-	}
-
-	/**
-	 * Returns the Map for the given driver, initializing it if necessary.
-	 */
-	private Map<String, Boolean> getDriverMap(WebDriver driver) {
-		Map<String, Boolean> driverMap = driverSupportedPseudos.get(driver);
-		if (driverMap == null) {
-			driverMap = new HashMap<>();
-			driverSupportedPseudos.put(driver, driverMap);
-		}
-		return driverMap;
 	}
 
     public static boolean isHtmlUnitDriverEmulatingIE(WebDriver driver) {
