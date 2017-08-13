@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
+
 /**
  * :last-child()
  * https://api.jquery.com/last-child-selector/
@@ -30,6 +32,11 @@ public class CssLastChildPseudoClass extends CssNthLastChildPseudoClass {
 
     public CssLastChildPseudoClass() {
         super("1");
+    }
+
+    @Override
+    public void accept(CssPseudoClassConditionVisitor visitor) {
+        visitor.visit(this);
     }
 
 }

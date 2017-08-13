@@ -33,4 +33,6 @@ public interface CssPseudoClassCondition extends CssCondition, CssConditionImple
                 "It is not yet because we need the project to compile while implementing everything.\n\n");
     }
 
+    void accept(CssPseudoClassConditionVisitor visitor);
+
 }

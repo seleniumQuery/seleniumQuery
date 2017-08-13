@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.conte
 
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassHasNoArgumentsException;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
 
 public class CssHasPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
@@ -29,10 +29,12 @@ public class CssHasPseudoClass implements CssPseudoClassCondition, CssConditionI
     private final CssSelectorList argumentSelector;
 
     public CssHasPseudoClass(CssSelectorList argumentSelector) {
-        if (argumentSelector == null) {
-            throw new CssFunctionalPseudoClassHasNoArgumentsException();
-        }
         this.argumentSelector = argumentSelector;
+    }
+
+    @Override
+    public void accept(CssPseudoClassConditionVisitor visitor) {
+        visitor.visit(this);
     }
 
 }

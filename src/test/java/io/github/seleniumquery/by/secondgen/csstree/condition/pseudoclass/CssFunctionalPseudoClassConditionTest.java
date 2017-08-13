@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,14 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
 public class CssFunctionalPseudoClassConditionTest {
 
+    class CssFunctionalPseudoClassConditionSubClass extends CssFunctionalPseudoClassCondition {
+        CssFunctionalPseudoClassConditionSubClass(String argument) { super(argument); }
+        @Override public void accept(CssPseudoClassConditionVisitor visitor) { }
+    }
+
     @Test
     public void getArgument() {
-        CssFunctionalPseudoClassCondition functionalPseudoClassCondition = new CssFunctionalPseudoClassCondition("1");
+        CssFunctionalPseudoClassCondition functionalPseudoClassCondition = new CssFunctionalPseudoClassConditionSubClass("1");
         String argument = functionalPseudoClassCondition.getArgument().getArgumentAsString();
         assertThat(argument, is("1"));
     }
@@ -44,7 +49,7 @@ public class CssFunctionalPseudoClassConditionTest {
             }
             return null;
         };
-        CssFunctionalPseudoClassCondition functionalPseudoClassCondition = new CssFunctionalPseudoClassCondition("1") {
+        CssFunctionalPseudoClassCondition functionalPseudoClassCondition = new CssFunctionalPseudoClassConditionSubClass("1") {
             @Override
             public CssConditionImplementedFinders getElementFinderFactoryStrategy() {
                 return finderGen;
