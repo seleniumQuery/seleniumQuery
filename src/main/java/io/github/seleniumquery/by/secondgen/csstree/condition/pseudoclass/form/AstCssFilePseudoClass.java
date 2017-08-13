@@ -19,15 +19,13 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
-public abstract class AstCssFilePseudoClass extends CssInputTypeAttributePseudoClass implements AstCssPseudoClassCondition {
-    public static final String PSEUDO = "file";
+public class AstCssFilePseudoClass implements AstCssPseudoClassCondition {
 
-    public AstCssFilePseudoClass(String typeAttributeValue) {
-        super(typeAttributeValue);
-    }
+    public static final String PSEUDO = "file";
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }

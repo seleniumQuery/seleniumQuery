@@ -19,6 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.selen
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssBlankPseudoClass extends AstCssBlankPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+public class CssBlankPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
 }

@@ -44,7 +44,9 @@ import io.github.seleniumquery.utils.DriverVersionUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssCheckedPseudoClass extends AstCssCheckedPseudoClass implements MaybeNativelySupportedPseudoClass {
+public class CssCheckedPseudoClass implements MaybeNativelySupportedPseudoClass {
+
+    static final String CHECKED_PSEUDO = ":checked";
 
     @Override
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {

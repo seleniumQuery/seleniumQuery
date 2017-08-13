@@ -21,10 +21,10 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssCheckboxPseudoClass extends AstCssCheckboxPseudoClass {
+public class CssCheckboxPseudoClass extends CssInputTypeAttributePseudoClass {
 
     public CssCheckboxPseudoClass() {
-        super(PSEUDO);
+        super(AstCssCheckboxPseudoClass.PSEUDO);
     }
 
 }
