@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.child
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
@@ -36,9 +35,8 @@ public class CssNthLastChildPseudoClass extends CssFunctionalPseudoClassConditio
 
     public static final String PSEUDO = "nth-last-child";
 
-    @SuppressWarnings("WeakerAccess") // instanciado via reflexao
-    public CssNthLastChildPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssNthLastChildPseudoClass(String pseudoClassArgument) {
+        super(pseudoClassArgument);
     }
 
     @Override

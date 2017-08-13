@@ -16,21 +16,18 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-
 public class CssFunctionalPseudoClassCondition implements CssPseudoClassCondition {
 
-    private final PseudoClass pseudoClassSelector;
-    private SqCssFunctionalPseudoClassArgument argument;
+    private final SqCssFunctionalPseudoClassArgument argument;
 
-    public CssFunctionalPseudoClassCondition(PseudoClass pseudoClassSelector) {
-        this.pseudoClassSelector = pseudoClassSelector;
+    public CssFunctionalPseudoClassCondition(String argument) {
+        if (argument == null) {
+            throw new CssFunctionalPseudoClassHasNoArgumentsException();
+        }
+        this.argument = new SqCssFunctionalPseudoClassArgument(argument);
     }
 
     public SqCssFunctionalPseudoClassArgument getArgument() {
-        if (this.argument == null) {
-            this.argument = new SqCssFunctionalPseudoClassArgument(pseudoClassSelector.getPseudoClassContent());
-        }
         return argument;
     }
 

@@ -16,16 +16,16 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import org.junit.Test;
-import org.openqa.selenium.InvalidSelectorException;
-
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass
+    .assertPseudoClass;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
+import org.junit.Test;
+import org.openqa.selenium.InvalidSelectorException;
 
 public class CssLtPseudoClassTest {
 
@@ -48,16 +48,12 @@ public class CssLtPseudoClassTest {
 
     private void assertLtArgumentIsNotValid(String ltArgument) {
         try {
-            lt(ltArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
+            new CssLtPseudoClass(ltArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
             fail("Should consider *:lt("+ltArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":lt()"));
             assertThat(e.getMessage(), containsString(ltArgument));
         }
-    }
-
-    private CssLtPseudoClass lt(String ltArgument) {
-        return new CssLtPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(ltArgument));
     }
 
     @Test
@@ -75,7 +71,7 @@ public class CssLtPseudoClassTest {
     }
 
     private void assertLtArgumentGeneratesXPath(String ltArgument, String ltXPathExpression) {
-        assertPseudoClass(lt(ltArgument)).whenNotNativelySupported().translatesToPureXPath(ltXPathExpression);
+        assertPseudoClass(new CssLtPseudoClass(ltArgument)).whenNotNativelySupported().translatesToPureXPath(ltXPathExpression);
     }
 
     @Test

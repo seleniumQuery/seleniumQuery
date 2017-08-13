@@ -16,11 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-import org.openqa.selenium.InvalidSelectorException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.openqa.selenium.InvalidSelectorException;
 
 /**
  * <p>Superclass for all functional pseudo-classes that have an integer index as argument.</p>
@@ -33,8 +32,8 @@ public abstract class CssFunctionalIndexArgumentPseudoClassCondition extends Css
 
     private static final Pattern INDEX_REGEX = Pattern.compile("^\\s*([+-]?\\d+)\\s*$");
 
-    public CssFunctionalIndexArgumentPseudoClassCondition(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssFunctionalIndexArgumentPseudoClassCondition(String pseudoClassArgument) {
+        super(pseudoClassArgument);
     }
 
     protected int getArgumentAsIndex() {

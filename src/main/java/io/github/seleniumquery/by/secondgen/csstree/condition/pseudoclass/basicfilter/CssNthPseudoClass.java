@@ -16,8 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-
 /**
  * :nth() is an alias to :eq().
  * https://github.com/seleniumQuery/seleniumQuery/issues/27
@@ -29,9 +27,8 @@ public class CssNthPseudoClass extends CssEqPseudoClass {
 
     public static final String PSEUDO = "nth";
 
-    @SuppressWarnings("WeakerAccess") // constructor is invoked via reflection
-    public CssNthPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssNthPseudoClass(String pseudoClassArgument) {
+        super(pseudoClassArgument);
     }
 
     @Override

@@ -16,16 +16,16 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import org.junit.Test;
-import org.openqa.selenium.InvalidSelectorException;
-
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass
+    .assertPseudoClass;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
+import org.junit.Test;
+import org.openqa.selenium.InvalidSelectorException;
 
 /**
  * :nth() selector is just an alias to :eq(), so this test class is equal to the eq test class.
@@ -53,16 +53,12 @@ public class CssNthPseudoClassTest {
 
     private void assertNthArgumentIsNotValid(String nthArgument) {
         try {
-            nth(nthArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
+            new CssNthPseudoClass(nthArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
             fail("Should consider *:nth("+nthArgument+") to be invalid.");
         } catch (InvalidSelectorException e) {
             assertThat(e.getMessage(), containsString(":nth()"));
             assertThat(e.getMessage(), containsString(nthArgument));
         }
-    }
-
-    private CssNthPseudoClass nth(String nthArgument) {
-        return new CssNthPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthArgument));
     }
 
     @Test
@@ -80,7 +76,7 @@ public class CssNthPseudoClassTest {
     }
 
     private void assertNthArgumentGeneratesXPath(String nthArgument, String nthXPathExpression) {
-        assertPseudoClass(nth(nthArgument)).whenNotNativelySupported().translatesToPureXPath(nthXPathExpression);
+        assertPseudoClass(new CssNthPseudoClass(nthArgument)).whenNotNativelySupported().translatesToPureXPath(nthXPathExpression);
     }
 
     @Test
