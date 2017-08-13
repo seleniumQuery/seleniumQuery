@@ -17,9 +17,6 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
@@ -27,22 +24,10 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFun
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssLangPseudoClass extends CssFunctionalPseudoClassCondition implements AstCssPseudoClassCondition,  CssConditionImplementedNotYet {
-
-    // :lang(), similar to :not(), gets translated into :lang-sq() by the pre-parser
-    public static final String PSEUDO = "lang-sq";
-
-    /* when used without args, such as "div:lang", the pre-parser does not translate it. it is invalid,
-      but we still match it, so we can return a proper error message */
-    public static final String PSEUDO_PURE_LANG = "lang";
+public class CssLangPseudoClass extends AstCssLangPseudoClass implements CssConditionImplementedNotYet {
 
     public CssLangPseudoClass(String language) {
         super(language);
-    }
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
     }
 
 }

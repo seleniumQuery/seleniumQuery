@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public class CssContainsPseudoClassTest {
 
     @Test
     public void toElementFinder__REGARDLESS_of_driver_native_support() {
-        CssContainsPseudoClass containsPseudoClass = new CssContainsPseudoClass("my stuff");
+        AstCssContainsPseudoClass containsPseudoClass = new CssContainsPseudoClass("my stuff");
         assertPseudoClass(containsPseudoClass).whenNotNativelySupported().translatesToPureXPath(CONTAINS_XPATH_EXPRESSION);
     }
 

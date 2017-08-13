@@ -21,8 +21,6 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.CheckedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
@@ -46,15 +44,7 @@ import io.github.seleniumquery.utils.DriverVersionUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssCheckedPseudoClass implements AstCssPseudoClassCondition, MaybeNativelySupportedPseudoClass {
-
-    public static final String PSEUDO = "checked";
-    static final String CHECKED_PSEUDO = ":checked";
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
+public class CssCheckedPseudoClass extends AstCssCheckedPseudoClass implements MaybeNativelySupportedPseudoClass {
 
     @Override
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {

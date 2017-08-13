@@ -18,24 +18,12 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.conte
 
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssHasPseudoClass implements AstCssPseudoClassCondition, CssPseudoClassCondition, CssConditionImplementedNotYet {
-
-    public static final String PSEUDO = "has";
-
-    @SuppressWarnings({"FieldCanBeLocal", "unused"})
-    private final CssSelectorList argumentSelector;
+public class CssHasPseudoClass extends AstCssHasPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
     public CssHasPseudoClass(CssSelectorList argumentSelector) {
-        this.argumentSelector = argumentSelector;
-    }
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
+        super(argumentSelector);
     }
 
 }

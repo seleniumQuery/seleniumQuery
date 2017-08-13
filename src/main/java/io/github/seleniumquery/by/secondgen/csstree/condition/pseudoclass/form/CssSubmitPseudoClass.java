@@ -20,8 +20,6 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -32,19 +30,13 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssSubmitPseudoClass implements AstCssPseudoClassCondition, NeverNativelySupportedPseudoClass {
+public class CssSubmitPseudoClass extends AstCssSubmitPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "submit";
     private static final String SUBMIT_XPATH_EXPRESSION = "(" +
             "(self::input and " + TYPE_ATTR_LC_VAL + " = 'submit')" +
             " or " +
             "(self::button and (" + TYPE_ATTR_LC_VAL + " = 'submit' or not(@type)))" +
         ")";
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {

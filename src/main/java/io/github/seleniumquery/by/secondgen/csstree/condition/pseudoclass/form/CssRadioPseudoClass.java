@@ -16,25 +16,15 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-
 /**
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssRadioPseudoClass extends CssInputTypeAttributePseudoClass implements AstCssPseudoClassCondition {
-
-    public static final String PSEUDO = "radio";
+public class CssRadioPseudoClass extends AstCssRadioPseudoClass {
 
     public CssRadioPseudoClass() {
         super(PSEUDO);
-    }
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
     }
 
 }

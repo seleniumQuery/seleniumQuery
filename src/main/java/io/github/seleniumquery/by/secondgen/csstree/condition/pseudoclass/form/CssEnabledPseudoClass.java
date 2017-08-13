@@ -20,8 +20,6 @@ import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.EnabledPseud
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
@@ -34,15 +32,9 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEnabledPseudoClass implements AstCssPseudoClassCondition, MaybeNativelySupportedPseudoClass {
+public class CssEnabledPseudoClass extends AstCssEnabledPseudoClass implements MaybeNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "enabled";
     private static final String ENABLED_PSEUDO = ":" + PSEUDO;
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
-    }
 
     @Override
     public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
