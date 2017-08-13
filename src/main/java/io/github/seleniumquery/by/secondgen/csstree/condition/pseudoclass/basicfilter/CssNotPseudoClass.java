@@ -25,8 +25,6 @@ import org.openqa.selenium.WebDriver;
 import com.google.common.base.Joiner;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
@@ -35,30 +33,13 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 /**
  * :not(selectorlist)
  *
- * Notice that the preparser turns :not() into :not-sq(), because SACCssParser doesn't accept commas
- * inside :not().
- *
  * @author acdcjunior
  * @since 0.17.0
  */
-public class CssNotPseudoClass implements CssPseudoClassCondition, MaybeNativelySupportedPseudoClass {
-
-    // :not() are translated into :not-sq() by the pre-parser
-    public static final String PSEUDO = "not-sq";
-
-    /* when used without args, such as "div:not", the pre-parser does not translate it. it is invalid,
-       but we still match it, so we can return a proper error message */
-    public static final String PSEUDO_PURE_NOT = "not";
-
-    private final CssSelectorList argumentSelector;
+public class CssNotPseudoClass extends AstCssNotPseudoClass implements MaybeNativelySupportedPseudoClass {
 
     public CssNotPseudoClass(CssSelectorList argumentSelector) {
-        this.argumentSelector = argumentSelector;
-    }
-
-    @Override
-    public void accept(CssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
+        super(argumentSelector);
     }
 
     @Override
@@ -75,7 +56,7 @@ public class CssNotPseudoClass implements CssPseudoClassCondition, MaybeNatively
 
     private String toChainedNotSelectors(WebDriver webDriver) {
         StringBuilder chainedNotSelectors = new StringBuilder();
-        for (CssSelector cssSelector : argumentSelector) {
+        for (CssSelector cssSelector : getNegatedSelector()) {
             chainedNotSelectors.append(":").append(PSEUDO_PURE_NOT).append("(").append(cssSelector.toElementFinder(webDriver).toCssString()).append(")");
         }
         return chainedNotSelectors.toString();
@@ -90,7 +71,7 @@ public class CssNotPseudoClass implements CssPseudoClassCondition, MaybeNatively
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
         List<String> xPathExpressions = new LinkedList<>();
-        for (CssSelector cssSelector : argumentSelector) {
+        for (CssSelector cssSelector : getNegatedSelector()) {
             xPathExpressions.add(cssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression());
         }
         String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);

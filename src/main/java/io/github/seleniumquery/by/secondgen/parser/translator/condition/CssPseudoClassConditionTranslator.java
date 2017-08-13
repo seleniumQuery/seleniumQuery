@@ -30,6 +30,7 @@ import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassHasNoArgumentsException;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssAnimatedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEqPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEvenPseudoClass;
@@ -123,8 +124,8 @@ class CssPseudoClassConditionTranslator {
 		pseudoClassesF.put(CssLangPseudoClass.PSEUDO_PURE_LANG, CssLangPseudoClass::new);
 		pseudoClassesF.put(CssLastPseudoClass.PSEUDO, (a) -> new CssLastPseudoClass());
 		pseudoClassesF.put(CssLtPseudoClass.PSEUDO, CssLtPseudoClass::new);
-		pseudoClassesF.put(CssNotPseudoClass.PSEUDO, (a) -> new CssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument("not", a)));
-		pseudoClassesF.put(CssNotPseudoClass.PSEUDO_PURE_NOT, (a) -> new CssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument("not", a)));
+		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO, (a) -> new CssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a)));
+		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO_PURE_NOT, (a) -> new CssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a)));
 		pseudoClassesF.put(CssNthPseudoClass.PSEUDO, CssNthPseudoClass::new);
 		pseudoClassesF.put(CssOddPseudoClass.PSEUDO, (a) -> new CssOddPseudoClass());
 		pseudoClassesF.put(CssRootPseudoClass.PSEUDO, (a) -> new CssRootPseudoClass());
@@ -145,7 +146,7 @@ class CssPseudoClassConditionTranslator {
 		// content filter
 		pseudoClassesF.put(CssContainsPseudoClass.PSEUDO, CssContainsPseudoClass::new);
 		pseudoClassesF.put(CssEmptyPseudoClass.PSEUDO, (a) -> new CssEmptyPseudoClass());
-		pseudoClassesF.put(CssHasPseudoClass.PSEUDO, (a) -> new CssHasPseudoClass(parseFunctionalPseudoClassSelectorArgument("has", a)));
+		pseudoClassesF.put(CssHasPseudoClass.PSEUDO, (a) -> new CssHasPseudoClass(parseFunctionalPseudoClassSelectorArgument(CssHasPseudoClass.PSEUDO, a)));
 		pseudoClassesF.put(CssParentPseudoClass.PSEUDO, (a) -> new CssParentPseudoClass());
 
 		// jquery-ui

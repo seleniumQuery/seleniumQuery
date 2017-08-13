@@ -21,6 +21,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssAnimatedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEqPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEvenPseudoClass;
@@ -98,7 +99,8 @@ public class CssPseudoClassConditionVisitorTest {
         @Override public void visit(CssLangPseudoClass cssLangPseudoClass) { registerVisit(CssLangPseudoClass.class, cssLangPseudoClass); }
         @Override public void visit(CssLastPseudoClass cssLastPseudoClass) { registerVisit(CssLastPseudoClass.class, cssLastPseudoClass); }
         @Override public void visit(CssLtPseudoClass cssLtPseudoClass) { registerVisit(CssLtPseudoClass.class, cssLtPseudoClass); }
-        @Override public void visit(CssNotPseudoClass cssNotPseudoClass) { registerVisit(CssNotPseudoClass.class, cssNotPseudoClass); }
+        @Override public void visit(AstCssNotPseudoClass astCssNotPseudoClass) { registerVisit(CssNotPseudoClass.class,
+            astCssNotPseudoClass); }
         @Override public void visit(CssNthPseudoClass cssNthPseudoClass) { registerVisit(CssNthPseudoClass.class, cssNthPseudoClass); }
         @Override public void visit(CssOddPseudoClass cssOddPseudoClass) { registerVisit(CssOddPseudoClass.class, cssOddPseudoClass); }
         @Override public void visit(CssRootPseudoClass cssRootPseudoClass) { registerVisit(CssRootPseudoClass.class, cssRootPseudoClass); }
@@ -246,12 +248,12 @@ public class CssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssNotPseudoClass() {
         // given
-        CssNotPseudoClass cssNotPseudoClass = new CssNotPseudoClass(ParseTreeBuilder.parse(".class"));
+        AstCssNotPseudoClass astCssNotPseudoClass = new CssNotPseudoClass(ParseTreeBuilder.parse(".class"));
         // when
-        cssNotPseudoClass.accept(visitor);
+        astCssNotPseudoClass.accept(visitor);
         // then
         assertEquals(CssNotPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(cssNotPseudoClass, visitor.getVisitedInstance());
+        assertEquals(astCssNotPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test

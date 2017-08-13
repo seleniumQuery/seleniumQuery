@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ public class CssNotPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        CssNotPseudoClass notTag = new CssNotPseudoClass(ParseTreeBuilder.parse("tag")); // :not(tag)
+        AstCssNotPseudoClass notTag = new CssNotPseudoClass(ParseTreeBuilder.parse("tag")); // :not(tag)
         assertPseudoClass(notTag).whenNotNativelySupported().translatesToPureXPath(".//*[not(self::tag)]");
     }
 
