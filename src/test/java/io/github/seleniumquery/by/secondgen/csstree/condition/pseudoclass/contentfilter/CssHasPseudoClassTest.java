@@ -16,15 +16,19 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
-import org.junit.Test;
-
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
+
+import org.junit.Test;
 
 public class CssHasPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(":has").withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssHasPseudoClass.class);
+        assertQueriesOnSelector(":has").withSelectorArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedSelectorArguments(
+            CssHasPseudoClass.class,
+            "Functional pseudo-class has no parenthesis/arguments: has",
+            "Error while parsing pseudo-class `:has("
+        );
     }
 
 }
