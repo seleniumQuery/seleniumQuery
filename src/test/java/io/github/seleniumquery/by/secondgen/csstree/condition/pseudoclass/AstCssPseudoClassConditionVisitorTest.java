@@ -21,6 +21,10 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssAnimatedPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEqPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEvenPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssFirstPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssAnimatedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEqPseudoClass;
@@ -89,10 +93,13 @@ public class AstCssPseudoClassConditionVisitorTest {
             this.visitedInstance = visited;
         }
 
-        @Override public void visit(CssAnimatedPseudoClass cssAnimatedPseudoClass) { registerVisit(CssAnimatedPseudoClass.class, cssAnimatedPseudoClass); }
-        @Override public void visit(CssEqPseudoClass cssEqPseudoClass) { registerVisit(CssEqPseudoClass.class, cssEqPseudoClass); }
-        @Override public void visit(CssEvenPseudoClass cssEvenPseudoClass) { registerVisit(CssEvenPseudoClass.class, cssEvenPseudoClass); }
-        @Override public void visit(CssFirstPseudoClass cssFirstPseudoClass) { registerVisit(CssFirstPseudoClass.class, cssFirstPseudoClass); }
+        @Override public void visit(AstCssAnimatedPseudoClass astCssAnimatedPseudoClass) { registerVisit(CssAnimatedPseudoClass.class, astCssAnimatedPseudoClass); }
+        @Override public void visit(AstCssEqPseudoClass astCssEqPseudoClass) { registerVisit(CssEqPseudoClass.class,
+            astCssEqPseudoClass); }
+        @Override public void visit(AstCssEvenPseudoClass astCssEvenPseudoClass) { registerVisit(CssEvenPseudoClass.class,
+            astCssEvenPseudoClass); }
+        @Override public void visit(AstCssFirstPseudoClass astCssFirstPseudoClass) { registerVisit(CssFirstPseudoClass.class,
+            astCssFirstPseudoClass); }
         @Override public void visit(CssGtPseudoClass cssGtPseudoClass) { registerVisit(CssGtPseudoClass.class, cssGtPseudoClass); }
         @Override public void visit(CssHeaderPseudoClass cssHeaderPseudoClass) { registerVisit(CssHeaderPseudoClass.class, cssHeaderPseudoClass); }
         @Override public void visit(CssLangPseudoClass cssLangPseudoClass) { registerVisit(CssLangPseudoClass.class, cssLangPseudoClass); }
@@ -147,45 +154,45 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssAnimatedPseudoClass() {
         // given
-        CssAnimatedPseudoClass cssAnimatedPseudoClass = new CssAnimatedPseudoClass();
+        AstCssAnimatedPseudoClass astCssAnimatedPseudoClass = new CssAnimatedPseudoClass();
         // when
-        cssAnimatedPseudoClass.accept(visitor);
+        astCssAnimatedPseudoClass.accept(visitor);
         // then
         assertEquals(CssAnimatedPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(cssAnimatedPseudoClass, visitor.getVisitedInstance());
+        assertEquals(astCssAnimatedPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssEqPseudoClass() {
         // given
-        CssEqPseudoClass cssEqPseudoClass = new CssEqPseudoClass("99");
+        AstCssEqPseudoClass astCssEqPseudoClass = new CssEqPseudoClass("99");
         // when
-        cssEqPseudoClass.accept(visitor);
+        astCssEqPseudoClass.accept(visitor);
         // then
         assertEquals(CssEqPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(cssEqPseudoClass, visitor.getVisitedInstance());
+        assertEquals(astCssEqPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssEvenPseudoClass() {
         // given
-        CssEvenPseudoClass cssEvenPseudoClass = new CssEvenPseudoClass();
+        AstCssEvenPseudoClass astCssEvenPseudoClass = new CssEvenPseudoClass();
         // when
-        cssEvenPseudoClass.accept(visitor);
+        astCssEvenPseudoClass.accept(visitor);
         // then
         assertEquals(CssEvenPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(cssEvenPseudoClass, visitor.getVisitedInstance());
+        assertEquals(astCssEvenPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssFirstPseudoClass() {
         // given
-        CssFirstPseudoClass cssFirstPseudoClass = new CssFirstPseudoClass();
+        AstCssFirstPseudoClass astCssFirstPseudoClass = new CssFirstPseudoClass();
         // when
-        cssFirstPseudoClass.accept(visitor);
+        astCssFirstPseudoClass.accept(visitor);
         // then
         assertEquals(CssFirstPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(cssFirstPseudoClass, visitor.getVisitedInstance());
+        assertEquals(astCssFirstPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test

@@ -16,8 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-
 /**
  * :first
  * https://api.jquery.com/first-selector/
@@ -25,17 +23,10 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssFirstPseudoClass extends CssEqPseudoClass {
-
-    public static final String PSEUDO = "first";
+public class CssFirstPseudoClass extends AstCssFirstPseudoClass {
 
     public CssFirstPseudoClass() {
         super("0");
-    }
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
     }
 
 }
