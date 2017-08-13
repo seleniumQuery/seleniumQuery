@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import static org.apache.commons.lang3.StringUtils.join;
 import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.InputPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
@@ -35,6 +36,11 @@ public class CssInputPseudoClass implements NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "input";
     private static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";
+
+    @Override
+    public void accept(CssPseudoClassConditionVisitor visitor) {
+        visitor.visit(this);
+    }
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
