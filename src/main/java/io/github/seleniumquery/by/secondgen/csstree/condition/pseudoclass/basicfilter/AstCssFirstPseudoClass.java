@@ -19,14 +19,16 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
 public abstract class AstCssFirstPseudoClass extends CssEqPseudoClass {
+
     public static final String PSEUDO = "first";
 
-    public AstCssFirstPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    public AstCssFirstPseudoClass(int index) {
+        super(index);
     }
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }

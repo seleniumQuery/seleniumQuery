@@ -165,7 +165,7 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssEqPseudoClass() {
         // given
-        AstCssEqPseudoClass astCssEqPseudoClass = new CssEqPseudoClass("99");
+        AstCssEqPseudoClass astCssEqPseudoClass = new CssEqPseudoClass(99);
         // when
         astCssEqPseudoClass.accept(visitor);
         // then
@@ -198,7 +198,7 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssGtPseudoClass() {
         // given
-        CssGtPseudoClass cssGtPseudoClass = new CssGtPseudoClass("99");
+        CssGtPseudoClass cssGtPseudoClass = new CssGtPseudoClass(99);
         // when
         cssGtPseudoClass.accept(visitor);
         // then
@@ -242,7 +242,7 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssLtPseudoClass() {
         // given
-        CssLtPseudoClass cssLtPseudoClass = new CssLtPseudoClass("55");
+        CssLtPseudoClass cssLtPseudoClass = new CssLtPseudoClass(55);
         // when
         cssLtPseudoClass.accept(visitor);
         // then
@@ -264,7 +264,7 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssNthPseudoClass() {
         // given
-        CssNthPseudoClass cssNthPseudoClass = new CssNthPseudoClass("55");
+        CssNthPseudoClass cssNthPseudoClass = new CssNthPseudoClass(55);
         // when
         cssNthPseudoClass.accept(visitor);
         // then

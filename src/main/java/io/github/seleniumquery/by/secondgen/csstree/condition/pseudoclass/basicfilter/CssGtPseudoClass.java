@@ -35,18 +35,13 @@ public class CssGtPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondi
 
     public static final String PSEUDO = "gt";
 
-    public CssGtPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    public CssGtPseudoClass(int index) {
+        super(index);
     }
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
-    }
-
-    @Override
-    protected String getPseudoClassName() {
-        return PSEUDO;
     }
 
     @Override

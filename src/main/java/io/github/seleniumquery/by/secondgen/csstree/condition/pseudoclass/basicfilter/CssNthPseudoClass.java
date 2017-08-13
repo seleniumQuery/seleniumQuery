@@ -29,18 +29,13 @@ public class CssNthPseudoClass extends CssEqPseudoClass {
 
     public static final String PSEUDO = "nth";
 
-    public CssNthPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    public CssNthPseudoClass(int index) {
+        super(index);
     }
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
-    }
-
-    @Override
-    protected String getPseudoClassName() {
-        return PSEUDO;
     }
 
 }

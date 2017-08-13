@@ -30,13 +30,8 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  */
 public class CssEqPseudoClass extends AstCssEqPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public CssEqPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
-    }
-
-    @Override
-    protected String getPseudoClassName() {
-        return PSEUDO;
+    public CssEqPseudoClass(int index) {
+        super(index);
     }
 
     @Override

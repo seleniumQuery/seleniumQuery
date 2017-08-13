@@ -26,7 +26,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 public class CssFirstPseudoClass extends AstCssFirstPseudoClass {
 
     public CssFirstPseudoClass() {
-        super("0");
+        super(0);
     }
 
 }

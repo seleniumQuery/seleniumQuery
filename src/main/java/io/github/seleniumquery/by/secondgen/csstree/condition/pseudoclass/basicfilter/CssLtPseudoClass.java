@@ -35,18 +35,13 @@ public class CssLtPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondi
 
     public static final String PSEUDO = "lt";
 
-    public CssLtPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    public CssLtPseudoClass(int index) {
+        super(index);
     }
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
-    }
-
-    @Override
-    protected String getPseudoClassName() {
-        return PSEUDO;
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -78,6 +79,27 @@ public class PseudoClassTestUtils {
         public <T extends CssFunctionalPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(Class<T> pseudoClassClass) {
             assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(this.selector, pseudoClassClass);
         }
+        public <T extends CssFunctionalIndexArgumentPseudoClassCondition> void yieldFunctionalIndexArgPseudoclassWithCorrectlyTranslatedArguments(Class<T> pseudoClassClass) {
+            assertQueriesOnSelectorWithArgumentsYieldFunctionalIndexArgPseudoClass(this.selector, pseudoClassClass);
+        }
+    }
+
+    private static <T extends CssFunctionalIndexArgumentPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalIndexArgPseudoClass(String selector,
+                                                                                                                                     Class<T> pseudoClassClass) {
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "", "Functional pseudo", "(Invalid token \"not\".");
+
+        assertSelectorTranslatesIndexArgument(selector, pseudoClassClass, "(0)", 0);
+        assertSelectorTranslatesIndexArgument(selector, pseudoClassClass, "(-0)", -0);
+        assertSelectorTranslatesIndexArgument(selector, pseudoClassClass, "(+0)", +0);
+        assertSelectorTranslatesIndexArgument(selector, pseudoClassClass, "(1)", 1);
+        assertSelectorTranslatesIndexArgument(selector, pseudoClassClass, "(-1)", -1);
+        assertSelectorTranslatesIndexArgument(selector, pseudoClassClass, "(+1)", +1);
+
+
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "()", "pseudo-class requires an integer as argument");
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(     )", "pseudo-class requires an integer as argument");
+
+        assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(\"a 'c' b\")", "pseudo-class requires an integer as argument");
     }
 
     private static <T extends CssFunctionalPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(String selector,
@@ -98,9 +120,9 @@ public class PseudoClassTestUtils {
     }
 
     private static <T extends CssPseudoClassCondition> void assertSelectorFailsAtTranslatingArgument(String selector,
-                                                                                                               Class<T> pseudoClassClass,
-                                                                                                               String selectorSuffix,
-                                                                                                               String... possibleExceptions) {
+                                                                                                     Class<T> pseudoClassClass,
+                                                                                                     String selectorSuffix,
+                                                                                                     String... possibleExceptions) {
         try {
             parseAndAssertFirstCssCondition(selector + selectorSuffix, pseudoClassClass);
             fail("Functional Pseudo called like \":"+selector+selectorSuffix+"\" should throw exception.");
@@ -110,6 +132,16 @@ public class PseudoClassTestUtils {
                 .collect(Collectors.toList());
             assertThat(e.getMessage(), anyOf(containsStringsPossibleExceptions));
         }
+    }
+
+    private static <T extends CssFunctionalIndexArgumentPseudoClassCondition> void assertSelectorTranslatesIndexArgument(String selector, Class<T> pseudoClassClass,
+                                                                                                                        String selectorSuffix, int expectedArgument) {
+        // given
+        // selector
+        // when
+        T cssCondition = parseAndAssertFirstCssCondition(selector + selectorSuffix, pseudoClassClass);
+        // then
+        assertEquals(expectedArgument, cssCondition.getArgumentAsIndex());
     }
 
     private static <T extends CssFunctionalPseudoClassCondition> void assertSelectorTranslatesArgument(String selector, Class<T> pseudoClassClass,
