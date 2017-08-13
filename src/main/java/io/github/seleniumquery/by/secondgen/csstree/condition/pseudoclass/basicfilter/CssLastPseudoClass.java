@@ -30,7 +30,7 @@ public class CssLastPseudoClass extends CssEqPseudoClass {
     public static final String PSEUDO = "last";
 
     public CssLastPseudoClass() {
-        super("-1");
+        super(-1);
     }
 
     @Override

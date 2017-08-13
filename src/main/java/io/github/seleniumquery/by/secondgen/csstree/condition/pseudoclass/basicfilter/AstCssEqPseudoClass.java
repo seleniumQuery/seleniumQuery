@@ -21,14 +21,16 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalIndexArgumentPseudoClassCondition;
 
 public abstract class AstCssEqPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondition implements AstCssPseudoClassCondition {
+
     public static final String PSEUDO = "eq";
 
-    public AstCssEqPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    public AstCssEqPseudoClass(int index) {
+        super(index);
     }
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }

@@ -19,10 +19,13 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.SimpleSelector;
 
+import com.google.common.annotations.VisibleForTesting;
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
@@ -30,6 +33,7 @@ import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassHasNoArgumentsException;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.InvalidPseudoClassSelectorException;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssAnimatedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEqPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEvenPseudoClass;
@@ -97,6 +101,7 @@ import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
  */
 class CssPseudoClassConditionTranslator {
 
+    private static final Pattern INDEX_REGEX = Pattern.compile("^\\s*([+-]?\\d+)\\s*$");
     private Map<String, Function<String, ? extends CssPseudoClassCondition>> pseudoClassesF = new HashMap<>();
 
 	CssPseudoClassConditionTranslator() {
@@ -119,18 +124,18 @@ class CssPseudoClassConditionTranslator {
 
 		// basic filter
 		pseudoClassesF.put(AstCssAnimatedPseudoClass.PSEUDO, (a) -> new CssAnimatedPseudoClass());
-		pseudoClassesF.put(AstCssEqPseudoClass.PSEUDO, CssEqPseudoClass::new);
+		pseudoClassesF.put(AstCssEqPseudoClass.PSEUDO, a -> new CssEqPseudoClass(extractIndexArgument(a, AstCssEqPseudoClass.PSEUDO)));
 		pseudoClassesF.put(AstCssEvenPseudoClass.PSEUDO, (a) -> new CssEvenPseudoClass());
 		pseudoClassesF.put(AstCssFirstPseudoClass.PSEUDO, (a) -> new CssFirstPseudoClass());
-		pseudoClassesF.put(CssGtPseudoClass.PSEUDO, CssGtPseudoClass::new);
+		pseudoClassesF.put(CssGtPseudoClass.PSEUDO, a -> new CssGtPseudoClass(extractIndexArgument(a, CssGtPseudoClass.PSEUDO)));
 		pseudoClassesF.put(CssHeaderPseudoClass.PSEUDO, (a) -> new CssHeaderPseudoClass());
 		pseudoClassesF.put(CssLangPseudoClass.PSEUDO, CssLangPseudoClass::new);
 		pseudoClassesF.put(CssLangPseudoClass.PSEUDO_PURE_LANG, CssLangPseudoClass::new);
 		pseudoClassesF.put(CssLastPseudoClass.PSEUDO, (a) -> new CssLastPseudoClass());
-		pseudoClassesF.put(CssLtPseudoClass.PSEUDO, CssLtPseudoClass::new);
+		pseudoClassesF.put(CssLtPseudoClass.PSEUDO, a -> new CssLtPseudoClass(extractIndexArgument(a, CssLtPseudoClass.PSEUDO)));
 		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO, (a) -> new CssNotPseudoClass(new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a))));
 		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO_PURE_NOT, (a) -> new CssNotPseudoClass(new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a))));
-		pseudoClassesF.put(CssNthPseudoClass.PSEUDO, CssNthPseudoClass::new);
+		pseudoClassesF.put(CssNthPseudoClass.PSEUDO, a -> new CssNthPseudoClass(extractIndexArgument(a, CssNthPseudoClass.PSEUDO)));
 		pseudoClassesF.put(CssOddPseudoClass.PSEUDO, (a) -> new CssOddPseudoClass());
 		pseudoClassesF.put(CssRootPseudoClass.PSEUDO, (a) -> new CssRootPseudoClass());
 		pseudoClassesF.put(CssTargetPseudoClass.PSEUDO, (a) -> new CssTargetPseudoClass());
@@ -167,6 +172,26 @@ class CssPseudoClassConditionTranslator {
 		pseudoClassesF.put(CssFilledPseudoClass.PSEUDO, (a) -> new CssFilledPseudoClass());
 		pseudoClassesF.put(CssUncheckedPseudoClass.PSEUDO, (a) -> new CssUncheckedPseudoClass());
 	}
+
+    // This is visible until we find a way to test it indirectly.
+	@VisibleForTesting
+    static int extractIndexArgument(String indexPseudoClassArgument, String pseudoClassName) {
+        if (indexPseudoClassArgument == null) {
+            throw new CssFunctionalPseudoClassHasNoArgumentsException();
+        }
+        Matcher m = INDEX_REGEX.matcher(indexPseudoClassArgument);
+        boolean isArgumentAnInteger = m.find();
+        if (!isArgumentAnInteger) {
+            String reason = String.format("The :%s() pseudo-class requires an integer as argument but got: \"%s\".",
+                pseudoClassName, indexPseudoClassArgument);
+            throw new InvalidPseudoClassSelectorException(reason);
+        }
+        String integerIndex = m.group(1);
+        if (integerIndex.startsWith("+")) {
+            integerIndex = integerIndex.substring(1);
+        }
+        return Integer.valueOf(integerIndex);
+    }
 
     public CssCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, AttributeCondition attributeCondition) {
         String pseudoClassName = getPseudoClassName(attributeCondition);
