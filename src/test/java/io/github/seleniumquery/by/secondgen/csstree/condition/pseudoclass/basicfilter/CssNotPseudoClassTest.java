@@ -34,7 +34,11 @@ public class CssNotPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(NOT_PSEUDO).withSelectorArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedSelectorArguments(CssNotPseudoClass.class);
+        assertQueriesOnSelector(NOT_PSEUDO).withSelectorArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedSelectorArguments(
+            CssNotPseudoClass.class,
+            "Impossible to parse selector \":not\"",
+            "Error while parsing pseudo-class `:not("
+        );
     }
 
     @Test

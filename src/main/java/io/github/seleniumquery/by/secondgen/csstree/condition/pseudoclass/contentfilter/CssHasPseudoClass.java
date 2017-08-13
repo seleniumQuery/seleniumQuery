@@ -16,15 +16,23 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
+import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassHasNoArgumentsException;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssHasPseudoClass extends CssFunctionalPseudoClassCondition implements CssConditionImplementedNotYet {
+public class CssHasPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
     public static final String PSEUDO = "has";
 
-    public CssHasPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
+    private final CssSelectorList argumentSelector;
+
+    public CssHasPseudoClass(CssSelectorList argumentSelector) {
+        if (argumentSelector == null) {
+            throw new CssFunctionalPseudoClassHasNoArgumentsException();
+        }
+        this.argumentSelector = argumentSelector;
     }
 
 }

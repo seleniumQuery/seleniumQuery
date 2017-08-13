@@ -141,14 +141,15 @@ public class PseudoClassTestUtils {
         private final String selector;
         private QueriesOnFunctionalPseudoclassesThatExpectSelectorsArAsgumentsTestAssertBuilder(String selector) { this.selector = selector; }
 
-        public <T extends CssPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedSelectorArguments(Class<T> pseudoClassClass) {
-            assertQueriesOnSelectorWithSelectorArgumentsYieldFunctionalPseudoClass(this.selector, pseudoClassClass);
+        public <T extends CssPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedSelectorArguments(Class<T> pseudoClassClass,
+                                                                                                                           String... possibleExceptionMessage) {
+            assertQueriesOnSelectorWithSelectorArgumentsYieldFunctionalPseudoClass(this.selector, pseudoClassClass, possibleExceptionMessage);
         }
     }
 
     private static <T extends CssPseudoClassCondition> void assertQueriesOnSelectorWithSelectorArgumentsYieldFunctionalPseudoClass(String selector,
-                                                                                                                                   Class<T> pseudoClassClass) {
-        String possibleExceptionMessage = "Impossible to parse selector";
+                                                                                                                                   Class<T> pseudoClassClass,
+                                                                                                                                   String... possibleExceptionMessage) {
         assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "", possibleExceptionMessage);
         assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(0)", possibleExceptionMessage);
         assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(-0)", possibleExceptionMessage);
