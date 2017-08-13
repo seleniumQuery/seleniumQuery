@@ -199,9 +199,9 @@ class CssPseudoClassConditionTranslator {
 		pseudoClassesF.put(AstCssOnlyOfTypePseudoClass.PSEUDO, a -> new CssOnlyOfTypePseudoClass());
 
 		// content filter
-		pseudoClassesF.put(AstCssContainsPseudoClass.PSEUDO, CssContainsPseudoClass::new);
+		pseudoClassesF.put(AstCssContainsPseudoClass.PSEUDO, a -> new CssContainsPseudoClass(new AstCssContainsPseudoClass(a)));
 		pseudoClassesF.put(AstCssEmptyPseudoClass.PSEUDO, a -> new CssEmptyPseudoClass());
-		pseudoClassesF.put(AstCssHasPseudoClass.PSEUDO, a -> new CssHasPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssHasPseudoClass.PSEUDO, a)));
+		pseudoClassesF.put(AstCssHasPseudoClass.PSEUDO, a -> new CssHasPseudoClass(new AstCssHasPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssHasPseudoClass.PSEUDO, a))));
 		pseudoClassesF.put(AstCssParentPseudoClass.PSEUDO, a -> new CssParentPseudoClass());
 
 		// jquery-ui

@@ -16,14 +16,16 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssHasPseudoClass extends AstCssHasPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+public class CssHasPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
-    public CssHasPseudoClass(CssSelectorList argumentSelector) {
-        super(argumentSelector);
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
+    private final AstCssHasPseudoClass astCssHasPseudoClass;
+
+    public CssHasPseudoClass(AstCssHasPseudoClass astCssHasPseudoClass) {
+        this.astCssHasPseudoClass = astCssHasPseudoClass;
     }
 
 }
