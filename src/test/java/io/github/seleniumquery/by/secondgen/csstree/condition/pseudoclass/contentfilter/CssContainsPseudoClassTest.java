@@ -36,7 +36,7 @@ public class CssContainsPseudoClassTest {
 
     @Test
     public void toElementFinder__REGARDLESS_of_driver_native_support() {
-        AstCssContainsPseudoClass containsPseudoClass = new CssContainsPseudoClass("my stuff");
+        CssContainsPseudoClass containsPseudoClass = new CssContainsPseudoClass(new AstCssContainsPseudoClass("my stuff"));
         assertPseudoClass(containsPseudoClass).whenNotNativelySupported().translatesToPureXPath(CONTAINS_XPATH_EXPRESSION);
     }
 

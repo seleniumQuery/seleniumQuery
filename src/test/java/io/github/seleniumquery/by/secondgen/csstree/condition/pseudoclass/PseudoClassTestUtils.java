@@ -75,7 +75,7 @@ public class PseudoClassTestUtils {
         private final String selector;
         private QueriesOnFunctionalPseudoclassSelectorsTestAssertBuilder(String selector) { this.selector = selector; }
 
-        public <T extends CssFunctionalPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(Class<T> pseudoClassClass) {
+        public <T extends CssPseudoClassCondition> void yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(Class<T> pseudoClassClass) {
             assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(this.selector, pseudoClassClass);
         }
         public <T extends CssPseudoClassCondition> void yieldFunctionalIndexArgPseudoclassWithCorrectlyTranslatedArguments(Class<T> pseudoClassClass) {
@@ -100,21 +100,19 @@ public class PseudoClassTestUtils {
         assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "(\"a 'c' b\")", "pseudo-class requires an integer as argument");
     }
 
-    private static <T extends CssFunctionalPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(String selector,
+    private static <T extends CssPseudoClassCondition> void assertQueriesOnSelectorWithArgumentsYieldFunctionalPseudoClass(String selector,
                                                                                                                                      Class<T> pseudoClassClass) {
         assertSelectorFailsAtTranslatingArgument(selector, pseudoClassClass, "", "Functional pseudo", "(Invalid token \"not\".");
 
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(0)", "0");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(-0)", "-0");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(+0)", "+0");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(1)", "1");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(-1)", "-1");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(+1)", "+1");
-
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "()", "");
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(     )", "     ");
-
-        assertSelectorTranslatesArgument(selector, pseudoClassClass, "(\"a 'c' b\")", "\"a 'c' b\"");
+        assertSelectorDoesNotErrorWhenTranslating(selector, pseudoClassClass, "(0)");
+        assertSelectorDoesNotErrorWhenTranslating(selector, pseudoClassClass, "(-0)");
+        assertSelectorDoesNotErrorWhenTranslating(selector, pseudoClassClass, "(+0)");
+        assertSelectorDoesNotErrorWhenTranslating(selector, pseudoClassClass, "(1)");
+        assertSelectorDoesNotErrorWhenTranslating(selector, pseudoClassClass, "(-1)");
+        assertSelectorDoesNotErrorWhenTranslating(selector, pseudoClassClass, "(+1)");
+        assertSelectorDoesNotErrorWhenTranslating(selector, pseudoClassClass, "()");
+        assertSelectorDoesNotErrorWhenTranslating(selector, pseudoClassClass, "(     )");
+        assertSelectorDoesNotErrorWhenTranslating(selector, pseudoClassClass, "(\"a 'c' b\")");
     }
 
     private static <T extends CssPseudoClassCondition> void assertSelectorFailsAtTranslatingArgument(String selector,

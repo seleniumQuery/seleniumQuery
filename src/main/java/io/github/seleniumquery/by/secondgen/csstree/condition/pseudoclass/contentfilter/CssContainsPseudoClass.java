@@ -29,15 +29,17 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsPseudoClass extends AstCssContainsPseudoClass implements NeverNativelySupportedPseudoClass {
+public class CssContainsPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public CssContainsPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    private final AstCssContainsPseudoClass astCssContainsPseudoClass;
+
+    public CssContainsPseudoClass(AstCssContainsPseudoClass astCssContainsPseudoClass) {
+        this.astCssContainsPseudoClass = astCssContainsPseudoClass;
     }
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-        String textToContain = getArgument().getArgumentAsString();
+        String textToContain = astCssContainsPseudoClass.getArgument().getArgumentAsString();
         textToContain = SelectorUtils.unescapeString(textToContain);
         String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
         return XPathAndFilterFinder.pureXPath("contains(string(.), " + wantedTextToContain + ")");

@@ -21,9 +21,10 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
 public class AstCssHasPseudoClass implements AstCssPseudoClassCondition {
+
     public static final String PSEUDO = "has";
-    @SuppressWarnings({"FieldCanBeLocal", "unused"})
-    protected final CssSelectorList argumentSelector;
+
+    private final CssSelectorList argumentSelector;
 
     public AstCssHasPseudoClass(CssSelectorList argumentSelector) {
         this.argumentSelector = argumentSelector;
@@ -33,4 +34,9 @@ public class AstCssHasPseudoClass implements AstCssPseudoClassCondition {
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
+    public CssSelectorList getArgumentSelector() {
+        return argumentSelector;
+    }
+
 }
