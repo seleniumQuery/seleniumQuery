@@ -18,8 +18,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
@@ -30,19 +28,12 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssAnimatedPseudoClass implements AstCssPseudoClassCondition, CssPseudoClassCondition, CssConditionImplementedFinders {
-
-    public static final String PSEUDO = "animated";
+public class CssAnimatedPseudoClass extends AstCssAnimatedPseudoClass implements CssPseudoClassCondition, CssConditionImplementedFinders {
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {
         throw new UnsupportedPseudoClassException(":animated", "This selector uses internals of jQuery that nor seleniumQuery, " +
                 "neither the user should access.");
-    }
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
     }
 
 }

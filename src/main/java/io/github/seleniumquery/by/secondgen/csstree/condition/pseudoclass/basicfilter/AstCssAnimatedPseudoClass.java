@@ -16,22 +16,14 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import org.openqa.selenium.WebDriver;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-
-/**
- * :even
- *
- * @author acdcjunior
- * @since 0.10.0
- */
-public class CssEvenPseudoClass extends AstCssEvenPseudoClass implements NeverNativelySupportedPseudoClass {
+public class AstCssAnimatedPseudoClass implements AstCssPseudoClassCondition {
+    public static final String PSEUDO = "animated";
 
     @Override
-    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-        return XPathAndFilterFinder.pureXPath("(position() mod 2) = 1");
+    public void accept(AstCssPseudoClassConditionVisitor visitor) {
+        visitor.visit(this);
     }
-
 }

@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssAnimatedPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEqPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEvenPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssFirstPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssAnimatedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEqPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEvenPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssFirstPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssGtPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssHeaderPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLangPseudoClass;
@@ -70,10 +70,10 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibi
 
 public interface AstCssPseudoClassConditionVisitor {
 
-    void visit(CssAnimatedPseudoClass cssAnimatedPseudoClass);
-    void visit(CssEqPseudoClass cssEqPseudoClass);
-    void visit(CssEvenPseudoClass cssEvenPseudoClass);
-    void visit(CssFirstPseudoClass cssFirstPseudoClass);
+    void visit(AstCssAnimatedPseudoClass astCssAnimatedPseudoClass);
+    void visit(AstCssEqPseudoClass astCssEqPseudoClass);
+    void visit(AstCssEvenPseudoClass astCssEvenPseudoClass);
+    void visit(AstCssFirstPseudoClass astCssFirstPseudoClass);
     void visit(CssGtPseudoClass cssGtPseudoClass);
     void visit(CssHeaderPseudoClass cssHeaderPseudoClass);
     void visit(CssLangPseudoClass cssLangPseudoClass);

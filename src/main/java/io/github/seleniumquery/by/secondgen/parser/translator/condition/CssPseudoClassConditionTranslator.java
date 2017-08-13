@@ -30,6 +30,10 @@ import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassHasNoArgumentsException;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssAnimatedPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEqPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEvenPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssFirstPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssAnimatedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEqPseudoClass;
@@ -114,10 +118,10 @@ class CssPseudoClassConditionTranslator {
 		pseudoClassesF.put(CssTextPseudoClass.PSEUDO, (a) -> new CssTextPseudoClass());
 
 		// basic filter
-		pseudoClassesF.put(CssAnimatedPseudoClass.PSEUDO, (a) -> new CssAnimatedPseudoClass());
-		pseudoClassesF.put(CssEqPseudoClass.PSEUDO, CssEqPseudoClass::new);
-		pseudoClassesF.put(CssEvenPseudoClass.PSEUDO, (a) -> new CssEvenPseudoClass());
-		pseudoClassesF.put(CssFirstPseudoClass.PSEUDO, (a) -> new CssFirstPseudoClass());
+		pseudoClassesF.put(AstCssAnimatedPseudoClass.PSEUDO, (a) -> new CssAnimatedPseudoClass());
+		pseudoClassesF.put(AstCssEqPseudoClass.PSEUDO, CssEqPseudoClass::new);
+		pseudoClassesF.put(AstCssEvenPseudoClass.PSEUDO, (a) -> new CssEvenPseudoClass());
+		pseudoClassesF.put(AstCssFirstPseudoClass.PSEUDO, (a) -> new CssFirstPseudoClass());
 		pseudoClassesF.put(CssGtPseudoClass.PSEUDO, CssGtPseudoClass::new);
 		pseudoClassesF.put(CssHeaderPseudoClass.PSEUDO, (a) -> new CssHeaderPseudoClass());
 		pseudoClassesF.put(CssLangPseudoClass.PSEUDO, CssLangPseudoClass::new);
