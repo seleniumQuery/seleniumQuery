@@ -25,17 +25,15 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicf
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEqPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEvenPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssFirstPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssLastPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNthPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssAnimatedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEqPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEvenPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssFirstPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssGtPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssHeaderPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLangPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLastPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLtPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssNthPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssOddPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssRootPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssTargetPseudoClass;
@@ -94,19 +92,16 @@ public class AstCssPseudoClassConditionVisitorTest {
         }
 
         @Override public void visit(AstCssAnimatedPseudoClass astCssAnimatedPseudoClass) { registerVisit(CssAnimatedPseudoClass.class, astCssAnimatedPseudoClass); }
-        @Override public void visit(AstCssEqPseudoClass astCssEqPseudoClass) { registerVisit(CssEqPseudoClass.class,
-            astCssEqPseudoClass); }
-        @Override public void visit(AstCssEvenPseudoClass astCssEvenPseudoClass) { registerVisit(CssEvenPseudoClass.class,
-            astCssEvenPseudoClass); }
-        @Override public void visit(AstCssFirstPseudoClass astCssFirstPseudoClass) { registerVisit(CssFirstPseudoClass.class,
-            astCssFirstPseudoClass); }
+        @Override public void visit(AstCssEqPseudoClass astCssEqPseudoClass) { registerVisit(AstCssEqPseudoClass.class, astCssEqPseudoClass); }
+        @Override public void visit(AstCssEvenPseudoClass astCssEvenPseudoClass) { registerVisit(CssEvenPseudoClass.class, astCssEvenPseudoClass); }
+        @Override public void visit(AstCssFirstPseudoClass astCssFirstPseudoClass) { registerVisit(AstCssFirstPseudoClass.class, astCssFirstPseudoClass); }
         @Override public void visit(CssGtPseudoClass cssGtPseudoClass) { registerVisit(CssGtPseudoClass.class, cssGtPseudoClass); }
         @Override public void visit(CssHeaderPseudoClass cssHeaderPseudoClass) { registerVisit(CssHeaderPseudoClass.class, cssHeaderPseudoClass); }
         @Override public void visit(CssLangPseudoClass cssLangPseudoClass) { registerVisit(CssLangPseudoClass.class, cssLangPseudoClass); }
-        @Override public void visit(CssLastPseudoClass cssLastPseudoClass) { registerVisit(CssLastPseudoClass.class, cssLastPseudoClass); }
+        @Override public void visit(AstCssLastPseudoClass astCssLastPseudoClass) { registerVisit(AstCssLastPseudoClass.class, astCssLastPseudoClass); }
         @Override public void visit(CssLtPseudoClass cssLtPseudoClass) { registerVisit(CssLtPseudoClass.class, cssLtPseudoClass); }
         @Override public void visit(AstCssNotPseudoClass astCssNotPseudoClass) { registerVisit(AstCssNotPseudoClass.class, astCssNotPseudoClass); }
-        @Override public void visit(CssNthPseudoClass cssNthPseudoClass) { registerVisit(CssNthPseudoClass.class, cssNthPseudoClass); }
+        @Override public void visit(AstCssNthPseudoClass astCssNthPseudoClass) { registerVisit(AstCssNthPseudoClass.class, astCssNthPseudoClass); }
         @Override public void visit(CssOddPseudoClass cssOddPseudoClass) { registerVisit(CssOddPseudoClass.class, cssOddPseudoClass); }
         @Override public void visit(CssRootPseudoClass cssRootPseudoClass) { registerVisit(CssRootPseudoClass.class, cssRootPseudoClass); }
         @Override public void visit(CssTargetPseudoClass cssTargetPseudoClass) { registerVisit(CssTargetPseudoClass.class, cssTargetPseudoClass); }
@@ -165,11 +160,11 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssEqPseudoClass() {
         // given
-        AstCssEqPseudoClass astCssEqPseudoClass = new CssEqPseudoClass(99);
+        AstCssEqPseudoClass astCssEqPseudoClass = new AstCssEqPseudoClass(99);
         // when
         astCssEqPseudoClass.accept(visitor);
         // then
-        assertEquals(CssEqPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssEqPseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssEqPseudoClass, visitor.getVisitedInstance());
     }
 
@@ -187,11 +182,11 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssFirstPseudoClass() {
         // given
-        AstCssFirstPseudoClass astCssFirstPseudoClass = new CssFirstPseudoClass();
+        AstCssFirstPseudoClass astCssFirstPseudoClass = new AstCssFirstPseudoClass();
         // when
         astCssFirstPseudoClass.accept(visitor);
         // then
-        assertEquals(CssFirstPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssFirstPseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssFirstPseudoClass, visitor.getVisitedInstance());
     }
 
@@ -231,12 +226,12 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssLastPseudoClass() {
         // given
-        CssLastPseudoClass cssLastPseudoClass = new CssLastPseudoClass();
+        AstCssLastPseudoClass astCssLastPseudoClass = new AstCssLastPseudoClass();
         // when
-        cssLastPseudoClass.accept(visitor);
+        astCssLastPseudoClass.accept(visitor);
         // then
-        assertEquals(CssLastPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(cssLastPseudoClass, visitor.getVisitedInstance());
+        assertEquals(AstCssLastPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(astCssLastPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
@@ -264,12 +259,12 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssNthPseudoClass() {
         // given
-        CssNthPseudoClass cssNthPseudoClass = new CssNthPseudoClass(55);
+        AstCssNthPseudoClass astCssNthPseudoClass = new AstCssNthPseudoClass(55);
         // when
-        cssNthPseudoClass.accept(visitor);
+        astCssNthPseudoClass.accept(visitor);
         // then
-        assertEquals(CssNthPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(cssNthPseudoClass, visitor.getVisitedInstance());
+        assertEquals(AstCssNthPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(astCssNthPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test

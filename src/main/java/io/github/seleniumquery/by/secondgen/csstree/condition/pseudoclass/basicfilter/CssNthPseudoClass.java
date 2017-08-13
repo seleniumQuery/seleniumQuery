@@ -16,8 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-
 /**
  * :nth() is an alias to :eq().
  * https://github.com/seleniumQuery/seleniumQuery/issues/27
@@ -27,15 +25,8 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
  */
 public class CssNthPseudoClass extends CssEqPseudoClass {
 
-    public static final String PSEUDO = "nth";
-
     public CssNthPseudoClass(int index) {
-        super(index);
-    }
-
-    @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
+        super(new AstCssNthPseudoClass(index));
     }
 
 }

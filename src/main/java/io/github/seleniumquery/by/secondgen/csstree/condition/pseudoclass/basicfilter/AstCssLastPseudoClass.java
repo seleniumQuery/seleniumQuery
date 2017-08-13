@@ -16,17 +16,19 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-/**
- * :last
- * https://api.jquery.com/last-selector/
- *
- * @author acdcjunior
- * @since 0.10.0
- */
-public class CssLastPseudoClass extends CssEqPseudoClass {
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
-    public CssLastPseudoClass() {
-        super(new AstCssLastPseudoClass());
+public class AstCssLastPseudoClass extends AstCssEqPseudoClass {
+
+    public static final String PSEUDO = "last";
+
+    public AstCssLastPseudoClass() {
+        super(-1);
+    }
+
+    @Override
+    public void accept(AstCssPseudoClassConditionVisitor visitor) {
+        visitor.visit(this);
     }
 
 }

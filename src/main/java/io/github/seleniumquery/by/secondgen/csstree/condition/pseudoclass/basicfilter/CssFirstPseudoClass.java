@@ -23,10 +23,10 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssFirstPseudoClass extends AstCssFirstPseudoClass {
+public class CssFirstPseudoClass extends CssEqPseudoClass {
 
     public CssFirstPseudoClass() {
-        super(0);
+        super(new AstCssFirstPseudoClass());
     }
 
 }
