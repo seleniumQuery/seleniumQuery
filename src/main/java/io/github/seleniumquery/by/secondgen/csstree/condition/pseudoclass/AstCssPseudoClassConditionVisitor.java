@@ -68,7 +68,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleni
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility.CssHiddenPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility.CssVisiblePseudoClass;
 
-public interface CssPseudoClassConditionVisitor {
+public interface AstCssPseudoClassConditionVisitor {
 
     void visit(CssAnimatedPseudoClass cssAnimatedPseudoClass);
     void visit(CssEqPseudoClass cssEqPseudoClass);

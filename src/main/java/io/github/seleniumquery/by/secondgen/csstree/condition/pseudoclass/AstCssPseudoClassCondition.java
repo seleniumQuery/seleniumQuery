@@ -18,6 +18,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
 public interface AstCssPseudoClassCondition {
 
-    void accept(CssPseudoClassConditionVisitor visitor);
+    void accept(AstCssPseudoClassConditionVisitor visitor);
 
 }
