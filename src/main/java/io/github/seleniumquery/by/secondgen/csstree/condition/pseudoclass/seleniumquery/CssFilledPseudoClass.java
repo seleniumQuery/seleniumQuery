@@ -17,10 +17,11 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssFilledPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+public class CssFilledPseudoClass implements AstCssPseudoClassCondition, CssPseudoClassCondition, CssConditionImplementedNotYet {
 
     public static final String PSEUDO = "filled";
 

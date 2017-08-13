@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
-public interface CssPseudoClassCondition extends CssCondition, CssConditionImplementedFinders, AstCssPseudoClassCondition {
+public interface CssPseudoClassCondition extends CssCondition, CssConditionImplementedFinders {
 
     @Override
     default ElementFinder toElementFinder(ElementFinder leftFinder) {

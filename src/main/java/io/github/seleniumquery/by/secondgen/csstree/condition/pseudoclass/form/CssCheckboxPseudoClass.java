@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
 /**
@@ -23,7 +24,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssCheckboxPseudoClass extends CssInputTypeAttributePseudoClass {
+public class CssCheckboxPseudoClass extends CssInputTypeAttributePseudoClass implements AstCssPseudoClassCondition {
 
     public static final String PSEUDO = "checkbox";
 

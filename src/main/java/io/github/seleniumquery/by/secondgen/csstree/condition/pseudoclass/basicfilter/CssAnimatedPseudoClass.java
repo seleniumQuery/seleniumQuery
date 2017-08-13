@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
@@ -29,7 +30,7 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssAnimatedPseudoClass implements CssPseudoClassCondition, CssConditionImplementedFinders {
+public class CssAnimatedPseudoClass implements AstCssPseudoClassCondition, CssPseudoClassCondition, CssConditionImplementedFinders {
 
     public static final String PSEUDO = "animated";
 

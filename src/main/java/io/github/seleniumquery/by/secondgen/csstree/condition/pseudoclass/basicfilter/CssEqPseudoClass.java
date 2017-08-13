@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 
 import org.openqa.selenium.WebDriver;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalIndexArgumentPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
@@ -30,8 +31,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEqPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondition implements
-    NeverNativelySupportedPseudoClass {
+public class CssEqPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondition implements AstCssPseudoClassCondition, NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "eq";
 

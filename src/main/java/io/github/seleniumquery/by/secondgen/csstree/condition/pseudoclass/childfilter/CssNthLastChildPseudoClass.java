@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.child
 
 import org.openqa.selenium.WebDriver;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
@@ -32,7 +33,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssNthLastChildPseudoClass extends CssFunctionalPseudoClassCondition implements MaybeNativelySupportedPseudoClass {
+public class CssNthLastChildPseudoClass extends CssFunctionalPseudoClassCondition implements AstCssPseudoClassCondition,  MaybeNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "nth-last-child";
 

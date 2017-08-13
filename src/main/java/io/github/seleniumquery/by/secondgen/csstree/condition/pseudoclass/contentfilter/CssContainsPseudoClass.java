@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.conte
 
 import org.openqa.selenium.WebDriver;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
@@ -31,7 +32,7 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsPseudoClass extends CssFunctionalPseudoClassCondition implements NeverNativelySupportedPseudoClass {
+public class CssContainsPseudoClass extends CssFunctionalPseudoClassCondition implements AstCssPseudoClassCondition,  NeverNativelySupportedPseudoClass {
 
     public static final String PSEUDO = "contains";
 

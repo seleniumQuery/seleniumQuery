@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass.PSEUDO_PURE_NOT;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +26,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.google.common.base.Joiner;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
@@ -37,10 +38,12 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.17.0
  */
-public class CssNotPseudoClass extends AstCssNotPseudoClass implements CssPseudoClassCondition, MaybeNativelySupportedPseudoClass {
+public class CssNotPseudoClass implements CssPseudoClassCondition, MaybeNativelySupportedPseudoClass {
 
-    public CssNotPseudoClass(CssSelectorList argumentSelector) {
-        super(argumentSelector);
+    private final AstCssNotPseudoClass astCssNotPseudoClass;
+
+    public CssNotPseudoClass(AstCssNotPseudoClass astCssNotPseudoClass) {
+        this.astCssNotPseudoClass = astCssNotPseudoClass;
     }
 
     @Override
@@ -57,7 +60,7 @@ public class CssNotPseudoClass extends AstCssNotPseudoClass implements CssPseudo
 
     private String toChainedNotSelectors(WebDriver webDriver) {
         StringBuilder chainedNotSelectors = new StringBuilder();
-        for (CssSelector cssSelector : getNegatedSelector()) {
+        for (CssSelector cssSelector : astCssNotPseudoClass.getNegatedSelector()) {
             chainedNotSelectors.append(":").append(PSEUDO_PURE_NOT).append("(").append(cssSelector.toElementFinder(webDriver).toCssString()).append(")");
         }
         return chainedNotSelectors.toString();
@@ -72,7 +75,7 @@ public class CssNotPseudoClass extends AstCssNotPseudoClass implements CssPseudo
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
         List<String> xPathExpressions = new LinkedList<>();
-        for (CssSelector cssSelector : getNegatedSelector()) {
+        for (CssSelector cssSelector : astCssNotPseudoClass.getNegatedSelector()) {
             xPathExpressions.add(cssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression());
         }
         String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);
