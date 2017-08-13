@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
 
 /**
@@ -29,7 +29,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPse
  * @author acdcjunior
  * @since 0.17.0
  */
-public abstract class AstCssNotPseudoClass implements CssPseudoClassCondition {
+public abstract class AstCssNotPseudoClass implements AstCssPseudoClassCondition {
 
     // :not() are translated into :not-sq() by the pre-parser
     public static final String PSEUDO = "not-sq";
