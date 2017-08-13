@@ -20,7 +20,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
-public interface CssPseudoClassCondition extends CssCondition, CssConditionImplementedFinders {
+public interface CssPseudoClassCondition extends CssCondition, CssConditionImplementedFinders, AstCssPseudoClassCondition {
 
     @Override
     default ElementFinder toElementFinder(ElementFinder leftFinder) {
@@ -32,7 +32,5 @@ public interface CssPseudoClassCondition extends CssCondition, CssConditionImple
                 " whatever (if it was moved) -\nwill be abstract!\n" +
                 "It is not yet because we need the project to compile while implementing everything.\n\n");
     }
-
-    void accept(CssPseudoClassConditionVisitor visitor);
 
 }

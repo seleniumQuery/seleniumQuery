@@ -25,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 import com.google.common.base.Joiner;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
@@ -36,7 +37,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.17.0
  */
-public class CssNotPseudoClass extends AstCssNotPseudoClass implements MaybeNativelySupportedPseudoClass {
+public class CssNotPseudoClass extends AstCssNotPseudoClass implements CssPseudoClassCondition, MaybeNativelySupportedPseudoClass {
 
     public CssNotPseudoClass(CssSelectorList argumentSelector) {
         super(argumentSelector);
