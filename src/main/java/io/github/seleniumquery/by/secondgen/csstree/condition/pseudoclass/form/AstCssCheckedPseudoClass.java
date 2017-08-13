@@ -20,11 +20,12 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
 public class AstCssCheckedPseudoClass implements AstCssPseudoClassCondition {
+
     public static final String PSEUDO = "checked";
-    static final String CHECKED_PSEUDO = ":checked";
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }

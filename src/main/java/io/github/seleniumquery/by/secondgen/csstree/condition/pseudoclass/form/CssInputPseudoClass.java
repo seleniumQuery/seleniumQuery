@@ -31,7 +31,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssInputPseudoClass extends AstCssInputPseudoClass implements NeverNativelySupportedPseudoClass {
+public class CssInputPseudoClass implements NeverNativelySupportedPseudoClass {
 
     private static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";
 

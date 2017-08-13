@@ -31,9 +31,9 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssDisabledPseudoClass extends AstCssDisabledPseudoClass implements MaybeNativelySupportedPseudoClass {
+public class CssDisabledPseudoClass implements MaybeNativelySupportedPseudoClass {
 
-    private static final String DISABLED_PSEUDO = ":" + PSEUDO;
+    private static final String DISABLED_PSEUDO = ":" + AstCssDisabledPseudoClass.PSEUDO;
 
     @Override
     public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {

@@ -20,7 +20,8 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
-public abstract class AstCssContainsPseudoClass extends CssFunctionalPseudoClassCondition implements AstCssPseudoClassCondition {
+public class AstCssContainsPseudoClass extends CssFunctionalPseudoClassCondition implements AstCssPseudoClassCondition {
+
     public static final String PSEUDO = "contains";
 
     public AstCssContainsPseudoClass(String argument) {
@@ -31,4 +32,5 @@ public abstract class AstCssContainsPseudoClass extends CssFunctionalPseudoClass
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }

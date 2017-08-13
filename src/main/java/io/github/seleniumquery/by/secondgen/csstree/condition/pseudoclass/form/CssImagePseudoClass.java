@@ -21,10 +21,10 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssImagePseudoClass extends AstCssImagePseudoClass {
+public class CssImagePseudoClass extends CssInputTypeAttributePseudoClass {
 
     public CssImagePseudoClass() {
-        super(PSEUDO);
+        super(AstCssImagePseudoClass.PSEUDO);
     }
 
 }

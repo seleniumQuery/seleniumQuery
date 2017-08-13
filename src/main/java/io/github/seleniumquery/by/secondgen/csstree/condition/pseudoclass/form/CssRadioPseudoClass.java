@@ -21,10 +21,10 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssRadioPseudoClass extends AstCssRadioPseudoClass {
+public class CssRadioPseudoClass extends CssInputTypeAttributePseudoClass {
 
     public CssRadioPseudoClass() {
-        super(PSEUDO);
+        super(AstCssRadioPseudoClass.PSEUDO);
     }
 
 }

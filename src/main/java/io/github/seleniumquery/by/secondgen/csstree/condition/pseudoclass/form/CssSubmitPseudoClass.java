@@ -30,7 +30,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssSubmitPseudoClass extends AstCssSubmitPseudoClass implements NeverNativelySupportedPseudoClass {
+public class CssSubmitPseudoClass implements NeverNativelySupportedPseudoClass {
 
     private static final String SUBMIT_XPATH_EXPRESSION = "(" +
             "(self::input and " + TYPE_ATTR_LC_VAL + " = 'submit')" +

@@ -33,7 +33,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssSelectedPseudoClass extends AstCssSelectedPseudoClass implements MaybeNativelySupportedPseudoClass {
+public class CssSelectedPseudoClass implements MaybeNativelySupportedPseudoClass {
 
     @Override
     public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
@@ -43,7 +43,7 @@ public class CssSelectedPseudoClass extends AstCssSelectedPseudoClass implements
 
     @Override
     public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
-        return AstCssCheckedPseudoClass.CHECKED_PSEUDO;
+        return CssCheckedPseudoClass.CHECKED_PSEUDO;
     }
 
     @Override

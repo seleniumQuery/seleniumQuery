@@ -20,10 +20,12 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
 public class AstCssUncheckedPseudoClass implements AstCssPseudoClassCondition {
+
     public static final String PSEUDO = "unchecked";
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }
