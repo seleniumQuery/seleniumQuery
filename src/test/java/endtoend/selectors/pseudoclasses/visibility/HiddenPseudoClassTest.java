@@ -16,24 +16,30 @@
 
 package endtoend.selectors.pseudoclasses.visibility;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.openqa.selenium.WebElement;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-
-import java.util.List;
-
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.junit.ClassRule;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.PseudoClassOnlySupportedThroughIsOrFilterException;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+
 public class HiddenPseudoClassTest {
-	
+
 	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-	
+
 	@Test
 	public void hidden_is() {
 		assertThat($("p").is(":hidden"), is(true));
@@ -46,20 +52,35 @@ public class HiddenPseudoClassTest {
 
 	@Test(expected = PseudoClassOnlySupportedThroughIsOrFilterException.class)
 	public void hidden_used_directly() {
-		List<WebElement> elements = $(":hidden").get();
-
-		assertThat(elements, hasSize(11));
-		assertThat(elements.get(0).getTagName(), is("head"));
-		assertThat(elements.get(1).getTagName(), is("meta"));
-		assertThat(elements.get(2).getTagName(), is("title"));
-		assertThat(elements.get(3).getTagName(), is("style"));
-		assertThat(elements.get(4).getTagName(), is("bell"));
-		assertThat(elements.get(5).getTagName(), is("div"));
-		assertThat(elements.get(6).getTagName(), is("h1"));
-		assertThat(elements.get(7).getTagName(), is("button"));
-		assertThat(elements.get(8).getTagName(), is("span"));
-		assertThat(elements.get(9).getTagName(), is("div"));
-		assertThat(elements.get(10).getTagName(), is("p"));
+		$(":hidden");
 	}
-	
+
+    @Test
+    @Ignore
+    public void all_hidden() {
+        assertSQObjectContains($(":hidden"), "HEAD", "META", "TITLE", "STYLE", "DIV", "H1", "BUTTON", "SPAN", "DIV", "P");
+    }
+
+    @Test
+    @Ignore
+    public void all_not_hidden() {
+        WebElement html = $.driver().get().findElement(By.cssSelector("*"));
+        assertEquals("html", html.getTagName());
+        assertEquals(true, html.isDisplayed());
+
+        assertSQObjectContains($(":not(:hidden)"), "HTML", "BODY", "BELL", "DIV", "H1", "BUTTON", "SPAN");
+    }
+
+    @Test
+    @Ignore
+    public void all_both() {
+        assertSQObjectContains($("*"), "HTML", "HEAD", "META", "TITLE", "STYLE", "BODY", "BELL", "DIV", "H1", "BUTTON", "SPAN", "DIV", "H1", "BUTTON", "SPAN", "DIV", "P");
+    }
+
+    private void assertSQObjectContains(SeleniumQueryObject $els, String... p) {
+        List<String> tags = $els.get().stream().map(WebElement::getTagName).collect(Collectors.toList());
+        List<String> expectedTags = Arrays.stream(p).map(String::toLowerCase).collect(Collectors.toList());
+        assertEquals(expectedTags.toString(), tags.toString());
+    }
+
 }
