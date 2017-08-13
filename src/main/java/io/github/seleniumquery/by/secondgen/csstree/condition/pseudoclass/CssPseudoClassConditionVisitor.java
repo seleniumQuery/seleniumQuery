@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssAnimatedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEqPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEvenPseudoClass;
@@ -25,7 +26,6 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicf
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLangPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLastPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLtPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssNotPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssNthPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssOddPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssRootPseudoClass;
@@ -79,7 +79,7 @@ public interface CssPseudoClassConditionVisitor {
     void visit(CssLangPseudoClass cssLangPseudoClass);
     void visit(CssLastPseudoClass cssLastPseudoClass);
     void visit(CssLtPseudoClass cssLtPseudoClass);
-    void visit(CssNotPseudoClass cssNotPseudoClass);
+    void visit(AstCssNotPseudoClass astCssNotPseudoClass);
     void visit(CssNthPseudoClass cssNthPseudoClass);
     void visit(CssOddPseudoClass cssOddPseudoClass);
     void visit(CssRootPseudoClass cssRootPseudoClass);
