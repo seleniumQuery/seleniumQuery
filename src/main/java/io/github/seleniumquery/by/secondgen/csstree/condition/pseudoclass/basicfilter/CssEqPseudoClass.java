@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 
 import org.openqa.selenium.WebDriver;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
@@ -28,15 +29,17 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEqPseudoClass extends AstCssEqPseudoClass implements NeverNativelySupportedPseudoClass {
+public class CssEqPseudoClass implements CssPseudoClassCondition, NeverNativelySupportedPseudoClass {
 
-    public CssEqPseudoClass(int index) {
-        super(index);
+    private final AstCssEqPseudoClass astCssEqPseudoClass;
+
+    public CssEqPseudoClass(AstCssEqPseudoClass astCssEqPseudoClass) {
+        this.astCssEqPseudoClass = astCssEqPseudoClass;
     }
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-        int index = getArgumentAsIndex();
+        int index = astCssEqPseudoClass.getArgumentAsIndex();
         if (index >= 0) {
             return XPathAndFilterFinder.pureXPath("position() = " + (index + 1));
         }

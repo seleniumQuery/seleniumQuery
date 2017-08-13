@@ -38,7 +38,7 @@ public class CssEqPseudoClassTest {
     }
 
     private void assertEqArgumentGeneratesXPath(int eqArgument, String eqXPathExpression) {
-        assertPseudoClass(new CssEqPseudoClass(eqArgument)).whenNotNativelySupported().translatesToPureXPath(eqXPathExpression);
+        assertPseudoClass(new CssEqPseudoClass(new AstCssEqPseudoClass(eqArgument))).whenNotNativelySupported().translatesToPureXPath(eqXPathExpression);
     }
 
     @Test

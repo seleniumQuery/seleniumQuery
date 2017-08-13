@@ -20,13 +20,13 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicf
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEqPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssEvenPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssFirstPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssLastPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNthPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssGtPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssHeaderPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLangPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLastPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLtPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssNthPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssOddPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssRootPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssTargetPseudoClass;
@@ -77,10 +77,10 @@ public interface AstCssPseudoClassConditionVisitor {
     void visit(CssGtPseudoClass cssGtPseudoClass);
     void visit(CssHeaderPseudoClass cssHeaderPseudoClass);
     void visit(CssLangPseudoClass cssLangPseudoClass);
-    void visit(CssLastPseudoClass cssLastPseudoClass);
+    void visit(AstCssLastPseudoClass astCssLastPseudoClass);
     void visit(CssLtPseudoClass cssLtPseudoClass);
     void visit(AstCssNotPseudoClass astCssNotPseudoClass);
-    void visit(CssNthPseudoClass cssNthPseudoClass);
+    void visit(AstCssNthPseudoClass astCssNthPseudoClass);
     void visit(CssOddPseudoClass cssOddPseudoClass);
     void visit(CssRootPseudoClass cssRootPseudoClass);
     void visit(CssTargetPseudoClass cssTargetPseudoClass);

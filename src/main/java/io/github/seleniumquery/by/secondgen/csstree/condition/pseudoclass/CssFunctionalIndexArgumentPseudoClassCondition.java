@@ -31,7 +31,7 @@ public abstract class CssFunctionalIndexArgumentPseudoClassCondition implements 
         this.index = index;
     }
 
-    protected int getArgumentAsIndex() {
+    public int getArgumentAsIndex() {
         return this.index;
     }
 

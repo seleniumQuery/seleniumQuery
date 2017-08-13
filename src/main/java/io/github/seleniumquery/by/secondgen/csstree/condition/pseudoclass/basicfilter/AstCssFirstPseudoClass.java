@@ -16,14 +16,15 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
-public abstract class AstCssFirstPseudoClass extends CssEqPseudoClass {
+public class AstCssFirstPseudoClass extends AstCssEqPseudoClass implements AstCssPseudoClassCondition {
 
     public static final String PSEUDO = "first";
 
-    public AstCssFirstPseudoClass(int index) {
-        super(index);
+    public AstCssFirstPseudoClass() {
+        super(0);
     }
 
     @Override
