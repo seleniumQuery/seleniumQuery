@@ -27,7 +27,7 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEndsWithAttributeCondition extends CssAttributeCondition {
+public class CssEndsWithAttributeCondition extends AstCssEndsWithAttributeCondition {
 
     public CssEndsWithAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
@@ -44,11 +44,6 @@ public class CssEndsWithAttributeCondition extends CssAttributeCondition {
         String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
         return "substring("+escapedAttributeName+", string-length(" + escapedAttributeName + ")-" +
                 (attrValue.length() - 1) + ") = " + escapedWantedValue;
-    }
-
-    @Override
-    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
-        return visitor.visit(this);
     }
 
 }

@@ -16,7 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
-public abstract class AstCssContainsPrefixAttributeCondition extends CssAttributeCondition {
+public abstract class AstCssContainsPrefixAttributeCondition extends CssAttributeConditionBase {
+
     public AstCssContainsPrefixAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
     }
@@ -25,4 +26,5 @@ public abstract class AstCssContainsPrefixAttributeCondition extends CssAttribut
     public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
+
 }

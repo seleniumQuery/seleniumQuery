@@ -32,12 +32,10 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssIdAttributeCondition implements AstCssAttributeCondition, CssCondition, CssConditionImplementedFinders {
-
-    private String id;
+public class CssIdAttributeCondition extends AstCssIdAttributeCondition implements CssCondition, CssConditionImplementedFinders {
 
     public CssIdAttributeCondition(String id) {
-        this.id = id;
+        super(id);
     }
 
     public String getId() {
@@ -57,11 +55,6 @@ public class CssIdAttributeCondition implements AstCssAttributeCondition, CssCon
 
     private String toXPath() {
         return "@id = '" + id + "'";
-    }
-
-    @Override
-    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
-        return visitor.visit(this);
     }
 
 }

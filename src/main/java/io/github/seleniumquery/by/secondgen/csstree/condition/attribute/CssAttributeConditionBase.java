@@ -30,14 +30,10 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class CssAttributeCondition implements AstCssAttributeCondition, CssCondition, CssConditionImplementedFinders {
+public abstract class CssAttributeConditionBase extends AstCssAttributeConditionBase implements CssCondition, CssConditionImplementedFinders {
 
-    protected String attributeName;
-    protected String wantedValue;
-
-    protected CssAttributeCondition(String attributeName, String wantedValue) {
-        this.attributeName = attributeName;
-        this.wantedValue = wantedValue;
+    protected CssAttributeConditionBase(String attributeName, String wantedValue) {
+        super(wantedValue, attributeName);
     }
 
     public String getAttributeName() {

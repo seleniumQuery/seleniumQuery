@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,21 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
-import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
 
 public class CssEqualsOrHasAttributeConditionTest {
 
     @Test
     public void toElementFinder__has_attribute() {
         // given
-        CssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition("attrib");
+        AstCssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition("attrib");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = hasAttributeCondition.toElementFinder(previous);
@@ -43,7 +44,7 @@ public class CssEqualsOrHasAttributeConditionTest {
     @Test
     public void toElementFinder__equals_attribute() {
         // given
-        CssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition("attrib", "valz");
+        AstCssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition("attrib", "valz");
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = hasAttributeCondition.toElementFinder(previous);
