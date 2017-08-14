@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.common.preparser;
+package io.github.seleniumquery.by.common.preparser.w3cwithmap;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -23,15 +23,15 @@ import java.util.stream.Stream;
 
 import org.w3c.css.sac.SelectorList;
 
-import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 
-public class CssParsedSelectorList implements Iterable<W3cCssSelectorWithMap> {
+public class W3cCssSelectorListWithMap implements Iterable<W3cCssSelectorWithMap> {
 
 	private final SelectorList selectorList;
 	private final ArgumentMap argumentMap;
 	private final List<W3cCssSelectorWithMap> w3cCssSelectorWithMaps;
 
-	public CssParsedSelectorList(SelectorList selectorList, ArgumentMap argumentMap) {
+	public W3cCssSelectorListWithMap(SelectorList selectorList, ArgumentMap argumentMap) {
 		this.selectorList = selectorList;
 		this.argumentMap = argumentMap;
 		this.w3cCssSelectorWithMaps = createParsedSelectorList();

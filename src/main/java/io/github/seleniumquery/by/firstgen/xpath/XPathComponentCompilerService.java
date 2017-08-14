@@ -22,8 +22,8 @@ import java.util.List;
 import org.w3c.css.sac.Selector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
@@ -34,7 +34,7 @@ public class XPathComponentCompilerService {
 	private XPathComponentCompilerService() {}
 
 	public static TagComponentList compileSelectorList(String selector) {
-		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
+		W3cCssSelectorListWithMap parsedSelectorList = CssSelectorParser.parseSelector(selector);
 
     	List<TagComponent> tagComponents = new ArrayList<>(parsedSelectorList.size());
         for (W3cCssSelectorWithMap w3cCssSelectorWithMap : parsedSelectorList) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,21 @@
 
 package io.github.seleniumquery.by.firstgen.css.conditionals;
 
-import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
-import io.github.seleniumquery.by.firstgen.xpath.component.ConditionComponent;
-import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.ConditionalSelector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SimpleSelector;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
+import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
+import io.github.seleniumquery.by.firstgen.xpath.component.ConditionComponent;
+import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 
 public class AndConditionalCssSelectorTest {
 
@@ -37,11 +38,11 @@ public class AndConditionalCssSelectorTest {
 
     @Test
     public void testConditionToXPath() {
-        CssParsedSelectorList cssParsedSelectorList = CssSelectorParser.parseSelector("span.a.b");
-        SelectorList selectorList = cssParsedSelectorList.getSelectorList();
+        W3cCssSelectorListWithMap w3cCssSelectorListWithMap = CssSelectorParser.parseSelector("span.a.b");
+        SelectorList selectorList = w3cCssSelectorListWithMap.getSelectorList();
         ConditionalSelector selector = (ConditionalSelector) selectorList.item(0);
 
-        ArgumentMap argumentMap = cssParsedSelectorList.getArgumentMap();
+        ArgumentMap argumentMap = w3cCssSelectorListWithMap.getArgumentMap();
         SimpleSelector simpleSelector = selector.getSimpleSelector();
         TagComponent spanTagComponent = XPathComponentCompilerService.compileSelector(argumentMap, simpleSelector);
 
