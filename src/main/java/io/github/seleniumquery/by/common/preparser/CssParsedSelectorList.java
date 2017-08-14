@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,15 @@
 
 package io.github.seleniumquery.by.common.preparser;
 
-import org.w3c.css.sac.SelectorList;
-
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Stream;
+
+import org.w3c.css.sac.SelectorList;
 
 public class CssParsedSelectorList implements Iterable<CssParsedSelector> {
-	
+
 	private final SelectorList selectorList;
 	private final ArgumentMap argumentMap;
 	private final List<CssParsedSelector> cssParsedSelectors;
@@ -58,6 +59,10 @@ public class CssParsedSelectorList implements Iterable<CssParsedSelector> {
     @Override
     public Iterator<CssParsedSelector> iterator() {
         return cssParsedSelectors.iterator();
+    }
+
+    public Stream<CssParsedSelector> stream() {
+        return cssParsedSelectors.stream();
     }
 
     public CssParsedSelector get(int index) {
