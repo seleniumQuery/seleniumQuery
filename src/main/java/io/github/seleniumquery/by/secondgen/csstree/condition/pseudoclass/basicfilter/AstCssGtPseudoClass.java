@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basic
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
-public abstract class AstCssGtPseudoClass extends AstCssFunctionalPseudoClassCondition<Integer> {
+public class AstCssGtPseudoClass extends AstCssFunctionalPseudoClassCondition<Integer> {
 
     public static final String PSEUDO = "gt";
 

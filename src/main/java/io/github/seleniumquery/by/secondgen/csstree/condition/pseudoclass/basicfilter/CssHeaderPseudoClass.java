@@ -28,7 +28,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssHeaderPseudoClass extends AstCssHeaderPseudoClass implements NeverNativelySupportedPseudoClass {
+public class CssHeaderPseudoClass implements NeverNativelySupportedPseudoClass {
 
     private static final String HEADER_XPATH_EXPRESSION = "(" +
             "self::h0 | self::h1 | self::h2 | self::h3 | self::h4 | " +

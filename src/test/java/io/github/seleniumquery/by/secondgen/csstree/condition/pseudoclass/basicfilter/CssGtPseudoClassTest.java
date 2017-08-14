@@ -38,7 +38,7 @@ public class CssGtPseudoClassTest {
     }
 
     private void assertGtArgumentGeneratesXPath(int gtArgument, String gtXPathExpression) {
-        assertPseudoClass(new CssGtPseudoClass(gtArgument)).whenNotNativelySupported().translatesToPureXPath(gtXPathExpression);
+        assertPseudoClass(new CssGtPseudoClass(new AstCssGtPseudoClass(gtArgument))).whenNotNativelySupported().translatesToPureXPath(gtXPathExpression);
     }
 
     @Test

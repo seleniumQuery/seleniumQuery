@@ -38,7 +38,7 @@ public class CssLtPseudoClassTest {
     }
 
     private void assertLtArgumentGeneratesXPath(int ltArgument, String ltXPathExpression) {
-        assertPseudoClass(new CssLtPseudoClass(ltArgument)).whenNotNativelySupported().translatesToPureXPath(ltXPathExpression);
+        assertPseudoClass(new CssLtPseudoClass(new AstCssLtPseudoClass(ltArgument))).whenNotNativelySupported().translatesToPureXPath(ltXPathExpression);
     }
 
     @Test

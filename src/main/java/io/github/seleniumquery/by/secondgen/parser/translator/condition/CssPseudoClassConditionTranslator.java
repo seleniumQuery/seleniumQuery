@@ -173,12 +173,12 @@ class CssPseudoClassConditionTranslator {
 		pseudoClassesF.put(AstCssEqPseudoClass.PSEUDO, a -> new CssEqPseudoClass(new AstCssEqPseudoClass(extractIndexArgument(a, AstCssEqPseudoClass.PSEUDO))));
 		pseudoClassesF.put(AstCssEvenPseudoClass.PSEUDO, a -> new CssEvenPseudoClass());
 		pseudoClassesF.put(AstCssFirstPseudoClass.PSEUDO, a -> new CssFirstPseudoClass());
-		pseudoClassesF.put(AstCssGtPseudoClass.PSEUDO, a -> new CssGtPseudoClass(extractIndexArgument(a, AstCssGtPseudoClass.PSEUDO)));
+		pseudoClassesF.put(AstCssGtPseudoClass.PSEUDO, a -> new CssGtPseudoClass(new AstCssGtPseudoClass(extractIndexArgument(a, AstCssGtPseudoClass.PSEUDO))));
 		pseudoClassesF.put(AstCssHeaderPseudoClass.PSEUDO, a -> new CssHeaderPseudoClass());
 		pseudoClassesF.put(AstCssLangPseudoClass.PSEUDO, a -> new CssLangPseudoClass(new AstCssLangPseudoClass(a)));
 		pseudoClassesF.put(AstCssLangPseudoClass.PSEUDO_PURE_LANG, a -> new CssLangPseudoClass(new AstCssLangPseudoClass(a)));
 		pseudoClassesF.put(AstCssLastPseudoClass.PSEUDO, a -> new CssLastPseudoClass());
-		pseudoClassesF.put(AstCssLtPseudoClass.PSEUDO, a -> new CssLtPseudoClass(extractIndexArgument(a, AstCssLtPseudoClass.PSEUDO)));
+		pseudoClassesF.put(AstCssLtPseudoClass.PSEUDO, a -> new CssLtPseudoClass(new AstCssLtPseudoClass(extractIndexArgument(a, AstCssLtPseudoClass.PSEUDO))));
 		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO, a -> new CssNotPseudoClass(new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a))));
 		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a -> new CssNotPseudoClass(new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a))));
 		pseudoClassesF.put(AstCssNthPseudoClass.PSEUDO, a -> new CssNthPseudoClass(extractIndexArgument(a, AstCssNthPseudoClass.PSEUDO)));
