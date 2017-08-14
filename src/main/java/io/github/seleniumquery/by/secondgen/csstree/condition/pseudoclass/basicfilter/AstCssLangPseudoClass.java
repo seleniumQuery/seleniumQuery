@@ -16,13 +16,14 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
-public abstract class AstCssLangPseudoClass extends CssFunctionalPseudoClassCondition implements AstCssPseudoClassCondition {
+public class AstCssLangPseudoClass extends AstCssFunctionalPseudoClassCondition<String> {
+
     // :lang(), similar to :not(), gets translated into :lang-sq() by the pre-parser
     public static final String PSEUDO = "lang-sq";
+
     /* when used without args, such as "div:lang", the pre-parser does not translate it. it is invalid,
           but we still match it, so we can return a proper error message */
     public static final String PSEUDO_PURE_LANG = "lang";
@@ -35,4 +36,5 @@ public abstract class AstCssLangPseudoClass extends CssFunctionalPseudoClassCond
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }

@@ -28,7 +28,7 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssAnimatedPseudoClass extends AstCssAnimatedPseudoClass implements CssPseudoClassCondition, CssConditionImplementedFinders {
+public class CssAnimatedPseudoClass implements CssPseudoClassCondition, CssConditionImplementedFinders {
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {

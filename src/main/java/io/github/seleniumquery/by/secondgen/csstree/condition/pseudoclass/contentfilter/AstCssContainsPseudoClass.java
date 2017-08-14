@@ -16,11 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
-public class AstCssContainsPseudoClass extends CssFunctionalPseudoClassCondition implements AstCssPseudoClassCondition {
+public class AstCssContainsPseudoClass extends AstCssFunctionalPseudoClassCondition<String> {
 
     public static final String PSEUDO = "contains";
 

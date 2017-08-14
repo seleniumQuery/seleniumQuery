@@ -36,7 +36,7 @@ public class CssLtPseudoClass extends AstCssLtPseudoClass implements NeverNative
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-        int index = getArgumentAsIndex();
+        int index = this.getArgument();
         if (index >= 0) {
             return XPathAndFilterFinder.pureXPath("position() < " + (index + 1));
         }

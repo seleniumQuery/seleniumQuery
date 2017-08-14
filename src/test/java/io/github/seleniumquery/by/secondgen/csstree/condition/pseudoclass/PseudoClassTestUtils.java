@@ -148,9 +148,9 @@ public class PseudoClassTestUtils {
         T cssCondition = parseAndAssertFirstCssCondition(selector + selectorSuffix, pseudoClassClass);
         // then
         if (expectedArgument != null) {
-            assertThat(cssCondition.getArgument().getArgumentAsString(), is(expectedArgument));
+            assertThat(cssCondition.getArgument(), is(expectedArgument));
         } else {
-            assertThat(cssCondition.getArgument().getArgumentAsString(), is(nullValue()));
+            assertThat(cssCondition.getArgument(), is(nullValue()));
         }
     }
 

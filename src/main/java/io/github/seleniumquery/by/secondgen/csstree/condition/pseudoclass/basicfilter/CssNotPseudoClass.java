@@ -60,7 +60,7 @@ public class CssNotPseudoClass implements CssPseudoClassCondition, MaybeNatively
 
     private String toChainedNotSelectors(WebDriver webDriver) {
         StringBuilder chainedNotSelectors = new StringBuilder();
-        for (CssSelector cssSelector : astCssNotPseudoClass.getNegatedSelector()) {
+        for (CssSelector cssSelector : astCssNotPseudoClass.getArgument()) {
             chainedNotSelectors.append(":").append(PSEUDO_PURE_NOT).append("(").append(cssSelector.toElementFinder(webDriver).toCssString()).append(")");
         }
         return chainedNotSelectors.toString();
@@ -75,7 +75,7 @@ public class CssNotPseudoClass implements CssPseudoClassCondition, MaybeNatively
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
         List<String> xPathExpressions = new LinkedList<>();
-        for (CssSelector cssSelector : astCssNotPseudoClass.getNegatedSelector()) {
+        for (CssSelector cssSelector : astCssNotPseudoClass.getArgument()) {
             xPathExpressions.add(cssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression());
         }
         String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);

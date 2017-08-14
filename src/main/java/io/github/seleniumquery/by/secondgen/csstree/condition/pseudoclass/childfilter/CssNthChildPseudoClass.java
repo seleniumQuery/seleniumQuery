@@ -54,7 +54,7 @@ public class CssNthChildPseudoClass extends AstCssNthChildPseudoClass implements
     }
 
     private NthArgument getNthChildArgument() {
-        return new NthArgument(getArgument().getArgumentAsString());
+        return new NthArgument(getArgument());
     }
 
 }

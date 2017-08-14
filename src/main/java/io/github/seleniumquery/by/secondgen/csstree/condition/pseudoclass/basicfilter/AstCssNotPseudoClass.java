@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
 /**
@@ -29,7 +29,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
  * @author acdcjunior
  * @since 0.17.0
  */
-public final class AstCssNotPseudoClass implements AstCssPseudoClassCondition {
+public class AstCssNotPseudoClass extends AstCssFunctionalPseudoClassCondition<CssSelectorList> {
 
     // :not() are translated into :not-sq() by the pre-parser
     public static final String PSEUDO = "not-sq";
@@ -38,19 +38,13 @@ public final class AstCssNotPseudoClass implements AstCssPseudoClassCondition {
        but we still match it, so we can return a proper error message */
     public static final String PSEUDO_PURE_NOT = "not";
 
-    private final CssSelectorList negatedSelector;
-
     public AstCssNotPseudoClass(CssSelectorList negatedSelector) {
-        this.negatedSelector = negatedSelector;
+        super(negatedSelector);
     }
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
-    }
-
-    public CssSelectorList getNegatedSelector() {
-        return negatedSelector;
     }
 
 }

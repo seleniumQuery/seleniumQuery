@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
@@ -24,10 +25,13 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplem
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssLangPseudoClass extends AstCssLangPseudoClass implements CssConditionImplementedNotYet {
+public class CssLangPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
-    public CssLangPseudoClass(String language) {
-        super(language);
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
+    private final AstCssLangPseudoClass astCssLangPseudoClass;
+
+    public CssLangPseudoClass(AstCssLangPseudoClass astCssLangPseudoClass) {
+        this.astCssLangPseudoClass = astCssLangPseudoClass;
     }
 
 }
