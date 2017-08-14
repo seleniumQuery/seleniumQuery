@@ -20,7 +20,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMap;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 

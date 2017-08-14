@@ -23,7 +23,7 @@ import org.w3c.css.sac.Selector;
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMap;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 
 public class CssSelectorMatcherService {
