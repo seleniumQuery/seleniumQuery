@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsPrefixAttributeCondition extends CssAttributeCondition {
+public class CssContainsPrefixAttributeCondition extends AstCssContainsPrefixAttributeCondition {
 
     public CssContainsPrefixAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);

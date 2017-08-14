@@ -16,37 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.common.AttributeEvaluatorUtils;
-import io.github.seleniumquery.utils.SelectorUtils;
-
-/**
- * [attribute^=stringToStart]
- *
- * CASE INsensitive!
- *
- * @author acdcjunior
- * @since 0.10.0
- */
-public class CssStartsWithAttributeCondition extends CssAttributeCondition {
-
-    public CssStartsWithAttributeCondition(String attributeName, String wantedValue) {
+public abstract class AstCssContainsSubstringAttributeCondition extends CssAttributeCondition {
+    public AstCssContainsSubstringAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
-    }
-
-    @Override
-    protected String symbol() {
-        return "^=";
-    }
-
-    protected String toXPath() {
-        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
-        String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
-        return "starts-with(" + escapedAttributeName + ", " + escapedWantedValue + ")";
     }
 
     @Override
     public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
 }
