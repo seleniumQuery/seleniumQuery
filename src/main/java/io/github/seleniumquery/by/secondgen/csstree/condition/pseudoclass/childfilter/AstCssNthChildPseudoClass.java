@@ -20,7 +20,8 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
-public abstract class AstCssNthChildPseudoClass extends CssFunctionalPseudoClassCondition implements AstCssPseudoClassCondition {
+public abstract class AstCssNthChildPseudoClass extends CssFunctionalPseudoClassCondition<String> implements AstCssPseudoClassCondition {
+
     public static final String PSEUDO = "nth-child";
 
     public AstCssNthChildPseudoClass(String argument) {
@@ -31,4 +32,5 @@ public abstract class AstCssNthChildPseudoClass extends CssFunctionalPseudoClass
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }

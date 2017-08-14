@@ -39,7 +39,7 @@ public class CssContainsPseudoClass implements NeverNativelySupportedPseudoClass
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-        String textToContain = astCssContainsPseudoClass.getArgument().getArgumentAsString();
+        String textToContain = astCssContainsPseudoClass.getArgument();
         textToContain = SelectorUtils.unescapeString(textToContain);
         String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
         return XPathAndFilterFinder.pureXPath("contains(string(.), " + wantedTextToContain + ")");

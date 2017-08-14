@@ -17,26 +17,20 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
-public class AstCssHasPseudoClass implements AstCssPseudoClassCondition {
+public class AstCssHasPseudoClass extends AstCssFunctionalPseudoClassCondition<CssSelectorList> {
 
     public static final String PSEUDO = "has";
 
-    private final CssSelectorList argumentSelector;
-
-    public AstCssHasPseudoClass(CssSelectorList argumentSelector) {
-        this.argumentSelector = argumentSelector;
+    public AstCssHasPseudoClass(CssSelectorList cssSelectorList) {
+        super(cssSelectorList);
     }
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
-    }
-
-    public CssSelectorList getArgumentSelector() {
-        return argumentSelector;
     }
 
 }

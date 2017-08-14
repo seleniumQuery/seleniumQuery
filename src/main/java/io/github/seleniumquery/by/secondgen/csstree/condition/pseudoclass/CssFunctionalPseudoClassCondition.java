@@ -16,19 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-public abstract class CssFunctionalPseudoClassCondition implements CssPseudoClassCondition {
+public abstract class CssFunctionalPseudoClassCondition<T> extends AstCssFunctionalPseudoClassCondition<T> implements CssPseudoClassCondition {
 
-    private final SqCssFunctionalPseudoClassArgument argument;
-
-    public CssFunctionalPseudoClassCondition(String argument) {
-        if (argument == null) {
-            throw new CssFunctionalPseudoClassHasNoArgumentsException();
-        }
-        this.argument = new SqCssFunctionalPseudoClassArgument(argument);
-    }
-
-    public SqCssFunctionalPseudoClassArgument getArgument() {
-        return argument;
+    public CssFunctionalPseudoClassCondition(T argument) {
+        super(argument);
     }
 
 }

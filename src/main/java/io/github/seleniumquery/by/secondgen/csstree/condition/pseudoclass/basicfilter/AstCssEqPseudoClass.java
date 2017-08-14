@@ -16,11 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalIndexArgumentPseudoClassCondition;
 
-public class AstCssEqPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondition implements AstCssPseudoClassCondition {
+public class AstCssEqPseudoClass extends AstCssFunctionalPseudoClassCondition<Integer> {
 
     public static final String PSEUDO = "eq";
 

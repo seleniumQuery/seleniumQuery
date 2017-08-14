@@ -16,23 +16,19 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-/**
- * <p>Superclass for all functional pseudo-classes that have an integer index as argument.</p>
- * <p>E.g. {@code *:my-pseudo(123),*:my-pseudo(+77),*:my-pseudo(-35)}</p>
- *
- * @author acdcjunior
- * @since 0.10.0
- */
-public abstract class CssFunctionalIndexArgumentPseudoClassCondition implements CssPseudoClassCondition {
+public abstract class AstCssFunctionalPseudoClassCondition<T> implements AstCssPseudoClassCondition {
 
-    private final int index;
+    private final T argument;
 
-    public CssFunctionalIndexArgumentPseudoClassCondition(int index) {
-        this.index = index;
+    public AstCssFunctionalPseudoClassCondition(T argument) {
+        if (argument == null) {
+            throw new CssFunctionalPseudoClassHasNoArgumentsException();
+        }
+        this.argument = argument;
     }
 
-    public int getArgumentAsIndex() {
-        return this.index;
+    public T getArgument() {
+        return argument;
     }
 
 }

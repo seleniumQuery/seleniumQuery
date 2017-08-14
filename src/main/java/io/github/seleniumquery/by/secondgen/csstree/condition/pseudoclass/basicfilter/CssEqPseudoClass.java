@@ -39,7 +39,7 @@ public class CssEqPseudoClass implements CssPseudoClassCondition, NeverNativelyS
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-        int index = astCssEqPseudoClass.getArgumentAsIndex();
+        int index = astCssEqPseudoClass.getArgument();
         if (index >= 0) {
             return XPathAndFilterFinder.pureXPath("position() = " + (index + 1));
         }

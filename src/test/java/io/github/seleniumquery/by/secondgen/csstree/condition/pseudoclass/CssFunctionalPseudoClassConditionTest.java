@@ -27,14 +27,15 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
 public class CssFunctionalPseudoClassConditionTest {
 
-    class CssFunctionalPseudoClassConditionSubClass extends CssFunctionalPseudoClassCondition {
+    class CssFunctionalPseudoClassConditionSubClass extends CssFunctionalPseudoClassCondition<String> {
         CssFunctionalPseudoClassConditionSubClass(String argument) { super(argument); }
+        @Override public void accept(AstCssPseudoClassConditionVisitor visitor) { }
     }
 
     @Test
     public void getArgument() {
-        CssFunctionalPseudoClassCondition functionalPseudoClassCondition = new CssFunctionalPseudoClassConditionSubClass("1");
-        String argument = functionalPseudoClassCondition.getArgument().getArgumentAsString();
+        AstCssFunctionalPseudoClassCondition<String> functionalPseudoClassCondition = new CssFunctionalPseudoClassConditionSubClass("1");
+        String argument = functionalPseudoClassCondition.getArgument();
         assertThat(argument, is("1"));
     }
 
@@ -48,7 +49,7 @@ public class CssFunctionalPseudoClassConditionTest {
             }
             return null;
         };
-        CssFunctionalPseudoClassCondition functionalPseudoClassCondition = new CssFunctionalPseudoClassConditionSubClass("1") {
+        CssFunctionalPseudoClassCondition<String> functionalPseudoClassCondition = new CssFunctionalPseudoClassConditionSubClass("1") {
             @Override
             public CssConditionImplementedFinders getElementFinderFactoryStrategy() {
                 return finderGen;

@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalIndexArgumentPseudoClassCondition;
 
-public abstract class AstCssLtPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondition implements AstCssPseudoClassCondition {
+public class AstCssLtPseudoClass extends AstCssFunctionalPseudoClassCondition<Integer> {
+
     public static final String PSEUDO = "lt";
 
     public AstCssLtPseudoClass(int index) {
@@ -31,4 +31,5 @@ public abstract class AstCssLtPseudoClass extends CssFunctionalIndexArgumentPseu
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }
