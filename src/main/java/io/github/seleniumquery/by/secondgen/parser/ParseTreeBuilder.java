@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,15 @@
 
 package io.github.seleniumquery.by.secondgen.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.seleniumquery.by.common.preparser.CssParsedSelector;
 import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
-import io.github.seleniumquery.by.secondgen.parser.translator.selector.CssSelectorTranslator;
-
-import java.util.ArrayList;
-import java.util.List;
+import io.github.seleniumquery.by.secondgen.parser.translator.CssSelectorTranslator;
 
 public class ParseTreeBuilder {
 
@@ -41,13 +41,9 @@ public class ParseTreeBuilder {
     private static List<CssSelector> translate(CssParsedSelectorList parsedSelectorList) {
         List<CssSelector> cssSelectors = new ArrayList<>(parsedSelectorList.size());
         for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
-            cssSelectors.add(translate(cssParsedSelector));
+            cssSelectors.add(cssSelectorTranslator.translate(cssParsedSelector));
         }
         return cssSelectors;
-    }
-
-    private static CssSelector translate(CssParsedSelector cssParsedSelector) {
-        return cssSelectorTranslator.translate(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
     }
 
 }

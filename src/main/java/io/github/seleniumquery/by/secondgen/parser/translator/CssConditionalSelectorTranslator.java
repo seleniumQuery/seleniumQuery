@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.parser.translator.selector;
+package io.github.seleniumquery.by.secondgen.parser.translator;
+
+import org.w3c.css.sac.Condition;
+import org.w3c.css.sac.ConditionalSelector;
+import org.w3c.css.sac.SimpleSelector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.parser.translator.condition.CssConditionTranslator;
-import org.w3c.css.sac.Condition;
-import org.w3c.css.sac.ConditionalSelector;
-import org.w3c.css.sac.SimpleSelector;
 
 public class CssConditionalSelectorTranslator {
 
