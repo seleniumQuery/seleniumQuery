@@ -191,10 +191,10 @@ class CssPseudoClassConditionTranslator {
 		pseudoClassesF.put(AstCssFirstOfTypePseudoClass.PSEUDO, a -> new CssFirstOfTypePseudoClass());
 		pseudoClassesF.put(AstCssLastChildPseudoClass.PSEUDO, a -> new CssLastChildPseudoClass());
 		pseudoClassesF.put(AstCssLastOfTypePseudoClass.PSEUDO, a -> new CssLastOfTypePseudoClass());
-		pseudoClassesF.put(AstCssNthChildPseudoClass.PSEUDO, CssNthChildPseudoClass::new);
-		pseudoClassesF.put(AstCssNthLastChildPseudoClass.PSEUDO, CssNthLastChildPseudoClass::new);
-		pseudoClassesF.put(AstCssNthLastOfTypePseudoClass.PSEUDO, CssNthLastOfTypePseudoClass::new);
-		pseudoClassesF.put(AstCssNthOfTypePseudoClass.PSEUDO, CssNthOfTypePseudoClass::new);
+		pseudoClassesF.put(AstCssNthChildPseudoClass.PSEUDO, a -> new CssNthChildPseudoClass(new AstCssNthChildPseudoClass(a)));
+		pseudoClassesF.put(AstCssNthLastChildPseudoClass.PSEUDO, a -> new CssNthLastChildPseudoClass(new AstCssNthLastChildPseudoClass(a)));
+		pseudoClassesF.put(AstCssNthLastOfTypePseudoClass.PSEUDO, a -> new CssNthLastOfTypePseudoClass(new AstCssNthLastOfTypePseudoClass(a)));
+		pseudoClassesF.put(AstCssNthOfTypePseudoClass.PSEUDO, a -> new CssNthOfTypePseudoClass(new AstCssNthOfTypePseudoClass(a)));
 		pseudoClassesF.put(AstCssOnlyChildPseudoClass.PSEUDO, a -> new CssOnlyChildPseudoClass());
 		pseudoClassesF.put(AstCssOnlyOfTypePseudoClass.PSEUDO, a -> new CssOnlyOfTypePseudoClass());
 

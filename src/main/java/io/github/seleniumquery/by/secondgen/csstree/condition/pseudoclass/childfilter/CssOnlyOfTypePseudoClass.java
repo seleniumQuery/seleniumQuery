@@ -19,6 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.child
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssOnlyOfTypePseudoClass extends AstCssOnlyOfTypePseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+public class CssOnlyOfTypePseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
 }

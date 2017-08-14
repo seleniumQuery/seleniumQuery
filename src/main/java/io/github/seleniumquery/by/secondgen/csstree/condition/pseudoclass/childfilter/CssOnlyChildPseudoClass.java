@@ -28,7 +28,7 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssOnlyChildPseudoClass extends AstCssOnlyChildPseudoClass implements NeverNativelySupportedPseudoClass {
+public class CssOnlyChildPseudoClass implements NeverNativelySupportedPseudoClass {
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {

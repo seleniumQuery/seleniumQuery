@@ -84,8 +84,8 @@ public class CssNthChildPseudoClassTest {
         }
     }
 
-    private AstCssNthChildPseudoClass nthChild(String nthChildArgument) {
-        return new CssNthChildPseudoClass(nthChildArgument);
+    private CssNthChildPseudoClass nthChild(String nthChildArgument) {
+        return new CssNthChildPseudoClass(new AstCssNthChildPseudoClass(nthChildArgument));
     }
 
     @Test

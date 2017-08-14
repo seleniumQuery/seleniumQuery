@@ -17,11 +17,11 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssNthLastOfTypePseudoClass extends AstCssNthLastOfTypePseudoClass implements CssConditionImplementedNotYet {
+public class CssNthLastOfTypePseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
 
-    public CssNthLastOfTypePseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    public CssNthLastOfTypePseudoClass(AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass) {
     }
 
 }

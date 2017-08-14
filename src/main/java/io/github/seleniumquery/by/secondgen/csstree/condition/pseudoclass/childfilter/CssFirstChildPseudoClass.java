@@ -24,10 +24,10 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.child
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssFirstChildPseudoClass extends AstCssFirstChildPseudoClass {
+public class CssFirstChildPseudoClass extends CssNthChildPseudoClass {
 
     public CssFirstChildPseudoClass() {
-        super("1");
+        super(new AstCssFirstChildPseudoClass());
     }
 
 }

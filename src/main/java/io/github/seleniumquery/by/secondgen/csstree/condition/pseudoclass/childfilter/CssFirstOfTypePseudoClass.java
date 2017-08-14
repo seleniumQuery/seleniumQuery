@@ -16,9 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+public class CssFirstOfTypePseudoClass extends CssNthOfTypePseudoClass {
 
-public class CssFirstOfTypePseudoClass extends AstCssFirstOfTypePseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+    public CssFirstOfTypePseudoClass() {
+        super(new AstCssFirstOfTypePseudoClass());
+    }
 
 }

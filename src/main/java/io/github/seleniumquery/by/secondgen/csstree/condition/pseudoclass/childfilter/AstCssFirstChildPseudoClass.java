@@ -18,12 +18,12 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.child
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
-public class AstCssFirstChildPseudoClass extends CssNthChildPseudoClass {
+public class AstCssFirstChildPseudoClass extends AstCssNthChildPseudoClass {
 
     public static final String PSEUDO = "first-child";
 
-    public AstCssFirstChildPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    public AstCssFirstChildPseudoClass() {
+        super("1");
     }
 
     @Override

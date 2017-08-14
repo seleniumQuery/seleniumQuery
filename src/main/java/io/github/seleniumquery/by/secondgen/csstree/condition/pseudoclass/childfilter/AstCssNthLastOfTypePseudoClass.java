@@ -16,11 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
-public abstract class AstCssNthLastOfTypePseudoClass extends CssFunctionalPseudoClassCondition<String> implements AstCssPseudoClassCondition {
+public class AstCssNthLastOfTypePseudoClass extends AstCssFunctionalPseudoClassCondition<String> {
 
     public static final String PSEUDO = "nth-last-of-type";
 

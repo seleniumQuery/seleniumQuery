@@ -16,9 +16,11 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+public class CssLastOfTypePseudoClass extends CssNthOfTypePseudoClass {
 
-public class CssLastOfTypePseudoClass extends AstCssLastOfTypePseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+    public CssLastOfTypePseudoClass() {
+        super(new AstCssLastOfTypePseudoClass());
+    }
 
 }
+

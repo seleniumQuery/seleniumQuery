@@ -52,16 +52,6 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childf
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.AstCssNthOfTypePseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.AstCssOnlyChildPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.AstCssOnlyOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssFirstChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssFirstOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssLastChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssLastOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssNthChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssNthLastChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssNthLastOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssNthOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssOnlyChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssOnlyOfTypePseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.AstCssContainsPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.AstCssEmptyPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.AstCssHasPseudoClass;
@@ -125,16 +115,16 @@ public class AstCssPseudoClassConditionVisitorTest {
         @Override public void visit(AstCssRootPseudoClass astCssRootPseudoClass) { registerVisit(CssRootPseudoClass.class,
             astCssRootPseudoClass); }
         @Override public void visit(AstCssTargetPseudoClass astCssTargetPseudoClass) { registerVisit(CssTargetPseudoClass.class, astCssTargetPseudoClass); }
-        @Override public void visit(AstCssFirstChildPseudoClass astCssFirstChildPseudoClass) { registerVisit(CssFirstChildPseudoClass.class, astCssFirstChildPseudoClass); }
-        @Override public void visit(AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass) { registerVisit(CssFirstOfTypePseudoClass.class, astCssFirstOfTypePseudoClass); }
-        @Override public void visit(AstCssLastChildPseudoClass astCssLastChildPseudoClass) { registerVisit(CssLastChildPseudoClass.class, astCssLastChildPseudoClass); }
-        @Override public void visit(AstCssLastOfTypePseudoClass astCssLastOfTypePseudoClass) { registerVisit(CssLastOfTypePseudoClass.class, astCssLastOfTypePseudoClass); }
-        @Override public void visit(AstCssNthChildPseudoClass astCssNthChildPseudoClass) { registerVisit(CssNthChildPseudoClass.class, astCssNthChildPseudoClass); }
-        @Override public void visit(AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass) { registerVisit(CssNthLastChildPseudoClass.class, astCssNthLastChildPseudoClass); }
-        @Override public void visit(AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass) { registerVisit(CssNthLastOfTypePseudoClass.class, astCssNthLastOfTypePseudoClass); }
-        @Override public void visit(AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass) { registerVisit(CssNthOfTypePseudoClass.class, astCssNthOfTypePseudoClass); }
-        @Override public void visit(AstCssOnlyChildPseudoClass astCssOnlyChildPseudoClass) { registerVisit(CssOnlyChildPseudoClass.class, astCssOnlyChildPseudoClass); }
-        @Override public void visit(AstCssOnlyOfTypePseudoClass astCssOnlyOfTypePseudoClass) { registerVisit(CssOnlyOfTypePseudoClass.class, astCssOnlyOfTypePseudoClass); }
+        @Override public void visit(AstCssFirstChildPseudoClass astCssFirstChildPseudoClass) { registerVisit(AstCssFirstChildPseudoClass.class, astCssFirstChildPseudoClass); }
+        @Override public void visit(AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass) { registerVisit(AstCssFirstOfTypePseudoClass.class, astCssFirstOfTypePseudoClass); }
+        @Override public void visit(AstCssLastChildPseudoClass astCssLastChildPseudoClass) { registerVisit(AstCssLastChildPseudoClass.class, astCssLastChildPseudoClass); }
+        @Override public void visit(AstCssLastOfTypePseudoClass astCssLastOfTypePseudoClass) { registerVisit(AstCssLastOfTypePseudoClass.class, astCssLastOfTypePseudoClass); }
+        @Override public void visit(AstCssNthChildPseudoClass astCssNthChildPseudoClass) { registerVisit(AstCssNthChildPseudoClass.class, astCssNthChildPseudoClass); }
+        @Override public void visit(AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass) { registerVisit(AstCssNthLastChildPseudoClass.class, astCssNthLastChildPseudoClass); }
+        @Override public void visit(AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass) { registerVisit(AstCssNthLastOfTypePseudoClass.class, astCssNthLastOfTypePseudoClass); }
+        @Override public void visit(AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass) { registerVisit(AstCssNthOfTypePseudoClass.class, astCssNthOfTypePseudoClass); }
+        @Override public void visit(AstCssOnlyChildPseudoClass astCssOnlyChildPseudoClass) { registerVisit(AstCssOnlyChildPseudoClass.class, astCssOnlyChildPseudoClass); }
+        @Override public void visit(AstCssOnlyOfTypePseudoClass astCssOnlyOfTypePseudoClass) { registerVisit(AstCssOnlyOfTypePseudoClass.class, astCssOnlyOfTypePseudoClass); }
         @Override public void visit(AstCssContainsPseudoClass astCssContainsPseudoClass) { registerVisit(AstCssContainsPseudoClass.class, astCssContainsPseudoClass); }
         @Override public void visit(AstCssEmptyPseudoClass astCssEmptyPseudoClass) { registerVisit(AstCssEmptyPseudoClass.class, astCssEmptyPseudoClass); }
         @Override public void visit(AstCssHasPseudoClass astCssHasPseudoClass) { registerVisit(AstCssHasPseudoClass.class, astCssHasPseudoClass); }
@@ -331,110 +321,110 @@ public class AstCssPseudoClassConditionVisitorTest {
     @Test
     public void visitCssFirstChildPseudoClass() {
         // given
-        AstCssFirstChildPseudoClass astCssFirstChildPseudoClass = new CssFirstChildPseudoClass();
+        AstCssFirstChildPseudoClass astCssFirstChildPseudoClass = new AstCssFirstChildPseudoClass();
         // when
         astCssFirstChildPseudoClass.accept(visitor);
         // then
-        assertEquals(CssFirstChildPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssFirstChildPseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssFirstChildPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssFirstOfTypePseudoClass() {
         // given
-        AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass = new CssFirstOfTypePseudoClass();
+        AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass = new AstCssFirstOfTypePseudoClass();
         // when
         astCssFirstOfTypePseudoClass.accept(visitor);
         // then
-        assertEquals(CssFirstOfTypePseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssFirstOfTypePseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssFirstOfTypePseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssLastChildPseudoClass() {
         // given
-        AstCssLastChildPseudoClass astCssLastChildPseudoClass = new CssLastChildPseudoClass();
+        AstCssLastChildPseudoClass astCssLastChildPseudoClass = new AstCssLastChildPseudoClass();
         // when
         astCssLastChildPseudoClass.accept(visitor);
         // then
-        assertEquals(CssLastChildPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssLastChildPseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssLastChildPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssLastOfTypePseudoClass() {
         // given
-        AstCssLastOfTypePseudoClass astCssLastOfTypePseudoClass = new CssLastOfTypePseudoClass();
+        AstCssLastOfTypePseudoClass astCssLastOfTypePseudoClass = new AstCssLastOfTypePseudoClass();
         // when
         astCssLastOfTypePseudoClass.accept(visitor);
         // then
-        assertEquals(CssLastOfTypePseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssLastOfTypePseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssLastOfTypePseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssNthChildPseudoClass() {
         // given
-        AstCssNthChildPseudoClass astCssNthChildPseudoClass = new CssNthChildPseudoClass("66");
+        AstCssNthChildPseudoClass astCssNthChildPseudoClass = new AstCssNthChildPseudoClass("66");
         // when
         astCssNthChildPseudoClass.accept(visitor);
         // then
-        assertEquals(CssNthChildPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssNthChildPseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssNthChildPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssNthLastChildPseudoClass() {
         // given
-        AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass = new CssNthLastChildPseudoClass("77");
+        AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass = new AstCssNthLastChildPseudoClass("77");
         // when
         astCssNthLastChildPseudoClass.accept(visitor);
         // then
-        assertEquals(CssNthLastChildPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssNthLastChildPseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssNthLastChildPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssNthLastOfTypePseudoClass() {
         // given
-        AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass = new CssNthLastOfTypePseudoClass("33");
+        AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass = new AstCssNthLastOfTypePseudoClass("33");
         // when
         astCssNthLastOfTypePseudoClass.accept(visitor);
         // then
-        assertEquals(CssNthLastOfTypePseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssNthLastOfTypePseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssNthLastOfTypePseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssNthOfTypePseudoClass() {
         // given
-        AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass = new CssNthOfTypePseudoClass("88");
+        AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass = new AstCssNthOfTypePseudoClass("88");
         // when
         astCssNthOfTypePseudoClass.accept(visitor);
         // then
-        assertEquals(CssNthOfTypePseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssNthOfTypePseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssNthOfTypePseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssOnlyChildPseudoClass() {
         // given
-        AstCssOnlyChildPseudoClass astCssOnlyChildPseudoClass = new CssOnlyChildPseudoClass();
+        AstCssOnlyChildPseudoClass astCssOnlyChildPseudoClass = new AstCssOnlyChildPseudoClass();
         // when
         astCssOnlyChildPseudoClass.accept(visitor);
         // then
-        assertEquals(CssOnlyChildPseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssOnlyChildPseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssOnlyChildPseudoClass, visitor.getVisitedInstance());
     }
 
     @Test
     public void visitCssOnlyOfTypePseudoClass() {
         // given
-        AstCssOnlyOfTypePseudoClass astCssOnlyOfTypePseudoClass = new CssOnlyOfTypePseudoClass();
+        AstCssOnlyOfTypePseudoClass astCssOnlyOfTypePseudoClass = new AstCssOnlyOfTypePseudoClass();
         // when
         astCssOnlyOfTypePseudoClass.accept(visitor);
         // then
-        assertEquals(CssOnlyOfTypePseudoClass.class, visitor.getVisitedClass());
+        assertEquals(AstCssOnlyOfTypePseudoClass.class, visitor.getVisitedClass());
         assertEquals(astCssOnlyOfTypePseudoClass, visitor.getVisitedInstance());
     }
 
