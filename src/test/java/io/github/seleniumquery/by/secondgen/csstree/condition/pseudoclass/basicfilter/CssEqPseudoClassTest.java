@@ -22,6 +22,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 import org.junit.Test;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssEqPseudoClass;
+
 public class CssEqPseudoClassTest {
 
     private static final String EQ_PSEUDO = ":eq";

@@ -22,6 +22,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 import org.junit.Test;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssGtPseudoClass;
+
 public class CssGtPseudoClassTest {
 
     private static final String GT_PSEUDO = ":gt";

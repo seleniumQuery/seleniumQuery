@@ -27,6 +27,7 @@ import org.junit.Test;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils;
 import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
 
 public class CssNotPseudoClassTest {
 

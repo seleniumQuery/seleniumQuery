@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssNthPseudoClass;
+
 /**
  * :nth() is an alias to :eq().
  * https://github.com/seleniumQuery/seleniumQuery/issues/27

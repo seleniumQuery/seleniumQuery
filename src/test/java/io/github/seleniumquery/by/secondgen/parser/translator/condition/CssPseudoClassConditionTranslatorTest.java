@@ -23,12 +23,12 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassHasNoArgumentsException;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.InvalidPseudoClassSelectorException;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.AstCssFunctionalPseudoClassHasNoArgumentsException;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.InvalidPseudoClassSelectorException;
 
 public class CssPseudoClassConditionTranslatorTest {
 
-    @Test(expected = CssFunctionalPseudoClassHasNoArgumentsException.class)
+    @Test(expected = AstCssFunctionalPseudoClassHasNoArgumentsException.class)
     public void extractIndexArgument__should_throw_exception_if_argument_is_NULL() {
         assertIndexArgumentIsNotValid(null);
     }

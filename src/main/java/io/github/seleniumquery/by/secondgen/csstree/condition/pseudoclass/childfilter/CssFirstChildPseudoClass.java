@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.childfilter.AstCssFirstChildPseudoClass;
+
 /**
  * :first-child
  * https://api.jquery.com/first-child-selector/

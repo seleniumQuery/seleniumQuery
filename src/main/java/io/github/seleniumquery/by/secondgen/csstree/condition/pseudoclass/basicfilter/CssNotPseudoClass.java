@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssNotPseudoClass.PSEUDO_PURE_NOT;
+import static io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssNotPseudoClass.PSEUDO_PURE_NOT;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +31,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finder
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssNotPseudoClass;
 
 /**
  * :not(selectorlist)

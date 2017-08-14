@@ -22,6 +22,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPse
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssEqPseudoClass;
 
 /**
  * :eq(index)

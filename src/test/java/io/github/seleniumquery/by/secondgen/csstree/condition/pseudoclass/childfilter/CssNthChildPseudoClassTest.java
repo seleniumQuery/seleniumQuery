@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.openqa.selenium.InvalidSelectorException;
 
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.childfilter.AstCssNthChildPseudoClass;
 
 public class CssNthChildPseudoClassTest {
 
