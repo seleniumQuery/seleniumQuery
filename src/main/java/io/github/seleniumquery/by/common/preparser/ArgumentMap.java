@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,12 +26,8 @@ public class ArgumentMap {
         this.argsMap = argumentMap;
     }
 
-    public String get(int index) {
-        return argsMap.get(index);
-    }
-
     public String get(String index) {
-        return get(Integer.valueOf(index));
+        return argsMap.get(Integer.valueOf(index));
     }
 
     public int size() {

@@ -35,20 +35,13 @@ public class W3cCssSelectorWithMapParser {
 
 	private static final Log LOGGER = LogFactory.getLog(W3cCssSelectorWithMapParser.class);
 
-	private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
-
-	private static final SACParserCSS3 SAC_CSS3_PARSER = new SACParserCSS3();
+    private static final SACParserCSS3 SAC_CSS3_PARSER = new SACParserCSS3();
 
 	public static W3cCssSelectorListWithMap parseSelector(String selector) {
-        PreParsedSelector preParsedSelector = preParseSelector(selector);
+        PreParsedSelector preParsedSelector = CssSelectorPreParser.preParseSelector(selector);
 		SelectorList selectorList = parseSelectorIntoParseTree(preParsedSelector.getTransformedSelector());
 		return new W3cCssSelectorListWithMap(selectorList, preParsedSelector.getArgumentMap());
 	}
-
-    private static PreParsedSelector preParseSelector(String selector) {
-        String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.turnAttributeNotEqualsIntoNotAttributeEquals(selector);
-        return CssSelectorPreParser.transformSelector(fixedSelector);
-    }
 
     /**
 	 * Parses a selector into a parse tree using SAC CSS3 Parser.

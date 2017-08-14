@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package io.github.seleniumquery.by.common.preparser;
 
-import io.github.seleniumquery.SeleniumQueryException;
+import static java.lang.Character.isLetter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.Character.isLetter;
+import io.github.seleniumquery.SeleniumQueryException;
 
 /**
  * Parses a selector string (such as "span.warn:not(.something)") into a {@link PreParsedSelector}.
@@ -39,7 +39,14 @@ import static java.lang.Character.isLetter;
  */
 class CssSelectorPreParser {
 
-	static class PreParsedSelector {
+    private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
+
+    static PreParsedSelector preParseSelector(String selector) {
+        String fixedSelector = NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX.turnAttributeNotEqualsIntoNotAttributeEquals(selector);
+        return transformSelector(fixedSelector);
+    }
+
+    static class PreParsedSelector {
 		private String transformedSelector;
 		private ArgumentMap argumentMap;
 		private PreParsedSelector(String transformedSelector, ArgumentMap argumentMap) {
@@ -56,7 +63,7 @@ class CssSelectorPreParser {
 	private int selectorCurrentParsingIndex;
 	private StringBuilder transformedSelector;
 	private Map<Integer, String> argumentMap;
-	
+
     static PreParsedSelector transformSelector(String selector) {
         return new CssSelectorPreParser(selector).transformSelector();
     }
@@ -72,7 +79,7 @@ class CssSelectorPreParser {
 		eatChar(getNextChar());
 		return new PreParsedSelector(transformedSelector.toString(), new ArgumentMap(argumentMap));
 	}
-	
+
 	private Character getNextChar() {
 		if (selectorCurrentParsingIndex == selector.length()) {
 			// reached end of string, nothing else to process
@@ -80,7 +87,7 @@ class CssSelectorPreParser {
 		}
 		return selector.charAt(selectorCurrentParsingIndex++);
 	}
-	
+
 	private void eatChar(Character c) {
 		if (c == END_OF_STRING) {
 			return;
@@ -93,7 +100,7 @@ class CssSelectorPreParser {
 		case '\\':
 			Character escapedChar = getNextChar(); // eat the char that was escaped
 			appendToFinalSelector(escapedChar);
-			
+
 			eatChar(getNextChar());
 			return;
 		case  '\'':
@@ -116,10 +123,10 @@ class CssSelectorPreParser {
 	private void eatPseudoClass() {
 		Character firstCharOfPseudoClass = getNextChar();
 		if (!isLetter(firstCharOfPseudoClass)) { throw new SeleniumQueryException("Parsing error. First char of pseudoclass is not a letter! -> "+firstCharOfPseudoClass); }
-		
+
 		StringBuilder pseudoClass = new StringBuilder();
 		pseudoClass.append(firstCharOfPseudoClass);
-		
+
 		Character nextChar = getNextChar();
 		while (nextChar != null && (isLetter(nextChar) || nextChar == '-')) {
 			pseudoClass.append(nextChar);
@@ -129,7 +136,7 @@ class CssSelectorPreParser {
 			String bracerContent = eatEverythingUntilBracerEnd();
 			int index = argumentMap.size();
 			argumentMap.put(index, bracerContent);
-			
+
 			String pseudoClassName = pseudoClass.toString();
 			if ("not".equals(pseudoClassName)) {
 				pseudoClassName = "not-sq";
@@ -182,7 +189,7 @@ class CssSelectorPreParser {
 	private String eatEverythingUntilStringEnd(char quote) {
 		StringBuilder stringContent = new StringBuilder();
 		stringContent.append(quote);
-		
+
 		Character nextChar = getNextChar();
 		while (nextChar != null) {
 			// closing quote
@@ -204,10 +211,10 @@ class CssSelectorPreParser {
 		throw new SeleniumQueryException("End of string reached while closing quote: "+quote);
 	}
 
-	private StringBuilder appendToFinalSelector(Character c) {
-		return transformedSelector.append(c);
-	}
-	
+	private void appendToFinalSelector(Character c) {
+        transformedSelector.append(c);
+    }
+
 	private StringBuilder appendToFinalSelector(String str) {
 		return transformedSelector.append(str);
 	}
