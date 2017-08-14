@@ -21,7 +21,7 @@ import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
@@ -31,7 +31,7 @@ public class CssSelectorMatcherService {
 	private CssSelectorMatcherService() {}
 
 	public static boolean elementMatchesStringSelector(WebDriver driver, WebElement element, String selector) {
-		W3cCssSelectorListWithMap cssParsedSelectors = CssSelectorParser.parseSelector(selector);
+		W3cCssSelectorListWithMap cssParsedSelectors = W3cCssSelectorWithMapParser.parseSelector(selector);
 		for (W3cCssSelectorWithMap w3cCssSelectorWithMap : cssParsedSelectors) {
             if (elementMatchesSelector(driver, element, w3cCssSelectorWithMap)) {
                 return true;

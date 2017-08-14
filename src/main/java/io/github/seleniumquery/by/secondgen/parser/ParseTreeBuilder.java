@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.secondgen.parser;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
@@ -32,7 +32,7 @@ public class ParseTreeBuilder {
 	private ParseTreeBuilder() {}
 
 	public static CssSelectorList parse(String selector) {
-		W3cCssSelectorListWithMap parsedSelectorList = CssSelectorParser.parseSelector(selector);
+		W3cCssSelectorListWithMap parsedSelectorList = W3cCssSelectorWithMapParser.parseSelector(selector);
         List<CssSelector> cssSelectors = translate(parsedSelectorList);
 		return new CssSelectorList(cssSelectors);
 	}

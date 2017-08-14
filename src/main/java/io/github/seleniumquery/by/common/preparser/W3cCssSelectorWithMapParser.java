@@ -31,9 +31,9 @@ import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.common.preparser.CssSelectorPreParser.PreParsedSelector;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 
-public class CssSelectorParser {
+public class W3cCssSelectorWithMapParser {
 
-	private static final Log LOGGER = LogFactory.getLog(CssSelectorParser.class);
+	private static final Log LOGGER = LogFactory.getLog(W3cCssSelectorWithMapParser.class);
 
 	private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
 

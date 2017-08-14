@@ -22,7 +22,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.w3c.css.sac.SelectorList;
 
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 
@@ -62,7 +62,7 @@ public class XPathComponentTest {
     }
 
     public static TagComponent selectorToExpression(String selector) {
-        W3cCssSelectorListWithMap cssParsedSelectors = CssSelectorParser.parseSelector(selector);
+        W3cCssSelectorListWithMap cssParsedSelectors = W3cCssSelectorWithMapParser.parseSelector(selector);
         SelectorList selectorList = cssParsedSelectors.getSelectorList();
         return XPathComponentCompilerService.compileSelector(cssParsedSelectors.getArgumentMap(), selectorList.item(0));
     }
