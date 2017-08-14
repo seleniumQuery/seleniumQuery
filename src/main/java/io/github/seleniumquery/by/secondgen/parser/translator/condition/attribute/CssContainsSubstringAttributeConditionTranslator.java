@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssContainsSubstringAttributeCondition;
 import org.w3c.css.sac.AttributeCondition;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssContainsSubstringAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssContainsSubstringAttributeCondition;
 
 /**
  * [attribute*=stringToContain]
@@ -27,7 +29,7 @@ import org.w3c.css.sac.AttributeCondition;
  */
 public class CssContainsSubstringAttributeConditionTranslator {
 
-	public CssContainsSubstringAttributeCondition translate(AttributeCondition attributeCondition) {
+	public AstCssContainsSubstringAttributeCondition translate(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		String wantedValue = attributeCondition.getValue();
 		return new CssContainsSubstringAttributeCondition(attributeName, wantedValue);

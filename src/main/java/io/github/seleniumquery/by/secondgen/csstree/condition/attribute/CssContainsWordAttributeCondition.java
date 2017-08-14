@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsWordAttributeCondition extends CssAttributeCondition {
+public class CssContainsWordAttributeCondition extends AstCssContainsWordAttributeCondition {
 
     public CssContainsWordAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);

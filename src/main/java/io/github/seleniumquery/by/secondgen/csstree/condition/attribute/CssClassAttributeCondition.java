@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
+import org.unbescape.css.CssEscape;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
-import org.unbescape.css.CssEscape;
 
 /**
  * .class
@@ -29,12 +30,10 @@ import org.unbescape.css.CssEscape;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssClassAttributeCondition implements CssCondition, CssConditionImplementedFinders {
-
-    private String unescapedClassName;
+public class CssClassAttributeCondition extends AstCssClassAttributeCondition implements CssCondition, CssConditionImplementedFinders {
 
     public CssClassAttributeCondition(String unescapedClassName) {
-        this.unescapedClassName = unescapedClassName;
+        super(unescapedClassName);
     }
 
     public String getClassName() {

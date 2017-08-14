@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,6 +64,11 @@ public class CssEqualsOrHasAttributeCondition extends CssAttributeCondition {
             return AttributeEvaluatorUtils.toXPathAttribute(this.attributeName) + "=" + escapedWantedValue;
         }
         return AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
+    }
+
+    @Override
+    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 
 }

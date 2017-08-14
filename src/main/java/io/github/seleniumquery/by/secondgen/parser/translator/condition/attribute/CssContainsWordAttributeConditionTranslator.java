@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssContainsWordAttributeCondition;
 import org.w3c.css.sac.AttributeCondition;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssContainsWordAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssContainsWordAttributeCondition;
 
 /**
  * [values~="10"]
@@ -27,7 +29,7 @@ import org.w3c.css.sac.AttributeCondition;
  */
 public class CssContainsWordAttributeConditionTranslator {
 
-	public CssContainsWordAttributeCondition translate(AttributeCondition attributeCondition) {
+	public AstCssContainsWordAttributeCondition translate(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		String wantedValue = attributeCondition.getValue();
 		return new CssContainsWordAttributeCondition(attributeName, wantedValue);
