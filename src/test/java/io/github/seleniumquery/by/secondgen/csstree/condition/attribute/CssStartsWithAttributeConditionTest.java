@@ -30,7 +30,7 @@ public class CssStartsWithAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        AstCssStartsWithAttributeCondition startsWithAttributeCondition = new CssStartsWithAttributeCondition("attribute", "stringToStart");
+        CssStartsWithAttributeCondition startsWithAttributeCondition = new CssStartsWithAttributeCondition(new AstCssStartsWithAttributeCondition("attribute", "stringToStart"));
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = startsWithAttributeCondition.toElementFinder(previous);

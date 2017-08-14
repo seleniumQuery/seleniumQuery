@@ -30,7 +30,7 @@ public class CssEqualsOrHasAttributeConditionTest {
     @Test
     public void toElementFinder__has_attribute() {
         // given
-        AstCssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition("attrib");
+        CssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition(new AstCssEqualsOrHasAttributeCondition("attrib"));
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = hasAttributeCondition.toElementFinder(previous);
@@ -44,7 +44,7 @@ public class CssEqualsOrHasAttributeConditionTest {
     @Test
     public void toElementFinder__equals_attribute() {
         // given
-        AstCssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition("attrib", "valz");
+        CssEqualsOrHasAttributeCondition hasAttributeCondition = new CssEqualsOrHasAttributeCondition(new AstCssEqualsOrHasAttributeCondition("attrib", "valz"));
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = hasAttributeCondition.toElementFinder(previous);

@@ -16,7 +16,19 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
-public abstract class AstCssEqualsOrHasAttributeCondition extends CssAttributeConditionBase {
+public class AstCssEqualsOrHasAttributeCondition extends AstCssAttributeConditionBase {
+
+    /*
+     * [simple]
+     * Attribute value is null in this case.
+     */
+    public AstCssEqualsOrHasAttributeCondition(String attributeName) {
+        this(attributeName, null);
+    }
+
+    /*
+     * [restart="never"]
+     */
     public AstCssEqualsOrHasAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
     }
@@ -25,4 +37,5 @@ public abstract class AstCssEqualsOrHasAttributeCondition extends CssAttributeCo
     public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
+
 }

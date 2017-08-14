@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssEqualsOrHasAttributeCondition;
 import org.w3c.css.sac.AttributeCondition;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssEqualsOrHasAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssEqualsOrHasAttributeCondition;
 
 /**
  * [simple]
@@ -36,10 +38,10 @@ public class CssEqualsOrHasAttributeConditionTranslator {
 		// [attribute=wantedValue]
 		if (attributeCondition.getSpecified()) {
 			String wantedValue = attributeCondition.getValue();
-			return new CssEqualsOrHasAttributeCondition(attributeName, wantedValue);
+			return new CssEqualsOrHasAttributeCondition(new AstCssEqualsOrHasAttributeCondition(attributeName, wantedValue));
 		}
 		// [attribute]
-		return new CssEqualsOrHasAttributeCondition(attributeName);
+		return new CssEqualsOrHasAttributeCondition(new AstCssEqualsOrHasAttributeCondition(attributeName));
 	}
 
 }

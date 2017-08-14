@@ -16,7 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
-public abstract class AstCssContainsWordAttributeCondition extends CssAttributeConditionBase {
+public class AstCssContainsWordAttributeCondition extends AstCssAttributeConditionBase {
+
     public AstCssContainsWordAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
     }
@@ -25,4 +26,5 @@ public abstract class AstCssContainsWordAttributeCondition extends CssAttributeC
     public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
+
 }

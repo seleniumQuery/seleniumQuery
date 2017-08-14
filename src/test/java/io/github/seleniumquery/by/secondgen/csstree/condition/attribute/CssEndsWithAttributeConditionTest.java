@@ -30,7 +30,7 @@ public class CssEndsWithAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        AstCssEndsWithAttributeCondition endsWithAttributeCondition = new CssEndsWithAttributeCondition("attribute", "stringToEnd");
+        CssEndsWithAttributeCondition endsWithAttributeCondition = new CssEndsWithAttributeCondition(new AstCssEndsWithAttributeCondition("attribute", "stringToEnd"));
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = endsWithAttributeCondition.toElementFinder(previous);

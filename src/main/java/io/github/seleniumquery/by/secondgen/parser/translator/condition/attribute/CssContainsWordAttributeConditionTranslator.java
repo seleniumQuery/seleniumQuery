@@ -29,10 +29,10 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssConta
  */
 public class CssContainsWordAttributeConditionTranslator {
 
-	public AstCssContainsWordAttributeCondition translate(AttributeCondition attributeCondition) {
+	public CssContainsWordAttributeCondition translate(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		String wantedValue = attributeCondition.getValue();
-		return new CssContainsWordAttributeCondition(attributeName, wantedValue);
+		return new CssContainsWordAttributeCondition(new AstCssContainsWordAttributeCondition(attributeName, wantedValue));
 	}
 
 }
