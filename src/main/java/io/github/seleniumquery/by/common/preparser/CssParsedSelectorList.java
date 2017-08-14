@@ -23,6 +23,8 @@ import java.util.stream.Stream;
 
 import org.w3c.css.sac.SelectorList;
 
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
+
 public class CssParsedSelectorList implements Iterable<W3cCssSelectorWithMap> {
 
 	private final SelectorList selectorList;

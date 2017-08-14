@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.common.preparser;
+package io.github.seleniumquery.by.common.preparser.w3cwithmap;
 
 import org.w3c.css.sac.Selector;
+
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 
 /**
  * Represents a w3c parsed Selector along with an ArgumentMap.

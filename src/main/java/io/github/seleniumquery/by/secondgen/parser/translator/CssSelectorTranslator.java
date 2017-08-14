@@ -23,7 +23,7 @@ import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SiblingSelector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMap;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 
 /**
