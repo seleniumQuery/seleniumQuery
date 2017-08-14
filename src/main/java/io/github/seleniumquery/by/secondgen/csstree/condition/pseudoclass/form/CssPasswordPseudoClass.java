@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.form.AstCssPasswordPseudoClass;
+
 /**
  *
  * @author acdcjunior

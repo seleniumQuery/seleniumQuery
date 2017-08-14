@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.contentfilter.AstCssContainsPseudoClass;
 import io.github.seleniumquery.utils.SelectorUtils;
 
 /**

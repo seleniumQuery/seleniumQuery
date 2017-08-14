@@ -22,6 +22,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 import org.junit.Test;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssLtPseudoClass;
+
 public class CssLtPseudoClassTest {
 
     private static final String LT_PSEUDO = ":lt";

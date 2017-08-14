@@ -22,6 +22,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 import org.junit.Test;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.contentfilter.AstCssContainsPseudoClass;
+
 public class CssContainsPseudoClassTest {
 
     private static final String CONTAINS_PSEUDO = ":contains";

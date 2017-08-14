@@ -23,7 +23,6 @@ import static io.github.seleniumquery.by.secondgen.parser.translator.condition.a
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -138,20 +137,6 @@ public class PseudoClassTestUtils {
         parseAndAssertFirstCssCondition(selector + selectorSuffix, pseudoClassClass);
         // then
         // no exception
-    }
-
-    private static <T extends CssFunctionalPseudoClassCondition> void assertSelectorTranslatesArgument(String selector, Class<T> pseudoClassClass,
-                                                                                                       String selectorSuffix, String expectedArgument) {
-        // given
-        // selector
-        // when
-        T cssCondition = parseAndAssertFirstCssCondition(selector + selectorSuffix, pseudoClassClass);
-        // then
-        if (expectedArgument != null) {
-            assertThat(cssCondition.getArgument(), is(expectedArgument));
-        } else {
-            assertThat(cssCondition.getArgument(), is(nullValue()));
-        }
     }
 
     public static void assertFilterOnlyPseudoGeneratesFilter(CssPseudoClassCondition pseudoClassCondition, ElementFilter pseudoClassFilter) {

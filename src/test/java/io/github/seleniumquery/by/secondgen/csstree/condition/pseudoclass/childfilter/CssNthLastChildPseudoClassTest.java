@@ -24,6 +24,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 import org.junit.Test;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.childfilter.AstCssNthLastChildPseudoClass;
+
 /**
  * IMPORTANT:
  * This class has less tests than the :nth-child pseudo. This is intentional. They use the
