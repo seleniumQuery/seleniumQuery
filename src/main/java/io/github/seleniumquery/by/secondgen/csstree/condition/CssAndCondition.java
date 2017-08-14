@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition;
 
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssAndCondition;
 
 /**
  * Chains conditions.

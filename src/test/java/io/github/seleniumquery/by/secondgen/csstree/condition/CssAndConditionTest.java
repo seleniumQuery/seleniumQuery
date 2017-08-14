@@ -28,6 +28,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssIdAtt
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssAndCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssClassAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssIdAttributeCondition;
 

@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssConditionVisitor;
+
 public class AstCssContainsWordAttributeCondition extends AstCssAttributeConditionBase {
 
     public AstCssContainsWordAttributeCondition(String attributeName, String wantedValue) {
@@ -23,7 +25,7 @@ public class AstCssContainsWordAttributeCondition extends AstCssAttributeConditi
     }
 
     @Override
-    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
+    public <T> T accept(AstCssConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

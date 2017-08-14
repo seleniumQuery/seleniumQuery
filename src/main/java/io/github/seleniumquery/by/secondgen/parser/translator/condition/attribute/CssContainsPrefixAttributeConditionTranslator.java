@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 
 import org.w3c.css.sac.AttributeCondition;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssContainsPrefixAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssContainsPrefixAttributeCondition;
 
 /**
@@ -29,10 +28,10 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCs
  */
 public class CssContainsPrefixAttributeConditionTranslator {
 
-	public CssContainsPrefixAttributeCondition translate(AttributeCondition attributeCondition) {
+	public AstCssContainsPrefixAttributeCondition translate(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		String wantedValue = attributeCondition.getValue();
-		return new CssContainsPrefixAttributeCondition(new AstCssContainsPrefixAttributeCondition(attributeName, wantedValue));
+		return new AstCssContainsPrefixAttributeCondition(attributeName, wantedValue);
 	}
 
 }

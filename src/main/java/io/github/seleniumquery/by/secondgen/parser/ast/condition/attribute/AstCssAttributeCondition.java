@@ -16,8 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
-public interface AstCssAttributeCondition {
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssCondition;
 
-    <T> T accept(AstCssAttributeConditionVisitor<T> visitor);
+public interface AstCssAttributeCondition extends AstCssCondition {
 
 }

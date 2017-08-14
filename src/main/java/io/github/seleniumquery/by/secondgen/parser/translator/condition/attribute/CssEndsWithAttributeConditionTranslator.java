@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 
 import org.w3c.css.sac.AttributeCondition;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssEndsWithAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssEndsWithAttributeCondition;
 
 /**
@@ -31,10 +30,10 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCs
  */
 public class CssEndsWithAttributeConditionTranslator {
 
-	public CssEndsWithAttributeCondition translate(AttributeCondition attributeCondition) {
+	public AstCssEndsWithAttributeCondition translate(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		String wantedValue = attributeCondition.getValue();
-		return new CssEndsWithAttributeCondition(new AstCssEndsWithAttributeCondition(attributeName, wantedValue));
+		return new AstCssEndsWithAttributeCondition(attributeName, wantedValue);
 	}
 
 }

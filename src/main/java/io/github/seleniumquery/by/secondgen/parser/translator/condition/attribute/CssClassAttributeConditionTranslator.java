@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 
 import org.w3c.css.sac.AttributeCondition;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssClassAttributeCondition;
 
 /**
@@ -29,10 +28,10 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCs
  */
 public class CssClassAttributeConditionTranslator {
 
-	public CssClassAttributeCondition translate(AttributeCondition attributeCondition) {
+	public AstCssClassAttributeCondition translate(AttributeCondition attributeCondition) {
 		String wantedClassName = attributeCondition.getValue();
 		String backslashEscapedClassName = wantedClassName.replaceAll("\\\\\"", "\"");
-		return new CssClassAttributeCondition(new AstCssClassAttributeCondition(backslashEscapedClassName));
+		return new AstCssClassAttributeCondition(backslashEscapedClassName);
 	}
 
 }
