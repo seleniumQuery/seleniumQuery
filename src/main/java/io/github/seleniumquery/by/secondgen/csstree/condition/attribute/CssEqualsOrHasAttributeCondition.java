@@ -29,7 +29,7 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEqualsOrHasAttributeCondition extends CssAttributeCondition {
+public class CssEqualsOrHasAttributeCondition extends AstCssEqualsOrHasAttributeCondition {
 
     /*
      * [simple]
@@ -64,11 +64,6 @@ public class CssEqualsOrHasAttributeCondition extends CssAttributeCondition {
             return AttributeEvaluatorUtils.toXPathAttribute(this.attributeName) + "=" + escapedWantedValue;
         }
         return AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
-    }
-
-    @Override
-    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
-        return visitor.visit(this);
     }
 
 }

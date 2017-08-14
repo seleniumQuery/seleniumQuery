@@ -22,9 +22,9 @@ public interface AstCssAttributeConditionVisitor<T> {
     T visit(AstCssContainsPrefixAttributeCondition astCssContainsPrefixAttributeCondition);
     T visit(AstCssContainsSubstringAttributeCondition astCssContainsSubstringAttributeCondition);
     T visit(AstCssContainsWordAttributeCondition astCssContainsWordAttributeCondition);
-    T visit(CssEndsWithAttributeCondition cssEndsWithAttributeCondition);
-    T visit(CssEqualsOrHasAttributeCondition cssEqualsOrHasAttributeCondition);
-    T visit(CssIdAttributeCondition cssIdAttributeCondition);
-    T visit(CssStartsWithAttributeCondition cssStartsWithAttributeCondition);
+    T visit(AstCssEndsWithAttributeCondition astCssEndsWithAttributeCondition);
+    T visit(AstCssEqualsOrHasAttributeCondition astCssEqualsOrHasAttributeCondition);
+    T visit(AstCssIdAttributeCondition astCssIdAttributeCondition);
+    T visit(AstCssStartsWithAttributeCondition astCssStartsWithAttributeCondition);
 
 }

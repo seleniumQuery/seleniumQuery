@@ -27,7 +27,7 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssStartsWithAttributeCondition extends CssAttributeCondition {
+public class CssStartsWithAttributeCondition extends AstCssStartsWithAttributeCondition {
 
     public CssStartsWithAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
@@ -42,11 +42,6 @@ public class CssStartsWithAttributeCondition extends CssAttributeCondition {
         String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
         String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
         return "starts-with(" + escapedAttributeName + ", " + escapedWantedValue + ")";
-    }
-
-    @Override
-    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
-        return visitor.visit(this);
     }
 
 }

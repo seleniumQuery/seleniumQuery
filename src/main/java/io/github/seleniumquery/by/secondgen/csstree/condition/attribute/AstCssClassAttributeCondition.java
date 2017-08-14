@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
 public class AstCssClassAttributeCondition implements AstCssAttributeCondition {
+
     protected String unescapedClassName;
 
     public AstCssClassAttributeCondition(String unescapedClassName) {
@@ -27,4 +28,5 @@ public class AstCssClassAttributeCondition implements AstCssAttributeCondition {
     public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
+
 }
