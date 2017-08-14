@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,34 +16,35 @@
 
 package io.github.seleniumquery.by.firstgen.xpath;
 
-import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelector;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.firstgen.css.CssSelector;
-import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
-import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
-import org.w3c.css.sac.Selector;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.w3c.css.sac.Selector;
+
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
+import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMap;
+import io.github.seleniumquery.by.firstgen.css.CssSelector;
+import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
+import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
+
 public class XPathComponentCompilerService {
-	
+
 	private XPathComponentCompilerService() {}
-	
+
 	public static TagComponentList compileSelectorList(String selector) {
 		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
 
     	List<TagComponent> tagComponents = new ArrayList<>(parsedSelectorList.size());
-        for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
-            tagComponents.add(compileIntoTagComponent(cssParsedSelector));
+        for (W3cCssSelectorWithMap w3cCssSelectorWithMap : parsedSelectorList) {
+            tagComponents.add(compileIntoTagComponent(w3cCssSelectorWithMap));
         }
     	return new TagComponentList(tagComponents);
 	}
 
-    private static TagComponent compileIntoTagComponent(CssParsedSelector cssParsedSelector) {
-        return compileSelector(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
+    private static TagComponent compileIntoTagComponent(W3cCssSelectorWithMap w3cCssSelectorWithMap) {
+        return compileSelector(w3cCssSelectorWithMap.getArgumentMap(), w3cCssSelectorWithMap.getSelector());
     }
 
     public static TagComponent compileSelector(ArgumentMap argumentMap, Selector selector) {

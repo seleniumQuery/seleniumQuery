@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,17 @@ package io.github.seleniumquery.by.common.preparser;
 import org.w3c.css.sac.Selector;
 
 /**
+ * Represents a w3c parsed Selector along with an ArgumentMap.
+ *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssParsedSelector {
+public class W3cCssSelectorWithMap {
 
     private ArgumentMap argumentMap;
     private Selector selector;
 
-    public CssParsedSelector(Selector selector, ArgumentMap argumentMap) {
+    public W3cCssSelectorWithMap(Selector selector, ArgumentMap argumentMap) {
         this.argumentMap = argumentMap;
         this.selector = selector;
     }

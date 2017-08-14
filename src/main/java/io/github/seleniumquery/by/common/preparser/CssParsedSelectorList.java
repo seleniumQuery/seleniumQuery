@@ -23,25 +23,25 @@ import java.util.stream.Stream;
 
 import org.w3c.css.sac.SelectorList;
 
-public class CssParsedSelectorList implements Iterable<CssParsedSelector> {
+public class CssParsedSelectorList implements Iterable<W3cCssSelectorWithMap> {
 
 	private final SelectorList selectorList;
 	private final ArgumentMap argumentMap;
-	private final List<CssParsedSelector> cssParsedSelectors;
+	private final List<W3cCssSelectorWithMap> w3cCssSelectorWithMaps;
 
 	public CssParsedSelectorList(SelectorList selectorList, ArgumentMap argumentMap) {
 		this.selectorList = selectorList;
 		this.argumentMap = argumentMap;
-		this.cssParsedSelectors = createParsedSelectorList();
+		this.w3cCssSelectorWithMaps = createParsedSelectorList();
 	}
 
-	private List<CssParsedSelector> createParsedSelectorList() {
-        List<CssParsedSelector> cssParsedSelectorList = new LinkedList<>();
+	private List<W3cCssSelectorWithMap> createParsedSelectorList() {
+        List<W3cCssSelectorWithMap> w3cCssSelectorWithMapList = new LinkedList<>();
 		for (int i = 0; i < selectorList.getLength(); i++) {
-			CssParsedSelector cssParsedSelector = new CssParsedSelector(selectorList.item(i), this.argumentMap);
-            cssParsedSelectorList.add(cssParsedSelector);
+			W3cCssSelectorWithMap w3cCssSelectorWithMap = new W3cCssSelectorWithMap(selectorList.item(i), this.argumentMap);
+            w3cCssSelectorWithMapList.add(w3cCssSelectorWithMap);
 		}
-        return cssParsedSelectorList;
+        return w3cCssSelectorWithMapList;
 	}
 
 	public SelectorList getSelectorList() {
@@ -53,20 +53,20 @@ public class CssParsedSelectorList implements Iterable<CssParsedSelector> {
 	}
 
     public int size() {
-        return cssParsedSelectors.size();
+        return w3cCssSelectorWithMaps.size();
     }
 
     @Override
-    public Iterator<CssParsedSelector> iterator() {
-        return cssParsedSelectors.iterator();
+    public Iterator<W3cCssSelectorWithMap> iterator() {
+        return w3cCssSelectorWithMaps.iterator();
     }
 
-    public Stream<CssParsedSelector> stream() {
-        return cssParsedSelectors.stream();
+    public Stream<W3cCssSelectorWithMap> stream() {
+        return w3cCssSelectorWithMaps.stream();
     }
 
-    public CssParsedSelector get(int index) {
-        return cssParsedSelectors.get(index);
+    public W3cCssSelectorWithMap get(int index) {
+        return w3cCssSelectorWithMaps.get(index);
     }
 
 }
