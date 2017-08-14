@@ -38,7 +38,7 @@ public class CssAndConditionTest {
         // given
         CssIdAttributeCondition idCondition = new CssIdAttributeCondition(new AstCssIdAttributeCondition("my-id"));
         CssClassAttributeCondition classCondition = new CssClassAttributeCondition(new AstCssClassAttributeCondition("class-name"));
-        CssAndCondition andCondition = new CssAndCondition(idCondition, classCondition);
+        CssAndCondition andCondition = new CssAndCondition(new AstCssAndCondition(idCondition, classCondition));
         // when
         ElementFinder elementFinder = andCondition.toElementFinder(UNIVERSAL_SELECTOR_FINDER);
         // then

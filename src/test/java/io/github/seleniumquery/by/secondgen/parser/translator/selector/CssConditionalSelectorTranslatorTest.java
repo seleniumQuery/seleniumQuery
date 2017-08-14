@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,12 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.selector;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssAndCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
@@ -23,11 +29,6 @@ import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelec
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
 import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
-import org.junit.Test;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public class CssConditionalSelectorTranslatorTest {
 
