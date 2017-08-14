@@ -30,14 +30,16 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssClassAttributeCondition extends AstCssClassAttributeCondition implements CssCondition, CssConditionImplementedFinders {
+public class CssClassAttributeCondition implements CssCondition, CssConditionImplementedFinders {
 
-    public CssClassAttributeCondition(String unescapedClassName) {
-        super(unescapedClassName);
+    private final AstCssClassAttributeCondition astCssClassAttributeCondition;
+
+    public CssClassAttributeCondition(AstCssClassAttributeCondition astCssClassAttributeCondition) {
+        this.astCssClassAttributeCondition = astCssClassAttributeCondition;
     }
 
     public String getClassName() {
-        return unescapedClassName;
+        return astCssClassAttributeCondition.unescapedClassName;
     }
 
     @Override
@@ -48,11 +50,11 @@ public class CssClassAttributeCondition extends AstCssClassAttributeCondition im
     }
 
     private CssFinder toCSS() {
-        return new CssFinder("." + CssEscape.escapeCssIdentifier(this.unescapedClassName));
+        return new CssFinder("." + CssEscape.escapeCssIdentifier(this.astCssClassAttributeCondition.unescapedClassName));
     }
 
     private String toXPath() {
-        return "contains(concat(' ', normalize-space(@class), ' '), ' " + unescapedClassName + " ')";
+        return "contains(concat(' ', normalize-space(@class), ' '), ' " + astCssClassAttributeCondition.unescapedClassName + " ')";
     }
 
 }

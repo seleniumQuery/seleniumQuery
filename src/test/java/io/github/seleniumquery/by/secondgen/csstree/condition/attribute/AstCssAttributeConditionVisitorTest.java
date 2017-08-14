@@ -36,7 +36,7 @@ public class AstCssAttributeConditionVisitorTest {
             this.visitedInstance = visited;
         }
 
-        @Override public Void visit(AstCssClassAttributeCondition astCssClassAttributeCondition) { registerVisit(CssClassAttributeCondition.class, astCssClassAttributeCondition); return null; }
+        @Override public Void visit(AstCssClassAttributeCondition astCssClassAttributeCondition) { registerVisit(AstCssClassAttributeCondition.class, astCssClassAttributeCondition); return null; }
         @Override public Void visit(AstCssContainsPrefixAttributeCondition astCssContainsPrefixAttributeCondition) { registerVisit(CssContainsPrefixAttributeCondition.class, astCssContainsPrefixAttributeCondition); return null; }
         @Override public Void visit(AstCssContainsSubstringAttributeCondition astCssContainsSubstringAttributeCondition) { registerVisit(CssContainsSubstringAttributeCondition.class, astCssContainsSubstringAttributeCondition); return null; }
         @Override public Void visit(AstCssContainsWordAttributeCondition astCssContainsWordAttributeCondition) { registerVisit(CssContainsWordAttributeCondition.class, astCssContainsWordAttributeCondition); return null; }
@@ -60,7 +60,7 @@ public class AstCssAttributeConditionVisitorTest {
 
     @Test
     public void visitCssClassAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new CssClassAttributeCondition("attr"));
+        assertVisitorVisitsCorrectClass(new AstCssClassAttributeCondition("attr"));
     }
 
     @Test
