@@ -30,18 +30,20 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class CssAttributeConditionBase extends AstCssAttributeConditionBase implements CssCondition, CssConditionImplementedFinders {
+public abstract class CssAttributeConditionBase implements CssCondition, CssConditionImplementedFinders {
 
-    protected CssAttributeConditionBase(String attributeName, String wantedValue) {
-        super(wantedValue, attributeName);
+    private final AstCssAttributeConditionBase astCssAttributeConditionBase;
+
+    protected CssAttributeConditionBase(AstCssAttributeConditionBase astCssAttributeConditionBase) {
+        this.astCssAttributeConditionBase = astCssAttributeConditionBase;
     }
 
     public String getAttributeName() {
-        return attributeName;
+        return astCssAttributeConditionBase.attributeName;
     }
 
     public String getWantedValue() {
-        return wantedValue;
+        return astCssAttributeConditionBase.wantedValue;
     }
 
     @Override
@@ -52,11 +54,11 @@ public abstract class CssAttributeConditionBase extends AstCssAttributeCondition
     }
 
     protected CssFinder toCSS() {
-        return new CssFinder("[" + getCssEscapedAttributeName() + symbol() + "'" + CssEscape.escapeCssString(this.wantedValue) + "']");
+        return new CssFinder("[" + getCssEscapedAttributeName() + symbol() + "'" + CssEscape.escapeCssString(this.astCssAttributeConditionBase.wantedValue) + "']");
     }
 
     protected String getCssEscapedAttributeName() {
-        return CssEscape.escapeCssIdentifier(this.attributeName);
+        return CssEscape.escapeCssIdentifier(this.astCssAttributeConditionBase.attributeName);
     }
 
     protected abstract String symbol();

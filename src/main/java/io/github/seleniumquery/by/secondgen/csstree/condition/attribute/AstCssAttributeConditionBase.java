@@ -21,9 +21,9 @@ public abstract class AstCssAttributeConditionBase implements AstCssAttributeCon
     protected final String attributeName;
     protected final String wantedValue;
 
-    public AstCssAttributeConditionBase(String wantedValue, String attributeName) {
-        this.wantedValue = wantedValue;
+    public AstCssAttributeConditionBase(String attributeName, String wantedValue) {
         this.attributeName = attributeName;
+        this.wantedValue = wantedValue;
     }
 
 }

@@ -16,7 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
-public abstract class AstCssContainsSubstringAttributeCondition extends CssAttributeConditionBase {
+public class AstCssContainsSubstringAttributeCondition extends AstCssAttributeConditionBase {
+
     public AstCssContainsSubstringAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
     }
@@ -25,4 +26,5 @@ public abstract class AstCssContainsSubstringAttributeCondition extends CssAttri
     public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
+
 }

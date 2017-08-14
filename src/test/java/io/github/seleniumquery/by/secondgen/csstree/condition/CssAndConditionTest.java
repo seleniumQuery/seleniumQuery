@@ -24,6 +24,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssIdAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssIdAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
@@ -35,7 +36,7 @@ public class CssAndConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        CssIdAttributeCondition idCondition = new CssIdAttributeCondition("my-id");
+        CssIdAttributeCondition idCondition = new CssIdAttributeCondition(new AstCssIdAttributeCondition("my-id"));
         CssClassAttributeCondition classCondition = new CssClassAttributeCondition(new AstCssClassAttributeCondition("class-name"));
         CssAndCondition andCondition = new CssAndCondition(idCondition, classCondition);
         // when

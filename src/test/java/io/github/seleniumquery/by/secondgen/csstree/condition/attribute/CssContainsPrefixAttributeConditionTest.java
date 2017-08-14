@@ -30,7 +30,7 @@ public class CssContainsPrefixAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        AstCssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new CssContainsPrefixAttributeCondition("hreflang", "en");
+        CssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new CssContainsPrefixAttributeCondition(new AstCssContainsPrefixAttributeCondition("hreflang", "en"));
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = containsPrefixAttributeCondition.toElementFinder(previous);

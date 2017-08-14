@@ -30,7 +30,7 @@ public class CssContainsSubstringAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        AstCssContainsSubstringAttributeCondition containsSubstringAttributeCondition = new CssContainsSubstringAttributeCondition("attribute", "stringToContain");
+        CssContainsSubstringAttributeCondition containsSubstringAttributeCondition = new CssContainsSubstringAttributeCondition(new AstCssContainsSubstringAttributeCondition("attribute", "stringToContain"));
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = containsSubstringAttributeCondition.toElementFinder(previous);

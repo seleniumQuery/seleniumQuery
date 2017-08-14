@@ -25,10 +25,10 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsPrefixAttributeCondition extends AstCssContainsPrefixAttributeCondition {
+public class CssContainsPrefixAttributeCondition extends CssAttributeConditionBase {
 
-    public CssContainsPrefixAttributeCondition(String attributeName, String wantedValue) {
-        super(attributeName, wantedValue);
+    public CssContainsPrefixAttributeCondition(AstCssContainsPrefixAttributeCondition astCssContainsPrefixAttributeCondition) {
+        super(astCssContainsPrefixAttributeCondition);
     }
 
     @Override
@@ -37,9 +37,9 @@ public class CssContainsPrefixAttributeCondition extends AstCssContainsPrefixAtt
     }
 
     protected String toXPath() {
-        String attrName = AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
-        String attrValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
-        String attrValueWithSuffix = SelectorUtils.intoEscapedXPathString(this.wantedValue + "-");
+        String attrName = AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName());
+        String attrValue = SelectorUtils.intoEscapedXPathString(this.getWantedValue());
+        String attrValueWithSuffix = SelectorUtils.intoEscapedXPathString(this.getWantedValue() + "-");
         return "("+attrName+" = "+attrValue+" or starts-with("+ attrName+", "+attrValueWithSuffix+"))";
     }
 

@@ -29,25 +29,14 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEqualsOrHasAttributeCondition extends AstCssEqualsOrHasAttributeCondition {
+public class CssEqualsOrHasAttributeCondition extends CssAttributeConditionBase {
 
-    /*
-     * [simple]
-     * Attribute value is null in this case.
-     */
-    public CssEqualsOrHasAttributeCondition(String attributeName) {
-        super(attributeName, null);
-    }
-
-    /*
-     * [restart="never"]
-     */
-    public CssEqualsOrHasAttributeCondition(String attributeName, String wantedValue) {
-        super(attributeName, wantedValue);
+    public CssEqualsOrHasAttributeCondition(AstCssEqualsOrHasAttributeCondition astCssEqualsOrHasAttributeCondition) {
+        super(astCssEqualsOrHasAttributeCondition);
     }
 
     protected CssFinder toCSS() {
-        if (this.wantedValue != null) {
+        if (this.getWantedValue() != null) {
             return super.toCSS();
         }
         return new CssFinder("[" + this.getCssEscapedAttributeName() + "]");
@@ -59,11 +48,11 @@ public class CssEqualsOrHasAttributeCondition extends AstCssEqualsOrHasAttribute
     }
 
     protected String toXPath() {
-        if (this.wantedValue != null) {
-            String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
-            return AttributeEvaluatorUtils.toXPathAttribute(this.attributeName) + "=" + escapedWantedValue;
+        if (this.getWantedValue() != null) {
+            String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.getWantedValue());
+            return AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName()) + "=" + escapedWantedValue;
         }
-        return AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
+        return AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName());
     }
 
 }

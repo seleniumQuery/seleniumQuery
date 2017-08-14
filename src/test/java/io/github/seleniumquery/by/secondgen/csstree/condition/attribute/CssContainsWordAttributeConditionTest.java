@@ -30,7 +30,7 @@ public class CssContainsWordAttributeConditionTest {
     @Test
     public void toElementFinder() {
         // given
-        AstCssContainsWordAttributeCondition containsWordAttributeCondition = new CssContainsWordAttributeCondition("values", "10");
+        CssContainsWordAttributeCondition containsWordAttributeCondition = new CssContainsWordAttributeCondition(new AstCssContainsWordAttributeCondition("values", "10"));
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = containsWordAttributeCondition.toElementFinder(previous);

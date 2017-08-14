@@ -27,10 +27,10 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEndsWithAttributeCondition extends AstCssEndsWithAttributeCondition {
+public class CssEndsWithAttributeCondition extends CssAttributeConditionBase {
 
-    public CssEndsWithAttributeCondition(String attributeName, String wantedValue) {
-        super(attributeName, wantedValue);
+    public CssEndsWithAttributeCondition(AstCssEndsWithAttributeCondition astCssEndsWithAttributeCondition) {
+        super(astCssEndsWithAttributeCondition);
     }
 
     @Override
@@ -39,9 +39,9 @@ public class CssEndsWithAttributeCondition extends AstCssEndsWithAttributeCondit
     }
 
     protected String toXPath() {
-        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
-        String attrValue = this.wantedValue;
-        String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
+        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName());
+        String attrValue = this.getWantedValue();
+        String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.getWantedValue());
         return "substring("+escapedAttributeName+", string-length(" + escapedAttributeName + ")-" +
                 (attrValue.length() - 1) + ") = " + escapedWantedValue;
     }

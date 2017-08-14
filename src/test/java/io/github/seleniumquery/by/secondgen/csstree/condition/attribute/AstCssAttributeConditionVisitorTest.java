@@ -37,13 +37,13 @@ public class AstCssAttributeConditionVisitorTest {
         }
 
         @Override public Void visit(AstCssClassAttributeCondition astCssClassAttributeCondition) { registerVisit(AstCssClassAttributeCondition.class, astCssClassAttributeCondition); return null; }
-        @Override public Void visit(AstCssContainsPrefixAttributeCondition astCssContainsPrefixAttributeCondition) { registerVisit(CssContainsPrefixAttributeCondition.class, astCssContainsPrefixAttributeCondition); return null; }
-        @Override public Void visit(AstCssContainsSubstringAttributeCondition astCssContainsSubstringAttributeCondition) { registerVisit(CssContainsSubstringAttributeCondition.class, astCssContainsSubstringAttributeCondition); return null; }
-        @Override public Void visit(AstCssContainsWordAttributeCondition astCssContainsWordAttributeCondition) { registerVisit(CssContainsWordAttributeCondition.class, astCssContainsWordAttributeCondition); return null; }
-        @Override public Void visit(AstCssEndsWithAttributeCondition astCssEndsWithAttributeCondition) { registerVisit(CssEndsWithAttributeCondition.class, astCssEndsWithAttributeCondition); return null; }
-        @Override public Void visit(AstCssEqualsOrHasAttributeCondition astCssEqualsOrHasAttributeCondition) { registerVisit(CssEqualsOrHasAttributeCondition.class, astCssEqualsOrHasAttributeCondition); return null; }
-        @Override public Void visit(AstCssIdAttributeCondition astCssIdAttributeCondition) { registerVisit(CssIdAttributeCondition.class, astCssIdAttributeCondition); return null; }
-        @Override public Void visit(AstCssStartsWithAttributeCondition astCssStartsWithAttributeCondition) { registerVisit(CssStartsWithAttributeCondition.class, astCssStartsWithAttributeCondition); return null; }
+        @Override public Void visit(AstCssContainsPrefixAttributeCondition astCssContainsPrefixAttributeCondition) { registerVisit(AstCssContainsPrefixAttributeCondition.class, astCssContainsPrefixAttributeCondition); return null; }
+        @Override public Void visit(AstCssContainsSubstringAttributeCondition astCssContainsSubstringAttributeCondition) { registerVisit(AstCssContainsSubstringAttributeCondition.class, astCssContainsSubstringAttributeCondition); return null; }
+        @Override public Void visit(AstCssContainsWordAttributeCondition astCssContainsWordAttributeCondition) { registerVisit(AstCssContainsWordAttributeCondition.class, astCssContainsWordAttributeCondition); return null; }
+        @Override public Void visit(AstCssEndsWithAttributeCondition astCssEndsWithAttributeCondition) { registerVisit(AstCssEndsWithAttributeCondition.class, astCssEndsWithAttributeCondition); return null; }
+        @Override public Void visit(AstCssEqualsOrHasAttributeCondition astCssEqualsOrHasAttributeCondition) { registerVisit(AstCssEqualsOrHasAttributeCondition.class, astCssEqualsOrHasAttributeCondition); return null; }
+        @Override public Void visit(AstCssIdAttributeCondition astCssIdAttributeCondition) { registerVisit(AstCssIdAttributeCondition.class, astCssIdAttributeCondition); return null; }
+        @Override public Void visit(AstCssStartsWithAttributeCondition astCssStartsWithAttributeCondition) { registerVisit(AstCssStartsWithAttributeCondition.class, astCssStartsWithAttributeCondition); return null; }
     }
 
     private AstCssAttributeConditionVisitorTest.AstCssAttributeConditionVisitorMock visitor = new AstCssAttributeConditionVisitorTest.AstCssAttributeConditionVisitorMock();
@@ -65,42 +65,42 @@ public class AstCssAttributeConditionVisitorTest {
 
     @Test
     public void visitCssContainsPrefixAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new CssContainsPrefixAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssContainsPrefixAttributeCondition("attr", "val"));
     }
 
     @Test
     public void visitCssContainsSubstringAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new CssContainsSubstringAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssContainsSubstringAttributeCondition("attr", "val"));
     }
 
     @Test
     public void visitCssContainsWordAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new CssContainsWordAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssContainsWordAttributeCondition("attr", "val"));
     }
 
     @Test
     public void visitCssEndsWithAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new CssEndsWithAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssEndsWithAttributeCondition("attr", "val"));
     }
 
     @Test
     public void visitCssEqualsOrHasAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new CssEqualsOrHasAttributeCondition("attr"));
+        assertVisitorVisitsCorrectClass(new AstCssEqualsOrHasAttributeCondition("attr"));
     }
 
     @Test
     public void visitCssEqualsOrHasAttributeCondition__2nd_constructor() {
-        assertVisitorVisitsCorrectClass(new CssEqualsOrHasAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssEqualsOrHasAttributeCondition("attr", "val"));
     }
 
     @Test
     public void visitCssIdAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new CssIdAttributeCondition("id"));
+        assertVisitorVisitsCorrectClass(new AstCssIdAttributeCondition("id"));
     }
 
     @Test
     public void visitCssStartsWithAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new CssStartsWithAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssStartsWithAttributeCondition("attr", "val"));
     }
 
 }

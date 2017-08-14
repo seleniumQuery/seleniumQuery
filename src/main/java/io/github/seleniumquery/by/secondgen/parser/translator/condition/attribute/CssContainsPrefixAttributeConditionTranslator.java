@@ -29,10 +29,10 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssConta
  */
 public class CssContainsPrefixAttributeConditionTranslator {
 
-	public AstCssContainsPrefixAttributeCondition translate(AttributeCondition attributeCondition) {
+	public CssContainsPrefixAttributeCondition translate(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		String wantedValue = attributeCondition.getValue();
-		return new CssContainsPrefixAttributeCondition(attributeName, wantedValue);
+		return new CssContainsPrefixAttributeCondition(new AstCssContainsPrefixAttributeCondition(attributeName, wantedValue));
 	}
 
 }

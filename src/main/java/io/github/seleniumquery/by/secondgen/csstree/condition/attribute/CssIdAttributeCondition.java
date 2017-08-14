@@ -32,14 +32,16 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssIdAttributeCondition extends AstCssIdAttributeCondition implements CssCondition, CssConditionImplementedFinders {
+public class CssIdAttributeCondition implements CssCondition, CssConditionImplementedFinders {
 
-    public CssIdAttributeCondition(String id) {
-        super(id);
+    private final AstCssIdAttributeCondition astCssIdAttributeCondition;
+
+    public CssIdAttributeCondition(AstCssIdAttributeCondition astCssIdAttributeCondition) {
+        this.astCssIdAttributeCondition = astCssIdAttributeCondition;
     }
 
     public String getId() {
-        return id;
+        return astCssIdAttributeCondition.id;
     }
 
     @Override
@@ -50,11 +52,11 @@ public class CssIdAttributeCondition extends AstCssIdAttributeCondition implemen
     }
 
     private CssFinder toCSS() {
-        return new CssFinder("#" + CssEscape.escapeCssIdentifier(this.id));
+        return new CssFinder("#" + CssEscape.escapeCssIdentifier(this.astCssIdAttributeCondition.id));
     }
 
     private String toXPath() {
-        return "@id = '" + id + "'";
+        return "@id = '" + astCssIdAttributeCondition.id + "'";
     }
 
 }

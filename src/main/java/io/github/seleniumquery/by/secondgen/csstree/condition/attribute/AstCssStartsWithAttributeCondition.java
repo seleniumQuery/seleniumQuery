@@ -16,7 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
-public abstract class AstCssStartsWithAttributeCondition extends CssAttributeConditionBase {
+public class AstCssStartsWithAttributeCondition extends AstCssAttributeConditionBase {
+
     public AstCssStartsWithAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
     }
@@ -25,4 +26,5 @@ public abstract class AstCssStartsWithAttributeCondition extends CssAttributeCon
     public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
+
 }

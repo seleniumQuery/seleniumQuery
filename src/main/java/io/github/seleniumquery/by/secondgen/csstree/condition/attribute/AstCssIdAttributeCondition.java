@@ -17,7 +17,8 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
 public class AstCssIdAttributeCondition implements AstCssAttributeCondition {
-    protected String id;
+
+    public final String id;
 
     public AstCssIdAttributeCondition(String id) {
         this.id = id;
@@ -27,4 +28,5 @@ public class AstCssIdAttributeCondition implements AstCssAttributeCondition {
     public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
+
 }

@@ -25,10 +25,10 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsSubstringAttributeCondition extends AstCssContainsSubstringAttributeCondition {
+public class CssContainsSubstringAttributeCondition extends CssAttributeConditionBase {
 
-    public CssContainsSubstringAttributeCondition(String attributeName, String wantedValue) {
-        super(attributeName, wantedValue);
+    public CssContainsSubstringAttributeCondition(AstCssContainsSubstringAttributeCondition astCssContainsSubstringAttributeCondition) {
+        super(astCssContainsSubstringAttributeCondition);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class CssContainsSubstringAttributeCondition extends AstCssContainsSubstr
     }
 
     protected String toXPath() {
-        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
-        String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
+        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName());
+        String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.getWantedValue());
         return "contains(" + escapedAttributeName + ", " + escapedWantedValue + ")";
     }
 

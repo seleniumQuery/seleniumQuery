@@ -27,10 +27,10 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsWordAttributeCondition extends AstCssContainsWordAttributeCondition {
+public class CssContainsWordAttributeCondition extends CssAttributeConditionBase {
 
-    public CssContainsWordAttributeCondition(String attributeName, String wantedValue) {
-        super(attributeName, wantedValue);
+    public CssContainsWordAttributeCondition(AstCssContainsWordAttributeCondition astCssContainsWordAttributeCondition) {
+        super(astCssContainsWordAttributeCondition);
     }
 
     @Override
@@ -39,8 +39,8 @@ public class CssContainsWordAttributeCondition extends AstCssContainsWordAttribu
     }
 
     protected String toXPath() {
-        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
-        String escapedWantedValueSurroundedBySpaces = SelectorUtils.intoEscapedXPathString(" " + this.wantedValue + " ");
+        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName());
+        String escapedWantedValueSurroundedBySpaces = SelectorUtils.intoEscapedXPathString(" " + this.getWantedValue() + " ");
         return "contains(concat(' ', normalize-space(" + escapedAttributeName + "), ' '), " + escapedWantedValueSurroundedBySpaces + ")";
     }
 

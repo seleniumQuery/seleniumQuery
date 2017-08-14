@@ -31,10 +31,10 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssStart
  */
 public class CssStartsWithAttributeConditionTranslator {
 
-	public AstCssStartsWithAttributeCondition translate(AttributeCondition attributeCondition) {
+	public CssStartsWithAttributeCondition translate(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		String wantedValue = attributeCondition.getValue();
-		return new CssStartsWithAttributeCondition(attributeName, wantedValue);
+		return new CssStartsWithAttributeCondition(new AstCssStartsWithAttributeCondition(attributeName, wantedValue));
 	}
 
 }
