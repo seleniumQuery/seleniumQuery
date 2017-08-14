@@ -1,16 +1,34 @@
-package io.github.seleniumquery.by.secondgen.csstree.condition;
+/*
+ * Copyright (c) 2017 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssIdAttributeCondition;
-import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
-import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
-import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
-import org.junit.Test;
+package io.github.seleniumquery.by.secondgen.csstree.condition;
 
 import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssIdAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 
 public class CssAndConditionTest {
 
@@ -18,7 +36,7 @@ public class CssAndConditionTest {
     public void toElementFinder() {
         // given
         CssIdAttributeCondition idCondition = new CssIdAttributeCondition("my-id");
-        CssClassAttributeCondition classCondition = new CssClassAttributeCondition("class-name");
+        CssClassAttributeCondition classCondition = new CssClassAttributeCondition(new AstCssClassAttributeCondition("class-name"));
         CssAndCondition andCondition = new CssAndCondition(idCondition, classCondition);
         // when
         ElementFinder elementFinder = andCondition.toElementFinder(UNIVERSAL_SELECTOR_FINDER);

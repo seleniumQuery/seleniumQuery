@@ -18,7 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
 public class AstCssClassAttributeCondition implements AstCssAttributeCondition {
 
-    protected String unescapedClassName;
+    public final String unescapedClassName;
 
     public AstCssClassAttributeCondition(String unescapedClassName) {
         this.unescapedClassName = unescapedClassName;
