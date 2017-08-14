@@ -41,10 +41,8 @@ class CssAndConditionTranslator {
 		this.cssConditionTranslator = cssConditionTranslator;
 	}
 
-	public AstCssAndCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, CombinatorCondition combinatorCondition) {
-		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
-																					selectorUpToThisPoint,
-																					combinatorCondition.getFirstCondition());
+	AstCssAndCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, CombinatorCondition combinatorCondition) {
+		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(selectorUpToThisPoint, combinatorCondition.getFirstCondition());
 
 		CssCondition firstCondition = cssConditionTranslator.translate(selectorUpToThisPoint, argumentMap, combinatorCondition.getFirstCondition());
 		CssCondition secondCondition = cssConditionTranslator.translate(selectorUpToThisPointPlusFirstCondition, argumentMap, combinatorCondition.getSecondCondition());
