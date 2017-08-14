@@ -18,15 +18,17 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.child
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
-public abstract class AstCssLastChildPseudoClass extends CssNthLastChildPseudoClass {
+public class AstCssLastChildPseudoClass extends AstCssNthLastChildPseudoClass {
+
     public static final String PSEUDO = "last-child";
 
-    public AstCssLastChildPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    public AstCssLastChildPseudoClass() {
+        super("1");
     }
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }

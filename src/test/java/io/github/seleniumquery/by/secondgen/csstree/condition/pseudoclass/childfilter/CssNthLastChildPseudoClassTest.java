@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,11 +56,11 @@ public class CssNthLastChildPseudoClassTest {
         String pseudoThatTheDriverWillTestForNativeSupport = NTH_LAST_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK;
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
                 pseudoThatTheDriverWillTestForNativeSupport,
-                new CssNthLastChildPseudoClass(nthArgument),
+                new CssNthLastChildPseudoClass(new AstCssNthLastChildPseudoClass(nthArgument)),
                 expectedCSS,
                 expectedXPath
         );
-        assertPseudoClass(new CssNthLastChildPseudoClass(nthArgument)).whenNotNativelySupported().translatesToPureXPath(expectedXPath);
+        assertPseudoClass(new CssNthLastChildPseudoClass(new AstCssNthLastChildPseudoClass(nthArgument))).whenNotNativelySupported().translatesToPureXPath(expectedXPath);
     }
 
 }

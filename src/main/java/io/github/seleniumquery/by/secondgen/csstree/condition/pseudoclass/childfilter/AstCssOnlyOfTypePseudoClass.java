@@ -20,10 +20,12 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCss
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
 public class AstCssOnlyOfTypePseudoClass implements AstCssPseudoClassCondition {
+
     public static final String PSEUDO = "only-of-type";
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }

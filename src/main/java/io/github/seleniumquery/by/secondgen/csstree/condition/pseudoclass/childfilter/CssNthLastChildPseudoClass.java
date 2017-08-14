@@ -30,21 +30,23 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssNthLastChildPseudoClass extends AstCssNthLastChildPseudoClass implements MaybeNativelySupportedPseudoClass {
+public class CssNthLastChildPseudoClass implements MaybeNativelySupportedPseudoClass {
 
-    public CssNthLastChildPseudoClass(String pseudoClassArgument) {
-        super(pseudoClassArgument);
+    private final AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass;
+
+    public CssNthLastChildPseudoClass(AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass) {
+        this.astCssNthLastChildPseudoClass = astCssNthLastChildPseudoClass;
     }
 
     @Override
     public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
-        return ":"+PSEUDO+"(1)";
+        return ":"+AstCssNthLastChildPseudoClass.PSEUDO+"(1)";
     }
 
     @Override
     public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
         NthArgument nthArgument = getNthChildArgument();
-        return new CssFinder(":"+PSEUDO+"("+nthArgument.toCSS()+")");
+        return new CssFinder(":"+AstCssNthLastChildPseudoClass.PSEUDO+"("+nthArgument.toCSS()+")");
     }
 
     @Override
@@ -54,7 +56,7 @@ public class CssNthLastChildPseudoClass extends AstCssNthLastChildPseudoClass im
     }
 
     private NthArgument getNthChildArgument() {
-        return new NthArgument(getArgument());
+        return new NthArgument(astCssNthLastChildPseudoClass.getArgument());
     }
 
 }

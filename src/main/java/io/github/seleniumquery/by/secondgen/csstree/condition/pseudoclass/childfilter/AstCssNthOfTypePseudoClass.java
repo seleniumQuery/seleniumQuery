@@ -16,11 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssFunctionalPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
 
-public abstract class AstCssNthOfTypePseudoClass extends CssFunctionalPseudoClassCondition<String> implements AstCssPseudoClassCondition {
+public class AstCssNthOfTypePseudoClass extends AstCssFunctionalPseudoClassCondition<String> {
 
     public static final String PSEUDO = "nth-of-type";
 

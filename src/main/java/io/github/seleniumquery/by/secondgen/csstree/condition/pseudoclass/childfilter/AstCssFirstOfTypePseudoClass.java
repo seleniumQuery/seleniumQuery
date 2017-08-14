@@ -16,14 +16,19 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 
-public class AstCssFirstOfTypePseudoClass implements AstCssPseudoClassCondition {
+public class AstCssFirstOfTypePseudoClass extends AstCssNthOfTypePseudoClass {
+
     public static final String PSEUDO = "first-of-type";
+
+    public AstCssFirstOfTypePseudoClass() {
+        super("-999999999");
+    }
 
     @Override
     public void accept(AstCssPseudoClassConditionVisitor visitor) {
         visitor.visit(this);
     }
+
 }
