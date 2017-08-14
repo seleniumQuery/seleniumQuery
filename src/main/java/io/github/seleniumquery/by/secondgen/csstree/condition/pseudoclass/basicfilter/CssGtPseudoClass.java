@@ -28,15 +28,17 @@ import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssGtPseudoClass extends AstCssGtPseudoClass implements NeverNativelySupportedPseudoClass {
+public class CssGtPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public CssGtPseudoClass(int index) {
-        super(index);
+    private final AstCssGtPseudoClass astCssGtPseudoClass;
+
+    public CssGtPseudoClass(AstCssGtPseudoClass astCssGtPseudoClass) {
+        this.astCssGtPseudoClass = astCssGtPseudoClass;
     }
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-        int index = this.getArgument();
+        int index = astCssGtPseudoClass.getArgument();
         if (index >= 0) {
             return XPathAndFilterFinder.pureXPath("position() > " + (index + 1));
         }

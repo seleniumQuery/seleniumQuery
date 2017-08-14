@@ -35,13 +35,6 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicf
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssOddPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssRootPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.AstCssTargetPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEvenPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssGtPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssHeaderPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLtPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssOddPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssRootPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssTargetPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.AstCssFirstChildPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.AstCssFirstOfTypePseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.AstCssLastChildPseudoClass;
@@ -98,23 +91,18 @@ public class AstCssPseudoClassConditionVisitorTest {
 
         @Override public void visit(AstCssAnimatedPseudoClass astCssAnimatedPseudoClass) { registerVisit(AstCssAnimatedPseudoClass.class, astCssAnimatedPseudoClass); }
         @Override public void visit(AstCssEqPseudoClass astCssEqPseudoClass) { registerVisit(AstCssEqPseudoClass.class, astCssEqPseudoClass); }
-        @Override public void visit(AstCssEvenPseudoClass astCssEvenPseudoClass) { registerVisit(CssEvenPseudoClass.class, astCssEvenPseudoClass); }
+        @Override public void visit(AstCssEvenPseudoClass astCssEvenPseudoClass) { registerVisit(AstCssEvenPseudoClass.class, astCssEvenPseudoClass); }
         @Override public void visit(AstCssFirstPseudoClass astCssFirstPseudoClass) { registerVisit(AstCssFirstPseudoClass.class, astCssFirstPseudoClass); }
-        @Override public void visit(AstCssGtPseudoClass astCssGtPseudoClass) { registerVisit(CssGtPseudoClass.class,
-            astCssGtPseudoClass); }
-        @Override public void visit(AstCssHeaderPseudoClass astCssHeaderPseudoClass) { registerVisit(CssHeaderPseudoClass.class, astCssHeaderPseudoClass); }
-        @Override public void visit(AstCssLangPseudoClass astCssLangPseudoClass) { registerVisit(AstCssLangPseudoClass.class,
-            astCssLangPseudoClass); }
+        @Override public void visit(AstCssGtPseudoClass astCssGtPseudoClass) { registerVisit(AstCssGtPseudoClass.class, astCssGtPseudoClass); }
+        @Override public void visit(AstCssHeaderPseudoClass astCssHeaderPseudoClass) { registerVisit(AstCssHeaderPseudoClass.class, astCssHeaderPseudoClass); }
+        @Override public void visit(AstCssLangPseudoClass astCssLangPseudoClass) { registerVisit(AstCssLangPseudoClass.class, astCssLangPseudoClass); }
         @Override public void visit(AstCssLastPseudoClass astCssLastPseudoClass) { registerVisit(AstCssLastPseudoClass.class, astCssLastPseudoClass); }
-        @Override public void visit(AstCssLtPseudoClass astCssLtPseudoClass) { registerVisit(CssLtPseudoClass.class,
-            astCssLtPseudoClass); }
+        @Override public void visit(AstCssLtPseudoClass astCssLtPseudoClass) { registerVisit(AstCssLtPseudoClass.class, astCssLtPseudoClass); }
         @Override public void visit(AstCssNotPseudoClass astCssNotPseudoClass) { registerVisit(AstCssNotPseudoClass.class, astCssNotPseudoClass); }
         @Override public void visit(AstCssNthPseudoClass astCssNthPseudoClass) { registerVisit(AstCssNthPseudoClass.class, astCssNthPseudoClass); }
-        @Override public void visit(AstCssOddPseudoClass astCssOddPseudoClass) { registerVisit(CssOddPseudoClass.class,
-            astCssOddPseudoClass); }
-        @Override public void visit(AstCssRootPseudoClass astCssRootPseudoClass) { registerVisit(CssRootPseudoClass.class,
-            astCssRootPseudoClass); }
-        @Override public void visit(AstCssTargetPseudoClass astCssTargetPseudoClass) { registerVisit(CssTargetPseudoClass.class, astCssTargetPseudoClass); }
+        @Override public void visit(AstCssOddPseudoClass astCssOddPseudoClass) { registerVisit(AstCssOddPseudoClass.class, astCssOddPseudoClass); }
+        @Override public void visit(AstCssRootPseudoClass astCssRootPseudoClass) { registerVisit(AstCssRootPseudoClass.class, astCssRootPseudoClass); }
+        @Override public void visit(AstCssTargetPseudoClass astCssTargetPseudoClass) { registerVisit(AstCssTargetPseudoClass.class, astCssTargetPseudoClass); }
         @Override public void visit(AstCssFirstChildPseudoClass astCssFirstChildPseudoClass) { registerVisit(AstCssFirstChildPseudoClass.class, astCssFirstChildPseudoClass); }
         @Override public void visit(AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass) { registerVisit(AstCssFirstOfTypePseudoClass.class, astCssFirstOfTypePseudoClass); }
         @Override public void visit(AstCssLastChildPseudoClass astCssLastChildPseudoClass) { registerVisit(AstCssLastChildPseudoClass.class, astCssLastChildPseudoClass); }
@@ -133,28 +121,20 @@ public class AstCssPseudoClassConditionVisitorTest {
         @Override public void visit(AstCssCheckboxPseudoClass astCssCheckboxPseudoClass) { registerVisit(AstCssCheckboxPseudoClass.class, astCssCheckboxPseudoClass); }
         @Override public void visit(AstCssCheckedPseudoClass astCssCheckedPseudoClass) { registerVisit(AstCssCheckedPseudoClass.class, astCssCheckedPseudoClass); }
         @Override public void visit(AstCssDisabledPseudoClass astCssDisabledPseudoClass) { registerVisit(AstCssDisabledPseudoClass.class, astCssDisabledPseudoClass); }
-        @Override public void visit(AstCssInputPseudoClass astCssInputPseudoClass) { registerVisit(AstCssInputPseudoClass.class,
-            astCssInputPseudoClass); }
-        @Override public void visit(AstCssFilePseudoClass astCssFilePseudoClass) { registerVisit(AstCssFilePseudoClass.class,
-            astCssFilePseudoClass); }
-        @Override public void visit(AstCssResetPseudoClass astCssResetPseudoClass) { registerVisit(AstCssResetPseudoClass.class,
-            astCssResetPseudoClass); }
-        @Override public void visit(AstCssFocusPseudoClass astCssFocusPseudoClass) { registerVisit(AstCssFocusPseudoClass.class,
-            astCssFocusPseudoClass); }
-        @Override public void visit(AstCssRadioPseudoClass astCssRadioPseudoClass) { registerVisit(AstCssRadioPseudoClass.class,
-            astCssRadioPseudoClass); }
+        @Override public void visit(AstCssInputPseudoClass astCssInputPseudoClass) { registerVisit(AstCssInputPseudoClass.class, astCssInputPseudoClass); }
+        @Override public void visit(AstCssFilePseudoClass astCssFilePseudoClass) { registerVisit(AstCssFilePseudoClass.class, astCssFilePseudoClass); }
+        @Override public void visit(AstCssResetPseudoClass astCssResetPseudoClass) { registerVisit(AstCssResetPseudoClass.class, astCssResetPseudoClass); }
+        @Override public void visit(AstCssFocusPseudoClass astCssFocusPseudoClass) { registerVisit(AstCssFocusPseudoClass.class, astCssFocusPseudoClass); }
+        @Override public void visit(AstCssRadioPseudoClass astCssRadioPseudoClass) { registerVisit(AstCssRadioPseudoClass.class, astCssRadioPseudoClass); }
         @Override public void visit(AstCssSelectedPseudoClass astCssSelectedPseudoClass) { registerVisit(AstCssSelectedPseudoClass.class, astCssSelectedPseudoClass); }
-        @Override public void visit(AstCssImagePseudoClass astCssImagePseudoClass) { registerVisit(AstCssImagePseudoClass.class,
-            astCssImagePseudoClass); }
+        @Override public void visit(AstCssImagePseudoClass astCssImagePseudoClass) { registerVisit(AstCssImagePseudoClass.class, astCssImagePseudoClass); }
         @Override public void visit(AstCssEnabledPseudoClass astCssEnabledPseudoClass) { registerVisit(AstCssEnabledPseudoClass.class, astCssEnabledPseudoClass); }
         @Override public void visit(AstCssPasswordPseudoClass astCssPasswordPseudoClass) { registerVisit(AstCssPasswordPseudoClass.class, astCssPasswordPseudoClass); }
         @Override public void visit(AstCssSubmitPseudoClass astCssSubmitPseudoClass) { registerVisit(AstCssSubmitPseudoClass.class, astCssSubmitPseudoClass); }
-        @Override public void visit(AstCssTextPseudoClass astCssTextPseudoClass) { registerVisit(AstCssTextPseudoClass.class,
-            astCssTextPseudoClass); }
+        @Override public void visit(AstCssTextPseudoClass astCssTextPseudoClass) { registerVisit(AstCssTextPseudoClass.class, astCssTextPseudoClass); }
         @Override public void visit(AstCssFocusablePseudoClass astCssFocusablePseudoClass) { registerVisit(AstCssFocusablePseudoClass.class, astCssFocusablePseudoClass); }
         @Override public void visit(AstCssTabbablePseudoClass astCssTabbablePseudoClass) { registerVisit(AstCssTabbablePseudoClass.class, astCssTabbablePseudoClass); }
-        @Override public void visit(AstCssBlankPseudoClass astCssBlankPseudoClass) { registerVisit(AstCssBlankPseudoClass.class,
-            astCssBlankPseudoClass); }
+        @Override public void visit(AstCssBlankPseudoClass astCssBlankPseudoClass) { registerVisit(AstCssBlankPseudoClass.class, astCssBlankPseudoClass); }
         @Override public void visit(AstCssFilledPseudoClass astCssFilledPseudoClass) { registerVisit(AstCssFilledPseudoClass.class, astCssFilledPseudoClass); }
         @Override public void visit(AstCssPresentPseudoClass astCssPresentPseudoClass) { registerVisit(AstCssPresentPseudoClass.class, astCssPresentPseudoClass); }
         @Override public void visit(AstCssUncheckedPseudoClass astCssUncheckedPseudoClass) { registerVisit(AstCssUncheckedPseudoClass.class, astCssUncheckedPseudoClass); }
@@ -164,565 +144,269 @@ public class AstCssPseudoClassConditionVisitorTest {
 
     private AstCssPseudoClassConditionVisitorMock visitor = new AstCssPseudoClassConditionVisitorMock();
 
+    private void assertVisitorVisitsCorrectClass(AstCssPseudoClassCondition astCssPseudoClassCondition) {
+        // given
+        // argument passed
+        // when
+        astCssPseudoClassCondition.accept(visitor);
+        // then
+        assertEquals(astCssPseudoClassCondition.getClass(), visitor.getVisitedClass());
+        assertEquals(astCssPseudoClassCondition, visitor.getVisitedInstance());
+    }
+
     @Test
     public void visitCssAnimatedPseudoClass() {
-        // given
-        AstCssAnimatedPseudoClass astCssAnimatedPseudoClass = new AstCssAnimatedPseudoClass();
-        // when
-        astCssAnimatedPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssAnimatedPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssAnimatedPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssAnimatedPseudoClass());
     }
 
     @Test
     public void visitCssEqPseudoClass() {
-        // given
-        AstCssEqPseudoClass astCssEqPseudoClass = new AstCssEqPseudoClass(99);
-        // when
-        astCssEqPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssEqPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssEqPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssEqPseudoClass(99));
     }
 
     @Test
     public void visitCssEvenPseudoClass() {
-        // given
-        AstCssEvenPseudoClass astCssEvenPseudoClass = new CssEvenPseudoClass();
-        // when
-        astCssEvenPseudoClass.accept(visitor);
-        // then
-        assertEquals(CssEvenPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssEvenPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssEvenPseudoClass());
     }
 
     @Test
     public void visitCssFirstPseudoClass() {
-        // given
-        AstCssFirstPseudoClass astCssFirstPseudoClass = new AstCssFirstPseudoClass();
-        // when
-        astCssFirstPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssFirstPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssFirstPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssFirstPseudoClass());
     }
 
     @Test
     public void visitCssGtPseudoClass() {
-        // given
-        AstCssGtPseudoClass astCssGtPseudoClass = new CssGtPseudoClass(99);
-        // when
-        astCssGtPseudoClass.accept(visitor);
-        // then
-        assertEquals(CssGtPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssGtPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssGtPseudoClass(99));
     }
 
     @Test
     public void visitCssHeaderPseudoClass() {
-        // given
-        AstCssHeaderPseudoClass astCssHeaderPseudoClass = new CssHeaderPseudoClass();
-        // when
-        astCssHeaderPseudoClass.accept(visitor);
-        // then
-        assertEquals(CssHeaderPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssHeaderPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssHeaderPseudoClass());
     }
 
     @Test
     public void visitCssLangPseudoClass() {
-        // given
-        AstCssLangPseudoClass astCssLangPseudoClass = new AstCssLangPseudoClass("br");
-        // when
-        astCssLangPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssLangPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssLangPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssLangPseudoClass("br"));
     }
 
     @Test
     public void visitCssLastPseudoClass() {
-        // given
-        AstCssLastPseudoClass astCssLastPseudoClass = new AstCssLastPseudoClass();
-        // when
-        astCssLastPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssLastPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssLastPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssLastPseudoClass());
     }
 
     @Test
     public void visitCssLtPseudoClass() {
-        // given
-        AstCssLtPseudoClass astCssLtPseudoClass = new CssLtPseudoClass(55);
-        // when
-        astCssLtPseudoClass.accept(visitor);
-        // then
-        assertEquals(CssLtPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssLtPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssLtPseudoClass(55));
     }
 
     @Test
     public void visitCssNotPseudoClass() {
-        // given
-        AstCssNotPseudoClass astCssNotPseudoClass = new AstCssNotPseudoClass(ParseTreeBuilder.parse(".class"));
-        // when
-        astCssNotPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssNotPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssNotPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssNotPseudoClass(ParseTreeBuilder.parse(".clazz")));
     }
 
     @Test
     public void visitCssNthPseudoClass() {
-        // given
-        AstCssNthPseudoClass astCssNthPseudoClass = new AstCssNthPseudoClass(55);
-        // when
-        astCssNthPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssNthPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssNthPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssNthPseudoClass(55));
     }
 
     @Test
     public void visitCssOddPseudoClass() {
-        // given
-        AstCssOddPseudoClass astCssOddPseudoClass = new CssOddPseudoClass();
-        // when
-        astCssOddPseudoClass.accept(visitor);
-        // then
-        assertEquals(CssOddPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssOddPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssOddPseudoClass());
     }
 
     @Test
     public void visitCssRootPseudoClass() {
-        // given
-        AstCssRootPseudoClass astCssRootPseudoClass = new CssRootPseudoClass();
-        // when
-        astCssRootPseudoClass.accept(visitor);
-        // then
-        assertEquals(CssRootPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssRootPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssRootPseudoClass());
     }
 
     @Test
     public void visitCssTargetPseudoClass() {
-        // given
-        AstCssTargetPseudoClass astCssTargetPseudoClass = new CssTargetPseudoClass();
-        // when
-        astCssTargetPseudoClass.accept(visitor);
-        // then
-        assertEquals(CssTargetPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssTargetPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssTargetPseudoClass());
     }
 
     @Test
     public void visitCssFirstChildPseudoClass() {
-        // given
-        AstCssFirstChildPseudoClass astCssFirstChildPseudoClass = new AstCssFirstChildPseudoClass();
-        // when
-        astCssFirstChildPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssFirstChildPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssFirstChildPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssFirstChildPseudoClass());
     }
 
     @Test
     public void visitCssFirstOfTypePseudoClass() {
-        // given
-        AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass = new AstCssFirstOfTypePseudoClass();
-        // when
-        astCssFirstOfTypePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssFirstOfTypePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssFirstOfTypePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssFirstOfTypePseudoClass());
     }
 
     @Test
     public void visitCssLastChildPseudoClass() {
-        // given
-        AstCssLastChildPseudoClass astCssLastChildPseudoClass = new AstCssLastChildPseudoClass();
-        // when
-        astCssLastChildPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssLastChildPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssLastChildPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssLastChildPseudoClass());
     }
 
     @Test
     public void visitCssLastOfTypePseudoClass() {
-        // given
-        AstCssLastOfTypePseudoClass astCssLastOfTypePseudoClass = new AstCssLastOfTypePseudoClass();
-        // when
-        astCssLastOfTypePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssLastOfTypePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssLastOfTypePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssLastOfTypePseudoClass());
     }
 
     @Test
     public void visitCssNthChildPseudoClass() {
-        // given
-        AstCssNthChildPseudoClass astCssNthChildPseudoClass = new AstCssNthChildPseudoClass("66");
-        // when
-        astCssNthChildPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssNthChildPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssNthChildPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssNthChildPseudoClass("66"));
     }
 
     @Test
     public void visitCssNthLastChildPseudoClass() {
-        // given
-        AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass = new AstCssNthLastChildPseudoClass("77");
-        // when
-        astCssNthLastChildPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssNthLastChildPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssNthLastChildPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssNthLastChildPseudoClass("77"));
     }
 
     @Test
     public void visitCssNthLastOfTypePseudoClass() {
-        // given
-        AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass = new AstCssNthLastOfTypePseudoClass("33");
-        // when
-        astCssNthLastOfTypePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssNthLastOfTypePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssNthLastOfTypePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssNthLastOfTypePseudoClass("33"));
     }
 
     @Test
     public void visitCssNthOfTypePseudoClass() {
-        // given
-        AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass = new AstCssNthOfTypePseudoClass("88");
-        // when
-        astCssNthOfTypePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssNthOfTypePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssNthOfTypePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssNthOfTypePseudoClass("88"));
     }
 
     @Test
     public void visitCssOnlyChildPseudoClass() {
-        // given
-        AstCssOnlyChildPseudoClass astCssOnlyChildPseudoClass = new AstCssOnlyChildPseudoClass();
-        // when
-        astCssOnlyChildPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssOnlyChildPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssOnlyChildPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssOnlyChildPseudoClass());
     }
 
     @Test
     public void visitCssOnlyOfTypePseudoClass() {
-        // given
-        AstCssOnlyOfTypePseudoClass astCssOnlyOfTypePseudoClass = new AstCssOnlyOfTypePseudoClass();
-        // when
-        astCssOnlyOfTypePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssOnlyOfTypePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssOnlyOfTypePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssOnlyOfTypePseudoClass());
     }
 
     @Test
     public void visitCssContainsPseudoClass() {
-        // given
-        AstCssContainsPseudoClass astCssContainsPseudoClass = new AstCssContainsPseudoClass("stuff");
-        // when
-        astCssContainsPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssContainsPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssContainsPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssContainsPseudoClass("stuff"));
     }
 
     @Test
     public void visitCssEmptyPseudoClass() {
-        // given
-        AstCssEmptyPseudoClass astCssEmptyPseudoClass = new AstCssEmptyPseudoClass();
-        // when
-        astCssEmptyPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssEmptyPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssEmptyPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssEmptyPseudoClass());
     }
 
     @Test
     public void visitCssHasPseudoClass() {
-        // given
-        AstCssHasPseudoClass astCssHasPseudoClass = new AstCssHasPseudoClass(ParseTreeBuilder.parse(".class"));
-        // when
-        astCssHasPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssHasPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssHasPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssHasPseudoClass(ParseTreeBuilder.parse(".clazz")));
     }
 
     @Test
     public void visitCssParentPseudoClass() {
-        // given
-        AstCssParentPseudoClass astCssParentPseudoClass = new AstCssParentPseudoClass();
-        // when
-        astCssParentPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssParentPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssParentPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssParentPseudoClass());
     }
 
     @Test
     public void visitCssButtonPseudoClass() {
-        // given
-        AstCssButtonPseudoClass astCssButtonPseudoClass = new AstCssButtonPseudoClass();
-        // when
-        astCssButtonPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssButtonPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssButtonPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssButtonPseudoClass());
     }
 
     @Test
     public void visitCssCheckboxPseudoClass() {
-        // given
-        AstCssCheckboxPseudoClass astCssCheckboxPseudoClass = new AstCssCheckboxPseudoClass();
-        // when
-        astCssCheckboxPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssCheckboxPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssCheckboxPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssCheckboxPseudoClass());
     }
 
     @Test
     public void visitCssCheckedPseudoClass() {
-        // given
-        AstCssCheckedPseudoClass astCssCheckedPseudoClass = new AstCssCheckedPseudoClass();
-        // when
-        astCssCheckedPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssCheckedPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssCheckedPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssCheckedPseudoClass());
     }
 
     @Test
     public void visitCssDisabledPseudoClass() {
-        // given
-        AstCssDisabledPseudoClass astCssDisabledPseudoClass = new AstCssDisabledPseudoClass();
-        // when
-        astCssDisabledPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssDisabledPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssDisabledPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssDisabledPseudoClass());
     }
 
     @Test
     public void visitCssInputPseudoClass() {
-        // given
-        AstCssInputPseudoClass astCssInputPseudoClass = new AstCssInputPseudoClass();
-        // when
-        astCssInputPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssInputPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssInputPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssInputPseudoClass());
     }
 
     @Test
     public void visitCssFilePseudoClass() {
-        // given
-        AstCssFilePseudoClass astCssFilePseudoClass = new AstCssFilePseudoClass();
-        // when
-        astCssFilePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssFilePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssFilePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssFilePseudoClass());
     }
 
     @Test
     public void visitCssResetPseudoClass() {
-        // given
-        AstCssResetPseudoClass astCssResetPseudoClass = new AstCssResetPseudoClass();
-        // when
-        astCssResetPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssResetPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssResetPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssResetPseudoClass());
     }
 
     @Test
     public void visitCssFocusPseudoClass() {
-        // given
-        AstCssFocusPseudoClass astCssFocusPseudoClass = new AstCssFocusPseudoClass();
-        // when
-        astCssFocusPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssFocusPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssFocusPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssFocusPseudoClass());
     }
 
     @Test
     public void visitCssRadioPseudoClass() {
-        // given
-        AstCssRadioPseudoClass astCssRadioPseudoClass = new AstCssRadioPseudoClass();
-        // when
-        astCssRadioPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssRadioPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssRadioPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssRadioPseudoClass());
     }
 
     @Test
     public void visitCssSelectedPseudoClass() {
-        // given
-        AstCssSelectedPseudoClass astCssSelectedPseudoClass = new AstCssSelectedPseudoClass();
-        // when
-        astCssSelectedPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssSelectedPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssSelectedPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssSelectedPseudoClass());
     }
 
     @Test
     public void visitCssImagePseudoClass() {
-        // given
-        AstCssImagePseudoClass astCssImagePseudoClass = new AstCssImagePseudoClass();
-        // when
-        astCssImagePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssImagePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssImagePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssImagePseudoClass());
     }
 
     @Test
     public void visitCssEnabledPseudoClass() {
-        // given
-        AstCssEnabledPseudoClass astCssEnabledPseudoClass = new AstCssEnabledPseudoClass();
-        // when
-        astCssEnabledPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssEnabledPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssEnabledPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssEnabledPseudoClass());
     }
 
     @Test
     public void visitCssPasswordPseudoClass() {
-        // given
-        AstCssPasswordPseudoClass astCssPasswordPseudoClass = new AstCssPasswordPseudoClass();
-        // when
-        astCssPasswordPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssPasswordPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssPasswordPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssPasswordPseudoClass());
     }
 
     @Test
     public void visitCssSubmitPseudoClass() {
-        // given
-        AstCssSubmitPseudoClass astCssSubmitPseudoClass = new AstCssSubmitPseudoClass();
-        // when
-        astCssSubmitPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssSubmitPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssSubmitPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssSubmitPseudoClass());
     }
 
     @Test
     public void visitCssTextPseudoClass() {
-        // given
-        AstCssTextPseudoClass astCssTextPseudoClass = new AstCssTextPseudoClass();
-        // when
-        astCssTextPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssTextPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssTextPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssTextPseudoClass());
     }
 
     @Test
     public void visitCssFocusablePseudoClass() {
-        // given
-        AstCssFocusablePseudoClass astCssFocusablePseudoClass = new AstCssFocusablePseudoClass();
-        // when
-        astCssFocusablePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssFocusablePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssFocusablePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssFocusablePseudoClass());
     }
 
     @Test
     public void visitCssTabbablePseudoClass() {
-        // given
-        AstCssTabbablePseudoClass astCssTabbablePseudoClass = new AstCssTabbablePseudoClass();
-        // when
-        astCssTabbablePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssTabbablePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssTabbablePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssTabbablePseudoClass());
     }
 
     @Test
     public void visitCssBlankPseudoClass() {
-        // given
-        AstCssBlankPseudoClass astCssBlankPseudoClass = new AstCssBlankPseudoClass();
-        // when
-        astCssBlankPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssBlankPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssBlankPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssBlankPseudoClass());
     }
 
     @Test
     public void visitCssFilledPseudoClass() {
-        // given
-        AstCssFilledPseudoClass astCssFilledPseudoClass = new AstCssFilledPseudoClass();
-        // when
-        astCssFilledPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssFilledPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssFilledPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssFilledPseudoClass());
     }
 
     @Test
     public void visitCssPresentPseudoClass() {
-        // given
-        AstCssPresentPseudoClass astCssPresentPseudoClass = new AstCssPresentPseudoClass();
-        // when
-        astCssPresentPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssPresentPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssPresentPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssPresentPseudoClass());
     }
 
     @Test
     public void visitCssUncheckedPseudoClass() {
-        // given
-        AstCssUncheckedPseudoClass astCssUncheckedPseudoClass = new AstCssUncheckedPseudoClass();
-        // when
-        astCssUncheckedPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssUncheckedPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssUncheckedPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssUncheckedPseudoClass());
     }
 
     @Test
     public void visitCssHiddenPseudoClass() {
-        // given
-        AstCssHiddenPseudoClass astCssHiddenPseudoClass = new AstCssHiddenPseudoClass();
-        // when
-        astCssHiddenPseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssHiddenPseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssHiddenPseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssHiddenPseudoClass());
     }
 
     @Test
     public void visitCssVisiblePseudoClass() {
-        // given
-        AstCssVisiblePseudoClass astCssVisiblePseudoClass = new AstCssVisiblePseudoClass();
-        // when
-        astCssVisiblePseudoClass.accept(visitor);
-        // then
-        assertEquals(AstCssVisiblePseudoClass.class, visitor.getVisitedClass());
-        assertEquals(astCssVisiblePseudoClass, visitor.getVisitedInstance());
+        assertVisitorVisitsCorrectClass(new AstCssVisiblePseudoClass());
     }
 
 }
