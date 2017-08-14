@@ -16,11 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.contentfilter.AstCssHasPseudoClass;
 
-public class CssHasPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+public class CssHasPseudoClass implements CssPseudoClassCondition {
 
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final AstCssHasPseudoClass astCssHasPseudoClass;
@@ -28,5 +27,7 @@ public class CssHasPseudoClass implements CssPseudoClassCondition, CssConditionI
     public CssHasPseudoClass(AstCssHasPseudoClass astCssHasPseudoClass) {
         this.astCssHasPseudoClass = astCssHasPseudoClass;
     }
+
+    // TODO selector 2nd gen
 
 }

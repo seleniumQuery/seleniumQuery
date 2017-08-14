@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finde
 
 import org.openqa.selenium.WebDriver;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 
-public interface AlwaysNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass, CssConditionImplementedFinders {
+public interface AlwaysNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass, CssCondition {
 
     @Override
     default boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {

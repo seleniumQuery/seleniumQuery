@@ -19,7 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 import org.unbescape.css.CssEscape;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
@@ -31,11 +30,11 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCs
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class CssAttributeConditionBase implements CssCondition, CssConditionImplementedFinders {
+public abstract class CssAttributeConditionBase implements CssCondition {
 
     private final AstCssAttributeConditionBase astCssAttributeConditionBase;
 
-    protected CssAttributeConditionBase(AstCssAttributeConditionBase astCssAttributeConditionBase) {
+    CssAttributeConditionBase(AstCssAttributeConditionBase astCssAttributeConditionBase) {
         this.astCssAttributeConditionBase = astCssAttributeConditionBase;
     }
 
@@ -58,7 +57,7 @@ public abstract class CssAttributeConditionBase implements CssCondition, CssCond
         return new CssFinder("[" + getCssEscapedAttributeName() + symbol() + "'" + CssEscape.escapeCssString(this.astCssAttributeConditionBase.wantedValue) + "']");
     }
 
-    protected String getCssEscapedAttributeName() {
+    String getCssEscapedAttributeName() {
         return CssEscape.escapeCssIdentifier(this.astCssAttributeConditionBase.attributeName);
     }
 

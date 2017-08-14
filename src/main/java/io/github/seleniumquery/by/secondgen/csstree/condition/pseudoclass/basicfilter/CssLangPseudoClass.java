@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssLangPseudoClass;
 
@@ -26,7 +25,7 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.bas
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssLangPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+public class CssLangPseudoClass implements CssPseudoClassCondition {
 
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final AstCssLangPseudoClass astCssLangPseudoClass;
@@ -34,5 +33,7 @@ public class CssLangPseudoClass implements CssPseudoClassCondition, CssCondition
     public CssLangPseudoClass(AstCssLangPseudoClass astCssLangPseudoClass) {
         this.astCssLangPseudoClass = astCssLangPseudoClass;
     }
+
+    // TODO selector 2nd gen
 
 }

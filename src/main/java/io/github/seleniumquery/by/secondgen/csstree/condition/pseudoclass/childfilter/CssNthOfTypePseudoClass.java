@@ -16,13 +16,14 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.childfilter.AstCssNthOfTypePseudoClass;
 
-public class CssNthOfTypePseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+public class CssNthOfTypePseudoClass implements CssPseudoClassCondition {
 
     public CssNthOfTypePseudoClass(AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass) {
     }
+
+    // TODO selector 2nd gen
 
 }

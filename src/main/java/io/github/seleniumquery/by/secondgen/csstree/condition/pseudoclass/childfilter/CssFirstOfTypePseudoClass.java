@@ -24,4 +24,6 @@ public class CssFirstOfTypePseudoClass extends CssNthOfTypePseudoClass {
         super(new AstCssFirstOfTypePseudoClass());
     }
 
+    // TODO selector 2nd gen
+
 }

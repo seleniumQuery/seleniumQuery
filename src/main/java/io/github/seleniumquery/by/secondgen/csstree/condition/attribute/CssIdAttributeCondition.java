@@ -19,7 +19,6 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 import org.unbescape.css.CssEscape;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
@@ -33,7 +32,7 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCs
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssIdAttributeCondition implements CssCondition, CssConditionImplementedFinders {
+public class CssIdAttributeCondition implements CssCondition {
 
     private final AstCssIdAttributeCondition astCssIdAttributeCondition;
 

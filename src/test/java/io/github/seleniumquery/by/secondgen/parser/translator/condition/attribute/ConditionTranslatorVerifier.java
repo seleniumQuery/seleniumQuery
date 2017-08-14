@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +16,29 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 
 @SuppressWarnings("deprecation")
 abstract class ConditionTranslatorVerifier {
 
-    protected String prefix;
+    String prefix;
 
-    public ConditionTranslatorVerifier(String prefix) {
+    ConditionTranslatorVerifier(String prefix) {
         this.prefix = prefix;
     }
 
-    public abstract CssConditionImplementedFinders verifyTranslation(String actualSelector, String expectedId);
+    public abstract CssCondition verifyTranslation(String actualSelector, String expectedId);
 
-    public void verifyTranslationAndReturn(String actualSelector, String expectedId) {
-        CssConditionImplementedFinders condition = verifyTranslation(actualSelector, expectedId);
+    private void verifyTranslationAndReturn(String actualSelector, String expectedId) {
+        CssCondition condition = verifyTranslation(actualSelector, expectedId);
         String cssStringGeneratedByCondition = TranslatorsTestUtils.getCssStringGeneratedByCondition(condition);
         assertThat(cssStringGeneratedByCondition, is(prefix + actualSelector));
     }
 
-    public void verify() {
+    void verify() {
         verifyTranslationOfRegularIdentifiers();
         verifyTranslationOfEscapedIdentifiers();
     }
