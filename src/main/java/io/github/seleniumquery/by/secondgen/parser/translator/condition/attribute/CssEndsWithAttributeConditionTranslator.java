@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 
 import org.w3c.css.sac.AttributeCondition;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssEndsWithAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssEndsWithAttributeCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssEndsWithAttributeCondition;
 
 /**
  * [attribute$=stringToEnd]

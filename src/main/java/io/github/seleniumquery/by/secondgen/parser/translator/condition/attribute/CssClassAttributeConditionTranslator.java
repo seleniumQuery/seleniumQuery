@@ -18,8 +18,8 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 
 import org.w3c.css.sac.AttributeCondition;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssClassAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssClassAttributeCondition;
 
 /**
  * .class

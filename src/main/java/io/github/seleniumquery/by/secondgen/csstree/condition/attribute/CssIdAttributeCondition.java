@@ -23,6 +23,7 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplem
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssIdAttributeCondition;
 
 /**
  * #id

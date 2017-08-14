@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
+package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
-public abstract class AstCssAttributeConditionBase implements AstCssAttributeCondition {
+public interface AstCssAttributeCondition {
 
-    protected final String attributeName;
-    protected final String wantedValue;
-
-    public AstCssAttributeConditionBase(String attributeName, String wantedValue) {
-        this.attributeName = attributeName;
-        this.wantedValue = wantedValue;
-    }
+    <T> T accept(AstCssAttributeConditionVisitor<T> visitor);
 
 }

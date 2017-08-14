@@ -23,10 +23,10 @@ import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.c
 
 import org.junit.Test;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssClassAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.CssDescendantSelector;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssClassAttributeCondition;
 
 public class CssConditionalSelectorTest {
 
