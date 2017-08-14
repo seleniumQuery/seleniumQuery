@@ -16,9 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssUncheckedPseudoClass implements CssPseudoClassCondition, CssConditionImplementedNotYet {
+public class CssUncheckedPseudoClass implements CssPseudoClassCondition {
+
+    // TODO selector 2nd gen
 
 }

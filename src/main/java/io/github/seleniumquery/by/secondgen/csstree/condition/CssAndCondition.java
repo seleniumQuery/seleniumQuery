@@ -29,7 +29,7 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssAndCondit
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssAndCondition implements CssCondition, CssConditionImplementedFinders {
+public class CssAndCondition implements CssCondition {
 
     private final AstCssAndCondition astCssAndCondition;
 
@@ -47,8 +47,8 @@ public class CssAndCondition implements CssCondition, CssConditionImplementedFin
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {
-        CssConditionImplementedFinders firstCondition = (CssConditionImplementedFinders) this.getFirstCondition();
-        CssConditionImplementedFinders secondCondition = (CssConditionImplementedFinders) this.getSecondCondition();
+        CssCondition firstCondition = this.getFirstCondition();
+        CssCondition secondCondition = this.getSecondCondition();
 
         ElementFinder elementFinder = firstCondition.toElementFinder(leftFinder);
         return secondCondition.toElementFinder(elementFinder);

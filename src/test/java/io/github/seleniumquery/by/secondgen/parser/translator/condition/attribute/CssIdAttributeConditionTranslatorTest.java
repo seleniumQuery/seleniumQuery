@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,20 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
+import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils
+    .parseAndAssertFirstCssCondition;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssIdAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionalSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
 import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
-import org.junit.Test;
-
-import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public class CssIdAttributeConditionTranslatorTest {
 
@@ -57,7 +58,7 @@ public class CssIdAttributeConditionTranslatorTest {
     static class IdVerifier extends ConditionTranslatorVerifier {
         IdVerifier() { super("#"); }
         @Override
-        public CssConditionImplementedFinders verifyTranslation(String actualSelector, String expectedId) {
+        public CssCondition verifyTranslation(String actualSelector, String expectedId) {
             // given
             // selector arg
             // when
