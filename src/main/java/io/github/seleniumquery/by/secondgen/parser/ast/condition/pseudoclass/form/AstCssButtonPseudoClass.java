@@ -24,8 +24,8 @@ public class AstCssButtonPseudoClass implements AstCssPseudoClassCondition {
     public static final String PSEUDO = "button";
 
     @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
+    public <T> T accept(AstCssPseudoClassConditionVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 
 }

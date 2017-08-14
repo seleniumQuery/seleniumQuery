@@ -24,8 +24,8 @@ public class AstCssHiddenPseudoClass implements AstCssPseudoClassCondition {
     public static final String PSEUDO = "hidden";
 
     @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
+    public <T> T accept(AstCssPseudoClassConditionVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 
 }

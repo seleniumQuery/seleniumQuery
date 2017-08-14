@@ -22,6 +22,8 @@ import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass
 
 import org.junit.Test;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssNthPseudoClass;
+
 /**
  * :nth() selector is just an alias to :eq(), so this test class is equal to the eq test class.
  * Edit there and then edit here. (Of course, the best would be to refactor them to eliminate code
@@ -43,7 +45,7 @@ public class CssNthPseudoClassTest {
     }
 
     private void assertNthArgumentGeneratesXPath(int nthArgument, String nthXPathExpression) {
-        assertPseudoClass(new CssNthPseudoClass(nthArgument)).whenNotNativelySupported().translatesToPureXPath(nthXPathExpression);
+        assertPseudoClass(new CssNthPseudoClass(new AstCssNthPseudoClass(nthArgument))).whenNotNativelySupported().translatesToPureXPath(nthXPathExpression);
     }
 
     @Test

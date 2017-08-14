@@ -78,7 +78,7 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.vis
 
 public class AstCssPseudoClassConditionVisitorTest {
 
-    class AstCssPseudoClassConditionVisitorMock implements AstCssPseudoClassConditionVisitor {
+    class AstCssPseudoClassConditionVisitorMock implements AstCssPseudoClassConditionVisitor<Void> {
         private Class<? extends AstCssPseudoClassCondition> visitedClass;
         private AstCssPseudoClassCondition visitedInstance;
 
@@ -91,57 +91,57 @@ public class AstCssPseudoClassConditionVisitorTest {
             this.visitedInstance = visited;
         }
 
-        @Override public void visit(AstCssAnimatedPseudoClass astCssAnimatedPseudoClass) { registerVisit(AstCssAnimatedPseudoClass.class, astCssAnimatedPseudoClass); }
-        @Override public void visit(AstCssEqPseudoClass astCssEqPseudoClass) { registerVisit(AstCssEqPseudoClass.class, astCssEqPseudoClass); }
-        @Override public void visit(AstCssEvenPseudoClass astCssEvenPseudoClass) { registerVisit(AstCssEvenPseudoClass.class, astCssEvenPseudoClass); }
-        @Override public void visit(AstCssFirstPseudoClass astCssFirstPseudoClass) { registerVisit(AstCssFirstPseudoClass.class, astCssFirstPseudoClass); }
-        @Override public void visit(AstCssGtPseudoClass astCssGtPseudoClass) { registerVisit(AstCssGtPseudoClass.class, astCssGtPseudoClass); }
-        @Override public void visit(AstCssHeaderPseudoClass astCssHeaderPseudoClass) { registerVisit(AstCssHeaderPseudoClass.class, astCssHeaderPseudoClass); }
-        @Override public void visit(AstCssLangPseudoClass astCssLangPseudoClass) { registerVisit(AstCssLangPseudoClass.class, astCssLangPseudoClass); }
-        @Override public void visit(AstCssLastPseudoClass astCssLastPseudoClass) { registerVisit(AstCssLastPseudoClass.class, astCssLastPseudoClass); }
-        @Override public void visit(AstCssLtPseudoClass astCssLtPseudoClass) { registerVisit(AstCssLtPseudoClass.class, astCssLtPseudoClass); }
-        @Override public void visit(AstCssNotPseudoClass astCssNotPseudoClass) { registerVisit(AstCssNotPseudoClass.class, astCssNotPseudoClass); }
-        @Override public void visit(AstCssNthPseudoClass astCssNthPseudoClass) { registerVisit(AstCssNthPseudoClass.class, astCssNthPseudoClass); }
-        @Override public void visit(AstCssOddPseudoClass astCssOddPseudoClass) { registerVisit(AstCssOddPseudoClass.class, astCssOddPseudoClass); }
-        @Override public void visit(AstCssRootPseudoClass astCssRootPseudoClass) { registerVisit(AstCssRootPseudoClass.class, astCssRootPseudoClass); }
-        @Override public void visit(AstCssTargetPseudoClass astCssTargetPseudoClass) { registerVisit(AstCssTargetPseudoClass.class, astCssTargetPseudoClass); }
-        @Override public void visit(AstCssFirstChildPseudoClass astCssFirstChildPseudoClass) { registerVisit(AstCssFirstChildPseudoClass.class, astCssFirstChildPseudoClass); }
-        @Override public void visit(AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass) { registerVisit(AstCssFirstOfTypePseudoClass.class, astCssFirstOfTypePseudoClass); }
-        @Override public void visit(AstCssLastChildPseudoClass astCssLastChildPseudoClass) { registerVisit(AstCssLastChildPseudoClass.class, astCssLastChildPseudoClass); }
-        @Override public void visit(AstCssLastOfTypePseudoClass astCssLastOfTypePseudoClass) { registerVisit(AstCssLastOfTypePseudoClass.class, astCssLastOfTypePseudoClass); }
-        @Override public void visit(AstCssNthChildPseudoClass astCssNthChildPseudoClass) { registerVisit(AstCssNthChildPseudoClass.class, astCssNthChildPseudoClass); }
-        @Override public void visit(AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass) { registerVisit(AstCssNthLastChildPseudoClass.class, astCssNthLastChildPseudoClass); }
-        @Override public void visit(AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass) { registerVisit(AstCssNthLastOfTypePseudoClass.class, astCssNthLastOfTypePseudoClass); }
-        @Override public void visit(AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass) { registerVisit(AstCssNthOfTypePseudoClass.class, astCssNthOfTypePseudoClass); }
-        @Override public void visit(AstCssOnlyChildPseudoClass astCssOnlyChildPseudoClass) { registerVisit(AstCssOnlyChildPseudoClass.class, astCssOnlyChildPseudoClass); }
-        @Override public void visit(AstCssOnlyOfTypePseudoClass astCssOnlyOfTypePseudoClass) { registerVisit(AstCssOnlyOfTypePseudoClass.class, astCssOnlyOfTypePseudoClass); }
-        @Override public void visit(AstCssContainsPseudoClass astCssContainsPseudoClass) { registerVisit(AstCssContainsPseudoClass.class, astCssContainsPseudoClass); }
-        @Override public void visit(AstCssEmptyPseudoClass astCssEmptyPseudoClass) { registerVisit(AstCssEmptyPseudoClass.class, astCssEmptyPseudoClass); }
-        @Override public void visit(AstCssHasPseudoClass astCssHasPseudoClass) { registerVisit(AstCssHasPseudoClass.class, astCssHasPseudoClass); }
-        @Override public void visit(AstCssParentPseudoClass astCssParentPseudoClass) { registerVisit(AstCssParentPseudoClass.class, astCssParentPseudoClass); }
-        @Override public void visit(AstCssButtonPseudoClass astCssButtonPseudoClass) { registerVisit(AstCssButtonPseudoClass.class, astCssButtonPseudoClass); }
-        @Override public void visit(AstCssCheckboxPseudoClass astCssCheckboxPseudoClass) { registerVisit(AstCssCheckboxPseudoClass.class, astCssCheckboxPseudoClass); }
-        @Override public void visit(AstCssCheckedPseudoClass astCssCheckedPseudoClass) { registerVisit(AstCssCheckedPseudoClass.class, astCssCheckedPseudoClass); }
-        @Override public void visit(AstCssDisabledPseudoClass astCssDisabledPseudoClass) { registerVisit(AstCssDisabledPseudoClass.class, astCssDisabledPseudoClass); }
-        @Override public void visit(AstCssInputPseudoClass astCssInputPseudoClass) { registerVisit(AstCssInputPseudoClass.class, astCssInputPseudoClass); }
-        @Override public void visit(AstCssFilePseudoClass astCssFilePseudoClass) { registerVisit(AstCssFilePseudoClass.class, astCssFilePseudoClass); }
-        @Override public void visit(AstCssResetPseudoClass astCssResetPseudoClass) { registerVisit(AstCssResetPseudoClass.class, astCssResetPseudoClass); }
-        @Override public void visit(AstCssFocusPseudoClass astCssFocusPseudoClass) { registerVisit(AstCssFocusPseudoClass.class, astCssFocusPseudoClass); }
-        @Override public void visit(AstCssRadioPseudoClass astCssRadioPseudoClass) { registerVisit(AstCssRadioPseudoClass.class, astCssRadioPseudoClass); }
-        @Override public void visit(AstCssSelectedPseudoClass astCssSelectedPseudoClass) { registerVisit(AstCssSelectedPseudoClass.class, astCssSelectedPseudoClass); }
-        @Override public void visit(AstCssImagePseudoClass astCssImagePseudoClass) { registerVisit(AstCssImagePseudoClass.class, astCssImagePseudoClass); }
-        @Override public void visit(AstCssEnabledPseudoClass astCssEnabledPseudoClass) { registerVisit(AstCssEnabledPseudoClass.class, astCssEnabledPseudoClass); }
-        @Override public void visit(AstCssPasswordPseudoClass astCssPasswordPseudoClass) { registerVisit(AstCssPasswordPseudoClass.class, astCssPasswordPseudoClass); }
-        @Override public void visit(AstCssSubmitPseudoClass astCssSubmitPseudoClass) { registerVisit(AstCssSubmitPseudoClass.class, astCssSubmitPseudoClass); }
-        @Override public void visit(AstCssTextPseudoClass astCssTextPseudoClass) { registerVisit(AstCssTextPseudoClass.class, astCssTextPseudoClass); }
-        @Override public void visit(AstCssFocusablePseudoClass astCssFocusablePseudoClass) { registerVisit(AstCssFocusablePseudoClass.class, astCssFocusablePseudoClass); }
-        @Override public void visit(AstCssTabbablePseudoClass astCssTabbablePseudoClass) { registerVisit(AstCssTabbablePseudoClass.class, astCssTabbablePseudoClass); }
-        @Override public void visit(AstCssBlankPseudoClass astCssBlankPseudoClass) { registerVisit(AstCssBlankPseudoClass.class, astCssBlankPseudoClass); }
-        @Override public void visit(AstCssFilledPseudoClass astCssFilledPseudoClass) { registerVisit(AstCssFilledPseudoClass.class, astCssFilledPseudoClass); }
-        @Override public void visit(AstCssPresentPseudoClass astCssPresentPseudoClass) { registerVisit(AstCssPresentPseudoClass.class, astCssPresentPseudoClass); }
-        @Override public void visit(AstCssUncheckedPseudoClass astCssUncheckedPseudoClass) { registerVisit(AstCssUncheckedPseudoClass.class, astCssUncheckedPseudoClass); }
-        @Override public void visit(AstCssHiddenPseudoClass astCssHiddenPseudoClass) { registerVisit(AstCssHiddenPseudoClass.class, astCssHiddenPseudoClass); }
-        @Override public void visit(AstCssVisiblePseudoClass astCssVisiblePseudoClass) { registerVisit(AstCssVisiblePseudoClass.class, astCssVisiblePseudoClass); }
+        @Override public Void visit(AstCssAnimatedPseudoClass astCssAnimatedPseudoClass) { registerVisit(AstCssAnimatedPseudoClass.class, astCssAnimatedPseudoClass); return null; }
+        @Override public Void visit(AstCssEqPseudoClass astCssEqPseudoClass) { registerVisit(AstCssEqPseudoClass.class, astCssEqPseudoClass); return null; }
+        @Override public Void visit(AstCssEvenPseudoClass astCssEvenPseudoClass) { registerVisit(AstCssEvenPseudoClass.class, astCssEvenPseudoClass); return null; }
+        @Override public Void visit(AstCssFirstPseudoClass astCssFirstPseudoClass) { registerVisit(AstCssFirstPseudoClass.class, astCssFirstPseudoClass); return null; }
+        @Override public Void visit(AstCssGtPseudoClass astCssGtPseudoClass) { registerVisit(AstCssGtPseudoClass.class, astCssGtPseudoClass); return null; }
+        @Override public Void visit(AstCssHeaderPseudoClass astCssHeaderPseudoClass) { registerVisit(AstCssHeaderPseudoClass.class, astCssHeaderPseudoClass); return null; }
+        @Override public Void visit(AstCssLangPseudoClass astCssLangPseudoClass) { registerVisit(AstCssLangPseudoClass.class, astCssLangPseudoClass); return null; }
+        @Override public Void visit(AstCssLastPseudoClass astCssLastPseudoClass) { registerVisit(AstCssLastPseudoClass.class, astCssLastPseudoClass); return null; }
+        @Override public Void visit(AstCssLtPseudoClass astCssLtPseudoClass) { registerVisit(AstCssLtPseudoClass.class, astCssLtPseudoClass); return null; }
+        @Override public Void visit(AstCssNotPseudoClass astCssNotPseudoClass) { registerVisit(AstCssNotPseudoClass.class, astCssNotPseudoClass); return null; }
+        @Override public Void visit(AstCssNthPseudoClass astCssNthPseudoClass) { registerVisit(AstCssNthPseudoClass.class, astCssNthPseudoClass); return null; }
+        @Override public Void visit(AstCssOddPseudoClass astCssOddPseudoClass) { registerVisit(AstCssOddPseudoClass.class, astCssOddPseudoClass); return null; }
+        @Override public Void visit(AstCssRootPseudoClass astCssRootPseudoClass) { registerVisit(AstCssRootPseudoClass.class, astCssRootPseudoClass); return null; }
+        @Override public Void visit(AstCssTargetPseudoClass astCssTargetPseudoClass) { registerVisit(AstCssTargetPseudoClass.class, astCssTargetPseudoClass); return null; }
+        @Override public Void visit(AstCssFirstChildPseudoClass astCssFirstChildPseudoClass) { registerVisit(AstCssFirstChildPseudoClass.class, astCssFirstChildPseudoClass); return null; }
+        @Override public Void visit(AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass) { registerVisit(AstCssFirstOfTypePseudoClass.class, astCssFirstOfTypePseudoClass); return null; }
+        @Override public Void visit(AstCssLastChildPseudoClass astCssLastChildPseudoClass) { registerVisit(AstCssLastChildPseudoClass.class, astCssLastChildPseudoClass); return null; }
+        @Override public Void visit(AstCssLastOfTypePseudoClass astCssLastOfTypePseudoClass) { registerVisit(AstCssLastOfTypePseudoClass.class, astCssLastOfTypePseudoClass); return null; }
+        @Override public Void visit(AstCssNthChildPseudoClass astCssNthChildPseudoClass) { registerVisit(AstCssNthChildPseudoClass.class, astCssNthChildPseudoClass); return null; }
+        @Override public Void visit(AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass) { registerVisit(AstCssNthLastChildPseudoClass.class, astCssNthLastChildPseudoClass); return null; }
+        @Override public Void visit(AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass) { registerVisit(AstCssNthLastOfTypePseudoClass.class, astCssNthLastOfTypePseudoClass); return null; }
+        @Override public Void visit(AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass) { registerVisit(AstCssNthOfTypePseudoClass.class, astCssNthOfTypePseudoClass); return null; }
+        @Override public Void visit(AstCssOnlyChildPseudoClass astCssOnlyChildPseudoClass) { registerVisit(AstCssOnlyChildPseudoClass.class, astCssOnlyChildPseudoClass); return null; }
+        @Override public Void visit(AstCssOnlyOfTypePseudoClass astCssOnlyOfTypePseudoClass) { registerVisit(AstCssOnlyOfTypePseudoClass.class, astCssOnlyOfTypePseudoClass); return null; }
+        @Override public Void visit(AstCssContainsPseudoClass astCssContainsPseudoClass) { registerVisit(AstCssContainsPseudoClass.class, astCssContainsPseudoClass); return null; }
+        @Override public Void visit(AstCssEmptyPseudoClass astCssEmptyPseudoClass) { registerVisit(AstCssEmptyPseudoClass.class, astCssEmptyPseudoClass); return null; }
+        @Override public Void visit(AstCssHasPseudoClass astCssHasPseudoClass) { registerVisit(AstCssHasPseudoClass.class, astCssHasPseudoClass); return null; }
+        @Override public Void visit(AstCssParentPseudoClass astCssParentPseudoClass) { registerVisit(AstCssParentPseudoClass.class, astCssParentPseudoClass); return null; }
+        @Override public Void visit(AstCssButtonPseudoClass astCssButtonPseudoClass) { registerVisit(AstCssButtonPseudoClass.class, astCssButtonPseudoClass); return null; }
+        @Override public Void visit(AstCssCheckboxPseudoClass astCssCheckboxPseudoClass) { registerVisit(AstCssCheckboxPseudoClass.class, astCssCheckboxPseudoClass); return null; }
+        @Override public Void visit(AstCssCheckedPseudoClass astCssCheckedPseudoClass) { registerVisit(AstCssCheckedPseudoClass.class, astCssCheckedPseudoClass); return null; }
+        @Override public Void visit(AstCssDisabledPseudoClass astCssDisabledPseudoClass) { registerVisit(AstCssDisabledPseudoClass.class, astCssDisabledPseudoClass); return null; }
+        @Override public Void visit(AstCssInputPseudoClass astCssInputPseudoClass) { registerVisit(AstCssInputPseudoClass.class, astCssInputPseudoClass); return null; }
+        @Override public Void visit(AstCssFilePseudoClass astCssFilePseudoClass) { registerVisit(AstCssFilePseudoClass.class, astCssFilePseudoClass); return null; }
+        @Override public Void visit(AstCssResetPseudoClass astCssResetPseudoClass) { registerVisit(AstCssResetPseudoClass.class, astCssResetPseudoClass); return null; }
+        @Override public Void visit(AstCssFocusPseudoClass astCssFocusPseudoClass) { registerVisit(AstCssFocusPseudoClass.class, astCssFocusPseudoClass); return null; }
+        @Override public Void visit(AstCssRadioPseudoClass astCssRadioPseudoClass) { registerVisit(AstCssRadioPseudoClass.class, astCssRadioPseudoClass); return null; }
+        @Override public Void visit(AstCssSelectedPseudoClass astCssSelectedPseudoClass) { registerVisit(AstCssSelectedPseudoClass.class, astCssSelectedPseudoClass); return null; }
+        @Override public Void visit(AstCssImagePseudoClass astCssImagePseudoClass) { registerVisit(AstCssImagePseudoClass.class, astCssImagePseudoClass); return null; }
+        @Override public Void visit(AstCssEnabledPseudoClass astCssEnabledPseudoClass) { registerVisit(AstCssEnabledPseudoClass.class, astCssEnabledPseudoClass); return null; }
+        @Override public Void visit(AstCssPasswordPseudoClass astCssPasswordPseudoClass) { registerVisit(AstCssPasswordPseudoClass.class, astCssPasswordPseudoClass); return null; }
+        @Override public Void visit(AstCssSubmitPseudoClass astCssSubmitPseudoClass) { registerVisit(AstCssSubmitPseudoClass.class, astCssSubmitPseudoClass); return null; }
+        @Override public Void visit(AstCssTextPseudoClass astCssTextPseudoClass) { registerVisit(AstCssTextPseudoClass.class, astCssTextPseudoClass); return null; }
+        @Override public Void visit(AstCssFocusablePseudoClass astCssFocusablePseudoClass) { registerVisit(AstCssFocusablePseudoClass.class, astCssFocusablePseudoClass); return null; }
+        @Override public Void visit(AstCssTabbablePseudoClass astCssTabbablePseudoClass) { registerVisit(AstCssTabbablePseudoClass.class, astCssTabbablePseudoClass); return null; }
+        @Override public Void visit(AstCssBlankPseudoClass astCssBlankPseudoClass) { registerVisit(AstCssBlankPseudoClass.class, astCssBlankPseudoClass); return null; }
+        @Override public Void visit(AstCssFilledPseudoClass astCssFilledPseudoClass) { registerVisit(AstCssFilledPseudoClass.class, astCssFilledPseudoClass); return null; }
+        @Override public Void visit(AstCssPresentPseudoClass astCssPresentPseudoClass) { registerVisit(AstCssPresentPseudoClass.class, astCssPresentPseudoClass); return null; }
+        @Override public Void visit(AstCssUncheckedPseudoClass astCssUncheckedPseudoClass) { registerVisit(AstCssUncheckedPseudoClass.class, astCssUncheckedPseudoClass); return null; }
+        @Override public Void visit(AstCssHiddenPseudoClass astCssHiddenPseudoClass) { registerVisit(AstCssHiddenPseudoClass.class, astCssHiddenPseudoClass); return null; }
+        @Override public Void visit(AstCssVisiblePseudoClass astCssVisiblePseudoClass) { registerVisit(AstCssVisiblePseudoClass.class, astCssVisiblePseudoClass); return null; }
     }
 
     private AstCssPseudoClassConditionVisitorMock visitor = new AstCssPseudoClassConditionVisitorMock();

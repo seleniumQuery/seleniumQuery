@@ -24,8 +24,8 @@ public class AstCssPresentPseudoClass implements AstCssPseudoClassCondition {
     public static final String PSEUDO = "present";
 
     @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
+    public <T> T accept(AstCssPseudoClassConditionVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 
 }
