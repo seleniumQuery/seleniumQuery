@@ -21,9 +21,8 @@ import org.w3c.css.sac.SimpleSelector;
 
 import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.secondgen.csstree.condition.AstCssAndCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssAndCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssAndCondition;
 
 /**
  * E.firstCondition.secondCondition
@@ -42,14 +41,14 @@ class CssAndConditionTranslator {
 		this.cssConditionTranslator = cssConditionTranslator;
 	}
 
-	public CssAndCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, CombinatorCondition combinatorCondition) {
+	public AstCssAndCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, CombinatorCondition combinatorCondition) {
 		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
 																					selectorUpToThisPoint,
 																					combinatorCondition.getFirstCondition());
 
 		CssCondition firstCondition = cssConditionTranslator.translate(selectorUpToThisPoint, argumentMap, combinatorCondition.getFirstCondition());
 		CssCondition secondCondition = cssConditionTranslator.translate(selectorUpToThisPointPlusFirstCondition, argumentMap, combinatorCondition.getSecondCondition());
-		return new CssAndCondition(new AstCssAndCondition(firstCondition, secondCondition));
+		return new AstCssAndCondition(firstCondition, secondCondition);
 	}
 
 }

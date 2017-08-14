@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.csstree.condition;
+package io.github.seleniumquery.by.secondgen.parser.ast.condition;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 
 public class AstCssAndCondition implements AstCssCondition {
 

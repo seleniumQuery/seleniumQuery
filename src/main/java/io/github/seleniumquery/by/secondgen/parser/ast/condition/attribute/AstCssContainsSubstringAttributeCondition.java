@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssConditionVisitor;
+
 public class AstCssContainsSubstringAttributeCondition extends AstCssAttributeConditionBase {
 
     public AstCssContainsSubstringAttributeCondition(String attributeName, String wantedValue) {
@@ -23,7 +25,7 @@ public class AstCssContainsSubstringAttributeCondition extends AstCssAttributeCo
     }
 
     @Override
-    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
+    public <T> T accept(AstCssConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

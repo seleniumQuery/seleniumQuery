@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssConditionVisitor;
+
 public class AstCssContainsPrefixAttributeCondition extends AstCssAttributeConditionBase {
 
     public AstCssContainsPrefixAttributeCondition(String attributeName, String wantedValue) {
@@ -23,7 +25,7 @@ public class AstCssContainsPrefixAttributeCondition extends AstCssAttributeCondi
     }
 
     @Override
-    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
+    public <T> T accept(AstCssConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

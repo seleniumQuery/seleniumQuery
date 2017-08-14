@@ -19,8 +19,6 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 import org.unbescape.java.JavaEscape;
 import org.w3c.css.sac.AttributeCondition;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssIdAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssIdAttributeCondition;
 
 /**
@@ -33,10 +31,10 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCs
  */
 public class CssIdAttributeConditionTranslator {
 
-	public CssCondition translate(AttributeCondition attributeCondition) {
+	public AstCssIdAttributeCondition translate(AttributeCondition attributeCondition) {
 		String wantedId = attributeCondition.getValue();
 		String escapedId = JavaEscape.unescapeJava(wantedId);
-		return new CssIdAttributeCondition(new AstCssIdAttributeCondition(escapedId));
+		return new AstCssIdAttributeCondition(escapedId);
 	}
 
 }

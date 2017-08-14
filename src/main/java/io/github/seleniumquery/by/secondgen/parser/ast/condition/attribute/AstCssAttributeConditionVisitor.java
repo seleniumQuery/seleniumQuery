@@ -16,15 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
-public interface AstCssAttributeConditionVisitor<T> {
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssConditionVisitor;
 
-    T visit(AstCssClassAttributeCondition astCssClassAttributeCondition);
-    T visit(AstCssContainsPrefixAttributeCondition astCssContainsPrefixAttributeCondition);
-    T visit(AstCssContainsSubstringAttributeCondition astCssContainsSubstringAttributeCondition);
-    T visit(AstCssContainsWordAttributeCondition astCssContainsWordAttributeCondition);
-    T visit(AstCssEndsWithAttributeCondition astCssEndsWithAttributeCondition);
-    T visit(AstCssEqualsOrHasAttributeCondition astCssEqualsOrHasAttributeCondition);
-    T visit(AstCssIdAttributeCondition astCssIdAttributeCondition);
-    T visit(AstCssStartsWithAttributeCondition astCssStartsWithAttributeCondition);
+public interface AstCssAttributeConditionVisitor<T> extends AstCssConditionVisitor<T> {
+
+
 
 }

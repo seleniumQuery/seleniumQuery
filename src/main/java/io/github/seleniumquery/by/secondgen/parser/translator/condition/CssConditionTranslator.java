@@ -26,6 +26,8 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssUnknownConditionException;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
+import io.github.seleniumquery.by.secondgen.csstree.selector.CssConditionVisitor;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssConditionVisitor;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
 import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.CssClassAttributeConditionTranslator;
 import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.CssContainsPrefixAttributeConditionTranslator;
@@ -56,35 +58,36 @@ public class CssConditionTranslator {
     private final CssClassAttributeConditionTranslator classAttributeConditionTranslator = new CssClassAttributeConditionTranslator();
     private final CssPseudoClassConditionTranslator pseudoClassConditionTranslator = new CssPseudoClassConditionTranslator();
 
+    private AstCssConditionVisitor<CssCondition> astCssConditionVisitor = new CssConditionVisitor();
     private AstCssPseudoClassConditionVisitor<CssPseudoClassCondition> astCssPseudoClassConditionVisitor = new CssPseudoClassConditionVisitor();
 
 	public CssCondition translate(SimpleSelector simpleSelector, ArgumentMap argumentMap, Condition condition) {
 	    switch (condition.getConditionType()) {
 		    case Condition.SAC_AND_CONDITION:
-		    	return andConditionTranslator.translate(simpleSelector, argumentMap, (CombinatorCondition) condition);
+		    	return andConditionTranslator.translate(simpleSelector, argumentMap, (CombinatorCondition) condition).accept(astCssConditionVisitor);
 		    case Condition.SAC_OR_CONDITION:
 				return incompatible("Condition.SAC_OR_CONDITION");
 
 			case Condition.SAC_ATTRIBUTE_CONDITION:
 				if (condition instanceof com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl) {
-		    		return startsWithAttributeConditionTranslator.translate((AttributeCondition) condition);
+		    		return startsWithAttributeConditionTranslator.translate((AttributeCondition) condition).accept(astCssConditionVisitor);
 		    	}
 		    	if (condition instanceof com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl) {
-		    		return endsWithAttributeConditionTranslator.translate((AttributeCondition) condition);
+		    		return endsWithAttributeConditionTranslator.translate((AttributeCondition) condition).accept(astCssConditionVisitor);
 		    	}
 		    	if (condition instanceof com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl) {
-		    		return containsSubstringAttributeConditionTranslator.translate((AttributeCondition) condition);
+		    		return containsSubstringAttributeConditionTranslator.translate((AttributeCondition) condition).accept(astCssConditionVisitor);
 		    	}
 		    	// else: condition is most probably a instance of com.steadystate.css.parser.selectors.AttributeConditionImpl
-		    	return equalsOrHasAttributeConditionTranslator.translate((AttributeCondition) condition);
+		    	return equalsOrHasAttributeConditionTranslator.translate((AttributeCondition) condition).accept(astCssConditionVisitor);
 	        case Condition.SAC_ID_CONDITION:
-				return idAttridAttributeConditionTranslatorbuteCssSelector.translate((AttributeCondition) condition);
+				return idAttridAttributeConditionTranslatorbuteCssSelector.translate((AttributeCondition) condition).accept(astCssConditionVisitor);
 	        case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
-	        	return containsWordAttributeConditionTranslator.translate((AttributeCondition) condition);
+	        	return containsWordAttributeConditionTranslator.translate((AttributeCondition) condition).accept(astCssConditionVisitor);
 	        case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-	        	return containsPrefixAttributeConditionTranslator.translate((AttributeCondition) condition);
+	        	return containsPrefixAttributeConditionTranslator.translate((AttributeCondition) condition).accept(astCssConditionVisitor);
 	        case Condition.SAC_CLASS_CONDITION:
-	        	return classAttributeConditionTranslator.translate((AttributeCondition) condition);
+	        	return classAttributeConditionTranslator.translate((AttributeCondition) condition).accept(astCssConditionVisitor);
 
 	        case Condition.SAC_PSEUDO_CLASS_CONDITION:
                 return pseudoClassConditionTranslator.translate(simpleSelector, argumentMap, (AttributeCondition) condition).accept(astCssPseudoClassConditionVisitor);

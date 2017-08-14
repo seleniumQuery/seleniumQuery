@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssConditionVisitor;
+
 public class AstCssIdAttributeCondition implements AstCssAttributeCondition {
 
     public final String id;
@@ -25,7 +27,7 @@ public class AstCssIdAttributeCondition implements AstCssAttributeCondition {
     }
 
     @Override
-    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
+    public <T> T accept(AstCssConditionVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

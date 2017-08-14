@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 
 import org.w3c.css.sac.AttributeCondition;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssContainsWordAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssContainsWordAttributeCondition;
 
 /**
@@ -29,10 +28,10 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCs
  */
 public class CssContainsWordAttributeConditionTranslator {
 
-	public CssContainsWordAttributeCondition translate(AttributeCondition attributeCondition) {
+	public AstCssContainsWordAttributeCondition translate(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		String wantedValue = attributeCondition.getValue();
-		return new CssContainsWordAttributeCondition(new AstCssContainsWordAttributeCondition(attributeName, wantedValue));
+		return new AstCssContainsWordAttributeCondition(attributeName, wantedValue);
 	}
 
 }

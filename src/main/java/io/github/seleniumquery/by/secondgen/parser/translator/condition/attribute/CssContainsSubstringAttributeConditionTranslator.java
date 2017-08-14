@@ -18,7 +18,6 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 
 import org.w3c.css.sac.AttributeCondition;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssContainsSubstringAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssContainsSubstringAttributeCondition;
 
 /**
@@ -29,10 +28,10 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCs
  */
 public class CssContainsSubstringAttributeConditionTranslator {
 
-	public CssContainsSubstringAttributeCondition translate(AttributeCondition attributeCondition) {
+	public AstCssContainsSubstringAttributeCondition translate(AttributeCondition attributeCondition) {
 		String attributeName = attributeCondition.getLocalName();
 		String wantedValue = attributeCondition.getValue();
-		return new CssContainsSubstringAttributeCondition(new AstCssContainsSubstringAttributeCondition(attributeName, wantedValue));
+		return new AstCssContainsSubstringAttributeCondition(attributeName, wantedValue);
 	}
 
 }

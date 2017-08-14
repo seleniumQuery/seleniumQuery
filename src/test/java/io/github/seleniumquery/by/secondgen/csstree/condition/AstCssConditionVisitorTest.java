@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
+package io.github.seleniumquery.by.secondgen.csstree.condition;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssAttributeCondition;
-import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssAttributeConditionVisitor;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssAndCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssConditionVisitor;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssClassAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssContainsPrefixAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssContainsSubstringAttributeCondition;
@@ -32,21 +33,24 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCs
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssIdAttributeCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssStartsWithAttributeCondition;
 
-public class AstCssAttributeConditionVisitorTest {
+public class AstCssConditionVisitorTest {
 
-    class AstCssAttributeConditionVisitorMock implements AstCssAttributeConditionVisitor<Void> {
-        private Class<? extends AstCssAttributeCondition> visitedClass;
-        private AstCssAttributeCondition visitedInstance;
+    private static final String ATTR = null;
 
-        Class<? extends AstCssAttributeCondition> getVisitedClass() { return visitedClass; }
-        AstCssAttributeCondition getVisitedInstance() { return visitedInstance; }
+    class AstCssConditionVisitorMock implements AstCssConditionVisitor<Void> {
+        private Class<? extends AstCssCondition> visitedClass;
+        private AstCssCondition visitedInstance;
 
-        void registerVisit(Class<? extends AstCssAttributeCondition> visitedClass, AstCssAttributeCondition visited) {
+        Class<? extends AstCssCondition> getVisitedClass() { return visitedClass; }
+        AstCssCondition getVisitedInstance() { return visitedInstance; }
+
+        void registerVisit(Class<? extends AstCssCondition> visitedClass, AstCssCondition visited) {
             if (this.visitedClass != null) fail("Visitor has already registered a visit: " + this.visitedClass);
             this.visitedClass = visitedClass;
             this.visitedInstance = visited;
         }
 
+        @Override public Void visit(AstCssAndCondition astCssAndCondition) { registerVisit(AstCssAndCondition.class, astCssAndCondition); return null; }
         @Override public Void visit(AstCssClassAttributeCondition astCssClassAttributeCondition) { registerVisit(AstCssClassAttributeCondition.class, astCssClassAttributeCondition); return null; }
         @Override public Void visit(AstCssContainsPrefixAttributeCondition astCssContainsPrefixAttributeCondition) { registerVisit(AstCssContainsPrefixAttributeCondition.class, astCssContainsPrefixAttributeCondition); return null; }
         @Override public Void visit(AstCssContainsSubstringAttributeCondition astCssContainsSubstringAttributeCondition) { registerVisit(AstCssContainsSubstringAttributeCondition.class, astCssContainsSubstringAttributeCondition); return null; }
@@ -57,61 +61,66 @@ public class AstCssAttributeConditionVisitorTest {
         @Override public Void visit(AstCssStartsWithAttributeCondition astCssStartsWithAttributeCondition) { registerVisit(AstCssStartsWithAttributeCondition.class, astCssStartsWithAttributeCondition); return null; }
     }
 
-    private AstCssAttributeConditionVisitorTest.AstCssAttributeConditionVisitorMock visitor = new AstCssAttributeConditionVisitorTest.AstCssAttributeConditionVisitorMock();
+    private AstCssConditionVisitorTest.AstCssConditionVisitorMock visitor = new AstCssConditionVisitorTest.AstCssConditionVisitorMock();
 
-    private void assertVisitorVisitsCorrectClass(AstCssAttributeCondition astCssPseudoClassCondition) {
+    private void assertVisitorVisitsCorrectClass(AstCssCondition astCssCondition) {
         // given
         // argument passed
         // when
-        astCssPseudoClassCondition.accept(visitor);
+        astCssCondition.accept(visitor);
         // then
-        assertEquals(astCssPseudoClassCondition.getClass(), visitor.getVisitedClass());
-        assertEquals(astCssPseudoClassCondition, visitor.getVisitedInstance());
+        assertEquals(astCssCondition.getClass(), visitor.getVisitedClass());
+        assertEquals(astCssCondition, visitor.getVisitedInstance());
+    }
+
+    @Test
+    public void visitAstCssAndCondition() {
+        assertVisitorVisitsCorrectClass(new AstCssAndCondition(null, null));
     }
 
     @Test
     public void visitCssClassAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new AstCssClassAttributeCondition("attr"));
+        assertVisitorVisitsCorrectClass(new AstCssClassAttributeCondition(ATTR));
     }
 
     @Test
     public void visitCssContainsPrefixAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new AstCssContainsPrefixAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssContainsPrefixAttributeCondition(ATTR, ATTR));
     }
 
     @Test
     public void visitCssContainsSubstringAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new AstCssContainsSubstringAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssContainsSubstringAttributeCondition(ATTR, ATTR));
     }
 
     @Test
     public void visitCssContainsWordAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new AstCssContainsWordAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssContainsWordAttributeCondition(ATTR, ATTR));
     }
 
     @Test
     public void visitCssEndsWithAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new AstCssEndsWithAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssEndsWithAttributeCondition(ATTR, ATTR));
     }
 
     @Test
     public void visitCssEqualsOrHasAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new AstCssEqualsOrHasAttributeCondition("attr"));
+        assertVisitorVisitsCorrectClass(new AstCssEqualsOrHasAttributeCondition(ATTR));
     }
 
     @Test
     public void visitCssEqualsOrHasAttributeCondition__2nd_constructor() {
-        assertVisitorVisitsCorrectClass(new AstCssEqualsOrHasAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssEqualsOrHasAttributeCondition(ATTR, ATTR));
     }
 
     @Test
     public void visitCssIdAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new AstCssIdAttributeCondition("id"));
+        assertVisitorVisitsCorrectClass(new AstCssIdAttributeCondition(ATTR));
     }
 
     @Test
     public void visitCssStartsWithAttributeCondition() {
-        assertVisitorVisitsCorrectClass(new AstCssStartsWithAttributeCondition("attr", "val"));
+        assertVisitorVisitsCorrectClass(new AstCssStartsWithAttributeCondition(ATTR, ATTR));
     }
 
 }
