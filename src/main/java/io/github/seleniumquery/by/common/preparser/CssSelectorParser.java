@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,33 @@
 
 package io.github.seleniumquery.by.common.preparser;
 
+import java.io.StringReader;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.CSSParseException;
+import org.w3c.css.sac.ErrorHandler;
+import org.w3c.css.sac.InputSource;
+import org.w3c.css.sac.SelectorList;
+
 import com.steadystate.css.parser.SACParserCSS3;
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.common.preparser.CssSelectorPreParser.PreParsedSelector;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.w3c.css.sac.*;
-
-import java.io.StringReader;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 
 public class CssSelectorParser {
 
 	private static final Log LOGGER = LogFactory.getLog(CssSelectorParser.class);
 
 	private static final NotEqualsAttributeSelectorFix NOT_EQUALS_ATTRIBUTE_SELECTOR_FIX = new NotEqualsAttributeSelectorFix();
-	
+
 	private static final SACParserCSS3 SAC_CSS3_PARSER = new SACParserCSS3();
 
-	public static CssParsedSelectorList parseSelector(String selector) {
+	public static W3cCssSelectorListWithMap parseSelector(String selector) {
         PreParsedSelector preParsedSelector = preParseSelector(selector);
 		SelectorList selectorList = parseSelectorIntoParseTree(preParsedSelector.getTransformedSelector());
-		return new CssParsedSelectorList(selectorList, preParsedSelector.getArgumentMap());
+		return new W3cCssSelectorListWithMap(selectorList, preParsedSelector.getArgumentMap());
 	}
 
     private static PreParsedSelector preParseSelector(String selector) {

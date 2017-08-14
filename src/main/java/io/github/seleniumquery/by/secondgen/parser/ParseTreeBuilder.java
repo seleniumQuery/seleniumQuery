@@ -19,8 +19,8 @@ package io.github.seleniumquery.by.secondgen.parser;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
 import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 import io.github.seleniumquery.by.secondgen.parser.translator.CssSelectorTranslator;
@@ -32,12 +32,12 @@ public class ParseTreeBuilder {
 	private ParseTreeBuilder() {}
 
 	public static CssSelectorList parse(String selector) {
-		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
+		W3cCssSelectorListWithMap parsedSelectorList = CssSelectorParser.parseSelector(selector);
         List<CssSelector> cssSelectors = translate(parsedSelectorList);
 		return new CssSelectorList(cssSelectors);
 	}
 
-    private static List<CssSelector> translate(CssParsedSelectorList parsedSelectorList) {
+    private static List<CssSelector> translate(W3cCssSelectorListWithMap parsedSelectorList) {
 	    return parsedSelectorList.stream().map(cssParsedSelector -> cssSelectorTranslator.translate(cssParsedSelector)).collect(Collectors.toList());
     }
 
