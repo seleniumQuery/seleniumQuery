@@ -19,7 +19,7 @@ package io.github.seleniumquery.by.firstgen.css.combinators;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
@@ -29,7 +29,7 @@ public class SelectorsTestUtil {
     public static <T> void verifySelectorYieldsXPathExpression(CssSelector<T, TagComponent> cssSiblingSelector,
                                                                String selector,
                                                                String value) {
-        W3cCssSelectorWithMap w3cCssSelectorWithMap = CssSelectorParser.parseSelector(selector).get(0);
+        W3cCssSelectorWithMap w3cCssSelectorWithMap = W3cCssSelectorWithMapParser.parseSelector(selector).get(0);
         @SuppressWarnings("unchecked") T sacSelector = (T) w3cCssSelectorWithMap.getSelector();
         // when
         TagComponent xPathComponent = cssSiblingSelector.toXPath(w3cCssSelectorWithMap.getArgumentMap(), sacSelector);

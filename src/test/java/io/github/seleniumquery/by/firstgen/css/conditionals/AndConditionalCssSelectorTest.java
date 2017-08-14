@@ -26,7 +26,7 @@ import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SimpleSelector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 import io.github.seleniumquery.by.firstgen.xpath.XPathComponentCompilerService;
 import io.github.seleniumquery.by.firstgen.xpath.component.ConditionComponent;
@@ -38,7 +38,7 @@ public class AndConditionalCssSelectorTest {
 
     @Test
     public void testConditionToXPath() {
-        W3cCssSelectorListWithMap w3cCssSelectorListWithMap = CssSelectorParser.parseSelector("span.a.b");
+        W3cCssSelectorListWithMap w3cCssSelectorListWithMap = W3cCssSelectorWithMapParser.parseSelector("span.a.b");
         SelectorList selectorList = w3cCssSelectorListWithMap.getSelectorList();
         ConditionalSelector selector = (ConditionalSelector) selectorList.item(0);
 

@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
@@ -33,7 +33,7 @@ public class IdAttributeCssSelectorTest {
 
     @Test
     public void testConditionToXPath() {
-        W3cCssSelectorListWithMap w3cCssSelectorListWithMap = CssSelectorParser.parseSelector("#idz");
+        W3cCssSelectorListWithMap w3cCssSelectorListWithMap = W3cCssSelectorWithMapParser.parseSelector("#idz");
         SelectorList selectorList = w3cCssSelectorListWithMap.getSelectorList();
         Selector selector = selectorList.item(0);
 

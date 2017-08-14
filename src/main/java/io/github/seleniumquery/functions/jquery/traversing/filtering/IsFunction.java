@@ -28,7 +28,7 @@ import org.w3c.css.sac.SelectorList;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 import io.github.seleniumquery.by.firstgen.css.CssSelector;
 import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
@@ -90,7 +90,7 @@ public class IsFunction {
         }
 
         private List<CompiledCssSelector> compileCssSelector(String selector) {
-            W3cCssSelectorListWithMap w3cCssSelectorListWithMap = CssSelectorParser.parseSelector(selector);
+            W3cCssSelectorListWithMap w3cCssSelectorListWithMap = W3cCssSelectorWithMapParser.parseSelector(selector);
             SelectorList selectorList = w3cCssSelectorListWithMap.getSelectorList();
             ArgumentMap argumentMap = w3cCssSelectorListWithMap.getArgumentMap();
 
@@ -145,7 +145,7 @@ public class IsFunction {
 		    String argumentMapIndex = m.group(1);
 		    String notPseudoClassContent = argumentMap.get(argumentMapIndex);
 
-			W3cCssSelectorListWithMap parsedPseudoClassContent = CssSelectorParser.parseSelector(notPseudoClassContent);
+			W3cCssSelectorListWithMap parsedPseudoClassContent = W3cCssSelectorWithMapParser.parseSelector(notPseudoClassContent);
 			SelectorList parsedPseudoClassContentSelectorList = parsedPseudoClassContent.getSelectorList();
 			ArgumentMap parsedPseudoClassContentArgumentMap = parsedPseudoClassContent.getArgumentMap();
 			for (int i = 0; i < parsedPseudoClassContentSelectorList.getLength(); i++) {
