@@ -27,8 +27,8 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.bas
  */
 public class CssNthPseudoClass extends CssEqPseudoClass {
 
-    public CssNthPseudoClass(int index) {
-        super(new AstCssNthPseudoClass(index));
+    public CssNthPseudoClass(AstCssNthPseudoClass astCssNthPseudoClass) {
+        super(astCssNthPseudoClass);
     }
 
 }

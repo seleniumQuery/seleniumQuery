@@ -30,61 +30,9 @@ import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssAnimatedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEqPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssEvenPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssFirstPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssGtPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssHeaderPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLangPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLastPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssLtPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssNotPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssNthPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssOddPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssRootPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter.CssTargetPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssFirstChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssFirstOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssLastChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssLastOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssNthChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssNthLastChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssNthLastOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssNthOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssOnlyChildPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter.CssOnlyOfTypePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.CssContainsPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.CssEmptyPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.CssHasPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter.CssParentPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssButtonPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssCheckboxPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssCheckedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssDisabledPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssEnabledPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssFilePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssFocusPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssImagePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssInputPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssPasswordPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssRadioPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssResetPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssSelectedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssSubmitPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form.CssTextPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.jqueryui.CssFocusablePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.jqueryui.CssTabbablePseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery.CssBlankPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery.CssFilledPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery.CssPresentPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery.CssUncheckedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility.CssHiddenPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility.CssVisiblePseudoClass;
 import io.github.seleniumquery.by.secondgen.parser.ParseTreeBuilder;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.AstCssFunctionalPseudoClassHasNoArgumentsException;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.AstCssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.InvalidPseudoClassSelectorException;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssAnimatedPseudoClass;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssEqPseudoClass;
@@ -148,75 +96,77 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.vis
 class CssPseudoClassConditionTranslator {
 
     private static final Pattern INDEX_REGEX = Pattern.compile("^\\s*([+-]?\\d+)\\s*$");
-    private Map<String, Function<String, ? extends CssPseudoClassCondition>> pseudoClassesF = new HashMap<>();
 
-	CssPseudoClassConditionTranslator() {
+    private Map<String, Function<String, ? extends AstCssPseudoClassCondition>> pseudoClassesF = new HashMap<>();
+
+	@SuppressWarnings("Convert2MethodRef")
+    CssPseudoClassConditionTranslator() {
 		// form
-		pseudoClassesF.put(AstCssButtonPseudoClass.PSEUDO, a -> new CssButtonPseudoClass());
-		pseudoClassesF.put(AstCssCheckboxPseudoClass.PSEUDO, a -> new CssCheckboxPseudoClass());
-		pseudoClassesF.put(AstCssCheckedPseudoClass.PSEUDO, a -> new CssCheckedPseudoClass());
-		pseudoClassesF.put(AstCssEnabledPseudoClass.PSEUDO, a -> new CssEnabledPseudoClass());
-		pseudoClassesF.put(AstCssDisabledPseudoClass.PSEUDO, a -> new CssDisabledPseudoClass());
-		pseudoClassesF.put(AstCssFilePseudoClass.PSEUDO, a -> new CssFilePseudoClass());
-		pseudoClassesF.put(AstCssFocusPseudoClass.PSEUDO, a -> new CssFocusPseudoClass());
-		pseudoClassesF.put(AstCssImagePseudoClass.PSEUDO, a -> new CssImagePseudoClass());
-		pseudoClassesF.put(AstCssInputPseudoClass.PSEUDO, a -> new CssInputPseudoClass());
-		pseudoClassesF.put(AstCssPasswordPseudoClass.PSEUDO, a -> new CssPasswordPseudoClass());
-		pseudoClassesF.put(AstCssRadioPseudoClass.PSEUDO, a -> new CssRadioPseudoClass());
-		pseudoClassesF.put(AstCssResetPseudoClass.PSEUDO, a -> new CssResetPseudoClass());
-		pseudoClassesF.put(AstCssSelectedPseudoClass.PSEUDO, a -> new CssSelectedPseudoClass());
-		pseudoClassesF.put(AstCssSubmitPseudoClass.PSEUDO, a -> new CssSubmitPseudoClass());
-		pseudoClassesF.put(AstCssTextPseudoClass.PSEUDO, a -> new CssTextPseudoClass());
+		pseudoClassesF.put(AstCssButtonPseudoClass.PSEUDO, a -> new AstCssButtonPseudoClass());
+		pseudoClassesF.put(AstCssCheckboxPseudoClass.PSEUDO, a -> new AstCssCheckboxPseudoClass());
+		pseudoClassesF.put(AstCssCheckedPseudoClass.PSEUDO, a -> new AstCssCheckedPseudoClass());
+		pseudoClassesF.put(AstCssEnabledPseudoClass.PSEUDO, a -> new AstCssEnabledPseudoClass());
+		pseudoClassesF.put(AstCssDisabledPseudoClass.PSEUDO, a -> new AstCssDisabledPseudoClass());
+		pseudoClassesF.put(AstCssFilePseudoClass.PSEUDO, a -> new AstCssFilePseudoClass());
+		pseudoClassesF.put(AstCssFocusPseudoClass.PSEUDO, a -> new AstCssFocusPseudoClass());
+		pseudoClassesF.put(AstCssImagePseudoClass.PSEUDO, a -> new AstCssImagePseudoClass());
+		pseudoClassesF.put(AstCssInputPseudoClass.PSEUDO, a -> new AstCssInputPseudoClass());
+		pseudoClassesF.put(AstCssPasswordPseudoClass.PSEUDO, a -> new AstCssPasswordPseudoClass());
+		pseudoClassesF.put(AstCssRadioPseudoClass.PSEUDO, a -> new AstCssRadioPseudoClass());
+		pseudoClassesF.put(AstCssResetPseudoClass.PSEUDO, a -> new AstCssResetPseudoClass());
+		pseudoClassesF.put(AstCssSelectedPseudoClass.PSEUDO, a -> new AstCssSelectedPseudoClass());
+		pseudoClassesF.put(AstCssSubmitPseudoClass.PSEUDO, a -> new AstCssSubmitPseudoClass());
+		pseudoClassesF.put(AstCssTextPseudoClass.PSEUDO, a -> new AstCssTextPseudoClass());
 
 		// basic filter
-		pseudoClassesF.put(AstCssAnimatedPseudoClass.PSEUDO, a -> new CssAnimatedPseudoClass());
-		pseudoClassesF.put(AstCssEqPseudoClass.PSEUDO, a -> new CssEqPseudoClass(new AstCssEqPseudoClass(extractIndexArgument(a, AstCssEqPseudoClass.PSEUDO))));
-		pseudoClassesF.put(AstCssEvenPseudoClass.PSEUDO, a -> new CssEvenPseudoClass());
-		pseudoClassesF.put(AstCssFirstPseudoClass.PSEUDO, a -> new CssFirstPseudoClass());
-		pseudoClassesF.put(AstCssGtPseudoClass.PSEUDO, a -> new CssGtPseudoClass(new AstCssGtPseudoClass(extractIndexArgument(a, AstCssGtPseudoClass.PSEUDO))));
-		pseudoClassesF.put(AstCssHeaderPseudoClass.PSEUDO, a -> new CssHeaderPseudoClass());
-		pseudoClassesF.put(AstCssLangPseudoClass.PSEUDO, a -> new CssLangPseudoClass(new AstCssLangPseudoClass(a)));
-		pseudoClassesF.put(AstCssLangPseudoClass.PSEUDO_PURE_LANG, a -> new CssLangPseudoClass(new AstCssLangPseudoClass(a)));
-		pseudoClassesF.put(AstCssLastPseudoClass.PSEUDO, a -> new CssLastPseudoClass());
-		pseudoClassesF.put(AstCssLtPseudoClass.PSEUDO, a -> new CssLtPseudoClass(new AstCssLtPseudoClass(extractIndexArgument(a, AstCssLtPseudoClass.PSEUDO))));
-		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO, a -> new CssNotPseudoClass(new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a))));
-		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a -> new CssNotPseudoClass(new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a))));
-		pseudoClassesF.put(AstCssNthPseudoClass.PSEUDO, a -> new CssNthPseudoClass(extractIndexArgument(a, AstCssNthPseudoClass.PSEUDO)));
-		pseudoClassesF.put(AstCssOddPseudoClass.PSEUDO, a -> new CssOddPseudoClass());
-		pseudoClassesF.put(AstCssRootPseudoClass.PSEUDO, a -> new CssRootPseudoClass());
-		pseudoClassesF.put(AstCssTargetPseudoClass.PSEUDO, a -> new CssTargetPseudoClass());
+		pseudoClassesF.put(AstCssAnimatedPseudoClass.PSEUDO, a -> new AstCssAnimatedPseudoClass());
+		pseudoClassesF.put(AstCssEqPseudoClass.PSEUDO, a -> new AstCssEqPseudoClass(extractIndexArgument(a, AstCssEqPseudoClass.PSEUDO)));
+		pseudoClassesF.put(AstCssEvenPseudoClass.PSEUDO, a -> new AstCssEvenPseudoClass());
+		pseudoClassesF.put(AstCssFirstPseudoClass.PSEUDO, a -> new AstCssFirstPseudoClass());
+		pseudoClassesF.put(AstCssGtPseudoClass.PSEUDO, a -> new AstCssGtPseudoClass(extractIndexArgument(a, AstCssGtPseudoClass.PSEUDO)));
+		pseudoClassesF.put(AstCssHeaderPseudoClass.PSEUDO, a -> new AstCssHeaderPseudoClass());
+		pseudoClassesF.put(AstCssLangPseudoClass.PSEUDO, a -> new AstCssLangPseudoClass(a));
+		pseudoClassesF.put(AstCssLangPseudoClass.PSEUDO_PURE_LANG, a -> new AstCssLangPseudoClass(a));
+		pseudoClassesF.put(AstCssLastPseudoClass.PSEUDO, a -> new AstCssLastPseudoClass());
+		pseudoClassesF.put(AstCssLtPseudoClass.PSEUDO, a -> new AstCssLtPseudoClass(extractIndexArgument(a, AstCssLtPseudoClass.PSEUDO)));
+		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO, a -> new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a)));
+		pseudoClassesF.put(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a -> new AstCssNotPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssNotPseudoClass.PSEUDO_PURE_NOT, a)));
+		pseudoClassesF.put(AstCssNthPseudoClass.PSEUDO, a -> new AstCssNthPseudoClass(extractIndexArgument(a, AstCssNthPseudoClass.PSEUDO)));
+		pseudoClassesF.put(AstCssOddPseudoClass.PSEUDO, a -> new AstCssOddPseudoClass());
+		pseudoClassesF.put(AstCssRootPseudoClass.PSEUDO, a -> new AstCssRootPseudoClass());
+		pseudoClassesF.put(AstCssTargetPseudoClass.PSEUDO, a -> new AstCssTargetPseudoClass());
 
 		// child filter
-		pseudoClassesF.put(AstCssFirstChildPseudoClass.PSEUDO, a -> new CssFirstChildPseudoClass());
-		pseudoClassesF.put(AstCssFirstOfTypePseudoClass.PSEUDO, a -> new CssFirstOfTypePseudoClass());
-		pseudoClassesF.put(AstCssLastChildPseudoClass.PSEUDO, a -> new CssLastChildPseudoClass());
-		pseudoClassesF.put(AstCssLastOfTypePseudoClass.PSEUDO, a -> new CssLastOfTypePseudoClass());
-		pseudoClassesF.put(AstCssNthChildPseudoClass.PSEUDO, a -> new CssNthChildPseudoClass(new AstCssNthChildPseudoClass(a)));
-		pseudoClassesF.put(AstCssNthLastChildPseudoClass.PSEUDO, a -> new CssNthLastChildPseudoClass(new AstCssNthLastChildPseudoClass(a)));
-		pseudoClassesF.put(AstCssNthLastOfTypePseudoClass.PSEUDO, a -> new CssNthLastOfTypePseudoClass(new AstCssNthLastOfTypePseudoClass(a)));
-		pseudoClassesF.put(AstCssNthOfTypePseudoClass.PSEUDO, a -> new CssNthOfTypePseudoClass(new AstCssNthOfTypePseudoClass(a)));
-		pseudoClassesF.put(AstCssOnlyChildPseudoClass.PSEUDO, a -> new CssOnlyChildPseudoClass());
-		pseudoClassesF.put(AstCssOnlyOfTypePseudoClass.PSEUDO, a -> new CssOnlyOfTypePseudoClass());
+		pseudoClassesF.put(AstCssFirstChildPseudoClass.PSEUDO, a -> new AstCssFirstChildPseudoClass());
+		pseudoClassesF.put(AstCssFirstOfTypePseudoClass.PSEUDO, a -> new AstCssFirstOfTypePseudoClass());
+		pseudoClassesF.put(AstCssLastChildPseudoClass.PSEUDO, a -> new AstCssLastChildPseudoClass());
+		pseudoClassesF.put(AstCssLastOfTypePseudoClass.PSEUDO, a -> new AstCssLastOfTypePseudoClass());
+		pseudoClassesF.put(AstCssNthChildPseudoClass.PSEUDO, a -> new AstCssNthChildPseudoClass(a));
+		pseudoClassesF.put(AstCssNthLastChildPseudoClass.PSEUDO, a -> new AstCssNthLastChildPseudoClass(a));
+		pseudoClassesF.put(AstCssNthLastOfTypePseudoClass.PSEUDO, a -> new AstCssNthLastOfTypePseudoClass(a));
+		pseudoClassesF.put(AstCssNthOfTypePseudoClass.PSEUDO, a -> new AstCssNthOfTypePseudoClass(a));
+		pseudoClassesF.put(AstCssOnlyChildPseudoClass.PSEUDO, a -> new AstCssOnlyChildPseudoClass());
+		pseudoClassesF.put(AstCssOnlyOfTypePseudoClass.PSEUDO, a -> new AstCssOnlyOfTypePseudoClass());
 
 		// content filter
-		pseudoClassesF.put(AstCssContainsPseudoClass.PSEUDO, a -> new CssContainsPseudoClass(new AstCssContainsPseudoClass(a)));
-		pseudoClassesF.put(AstCssEmptyPseudoClass.PSEUDO, a -> new CssEmptyPseudoClass());
-		pseudoClassesF.put(AstCssHasPseudoClass.PSEUDO, a -> new CssHasPseudoClass(new AstCssHasPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssHasPseudoClass.PSEUDO, a))));
-		pseudoClassesF.put(AstCssParentPseudoClass.PSEUDO, a -> new CssParentPseudoClass());
+		pseudoClassesF.put(AstCssContainsPseudoClass.PSEUDO, a -> new AstCssContainsPseudoClass(a));
+		pseudoClassesF.put(AstCssEmptyPseudoClass.PSEUDO, a -> new AstCssEmptyPseudoClass());
+		pseudoClassesF.put(AstCssHasPseudoClass.PSEUDO, a -> new AstCssHasPseudoClass(parseFunctionalPseudoClassSelectorArgument(AstCssHasPseudoClass.PSEUDO, a)));
+		pseudoClassesF.put(AstCssParentPseudoClass.PSEUDO, a -> new AstCssParentPseudoClass());
 
 		// jquery-ui
-		pseudoClassesF.put(AstCssFocusablePseudoClass.PSEUDO, a -> new CssFocusablePseudoClass());
-		pseudoClassesF.put(AstCssTabbablePseudoClass.PSEUDO, a -> new CssTabbablePseudoClass());
+		pseudoClassesF.put(AstCssFocusablePseudoClass.PSEUDO, a -> new AstCssFocusablePseudoClass());
+		pseudoClassesF.put(AstCssTabbablePseudoClass.PSEUDO, a -> new AstCssTabbablePseudoClass());
 
 		// visibility
-		pseudoClassesF.put(AstCssHiddenPseudoClass.PSEUDO, a -> new CssHiddenPseudoClass());
-		pseudoClassesF.put(AstCssVisiblePseudoClass.PSEUDO, a -> new CssVisiblePseudoClass());
+		pseudoClassesF.put(AstCssHiddenPseudoClass.PSEUDO, a -> new AstCssHiddenPseudoClass());
+		pseudoClassesF.put(AstCssVisiblePseudoClass.PSEUDO, a -> new AstCssVisiblePseudoClass());
 
 		// seleniumQuery additions
-		pseudoClassesF.put(AstCssPresentPseudoClass.PSEUDO, a -> new CssPresentPseudoClass());
-		pseudoClassesF.put(AstCssBlankPseudoClass.PSEUDO, a -> new CssBlankPseudoClass());
-		pseudoClassesF.put(AstCssFilledPseudoClass.PSEUDO, a -> new CssFilledPseudoClass());
-		pseudoClassesF.put(AstCssUncheckedPseudoClass.PSEUDO, a -> new CssUncheckedPseudoClass());
+		pseudoClassesF.put(AstCssPresentPseudoClass.PSEUDO, a -> new AstCssPresentPseudoClass());
+		pseudoClassesF.put(AstCssBlankPseudoClass.PSEUDO, a -> new AstCssBlankPseudoClass());
+		pseudoClassesF.put(AstCssFilledPseudoClass.PSEUDO, a -> new AstCssFilledPseudoClass());
+		pseudoClassesF.put(AstCssUncheckedPseudoClass.PSEUDO, a -> new AstCssUncheckedPseudoClass());
 	}
 
     // This is visible until we find a way to test it indirectly.
@@ -239,9 +189,9 @@ class CssPseudoClassConditionTranslator {
         return Integer.valueOf(integerIndex);
     }
 
-    public CssCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, AttributeCondition attributeCondition) {
+    public AstCssPseudoClassCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, AttributeCondition attributeCondition) {
         String pseudoClassName = getPseudoClassName(attributeCondition);
-        Function<String, ? extends CssPseudoClassCondition> pseudoClass = pseudoClassesF.get(pseudoClassName);
+        Function<String, ? extends AstCssPseudoClassCondition> pseudoClass = pseudoClassesF.get(pseudoClassName);
         if (pseudoClass == null) {
             throw new UnsupportedPseudoClassException(argumentMap, selectorUpToThisPoint, pseudoClassName);
         }

@@ -24,8 +24,8 @@ public class AstCssParentPseudoClass implements AstCssPseudoClassCondition {
     public static final String PSEUDO = "parent";
 
     @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
+    public <T> T accept(AstCssPseudoClassConditionVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 
 }

@@ -24,8 +24,8 @@ public class AstCssTabbablePseudoClass implements AstCssPseudoClassCondition {
     public static final String PSEUDO = "tabbable";
 
     @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
+    public <T> T accept(AstCssPseudoClassConditionVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 
 }

@@ -28,7 +28,7 @@ public class AstCssFunctionalPseudoClassConditionTest {
 
     class CssFunctionalPseudoClassConditionSubClass extends AstCssFunctionalPseudoClassCondition<String> {
         CssFunctionalPseudoClassConditionSubClass(String argument) { super(argument); }
-        @Override public void accept(AstCssPseudoClassConditionVisitor visitor) { }
+        @Override public <T> T accept(AstCssPseudoClassConditionVisitor<T> visitor) { return null; }
     }
 
     @Test

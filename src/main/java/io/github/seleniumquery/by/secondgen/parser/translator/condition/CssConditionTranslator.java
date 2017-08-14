@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,26 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition;
 
-import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssUnknownConditionException;
-import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.*;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.SimpleSelector;
+
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssUnknownConditionException;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassConditionVisitor;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.AstCssPseudoClassConditionVisitor;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.CssClassAttributeConditionTranslator;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.CssContainsPrefixAttributeConditionTranslator;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute
+    .CssContainsSubstringAttributeConditionTranslator;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.CssContainsWordAttributeConditionTranslator;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.CssEndsWithAttributeConditionTranslator;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.CssEqualsOrHasAttributeConditionTranslator;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.CssIdAttributeConditionTranslator;
+import io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.CssStartsWithAttributeConditionTranslator;
 
 /**
  * Translates a SAC {@link Condition} selector into a {@link CssCondition}.
@@ -43,6 +55,8 @@ public class CssConditionTranslator {
     private final CssContainsPrefixAttributeConditionTranslator containsPrefixAttributeConditionTranslator = new CssContainsPrefixAttributeConditionTranslator();
     private final CssClassAttributeConditionTranslator classAttributeConditionTranslator = new CssClassAttributeConditionTranslator();
     private final CssPseudoClassConditionTranslator pseudoClassConditionTranslator = new CssPseudoClassConditionTranslator();
+
+    private AstCssPseudoClassConditionVisitor<CssPseudoClassCondition> astCssPseudoClassConditionVisitor = new CssPseudoClassConditionVisitor();
 
 	public CssCondition translate(SimpleSelector simpleSelector, ArgumentMap argumentMap, Condition condition) {
 	    switch (condition.getConditionType()) {
@@ -73,7 +87,7 @@ public class CssConditionTranslator {
 	        	return classAttributeConditionTranslator.translate((AttributeCondition) condition);
 
 	        case Condition.SAC_PSEUDO_CLASS_CONDITION:
-	        	return pseudoClassConditionTranslator.translate(simpleSelector, argumentMap, (AttributeCondition) condition);
+                return pseudoClassConditionTranslator.translate(simpleSelector, argumentMap, (AttributeCondition) condition).accept(astCssPseudoClassConditionVisitor);
 	        case Condition.SAC_LANG_CONDITION:
 				return incompatible("Condition.SAC_LANG_CONDITION");
 

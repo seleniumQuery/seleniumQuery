@@ -68,64 +68,64 @@ import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.sel
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.visibility.AstCssHiddenPseudoClass;
 import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.visibility.AstCssVisiblePseudoClass;
 
-public interface AstCssPseudoClassConditionVisitor {
+public interface AstCssPseudoClassConditionVisitor<T> {
 
-    void visit(AstCssAnimatedPseudoClass astCssAnimatedPseudoClass);
-    void visit(AstCssEqPseudoClass astCssEqPseudoClass);
-    void visit(AstCssEvenPseudoClass astCssEvenPseudoClass);
-    void visit(AstCssFirstPseudoClass astCssFirstPseudoClass);
-    void visit(AstCssGtPseudoClass astCssGtPseudoClass);
-    void visit(AstCssHeaderPseudoClass astCssHeaderPseudoClass);
-    void visit(AstCssLangPseudoClass astCssLangPseudoClass);
-    void visit(AstCssLastPseudoClass astCssLastPseudoClass);
-    void visit(AstCssLtPseudoClass astCssLtPseudoClass);
-    void visit(AstCssNotPseudoClass astCssNotPseudoClass);
-    void visit(AstCssNthPseudoClass astCssNthPseudoClass);
-    void visit(AstCssOddPseudoClass astCssOddPseudoClass);
-    void visit(AstCssRootPseudoClass astCssRootPseudoClass);
-    void visit(AstCssTargetPseudoClass astCssTargetPseudoClass);
+    T visit(AstCssAnimatedPseudoClass astCssAnimatedPseudoClass);
+    T visit(AstCssEqPseudoClass astCssEqPseudoClass);
+    T visit(AstCssEvenPseudoClass astCssEvenPseudoClass);
+    T visit(AstCssFirstPseudoClass astCssFirstPseudoClass);
+    T visit(AstCssGtPseudoClass astCssGtPseudoClass);
+    T visit(AstCssHeaderPseudoClass astCssHeaderPseudoClass);
+    T visit(AstCssLangPseudoClass astCssLangPseudoClass);
+    T visit(AstCssLastPseudoClass astCssLastPseudoClass);
+    T visit(AstCssLtPseudoClass astCssLtPseudoClass);
+    T visit(AstCssNotPseudoClass astCssNotPseudoClass);
+    T visit(AstCssNthPseudoClass astCssNthPseudoClass);
+    T visit(AstCssOddPseudoClass astCssOddPseudoClass);
+    T visit(AstCssRootPseudoClass astCssRootPseudoClass);
+    T visit(AstCssTargetPseudoClass astCssTargetPseudoClass);
 
-    void visit(AstCssFirstChildPseudoClass astCssFirstChildPseudoClass);
-    void visit(AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass);
-    void visit(AstCssLastChildPseudoClass astCssLastChildPseudoClass);
-    void visit(AstCssLastOfTypePseudoClass astCssLastOfTypePseudoClass);
-    void visit(AstCssNthChildPseudoClass astCssNthChildPseudoClass);
-    void visit(AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass);
-    void visit(AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass);
-    void visit(AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass);
-    void visit(AstCssOnlyChildPseudoClass astCssOnlyChildPseudoClass);
-    void visit(AstCssOnlyOfTypePseudoClass astCssOnlyOfTypePseudoClass);
+    T visit(AstCssFirstChildPseudoClass astCssFirstChildPseudoClass);
+    T visit(AstCssFirstOfTypePseudoClass astCssFirstOfTypePseudoClass);
+    T visit(AstCssLastChildPseudoClass astCssLastChildPseudoClass);
+    T visit(AstCssLastOfTypePseudoClass astCssLastOfTypePseudoClass);
+    T visit(AstCssNthChildPseudoClass astCssNthChildPseudoClass);
+    T visit(AstCssNthLastChildPseudoClass astCssNthLastChildPseudoClass);
+    T visit(AstCssNthLastOfTypePseudoClass astCssNthLastOfTypePseudoClass);
+    T visit(AstCssNthOfTypePseudoClass astCssNthOfTypePseudoClass);
+    T visit(AstCssOnlyChildPseudoClass astCssOnlyChildPseudoClass);
+    T visit(AstCssOnlyOfTypePseudoClass astCssOnlyOfTypePseudoClass);
 
-    void visit(AstCssContainsPseudoClass astCssContainsPseudoClass);
-    void visit(AstCssEmptyPseudoClass astCssEmptyPseudoClass);
-    void visit(AstCssHasPseudoClass astCssHasPseudoClass);
-    void visit(AstCssParentPseudoClass astCssParentPseudoClass);
+    T visit(AstCssContainsPseudoClass astCssContainsPseudoClass);
+    T visit(AstCssEmptyPseudoClass astCssEmptyPseudoClass);
+    T visit(AstCssHasPseudoClass astCssHasPseudoClass);
+    T visit(AstCssParentPseudoClass astCssParentPseudoClass);
 
-    void visit(AstCssButtonPseudoClass astCssButtonPseudoClass);
-    void visit(AstCssCheckboxPseudoClass astCssCheckboxPseudoClass);
-    void visit(AstCssCheckedPseudoClass astCssCheckedPseudoClass);
-    void visit(AstCssDisabledPseudoClass astCssDisabledPseudoClass);
-    void visit(AstCssInputPseudoClass astCssInputPseudoClass);
-    void visit(AstCssFilePseudoClass astCssFilePseudoClass);
-    void visit(AstCssResetPseudoClass astCssResetPseudoClass);
-    void visit(AstCssFocusPseudoClass astCssFocusPseudoClass);
-    void visit(AstCssRadioPseudoClass astCssRadioPseudoClass);
-    void visit(AstCssSelectedPseudoClass astCssSelectedPseudoClass);
-    void visit(AstCssImagePseudoClass astCssImagePseudoClass);
-    void visit(AstCssEnabledPseudoClass astCssEnabledPseudoClass);
-    void visit(AstCssPasswordPseudoClass astCssPasswordPseudoClass);
-    void visit(AstCssSubmitPseudoClass astCssSubmitPseudoClass);
-    void visit(AstCssTextPseudoClass astCssTextPseudoClass);
+    T visit(AstCssButtonPseudoClass astCssButtonPseudoClass);
+    T visit(AstCssCheckboxPseudoClass astCssCheckboxPseudoClass);
+    T visit(AstCssCheckedPseudoClass astCssCheckedPseudoClass);
+    T visit(AstCssDisabledPseudoClass astCssDisabledPseudoClass);
+    T visit(AstCssInputPseudoClass astCssInputPseudoClass);
+    T visit(AstCssFilePseudoClass astCssFilePseudoClass);
+    T visit(AstCssResetPseudoClass astCssResetPseudoClass);
+    T visit(AstCssFocusPseudoClass astCssFocusPseudoClass);
+    T visit(AstCssRadioPseudoClass astCssRadioPseudoClass);
+    T visit(AstCssSelectedPseudoClass astCssSelectedPseudoClass);
+    T visit(AstCssImagePseudoClass astCssImagePseudoClass);
+    T visit(AstCssEnabledPseudoClass astCssEnabledPseudoClass);
+    T visit(AstCssPasswordPseudoClass astCssPasswordPseudoClass);
+    T visit(AstCssSubmitPseudoClass astCssSubmitPseudoClass);
+    T visit(AstCssTextPseudoClass astCssTextPseudoClass);
 
-    void visit(AstCssFocusablePseudoClass astCssFocusablePseudoClass);
-    void visit(AstCssTabbablePseudoClass astCssTabbablePseudoClass);
+    T visit(AstCssFocusablePseudoClass astCssFocusablePseudoClass);
+    T visit(AstCssTabbablePseudoClass astCssTabbablePseudoClass);
 
-    void visit(AstCssBlankPseudoClass astCssBlankPseudoClass);
-    void visit(AstCssFilledPseudoClass astCssFilledPseudoClass);
-    void visit(AstCssPresentPseudoClass astCssPresentPseudoClass);
-    void visit(AstCssUncheckedPseudoClass astCssUncheckedPseudoClass);
+    T visit(AstCssBlankPseudoClass astCssBlankPseudoClass);
+    T visit(AstCssFilledPseudoClass astCssFilledPseudoClass);
+    T visit(AstCssPresentPseudoClass astCssPresentPseudoClass);
+    T visit(AstCssUncheckedPseudoClass astCssUncheckedPseudoClass);
 
-    void visit(AstCssHiddenPseudoClass astCssHiddenPseudoClass);
-    void visit(AstCssVisiblePseudoClass astCssVisiblePseudoClass);
+    T visit(AstCssHiddenPseudoClass astCssHiddenPseudoClass);
+    T visit(AstCssVisiblePseudoClass astCssVisiblePseudoClass);
 
 }

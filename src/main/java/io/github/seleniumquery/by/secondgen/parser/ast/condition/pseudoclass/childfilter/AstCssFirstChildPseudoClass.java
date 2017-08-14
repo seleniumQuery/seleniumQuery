@@ -27,8 +27,8 @@ public class AstCssFirstChildPseudoClass extends AstCssNthChildPseudoClass {
     }
 
     @Override
-    public void accept(AstCssPseudoClassConditionVisitor visitor) {
-        visitor.visit(this);
+    public <T> T accept(AstCssPseudoClassConditionVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 
 }

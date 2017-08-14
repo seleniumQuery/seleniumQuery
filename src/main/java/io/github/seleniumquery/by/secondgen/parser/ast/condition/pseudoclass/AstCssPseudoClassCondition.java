@@ -18,6 +18,6 @@ package io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass;
 
 public interface AstCssPseudoClassCondition {
 
-    void accept(AstCssPseudoClassConditionVisitor visitor);
+    <T> T accept(AstCssPseudoClassConditionVisitor<T> visitor);
 
 }
