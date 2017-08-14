@@ -14,10 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
+package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
-public interface AstCssAttributeCondition {
+public class AstCssStartsWithAttributeCondition extends AstCssAttributeConditionBase {
 
-    <T> T accept(AstCssAttributeConditionVisitor<T> visitor);
+    public AstCssStartsWithAttributeCondition(String attributeName, String wantedValue) {
+        super(attributeName, wantedValue);
+    }
+
+    @Override
+    public <T> T accept(AstCssAttributeConditionVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 
 }

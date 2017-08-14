@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.common.AttributeEvaluatorUtils;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssEqualsOrHasAttributeCondition;
 import io.github.seleniumquery.utils.SelectorUtils;
 
 /**

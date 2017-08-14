@@ -20,8 +20,8 @@ import org.unbescape.java.JavaEscape;
 import org.w3c.css.sac.AttributeCondition;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssIdAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssIdAttributeCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssIdAttributeCondition;
 
 /**
  * #id

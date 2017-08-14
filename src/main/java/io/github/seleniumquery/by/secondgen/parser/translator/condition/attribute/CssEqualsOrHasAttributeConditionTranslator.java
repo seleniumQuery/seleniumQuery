@@ -19,8 +19,8 @@ package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribu
 import org.w3c.css.sac.AttributeCondition;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.AstCssEqualsOrHasAttributeCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssEqualsOrHasAttributeCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssEqualsOrHasAttributeCondition;
 
 /**
  * [simple]

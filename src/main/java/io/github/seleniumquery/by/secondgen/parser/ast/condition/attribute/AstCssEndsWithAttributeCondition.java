@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
+package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
-public class AstCssIdAttributeCondition implements AstCssAttributeCondition {
+public class AstCssEndsWithAttributeCondition extends AstCssAttributeConditionBase {
 
-    public final String id;
-
-    public AstCssIdAttributeCondition(String id) {
-        this.id = id;
+    public AstCssEndsWithAttributeCondition(String attributeName, String wantedValue) {
+        super(attributeName, wantedValue);
     }
 
     @Override

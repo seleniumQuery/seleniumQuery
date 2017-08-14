@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
+package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
-public class AstCssStartsWithAttributeCondition extends AstCssAttributeConditionBase {
+public class AstCssContainsPrefixAttributeCondition extends AstCssAttributeConditionBase {
 
-    public AstCssStartsWithAttributeCondition(String attributeName, String wantedValue) {
+    public AstCssContainsPrefixAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
     }
 

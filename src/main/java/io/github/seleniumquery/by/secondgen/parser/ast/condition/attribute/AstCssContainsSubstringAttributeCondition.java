@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
+package io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute;
 
-public class AstCssContainsWordAttributeCondition extends AstCssAttributeConditionBase {
+public class AstCssContainsSubstringAttributeCondition extends AstCssAttributeConditionBase {
 
-    public AstCssContainsWordAttributeCondition(String attributeName, String wantedValue) {
+    public AstCssContainsSubstringAttributeCondition(String attributeName, String wantedValue) {
         super(attributeName, wantedValue);
     }
 

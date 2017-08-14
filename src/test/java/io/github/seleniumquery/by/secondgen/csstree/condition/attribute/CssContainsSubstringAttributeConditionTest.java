@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssContainsSubstringAttributeCondition;
 
 public class CssContainsSubstringAttributeConditionTest {
 
