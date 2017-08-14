@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.parser.translator.selector;
+package io.github.seleniumquery.by.secondgen.parser.translator;
 
-import io.github.seleniumquery.by.secondgen.csstree.selector.CssTagNameSelector;
-import org.w3c.css.sac.ElementSelector;
+import org.w3c.css.sac.Selector;
+
+import io.github.seleniumquery.SeleniumQueryException;
 
 /**
- * $("tagname")
+ * Informs right away that the given selector is not known.
  *
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssTagNameSelectorTranslator {
+class UnknownCssSelectorException extends SeleniumQueryException {
 
-	public CssTagNameSelector translate(ElementSelector elementSelector) {
-		String tagName = elementSelector.toString();
-		return new CssTagNameSelector(tagName);
-	}
+    UnknownCssSelectorException(Selector selector) {
+        super("CSS selector \""+selector.getClass().getSimpleName() + "\" (type="+ selector.getSelectorType() + ") is invalid or not supported!");
+    }
 
 }

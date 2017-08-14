@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.by.secondgen.parser.translator.selector;
+package io.github.seleniumquery.by.secondgen.parser.translator;
+
+import org.w3c.css.sac.ConditionalSelector;
+import org.w3c.css.sac.DescendantSelector;
+import org.w3c.css.sac.ElementSelector;
+import org.w3c.css.sac.Selector;
+import org.w3c.css.sac.SiblingSelector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.CssParsedSelector;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
-import io.github.seleniumquery.by.secondgen.csstree.selector.UnknownCssSelectorException;
-import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator.CssDescendantSelectorTranslator;
-import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator.CssDirectAdjacentSelectorTranslator;
-import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator.CssDirectDescendantSelectorTranslator;
-import io.github.seleniumquery.by.secondgen.parser.translator.selector.combinator.CssGeneralAdjacentSelectorTranslator;
-import org.w3c.css.sac.*;
 
 /**
  * Translates a Selector into a {@link CssSelector}.
@@ -33,12 +34,13 @@ import org.w3c.css.sac.*;
  */
 public class CssSelectorTranslator {
 
+    private final CssCombinatorSelectorTranslator combinatorSelectorTranslator = new CssCombinatorSelectorTranslator(this);
     private final CssConditionalSelectorTranslator conditionalCssSelector = new CssConditionalSelectorTranslator(this);
     private final CssTagNameSelectorTranslator tagNameSelector = new CssTagNameSelectorTranslator();
-    private final CssDescendantSelectorTranslator descendantSelectorTranslator = new CssDescendantSelectorTranslator(this);
-    private final CssDirectDescendantSelectorTranslator directDescendantSelectorTranslator = new CssDirectDescendantSelectorTranslator(this);
-    private final CssDirectAdjacentSelectorTranslator directAdjacentSelectorTranslator = new CssDirectAdjacentSelectorTranslator(this);
-    private final CssGeneralAdjacentSelectorTranslator generalAdjacentSelectorTranslator = new CssGeneralAdjacentSelectorTranslator(this);
+
+    public CssSelector translate(CssParsedSelector cssParsedSelector) {
+        return translate(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
+    }
 
 	public CssSelector translate(ArgumentMap argumentMap, Selector selector) {
 		switch (selector.getSelectorType()) {
@@ -50,14 +52,14 @@ public class CssSelectorTranslator {
 
 			// COMBINATORS
 			case Selector.SAC_DESCENDANT_SELECTOR:
-				return descendantSelectorTranslator.translate(argumentMap, (DescendantSelector) selector);
+				return combinatorSelectorTranslator.translateDescendant(argumentMap, (DescendantSelector) selector);
 			case Selector.SAC_CHILD_SELECTOR:
-				return directDescendantSelectorTranslator.translate(argumentMap, (DescendantSelector) selector);
+				return combinatorSelectorTranslator.translateDirectDescendant(argumentMap, (DescendantSelector) selector);
 			case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
-				return directAdjacentSelectorTranslator.translate(argumentMap, (SiblingSelector) selector);
+				return combinatorSelectorTranslator.translateDirectAdjacent(argumentMap, (SiblingSelector) selector);
 			// the parser returns this code for the "E ~ F" selector. Go figure...
 			case Selector.SAC_ANY_NODE_SELECTOR:
-				return generalAdjacentSelectorTranslator.translate(argumentMap, (SiblingSelector) selector);
+				return combinatorSelectorTranslator.translateGeneralAdjacent(argumentMap, (SiblingSelector) selector);
 
 			case Selector.SAC_ROOT_NODE_SELECTOR:
 			case Selector.SAC_NEGATIVE_SELECTOR:
@@ -70,5 +72,4 @@ public class CssSelectorTranslator {
 				throw new UnknownCssSelectorException(selector);
 		}
 	}
-
 }
