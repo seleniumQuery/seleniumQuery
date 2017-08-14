@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,26 +30,24 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
  */
 public class CssAndCondition implements CssCondition, CssConditionImplementedFinders {
 
-    private CssCondition firstCondition;
-    private CssCondition secondCondition;
+    private final AstCssAndCondition astCssAndCondition;
 
-    public CssAndCondition(CssCondition firstCondition, CssCondition secondCondition) {
-        this.firstCondition = firstCondition;
-        this.secondCondition = secondCondition;
+    public CssAndCondition(AstCssAndCondition astCssAndCondition) {
+        this.astCssAndCondition = astCssAndCondition;
     }
 
     public CssCondition getFirstCondition() {
-        return firstCondition;
+        return astCssAndCondition.getFirstCondition();
     }
 
     public CssCondition getSecondCondition() {
-        return secondCondition;
+        return astCssAndCondition.getSecondCondition();
     }
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {
-        CssConditionImplementedFinders firstCondition = (CssConditionImplementedFinders) this.firstCondition;
-        CssConditionImplementedFinders secondCondition = (CssConditionImplementedFinders) this.secondCondition;
+        CssConditionImplementedFinders firstCondition = (CssConditionImplementedFinders) this.getFirstCondition();
+        CssConditionImplementedFinders secondCondition = (CssConditionImplementedFinders) this.getSecondCondition();
 
         ElementFinder elementFinder = firstCondition.toElementFinder(leftFinder);
         return secondCondition.toElementFinder(elementFinder);
