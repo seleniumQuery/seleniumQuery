@@ -23,7 +23,7 @@ import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SiblingSelector;
 
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelector;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMap;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
 
 /**
@@ -38,8 +38,8 @@ public class CssSelectorTranslator {
     private final CssConditionalSelectorTranslator conditionalCssSelector = new CssConditionalSelectorTranslator(this);
     private final CssTagNameSelectorTranslator tagNameSelector = new CssTagNameSelectorTranslator();
 
-    public CssSelector translate(CssParsedSelector cssParsedSelector) {
-        return translate(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
+    public CssSelector translate(W3cCssSelectorWithMap w3cCssSelectorWithMap) {
+        return translate(w3cCssSelectorWithMap.getArgumentMap(), w3cCssSelectorWithMap.getSelector());
     }
 
 	public CssSelector translate(ArgumentMap argumentMap, Selector selector) {
