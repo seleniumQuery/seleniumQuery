@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,23 @@
 
 package integration.io.github.seleniumquery.by;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import io.github.seleniumquery.utils.DriverVersionUtils;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import io.github.seleniumquery.utils.DriverVersionUtils;
 import testinfrastructure.testdouble.PseudoTestDoubleException;
 import testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy;
 import testinfrastructure.testutils.DriverInTest;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
 
 public class DriverVersionUtilsTest {
 
@@ -76,7 +79,7 @@ public class DriverVersionUtilsTest {
         // given
         final String supportedPseudo = ":some-supported-pseudo";
         class WebDriverThatSupportsSomePseudo extends WebDriverDummy {
-            @Override public WebElement findElementByCssSelector(String s) { assertThat(s, is("#AAA_SomeIdThatShouldNotExist" + supportedPseudo)); return null; }
+            @Override public List<WebElement> findElementsByCssSelector(String s) { assertThat(s, is("#AAA_SomeIdThatShouldNotExist" + supportedPseudo)); return null; }
         }
         DriverVersionUtils driverVersionUtils = new DriverVersionUtils();
         WebDriver webDriver = new WebDriverThatSupportsSomePseudo();
