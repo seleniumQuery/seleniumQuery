@@ -91,9 +91,9 @@ public class EndToEndTestUtils {
     private static String[] ids(String selector) {
         SeleniumQueryObject f = $(selector);
         List<String> actualIds = new ArrayList<>();
-        for (WebElement webElement : f) {
+        f.forEach(webElement -> {
             actualIds.add(id(webElement));
-        }
+        });
         return actualIds.toArray(new String[actualIds.size()]);
     }
 
@@ -122,9 +122,9 @@ public class EndToEndTestUtils {
      */
     public static List<String> ids(SeleniumQueryObject sq) {
         List<String> ids = new ArrayList<>(sq.size());
-        for (WebElement element : sq) {
+        sq.forEach(element -> {
             ids.add(id(element));
-        }
+        });
         return ids;
     }
 

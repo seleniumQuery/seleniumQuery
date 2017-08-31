@@ -33,22 +33,22 @@ public class XPathComponentCompilerService {
 	private XPathComponentCompilerService() {}
 	
 	public static TagComponentList compileSelectorList(String selector) {
-		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
+	    CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
 
-    	List<TagComponent> tagComponents = new ArrayList<>(parsedSelectorList.size());
-        for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
-            tagComponents.add(compileIntoTagComponent(cssParsedSelector));
-        }
+    	    List<TagComponent> tagComponents = new ArrayList<>(parsedSelectorList.size());
+            parsedSelectorList.forEach(cssParsedSelector -> {
+                tagComponents.add(compileIntoTagComponent(cssParsedSelector));
+            });
     	return new TagComponentList(tagComponents);
 	}
 
-    private static TagComponent compileIntoTagComponent(CssParsedSelector cssParsedSelector) {
-        return compileSelector(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
+        private static TagComponent compileIntoTagComponent(CssParsedSelector cssParsedSelector) {
+            return compileSelector(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
     }
 
     public static TagComponent compileSelector(ArgumentMap argumentMap, Selector selector) {
-		CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
-		return cssSelector.toXPath(argumentMap, selector);
-	}
+        CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
+        return cssSelector.toXPath(argumentMap, selector);
+    }
 
 }
