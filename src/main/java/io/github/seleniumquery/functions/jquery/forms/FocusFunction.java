@@ -41,9 +41,9 @@ public class FocusFunction {
 	public static SeleniumQueryObject focus(SeleniumQueryObject caller) {
 		List<WebElement> elements = caller.get();
 		WebDriver driver = caller.getWebDriver();
-		for (WebElement webElement : elements) {
+		elements.forEach(webElement -> {
 			focusElement(driver, webElement);
-		}
+		});
 		return caller;
 	}
 

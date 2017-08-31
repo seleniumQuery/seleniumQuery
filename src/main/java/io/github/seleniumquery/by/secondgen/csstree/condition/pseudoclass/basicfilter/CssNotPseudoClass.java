@@ -59,9 +59,9 @@ public class CssNotPseudoClass extends CssFunctionalPseudoClassCondition {
         private String toChainedNotSelectors(WebDriver webDriver, SqCssFunctionalPseudoClassArgument functionalPseudoClassArgument) {
             CssSelectorList parsedNotPseudoClassArgument = ParseTreeBuilder.parse(functionalPseudoClassArgument.getArgumentAsString());
             StringBuilder chainedNotSelectors = new StringBuilder();
-            for (CssSelector cssSelector : parsedNotPseudoClassArgument) {
+            parsedNotPseudoClassArgument.forEach(cssSelector -> {
                 chainedNotSelectors.append(":").append(PSEUDO_PURE_NOT).append("(").append(cssSelector.toElementFinder(webDriver).toCssString()).append(")");
-            }
+            });
             return chainedNotSelectors.toString();
         }
 
@@ -75,9 +75,9 @@ public class CssNotPseudoClass extends CssFunctionalPseudoClassCondition {
         public XPathAndFilterFinder toXPath(WebDriver webDriver) {
             CssSelectorList parsedNotPseudoClassArgument = ParseTreeBuilder.parse(getArgument().getArgumentAsString());
             List<String> xPathExpressions = new LinkedList<>();
-            for (CssSelector cssSelector : parsedNotPseudoClassArgument) {
+            parsedNotPseudoClassArgument.forEach(cssSelector -> {
                 xPathExpressions.add(cssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression());
-            }
+            });
             String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);
             return XPathAndFilterFinder.pureXPath("not("+joinedXPathExps+")");
         }
