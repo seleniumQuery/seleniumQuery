@@ -48,6 +48,16 @@ public interface SeleniumQueryWaitEvaluateUntil<T> {
     SeleniumQueryWaitAndOrThen contains(String string);
 
     /**
+     * Tests if the result of the preceding function contains the given argument ignoring text case.
+     *
+     * @param string The string the function call result must contain.
+     * @return An element that allows chaining of further waiting conditions or calling regular functions.
+     *
+     * @since 0.18.0
+     */
+    SeleniumQueryWaitAndOrThen containsIgnoreCase(String string);
+
+    /**
      * Tests if the result of the preceding function matches the given regex.
      *
      * @param regex The regex the function call result must match.
