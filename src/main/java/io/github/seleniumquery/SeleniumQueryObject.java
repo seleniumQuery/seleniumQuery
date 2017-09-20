@@ -238,6 +238,23 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	 */
 	SeleniumQueryObject click();
 
+	/**
+	 * Clicks <strong>all</strong> elements in the set of matched elements, in the
+	 * order they were matched, but following some steps first:
+     * - Wait for the element to become ":visible"
+     * - Scroll the screen until the element
+     * - Finally click it
+     *
+     * Those steps avoid some errors using ChromeHeadless and simplify some tests.
+     * <br><br>
+     * If any element throws exceptions while being clicked, the others will still be clicked.
+	 *
+	 * @return The same seleniumQuery object.
+	 *
+	 * @since 0.17.0
+	 */
+	SeleniumQueryObject waitViewClick();
+
     /**
      * Double clicks <strong>all</strong> elements in the set of matched elements, in the
      * order they were matched.

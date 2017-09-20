@@ -35,13 +35,13 @@ import java.util.List;
 
 /**
  * Main implementation of {@link SeleniumQueryObject}.
- *  
+ *
  * @author acdcjunior
  * @author ricardo-sc
  * @since 0.14.0
  */
 class SqObject implements SeleniumQueryObject {
-	
+
 	private static final Log LOGGER = LogFactory.getLog(SqObject.class);
 
     static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
@@ -52,12 +52,12 @@ class SqObject implements SeleniumQueryObject {
 
     private By by;
 	private List<WebElement> elements;
-	
+
 	/**
 	 * The previous (or "parent") element, meaning this SeleniumQueryObject was created as result
 	 * of calling a "destructive" function (such as {@link #not(String)}) on that element.<br>
 	 * This property is retrieved by a call to {@link #end()}.
-	 * 
+	 *
 	 * @since 0.9.0
 	 */
 	private SeleniumQueryObject previous;
@@ -150,9 +150,10 @@ class SqObject implements SeleniumQueryObject {
 	}
 
 	@Override
-    public SeleniumQueryObject click() {
-		return seleniumQueryFunctions.click(this);
-	}
+    public SeleniumQueryObject click() {return seleniumQueryFunctions.click(this);}
+
+	@Override
+    public SeleniumQueryObject waitViewClick() {return seleniumQueryFunctions.waitViewClick(this);}
 
 	@Override
 	public SeleniumQueryObject dblclick() {
