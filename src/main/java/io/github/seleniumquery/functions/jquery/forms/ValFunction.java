@@ -85,9 +85,9 @@ public class ValFunction {
 	 */
 	public static SeleniumQueryObject val(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String value) {
 		LOGGER.debug("Setting value of "+ seleniumQueryObject +" to: \""+value+"\".");
-		for (WebElement element : elements) {
-            changeElementValue(seleniumQueryObject.getWebDriver(), element, value);
-		}
+		elements.forEach(element -> {
+			changeElementValue(seleniumQueryObject.getWebDriver(), element, value);
+		});
 		return seleniumQueryObject;
 	}
 

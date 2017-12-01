@@ -47,26 +47,25 @@ public class TagComponentList {
 	
 	public List<WebElement> findWebElements(SearchContext context) {
 		Set<WebElement> elements = new LinkedHashSet<>();
-		for (TagComponent tagComponent : tagComponents) {
-			List<WebElement> elementsFound = tagComponent.findWebElements(context);
-			elements.addAll(elementsFound);
-		}
+		tagComponents.stream().map(elementsFound -> tagComponent.findWebElements(context)).forEach(elementsFound -> {
+                    elements.addAll(elementsFound);
+                });
 		return new ArrayList<>(elements);
 	}
-	
-	public String toXPath() {
+
+        public String toXPath() {
 		StringBuilder compoundXPathExpression = new StringBuilder();
-		for (TagComponent tagComponent : tagComponents) {
-			compoundXPathExpression.append(tagComponent.toXPath()).append(XPATH_EXPRESSION_OR);
-		}
+		tagComponents.forEach(tagComponent -> {
+                    compoundXPathExpression.append(tagComponent.toXPath()).append(XPATH_EXPRESSION_OR);
+                );
 		removeTrailingExpressionOr(compoundXPathExpression);
 		return compoundXPathExpression.toString(); 
 	}
 
-	/**
-	 * Removes a trailing XPATH_EXPRESSION_OR, if necessary.
-	 */
-	private void removeTrailingExpressionOr(StringBuilder compoundXPathExpression) {
+       /**
+        * Removes a trailing XPATH_EXPRESSION_OR, if necessary.
+        */
+        private void removeTrailingExpressionOr(StringBuilder compoundXPathExpression) {
 		if (!tagComponents.isEmpty()) {
 			int xPathExpressionLength = compoundXPathExpression.length();
 			compoundXPathExpression.delete(xPathExpressionLength - XPATH_EXPRESSION_OR.length(), xPathExpressionLength);
@@ -76,18 +75,18 @@ public class TagComponentList {
 	public String toXPathCondition() {
 		StringBuilder compoundXPathCondition = new StringBuilder();
 		compoundXPathCondition.append('(');
-		for (TagComponent tagComponent : tagComponents) {
-			compoundXPathCondition.append(tagComponent.toXPathCondition()).append(XPATH_CONDITIONAL_OR);
-		}
+		tagComponents.forEach(tagComponent -> {
+                    compoundXPathCondition.append(tagComponent.toXPathCondition()).append(XPATH_CONDITIONAL_OR);
+                });
 		removeTrailingConditionalOr(compoundXPathCondition);
 		compoundXPathCondition.append(')');
 		return compoundXPathCondition.toString(); 
 	}
 
-	/**
-	 * Removes a trailing XPATH_CONDITIONAL_OR, if necessary.
-	 */
-	private void removeTrailingConditionalOr(StringBuilder sb) {
+       /**
+        * Removes a trailing XPATH_CONDITIONAL_OR, if necessary.
+        */
+        private void removeTrailingConditionalOr(StringBuilder sb) {
 		if (!tagComponents.isEmpty()) {
 			sb.delete(sb.length()-XPATH_CONDITIONAL_OR.length(), sb.length());
 		}

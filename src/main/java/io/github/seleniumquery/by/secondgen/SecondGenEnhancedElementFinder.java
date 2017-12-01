@@ -40,10 +40,9 @@ public class SecondGenEnhancedElementFinder implements EnhancedElementFinder {
     public List<WebElement> findElements(SearchContext context, String selector) {
         CssSelectorList parse = ParseTreeBuilder.parse(selector);
         Set<WebElement> elements = new LinkedHashSet<>();
-        for (CssSelector s : parse) {
-            List<WebElement> elementsFound = s.toElementFinder((WebDriver) context).findWebElements(context);
+        parse.stream().map(elementsFound -> s.toElementFinder((WebDriver) context).findWebElements(context)).forEach(elementsFound -> {
             elements.addAll(elementsFound);
-        }
+        });
         return new ArrayList<>(elements);
     }
 

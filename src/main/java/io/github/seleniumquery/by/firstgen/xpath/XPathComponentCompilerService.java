@@ -37,9 +37,9 @@ public class XPathComponentCompilerService {
 		W3cCssSelectorListWithMap parsedSelectorList = W3cCssSelectorWithMapParser.parseSelector(selector);
 
     	List<TagComponent> tagComponents = new ArrayList<>(parsedSelectorList.size());
-        for (W3cCssSelectorWithMap w3cCssSelectorWithMap : parsedSelectorList) {
-            tagComponents.add(compileIntoTagComponent(w3cCssSelectorWithMap));
-        }
+      parsedSelectorList.forEach(w3cCssSelectorWithMap -> {
+          tagComponents.add(compileIntoTagComponent(w3cCssSelectorWithMap));
+      });
     	return new TagComponentList(tagComponents);
 	}
 
@@ -48,8 +48,8 @@ public class XPathComponentCompilerService {
     }
 
     public static TagComponent compileSelector(ArgumentMap argumentMap, Selector selector) {
-		CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
-		return cssSelector.toXPath(argumentMap, selector);
-	}
+        CssSelector<Selector, TagComponent> cssSelector = CssSelectorFactory.parsedSelectorToCssSelector(selector);
+        return cssSelector.toXPath(argumentMap, selector);
+    }
 
 }
