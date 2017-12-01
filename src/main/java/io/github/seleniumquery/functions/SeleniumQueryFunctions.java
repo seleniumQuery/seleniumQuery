@@ -104,6 +104,10 @@ public class SeleniumQueryFunctions {
         return ClickFunction.click(seleniumQueryObject);
     }
 
+    public SeleniumQueryObject waitViewClick(SeleniumQueryObject seleniumQueryObject) {
+        return ClickFunction.waitViewClick(seleniumQueryObject);
+    }
+
     public SeleniumQueryObject dblclick(SeleniumQueryObject seleniumQueryObject) {
         return new DoubleClickFunction().dblclick(seleniumQueryObject);
     }
