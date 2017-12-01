@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public class ClickFunction {
         return click(seleniumQueryObject,true);
     }
 
-    private static SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject,boolean isWaitView){
+    private static SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject, boolean isWaitView){
         List<WebElement> elements = seleniumQueryObject.get();
 
         int numberOfNotClickedElements = 0;
@@ -79,4 +79,5 @@ public class ClickFunction {
         reportIfThereWasAnyElementNotClicked(LOGGER, seleniumQueryObject, elements, numberOfNotClickedElements, lastCaughtException, elementThatThrewLastCaughtException);
         return seleniumQueryObject;
     }
+
 }
