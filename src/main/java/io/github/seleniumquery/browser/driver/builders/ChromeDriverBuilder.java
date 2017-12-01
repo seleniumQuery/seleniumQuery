@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,13 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
-import io.github.seleniumquery.SeleniumQueryException;
-import io.github.seleniumquery.browser.driver.DriverBuilder;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils
+    .customPathWasProvidedAndExecutableExistsThere;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.executableExistsInClasspath;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPath;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
+import static java.lang.String.format;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -25,8 +30,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.*;
-import static java.lang.String.format;
+import io.github.seleniumquery.SeleniumQueryException;
+import io.github.seleniumquery.browser.driver.DriverBuilder;
 
 /**
  * Builds {@link ChromeDriver} instances for {@link io.github.seleniumquery.browser.driver.SeleniumQueryDriver}.
@@ -55,6 +60,20 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
     private String customPathToChromeDriver;
     private ChromeOptions chromeOptions;
+
+    /**
+     * Sets the {@link DesiredCapabilities} to the driver being built.
+     *
+     * @param desiredCapabilities The desired capabilities object. See https://sites.google.com/a/chromium.org/chromedriver/capabilities
+     * @return The current builder instance, for additional configuration, if needed.
+     *
+     * @deprecated Prefer using {@link ChromeOptions} and {@link ChromeDriverBuilder#withOptions(ChromeOptions)} instead.
+     */
+    @Override
+    @Deprecated
+    public ChromeDriverBuilder withCapabilities(DesiredCapabilities desiredCapabilities) {
+        return super.withCapabilities(desiredCapabilities);
+    }
 
     /**
      * Sets specific {@link ChromeOptions} options to be used in the {@link ChromeDriver}.
