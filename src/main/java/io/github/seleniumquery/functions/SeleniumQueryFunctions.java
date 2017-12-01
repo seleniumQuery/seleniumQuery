@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,6 +102,10 @@ public class SeleniumQueryFunctions {
 
     public SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject) {
         return ClickFunction.click(seleniumQueryObject);
+    }
+
+    public SeleniumQueryObject waitViewClick(SeleniumQueryObject seleniumQueryObject) {
+        return ClickFunction.waitViewClick(seleniumQueryObject);
     }
 
     public SeleniumQueryObject dblclick(SeleniumQueryObject seleniumQueryObject) {

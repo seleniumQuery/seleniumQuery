@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,6 +59,7 @@ public class SeleniumQueryObjectDummy implements SeleniumQueryObject {
     @Override public SeleniumQueryObject eq(int index) { throw new PseudoTestDoubleException(); }
     @Override public String text() { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject click() { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryObject waitViewClick() { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject dblclick() { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject val(String value) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject val(Number value) { throw new PseudoTestDoubleException(); }

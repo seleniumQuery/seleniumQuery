@@ -150,6 +150,11 @@ class SqObject implements SeleniumQueryObject {
 		return seleniumQueryFunctions.click(this);
 	}
 
+    @Override
+    public SeleniumQueryObject waitViewClick() {
+        return seleniumQueryFunctions.waitViewClick(this);
+    }
+
 	@Override
 	public SeleniumQueryObject dblclick() {
 		return seleniumQueryFunctions.dblclick(this);

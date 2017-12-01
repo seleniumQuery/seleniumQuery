@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -37,11 +38,18 @@ import static io.github.seleniumquery.functions.jquery.events.ClickFunctionUtils
 public class ClickFunction {
 
     private static final Log LOGGER = LogFactory.getLog(ClickFunction.class);
-    
+
     private ClickFunction() {}
 
     public static SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject) {
-        LOGGER.debug("Clicking "+seleniumQueryObject+".");
+        return click(seleniumQueryObject,false);
+    }
+
+    public static SeleniumQueryObject waitViewClick(SeleniumQueryObject seleniumQueryObject){
+        return click(seleniumQueryObject,true);
+    }
+
+    private static SeleniumQueryObject click(SeleniumQueryObject seleniumQueryObject, boolean isWaitView){
         List<WebElement> elements = seleniumQueryObject.get();
 
         int numberOfNotClickedElements = 0;
@@ -50,6 +58,16 @@ public class ClickFunction {
 
         for (WebElement element : elements) {
             try {
+                if(isWaitView) { //Avoiding errors with ChromeHeadless.
+                    LOGGER.debug("Waiting " + seleniumQueryObject + " becoming visible.");
+                    seleniumQueryObject.waitUntil().is(":visible");
+
+                    LOGGER.debug("Viewing " + seleniumQueryObject + ".");
+                    JavascriptExecutor js = (JavascriptExecutor) seleniumQueryObject.getWebDriver();
+                    js.executeScript("arguments[0].scrollIntoView()", element);
+                }
+
+                LOGGER.debug("Clicking " + seleniumQueryObject + ".");
                 element.click();
             } catch (ElementNotVisibleException e) {
                 numberOfNotClickedElements++;
