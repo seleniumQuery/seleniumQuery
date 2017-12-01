@@ -37,8 +37,7 @@ import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 public class ChromeDriverBuilderTest {
 
     // https://code.google.com/p/chromium/codesearch#chromium/src/chrome/test/chromedriver/chrome/mobile_device_list.cc
-    private static final String CHROME_MOBILE_EMULATION_DEVICE = "Apple iPad";
-    private static final String CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING = "iPad";
+    private static final String CHROME_MOBILE_EMULATION_DEVICE = "iPad";
     private static final String WINDOWS_TEST_CHROMEDRIVER_LOCATION = "D:\\usr\\local\\bin\\chromedriver.exe";
     private static final String LINUX_TEST_CHROMEDRIVER_LOCATION = "/usr/local/bin/chromedriver";
 
@@ -59,7 +58,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome().withOptions(options);
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING));
+        BrowserAgentTestHelper.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
     }
 
     @Test
@@ -72,7 +71,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome().withCapabilities(capabilities);
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING));
+        BrowserAgentTestHelper.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
     }
 
     private ChromeOptions createChromeOptionsWithMobileEmulation() {
@@ -90,7 +89,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome();
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(not(containsString(CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING)));
+        BrowserAgentTestHelper.assertBrowserAgent(not(containsString(CHROME_MOBILE_EMULATION_DEVICE)));
     }
 
     @Test
