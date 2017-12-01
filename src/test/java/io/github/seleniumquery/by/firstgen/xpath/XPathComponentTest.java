@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,15 @@
 
 package io.github.seleniumquery.by.firstgen.xpath;
 
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 import org.w3c.css.sac.SelectorList;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
+import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 
 public class XPathComponentTest {
 
@@ -61,7 +62,7 @@ public class XPathComponentTest {
     }
 
     public static TagComponent selectorToExpression(String selector) {
-        CssParsedSelectorList cssParsedSelectors = CssSelectorParser.parseSelector(selector);
+        W3cCssSelectorListWithMap cssParsedSelectors = W3cCssSelectorWithMapParser.parseSelector(selector);
         SelectorList selectorList = cssParsedSelectors.getSelectorList();
         return XPathComponentCompilerService.compileSelector(cssParsedSelectors.getArgumentMap(), selectorList.item(0));
     }

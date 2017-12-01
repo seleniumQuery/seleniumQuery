@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.firstgen.css.pseudoclasses.InputPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import static org.apache.commons.lang3.StringUtils.join;
+
 import org.openqa.selenium.WebDriver;
 
-import static org.apache.commons.lang3.StringUtils.join;
+import io.github.seleniumquery.by.firstgen.css.pseudoclasses.InputPseudoClass;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
 /**
  * :input
@@ -31,21 +31,13 @@ import static org.apache.commons.lang3.StringUtils.join;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssInputPseudoClass extends CssPseudoClassCondition {
+public class CssInputPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "input";
-    public static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";
-
-    public NeverNativelySupportedPseudoClass inputPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath(INPUT_TAGS_XPATH);
-        }
-    };
+    private static final String INPUT_TAGS_XPATH = "(self::" + join(InputPseudoClass.FORM_ELEMENT_TAGS, " or self::") + ")";
 
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return inputPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath(INPUT_TAGS_XPATH);
     }
 
 }

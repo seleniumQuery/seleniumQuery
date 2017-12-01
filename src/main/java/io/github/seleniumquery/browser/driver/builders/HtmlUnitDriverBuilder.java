@@ -16,15 +16,15 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
-import io.github.seleniumquery.browser.driver.DriverBuilder;
+import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
+import static org.openqa.selenium.remote.CapabilityType.VERSION;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
-import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
-import static org.openqa.selenium.remote.CapabilityType.VERSION;
+import io.github.seleniumquery.browser.driver.DriverBuilder;
 
 /**
  * Builds {@link HtmlUnitDriver} instances for SeleniumQueryDriver.
@@ -35,10 +35,8 @@ import static org.openqa.selenium.remote.CapabilityType.VERSION;
 public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> {
 
     private static final String DEFAULT_EMULATED_BROWSER_NAME = BrowserType.CHROME;
-    private static final String DEFAULT_EMULATED_BROWSER_VERSION = null; // HtmlUnit does not use version when browser is chrome
 
     private String emulatedBrowserName = DEFAULT_EMULATED_BROWSER_NAME;
-    private String emulatedBrowserVersion = DEFAULT_EMULATED_BROWSER_VERSION;
 
     private Boolean javaScriptEnabled;
 
@@ -91,34 +89,21 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
     }
 
     /**
-     * Configures HtmlUnit to emulate latest available Internet Explorer version.
+     * Configures HtmlUnit to emulate Internet Explorer.
      *
      * @return A self reference.
      *
      * @since 0.9.0
      */
     public HtmlUnitDriverBuilder emulatingInternetExplorer() {
-        return emulatingInternetExplorer11();
-    }
-
-    /**
-     * Configures HtmlUnit to emulate Internet Explorer 11.
-     *
-     * @return A self reference.
-     *
-     * @since 0.9.0
-     */
-    public HtmlUnitDriverBuilder emulatingInternetExplorer11() {
         this.emulatedBrowserName = BrowserType.IE;
-        this.emulatedBrowserVersion = "11";
         return this;
     }
 
     @Override
     protected WebDriver build() {
-        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.htmlUnitWithJs());
-        overwriteCapabilityIfValueNotNull(capabilities, BROWSER_NAME, this.emulatedBrowserName);
-        overwriteCapabilityIfValueNotNull(capabilities, VERSION, this.emulatedBrowserVersion);
+        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.htmlUnit());
+        overwriteCapabilityIfValueNotNull(capabilities, VERSION, this.emulatedBrowserName);
         overwriteCapabilityIfValueNotNull(capabilities, SUPPORTS_JAVASCRIPT, this.javaScriptEnabled);
         return new HtmlUnitDriver(capabilities);
     }

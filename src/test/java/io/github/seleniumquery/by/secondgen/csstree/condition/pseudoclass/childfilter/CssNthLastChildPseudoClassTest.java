@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,15 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass
+    .assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils
+    .assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
+
 import org.junit.Test;
 
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.childfilter.AstCssNthLastChildPseudoClass;
 
 /**
  * IMPORTANT:
@@ -55,15 +58,11 @@ public class CssNthLastChildPseudoClassTest {
         String pseudoThatTheDriverWillTestForNativeSupport = NTH_LAST_CHILD_PSEUDO_USED_IN_NATIVE_SUPPORT_CHECK;
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(
                 pseudoThatTheDriverWillTestForNativeSupport,
-                nthLastChild(nthArgument),
+                new CssNthLastChildPseudoClass(new AstCssNthLastChildPseudoClass(nthArgument)),
                 expectedCSS,
                 expectedXPath
         );
-        assertPseudoClass(nthLastChild(nthArgument)).whenNotNativelySupported().translatesToPureXPath(expectedXPath);
-    }
-
-    private CssNthLastChildPseudoClass nthLastChild(String nthArgument) {
-        return new CssNthLastChildPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthArgument));
+        assertPseudoClass(new CssNthLastChildPseudoClass(new AstCssNthLastChildPseudoClass(nthArgument))).whenNotNativelySupported().translatesToPureXPath(expectedXPath);
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,31 +16,32 @@
 
 package io.github.seleniumquery.by.firstgen.css;
 
-import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelector;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
 
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
+import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
+
 public class CssSelectorMatcherService {
-	
+
 	private CssSelectorMatcherService() {}
-	
+
 	public static boolean elementMatchesStringSelector(WebDriver driver, WebElement element, String selector) {
-		CssParsedSelectorList cssParsedSelectors = CssSelectorParser.parseSelector(selector);
-		for (CssParsedSelector cssParsedSelector : cssParsedSelectors) {
-            if (elementMatchesSelector(driver, element, cssParsedSelector)) {
+		W3cCssSelectorListWithMap cssParsedSelectors = W3cCssSelectorWithMapParser.parseSelector(selector);
+		for (W3cCssSelectorWithMap w3cCssSelectorWithMap : cssParsedSelectors) {
+            if (elementMatchesSelector(driver, element, w3cCssSelectorWithMap)) {
                 return true;
             }
 		}
         return false;
 	}
 
-    public static boolean elementMatchesSelector(WebDriver driver, WebElement element, CssParsedSelector cssParsedSelector) {
-        return CssSelectorMatcherService.elementMatchesSelector(driver, element, cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
+    public static boolean elementMatchesSelector(WebDriver driver, WebElement element, W3cCssSelectorWithMap w3cCssSelectorWithMap) {
+        return CssSelectorMatcherService.elementMatchesSelector(driver, element, w3cCssSelectorWithMap.getArgumentMap(), w3cCssSelectorWithMap.getSelector());
     }
 
     public static boolean elementMatchesSelector(WebDriver driver, WebElement element, ArgumentMap argumentMap, Selector selector) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition;
 
-import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
-import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssAndCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.SimpleSelector;
+
+import com.steadystate.css.parser.selectors.ConditionalSelectorImpl;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssAndCondition;
 
 /**
  * E.firstCondition.secondCondition
@@ -40,14 +41,12 @@ class CssAndConditionTranslator {
 		this.cssConditionTranslator = cssConditionTranslator;
 	}
 
-	public CssAndCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, CombinatorCondition combinatorCondition) {
-		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(
-																					selectorUpToThisPoint,
-																					combinatorCondition.getFirstCondition());
+	AstCssAndCondition translate(SimpleSelector selectorUpToThisPoint, ArgumentMap argumentMap, CombinatorCondition combinatorCondition) {
+		ConditionalSelectorImpl selectorUpToThisPointPlusFirstCondition = new ConditionalSelectorImpl(selectorUpToThisPoint, combinatorCondition.getFirstCondition());
 
 		CssCondition firstCondition = cssConditionTranslator.translate(selectorUpToThisPoint, argumentMap, combinatorCondition.getFirstCondition());
 		CssCondition secondCondition = cssConditionTranslator.translate(selectorUpToThisPointPlusFirstCondition, argumentMap, combinatorCondition.getSecondCondition());
-		return new CssAndCondition(firstCondition, secondCondition);
+		return new AstCssAndCondition(firstCondition, secondCondition);
 	}
 
 }

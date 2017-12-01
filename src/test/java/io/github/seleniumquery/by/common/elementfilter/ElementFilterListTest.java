@@ -16,14 +16,10 @@
 
 package io.github.seleniumquery.by.common.elementfilter;
 
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
 
 public class ElementFilterListTest {
 
@@ -38,12 +34,7 @@ public class ElementFilterListTest {
     }
 
     private ElementFilter createSomeElementFilter() {
-        return new ElementFilter() {
-            @Override
-            public List<WebElement> filterElements(WebDriver driver, List<WebElement> elements) {
-                return null;
-            }
-        };
+        return (driver, elements) -> null;
     }
 
     @Test

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.common.AttributeEvaluatorUtils;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssContainsSubstringAttributeCondition;
 import io.github.seleniumquery.utils.SelectorUtils;
 
 /**
@@ -25,10 +26,10 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsSubstringAttributeCondition extends CssAttributeCondition {
+public class CssContainsSubstringAttributeCondition extends CssAttributeConditionBase {
 
-    public CssContainsSubstringAttributeCondition(String attributeName, String wantedValue) {
-        super(attributeName, wantedValue);
+    public CssContainsSubstringAttributeCondition(AstCssContainsSubstringAttributeCondition astCssContainsSubstringAttributeCondition) {
+        super(astCssContainsSubstringAttributeCondition);
     }
 
     @Override
@@ -37,8 +38,8 @@ public class CssContainsSubstringAttributeCondition extends CssAttributeConditio
     }
 
     protected String toXPath() {
-        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
-        String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
+        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName());
+        String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.getWantedValue());
         return "contains(" + escapedAttributeName + ", " + escapedWantedValue + ")";
     }
 

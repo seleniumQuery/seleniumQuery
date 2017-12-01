@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery;
 
-import io.github.seleniumquery.browser.BrowserFunctionsWithDeprecatedFunctions;
-import io.github.seleniumquery.internal.SqObjectFactory;
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
+import io.github.seleniumquery.browser.BrowserFunctions;
 
 /**
  * The seleniumQuery objects factory.<br>
@@ -52,7 +52,9 @@ import java.util.List;
  * @since 0.9.0
  */
 public class SeleniumQuery {
-	
+
+    private static final SeleniumQueryBrowser globalSeleniumQueryBrowser = new SeleniumQueryBrowser();
+
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p>
 	 * <p>
@@ -69,19 +71,27 @@ public class SeleniumQuery {
 	 *
 	 * @since 0.9.0
 	 */
-	public static final BrowserFunctionsWithDeprecatedFunctions $ = new BrowserFunctionsWithDeprecatedFunctions();
+	public static final BrowserFunctions $ = globalSeleniumQueryBrowser.$;
 
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p> This works as an alias to <code>$</code>.
 	 */
-	public static final BrowserFunctionsWithDeprecatedFunctions sQ = $;
-	
+	public static final BrowserFunctions sQ = globalSeleniumQueryBrowser.sQ;
+
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p> This works as an alias to <code>$</code>.
 	 */
-	public static final BrowserFunctionsWithDeprecatedFunctions jQuery = $;
-	
-	private SeleniumQuery() {}
+	public static final BrowserFunctions jQuery = globalSeleniumQueryBrowser.jQuery;
+
+    private SeleniumQuery() {}
+
+    /**
+     * The global {@link SeleniumQueryBrowser} instance, used by {@code SeleniumQuery.$}.
+     * @return the {@link SeleniumQueryBrowser} used by the static {@code $}.
+     */
+	public static SeleniumQueryBrowser seleniumQueryBrowser() {
+	    return globalSeleniumQueryBrowser;
+    }
 
 	/**
 	 * <p>The seleniumQuery global browser functions object.</p>
@@ -105,7 +115,7 @@ public class SeleniumQuery {
 	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject $(String selector) {
-		return getSeleniumQueryObjectFactory().createWithValidSelectorAndNoPrevious($.driver().get(), selector);
+	    return globalSeleniumQueryBrowser.$(selector);
 	}
 
 	/**
@@ -128,7 +138,7 @@ public class SeleniumQuery {
 	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject $(WebElement... elements) {
-		return getSeleniumQueryObjectFactory().createWithInvalidSelectorAndNoPrevious($.driver().get(), elements);
+        return globalSeleniumQueryBrowser.$(elements);
 	}
 
 	/**
@@ -151,7 +161,7 @@ public class SeleniumQuery {
 	 * @since 0.9.0
 	 */
 	public static SeleniumQueryObject $(List<WebElement> elements) {
-		return getSeleniumQueryObjectFactory().createWithInvalidSelectorAndNoPrevious($.driver().get(), elements);
+        return globalSeleniumQueryBrowser.$(elements);
 	}
 
 	/**
@@ -228,10 +238,6 @@ public class SeleniumQuery {
 	 */
 	public static SeleniumQueryObject jQuery(List<WebElement> elements) {
 		return $(elements);
-	}
-
-	private static SqObjectFactory getSeleniumQueryObjectFactory() {
-		return SqObjectFactory.instance();
 	}
 
 }

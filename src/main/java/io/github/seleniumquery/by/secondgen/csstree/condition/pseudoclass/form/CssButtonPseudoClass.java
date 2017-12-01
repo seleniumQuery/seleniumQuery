@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
 /**
  * :button
@@ -38,20 +38,11 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssButtonPseudoClass extends CssPseudoClassCondition {
-
-    public static final String PSEUDO = "button";
-
-    private NeverNativelySupportedPseudoClass buttonPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath("((self::input and " + TYPE_ATTR_LC_VAL + " = 'button') or self::button)");
-        }
-    };
+public class CssButtonPseudoClass implements NeverNativelySupportedPseudoClass {
 
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return buttonPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath("((self::input and " + TYPE_ATTR_LC_VAL + " = 'button') or self::button)");
     }
 
 }

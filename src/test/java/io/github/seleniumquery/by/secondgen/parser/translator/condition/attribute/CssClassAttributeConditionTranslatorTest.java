@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,14 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
-import org.junit.Test;
-
-import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
+import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils
+    .parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
 
 public class CssClassAttributeConditionTranslatorTest {
 

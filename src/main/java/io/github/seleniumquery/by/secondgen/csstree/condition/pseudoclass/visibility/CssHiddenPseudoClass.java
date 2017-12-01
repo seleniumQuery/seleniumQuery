@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.visibility;
 
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.HiddenPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
 
 /**
  * :hidden
@@ -28,20 +28,11 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssHiddenPseudoClass extends CssPseudoClassCondition {
-
-    public static final String PSEUDO = "hidden";
-
-    public NeverNativelySupportedPseudoClass hiddenPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.filterOnly(HiddenPseudoClass.HIDDEN_FILTER);
-        }
-    };
+public class CssHiddenPseudoClass implements NeverNativelySupportedPseudoClass {
 
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return hiddenPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.filterOnly(HiddenPseudoClass.HIDDEN_FILTER);
     }
 
 }

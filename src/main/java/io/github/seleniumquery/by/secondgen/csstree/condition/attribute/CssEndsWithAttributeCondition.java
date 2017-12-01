@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.common.AttributeEvaluatorUtils;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssEndsWithAttributeCondition;
 import io.github.seleniumquery.utils.SelectorUtils;
 
 /**
@@ -27,10 +28,10 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEndsWithAttributeCondition extends CssAttributeCondition {
+public class CssEndsWithAttributeCondition extends CssAttributeConditionBase {
 
-    public CssEndsWithAttributeCondition(String attributeName, String wantedValue) {
-        super(attributeName, wantedValue);
+    public CssEndsWithAttributeCondition(AstCssEndsWithAttributeCondition astCssEndsWithAttributeCondition) {
+        super(astCssEndsWithAttributeCondition);
     }
 
     @Override
@@ -39,9 +40,9 @@ public class CssEndsWithAttributeCondition extends CssAttributeCondition {
     }
 
     protected String toXPath() {
-        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
-        String attrValue = this.wantedValue;
-        String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
+        String escapedAttributeName = AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName());
+        String attrValue = this.getWantedValue();
+        String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.getWantedValue());
         return "substring("+escapedAttributeName+", string-length(" + escapedAttributeName + ")-" +
                 (attrValue.length() - 1) + ") = " + escapedWantedValue;
     }

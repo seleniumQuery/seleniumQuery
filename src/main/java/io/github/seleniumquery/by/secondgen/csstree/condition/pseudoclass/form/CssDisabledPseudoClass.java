@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.DisabledPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.form.AstCssDisabledPseudoClass;
 
 /**
  * :disabled
@@ -31,26 +32,18 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssDisabledPseudoClass extends CssPseudoClassCondition {
+public class CssDisabledPseudoClass implements MaybeNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "disabled";
-    private static final String DISABLED_PSEUDO = ":" + PSEUDO;
-
-    private MaybeNativelySupportedPseudoClass disabledPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
-        @Override
-        public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CssFinder(DISABLED_PSEUDO);
-        }
-
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath(DisabledPseudoClass.DISABLED_XPATH_CONDITION);
-        }
-    };
+    private static final String DISABLED_PSEUDO = ":" + AstCssDisabledPseudoClass.PSEUDO;
 
     @Override
-    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return disabledPseudoClassFinderFactoryStrategy;
+    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+        return new CssFinder(DISABLED_PSEUDO);
+    }
+
+    @Override
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath(DisabledPseudoClass.DISABLED_XPATH_CONDITION);
     }
 
 }

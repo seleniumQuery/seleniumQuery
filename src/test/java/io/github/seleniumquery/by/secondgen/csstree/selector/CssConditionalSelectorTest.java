@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,17 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.selector;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
-import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.CssDescendantSelector;
-import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy.createWebDriverDummy;
+
+import org.junit.Test;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssClassAttributeCondition;
+import io.github.seleniumquery.by.secondgen.csstree.selector.combinator.CssDescendantSelector;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssClassAttributeCondition;
 
 public class CssConditionalSelectorTest {
 
@@ -32,7 +34,7 @@ public class CssConditionalSelectorTest {
     public void toElementFinder() {
         // given
         CssTagNameSelector tagNameSelector = new CssTagNameSelector("tagg");
-        CssClassAttributeCondition classAttributeCondition = new CssClassAttributeCondition("clz");
+        CssClassAttributeCondition classAttributeCondition = new CssClassAttributeCondition(new AstCssClassAttributeCondition("clz"));
         // tagg.clz
         CssConditionalSelector conditionalSelector = new CssConditionalSelector(tagNameSelector, classAttributeCondition);
         // when
@@ -49,7 +51,7 @@ public class CssConditionalSelectorTest {
         // given
         CssTagNameSelector aTagSelector = new CssTagNameSelector("a");
         CssTagNameSelector bTagSelector = new CssTagNameSelector("b");
-        CssClassAttributeCondition classAttributeCondition = new CssClassAttributeCondition("condition");
+        CssClassAttributeCondition classAttributeCondition = new CssClassAttributeCondition(new AstCssClassAttributeCondition("condition"));
         CssConditionalSelector conditionalSelector = new CssConditionalSelector(bTagSelector, classAttributeCondition);
         // a b.condition
         CssDescendantSelector descendantSelector = new CssDescendantSelector(aTagSelector, conditionalSelector);

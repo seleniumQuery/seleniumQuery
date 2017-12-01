@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
 
 /**
  * :only-child
@@ -28,20 +28,11 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssOnlyChildPseudoClass extends CssPseudoClassCondition {
-
-    public static final String PSEUDO = "only-child";
-
-    public NeverNativelySupportedPseudoClass onlyChildPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath("../*[last() = 1]");
-        }
-    };
+public class CssOnlyChildPseudoClass implements NeverNativelySupportedPseudoClass {
 
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return onlyChildPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath("../*[last() = 1]");
     }
 
 }

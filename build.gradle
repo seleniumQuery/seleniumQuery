@@ -5,6 +5,10 @@ version = '0.17.0-SNAPSHOT'
 
 description = "seleniumQuery"
 
+ext {
+    seleniumVersion = "3.8.0"
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 tasks.withType(JavaCompile) {
@@ -17,22 +21,39 @@ repositories {
 
 dependencies {
     compile('net.sourceforge.cssparser:cssparser:0.9.22')
-    compile('org.apache.commons:commons-lang3:3.5')
-    compile('org.seleniumhq.selenium:selenium-java:3.2.0')
-    compile('org.seleniumhq.selenium:selenium-remote-driver:3.2.0')
-    compile('org.seleniumhq.selenium:htmlunit-driver:2.25')
+    compile('org.apache.commons:commons-text:1.1')
+    compile('org.apache.commons:commons-lang3:3.6')
+    compile('org.seleniumhq.selenium:htmlunit-driver:2.27')
+    compile("org.seleniumhq.selenium:selenium-java:${seleniumVersion}")
+    compile("org.seleniumhq.selenium:selenium-remote-driver:${seleniumVersion}")
     compile('com.codeborne:phantomjsdriver:1.4.1') {
         exclude(module: 'selenium-java')
         exclude(module: 'selenium-remote-driver')
     }
     compile('commons-logging:commons-logging:1.2')
     compile('org.unbescape:unbescape:1.1.4.RELEASE')
-	
+
     testCompile('junit:junit:4.12') {
         exclude(module: 'hamcrest-core')
     }
     testCompile('org.hamcrest:hamcrest-junit:2.0.0.0')
 }
+
+/*
+ * Copyright (c) 2017 seleniumQuery authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 // https://docs.gradle.org/current/userguide/jacoco_plugin.html
 apply plugin: "jacoco"

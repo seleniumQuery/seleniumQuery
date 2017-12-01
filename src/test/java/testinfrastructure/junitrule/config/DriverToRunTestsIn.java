@@ -37,6 +37,7 @@ public enum DriverToRunTestsIn {
 	FIREFOX_JS_OFF_ONLY                 (_FIREFOX, _JAVASCRIPT_OFF),
 
 	CHROME                              (_CHROME, _JAVASCRIPT_ON),
+	CHROME_HEADLESS                     (_CHROME_HEADLESS, _JAVASCRIPT_ON),
 	IE                                  (_IE, _JAVASCRIPT_ON),
 	PHANTOMJS                           (_PHANTOMJS, _JAVASCRIPT_ON),
 
@@ -53,17 +54,19 @@ public enum DriverToRunTestsIn {
 	private final boolean htmlUnit;
 	private final boolean firefox;
 	private final boolean chrome;
+	private final boolean chromeHeadless;
 	private final boolean ie;
 	private final boolean phantomJS;
 	private final boolean javaScriptOn;
 	private final boolean javaScriptOff;
 
-	public enum ShouldRun {_FIREFOX, _CHROME, _IE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
+	public enum ShouldRun {_FIREFOX, _CHROME, _CHROME_HEADLESS, _IE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
 
 	DriverToRunTestsIn(ShouldRun... shouldRuns) {
         List<ShouldRun> shouldRunList = asList(shouldRuns);
         this.firefox = shouldRunList.contains(_FIREFOX);
 		this.chrome = shouldRunList.contains(_CHROME);
+		this.chromeHeadless = shouldRunList.contains(_CHROME_HEADLESS);
 		this.ie = shouldRunList.contains(_IE);
 		this.phantomJS = shouldRunList.contains(_PHANTOMJS);
 		this.htmlUnit = shouldRunList.contains(_HTMLUNIT);
@@ -74,6 +77,7 @@ public enum DriverToRunTestsIn {
 	public boolean canRunHtmlUnit() { return htmlUnit; }
 	public boolean canRunFirefox() { return firefox; }
 	public boolean canRunChrome() { return chrome; }
+	public boolean canRunChromeHeadless() { return chromeHeadless; }
 	public boolean canRunIE() { return ie; }
 	public boolean canRunPhantomJS() { return phantomJS; }
 	public boolean shouldRunWithJavaScriptOn() { return javaScriptOn; }

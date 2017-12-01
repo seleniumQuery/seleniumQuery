@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,23 @@
 
 package io.github.seleniumquery.functions.jquery.traversing.filtering;
 
-import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.by.common.preparser.ArgumentMap;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
-import io.github.seleniumquery.by.firstgen.css.CssSelector;
-import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
-import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.by.common.preparser.ArgumentMap;
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
+import io.github.seleniumquery.by.firstgen.css.CssSelector;
+import io.github.seleniumquery.by.firstgen.css.CssSelectorFactory;
+import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
 
 /**
  * $("selector").is("selector")
@@ -43,7 +44,7 @@ import java.util.regex.Pattern;
 public class IsFunction {
 
 	private static final Pattern NOT_SQ_PATTERN = Pattern.compile("not-sq\\((\\d+)\\)");
-	
+
 	private IsFunction() {}
 
 	public static boolean is(SeleniumQueryObject seleniumQueryObject, String selector) {
@@ -89,9 +90,9 @@ public class IsFunction {
         }
 
         private List<CompiledCssSelector> compileCssSelector(String selector) {
-            CssParsedSelectorList cssParsedSelectorList = CssSelectorParser.parseSelector(selector);
-            SelectorList selectorList = cssParsedSelectorList.getSelectorList();
-            ArgumentMap argumentMap = cssParsedSelectorList.getArgumentMap();
+            W3cCssSelectorListWithMap w3cCssSelectorListWithMap = W3cCssSelectorWithMapParser.parseSelector(selector);
+            SelectorList selectorList = w3cCssSelectorListWithMap.getSelectorList();
+            ArgumentMap argumentMap = w3cCssSelectorListWithMap.getArgumentMap();
 
             List<CompiledCssSelector> compiledCssSelectors = new ArrayList<>();
             for (int i = 0; i < selectorList.getLength(); i++) {
@@ -141,8 +142,8 @@ public class IsFunction {
 		while (m.find()) {
 		    String argumentMapIndex = m.group(1);
 		    String notPseudoClassContent = argumentMap.get(argumentMapIndex);
-		    
-			CssParsedSelectorList parsedPseudoClassContent = CssSelectorParser.parseSelector(notPseudoClassContent);
+
+			W3cCssSelectorListWithMap parsedPseudoClassContent = W3cCssSelectorWithMapParser.parseSelector(notPseudoClassContent);
 			SelectorList parsedPseudoClassContentSelectorList = parsedPseudoClassContent.getSelectorList();
 			ArgumentMap parsedPseudoClassContentArgumentMap = parsedPseudoClassContent.getArgumentMap();
 			for (int i = 0; i < parsedPseudoClassContentSelectorList.getLength(); i++) {
@@ -154,5 +155,5 @@ public class IsFunction {
 		}
 		return false;
 	}
-	
+
 }

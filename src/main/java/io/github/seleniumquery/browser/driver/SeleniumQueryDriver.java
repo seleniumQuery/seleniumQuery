@@ -16,16 +16,21 @@
 
 package io.github.seleniumquery.browser.driver;
 
-import io.github.seleniumquery.SeleniumQueryConfig;
-import io.github.seleniumquery.browser.driver.builders.*;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 
-import java.util.concurrent.TimeUnit;
+import io.github.seleniumquery.SeleniumQueryConfig;
+import io.github.seleniumquery.browser.driver.builders.ChromeDriverBuilder;
+import io.github.seleniumquery.browser.driver.builders.FirefoxDriverBuilder;
+import io.github.seleniumquery.browser.driver.builders.HtmlUnitDriverBuilder;
+import io.github.seleniumquery.browser.driver.builders.InternetExplorerDriverBuilder;
+import io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder;
 
 /**
- * Represents and manages the {@link WebDriver} instance used a specific
+ * Represents and manages the {@link WebDriver} instance used by (within) a specific
  * {@link io.github.seleniumquery.SeleniumQueryBrowser}.
  *
  * @author acdcjunior

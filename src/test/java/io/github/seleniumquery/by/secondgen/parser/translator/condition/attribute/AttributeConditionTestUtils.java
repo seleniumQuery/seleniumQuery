@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,23 @@
 
 package io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssAttributeCondition;
-import org.hamcrest.Matcher;
-
-import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils.parseAndAssertFirstCssCondition;
+import static io.github.seleniumquery.by.secondgen.parser.translator.condition.attribute.TranslatorsTestUtils
+    .parseAndAssertFirstCssCondition;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.hamcrest.Matcher;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.attribute.CssAttributeConditionBase;
+
 public class AttributeConditionTestUtils {
 
-    public static <T extends CssAttributeCondition> void verifySelectorYieldsAttrCondition(Class<T> conditionClass,
-                                                                                           String selector,
-                                                                                           String attributeName, Matcher<String> valueMatcher) {
+    public static <T extends CssAttributeConditionBase> void verifySelectorYieldsAttrCondition(Class<T> conditionClass,
+                                                                                               String selector,
+                                                                                               String attributeName, Matcher<String> valueMatcher) {
         // given
         // when
-        CssAttributeCondition cssCondition = parseAndAssertFirstCssCondition(selector, conditionClass);
+        CssAttributeConditionBase cssCondition = parseAndAssertFirstCssCondition(selector, conditionClass);
         // then
         assertThat(cssCondition.getAttributeName(), is(attributeName));
         assertThat(cssCondition.getWantedValue(), is(valueMatcher));

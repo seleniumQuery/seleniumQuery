@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
+import org.unbescape.css.CssEscape;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
-import org.unbescape.css.CssEscape;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssIdAttributeCondition;
 
 /**
  * #id
@@ -31,16 +32,16 @@ import org.unbescape.css.CssEscape;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssIdAttributeCondition implements CssCondition, CssConditionImplementedFinders {
+public class CssIdAttributeCondition implements CssCondition {
 
-    private String id;
+    private final AstCssIdAttributeCondition astCssIdAttributeCondition;
 
-    public CssIdAttributeCondition(String id) {
-        this.id = id;
+    public CssIdAttributeCondition(AstCssIdAttributeCondition astCssIdAttributeCondition) {
+        this.astCssIdAttributeCondition = astCssIdAttributeCondition;
     }
 
     public String getId() {
-        return id;
+        return astCssIdAttributeCondition.id;
     }
 
     @Override
@@ -51,11 +52,11 @@ public class CssIdAttributeCondition implements CssCondition, CssConditionImplem
     }
 
     private CssFinder toCSS() {
-        return new CssFinder("#" + CssEscape.escapeCssIdentifier(this.id));
+        return new CssFinder("#" + CssEscape.escapeCssIdentifier(this.astCssIdAttributeCondition.id));
     }
 
     private String toXPath() {
-        return "@id = '" + id + "'";
+        return "@id = '" + astCssIdAttributeCondition.id + "'";
     }
 
 }

@@ -16,11 +16,11 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils;
-import org.junit.Test;
-
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass
+    .assertPseudoClass;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
+
+import org.junit.Test;
 
 public class CssLastChildPseudoClassTest {
 
@@ -34,7 +34,7 @@ public class CssLastChildPseudoClassTest {
 
     @Test
     public void toElementFinder__when_driver_does_NOT_have_native_support() {
-        assertPseudoClass(new CssLastChildPseudoClass(PseudoClassTestUtils.EMPTY)).whenNotNativelySupported().translatesToPureXPath(LAST_CHILD_XPATH_EXPRESSION);
+        assertPseudoClass(new CssLastChildPseudoClass()).whenNotNativelySupported().translatesToPureXPath(LAST_CHILD_XPATH_EXPRESSION);
     }
 
 }

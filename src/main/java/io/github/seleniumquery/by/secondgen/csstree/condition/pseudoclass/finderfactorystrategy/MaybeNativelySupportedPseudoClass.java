@@ -16,14 +16,15 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
+import static io.github.seleniumquery.by.secondgen.finder.CssFinder.CSS_NOT_NATIVELY_SUPPORTED;
+
+import org.openqa.selenium.WebDriver;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 import io.github.seleniumquery.utils.DriverVersionUtils;
-import org.openqa.selenium.WebDriver;
-
-import static io.github.seleniumquery.by.secondgen.finder.CssFinder.CSS_NOT_NATIVELY_SUPPORTED;
 
 /**
  * Represents a strategy where the selector may or may not be natively supported by the driver.
@@ -31,19 +32,20 @@ import static io.github.seleniumquery.by.secondgen.finder.CssFinder.CSS_NOT_NATI
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class MaybeNativelySupportedPseudoClass implements CssConditionImplementedFinders {
+public interface MaybeNativelySupportedPseudoClass extends CssPseudoClassCondition {
 
     @Override
-    public ElementFinder toElementFinder(ElementFinder leftFinder) {
+    default ElementFinder toElementFinder(ElementFinder leftFinder) {
         WebDriver webDriver = leftFinder.getWebDriver();
         if (isThisCSSPseudoClassNativelySupportedOn(webDriver)) {
-            return createFinderForNativelySupportedPseudo(leftFinder, webDriver);
+            return __createFinderForNativelySupportedPseudo(leftFinder, webDriver);
         } else {
-            return createFinderForUnsupportedPseudo(leftFinder, webDriver);
+            return __createFinderForUnsupportedPseudo(leftFinder, webDriver);
         }
     }
 
-    private ElementFinder createFinderForNativelySupportedPseudo(ElementFinder leftFinder, WebDriver webDriver) {
+    // should be private, but java doesn't allow it yet
+    default ElementFinder __createFinderForNativelySupportedPseudo(ElementFinder leftFinder, WebDriver webDriver) {
         return new ElementFinder(
                 webDriver,
                 leftFinder.getCssFinder().merge(toCssWhenNativelySupported(webDriver)),
@@ -51,7 +53,8 @@ public abstract class MaybeNativelySupportedPseudoClass implements CssConditionI
         );
     }
 
-    private ElementFinder createFinderForUnsupportedPseudo(ElementFinder leftFinder, WebDriver webDriver) {
+    // should be private, but java doesn't allow it yet
+    default ElementFinder __createFinderForUnsupportedPseudo(ElementFinder leftFinder, WebDriver webDriver) {
         return new ElementFinder(
                 webDriver,
                 CSS_NOT_NATIVELY_SUPPORTED,
@@ -59,7 +62,7 @@ public abstract class MaybeNativelySupportedPseudoClass implements CssConditionI
         );
     }
 
-    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
+    default boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
         return DriverVersionUtils.getInstance().hasNativeSupportForPseudo(webDriver, pseudoClassForCSSNativeSupportCheck(webDriver));
     }
 
@@ -77,16 +80,16 @@ public abstract class MaybeNativelySupportedPseudoClass implements CssConditionI
      * @param webDriver The webDriver that should be used to generate the CSS.
      * @return The css selector to be appended to an id selector for checking if the selector is supported.
      */
-    public String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
+    default String pseudoClassForCSSNativeSupportCheck(WebDriver webDriver) {
         return toCssWhenNativelySupported(webDriver).toString();
     }
 
-    public abstract CssFinder toCssWhenNativelySupported(WebDriver webDriver);
+    CssFinder toCssWhenNativelySupported(WebDriver webDriver);
 
-    public XPathMergeStrategy xPathMergeStrategy() {
+    default XPathMergeStrategy xPathMergeStrategy() {
         return XPathMergeStrategy.CONDITIONAL_SIMPLE_XPATH_MERGE;
     }
 
-    public abstract XPathAndFilterFinder toXPath(WebDriver webDriver);
+    XPathAndFilterFinder toXPath(WebDriver webDriver);
 
 }

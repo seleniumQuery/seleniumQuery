@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,23 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
-import org.junit.Test;
-import org.openqa.selenium.InvalidSelectorException;
-
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass
+    .assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils
+    .assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
-import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.*;
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.createWebDriverWithNativeSupportForPseudo;
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.universalSelectorFinder;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
+import org.junit.Test;
+import org.openqa.selenium.InvalidSelectorException;
+
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.childfilter.AstCssNthChildPseudoClass;
 
 public class CssNthChildPseudoClassTest {
 
@@ -81,7 +86,7 @@ public class CssNthChildPseudoClassTest {
     }
 
     private CssNthChildPseudoClass nthChild(String nthChildArgument) {
-        return new CssNthChildPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthChildArgument));
+        return new CssNthChildPseudoClass(new AstCssNthChildPseudoClass(nthChildArgument));
     }
 
     @Test

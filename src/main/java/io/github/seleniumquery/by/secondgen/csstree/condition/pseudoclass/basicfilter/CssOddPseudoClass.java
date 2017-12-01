@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
 
 /**
  * :odd
@@ -27,20 +27,11 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssOddPseudoClass extends CssPseudoClassCondition {
-
-    public static final String PSEUDO = "odd";
-
-    public NeverNativelySupportedPseudoClass oddPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath("(position() mod 2) = 0");
-        }
-    };
+public class CssOddPseudoClass implements NeverNativelySupportedPseudoClass {
 
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return oddPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath("(position() mod 2) = 0");
     }
 
 }

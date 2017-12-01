@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.common.AttributeEvaluatorUtils;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssEqualsOrHasAttributeCondition;
 import io.github.seleniumquery.utils.SelectorUtils;
 
 /**
@@ -29,25 +30,14 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEqualsOrHasAttributeCondition extends CssAttributeCondition {
+public class CssEqualsOrHasAttributeCondition extends CssAttributeConditionBase {
 
-    /*
-     * [simple]
-     * Attribute value is null in this case.
-     */
-    public CssEqualsOrHasAttributeCondition(String attributeName) {
-        super(attributeName, null);
-    }
-
-    /*
-     * [restart="never"]
-     */
-    public CssEqualsOrHasAttributeCondition(String attributeName, String wantedValue) {
-        super(attributeName, wantedValue);
+    public CssEqualsOrHasAttributeCondition(AstCssEqualsOrHasAttributeCondition astCssEqualsOrHasAttributeCondition) {
+        super(astCssEqualsOrHasAttributeCondition);
     }
 
     protected CssFinder toCSS() {
-        if (this.wantedValue != null) {
+        if (this.getWantedValue() != null) {
             return super.toCSS();
         }
         return new CssFinder("[" + this.getCssEscapedAttributeName() + "]");
@@ -59,11 +49,11 @@ public class CssEqualsOrHasAttributeCondition extends CssAttributeCondition {
     }
 
     protected String toXPath() {
-        if (this.wantedValue != null) {
-            String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
-            return AttributeEvaluatorUtils.toXPathAttribute(this.attributeName) + "=" + escapedWantedValue;
+        if (this.getWantedValue() != null) {
+            String escapedWantedValue = SelectorUtils.intoEscapedXPathString(this.getWantedValue());
+            return AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName()) + "=" + escapedWantedValue;
         }
-        return AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
+        return AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName());
     }
 
 }

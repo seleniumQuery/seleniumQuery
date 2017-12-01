@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
+import org.unbescape.css.CssEscape;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtils;
-import org.unbescape.css.CssEscape;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssClassAttributeCondition;
 
 /**
  * .class
@@ -29,16 +30,16 @@ import org.unbescape.css.CssEscape;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssClassAttributeCondition implements CssCondition, CssConditionImplementedFinders {
+public class CssClassAttributeCondition implements CssCondition {
 
-    private String unescapedClassName;
+    private final AstCssClassAttributeCondition astCssClassAttributeCondition;
 
-    public CssClassAttributeCondition(String unescapedClassName) {
-        this.unescapedClassName = unescapedClassName;
+    public CssClassAttributeCondition(AstCssClassAttributeCondition astCssClassAttributeCondition) {
+        this.astCssClassAttributeCondition = astCssClassAttributeCondition;
     }
 
     public String getClassName() {
-        return unescapedClassName;
+        return astCssClassAttributeCondition.unescapedClassName;
     }
 
     @Override
@@ -49,11 +50,11 @@ public class CssClassAttributeCondition implements CssCondition, CssConditionImp
     }
 
     private CssFinder toCSS() {
-        return new CssFinder("." + CssEscape.escapeCssIdentifier(this.unescapedClassName));
+        return new CssFinder("." + CssEscape.escapeCssIdentifier(this.astCssClassAttributeCondition.unescapedClassName));
     }
 
     private String toXPath() {
-        return "contains(concat(' ', normalize-space(@class), ' '), ' " + unescapedClassName + " ')";
+        return "contains(concat(' ', normalize-space(@class), ' '), ' " + astCssClassAttributeCondition.unescapedClassName + " ')";
     }
 
 }

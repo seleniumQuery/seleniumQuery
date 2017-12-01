@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition;
 
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.AstCssAndCondition;
 
 /**
  * Chains conditions.
@@ -28,28 +29,26 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssAndCondition implements CssCondition, CssConditionImplementedFinders {
+public class CssAndCondition implements CssCondition {
 
-    private CssCondition firstCondition;
-    private CssCondition secondCondition;
+    private final AstCssAndCondition astCssAndCondition;
 
-    public CssAndCondition(CssCondition firstCondition, CssCondition secondCondition) {
-        this.firstCondition = firstCondition;
-        this.secondCondition = secondCondition;
+    public CssAndCondition(AstCssAndCondition astCssAndCondition) {
+        this.astCssAndCondition = astCssAndCondition;
     }
 
     public CssCondition getFirstCondition() {
-        return firstCondition;
+        return astCssAndCondition.getFirstCondition();
     }
 
     public CssCondition getSecondCondition() {
-        return secondCondition;
+        return astCssAndCondition.getSecondCondition();
     }
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {
-        CssConditionImplementedFinders firstCondition = (CssConditionImplementedFinders) this.firstCondition;
-        CssConditionImplementedFinders secondCondition = (CssConditionImplementedFinders) this.secondCondition;
+        CssCondition firstCondition = this.getFirstCondition();
+        CssCondition secondCondition = this.getSecondCondition();
 
         ElementFinder elementFinder = firstCondition.toElementFinder(leftFinder);
         return secondCondition.toElementFinder(elementFinder);

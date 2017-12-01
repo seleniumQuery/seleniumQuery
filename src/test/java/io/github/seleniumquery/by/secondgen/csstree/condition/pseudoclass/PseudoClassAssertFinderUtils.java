@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,21 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
-import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
-import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
-import org.hamcrest.Matcher;
-
-import java.util.List;
-
-import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.*;
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.createWebDriverWithNativeSupportForNoPseudoClass;
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.createWebDriverWithNativeSupportForPseudo;
+import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.universalSelectorFinder;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+
+import java.util.List;
+
+import org.hamcrest.Matcher;
+
+import io.github.seleniumquery.by.common.elementfilter.ElementFilter;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
 /**
  * @author acdcjunior
@@ -40,7 +43,7 @@ public class PseudoClassAssertFinderUtils {
     public static final boolean PURE_CSS_IS_NOT_SUPPORTED = false;
     public static final String CSS_UNIVERSAL_SELECTOR = "*";
 
-    public static void assertPseudoClassHasFinder(CssConditionImplementedFinders pseudoClassObject,
+    public static void assertPseudoClassHasFinder(CssCondition pseudoClassObject,
                                                   ElementFinder previous,
                                                   String expectedCss, boolean canPureCss,
                                                   String expectedXPath, Matcher<? super List<ElementFilter>> elementFilterMatcher) {
@@ -56,7 +59,7 @@ public class PseudoClassAssertFinderUtils {
     }
 
     public static void assertPseudoClassHasElementFinderWhenNativelySupported(String pseudoExpressionThatShouldPassNativeSupportCheck,
-                                                                              CssConditionImplementedFinders pseudoClassObject,
+                                                                              CssCondition pseudoClassObject,
                                                                               String expectedCss, boolean canPureCss,
                                                                               String expectedXPath, Matcher<? super List<ElementFilter>> elementFilterMatcher) {
         ElementFinder previousFinder = universalSelectorFinder(
@@ -72,7 +75,7 @@ public class PseudoClassAssertFinderUtils {
         );
     }
 
-    private static void assertPseudoClassHasFinderWhenNotNativelySupported(CssConditionImplementedFinders pseudoClassObject,
+    private static void assertPseudoClassHasFinderWhenNotNativelySupported(CssCondition pseudoClassObject,
                                                                           String expectedCss,
                                                                           boolean canPureCss,
                                                                           String expectedXPath,
@@ -87,7 +90,7 @@ public class PseudoClassAssertFinderUtils {
         );
     }
 
-    public static void assertPseudoSupportsOnlyPureCssAndNotPureXPathWhenNativelySupported(CssConditionImplementedFinders pseudoClassObject,
+    public static void assertPseudoSupportsOnlyPureCssAndNotPureXPathWhenNativelySupported(CssCondition pseudoClassObject,
                                                                                            String pseudoClass,
                                                                                            String expectedXPath,
                                                                                            ElementFilter filter) {
@@ -99,14 +102,14 @@ public class PseudoClassAssertFinderUtils {
         );
     }
 
-    public static void assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(CssConditionImplementedFinders pseudoClassObject,
+    public static void assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(CssCondition pseudoClassObject,
                                                                                         String pseudoClass,
                                                                                         String expectedXPath) {
         assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(pseudoClass, pseudoClassObject, pseudoClass, expectedXPath);
     }
 
     public static void assertPseudoSupportsBothPureCssAndPureXPathWhenNativelySupported(String pseudoClassThatShouldBeNativelySupported,
-                                                                                        CssConditionImplementedFinders pseudoClassObject,
+                                                                                        CssCondition pseudoClassObject,
                                                                                         String expectedCSS,
                                                                                         String expectedXPath) {
         assertPseudoClassHasElementFinderWhenNativelySupported(
@@ -117,7 +120,7 @@ public class PseudoClassAssertFinderUtils {
         );
     }
 
-    public static void assertPseudoClassDoesNotSupportAnythingPurelyWhenNotNativelySupported(CssConditionImplementedFinders pseudoClassObject,
+    public static void assertPseudoClassDoesNotSupportAnythingPurelyWhenNotNativelySupported(CssCondition pseudoClassObject,
                                                                                              String expectedXPath,
                                                                                              ElementFilter filter) {
         assertPseudoClassHasFinderWhenNotNativelySupported(
@@ -128,23 +131,23 @@ public class PseudoClassAssertFinderUtils {
     }
 
     public static class AssertPseudoClass {
-        public static AssertPseudoClass assertPseudoClass(CssConditionImplementedFinders pseudoClass) { return new AssertPseudoClass(pseudoClass); }
+        public static AssertPseudoClass assertPseudoClass(CssCondition pseudoClass) { return new AssertPseudoClass(pseudoClass); }
 
-        private final CssConditionImplementedFinders pseudoClass;
-        public AssertPseudoClass(CssConditionImplementedFinders pseudoClass) { this.pseudoClass = pseudoClass; }
+        private final CssCondition pseudoClass;
+        public AssertPseudoClass(CssCondition pseudoClass) { this.pseudoClass = pseudoClass; }
 
         public AssertPseudoClassWithoutNativeSupport whenNotNativelySupported() { return new AssertPseudoClassWithoutNativeSupport(this.pseudoClass); }
     }
     public static class AssertPseudoClassWithoutNativeSupport {
-        private final CssConditionImplementedFinders pseudoClass;
-        public AssertPseudoClassWithoutNativeSupport(CssConditionImplementedFinders pseudoClass) { this.pseudoClass = pseudoClass; }
+        private final CssCondition pseudoClass;
+        AssertPseudoClassWithoutNativeSupport(CssCondition pseudoClass) { this.pseudoClass = pseudoClass; }
 
         public void translatesToPureXPath(String expectedXPath) {
             assertPseudoClassHasFinderWhenNotNativelySupported(this.pseudoClass, CSS_UNIVERSAL_SELECTOR, PURE_CSS_IS_NOT_SUPPORTED, expectedXPath, empty());
         }
     }
 
-    public static void assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(CssConditionImplementedFinders pseudoClassObject,
+    public static void assertPseudoSupportsDifferentButPureCssAndPureXPathRegardlessOfNativeSupport(CssCondition pseudoClassObject,
                                                                                                     String pseudoClass,
                                                                                                     String expectedCss,
                                                                                                     String expectedXPath) {
