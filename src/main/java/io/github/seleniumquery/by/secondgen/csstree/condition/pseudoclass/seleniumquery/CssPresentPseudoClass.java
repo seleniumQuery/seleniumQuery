@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.seleniumquery;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.AlwaysNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
+import org.openqa.selenium.WebDriver;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy
+    .AlwaysNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
 
 /**
  * :present
@@ -33,24 +33,16 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssPresentPseudoClass extends CssPseudoClassCondition {
-
-    public static final String PSEUDO = "present";
-
-    public MaybeNativelySupportedPseudoClass presentPseudoClassFinderFactoryStrategy = new AlwaysNativelySupportedPseudoClass() {
-        @Override
-        public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
-            return CssFinder.universalSelector();
-        }
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath("true()");
-        }
-    };
+public class CssPresentPseudoClass implements AlwaysNativelySupportedPseudoClass {
 
     @Override
-    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return presentPseudoClassFinderFactoryStrategy;
+    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+        return CssFinder.universalSelector();
+    }
+
+    @Override
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath("true()");
     }
 
 }

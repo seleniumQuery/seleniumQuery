@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,19 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
-import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import org.openqa.selenium.WebDriver;
 
-public abstract class AlwaysNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass implements CssConditionImplementedFinders {
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.finder.CssFinder;
+
+public interface AlwaysNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass, CssCondition {
 
     @Override
-    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
+    default boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
         return true;
     }
 
     @Override
-    public abstract CssFinder toCssWhenNativelySupported(WebDriver webDriver);
+    CssFinder toCssWhenNativelySupported(WebDriver webDriver);
 
 }

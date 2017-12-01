@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,15 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
+import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.CheckedPseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 import io.github.seleniumquery.utils.DriverVersionUtils;
-import org.openqa.selenium.WebDriver;
-
-import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
 
 /**
  * <p>
@@ -44,38 +44,30 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssCheckedPseudoClass extends CssPseudoClassCondition {
+public class CssCheckedPseudoClass implements MaybeNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "checked";
-    public static final String CHECKED_PSEUDO = ":checked";
-
-    public MaybeNativelySupportedPseudoClass checkedPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
-        @Override
-        public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
-            return isDriverWhereCheckedSelectorHasNoBugs(webDriver) && super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
-        }
-
-        @Override
-        public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CssFinder(CHECKED_PSEUDO);
-        }
-
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return new XPathAndFilterFinder(xPathExpression(), CheckedPseudoClass.CHECKED_FILTER);
-        }
-
-        private String xPathExpression() {
-            return "((self::input and ("+ TYPE_ATTR_LC_VAL +" = 'radio' or "+ TYPE_ATTR_LC_VAL +" = 'checkbox')) or self::option)";
-        }
-    };
+    static final String CHECKED_PSEUDO = ":checked";
 
     @Override
-    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return checkedPseudoClassFinderFactoryStrategy;
+    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
+        return isDriverWhereCheckedSelectorHasNoBugs(webDriver) && MaybeNativelySupportedPseudoClass.super.isThisCSSPseudoClassNativelySupportedOn(webDriver);
     }
 
-    public static boolean isDriverWhereCheckedSelectorHasNoBugs(WebDriver webDriver) {
+    @Override
+    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+        return new CssFinder(CHECKED_PSEUDO);
+    }
+
+    @Override
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return new XPathAndFilterFinder(xPathExpression(), CheckedPseudoClass.CHECKED_FILTER);
+    }
+
+    private String xPathExpression() {
+        return "((self::input and ("+ TYPE_ATTR_LC_VAL +" = 'radio' or "+ TYPE_ATTR_LC_VAL +" = 'checkbox')) or self::option)";
+    }
+
+    static boolean isDriverWhereCheckedSelectorHasNoBugs(WebDriver webDriver) {
         DriverVersionUtils driverVsUtils = DriverVersionUtils.getInstance();
         return !driverVsUtils.isPhantomJSDriver(webDriver);
     }

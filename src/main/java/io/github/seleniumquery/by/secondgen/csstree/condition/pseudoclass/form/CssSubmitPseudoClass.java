@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
-import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+
 import org.openqa.selenium.WebDriver;
 
-import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATTR_LC_VAL;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
+import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
 
 /**
  * :submit
@@ -30,25 +30,17 @@ import static io.github.seleniumquery.by.common.AttributeEvaluatorUtils.TYPE_ATT
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssSubmitPseudoClass extends CssPseudoClassCondition {
+public class CssSubmitPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "submit";
-    public static final String SUBMIT_XPATH_EXPRESSION = "(" +
+    private static final String SUBMIT_XPATH_EXPRESSION = "(" +
             "(self::input and " + TYPE_ATTR_LC_VAL + " = 'submit')" +
             " or " +
             "(self::button and (" + TYPE_ATTR_LC_VAL + " = 'submit' or not(@type)))" +
         ")";
 
-    public NeverNativelySupportedPseudoClass submitPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath(SUBMIT_XPATH_EXPRESSION);
-        }
-    };
-
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return submitPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath(SUBMIT_XPATH_EXPRESSION);
     }
 
 }

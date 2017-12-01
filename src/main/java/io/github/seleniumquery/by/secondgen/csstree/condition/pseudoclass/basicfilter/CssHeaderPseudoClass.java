@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
 
 /**
  * :header
@@ -28,25 +28,16 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssHeaderPseudoClass extends CssPseudoClassCondition {
+public class CssHeaderPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "header";
-
-    public static final String HEADER_XPATH_EXPRESSION = "(" +
+    private static final String HEADER_XPATH_EXPRESSION = "(" +
             "self::h0 | self::h1 | self::h2 | self::h3 | self::h4 | " +
             "self::h5 | self::h6 | self::h7 | self::h8 | self::h9" +
         ")";
 
-    public NeverNativelySupportedPseudoClass headerPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath(HEADER_XPATH_EXPRESSION);
-        }
-    };
-
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return headerPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath(HEADER_XPATH_EXPRESSION);
     }
 
 }

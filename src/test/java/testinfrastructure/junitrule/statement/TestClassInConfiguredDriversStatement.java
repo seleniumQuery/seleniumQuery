@@ -16,23 +16,29 @@
 
 package testinfrastructure.junitrule.statement;
 
-import io.github.seleniumquery.SeleniumQuery;
-import io.github.seleniumquery.browser.BrowserFunctions;
-import org.junit.runners.model.Statement;
-import testinfrastructure.junitrule.TestClassSession;
-import testinfrastructure.junitrule.config.DriverInstantiator;
-import testinfrastructure.junitrule.config.DriverToRunTestsIn;
-import testinfrastructure.junitrule.config.RemoteInstantiator;
-
-import java.util.List;
-
 import static java.util.Arrays.asList;
 import static testinfrastructure.junitrule.config.DriverInstantiator.FIREFOX_JS_OFF;
 import static testinfrastructure.junitrule.config.DriverInstantiator.FIREFOX_JS_ON;
 import static testinfrastructure.junitrule.config.DriverInstantiator.PHANTOMJS;
-import static testinfrastructure.junitrule.config.RemoteInstantiator.*;
+import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_CHROME;
+import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_CHROME_OSX;
+import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_CHROME_W7;
+import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_FIREFOX;
+import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_IE_11;
+import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_SAFARI;
 import static testinfrastructure.junitrule.statement.TestClassInConfiguredDriversStatement.DriverHasJavaScriptEnabled.NO;
 import static testinfrastructure.junitrule.statement.TestClassInConfiguredDriversStatement.DriverHasJavaScriptEnabled.YES;
+
+import java.util.List;
+
+import org.junit.runners.model.Statement;
+
+import io.github.seleniumquery.SeleniumQuery;
+import io.github.seleniumquery.browser.BrowserFunctions;
+import testinfrastructure.junitrule.TestClassSession;
+import testinfrastructure.junitrule.config.DriverInstantiator;
+import testinfrastructure.junitrule.config.DriverToRunTestsIn;
+import testinfrastructure.junitrule.config.RemoteInstantiator;
 
 @SuppressWarnings("deprecation")
 public class TestClassInConfiguredDriversStatement extends Statement {
@@ -66,8 +72,8 @@ public class TestClassInConfiguredDriversStatement extends Statement {
 		executeTestOnHtmlUnitEmulatingChromeJavaScriptOff();
 		executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOn();
 		executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOff();
-		executeTestOnHtmlUnitEmulatingIE11JavaScriptOn();
-		executeTestOnHtmlUnitEmulatingIE11JavaScriptOff();
+		executeTestOnHtmlUnitEmulatingIEJavaScriptOn();
+		executeTestOnHtmlUnitEmulatingIEJavaScriptOff();
 	}
 
 	private void executeTestOnHtmlUnitEmulatingChromeJavaScriptOn() {
@@ -86,15 +92,16 @@ public class TestClassInConfiguredDriversStatement extends Statement {
 	private void executeTestOnHtmlUnitEmulatingFirefoxJavaScriptOff() {
 		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_FIREFOX_JS_OFF, NO);
 	}
-	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOn()     {
-		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE11_JS_ON, YES);
+	private void executeTestOnHtmlUnitEmulatingIEJavaScriptOn()     {
+		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOn(), DriverInstantiator.HTMLUNIT_IE_JS_ON, YES);
 	}
-	private void executeTestOnHtmlUnitEmulatingIE11JavaScriptOff()    {
-		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE11_JS_OFF, NO);
+	private void executeTestOnHtmlUnitEmulatingIEJavaScriptOff()    {
+		executeTestOn(driverToRunTestsIn.canRunHtmlUnitWithJavaScriptOff(), DriverInstantiator.HTMLUNIT_IE_JS_OFF, NO);
 	}
 
     private void executeTestOnChrome() {
         executeTestOn(driverToRunTestsIn.canRunChrome(), DriverInstantiator.CHROME, YES);
+        executeTestOn(driverToRunTestsIn.canRunChromeHeadless(), DriverInstantiator.CHROME_HEADLESS, YES);
     }
 
     private void executeTestOnIE() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.selector;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
-import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 import org.openqa.selenium.WebDriver;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
 /**
  * Conditional selector, simply an union of a selector and a condition.
@@ -48,13 +48,13 @@ public class CssConditionalSelector implements CssSelector {
     @Override
     public ElementFinder toElementFinder(WebDriver webDriver) {
         ElementFinder elementFinder = cssSelector.toElementFinder(webDriver);
-        return ((CssConditionImplementedFinders) cssCondition).toElementFinder(elementFinder);
+        return cssCondition.toElementFinder(elementFinder);
     }
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {
         ElementFinder elementFinder = cssSelector.toElementFinder(leftFinder);
-        return ((CssConditionImplementedFinders) cssCondition).toElementFinder(elementFinder);
+        return cssCondition.toElementFinder(elementFinder);
     }
 
 }

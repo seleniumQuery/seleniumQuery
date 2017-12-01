@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,23 +16,23 @@
 
 package endtoend.browser.driver.builders;
 
-import endtoend.browser.SeleniumQueryBrowserTest;
-import io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder;
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assume.assumeTrue;
+import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverTestExecutableExists;
+
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assume.assumeTrue;
-import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
-import static testinfrastructure.testutils.EnvironmentTestUtils.onlyRunIfDriverTestExecutableExists;
+import endtoend.helpers.BrowserAgentTestHelper;
+import io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class PhantomJSDriverBuilderTest {
 
@@ -54,8 +54,7 @@ public class PhantomJSDriverBuilderTest {
         // when
         $.driver().usePhantomJS().withCapabilities(capabilities);
         // then
-        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
-        assertThat($("#agent").text(), containsString("JustAnotherAgent"));
+        BrowserAgentTestHelper.assertBrowserAgent(containsString("JustAnotherAgent"));
     }
 
     @Test
@@ -75,7 +74,7 @@ public class PhantomJSDriverBuilderTest {
         // given
         $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/phantomjs.exe");
         // when
-        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
+        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl();
         // then
         // no exception is thrown while opening a page
     }

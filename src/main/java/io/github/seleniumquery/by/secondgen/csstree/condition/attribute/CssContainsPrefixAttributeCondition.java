@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
 import io.github.seleniumquery.by.common.AttributeEvaluatorUtils;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssContainsPrefixAttributeCondition;
 import io.github.seleniumquery.utils.SelectorUtils;
 
 /**
@@ -25,10 +26,10 @@ import io.github.seleniumquery.utils.SelectorUtils;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsPrefixAttributeCondition extends CssAttributeCondition {
+public class CssContainsPrefixAttributeCondition extends CssAttributeConditionBase {
 
-    public CssContainsPrefixAttributeCondition(String attributeName, String wantedValue) {
-        super(attributeName, wantedValue);
+    public CssContainsPrefixAttributeCondition(AstCssContainsPrefixAttributeCondition astCssContainsPrefixAttributeCondition) {
+        super(astCssContainsPrefixAttributeCondition);
     }
 
     @Override
@@ -37,9 +38,9 @@ public class CssContainsPrefixAttributeCondition extends CssAttributeCondition {
     }
 
     protected String toXPath() {
-        String attrName = AttributeEvaluatorUtils.toXPathAttribute(this.attributeName);
-        String attrValue = SelectorUtils.intoEscapedXPathString(this.wantedValue);
-        String attrValueWithSuffix = SelectorUtils.intoEscapedXPathString(this.wantedValue + "-");
+        String attrName = AttributeEvaluatorUtils.toXPathAttribute(this.getAttributeName());
+        String attrValue = SelectorUtils.intoEscapedXPathString(this.getWantedValue());
+        String attrValueWithSuffix = SelectorUtils.intoEscapedXPathString(this.getWantedValue() + "-");
         return "("+attrName+" = "+attrValue+" or starts-with("+ attrName+", "+attrValueWithSuffix+"))";
     }
 

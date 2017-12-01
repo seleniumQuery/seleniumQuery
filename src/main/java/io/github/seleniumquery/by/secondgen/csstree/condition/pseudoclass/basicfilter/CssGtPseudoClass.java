@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalIndexArgumentPseudoClassCondition;
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.XPathMergeStrategy;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssGtPseudoClass;
 
 /**
  * :gt(index)
@@ -29,37 +29,26 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssGtPseudoClass extends CssFunctionalIndexArgumentPseudoClassCondition {
+public class CssGtPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "gt";
+    private final AstCssGtPseudoClass astCssGtPseudoClass;
 
-    public NeverNativelySupportedPseudoClass gtPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            int index = getArgumentAsIndex();
-            if (index >= 0) {
-                return XPathAndFilterFinder.pureXPath("position() > " + (index + 1));
-            }
-            return XPathAndFilterFinder.pureXPath("position() > (last()-" + (-index - 1) + ")");
-        }
-        @Override
-        public XPathMergeStrategy xPathMergeStrategy() {
-            return XPathMergeStrategy.CONDITIONAL_TO_ALL_XPATH_MERGE;
-        }
-    };
-
-    public CssGtPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssGtPseudoClass(AstCssGtPseudoClass astCssGtPseudoClass) {
+        this.astCssGtPseudoClass = astCssGtPseudoClass;
     }
 
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return gtPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        int index = astCssGtPseudoClass.getArgument();
+        if (index >= 0) {
+            return XPathAndFilterFinder.pureXPath("position() > " + (index + 1));
+        }
+        return XPathAndFilterFinder.pureXPath("position() > (last()-" + (-index - 1) + ")");
     }
 
     @Override
-    protected String getPseudoClassName() {
-        return PSEUDO;
+    public XPathMergeStrategy xPathMergeStrategy() {
+        return XPathMergeStrategy.CONDITIONAL_TO_ALL_XPATH_MERGE;
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
 import io.github.seleniumquery.by.firstgen.css.pseudoclasses.UnsupportedPseudoClassException;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
@@ -28,9 +28,7 @@ import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssAnimatedPseudoClass extends CssPseudoClassCondition implements CssConditionImplementedFinders {
-
-    public static final String PSEUDO = "animated";
+public class CssAnimatedPseudoClass implements CssPseudoClassCondition, CssCondition {
 
     @Override
     public ElementFinder toElementFinder(ElementFinder leftFinder) {

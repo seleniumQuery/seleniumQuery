@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,14 @@
 
 package io.github.seleniumquery.by;
 
-import io.github.seleniumquery.by.firstgen.FirstGenEnhancedElementFinder;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-import java.util.regex.Pattern;
+import io.github.seleniumquery.by.firstgen.FirstGenEnhancedElementFinder;
 
 /**
  * This By is a combination of the By.xpath and By.css, where the CSS3, XPath, jQuery/Sizzle and others

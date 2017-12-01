@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SqCssFunctionalPseudoClassArgument;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssLastPseudoClass;
 
 /**
  * :last
@@ -28,16 +27,8 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.SqCssF
  */
 public class CssLastPseudoClass extends CssEqPseudoClass {
 
-    public static final String PSEUDO = "last";
-
-    @SuppressWarnings("WeakerAccess") // constructor is invoked via reflection
-    public CssLastPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
-    }
-
-    @Override
-    public SqCssFunctionalPseudoClassArgument getArgument() {
-        return new SqCssFunctionalPseudoClassArgument("-1");
+    public CssLastPseudoClass() {
+        super(new AstCssLastPseudoClass());
     }
 
 }

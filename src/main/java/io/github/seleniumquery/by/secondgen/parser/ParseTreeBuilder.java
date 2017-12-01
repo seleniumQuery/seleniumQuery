@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,14 @@
 
 package io.github.seleniumquery.by.secondgen.parser;
 
-import io.github.seleniumquery.by.common.preparser.CssParsedSelector;
-import io.github.seleniumquery.by.common.preparser.CssParsedSelectorList;
-import io.github.seleniumquery.by.common.preparser.CssSelectorParser;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import io.github.seleniumquery.by.common.preparser.W3cCssSelectorWithMapParser;
+import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorListWithMap;
 import io.github.seleniumquery.by.secondgen.csstree.CssSelectorList;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
-import io.github.seleniumquery.by.secondgen.parser.translator.selector.CssSelectorTranslator;
-
-import java.util.ArrayList;
-import java.util.List;
+import io.github.seleniumquery.by.secondgen.parser.translator.CssSelectorTranslator;
 
 public class ParseTreeBuilder {
 
@@ -33,21 +32,13 @@ public class ParseTreeBuilder {
 	private ParseTreeBuilder() {}
 
 	public static CssSelectorList parse(String selector) {
-		CssParsedSelectorList parsedSelectorList = CssSelectorParser.parseSelector(selector);
+		W3cCssSelectorListWithMap parsedSelectorList = W3cCssSelectorWithMapParser.parseSelector(selector);
         List<CssSelector> cssSelectors = translate(parsedSelectorList);
 		return new CssSelectorList(cssSelectors);
 	}
 
-    private static List<CssSelector> translate(CssParsedSelectorList parsedSelectorList) {
-        List<CssSelector> cssSelectors = new ArrayList<>(parsedSelectorList.size());
-        for (CssParsedSelector cssParsedSelector : parsedSelectorList) {
-            cssSelectors.add(translate(cssParsedSelector));
-        }
-        return cssSelectors;
-    }
-
-    private static CssSelector translate(CssParsedSelector cssParsedSelector) {
-        return cssSelectorTranslator.translate(cssParsedSelector.getArgumentMap(), cssParsedSelector.getSelector());
+    private static List<CssSelector> translate(W3cCssSelectorListWithMap parsedSelectorList) {
+	    return parsedSelectorList.stream().map(cssParsedSelector -> cssSelectorTranslator.translate(cssParsedSelector)).collect(Collectors.toList());
     }
 
 }

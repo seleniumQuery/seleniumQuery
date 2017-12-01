@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2016 seleniumQuery authors
+  ~ Copyright (c) 2017 seleniumQuery authors
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -27,44 +27,59 @@
 	<description>Cross-driver jQuery-like Java interface for Selenium WebDriver</description>
 
 	<properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdk.version>1.8</jdk.version>
 
-		<selenium-java.version>3.2.0</selenium-java.version>
-        <htmlunit-driver.version>2.25</htmlunit-driver.version>
-        <phantomjsdriver.version>1.4.1</phantomjsdriver.version>
+		<selenium-java.version>3.8.0</selenium-java.version>
+        <htmlunit-driver.version>2.27</htmlunit-driver.version>
+        <phantomjsdriver.version>1.4.3</phantomjsdriver.version>
     </properties>
 
 	<dependencies>
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
             <artifactId>cssparser</artifactId>
-            <version>0.9.22</version>
+            <version>0.9.23</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.1</version>
         </dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.5</version>
+			<version>3.6</version>
 		</dependency>
 
-		<!-- The selenium dependency -->
-		<dependency>
+        <!-- should be above selenium-java because the htmlunit version it brings
+         is different and we want this one to be used instead (to take precedence) -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>${htmlunit-driver.version}</version>
+        </dependency>
+
+        <!-- The selenium dependency -->
+        <dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>${selenium-java.version}</version>
+		</dependency>
+        <dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium-java.version}</version>
 		</dependency>
 
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-remote-driver</artifactId>
             <version>${selenium-java.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
-            <version>${htmlunit-driver.version}</version>
         </dependency>
 
 		<dependency>
@@ -99,7 +114,7 @@
 		<dependency>
 			<groupId>org.unbescape</groupId>
 			<artifactId>unbescape</artifactId>
-			<version>1.1.4.RELEASE</version>
+			<version>1.1.5.RELEASE</version>
 		</dependency>
 
 		<!-- BELOW, TEST DEPENDENCIES ONLY -->
@@ -127,20 +142,11 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.1</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19.1</version>
+				<version>2.20.1</version>
 				<configuration>
-					<argLine>-Xmx64m</argLine>
+					<!--suppress MavenModelInspection -->
+                    <argLine>${argLine} -Xmx64m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>

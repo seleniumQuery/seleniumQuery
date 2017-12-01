@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,30 +16,28 @@
 
 package endtoend.browser.driver.builders;
 
-import endtoend.browser.SeleniumQueryBrowserTest;
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assume.assumeTrue;
+import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import endtoend.helpers.BrowserAgentTestHelper;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assume.assumeTrue;
-import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
-import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
 
 public class ChromeDriverBuilderTest {
 
     // https://code.google.com/p/chromium/codesearch#chromium/src/chrome/test/chromedriver/chrome/mobile_device_list.cc
-    private static final String CHROME_MOBILE_EMULATION_DEVICE = "Apple iPad";
-    private static final String CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING = "iPad";
+    private static final String CHROME_MOBILE_EMULATION_DEVICE = "iPad";
     private static final String WINDOWS_TEST_CHROMEDRIVER_LOCATION = "D:\\usr\\local\\bin\\chromedriver.exe";
     private static final String LINUX_TEST_CHROMEDRIVER_LOCATION = "/usr/local/bin/chromedriver";
 
@@ -60,8 +58,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome().withOptions(options);
         // then
-        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
-        assertThat($("#agent").text(), containsString(CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING));
+        BrowserAgentTestHelper.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
     }
 
     @Test
@@ -74,8 +71,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome().withCapabilities(capabilities);
         // then
-        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
-        assertThat($("#agent").text(), containsString(CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING));
+        BrowserAgentTestHelper.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
     }
 
     private ChromeOptions createChromeOptionsWithMobileEmulation() {
@@ -93,8 +89,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome();
         // then
-        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
-        assertThat($("#agent").text(), not(containsString(CHROME_MOBILE_EMULATION_EXPECTED_AGENT_STRING)));
+        BrowserAgentTestHelper.assertBrowserAgent(not(containsString(CHROME_MOBILE_EMULATION_DEVICE)));
     }
 
     @Test
@@ -108,7 +103,7 @@ public class ChromeDriverBuilderTest {
         // so this test is really effective, the chromedriver executable shouldnt be in $PATH
         $.driver().useChrome().withPathToChromeDriver(getChromeDriverExecutablePath());
         // when
-        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
+        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl();
         // then
         // no exception is thrown while opening a page
     }
@@ -128,9 +123,17 @@ public class ChromeDriverBuilderTest {
         System.setProperty("webdriver.chrome.driver", getChromeDriverExecutablePath());
         // when
         $.driver().useChrome();
-        $.url(classNameToTestFileUrl(SeleniumQueryBrowserTest.class));
+        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl();
         // then
         // no exception is thrown while opening a page
+    }
+
+    @Test
+    public void headlessChrome() {
+        // when
+        $.driver().useChrome().withHeadlessChrome();
+        // then
+        BrowserAgentTestHelper.assertBrowserAgent(containsString("HeadlessChrome"));
     }
 
 }

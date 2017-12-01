@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.childfilter.AstCssLastOfTypePseudoClass;
 
-public class CssLastOfTypePseudoClass extends CssPseudoClassCondition implements CssConditionImplementedNotYet {
+public class CssLastOfTypePseudoClass extends CssNthOfTypePseudoClass {
 
-    public static final String PSEUDO = "last-of-type";
+    public CssLastOfTypePseudoClass() {
+        super(new AstCssLastOfTypePseudoClass());
+    }
 
 }
+

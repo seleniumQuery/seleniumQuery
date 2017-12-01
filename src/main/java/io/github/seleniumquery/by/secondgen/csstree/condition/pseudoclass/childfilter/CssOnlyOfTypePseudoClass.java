@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.childfilter;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
 
-public class CssOnlyOfTypePseudoClass extends CssPseudoClassCondition implements CssConditionImplementedNotYet {
+public class CssOnlyOfTypePseudoClass implements CssPseudoClassCondition {
 
-    public static final String PSEUDO = "only-of-type";
+    // TODO selector 2nd gen
 
 }

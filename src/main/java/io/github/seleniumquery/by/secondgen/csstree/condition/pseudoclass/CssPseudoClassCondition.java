@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,16 @@
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass;
 
 import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
 import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
 
-public abstract class CssPseudoClassCondition implements CssCondition, CssConditionImplementedFinders {
+public interface CssPseudoClassCondition extends CssCondition {
 
     @Override
-    public ElementFinder toElementFinder(ElementFinder leftFinder) {
+    default ElementFinder toElementFinder(ElementFinder leftFinder) {
         return getElementFinderFactoryStrategy().toElementFinder(leftFinder);
     }
 
-    public CssConditionImplementedFinders getElementFinderFactoryStrategy() {
+    default CssCondition getElementFinderFactoryStrategy() {
         throw new RuntimeException("\n\nThe method CssPseudoClassCondition#getElementFinderFactoryStrategy() - or" +
                 " whatever (if it was moved) -\nwill be abstract!\n" +
                 "It is not yet because we need the project to compile while implementing everything.\n\n");

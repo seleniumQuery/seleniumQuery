@@ -16,19 +16,20 @@
 
 package endtoend.basic;
 
-import io.github.seleniumquery.SeleniumQuery;
-import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.browser.BrowserFunctionsWithDeprecatedFunctions;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import testinfrastructure.EndToEndTestUtils;
-
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static testinfrastructure.testutils.SeleniumQueryObjectTestUtils.verifySeleniumQueryObjectHasElements;
+
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import io.github.seleniumquery.SeleniumQuery;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.browser.BrowserFunctions;
+import testinfrastructure.EndToEndTestUtils;
 
 public class SeleniumQueryTest {
 
@@ -51,7 +52,7 @@ public class SeleniumQueryTest {
         verifySeleniumQueryFieldAliasWorks(SeleniumQuery.jQuery);
     }
 
-    private void verifySeleniumQueryFieldAliasWorks(BrowserFunctionsWithDeprecatedFunctions seleniumQueryField) {
+    private void verifySeleniumQueryFieldAliasWorks(BrowserFunctions seleniumQueryField) {
         // given
         HtmlUnitDriver driver = new HtmlUnitDriver();
         // when

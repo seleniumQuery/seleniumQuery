@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.form.AstCssImagePseudoClass;
+
 /**
  *
  * @author acdcjunior
@@ -23,10 +25,8 @@ package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
  */
 public class CssImagePseudoClass extends CssInputTypeAttributePseudoClass {
 
-    public static final String PSEUDO = "image";
-
     public CssImagePseudoClass() {
-        super(PSEUDO);
+        super(AstCssImagePseudoClass.PSEUDO);
     }
 
 }

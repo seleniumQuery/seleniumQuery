@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,20 @@
 
 package testinfrastructure.junitrule.config;
 
-import io.github.seleniumquery.browser.BrowserFunctions;
-import testinfrastructure.junitrule.annotation.*;
+import static java.util.Arrays.asList;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import io.github.seleniumquery.browser.BrowserFunctions;
+import testinfrastructure.junitrule.annotation.ChromeOnly;
+import testinfrastructure.junitrule.annotation.EdgeOnly;
+import testinfrastructure.junitrule.annotation.FirefoxOnly;
+import testinfrastructure.junitrule.annotation.HtmlUnitOnly;
+import testinfrastructure.junitrule.annotation.IEOnly;
+import testinfrastructure.junitrule.annotation.OperaOnly;
+import testinfrastructure.junitrule.annotation.PhantomJSOnly;
+import testinfrastructure.junitrule.annotation.SafariOnly;
 
 @SuppressWarnings("deprecation")
 public abstract class DriverInstantiator {
@@ -66,6 +73,11 @@ public abstract class DriverInstantiator {
             $.driver().useChrome();
         }
     };
+    public static DriverInstantiator CHROME_HEADLESS = new DriverInstantiator("Chrome Headless", ChromeOnly.class) {
+        @Override public void instantiateDriver(BrowserFunctions $) {
+            $.driver().useChrome().withHeadlessChrome();
+        }
+    };
     public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = new DriverInstantiator("HtmlUnit (Chrome) - JS ON", HtmlUnitOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
             $.driver().useHtmlUnit().emulatingChrome();
@@ -86,8 +98,8 @@ public abstract class DriverInstantiator {
             $.driver().useHtmlUnit().emulatingFirefox().withoutJavaScript();
         }
     };
-    public static DriverInstantiator HTMLUNIT_IE11_JS_ON  = new DriverInstantiator("HtmlUnit (IE11) - JS ON", HtmlUnitOnly.class)  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11(); } };
-    public static DriverInstantiator HTMLUNIT_IE11_JS_OFF = new DriverInstantiator("HtmlUnit (IE11) - JS OFF", HtmlUnitOnly.class) { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer11().withoutJavaScript(); } };
+    public static DriverInstantiator HTMLUNIT_IE_JS_ON = new DriverInstantiator("HtmlUnit (IE) - JS ON", HtmlUnitOnly.class)  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer(); } };
+    public static DriverInstantiator HTMLUNIT_IE_JS_OFF = new DriverInstantiator("HtmlUnit (IE) - JS OFF", HtmlUnitOnly.class) { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer().withoutJavaScript(); } };
 
     public boolean shouldSkipTestClass(Class<?> testClass) {
         return classHasAtLeastOneDriverAnnotationButNot(testClass, this.driverAnnotation);

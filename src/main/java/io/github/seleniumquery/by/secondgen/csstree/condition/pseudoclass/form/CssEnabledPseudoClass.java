@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,14 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.form;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.EnabledPseudoClass.ENABLED_XPATH;
+
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.MaybeNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
-import org.openqa.selenium.WebDriver;
-
-import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.EnabledPseudoClass.ENABLED_XPATH;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.form.AstCssEnabledPseudoClass;
 
 /**
  * :enabled
@@ -32,26 +33,18 @@ import static io.github.seleniumquery.by.firstgen.css.pseudoclasses.EnabledPseud
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssEnabledPseudoClass extends CssPseudoClassCondition {
+public class CssEnabledPseudoClass implements MaybeNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "enabled";
-    private static final String ENABLED_PSEUDO = ":" + PSEUDO;
-
-    private MaybeNativelySupportedPseudoClass enabledPseudoClassFinderFactoryStrategy = new MaybeNativelySupportedPseudoClass() {
-        @Override
-        public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
-            return new CssFinder(ENABLED_PSEUDO);
-        }
-
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            return XPathAndFilterFinder.pureXPath(ENABLED_XPATH);
-        }
-    };
+    private static final String ENABLED_PSEUDO = ":" + AstCssEnabledPseudoClass.PSEUDO;
 
     @Override
-    public MaybeNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return enabledPseudoClassFinderFactoryStrategy;
+    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+        return new CssFinder(ENABLED_PSEUDO);
+    }
+
+    @Override
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        return XPathAndFilterFinder.pureXPath(ENABLED_XPATH);
     }
 
 }

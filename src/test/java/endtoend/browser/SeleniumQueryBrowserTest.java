@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,12 @@
 
 package endtoend.browser;
 
-import io.github.seleniumquery.SeleniumQueryBrowser;
 import org.junit.After;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertThat;
-import static testinfrastructure.EndToEndTestUtils.openUrl;
+import endtoend.browser.driver.builders.HtmlUnitDriverBuilderTest;
+import endtoend.helpers.BrowserAgentTestHelper;
+import io.github.seleniumquery.SeleniumQueryBrowser;
 
 public class SeleniumQueryBrowserTest {
 
@@ -31,14 +30,19 @@ public class SeleniumQueryBrowserTest {
 
     @Test
     public void multiple_browser_instances_should_work_OK() {
+        // given
         chrome.$.driver().useHtmlUnit().emulatingChrome();
-        openUrl(SeleniumQueryBrowserTest.class, chrome.$);
+        // when
+        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl(chrome);
 
+        // given
         firefox.$.driver().useHtmlUnit().emulatingFirefox();
-        openUrl(SeleniumQueryBrowserTest.class, firefox.$);
+        // when
+        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl(firefox);
 
-        assertThat(chrome.$("#agent").text(), containsString("Chrome"));
-        assertThat(firefox.$("#agent").text(), containsString("Firefox"));
+        // then
+        BrowserAgentTestHelper.assertBrowserAgent(chrome, HtmlUnitDriverBuilderTest.HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestHelper.assertBrowserAgent(firefox, HtmlUnitDriverBuilderTest.HTMLUNIT_FF_AGENT_STRING);
     }
 
     @After

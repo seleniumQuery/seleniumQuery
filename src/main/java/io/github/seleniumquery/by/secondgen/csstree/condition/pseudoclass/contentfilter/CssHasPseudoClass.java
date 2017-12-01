@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,18 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.contentfilter.AstCssHasPseudoClass;
 
-public class CssHasPseudoClass extends CssFunctionalPseudoClassCondition implements CssConditionImplementedNotYet {
+public class CssHasPseudoClass implements CssPseudoClassCondition {
 
-    public static final String PSEUDO = "has";
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
+    private final AstCssHasPseudoClass astCssHasPseudoClass;
 
-    public CssHasPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssHasPseudoClass(AstCssHasPseudoClass astCssHasPseudoClass) {
+        this.astCssHasPseudoClass = astCssHasPseudoClass;
     }
+
+    // TODO selector 2nd gen
 
 }

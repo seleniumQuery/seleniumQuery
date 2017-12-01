@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,22 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.attribute;
 
-import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
-import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import io.github.seleniumquery.by.secondgen.finder.ElementFinder;
+import io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.attribute.AstCssContainsPrefixAttributeCondition;
 
 public class CssContainsPrefixAttributeConditionTest {
 
     @Test
     public void toElementFinder() {
         // given
-        CssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new CssContainsPrefixAttributeCondition("hreflang", "en");
+        CssContainsPrefixAttributeCondition containsPrefixAttributeCondition = new CssContainsPrefixAttributeCondition(new AstCssContainsPrefixAttributeCondition("hreflang", "en"));
         ElementFinder previous = ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
         // when
         ElementFinder elementFinder = containsPrefixAttributeCondition.toElementFinder(previous);

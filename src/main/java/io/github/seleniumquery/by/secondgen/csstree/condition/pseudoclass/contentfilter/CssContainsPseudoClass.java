@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.contentfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
+import org.openqa.selenium.WebDriver;
+
 import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy.NeverNativelySupportedPseudoClass;
 import io.github.seleniumquery.by.secondgen.finder.XPathAndFilterFinder;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.contentfilter.AstCssContainsPseudoClass;
 import io.github.seleniumquery.utils.SelectorUtils;
-import org.openqa.selenium.WebDriver;
 
 /**
  * :contains()
@@ -30,27 +30,20 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssContainsPseudoClass extends CssFunctionalPseudoClassCondition {
+public class CssContainsPseudoClass implements NeverNativelySupportedPseudoClass {
 
-    public static final String PSEUDO = "contains";
+    private final AstCssContainsPseudoClass astCssContainsPseudoClass;
 
-    public NeverNativelySupportedPseudoClass containsPseudoClassFinderFactoryStrategy = new NeverNativelySupportedPseudoClass() {
-        @Override
-        public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-            String textToContain = getArgument().getArgumentAsString();
-            textToContain = SelectorUtils.unescapeString(textToContain);
-            String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
-            return XPathAndFilterFinder.pureXPath("contains(string(.), " + wantedTextToContain + ")");
-        }
-    };
-
-    public CssContainsPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssContainsPseudoClass(AstCssContainsPseudoClass astCssContainsPseudoClass) {
+        this.astCssContainsPseudoClass = astCssContainsPseudoClass;
     }
 
     @Override
-    public NeverNativelySupportedPseudoClass getElementFinderFactoryStrategy() {
-        return containsPseudoClassFinderFactoryStrategy;
+    public XPathAndFilterFinder toXPath(WebDriver webDriver) {
+        String textToContain = astCssContainsPseudoClass.getArgument();
+        textToContain = SelectorUtils.unescapeString(textToContain);
+        String wantedTextToContain = SelectorUtils.intoEscapedXPathString(textToContain);
+        return XPathAndFilterFinder.pureXPath("contains(string(.), " + wantedTextToContain + ")");
     }
 
 }

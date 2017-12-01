@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,13 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import org.junit.Test;
-import org.openqa.selenium.InvalidSelectorException;
-
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass.assertPseudoClass;
+import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassAssertFinderUtils.AssertPseudoClass
+    .assertPseudoClass;
 import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.assertQueriesOnSelector;
-import static io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.PseudoClassTestUtils.createPseudoClassSelectorAppliedToUniversalSelector;
-import static io.github.seleniumquery.by.secondgen.finder.ElementFinderUtilsTest.UNIVERSAL_SELECTOR_FINDER;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+
+import org.junit.Test;
+
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssNthPseudoClass;
 
 /**
  * :nth() selector is just an alias to :eq(), so this test class is equal to the eq test class.
@@ -38,74 +35,34 @@ public class CssNthPseudoClassTest {
 
     @Test
     public void translate() {
-        assertQueriesOnSelector(NTH_PSEUDO).withAllKindsOfArguments().yieldFunctionalPseudoclassWithCorrectlyTranslatedArguments(CssNthPseudoClass.class);
-    }
-
-    @Test
-    public void toElementFinder__nth_should_throw_exception_if_argument_is_not_an_integer() {
-        assertNthArgumentIsNotValid("a");
-        assertNthArgumentIsNotValid("");
-        assertNthArgumentIsNotValid("+");
-        assertNthArgumentIsNotValid("-");
-        assertNthArgumentIsNotValid("+ 1");
-        assertNthArgumentIsNotValid(" ");
-    }
-
-    private void assertNthArgumentIsNotValid(String nthArgument) {
-        try {
-            nth(nthArgument).toElementFinder(UNIVERSAL_SELECTOR_FINDER);
-            fail("Should consider *:nth("+nthArgument+") to be invalid.");
-        } catch (InvalidSelectorException e) {
-            assertThat(e.getMessage(), containsString(":nth()"));
-            assertThat(e.getMessage(), containsString(nthArgument));
-        }
-    }
-
-    private CssNthPseudoClass nth(String nthArgument) {
-        return new CssNthPseudoClass(createPseudoClassSelectorAppliedToUniversalSelector(nthArgument));
+        assertQueriesOnSelector(NTH_PSEUDO).withAllKindsOfArguments().yieldFunctionalIndexArgPseudoclassWithCorrectlyTranslatedArguments(CssNthPseudoClass.class);
     }
 
     @Test
     public void toElementFinder__nth_0__only_generates_XPath_regardless_of_native_support() {
         String nth0XPathExpression = "(.//*)[position() = 1]";
-        assertNthArgumentGeneratesXPath("0", nth0XPathExpression);
-        assertNthArgumentGeneratesXPath("+0", nth0XPathExpression);
-        assertNthArgumentGeneratesXPath("-0", nth0XPathExpression);
-        assertNthArgumentGeneratesXPath(" +0", nth0XPathExpression);
-        assertNthArgumentGeneratesXPath(" -0", nth0XPathExpression);
-        assertNthArgumentGeneratesXPath("+0 ", nth0XPathExpression);
-        assertNthArgumentGeneratesXPath("-0 ", nth0XPathExpression);
-        assertNthArgumentGeneratesXPath("  +0   ", nth0XPathExpression);
-        assertNthArgumentGeneratesXPath("  -0   ", nth0XPathExpression);
+        assertNthArgumentGeneratesXPath(0, nth0XPathExpression);
     }
 
-    private void assertNthArgumentGeneratesXPath(String nthArgument, String nthXPathExpression) {
-        assertPseudoClass(nth(nthArgument)).whenNotNativelySupported().translatesToPureXPath(nthXPathExpression);
+    private void assertNthArgumentGeneratesXPath(int nthArgument, String nthXPathExpression) {
+        assertPseudoClass(new CssNthPseudoClass(new AstCssNthPseudoClass(nthArgument))).whenNotNativelySupported().translatesToPureXPath(nthXPathExpression);
     }
 
     @Test
     public void toElementFinder__nth_1__only_generates_XPath_regardless_of_native_support() {
         String nth1XPathExpression = "(.//*)[position() = 2]";
-        assertNthArgumentGeneratesXPath("1", nth1XPathExpression);
-        assertNthArgumentGeneratesXPath("+1", nth1XPathExpression);
-        assertNthArgumentGeneratesXPath("  +1", nth1XPathExpression);
-        assertNthArgumentGeneratesXPath("+1  ", nth1XPathExpression);
-        assertNthArgumentGeneratesXPath("      +1     ", nth1XPathExpression);
+        assertNthArgumentGeneratesXPath(1, nth1XPathExpression);
     }
 
     @Test
     public void toElementFinder__nth_2_NEGATIVE__only_generates_XPath_regardless_of_native_support() {
         String nthNegative2XPathExpression = "(.//*)[position() = (last()-1)]";
-        assertNthArgumentGeneratesXPath("-2", nthNegative2XPathExpression);
-        assertNthArgumentGeneratesXPath("-2", nthNegative2XPathExpression);
-        assertNthArgumentGeneratesXPath("  -2", nthNegative2XPathExpression);
-        assertNthArgumentGeneratesXPath("-2  ", nthNegative2XPathExpression);
-        assertNthArgumentGeneratesXPath("      -2     ", nthNegative2XPathExpression);
+        assertNthArgumentGeneratesXPath(-2, nthNegative2XPathExpression);
     }
 
     @Test
     public void toElementFinder__nth_1_NEGATIVE__does_not_add_MINUS_ZERO_in_the_XPath_expression() {
-        assertNthArgumentGeneratesXPath("-1", "(.//*)[position() = last()]");
+        assertNthArgumentGeneratesXPath(-1, "(.//*)[position() = last()]");
     }
 
 }

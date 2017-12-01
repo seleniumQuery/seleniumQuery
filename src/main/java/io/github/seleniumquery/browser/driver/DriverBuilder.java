@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.seleniumquery.browser.driver;
 
 import org.openqa.selenium.WebDriver;
@@ -27,12 +26,19 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 public abstract class DriverBuilder<T extends DriverBuilder<T>> {
 
-    protected DesiredCapabilities desiredCapabilities;
+    private DesiredCapabilities desiredCapabilities;
+
+    private boolean capabilitiesManuallySet = false;
 
     @SuppressWarnings("unchecked")
     public T withCapabilities(DesiredCapabilities desiredCapabilities) {
+        markCapabilitiesWereSet();
         this.desiredCapabilities = desiredCapabilities;
         return (T) this;
+    }
+
+    private void markCapabilitiesWereSet() {
+        this.capabilitiesManuallySet = true;
     }
 
     protected DesiredCapabilities capabilities(DesiredCapabilities defaultDesiredCapabilities) {
@@ -43,9 +49,14 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
     }
 
     protected void overwriteCapabilityIfValueNotNull(DesiredCapabilities capabilities, String capabilityName, Object value) {
+        markCapabilitiesWereSet();
         if (value != null) {
             capabilities.setCapability(capabilityName, value);
         }
+    }
+
+    protected boolean isCapabilitiesManuallySet() {
+        return capabilitiesManuallySet;
     }
 
     /**

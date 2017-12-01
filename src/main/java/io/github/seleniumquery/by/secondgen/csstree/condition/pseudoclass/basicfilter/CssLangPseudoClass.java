@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,8 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.basicfilter;
 
-import io.github.seleniumquery.by.common.pseudoclass.PseudoClass;
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedNotYet;
-import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFunctionalPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssPseudoClassCondition;
+import io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudoclass.basicfilter.AstCssLangPseudoClass;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:lang
@@ -26,17 +25,15 @@ import io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.CssFun
  * @author acdcjunior
  * @since 0.10.0
  */
-public class CssLangPseudoClass extends CssFunctionalPseudoClassCondition implements CssConditionImplementedNotYet {
+public class CssLangPseudoClass implements CssPseudoClassCondition {
 
-    // :lang(), similar to :not(), gets translated into :lang-sq() by the pre-parser
-    public static final String PSEUDO = "lang-sq";
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
+    private final AstCssLangPseudoClass astCssLangPseudoClass;
 
-    /* when used without args, such as "div:lang", the pre-parser does not translate it. it is invalid,
-      but we still match it, so we can return a proper error message */
-    public static final String PSEUDO_PURE_LANG = "lang";
-
-    public CssLangPseudoClass(PseudoClass pseudoClassSelector) {
-        super(pseudoClassSelector);
+    public CssLangPseudoClass(AstCssLangPseudoClass astCssLangPseudoClass) {
+        this.astCssLangPseudoClass = astCssLangPseudoClass;
     }
+
+    // TODO selector 2nd gen
 
 }

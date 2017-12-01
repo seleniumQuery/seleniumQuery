@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,10 @@
 
 package io.github.seleniumquery.by.secondgen.csstree.condition.pseudoclass.finderfactorystrategy;
 
-import io.github.seleniumquery.by.secondgen.csstree.condition.CssConditionImplementedFinders;
-import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 import org.openqa.selenium.WebDriver;
+
+import io.github.seleniumquery.by.secondgen.csstree.condition.CssCondition;
+import io.github.seleniumquery.by.secondgen.finder.CssFinder;
 
 /**
  * Pseudos extending this class will never ever even check for native support.
@@ -26,21 +27,20 @@ import org.openqa.selenium.WebDriver;
  * @author acdcjunior
  * @since 0.10.0
  */
-public abstract class NeverNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass implements CssConditionImplementedFinders {
+public interface NeverNativelySupportedPseudoClass extends MaybeNativelySupportedPseudoClass, CssCondition {
 
     @Override
-    public boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
+    default boolean isThisCSSPseudoClassNativelySupportedOn(WebDriver webDriver) {
         return false;
     }
 
     /**
      * Due to the {@link NeverNativelySupportedPseudoClass#isThisCSSPseudoClassNativelySupportedOn(org.openqa.selenium.WebDriver)}
      * always returning false, this method will actually never be called.
-     * I do know this smells like a violation of LSP, but I, for the love of Yoda, couldn't figure out a better way!
-     * @param webDriver ignored
+     * @param ignored unused
      */
     @Override
-    public CssFinder toCssWhenNativelySupported(WebDriver webDriver) {
+    default CssFinder toCssWhenNativelySupported(WebDriver ignored) {
         throw new UnsupportedOperationException();
     }
 
