@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,15 @@
 
 package io.github.seleniumquery.utils;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
-import org.apache.commons.lang3.StringEscapeUtils;
+import static java.util.Collections.singletonList;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.text.StringEscapeUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -28,11 +32,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.internal.WrapsDriver;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.util.Collections.singletonList;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 
 /**
  * Contains some utility functions for dealing with WebDrivers, such as inspecting their version.
@@ -44,8 +45,8 @@ import static java.util.Collections.singletonList;
 public class SelectorUtils {
 
 	private static final Log LOGGER = LogFactory.getLog(SelectorUtils.class);
-	
-	/**<p> 
+
+	/**<p>
 	 * Sequence to be used in regexes to prevent matching escaped symbols.
 	 * </p>
 	 * <p>
@@ -63,7 +64,7 @@ public class SelectorUtils {
 	 * </p>
 	 */
 	public static final String ESCAPED_SLASHES = "(?<!(?:^|[^\\\\])\\\\)";
-	
+
 	private SelectorUtils() {}
 
 	public static WebElement parent(WebElement element) {
@@ -75,7 +76,7 @@ public class SelectorUtils {
 			return null;
 		}
 	}
-	
+
 	@SuppressWarnings("unused")
     public static List<WebElement> parents(WebElement element) {
 		return element.findElements(By.xpath("ancestor::node()[count(ancestor-or-self::html) > 0]"));
@@ -160,10 +161,10 @@ public class SelectorUtils {
 	public static List<WebElement> getDirectChildren(WebElement parent) {
 		return parent.findElements(By.xpath("./*"));
 	}
-	
+
 	public static List<WebElement> getPreviousSiblings(WebElement elementItSelf) {
 		List<WebElement> itselfWithSiblings = SelectorUtils.itselfWithSiblings(elementItSelf);
-		
+
 		List<WebElement> previousSiblings = new ArrayList<>();
 		for (WebElement siblingOrItSelf : itselfWithSiblings) {
 			if (elementItSelf.equals(siblingOrItSelf)) {
@@ -173,7 +174,7 @@ public class SelectorUtils {
 		}
 		return previousSiblings;
 	}
-	
+
 	public static WebElement getPreviousSibling(WebElement element) {
 		List<WebElement> previousSiblings = getPreviousSiblings(element);
 		int siblingCount = previousSiblings.size();
@@ -183,10 +184,10 @@ public class SelectorUtils {
 		}
 		return previousSiblings.get(siblingCount-1);
 	}
-	
+
 	/**
 	 * Escapes a CSS identifier.
-	 * 
+	 *
 	 * Future references for CSS escaping:
 	 * http://mathiasbynens.be/notes/css-escapes
 	 * http://mothereff.in/css-escapes
@@ -229,7 +230,7 @@ public class SelectorUtils {
 		// finally, surround with "s
 		return '"'+escapedAttributeValue+'"';
 	}
-	
+
 	public static WebDriver getWebDriver(SearchContext context) {
 		if (context instanceof WebDriver) {
 			return (WebDriver) context;
@@ -240,7 +241,7 @@ public class SelectorUtils {
 		throw new RuntimeException("We don't know how to extract the WebDriver from this context: "
 				+context.getClass()+" -> "+context);
 	}
-	
+
 	/**
 	 * Escapes the attributes values into a valid CSS string.
 	 * Deals with the way the CSS parser gives the attributes' values to us.
