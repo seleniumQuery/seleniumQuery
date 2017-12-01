@@ -30,7 +30,7 @@
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
 
-		<selenium-java.version>3.7.0</selenium-java.version>
+		<selenium-java.version>3.8.0</selenium-java.version>
         <htmlunit-driver.version>2.27</htmlunit-driver.version>
         <phantomjsdriver.version>1.4.3</phantomjsdriver.version>
     </properties>

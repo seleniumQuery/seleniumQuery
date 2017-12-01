@@ -6,7 +6,7 @@ version = '0.17.0-SNAPSHOT'
 description = "seleniumQuery"
 
 ext {
-    seleniumVersion = "3.7.0"
+    seleniumVersion = "3.8.0"
 }
 
 sourceCompatibility = 1.8
