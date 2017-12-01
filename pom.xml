@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2016 seleniumQuery authors
+  ~ Copyright (c) 2017 seleniumQuery authors
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
 
-		<selenium-java.version>3.4.0</selenium-java.version>
+		<selenium-java.version>3.7.0</selenium-java.version>
         <htmlunit-driver.version>2.27</htmlunit-driver.version>
         <phantomjsdriver.version>1.4.3</phantomjsdriver.version>
     </properties>
@@ -143,7 +143,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.20</version>
 				<configuration>
-					<argLine>@{argLine} -Xmx64m</argLine>
+					<argLine>${argLine} -Xmx64m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
