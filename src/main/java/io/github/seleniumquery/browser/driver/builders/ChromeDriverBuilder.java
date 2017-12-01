@@ -107,12 +107,31 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
     @Override
     protected WebDriver build() {
+        if (isCapabilitiesManuallySet()) {
+            LOGGER.warn("Prefer Prefer using ChromeOptions and .withOptions() instead of DesiredCapabilities and .withCapabilities().");
+            return buildUsingCapabilities();
+        } else {
+            return buildUsingChromeOptions();
+        }
+    }
+
+    private WebDriver buildUsingCapabilities() {
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.chrome());
         overwriteCapabilityIfValueNotNull(capabilities, ChromeOptions.CAPABILITY, this.chromeOptions);
 
         configureChromeServerExecutablePath();
         try {
             return new ChromeDriver(capabilities);
+        } catch (IllegalStateException e) {
+            throwCustomExceptionIfExecutableWasNotFound(e);
+            throw e;
+        }
+    }
+
+    private WebDriver buildUsingChromeOptions() {
+        configureChromeServerExecutablePath();
+        try {
+            return new ChromeDriver(this.chromeOptions != null ? this.chromeOptions : new ChromeOptions());
         } catch (IllegalStateException e) {
             throwCustomExceptionIfExecutableWasNotFound(e);
             throw e;
