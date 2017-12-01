@@ -76,6 +76,37 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     }
 
     /**
+     * Configures {@link ChromeDriver} to run in headless mode.
+     *
+     * @return A self reference, allowing further configuration.
+     * @since 0.17.0
+     */
+    public ChromeDriverBuilder withHeadlessChrome() {
+        getInitializedChromeOptions().addArguments("headless").addArguments("disable-gpu");
+        return this;
+    }
+
+    /**
+     * Configures {@link ChromeDriver} to run in headless mode.
+     * Alias to {@link #withHeadlessChrome()}.
+     * @return A self reference, allowing further configuration.
+     * @since 0.17.0
+     */
+    public ChromeDriverBuilder headlessChrome() {
+        return withHeadlessChrome();
+    }
+
+    /**
+     * Configures {@link ChromeDriver} to run in headless mode.
+     * Alias to {@link #withHeadlessChrome()}.
+     * @return A self reference, allowing further configuration.
+     * @since 0.17.0
+     */
+    public ChromeDriverBuilder headless() {
+        return withHeadlessChrome();
+    }
+
+    /**
      * Sets specific {@link ChromeOptions} options to be used in the {@link ChromeDriver}.
      *
      * @param chromeOptions Options to be used.
@@ -131,11 +162,18 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     private WebDriver buildUsingChromeOptions() {
         configureChromeServerExecutablePath();
         try {
-            return new ChromeDriver(this.chromeOptions != null ? this.chromeOptions : new ChromeOptions());
+            return new ChromeDriver(getInitializedChromeOptions());
         } catch (IllegalStateException e) {
             throwCustomExceptionIfExecutableWasNotFound(e);
             throw e;
         }
+    }
+
+    private ChromeOptions getInitializedChromeOptions() {
+        if (this.chromeOptions == null) {
+           this.chromeOptions = new ChromeOptions();
+        }
+        return this.chromeOptions;
     }
 
     private void configureChromeServerExecutablePath() {
