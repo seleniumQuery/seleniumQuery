@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,6 @@ import static java.util.Arrays.asList;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
-
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
 import testinfrastructure.junitrule.annotation.ChromeOnly;
@@ -77,11 +75,7 @@ public abstract class DriverInstantiator {
     };
     public static DriverInstantiator CHROME_HEADLESS = new DriverInstantiator("Chrome Headless", ChromeOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("headless");
-            chromeOptions.addArguments("disable-gpu");
-            chromeOptions.addArguments("no-sandbox");
-            $.driver().useChrome().withOptions(chromeOptions);
+            $.driver().useChrome().withHeadlessChrome();
         }
     };
     public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = new DriverInstantiator("HtmlUnit (Chrome) - JS ON", HtmlUnitOnly.class) {

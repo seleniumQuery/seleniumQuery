@@ -128,4 +128,12 @@ public class ChromeDriverBuilderTest {
         // no exception is thrown while opening a page
     }
 
+    @Test
+    public void headlessChrome() {
+        // when
+        $.driver().useChrome().withHeadlessChrome();
+        // then
+        BrowserAgentTestHelper.assertBrowserAgent(containsString("HeadlessChrome"));
+    }
+
 }
