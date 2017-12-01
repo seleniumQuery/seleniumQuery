@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,13 @@
 
 package endtoend.crossdriver.driverbugs;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertThat;
+import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
+
+import java.util.List;
+
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,14 +30,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-
-import java.util.List;
-
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
-import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
 
 /**
  * This test exists so we can keep the workaround on :checked for PhantomJS driver.
@@ -62,7 +63,14 @@ public class PhantomJSCheckedSelectorBugTest {
             List<WebElement> checkedElements = $.driver().get().findElements(By.cssSelector(":checked"));
             if (isNotWindowsOS()) {
                 // so, under linux (Travis-CI), there is a bug
-                assertThat(checkedElements, hasSize(2));
+                try {
+                    assertThat(checkedElements, hasSize(2));
+                } catch (AssertionError e) {
+                    for (int i = 0; i < 50; i++) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    assertThat(checkedElements, hasSize(3));
+                }
             } else {
                 // and under windows (Appveyor), it works
                 assertThat(checkedElements, hasSize(3));
