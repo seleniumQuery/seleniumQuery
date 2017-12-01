@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,10 @@ package io.github.seleniumquery.wait;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import io.github.seleniumquery.SeleniumQueryWaitEvaluateUntil;
-import io.github.seleniumquery.wait.evaluators.*;
+import io.github.seleniumquery.wait.evaluators.ContainsEvaluator;
+import io.github.seleniumquery.wait.evaluators.EqualsEvaluator;
+import io.github.seleniumquery.wait.evaluators.Evaluator;
+import io.github.seleniumquery.wait.evaluators.MatchesEvaluator;
 import io.github.seleniumquery.wait.evaluators.comparison.GreaterThanEvaluator;
 import io.github.seleniumquery.wait.evaluators.comparison.LessThanEvaluator;
 import io.github.seleniumquery.wait.getters.Getter;
@@ -62,12 +65,6 @@ class EvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 		Evaluator<String> containsEvaluator = new ContainsEvaluator(getter);
 		return new AndOrThen(fluentWait.waitUntil(containsEvaluator, string, seleniumQueryObject, this.negated));
 	}
-
-	@Override
-    public SeleniumQueryWaitAndOrThen containsIgnoreCase(String string) {
-        Evaluator<String> containsEvaluator = new ContainsIgnoreCaseEvaluator(getter);
-        return new AndOrThen(fluentWait.waitUntil(containsEvaluator, string, seleniumQueryObject, this.negated));
-    }
 
 	@Override
 	public SeleniumQueryWaitAndOrThen matches(String regex) {
