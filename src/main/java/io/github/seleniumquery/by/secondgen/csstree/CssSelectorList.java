@@ -29,7 +29,7 @@ import java.util.stream.Stream;
  *
  * Each {@link CssSelector} ia a root of a CSS selector object tree.
  */
-public class CssSelectorList implements Iterable<CssSelector> {
+public class CssSelectorList  {
 
     private List<CssSelector> cssSelectors;
 
@@ -37,17 +37,8 @@ public class CssSelectorList implements Iterable<CssSelector> {
         this.cssSelectors = Collections.unmodifiableList(new ArrayList<>(cssSelectors));
     }
 
-    public CssSelector selector(int i) {
-        return cssSelectors.get(i);
-    }
-
     public CssSelector firstSelector() {
-        return selector(0);
-    }
-
-    @Override
-    public Iterator<CssSelector> iterator() {
-        return cssSelectors.iterator();
+        return stream().findFirst().get();
     }
 
     public Stream<CssSelector> stream() {

@@ -20,6 +20,7 @@ import static io.github.seleniumquery.by.secondgen.parser.ast.condition.pseudocl
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -60,11 +61,9 @@ public class CssNotPseudoClass implements CssPseudoClassCondition, MaybeNatively
     }
 
     private String toChainedNotSelectors(WebDriver webDriver) {
-        StringBuilder chainedNotSelectors = new StringBuilder();
-        for (CssSelector cssSelector : astCssNotPseudoClass.getArgument()) {
-            chainedNotSelectors.append(":").append(PSEUDO_PURE_NOT).append("(").append(cssSelector.toElementFinder(webDriver).toCssString()).append(")");
-        }
-        return chainedNotSelectors.toString();
+        return astCssNotPseudoClass.getArgument().stream()
+            .map(cssSelector -> ":" + PSEUDO_PURE_NOT + "(" + cssSelector.toElementFinder(webDriver).toCssString() + ")")
+            .collect(Collectors.joining());
     }
 
     private void assertCssDoesNotContainUnsupportedSelectors(String cssString) {
@@ -75,11 +74,9 @@ public class CssNotPseudoClass implements CssPseudoClassCondition, MaybeNatively
 
     @Override
     public XPathAndFilterFinder toXPath(WebDriver webDriver) {
-        List<String> xPathExpressions = new LinkedList<>();
-        for (CssSelector cssSelector : astCssNotPseudoClass.getArgument()) {
-            xPathExpressions.add(cssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression());
-        }
-        String joinedXPathExps = Joiner.on(" | ").join(xPathExpressions);
+        String joinedXPathExps = astCssNotPseudoClass.getArgument().stream()
+            .map(cssSelector -> cssSelector.toElementFinder(webDriver).getXPathAndFilterFinder().getRawXPathExpression())
+            .collect(Collectors.joining(" | "));
         return XPathAndFilterFinder.pureXPath("not("+joinedXPathExps+")");
     }
 
