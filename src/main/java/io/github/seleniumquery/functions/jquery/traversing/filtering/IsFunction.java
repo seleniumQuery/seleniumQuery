@@ -128,9 +128,11 @@ public class IsFunction {
                 return filteredElements;
             }
             for (CompiledCssSelector s : compiledCssSelectors) {
-                elements.stream().filter(webElement -> s.cssSelector.is(driver, webElement, s.argumentMap, s.parsedSimpleSelector)).forEach(webElement -> {
-                    filteredElements.add(webElement);
-                });
+                for (WebElement webElement : elements) {
+                    if (s.cssSelector.is(driver, webElement, s.argumentMap, s.parsedSimpleSelector)) {
+                        filteredElements.add(webElement);
+                    }
+                }
             }
             return filteredElements;
         }

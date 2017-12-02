@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * A list of CSS Selectors (objects that represent parsed CSS selectors).
@@ -47,6 +48,10 @@ public class CssSelectorList implements Iterable<CssSelector> {
     @Override
     public Iterator<CssSelector> iterator() {
         return cssSelectors.iterator();
+    }
+
+    public Stream<CssSelector> stream() {
+        return cssSelectors.stream();
     }
 
 }

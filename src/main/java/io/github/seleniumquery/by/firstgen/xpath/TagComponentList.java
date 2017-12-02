@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,79 +17,53 @@
 package io.github.seleniumquery.by.firstgen.xpath;
 
 import io.github.seleniumquery.by.firstgen.xpath.component.TagComponent;
+
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
- * Represents a list of {@link io.github.seleniumquery.by.firstgen.xpath.component.XPathComponent}. In other words, multiple XPath expressions
+ * Represents a list of {@link io.github.seleniumquery.by.firstgen.xpath.component.XPathComponent}. In other words, multiple
+ * XPath expressions
  * that should be "composed" or "merged" to become a single expression.
- * 
- * @since 0.9.0
- * 
+ *
  * @author acdcjunior
  * @author ricardo-sc
+ * @since 0.9.0
  */
 public class TagComponentList {
-	
-	private static final String XPATH_EXPRESSION_OR = " | ";
-	private static final String XPATH_CONDITIONAL_OR = ") or (";
-	
-	private List<TagComponent> tagComponents;
-	
-	TagComponentList(List<TagComponent> tagComponents) {
-		this.tagComponents = tagComponents;
-	}
-	
-	public List<WebElement> findWebElements(SearchContext context) {
-		Set<WebElement> elements = new LinkedHashSet<>();
-		tagComponents.stream().map(elementsFound -> tagComponent.findWebElements(context)).forEach(elementsFound -> {
-                    elements.addAll(elementsFound);
-                });
-		return new ArrayList<>(elements);
-	}
 
-        public String toXPath() {
-		StringBuilder compoundXPathExpression = new StringBuilder();
-		tagComponents.forEach(tagComponent -> {
-                    compoundXPathExpression.append(tagComponent.toXPath()).append(XPATH_EXPRESSION_OR);
-                );
-		removeTrailingExpressionOr(compoundXPathExpression);
-		return compoundXPathExpression.toString(); 
-	}
+    private static final String XPATH_EXPRESSION_OR = " | ";
+    private static final String XPATH_CONDITIONAL_OR_START = "(";
+    private static final String XPATH_CONDITIONAL_OR_MIDDLE = ") or (";
+    private static final String XPATH_CONDITIONAL_OR_END = ")";
 
-       /**
-        * Removes a trailing XPATH_EXPRESSION_OR, if necessary.
-        */
-        private void removeTrailingExpressionOr(StringBuilder compoundXPathExpression) {
-		if (!tagComponents.isEmpty()) {
-			int xPathExpressionLength = compoundXPathExpression.length();
-			compoundXPathExpression.delete(xPathExpressionLength - XPATH_EXPRESSION_OR.length(), xPathExpressionLength);
-		}
-	}
-	
-	public String toXPathCondition() {
-		StringBuilder compoundXPathCondition = new StringBuilder();
-		compoundXPathCondition.append('(');
-		tagComponents.forEach(tagComponent -> {
-                    compoundXPathCondition.append(tagComponent.toXPathCondition()).append(XPATH_CONDITIONAL_OR);
-                });
-		removeTrailingConditionalOr(compoundXPathCondition);
-		compoundXPathCondition.append(')');
-		return compoundXPathCondition.toString(); 
-	}
+    private List<TagComponent> tagComponents;
 
-       /**
-        * Removes a trailing XPATH_CONDITIONAL_OR, if necessary.
-        */
-        private void removeTrailingConditionalOr(StringBuilder sb) {
-		if (!tagComponents.isEmpty()) {
-			sb.delete(sb.length()-XPATH_CONDITIONAL_OR.length(), sb.length());
-		}
-	}
+    TagComponentList(List<TagComponent> tagComponents) {
+        this.tagComponents = tagComponents;
+    }
+
+    public List<WebElement> findWebElements(SearchContext context) {
+        return tagComponents.stream()
+            .flatMap(tagComponent -> tagComponent.findWebElements(context).stream())
+            .distinct()
+            .collect(Collectors.toList());
+    }
+
+    public String toXPath() {
+        return tagComponents.stream()
+            .map(TagComponent::toXPath)
+            .collect(Collectors.joining(XPATH_EXPRESSION_OR));
+    }
+
+    public String toXPathCondition() {
+        String conditionalTagExpressions = tagComponents.stream()
+            .map(TagComponent::toXPathCondition)
+            .collect(Collectors.joining(XPATH_CONDITIONAL_OR_MIDDLE));
+        return XPATH_CONDITIONAL_OR_START + conditionalTagExpressions + XPATH_CONDITIONAL_OR_END;
+    }
 
 }

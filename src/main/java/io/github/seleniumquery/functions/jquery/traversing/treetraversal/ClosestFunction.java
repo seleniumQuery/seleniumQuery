@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,20 +33,25 @@ import java.util.List;
  * @since 0.9.0
  */
 public class ClosestFunction {
-	
+
 	private ClosestFunction() {}
 
-	public static SeleniumQueryObject closest(SeleniumQueryObject caller, String selector)  {
+	public static SeleniumQueryObject closest(SeleniumQueryObject caller, String selector) {
 		List<WebElement> elements = caller.get();
 		WebDriver driver = caller.getWebDriver();
-		
+
 		List<WebElement> closests = new ArrayList<>(elements.size());
-		elements.stream().map(closestElement -> closest(driver, element, selector)).filter(closestElement -> closestElement != null).forEach(closestElement -> {
+		for (WebElement element : elements) {
+			WebElement closestElement = closest(driver, element, selector);
+			if (closestElement != null) {
 				closests.add(closestElement);
-			});
+			}
+		}
 
 		return SqObjectFactory.instance().createWithInvalidSelector(caller.getWebDriver(), closests, caller);
-	}public static WebElement closest(WebDriver driver, WebElement element, String selector) {
+	}
+
+	public static WebElement closest(WebDriver driver, WebElement element, String selector) {
 		WebElement ancestorOrSelf = element; // begins by evaluating the element itself
 		while (ancestorOrSelf != null) {
 			if (CssSelectorMatcherService.elementMatchesStringSelector(driver, ancestorOrSelf, selector)) {

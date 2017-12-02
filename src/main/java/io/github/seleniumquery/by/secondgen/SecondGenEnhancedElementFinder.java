@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author acdcjunior
@@ -35,15 +37,14 @@ import java.util.Set;
  */
 public class SecondGenEnhancedElementFinder implements EnhancedElementFinder {
 
-    // TODO this code is not tested at all!
+    // TODO this code has no UTs
     @Override
     public List<WebElement> findElements(SearchContext context, String selector) {
-        CssSelectorList parse = ParseTreeBuilder.parse(selector);
-        Set<WebElement> elements = new LinkedHashSet<>();
-        parse.stream().map(elementsFound -> s.toElementFinder((WebDriver) context).findWebElements(context)).forEach(elementsFound -> {
-            elements.addAll(elementsFound);
-        });
-        return new ArrayList<>(elements);
+        CssSelectorList cssSelectorList = ParseTreeBuilder.parse(selector);
+
+        return cssSelectorList.stream()
+            .flatMap(cssSelector -> cssSelector.toElementFinder((WebDriver) context).findWebElements(context).stream())
+            .collect(Collectors.toList());
     }
 
 }
