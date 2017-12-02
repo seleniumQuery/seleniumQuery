@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,11 @@ public interface CssSelector {
      * Converts this selector into a finder.
      * @param webDriver The driver that will be checked for native CSS support of selectors.
      * @return The finder, having the best strategy to find elements based on this selector.
+     *
+     * Note: this must be a {@link WebDriver} and not just a SearchContext because many selectors down the way use it to
+     * check what browser is it and adapt accordingly - e.g. :checked, where PhantomJS has bugs. Also it uses to detect
+     * which selectors are available natively and which are not and it caches the result per driver. If it were a SearchContext
+     * it would only cache per SearchContext, meaning many elements could trigger the native-test.
      */
     ElementFinder toElementFinder(WebDriver webDriver);
 
