@@ -256,16 +256,9 @@
 	<developers>
 		<developer>
 			<id>acdcjunior</id>
-			<name>Antonio "acdc" Junior.</name>
+			<name>Antonio "acdc" Jr.</name>
 			<email>acdcjunior@gmail.com</email>
 			<url>http://github.com/acdcjunior</url>
-			<timezone>-3</timezone>
-		</developer>
-		<developer>
-			<id>ricardoscr</id>
-			<name>Ricardo S. Carvalho</name>
-			<email>ricardosc@gmail.com</email>
-			<url>http://github.com/ricardoscr</url>
 			<timezone>-3</timezone>
 		</developer>
 	</developers>
