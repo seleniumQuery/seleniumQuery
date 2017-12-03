@@ -89,7 +89,7 @@ public class EdgeDriverBuilderTest {
 
     @Test
     @SuppressWarnings({"deprecation", "ConstantConditions"})
-    public void withCapabilities__should_return_the_current_ChromeDriverBuilder_instance_to_allow_further_chaining() {
+    public void withCapabilities__should_return_the_current_EdgeDriverBuilder_instance_to_allow_further_chaining() {
         EdgeOptions edgeOptions = null;
         $.driver().useEdge().withCapabilities(null).withOptions(edgeOptions); // should compile
     }
