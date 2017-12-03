@@ -18,6 +18,8 @@ package endtoend.browser.util;
 
 public class DriverBuilderTestUtil {
 
+    public static final class VerySpecialExceptionOnlyWeThrow extends RuntimeException {}
+
     public static void openAnyUrl() {
         BrowserAgentTestUtils.openBrowserAgentTestHelperUrl();
     }

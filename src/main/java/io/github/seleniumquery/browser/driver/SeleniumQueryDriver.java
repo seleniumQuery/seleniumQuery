@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import org.openqa.selenium.WebDriver;
 
 import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.browser.driver.builders.ChromeDriverBuilder;
+import io.github.seleniumquery.browser.driver.builders.EdgeDriverBuilder;
 import io.github.seleniumquery.browser.driver.builders.FirefoxDriverBuilder;
 import io.github.seleniumquery.browser.driver.builders.HtmlUnitDriverBuilder;
 import io.github.seleniumquery.browser.driver.builders.InternetExplorerDriverBuilder;
@@ -131,7 +132,17 @@ public class SeleniumQueryDriver {
     /**
      * <p>Sets {@link org.openqa.selenium.firefox.FirefoxDriver} as the {@link WebDriver} for this seleniumQuery browser instance.</p>
      *
-     * This method looks for the Firefox binary at the system's PATH variable.
+     * <br>
+     * Note that latest {@link org.openqa.selenium.firefox.FirefoxDriver} requires a <code>geckodriver.exe</code> executable configured.
+     * <br><br>
+     * You can ask SeleniumQuery to automatically download and configure <code>geckodriver.exe</code> using:
+     *
+     * <strong><pre>
+     * $.driver().useFirefox().autoDriverDownload();
+     * </pre></strong>
+     *
+     * Or you can download and configure it manually from the
+     * <a href="https://github.com/mozilla/geckodriver">Geckodriver page</a>.
      *
      * @return A {@link FirefoxDriverBuilder}, allowing further configuration of the driver.
      *
@@ -145,15 +156,23 @@ public class SeleniumQueryDriver {
      * Sets {@link org.openqa.selenium.chrome.ChromeDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
      * <p>
      * Note that the Chrome needs a <i>ChromeDriver Server executable</i> to bridge Selenium to the browser and as such
-     * Selenium must know the path to it. It is a file usually named <code>chromedriver.exe</code> (windows) or <code>chromedriver</code> (linux)
+     * Selenium must know the path to it.
+     * <br><br>
+     * You can ask SeleniumQuery to automatically download and configure <code>chromedriver.exe</code> using:
+     *
+     * <strong><pre>
+     * $.driver().useChrome().autoDriverDownload();
+     * </pre></strong>
+     *
+     * Or you can configure it manually. It is a file usually named <code>chromedriver.exe</code> (windows) or <code>chromedriver</code> (linux)
      * and its latest version can be downloaded from
      * <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's download page</a>. You can also check
      * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver">seleniumQuery and Chrome Driver wiki page</a>
      * for the other info.
      * </p>
      * <br>
-     * <b> This method looks for the ChromeDriver executable (<code>chromedriver.exe</code>/<code>chromedriver</code>) at the CLASSPATH
-     * (tipically at a {@code resources/} folder of a maven project), at the "webdriver.chrome.driver" system property or at the system's PATH variable.</b>
+     * This method looks for the ChromeDriver executable (<code>chromedriver.exe</code>/<code>chromedriver</code>) at the CLASSPATH
+     * (tipically at a {@code resources/} folder of a maven project), at the "webdriver.chrome.driver" system property or at the system's PATH variable.
      * If you wish to directly specify a path, use:
      * <pre>
      * $.driver().useChrome().withPathToChromeDriver("other/path/to/chromedriver.exe"); // windows
@@ -172,18 +191,26 @@ public class SeleniumQueryDriver {
      * Sets {@link org.openqa.selenium.ie.InternetExplorerDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
      * <p>
      * Note that the {@link org.openqa.selenium.ie.InternetExplorerDriver} needs a <i>server executable</i> to bridge selenium to the browser and,
-     * as such, Selenium must know the path to it. It is a file usually named <code>IEDriverServer.exe</code> and its latest
+     * as such, Selenium must know the path to it.
+     * <br><br>
+     * You can ask SeleniumQuery to automatically download and configure <code>IEDriverServer.exe</code> using:
+     *
+     * <strong><pre>
+     * $.driver().useInternetExplorer().autoDriverDownload();
+     * </pre></strong>
+     *
+     * Or you can configure it manually. It is a file usually named <code>IEDriverServer.exe</code> and its latest
      * version can be downloaded from
      * <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer's download page</a> -- or check
      * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-IE-Driverr">seleniumQuery and IE Driver wiki page</a>
      * for the latest info.
      * </p>
      * <br>
-     * <b> This method looks for the <code>IEDriverServer.exe</code> at the CLASSPATH (tipically at a {@code resources/} folder of a
-     * maven project), at the "webdriver.ie.driver" system property or at the system's PATH variable.</b>
+     * This method looks for the <code>IEDriverServer.exe</code> at the CLASSPATH (tipically at a {@code resources/} folder of a
+     * maven project), at the "webdriver.ie.driver" system property or at the system's PATH variable.
      * If you wish to directly specify a path, use:
      * <pre>
-     * $.driver().useChrome().withPathToIEDriverServerExe("other/path/to/IEDriverServer.exe");
+     * $.driver().useInternetExplorer().withPathToIEDriverServerExe("other/path/to/IEDriverServer.exe");
      * </pre>
      *
      * @return A {@link InternetExplorerDriverBuilder}, allowing further configuration of the driver.
@@ -198,13 +225,21 @@ public class SeleniumQueryDriver {
      * Sets {@link org.openqa.selenium.phantomjs.PhantomJSDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
      * <p>
      * Note that the PhantomJS Driver needs a <i>PhantomJS executable</i> to act as browser and as such
-     * Selenium must know the path to it. It is a file usually named <code>phantomjs.exe</code> (windows) or <code>phantomjs</code> (linux)
+     * Selenium must know the path to it.
+     * <br><br>
+     * You can ask SeleniumQuery to automatically download and configure <code>phantomjs.exe</code> using:
+     *
+     * <strong><pre>
+     * $.driver().usePhantomJS().autoDriverDownload();
+     * </pre></strong>
+     *
+     * Or you can configure it manually. It is a file usually named <code>phantomjs.exe</code> (windows) or <code>phantomjs</code> (linux)
      * and its latest version can be downloaded from
      * <a href="http://phantomjs.org/download.html">PhantomJS download page</a>.
      * </p>
      * <br>
-     * <b> This method looks for the PhantomJS executable (<code>phantomjs.exe</code>/<code>phantomjs</code>) at the CLASSPATH
-     * (tipically at a {@code resources/} folder of a maven project), at the "phantomjs.binary.path" system property or at the system's PATH variable.</b>
+     * This method looks for the PhantomJS executable (<code>phantomjs.exe</code>/<code>phantomjs</code>) at the CLASSPATH
+     * (tipically at a {@code resources/} folder of a maven project), at the "phantomjs.binary.path" system property or at the system's PATH variable.
      * If you wish to directly specify a path, use:
      * <pre>
      * $.driver().usePhantomJS().withPathToPhantomJS("other/path/to/phantomjs.exe"); // windows
@@ -217,6 +252,27 @@ public class SeleniumQueryDriver {
      */
     public PhantomJSDriverBuilder usePhantomJS() {
         return clearCurrentDriverAndAssignNewBuilder(new PhantomJSDriverBuilder());
+    }
+
+    /**
+     * Sets {@link org.openqa.selenium.edge.EdgeDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
+     * <br><br>
+     * Note that the {@link org.openqa.selenium.edge.EdgeDriver} needs a <code>MicrosoftWebDriver.exe</code> executable configured.
+     * <br><br>
+     * You can ask SeleniumQuery to automatically download and configure <code>MicrosoftWebDriver.exe</code> using:
+     *
+     * <strong><pre>
+     * $.driver().useEdge().autoDriverDownload();
+     * </pre></strong>
+     *
+     * Or you can download and configure it manually from the
+     * <a href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads">Microsoft WebDriver page</a>.
+     *
+     * @return A {@link EdgeDriverBuilder}, allowing further configuration of the driver.
+     * @since 0.18.0
+     */
+    public EdgeDriverBuilder useEdge() {
+        return clearCurrentDriverAndAssignNewBuilder(new EdgeDriverBuilder());
     }
 
 }
