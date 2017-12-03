@@ -23,6 +23,8 @@ import static io.github.seleniumquery.browser.driver.builders.DriverInstantiatio
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
 import static java.lang.String.format;
 
+import java.util.function.Consumer;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -30,6 +32,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import io.github.bonigarcia.wdm.BrowserManager;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.browser.driver.DriverBuilder;
 
@@ -138,11 +142,20 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
     @Override
     protected WebDriver build() {
+        autoDownloadDriverIfAskedFor(ChromeDriver.class);
         if (isCapabilitiesManuallySet()) {
             LOGGER.warn("Prefer Prefer using ChromeOptions and .withOptions() instead of DesiredCapabilities and .withCapabilities().");
             return buildUsingCapabilities();
         } else {
             return buildUsingChromeOptions();
+        }
+    }
+
+    private void autoDownloadDriverIfAskedFor(Class<? extends WebDriver> driverClass) {
+        if (this.autoDriverDownloadConfigurer != null) {
+            BrowserManager browserManager = WebDriverManager.getInstance(driverClass);
+            this.autoDriverDownloadConfigurer.accept(browserManager);
+            browserManager.setup();
         }
     }
 
@@ -199,6 +212,20 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
                     CHROMEDRIVER_EXECUTABLE_WINDOWS, CHROMEDRIVER_EXECUTABLE_LINUX, CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, EXCEPTION_MESSAGE
                 ), e);
         }
+    }
+
+    private Consumer<BrowserManager> autoDriverDownloadConfigurer;
+
+    public ChromeDriverBuilder autoDriverDownload() {
+        return this.autoDriverDownload(x -> {});
+    }
+
+    public ChromeDriverBuilder autoDriverDownload(Consumer<BrowserManager> configurer) {
+        if (this.autoDriverDownloadConfigurer != null) {
+            LOGGER.warn(".autoDriverDownload() has already been called. Ignoring all calls but the last.");
+        }
+        this.autoDriverDownloadConfigurer = configurer;
+        return this;
     }
 
 }

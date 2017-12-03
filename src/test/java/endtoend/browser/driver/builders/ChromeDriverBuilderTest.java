@@ -19,6 +19,7 @@ package endtoend.browser.driver.builders;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.testutils.EnvironmentTestUtils.isNotWindowsOS;
 
@@ -32,6 +33,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import endtoend.helpers.BrowserAgentTestHelper;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class ChromeDriverBuilderTest {
@@ -62,6 +64,7 @@ public class ChromeDriverBuilderTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void withCapabilities() {
         // given
         ChromeOptions options = createChromeOptionsWithMobileEmulation();
@@ -93,6 +96,7 @@ public class ChromeDriverBuilderTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void withCapabilities__should_return_the_current_ChromeDriverBuilder_instance_to_allow_further_chaining() {
         $.driver().useChrome().withCapabilities(null).withOptions(null); // should compile
     }
@@ -134,6 +138,24 @@ public class ChromeDriverBuilderTest {
         $.driver().useChrome().withHeadlessChrome();
         // then
         BrowserAgentTestHelper.assertBrowserAgent(containsString("HeadlessChrome"));
+    }
+
+    @Test
+    public void autoDriverDownload() {
+        // when
+        $.driver().useChrome().autoDriverDownload();
+        // then
+        BrowserAgentTestHelper.assertBrowserAgent(containsString("Chrome"));
+    }
+
+    @Test
+    public void autoDriverDownload__lambda() {
+        // when
+        $.driver().useChrome().autoDriverDownload(x -> x.version("2.32")).headless();
+        // then
+        BrowserAgentTestHelper.assertBrowserAgent(containsString("Chrome"));
+        // some day, when the version below is too old, this test will fail. Replace the number below with latestVersion - 0.01
+        assertEquals("2.32", ChromeDriverManager.getInstance().getDownloadedVersion());
     }
 
 }
