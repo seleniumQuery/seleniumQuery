@@ -20,8 +20,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
@@ -50,7 +48,7 @@ public class FirefoxDriverBuilderTest {
         // when
         $.driver().useFirefox();
         // then
-        assertJavaScriptIsOn($.driver().get());
+        DriverBuilderTestUtils.assertJavaScriptIsOn($.driver().get());
     }
 
     @Test
@@ -59,7 +57,7 @@ public class FirefoxDriverBuilderTest {
         // when
         $.driver().useFirefox().withoutJavaScript();
         // then
-        assertJavaScriptIsOff($.driver().get());
+        DriverBuilderTestUtils.assertJavaScriptIsOff($.driver().get());
     }
 
     @Test
@@ -75,23 +73,13 @@ public class FirefoxDriverBuilderTest {
         // the code works, but I can't find a way to test it yet
     }
 
-    public static void assertJavaScriptIsOn(WebDriver driver) {
-        driver.get(classNameToTestFileUrl(FirefoxDriverBuilderTest.class));
-        assertThat(driver.findElements(By.tagName("div")), hasSize(1 + 3));
-    }
-
-    public static void assertJavaScriptIsOff(WebDriver driver) {
-        driver.get(classNameToTestFileUrl(FirefoxDriverBuilderTest.class));
-        assertThat(driver.findElements(By.tagName("div")), hasSize(1));
-    }
-
     @Test
     public void autoDriverDownload() {
         // given
         // when
         $.driver().useFirefox().autoDriverDownload();
         // then
-        assertJavaScriptIsOn($.driver().get());
+        DriverBuilderTestUtils.assertJavaScriptIsOn($.driver().get());
     }
 
 }

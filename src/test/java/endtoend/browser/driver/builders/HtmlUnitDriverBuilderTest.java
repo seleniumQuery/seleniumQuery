@@ -16,8 +16,8 @@
 
 package endtoend.browser.driver.builders;
 
-import static endtoend.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOff;
-import static endtoend.browser.driver.builders.FirefoxDriverBuilderTest.assertJavaScriptIsOn;
+import static endtoend.browser.driver.builders.DriverBuilderTestUtils.assertJavaScriptIsOff;
+import static endtoend.browser.driver.builders.DriverBuilderTestUtils.assertJavaScriptIsOn;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
