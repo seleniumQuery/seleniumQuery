@@ -26,6 +26,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Represents the <strong>SeleniumQuery Object</strong>: a list of {@link WebElement}s with special methods.
@@ -586,5 +589,24 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	 * @since 0.13.0
      */
 	SeleniumQueryObject each(EachFunction function);
+
+    /**
+     * Returns a sequential {@code Stream} with the set of matched elements as its source.
+     *
+     * @return a sequential {@code Stream} over the elements in this object.
+     * @since 0.18.0
+     */
+	Stream<WebElement> stream();
+
+	/**
+	 * Pass each element in the current matched set through a function, producing a list object containing the return values.
+	 *
+	 * @param mapper The function to process each item against.
+	 * @return A list containing all translated objects.
+	 * @since 0.18.0
+     */
+	default <T> List<T> map(Function<? super WebElement, ? extends T> mapper) {
+	    return this.stream().map(mapper).collect(Collectors.toList());
+    }
 
 }

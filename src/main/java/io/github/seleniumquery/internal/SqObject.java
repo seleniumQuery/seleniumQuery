@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import io.github.seleniumquery.SeleniumQueryWaitUntil;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
+import io.github.seleniumquery.functions.sq.StreamFunction;
 import io.github.seleniumquery.utils.ListUtils;
 import io.github.seleniumquery.wait.SqWaitUntil;
 import org.openqa.selenium.By;
@@ -30,6 +31,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Main implementation of {@link SeleniumQueryObject}.
@@ -307,5 +309,10 @@ class SqObject implements SeleniumQueryObject {
     public SeleniumQueryObject each(EachFunction function) {
 		return seleniumQueryFunctions.each(this, function);
 	}
+
+    @Override
+    public Stream<WebElement> stream() {
+        return new StreamFunction().apply(this);
+    }
 
 }

@@ -29,6 +29,7 @@ import testinfrastructure.testdouble.PseudoTestDoubleException;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Creates a "smart" dummy {@link SeleniumQueryObject}. It's goal is to be a mere placeholder in a test
@@ -90,5 +91,6 @@ public class SeleniumQueryObjectDummy implements SeleniumQueryObject {
     @Override public SeleniumQueryObject filter(Predicate<WebElement> filterFunction) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject filter(String selector) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject each(EachFunction function) { throw new PseudoTestDoubleException(); }
+    @Override public Stream<WebElement> stream() { throw new PseudoTestDoubleException(); }
 
 }
