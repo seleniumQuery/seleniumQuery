@@ -96,9 +96,10 @@ public class ChromeDriverBuilderTest {
     }
 
     @Test
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "ConstantConditions"})
     public void withCapabilities__should_return_the_current_ChromeDriverBuilder_instance_to_allow_further_chaining() {
-        $.driver().useChrome().withCapabilities(null).withOptions(null); // should compile
+        ChromeOptions chromeOptions = null;
+        $.driver().useChrome().withCapabilities(null).withOptions(chromeOptions); // should compile
     }
 
     @Test
