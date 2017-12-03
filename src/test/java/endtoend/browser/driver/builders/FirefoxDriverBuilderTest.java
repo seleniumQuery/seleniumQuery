@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,8 @@ public class FirefoxDriverBuilderTest {
 
     @Before
     public void setUp() {
-        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunFirefox());
+        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return Firefox.",
+            SetUpAndTearDownDriver.driverToRunTestsIn.canRunFirefox());
     }
 
     @After
@@ -82,6 +83,15 @@ public class FirefoxDriverBuilderTest {
     public static void assertJavaScriptIsOff(WebDriver driver) {
         driver.get(classNameToTestFileUrl(FirefoxDriverBuilderTest.class));
         assertThat(driver.findElements(By.tagName("div")), hasSize(1));
+    }
+
+    @Test
+    public void autoDriverDownload() {
+        // given
+        // when
+        $.driver().useFirefox().autoDriverDownload();
+        // then
+        assertJavaScriptIsOn($.driver().get());
     }
 
 }

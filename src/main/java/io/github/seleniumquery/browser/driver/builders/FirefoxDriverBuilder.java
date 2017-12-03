@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.browser.driver.DriverBuilder;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
@@ -63,6 +64,7 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
 
     @Override
     protected WebDriver build() {
+        autoDownloadDriverIfAskedFor(FirefoxDriver.class);
         DesiredCapabilities capabilities = createConfiguredCapabilities();
         FirefoxDriver firefoxDriver = new FirefoxDriver(capabilities);
         disableJavaScriptIfWanted(firefoxDriver);
