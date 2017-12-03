@@ -109,7 +109,7 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
     @SuppressWarnings("unchecked")
     public T autoDriverDownload(Consumer<BrowserManager> configurer) {
         if (this.autoDriverDownloadConfigurer != null) {
-            LOGGER.warn(".autoDriverDownload() has already been called. Ignoring all calls but the last.");
+            LOGGER.warn(".autoDriverDownload() has already been called. Overwriting previous calls.");
         }
         this.autoDriverDownloadConfigurer = configurer;
         return (T) this;
