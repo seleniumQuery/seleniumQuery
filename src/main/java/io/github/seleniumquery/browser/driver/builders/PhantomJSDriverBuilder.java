@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,22 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
-import com.google.common.annotations.VisibleForTesting;
-import io.github.seleniumquery.SeleniumQueryException;
-import io.github.seleniumquery.browser.driver.DriverBuilder;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils
+    .customPathWasProvidedAndExecutableExistsThere;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.executableExistsInClasspath;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPath;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
+import static java.lang.String.format;
+
 import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.*;
-import static java.lang.String.format;
+import com.google.common.annotations.VisibleForTesting;
+import io.github.seleniumquery.SeleniumQueryException;
+import io.github.seleniumquery.browser.driver.DriverBuilder;
 
 /**
  * Builds {@link PhantomJSDriver} instances for SeleniumQueryDriver.
@@ -80,6 +85,7 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
 
     @Override
     protected WebDriver build() {
+        autoDownloadDriverIfAskedFor(PhantomJSDriver.class);
         DesiredCapabilities capabilities = capabilities(new DesiredCapabilities());
 
         configurePhantomJsExecutablePath(capabilities);

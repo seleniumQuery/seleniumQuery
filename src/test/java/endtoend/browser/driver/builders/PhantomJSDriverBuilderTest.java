@@ -38,7 +38,8 @@ public class PhantomJSDriverBuilderTest {
 
     @Before
     public void setUp() {
-        assumeTrue("SetUpAndTearDownDriver should authorize to run tests in PhantomJS", SetUpAndTearDownDriver.driverToRunTestsIn.canRunPhantomJS());
+        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return PhantomJS.",
+            SetUpAndTearDownDriver.driverToRunTestsIn.canRunPhantomJS());
     }
 
     @After
@@ -73,6 +74,16 @@ public class PhantomJSDriverBuilderTest {
         onlyRunIfDriverTestExecutableExists("phantomjs.exe");
         // given
         $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/phantomjs.exe");
+        // when
+        BrowserAgentTestUtils.openBrowserAgentTestHelperUrl();
+        // then
+        // no exception is thrown while opening a page
+    }
+
+    @Test
+    public void autoDriverDownload() {
+        // given
+        $.driver().usePhantomJS().autoDriverDownload();
         // when
         BrowserAgentTestUtils.openBrowserAgentTestHelperUrl();
         // then
