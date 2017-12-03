@@ -23,8 +23,6 @@ import static io.github.seleniumquery.browser.driver.builders.DriverInstantiatio
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
 import static java.lang.String.format;
 
-import java.util.function.Consumer;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -32,8 +30,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import io.github.bonigarcia.wdm.BrowserManager;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.browser.driver.DriverBuilder;
 
@@ -144,7 +140,7 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     protected WebDriver build() {
         autoDownloadDriverIfAskedFor(ChromeDriver.class);
         if (isCapabilitiesManuallySet()) {
-            LOGGER.warn("Prefer Prefer using ChromeOptions and .withOptions() instead of DesiredCapabilities and .withCapabilities().");
+            LOGGER.warn("Prefer using ChromeOptions and .withOptions() instead of DesiredCapabilities and .withCapabilities().");
             return buildUsingCapabilities();
         } else {
             return buildUsingChromeOptions();
