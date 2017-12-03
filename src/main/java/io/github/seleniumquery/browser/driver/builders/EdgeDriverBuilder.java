@@ -109,8 +109,8 @@ public class EdgeDriverBuilder extends DriverBuilder<EdgeDriverBuilder> {
         if (e.getMessage().contains("path to the driver executable must be set")) {
             throw new SeleniumQueryException("The EdgeDriver server executable was not found. Try using:\n\n" +
                 "$.driver().useEdge().autoDriverDownload();\n\n" +
-                "Or download and configure it manually from the Microsoft WebDriver page: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads"
-            );
+                "Or download and configure it manually from the Microsoft WebDriver page: https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads",
+            e);
         }
     }
 
