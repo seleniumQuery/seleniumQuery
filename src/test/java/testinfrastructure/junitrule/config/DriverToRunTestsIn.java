@@ -25,6 +25,7 @@ import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._IE;
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._JAVASCRIPT_OFF;
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._JAVASCRIPT_ON;
+import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._OPERA;
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._PHANTOMJS;
 import static testinfrastructure.testutils.EnvironmentTestUtils.gitLastCommitMessageContains;
 
@@ -50,6 +51,8 @@ public enum DriverToRunTestsIn {
     IE                                  (_IE, _JAVASCRIPT_ON),
 	EDGE                                (_EDGE, _JAVASCRIPT_ON),
 
+	OPERA                                (_OPERA, _JAVASCRIPT_ON),
+
     PHANTOMJS                           (_PHANTOMJS, _JAVASCRIPT_ON),
 
 	HTMLUNIT_ALL_JS_ON_AND_OFF          (_HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF),
@@ -68,11 +71,12 @@ public enum DriverToRunTestsIn {
 	private final boolean chromeHeadless;
 	private final boolean ie;
 	private final boolean edge;
+	private final boolean opera;
 	private final boolean phantomJS;
 	private final boolean javaScriptOn;
 	private final boolean javaScriptOff;
 
-	public enum ShouldRun {_FIREFOX, _CHROME, _CHROME_HEADLESS, _IE, _EDGE, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
+	public enum ShouldRun {_FIREFOX, _CHROME, _CHROME_HEADLESS, _IE, _EDGE, _OPERA, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
 
 	DriverToRunTestsIn(ShouldRun... shouldRuns) {
         List<ShouldRun> shouldRunList = asList(shouldRuns);
@@ -81,6 +85,7 @@ public enum DriverToRunTestsIn {
 		this.chromeHeadless = shouldRunList.contains(_CHROME_HEADLESS);
 		this.ie = shouldRunList.contains(_IE);
 		this.edge = shouldRunList.contains(_EDGE);
+		this.opera = shouldRunList.contains(_OPERA);
 		this.phantomJS = shouldRunList.contains(_PHANTOMJS);
 		this.htmlUnit = shouldRunList.contains(_HTMLUNIT);
 		this.javaScriptOn = shouldRunList.contains(_JAVASCRIPT_ON);
@@ -93,6 +98,7 @@ public enum DriverToRunTestsIn {
 	public boolean canRunChromeHeadless() { return chromeHeadless; }
 	public boolean canRunIE() { return ie; }
 	public boolean canRunEdge() { return edge; }
+	public boolean canRunOpera() { return opera; }
 	public boolean canRunPhantomJS() { return phantomJS; }
 	public boolean shouldRunWithJavaScriptOn() { return javaScriptOn; }
 	public boolean shouldRunWithJavaScriptOff() { return javaScriptOff; }

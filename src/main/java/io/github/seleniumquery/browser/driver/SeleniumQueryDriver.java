@@ -28,6 +28,7 @@ import io.github.seleniumquery.browser.driver.builders.EdgeDriverBuilder;
 import io.github.seleniumquery.browser.driver.builders.FirefoxDriverBuilder;
 import io.github.seleniumquery.browser.driver.builders.HtmlUnitDriverBuilder;
 import io.github.seleniumquery.browser.driver.builders.InternetExplorerDriverBuilder;
+import io.github.seleniumquery.browser.driver.builders.OperaDriverBuilder;
 import io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder;
 
 /**
@@ -273,6 +274,27 @@ public class SeleniumQueryDriver {
      */
     public EdgeDriverBuilder useEdge() {
         return clearCurrentDriverAndAssignNewBuilder(new EdgeDriverBuilder());
+    }
+
+    /**
+     * Sets {@link org.openqa.selenium.opera.OperaDriver} as the {@link WebDriver} for this seleniumQuery browser instance.
+     * <br><br>
+     * Note that the {@link org.openqa.selenium.opera.OperaDriver} needs a <code>operadriver.exe</code> executable configured.
+     * <br><br>
+     * You can ask SeleniumQuery to automatically download and configure <code>operadriver.exe</code> using .autoDriverDownload():
+     *
+     * <strong><pre>
+     * $.driver().useOpera().autoDriverDownload();
+     * </pre></strong>
+     *
+     * Or you can download and configure it manually from the
+     * <a href="https://github.com/operasoftware/operachromiumdriver">OperaDriver page</a>.
+     *
+     * @return A {@link OperaDriverBuilder}, allowing further configuration of the driver.
+     * @since 0.18.0
+     */
+    public OperaDriverBuilder useOpera() {
+        return clearCurrentDriverAndAssignNewBuilder(new OperaDriverBuilder());
     }
 
 }
