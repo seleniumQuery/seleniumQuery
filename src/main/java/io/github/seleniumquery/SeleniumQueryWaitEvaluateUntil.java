@@ -53,7 +53,7 @@ public interface SeleniumQueryWaitEvaluateUntil<T> {
      * @param string The string the function call result must contain.
      * @return An element that allows chaining of further waiting conditions or calling regular functions.
      *
-     * @since 0.18.0
+     * @since 0.17.0
      */
     SeleniumQueryWaitAndOrThen containsIgnoreCase(String string);
 
