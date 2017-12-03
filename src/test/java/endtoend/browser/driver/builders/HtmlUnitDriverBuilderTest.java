@@ -16,8 +16,8 @@
 
 package endtoend.browser.driver.builders;
 
-import static endtoend.browser.driver.builders.DriverBuilderTestUtils.assertJavaScriptIsOff;
-import static endtoend.browser.driver.builders.DriverBuilderTestUtils.assertJavaScriptIsOn;
+import static endtoend.browser.util.JsOnOffTestUtils.assertJavaScriptIsOff;
+import static endtoend.browser.util.JsOnOffTestUtils.assertJavaScriptIsOn;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
@@ -25,7 +25,8 @@ import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import endtoend.helpers.BrowserAgentTestHelper;
+import endtoend.browser.util.BrowserAgentTestUtils;
+
 
 public class HtmlUnitDriverBuilderTest {
 
@@ -53,7 +54,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit();
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestUtils.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_STRING);
     }
 
     @Test
@@ -82,7 +83,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingFirefox();
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(HTMLUNIT_FF_AGENT_STRING);
+        BrowserAgentTestUtils.assertBrowserAgent(HTMLUNIT_FF_AGENT_STRING);
     }
 
     @Test
@@ -91,7 +92,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingChrome();
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestUtils.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_STRING);
     }
 
     @Test
@@ -100,7 +101,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingInternetExplorer();
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(HTMLUNIT_IE_AGENT_STRING);
+        BrowserAgentTestUtils.assertBrowserAgent(HTMLUNIT_IE_AGENT_STRING);
     }
 
 }

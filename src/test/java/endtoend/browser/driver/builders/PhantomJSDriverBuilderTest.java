@@ -30,7 +30,7 @@ import org.junit.Test;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import endtoend.helpers.BrowserAgentTestHelper;
+import endtoend.browser.util.BrowserAgentTestUtils;
 import io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
@@ -54,7 +54,7 @@ public class PhantomJSDriverBuilderTest {
         // when
         $.driver().usePhantomJS().withCapabilities(capabilities);
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(containsString("JustAnotherAgent"));
+        BrowserAgentTestUtils.assertBrowserAgent(containsString("JustAnotherAgent"));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class PhantomJSDriverBuilderTest {
         // given
         $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/phantomjs.exe");
         // when
-        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl();
+        BrowserAgentTestUtils.openBrowserAgentTestHelperUrl();
         // then
         // no exception is thrown while opening a page
     }

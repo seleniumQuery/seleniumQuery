@@ -32,7 +32,7 @@ import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import endtoend.helpers.BrowserAgentTestHelper;
+import endtoend.browser.util.BrowserAgentTestUtils;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
@@ -60,7 +60,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome().withOptions(options);
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
+        BrowserAgentTestUtils.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome().withCapabilities(capabilities);
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
+        BrowserAgentTestUtils.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
     }
 
     private ChromeOptions createChromeOptionsWithMobileEmulation() {
@@ -92,7 +92,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome();
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(not(containsString(CHROME_MOBILE_EMULATION_DEVICE)));
+        BrowserAgentTestUtils.assertBrowserAgent(not(containsString(CHROME_MOBILE_EMULATION_DEVICE)));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class ChromeDriverBuilderTest {
         // so this test is really effective, the chromedriver executable shouldnt be in $PATH
         $.driver().useChrome().withPathToChromeDriver(getChromeDriverExecutablePath());
         // when
-        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl();
+        BrowserAgentTestUtils.openBrowserAgentTestHelperUrl();
         // then
         // no exception is thrown while opening a page
     }
@@ -127,7 +127,7 @@ public class ChromeDriverBuilderTest {
         System.setProperty("webdriver.chrome.driver", getChromeDriverExecutablePath());
         // when
         $.driver().useChrome();
-        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl();
+        BrowserAgentTestUtils.openBrowserAgentTestHelperUrl();
         // then
         // no exception is thrown while opening a page
     }
@@ -137,7 +137,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome().withHeadlessChrome();
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(containsString("HeadlessChrome"));
+        BrowserAgentTestUtils.assertBrowserAgent(containsString("HeadlessChrome"));
     }
 
     @Test
@@ -145,7 +145,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome().autoDriverDownload();
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(containsString("Chrome"));
+        BrowserAgentTestUtils.assertBrowserAgent(containsString("Chrome"));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class ChromeDriverBuilderTest {
         // when
         $.driver().useChrome().autoDriverDownload(x -> x.version("2.32")).headless();
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(containsString("Chrome"));
+        BrowserAgentTestUtils.assertBrowserAgent(containsString("Chrome"));
         // some day, when the version below is too old, this test will fail. Replace the number below with latestVersion - 0.01
         assertEquals("2.32", ChromeDriverManager.getInstance().getDownloadedVersion());
     }

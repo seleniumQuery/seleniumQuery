@@ -16,18 +16,17 @@
 
 package endtoend.browser.driver.builders;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.junit.Assume.assumeTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assume.assumeTrue;
-import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
+import endtoend.browser.util.JsOnOffTestUtils;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class FirefoxDriverBuilderTest {
 
@@ -48,7 +47,7 @@ public class FirefoxDriverBuilderTest {
         // when
         $.driver().useFirefox();
         // then
-        DriverBuilderTestUtils.assertJavaScriptIsOn($.driver().get());
+        JsOnOffTestUtils.assertJavaScriptIsOn($.driver().get());
     }
 
     @Test
@@ -57,7 +56,7 @@ public class FirefoxDriverBuilderTest {
         // when
         $.driver().useFirefox().withoutJavaScript();
         // then
-        DriverBuilderTestUtils.assertJavaScriptIsOff($.driver().get());
+        JsOnOffTestUtils.assertJavaScriptIsOff($.driver().get());
     }
 
     @Test
@@ -79,7 +78,7 @@ public class FirefoxDriverBuilderTest {
         // when
         $.driver().useFirefox().autoDriverDownload();
         // then
-        DriverBuilderTestUtils.assertJavaScriptIsOn($.driver().get());
+        JsOnOffTestUtils.assertJavaScriptIsOn($.driver().get());
     }
 
 }

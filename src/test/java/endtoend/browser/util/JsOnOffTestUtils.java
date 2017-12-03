@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.browser.driver.builders;
+package endtoend.browser.util;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
@@ -23,15 +23,15 @@ import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-class DriverBuilderTestUtils {
+public class JsOnOffTestUtils {
 
-    static void assertJavaScriptIsOn(WebDriver driver) {
-        driver.get(classNameToTestFileUrl(DriverBuilderTestUtils.class));
+    public static void assertJavaScriptIsOn(WebDriver driver) {
+        driver.get(classNameToTestFileUrl(JsOnOffTestUtils.class));
         assertThat(driver.findElements(By.tagName("div")), hasSize(1 + 3));
     }
 
-    static void assertJavaScriptIsOff(WebDriver driver) {
-        driver.get(classNameToTestFileUrl(DriverBuilderTestUtils.class));
+    public static void assertJavaScriptIsOff(WebDriver driver) {
+        driver.get(classNameToTestFileUrl(JsOnOffTestUtils.class));
         assertThat(driver.findElements(By.tagName("div")), hasSize(1));
     }
 

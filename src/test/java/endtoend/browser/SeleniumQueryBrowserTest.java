@@ -20,7 +20,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import endtoend.browser.driver.builders.HtmlUnitDriverBuilderTest;
-import endtoend.helpers.BrowserAgentTestHelper;
+import endtoend.browser.util.BrowserAgentTestUtils;
 import io.github.seleniumquery.SeleniumQueryBrowser;
 
 public class SeleniumQueryBrowserTest {
@@ -33,16 +33,16 @@ public class SeleniumQueryBrowserTest {
         // given
         chrome.$.driver().useHtmlUnit().emulatingChrome();
         // when
-        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl(chrome);
+        BrowserAgentTestUtils.openBrowserAgentTestHelperUrl(chrome);
 
         // given
         firefox.$.driver().useHtmlUnit().emulatingFirefox();
         // when
-        BrowserAgentTestHelper.openBrowserAgentTestHelperUrl(firefox);
+        BrowserAgentTestUtils.openBrowserAgentTestHelperUrl(firefox);
 
         // then
-        BrowserAgentTestHelper.assertBrowserAgent(chrome, HtmlUnitDriverBuilderTest.HTMLUNIT_CHROME_AGENT_STRING);
-        BrowserAgentTestHelper.assertBrowserAgent(firefox, HtmlUnitDriverBuilderTest.HTMLUNIT_FF_AGENT_STRING);
+        BrowserAgentTestUtils.assertBrowserAgent(chrome, HtmlUnitDriverBuilderTest.HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestUtils.assertBrowserAgent(firefox, HtmlUnitDriverBuilderTest.HTMLUNIT_FF_AGENT_STRING);
     }
 
     @After

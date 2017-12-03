@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.helpers;
+package endtoend.browser.util;
 
 import static org.junit.Assert.assertThat;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
@@ -25,9 +25,9 @@ import org.hamcrest.Matchers;
 import io.github.seleniumquery.SeleniumQuery;
 import io.github.seleniumquery.SeleniumQueryBrowser;
 
-public class BrowserAgentTestHelper {
+public class BrowserAgentTestUtils {
 
-    private static final String AGENT_TEST_URL = classNameToTestFileUrl(BrowserAgentTestHelper.class);
+    private static final String AGENT_TEST_URL = classNameToTestFileUrl(BrowserAgentTestUtils.class);
 
     public static void assertBrowserAgent(String agentString) {
         openBrowserAgentTestHelperUrl();
@@ -44,7 +44,7 @@ public class BrowserAgentTestHelper {
     }
 
     public static void openBrowserAgentTestHelperUrl(SeleniumQueryBrowser browser) {
-        browser.$.url(BrowserAgentTestHelper.AGENT_TEST_URL);
+        browser.$.url(BrowserAgentTestUtils.AGENT_TEST_URL);
     }
 
     public static void assertBrowserAgent(SeleniumQueryBrowser browser, String agentString) {
