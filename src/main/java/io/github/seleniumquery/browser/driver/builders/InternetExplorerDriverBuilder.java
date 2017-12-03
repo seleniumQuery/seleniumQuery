@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,20 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
-import io.github.seleniumquery.SeleniumQueryException;
-import io.github.seleniumquery.browser.driver.DriverBuilder;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils
+    .customPathWasProvidedAndExecutableExistsThere;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.executableExistsInClasspath;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPath;
+import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
+import static java.lang.String.format;
+
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.*;
-import static java.lang.String.format;
+import io.github.seleniumquery.SeleniumQueryException;
+import io.github.seleniumquery.browser.driver.DriverBuilder;
 
 /**
  * Builds {@link InternetExplorerDriver} instances for SeleniumQueryDriver.
@@ -67,6 +72,7 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
 
     @Override
     protected WebDriver build() {
+        autoDownloadDriverIfAskedFor(InternetExplorerDriver.class);
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.chrome());
 
         configureIEServerExecutablePath();

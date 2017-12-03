@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,6 @@
 
 package endtoend.browser.driver.builders;
 
-import io.github.seleniumquery.browser.driver.builders.InternetExplorerDriverBuilder;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static io.github.seleniumquery.browser.driver.builders.DriverInstantiationUtils.getFullPathForFileInClasspath;
 import static org.hamcrest.CoreMatchers.is;
@@ -30,11 +23,21 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import endtoend.browser.util.DriverBuilderTestUtil;
+import io.github.seleniumquery.browser.driver.builders.InternetExplorerDriverBuilder;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+
 public class InternetExplorerDriverBuilderTest {
 
     @Before
     public void setUp() {
-        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunIE());
+        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return IE.",
+            SetUpAndTearDownDriver.driverToRunTestsIn.canRunIE());
     }
 
     @After
@@ -65,7 +68,7 @@ public class InternetExplorerDriverBuilderTest {
         // given
         $.driver().useInternetExplorer().withPathToIEDriverServerExe("src/test/resources/IEDriverServer.exe");
         // when
-        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
+        DriverBuilderTestUtil.openAnyUrl();
         // then
         // no exception is thrown while opening a page
     }
@@ -77,7 +80,17 @@ public class InternetExplorerDriverBuilderTest {
         System.setProperty("webdriver.ie.driver", getFullPathForFileInClasspath("IEDriverServer.exe"));
         // when
         $.driver().useInternetExplorer();
-        $.url(classNameToTestFileUrl(ChromeDriverBuilderTest.class));
+        DriverBuilderTestUtil.openAnyUrl();
+        // then
+        // no exception is thrown while opening a page
+    }
+
+    @Test
+    public void autoDriverDownload() {
+        // given
+        $.driver().useInternetExplorer().autoDriverDownload();
+        // when
+        DriverBuilderTestUtil.openAnyUrl();
         // then
         // no exception is thrown while opening a page
     }
