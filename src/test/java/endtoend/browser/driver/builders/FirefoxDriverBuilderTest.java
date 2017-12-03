@@ -25,6 +25,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
+import endtoend.browser.util.DriverBuilderTestUtil;
 import endtoend.browser.util.JsOnOffTestUtils;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
@@ -69,7 +70,7 @@ public class FirefoxDriverBuilderTest {
         $.driver().useFirefox().withProfile(profile);
         // then
         // assert that preference was set
-        // the code works, but I can't find a way to test it yet
+        // the code works, but I can't find a way to verify it yet
     }
 
     @Test
@@ -78,7 +79,7 @@ public class FirefoxDriverBuilderTest {
         // when
         $.driver().useFirefox().autoDriverDownload();
         // then
-        JsOnOffTestUtils.assertJavaScriptIsOn($.driver().get());
+        DriverBuilderTestUtil.openAnyUrl();
     }
 
 }

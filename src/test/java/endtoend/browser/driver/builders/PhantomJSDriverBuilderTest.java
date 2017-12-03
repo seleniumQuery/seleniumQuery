@@ -31,6 +31,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import endtoend.browser.util.BrowserAgentTestUtils;
+import endtoend.browser.util.DriverBuilderTestUtil;
 import io.github.seleniumquery.browser.driver.builders.PhantomJSDriverBuilder;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
@@ -75,7 +76,7 @@ public class PhantomJSDriverBuilderTest {
         // given
         $.driver().usePhantomJS().withPathToPhantomJS("src/test/resources/phantomjs.exe");
         // when
-        BrowserAgentTestUtils.openBrowserAgentTestHelperUrl();
+        DriverBuilderTestUtil.openAnyUrl();
         // then
         // no exception is thrown while opening a page
     }
@@ -85,7 +86,7 @@ public class PhantomJSDriverBuilderTest {
         // given
         $.driver().usePhantomJS().autoDriverDownload();
         // when
-        BrowserAgentTestUtils.openBrowserAgentTestHelperUrl();
+        DriverBuilderTestUtil.openAnyUrl();
         // then
         // no exception is thrown while opening a page
     }
