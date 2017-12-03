@@ -15,8 +15,15 @@
  */
 package io.github.seleniumquery.browser.driver;
 
+import java.util.function.Consumer;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import io.github.bonigarcia.wdm.BrowserManager;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
  * Builds {@link WebDriver} instances for SeleniumQueryDriver.
@@ -26,9 +33,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 public abstract class DriverBuilder<T extends DriverBuilder<T>> {
 
+    private static final Log LOGGER = LogFactory.getLog(DriverBuilder.class);
+
     private DesiredCapabilities desiredCapabilities;
 
     private boolean capabilitiesManuallySet = false;
+
+    private Consumer<BrowserManager> autoDriverDownloadConfigurer;
 
     @SuppressWarnings("unchecked")
     public T withCapabilities(DesiredCapabilities desiredCapabilities) {
@@ -69,5 +80,39 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
      * @return A WebDriver instance based on the previous configurations.
      */
     protected abstract WebDriver build();
+
+    protected void autoDownloadDriverIfAskedFor(Class<? extends WebDriver> driverClass) {
+        if (this.autoDriverDownloadConfigurer != null) {
+            BrowserManager browserManager = WebDriverManager.getInstance(driverClass);
+            this.autoDriverDownloadConfigurer.accept(browserManager);
+            browserManager.setup();
+        }
+    }
+
+    /**
+     * Automatically downloads and configures the chromedriver.exe executable using
+     * <a href="https://github.com/bonigarcia/webdrivermanager">webdrivermanager</a>.
+     * @return A self reference, allowing further configuration of the driver builder.
+     * @since 0.18.0
+     */
+    public T autoDriverDownload() {
+        return this.autoDriverDownload(x -> {});
+    }
+
+    /**
+     * Automatically downloads and configures the chromedriver.exe executable using
+     * <a href="https://github.com/bonigarcia/webdrivermanager">webdrivermanager</a>.
+     * @param configurer A function that allows <a href="https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api">additional configuration</a> of the {@link BrowserManager}.
+     * @return A self reference, allowing further configuration of the driver builder.
+     * @since 0.18.0
+     */
+    @SuppressWarnings("unchecked")
+    public T autoDriverDownload(Consumer<BrowserManager> configurer) {
+        if (this.autoDriverDownloadConfigurer != null) {
+            LOGGER.warn(".autoDriverDownload() has already been called. Ignoring all calls but the last.");
+        }
+        this.autoDriverDownloadConfigurer = configurer;
+        return (T) this;
+    }
 
 }

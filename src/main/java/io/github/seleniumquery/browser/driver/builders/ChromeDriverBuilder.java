@@ -151,14 +151,6 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
         }
     }
 
-    private void autoDownloadDriverIfAskedFor(Class<? extends WebDriver> driverClass) {
-        if (this.autoDriverDownloadConfigurer != null) {
-            BrowserManager browserManager = WebDriverManager.getInstance(driverClass);
-            this.autoDriverDownloadConfigurer.accept(browserManager);
-            browserManager.setup();
-        }
-    }
-
     private WebDriver buildUsingCapabilities() {
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.chrome());
         overwriteCapabilityIfValueNotNull(capabilities, ChromeOptions.CAPABILITY, this.chromeOptions);
@@ -212,33 +204,6 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
                     CHROMEDRIVER_EXECUTABLE_WINDOWS, CHROMEDRIVER_EXECUTABLE_LINUX, CHROME_DRIVER_EXECUTABLE_SYSTEM_PROPERTY, EXCEPTION_MESSAGE
                 ), e);
         }
-    }
-
-    private Consumer<BrowserManager> autoDriverDownloadConfigurer;
-
-    /**
-     * Automatically downloads and configures the chromedriver.exe executable using
-     * <a href="https://github.com/bonigarcia/webdrivermanager">webdrivermanager</a>.
-     * @return A self reference, allowing further configuration of the driver builder.
-     * @since 0.18.0
-     */
-    public ChromeDriverBuilder autoDriverDownload() {
-        return this.autoDriverDownload(x -> {});
-    }
-
-    /**
-     * Automatically downloads and configures the chromedriver.exe executable using
-     * <a href="https://github.com/bonigarcia/webdrivermanager">webdrivermanager</a>.
-     * @param configurer A function that allows <a href="https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api">additional configuration</a> of the {@link BrowserManager}.
-     * @return A self reference, allowing further configuration of the driver builder.
-     * @since 0.18.0
-     */
-    public ChromeDriverBuilder autoDriverDownload(Consumer<BrowserManager> configurer) {
-        if (this.autoDriverDownloadConfigurer != null) {
-            LOGGER.warn(".autoDriverDownload() has already been called. Ignoring all calls but the last.");
-        }
-        this.autoDriverDownloadConfigurer = configurer;
-        return this;
     }
 
 }
