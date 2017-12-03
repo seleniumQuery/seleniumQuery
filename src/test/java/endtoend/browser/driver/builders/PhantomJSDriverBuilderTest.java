@@ -39,7 +39,7 @@ public class PhantomJSDriverBuilderTest {
 
     @Before
     public void setUp() {
-        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return PhantomJS.",
+        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return DriverToRunTestsIn.PHANTOMJS.",
             SetUpAndTearDownDriver.driverToRunTestsIn.canRunPhantomJS());
     }
 

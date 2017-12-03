@@ -36,7 +36,8 @@ public class EdgeDriverBuilderTest {
 
     @Before
     public void setUp() {
-        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunEdge());
+        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return DriverToRunTestsIn.EDGE.",
+            SetUpAndTearDownDriver.driverToRunTestsIn.canRunEdge());
     }
 
     @After

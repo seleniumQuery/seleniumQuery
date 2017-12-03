@@ -45,7 +45,8 @@ public class ChromeDriverBuilderTest {
 
     @Before
     public void setUp() {
-        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunChrome());
+        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return DriverToRunTestsIn.CHROME.",
+            SetUpAndTearDownDriver.driverToRunTestsIn.canRunChrome());
     }
 
     @After

@@ -36,7 +36,7 @@ public class InternetExplorerDriverBuilderTest {
 
     @Before
     public void setUp() {
-        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return IE.",
+        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return DriverToRunTestsIn.IE.",
             SetUpAndTearDownDriver.driverToRunTestsIn.canRunIE());
     }
 

@@ -33,7 +33,7 @@ public class FirefoxDriverBuilderTest {
 
     @Before
     public void setUp() {
-        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return Firefox.",
+        assumeTrue("To run the tests in this class, EndToEndTestConfig#whatDriversShouldTestsRun() should return DriverToRunTestsIn.FIREFOX.",
             SetUpAndTearDownDriver.driverToRunTestsIn.canRunFirefox());
     }
 
