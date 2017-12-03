@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery;
 
+import org.hamcrest.Matcher;
+
 /**
  * Functions used in the waitUntil().
  *
@@ -95,5 +97,23 @@ public interface SeleniumQueryWaitEvaluateUntil<T> {
      * @since 0.9.0
      */
     SeleniumQueryWaitEvaluateUntil<T> not();
+
+    /**
+     * <p>Tests if the result of the preceding function satisfies the condition specified by
+     * <code>hamcrestMatcher</code>. Example:
+     *
+     * <pre>
+     *   $("#myDiv").waitUntil().text().that(Matchers.containsString("John Smith"))
+     * </pre>
+     *
+     * @param hamcrestMatcher an expression, built of {@link Matcher}s, specifying allowed
+     * values
+     * @see org.hamcrest.CoreMatchers
+     * @see org.hamcrest.MatcherAssert
+     *
+     * @return An element that allows chaining of further waiting conditions or calling regular functions.
+     * @since 0.18.0
+     */
+    SeleniumQueryWaitAndOrThen that(Matcher<T> hamcrestMatcher);
 
 }

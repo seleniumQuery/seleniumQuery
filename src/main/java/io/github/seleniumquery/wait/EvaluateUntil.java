@@ -16,10 +16,17 @@
 
 package io.github.seleniumquery.wait;
 
+import org.hamcrest.Matcher;
+
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import io.github.seleniumquery.SeleniumQueryWaitEvaluateUntil;
-import io.github.seleniumquery.wait.evaluators.*;
+import io.github.seleniumquery.wait.evaluators.ContainsEvaluator;
+import io.github.seleniumquery.wait.evaluators.ContainsIgnoreCaseEvaluator;
+import io.github.seleniumquery.wait.evaluators.EqualsEvaluator;
+import io.github.seleniumquery.wait.evaluators.Evaluator;
+import io.github.seleniumquery.wait.evaluators.MatchesEvaluator;
+import io.github.seleniumquery.wait.evaluators.ThatEvaluator;
 import io.github.seleniumquery.wait.evaluators.comparison.GreaterThanEvaluator;
 import io.github.seleniumquery.wait.evaluators.comparison.LessThanEvaluator;
 import io.github.seleniumquery.wait.getters.Getter;
@@ -88,5 +95,10 @@ class EvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 	public SeleniumQueryWaitEvaluateUntil<T> not() {
 		return new EvaluateUntil<>(fluentWait, getter, seleniumQueryObject, !this.negated);
 	}
+
+    @Override
+    public SeleniumQueryWaitAndOrThen that(Matcher<T> hamcrestMatcher) {
+        return andOrThen(new ThatEvaluator<>(getter), hamcrestMatcher);
+    }
 
 }
