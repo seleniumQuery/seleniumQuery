@@ -31,7 +31,7 @@ import java.io.PrintWriter;
 
 public class SeleniumQueryTimeoutException extends TimeoutException {
 
-	SeleniumQueryTimeoutException(TimeoutException sourceException, SeleniumQueryObject seleniumQueryObject, String reason) {
+	public SeleniumQueryTimeoutException(TimeoutException sourceException, SeleniumQueryObject seleniumQueryObject, String reason) {
 		super("Timeout while waiting for "+seleniumQueryObject+" "+reason, sourceException);
 
         try {

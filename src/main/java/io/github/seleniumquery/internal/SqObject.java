@@ -31,10 +31,10 @@ import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
 import io.github.seleniumquery.functions.sq.StreamFunction;
-import io.github.seleniumquery.internal.functions.assertthat.FluentAssertThat;
+import io.github.seleniumquery.internal.fluentfunctions.SqFluentFunction;
+import io.github.seleniumquery.internal.fluentfunctions.assertthat.FluentAssertThat;
 import io.github.seleniumquery.utils.ListUtils;
-import io.github.seleniumquery.wait.FluentSqWait;
-import io.github.seleniumquery.wait.SqWaitUntil;
+import io.github.seleniumquery.internal.fluentfunctions.waituntil.FluentWaitUntil;
 
 /**
  * Main implementation of {@link SeleniumQueryObject}.
@@ -77,22 +77,22 @@ class SqObject implements SeleniumQueryObject {
 
 	@Override
     public final SeleniumQueryWaitUntil waitUntil() {
-		return new SqWaitUntil(this, new FluentSqWait());
+		return new SqFluentFunction(this, new FluentWaitUntil());
 	}
 
     @Override
     public SeleniumQueryWaitUntil assertThat() {
-        return new SqWaitUntil(this, new FluentAssertThat());
+        return new SqFluentFunction(this, new FluentAssertThat());
     }
 
     @Override
     public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) {
-		return new SqWaitUntil(this, new FluentSqWait(waitUntilTimeout));
+		return new SqFluentFunction(this, new FluentWaitUntil(waitUntilTimeout));
 	}
 
 	@Override
     public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) {
-		return new SqWaitUntil(this, new FluentSqWait(waitUntilTimeout, waitUntilPollingInterval));
+		return new SqFluentFunction(this, new FluentWaitUntil(waitUntilTimeout, waitUntilPollingInterval));
 	}
 
 	@Override
