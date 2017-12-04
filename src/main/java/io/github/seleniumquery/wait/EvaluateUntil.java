@@ -41,10 +41,10 @@ import io.github.seleniumquery.wait.getters.Getter;
  */
 class EvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 
-	private FluentSqWait fluentWait;
-	protected Getter<T> getter;
-	protected SeleniumQueryObject seleniumQueryObject;
-	private boolean negated;
+	private final FluentSqWait fluentWait;
+	private final Getter<T> getter;
+	private final SeleniumQueryObject seleniumQueryObject;
+	private final boolean negated;
 
 	EvaluateUntil(FluentSqWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
 		this(fluentWait, getter, seleniumQueryObject, false);
@@ -66,7 +66,7 @@ class EvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
         return new AndOrThen(fluentWait.waitUntil(evaluator, value, seleniumQueryObject, this.negated));
     }
 
-	@Override
+    @Override
 	public SeleniumQueryWaitAndOrThen contains(String string) {
         return andOrThen(new ContainsEvaluator(getter), string);
 	}

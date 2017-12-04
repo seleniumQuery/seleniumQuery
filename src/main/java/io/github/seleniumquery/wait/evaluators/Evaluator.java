@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package io.github.seleniumquery.wait.evaluators;
 
-import io.github.seleniumquery.wait.WaitingBehaviorModifier;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
+import io.github.seleniumquery.wait.WaitingBehaviorModifier;
 
 public interface Evaluator<T> {
 
