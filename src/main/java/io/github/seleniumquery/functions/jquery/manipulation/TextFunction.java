@@ -20,32 +20,25 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * $("#selector").text();
- *  
+ *
  * @author acdcjunior
  * @author ricardo-sc
  * @since 0.9.0
  */
 public class TextFunction {
-	
+
 	private TextFunction() {}
-	
+
 	public static String text(SeleniumQueryObject seleniumQueryObject) {
 		return text(seleniumQueryObject.get());
 	}
 
 	public static String text(List<WebElement> webElements) {
-		StringBuilder sb = new StringBuilder();
-		webElements.forEach(element -> {
-			sb.append(element.getText()).append(" ");
-		});
-		if (sb.length() > 0) {
-			// remove the last added " "
-			sb.deleteCharAt(sb.length()-1);
-		}
-		return sb.toString();
+        return webElements.stream().map(WebElement::getText).collect(Collectors.joining(" "));
 	}
 
 }
