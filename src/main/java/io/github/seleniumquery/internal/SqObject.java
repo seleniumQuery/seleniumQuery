@@ -16,6 +16,14 @@
 
 package io.github.seleniumquery.internal;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.SeleniumQueryWaitUntil;
@@ -25,13 +33,6 @@ import io.github.seleniumquery.functions.as.StandardPlugins;
 import io.github.seleniumquery.functions.sq.StreamFunction;
 import io.github.seleniumquery.utils.ListUtils;
 import io.github.seleniumquery.wait.SqWaitUntil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Main implementation of {@link SeleniumQueryObject}.
@@ -77,7 +78,12 @@ class SqObject implements SeleniumQueryObject {
 		return new SqWaitUntil(this);
 	}
 
-	@Override
+    @Override
+    public SeleniumQueryWaitUntil assertThat() {
+        return new SqWaitUntil(this, 0);
+    }
+
+    @Override
     public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) {
 		return new SqWaitUntil(this, waitUntilTimeout);
 	}

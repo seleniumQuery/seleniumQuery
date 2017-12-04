@@ -16,20 +16,21 @@
 
 package testinfrastructure.testdouble.io.github.seleniumquery;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import com.google.common.base.Predicate;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.SeleniumQueryWaitUntil;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import testinfrastructure.testdouble.PseudoTestDoubleException;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Creates a "smart" dummy {@link SeleniumQueryObject}. It's goal is to be a mere placeholder in a test
@@ -45,6 +46,7 @@ public class SeleniumQueryObjectDummy implements SeleniumQueryObject {
     private SeleniumQueryObjectDummy() { }
 
     @Override public SeleniumQueryWaitUntil waitUntil() { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryWaitUntil assertThat() { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) { throw new PseudoTestDoubleException(); }
     @Override public StandardPlugins as() { throw new PseudoTestDoubleException(); }

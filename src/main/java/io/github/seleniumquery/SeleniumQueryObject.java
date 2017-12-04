@@ -16,19 +16,20 @@
 
 package io.github.seleniumquery;
 
-import com.google.common.base.Predicate;
-import io.github.seleniumquery.functions.SeleniumQueryFunctions;
-import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
-import io.github.seleniumquery.functions.as.StandardPlugins;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import com.google.common.base.Predicate;
+import io.github.seleniumquery.functions.SeleniumQueryFunctions;
+import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
+import io.github.seleniumquery.functions.as.StandardPlugins;
 
 /**
  * Represents the <strong>SeleniumQuery Object</strong>: a list of {@link WebElement}s with special methods.
@@ -78,10 +79,18 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	 * version with a time parameter.
 	 *
 	 * @return a {@link SeleniumQueryWaitUntil} object for specifying the wait conditions.
-	 *
 	 * @since 0.9.0
 	 */
 	SeleniumQueryWaitUntil waitUntil();
+
+    /**
+     * <p>Asserts that some property or attribute of the elements in this collection
+     * match some criteria.</p>
+     *
+     * @return a {@link SeleniumQueryWaitUntil} object for specifying the assert conditions.
+     * @since 0.18.0
+     */
+	SeleniumQueryWaitUntil assertThat();
 
 	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning

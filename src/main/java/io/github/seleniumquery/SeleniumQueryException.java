@@ -29,7 +29,7 @@ public class SeleniumQueryException extends RuntimeException {
         super(banner(message), cause);
     }
 
-    private static String banner(String message) {
+    static String banner(String message) {
         return "\n" +
             "################################################################################\n" +
             message + "\n" +
