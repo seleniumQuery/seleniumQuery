@@ -1,44 +1,3 @@
-apply plugin: "java"
-
-group = 'io.github.seleniumquery'
-version = '0.17.0-SNAPSHOT'
-
-description = "seleniumQuery"
-
-ext {
-    seleniumVersion = "3.8.0"
-}
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-tasks.withType(JavaCompile) {
-	options.encoding = 'UTF-8'
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile('net.sourceforge.cssparser:cssparser:0.9.22')
-    compile('org.apache.commons:commons-text:1.1')
-    compile('org.apache.commons:commons-lang3:3.6')
-    compile('org.seleniumhq.selenium:htmlunit-driver:2.27')
-    compile("org.seleniumhq.selenium:selenium-java:${seleniumVersion}")
-    compile("org.seleniumhq.selenium:selenium-remote-driver:${seleniumVersion}")
-    compile('com.codeborne:phantomjsdriver:1.4.1') {
-        exclude(module: 'selenium-java')
-        exclude(module: 'selenium-remote-driver')
-    }
-    compile('commons-logging:commons-logging:1.2')
-    compile('org.unbescape:unbescape:1.1.4.RELEASE')
-
-    testCompile('junit:junit:4.12') {
-        exclude(module: 'hamcrest-core')
-    }
-    testCompile('org.hamcrest:hamcrest-junit:2.0.0.0')
-}
-
 /*
  * Copyright (c) 2017 seleniumQuery authors
  *
@@ -54,6 +13,56 @@ dependencies {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+apply plugin: "java"
+
+group = 'io.github.seleniumquery'
+version = '0.18.0-SNAPSHOT'
+
+description = "seleniumQuery"
+
+ext {
+    htmlUnitVersion = "2.27"
+    seleniumVersion = "3.8.1"
+    phantomJsDriverVersion = "1.4.3"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('net.sourceforge.cssparser:cssparser:0.9.23')
+    compile('org.apache.commons:commons-text:1.1')
+    compile('org.apache.commons:commons-lang3:3.6')
+    compile("org.seleniumhq.selenium:htmlunit-driver:${htmlUnitVersion}")
+    compile("org.seleniumhq.selenium:selenium-api:${seleniumVersion}")
+    compile("org.seleniumhq.selenium:selenium-java:${seleniumVersion}")
+    compile("org.seleniumhq.selenium:selenium-remote-driver:${seleniumVersion}")
+    compile("com.codeborne:phantomjsdriver:${phantomJsDriverVersion}") {
+        exclude(module: 'selenium-java')
+        exclude(module: 'selenium-remote-driver')
+    }
+    compile('commons-logging:commons-logging:1.2')
+    compile('org.unbescape:unbescape:1.1.5.RELEASE')
+
+    // used by driverbuilders in the .autoDriverDownload() methods
+    compile("io.github.bonigarcia:webdrivermanager:2.0.0")
+
+    // used by .waitUntil().text().that(<hamcrest matcher>)
+    compile("org.hamcrest:hamcrest-library:1.3")
+
+    testCompile('junit:junit:4.12') {
+        exclude(module: 'hamcrest-core')
+    }
+    testCompile('org.hamcrest:hamcrest-junit:2.0.0.0')
+}
 
 // https://docs.gradle.org/current/userguide/jacoco_plugin.html
 apply plugin: "jacoco"
