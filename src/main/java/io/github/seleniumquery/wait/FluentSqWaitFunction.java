@@ -24,7 +24,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static io.github.seleniumquery.wait.WaitingBehaviorModifier.USUAL_BEHAVIOR;
+import static io.github.seleniumquery.wait.FluentBehaviorModifier.REGULAR_BEHAVIOR;
 
 /**
  * @author acdcjunior
@@ -36,21 +36,22 @@ class FluentSqWaitFunction<T> implements Function<By, List<WebElement>> {
     private final T value;
     private final Evaluator<T> evaluator;
     private final By by;
-    private final WaitingBehaviorModifier waitingBehaviorModifier;
+    private final FluentBehaviorModifier fluentBehaviorModifier;
 
-    FluentSqWaitFunction(WebDriver driver, T value, Evaluator<T> evaluator, By by, WaitingBehaviorModifier waitingBehaviorModifier) {
+    FluentSqWaitFunction(WebDriver driver, T value, Evaluator<T> evaluator, By by, FluentBehaviorModifier fluentBehaviorModifier) {
         this.driver = driver;
         this.value = value;
         this.evaluator = evaluator;
         this.by = by;
-        this.waitingBehaviorModifier = waitingBehaviorModifier;
+        this.fluentBehaviorModifier = fluentBehaviorModifier;
     }
 
     @Override
     public List<WebElement> apply(By selector) {
         List<WebElement> elements = driver.findElements(by);
         final boolean evaluate = evaluator.evaluate(driver, elements, value);
-        if (waitingBehaviorModifier == USUAL_BEHAVIOR) {
+        // TODO use function from fluentBehaviorModifier instead of if
+        if (fluentBehaviorModifier == REGULAR_BEHAVIOR) {
             if (!evaluate) {
                 return null;
             }

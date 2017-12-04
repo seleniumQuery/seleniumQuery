@@ -28,16 +28,18 @@ import io.github.seleniumquery.SeleniumQueryWaitUntil;
  * @since 0.9.0
  */
 class AndOrThen implements SeleniumQueryWaitAndOrThen {
-	
-	private SeleniumQueryObject seleniumQueryObject;
-	
-	AndOrThen(SeleniumQueryObject seleniumQueryObject) {
+
+	private final SeleniumQueryObject seleniumQueryObject;
+    private final FluentFunction fluentFunction;
+
+    AndOrThen(SeleniumQueryObject seleniumQueryObject, FluentFunction fluentFunction) {
 		this.seleniumQueryObject = seleniumQueryObject;
-	}
+        this.fluentFunction = fluentFunction;
+    }
 
 	@Override
 	public SeleniumQueryWaitUntil and() {
-		return new SqWaitUntil(this.seleniumQueryObject);
+		return new SqWaitUntil(this.seleniumQueryObject, this.fluentFunction);
 	}
 
 	@Override

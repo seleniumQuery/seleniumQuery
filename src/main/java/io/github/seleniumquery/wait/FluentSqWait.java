@@ -17,6 +17,7 @@
 package io.github.seleniumquery.wait;
 
 import com.google.common.base.Function;
+import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
 import io.github.seleniumquery.internal.SqObjectFactory;
@@ -31,26 +32,53 @@ import java.util.concurrent.TimeUnit;
  * @author acdcjunior
  * @since 0.9.0
  */
-class FluentSqWait {
-	
+public class FluentSqWait implements FluentFunction {
+
 	private long waitUntilTimeout;
 	private long waitUntilPollingInterval;
 
-	FluentSqWait(long waitUntilTimeout, long waitUntilPollingInterval) {
+    /**
+     * Creates a waitUntil object for the given seleniumQueryObject, with timeout and polling interval
+     * as defined in the config files.
+     * @since 0.9.0
+     */
+    public FluentSqWait() {
+        this(SeleniumQueryConfig.getWaitUntilTimeout(), SeleniumQueryConfig.getWaitUntilPollingInterval());
+	}
+
+    /**
+     * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval
+     * as defined in the config files.
+     * @since 0.9.0
+     */
+    public FluentSqWait(long waitUntilTimeout) {
+        this(waitUntilTimeout, SeleniumQueryConfig.getWaitUntilPollingInterval());
+	}
+
+    /**
+     * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval.
+     * @since 0.9.0
+     */
+    public FluentSqWait(long waitUntilTimeout, long waitUntilPollingInterval) {
 		this.waitUntilTimeout = waitUntilTimeout;
 		this.waitUntilPollingInterval = waitUntilPollingInterval;
 	}
 
-	public <T> SeleniumQueryObject waitUntil(final Evaluator<T> evaluator, final T value,
-																	SeleniumQueryObject seleniumQueryObject, final boolean negated) {
-        WaitingBehaviorModifier waitingBehaviorModifier = WaitingBehaviorModifier.fromBoolean(negated);
+	@Override
+    public <T> SeleniumQueryObject apply(Evaluator<T> evaluator, T value, SeleniumQueryObject sqo, FluentBehaviorModifier negated) {
+        return this.waitUntil(evaluator, value, sqo, negated);
+    }
+
+    private <T> SeleniumQueryObject waitUntil(final Evaluator<T> evaluator, final T value,
+                                              SeleniumQueryObject seleniumQueryObject,
+                                              FluentBehaviorModifier fluentBehaviorModifier) {
 		final WebDriver driver = seleniumQueryObject.getWebDriver();
 		final By by = seleniumQueryObject.getBy();
-        FluentSqWaitFunction<T> fluentSqWaitFunction = new FluentSqWaitFunction<>(driver, value, evaluator, by, waitingBehaviorModifier);
-        List<WebElement> elements = fluentWait(seleniumQueryObject, fluentSqWaitFunction, "to .waitUntil()."+evaluator.stringFor(value, waitingBehaviorModifier));
+        FluentSqWaitFunction<T> fluentSqWaitFunction = new FluentSqWaitFunction<>(driver, value, evaluator, by, fluentBehaviorModifier);
+        List<WebElement> elements = fluentWait(seleniumQueryObject, fluentSqWaitFunction, "to .waitUntil()."+evaluator.stringFor(value, fluentBehaviorModifier));
 		return SqObjectFactory.instance().create(
 				seleniumQueryObject.getWebDriver(),
-                new SeleniumQueryInvalidBy(seleniumQueryObject, ".waitUntil()." + evaluator.stringFor(value, waitingBehaviorModifier)),
+                new SeleniumQueryInvalidBy(seleniumQueryObject, ".waitUntil()." + evaluator.stringFor(value, fluentBehaviorModifier)),
                 elements, seleniumQueryObject);
 	}
 
@@ -69,6 +97,6 @@ class FluentSqWait {
 			throw new SeleniumQueryTimeoutException(sourceException, seleniumQueryObject, reason);
 		}
 	}
-	
+
 }
 

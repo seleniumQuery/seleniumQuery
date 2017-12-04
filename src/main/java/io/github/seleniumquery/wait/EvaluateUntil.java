@@ -41,20 +41,21 @@ import io.github.seleniumquery.wait.getters.Getter;
  */
 class EvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 
-	private final FluentSqWait fluentWait;
+	private final FluentFunction fluentFunction;
 	private final Getter<T> getter;
 	private final SeleniumQueryObject seleniumQueryObject;
-	private final boolean negated;
+    private final FluentBehaviorModifier fluentBehaviorModifier;
 
-	EvaluateUntil(FluentSqWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
-		this(fluentWait, getter, seleniumQueryObject, false);
+    EvaluateUntil(FluentFunction fluentFunction, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
+        this(fluentFunction, getter, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR);
 	}
 
-	private EvaluateUntil(FluentSqWait fluentWait, Getter<T> getter, SeleniumQueryObject seleniumQueryObject, boolean negated) {
-		this.fluentWait = fluentWait;
+	private EvaluateUntil(FluentFunction fluentFunction, Getter<T> getter, SeleniumQueryObject seleniumQueryObject,
+                          FluentBehaviorModifier fluentBehaviorModifier) {
+		this.fluentFunction = fluentFunction;
 		this.getter = getter;
 		this.seleniumQueryObject = seleniumQueryObject;
-		this.negated = negated;
+		this.fluentBehaviorModifier = fluentBehaviorModifier;
 	}
 
 	@Override
@@ -63,7 +64,7 @@ class EvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 	}
 
     private <V> AndOrThen andOrThen(Evaluator<V> evaluator, V value) {
-        return new AndOrThen(fluentWait.waitUntil(evaluator, value, seleniumQueryObject, this.negated));
+        return new AndOrThen(fluentFunction.apply(evaluator, value, seleniumQueryObject, this.fluentBehaviorModifier), this.fluentFunction);
     }
 
     @Override
@@ -93,7 +94,7 @@ class EvaluateUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<T> not() {
-		return new EvaluateUntil<>(fluentWait, getter, seleniumQueryObject, !this.negated);
+		return new EvaluateUntil<>(fluentFunction, getter, seleniumQueryObject, this.fluentBehaviorModifier.negate());
 	}
 
     @Override

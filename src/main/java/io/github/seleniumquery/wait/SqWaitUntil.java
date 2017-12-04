@@ -16,7 +16,6 @@
 
 package io.github.seleniumquery.wait;
 
-import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import io.github.seleniumquery.SeleniumQueryWaitEvaluateUntil;
@@ -30,79 +29,59 @@ import io.github.seleniumquery.wait.getters.*;
  * @since 0.9.0
  */
 public class SqWaitUntil implements io.github.seleniumquery.SeleniumQueryWaitUntil {
-	
+
 	private SeleniumQueryObject seleniumQueryObject;
-	
-	private FluentSqWait fluentWait;
-	
+
+	private FluentFunction fluentFunction;
+
 	/**
-	 * Creates a waitUntil object for the given seleniumQueryObject, with timeout and polling interval
-	 * as defined in the config files.
-	 * @param seleniumQueryObject The object to wait for.
-	 * @since 0.9.0
-	 */
-	public SqWaitUntil(SeleniumQueryObject seleniumQueryObject) {
-		this(seleniumQueryObject, SeleniumQueryConfig.getWaitUntilTimeout(), SeleniumQueryConfig.getWaitUntilPollingInterval());
-	}
-	
-	/**
-	 * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval
-	 * as defined in the config files.
-	 * @param seleniumQueryObject The object to wait for.
-	 * @param waitUntilTimeout Time, in ms, to wait.
-	 * @since 0.9.0
-     */
-	public SqWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout) {
-		this(seleniumQueryObject, waitUntilTimeout, SeleniumQueryConfig.getWaitUntilPollingInterval());
-	}
-	
-	/**
-	 * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval.
+	 * Creates a waitUntil object for the given seleniumQueryObject, with the given fluent function.
 	 *
 	 * @param seleniumQueryObject The object to wait for.
-	 * @param waitUntilTimeout Time, in ms, to wait.
-	 * @param waitUntilPollingInterval Interval, in ms, to poll the object.
-	 * @since 0.9.0
+	 * @param fluentFunction The fluent function to be evaluated.
+     * @since 0.9.0
      */
-	public SqWaitUntil(SeleniumQueryObject seleniumQueryObject, long waitUntilTimeout, long waitUntilPollingInterval) {
+	public SqWaitUntil(SeleniumQueryObject seleniumQueryObject, FluentFunction fluentFunction) {
 		this.seleniumQueryObject = seleniumQueryObject;
-		this.fluentWait = new FluentSqWait(waitUntilTimeout, waitUntilPollingInterval);
+		this.fluentFunction = fluentFunction;
 	}
-	
+
 	@Override
 	public SeleniumQueryWaitAndOrThen is(String selector) {
-		SeleniumQueryObject seleniumQueryObjectAfterWait = this.fluentWait.waitUntil(IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, false);
-		return new AndOrThen(seleniumQueryObjectAfterWait);
+        SeleniumQueryObject sqoAfter = this.fluentFunction.apply(
+            IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR
+        );
+		return new AndOrThen(sqoAfter, this.fluentFunction);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<String> val() {
-		return new EvaluateUntil<>(this.fluentWait, ValGetter.VAL_GETTER, seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentFunction, ValGetter.VAL_GETTER, seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<String> text() {
-		return new EvaluateUntil<>(this.fluentWait, TextGetter.TEXT_GETTER, seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentFunction, TextGetter.TEXT_GETTER, seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<String> attr(String attributeName) {
-		return new EvaluateUntil<>(this.fluentWait, new AttrGetter(attributeName), seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentFunction, new AttrGetter(attributeName), seleniumQueryObject);
 	}
 
 	@Override
 	public <T> SeleniumQueryWaitEvaluateUntil<T> prop(String propertyName) {
-		return new EvaluateUntil<>(this.fluentWait, new PropGetter<T>(propertyName), seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentFunction, new PropGetter<T>(propertyName), seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<String> html() {
-		return new EvaluateUntil<>(this.fluentWait, HtmlGetter.HTML_GETTER, seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentFunction, HtmlGetter.HTML_GETTER, seleniumQueryObject);
 	}
 
 	@Override
 	public SeleniumQueryWaitEvaluateUntil<Integer> size() {
-		return new EvaluateUntil<>(this.fluentWait, SizeGetter.SIZE_GETTER, seleniumQueryObject);
+		return new EvaluateUntil<>(this.fluentFunction, SizeGetter.SIZE_GETTER, seleniumQueryObject);
 	}
-	
+
 }

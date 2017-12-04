@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 seleniumQuery authors
+ * Copyright (c) 2017 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,11 @@
 
 package io.github.seleniumquery.wait;
 
-public enum WaitingBehaviorModifier {
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.wait.evaluators.Evaluator;
 
-    USUAL_BEHAVIOR(""),
-    NEGATED_BEHAVIOR(".not()");
+public interface FluentFunction {
 
-    private final String toString;
-
-    WaitingBehaviorModifier(String toString) {
-        this.toString = toString;
-    }
-
-    public static WaitingBehaviorModifier fromBoolean(boolean negated) {
-        if (negated) {
-            return NEGATED_BEHAVIOR;
-        }
-        return USUAL_BEHAVIOR;
-    }
-
-    @Override
-    public String toString() {
-        return this.toString;
-    }
+    <T> SeleniumQueryObject apply(Evaluator<T> evaluator, T value, SeleniumQueryObject sqo, FluentBehaviorModifier fluentBehaviorModifier);
 
 }

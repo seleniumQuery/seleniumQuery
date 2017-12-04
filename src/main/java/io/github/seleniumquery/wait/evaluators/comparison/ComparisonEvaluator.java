@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.wait.evaluators.comparison;
 
-import io.github.seleniumquery.wait.WaitingBehaviorModifier;
+import io.github.seleniumquery.wait.FluentBehaviorModifier;
 import io.github.seleniumquery.wait.evaluators.Evaluator;
 import io.github.seleniumquery.wait.getters.Getter;
 import org.apache.commons.logging.Log;
@@ -34,7 +34,8 @@ import java.util.List;
  * @since 0.13.0
  */
 abstract class ComparisonEvaluator implements Evaluator<Number> {
-	protected Getter<?> getter;
+
+	private Getter<?> getter;
 
     private static final Log LOGGER = LogFactory.getLog(ComparisonEvaluator.class);
 
@@ -60,8 +61,8 @@ abstract class ComparisonEvaluator implements Evaluator<Number> {
 	protected abstract boolean compare(BigDecimal elementValueAsNumber, BigDecimal numberToCompare);
 
 	@Override
-    public String stringFor(Number valueToCompare, WaitingBehaviorModifier waitingBehaviorModifier) {
-        return String.format("%s.%s(%s)", getter.toString() + waitingBehaviorModifier, getFunctionName(), valueToCompare);
+    public String stringFor(Number valueToCompare, FluentBehaviorModifier fluentBehaviorModifier) {
+        return String.format("%s.%s(%s)", getter.toString() + fluentBehaviorModifier, getFunctionName(), valueToCompare);
     }
 
 	protected abstract String getFunctionName();

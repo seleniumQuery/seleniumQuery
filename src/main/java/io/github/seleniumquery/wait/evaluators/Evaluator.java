@@ -21,12 +21,17 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import io.github.seleniumquery.wait.WaitingBehaviorModifier;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.wait.FluentBehaviorModifier;
 
 public interface Evaluator<T> {
 
+	default boolean evaluate(SeleniumQueryObject seleniumQueryObject, T valueArgument) {
+	    return evaluate(seleniumQueryObject.getWebDriver(), seleniumQueryObject.get(), valueArgument);
+    }
+
 	boolean evaluate(WebDriver driver, List<WebElement> elements, T valueArgument);
 
-	String stringFor(T valueArgument, WaitingBehaviorModifier waitingBehaviorModifier);
+	String stringFor(T valueArgument, FluentBehaviorModifier fluentBehaviorModifier);
 
 }

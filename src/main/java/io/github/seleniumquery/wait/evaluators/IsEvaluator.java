@@ -17,7 +17,7 @@
 package io.github.seleniumquery.wait.evaluators;
 
 import io.github.seleniumquery.functions.jquery.traversing.filtering.IsFunction;
-import io.github.seleniumquery.wait.WaitingBehaviorModifier;
+import io.github.seleniumquery.wait.FluentBehaviorModifier;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -35,7 +35,7 @@ public class IsEvaluator implements Evaluator<String> {
 	}
 
 	@Override
-	public String stringFor(String selector, WaitingBehaviorModifier waitingBehaviorModifier) {
+	public String stringFor(String selector, FluentBehaviorModifier fluentBehaviorModifier) {
 		return "is(\"" + selector + "\")";
 	}
 

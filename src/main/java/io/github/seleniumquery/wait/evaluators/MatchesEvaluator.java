@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.wait.evaluators;
 
-import io.github.seleniumquery.wait.WaitingBehaviorModifier;
+import io.github.seleniumquery.wait.FluentBehaviorModifier;
 import io.github.seleniumquery.wait.getters.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,8 +43,8 @@ public class MatchesEvaluator implements Evaluator<String> {
 	}
 
 	@Override
-	public String stringFor(String regex, WaitingBehaviorModifier waitingBehaviorModifier) {
-		return getter.toString() + waitingBehaviorModifier + ".matches(\"" + regex + "\")";
+	public String stringFor(String regex, FluentBehaviorModifier fluentBehaviorModifier) {
+		return getter.toString() + fluentBehaviorModifier + ".matches(\"" + regex + "\")";
 	}
 
 }

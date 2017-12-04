@@ -16,7 +16,7 @@
 
 package io.github.seleniumquery.wait.evaluators;
 
-import io.github.seleniumquery.wait.WaitingBehaviorModifier;
+import io.github.seleniumquery.wait.FluentBehaviorModifier;
 import io.github.seleniumquery.wait.getters.Getter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,7 +26,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class EqualsEvaluator<T> implements Evaluator<T> {
-	
+
 	private static final Log LOGGER = LogFactory.getLog(EqualsEvaluator.class);
 
 	private Getter<T> getter;
@@ -44,12 +44,12 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
 	}
 
 	@Override
-	public String stringFor(T valueToEqual, WaitingBehaviorModifier waitingBehaviorModifier) {
+	public String stringFor(T valueToEqual, FluentBehaviorModifier fluentBehaviorModifier) {
         String valueAsString = "\"" + valueToEqual + "\"";
         if (valueToEqual instanceof Number) {
             valueAsString = valueToEqual.toString();
         }
-        return getter.toString() + waitingBehaviorModifier + ".isEqualTo(" + valueAsString + ")";
+        return getter.toString() + fluentBehaviorModifier + ".isEqualTo(" + valueAsString + ")";
 	}
 
 }

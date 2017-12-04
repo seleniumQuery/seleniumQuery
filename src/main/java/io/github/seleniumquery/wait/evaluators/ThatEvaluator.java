@@ -24,7 +24,7 @@ import org.hamcrest.Matcher;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import io.github.seleniumquery.wait.WaitingBehaviorModifier;
+import io.github.seleniumquery.wait.FluentBehaviorModifier;
 import io.github.seleniumquery.wait.getters.Getter;
 
 public class ThatEvaluator<T> implements Evaluator<Matcher<T>> {
@@ -47,8 +47,8 @@ public class ThatEvaluator<T> implements Evaluator<Matcher<T>> {
 	}
 
 	@Override
-	public String stringFor(Matcher<T> matcher, WaitingBehaviorModifier waitingBehaviorModifier) {
-        return getter.toString() + waitingBehaviorModifier + ".that(<" + matcher + ">)";
+	public String stringFor(Matcher<T> matcher, FluentBehaviorModifier fluentBehaviorModifier) {
+        return getter.toString() + fluentBehaviorModifier + ".that(<" + matcher + ">)";
 	}
 
 }
