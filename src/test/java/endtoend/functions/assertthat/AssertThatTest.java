@@ -23,6 +23,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
+import io.github.seleniumquery.fluentfunctions.assertthat.SeleniumQueryAssertionError;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class AssertThatTest {
@@ -33,9 +34,10 @@ public class AssertThatTest {
     public void assertThat__text__contains__SUCCESS() {
     	$("#sq").assertThat().text().contains("seleniumQue");
     }
-    @Test
+
+    @Test(expected = SeleniumQueryAssertionError.class)
     public void assertThat__text__contains__FAIL() {
-    	$("#sq").assertThat().text().contains("xxx");
+    	$("#sq").assertThat().text().contains("abc");
     	fail();
     }
 
