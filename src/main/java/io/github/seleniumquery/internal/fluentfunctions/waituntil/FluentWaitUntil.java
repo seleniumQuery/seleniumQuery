@@ -21,11 +21,11 @@ import static io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorMod
 import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.by.SeleniumQueryInvalidBy;
+import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
 import io.github.seleniumquery.internal.SqObjectFactory;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.FluentFunction;
-import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
