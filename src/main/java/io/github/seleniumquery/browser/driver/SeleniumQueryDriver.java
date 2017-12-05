@@ -138,9 +138,9 @@ public class SeleniumQueryDriver {
      * <br><br>
      * You can ask SeleniumQuery to automatically download and configure <code>geckodriver.exe</code> using:
      *
-     * <strong><pre>
+     * <pre style="font-weight: bold">
      * $.driver().useFirefox().autoDriverDownload();
-     * </pre></strong>
+     * </pre>
      *
      * Or you can download and configure it manually from the
      * <a href="https://github.com/mozilla/geckodriver">Geckodriver page</a>.
@@ -161,9 +161,9 @@ public class SeleniumQueryDriver {
      * <br><br>
      * You can ask SeleniumQuery to automatically download and configure <code>chromedriver.exe</code> using:
      *
-     * <strong><pre>
+     * <pre style="font-weight: bold">
      * $.driver().useChrome().autoDriverDownload();
-     * </pre></strong>
+     * </pre>
      *
      * Or you can configure it manually. It is a file usually named <code>chromedriver.exe</code> (windows) or <code>chromedriver</code> (linux)
      * and its latest version can be downloaded from
@@ -196,9 +196,9 @@ public class SeleniumQueryDriver {
      * <br><br>
      * You can ask SeleniumQuery to automatically download and configure <code>IEDriverServer.exe</code> using:
      *
-     * <strong><pre>
+     * <pre style="font-weight: bold">
      * $.driver().useInternetExplorer().autoDriverDownload();
-     * </pre></strong>
+     * </pre>
      *
      * Or you can configure it manually. It is a file usually named <code>IEDriverServer.exe</code> and its latest
      * version can be downloaded from
@@ -230,9 +230,9 @@ public class SeleniumQueryDriver {
      * <br><br>
      * You can ask SeleniumQuery to automatically download and configure <code>phantomjs.exe</code> using:
      *
-     * <strong><pre>
+     * <pre style="font-weight: bold">
      * $.driver().usePhantomJS().autoDriverDownload();
-     * </pre></strong>
+     * </pre>
      *
      * Or you can configure it manually. It is a file usually named <code>phantomjs.exe</code> (windows) or <code>phantomjs</code> (linux)
      * and its latest version can be downloaded from
@@ -262,9 +262,9 @@ public class SeleniumQueryDriver {
      * <br><br>
      * You can ask SeleniumQuery to automatically download and configure <code>MicrosoftWebDriver.exe</code> using:
      *
-     * <strong><pre>
+     * <pre style="font-weight: bold">
      * $.driver().useEdge().autoDriverDownload();
-     * </pre></strong>
+     * </pre>
      *
      * Or you can download and configure it manually from the
      * <a href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads">Microsoft WebDriver page</a>.
@@ -283,9 +283,9 @@ public class SeleniumQueryDriver {
      * <br><br>
      * You can ask SeleniumQuery to automatically download and configure <code>operadriver.exe</code> using .autoDriverDownload():
      *
-     * <strong><pre>
+     * <strong><pre style="font-weight: bold">
      * $.driver().useOpera().autoDriverDownload();
-     * </pre></strong>
+     * </pre>
      *
      * Or you can download and configure it manually from the
      * <a href="https://github.com/operasoftware/operachromiumdriver">OperaDriver page</a>.

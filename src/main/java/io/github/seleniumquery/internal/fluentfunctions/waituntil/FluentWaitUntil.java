@@ -55,6 +55,7 @@ public class FluentWaitUntil implements FluentFunction {
     /**
      * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval
      * as defined in the config files.
+     * @param waitUntilTimeout Timeout in ms.
      * @since 0.9.0
      */
     public FluentWaitUntil(long waitUntilTimeout) {
@@ -63,6 +64,8 @@ public class FluentWaitUntil implements FluentFunction {
 
     /**
      * Creates a waitUntil object for the given seleniumQueryObject, with the given timeout and polling interval.
+     * @param waitUntilTimeout Timeout in ms.
+     * @param waitUntilPollingInterval Polling interval in ms.
      * @since 0.9.0
      */
     public FluentWaitUntil(long waitUntilTimeout, long waitUntilPollingInterval) {

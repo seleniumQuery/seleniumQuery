@@ -610,6 +610,7 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	/**
 	 * Pass each element in the current matched set through a function, producing a list object containing the return values.
 	 *
+	 * @param <T> The returning type of the mapper function.
 	 * @param mapper The function to process each item against.
 	 * @return A list containing all translated objects.
 	 * @since 0.18.0
