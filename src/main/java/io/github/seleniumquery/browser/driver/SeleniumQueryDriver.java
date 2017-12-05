@@ -205,7 +205,6 @@ public class SeleniumQueryDriver {
      * <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer's download page</a> -- or check
      * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-IE-Driverr">seleniumQuery and IE Driver wiki page</a>
      * for the latest info.
-     * </p>
      * <br>
      * This method looks for the <code>IEDriverServer.exe</code> at the CLASSPATH (tipically at a {@code resources/} folder of a
      * maven project), at the "webdriver.ie.driver" system property or at the system's PATH variable.
@@ -237,7 +236,6 @@ public class SeleniumQueryDriver {
      * Or you can configure it manually. It is a file usually named <code>phantomjs.exe</code> (windows) or <code>phantomjs</code> (linux)
      * and its latest version can be downloaded from
      * <a href="http://phantomjs.org/download.html">PhantomJS download page</a>.
-     * </p>
      * <br>
      * This method looks for the PhantomJS executable (<code>phantomjs.exe</code>/<code>phantomjs</code>) at the CLASSPATH
      * (tipically at a {@code resources/} folder of a maven project), at the "phantomjs.binary.path" system property or at the system's PATH variable.
@@ -283,7 +281,7 @@ public class SeleniumQueryDriver {
      * <br><br>
      * You can ask SeleniumQuery to automatically download and configure <code>operadriver.exe</code> using .autoDriverDownload():
      *
-     * <strong><pre style="font-weight: bold">
+     * <pre style="font-weight: bold">
      * $.driver().useOpera().autoDriverDownload();
      * </pre>
      *
