@@ -170,7 +170,6 @@ public class SeleniumQueryDriver {
      * <a href="http://chromedriver.storage.googleapis.com/index.html">ChromeDriver's download page</a>. You can also check
      * <a href="https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-Chrome-Driver">seleniumQuery and Chrome Driver wiki page</a>
      * for the other info.
-     * </p>
      * <br>
      * This method looks for the ChromeDriver executable (<code>chromedriver.exe</code>/<code>chromedriver</code>) at the CLASSPATH
      * (tipically at a {@code resources/} folder of a maven project), at the "webdriver.chrome.driver" system property or at the system's PATH variable.
