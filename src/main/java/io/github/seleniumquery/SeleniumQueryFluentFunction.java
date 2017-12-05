@@ -17,19 +17,16 @@
 package io.github.seleniumquery;
 
 /**
- * .waitUntil() functions.
+ * SeleniumQuery fluent functions.
  *
  * @author acdcjunior
- * @since 0.9.0
- *
- * @deprecated Use {@link SeleniumQueryFluentFunction} instead.
+ * @since 0.18.0
  */
-@Deprecated
-@SuppressWarnings("DeprecatedIsStillUsed")
-public interface SeleniumQueryWaitUntil {
+@SuppressWarnings("deprecation")
+public interface SeleniumQueryFluentFunction extends SeleniumQueryWaitUntil {
 
 	/**
-	 * Waits until <b>at least one element returned</b> - by a query to the selector used
+	 * Evaluates if <b>at least one element returned</b> - by a query to the selector used
 	 * to construct this seleniumQuery object - <b>is matched by the selector given</b>.
 	 *
      * @param selector The selector to test.
@@ -37,63 +34,57 @@ public interface SeleniumQueryWaitUntil {
 	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryWaitAndOrThen is(String selector);
+	SeleniumQueryFluentAndOrThen is(String selector);
 
 	/**
-	 * Waits until every matched element's value meets the specified criteria.
+	 * Evaluates if the value of this seleniumQuery object meets the specified criteria.
 	 *
 	 * @return An object for specifying the criteria which the values of the elements must meet.
-	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryWaitEvaluateUntil<String> val();
+	SeleniumQueryFluentFunctionEvaluateIf<String> val();
 
 	/**
-	 * Waits until every matched element's text meets the specified criteria.
+	 * Evaluates if the text of this seleniumQuery object meets the specified criteria.
 	 *
 	 * @return An object for specifying the criteria which the texts of the elements must meet.
-	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryWaitEvaluateUntil<String> text();
+	SeleniumQueryFluentFunctionEvaluateIf<String> text();
 
 	/**
-	 * Waits until every matched element has the given attribute meeting the specified criteria.
+	 * Evaluates if the given attribute of this seleniumQuery object meets the specified criteria.
 	 *
      * @param attributeName The name of the attribute to evaluate.
 	 * @return An object for specifying the criteria which the attributes of the elements must meet.
-	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryWaitEvaluateUntil<String> attr(String attributeName);
+	SeleniumQueryFluentFunctionEvaluateIf<String> attr(String attributeName);
 
 	/**
-	 * Waits until every matched element has the given attribute property the specified criteria.
+     * Evaluates if the given property of this seleniumQuery object meets the specified criteria.
 	 *
      * @param propertyName The name of the property to evaluate.
      * @param <T>  The expected type of the property.
 	 * @return An object for specifying the criteria which the properties of the elements must meet.
-	 *
 	 * @since 0.9.0
 	 */
-	<T> SeleniumQueryWaitEvaluateUntil<T> prop(String propertyName);
+	<T> SeleniumQueryFluentFunctionEvaluateIf<T> prop(String propertyName);
 
 	/**
-	 * Waits until every matched element's html meets the specified criteria.
+     * Evaluates if the innerHTML of this seleniumQuery object meets the specified criteria.
 	 *
 	 * @return An object for specifying the criteria which the htmls of the elements must meet.
-	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryWaitEvaluateUntil<String> html();
+	SeleniumQueryFluentFunctionEvaluateIf<String> html();
 
 	/**
-	 * Waits until the quantity of matched elements meets the specified criteria.
+     * Evaluates if the size of this seleniumQuery object meets the specified criteria.
 	 *
 	 * @return An object for specifying the criteria which the quantity of the elements must meet.
-	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryWaitEvaluateUntil<Integer> size();
+	SeleniumQueryFluentFunctionEvaluateIf<Integer> size();
 
 }

@@ -16,10 +16,10 @@
 
 package io.github.seleniumquery.internal.fluentfunctions;
 
+import io.github.seleniumquery.SeleniumQueryFluentAndOrThen;
+import io.github.seleniumquery.SeleniumQueryFluentFunction;
+import io.github.seleniumquery.SeleniumQueryFluentFunctionEvaluateIf;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
-import io.github.seleniumquery.SeleniumQueryWaitEvaluateUntil;
-import io.github.seleniumquery.SeleniumQueryWaitUntil;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.IsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.AttrGetter;
 import io.github.seleniumquery.internal.fluentfunctions.getters.HtmlGetter;
@@ -34,7 +34,7 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.ValGetter;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class SqFluentFunction implements SeleniumQueryWaitUntil {
+public class SqFluentFunction implements SeleniumQueryFluentFunction {
 
 	private SeleniumQueryObject seleniumQueryObject;
 
@@ -53,7 +53,7 @@ public class SqFluentFunction implements SeleniumQueryWaitUntil {
 	}
 
 	@Override
-	public SeleniumQueryWaitAndOrThen is(String selector) {
+	public SeleniumQueryFluentAndOrThen is(String selector) {
         SeleniumQueryObject sqoAfter = this.fluentFunction.apply(
             IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR
         );
@@ -61,32 +61,32 @@ public class SqFluentFunction implements SeleniumQueryWaitUntil {
 	}
 
 	@Override
-	public SeleniumQueryWaitEvaluateUntil<String> val() {
+	public SeleniumQueryFluentFunctionEvaluateIf<String> val() {
 		return new ApplyUntil<>(this.fluentFunction, ValGetter.VAL_GETTER, seleniumQueryObject);
 	}
 
 	@Override
-	public SeleniumQueryWaitEvaluateUntil<String> text() {
+	public SeleniumQueryFluentFunctionEvaluateIf<String> text() {
 		return new ApplyUntil<>(this.fluentFunction, TextGetter.TEXT_GETTER, seleniumQueryObject);
 	}
 
 	@Override
-	public SeleniumQueryWaitEvaluateUntil<String> attr(String attributeName) {
+	public SeleniumQueryFluentFunctionEvaluateIf<String> attr(String attributeName) {
 		return new ApplyUntil<>(this.fluentFunction, new AttrGetter(attributeName), seleniumQueryObject);
 	}
 
 	@Override
-	public <T> SeleniumQueryWaitEvaluateUntil<T> prop(String propertyName) {
+	public <T> SeleniumQueryFluentFunctionEvaluateIf<T> prop(String propertyName) {
 		return new ApplyUntil<>(this.fluentFunction, new PropGetter<T>(propertyName), seleniumQueryObject);
 	}
 
 	@Override
-	public SeleniumQueryWaitEvaluateUntil<String> html() {
+	public SeleniumQueryFluentFunctionEvaluateIf<String> html() {
 		return new ApplyUntil<>(this.fluentFunction, HtmlGetter.HTML_GETTER, seleniumQueryObject);
 	}
 
 	@Override
-	public SeleniumQueryWaitEvaluateUntil<Integer> size() {
+	public SeleniumQueryFluentFunctionEvaluateIf<Integer> size() {
 		return new ApplyUntil<>(this.fluentFunction, SizeGetter.SIZE_GETTER, seleniumQueryObject);
 	}
 

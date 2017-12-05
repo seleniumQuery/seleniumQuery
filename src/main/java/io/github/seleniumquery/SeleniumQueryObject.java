@@ -78,30 +78,30 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	 * If a different amout of time is needed, either create and/or modify the <code>seleniumQuery.properties</code> file or use this method's
 	 * version with a time parameter.
 	 *
-	 * @return a {@link SeleniumQueryWaitUntil} object for specifying the wait conditions.
+	 * @return a {@link SeleniumQueryFluentFunction} object for specifying the wait conditions.
 	 * @since 0.9.0
 	 */
-	SeleniumQueryWaitUntil waitUntil();
+	SeleniumQueryFluentFunction waitUntil();
 
     /**
      * <p>Asserts that some property or attribute of the elements in this collection
      * match some criteria.</p>
      *
-     * @return a {@link SeleniumQueryWaitUntil} object for specifying the assert conditions.
+     * @return a {@link SeleniumQueryFluentFunction} object for specifying the assert conditions.
      * @since 0.18.0
      */
-	SeleniumQueryWaitUntil assertThat();
+    SeleniumQueryFluentFunction assertThat();
 
 	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
 	 * a new seleniumQuery object at the end.
 	 *
 	 * @param waitUntilTimeout Time in milliseconds to wait before a timeout is thrown.
-	 * @return a {@link SeleniumQueryWaitUntil} object for specifying the wait conditions.
+	 * @return a {@link SeleniumQueryFluentFunction} object for specifying the wait conditions.
 	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout);
+    SeleniumQueryFluentFunction waitUntil(long waitUntilTimeout);
 
 	/**
 	 * List of functions that will halt the execution and requery the selector until the specified condition is met, returning
@@ -109,11 +109,11 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	 *
 	 * @param waitUntilTimeout Time in milliseconds to wait for the condition.
 	 * @param waitUntilPollingInterval Interval in milliseconds between every requery/check.
-	 * @return a {@link SeleniumQueryWaitUntil} object for specifying the wait conditions.
+	 * @return a {@link SeleniumQueryFluentFunction} object for specifying the wait conditions.
 	 *
 	 * @since 0.9.0
 	 */
-	SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval);
+    SeleniumQueryFluentFunction waitUntil(long waitUntilTimeout, long waitUntilPollingInterval);
 
 	/**
 	 * Enables several functions (plugins) that allow executing specific tasks, from specific points of view, on

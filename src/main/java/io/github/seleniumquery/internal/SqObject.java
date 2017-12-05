@@ -25,8 +25,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.google.common.base.Predicate;
+import io.github.seleniumquery.SeleniumQueryFluentFunction;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.SeleniumQueryWaitUntil;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
@@ -76,22 +76,22 @@ class SqObject implements SeleniumQueryObject {
 	}
 
 	@Override
-    public final SeleniumQueryWaitUntil waitUntil() {
+    public final SeleniumQueryFluentFunction waitUntil() {
 		return new SqFluentFunction(this, new FluentWaitUntil());
 	}
 
     @Override
-    public SeleniumQueryWaitUntil assertThat() {
+    public SeleniumQueryFluentFunction assertThat() {
         return new SqFluentFunction(this, new FluentAssertThat());
     }
 
     @Override
-    public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) {
+    public final SeleniumQueryFluentFunction waitUntil(long waitUntilTimeout) {
 		return new SqFluentFunction(this, new FluentWaitUntil(waitUntilTimeout));
 	}
 
 	@Override
-    public final SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) {
+    public final SeleniumQueryFluentFunction waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) {
 		return new SqFluentFunction(this, new FluentWaitUntil(waitUntilTimeout, waitUntilPollingInterval));
 	}
 

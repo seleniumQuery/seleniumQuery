@@ -18,9 +18,9 @@ package io.github.seleniumquery.internal.fluentfunctions;
 
 import org.hamcrest.Matcher;
 
+import io.github.seleniumquery.SeleniumQueryFluentAndOrThen;
+import io.github.seleniumquery.SeleniumQueryFluentFunctionEvaluateIf;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
-import io.github.seleniumquery.SeleniumQueryWaitEvaluateUntil;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsIgnoreCaseEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.EqualsEvaluator;
@@ -39,7 +39,7 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
  * @author acdcjunior
  * @since 0.9.0
  */
-class ApplyUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
+class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
 
 	private final FluentFunction fluentFunction;
 	private final Getter<T> getter;
@@ -59,7 +59,7 @@ class ApplyUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
 	}
 
 	@Override
-	public SeleniumQueryWaitAndOrThen isEqualTo(T valueToEqual) {
+	public SeleniumQueryFluentAndOrThen isEqualTo(T valueToEqual) {
         return andOrThen(new EqualsEvaluator<>(getter), valueToEqual);
 	}
 
@@ -68,37 +68,37 @@ class ApplyUntil<T> implements SeleniumQueryWaitEvaluateUntil<T> {
     }
 
     @Override
-	public SeleniumQueryWaitAndOrThen contains(String string) {
+	public SeleniumQueryFluentAndOrThen contains(String string) {
         return andOrThen(new ContainsEvaluator(getter), string);
 	}
 
     @Override
-    public SeleniumQueryWaitAndOrThen containsIgnoreCase(String string) {
+    public SeleniumQueryFluentAndOrThen containsIgnoreCase(String string) {
         return andOrThen(new ContainsIgnoreCaseEvaluator(getter), string);
     }
 
 	@Override
-	public SeleniumQueryWaitAndOrThen matches(String regex) {
+	public SeleniumQueryFluentAndOrThen matches(String regex) {
         return andOrThen(new MatchesEvaluator(getter), regex);
 	}
 
 	@Override
-	public SeleniumQueryWaitAndOrThen isGreaterThan(Number valueToCompare) {
+	public SeleniumQueryFluentAndOrThen isGreaterThan(Number valueToCompare) {
         return andOrThen(new GreaterThanEvaluator(getter), valueToCompare);
 	}
 
     @Override
-	public SeleniumQueryWaitAndOrThen isLessThan(Number valueToCompare) {
+	public SeleniumQueryFluentAndOrThen isLessThan(Number valueToCompare) {
         return andOrThen(new LessThanEvaluator(getter), valueToCompare);
 	}
 
 	@Override
-	public SeleniumQueryWaitEvaluateUntil<T> not() {
+	public SeleniumQueryFluentFunctionEvaluateIf<T> not() {
 		return new ApplyUntil<>(fluentFunction, getter, seleniumQueryObject, this.fluentBehaviorModifier.negate());
 	}
 
     @Override
-    public SeleniumQueryWaitAndOrThen that(Matcher<T> hamcrestMatcher) {
+    public SeleniumQueryFluentAndOrThen that(Matcher<T> hamcrestMatcher) {
         return andOrThen(new ThatEvaluator<>(getter), hamcrestMatcher);
     }
 

@@ -17,31 +17,28 @@
 package io.github.seleniumquery;
 
 /**
- * An interface allows to specify the next step after waiting for some condition: to wait for more
+ * An interface allows to specify the next step after evaluating for some condition: to re-evaluate more
  * (<code>.and()</code>) or to do something else (<code>.then()</code>).
  *
  * @author acdcjunior
- * @since 0.9.0
- *
- * @deprecated Use {@link SeleniumQueryFluentAndOrThen} instead.
+ * @since 0.18.0
  */
-@Deprecated
-@SuppressWarnings("DeprecatedIsStillUsed")
-public interface SeleniumQueryWaitAndOrThen {
+@SuppressWarnings("deprecation")
+public interface SeleniumQueryFluentAndOrThen extends SeleniumQueryWaitAndOrThen {
 
     /**
-     * Allows the chaining of additional waiting conditions.
+     * Allows the chaining of additional evaluation conditions.
      *
-     * @return An object where it is possible to set more waiting conditions.
+     * @return An object where it is possible to set more evaluation conditions.
      * @since 0.9.0
      */
-    SeleniumQueryWaitUntil and();
+    SeleniumQueryFluentFunction and();
 
     /**
      * Allows the execution of a regular function (such as <code>.click()</code>) on the elements matched after
-     * the waiting condition is met.
+     * the evaluation condition is met.
      *
-     * @return The {@link SeleniumQueryObject} after the waiting conditions were met.
+     * @return The {@link SeleniumQueryObject} after the evaluation conditions were met.
      */
     SeleniumQueryObject then();
 

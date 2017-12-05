@@ -16,8 +16,9 @@
 
 package io.github.seleniumquery.internal.fluentfunctions;
 
+import io.github.seleniumquery.SeleniumQueryFluentAndOrThen;
+import io.github.seleniumquery.SeleniumQueryFluentFunction;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import io.github.seleniumquery.SeleniumQueryWaitUntil;
 
 /**
@@ -27,7 +28,7 @@ import io.github.seleniumquery.SeleniumQueryWaitUntil;
  * @author acdcjunior
  * @since 0.9.0
  */
-class AndOrThen implements SeleniumQueryWaitAndOrThen {
+class AndOrThen implements SeleniumQueryFluentAndOrThen {
 
 	private final SeleniumQueryObject seleniumQueryObject;
     private final FluentFunction fluentFunction;
@@ -38,7 +39,7 @@ class AndOrThen implements SeleniumQueryWaitAndOrThen {
     }
 
 	@Override
-	public SeleniumQueryWaitUntil and() {
+	public SeleniumQueryFluentFunction and() {
 		return new SqFluentFunction(this.seleniumQueryObject, this.fluentFunction);
 	}
 

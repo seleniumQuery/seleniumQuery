@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
-package endtoend.functions.assertthat;
+package endtoend.fluentfunctions.assertthat;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
+import io.github.seleniumquery.SeleniumQueryFluentAndOrThen;
+import io.github.seleniumquery.SeleniumQueryFluentFunction;
+import io.github.seleniumquery.SeleniumQueryFluentFunctionEvaluateIf;
+import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.fluentfunctions.assertthat.SeleniumQueryAssertionError;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
@@ -39,6 +44,16 @@ public class AssertThatTest {
     public void assertThat__text__contains__FAIL() {
     	$("#sq").assertThat().text().contains("abc");
     	fail();
+    }
+
+    @Test
+    public void assertThat__text__contains__SUCCESS__local_Objects() {
+        SeleniumQueryFluentFunction seleniumQueryFluentFunction = $("#sq").assertThat();
+        SeleniumQueryFluentFunctionEvaluateIf<String> text = seleniumQueryFluentFunction.text();
+        SeleniumQueryFluentAndOrThen seleniumQue = text.contains("seleniumQue");
+        SeleniumQueryObject then = seleniumQue.then();
+        String text2 = then.text();
+        assertEquals("seleniumQuery", text2);
     }
 
 }

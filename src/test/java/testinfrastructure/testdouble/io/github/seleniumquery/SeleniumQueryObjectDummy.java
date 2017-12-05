@@ -25,8 +25,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.google.common.base.Predicate;
+import io.github.seleniumquery.SeleniumQueryFluentFunction;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.SeleniumQueryWaitUntil;
 import io.github.seleniumquery.functions.SeleniumQueryFunctions;
 import io.github.seleniumquery.functions.as.SeleniumQueryPlugin;
 import io.github.seleniumquery.functions.as.StandardPlugins;
@@ -45,10 +45,10 @@ public class SeleniumQueryObjectDummy implements SeleniumQueryObject {
 
     private SeleniumQueryObjectDummy() { }
 
-    @Override public SeleniumQueryWaitUntil waitUntil() { throw new PseudoTestDoubleException(); }
-    @Override public SeleniumQueryWaitUntil assertThat() { throw new PseudoTestDoubleException(); }
-    @Override public SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout) { throw new PseudoTestDoubleException(); }
-    @Override public SeleniumQueryWaitUntil waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryFluentFunction waitUntil() { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryFluentFunction assertThat() { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryFluentFunction waitUntil(long waitUntilTimeout) { throw new PseudoTestDoubleException(); }
+    @Override public SeleniumQueryFluentFunction waitUntil(long waitUntilTimeout, long waitUntilPollingInterval) { throw new PseudoTestDoubleException(); }
     @Override public StandardPlugins as() { throw new PseudoTestDoubleException(); }
     @Override public <PLUGIN> PLUGIN as(SeleniumQueryPlugin<PLUGIN> pluginFunction) { throw new PseudoTestDoubleException(); }
     @Override public Iterator<WebElement> iterator() { throw new PseudoTestDoubleException(); }
