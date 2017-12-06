@@ -12,9 +12,9 @@ import testinfrastructure.testdouble.org.openqa.selenium.WebElementStub;
 
 public class TextFunctionTest {
 
-    private static class WebElementText extends WebElementStub {
+    public static class WebElementText extends WebElementStub {
         private final String text;
-        private WebElementText(String text) {
+        public WebElementText(String text) {
             this.text = text;
         }
         @Override
