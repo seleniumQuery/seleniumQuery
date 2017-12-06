@@ -20,6 +20,7 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,13 +48,24 @@ public class AssertThatTest {
     }
 
     @Test
-    public void assertThat__text__contains__SUCCESS__local_Objects() {
+    public void assertThat__html__matches__SUCCESS() {
+    	$("#sq").assertThat().html().that(CoreMatchers.not(CoreMatchers.containsString("OTHER STRING")));
+    }
+
+    @Test(expected = SeleniumQueryAssertionError.class)
+    public void assertThat__html__matches__FAIL() {
+    	$("#sq").assertThat().html().that(CoreMatchers.containsString("abc"));
+    	fail();
+    }
+
+    @Test
+    public void assertThat__intermediary_objects_types() {
         SeleniumQueryFluentFunction seleniumQueryFluentFunction = $("#sq").assertThat();
-        SeleniumQueryFluentFunctionEvaluateIf<String> text = seleniumQueryFluentFunction.text();
-        SeleniumQueryFluentAndOrThen seleniumQue = text.contains("seleniumQue");
+        SeleniumQueryFluentFunctionEvaluateIf<String> fluentFunctionEvaluateIf = seleniumQueryFluentFunction.text();
+        SeleniumQueryFluentAndOrThen seleniumQue = fluentFunctionEvaluateIf.contains("seleniumQue");
         SeleniumQueryObject then = seleniumQue.then();
-        String text2 = then.text();
-        assertEquals("seleniumQuery", text2);
+        String text = then.text();
+        assertEquals("seleniumQuery", text);
     }
 
 }
