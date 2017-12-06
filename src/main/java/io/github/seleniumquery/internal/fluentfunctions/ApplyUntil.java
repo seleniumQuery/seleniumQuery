@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.internal.fluentfunctions;
 
+import java.util.regex.Pattern;
+
 import org.hamcrest.Matcher;
 
 import io.github.seleniumquery.SeleniumQueryFluentAndOrThen;
@@ -25,6 +27,7 @@ import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsEvalu
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsIgnoreCaseEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.EqualsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesPatternEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesStringRegexEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesHamcrestMatcherEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.GreaterThanEvaluator;
@@ -92,10 +95,14 @@ class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
 		return new ApplyUntil<>(fluentFunction, getter, seleniumQueryObject, this.fluentBehaviorModifier.negate());
 	}
 
-
     @Override
     public SeleniumQueryFluentAndOrThen matches(String regex) {
         return andOrThen(new MatchesStringRegexEvaluator(getter), regex);
+    }
+
+    @Override
+    public SeleniumQueryFluentAndOrThen matches(Pattern regexPattern) {
+        return andOrThen(new MatchesPatternEvaluator(getter), regexPattern);
     }
 
     @Override

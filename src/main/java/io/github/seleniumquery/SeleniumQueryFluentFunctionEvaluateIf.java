@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery;
 
+import java.util.regex.Pattern;
+
 import org.hamcrest.Matcher;
 
 /**
@@ -61,16 +63,6 @@ public interface SeleniumQueryFluentFunctionEvaluateIf<T> extends SeleniumQueryW
     SeleniumQueryFluentAndOrThen containsIgnoreCase(String string);
 
     /**
-     * Tests if the result of the preceding function matches the given regex.
-     *
-     * @param regex The regex the function call result must match.
-     * @return An element that allows chaining of further waiting conditions or calling regular functions.
-     *
-     * @since 0.9.0
-     */
-    SeleniumQueryFluentAndOrThen matches(String regex);
-
-    /**
      * <p>Tests if the result of the preceding function is greater than the given argument.</p>
      *
      * @param valueToCompare The number the function call result must be greater than.
@@ -98,6 +90,26 @@ public interface SeleniumQueryFluentFunctionEvaluateIf<T> extends SeleniumQueryW
      * @since 0.9.0
      */
     SeleniumQueryFluentFunctionEvaluateIf<T> not();
+
+    /**
+     * Tests if the result of the preceding function matches the given regex.
+     *
+     * @param regex The regex the function call result must match.
+     * @return An element that allows chaining of further waiting conditions or calling regular functions.
+     *
+     * @since 0.9.0
+     */
+    SeleniumQueryFluentAndOrThen matches(String regex);
+
+    /**
+     * Tests if the result of the preceding function matches the given regex {@link Pattern}.
+     *
+     * @param regexPattern The regex {@link Pattern} the function call result must match.
+     * @return An element that allows chaining of further waiting conditions or calling regular functions.
+     *
+     * @since 0.18.0
+     */
+    SeleniumQueryFluentAndOrThen matches(Pattern regexPattern);
 
     /**
      * <p>Tests if the result of the preceding function satisfies the condition specified by
