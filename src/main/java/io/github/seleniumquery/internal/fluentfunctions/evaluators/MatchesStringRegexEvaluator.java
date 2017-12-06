@@ -29,11 +29,11 @@ import java.util.List;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class MatchesEvaluator implements Evaluator<String> {
+public class MatchesStringRegexEvaluator implements Evaluator<String> {
 
 	private Getter<?> getter;
 
-	public MatchesEvaluator(Getter<?> getter) {
+	public MatchesStringRegexEvaluator(Getter<?> getter) {
 		this.getter = getter;
 	}
 

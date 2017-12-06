@@ -25,7 +25,7 @@ import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsEvalu
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsIgnoreCaseEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.EqualsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesStringRegexEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesHamcrestMatcherEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.GreaterThanEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.LessThanEvaluator;
@@ -78,11 +78,6 @@ class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
     }
 
 	@Override
-	public SeleniumQueryFluentAndOrThen matches(String regex) {
-        return andOrThen(new MatchesEvaluator(getter), regex);
-	}
-
-	@Override
 	public SeleniumQueryFluentAndOrThen isGreaterThan(Number valueToCompare) {
         return andOrThen(new GreaterThanEvaluator(getter), valueToCompare);
 	}
@@ -96,6 +91,12 @@ class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
 	public SeleniumQueryFluentFunctionEvaluateIf<T> not() {
 		return new ApplyUntil<>(fluentFunction, getter, seleniumQueryObject, this.fluentBehaviorModifier.negate());
 	}
+
+
+    @Override
+    public SeleniumQueryFluentAndOrThen matches(String regex) {
+        return andOrThen(new MatchesStringRegexEvaluator(getter), regex);
+    }
 
     @Override
     public SeleniumQueryFluentAndOrThen matches(Matcher<T> hamcrestMatcher) {
