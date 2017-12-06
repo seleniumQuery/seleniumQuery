@@ -84,7 +84,16 @@ public class FluentWaitUntil implements FluentFunction {
 		final WebDriver driver = seleniumQueryObject.getWebDriver();
 		final By by = seleniumQueryObject.getBy();
 
-        FluentSqWaitFunction<T> fluentSqWaitFunction = new FluentSqWaitFunction<>(driver, value, evaluator, by, fluentBehaviorModifier);
+        Function<By, List<WebElement>> fluentSqWaitFunction = selector -> {
+            List<WebElement> elements = driver.findElements(by);
+            final boolean passedEvaluation = evaluator.evaluate(driver, elements, value);
+
+            if (fluentBehaviorModifier.isExpectedBehavior(passedEvaluation)) {
+                return elements;
+            } else {
+                return null;
+            }
+        };
 
         List<WebElement> elements = fluentWait(
             seleniumQueryObject,
@@ -114,41 +123,5 @@ public class FluentWaitUntil implements FluentFunction {
 			throw new SeleniumQueryTimeoutException(sourceException, seleniumQueryObject, reason);
 		}
 	}
-
-}
-
-
-class FluentSqWaitFunction<T> implements Function<By, List<WebElement>> {
-
-    private final WebDriver driver;
-    private final T value;
-    private final Evaluator<T> evaluator;
-    private final By by;
-    private final FluentBehaviorModifier fluentBehaviorModifier;
-
-    FluentSqWaitFunction(WebDriver driver, T value, Evaluator<T> evaluator, By by, FluentBehaviorModifier fluentBehaviorModifier) {
-        this.driver = driver;
-        this.value = value;
-        this.evaluator = evaluator;
-        this.by = by;
-        this.fluentBehaviorModifier = fluentBehaviorModifier;
-    }
-
-    @Override
-    public List<WebElement> apply(By selector) {
-        List<WebElement> elements = driver.findElements(by);
-        final boolean evaluate = evaluator.evaluate(driver, elements, value);
-        // TODO use function from fluentBehaviorModifier instead of if
-        if (fluentBehaviorModifier == REGULAR_BEHAVIOR) {
-            if (!evaluate) {
-                return null;
-            }
-        } else {
-            if (evaluate) {
-                return null;
-            }
-        }
-        return elements;
-    }
 
 }
