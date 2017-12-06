@@ -24,12 +24,12 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
+import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class ContainsIgnoreCaseEvaluatorTest {
 
-    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(ThatEvaluatorTest.class);
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(MatchesHamcrestMatcherEvaluatorTest.class);
 
     @Test
     public void containsIgnoreCase() {

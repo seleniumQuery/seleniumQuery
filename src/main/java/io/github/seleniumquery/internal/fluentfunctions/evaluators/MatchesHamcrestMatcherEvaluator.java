@@ -27,28 +27,28 @@ import org.openqa.selenium.WebElement;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
-public class ThatEvaluator<T> implements Evaluator<Matcher<T>> {
+public class MatchesHamcrestMatcherEvaluator<T> implements Evaluator<Matcher<T>> {
 
-	private static final Log LOGGER = LogFactory.getLog(ThatEvaluator.class);
+	private static final Log LOGGER = LogFactory.getLog(MatchesHamcrestMatcherEvaluator.class);
 
 	private Getter<T> getter;
 
-	public ThatEvaluator(Getter<T> getter) {
+	public MatchesHamcrestMatcherEvaluator(Getter<T> getter) {
 		this.getter = getter;
 	}
 
 	@Override
 	public boolean evaluate(WebDriver driver, List<WebElement> elements, Matcher<T> matcher) {
-		LOGGER.debug("Evaluating .that()...");
+		LOGGER.debug("Evaluating .matches(<Matcher>)...");
 		final T gotValue = getter.get(driver, elements);
-		LOGGER.debug("Evaluating .that()... got "+getter+": \""+gotValue+"\". Wanted: <"+matcher+">.");
+		LOGGER.debug("Evaluating .matches(<Matcher>)... got "+getter+": \""+gotValue+"\". Wanted: <"+matcher+">.");
 
 		return matcher.matches(gotValue);
 	}
 
 	@Override
 	public String stringFor(Matcher<T> matcher, FluentBehaviorModifier fluentBehaviorModifier) {
-        return getter.toString() + fluentBehaviorModifier + ".that(<" + matcher + ">)";
+        return getter.toString() + fluentBehaviorModifier + ".matches(<" + matcher + ">)";
 	}
 
 }

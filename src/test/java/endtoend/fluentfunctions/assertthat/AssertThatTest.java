@@ -49,12 +49,12 @@ public class AssertThatTest {
 
     @Test
     public void assertThat__html__matches__SUCCESS() {
-    	$("#sq").assertThat().html().that(CoreMatchers.not(CoreMatchers.containsString("OTHER STRING")));
+    	$("#sq").assertThat().html().matches(CoreMatchers.not(CoreMatchers.containsString("OTHER STRING")));
     }
 
     @Test(expected = SeleniumQueryAssertionError.class)
     public void assertThat__html__matches__FAIL() {
-    	$("#sq").assertThat().html().that(CoreMatchers.containsString("abc"));
+    	$("#sq").assertThat().html().matches(CoreMatchers.containsString("abc"));
     	fail();
     }
 

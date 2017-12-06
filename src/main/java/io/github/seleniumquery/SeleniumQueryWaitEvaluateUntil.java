@@ -107,7 +107,8 @@ public interface SeleniumQueryWaitEvaluateUntil<T> {
      * <code>hamcrestMatcher</code>. Example:
      *
      * <pre>
-     *   $("#myDiv").waitUntil().text().that(Matchers.containsString("John Smith"))
+     *   $("#myDiv").waitUntil().text().matches(Matchers.containsString("John Smith"))
+     *   $("#myDiv").assertThat().text().matches(Matchers.containsString("John Smith"))
      * </pre>
      *
      * @param hamcrestMatcher an expression, built of {@link Matcher}s, specifying allowed
@@ -118,6 +119,6 @@ public interface SeleniumQueryWaitEvaluateUntil<T> {
      * @return An element that allows chaining of further waiting conditions or calling regular functions.
      * @since 0.18.0
      */
-    SeleniumQueryWaitAndOrThen that(Matcher<T> hamcrestMatcher);
+    SeleniumQueryWaitAndOrThen matches(Matcher<T> hamcrestMatcher);
 
 }

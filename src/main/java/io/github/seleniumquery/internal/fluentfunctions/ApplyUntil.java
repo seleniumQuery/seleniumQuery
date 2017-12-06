@@ -26,7 +26,7 @@ import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsIgnor
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.EqualsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesEvaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.ThatEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesHamcrestMatcherEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.GreaterThanEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.LessThanEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
@@ -98,8 +98,8 @@ class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
 	}
 
     @Override
-    public SeleniumQueryFluentAndOrThen that(Matcher<T> hamcrestMatcher) {
-        return andOrThen(new ThatEvaluator<>(getter), hamcrestMatcher);
+    public SeleniumQueryFluentAndOrThen matches(Matcher<T> hamcrestMatcher) {
+        return andOrThen(new MatchesHamcrestMatcherEvaluator<>(getter), hamcrestMatcher);
     }
 
 }

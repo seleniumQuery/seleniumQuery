@@ -104,8 +104,8 @@ public interface SeleniumQueryFluentFunctionEvaluateIf<T> extends SeleniumQueryW
      * <code>hamcrestMatcher</code>. Example:
      *
      * <pre>
-     *   $("#myDiv").waitUntil().text().that(Matchers.containsString("John Smith"));
-     *   $("#myDiv").assertThat().text().that(Matchers.containsString("John Smith"));
+     *   $("#myDiv").waitUntil().text().matches(Matchers.containsString("John Smith"));
+     *   $("#myDiv").assertThat().text().matches(Matchers.containsString("John Smith"));
      * </pre>
      *
      * @param hamcrestMatcher an expression, built of {@link Matcher}s, specifying allowed
@@ -116,6 +116,6 @@ public interface SeleniumQueryFluentFunctionEvaluateIf<T> extends SeleniumQueryW
      * @return An element that allows chaining of further waiting conditions or calling regular functions.
      * @since 0.18.0
      */
-    SeleniumQueryFluentAndOrThen that(Matcher<T> hamcrestMatcher);
+    SeleniumQueryFluentAndOrThen matches(Matcher<T> hamcrestMatcher);
 
 }

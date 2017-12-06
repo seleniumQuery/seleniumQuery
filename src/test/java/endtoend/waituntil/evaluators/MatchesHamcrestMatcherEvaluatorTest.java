@@ -26,27 +26,27 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
+import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
-public class ThatEvaluatorTest {
+public class MatchesHamcrestMatcherEvaluatorTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Rule public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void that() {
-        assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().that(Matchers.containsString("isibleDi")).then().text());
+    public void matches__success() {
+        assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().matches(Matchers.containsString("isibleDi")).then().text());
     }
 
     @Test
-    public void that_fails() {
+    public void matches__fails() {
         try {
-            assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil(100).text().that(Matchers.containsString("isibleDix")).then().text());
+            assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil(100).text().matches(Matchers.containsString("isibleDix")).then().text());
             fail();
         } catch (SeleniumQueryTimeoutException e) {
-            assertEquals("Timeout while waiting for $(\".visibleDiv\") to .waitUntil().text().that" +
+            assertEquals("Timeout while waiting for $(\".visibleDiv\") to .waitUntil().text().matches" +
                 "(<a string containing \"isibleDix\">)", e.getMessage());
         }
     }
