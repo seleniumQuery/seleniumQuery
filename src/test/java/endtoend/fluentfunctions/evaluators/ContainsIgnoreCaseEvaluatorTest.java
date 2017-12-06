@@ -14,42 +14,36 @@
  * limitations under the License.
  */
 
-package endtoend.waituntil.evaluators;
+package endtoend.fluentfunctions.evaluators;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import org.hamcrest.Matchers;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
-public class MatchesHamcrestMatcherEvaluatorTest {
+public class ContainsIgnoreCaseEvaluatorTest {
 
-    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
-
-    @Rule public ExpectedException thrown = ExpectedException.none();
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(MatchesHamcrestMatcherEvaluatorTest.class);
 
     @Test
-    public void matches__success() {
-        assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().matches(Matchers.containsString("isibleDi")).then().text());
+    public void containsIgnoreCase() {
+        assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().containsIgnoreCase("iSIBLeDi").then().text());
     }
 
     @Test
-    public void matches__fails() {
+    public void containsIgnoreCase_fails() {
         try {
-            assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil(100).text().matches(Matchers.containsString("isibleDix")).then().text());
+            assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil(100).text().containsIgnoreCase("x").then().text());
             fail();
         } catch (SeleniumQueryTimeoutException e) {
-            assertEquals("Timeout while waiting for $(\".visibleDiv\") to .waitUntil().text().matches" +
-                "(<a string containing \"isibleDix\">)", e.getMessage());
+            assertEquals("Timeout while waiting for $(\".visibleDiv\") to .waitUntil().text().containsIgnoreCase(\"x\")", e.getMessage());
         }
     }
-
 
 }

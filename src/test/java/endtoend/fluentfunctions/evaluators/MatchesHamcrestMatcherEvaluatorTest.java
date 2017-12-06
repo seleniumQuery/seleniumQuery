@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package endtoend.waituntil.evaluators;
+package endtoend.fluentfunctions.evaluators;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import org.hamcrest.Matchers;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,22 +28,23 @@ import org.junit.Test;
 import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
-public class ContainsIgnoreCaseEvaluatorTest {
+public class MatchesHamcrestMatcherEvaluatorTest {
 
-    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(MatchesHamcrestMatcherEvaluatorTest.class);
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
-    public void containsIgnoreCase() {
-        assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().containsIgnoreCase("iSIBLeDi").then().text());
+    public void matches__success() {
+        assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().matches(Matchers.containsString("isibleDi")).then().text());
     }
 
     @Test
-    public void containsIgnoreCase_fails() {
+    public void matches__fails() {
         try {
-            assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil(100).text().containsIgnoreCase("x").then().text());
+            $(".visibleDiv").waitUntil(100).text().matches(Matchers.containsString("isibleDix"));
             fail();
         } catch (SeleniumQueryTimeoutException e) {
-            assertEquals("Timeout while waiting for $(\".visibleDiv\") to .waitUntil().text().containsIgnoreCase(\"x\")", e.getMessage());
+            assertEquals("Timeout while waiting for $(\".visibleDiv\") to .waitUntil().text().matches" +
+                "(<a string containing \"isibleDix\">)", e.getMessage());
         }
     }
 
