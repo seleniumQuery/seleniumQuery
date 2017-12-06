@@ -27,6 +27,12 @@ import org.openqa.selenium.WebElement;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
+/**
+ * Evaluator that tests the elements' values against a hamcrest matcher.
+ *
+ * @author acdcjunior
+ * @since 0.9.0
+ */
 public class MatchesHamcrestMatcherEvaluator<T> implements Evaluator<Matcher<T>> {
 
 	private static final Log LOGGER = LogFactory.getLog(MatchesHamcrestMatcherEvaluator.class);

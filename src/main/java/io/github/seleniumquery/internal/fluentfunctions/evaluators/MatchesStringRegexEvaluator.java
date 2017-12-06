@@ -24,7 +24,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * Evaluator that tests the element's values against a regex.
+ * Evaluator that tests the elements' values against a string regex.
  *
  * @author acdcjunior
  * @since 0.9.0

@@ -19,13 +19,23 @@ public class MatchesStringRegexEvaluatorTest {
     private final MatchesStringRegexEvaluator matchesStringRegexEvaluator = new MatchesStringRegexEvaluator(TextGetter.TEXT_GETTER);
 
     @Test
-    public void evaluates() {
+    public void evaluates__success() {
         // given
         List<WebElement> elements = asList(new TextFunctionTest.WebElementText("aaa"), new TextFunctionTest.WebElementText("bbb"));
         // when
         boolean evaluate = matchesStringRegexEvaluator.evaluate(UNUSED_DRIVER, elements, "a{3} b{3}");
         // then
         assertTrue(evaluate);
+    }
+
+    @Test
+    public void evaluates__fails() {
+        // given
+        List<WebElement> elements = asList(new TextFunctionTest.WebElementText("zzz"), new TextFunctionTest.WebElementText("bbb"));
+        // when
+        boolean evaluate = matchesStringRegexEvaluator.evaluate(UNUSED_DRIVER, elements, "a{3} b{3}");
+        // then
+        assertFalse(evaluate);
     }
 
     @Test
