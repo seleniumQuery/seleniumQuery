@@ -16,13 +16,14 @@
 
 package io.github.seleniumquery.browser;
 
-import io.github.seleniumquery.browser.driver.SeleniumQueryDriver;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import static java.lang.String.format;
 
 import java.io.File;
 
-import static java.lang.String.format;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import io.github.seleniumquery.browser.driver.SeleniumQueryDriver;
 
 /**
  * <p>Set of functions used both by user-managed browsers and global (static) browser.</p>
@@ -83,7 +84,6 @@ public class BrowserFunctions {
      *
      * @param fileToOpenAsURL The file to be opened as URL.
      * @return A self reference.
-     *
      * @since 0.9.0
      */
     public BrowserFunctions url(File fileToOpenAsURL) {
@@ -98,19 +98,17 @@ public class BrowserFunctions {
      * $.pause(10 * 1000); // pauses for 10 seconds
      * </pre>
      *
-     * @deprecated <strong>IMPORTANT: 'Pause' is considered to be a bad design practice.</strong><br>It will lead to fragile,
-     * erratic, possibily non-repeatable tests tha can begin failing for no reason.
+     * <strong>IMPORTANT: 'Pause' is considered to be a bad design practice.</strong><br>It will lead to fragile,
+     * erratic, possibly non-repeatable tests that can begin failing for no reason.
      * <p>It is better to write code
      * based on what the user will expect, for that consider leveraging the {@code .waitUntil()} functions, such as
      * in <code>$("#someDivThatShouldComeOut").waitUntil().is(":visible");</code>.</p>
      *
      * @param timeToPauseInMillis Pause duration, in milliseconds.
      * @return A self reference.
-     *
      * @since 0.9.0
      */
     @SuppressWarnings("deprecation")
-    @Deprecated
     public BrowserFunctions pause(long timeToPauseInMillis) {
         LOGGER.debug(format("Pausing for %d milliseconds.", timeToPauseInMillis));
         new org.openqa.selenium.interactions.PauseAction(timeToPauseInMillis).perform();
@@ -121,7 +119,6 @@ public class BrowserFunctions {
      * Attempts to maximize the window of the current browser/driver.
      *
      * @return A self reference.
-     *
      * @since 0.9.0
      */
     public BrowserFunctions maximizeWindow() {
@@ -134,7 +131,6 @@ public class BrowserFunctions {
      * Quits the WebDriver in use by this seleniumQuery browser.
      *
      * @return A self reference.
-     *
      * @since 0.9.0
      */
     public BrowserFunctions quit() {
