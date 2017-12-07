@@ -18,6 +18,7 @@ package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
 import java.util.List;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -30,7 +31,10 @@ public interface Evaluator<T> {
 	    return evaluate(seleniumQueryObject.getWebDriver(), seleniumQueryObject.get(), valueArgument);
     }
 
-	boolean evaluate(WebDriver driver, List<WebElement> elements, T valueArgument);
+    @Deprecated
+	default boolean evaluate(WebDriver driver, List<WebElement> elements, T valueArgument) {
+	    throw new NotImplementedException("Temporary. Don't use this.");
+    }
 
 	String stringFor(T valueArgument, FluentBehaviorModifier fluentBehaviorModifier);
 

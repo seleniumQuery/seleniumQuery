@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery.internal.fluentfunctions;
 
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.hamcrest.Matcher;
@@ -27,6 +28,7 @@ import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsEvalu
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsIgnoreCaseEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.EqualsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesPredicateEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesPatternEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesStringRegexEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesHamcrestMatcherEvaluator;
@@ -108,6 +110,11 @@ class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
     @Override
     public SeleniumQueryFluentAndOrThen matches(Matcher<T> hamcrestMatcher) {
         return andOrThen(new MatchesHamcrestMatcherEvaluator<>(getter), hamcrestMatcher);
+    }
+
+    @Override
+    public SeleniumQueryFluentAndOrThen matches(Predicate<T> predicateFunction) {
+        return andOrThen(new MatchesPredicateEvaluator<>(getter), predicateFunction);
     }
 
 }

@@ -16,6 +16,7 @@
 
 package io.github.seleniumquery;
 
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.hamcrest.Matcher;
@@ -129,5 +130,15 @@ public interface SeleniumQueryFluentFunctionEvaluateIf<T> extends SeleniumQueryW
      * @since 0.18.0
      */
     SeleniumQueryFluentAndOrThen matches(Matcher<T> hamcrestMatcher);
+
+    /**
+     * Tests if the result of the preceding function matches the given {@link Predicate} function.
+     *
+     * @param predicate The {@link Predicate} the result must match.
+     * @return An element that allows chaining of further waiting conditions or calling regular functions.
+     *
+     * @since 0.18.0
+     */
+    SeleniumQueryFluentAndOrThen matches(Predicate<T> predicate);
 
 }
