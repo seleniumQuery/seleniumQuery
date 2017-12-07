@@ -25,17 +25,27 @@ import org.apache.commons.logging.LogFactory;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
 import io.github.seleniumquery.browser.driver.SeleniumQueryDriver;
+import io.github.seleniumquery.internal.browser.browserfunctions.EvalFunction;
 
 /**
  * Default internal implementation of {@link BrowserFunctions}.
  *
  * @since 0.18.0
  */
-public class InternalBrowserFunctions implements BrowserFunctions {
+public class InternalBrowserFunctions
+    implements
+    BrowserFunctions,
+    InternalTargetableBrowserFunctions,
+    EvalFunction {
 
     private static final Log LOGGER = LogFactory.getLog(InternalBrowserFunctions.class);
 
     private SeleniumQueryDriver globalDriver = new SeleniumQueryDriver();
+
+    @Override
+    public BrowserFunctions target() {
+        return this;
+    }
 
     @Override
     public SeleniumQueryDriver driver() {
