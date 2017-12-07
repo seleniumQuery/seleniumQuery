@@ -619,4 +619,13 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 	    return this.stream().map(mapper).collect(Collectors.toList());
     }
 
+	/**
+	 * Queries -- in-place -- the current seleniumQuery object again. Useful for dealing with fast-changing contexts or
+     * <b>removing stale element exceptions</b>.
+	 *
+	 * @return The same seleniumQuery object, now updated (with more or less elements).
+	 * @since 0.18.0
+     */
+	SeleniumQueryObject refresh();
+
 }

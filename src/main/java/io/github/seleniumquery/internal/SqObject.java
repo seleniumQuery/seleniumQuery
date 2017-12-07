@@ -75,7 +75,13 @@ class SqObject implements SeleniumQueryObject {
 		this.previous = previous;
 	}
 
-	@Override
+    @Override
+    public SeleniumQueryObject refresh() {
+        this.elements = ListUtils.toImmutableRandomAccessList(driver.findElements(by));
+        return this;
+    }
+
+    @Override
     public final SeleniumQueryFluentFunction waitUntil() {
 		return new SqFluentFunction(this, new FluentWaitUntil());
 	}
