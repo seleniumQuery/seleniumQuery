@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.browser;
+package io.github.seleniumquery.internal.browser;
 
 import static java.lang.String.format;
 
@@ -23,6 +23,7 @@ import java.io.File;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import io.github.seleniumquery.browser.BrowserFunctions;
 import io.github.seleniumquery.browser.driver.SeleniumQueryDriver;
 
 /**

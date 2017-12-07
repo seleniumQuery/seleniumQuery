@@ -21,8 +21,8 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
-import io.github.seleniumquery.browser.InternalBrowserFunctions;
 import io.github.seleniumquery.internal.SqObjectFactory;
+import io.github.seleniumquery.internal.browser.InternalBrowserFunctions;
 
 /**
  * THe seleniumQuery Browser, consisting of seleniumQuery decoration-ish over a specific instance of WebDriver.

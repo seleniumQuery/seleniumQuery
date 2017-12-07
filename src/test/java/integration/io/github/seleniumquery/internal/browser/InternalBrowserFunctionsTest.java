@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package integration.io.github.seleniumquery.browser;
+package integration.io.github.seleniumquery.internal.browser;
 
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
@@ -23,9 +23,9 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
-import io.github.seleniumquery.browser.InternalBrowserFunctions;
+import io.github.seleniumquery.internal.browser.InternalBrowserFunctions;
 
-public class BrowserFunctionsTest {
+public class InternalBrowserFunctionsTest {
 
     private BrowserFunctions browserFunctions = new InternalBrowserFunctions();
 
