@@ -1,4 +1,4 @@
-package io.github.seleniumquery.internal.fluentfunctions.evaluators;
+package io.github.seleniumquery.internal.fluentfunctions.evaluators.matches;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,6 +13,7 @@ import org.junit.Test;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.functions.jquery.manipulation.TextFunctionTest;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesPredicateEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.TextGetter;
 
 public class MatchesPredicateEvaluatorTest {

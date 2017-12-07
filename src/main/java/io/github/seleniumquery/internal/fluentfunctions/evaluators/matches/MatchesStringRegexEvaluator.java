@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.internal.fluentfunctions.evaluators;
+package io.github.seleniumquery.internal.fluentfunctions.evaluators.matches;
 
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

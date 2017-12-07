@@ -28,10 +28,10 @@ import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsEvalu
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsIgnoreCaseEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.EqualsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesPredicateEvaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesPatternEvaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesStringRegexEvaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.MatchesHamcrestMatcherEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesPredicateEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesPatternEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesStringRegexEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesHamcrestMatcherEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.GreaterThanEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.LessThanEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.fluentfunctions.evaluators;
+package endtoend.fluentfunctions.evaluators.matches;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
