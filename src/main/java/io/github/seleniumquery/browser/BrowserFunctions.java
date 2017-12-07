@@ -91,7 +91,7 @@ public interface BrowserFunctions {
      * Example of using arguments:
      * <pre style="font-weight: bold">
      *     // this appends the div arg to the body, notice arguments[0] is used to access the first passed arg
-     *     $.eval("document.body.innerHTML += arguments[0]", "&lt;div id='new'>&lt;/div>");
+     *     $.eval("document.body.innerHTML += arguments[0]", "&lt;div id='new'&gt;&lt;/div&gt;");
      * </pre>
      * Example of returning values:
      * <pre style="font-weight: bold">
@@ -127,6 +127,7 @@ public interface BrowserFunctions {
      * arguments will be made available to the JavaScript via the "arguments" magic variable, as if
      * the function were called via "Function.apply"
      *
+     * @param <T> Type of the returned result.
      * @param script The JavaScript to execute
      * @param args The arguments to the script. May be empty
      * @return One of Boolean, Long, Double, String, List, Map or WebElement. Or null.
