@@ -96,4 +96,9 @@ public class SeleniumQueryObjectDummy implements SeleniumQueryObject {
     @Override public Stream<WebElement> stream() { throw new PseudoTestDoubleException(); }
     @Override public SeleniumQueryObject refresh() { throw new PseudoTestDoubleException(); }
 
+    @Override
+    public <T> T eval(String script, Object... args) {
+        return null;
+    }
+
 }

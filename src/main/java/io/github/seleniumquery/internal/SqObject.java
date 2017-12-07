@@ -33,8 +33,9 @@ import io.github.seleniumquery.functions.as.StandardPlugins;
 import io.github.seleniumquery.functions.sq.StreamFunction;
 import io.github.seleniumquery.internal.fluentfunctions.SqFluentFunction;
 import io.github.seleniumquery.internal.fluentfunctions.assertthat.FluentAssertThat;
-import io.github.seleniumquery.utils.ListUtils;
 import io.github.seleniumquery.internal.fluentfunctions.waituntil.FluentWaitUntil;
+import io.github.seleniumquery.internal.functions.seleniumquery.EvalFunction;
+import io.github.seleniumquery.utils.ListUtils;
 
 /**
  * Main implementation of {@link SeleniumQueryObject}.
@@ -43,7 +44,11 @@ import io.github.seleniumquery.internal.fluentfunctions.waituntil.FluentWaitUnti
  * @author ricardo-sc
  * @since 0.14.0
  */
-class SqObject implements SeleniumQueryObject {
+class SqObject
+    implements
+    SeleniumQueryObject,
+    InternalTargetableSqObject,
+    EvalFunction {
 
     static final SeleniumQueryObject NOT_BUILT_BASED_ON_A_PREVIOUS_OBJECT = null;
 
@@ -74,6 +79,11 @@ class SqObject implements SeleniumQueryObject {
 		this.elements = ListUtils.toImmutableRandomAccessList(webElements);
 		this.previous = previous;
 	}
+
+    @Override
+    public SeleniumQueryObject target() {
+        return this;
+    }
 
     @Override
     public SeleniumQueryObject refresh() {

@@ -628,4 +628,36 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
      */
 	SeleniumQueryObject refresh();
 
+	/**
+	 * Same as {@code $.eval()}, except that the first argument sent to the evaluated code is the array of currently matched
+     * web elements.
+     * <br>
+     * Example of using arguments:
+     * <pre style="font-weight: bold">
+     * // this appends a div to the body
+     * // notice arguments[0] is the list of matched elements and arguments[0][0] is the '#existing' element
+     * // arguments[1] is the string "second"
+     * $("#existing").eval("document.body.innerHTML += '&lt;div id=\"new\"&gt;' + arguments[0][0].textContent + '|' + arguments[1] + '&lt;/div&gt;'", "second");
+     * </pre>
+     * Example of returning values:
+     * <pre style="font-weight: bold">
+     * // simply use return in the expression
+     * WebElement existingDiv = $("#existing").eval("return arguments[0][0]");
+     * </pre>
+     * Naturally, {@code return} and {@code arguments} can be used in a single expression.
+     * <br>
+     * <br>
+     *     For more info, see {@link io.github.seleniumquery.browser.BrowserFunctions#eval(String, Object...)} javadocs.
+     *
+     * @param <T> Type of the returned result.
+     * @param script The JavaScript to execute
+     * @param args The arguments to the script. May be empty. Theee will be acessible as {@code arguments[1]} and
+     *            on. {@code arguments[0]} will be the list of currently matched {@code WebElement}s (accessible
+     *            as {@code HTMLElement} instances -- not jQuery objects).
+     * @return One of Boolean, Long, Double, String, List, Map or WebElement. Or null.
+     *
+     * @since 0.18.0
+     */
+    <T> T eval(String script, Object... args);
+
 }
