@@ -27,14 +27,14 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class WaitUntilIsTest {
-	
+
 	@ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(WaitUntilIsMoreTest.class);
 
 	@Test
 	public void waitUntil_not_enabled() {
 		assertThat($("input.disabledInput").waitUntil().is(":not(:enabled)").then().size(), is(1));
 	}
-	
+
 	@Test
 	public void waitUntil_disabled() {
 		assertThat($("input.disabledInput").waitUntil().is(":disabled").then().size(), is(1));
@@ -59,7 +59,7 @@ public class WaitUntilIsTest {
 	public void waitUntil_visible_enabled() {
 		assertThat($("input.enabledInput").waitUntil().is(":visible:enabled").then().size(), is(1));
 	}
-	
+
 	@Test
 	public void waitUntil_hidden() {
 		assertThat($("div.invisibleDiv").waitUntil().is(":hidden").then().size(), is(1));
@@ -70,7 +70,7 @@ public class WaitUntilIsTest {
 		// when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div.invisibleDiv").waitUntil().is(":hidden");
 		// then
-		String expectedToString = "$(\"div.invisibleDiv\").waitUntil().is(\":hidden\")";
+		String expectedToString = "$(\"div.invisibleDiv\")";
 		assertThat(waitAndOrThen.toString(), is(expectedToString));
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}

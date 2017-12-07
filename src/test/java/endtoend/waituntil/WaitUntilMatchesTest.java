@@ -54,7 +54,7 @@ public class WaitUntilMatchesTest {
 		// when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("input").waitUntil().val().matches("[ba]{2}c?.*");
         // then
-		String expectedToString = "$(\"input\").waitUntil().val().matches(\"[ba]{2}c?.*\")";
+		String expectedToString = "$(\"input\")";
 		assertThat(waitAndOrThen.toString(), is(expectedToString));
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}

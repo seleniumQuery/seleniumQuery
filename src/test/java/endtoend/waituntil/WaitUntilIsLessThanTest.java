@@ -72,7 +72,7 @@ public class WaitUntilIsLessThanTest {
         // when
         SeleniumQueryWaitAndOrThen waitAndOrThen = $(DIV_CLICKABLE_SELECTOR).waitUntil(2000, 200).text().isLessThan(8);
         // then
-        String expectedToString = "$(\"" + DIV_CLICKABLE_SELECTOR + "\").waitUntil().text().isLessThan(8)";
+        String expectedToString = "$(\"" + DIV_CLICKABLE_SELECTOR + "\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
         assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}

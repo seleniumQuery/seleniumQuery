@@ -74,7 +74,7 @@ public class WaitUntilGettersNotTest {
         // when
         SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().text().not().contains("SOMETHING-ELSE");
         // then
-        String expectedToString = "$(\"div\").waitUntil().text().not().contains(\"SOMETHING-ELSE\")";
+        String expectedToString = "$(\"div\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
         assertThat(waitAndOrThen.then().toString(), is(expectedToString));
     }
@@ -84,7 +84,7 @@ public class WaitUntilGettersNotTest {
         // when
         SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().val().not().isEqualTo("STUFF");
         // then
-        String expectedToString = "$(\"div\").waitUntil().val().not().isEqualTo(\"STUFF\")";
+        String expectedToString = "$(\"div\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
         assertThat(waitAndOrThen.then().toString(), is(expectedToString));
     }
@@ -95,7 +95,7 @@ public class WaitUntilGettersNotTest {
         // when
         SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().attr("data-attr").not().matches("x");
         // then
-        String expectedToString = "$(\"div\").waitUntil().attr(\"data-attr\").not().matches(\"x\")";
+        String expectedToString = "$(\"div\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
         assertThat(waitAndOrThen.then().toString(), is(expectedToString));
     }
@@ -105,7 +105,7 @@ public class WaitUntilGettersNotTest {
         // when
         SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().size().not().isGreaterThan(999);
         // then
-        String expectedToString = "$(\"div\").waitUntil().size().not().isGreaterThan(999)";
+        String expectedToString = "$(\"div\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
         assertThat(waitAndOrThen.then().toString(), is(expectedToString));
     }
@@ -116,7 +116,7 @@ public class WaitUntilGettersNotTest {
         // when
         SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().prop("tagName").not().isLessThan(-1);
         // then
-        String expectedToString = "$(\"div\").waitUntil().prop(\"tagName\").not().isLessThan(-1)";
+        String expectedToString = "$(\"div\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
         assertThat(waitAndOrThen.then().toString(), is(expectedToString));
     }
@@ -126,7 +126,7 @@ public class WaitUntilGettersNotTest {
         // when
         SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().html().not().isGreaterThan(999);
         // then
-        String expectedToString = "$(\"div\").waitUntil().html().not().isGreaterThan(999)";
+        String expectedToString = "$(\"div\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
         assertThat(waitAndOrThen.then().toString(), is(expectedToString));
     }

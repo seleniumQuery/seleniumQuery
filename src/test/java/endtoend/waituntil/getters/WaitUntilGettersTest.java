@@ -72,7 +72,7 @@ public class WaitUntilGettersTest {
 		// when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().size().isEqualTo(2);
 		// then
-		String expectedToString = "$(\"div\").waitUntil().size().isEqualTo(2)";
+		String expectedToString = "$(\"div\")";
 		assertThat(waitAndOrThen.toString(), is(expectedToString));
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
@@ -82,7 +82,7 @@ public class WaitUntilGettersTest {
         // when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().attr("data-attr").isEqualTo("data-attr-value");
         // then
-		String expectedToString = "$(\"div\").waitUntil().attr(\"data-attr\").isEqualTo(\"data-attr-value\")";
+		String expectedToString = "$(\"div\")";
 		assertThat(waitAndOrThen.toString(), is(expectedToString));
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
@@ -92,7 +92,7 @@ public class WaitUntilGettersTest {
         // when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().prop("tagName").isEqualTo("DIV");
         // then
-        String expectedToString = "$(\"div\").waitUntil().prop(\"tagName\").isEqualTo(\"DIV\")";
+        String expectedToString = "$(\"div\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
@@ -102,7 +102,7 @@ public class WaitUntilGettersTest {
         // when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().html().isEqualTo("&gt;&lt;");
         // then
-        String expectedToString = "$(\"div\").waitUntil().html().isEqualTo(\"&gt;&lt;\")";
+        String expectedToString = "$(\"div\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}
@@ -112,7 +112,7 @@ public class WaitUntilGettersTest {
         // when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("div").waitUntil().text().contains("< >");
         // then
-        String expectedToString = "$(\"div\").waitUntil().text().contains(\"< >\")";
+        String expectedToString = "$(\"div\")";
         assertThat(waitAndOrThen.toString(), is(expectedToString));
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}

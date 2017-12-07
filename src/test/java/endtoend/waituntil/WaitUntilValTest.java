@@ -62,7 +62,7 @@ public class WaitUntilValTest {
         // when
 		SeleniumQueryWaitAndOrThen waitAndOrThen = $("#i1").waitUntil().val().isEqualTo("abc");
 		// then
-		String expectedToString = "$(\"#i1\").waitUntil().val().isEqualTo(\"abc\")";
+		String expectedToString = "$(\"#i1\")";
 		assertThat(waitAndOrThen.toString(), is(expectedToString));
 		assertThat(waitAndOrThen.then().toString(), is(expectedToString));
 	}

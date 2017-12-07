@@ -67,7 +67,7 @@ public class WaitUntilTest {
         assertEquals("seleniumQuery", text2);
     }
 
-    @Test(expected = io.github.seleniumquery.SeleniumQueryException.class)
+    @Test
     @SuppressWarnings("deprecation")
     public void waitUntil__text__contains__SUCCESS__local_Objects___BAD_interfaces_with_AND() {
         SeleniumQueryWaitUntil seleniumQueryWaitUntil = $("#sq").waitUntil();
