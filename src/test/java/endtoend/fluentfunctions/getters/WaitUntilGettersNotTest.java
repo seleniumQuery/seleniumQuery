@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package endtoend.waituntil.getters;
+package endtoend.fluentfunctions.getters;
 
-import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
+
+import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
-
-import java.util.List;
-
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 public class WaitUntilGettersNotTest {
 

@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package endtoend.waituntil;
-
-import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+package endtoend.fluentfunctions.waituntil;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import io.github.seleniumquery.wait.SeleniumQueryTimeoutException;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class WaitUntilIsMoreTest {
 
@@ -58,7 +59,7 @@ public class WaitUntilIsMoreTest {
 	public void containsText() {
 		assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().contains("isibleDi").then().text());
 	}
-	
+
 	@Test(expected=SeleniumQueryTimeoutException.class)
 	public void waitUntil_has_textContaining__should_throw_an_exception_after_waiting_for_div_without_the_desired_text() {
 		$(".visibleDiv").waitUntil(1200).text().contains("CRAZY TEXT THAT IT DOES NOT CONTAIN");

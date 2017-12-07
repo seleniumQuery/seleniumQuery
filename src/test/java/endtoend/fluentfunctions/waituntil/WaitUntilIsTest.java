@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package endtoend.waituntil;
-
-import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+package endtoend.fluentfunctions.waituntil;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import io.github.seleniumquery.SeleniumQueryWaitAndOrThen;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class WaitUntilIsTest {
 
