@@ -16,11 +16,13 @@
 
 package io.github.seleniumquery;
 
-import io.github.seleniumquery.browser.BrowserFunctions;
-import io.github.seleniumquery.internal.SqObjectFactory;
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
+import io.github.seleniumquery.browser.BrowserFunctions;
+import io.github.seleniumquery.browser.InternalBrowserFunctions;
+import io.github.seleniumquery.internal.SqObjectFactory;
 
 /**
  * THe seleniumQuery Browser, consisting of seleniumQuery decoration-ish over a specific instance of WebDriver.
@@ -47,7 +49,7 @@ public class SeleniumQueryBrowser {
      *
      * @since 0.9.0
      */
-    public final BrowserFunctions $ = new BrowserFunctions();
+    public final BrowserFunctions $ = new InternalBrowserFunctions();
 
     /**
      * <p>The seleniumQuery browser functions object.</p> This works as an alias to <code>$</code>.

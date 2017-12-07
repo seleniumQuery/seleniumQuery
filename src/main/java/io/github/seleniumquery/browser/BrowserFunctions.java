@@ -1,27 +1,6 @@
-/*
- * Copyright (c) 2015 seleniumQuery authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package io.github.seleniumquery.browser;
 
-import static java.lang.String.format;
-
 import java.io.File;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import io.github.seleniumquery.browser.driver.SeleniumQueryDriver;
 
@@ -35,11 +14,7 @@ import io.github.seleniumquery.browser.driver.SeleniumQueryDriver;
  *
  * @since 0.9.0
  */
-public class BrowserFunctions {
-
-    private static final Log LOGGER = LogFactory.getLog(BrowserFunctions.class);
-
-    private SeleniumQueryDriver globalDriver = new SeleniumQueryDriver();
+public interface BrowserFunctions {
 
     /**
      * Obtains the seleniumQuery's driver tool instance. Through it you can:
@@ -50,9 +25,7 @@ public class BrowserFunctions {
      *
      * @return The seleniumQuery's driver tool instance.
      */
-    public SeleniumQueryDriver driver() {
-        return globalDriver;
-    }
+    SeleniumQueryDriver driver();
 
     /**
      * Returns the current URL in the browser.
@@ -61,9 +34,7 @@ public class BrowserFunctions {
      *
      * @since 0.9.0
      */
-    public String url() {
-        return driver().get().getCurrentUrl();
-    }
+    String url();
 
     /**
      * Opens the given URL in the default browser.
@@ -73,11 +44,7 @@ public class BrowserFunctions {
      *
      * @since 0.9.0
      */
-    public BrowserFunctions url(String urlToOpen) {
-        LOGGER.debug(format("Opening URL: %s", urlToOpen));
-        driver().get().get(urlToOpen);
-        return this;
-    }
+    BrowserFunctions url(String urlToOpen);
 
     /**
      * Opens the given file as a URL in the browser.
@@ -86,9 +53,7 @@ public class BrowserFunctions {
      * @return A self reference.
      * @since 0.9.0
      */
-    public BrowserFunctions url(File fileToOpenAsURL) {
-        return url(fileToOpenAsURL.toURI().toString());
-    }
+    BrowserFunctions url(File fileToOpenAsURL);
 
     /**
      * <p>Performs a pause, instructing the the browser (thread) to wait (sleep) for the time
@@ -109,11 +74,7 @@ public class BrowserFunctions {
      * @since 0.9.0
      */
     @SuppressWarnings("deprecation")
-    public BrowserFunctions pause(long timeToPauseInMillis) {
-        LOGGER.debug(format("Pausing for %d milliseconds.", timeToPauseInMillis));
-        new org.openqa.selenium.interactions.PauseAction(timeToPauseInMillis).perform();
-        return this;
-    }
+    BrowserFunctions pause(long timeToPauseInMillis);
 
     /**
      * Attempts to maximize the window of the current browser/driver.
@@ -121,11 +82,7 @@ public class BrowserFunctions {
      * @return A self reference.
      * @since 0.9.0
      */
-    public BrowserFunctions maximizeWindow() {
-        LOGGER.debug("Maximizing window.");
-        driver().get().manage().window().maximize();
-        return this;
-    }
+    BrowserFunctions maximizeWindow();
 
     /**
      * Quits the WebDriver in use by this seleniumQuery browser.
@@ -133,9 +90,6 @@ public class BrowserFunctions {
      * @return A self reference.
      * @since 0.9.0
      */
-    public BrowserFunctions quit() {
-        driver().quit();
-        return this;
-    }
+    BrowserFunctions quit();
 
 }

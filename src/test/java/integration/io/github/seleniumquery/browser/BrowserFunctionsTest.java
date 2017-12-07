@@ -16,16 +16,18 @@
 
 package integration.io.github.seleniumquery.browser;
 
-import io.github.seleniumquery.browser.BrowserFunctions;
-import org.junit.Test;
-
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Test;
+
+import io.github.seleniumquery.browser.BrowserFunctions;
+import io.github.seleniumquery.browser.InternalBrowserFunctions;
+
 public class BrowserFunctionsTest {
 
-    BrowserFunctions browserFunctions = new BrowserFunctions();
+    private BrowserFunctions browserFunctions = new InternalBrowserFunctions();
 
     @Test
     @SuppressWarnings("deprecation")
