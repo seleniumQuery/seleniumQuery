@@ -16,18 +16,20 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.waituntil;
 
-import io.github.seleniumquery.SeleniumQueryConfig;
-import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
-import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
-import io.github.seleniumquery.internal.fluentfunctions.FluentFunction;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.FluentWait;
-
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.FluentWait;
+
+import io.github.seleniumquery.SeleniumQueryConfig;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.internal.InternalExceptionFactory;
+import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.FluentFunction;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 
 /**
  * @author acdcjunior
@@ -100,7 +102,7 @@ public class FluentWaitUntil implements FluentFunction {
                                         .ignoring(NoSuchElementException.class)
                                             .until(waitFunction);
         } catch (TimeoutException sourceException) {
-            throw new SeleniumQueryTimeoutException(sourceException, seleniumQueryObject, "to .waitUntil()."+evaluator.stringFor(value, fluentBehaviorModifier));
+            throw InternalExceptionFactory.newTimeoutException(sourceException, seleniumQueryObject, "to .waitUntil()."+evaluator.stringFor(value, fluentBehaviorModifier));
         }
 
         return seleniumQueryObject;
