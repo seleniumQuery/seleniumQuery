@@ -18,6 +18,7 @@ package io.github.seleniumquery.internal.fluentfunctions.evaluators.matches;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
@@ -36,13 +37,25 @@ public class MatchesStringRegexEvaluator implements Evaluator<String> {
 	}
 
 	@Override
-	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, String regex) {
-		return getter.get(seleniumQueryObject).toString().matches(regex);
-	}
+    public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, String regex) {
+        String lastValue = getter.get(seleniumQueryObject).toString();
+        boolean satisfiesConstraints = lastValue.matches(regex);
+        return new EvaluationReport(lastValue, satisfiesConstraints);
+    }
 
 	@Override
 	public String stringFor(String regex, FluentBehaviorModifier fluentBehaviorModifier) {
-		return getter.toString() + fluentBehaviorModifier + ".matches(\"" + regex + "\")";
+		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(\"" + regex + "\")";
 	}
+
+    @Override
+    public String getterAsString() {
+        return getter.toString();
+    }
+
+    @Override
+    public String miolo(String value) {
+        return "match regex \"" + value + "\"";
+    }
 
 }
