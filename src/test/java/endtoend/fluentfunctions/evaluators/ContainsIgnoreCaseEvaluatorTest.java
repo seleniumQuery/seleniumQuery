@@ -16,35 +16,49 @@
 
 package endtoend.fluentfunctions.evaluators;
 
+import static endtoend.fluentfunctions.evaluators.EvaluatorsExceptionTestUtils.assertThrowsAssertionError;
+import static endtoend.fluentfunctions.evaluators.EvaluatorsExceptionTestUtils.assertThrowsTimeoutException;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import endtoend.fluentfunctions.evaluators.matches.MatchesHamcrestMatcherEvaluatorTest;
-import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class ContainsIgnoreCaseEvaluatorTest {
 
-    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(MatchesHamcrestMatcherEvaluatorTest.class);
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
     public void containsIgnoreCase() {
-        assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().containsIgnoreCase("iSIBLeDi").then().text());
+        assertEquals("yo", $("#yo").waitUntil().val().containsIgnoreCase("yO").then().val());
+        assertEquals("yo", $("#yo").assertThat().val().containsIgnoreCase("Yo").then().val());
     }
 
     @Test
-    public void containsIgnoreCase_fails() {
-        try {
-            assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil(100).text().containsIgnoreCase("x").then().text());
-            fail();
-        } catch (SeleniumQueryTimeoutException e) {
-            assertEquals("Timeout while waiting for $(\".visibleDiv\") to .waitUntil().text().containsIgnoreCase(\"x\")", e.getMessage());
-        }
+    public void containsIgnoreCase_fails_waitUntil() {
+        assertThrowsTimeoutException(
+            __ ->
+                $("#yo").waitUntil(100).val().containsIgnoreCase("x")
+            ,
+            "Timeout while waiting for $(\"#yo\").waitUntil().val().containsIgnoreCase(\"x\").\n\n" +
+                "expected: <val() to contain \"x\" ignoring case>\n" +
+                "but: <last val() was \"yo\">"
+        );
+    }
+
+    @Test
+    public void containsIgnoreCase_fails_assertThat() {
+        assertThrowsAssertionError(
+            __ ->
+                $("#yo").assertThat().val().containsIgnoreCase("x")
+            ,
+            "Failed assertion $(\"#yo\").assertThat().val().containsIgnoreCase(\"x\").\n\n" +
+                "expected: <val() to contain \"x\" ignoring case>\n" +
+                "but: <val() was \"yo\">"
+        );
     }
 
 }

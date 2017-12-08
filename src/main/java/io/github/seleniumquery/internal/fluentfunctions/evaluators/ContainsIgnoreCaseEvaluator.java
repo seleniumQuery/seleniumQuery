@@ -17,12 +17,17 @@
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
 public class ContainsIgnoreCaseEvaluator implements Evaluator<String> {
+
+    private static final Log LOGGER = LogFactory.getLog(ContainsIgnoreCaseEvaluator.class);
+
     private Getter<?> getter;
 
     public ContainsIgnoreCaseEvaluator(Getter<?> getter) {
@@ -30,15 +35,27 @@ public class ContainsIgnoreCaseEvaluator implements Evaluator<String> {
     }
 
     @Override
-    public boolean evaluate(SeleniumQueryObject seleniumQueryObject, String valueToEqual) {
+    public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, String valueToContain) {
+        LOGGER.debug("Evaluating .containsIgnoreCase()...");
         Object propertyGot = getter.get(seleniumQueryObject);
-
-        return propertyGot != null && StringUtils.containsIgnoreCase(propertyGot.toString(), valueToEqual);
+        boolean satisfiesConstraints = propertyGot != null && StringUtils.containsIgnoreCase(propertyGot.toString(), valueToContain);
+        LOGGER.debug("Evaluating .containsIgnoreCase()... got " + getter + ": \"" + propertyGot + "\". Wanted: \"" + valueToContain + "\".");
+        return new EvaluationReport(propertyGot + "", satisfiesConstraints);
     }
 
     @Override
-    public String stringFor(String valueToEqual, FluentBehaviorModifier fluentBehaviorModifier) {
-        return getter.toString() + fluentBehaviorModifier + ".containsIgnoreCase(\"" + valueToEqual + "\")";
+    public String stringFor(String valueToContain, FluentBehaviorModifier fluentBehaviorModifier) {
+        return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".containsIgnoreCase(\"" + valueToContain + "\")";
+    }
+
+    @Override
+    public String getterAsString() {
+        return getter.toString();
+    }
+
+    @Override
+    public String miolo(String valueToContain) {
+        return "contain \"" + valueToContain + "\" ignoring case";
     }
 
 }
