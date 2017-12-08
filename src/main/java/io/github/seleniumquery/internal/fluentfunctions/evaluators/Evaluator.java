@@ -29,12 +29,14 @@ public interface Evaluator<T> {
 
     default String expectedVsActualMessage(FluentBehaviorModifier fluentBehaviorModifier, T value, String lastValue, String actualPrefix) {
         return String.format(
-            "expected: <%s %sto " + miolo(value) + ">\nbut: <%s%s was \"%s\">",
+            "expected: <%s %sto " + miolo(value) + ">\nbut: <%s%s was %s%s%s>",
             getterAsString(),
             fluentBehaviorModifier.asString(),
             actualPrefix,
             getterAsString(),
-            lastValue
+            value instanceof Number ? "" : "\"",
+            lastValue,
+            value instanceof Number ? "" : "\""
         );
     }
 
