@@ -13,7 +13,7 @@ import org.junit.Test;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.functions.jquery.manipulation.TextFunctionTest;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesPredicateEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
 import io.github.seleniumquery.internal.fluentfunctions.getters.TextGetter;
 
 public class MatchesPredicateEvaluatorTest {
@@ -26,9 +26,9 @@ public class MatchesPredicateEvaluatorTest {
         // given
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(new TextFunctionTest.WebElementText("aaa"), new TextFunctionTest.WebElementText("bbb"));
         // when
-        boolean evaluate = matchesPredicateEvaluator.evaluate(sqo, lambda);
+        EvaluationReport evaluate = matchesPredicateEvaluator.evaluate(sqo, lambda);
         // then
-        assertTrue(evaluate);
+        assertTrue(evaluate.isSatisfiesConstraints());
     }
 
     @Test
@@ -36,9 +36,9 @@ public class MatchesPredicateEvaluatorTest {
         // given
         SeleniumQueryObject sqo = createStubSeleniumQueryObjectWithElements(new TextFunctionTest.WebElementText("zzz"), new TextFunctionTest.WebElementText("bbb"));
         // when
-        boolean evaluate = matchesPredicateEvaluator.evaluate(sqo, lambda);
+        EvaluationReport evaluate = matchesPredicateEvaluator.evaluate(sqo, lambda);
         // then
-        assertFalse(evaluate);
+        assertFalse(evaluate.isSatisfiesConstraints());
     }
 
     @Test

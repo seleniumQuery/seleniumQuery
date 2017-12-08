@@ -20,6 +20,7 @@ import java.util.function.Predicate;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
@@ -37,14 +38,27 @@ public class MatchesPredicateEvaluator<T> implements Evaluator<Predicate<T>> {
 		this.getter = getter;
 	}
 
+
     @Override
-    public boolean evaluate(SeleniumQueryObject seleniumQueryObject, Predicate<T> predicateLambda) {
-	    return predicateLambda.test(getter.get(seleniumQueryObject));
+    public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, Predicate<T> predicateLambda) {
+        T lastValue = getter.get(seleniumQueryObject);
+        boolean satisfiesConstraints = predicateLambda.test(lastValue);
+        return new EvaluationReport(lastValue.toString(), satisfiesConstraints);
     }
 
 	@Override
 	public String stringFor(Predicate<T> predicateLambda, FluentBehaviorModifier fluentBehaviorModifier) {
-		return getter.toString() + fluentBehaviorModifier + ".matches(<predicate function>)";
+		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(<predicate function>)";
 	}
+
+    @Override
+    public String getterAsString() {
+        return getter.toString();
+    }
+
+    @Override
+    public String miolo(Predicate<T> predicateLambda) {
+        return "satisfy predicate function";
+    }
 
 }

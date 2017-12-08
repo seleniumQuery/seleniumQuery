@@ -1,7 +1,8 @@
 package endtoend.fluentfunctions.evaluators.matches;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.function.Predicate;
 
@@ -20,7 +21,6 @@ public class MatchesPredicateEvaluatorTest {
     private final Predicate<String> aaa = text -> text.contains("aaa");
     private final Predicate<String> zzz = text -> text.contains("zzz");
 
-
     @Test
     public void matches__predicate_success() {
         assertEquals("aaa bbb", $("div").waitUntil().text().matches(aaa).then().text());
@@ -33,7 +33,9 @@ public class MatchesPredicateEvaluatorTest {
             $("div").waitUntil(100).text().matches(zzz);
             fail();
         } catch (SeleniumQueryTimeoutException e) {
-            assertEquals("Timeout while waiting for $(\"div\") to .waitUntil().text().matches(<predicate function>)", e.getMessage());
+            assertEquals("Timeout while waiting for $(\"div\").waitUntil().text().matches(<predicate function>).\n\n" +
+                "expected: <text() to satisfy predicate function>\n" +
+                "but: <last text() was \"aaa bbb\">", e.getMessage());
         }
     }
 
@@ -43,7 +45,9 @@ public class MatchesPredicateEvaluatorTest {
             $("div").assertThat().text().matches(zzz);
             fail();
         } catch (SeleniumQueryAssertionError e) {
-            assertEquals("Failed assertion: $(\"div\").assertThat().text().matches(<predicate function>)", e.getMessage());
+            assertEquals("Failed assertion $(\"div\").assertThat().text().matches(<predicate function>).\n\n" +
+                "expected: <text() to satisfy predicate function>\n" +
+                "but: <text() was \"aaa bbb\">", e.getMessage());
         }
     }
 
