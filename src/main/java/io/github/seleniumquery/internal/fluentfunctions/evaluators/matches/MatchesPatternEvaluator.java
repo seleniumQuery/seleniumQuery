@@ -16,11 +16,14 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators.matches;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
@@ -32,6 +35,8 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
  */
 public class MatchesPatternEvaluator implements Evaluator<Pattern> {
 
+    private static final Log LOGGER = LogFactory.getLog(MatchesPatternEvaluator.class);
+
 	private Getter<?> getter;
 
 	public MatchesPatternEvaluator(Getter<?> getter) {
@@ -39,15 +44,24 @@ public class MatchesPatternEvaluator implements Evaluator<Pattern> {
 	}
 
 	@Override
-	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, Pattern regexPattern) {
-        String values = getter.get(seleniumQueryObject).toString();
-        Matcher m = regexPattern.matcher(values);
-        return m.matches();
+	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, Pattern regexPattern) {
+        LOGGER.debug("Evaluating .matches(<Pattern>)...");
+        String lastValue = getter.get(seleniumQueryObject).toString();
+        LOGGER.debug("Evaluating .matches(<Pattern>)... got "+getter+": \""+lastValue+"\". Wanted: <\"" + regexPattern + "\">.");
+        boolean satisfiesConstraints = regexPattern.matcher(lastValue).matches();
+        return new EvaluationReport(lastValue, satisfiesConstraints);
 	}
 
 	@Override
 	public String stringFor(Pattern regexPattern, FluentBehaviorModifier fluentBehaviorModifier) {
-		return getter.toString() + fluentBehaviorModifier + ".matches(\"" + regexPattern + "\")";
+        return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(\"" + regexPattern + "\")";
+	}
+
+	@Override
+	public String expectedVsActualMessage(FluentBehaviorModifier fluentBehaviorModifier, Pattern regexPattern, String lastValue,
+                                          String actualPrefix) {
+        return String.format("expected: <%s %sto match Pattern \"%s\">\nbut: <%s%s was \"%s\">", getter.toString(),
+            fluentBehaviorModifier.asString(), regexPattern, actualPrefix, getter.toString(), lastValue);
 	}
 
 }
