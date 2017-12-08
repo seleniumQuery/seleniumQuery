@@ -16,20 +16,21 @@
 
 package testinfrastructure;
 
-import io.github.seleniumquery.SeleniumQuery;
-import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.browser.BrowserFunctions;
-import org.openqa.selenium.WebElement;
-import testinfrastructure.testutils.SauceLabsUtils;
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.openqa.selenium.WebElement;
+
+import io.github.seleniumquery.SeleniumQuery;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.browser.BrowserFunctions;
+import testinfrastructure.testutils.SauceLabsUtils;
 
 public class EndToEndTestUtils {
 
@@ -64,7 +65,11 @@ public class EndToEndTestUtils {
     public static String classNameToTestFileUrl(String classFullName) {
         String classPath = classFullName.replace('.', '/');
         String htmlPath = TEST_SRC_FOLDER + classPath + ".html";
-        return new File(htmlPath).toURI().toString();
+        File file = new File(htmlPath);
+        if (!file.exists()) {
+            throw new RuntimeException("File " + htmlPath + " does not exist.");
+        }
+        return file.toURI().toString();
     }
 
     public static void openUrl(String urlToOpen) {
