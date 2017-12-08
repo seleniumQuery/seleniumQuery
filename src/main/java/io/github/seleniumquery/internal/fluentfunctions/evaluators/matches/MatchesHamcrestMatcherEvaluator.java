@@ -22,6 +22,7 @@ import org.hamcrest.Matcher;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
@@ -41,18 +42,25 @@ public class MatchesHamcrestMatcherEvaluator<T> implements Evaluator<Matcher<T>>
 		this.getter = getter;
 	}
 
-	@Override
-	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, Matcher<T> matcher) {
+ 	@Override
+	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, Matcher<T> matcher) {
 		LOGGER.debug("Evaluating .matches(<Matcher>)...");
-		final T gotValue = getter.get(seleniumQueryObject);
-		LOGGER.debug("Evaluating .matches(<Matcher>)... got "+getter+": \""+gotValue+"\". Wanted: <"+matcher+">.");
-
-		return matcher.matches(gotValue);
+		T lastValue = getter.get(seleniumQueryObject);
+		LOGGER.debug("Evaluating .matches(<Matcher>)... got "+getter+": \""+lastValue+"\". Wanted: <"+matcher+">.");
+        boolean satisfiesConstraints = matcher.matches(lastValue);
+        return new EvaluationReport(lastValue.toString(), satisfiesConstraints);
 	}
 
 	@Override
 	public String stringFor(Matcher<T> matcher, FluentBehaviorModifier fluentBehaviorModifier) {
-        return getter.toString() + fluentBehaviorModifier + ".matches(<" + matcher + ">)";
+        return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(<" + matcher + ">)";
 	}
+
+    @Override
+    public String expectedVsActualMessage(FluentBehaviorModifier fluentBehaviorModifier, Matcher<T> matcher, String lastValue,
+                                          String actualPrefix) {
+        return String.format("expected: <%s %sto be <%s>>\nbut: <%s%s was \"%s\">", getter.toString(),
+            fluentBehaviorModifier.asString(), matcher, actualPrefix, getter.toString(), lastValue);
+    }
 
 }

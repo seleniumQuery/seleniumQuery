@@ -25,6 +25,7 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
+import io.github.seleniumquery.fluentfunctions.assertthat.SeleniumQueryAssertionError;
 import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
@@ -34,17 +35,59 @@ public class MatchesHamcrestMatcherEvaluatorTest {
 
     @Test
     public void matches__success() {
-        assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().text().matches(Matchers.containsString("isibleDi")).then().text());
+        assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().html().matches(Matchers.containsString("isibleDi")).then().html());
     }
 
     @Test
-    public void matches__fails() {
+    public void matches__assertThat_success() {
+        assertEquals("!visibleDiv!", $(".visibleDiv").assertThat().html().matches(Matchers.containsString("isibleDi")).then().html());
+    }
+
+    @Test
+    public void matches__pattern_fails_waitUntil() {
         try {
-            $(".visibleDiv").waitUntil(100).text().matches(Matchers.containsString("isibleDix"));
+            $(".visibleDiv").waitUntil(100).html().matches(Matchers.containsString("isibleDix"));
             fail();
         } catch (SeleniumQueryTimeoutException e) {
-            assertEquals("Timeout while waiting for $(\".visibleDiv\") to .waitUntil().text().matches" +
-                "(<a string containing \"isibleDix\">)", e.getMessage());
+            assertEquals("Timeout while waiting for $(\".visibleDiv\").waitUntil().html().matches(<a string containing \"isibleDix\">).\n\n" +
+                "expected: <html() to be <a string containing \"isibleDix\">>\n" +
+                "but: <last html() was \"!visibleDiv!\">", e.getMessage());
+        }
+    }
+
+    @Test
+    public void matches__pattern_fails_assertThat() {
+        try {
+            $(".visibleDiv").assertThat().html().matches(Matchers.containsString("isibleDix"));
+            fail();
+        } catch (SeleniumQueryAssertionError e) {
+            assertEquals("Failed assertion $(\".visibleDiv\").assertThat().html().matches(<a string containing \"isibleDix\">).\n\n" +
+                "expected: <html() to be <a string containing \"isibleDix\">>\n" +
+                "but: <html() was \"!visibleDiv!\">", e.getMessage());
+        }
+    }
+
+    @Test
+    public void matches__NOT_pattern_fails_waitUntil() {
+        try {
+            $(".visibleDiv").waitUntil(101).html().not().matches(Matchers.containsString("isibleDi"));
+            fail();
+        } catch (SeleniumQueryTimeoutException e) {
+            assertEquals("Timeout while waiting for $(\".visibleDiv\").waitUntil().html().not().matches(<a string containing \"isibleDi\">).\n\n" +
+                "expected: <html() not to be <a string containing \"isibleDi\">>\n" +
+                "but: <last html() was \"!visibleDiv!\">", e.getMessage());
+        }
+    }
+
+    @Test
+    public void matches__NOT_pattern_fails_assertThat() {
+        try {
+            $(".visibleDiv").assertThat().html().not().matches(Matchers.containsString("isibleDi"));
+            fail();
+        } catch (SeleniumQueryAssertionError e) {
+            assertEquals("Failed assertion $(\".visibleDiv\").assertThat().html().not().matches(<a string containing \"isibleDi\">).\n\n" +
+                "expected: <html() not to be <a string containing \"isibleDi\">>\n" +
+                "but: <html() was \"!visibleDiv!\">", e.getMessage());
         }
     }
 
