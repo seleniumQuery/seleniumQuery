@@ -1,8 +1,9 @@
 package endtoend.fluentfunctions.evaluators.matches;
 
+import static endtoend.fluentfunctions.evaluators.EvaluatorsExceptionTestUtils.assertThrowsAssertionError;
+import static endtoend.fluentfunctions.evaluators.EvaluatorsExceptionTestUtils.assertThrowsTimeoutException;
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.function.Predicate;
 
@@ -10,8 +11,6 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import io.github.seleniumquery.fluentfunctions.assertthat.SeleniumQueryAssertionError;
-import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class MatchesPredicateEvaluatorTest {
@@ -29,26 +28,26 @@ public class MatchesPredicateEvaluatorTest {
 
     @Test
     public void matches__predicate_fails() {
-        try {
-            $("div").waitUntil(100).text().matches(zzz);
-            fail();
-        } catch (SeleniumQueryTimeoutException e) {
-            assertEquals("Timeout while waiting for $(\"div\").waitUntil().text().matches(<predicate function>).\n\n" +
+        assertThrowsTimeoutException(
+            __ ->
+                $("div").waitUntil(100).text().matches(zzz)
+            ,
+            "Timeout while waiting for $(\"div\").waitUntil().text().matches(<predicate function>).\n\n" +
                 "expected: <text() to satisfy predicate function>\n" +
-                "but: <last text() was \"aaa bbb\">", e.getMessage());
-        }
+                "but: <last text() was \"aaa bbb\">"
+        );
     }
 
     @Test
     public void matches__predicate_fails_assertThat() {
-        try {
-            $("div").assertThat().text().matches(zzz);
-            fail();
-        } catch (SeleniumQueryAssertionError e) {
-            assertEquals("Failed assertion $(\"div\").assertThat().text().matches(<predicate function>).\n\n" +
+        assertThrowsAssertionError(
+            __ ->
+                $("div").assertThat().text().matches(zzz)
+            ,
+            "Failed assertion $(\"div\").assertThat().text().matches(<predicate function>).\n\n" +
                 "expected: <text() to satisfy predicate function>\n" +
-                "but: <text() was \"aaa bbb\">", e.getMessage());
-        }
+                "but: <text() was \"aaa bbb\">"
+        );
     }
 
 }
