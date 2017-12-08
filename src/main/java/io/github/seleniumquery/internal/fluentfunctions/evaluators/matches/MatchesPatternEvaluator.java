@@ -64,4 +64,14 @@ public class MatchesPatternEvaluator implements Evaluator<Pattern> {
             fluentBehaviorModifier.asString(), regexPattern, actualPrefix, getter.toString(), lastValue);
 	}
 
+    @Override
+    public String getterAsString() {
+        return getter.toString();
+    }
+
+    @Override
+    public String miolo(Pattern regexPattern) {
+        return String.format("match Pattern \"%s\"", regexPattern);
+    }
+
 }

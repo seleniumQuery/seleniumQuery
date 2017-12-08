@@ -16,13 +16,32 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
+import org.apache.commons.lang3.NotImplementedException;
+
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 
 public interface Evaluator<T> {
 
-	boolean evaluate(SeleniumQueryObject seleniumQueryObject, T valueArgument);
+    EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, T valueArgument);
 
 	String stringFor(T valueArgument, FluentBehaviorModifier fluentBehaviorModifier);
+
+    default String expectedVsActualMessage(FluentBehaviorModifier fluentBehaviorModifier, T value, String lastValue, String actualPrefix) {
+        return String.format(
+            "expected: <%s %sto " + miolo(value) + ">\nbut: <%s%s was \"%s\">",
+            getterAsString(),
+            fluentBehaviorModifier.asString(),
+            actualPrefix,
+            getterAsString(),
+            lastValue
+        );
+    }
+
+    String getterAsString();
+
+    default String miolo(T value) {
+        throw new NotImplementedException("implement it!");
+    }
 
 }

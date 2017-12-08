@@ -57,10 +57,13 @@ public class MatchesHamcrestMatcherEvaluator<T> implements Evaluator<Matcher<T>>
 	}
 
     @Override
-    public String expectedVsActualMessage(FluentBehaviorModifier fluentBehaviorModifier, Matcher<T> matcher, String lastValue,
-                                          String actualPrefix) {
-        return String.format("expected: <%s %sto be <%s>>\nbut: <%s%s was \"%s\">", getter.toString(),
-            fluentBehaviorModifier.asString(), matcher, actualPrefix, getter.toString(), lastValue);
+    public String getterAsString() {
+        return getter.toString();
+    }
+
+    @Override
+    public String miolo(Matcher<T> matcher) {
+        return String.format("be <%s>", matcher);
     }
 
 }
