@@ -44,7 +44,7 @@ public class MatchesPredicateEvaluatorTest {
     @Test
     public void stringFor() {
         // when
-        String stringFor = matchesPredicateEvaluator.stringFor(lambda, FluentBehaviorModifier.NEGATED_BEHAVIOR);
+        String stringFor = matchesPredicateEvaluator.describeEvaluatorFunction(lambda, FluentBehaviorModifier.NEGATED_BEHAVIOR);
         // then
         assertEquals("text().not().matches(<predicate function>)", stringFor);
     }

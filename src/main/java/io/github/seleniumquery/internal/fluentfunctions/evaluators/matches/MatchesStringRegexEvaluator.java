@@ -44,7 +44,7 @@ public class MatchesStringRegexEvaluator implements Evaluator<String> {
     }
 
 	@Override
-	public String stringFor(String regex, FluentBehaviorModifier fluentBehaviorModifier) {
+	public String describeEvaluatorFunction(String regex, FluentBehaviorModifier fluentBehaviorModifier) {
 		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(\"" + regex + "\")";
 	}
 
@@ -54,7 +54,7 @@ public class MatchesStringRegexEvaluator implements Evaluator<String> {
     }
 
     @Override
-    public String miolo(String value) {
+    public String describeExpectedValue(String value) {
         return "match regex \"" + value + "\"";
     }
 

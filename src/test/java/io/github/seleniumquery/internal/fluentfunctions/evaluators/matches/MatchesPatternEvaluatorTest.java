@@ -44,7 +44,7 @@ public class MatchesPatternEvaluatorTest {
     @Test
     public void stringFor() {
         // when
-        String stringFor = matchesPatternEvaluator.stringFor(caseInsensitivePattern, FluentBehaviorModifier.NEGATED_BEHAVIOR);
+        String stringFor = matchesPatternEvaluator.describeEvaluatorFunction(caseInsensitivePattern, FluentBehaviorModifier.NEGATED_BEHAVIOR);
         // then
         assertEquals("text().not().matches(\"A{3} B{3}\")", stringFor);
     }

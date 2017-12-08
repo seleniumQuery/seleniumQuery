@@ -43,7 +43,7 @@ public class LessThanEvaluator extends ComparisonEvaluator {
 	}
 
     @Override
-    public String miolo(Number value) {
+    public String describeExpectedValue(Number value) {
         return "be less than " + value;
     }
 

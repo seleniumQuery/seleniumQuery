@@ -70,7 +70,7 @@ abstract class ComparisonEvaluator implements Evaluator<Number> {
     protected abstract boolean compare(BigDecimal elementValueAsNumber, BigDecimal numberToCompare);
 
 	@Override
-    public String stringFor(Number valueToCompare, FluentBehaviorModifier fluentBehaviorModifier) {
+    public String describeEvaluatorFunction(Number valueToCompare, FluentBehaviorModifier fluentBehaviorModifier) {
         return String.format("%s.%s(%s)", getter.toString() + fluentBehaviorModifier.asFunctionName(), getFunctionName(), valueToCompare);
     }
 

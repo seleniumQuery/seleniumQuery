@@ -32,7 +32,7 @@ public class IsEvaluator implements Evaluator<String> {
 	}
 
 	@Override
-	public String stringFor(String selector, FluentBehaviorModifier fluentBehaviorModifier) {
+	public String describeEvaluatorFunction(String selector, FluentBehaviorModifier fluentBehaviorModifier) {
         return "is(\"" + selector + "\")";
 	}
 
@@ -42,7 +42,7 @@ public class IsEvaluator implements Evaluator<String> {
     }
 
     @Override
-    public String miolo(String value) {
+    public String describeExpectedValue(String value) {
         return "be \"" + value + "\"";
     }
 

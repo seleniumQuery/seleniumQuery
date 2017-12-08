@@ -41,7 +41,7 @@ public class MatchesStringRegexEvaluatorTest {
     @Test
     public void stringFor() {
         // when
-        String stringFor = matchesStringRegexEvaluator.stringFor("a{3} b{3}", FluentBehaviorModifier.NEGATED_BEHAVIOR);
+        String stringFor = matchesStringRegexEvaluator.describeEvaluatorFunction("a{3} b{3}", FluentBehaviorModifier.NEGATED_BEHAVIOR);
         // then
         assertEquals("text().not().matches(\"a{3} b{3}\")", stringFor);
     }

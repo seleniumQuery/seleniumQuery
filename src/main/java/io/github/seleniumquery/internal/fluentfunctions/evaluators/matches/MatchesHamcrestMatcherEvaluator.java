@@ -52,7 +52,7 @@ public class MatchesHamcrestMatcherEvaluator<T> implements Evaluator<Matcher<T>>
 	}
 
 	@Override
-	public String stringFor(Matcher<T> matcher, FluentBehaviorModifier fluentBehaviorModifier) {
+	public String describeEvaluatorFunction(Matcher<T> matcher, FluentBehaviorModifier fluentBehaviorModifier) {
         return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(<" + matcher + ">)";
 	}
 
@@ -62,7 +62,7 @@ public class MatchesHamcrestMatcherEvaluator<T> implements Evaluator<Matcher<T>>
     }
 
     @Override
-    public String miolo(Matcher<T> matcher) {
+    public String describeExpectedValue(Matcher<T> matcher) {
         return String.format("be <%s>", matcher);
     }
 

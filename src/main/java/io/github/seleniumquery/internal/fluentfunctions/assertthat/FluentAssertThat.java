@@ -35,7 +35,7 @@ public class FluentAssertThat implements FluentFunction {
             throw new SeleniumQueryAssertionError(
                 String.format("Failed assertion %s.assertThat().%s.\n\n%s",
                     seleniumQueryObject,
-                    evaluator.stringFor(value, fluentBehaviorModifier),
+                    evaluator.describeEvaluatorFunction(value, fluentBehaviorModifier),
                     evaluator.expectedVsActualMessage(fluentBehaviorModifier, value, evaluationReport.getLastValue(), "")
                 )
             );

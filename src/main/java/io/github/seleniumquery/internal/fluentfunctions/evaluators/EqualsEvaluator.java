@@ -43,7 +43,7 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
 	}
 
 	@Override
-	public String stringFor(T valueToEqual, FluentBehaviorModifier fluentBehaviorModifier) {
+	public String describeEvaluatorFunction(T valueToEqual, FluentBehaviorModifier fluentBehaviorModifier) {
         String valueAsString = "\"" + valueToEqual + "\"";
         if (valueToEqual instanceof Number) {
             valueAsString = valueToEqual.toString();
@@ -57,7 +57,7 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
     }
 
     @Override
-    public String miolo(T valueToEqual) {
+    public String describeExpectedValue(T valueToEqual) {
         return "equal \"" + valueToEqual + "\"";
     }
 

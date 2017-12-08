@@ -25,11 +25,11 @@ public interface Evaluator<T> {
 
     EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, T valueArgument);
 
-	String stringFor(T valueArgument, FluentBehaviorModifier fluentBehaviorModifier);
+	String describeEvaluatorFunction(T valueArgument, FluentBehaviorModifier fluentBehaviorModifier);
 
     default String expectedVsActualMessage(FluentBehaviorModifier fluentBehaviorModifier, T value, String lastValue, String actualPrefix) {
         return String.format(
-            "expected: <%s %sto " + miolo(value) + ">\nbut: <%s%s was %s%s%s>",
+            "expected: <%s %sto " + describeExpectedValue(value) + ">\nbut: <%s%s was %s%s%s>",
             getterAsString(),
             fluentBehaviorModifier.asString(),
             actualPrefix,
@@ -42,6 +42,6 @@ public interface Evaluator<T> {
 
     String getterAsString();
 
-    String miolo(T value);
+    String describeExpectedValue(T value);
 
 }

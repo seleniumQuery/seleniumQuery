@@ -53,7 +53,7 @@ public class MatchesPatternEvaluator implements Evaluator<Pattern> {
 	}
 
 	@Override
-	public String stringFor(Pattern regexPattern, FluentBehaviorModifier fluentBehaviorModifier) {
+	public String describeEvaluatorFunction(Pattern regexPattern, FluentBehaviorModifier fluentBehaviorModifier) {
         return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(\"" + regexPattern + "\")";
 	}
 
@@ -70,7 +70,7 @@ public class MatchesPatternEvaluator implements Evaluator<Pattern> {
     }
 
     @Override
-    public String miolo(Pattern regexPattern) {
+    public String describeExpectedValue(Pattern regexPattern) {
         return String.format("match Pattern \"%s\"", regexPattern);
     }
 

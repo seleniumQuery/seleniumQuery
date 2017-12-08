@@ -47,7 +47,7 @@ public class MatchesPredicateEvaluator<T> implements Evaluator<Predicate<T>> {
     }
 
 	@Override
-	public String stringFor(Predicate<T> predicateLambda, FluentBehaviorModifier fluentBehaviorModifier) {
+	public String describeEvaluatorFunction(Predicate<T> predicateLambda, FluentBehaviorModifier fluentBehaviorModifier) {
 		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(<predicate function>)";
 	}
 
@@ -57,7 +57,7 @@ public class MatchesPredicateEvaluator<T> implements Evaluator<Predicate<T>> {
     }
 
     @Override
-    public String miolo(Predicate<T> predicateLambda) {
+    public String describeExpectedValue(Predicate<T> predicateLambda) {
         return "satisfy predicate function";
     }
 

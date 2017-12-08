@@ -28,7 +28,7 @@ public class InternalExceptionFactory {
         String message = String.format(
             "Timeout while waiting for %s.waitUntil().%s.\n\n%s",
             seleniumQueryObject,
-            evaluator.stringFor(value, fluentBehaviorModifier),
+            evaluator.describeEvaluatorFunction(value, fluentBehaviorModifier),
             evaluator.expectedVsActualMessage(fluentBehaviorModifier, value, lastValue, "last ")
         );
         SeleniumQueryTimeoutException ex = new SeleniumQueryTimeoutException(message, sourceException);

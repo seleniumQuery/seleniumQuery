@@ -44,7 +44,7 @@ public class ContainsIgnoreCaseEvaluator implements Evaluator<String> {
     }
 
     @Override
-    public String stringFor(String valueToContain, FluentBehaviorModifier fluentBehaviorModifier) {
+    public String describeEvaluatorFunction(String valueToContain, FluentBehaviorModifier fluentBehaviorModifier) {
         return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".containsIgnoreCase(\"" + valueToContain + "\")";
     }
 
@@ -54,7 +54,7 @@ public class ContainsIgnoreCaseEvaluator implements Evaluator<String> {
     }
 
     @Override
-    public String miolo(String valueToContain) {
+    public String describeExpectedValue(String valueToContain) {
         return "contain \"" + valueToContain + "\" ignoring case";
     }
 
