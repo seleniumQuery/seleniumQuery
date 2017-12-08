@@ -16,12 +16,9 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
+import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class ContainsEvaluator implements Evaluator<String> {
 
@@ -32,8 +29,8 @@ public class ContainsEvaluator implements Evaluator<String> {
 	}
 
 	@Override
-	public boolean evaluate(WebDriver driver, List<WebElement> elements, String valueToEqual) {
-		Object propertyGot = getter.get(driver, elements);
+	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, String valueToEqual) {
+		Object propertyGot = getter.get(seleniumQueryObject);
 		return propertyGot != null && propertyGot.toString().contains(valueToEqual);
 	}
 

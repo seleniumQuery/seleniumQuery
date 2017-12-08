@@ -16,13 +16,10 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators.matches;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
+import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
@@ -42,8 +39,8 @@ public class MatchesPatternEvaluator implements Evaluator<Pattern> {
 	}
 
 	@Override
-	public boolean evaluate(WebDriver driver, List<WebElement> elements, Pattern regexPattern) {
-        String values = getter.get(driver, elements).toString();
+	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, Pattern regexPattern) {
+        String values = getter.get(seleniumQueryObject).toString();
         Matcher m = regexPattern.matcher(values);
         return m.matches();
 	}

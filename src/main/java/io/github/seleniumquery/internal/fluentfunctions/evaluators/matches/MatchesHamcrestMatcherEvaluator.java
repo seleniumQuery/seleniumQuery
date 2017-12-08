@@ -16,14 +16,11 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators.matches;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.Matcher;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
+import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
@@ -45,9 +42,9 @@ public class MatchesHamcrestMatcherEvaluator<T> implements Evaluator<Matcher<T>>
 	}
 
 	@Override
-	public boolean evaluate(WebDriver driver, List<WebElement> elements, Matcher<T> matcher) {
+	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, Matcher<T> matcher) {
 		LOGGER.debug("Evaluating .matches(<Matcher>)...");
-		final T gotValue = getter.get(driver, elements);
+		final T gotValue = getter.get(seleniumQueryObject);
 		LOGGER.debug("Evaluating .matches(<Matcher>)... got "+getter+": \""+gotValue+"\". Wanted: <"+matcher+">.");
 
 		return matcher.matches(gotValue);

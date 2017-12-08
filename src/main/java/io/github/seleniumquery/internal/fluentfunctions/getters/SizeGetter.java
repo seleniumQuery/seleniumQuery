@@ -1,9 +1,6 @@
 package io.github.seleniumquery.internal.fluentfunctions.getters;
 
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.github.seleniumquery.SeleniumQueryObject;
 
 public class SizeGetter implements Getter<Integer> {
 
@@ -11,9 +8,9 @@ public class SizeGetter implements Getter<Integer> {
 
 	private SizeGetter() { }
 
-	@Override
-	public Integer get(WebDriver driver, List<WebElement> elements) {
-		return elements.size();
+    @Override
+    public Integer get(SeleniumQueryObject seleniumQueryObject) {
+		return seleniumQueryObject.size();
 	}
 
 	@Override

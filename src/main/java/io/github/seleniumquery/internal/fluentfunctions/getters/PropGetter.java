@@ -16,20 +16,16 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.getters;
 
-import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
+import io.github.seleniumquery.SeleniumQueryObject;
 
 public class PropGetter<T> implements Getter<T> {
 
 	private String propertyName;
 	public PropGetter(String propertyName) { this.propertyName = propertyName; }
 
-	@Override
-	public T get(WebDriver driver, List<WebElement> elements) {
-		return PropFunction.prop(driver, elements, this.propertyName);
+    @Override
+    public T get(SeleniumQueryObject seleniumQueryObject) {
+		return seleniumQueryObject.prop(this.propertyName);
 	}
 
 	@Override

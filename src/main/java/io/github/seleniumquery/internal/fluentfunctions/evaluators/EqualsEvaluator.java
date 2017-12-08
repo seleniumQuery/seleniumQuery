@@ -16,14 +16,12 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
-import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
-import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
 public class EqualsEvaluator<T> implements Evaluator<T> {
 
@@ -36,9 +34,9 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
 	}
 
 	@Override
-	public boolean evaluate(WebDriver driver, List<WebElement> elements, T valueToEqual) {
+	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, T valueToEqual) {
 		LOGGER.debug("Evaluating isEqualTo()...");
-		final T gotValue = getter.get(driver, elements);
+		final T gotValue = getter.get(seleniumQueryObject);
 		LOGGER.debug("Evaluating isEqualTo()... got "+getter+": \""+gotValue+"\". Wanted: \""+valueToEqual+"\".");
 		return gotValue.equals(valueToEqual);
 	}

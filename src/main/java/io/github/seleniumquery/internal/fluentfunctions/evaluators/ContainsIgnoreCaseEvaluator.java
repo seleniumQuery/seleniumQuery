@@ -16,13 +16,11 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
+import org.apache.commons.lang3.StringUtils;
+
+import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class ContainsIgnoreCaseEvaluator implements Evaluator<String> {
     private Getter<?> getter;
@@ -32,8 +30,8 @@ public class ContainsIgnoreCaseEvaluator implements Evaluator<String> {
     }
 
     @Override
-    public boolean evaluate(WebDriver driver, List<WebElement> elements, String valueToEqual) {
-        Object propertyGot = getter.get(driver, elements);
+    public boolean evaluate(SeleniumQueryObject seleniumQueryObject, String valueToEqual) {
+        Object propertyGot = getter.get(seleniumQueryObject);
 
         return propertyGot != null && StringUtils.containsIgnoreCase(propertyGot.toString(), valueToEqual);
     }

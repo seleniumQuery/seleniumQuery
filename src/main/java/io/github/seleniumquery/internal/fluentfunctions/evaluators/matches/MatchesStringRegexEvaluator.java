@@ -16,13 +16,10 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators.matches;
 
+import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * Evaluator that tests the elements' values against a string regex.
@@ -39,8 +36,8 @@ public class MatchesStringRegexEvaluator implements Evaluator<String> {
 	}
 
 	@Override
-	public boolean evaluate(WebDriver driver, List<WebElement> elements, String regex) {
-		return getter.get(driver, elements).toString().matches(regex);
+	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, String regex) {
+		return getter.get(seleniumQueryObject).toString().matches(regex);
 	}
 
 	@Override

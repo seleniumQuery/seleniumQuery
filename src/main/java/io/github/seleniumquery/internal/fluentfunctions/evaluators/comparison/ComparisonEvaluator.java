@@ -16,16 +16,15 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison;
 
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
-import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
-import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
+import java.math.BigDecimal;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.math.BigDecimal;
-import java.util.List;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
+import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
 /**
  * Superclass (template method) for all evaluators that compare elements' contents and arguments as numbers.
@@ -44,10 +43,10 @@ abstract class ComparisonEvaluator implements Evaluator<Number> {
 	}
 
 	@Override
-	public boolean evaluate(WebDriver driver, List<WebElement> elements, Number valueToCompare) {
+	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, Number valueToCompare) {
         BigDecimal numberToCompare = ComparisonEvaluatorUtils.parseNumber(valueToCompare);
 
-        Object elementValue = getter.get(driver, elements);
+        Object elementValue = getter.get(seleniumQueryObject);
 		try {
 			BigDecimal elementValueAsNumber = ComparisonEvaluatorUtils.parseNumber(elementValue);
 

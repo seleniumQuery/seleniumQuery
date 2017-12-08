@@ -16,12 +16,8 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
-import io.github.seleniumquery.functions.jquery.traversing.filtering.IsFunction;
+import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class IsEvaluator implements Evaluator<String> {
 
@@ -30,8 +26,8 @@ public class IsEvaluator implements Evaluator<String> {
 	private IsEvaluator() {	}
 
 	@Override
-	public boolean evaluate(WebDriver driver, List<WebElement> elements, String selector) {
-		return IsFunction.is(driver, elements, selector);
+	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, String selector) {
+        return seleniumQueryObject.is(selector);
 	}
 
 	@Override
