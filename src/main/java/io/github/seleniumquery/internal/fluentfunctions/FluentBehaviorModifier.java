@@ -16,48 +16,56 @@
 
 package io.github.seleniumquery.internal.fluentfunctions;
 
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
+
 public enum FluentBehaviorModifier {
 
-    REGULAR_BEHAVIOR("") {
+    REGULAR_BEHAVIOR() {
         @Override
         public FluentBehaviorModifier negate() {
             return NEGATED_BEHAVIOR;
         }
-
         @Override
-        public boolean isExpectedBehavior(boolean satisfiesConstraints) {
-            return satisfiesConstraints;
+        public boolean isExpectedBehavior(EvaluationReport evaluationReport) {
+            return evaluationReport.isSatisfiesConstraints();
+        }
+        @Override
+        public String asString() {
+            return "";
+        }
+        @Override
+        public String asFunctionName() {
+            return "";
         }
     },
-    NEGATED_BEHAVIOR(".not()") {
+    NEGATED_BEHAVIOR() {
         @Override
         public FluentBehaviorModifier negate() {
             return REGULAR_BEHAVIOR;
         }
-
         @Override
-        public boolean isExpectedBehavior(boolean satisfiesConstraints) {
-            return !satisfiesConstraints;
+        public boolean isExpectedBehavior(EvaluationReport evaluationReport) {
+            return !evaluationReport.isSatisfiesConstraints();
+        }
+        @Override
+        public String asString() {
+            return "not ";
+        }
+        @Override
+        public String asFunctionName() {
+            return ".not()";
         }
     };
 
-    private final String toString;
-
-    FluentBehaviorModifier(String toString) {
-        this.toString = toString;
-    }
-
-    @Override
-    public String toString() {
-        return this.toString;
-    }
+    public abstract String asString();
+    public abstract String asFunctionName();
 
     public abstract FluentBehaviorModifier negate();
 
-    public abstract boolean isExpectedBehavior(boolean satisfiesConstraints);
+    public abstract boolean isExpectedBehavior(EvaluationReport evaluationReport);
 
-    public boolean isNotExpectedBehavior(boolean satisfiesConstraints) {
-        return !this.isExpectedBehavior(satisfiesConstraints);
+    public boolean isNotExpectedBehavior(EvaluationReport evaluationReport) {
+        return !this.isExpectedBehavior(evaluationReport);
     }
 
 }

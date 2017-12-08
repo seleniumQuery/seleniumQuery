@@ -29,6 +29,7 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.InternalExceptionFactory;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.FluentFunction;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 
 /**
@@ -81,13 +82,16 @@ public class FluentWaitUntil implements FluentFunction {
                                          final SeleniumQueryObject seleniumQueryObject,
                                          final FluentBehaviorModifier fluentBehaviorModifier) {
 
+        // this is an array so we can modify from the lambda, but, ideally, it would be a regular variable
+        EvaluationReport[] lastEvaluationReport = new EvaluationReport[1];
+
         Function<Object, Object> waitFunction = unused -> {
             // refresh sqo
             seleniumQueryObject.refresh();
             // check if it now passes the required evaluation
-            boolean passedEvaluation = evaluator.evaluate(seleniumQueryObject, value);
+            lastEvaluationReport[0] = evaluator.evaluate(seleniumQueryObject, value);
 
-            if (fluentBehaviorModifier.isExpectedBehavior(passedEvaluation)) {
+            if (fluentBehaviorModifier.isExpectedBehavior(lastEvaluationReport[0])) {
                 return NO_MORE_WAITING;
             } else {
                 return CONTINUE_WAITING;
@@ -102,7 +106,14 @@ public class FluentWaitUntil implements FluentFunction {
                                         .ignoring(NoSuchElementException.class)
                                             .until(waitFunction);
         } catch (TimeoutException sourceException) {
-            throw InternalExceptionFactory.newTimeoutException(sourceException, seleniumQueryObject, "to .waitUntil()."+evaluator.stringFor(value, fluentBehaviorModifier));
+            throw InternalExceptionFactory.newTimeoutException(
+                sourceException,
+                seleniumQueryObject,
+                value,
+                fluentBehaviorModifier,
+                evaluator,
+                lastEvaluationReport[0].getLastValue()
+            );
         }
 
         return seleniumQueryObject;

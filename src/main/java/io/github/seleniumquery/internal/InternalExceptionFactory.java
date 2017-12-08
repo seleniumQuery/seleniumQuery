@@ -14,14 +14,24 @@ import org.openqa.selenium.WebDriver;
 import io.github.seleniumquery.SeleniumQueryConfig;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
+import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 
 public class InternalExceptionFactory {
 
-    public static SeleniumQueryTimeoutException newTimeoutException(TimeoutException sourceException,
-                                                                    SeleniumQueryObject seleniumQueryObject,
-                                                                    String reason) {
-        SeleniumQueryTimeoutException ex = new SeleniumQueryTimeoutException("Timeout while waiting " +
-            "for " + seleniumQueryObject + " " + reason, sourceException);
+    public static <T> SeleniumQueryTimeoutException newTimeoutException(TimeoutException sourceException,
+                                                                        SeleniumQueryObject seleniumQueryObject,
+                                                                        T value,
+                                                                        FluentBehaviorModifier fluentBehaviorModifier,
+                                                                        Evaluator<T> evaluator,
+                                                                        String lastValue) {
+        String message = String.format(
+            "Timeout while waiting for %s.waitUntil().%s.\n\n%s",
+            seleniumQueryObject,
+            evaluator.stringFor(value, fluentBehaviorModifier),
+            evaluator.expectedVsActualMessage(fluentBehaviorModifier, value, lastValue, "last ")
+        );
+        SeleniumQueryTimeoutException ex = new SeleniumQueryTimeoutException(message, sourceException);
 
         try {
             saveErrorPage(seleniumQueryObject.getWebDriver());

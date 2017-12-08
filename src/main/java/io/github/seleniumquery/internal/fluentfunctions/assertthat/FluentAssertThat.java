@@ -16,23 +16,31 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.assertthat;
 
-import io.github.seleniumquery.SeleniumQueryException;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.fluentfunctions.assertthat.SeleniumQueryAssertionError;
-import io.github.seleniumquery.internal.fluentfunctions.FluentFunction;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.FluentFunction;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 
 public class FluentAssertThat implements FluentFunction {
 
     @Override
-    public <T> SeleniumQueryObject apply(Evaluator<T> evaluator, T value, SeleniumQueryObject sqo,
+    public <T> SeleniumQueryObject apply(Evaluator<T> evaluator,
+                                         T value,
+                                         SeleniumQueryObject seleniumQueryObject,
                                          FluentBehaviorModifier fluentBehaviorModifier) {
-        boolean passedAssertion = evaluator.evaluate(sqo, value);
-        if (fluentBehaviorModifier.isNotExpectedBehavior(passedAssertion)) {
-            throw new SeleniumQueryAssertionError("Failed assertion: "+sqo+".assertThat()."+evaluator.stringFor(value, fluentBehaviorModifier));
+        EvaluationReport evaluationReport = evaluator.evaluate(seleniumQueryObject, value);
+        if (fluentBehaviorModifier.isNotExpectedBehavior(evaluationReport)) {
+            throw new SeleniumQueryAssertionError(
+                String.format("Failed assertion %s.assertThat().%s.\n\n%s",
+                    seleniumQueryObject,
+                    evaluator.stringFor(value, fluentBehaviorModifier),
+                    evaluator.expectedVsActualMessage(fluentBehaviorModifier, value, evaluationReport.getLastValue(), "")
+                )
+            );
         }
-        return sqo;
+        return seleniumQueryObject;
     }
 
 }
