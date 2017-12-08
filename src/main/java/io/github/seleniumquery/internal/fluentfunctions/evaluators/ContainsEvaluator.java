@@ -16,11 +16,16 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
 public class ContainsEvaluator implements Evaluator<String> {
+
+    private static final Log LOGGER = LogFactory.getLog(ContainsEvaluator.class);
 
 	private Getter<?> getter;
 
@@ -29,14 +34,27 @@ public class ContainsEvaluator implements Evaluator<String> {
 	}
 
 	@Override
-	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, String valueToEqual) {
+	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, String valueToContain) {
+        LOGGER.debug("Evaluating .contains()...");
 		Object propertyGot = getter.get(seleniumQueryObject);
-		return propertyGot != null && propertyGot.toString().contains(valueToEqual);
+        boolean satisfiesConstraints = propertyGot != null && propertyGot.toString().contains(valueToContain);
+        LOGGER.debug("Evaluating .contains()... got " + getter + ": \"" + propertyGot + "\". Wanted: \"" + valueToContain + "\".");
+        return new EvaluationReport(propertyGot + "", satisfiesConstraints);
 	}
 
 	@Override
-	public String stringFor(String valueToEqual, FluentBehaviorModifier fluentBehaviorModifier) {
-		return getter.toString() + fluentBehaviorModifier + ".contains(\"" + valueToEqual + "\")";
+	public String stringFor(String valueToContain, FluentBehaviorModifier fluentBehaviorModifier) {
+		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".contains(\"" + valueToContain + "\")";
 	}
+
+    @Override
+    public String getterAsString() {
+        return getter.toString();
+    }
+
+    @Override
+    public String miolo(String valueToContain) {
+        return "contain \"" + valueToContain + "\"";
+    }
 
 }
