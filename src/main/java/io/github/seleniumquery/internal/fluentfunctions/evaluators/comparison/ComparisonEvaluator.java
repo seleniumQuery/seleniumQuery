@@ -23,6 +23,7 @@ import org.apache.commons.logging.LogFactory;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
@@ -42,26 +43,35 @@ abstract class ComparisonEvaluator implements Evaluator<Number> {
 		this.getter = getter;
 	}
 
+    @Override
+    public String getterAsString() {
+        return getter.toString();
+    }
+
 	@Override
-	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, Number valueToCompare) {
-        BigDecimal numberToCompare = ComparisonEvaluatorUtils.parseNumber(valueToCompare);
-
-        Object elementValue = getter.get(seleniumQueryObject);
-		try {
-			BigDecimal elementValueAsNumber = ComparisonEvaluatorUtils.parseNumber(elementValue);
-
-			return compare(elementValueAsNumber, numberToCompare);
-		} catch (IllegalArgumentException e) {
-            LOGGER.debug("Invalid value when trying to compare as number.\nElement value: "+elementValue, e);
-			return false;
-		}
+	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, Number valueToCompare) {
+        Object gotValue = getter.get(seleniumQueryObject);
+        boolean satisfiesConstraints = satisfiesConstraints(valueToCompare, gotValue);
+        return new EvaluationReport(gotValue.toString(), satisfiesConstraints);
 	}
 
-	protected abstract boolean compare(BigDecimal elementValueAsNumber, BigDecimal numberToCompare);
+    private boolean satisfiesConstraints(Number valueToCompare, Object elementValue) {
+        BigDecimal numberToCompare = ComparisonEvaluatorUtils.parseNumber(valueToCompare);
+        try {
+            BigDecimal elementValueAsNumber = ComparisonEvaluatorUtils.parseNumber(elementValue);
+
+            return compare(elementValueAsNumber, numberToCompare);
+        } catch (IllegalArgumentException e) {
+            LOGGER.debug("Invalid value when trying to compare as number.\nElement value: "+elementValue, e);
+            return false;
+        }
+    }
+
+    protected abstract boolean compare(BigDecimal elementValueAsNumber, BigDecimal numberToCompare);
 
 	@Override
     public String stringFor(Number valueToCompare, FluentBehaviorModifier fluentBehaviorModifier) {
-        return String.format("%s.%s(%s)", getter.toString() + fluentBehaviorModifier, getFunctionName(), valueToCompare);
+        return String.format("%s.%s(%s)", getter.toString() + fluentBehaviorModifier.asFunctionName(), getFunctionName(), valueToCompare);
     }
 
 	protected abstract String getFunctionName();

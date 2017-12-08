@@ -16,9 +16,9 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison;
 
-import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
-
 import java.math.BigDecimal;
+
+import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
 /**
  * Evaluates if the argument is greater than the element's value.
@@ -41,5 +41,10 @@ public class GreaterThanEvaluator extends ComparisonEvaluator {
 	protected String getFunctionName() {
 		return "isGreaterThan";
 	}
+
+    @Override
+    public String miolo(Number value) {
+        return "be greater than " + value;
+    }
 
 }
