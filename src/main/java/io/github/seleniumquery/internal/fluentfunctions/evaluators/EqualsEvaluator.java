@@ -34,11 +34,12 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
 	}
 
 	@Override
-	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, T valueToEqual) {
+	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, T valueToEqual) {
 		LOGGER.debug("Evaluating isEqualTo()...");
-		final T gotValue = getter.get(seleniumQueryObject);
+		T gotValue = getter.get(seleniumQueryObject);
 		LOGGER.debug("Evaluating isEqualTo()... got "+getter+": \""+gotValue+"\". Wanted: \""+valueToEqual+"\".");
-		return gotValue.equals(valueToEqual);
+        boolean satisfiesConstraints = gotValue.equals(valueToEqual);
+        return new EvaluationReport(gotValue.toString(), satisfiesConstraints);
 	}
 
 	@Override
@@ -47,7 +48,17 @@ public class EqualsEvaluator<T> implements Evaluator<T> {
         if (valueToEqual instanceof Number) {
             valueAsString = valueToEqual.toString();
         }
-        return getter.toString() + fluentBehaviorModifier + ".isEqualTo(" + valueAsString + ")";
+        return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".isEqualTo(" + valueAsString + ")";
 	}
+
+    @Override
+    public String getterAsString() {
+        return getter.toString();
+    }
+
+    @Override
+    public String miolo(T valueToEqual) {
+        return "equal \"" + valueToEqual + "\"";
+    }
 
 }
