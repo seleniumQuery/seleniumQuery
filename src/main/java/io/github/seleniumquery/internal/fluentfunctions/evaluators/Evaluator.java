@@ -16,12 +16,12 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
-import org.apache.commons.lang3.NotImplementedException;
-
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 
 public interface Evaluator<T> {
+
+    int MAX_LENGTH_DISPLAY = 100;
 
     EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, T valueArgument);
 
@@ -35,15 +35,13 @@ public interface Evaluator<T> {
             actualPrefix,
             getterAsString(),
             value instanceof Number ? "" : "\"",
-            lastValue,
+            lastValue.length() > MAX_LENGTH_DISPLAY ? lastValue.substring(0, MAX_LENGTH_DISPLAY - 3) + "..." : lastValue,
             value instanceof Number ? "" : "\""
         );
     }
 
     String getterAsString();
 
-    default String miolo(T value) {
-        throw new NotImplementedException("implement it!");
-    }
+    String miolo(T value);
 
 }

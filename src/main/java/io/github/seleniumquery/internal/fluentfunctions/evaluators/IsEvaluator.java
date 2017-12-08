@@ -26,13 +26,24 @@ public class IsEvaluator implements Evaluator<String> {
 	private IsEvaluator() {	}
 
 	@Override
-	public boolean evaluate(SeleniumQueryObject seleniumQueryObject, String selector) {
-        return seleniumQueryObject.is(selector);
+	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, String selector) {
+        boolean satisfiesConstraints = seleniumQueryObject.is(selector);
+        return new EvaluationReport(seleniumQueryObject.prop("outerHTML"), satisfiesConstraints);
 	}
 
 	@Override
 	public String stringFor(String selector, FluentBehaviorModifier fluentBehaviorModifier) {
-		return "is(\"" + selector + "\")";
+        return "is(\"" + selector + "\")";
 	}
+
+    @Override
+    public String getterAsString() {
+        return "matched element set";
+    }
+
+    @Override
+    public String miolo(String value) {
+        return "be \"" + value + "\"";
+    }
 
 }
