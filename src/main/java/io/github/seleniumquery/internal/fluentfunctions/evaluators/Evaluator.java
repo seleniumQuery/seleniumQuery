@@ -28,6 +28,8 @@ public interface Evaluator<T> {
 	String describeEvaluatorFunction(T valueArgument, FluentBehaviorModifier fluentBehaviorModifier);
 
     default String expectedVsActualMessage(FluentBehaviorModifier fluentBehaviorModifier, T value, String lastValue, String actualPrefix) {
+        String formattedLastValue = lastValue == null ? "<null>" :
+            lastValue.length() > MAX_LENGTH_DISPLAY ? lastValue.substring(0, MAX_LENGTH_DISPLAY - 3) + "..." : lastValue;
         return String.format(
             "expected: <%s %sto " + describeExpectedValue(value) + ">\nbut: <%s%s was %s%s%s>",
             getterAsString(),
@@ -35,7 +37,7 @@ public interface Evaluator<T> {
             actualPrefix,
             getterAsString(),
             value instanceof Number ? "" : "\"",
-            lastValue.length() > MAX_LENGTH_DISPLAY ? lastValue.substring(0, MAX_LENGTH_DISPLAY - 3) + "..." : lastValue,
+            formattedLastValue,
             value instanceof Number ? "" : "\""
         );
     }
