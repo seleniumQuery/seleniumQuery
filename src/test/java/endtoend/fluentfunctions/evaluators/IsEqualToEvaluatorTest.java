@@ -27,7 +27,7 @@ import org.junit.Test;
 
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
-public class EqualsEvaluatorTest {
+public class IsEqualToEvaluatorTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 

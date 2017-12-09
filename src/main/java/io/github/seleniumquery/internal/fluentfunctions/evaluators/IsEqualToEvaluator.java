@@ -23,13 +23,13 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
-public class EqualsEvaluator<T> implements Evaluator<T> {
+public class IsEqualToEvaluator<T> implements Evaluator<T> {
 
-	private static final Log LOGGER = LogFactory.getLog(EqualsEvaluator.class);
+	private static final Log LOGGER = LogFactory.getLog(IsEqualToEvaluator.class);
 
 	private Getter<T> getter;
 
-	public EqualsEvaluator(Getter<T> getter) {
+	public IsEqualToEvaluator(Getter<T> getter) {
 		this.getter = getter;
 	}
 

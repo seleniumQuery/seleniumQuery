@@ -26,14 +26,14 @@ import io.github.seleniumquery.SeleniumQueryFluentFunctionEvaluateIf;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsIgnoreCaseEvaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.EqualsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesPredicateEvaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesPatternEvaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesStringRegexEvaluator;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesHamcrestMatcherEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.IsEqualToEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.GreaterThanEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.LessThanEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesHamcrestMatcherEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesPatternEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesPredicateEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.matches.MatchesStringRegexEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
 /**
@@ -65,7 +65,7 @@ class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
 
 	@Override
 	public SeleniumQueryFluentAndOrThen isEqualTo(T valueToEqual) {
-        return andOrThen(new EqualsEvaluator<>(getter), valueToEqual);
+        return andOrThen(new IsEqualToEvaluator<>(getter), valueToEqual);
 	}
 
     private <V> AndOrThen andOrThen(Evaluator<V> evaluator, V value) {
