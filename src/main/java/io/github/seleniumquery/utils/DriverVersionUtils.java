@@ -36,6 +36,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.common.annotations.VisibleForTesting;
+import io.github.seleniumquery.SeleniumQueryObject;
 
 /**
  * Contains some utility functions for dealing with WebDrivers, such as inspecting their version.
@@ -111,16 +112,21 @@ public class DriverVersionUtils {
     public static boolean isSafariDriver(WebDriver driver) {
         return isDriver(driver, SafariDriver.class, BrowserType.SAFARI);
     }
+
     public static boolean isEdgeDriver(WebDriver driver) {
         return isDriver(driver, EdgeDriver.class, BrowserType.EDGE);
     }
-
     public static boolean isDriver(WebDriver driver, Class<?> clazz, String... browserNames) {
         return clazz.isInstance(driver) || isDriverByName(driver, browserNames);
     }
 
     public static boolean isDriverByName(WebDriver driver, String... browserNames) {
         return driver instanceof HasCapabilities && contains(browserNames, ((HasCapabilities) driver).getCapabilities().getBrowserName());
+    }
+
+    public static boolean isHtmlUnitWithDisabledJavaScript(SeleniumQueryObject seleniumQueryObject) {
+        WebDriver driver = seleniumQueryObject.getWebDriver();
+        return DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && !((HtmlUnitDriver) driver).isJavascriptEnabled();
     }
 
 }
