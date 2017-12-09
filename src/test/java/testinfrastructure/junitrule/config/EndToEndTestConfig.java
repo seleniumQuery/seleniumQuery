@@ -19,7 +19,7 @@ public class EndToEndTestConfig {
             return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
         }
         if (EnvironmentTestUtils.isRunningAtWercker()) {
-            return DriverToRunTestsIn.HTMLUNIT_ALL_JS_ON_AND_OFF;
+            return DriverToRunTestsIn.HTMLUNIT_ALL_JS_ON_ONLY;
         }
         if (EnvironmentTestUtils.isRunningAtContinuousIntegrationServer()) {
             return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
