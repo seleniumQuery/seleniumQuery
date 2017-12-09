@@ -9,7 +9,7 @@ public class EndToEndTestConfig {
             return DriverToRunTestsIn.FIREFOX;
         }
         if (EnvironmentTestUtils.isRunningAtShippable()) {
-            return DriverToRunTestsIn.CHROME;
+            return DriverToRunTestsIn.CHROME_HEADLESS;
         }
         if (EnvironmentTestUtils.isRunningAtCodeShip()) {
             // will also run DriverToRunTestsIn.REMOTE if last commit message contains [run sauce]
