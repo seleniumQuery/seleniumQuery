@@ -27,6 +27,7 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.ContainsIgnoreCaseEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.IsBlankEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.IsEqualToEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.GreaterThanEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.comparison.LessThanEvaluator;
@@ -67,6 +68,11 @@ class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
 	public SeleniumQueryFluentAndOrThen isEqualTo(T valueToEqual) {
         return andOrThen(new IsEqualToEvaluator<>(getter), valueToEqual);
 	}
+
+    @Override
+    public SeleniumQueryFluentAndOrThen isBlank() {
+        return andOrThen(new IsBlankEvaluator(getter), null);
+    }
 
     private <V> AndOrThen andOrThen(Evaluator<V> evaluator, V value) {
         return new AndOrThen(fluentFunction.apply(evaluator, value, seleniumQueryObject, this.fluentBehaviorModifier), this.fluentFunction);

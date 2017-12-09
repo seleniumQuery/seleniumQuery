@@ -141,4 +141,22 @@ public interface SeleniumQueryFluentFunctionEvaluateIf<T> extends SeleniumQueryW
      */
     SeleniumQueryFluentAndOrThen matches(Predicate<T> predicate);
 
+    /**
+     * <p>Tests if the result of the preceding function <b>is empty ({@code ""}), {@code null} or whitespace only</b>.</p>
+     *
+     * <p>Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
+     *
+     * <pre>
+     * (null).isBlank()      = true
+     * ("").isBlank()        = true
+     * (" ").isBlank()       = true
+     * ("bob").isBlank()     = false
+     * ("  bob  ").isBlank() = false
+     * </pre>
+     *
+     * @return An element that allows chaining of further waiting conditions or calling regular functions.
+     * @since 0.18.0
+     */
+    SeleniumQueryFluentAndOrThen isBlank();
+
 }
