@@ -5,6 +5,9 @@ import testinfrastructure.testutils.EnvironmentTestUtils;
 public class EndToEndTestConfig {
 
     public static DriverToRunTestsIn whatDriversShouldTestsRun() {
+        if (EnvironmentTestUtils.isRunningAtTravis()) {
+            return DriverToRunTestsIn.PHANTOMJS;
+        }
         if (EnvironmentTestUtils.isRunningAtAppveyor()) {
             return DriverToRunTestsIn.FIREFOX;
         }

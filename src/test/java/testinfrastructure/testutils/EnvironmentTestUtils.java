@@ -37,6 +37,10 @@ public class EnvironmentTestUtils {
         return "true".equalsIgnoreCase(System.getenv("CI"));
     }
 
+    public static boolean isRunningAtTravis() {
+        return "true".equalsIgnoreCase(System.getenv("TRAVIS"));
+    }
+
     public static boolean isRunningAtAppveyor() {
         return "True".equalsIgnoreCase(System.getenv("APPVEYOR"));
     }
