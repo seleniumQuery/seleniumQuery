@@ -24,8 +24,8 @@ public class EvalFunctionTest {
     @Test
     @JavaScriptEnabledOnly
     public void eval_return() {
-        long bodyCharCount = $.eval("return document.body.innerHTML.length");
-        $("body").assertThat().html().matches(html -> html.length() == bodyCharCount);
+        long childrenCount = $.eval("return document.body.children.length");
+        $("body *").assertThat().size().matches(size -> size == childrenCount);
     }
 
 }
