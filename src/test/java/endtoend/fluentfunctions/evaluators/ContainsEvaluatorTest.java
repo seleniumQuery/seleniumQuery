@@ -26,18 +26,21 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 public class ContainsEvaluatorTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
+    @JavaScriptEnabledOnly
     public void contains() {
         assertEquals("foo", $("#yo").waitUntil().prop("className").contains("foo").then().prop("className"));
         assertEquals("foo", $("#yo").assertThat().prop("className").contains("foo").then().prop("className"));
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void contains_fails_waitUntil() {
         assertThrowsTimeoutException(
             __ ->
@@ -50,6 +53,7 @@ public class ContainsEvaluatorTest {
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void contains_fails_assertThat() {
         assertThrowsAssertionError(
             __ ->

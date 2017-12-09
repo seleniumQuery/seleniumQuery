@@ -26,18 +26,21 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 public class IsEvaluatorTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
+    @JavaScriptEnabledOnly
     public void isEvaluator() {
         assertEquals("bar", $("#bar").waitUntil().is(":not(:enabled)").then().attr("id"));
         assertEquals("bar", $("#bar").assertThat().is(":not(:enabled)").then().attr("id"));
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void isEvaluator_fails_waitUntil() {
         assertThrowsTimeoutException(
             __ ->
@@ -51,6 +54,7 @@ public class IsEvaluatorTest {
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void isEvaluator_fails_assertThat() {
         assertThrowsAssertionError(
             __ ->

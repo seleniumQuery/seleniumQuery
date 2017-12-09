@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class MatchesStringRegexEvaluatorTest {
@@ -20,12 +21,14 @@ public class MatchesStringRegexEvaluatorTest {
     private final String AAA = "A{3} B{3}";
 
     @Test
+    @JavaScriptEnabledOnly
     public void matches__predicate_success() {
         assertEquals("aaa bbb", $("input").waitUntil().attr("value").matches(aaa).then().attr("value"));
         assertEquals("aaa bbb", $("input").assertThat().attr("value").matches(aaa).then().attr("value"));
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void matches__predicate_fails() {
         assertThrowsTimeoutException(
             __ ->
@@ -41,11 +44,11 @@ public class MatchesStringRegexEvaluatorTest {
     public void matches__predicate_fails_assertThat() {
         assertThrowsAssertionError(
             __ ->
-                $("input").assertThat().attr("value").matches(AAA)
+                $("#txt").assertThat().text().matches(AAA)
             ,
-            "Failed assertion $(\"input\").assertThat().attr(\"value\").matches(\"A{3} B{3}\").\n\n" +
-                "expected: <attr(\"value\") to match regex \"A{3} B{3}\">\n" +
-                "but: <attr(\"value\") was \"aaa bbb\">"
+            "Failed assertion $(\"#txt\").assertThat().text().matches(\"A{3} B{3}\").\n\n" +
+                "expected: <text() to match regex \"A{3} B{3}\">\n" +
+                "but: <text() was \"foo\">"
         );
     }
 

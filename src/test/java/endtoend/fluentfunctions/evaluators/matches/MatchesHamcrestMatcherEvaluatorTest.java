@@ -28,22 +28,26 @@ import org.junit.Test;
 import io.github.seleniumquery.fluentfunctions.assertthat.SeleniumQueryAssertionError;
 import io.github.seleniumquery.fluentfunctions.waituntil.SeleniumQueryTimeoutException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 
 public class MatchesHamcrestMatcherEvaluatorTest {
 
     @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
+    @JavaScriptEnabledOnly
     public void matches__success() {
         assertEquals("!visibleDiv!", $(".visibleDiv").waitUntil().html().matches(Matchers.containsString("isibleDi")).then().html());
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void matches__assertThat_success() {
         assertEquals("!visibleDiv!", $(".visibleDiv").assertThat().html().matches(Matchers.containsString("isibleDi")).then().html());
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void matches__pattern_fails_waitUntil() {
         try {
             $(".visibleDiv").waitUntil(100).html().matches(Matchers.containsString("isibleDix"));
@@ -56,6 +60,7 @@ public class MatchesHamcrestMatcherEvaluatorTest {
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void matches__pattern_fails_assertThat() {
         try {
             $(".visibleDiv").assertThat().html().matches(Matchers.containsString("isibleDix"));
@@ -68,6 +73,7 @@ public class MatchesHamcrestMatcherEvaluatorTest {
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void matches__NOT_pattern_fails_waitUntil() {
         try {
             $(".visibleDiv").waitUntil(101).html().not().matches(Matchers.containsString("isibleDi"));
@@ -80,6 +86,7 @@ public class MatchesHamcrestMatcherEvaluatorTest {
     }
 
     @Test
+    @JavaScriptEnabledOnly
     public void matches__NOT_pattern_fails_assertThat() {
         try {
             $(".visibleDiv").assertThat().html().not().matches(Matchers.containsString("isibleDi"));
