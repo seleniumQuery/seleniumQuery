@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import io.github.seleniumquery.browser.BrowserFunctions;
 import io.github.seleniumquery.browser.driver.SeleniumQueryDriver;
 import io.github.seleniumquery.internal.browser.browserfunctions.EvalFunction;
+import io.github.seleniumquery.internal.browser.browserfunctions.TitleFunction;
 
 /**
  * Default internal implementation of {@link BrowserFunctions}.
@@ -36,7 +37,9 @@ public class InternalBrowserFunctions
     implements
     BrowserFunctions,
     InternalTargetableBrowserFunctions,
-    EvalFunction {
+    // function implementations are added as "mixins" via default methods
+    EvalFunction,
+    TitleFunction {
 
     private static final Log LOGGER = LogFactory.getLog(InternalBrowserFunctions.class);
 

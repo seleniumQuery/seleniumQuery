@@ -144,4 +144,13 @@ public interface BrowserFunctions {
      */
     BrowserFunctions quit();
 
+    /**
+     * The title of the current page.
+     *
+     * @return The title of the current page, with leading and trailing whitespace stripped, or null
+     *         if one is not already set
+     * @since 0.18.0
+     */
+    String title();
+
 }
