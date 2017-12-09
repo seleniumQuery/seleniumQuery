@@ -5,6 +5,9 @@ import testinfrastructure.testutils.EnvironmentTestUtils;
 public class EndToEndTestConfig {
 
     public static DriverToRunTestsIn whatDriversShouldTestsRun() {
+        if (EnvironmentTestUtils.isRunningAtAppveyor()) {
+            return DriverToRunTestsIn.FIREFOX;
+        }
         if (EnvironmentTestUtils.isRunningAtShippable()) {
             return DriverToRunTestsIn.CHROME;
         }

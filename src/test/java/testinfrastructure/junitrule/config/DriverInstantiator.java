@@ -20,6 +20,7 @@ import static java.util.Arrays.asList;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.function.Consumer;
 
 import io.github.seleniumquery.browser.BrowserFunctions;
 import testinfrastructure.junitrule.annotation.ChromeOnly;
@@ -48,53 +49,19 @@ public abstract class DriverInstantiator {
 
     public abstract void instantiateDriver(BrowserFunctions browser);
 
-    public static DriverInstantiator PHANTOMJS = new DriverInstantiator("PhantomJS", PhantomJSOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().usePhantomJS();
-        }
-    };
-    public static DriverInstantiator FIREFOX = new DriverInstantiator("Firefox - JS ON", FirefoxOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useFirefox().autoDriverDownload();
-        }
-    };
-    public static DriverInstantiator IE = new DriverInstantiator("IE", IEOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useInternetExplorer();
-        }
-    };
-    public static DriverInstantiator CHROME = new DriverInstantiator("Chrome", ChromeOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useChrome();
-        }
-    };
-    public static DriverInstantiator CHROME_HEADLESS = new DriverInstantiator("Chrome Headless", ChromeOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useChrome().withHeadlessChrome();
-        }
-    };
-    public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = new DriverInstantiator("HtmlUnit (Chrome) - JS ON", HtmlUnitOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useHtmlUnit().emulatingChrome();
-        }
-    };
-    public static DriverInstantiator HTMLUNIT_CHROME_JS_OFF = new DriverInstantiator("HtmlUnit (Chrome) - JS OFF", HtmlUnitOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useHtmlUnit().emulatingChrome().withoutJavaScript();
-        }
-    };
-    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_ON = new DriverInstantiator("HtmlUnit (Firefox) - JS ON", HtmlUnitOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useHtmlUnit().emulatingFirefox();
-        }
-    };
-    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_OFF = new DriverInstantiator("HtmlUnit (Firefox) - JS OFF", HtmlUnitOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useHtmlUnit().emulatingFirefox().withoutJavaScript();
-        }
-    };
-    public static DriverInstantiator HTMLUNIT_IE_JS_ON = new DriverInstantiator("HtmlUnit (IE) - JS ON", HtmlUnitOnly.class)  { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer(); } };
-    public static DriverInstantiator HTMLUNIT_IE_JS_OFF = new DriverInstantiator("HtmlUnit (IE) - JS OFF", HtmlUnitOnly.class) { @Override public void instantiateDriver(BrowserFunctions $) { $.driver().useHtmlUnit().emulatingInternetExplorer().withoutJavaScript(); } };
+
+    public static DriverInstantiator PHANTOMJS = create("PhantomJS", PhantomJSOnly.class,                                $ -> $.driver().usePhantomJS().autoDriverDownload());
+    public static DriverInstantiator FIREFOX = create("Firefox - JS ON", FirefoxOnly.class,                              $ -> $.driver().useFirefox().autoDriverDownload());
+    public static DriverInstantiator IE = create("IE", IEOnly.class,                                                     $ -> $.driver().useInternetExplorer().autoDriverDownload());
+    public static DriverInstantiator CHROME = create("Chrome", ChromeOnly.class,                                         $ -> $.driver().useChrome().autoDriverDownload());
+    public static DriverInstantiator CHROME_HEADLESS = create("Chrome Headless", ChromeOnly.class,                       $ -> $.driver().useChrome().autoDriverDownload().withHeadlessChrome());
+    public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = create("HtmlUnit (Chrome) - JS ON", HtmlUnitOnly.class,     $ -> $.driver().useHtmlUnit().emulatingChrome());
+    public static DriverInstantiator HTMLUNIT_CHROME_JS_OFF = create("HtmlUnit (Chrome) - JS OFF", HtmlUnitOnly.class,   $ -> $.driver().useHtmlUnit().emulatingChrome().withoutJavaScript());
+    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_ON = create("HtmlUnit (Firefox) - JS ON", HtmlUnitOnly.class,   $ -> $.driver().useHtmlUnit().emulatingFirefox());
+    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_OFF = create("HtmlUnit (Firefox) - JS OFF", HtmlUnitOnly.class, $ -> $.driver().useHtmlUnit().emulatingFirefox().withoutJavaScript());
+    public static DriverInstantiator HTMLUNIT_IE_JS_ON = create("HtmlUnit (IE) - JS ON", HtmlUnitOnly.class,             $ -> $.driver().useHtmlUnit().emulatingInternetExplorer());
+    public static DriverInstantiator HTMLUNIT_IE_JS_OFF = create("HtmlUnit (IE) - JS OFF", HtmlUnitOnly.class,           $ -> $.driver().useHtmlUnit().emulatingInternetExplorer().withoutJavaScript());
+
 
     public boolean shouldSkipTestClass(Class<?> testClass) {
         return classHasAtLeastOneDriverAnnotationButNot(testClass, this.driverAnnotation);
@@ -113,6 +80,15 @@ public abstract class DriverInstantiator {
             }
         }
         return  false;
+    }
+
+    private static DriverInstantiator create(String driverDescription, Class<? extends Annotation> driverOnlyAnnotation, Consumer<BrowserFunctions> driverCreator) {
+        return new DriverInstantiator(driverDescription, driverOnlyAnnotation) {
+            @Override
+            public void instantiateDriver(BrowserFunctions $) {
+                driverCreator.accept($);
+            }
+        };
     }
 
 }

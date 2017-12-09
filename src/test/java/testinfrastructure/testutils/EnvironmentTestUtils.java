@@ -16,12 +16,12 @@
 
 package testinfrastructure.testutils;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
+import static org.junit.Assume.assumeTrue;
 
 import java.io.File;
 
-import static org.junit.Assume.assumeTrue;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 
 public class EnvironmentTestUtils {
 
@@ -35,6 +35,10 @@ public class EnvironmentTestUtils {
 
     public static boolean isRunningAtContinuousIntegrationServer() {
         return "true".equalsIgnoreCase(System.getenv("CI"));
+    }
+
+    public static boolean isRunningAtAppveyor() {
+        return "True".equalsIgnoreCase(System.getenv("APPVEYOR"));
     }
 
     public static boolean isRunningAtCodeShip() {
