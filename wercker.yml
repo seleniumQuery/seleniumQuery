@@ -27,3 +27,6 @@ build:
     - script:
         code: |
           mvn clean install
+    - script:
+        name: upload to codecov.io
+        code: bash <(curl -s https://codecov.io/bash)
