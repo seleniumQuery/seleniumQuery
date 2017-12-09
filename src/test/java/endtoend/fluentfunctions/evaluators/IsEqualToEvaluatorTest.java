@@ -33,19 +33,19 @@ public class IsEqualToEvaluatorTest {
 
     @Test
     public void isEqualTo() {
-        assertEquals("foo", $("#bar").waitUntil().html().isEqualTo("foo").then().html());
-        assertEquals("foo", $("#bar").assertThat().html().isEqualTo("foo").then().html());
+        assertEquals(true, $("#bar").waitUntil().prop("disabled").isEqualTo(true).then().prop("disabled"));
+        assertEquals(true, $("#bar").assertThat().prop("disabled").isEqualTo(true).then().prop("disabled"));
     }
 
     @Test
     public void isEqualTo_fails_waitUntil() {
         assertThrowsTimeoutException(
             __ ->
-                $("#bar").waitUntil(100).html().isEqualTo("qux")
+                $("#bar").waitUntil(100).prop("disabled").isEqualTo(false)
             ,
-            "Timeout while waiting for $(\"#bar\").waitUntil().html().isEqualTo(\"qux\").\n\n" +
-                "expected: <html() to equal \"qux\">\n" +
-                "but: <last html() was \"foo\">"
+            "Timeout while waiting for $(\"#bar\").waitUntil().prop(\"disabled\").isEqualTo(false).\n\n" +
+                "expected: <prop(\"disabled\") to equal false>\n" +
+                "but: <last prop(\"disabled\") was true>"
         );
     }
 
@@ -53,11 +53,11 @@ public class IsEqualToEvaluatorTest {
     public void isEqualTo_fails_assertThat() {
         assertThrowsAssertionError(
             __ ->
-                $("#bar").assertThat().html().isEqualTo("qux")
+                $("#bar").assertThat().prop("disabled").isEqualTo(false)
             ,
-            "Failed assertion $(\"#bar\").assertThat().html().isEqualTo(\"qux\").\n\n" +
-                "expected: <html() to equal \"qux\">\n" +
-                "but: <html() was \"foo\">"
+            "Failed assertion $(\"#bar\").assertThat().prop(\"disabled\").isEqualTo(false).\n\n" +
+                "expected: <prop(\"disabled\") to equal false>\n" +
+                "but: <prop(\"disabled\") was true>"
         );
     }
 

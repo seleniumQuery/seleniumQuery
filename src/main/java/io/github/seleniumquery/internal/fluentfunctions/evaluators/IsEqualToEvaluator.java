@@ -44,11 +44,7 @@ public class IsEqualToEvaluator<T> implements Evaluator<T> {
 
 	@Override
 	public String describeEvaluatorFunction(T valueToEqual, FluentBehaviorModifier fluentBehaviorModifier) {
-        String valueAsString = "\"" + valueToEqual + "\"";
-        if (valueToEqual instanceof Number) {
-            valueAsString = valueToEqual.toString();
-        }
-        return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".isEqualTo(" + valueAsString + ")";
+        return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".isEqualTo(" + quoteValue(valueToEqual) + ")";
 	}
 
     @Override
@@ -58,7 +54,7 @@ public class IsEqualToEvaluator<T> implements Evaluator<T> {
 
     @Override
     public String describeExpectedValue(T valueToEqual) {
-        return "equal \"" + valueToEqual + "\"";
+        return "equal " + quoteValue(valueToEqual);
     }
 
 }
