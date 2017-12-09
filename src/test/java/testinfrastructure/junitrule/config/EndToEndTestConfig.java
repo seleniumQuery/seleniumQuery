@@ -9,7 +9,7 @@ public class EndToEndTestConfig {
             return DriverToRunTestsIn.PHANTOMJS;
         }
         if (EnvironmentTestUtils.isRunningAtAppveyor()) {
-            return DriverToRunTestsIn.FIREFOX;
+            return DriverToRunTestsIn.FIREFOX_AND_IE;
         }
         if (EnvironmentTestUtils.isRunningAtShippable()) {
             return DriverToRunTestsIn.CHROME;
@@ -24,7 +24,7 @@ public class EndToEndTestConfig {
         if (EnvironmentTestUtils.isRunningAtContinuousIntegrationServer()) {
             return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
         }
-        return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
+        return DriverToRunTestsIn.IE;
     }
 
 }
