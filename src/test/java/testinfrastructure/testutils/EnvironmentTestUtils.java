@@ -49,6 +49,10 @@ public class EnvironmentTestUtils {
         return "true".equalsIgnoreCase(System.getenv("SHIPPABLE"));
     }
 
+    public static boolean isRunningAtWercker() {
+        return StringUtils.containsIgnoreCase(System.getenv("WERCKER_RUN_URL"), "http");
+    }
+
     private static String getGitLastCommitMessageIfAvailable() {
         if (isRunningAtCodeShip()) {
             return StringUtils.trimToEmpty(System.getenv("CI_MESSAGE"));
