@@ -16,22 +16,39 @@
 
 package io.github.seleniumquery.functions.jquery.forms;
 
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.utils.DriverVersionUtils;
+import static io.github.seleniumquery.utils.WebElementUtils.isContentEditable;
+import static io.github.seleniumquery.utils.WebElementUtils.isInputButtonTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isInputCheckboxTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isInputFileTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isInputHiddenTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isInputRadioTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isInputSubmitTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isInputTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isOptionTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isSelectTag;
+import static io.github.seleniumquery.utils.WebElementUtils.isTextareaTag;
+import static org.apache.commons.lang3.StringUtils.capitalize;
+
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.*;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
-import static io.github.seleniumquery.utils.WebElementUtils.*;
-import static org.apache.commons.lang3.StringUtils.capitalize;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.utils.DriverVersionUtils;
 
 public class ValFunction {
 
@@ -62,10 +79,14 @@ public class ValFunction {
 		if (isInputTag(element) || isOptionTag(element)) {
 			return element.getAttribute("value");
 		} else if (isSelectTag(element)) {
-			return new Select(element).getFirstSelectedOption().getAttribute("value");
+            Select select = new Select(element);
+            if (select.isMultiple())
+                return select.getAllSelectedOptions().stream().map(we -> we.getAttribute("value")).collect(Collectors.joining(","));
+            else
+                return select.getFirstSelectedOption().getAttribute("value");
 		} else if (isTextareaTag(element)) {
 			// see issue#59 - <textarea> returns wrong value (original value) for getText() in Firefox
-			// It used to be element.getText(), .getAttribute("value") OTOH, works for everyone.
+			// It used to be element.getText(). We use .getAttribute("value") because it works for everyone.
 			return element.getAttribute("value");
 		}
 		LOGGER.warn("Attempting to call .val() in an element of type '"+tagName+"': "+element+". Returning empty string.");
@@ -85,9 +106,7 @@ public class ValFunction {
 	 */
 	public static SeleniumQueryObject val(SeleniumQueryObject seleniumQueryObject, List<WebElement> elements, String value) {
 		LOGGER.debug("Setting value of "+ seleniumQueryObject +" to: \""+value+"\".");
-		elements.forEach(element -> {
-			changeElementValue(seleniumQueryObject.getWebDriver(), element, value);
-		});
+		elements.forEach(element -> changeElementValue(seleniumQueryObject.getWebDriver(), element, value));
 		return seleniumQueryObject;
 	}
 
@@ -169,7 +188,7 @@ public class ValFunction {
 				getElementMethod.setAccessible(true);
 
 				HtmlElement he = (HtmlElement) getElementMethod.invoke(element);
-				HTMLElement e = (HTMLElement) he.getScriptableObject();
+				HTMLElement e = he.getScriptableObject();
 
 				e.setInnerText(value);
 			} catch (Exception e) {
