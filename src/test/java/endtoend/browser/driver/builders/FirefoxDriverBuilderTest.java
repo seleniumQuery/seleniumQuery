@@ -27,6 +27,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 
 import endtoend.browser.util.DriverBuilderTestUtil;
 import endtoend.browser.util.JsOnOffTestUtils;
+import io.github.seleniumquery.SeleniumQueryException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class FirefoxDriverBuilderTest {
@@ -51,13 +52,10 @@ public class FirefoxDriverBuilderTest {
         JsOnOffTestUtils.assertJavaScriptIsOn($.driver().get());
     }
 
-    @Test
-    public void withoutJavaScript__should_set_js_OFF() {
-        // given
-        // when
+    @Test(expected = SeleniumQueryException.class)
+    @SuppressWarnings("deprecation")
+    public void withoutJavaScript__should_throw_exception() {
         $.driver().useFirefox().withoutJavaScript();
-        // then
-        JsOnOffTestUtils.assertJavaScriptIsOff($.driver().get());
     }
 
     @Test

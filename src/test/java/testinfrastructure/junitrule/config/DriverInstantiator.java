@@ -53,14 +53,9 @@ public abstract class DriverInstantiator {
             $.driver().usePhantomJS();
         }
     };
-    public static DriverInstantiator FIREFOX_JS_ON = new DriverInstantiator("Firefox - JS ON", FirefoxOnly.class) {
+    public static DriverInstantiator FIREFOX = new DriverInstantiator("Firefox - JS ON", FirefoxOnly.class) {
         @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useFirefox();
-        }
-    };
-    public static DriverInstantiator FIREFOX_JS_OFF = new DriverInstantiator("Firefox - JS OFF", FirefoxOnly.class) {
-        @Override public void instantiateDriver(BrowserFunctions $) {
-            $.driver().useFirefox().withoutJavaScript();
+            $.driver().useFirefox().autoDriverDownload();
         }
     };
     public static DriverInstantiator IE = new DriverInstantiator("IE", IEOnly.class) {

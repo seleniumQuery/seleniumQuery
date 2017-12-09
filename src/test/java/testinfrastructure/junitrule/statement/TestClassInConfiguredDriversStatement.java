@@ -17,8 +17,7 @@
 package testinfrastructure.junitrule.statement;
 
 import static java.util.Arrays.asList;
-import static testinfrastructure.junitrule.config.DriverInstantiator.FIREFOX_JS_OFF;
-import static testinfrastructure.junitrule.config.DriverInstantiator.FIREFOX_JS_ON;
+import static testinfrastructure.junitrule.config.DriverInstantiator.FIREFOX;
 import static testinfrastructure.junitrule.config.DriverInstantiator.PHANTOMJS;
 import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_CHROME;
 import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_CHROME_OSX;
@@ -61,7 +60,6 @@ public class TestClassInConfiguredDriversStatement extends Statement {
 		executeTestOnChrome();
 		executeTestOnIE();
 		executeTestOnFirefoxWithJS();
-		executeTestOnFirefoxWithoutJS();
 		executeTestOnPhantomJS();
 		executeTestOnRemote();
 		testClassSession.reportSummaryOfAllFailures();
@@ -109,11 +107,7 @@ public class TestClassInConfiguredDriversStatement extends Statement {
     }
 
     private void executeTestOnFirefoxWithJS() {
-        executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOn(), FIREFOX_JS_ON, YES);
-    }
-
-    private void executeTestOnFirefoxWithoutJS() {
-        executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOff(), FIREFOX_JS_OFF, NO);
+        executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOn(), FIREFOX, YES);
     }
 
     private void executeTestOnPhantomJS() {

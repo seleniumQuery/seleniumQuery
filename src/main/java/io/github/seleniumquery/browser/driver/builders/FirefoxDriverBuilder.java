@@ -16,15 +16,13 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
-import io.github.seleniumquery.SeleniumQuery;
-import io.github.seleniumquery.browser.driver.DriverBuilder;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import io.github.seleniumquery.SeleniumQueryException;
+import io.github.seleniumquery.browser.driver.DriverBuilder;
 
 /**
  * Builds {@link FirefoxDriver} instances for SeleniumQueryDriver.
@@ -34,19 +32,18 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
 
-    private Boolean enableJavaScript;
     private FirefoxProfile firefoxProfile;
 
     /**
-     * Configures Firefox to have JavaScript disabled.
+     * @deprecated Firefox (geckodriver) no longer supports disabling JavaScript. Without it, geckodriver simply
+     * can't communicate with Firefox.
      *
      * @return A self reference.
-     *
      * @since 0.9.0
      */
     public FirefoxDriverBuilder withoutJavaScript() {
-        this.enableJavaScript = false;
-        return this;
+        throw new SeleniumQueryException("Firefox no longer supports disabling JavaScript. Without it, " +
+            "geckodriver simply can't communicate with Firefox.");
     }
 
     /**
@@ -66,9 +63,7 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
     protected WebDriver build() {
         autoDownloadDriverIfAskedFor(FirefoxDriver.class);
         DesiredCapabilities capabilities = createConfiguredCapabilities();
-        FirefoxDriver firefoxDriver = new FirefoxDriver(capabilities);
-        disableJavaScriptIfWanted(firefoxDriver);
-        return firefoxDriver;
+        return new FirefoxDriver(capabilities);
     }
 
     private DesiredCapabilities createConfiguredCapabilities() {
@@ -80,26 +75,6 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
     private void configureFirefoxProfile(DesiredCapabilities capabilities) {
         FirefoxProfile profile = this.firefoxProfile != null ? this.firefoxProfile : new FirefoxProfile();
         capabilities.setCapability(FirefoxDriver.PROFILE, profile);
-    }
-
-    private void disableJavaScriptIfWanted(FirefoxDriver driver) {
-        if (shouldDisableJavaScript()) {
-            disableJavaScript(driver);
-        }
-    }
-
-    private boolean shouldDisableJavaScript() {
-        return Boolean.FALSE.equals(this.enableJavaScript);
-    }
-
-    @SuppressWarnings("deprecation")
-    private void disableJavaScript(FirefoxDriver driver) {
-        driver.get("about:config");
-        Actions act = new Actions(driver);
-        act.sendKeys(Keys.RETURN).sendKeys("javascript.enabled").perform();
-        SeleniumQuery.$.pause(1000);
-        act.sendKeys(Keys.TAB).sendKeys(Keys.RETURN).sendKeys(Keys.F5).perform();
-        driver.get("about:blank");
     }
 
 }
