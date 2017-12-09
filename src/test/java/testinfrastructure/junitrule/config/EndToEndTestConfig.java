@@ -11,6 +11,9 @@ public class EndToEndTestConfig {
         if (EnvironmentTestUtils.isRunningAtAppveyor()) {
             return DriverToRunTestsIn.FIREFOX_AND_IE;
         }
+        if (EnvironmentTestUtils.isRunningAtCircleCi()) {
+            return DriverToRunTestsIn.HTMLUNIT_ALL_JS_OFF_ONLY;
+        }
         if (EnvironmentTestUtils.isRunningAtShippable()) {
             return DriverToRunTestsIn.CHROME;
         }

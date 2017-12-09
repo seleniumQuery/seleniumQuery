@@ -49,6 +49,10 @@ public class EnvironmentTestUtils {
         return "codeship".equalsIgnoreCase(System.getenv("CI_NAME"));
     }
 
+    public static boolean isRunningAtCircleCi() {
+        return "true".equalsIgnoreCase(System.getenv("CIRCLECI"));
+    }
+
     public static boolean isRunningAtShippable() {
         return "true".equalsIgnoreCase(System.getenv("SHIPPABLE"));
     }
