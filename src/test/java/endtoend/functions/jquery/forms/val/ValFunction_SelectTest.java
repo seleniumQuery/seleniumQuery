@@ -1,4 +1,4 @@
-package endtoend.functions.jquery.forms;
+package endtoend.functions.jquery.forms.val;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
 

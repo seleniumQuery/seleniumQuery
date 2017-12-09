@@ -14,7 +14,18 @@
  * limitations under the License.
  */
 
-package endtoend.functions.jquery.forms;
+package endtoend.functions.jquery.forms.val;
+
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.startsWith;
+import static org.junit.Assert.assertThat;
+import static testinfrastructure.testutils.DriverInTest.isFirefoxDriver;
+import static testinfrastructure.testutils.DriverInTest.isIEDriver;
+import static testinfrastructure.testutils.DriverInTest.isOperaDriver;
+import static testinfrastructure.testutils.DriverInTest.isRemoteDriver;
 
 import org.hamcrest.Matcher;
 import org.junit.ClassRule;
@@ -23,14 +34,21 @@ import org.junit.Test;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-import testinfrastructure.junitrule.annotation.*;
-import testinfrastructure.testutils.SauceLabsUtils;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
-import static testinfrastructure.testutils.DriverInTest.*;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+import testinfrastructure.junitrule.annotation.ChromeOnly;
+import testinfrastructure.junitrule.annotation.ChromeShouldBeSkipped;
+import testinfrastructure.junitrule.annotation.EdgeOnly;
+import testinfrastructure.junitrule.annotation.EdgeSkip;
+import testinfrastructure.junitrule.annotation.FirefoxOnly;
+import testinfrastructure.junitrule.annotation.FirefoxSkip;
+import testinfrastructure.junitrule.annotation.HtmlUnitOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptDisabledOnly;
+import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
+import testinfrastructure.junitrule.annotation.OperaSkip;
+import testinfrastructure.junitrule.annotation.SafariOnly;
+import testinfrastructure.junitrule.annotation.SafariSkip;
+import testinfrastructure.testutils.SauceLabsUtils;
 
 // http://jsbin.com/futuhipuhi/2/edit?html,js,output
 public class ValFunctionTest {
