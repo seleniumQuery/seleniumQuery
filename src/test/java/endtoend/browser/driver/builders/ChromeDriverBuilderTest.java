@@ -135,9 +135,9 @@ public class ChromeDriverBuilderTest {
     }
 
     @Test
-    public void headlessChrome() {
+    public void headless() {
         // when
-        $.driver().useChrome().withHeadlessChrome();
+        $.driver().useChrome().headless();
         // then
         BrowserAgentTestUtils.assertBrowserAgent(containsString("HeadlessChrome"));
     }

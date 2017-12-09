@@ -81,29 +81,9 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
      * @return A self reference, allowing further configuration.
      * @since 0.17.0
      */
-    public ChromeDriverBuilder withHeadlessChrome() {
+    public ChromeDriverBuilder headless() {
         getInitializedChromeOptions().addArguments("headless").addArguments("disable-gpu");
         return this;
-    }
-
-    /**
-     * Configures {@link ChromeDriver} to run in headless mode.
-     * Alias to {@link #withHeadlessChrome()}.
-     * @return A self reference, allowing further configuration.
-     * @since 0.17.0
-     */
-    public ChromeDriverBuilder headlessChrome() {
-        return withHeadlessChrome();
-    }
-
-    /**
-     * Configures {@link ChromeDriver} to run in headless mode.
-     * Alias to {@link #withHeadlessChrome()}.
-     * @return A self reference, allowing further configuration.
-     * @since 0.17.0
-     */
-    public ChromeDriverBuilder headless() {
-        return withHeadlessChrome();
     }
 
     /**
@@ -153,6 +133,7 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
 
         configureChromeServerExecutablePath();
         try {
+            //noinspection deprecation
             return new ChromeDriver(capabilities);
         } catch (IllegalStateException e) {
             throwCustomExceptionIfExecutableWasNotFound(e);
