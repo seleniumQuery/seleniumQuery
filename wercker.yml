@@ -29,4 +29,4 @@ build:
           mvn clean test
     - script:
         name: upload to codecov.io
-        code: bash <(curl -s https://codecov.io/bash) -t c7c6e53d-462b-463d-9220-11d4411c856d
+        code: bash <(curl -s https://codecov.io/bash)
