@@ -16,6 +16,11 @@
 
 package endtoend.browser.driver;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.junit.Assert.assertThat;
+import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverQuitSpy.createWebDriverQuitSpy;
+
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,6 +29,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.junitrule.annotation.ChromeOnly;
 import testinfrastructure.junitrule.annotation.FirefoxOnly;
@@ -31,11 +37,6 @@ import testinfrastructure.junitrule.annotation.IEOnly;
 import testinfrastructure.junitrule.annotation.PhantomJSOnly;
 import testinfrastructure.junitrule.sample.SampleTest;
 import testinfrastructure.testdouble.org.openqa.selenium.WebDriverQuitSpy;
-
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import static org.junit.Assert.assertThat;
-import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverQuitSpy.createWebDriverQuitSpy;
 
 public class SeleniumQueryDriverOthersTest {
 
@@ -48,16 +49,12 @@ public class SeleniumQueryDriverOthersTest {
         WebDriverQuitSpy previousDriver = createWebDriverQuitSpy();
         $.driver().use(previousDriver);
         previousDriver.assertDriverWasNotQuit();
-        try {
-            // when
-            $.driver().useFirefox();
-            WebDriver driver = $.driver().get();
-            // then
-            previousDriver.assertDriverWasQuit();
-            assertThat(driver, instanceOf(FirefoxDriver.class));
-        } finally {
-            $.driver().quit();
-        }
+        // when
+        $.driver().useFirefox().autoQuitDriver();
+        WebDriver driver = $.driver().get();
+        // then
+        previousDriver.assertDriverWasQuit();
+        assertThat(driver, instanceOf(FirefoxDriver.class));
     }
 
     @Test

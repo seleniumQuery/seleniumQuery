@@ -41,6 +41,19 @@ public abstract class DriverInstantiator {
     private String driverDescription;
     private final Class<? extends Annotation> driverAnnotation;
 
+    public static DriverInstantiator PHANTOMJS = create("PhantomJS", PhantomJSOnly.class,                                $ -> $.driver().usePhantomJS().autoDriverDownload());
+    public static DriverInstantiator FIREFOX = create("Firefox", FirefoxOnly.class,                                      $ -> $.driver().useFirefox().autoDriverDownload());
+    public static DriverInstantiator IE = create("IE", IEOnly.class,                                                     $ -> $.driver().useInternetExplorer().autoDriverDownload());
+    public static DriverInstantiator CHROME = create("Chrome", ChromeOnly.class,                                         $ -> $.driver().useChrome().autoDriverDownload());
+    public static DriverInstantiator CHROME_HEADLESS = create("Chrome Headless", ChromeOnly.class,                       $ -> $.driver().useChrome().autoDriverDownload().headless());
+    public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = create("HtmlUnit (Chrome) - JS ON", HtmlUnitOnly.class,     $ -> $.driver().useHtmlUnit().emulatingChrome());
+    public static DriverInstantiator HTMLUNIT_CHROME_JS_OFF = create("HtmlUnit (Chrome) - JS OFF", HtmlUnitOnly.class,   $ -> $.driver().useHtmlUnit().emulatingChrome().withoutJavaScript());
+    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_ON = create("HtmlUnit (Firefox) - JS ON", HtmlUnitOnly.class,   $ -> $.driver().useHtmlUnit().emulatingFirefox());
+    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_OFF = create("HtmlUnit (Firefox) - JS OFF", HtmlUnitOnly.class, $ -> $.driver().useHtmlUnit().emulatingFirefox().withoutJavaScript());
+    public static DriverInstantiator HTMLUNIT_IE_JS_ON = create("HtmlUnit (IE) - JS ON", HtmlUnitOnly.class,             $ -> $.driver().useHtmlUnit().emulatingInternetExplorer());
+    public static DriverInstantiator HTMLUNIT_IE_JS_OFF = create("HtmlUnit (IE) - JS OFF", HtmlUnitOnly.class,           $ -> $.driver().useHtmlUnit().emulatingInternetExplorer().withoutJavaScript());
+
+
     DriverInstantiator(String driverDescription, Class<? extends Annotation> driverOnlyAnnotation) {
         this.driverDescription = driverDescription;
         this.driverAnnotation = driverOnlyAnnotation;
@@ -50,17 +63,6 @@ public abstract class DriverInstantiator {
     public abstract void instantiateDriver(BrowserFunctions browser);
 
 
-    public static DriverInstantiator PHANTOMJS = create("PhantomJS", PhantomJSOnly.class,                                $ -> $.driver().usePhantomJS().autoDriverDownload().autoQuitDriver());
-    public static DriverInstantiator FIREFOX = create("Firefox", FirefoxOnly.class,                                      $ -> $.driver().useFirefox().autoDriverDownload().autoQuitDriver());
-    public static DriverInstantiator IE = create("IE", IEOnly.class,                                                     $ -> $.driver().useInternetExplorer().autoDriverDownload().autoQuitDriver());
-    public static DriverInstantiator CHROME = create("Chrome", ChromeOnly.class,                                         $ -> $.driver().useChrome().autoDriverDownload().autoQuitDriver());
-    public static DriverInstantiator CHROME_HEADLESS = create("Chrome Headless", ChromeOnly.class,                       $ -> $.driver().useChrome().autoDriverDownload().headless().autoQuitDriver());
-    public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = create("HtmlUnit (Chrome) - JS ON", HtmlUnitOnly.class,     $ -> $.driver().useHtmlUnit().emulatingChrome().autoQuitDriver());
-    public static DriverInstantiator HTMLUNIT_CHROME_JS_OFF = create("HtmlUnit (Chrome) - JS OFF", HtmlUnitOnly.class,   $ -> $.driver().useHtmlUnit().emulatingChrome().withoutJavaScript().autoQuitDriver());
-    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_ON = create("HtmlUnit (Firefox) - JS ON", HtmlUnitOnly.class,   $ -> $.driver().useHtmlUnit().emulatingFirefox().autoQuitDriver());
-    public static DriverInstantiator HTMLUNIT_FIREFOX_JS_OFF = create("HtmlUnit (Firefox) - JS OFF", HtmlUnitOnly.class, $ -> $.driver().useHtmlUnit().emulatingFirefox().withoutJavaScript().autoQuitDriver());
-    public static DriverInstantiator HTMLUNIT_IE_JS_ON = create("HtmlUnit (IE) - JS ON", HtmlUnitOnly.class,             $ -> $.driver().useHtmlUnit().emulatingInternetExplorer().autoQuitDriver());
-    public static DriverInstantiator HTMLUNIT_IE_JS_OFF = create("HtmlUnit (IE) - JS OFF", HtmlUnitOnly.class,           $ -> $.driver().useHtmlUnit().emulatingInternetExplorer().withoutJavaScript().autoQuitDriver());
 
 
     public boolean shouldSkipTestClass(Class<?> testClass) {
