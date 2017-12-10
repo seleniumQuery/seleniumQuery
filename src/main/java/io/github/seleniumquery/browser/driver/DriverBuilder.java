@@ -43,6 +43,12 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
 
     private boolean autoQuitAskedFor = false;
 
+    /**
+     * Configures the driver with the given capabilities.
+     * @param desiredCapabilities The capabilities to be set.
+     * @return A self reference for further configuration.
+     * @since 0.9.0
+     */
     @SuppressWarnings("unchecked")
     public T withCapabilities(DesiredCapabilities desiredCapabilities) {
         markCapabilitiesWereSet();

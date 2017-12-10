@@ -20,12 +20,15 @@ import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.junit.Assume.assumeTrue;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
 import endtoend.browser.util.DriverBuilderTestUtil;
+import endtoend.browser.util.HeadlessTestUtils;
 import endtoend.browser.util.JsOnOffTestUtils;
 import io.github.seleniumquery.SeleniumQueryException;
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
@@ -59,16 +62,15 @@ public class FirefoxDriverBuilderTest {
     }
 
     @Test
-    @Ignore("It works, but we gotta find a way to TEST if the changed preference was really set")
     public void withProfile__should_set_the_given_profile() {
         // given
         FirefoxProfile profile = new FirefoxProfile();
-        profile.setPreference("browser.startup.homepage", "about:blank?stuff");
+        profile.setPreference("browser.startup.homepage", "about:blank?setViaProfile");
         // when
-        $.driver().useFirefox().withProfile(profile);
+        $.driver().useFirefox().autoDriverDownload().withProfile(profile).autoQuitDriver();
         // then
-        // assert that preference was set
-        // the code works, but I can't find a way to verify it yet
+        $.driver().get();
+        Assert.assertEquals("about:blank?setViaProfile", $.url());
     }
 
     @Test
@@ -78,6 +80,33 @@ public class FirefoxDriverBuilderTest {
         $.driver().useFirefox().autoDriverDownload();
         // then
         DriverBuilderTestUtil.openAnyUrl();
+    }
+
+    @Test
+    public void headless__yes() {
+        // when
+        $.driver().useFirefox().headless().autoDriverDownload();
+        // then
+        HeadlessTestUtils.assertHeadlessYes($.driver().get());
+    }
+
+    @Test
+    public void headless__not() {
+        // when
+        $.driver().useFirefox().autoDriverDownload();
+        // then
+        HeadlessTestUtils.assertHeadlessNot($.driver().get());
+    }
+
+    @Test
+    public void withOptions() {
+        // when
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setHeadless(true);
+        FirefoxBinary firefoxBinary = new FirefoxBinary();
+        $.driver().useFirefox().withOptions(firefoxOptions).withBinary(firefoxBinary).autoDriverDownload();
+        // then
+        HeadlessTestUtils.assertHeadlessYes($.driver().get());
     }
 
 }

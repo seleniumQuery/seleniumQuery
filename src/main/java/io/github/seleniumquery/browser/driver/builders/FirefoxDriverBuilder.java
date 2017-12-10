@@ -16,8 +16,12 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -32,18 +36,27 @@ import io.github.seleniumquery.browser.driver.DriverBuilder;
  */
 public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
 
-    private FirefoxProfile firefoxProfile;
+    private static final Log LOGGER = LogFactory.getLog(FirefoxDriverBuilder.class);
+
+    private FirefoxOptions firefoxOptions;
+
+    private FirefoxOptions getInitializedFirefoxOptions() {
+        if (this.firefoxOptions == null) {
+            this.firefoxOptions = new FirefoxOptions();
+        }
+        return this.firefoxOptions;
+    }
 
     /**
-     * @deprecated Firefox (geckodriver) no longer supports disabling JavaScript. Without it, geckodriver simply
-     * can't communicate with Firefox.
-     *
-     * @return A self reference.
-     * @since 0.9.0
+     * Configures the driver with the given capabilities.
+     * @param desiredCapabilities The capabilities to be set.
+     * @return A self reference for further configuration.
+     * @since 0.18.0
      */
-    public FirefoxDriverBuilder withoutJavaScript() {
-        throw new SeleniumQueryException("Firefox no longer supports disabling JavaScript. Without it, " +
-            "geckodriver simply can't communicate with Firefox.");
+    @Override
+    public FirefoxDriverBuilder withCapabilities(DesiredCapabilities desiredCapabilities) {
+        getInitializedFirefoxOptions().merge(desiredCapabilities);
+        return this;
     }
 
     /**
@@ -51,11 +64,57 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
      *
      * @param firefoxProfile Profile to be used.
      * @return A self reference, allowing further configuration.
-     *
      * @since 0.9.0
      */
     public FirefoxDriverBuilder withProfile(FirefoxProfile firefoxProfile) {
-        this.firefoxProfile = firefoxProfile;
+        getInitializedFirefoxOptions().setProfile(firefoxProfile);
+        return this;
+    }
+
+    /**
+     * <p>Sets specific {@link FirefoxOptions} to be used in the {@link FirefoxDriver}.</p>
+     * <br>
+     * This overwrites most configuration done by other options of driverbuilder. If you want to use it, it
+     * is best to have it as first configuration of the driver builder, e.g.:
+     * <pre><code>
+     * // instead of
+     * $.driver().useFirefox().withBinary(...).withCapabilities(...)<b>.withOptions(yourCustomOptions)</b>;
+     * // do
+     * $.driver().useFirefox()<b>.withOptions(yourCustomOptions)</b>.withBinary(...).withCapabilities(...);
+     * </code></pre>
+     *
+     * @param firefoxOptions Options to be used.
+     * @return A self reference, allowing further configuration.
+     * @since 0.18.0
+     */
+    public FirefoxDriverBuilder withOptions(FirefoxOptions firefoxOptions) {
+        if (this.firefoxOptions != null) {
+            LOGGER.warn("FirefoxOptions has already been initialized. All previous configurations are being overwritten.");
+        }
+        this.firefoxOptions = firefoxOptions;
+        return this;
+    }
+
+    /**
+     * Sets specific {@link FirefoxBinary} to be used in the {@link FirefoxDriver}.
+     *
+     * @param firefoxBinary Binary to be used.
+     * @return A self reference, allowing further configuration.
+     * @since 0.18.0
+     */
+    public FirefoxDriverBuilder withBinary(FirefoxBinary firefoxBinary) {
+        getInitializedFirefoxOptions().setBinary(firefoxBinary);
+        return this;
+    }
+
+    /**
+     * Configures {@link FirefoxDriver} to run in headless mode.
+     *
+     * @return A self reference, allowing further configuration.
+     * @since 0.18.0
+     */
+    public FirefoxDriverBuilder headless() {
+        getInitializedFirefoxOptions().setHeadless(true);
         return this;
     }
 
@@ -68,19 +127,19 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
     }
 
     private WebDriver buildFirefox() {
-        DesiredCapabilities capabilities = createConfiguredCapabilities();
-        return new FirefoxDriver(capabilities);
+        return new FirefoxDriver(getInitializedFirefoxOptions());
     }
 
-    private DesiredCapabilities createConfiguredCapabilities() {
-        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.firefox());
-        configureFirefoxProfile(capabilities);
-        return capabilities;
-    }
-
-    private void configureFirefoxProfile(DesiredCapabilities capabilities) {
-        FirefoxProfile profile = this.firefoxProfile != null ? this.firefoxProfile : new FirefoxProfile();
-        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+    /**
+     * @deprecated Firefox (geckodriver) no longer supports disabling JavaScript. Without it, geckodriver simply
+     * can't communicate with Firefox.
+     *
+     * @return A self reference.
+     * @since 0.9.0
+     */
+    public FirefoxDriverBuilder withoutJavaScript() {
+        throw new SeleniumQueryException("Firefox no longer supports disabling JavaScript. Without it, " +
+            "geckodriver simply can't communicate with Firefox.");
     }
 
 }
