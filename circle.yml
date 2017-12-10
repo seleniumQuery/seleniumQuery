@@ -4,4 +4,4 @@ machine:
 test:
   override:
     # This one could definitely be a sequence of docker commands to setup a grid
-    - docker run -it --rm --name seleniumquery-test -v $(pwd):/project -w /project gradle:jdk8 gradle test jacocoTestReport && bash <(curl -s https://codecov.io/bash)
+    - docker run -it --rm --name seleniumquery-test -v $(pwd):/project -w /project gradle:jdk8 gradle check jacocoTestReport && bash <(curl -s https://codecov.io/bash)
