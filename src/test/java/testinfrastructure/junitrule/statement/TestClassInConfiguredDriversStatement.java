@@ -17,7 +17,9 @@
 package testinfrastructure.junitrule.statement;
 
 import static java.util.Arrays.asList;
+import static testinfrastructure.junitrule.config.DriverInstantiator.EDGE;
 import static testinfrastructure.junitrule.config.DriverInstantiator.FIREFOX;
+import static testinfrastructure.junitrule.config.DriverInstantiator.OPERA;
 import static testinfrastructure.junitrule.config.DriverInstantiator.PHANTOMJS;
 import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_CHROME;
 import static testinfrastructure.junitrule.config.RemoteInstantiator.REMOTE_CHROME_OSX;
@@ -58,8 +60,10 @@ public class TestClassInConfiguredDriversStatement extends Statement {
 	public void evaluate() throws Throwable {
 		executeTestOnHtmlUnits();
 		executeTestOnChrome();
+		executeTestOnFirefox();
+		executeTestOnEdge();
+		executeTestOnOpera();
 		executeTestOnIE();
-		executeTestOnFirefoxWithJS();
 		executeTestOnPhantomJS();
 		executeTestOnRemote();
 		testClassSession.reportSummaryOfAllFailures();
@@ -106,8 +110,16 @@ public class TestClassInConfiguredDriversStatement extends Statement {
         executeTestOn(driverToRunTestsIn.canRunIE(), DriverInstantiator.IE, YES);
     }
 
-    private void executeTestOnFirefoxWithJS() {
+    private void executeTestOnFirefox() {
         executeTestOn(driverToRunTestsIn.canRunFirefox() && driverToRunTestsIn.shouldRunWithJavaScriptOn(), FIREFOX, YES);
+    }
+
+    private void executeTestOnEdge() {
+        executeTestOn(driverToRunTestsIn.canRunEdge() && driverToRunTestsIn.shouldRunWithJavaScriptOn(), EDGE, YES);
+    }
+
+    private void executeTestOnOpera() {
+        executeTestOn(driverToRunTestsIn.canRunOpera() && driverToRunTestsIn.shouldRunWithJavaScriptOn(), OPERA, YES);
     }
 
     private void executeTestOnPhantomJS() {

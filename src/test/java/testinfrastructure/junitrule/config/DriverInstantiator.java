@@ -43,6 +43,8 @@ public abstract class DriverInstantiator {
 
     public static DriverInstantiator PHANTOMJS = create("PhantomJS", PhantomJSOnly.class,                                $ -> $.driver().usePhantomJS().autoDriverDownload());
     public static DriverInstantiator FIREFOX = create("Firefox", FirefoxOnly.class,                                      $ -> $.driver().useFirefox().autoDriverDownload());
+    public static DriverInstantiator EDGE = create("Edge", EdgeOnly.class,                                               $ -> $.driver().useEdge().autoDriverDownload());
+    public static DriverInstantiator OPERA = create("Opera", OperaOnly.class,                                            $ -> $.driver().useOpera().autoDriverDownload());
     public static DriverInstantiator IE = create("IE", IEOnly.class,                                                     $ -> $.driver().useInternetExplorer().autoDriverDownload());
     public static DriverInstantiator CHROME = create("Chrome", ChromeOnly.class,                                         $ -> $.driver().useChrome().autoDriverDownload());
     public static DriverInstantiator CHROME_HEADLESS = create("Chrome Headless", ChromeOnly.class,                       $ -> $.driver().useChrome().autoDriverDownload().headless());

@@ -42,7 +42,7 @@ public enum DriverToRunTestsIn {
 	NON_HEADLESS_DRIVERS_JS_ON_ONLY     (_FIREFOX, _CHROME, _IE, _JAVASCRIPT_ON),
 
 	FIREFOX                             (_FIREFOX, _JAVASCRIPT_ON),
-	FIREFOX_AND_IE                      (_FIREFOX, _IE, _JAVASCRIPT_ON),
+	FIREFOX_AND_EDGE                    (_FIREFOX, _EDGE, _JAVASCRIPT_ON),
 
 	CHROME                              (_CHROME, _JAVASCRIPT_ON),
 	CHROME_HEADLESS                     (_CHROME_HEADLESS, _JAVASCRIPT_ON),
