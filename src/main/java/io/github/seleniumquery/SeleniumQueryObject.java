@@ -382,6 +382,8 @@ public interface SeleniumQueryObject extends Iterable<WebElement> {
 
     /**
 	 * Retrieves one of the {@link WebElement} matched by the seleniumQuery object.
+     * <br><br>
+     * <strong>If the index specifices a position that has no element, {@code null} is returned (no exception is thrown).</strong>
 	 *
 	 * @param index A zero-based integer indicating which element to retrieve.
 	 * @return The element at the specified index.
