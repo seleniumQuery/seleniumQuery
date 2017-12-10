@@ -16,43 +16,54 @@
 
 package endtoend.showcase;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.junit.Assume.assumeTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 
 public class SeleniumQueryExampleTest {
 
     @Before
     public void setUp() {
-        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunFirefox());
+        assumeTrue(SetUpAndTearDownDriver.driverToRunTestsIn.canRunChrome());
     }
 
     @Test
     public void showcase_should_work() {
-        // sets Firefox as the driver (this is optional, if omitted, will default to HtmlUnit)
-        $.driver().useFirefox(); // The WebDriver will be instantiated only when first used
+        // sets Chrome as the driver (this is optional, if omitted, will default to HtmlUnit)
+        $.driver().useChrome(); // The WebDriver will be instantiated only when first used
 
+        // or use any previously existing driver
+        // $.driver().use(new FirefoxDriver());
+
+        // starts the driver (if not started already) and opens the URL
         $.url("http://www.google.com/?hl=en");
 
-        $(":text[name='q']").val("selenium"); // the keys are actually typed!
-        $(":button[name=btnG]").click(); // simulates a real user click (not just the JS event)
+        // interact with the page
+        $(":text[name='q']").val("seleniumQuery"); // the keys are actually typed!
 
         // Besides the short syntax and the jQuery behavior you already know,
         // other very useful function in seleniumQuery is .waitUntil(),
         // handy for dealing with user-waiting actions (specially in Ajax enabled pages):
+
+        // the command below waits until the button is visible and then performs a real user click (not just the JS event)
+        $(":button[value='Google Search']").waitUntil().is(":visible").then().click();
+
+        // this waits for the #resultStats to be visible and, when it is visible, returns its text content
         String resultsText = $("#resultStats").waitUntil().is(":visible").then().text();
 
-        assertTrue("\""+ resultsText + "\" should match regex", resultsText.trim().matches("About \\d+,\\d+,\\d+ results \\(\\d+\\.\\d+ seconds\\)"));
-        // should print something like: About 24,800,000 results (0.48 seconds)
+        System.out.println(resultsText);
+        // should print something like: About 1,080 results (0.26 seconds)
+
+        $.quit(); // quits the currently used driver (chrome)
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         $.quit(); // quits the currently used driver (firefox)
     }
 
