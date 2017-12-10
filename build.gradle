@@ -37,6 +37,7 @@ ext {
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+//noinspection GroovyAssignabilityCheck
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
@@ -74,7 +75,17 @@ dependencies {
 }
 
 // https://docs.gradle.org/current/userguide/jacoco_plugin.html
+// https://docs.codecov.io/docs/supported-languages --> https://github.com/codecov/example-gradle
 apply plugin: "jacoco"
 jacoco {
     toolVersion = "0.7.9"
 }
+jacocoTestReport {
+    reports {
+        //noinspection GroovyAssignabilityCheck
+        xml.enabled true
+        //noinspection GroovyAssignabilityCheck
+        html.enabled false
+    }
+}
+check.dependsOn jacocoTestReport

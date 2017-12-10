@@ -23,6 +23,6 @@ build:
     - pwd
     - mkdir -p shippable/codecoverage
     - chmod +x gradlew
-    - xvfb-run --server-num "$(echo "$DISPLAY" | sed 's/:\([0-9][0-9]*\).*/\1/')" --server-args "-ac -screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_DEPTH}" ./gradlew test jacocoTestReport -i
+    - xvfb-run --server-num "$(echo "$DISPLAY" | sed 's/:\([0-9][0-9]*\).*/\1/')" --server-args "-ac -screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_DEPTH}" ./gradlew check jacocoTestReport -i
     - cp -r build shippable/codecoverage
     - bash <(curl -s https://codecov.io/bash)
