@@ -35,7 +35,7 @@
 | Edge                    | Appveyor  | Yes       | [![Windows Build Status](https://img.shields.io/appveyor/ci/acdcjunior/seleniumQuery/master.svg?label=Windows+Build)](https://ci.appveyor.com/project/acdcjunior/seleniumQuery/branch/master)
 | Phantom                 | Travis    | Yes       | [![Linux Build Status](https://img.shields.io/travis/seleniumQuery/seleniumQuery/master.svg?label=Linux+Build)](https://travis-ci.org/seleniumQuery/seleniumQuery)
 | HtmlUnit JS On          | Wercker   | MAYBE     | [![wercker status](https://app.wercker.com/status/b772beb5c952865d659e548bf7d64f48/s "wercker status")](https://app.wercker.com/project/bykey/b772beb5c952865d659e548bf7d64f48)
-| HtmlUnit JS Off         | CircleCI  | No        | [![Circle CI](https://circleci.com/gh/seleniumQuery/seleniumQuery.svg?style=svg)](https://circleci.com/gh/seleniumQuery/seleniumQuery)
+| HtmlUnit JS Off         | CircleCI  | MAYBE     | [![Circle CI](https://circleci.com/gh/seleniumQuery/seleniumQuery.svg?style=svg)](https://circleci.com/gh/seleniumQuery/seleniumQuery)
 | IE                      | -
 | Opera                   | -
 | jBrowserDriver          | -
