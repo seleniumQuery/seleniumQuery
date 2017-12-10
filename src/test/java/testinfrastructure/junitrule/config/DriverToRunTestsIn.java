@@ -21,6 +21,7 @@ import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._CHROME_HEADLESS;
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._EDGE;
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._FIREFOX;
+import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._FIREFOX_HEADLESS;
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._HTMLUNIT;
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._IE;
 import static testinfrastructure.junitrule.config.DriverToRunTestsIn.ShouldRun._JAVASCRIPT_OFF;
@@ -42,10 +43,13 @@ public enum DriverToRunTestsIn {
 	NON_HEADLESS_DRIVERS_JS_ON_ONLY     (_FIREFOX, _CHROME, _IE, _JAVASCRIPT_ON),
 
 	FIREFOX                             (_FIREFOX, _JAVASCRIPT_ON),
-	FIREFOX_AND_EDGE                    (_FIREFOX, _EDGE, _JAVASCRIPT_ON),
+	FIREFOX_HEADLESS                    (_FIREFOX_HEADLESS, _JAVASCRIPT_ON),
 
 	CHROME                              (_CHROME, _JAVASCRIPT_ON),
 	CHROME_HEADLESS                     (_CHROME_HEADLESS, _JAVASCRIPT_ON),
+
+    FIREFOX_AND_CHROME_HEADLESS         (_FIREFOX_HEADLESS, _CHROME_HEADLESS, _JAVASCRIPT_ON),
+    FIREFOX_AND_EDGE                    (_FIREFOX, _EDGE, _JAVASCRIPT_ON),
 
     IE                                  (_IE, _JAVASCRIPT_ON),
 	EDGE                                (_EDGE, _JAVASCRIPT_ON),
@@ -66,6 +70,7 @@ public enum DriverToRunTestsIn {
 
 	private final boolean htmlUnit;
 	private final boolean firefox;
+    private final boolean firefoxHeadless;
 	private final boolean chrome;
 	private final boolean chromeHeadless;
 	private final boolean ie;
@@ -75,11 +80,12 @@ public enum DriverToRunTestsIn {
 	private final boolean javaScriptOn;
 	private final boolean javaScriptOff;
 
-	public enum ShouldRun {_FIREFOX, _CHROME, _CHROME_HEADLESS, _IE, _EDGE, _OPERA, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
+    public enum ShouldRun {_FIREFOX, _FIREFOX_HEADLESS, _CHROME, _CHROME_HEADLESS, _IE, _EDGE, _OPERA, _PHANTOMJS, _HTMLUNIT, _JAVASCRIPT_ON, _JAVASCRIPT_OFF}
 
 	DriverToRunTestsIn(ShouldRun... shouldRuns) {
         List<ShouldRun> shouldRunList = asList(shouldRuns);
         this.firefox = shouldRunList.contains(_FIREFOX);
+        this.firefoxHeadless = shouldRunList.contains(_FIREFOX_HEADLESS);
 		this.chrome = shouldRunList.contains(_CHROME);
 		this.chromeHeadless = shouldRunList.contains(_CHROME_HEADLESS);
 		this.ie = shouldRunList.contains(_IE);
@@ -93,6 +99,7 @@ public enum DriverToRunTestsIn {
 
 	public boolean canRunHtmlUnit() { return htmlUnit; }
 	public boolean canRunFirefox() { return firefox; }
+	public boolean canRunFirefoxHeadless() { return firefoxHeadless; }
 	public boolean canRunChrome() { return chrome; }
 	public boolean canRunChromeHeadless() { return chromeHeadless; }
 	public boolean canRunIE() { return ie; }

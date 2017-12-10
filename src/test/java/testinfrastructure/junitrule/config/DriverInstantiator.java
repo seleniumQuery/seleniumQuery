@@ -43,6 +43,7 @@ public abstract class DriverInstantiator {
 
     public static DriverInstantiator PHANTOMJS = create("PhantomJS", PhantomJSOnly.class,                                $ -> $.driver().usePhantomJS().autoDriverDownload());
     public static DriverInstantiator FIREFOX = create("Firefox", FirefoxOnly.class,                                      $ -> $.driver().useFirefox().autoDriverDownload());
+    public static DriverInstantiator FIREFOX_HEADLESS = create("Firefox Headless", ChromeOnly.class,                     $ -> $.driver().useFirefox().autoDriverDownload().headless());
     public static DriverInstantiator EDGE = create("Edge", EdgeOnly.class,                                               $ -> $.driver().useEdge().autoDriverDownload());
     public static DriverInstantiator OPERA = create("Opera", OperaOnly.class,                                            $ -> $.driver().useOpera().autoDriverDownload());
     public static DriverInstantiator IE = create("IE", IEOnly.class,                                                     $ -> $.driver().useInternetExplorer().autoDriverDownload());
@@ -63,9 +64,6 @@ public abstract class DriverInstantiator {
     public String getDriverDescription() { return driverDescription; }
 
     public abstract void instantiateDriver(BrowserFunctions browser);
-
-
-
 
     public boolean shouldSkipTestClass(Class<?> testClass) {
         return classHasAtLeastOneDriverAnnotationButNot(testClass, this.driverAnnotation);
