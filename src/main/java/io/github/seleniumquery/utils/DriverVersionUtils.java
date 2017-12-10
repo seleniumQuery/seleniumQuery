@@ -126,6 +126,10 @@ public class DriverVersionUtils {
 
     public static boolean isHtmlUnitWithDisabledJavaScript(SeleniumQueryObject seleniumQueryObject) {
         WebDriver driver = seleniumQueryObject.getWebDriver();
+        return isHtmlUnitWithDisabledJavaScript(driver);
+    }
+
+    public static boolean isHtmlUnitWithDisabledJavaScript(WebDriver driver) {
         return DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && !((HtmlUnitDriver) driver).isJavascriptEnabled();
     }
 

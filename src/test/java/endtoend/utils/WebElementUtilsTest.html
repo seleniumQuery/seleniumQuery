@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2017 seleniumQuery authors
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html>
+<head>
+    <title>contenteditable</title>
+    <style>
+        div {
+            border: 1px solid black;
+        }
+        div {
+            color: black;
+        }
+        div[eh="sim"] {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div contenteditable="" id="aa">aa YES direct
+    <div contenteditable="false" id="bb">bb NOT direct
+        <div contenteditable="true" id="cc">cc YES direct
+            <div contenteditable="false" id="dd">dd NOT direct
+                <div id="ee" contenteditable>ee YES direct
+                    <div id="ff">ff YES
+                        <div contenteditable="false" id="gg">gg NOT
+                            <div id="hh">hh NOT
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script>-->
+    <!--console.log("aa", aa.isContentEditable, aa.contentEditable);-->
+    <!--console.log("bb", bb.isContentEditable, bb.contentEditable);-->
+    <!--console.log("cc", cc.isContentEditable, cc.contentEditable);-->
+    <!--console.log("dd", dd.isContentEditable, dd.contentEditable);-->
+    <!--console.log("ee", ee.isContentEditable, ee.contentEditable);-->
+    <!--console.log("ff", ff.isContentEditable, ff.contentEditable);-->
+    <!--console.log("gg", gg.isContentEditable, gg.contentEditable);-->
+    <!--console.log("hh", hh.isContentEditable, hh.contentEditable);-->
+    <!--document.querySelectorAll('div').forEach(function(d) {-->
+        <!--if (d.isContentEditable) {-->
+            <!--d.setAttribute("eh", "sim");-->
+        <!--}-->
+    <!--})-->
+<!--</script>-->
+</body>
+</html>
