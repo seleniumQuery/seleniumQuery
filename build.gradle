@@ -14,7 +14,15 @@
  * limitations under the License.
  */
 
-apply plugin: "java"
+apply plugin: 'java'
+apply plugin: 'idea'
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
 
 group = 'io.github.seleniumquery'
 version = '0.18.0-SNAPSHOT'
