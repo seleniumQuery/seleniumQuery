@@ -35,13 +35,11 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -117,7 +115,7 @@ public class ValFunction {
             changeValueOfInputElement(element, value);
         } else if (isOptionTag(element)) {
 			warnAboutNotChangingValueOfElement("<option>", "#myOption");
-		} else if (isContentEditable(element)) {
+		} else if (isContentEditable(driver, element)) {
 			changeValueOfContentEditableElement(driver, element, value);
 		} else {
             changeValueOfUnknownElement(element, value);
@@ -156,18 +154,6 @@ public class ValFunction {
 		// #Cross-Driver
 		if (DriverVersionUtils.getInstance().isHtmlUnitDriver(driver)) {
             changeContentEditableValueInHtmlUnit(driver, element, value);
-        } else if (driver instanceof FirefoxDriver) {
-            // #Cross-Driver
-            // in firefox, an editable div cannot be empty
-            try {
-                selectAllText(element);
-                element.sendKeys(value);
-            } catch (ElementNotVisibleException e) {
-                // we could work it out, possibly via JavaScript, but we decided not to, as the END USER would not be able to edit it as well!
-                throw new ElementNotVisibleException("Empty contenteditable elements are not visible in Firefox, " +
-                        "so a user can't directly interact with them. Try picking an element before the contenteditable one " +
-                        "and sending the TAB key to it, so the focus is switched, and then try calling .val() to change its value.", e);
-            }
         } else {
             element.clear();
             element.sendKeys(value);

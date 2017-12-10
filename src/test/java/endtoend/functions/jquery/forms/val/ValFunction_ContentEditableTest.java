@@ -23,12 +23,11 @@ import static org.junit.Assert.assertThat;
 import static testinfrastructure.testutils.DriverInTest.isFirefoxDriver;
 import static testinfrastructure.testutils.DriverInTest.isIEDriver;
 import static testinfrastructure.testutils.DriverInTest.isOperaDriver;
-import static testinfrastructure.testutils.DriverInTest.isRemoteDriver;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
@@ -118,7 +117,7 @@ public class ValFunction_ContentEditableTest {
         verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
     }
 
-    @Test(expected = ElementNotVisibleException.class)
+    @Test(expected = InvalidElementStateException.class)
     @FirefoxOnly
     public void val_readAndWrite___divWithContentEditableAttribute___with_EMPTY_STARTING_VALUE__hasProblemsOnFirefox() {
         verifyEditableDivAcceptsHtmlCharsCorrectly("#editable-empty", "");
@@ -141,10 +140,8 @@ public class ValFunction_ContentEditableTest {
         WebDriver driver = $.driver().get();
         if (isIEDriver(driver)) {
             return " " + resultingHtml;
-		} else if ((isFirefoxDriver(driver) && isRemoteDriver(driver)) || isOperaDriver(driver)) {
+		} else if (isFirefoxDriver(driver) || isOperaDriver(driver)) {
             return resultingHtml + " ";
-        } else if (isFirefoxDriver(driver)) {
-            return resultingHtml + "<br>";
         }
         return resultingHtml;
     }
