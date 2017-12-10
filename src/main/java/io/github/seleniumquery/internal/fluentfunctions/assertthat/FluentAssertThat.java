@@ -26,11 +26,11 @@ import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 public class FluentAssertThat implements FluentFunction {
 
     @Override
-    public <T> SeleniumQueryObject apply(Evaluator<T> evaluator,
-                                         T value,
-                                         SeleniumQueryObject seleniumQueryObject,
-                                         FluentBehaviorModifier fluentBehaviorModifier) {
-        EvaluationReport evaluationReport = evaluator.evaluate(seleniumQueryObject, value);
+    public <EVALUATORARG, GETTERTYPE> SeleniumQueryObject apply(Evaluator<EVALUATORARG, GETTERTYPE> evaluator,
+                                                                EVALUATORARG value,
+                                                                SeleniumQueryObject seleniumQueryObject,
+                                                                FluentBehaviorModifier fluentBehaviorModifier) {
+        EvaluationReport<GETTERTYPE> evaluationReport = evaluator.evaluate(seleniumQueryObject, value);
         if (fluentBehaviorModifier.isNotExpectedBehavior(evaluationReport)) {
             throw new SeleniumQueryAssertionError(
                 String.format("Failed assertion %s.assertThat().%s.\n\n%s",

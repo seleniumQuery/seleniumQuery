@@ -19,12 +19,12 @@ import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 
 public class InternalExceptionFactory {
 
-    public static <T> SeleniumQueryTimeoutException newTimeoutException(TimeoutException sourceException,
-                                                                        SeleniumQueryObject seleniumQueryObject,
-                                                                        T value,
-                                                                        FluentBehaviorModifier fluentBehaviorModifier,
-                                                                        Evaluator<T> evaluator,
-                                                                        String lastValue) {
+    public static <EVALUATORARG, GETTERTYPE> SeleniumQueryTimeoutException newTimeoutException(TimeoutException sourceException,
+                                                                                               SeleniumQueryObject seleniumQueryObject,
+                                                                                               EVALUATORARG value,
+                                                                                               FluentBehaviorModifier fluentBehaviorModifier,
+                                                                                               Evaluator<EVALUATORARG, GETTERTYPE> evaluator,
+                                                                                               GETTERTYPE lastValue) {
         String message = String.format(
             "Timeout while waiting for %s.waitUntil().%s.\n\n%s",
             seleniumQueryObject,

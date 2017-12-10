@@ -24,28 +24,28 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
-public class ContainsIgnoreCaseEvaluator implements Evaluator<String> {
+public class ContainsIgnoreCaseEvaluator<GETTERTYPE> implements Evaluator<String, GETTERTYPE> {
 
     private static final Log LOGGER = LogFactory.getLog(ContainsIgnoreCaseEvaluator.class);
 
-    private Getter<?> getter;
+    private Getter<GETTERTYPE> getter;
 
-    public ContainsIgnoreCaseEvaluator(Getter<?> getter) {
+    public ContainsIgnoreCaseEvaluator(Getter<GETTERTYPE> getter) {
         this.getter = getter;
     }
 
     @Override
-    public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, String valueToContain) {
+    public EvaluationReport<GETTERTYPE> evaluate(SeleniumQueryObject seleniumQueryObject, String valueToContain) {
         LOGGER.debug("Evaluating .containsIgnoreCase()...");
-        Object propertyGot = getter.get(seleniumQueryObject);
-        boolean satisfiesConstraints = propertyGot != null && StringUtils.containsIgnoreCase(propertyGot.toString(), valueToContain);
-        LOGGER.debug("Evaluating .containsIgnoreCase()... got " + getter + ": \"" + propertyGot + "\". Wanted: \"" + valueToContain + "\".");
-        return new EvaluationReport(propertyGot + "", satisfiesConstraints);
+        GETTERTYPE actualValue = getter.get(seleniumQueryObject);
+        LOGGER.debug("Evaluating .containsIgnoreCase()... got " + getter + ": " + quoteValue(actualValue) + ". Wanted: " + quoteArg(valueToContain) + ".");
+        boolean satisfiesConstraints = actualValue != null && StringUtils.containsIgnoreCase(actualValue.toString(), valueToContain);
+        return new EvaluationReport<>(actualValue, satisfiesConstraints);
     }
 
     @Override
     public String describeEvaluatorFunction(String valueToContain, FluentBehaviorModifier fluentBehaviorModifier) {
-        return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".containsIgnoreCase(\"" + valueToContain + "\")";
+        return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".containsIgnoreCase(" + quoteArg(valueToContain) + ")";
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ContainsIgnoreCaseEvaluator implements Evaluator<String> {
 
     @Override
     public String describeExpectedValue(String valueToContain) {
-        return "contain \"" + valueToContain + "\" ignoring case";
+        return "contain " + quoteArg(valueToContain) + " ignoring case";
     }
 
 }

@@ -77,13 +77,13 @@ public class FluentWaitUntil implements FluentFunction {
 	}
 
 	@Override
-    public <T> SeleniumQueryObject apply(final Evaluator<T> evaluator,
-                                         final T value,
-                                         final SeleniumQueryObject seleniumQueryObject,
-                                         final FluentBehaviorModifier fluentBehaviorModifier) {
+    public <EVALUATORARG, GETTERTYPE> SeleniumQueryObject apply(Evaluator<EVALUATORARG, GETTERTYPE> evaluator,
+                                                                EVALUATORARG value,
+                                                                SeleniumQueryObject seleniumQueryObject,
+                                                                FluentBehaviorModifier fluentBehaviorModifier) {
 
         // this is an array so we can modify from the lambda, but, ideally, it would be a regular variable
-        EvaluationReport[] lastEvaluationReport = new EvaluationReport[1];
+        @SuppressWarnings("unchecked") EvaluationReport<GETTERTYPE>[] lastEvaluationReport = new EvaluationReport[1];
 
         Function<Object, Object> waitFunction = unused -> {
             // refresh sqo

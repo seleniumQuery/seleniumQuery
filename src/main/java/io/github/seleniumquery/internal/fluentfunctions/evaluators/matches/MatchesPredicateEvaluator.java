@@ -18,6 +18,9 @@ package io.github.seleniumquery.internal.fluentfunctions.evaluators.matches;
 
 import java.util.function.Predicate;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
@@ -30,24 +33,27 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
  * @author acdcjunior
  * @since 0.18.0
  */
-public class MatchesPredicateEvaluator<T> implements Evaluator<Predicate<T>> {
+public class MatchesPredicateEvaluator<GETTERTYPE> implements Evaluator<Predicate<GETTERTYPE>, GETTERTYPE> {
 
-	private Getter<T> getter;
+    private static final Log LOGGER = LogFactory.getLog(MatchesPredicateEvaluator.class);
 
-	public MatchesPredicateEvaluator(Getter<T> getter) {
+	private Getter<GETTERTYPE> getter;
+
+	public MatchesPredicateEvaluator(Getter<GETTERTYPE> getter) {
 		this.getter = getter;
 	}
 
-
     @Override
-    public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, Predicate<T> predicateLambda) {
-        T lastValue = getter.get(seleniumQueryObject);
-        boolean satisfiesConstraints = predicateLambda.test(lastValue);
-        return new EvaluationReport(lastValue.toString(), satisfiesConstraints);
+    public EvaluationReport<GETTERTYPE> evaluate(SeleniumQueryObject seleniumQueryObject, Predicate<GETTERTYPE> predicateLambda) {
+        LOGGER.debug("Evaluating .matches(<predicate function>)...");
+        GETTERTYPE actualValue = getter.get(seleniumQueryObject);
+        LOGGER.debug("Evaluating .matches(<predicate function>)... got " + getter + ": " + quoteValue(actualValue) + ". Wanted: <predicate function>.");
+        boolean satisfiesConstraints = predicateLambda.test(actualValue);
+        return new EvaluationReport<>(actualValue, satisfiesConstraints);
     }
 
 	@Override
-	public String describeEvaluatorFunction(Predicate<T> predicateLambda, FluentBehaviorModifier fluentBehaviorModifier) {
+	public String describeEvaluatorFunction(Predicate<GETTERTYPE> predicateLambda, FluentBehaviorModifier fluentBehaviorModifier) {
 		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(<predicate function>)";
 	}
 
@@ -57,7 +63,7 @@ public class MatchesPredicateEvaluator<T> implements Evaluator<Predicate<T>> {
     }
 
     @Override
-    public String describeExpectedValue(Predicate<T> predicateLambda) {
+    public String describeExpectedValue(Predicate<GETTERTYPE> predicateLambda) {
         return "satisfy predicate function";
     }
 

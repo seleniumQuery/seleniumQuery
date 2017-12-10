@@ -16,6 +16,9 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators.matches;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
@@ -28,24 +31,28 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class MatchesStringRegexEvaluator implements Evaluator<String> {
+public class MatchesStringRegexEvaluator<GETTERTYPE> implements Evaluator<String, GETTERTYPE> {
 
-	private Getter<?> getter;
+    private static final Log LOGGER = LogFactory.getLog(MatchesStringRegexEvaluator.class);
 
-	public MatchesStringRegexEvaluator(Getter<?> getter) {
+	private Getter<GETTERTYPE> getter;
+
+	public MatchesStringRegexEvaluator(Getter<GETTERTYPE> getter) {
 		this.getter = getter;
 	}
 
 	@Override
-    public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, String regex) {
-        String lastValue = getter.get(seleniumQueryObject).toString();
-        boolean satisfiesConstraints = lastValue.matches(regex);
-        return new EvaluationReport(lastValue, satisfiesConstraints);
+    public EvaluationReport<GETTERTYPE> evaluate(SeleniumQueryObject seleniumQueryObject, String regex) {
+        LOGGER.debug("Evaluating .matches(<regex>)...");
+        GETTERTYPE actualValue = getter.get(seleniumQueryObject);
+        LOGGER.debug("Evaluating .matches(<regex>)... got " + getter + ": " + quoteValue(actualValue) + ". Wanted: <" + quoteArg(regex) + ">.");
+        boolean satisfiesConstraints = actualValue != null && actualValue.toString().matches(regex);
+        return new EvaluationReport<>(actualValue, satisfiesConstraints);
     }
 
 	@Override
 	public String describeEvaluatorFunction(String regex, FluentBehaviorModifier fluentBehaviorModifier) {
-		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(\"" + regex + "\")";
+		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(" + quoteArg(regex) + ")";
 	}
 
     @Override
@@ -54,8 +61,8 @@ public class MatchesStringRegexEvaluator implements Evaluator<String> {
     }
 
     @Override
-    public String describeExpectedValue(String value) {
-        return "match regex \"" + value + "\"";
+    public String describeExpectedValue(String regex) {
+        return "match regex " + quoteArg(regex);
     }
 
 }

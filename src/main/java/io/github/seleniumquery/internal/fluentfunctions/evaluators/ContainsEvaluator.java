@@ -23,28 +23,28 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
-public class ContainsEvaluator implements Evaluator<String> {
+public class ContainsEvaluator<GETTERTYPE> implements Evaluator<String, GETTERTYPE> {
 
     private static final Log LOGGER = LogFactory.getLog(ContainsEvaluator.class);
 
-	private Getter<?> getter;
+	private Getter<GETTERTYPE> getter;
 
-	public ContainsEvaluator(Getter<?> getter) {
+	public ContainsEvaluator(Getter<GETTERTYPE> getter) {
 		this.getter = getter;
 	}
 
 	@Override
-	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, String valueToContain) {
+	public EvaluationReport<GETTERTYPE> evaluate(SeleniumQueryObject seleniumQueryObject, String valueToContain) {
         LOGGER.debug("Evaluating .contains()...");
-		Object propertyGot = getter.get(seleniumQueryObject);
-        boolean satisfiesConstraints = propertyGot != null && propertyGot.toString().contains(valueToContain);
-        LOGGER.debug("Evaluating .contains()... got " + getter + ": \"" + propertyGot + "\". Wanted: \"" + valueToContain + "\".");
-        return new EvaluationReport(propertyGot + "", satisfiesConstraints);
+        GETTERTYPE actualValue = getter.get(seleniumQueryObject);
+        LOGGER.debug("Evaluating .contains()... got " + getter + ": " + quoteValue(actualValue) + ". Wanted: " + quoteArg(valueToContain) + ".");
+        boolean satisfiesConstraints = actualValue != null && actualValue.toString().contains(valueToContain);
+        return new EvaluationReport<>(actualValue, satisfiesConstraints);
 	}
 
 	@Override
 	public String describeEvaluatorFunction(String valueToContain, FluentBehaviorModifier fluentBehaviorModifier) {
-		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".contains(\"" + valueToContain + "\")";
+		return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".contains(" + quoteArg(valueToContain) + ")";
 	}
 
     @Override
@@ -54,7 +54,7 @@ public class ContainsEvaluator implements Evaluator<String> {
 
     @Override
     public String describeExpectedValue(String valueToContain) {
-        return "contain \"" + valueToContain + "\"";
+        return "contain " + quoteArg(valueToContain);
     }
 
 }

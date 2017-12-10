@@ -40,23 +40,23 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 /**
  * Functions used in the waitUntil().
  *
- * @param <T> The type returned by the getter and TYPE OF THE ARGUMENT used in the end function.
+ * @param <GETTERTYPE> The type returned by the getter and TYPE OF THE ARGUMENT used in the end function.
  *
  * @author acdcjunior
  * @since 0.9.0
  */
-class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
+class ApplyUntil<GETTERTYPE> implements SeleniumQueryFluentFunctionEvaluateIf<GETTERTYPE> {
 
 	private final FluentFunction fluentFunction;
-	private final Getter<T> getter;
+	private final Getter<GETTERTYPE> getter;
 	private final SeleniumQueryObject seleniumQueryObject;
     private final FluentBehaviorModifier fluentBehaviorModifier;
 
-    ApplyUntil(FluentFunction fluentFunction, Getter<T> getter, SeleniumQueryObject seleniumQueryObject) {
+    ApplyUntil(FluentFunction fluentFunction, Getter<GETTERTYPE> getter, SeleniumQueryObject seleniumQueryObject) {
         this(fluentFunction, getter, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR);
 	}
 
-	private ApplyUntil(FluentFunction fluentFunction, Getter<T> getter, SeleniumQueryObject seleniumQueryObject,
+	private ApplyUntil(FluentFunction fluentFunction, Getter<GETTERTYPE> getter, SeleniumQueryObject seleniumQueryObject,
                        FluentBehaviorModifier fluentBehaviorModifier) {
 		this.fluentFunction = fluentFunction;
 		this.getter = getter;
@@ -65,61 +65,61 @@ class ApplyUntil<T> implements SeleniumQueryFluentFunctionEvaluateIf<T> {
 	}
 
 	@Override
-	public SeleniumQueryFluentAndOrThen isEqualTo(T valueToEqual) {
+	public SeleniumQueryFluentAndOrThen isEqualTo(GETTERTYPE valueToEqual) {
         return andOrThen(new IsEqualToEvaluator<>(getter), valueToEqual);
 	}
 
     @Override
     public SeleniumQueryFluentAndOrThen isBlank() {
-        return andOrThen(new IsBlankEvaluator(getter), null);
+        return andOrThen(new IsBlankEvaluator<>(getter), null);
     }
 
-    private <V> AndOrThen andOrThen(Evaluator<V> evaluator, V value) {
+    private <V> AndOrThen andOrThen(Evaluator<V, GETTERTYPE> evaluator, V value) {
         return new AndOrThen(fluentFunction.apply(evaluator, value, seleniumQueryObject, this.fluentBehaviorModifier), this.fluentFunction);
     }
 
     @Override
 	public SeleniumQueryFluentAndOrThen contains(String string) {
-        return andOrThen(new ContainsEvaluator(getter), string);
+        return andOrThen(new ContainsEvaluator<>(getter), string);
 	}
 
     @Override
     public SeleniumQueryFluentAndOrThen containsIgnoreCase(String string) {
-        return andOrThen(new ContainsIgnoreCaseEvaluator(getter), string);
+        return andOrThen(new ContainsIgnoreCaseEvaluator<>(getter), string);
     }
 
 	@Override
 	public SeleniumQueryFluentAndOrThen isGreaterThan(Number valueToCompare) {
-        return andOrThen(new GreaterThanEvaluator(getter), valueToCompare);
+        return andOrThen(new GreaterThanEvaluator<>(getter), valueToCompare);
 	}
 
     @Override
 	public SeleniumQueryFluentAndOrThen isLessThan(Number valueToCompare) {
-        return andOrThen(new LessThanEvaluator(getter), valueToCompare);
+        return andOrThen(new LessThanEvaluator<>(getter), valueToCompare);
 	}
 
 	@Override
-	public SeleniumQueryFluentFunctionEvaluateIf<T> not() {
+	public SeleniumQueryFluentFunctionEvaluateIf<GETTERTYPE> not() {
 		return new ApplyUntil<>(fluentFunction, getter, seleniumQueryObject, this.fluentBehaviorModifier.negate());
 	}
 
     @Override
     public SeleniumQueryFluentAndOrThen matches(String regex) {
-        return andOrThen(new MatchesStringRegexEvaluator(getter), regex);
+        return andOrThen(new MatchesStringRegexEvaluator<>(getter), regex);
     }
 
     @Override
     public SeleniumQueryFluentAndOrThen matches(Pattern regexPattern) {
-        return andOrThen(new MatchesPatternEvaluator(getter), regexPattern);
+        return andOrThen(new MatchesPatternEvaluator<>(getter), regexPattern);
     }
 
     @Override
-    public SeleniumQueryFluentAndOrThen matches(Matcher<T> hamcrestMatcher) {
+    public SeleniumQueryFluentAndOrThen matches(Matcher<GETTERTYPE> hamcrestMatcher) {
         return andOrThen(new MatchesHamcrestMatcherEvaluator<>(getter), hamcrestMatcher);
     }
 
     @Override
-    public SeleniumQueryFluentAndOrThen matches(Predicate<T> predicateFunction) {
+    public SeleniumQueryFluentAndOrThen matches(Predicate<GETTERTYPE> predicateFunction) {
         return andOrThen(new MatchesPredicateEvaluator<>(getter), predicateFunction);
     }
 

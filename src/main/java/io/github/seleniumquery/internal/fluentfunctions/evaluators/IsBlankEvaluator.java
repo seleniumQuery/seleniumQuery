@@ -28,23 +28,23 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
  * @author acdcjunior
  * @since 0.18.0
  */
-public class IsBlankEvaluator implements Evaluator<Void> {
+public class IsBlankEvaluator<GETTERTYPE> implements Evaluator<Void, GETTERTYPE> {
 
 	private static final Log LOGGER = LogFactory.getLog(IsBlankEvaluator.class);
 
-	private Getter<?> getter;
+	private Getter<GETTERTYPE> getter;
 
-	public IsBlankEvaluator(Getter<?> getter) {
+	public IsBlankEvaluator(Getter<GETTERTYPE> getter) {
 		this.getter = getter;
 	}
 
 	@Override
-	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, Void unused) {
+	public EvaluationReport<GETTERTYPE> evaluate(SeleniumQueryObject seleniumQueryObject, Void unused) {
 		LOGGER.debug("Evaluating isBlank()...");
-		Object gotValue = getter.get(seleniumQueryObject);
-		LOGGER.debug("Evaluating isBlank()... got "+getter+": \""+gotValue+"\". Wanted blank.");
-        boolean satisfiesConstraints = StringUtils.isBlank(gotValue != null ? gotValue + "" : null);
-        return new EvaluationReport(gotValue + "", satisfiesConstraints);
+        GETTERTYPE actualValue = getter.get(seleniumQueryObject);
+        LOGGER.debug("Evaluating isBlank()... got " + getter + ": " + quoteValue(actualValue) + ". Wanted blank.");
+        boolean satisfiesConstraints = StringUtils.isBlank(actualValue == null ? null : actualValue + "");
+        return new EvaluationReport<>(actualValue, satisfiesConstraints);
 	}
 
 	@Override

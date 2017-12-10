@@ -33,13 +33,13 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
  * @author acdcjunior
  * @since 0.13.0
  */
-abstract class ComparisonEvaluator implements Evaluator<Number> {
-
-	private Getter<?> getter;
+abstract class ComparisonEvaluator<GETTERTYPE> implements Evaluator<Number, GETTERTYPE> {
 
     private static final Log LOGGER = LogFactory.getLog(ComparisonEvaluator.class);
 
-	ComparisonEvaluator(Getter<?> getter) {
+	private Getter<GETTERTYPE> getter;
+
+	ComparisonEvaluator(Getter<GETTERTYPE> getter) {
 		this.getter = getter;
 	}
 
@@ -49,20 +49,25 @@ abstract class ComparisonEvaluator implements Evaluator<Number> {
     }
 
 	@Override
-	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, Number valueToCompare) {
-        Object gotValue = getter.get(seleniumQueryObject);
-        boolean satisfiesConstraints = satisfiesConstraints(valueToCompare, gotValue);
-        return new EvaluationReport(gotValue.toString(), satisfiesConstraints);
+	public EvaluationReport<GETTERTYPE> evaluate(SeleniumQueryObject seleniumQueryObject, Number valueToCompare) {
+        LOGGER.debug("Evaluating ." + getFunctionName() + "()...");
+        GETTERTYPE actualValue = getter.get(seleniumQueryObject);
+        LOGGER.debug("Evaluating ." + getFunctionName() + "()... got " + getter + ": " + quoteValue(actualValue) + ". Wanted: " + quoteArg(valueToCompare) + ".");
+        boolean satisfiesConstraints = satisfiesConstraints(valueToCompare, actualValue);
+        return new EvaluationReport<>(actualValue, satisfiesConstraints);
 	}
 
-    private boolean satisfiesConstraints(Number valueToCompare, Object elementValue) {
+    private boolean satisfiesConstraints(Number valueToCompare, GETTERTYPE elementValue) {
+	    if (elementValue == null) {
+	        return false;
+        }
         BigDecimal numberToCompare = ComparisonEvaluatorUtils.parseNumber(valueToCompare);
         try {
             BigDecimal elementValueAsNumber = ComparisonEvaluatorUtils.parseNumber(elementValue);
 
             return compare(elementValueAsNumber, numberToCompare);
         } catch (IllegalArgumentException e) {
-            LOGGER.debug("Invalid value when trying to compare as number.\nElement value: "+elementValue, e);
+            LOGGER.debug("Invalid value when trying to compare as number.\nElement value: " + quoteValue(elementValue), e);
             return false;
         }
     }

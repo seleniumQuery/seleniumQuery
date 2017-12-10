@@ -16,6 +16,8 @@
 
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
+import java.util.Objects;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -23,7 +25,7 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
-public class IsEqualToEvaluator<T> implements Evaluator<T> {
+public class IsEqualToEvaluator<T> implements Evaluator<T, T> {
 
 	private static final Log LOGGER = LogFactory.getLog(IsEqualToEvaluator.class);
 
@@ -34,12 +36,12 @@ public class IsEqualToEvaluator<T> implements Evaluator<T> {
 	}
 
 	@Override
-	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, T valueToEqual) {
+	public EvaluationReport<T> evaluate(SeleniumQueryObject seleniumQueryObject, T valueToEqual) {
 		LOGGER.debug("Evaluating isEqualTo()...");
-		T gotValue = getter.get(seleniumQueryObject);
-		LOGGER.debug("Evaluating isEqualTo()... got "+getter+": \""+gotValue+"\". Wanted: \""+valueToEqual+"\".");
-        boolean satisfiesConstraints = gotValue.equals(valueToEqual);
-        return new EvaluationReport(gotValue.toString(), satisfiesConstraints);
+		T actualValue = getter.get(seleniumQueryObject);
+        LOGGER.debug("Evaluating isEqualTo()... got " + getter + ": " + quoteValue(actualValue) + ". Wanted: " + quoteValue(actualValue) + ".");
+        boolean satisfiesConstraints = Objects.equals(actualValue, valueToEqual);
+        return new EvaluationReport<>(actualValue, satisfiesConstraints);
 	}
 
 	@Override

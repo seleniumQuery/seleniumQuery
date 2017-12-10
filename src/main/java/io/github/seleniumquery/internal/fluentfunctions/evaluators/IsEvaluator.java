@@ -20,16 +20,16 @@ import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 import io.github.seleniumquery.utils.DriverVersionUtils;
 
-public class IsEvaluator implements Evaluator<String> {
+public class IsEvaluator implements Evaluator<String, String> {
 
 	public static IsEvaluator IS_EVALUATOR = new IsEvaluator();
 
 	private IsEvaluator() {	}
 
 	@Override
-	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, String selector) {
+	public EvaluationReport<String> evaluate(SeleniumQueryObject seleniumQueryObject, String selector) {
         boolean satisfiesConstraints = seleniumQueryObject.is(selector);
-        return new EvaluationReport(outerHTML(seleniumQueryObject), satisfiesConstraints);
+        return new EvaluationReport<>(outerHTML(seleniumQueryObject), satisfiesConstraints);
 	}
 
     private String outerHTML(SeleniumQueryObject seleniumQueryObject) {
@@ -41,7 +41,7 @@ public class IsEvaluator implements Evaluator<String> {
 
     @Override
 	public String describeEvaluatorFunction(String selector, FluentBehaviorModifier fluentBehaviorModifier) {
-        return "is(\"" + selector + "\")";
+        return "is(" + quoteArg(selector) + ")";
 	}
 
     @Override
@@ -50,8 +50,8 @@ public class IsEvaluator implements Evaluator<String> {
     }
 
     @Override
-    public String describeExpectedValue(String value) {
-        return "be \"" + value + "\"";
+    public String describeExpectedValue(String selector) {
+        return "be " + quoteArg(selector);
     }
 
 }

@@ -21,6 +21,6 @@ import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 
 public interface FluentFunction {
 
-    <T> SeleniumQueryObject apply(Evaluator<T> evaluator, T value, SeleniumQueryObject sqo, FluentBehaviorModifier fluentBehaviorModifier);
+    <T, GETTERTYPE> SeleniumQueryObject apply(Evaluator<T, GETTERTYPE> evaluator, T value, SeleniumQueryObject sqo, FluentBehaviorModifier fluentBehaviorModifier);
 
 }

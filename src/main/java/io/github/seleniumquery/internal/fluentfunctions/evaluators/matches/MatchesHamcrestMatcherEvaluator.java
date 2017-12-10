@@ -32,27 +32,27 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class MatchesHamcrestMatcherEvaluator<T> implements Evaluator<Matcher<T>> {
+public class MatchesHamcrestMatcherEvaluator<GETTERTYPE> implements Evaluator<Matcher<GETTERTYPE>, GETTERTYPE> {
 
 	private static final Log LOGGER = LogFactory.getLog(MatchesHamcrestMatcherEvaluator.class);
 
-	private Getter<T> getter;
+	private Getter<GETTERTYPE> getter;
 
-	public MatchesHamcrestMatcherEvaluator(Getter<T> getter) {
+	public MatchesHamcrestMatcherEvaluator(Getter<GETTERTYPE> getter) {
 		this.getter = getter;
 	}
 
  	@Override
-	public EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, Matcher<T> matcher) {
+	public EvaluationReport<GETTERTYPE> evaluate(SeleniumQueryObject seleniumQueryObject, Matcher<GETTERTYPE> matcher) {
 		LOGGER.debug("Evaluating .matches(<Matcher>)...");
-		T lastValue = getter.get(seleniumQueryObject);
-		LOGGER.debug("Evaluating .matches(<Matcher>)... got "+getter+": \""+lastValue+"\". Wanted: <"+matcher+">.");
-        boolean satisfiesConstraints = matcher.matches(lastValue);
-        return new EvaluationReport(lastValue.toString(), satisfiesConstraints);
+        GETTERTYPE actualValue = getter.get(seleniumQueryObject);
+        LOGGER.debug("Evaluating .matches(<Matcher>)... got " + getter + ": " + quoteValue(actualValue) + ". Wanted: <" + matcher + ">.");
+        boolean satisfiesConstraints = matcher.matches(actualValue);
+        return new EvaluationReport<>(actualValue, satisfiesConstraints);
 	}
 
 	@Override
-	public String describeEvaluatorFunction(Matcher<T> matcher, FluentBehaviorModifier fluentBehaviorModifier) {
+	public String describeEvaluatorFunction(Matcher<GETTERTYPE> matcher, FluentBehaviorModifier fluentBehaviorModifier) {
         return getter.toString() + fluentBehaviorModifier.asFunctionName() + ".matches(<" + matcher + ">)";
 	}
 
@@ -62,7 +62,7 @@ public class MatchesHamcrestMatcherEvaluator<T> implements Evaluator<Matcher<T>>
     }
 
     @Override
-    public String describeExpectedValue(Matcher<T> matcher) {
+    public String describeExpectedValue(Matcher<GETTERTYPE> matcher) {
         return String.format("be <%s>", matcher);
     }
 

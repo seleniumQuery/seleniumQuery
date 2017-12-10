@@ -19,37 +19,45 @@ package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
 
-public interface Evaluator<T> {
+public interface Evaluator<EVALUATORARG, GETTERTYPE> {
 
     int MAX_LENGTH_DISPLAY = 100;
 
-    EvaluationReport evaluate(SeleniumQueryObject seleniumQueryObject, T valueArgument);
+    EvaluationReport<GETTERTYPE> evaluate(SeleniumQueryObject seleniumQueryObject, EVALUATORARG evaluatorArgument);
 
-	String describeEvaluatorFunction(T valueArgument, FluentBehaviorModifier fluentBehaviorModifier);
+	String describeEvaluatorFunction(EVALUATORARG evaluatorArgument, FluentBehaviorModifier fluentBehaviorModifier);
 
-    default String expectedVsActualMessage(FluentBehaviorModifier fluentBehaviorModifier, T value, String lastValue, String actualPrefix) {
+    default String expectedVsActualMessage(FluentBehaviorModifier fluentBehaviorModifier, EVALUATORARG evaluatorArgument, GETTERTYPE lastValue, String actualPrefix) {
         return String.format(
-            "expected: <%s %sto " + describeExpectedValue(value) + ">\nbut: <%s%s was %s>",
+            "expected: <%s %sto " + describeExpectedValue(evaluatorArgument) + ">\nbut: <%s%s was %s>",
             getterAsString(),
             fluentBehaviorModifier.asString(),
             actualPrefix,
             getterAsString(),
-            quoteValue(value, lastValue)
+            quoteValue(lastValue)
         );
     }
 
     String getterAsString();
 
-    String describeExpectedValue(T value);
+    String describeExpectedValue(EVALUATORARG evaluatorArgument);
 
-    default String quoteValue(T typeReferenceValue) {
-        return quoteValue(typeReferenceValue, typeReferenceValue != null ? typeReferenceValue.toString() : null);
+    default String quoteArg(EVALUATORARG valueToBeQuoted) {
+        return quoteAny(valueToBeQuoted);
     }
 
-    default String quoteValue(T typeReferenceValue, String valueToBeQuoted) {
-        String valueToBeQuotedTrimmed = valueToBeQuoted == null ? "<null>" :
-        valueToBeQuoted.length() > MAX_LENGTH_DISPLAY ? valueToBeQuoted.substring(0, MAX_LENGTH_DISPLAY - 3) + "..." : valueToBeQuoted;
-        if (typeReferenceValue instanceof String) {
+    default String quoteValue(GETTERTYPE valueToBeQuoted) {
+        return quoteAny(valueToBeQuoted);
+    }
+
+    default String quoteAny(Object valueToBeQuoted) {
+        if (valueToBeQuoted == null) {
+            return null;
+        }
+        String valueToBeQuotedAsString = valueToBeQuoted.toString();
+        String valueToBeQuotedTrimmed = valueToBeQuotedAsString.length() > MAX_LENGTH_DISPLAY ?
+            valueToBeQuotedAsString.substring(0, MAX_LENGTH_DISPLAY - 3) + "..." : valueToBeQuotedAsString;
+        if (valueToBeQuoted instanceof String) {
             return '"' + valueToBeQuotedTrimmed + '"';
         } else {
             return  valueToBeQuotedTrimmed;

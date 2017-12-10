@@ -26,9 +26,9 @@ import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
  * @author acdcjunior
  * @since 0.9.0
  */
-public class GreaterThanEvaluator extends ComparisonEvaluator {
+public class GreaterThanEvaluator<GETTERTYPE> extends ComparisonEvaluator<GETTERTYPE> {
 
-	public GreaterThanEvaluator(Getter<?> getter) {
+	public GreaterThanEvaluator(Getter<GETTERTYPE> getter) {
 		super(getter);
 	}
 

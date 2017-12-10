@@ -1,16 +1,16 @@
 package io.github.seleniumquery.internal.fluentfunctions.evaluators;
 
-public class EvaluationReport {
+public class EvaluationReport<GETTERTYPE> {
 
-    private final String lastValue;
+    private final GETTERTYPE lastValue;
     private final boolean satisfiesConstraints;
 
-    public EvaluationReport(String lastValue, boolean satisfiesConstraints) {
+    public EvaluationReport(GETTERTYPE lastValue, boolean satisfiesConstraints) {
         this.lastValue = lastValue;
         this.satisfiesConstraints = satisfiesConstraints;
     }
 
-    public String getLastValue() {
+    public GETTERTYPE getLastValue() {
         return lastValue;
     }
 
