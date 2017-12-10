@@ -41,6 +41,8 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
 
     private Consumer<BrowserManager> autoDriverDownloadConfigurer;
 
+    private boolean autoQuitAskedFor = false;
+
     @SuppressWarnings("unchecked")
     public T withCapabilities(DesiredCapabilities desiredCapabilities) {
         markCapabilitiesWereSet();
@@ -113,6 +115,28 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
         }
         this.autoDriverDownloadConfigurer = configurer;
         return (T) this;
+    }
+
+    /**
+     * Configures the WebDriver to automatically close when the JVM shuts down.
+     * @return A self reference, allowing further configuration of the driver builder.
+     * @since 0.18.0
+     */
+    @SuppressWarnings("unchecked")
+    public T autoQuitDriver() {
+        this.autoQuitAskedFor = true;
+        return (T) this;
+    }
+
+    protected void autoQuitDriverIfAskedFor(WebDriver driver) {
+        if (this.autoQuitAskedFor) {
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                synchronized (driver) {
+                    LOGGER.warn("Quitting driver automatically now: " + driver);
+                    driver.quit();
+                }
+            }));
+        }
     }
 
 }

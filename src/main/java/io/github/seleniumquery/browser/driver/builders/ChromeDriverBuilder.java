@@ -119,6 +119,12 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     @Override
     protected WebDriver build() {
         autoDownloadDriverIfAskedFor(ChromeDriver.class);
+        WebDriver webDriver = buildChrome();
+        autoQuitDriverIfAskedFor(webDriver);
+        return webDriver;
+    }
+
+    private WebDriver buildChrome() {
         if (isCapabilitiesManuallySet()) {
             LOGGER.warn("Prefer using ChromeOptions and .withOptions() instead of DesiredCapabilities and .withCapabilities().");
             return buildUsingCapabilities();

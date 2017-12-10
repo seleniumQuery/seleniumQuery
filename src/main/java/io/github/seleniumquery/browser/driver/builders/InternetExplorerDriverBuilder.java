@@ -73,6 +73,12 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
     @Override
     protected WebDriver build() {
         autoDownloadDriverIfAskedFor(InternetExplorerDriver.class);
+        WebDriver webDriver = buildIE();
+        autoQuitDriverIfAskedFor(webDriver);
+        return webDriver;
+    }
+
+    private WebDriver buildIE() {
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.chrome());
 
         configureIEServerExecutablePath();

@@ -102,6 +102,12 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
 
     @Override
     protected WebDriver build() {
+        WebDriver webDriver = buildHtmlUnit();
+        autoQuitDriverIfAskedFor(webDriver);
+        return webDriver;
+    }
+
+    private WebDriver buildHtmlUnit() {
         DesiredCapabilities capabilities = capabilities(DesiredCapabilities.htmlUnit());
         overwriteCapabilityIfValueNotNull(capabilities, VERSION, this.emulatedBrowserName);
         overwriteCapabilityIfValueNotNull(capabilities, SUPPORTS_JAVASCRIPT, this.javaScriptEnabled);

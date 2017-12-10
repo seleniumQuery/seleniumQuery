@@ -62,6 +62,12 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
     @Override
     protected WebDriver build() {
         autoDownloadDriverIfAskedFor(FirefoxDriver.class);
+        WebDriver webDriver = buildFirefox();
+        autoQuitDriverIfAskedFor(webDriver);
+        return webDriver;
+    }
+
+    private WebDriver buildFirefox() {
         DesiredCapabilities capabilities = createConfiguredCapabilities();
         return new FirefoxDriver(capabilities);
     }

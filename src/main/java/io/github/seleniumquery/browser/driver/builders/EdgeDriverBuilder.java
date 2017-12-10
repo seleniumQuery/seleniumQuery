@@ -67,6 +67,12 @@ public class EdgeDriverBuilder extends DriverBuilder<EdgeDriverBuilder> {
     @Override
     protected WebDriver build() {
         autoDownloadDriverIfAskedFor(EdgeDriver.class);
+        WebDriver webDriver = buildEdge();
+        autoQuitDriverIfAskedFor(webDriver);
+        return webDriver;
+    }
+
+    private WebDriver buildEdge() {
         if (isCapabilitiesManuallySet()) {
             LOGGER.warn("Prefer using EdgeOptions and .withOptions() instead of DesiredCapabilities and " +
                 ".withCapabilities().");

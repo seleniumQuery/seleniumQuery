@@ -115,6 +115,12 @@ public class OperaDriverBuilder extends DriverBuilder<OperaDriverBuilder> {
     @Override
     protected WebDriver build() {
         autoDownloadDriverIfAskedFor(OperaDriver.class);
+        WebDriver webDriver = buildOpera();
+        autoQuitDriverIfAskedFor(webDriver);
+        return webDriver;
+    }
+
+    private WebDriver buildOpera() {
         if (isCapabilitiesManuallySet()) {
             LOGGER.warn("Prefer using OperaOptions and .withOptions() instead of DesiredCapabilities and " +
                 ".withCapabilities().");

@@ -35,7 +35,7 @@ public class HtmlUnitDriverBuilderTest {
     public static final String HTMLUNIT_FF_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; rv:52.0) Gecko/20100101 Firefox/52.0";
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         $.driver().quit();
     }
 
@@ -49,7 +49,7 @@ public class HtmlUnitDriverBuilderTest {
     }
 
     @Test
-    public void useHtmlUnit__should_emulate_CHROME_by_default() throws Exception {
+    public void useHtmlUnit__should_emulate_CHROME_by_default() {
         // given
         // when
         $.driver().useHtmlUnit();
@@ -102,6 +102,12 @@ public class HtmlUnitDriverBuilderTest {
         $.driver().useHtmlUnit().emulatingInternetExplorer();
         // then
         BrowserAgentTestUtils.assertBrowserAgent(HTMLUNIT_IE_AGENT_STRING);
+    }
+
+    @Test
+    public void autoQuit__compiles() {
+        // this is here just to test compilation... I don't really know how to test this, for HtmlUnit or any other driver...
+        $.driver().useHtmlUnit().autoQuitDriver();
     }
 
 }

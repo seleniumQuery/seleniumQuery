@@ -41,7 +41,7 @@ import io.github.seleniumquery.browser.driver.DriverBuilder;
  */
 public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder> {
 
-    public static final String PHANTOMJS_EXECUTABLE_PATH_PROPERTY = PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY;
+    private static final String PHANTOMJS_EXECUTABLE_PATH_PROPERTY = PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY;
 
     private static final String EXCEPTION_MESSAGE = " \nDownload the latest release at http://phantomjs.org/download.html and place it: \n" +
             "(1) on the classpath of this project; or\n" +
@@ -67,7 +67,7 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
         this(SystemUtils.IS_OS_WINDOWS, PHANTOMJS_EXECUTABLE_WINDOWS, PHANTOMJS_EXECUTABLE_LINUX);
     }
 
-    public PhantomJSDriverBuilder(boolean isWindowsOS, String phantomjsExecutableWindows, String phantomjsExecutableLinux) {
+    PhantomJSDriverBuilder(boolean isWindowsOS, String phantomjsExecutableWindows, String phantomjsExecutableLinux) {
         this.isWindowsOS = isWindowsOS;
         this.phantomjsExecutableWindows = phantomjsExecutableWindows;
         this.phantomjsExecutableLinux = phantomjsExecutableLinux;
@@ -86,6 +86,12 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
     @Override
     protected WebDriver build() {
         autoDownloadDriverIfAskedFor(PhantomJSDriver.class);
+        WebDriver webDriver = buildPhantomJS();
+        autoQuitDriverIfAskedFor(webDriver);
+        return webDriver;
+    }
+
+    private WebDriver buildPhantomJS() {
         DesiredCapabilities capabilities = capabilities(new DesiredCapabilities());
 
         configurePhantomJsExecutablePath(capabilities);
