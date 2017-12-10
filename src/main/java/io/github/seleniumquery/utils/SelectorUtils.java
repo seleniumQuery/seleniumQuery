@@ -26,7 +26,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.text.StringEscapeUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidSelectorException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
@@ -34,6 +37,7 @@ import org.openqa.selenium.internal.WrapsDriver;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
+import io.github.seleniumquery.functions.jquery.attributes.PropFunction;
 
 /**
  * Contains some utility functions for dealing with WebDrivers, such as inspecting their version.
@@ -68,16 +72,52 @@ public class SelectorUtils {
 	private SelectorUtils() {}
 
 	public static WebElement parent(WebElement element) {
-		try {
-			return element.findElement(By.xpath(".."));
-		} catch (RuntimeException e) {
-			LOGGER.debug("parent() (XPath \"..\") on element ("+element+") failed. It probably is because element is <html>." +
-					" Still, it could be something else, thus this logging.", e);
-			return null;
-		}
-	}
+	    if (DriverVersionUtils.isHtmlUnitWithDisabledJavaScript(element) || !(element instanceof WrapsDriver)) {
+            return parentByXPath(element);
+        } else {
+            WebDriver driver = ((WrapsDriver) element).getWrappedDriver();
+            return PropFunction.prop(driver, element, "parentElement");
+        }
+    }
 
-	@SuppressWarnings("unused")
+    private static WebElement parentByXPath(WebElement element) {
+        if ("html".equalsIgnoreCase(element.getTagName())) {
+            try {
+                WebElement parent = parentByXPathExpression(element);
+                parent.getTagName(); // trigger exception on firefox #Cross-Driver
+                return parent;
+            } catch (InvalidSelectorException | StaleElementReferenceException e) {
+                if (e.getMessage().contains("HTMLDocument") || e.getMessage().contains("htmlunit.html.HtmlPage")) {
+                    // #Cross-Driver
+                    // chrome throws InvalidSelectorException: invalid selector: The result of the xpath expression ".." is: [object HTMLDocument]. It should be an element.
+                    // opera throws InvalidSelectorException: invalid selector: The result of the xpath expression ".." is: [object HTMLDocument]. It should be an element.
+                    // ie throws InvalidSelectorException: The result of the xpath expression ".." is: [object HTMLDocument]. It should be an element.
+                    // edge: see below
+
+                    // phantomjs throws InvalidSelectorException: {"errorMessage":"The result of the xpath expression \"..\" is: [object HTMLDocument]. It should be an element." ...}
+
+                    // htmlunit throws InvalidSelectorException: The xpath expression '..' selected an object of type 'class com.gargoylesoftware.htmlunit.html.HtmlPage' instead of a WebElement
+
+                    // firefox throws StaleElementReferenceException: The element reference of [object HTMLDocument] {...} stale; either the element is no longer attached to the DOM, it is not in the current frame context, or the document has been refreshed
+                    LOGGER.debug("parent() on element ("+element+") failed. It probably is because element is <html>. Still, it could be something else, thus this logging.", e);
+                } else {
+                    throw e;
+                }
+            } catch (NoSuchElementException e) {
+                // edge throws NoSuchElementException: No such element (WARNING: The server did not provide any stacktrace information)
+                LOGGER.debug("parent() on element ("+element+") failed. It probably is because element is <html>. Still, it could be something else, thus this logging.", e);
+            }
+            return null;
+        } else {
+            return parentByXPathExpression(element);
+        }
+    }
+
+    private static WebElement parentByXPathExpression(WebElement element) {
+        return element.findElement(By.xpath(".."));
+    }
+
+    @SuppressWarnings("unused")
     public static List<WebElement> parents(WebElement element) {
 		return element.findElements(By.xpath("ancestor::node()[count(ancestor-or-self::html) > 0]"));
 	}
@@ -196,7 +236,8 @@ public class SelectorUtils {
 	 * @param unescapedSelector The CSS selector to escape
      * @return The CSS selector escaped
 	 */
-	public static String escapeSelector(String unescapedSelector) {
+	@SuppressWarnings("ConstantConditions")
+    public static String escapeSelector(String unescapedSelector) {
 		String escapedSelector = unescapedSelector;
 		if (Character.isDigit(unescapedSelector.charAt(0))) {
 			escapedSelector = "\\\\3"+unescapedSelector.charAt(0)+" "+escapedSelector.substring(1);

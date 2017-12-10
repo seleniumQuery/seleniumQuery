@@ -28,8 +28,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.safari.SafariDriver;
@@ -131,6 +133,14 @@ public class DriverVersionUtils {
 
     public static boolean isHtmlUnitWithDisabledJavaScript(WebDriver driver) {
         return DriverVersionUtils.getInstance().isHtmlUnitDriver(driver) && !((HtmlUnitDriver) driver).isJavascriptEnabled();
+    }
+
+    public static boolean isHtmlUnitWithDisabledJavaScript(WebElement webElement) {
+	    if (webElement instanceof HtmlUnitWebElement) {
+            HtmlUnitDriver htmlUnitDriver = (HtmlUnitDriver) ((HtmlUnitWebElement) webElement).getWrappedDriver();
+            return !htmlUnitDriver.isJavascriptEnabled();
+        }
+        return false;
     }
 
 }
