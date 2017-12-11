@@ -36,7 +36,6 @@ import java.util.stream.Collectors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -188,25 +187,12 @@ public class ValFunction {
         element.sendKeys(value);
     }
 
-    /**
-     * We attempt to clear the element, but if an exception saying it can't be edited is thrown, we still
-     * try to select its whole text (with CTRL+HOME then CTRL+SHIFT+END (windows)), so the next typed keys
-     * erase the current value (so the resulting content will be as if it was cleared by this function anyway).
-     */
     private static void clearElementOrSelectAllOfItsText(WebElement element) {
         try {
             element.clear();
-        } catch (WebDriverException e) {
-            if (e.getMessage().startsWith("Element must be user-editable in order to clear it.")) {
-                selectAllText(element);
-            }
-        }
-    }
-
-    private static void selectAllText(WebElement element) {
-        try {
-            element.sendKeys(Keys.chord(Keys.CONTROL, Keys.HOME), Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END));
         } catch (WebDriverException ignored) {
+            // this is a "best effort" clear
+            // frequent exception: "Element must be user-editable in order to clear it."
         }
     }
 

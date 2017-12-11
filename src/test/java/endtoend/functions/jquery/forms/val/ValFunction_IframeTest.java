@@ -17,10 +17,7 @@
 package endtoend.functions.jquery.forms.val;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 
 import org.hamcrest.Matcher;
@@ -32,8 +29,6 @@ import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.junitrule.annotation.ChromeOnly;
 import testinfrastructure.junitrule.annotation.EdgeOnly;
 import testinfrastructure.junitrule.annotation.FirefoxOnly;
-import testinfrastructure.junitrule.annotation.JavaScriptDisabledOnly;
-import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
 import testinfrastructure.junitrule.annotation.SafariOnly;
 import testinfrastructure.testutils.SauceLabsUtils;
 
@@ -75,46 +70,56 @@ public class ValFunction_IframeTest {
      *
      *
      * Safari dies when typing.
-     * Firefox does not clear selection.
-     * Edge does not read the value correctly (nor types).
+     * Firefox reads correctly, but edition only works if click before typing (it is as if it doesn't properly focus the iframe body using sendkeys only).
+     * Edge only types when clicking before (if not clicking, the value ends up empty)
      * Chrome works 100%.
      * HtmlUnit reads, but doesnt type.
      * PhantomJS same as Edge.
      */
     @Test
-    @JavaScriptEnabledOnly
     @ChromeOnly
     public void iframe_with_DesignMode_ON___values_are_CHANGED_correctly__CHROME() {
-        verifyTypingAtIframeChangesValueAsExpected(is("[typed-value]"));
-    }
-    @Test
-    @JavaScriptEnabledOnly
-    @FirefoxOnly
-    public void iframe_with_DesignMode_ON___values_are_CHANGED_correctly__FIREFOX() {
-        verifyTypingAtIframeChangesValueAsExpected(allOf(startsWith("[typed-value]"), not(is("[typed-value]"))));
+        verifyTypingAtIframeChangesValueAsExpected(is("[typed-value]"), false);
     }
 
-    private void verifyTypingAtIframeChangesValueAsExpected(Matcher<String> resultTextMatcher) {
+    @Test
+    @FirefoxOnly
+    public void iframe_with_DesignMode_ON___values_are_CHANGED_correctly__FIREFOX__NOT_CLICKING() {
+        // see comments above
+        verifyTypingAtIframeChangesValueAsExpected(is("iframe-body-content"), false);
+    }
+
+    @Test
+    @FirefoxOnly
+    public void iframe_with_DesignMode_ON___values_are_CHANGED_correctly__FIREFOX__CLICKING() {
+        // see comments above
+        verifyTypingAtIframeChangesValueAsExpected(is("iframe-body-content[typed-value]"), true);
+    }
+
+    @Test
+    @EdgeOnly
+    public void iframe_with_DesignMode_ON___values_are_CHANGED_correctly__EDGE__NOT_CLICKING() {
+        // see comments above
+        verifyTypingAtIframeChangesValueAsExpected(is(""), false);
+    }
+
+    @Test
+    @EdgeOnly
+    public void iframe_with_DesignMode_ON___values_are_CHANGED_correctly__EDGE__CLICKING() {
+        // see comments above
+        verifyTypingAtIframeChangesValueAsExpected(is("[typed-value]"), true);
+    }
+
+    private void verifyTypingAtIframeChangesValueAsExpected(Matcher<String> resultTextMatcher, boolean canClick) {
         $.url(SauceLabsUtils.remoteAddressForFile($.url()));
         $("#iframe-debug").waitUntil().text().isEqualTo("designMode successfully set to on by JavaScript");
-        $.driver().get().switchTo().frame("iframe-with-design-mode-on");
+        $.driver().get().switchTo().frame($("#iframe-with-design-mode-on").get(0));
+        if (canClick) {
+            $("body").click();
+        }
         $("body").val("[typed-value]");
         assertThat($("body").val(), is(""));
         assertThat($("body").text(), resultTextMatcher);
     }
-
-    @Test
-    @JavaScriptDisabledOnly
-    @FirefoxOnly
-    public void iframe_with_DesignMode_ON____JS_OFF____values_DONT_change__but_no_exception_is_thrown_as_well() {
-        $.driver().get().switchTo().frame("iframe-with-design-mode-on");
-        $("body").val("something");
-        assertThat($("body").val(), is(""));
-        assertThat($("body").text(), is("iframe-body-content"));
-
-        $.driver().get().switchTo().defaultContent();
-        assertThat($("#iframe-debug").text(), is("no-javascript")); // make sure JS didn't run!
-    }
-
 
 }
