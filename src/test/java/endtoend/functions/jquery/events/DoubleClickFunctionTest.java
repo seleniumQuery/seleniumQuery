@@ -16,17 +16,24 @@
 
 package endtoend.functions.jquery.events;
 
+import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static testinfrastructure.testutils.DriverInTest.isEdgeDriver;
+import static testinfrastructure.testutils.DriverInTest.isFirefoxDriver;
+import static testinfrastructure.testutils.DriverInTest.isHtmlUnitDriver;
+import static testinfrastructure.testutils.DriverInTest.isIEDriver;
+import static testinfrastructure.testutils.DriverInTest.isOperaDriver;
+import static testinfrastructure.testutils.DriverInTest.isPhantomJSDriver;
+import static testinfrastructure.testutils.DriverInTest.isSafariDriver;
+
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+
 import testinfrastructure.junitrule.SetUpAndTearDownDriver;
 import testinfrastructure.junitrule.annotation.JavaScriptEnabledOnly;
-
-import static io.github.seleniumquery.SeleniumQuery.$;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static testinfrastructure.testutils.DriverInTest.*;
 
 public class DoubleClickFunctionTest {
 
@@ -47,6 +54,7 @@ public class DoubleClickFunctionTest {
             || isIEDriver(driver)
             || isPhantomJSDriver(driver)
             || isSafariDriver(driver)
+            || isFirefoxDriver(driver)
             || isEdgeDriver(driver)) {
             otherDiff++;
         }

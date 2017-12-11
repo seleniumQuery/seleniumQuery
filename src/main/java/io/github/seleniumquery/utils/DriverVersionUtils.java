@@ -30,6 +30,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -141,6 +142,10 @@ public class DriverVersionUtils {
             return !htmlUnitDriver.isJavascriptEnabled();
         }
         return false;
+    }
+
+    public static boolean isFirefoxDriver(WebDriver driver) {
+        return isDriver(driver, FirefoxDriver.class, BrowserType.FIREFOX);
     }
 
 }
