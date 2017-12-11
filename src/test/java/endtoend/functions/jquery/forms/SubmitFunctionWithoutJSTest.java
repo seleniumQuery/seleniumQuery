@@ -16,18 +16,19 @@
 
 package endtoend.functions.jquery.forms;
 
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import testinfrastructure.junitrule.SetUpAndTearDownDriver;
-
 import static io.github.seleniumquery.SeleniumQuery.$;
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.junit.Assert.assertThat;
 
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import testinfrastructure.junitrule.SetUpAndTearDownDriver;
+
 public class SubmitFunctionWithoutJSTest {
 
-    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver(SubmitFunctionWithoutJSTest.class);
+    @ClassRule @Rule public static SetUpAndTearDownDriver setUpAndTearDownDriverRule = new SetUpAndTearDownDriver();
 
     @Test
     public void submit_function_without_js() {

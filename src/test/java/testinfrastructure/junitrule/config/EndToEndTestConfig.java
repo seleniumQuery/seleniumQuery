@@ -9,8 +9,8 @@ public class EndToEndTestConfig {
             return DriverToRunTestsIn.PHANTOMJS;
         }
         if (EnvironmentTestUtils.isRunningAtAppveyor()) {
-            return DriverToRunTestsIn.FIREFOX;
-//            return DriverToRunTestsIn.FIREFOX_AND_EDGE;
+//            return DriverToRunTestsIn.FIREFOX;
+            return DriverToRunTestsIn.FIREFOX_AND_EDGE;
         }
         if (EnvironmentTestUtils.isRunningAtCircleCi()) {
             return DriverToRunTestsIn.HTMLUNIT_ALL_JS_OFF_ONLY;
