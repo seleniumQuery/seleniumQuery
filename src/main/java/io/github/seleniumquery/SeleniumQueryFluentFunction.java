@@ -87,4 +87,12 @@ public interface SeleniumQueryFluentFunction extends SeleniumQueryWaitUntil {
 	 */
 	SeleniumQueryFluentFunctionEvaluateIf<Integer> size();
 
+    /**
+     * Evaluates if the size of this seleniumQuery is greated than zero.
+     *
+     * @return An object for specifying other waiting conditions (<code>.and()</code>) or to execute usual functions (<code>.then()</code>).
+     * @since 0.18.0
+     */
+    SeleniumQueryFluentAndOrThen isNotEmpty();
+
 }

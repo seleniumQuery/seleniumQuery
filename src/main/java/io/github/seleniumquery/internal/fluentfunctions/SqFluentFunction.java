@@ -21,6 +21,7 @@ import io.github.seleniumquery.SeleniumQueryFluentFunction;
 import io.github.seleniumquery.SeleniumQueryFluentFunctionEvaluateIf;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsNotEmptyEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.AttrGetter;
 import io.github.seleniumquery.internal.fluentfunctions.getters.HtmlGetter;
 import io.github.seleniumquery.internal.fluentfunctions.getters.PropGetter;
@@ -53,14 +54,6 @@ public class SqFluentFunction implements SeleniumQueryFluentFunction {
 	}
 
 	@Override
-	public SeleniumQueryFluentAndOrThen is(String selector) {
-        SeleniumQueryObject sqoAfter = this.fluentFunction.apply(
-            IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR
-        );
-		return new AndOrThen(sqoAfter, this.fluentFunction);
-	}
-
-	@Override
 	public SeleniumQueryFluentFunctionEvaluateIf<String> val() {
 		return new ApplyUntil<>(this.fluentFunction, ValGetter.VAL_GETTER, seleniumQueryObject);
 	}
@@ -89,5 +82,21 @@ public class SqFluentFunction implements SeleniumQueryFluentFunction {
 	public SeleniumQueryFluentFunctionEvaluateIf<Integer> size() {
 		return new ApplyUntil<>(this.fluentFunction, SizeGetter.SIZE_GETTER, seleniumQueryObject);
 	}
+
+    @Override
+    public SeleniumQueryFluentAndOrThen is(String selector) {
+        SeleniumQueryObject sqoAfter = this.fluentFunction.apply(
+            IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR
+        );
+        return new AndOrThen(sqoAfter, this.fluentFunction);
+    }
+
+    @Override
+    public SeleniumQueryFluentAndOrThen isNotEmpty() {
+        SeleniumQueryObject sqoAfter = this.fluentFunction.apply(
+            IsNotEmptyEvaluator.IS_NOT_EMPTY_EVALUATOR, null, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR
+        );
+        return new AndOrThen(sqoAfter, this.fluentFunction);
+    }
 
 }
