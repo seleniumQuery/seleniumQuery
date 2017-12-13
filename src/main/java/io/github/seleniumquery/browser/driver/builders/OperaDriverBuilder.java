@@ -42,17 +42,17 @@ public class OperaDriverBuilder extends DriverBuilder<OperaDriverBuilder> {
     private OperaOptions operaOptions;
 
     /**
-     * Sets the {@link DesiredCapabilities} to the driver being built.
+     * Merges the {@link DesiredCapabilities} into the currently configured {@link OperaOptions} that will
+     * be used in the driver being built.
      *
      * @param desiredCapabilities The desired capabilities object.
      * @return The current builder instance, for additional configuration, if needed.
      * @since 0.18.0
-     * @deprecated Prefer using {@link OperaOptions} and {@link OperaDriverBuilder#withOptions(OperaOptions)} instead.
      */
     @Override
-    @Deprecated
     public OperaDriverBuilder withCapabilities(DesiredCapabilities desiredCapabilities) {
-        return super.withCapabilities(desiredCapabilities);
+        getInitializedOperaOptions().merge(desiredCapabilities);
+        return this;
     }
 
     /**
@@ -121,32 +121,6 @@ public class OperaDriverBuilder extends DriverBuilder<OperaDriverBuilder> {
     }
 
     private WebDriver buildOpera() {
-        if (isCapabilitiesManuallySet()) {
-            LOGGER.warn("Prefer using OperaOptions and .withOptions() instead of DesiredCapabilities and " +
-                ".withCapabilities().");
-            return buildUsingCapabilities();
-        } else {
-            return buildUsingOperaOptions();
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    private WebDriver buildUsingCapabilities() {
-        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.opera());
-        overwriteCapabilityIfValueNotNull(capabilities, OperaOptions.CAPABILITY, this.operaOptions);
-
-        try {
-            return new OperaDriver(capabilities);
-        } catch (IllegalStateException e) {
-            throwCustomExceptionIfExecutableWasNotFound(e);
-            throw e;
-        } catch (WebDriverException e) {
-            throwCustomExceptionIfBinaryWasNotFound(e);
-            throw e;
-        }
-    }
-
-    private WebDriver buildUsingOperaOptions() {
         try {
             return new OperaDriver(getInitializedOperaOptions());
         } catch (IllegalStateException e) {

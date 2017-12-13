@@ -62,16 +62,16 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     private ChromeOptions chromeOptions;
 
     /**
-     * Sets the {@link DesiredCapabilities} to the driver being built.
+     * Merges the {@link DesiredCapabilities} into the currently configured {@link ChromeOptions} that will
+     * be used in the driver being built.
      *
      * @param desiredCapabilities The desired capabilities object. See https://sites.google.com/a/chromium.org/chromedriver/capabilities
      * @return The current builder instance, for additional configuration, if needed.
-     *
-     * @deprecated Prefer using {@link ChromeOptions} and {@link ChromeDriverBuilder#withOptions(ChromeOptions)} instead.
+     * @since 0.18.0
      */
     @Override
-    @Deprecated
     public ChromeDriverBuilder withCapabilities(DesiredCapabilities desiredCapabilities) {
+        getInitializedChromeOptions().merge(desiredCapabilities);
         return super.withCapabilities(desiredCapabilities);
     }
 
@@ -103,6 +103,9 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
      * Configures the builder to look for the ChromeDriver executable (<code>chromedriver.exe</code>/<code>chromedriver</code>) at
      * the specified path.
      *
+     * <br><br>
+     *     Note: if you haven't, consider using <code>$.useChrome().autoDriverDownload();</code> instead.
+     *
      * @param pathToChromeDriver The path to the executable server file. Examples:
      *     <code>"C:\myFiles\chromedriver.exe"</code>; can be relative, as in <code>"..\stuff\chromedriver"</code>;
      *     does not matter if the executable was renamed, such as <code>"wherever/myself/drivers/chromedriver_v12345.exe"</code>.
@@ -125,29 +128,6 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
     }
 
     private WebDriver buildChrome() {
-        if (isCapabilitiesManuallySet()) {
-            LOGGER.warn("Prefer using ChromeOptions and .withOptions() instead of DesiredCapabilities and .withCapabilities().");
-            return buildUsingCapabilities();
-        } else {
-            return buildUsingChromeOptions();
-        }
-    }
-
-    private WebDriver buildUsingCapabilities() {
-        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.chrome());
-        overwriteCapabilityIfValueNotNull(capabilities, ChromeOptions.CAPABILITY, this.chromeOptions);
-
-        configureChromeServerExecutablePath();
-        try {
-            //noinspection deprecation
-            return new ChromeDriver(capabilities);
-        } catch (IllegalStateException e) {
-            throwCustomExceptionIfExecutableWasNotFound(e);
-            throw e;
-        }
-    }
-
-    private WebDriver buildUsingChromeOptions() {
         configureChromeServerExecutablePath();
         try {
             return new ChromeDriver(getInitializedChromeOptions());

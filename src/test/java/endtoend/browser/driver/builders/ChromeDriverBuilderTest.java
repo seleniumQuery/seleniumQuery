@@ -64,18 +64,21 @@ public class ChromeDriverBuilderTest {
         BrowserAgentTestUtils.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
     }
 
-    @Test
-    @SuppressWarnings("deprecation")
+    private static class MergeWasCalled extends RuntimeException {}
+
+    @Test(expected = MergeWasCalled.class)
     public void withCapabilities() {
         // given
-        ChromeOptions options = createChromeOptionsWithMobileEmulation();
-
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities() {
+            @Override
+            public Map<String, Object> asMap() { // .merge() uses this method. if the code stops calling .merge(), this test fails
+                throw new MergeWasCalled();
+            }
+        };
         // when
-        $.driver().useChrome().withCapabilities(capabilities);
+        $.driver().useChrome().withCapabilities(desiredCapabilities);
         // then
-        BrowserAgentTestUtils.assertBrowserAgent(containsString(CHROME_MOBILE_EMULATION_DEVICE));
+        // should throw exception
     }
 
     private ChromeOptions createChromeOptionsWithMobileEmulation() {

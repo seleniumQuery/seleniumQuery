@@ -16,8 +16,6 @@
 
 package io.github.seleniumquery.browser.driver.builders;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -34,22 +32,20 @@ import io.github.seleniumquery.browser.driver.DriverBuilder;
  */
 public class EdgeDriverBuilder extends DriverBuilder<EdgeDriverBuilder> {
 
-    private static final Log LOGGER = LogFactory.getLog(EdgeDriverBuilder.class);
-
     private EdgeOptions edgeOptions;
 
     /**
-     * Sets the {@link DesiredCapabilities} to the driver being built.
+     * Merges the {@link DesiredCapabilities} into the currently configured {@link EdgeOptions} that will
+     * be used in the driver being built.
      *
      * @param desiredCapabilities The desired capabilities object.
      * @return The current builder instance, for additional configuration, if needed.
      * @since 0.18.0
-     * @deprecated Prefer using {@link EdgeOptions} and {@link EdgeDriverBuilder#withOptions(EdgeOptions)} instead.
      */
     @Override
-    @Deprecated
     public EdgeDriverBuilder withCapabilities(DesiredCapabilities desiredCapabilities) {
-        return super.withCapabilities(desiredCapabilities);
+        getInitializedEdgeOptions().merge(desiredCapabilities);
+        return this;
     }
 
     /**
@@ -73,29 +69,6 @@ public class EdgeDriverBuilder extends DriverBuilder<EdgeDriverBuilder> {
     }
 
     private WebDriver buildEdge() {
-        if (isCapabilitiesManuallySet()) {
-            LOGGER.warn("Prefer using EdgeOptions and .withOptions() instead of DesiredCapabilities and " +
-                ".withCapabilities().");
-            return buildUsingCapabilities();
-        } else {
-            return buildUsingEdgeOptions();
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    private WebDriver buildUsingCapabilities() {
-        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.edge());
-        overwriteCapabilityIfValueNotNull(capabilities, EdgeOptions.CAPABILITY, this.edgeOptions);
-
-        try {
-            return new EdgeDriver(capabilities);
-        } catch (IllegalStateException e) {
-            throwCustomExceptionIfExecutableWasNotFound(e);
-            throw e;
-        }
-    }
-
-    private WebDriver buildUsingEdgeOptions() {
         try {
             return new EdgeDriver(getInitializedEdgeOptions());
         } catch (IllegalStateException e) {

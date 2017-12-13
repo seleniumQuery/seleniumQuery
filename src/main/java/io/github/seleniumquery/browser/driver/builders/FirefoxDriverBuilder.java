@@ -49,6 +49,9 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
 
     /**
      * Configures the driver with the given capabilities.
+     * Merges the {@link DesiredCapabilities} into the currently configured {@link FirefoxOptions} that will
+     * be used in the driver being built.
+     *
      * @param desiredCapabilities The capabilities to be set.
      * @return A self reference for further configuration.
      * @since 0.18.0
