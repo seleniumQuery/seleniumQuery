@@ -20,7 +20,7 @@ import io.github.seleniumquery.SeleniumQueryFluentAndOrThen;
 import io.github.seleniumquery.SeleniumQueryFluentFunction;
 import io.github.seleniumquery.SeleniumQueryFluentFunctionEvaluateIf;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.internal.fluentfunctions.evaluators.IsEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.AttrGetter;
 import io.github.seleniumquery.internal.fluentfunctions.getters.HtmlGetter;
 import io.github.seleniumquery.internal.fluentfunctions.getters.PropGetter;

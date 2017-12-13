@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package endtoend.fluentfunctions.evaluators;
+package endtoend.fluentfunctions.evaluators.is;
 
 import static endtoend.fluentfunctions.evaluators.EvaluatorsExceptionTestUtils.assertThrowsAssertionError;
 import static endtoend.fluentfunctions.evaluators.EvaluatorsExceptionTestUtils.assertThrowsTimeoutException;

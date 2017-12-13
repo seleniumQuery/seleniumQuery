@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.internal.fluentfunctions.evaluators;
+package io.github.seleniumquery.internal.fluentfunctions.evaluators.is;
 
 import java.util.Objects;
 
@@ -23,6 +23,8 @@ import org.apache.commons.logging.LogFactory;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.Getter;
 
 public class IsEqualToEvaluator<T> implements Evaluator<T, T> {

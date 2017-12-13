@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.seleniumquery.internal.fluentfunctions.evaluators;
+package io.github.seleniumquery.internal.fluentfunctions.evaluators.is;
 
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.FluentBehaviorModifier;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.EvaluationReport;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
 import io.github.seleniumquery.utils.DriverVersionUtils;
 
 public class IsEvaluator implements Evaluator<String, String> {
