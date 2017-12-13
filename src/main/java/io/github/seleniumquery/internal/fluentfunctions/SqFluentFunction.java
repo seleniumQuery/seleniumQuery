@@ -20,6 +20,8 @@ import io.github.seleniumquery.SeleniumQueryFluentAndOrThen;
 import io.github.seleniumquery.SeleniumQueryFluentFunction;
 import io.github.seleniumquery.SeleniumQueryFluentFunctionEvaluateIf;
 import io.github.seleniumquery.SeleniumQueryObject;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsEmptyEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsNotEmptyEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.AttrGetter;
@@ -85,18 +87,24 @@ public class SqFluentFunction implements SeleniumQueryFluentFunction {
 
     @Override
     public SeleniumQueryFluentAndOrThen is(String selector) {
+        return isAnd(IsEvaluator.IS_EVALUATOR, selector);
+    }
+
+    private <T> SeleniumQueryFluentAndOrThen isAnd(Evaluator<T, ?> evaluator, T evaluatorArgument) {
         SeleniumQueryObject sqoAfter = this.fluentFunction.apply(
-            IsEvaluator.IS_EVALUATOR, selector, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR
+            evaluator, evaluatorArgument, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR
         );
         return new AndOrThen(sqoAfter, this.fluentFunction);
     }
 
     @Override
     public SeleniumQueryFluentAndOrThen isNotEmpty() {
-        SeleniumQueryObject sqoAfter = this.fluentFunction.apply(
-            IsNotEmptyEvaluator.IS_NOT_EMPTY_EVALUATOR, null, seleniumQueryObject, FluentBehaviorModifier.REGULAR_BEHAVIOR
-        );
-        return new AndOrThen(sqoAfter, this.fluentFunction);
+        return isAnd(IsNotEmptyEvaluator.IS_NOT_EMPTY_EVALUATOR, null);
+    }
+
+    @Override
+    public SeleniumQueryFluentAndOrThen isEmpty() {
+        return isAnd(IsEmptyEvaluator.IS_EMPTY_EVALUATOR, null);
     }
 
 }
