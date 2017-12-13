@@ -32,29 +32,41 @@ public class SubmitFunctionWithoutJSTest {
 
     @Test
     public void submit_function_without_js() {
-        String url = $.url();
-        assertThat(url, endsWith("WithoutJSTest.html"));
+        assertThat($.url(), endsWith("WithoutJSTest.html"));
+    }
 
+    @Test
+    public void submit_function_without_js__input_a() {
         $("#input-a").submit();
         assertThat($.url(), endsWith("WithoutJSTest_2.html?aName=aValue"));
+    }
 
-        $.url(url);
+    @Test
+    public void submit_function_without_js__div_a() {
         $("#div-a").submit();
         assertThat($.url(), endsWith("WithoutJSTest_2.html?aName=aValue"));
+    }
 
-        $.url(url);
+    @Test
+    public void submit_function_without_js__input_b() {
         $("#input-b").submit();
         assertThat($.url(), endsWith("WithoutJSTest_3.html?bName=bValue"));
+    }
 
-        $.url(url);
+    @Test
+    public void submit_function_without_js__div_b() {
         $("#div-b").submit();
         assertThat($.url(), endsWith("WithoutJSTest_3.html?bName=bValue"));
+    }
 
-        $.url(url);
+    @Test
+    public void submit_function_without_js__input() {
         $("input").submit();
         assertThat($.url(), endsWith("WithoutJSTest_2.html?aName=aValue"));
+    }
 
-        $.url(url);
+    @Test
+    public void submit_function_without_js__div() {
         $("div").submit();
         assertThat($.url(), endsWith("WithoutJSTest_2.html?aName=aValue"));
     }
