@@ -13,7 +13,7 @@ public class EvaluatorsExceptionTestUtils {
     public static void assertThrowsTimeoutException(Consumer<Void> functionThatThrowsException, String expectedMessage) {
         try {
             functionThatThrowsException.accept(null);
-            fail();
+            fail("A SeleniumQueryTimeoutException was expected but not thrown.");
         } catch (SeleniumQueryTimeoutException e) {
             assertEquals(expectedMessage, e.getMessage());
         }
@@ -22,7 +22,7 @@ public class EvaluatorsExceptionTestUtils {
     public static void assertThrowsAssertionError(Consumer<Void> functionThatThrowsException, String expectedMessage) {
         try {
             functionThatThrowsException.accept(null);
-            fail();
+            fail("A SeleniumQueryAssertionError was expected but not thrown.");
         } catch (SeleniumQueryAssertionError e) {
             assertEquals(expectedMessage, e.getMessage());
         }
