@@ -142,4 +142,12 @@ public interface SeleniumQueryFluentFunction extends SeleniumQueryWaitUntil {
      */
     SeleniumQueryFluentAndOrThen isDisplayed();
 
+    /**
+     * Evaluates if this seleniumQuery object is <b>not empty</b> and has <b>only hidden</b> elements.
+     *
+     * @return An object for specifying other waiting conditions (<code>.and()</code>) or to execute usual functions (<code>.then()</code>).
+     * @since 0.18.0
+     */
+    SeleniumQueryFluentAndOrThen isHidden();
+
 }
