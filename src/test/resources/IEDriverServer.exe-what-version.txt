@@ -1,5 +1,0 @@
-File: IEDriverServer_Win32_2.48.0.zip
-Downloaded from: http://selenium-release.storage.googleapis.com/2.48/IEDriverServer_Win32_2.48.0.zip
-
-When: 2015-10-11
-More: http://selenium-release.storage.googleapis.com/index.html
