@@ -44,7 +44,7 @@ public class IsDisplayedEvaluatorTest {
                 $("article").waitUntil(100).isDisplayed()
             ,
             "Timeout while waiting for $(\"article\").waitUntil().isDisplayed().\n\n" +
-                "expected: <matched element set to have only visible elements>\n" +
+                "expected: <matched element set to be not empty and have only visible elements>\n" +
                 "but: <last matched element set was a 5 element set, of which 3 were not visible>"
         );
     }
@@ -56,7 +56,7 @@ public class IsDisplayedEvaluatorTest {
                 $("span").assertThat().isDisplayed()
             ,
             "Failed assertion $(\"span\").assertThat().isDisplayed().\n\n" +
-                "expected: <matched element set to have only visible elements>\n" +
+                "expected: <matched element set to be not empty and have only visible elements>\n" +
                 "but: <matched element set was a 1 element set, with no visible elements>"
         );
     }
