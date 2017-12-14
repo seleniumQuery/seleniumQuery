@@ -27,16 +27,20 @@ public class IsHiddenEvaluator implements Evaluator<Void, Object> {
 
 	public static IsHiddenEvaluator IS_HIDDEN_EVALUATOR = new IsHiddenEvaluator();
 
-	private IsHiddenEvaluator() {	}
+	IsHiddenEvaluator() {	}
 
     @Override
 	@SuppressWarnings("ConstantConditions")
 	public EvaluationReport<Object> evaluate(SeleniumQueryObject seleniumQueryObject, Void selector) {
         int originalSize = seleniumQueryObject.size();
         int visibleSize = seleniumQueryObject.filter(WebElement::isDisplayed).size();
-        boolean satisfiesConstraints = originalSize > 0 && visibleSize == 0;
+        boolean satisfiesConstraints = satisfiesConstraints(originalSize, visibleSize);
         return new EvaluationReport<>(createObtainedValue(originalSize, visibleSize), satisfiesConstraints);
 	}
+
+    boolean satisfiesConstraints(int originalSize, int visibleSize) {
+        return originalSize > 0 && visibleSize == 0;
+    }
 
     private Object createObtainedValue(int originalSize, int visibleSize) {
 	    // we return this instead of "empty" because "empty" will be rendered between quotes, and we don't want that
