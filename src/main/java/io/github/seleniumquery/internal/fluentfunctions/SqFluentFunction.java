@@ -21,6 +21,7 @@ import io.github.seleniumquery.SeleniumQueryFluentFunction;
 import io.github.seleniumquery.SeleniumQueryFluentFunctionEvaluateIf;
 import io.github.seleniumquery.SeleniumQueryObject;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.Evaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsDisplayedEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsEmptyEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsNotEmptyEvaluator;
@@ -117,6 +118,11 @@ public class SqFluentFunction implements SeleniumQueryFluentFunction {
     @Override
     public SeleniumQueryFluentAndOrThen isVisible() {
         return isAnd(IsVisibleEvaluator.IS_VISIBLE_EVALUATOR, null);
+    }
+
+    @Override
+    public SeleniumQueryFluentAndOrThen isDisplayed() {
+        return isAnd(IsDisplayedEvaluator.IS_DISPLAYED_EVALUATOR, null);
     }
 
 }

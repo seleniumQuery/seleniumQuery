@@ -27,7 +27,7 @@ public class IsVisibleEvaluator implements Evaluator<Void, Object> {
 
 	public static IsVisibleEvaluator IS_VISIBLE_EVALUATOR = new IsVisibleEvaluator();
 
-	private IsVisibleEvaluator() {	}
+	IsVisibleEvaluator() {	}
 
 	@Override
 	public EvaluationReport<Object> evaluate(SeleniumQueryObject seleniumQueryObject, Void selector) {
@@ -42,12 +42,14 @@ public class IsVisibleEvaluator implements Evaluator<Void, Object> {
         return new Object() {
             @Override
             public String toString() {
+                if (visibleSize == 0) {
+                    return "a " + originalSize + " element set, with no visible elements";
+                }
                 int notVisibleSize = originalSize - visibleSize;
                 if (notVisibleSize == 1) {
                     return "a " + originalSize + " element set, of which 1 was not visible";
-                } else {
-                    return "a " + originalSize + " element set, of which " + notVisibleSize + " were not visible";
                 }
+                return "a " + originalSize + " element set, of which " + notVisibleSize + " were not visible";
             }
         };
     }
