@@ -33,19 +33,43 @@ public class IsVisibleEvaluatorTest {
 
     @Test
     public void success() {
-        assertEquals(true, $("div").waitUntil().isVisible().then().is(":visible"));
-        assertEquals(true, $("div").assertThat().isVisible().then().is(":visible"));
+        assertEquals(true, $("span.all-visible").waitUntil().isVisible().then().is(":visible"));
+        assertEquals(true, $("span.all-visible").assertThat().isVisible().then().is(":visible"));
     }
 
     @Test
-    public void isVisible_fails_waitUntil() {
+    public void isVisible_fails_waitUntil__all_hidden() {
         assertThrowsTimeoutException(
             __ ->
-                $("span").waitUntil(100).isVisible()
+                $("span.all-hidden").waitUntil(100).isVisible()
             ,
-            "Timeout while waiting for $(\"span\").waitUntil().isVisible().\n\n" +
-                "expected: <matched element set to have only visible elements>\n" +
-                "but: <last matched element set was a 2 element set, of which 1 was not visible>"
+            "Timeout while waiting for $(\"span.all-hidden\").waitUntil().isVisible().\n\n" +
+                "expected: <matched element set to be not empty and have only visible elements>\n" +
+                "but: <last matched element set was a 2 element set, with no visible elements>"
+        );
+    }
+
+    @Test
+    public void isVisible_fails_assertThat__one_not_hidden() {
+        assertThrowsAssertionError(
+            __ ->
+                $("span.one-not-hidden").assertThat().isVisible()
+            ,
+            "Failed assertion $(\"span.one-not-hidden\").assertThat().isVisible().\n\n" +
+                "expected: <matched element set to be not empty and have only visible elements>\n" +
+                "but: <matched element set was a 4 element set, of which 3 were not visible>"
+        );
+    }
+
+    @Test
+    public void isVisible_fails_waitUntil__empty_set() {
+        assertThrowsTimeoutException(
+            __ ->
+                $("span.empty-set").waitUntil(100).isVisible()
+            ,
+            "Timeout while waiting for $(\"span.empty-set\").waitUntil().isVisible().\n\n" +
+                "expected: <matched element set to be not empty and have only visible elements>\n" +
+                "but: <last matched element set was an empty element set>"
         );
     }
 
@@ -53,11 +77,11 @@ public class IsVisibleEvaluatorTest {
     public void isVisible_fails_assertThat() {
         assertThrowsAssertionError(
             __ ->
-                $("article").assertThat().isVisible()
+                $("span.with-8-els-2-not-hidden").assertThat().isVisible()
             ,
-            "Failed assertion $(\"article\").assertThat().isVisible().\n\n" +
-                "expected: <matched element set to have only visible elements>\n" +
-                "but: <matched element set was a 3 element set, of which 2 were not visible>"
+            "Failed assertion $(\"span.with-8-els-2-not-hidden\").assertThat().isVisible().\n\n" +
+                "expected: <matched element set to be not empty and have only visible elements>\n" +
+                "but: <matched element set was a 8 element set, of which 6 were not visible>"
         );
     }
 

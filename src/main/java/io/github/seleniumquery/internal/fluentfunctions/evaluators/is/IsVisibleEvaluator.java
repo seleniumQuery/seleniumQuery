@@ -33,7 +33,7 @@ public class IsVisibleEvaluator implements Evaluator<Void, Object> {
 	public EvaluationReport<Object> evaluate(SeleniumQueryObject seleniumQueryObject, Void selector) {
         int originalSize = seleniumQueryObject.size();
         int visibleSize = seleniumQueryObject.filter(WebElement::isDisplayed).size();
-        boolean satisfiesConstraints = originalSize == visibleSize;
+        boolean satisfiesConstraints = originalSize > 0 && originalSize == visibleSize;
         return new EvaluationReport<>(createObtainedValue(originalSize, visibleSize), satisfiesConstraints);
 	}
 
@@ -42,6 +42,9 @@ public class IsVisibleEvaluator implements Evaluator<Void, Object> {
         return new Object() {
             @Override
             public String toString() {
+                if (originalSize == 0) {
+                    return "an empty element set";
+                }
                 if (visibleSize == 0) {
                     return "a " + originalSize + " element set, with no visible elements";
                 }
@@ -66,7 +69,7 @@ public class IsVisibleEvaluator implements Evaluator<Void, Object> {
 
     @Override
     public String describeExpectedValue(Void selector) {
-        return "have only visible elements";
+        return "be not empty and have only visible elements";
     }
 
 }
