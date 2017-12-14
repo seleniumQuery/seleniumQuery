@@ -106,9 +106,25 @@ public interface SeleniumQueryFluentFunction extends SeleniumQueryWaitUntil {
     /**
      * Evaluates if this seleniumQuery object has elements (is not empty).
      *
+     * <br><br>
+     *     Note: this is an alias to {@code .isNotEmpty()}.
+     *
      * @return An object for specifying other waiting conditions (<code>.and()</code>) or to execute usual functions (<code>.then()</code>).
      * @since 0.18.0
      */
     SeleniumQueryFluentAndOrThen isPresent();
+
+    /**
+     * Evaluates if this seleniumQuery object has <b>only visible</b> elements.
+     *
+     * <br><br>
+     *     Note: this is different from {@code .is(":visible")} because {@code .is()} requires only one
+     *     element to match the selector (to be visible), whereas this {@code .isVisible()} method
+     *     requires <b>all</b> matched elements to be visible.
+     *
+     * @return An object for specifying other waiting conditions (<code>.and()</code>) or to execute usual functions (<code>.then()</code>).
+     * @since 0.18.0
+     */
+    SeleniumQueryFluentAndOrThen isVisible();
 
 }

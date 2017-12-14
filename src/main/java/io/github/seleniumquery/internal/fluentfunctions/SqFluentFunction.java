@@ -25,6 +25,7 @@ import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsEmptyEva
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsNotEmptyEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsPresentEvaluator;
+import io.github.seleniumquery.internal.fluentfunctions.evaluators.is.IsVisibleEvaluator;
 import io.github.seleniumquery.internal.fluentfunctions.getters.AttrGetter;
 import io.github.seleniumquery.internal.fluentfunctions.getters.HtmlGetter;
 import io.github.seleniumquery.internal.fluentfunctions.getters.PropGetter;
@@ -111,6 +112,11 @@ public class SqFluentFunction implements SeleniumQueryFluentFunction {
     @Override
     public SeleniumQueryFluentAndOrThen isPresent() {
         return isAnd(IsPresentEvaluator.IS_PRESENT_EVALUATOR, null);
+    }
+
+    @Override
+    public SeleniumQueryFluentAndOrThen isVisible() {
+        return isAnd(IsVisibleEvaluator.IS_VISIBLE_EVALUATOR, null);
     }
 
 }
