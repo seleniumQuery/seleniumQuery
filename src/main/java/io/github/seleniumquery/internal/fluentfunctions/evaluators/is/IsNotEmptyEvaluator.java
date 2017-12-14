@@ -25,7 +25,7 @@ public class IsNotEmptyEvaluator implements Evaluator<Void, Object> {
 
 	public static IsNotEmptyEvaluator IS_NOT_EMPTY_EVALUATOR = new IsNotEmptyEvaluator();
 
-	private IsNotEmptyEvaluator() {	}
+	IsNotEmptyEvaluator() {	}
 
 	@Override
 	public EvaluationReport<Object> evaluate(SeleniumQueryObject seleniumQueryObject, Void selector) {
