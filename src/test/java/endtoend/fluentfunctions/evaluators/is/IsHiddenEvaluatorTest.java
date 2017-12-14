@@ -33,17 +33,17 @@ public class IsHiddenEvaluatorTest {
 
     @Test
     public void success() {
-        assertEquals(true, $("div").waitUntil().isHidden().then().is(":hidden"));
-        assertEquals(true, $("div").assertThat().isHidden().then().is(":hidden"));
+        assertEquals(true, $("span.visible-0-hidden-2").waitUntil().isHidden().then().assertThat().size().isEqualTo(2).then().is(":hidden"));
+        assertEquals(true, $("span.visible-0-hidden-2").assertThat().isHidden().then().assertThat().size().isEqualTo(2).then().is(":hidden"));
     }
 
     @Test
     public void isHidden_fails_waitUntil() {
         assertThrowsTimeoutException(
             __ ->
-                $("article").waitUntil(100).isHidden()
+                $("span.visible-2-hidden-6").waitUntil(100).isHidden()
             ,
-            "Timeout while waiting for $(\"article\").waitUntil().isHidden().\n\n" +
+            "Timeout while waiting for $(\"span.visible-2-hidden-6\").waitUntil().isHidden().\n\n" +
                 "expected: <matched element set to be not empty and have only hidden elements>\n" +
                 "but: <last matched element set was a 8 element set, of which 2 were not hidden>"
         );
@@ -65,9 +65,9 @@ public class IsHiddenEvaluatorTest {
     public void isHidden_fails_waitUntil__one_not_hidden() {
         assertThrowsTimeoutException(
             __ ->
-                $("span.one-not-hidden").waitUntil(100).isHidden()
+                $("span.visible-1-hidden-3").waitUntil(100).isHidden()
             ,
-            "Timeout while waiting for $(\"span.one-not-hidden\").waitUntil().isHidden().\n\n" +
+            "Timeout while waiting for $(\"span.visible-1-hidden-3\").waitUntil().isHidden().\n\n" +
                 "expected: <matched element set to be not empty and have only hidden elements>\n" +
                 "but: <last matched element set was a 4 element set, of which 1 was not hidden>"
         );
@@ -77,9 +77,9 @@ public class IsHiddenEvaluatorTest {
     public void isHidden_fails_assertThat__all_visible() {
         assertThrowsAssertionError(
             __ ->
-                $("span.all-visible").assertThat().isHidden()
+                $("span.visible-3-hidden-0").assertThat().isHidden()
             ,
-            "Failed assertion $(\"span.all-visible\").assertThat().isHidden().\n\n" +
+            "Failed assertion $(\"span.visible-3-hidden-0\").assertThat().isHidden().\n\n" +
                 "expected: <matched element set to be not empty and have only hidden elements>\n" +
                 "but: <matched element set was a 3 element set, with no hidden elements>"
         );
