@@ -2,21 +2,6 @@
 
 General notes about the project, including found external issues/bugs, wanted features and TODOs.
 
-# CI Jobs
-
-- Travis (3 jobs)
-    - OpenJDK8 @ linux: HtmlUnit + PhantomJS
-    - Oracle JDK7 @ linux: HtmlUnit + PhantomJS
-    - OpenJDK7 @ linux: HtmlUnit + PhantomJS
-- Appveyor
-    - Runs at Windows
-- Codeship
-    - If commit contains `[run sauce]`, it will run e2e tests for all remote (SauceLabs') drivers.
-- Wercker
-- CircleCI
-- [Drone.io](https://drone.io/github.com/seleniumQuery/seleniumQuery)
-    - Linux, Java 8, will run e2e tests for JBrowserDriver (not done yet)
-
 
 # Issues/bugs related to other drives
 
@@ -48,8 +33,6 @@ This files lists **unresolved** bugs or issues related to the drivers of Seleniu
 
 # Technical debt
 
-- add test for .click() without JS
-    - Add a form, and test clicking a submit button, just like `.submit()` is being tested.
 - Rework .children() function, so it uses .filter()
     - This is sort of a duplicated functionality there.
 
@@ -57,7 +40,7 @@ This files lists **unresolved** bugs or issues related to the drivers of Seleniu
 -----
 #### Other wanted
 
-Stories are not necessarily prioritized.
+
 
 ## Add HtmlUnit EDGE to browserBuilder
 
@@ -80,12 +63,6 @@ Add options like:
 
 That would be all of it.
 
-## Chrome driver builder should test for OS when trying to locate executable
-
-This applies to Chrome builder.
-
-External-world description of this issue:
-> Driver builder will not look for chromedriver.exe executable if OS is not windows.
 
 ## Add `$.driver().useSameAs(SeleniumQueryBrowser)`
 
