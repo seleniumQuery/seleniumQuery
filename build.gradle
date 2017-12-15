@@ -55,7 +55,7 @@ dependencies {
     compile("org.seleniumhq.selenium:selenium-api:${seleniumVersion}")
     compile("org.seleniumhq.selenium:selenium-java:${seleniumVersion}")
     compile("org.seleniumhq.selenium:selenium-remote-driver:${seleniumVersion}")
-    compile("com.codeborne:phantomjsdriver:${phantomJsDriverVersion}") {
+    compile("com.codeborne:phantomjsdriver:1.4.3") {
         exclude(module: 'selenium-java')
         exclude(module: 'selenium-remote-driver')
     }
@@ -63,7 +63,7 @@ dependencies {
     compile('org.unbescape:unbescape:1.1.5.RELEASE')
 
     // used by driverbuilders in the .autoDriverDownload() methods
-    compile("io.github.bonigarcia:webdrivermanager:2.0.0")
+    compile("io.github.bonigarcia:webdrivermanager:2.0.1")
 
     // used by .waitUntil().text().that(<hamcrest matcher>)
     compile("org.hamcrest:hamcrest-library:1.3")
