@@ -22,6 +22,7 @@ import org.w3c.css.sac.ElementSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SiblingSelector;
 
+import com.steadystate.css.parser.selectors.GeneralAdjacentSelectorImpl;
 import io.github.seleniumquery.by.common.preparser.ArgumentMap;
 import io.github.seleniumquery.by.common.preparser.w3cwithmap.W3cCssSelectorWithMap;
 import io.github.seleniumquery.by.secondgen.csstree.selector.CssSelector;
@@ -56,11 +57,12 @@ public class CssSelectorTranslator {
 			case Selector.SAC_CHILD_SELECTOR:
 				return combinatorSelectorTranslator.translateDirectDescendant(argumentMap, (DescendantSelector) selector);
 			case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
+                // both "E ~ F" and  "E + F" return DIRECT_ADJACENT_SELECTOR, so we must resort to instanceof...
+			    if (selector instanceof GeneralAdjacentSelectorImpl) {
+				    return combinatorSelectorTranslator.translateGeneralAdjacent(argumentMap, (SiblingSelector) selector);
+                }
 				return combinatorSelectorTranslator.translateDirectAdjacent(argumentMap, (SiblingSelector) selector);
-			// the parser returns this code for the "E ~ F" selector. Go figure...
 			case Selector.SAC_ANY_NODE_SELECTOR:
-				return combinatorSelectorTranslator.translateGeneralAdjacent(argumentMap, (SiblingSelector) selector);
-
 			case Selector.SAC_ROOT_NODE_SELECTOR:
 			case Selector.SAC_NEGATIVE_SELECTOR:
 			case Selector.SAC_TEXT_NODE_SELECTOR:
@@ -72,4 +74,5 @@ public class CssSelectorTranslator {
 				throw new UnknownCssSelectorException(selector);
 		}
 	}
+
 }
