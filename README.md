@@ -227,22 +227,48 @@ For an example of how to create your own plugin, check the [seleniumQuery Plugin
 
 How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only when first used.
 
-##### Firefox
+Supported drivers:
+
+| Chrome | Firefox | Opera | Edge | Internet Explorer | PhantomJS | HtmlUnit |
+| ------ | ------- | ----- | ---- | ----------------- | --------- | -------- |
+| ![chrome](https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_64x64.png?raw=true) | ![firefox](https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_64x64.png?raw=true) | ![opera](https://github.com/alrra/browser-logos/blob/master/src/opera/opera_64x64.png?raw=true) | ![edge](https://github.com/alrra/browser-logos/blob/master/src/edge/edge_64x64.png?raw=true) | ![internet explorer](doc/ie.png) | ![PhantomJS](doc/phantomjs.png) | ![HtmlUnit](doc/htmlunit.png)
+| Headless | Headless | - | - | - | Headless | Headless |
 
 ```java
 $.driver().useFirefox(); // Will set up firefox as driver
 $.url("http://seleniumquery.github.io"); //the driver will be instantiated when this executes
 ```
 
-##### Chrome, InternetExplorer, PhantomJS drivers
+##### How to use a driver
 
-All you have to do is download [their executables](https://github.com/seleniumQuery/seleniumQuery-demos/tree/master/src/main/resources) before. Setting them up in seleniumQuery is all too easy:
+You can download [their executables](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) before or you can
+let seleniumQuery automatically download and configure them (powered by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager)).
+ Setting them up in seleniumQuery is all too easy:
 
 ```java
 // Using Chrome
 $.driver().useChrome(); // will look for chromedriver/exe to you, including in the classpath!
-// Or if you want to set the path yourself
+// if you don't have chromedriver.exe and want seleniumQuery to automatically download and configure it
+$.driver().useChrome().headless().autoDriverDownload();
+// If you want to set the path to chromedriver.exe yourself
 $.driver().useChrome().withPathToChromeDriver("path/to/chromedriver.exe")
+// General example:
+$.driver()
+    .useChrome() // sets Chrome as the driver (this is optional, if omitted, will default to HtmlUnit)
+    .headless() // configures chrome to be headless
+    .autoDriverDownload() // automatically downloads and configures chromedriver.exe
+    .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
+// using options
+$.driver()
+    .useChrome()
+    .withOptions(<some ChromeOptions instance>)
+
+// Using firefox
+$.driver()
+    .useFirefox() // sets Firefox as the driver
+    .headless() // configures Firefox to be headless
+    .autoDriverDownload() // automatically downloads and configures geckodriver.exe
+    .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
 
 // InternetExplorerDriver
 $.driver().useInternetExplorer(); // we search IEDriverServer.exe for you
@@ -330,6 +356,7 @@ jQuery("input.street").val("5th St!");
 
 <br>
 
+
 # Using multiple browsers/drivers simultaneously
 
 Typically, the `$` is a static variable, thus every command you issue only affects the one same instance of WebDriver.
@@ -339,31 +366,20 @@ But... what if you want/need to use two WebDrivers at the same time?
 We've got your back, see the [example](src/test/java/endtoend/browser/SeleniumQueryBrowserTest.java):
 
 ```java
-public class SeleniumQueryBrowserTest {
+public static void main(String[] args) {
+  String demoPage = "https://cdn.rawgit.com/seleniumQuery/seleniumQuery-showcase/master/Agent.html";
 
-    // using two drivers (chrome and firefox) at the same time
-    private SeleniumQueryBrowser chrome = new SeleniumQueryBrowser();
-    private SeleniumQueryBrowser firefox = new SeleniumQueryBrowser();
+  // using two drivers (chrome and firefox) at the same time
+  SeleniumQueryBrowser chrome = new SeleniumQueryBrowser();
+  chrome.$.driver().useHtmlUnit().emulatingChrome().autoQuitDriver();
+  chrome.$.url(demoPage);
 
-    @Test
-    public void multiple_browser_instances_should_work_OK() {
-        chrome.$.driver().useHtmlUnit().emulatingChrome();
-        chrome.$.url("http://google.com");
+  SeleniumQueryBrowser firefox = new SeleniumQueryBrowser();
+  firefox.$.driver().useHtmlUnit().emulatingFirefox().autoQuitDriver();
+  firefox.$.url(demoPage);
 
-        firefox.$.driver().useHtmlUnit().emulatingFirefox();
-        firefox.$.url("http://google.com");
-
-        // assuming, of course, that such #agent elements exist
-        assertThat(chrome.$("#agent").text(), containsString("Chrome"));
-        assertThat(firefox.$("#agent").text(), containsString("Firefox"));
-    }
-
-    @After
-    public void tearDown() {
-        chrome.$.quit();
-        firefox.$.quit();
-    }
-
+  chrome.$("#agent").assertThat().text().contains("Chrome");
+  firefox.$("#agent").assertThat().text().contains("Firefox");
 }
 ```
 
@@ -381,9 +397,8 @@ See [releases](https://github.com/seleniumQuery/seleniumQuery/releases).
 
 # Contributing
 
-The tool quite simple, so there's a lot of room for improvement. Some of its main functionalities were just created (didn't exist in
-jQuery) for our specific needs, like the `.waitUntil()`, the `.as()` plugins, the driver builder and so on. So if you come up with an idea of something that could
-be useful, tell us, or, even better, do it yourself and join the team!
+The tool quite simple, so there's a lot of room for improvement. If you come up with an idea of something that could
+be useful, [tell us](https://github.com/seleniumQuery/seleniumQuery/issues/new)!
 
 ## Goals and non-goals
 
