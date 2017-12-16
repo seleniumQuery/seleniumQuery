@@ -4,9 +4,8 @@ shallow_clone: true
 
 environment:
   matrix:
-    #- JAVA_HOME: C:\Program Files (x86)\Java\jdk1.7.0
-    #- JAVA_HOME: C:\Program Files\Java\jdk1.7.0
     - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+
 branches:
   only:
     - master
@@ -17,9 +16,6 @@ os: Visual Studio 2015
 #  - Win32
 
 install:
-  - cinst PhantomJS -y -Version 2.1.1
-  - set path=%path%;C:\tools\PhantomJS\;C:\ProgramData\chocolatey\lib\PhantomJS\tools;C:\ProgramData\chocolatey\lib\PhantomJS
-
   - ps: |
       Add-Type -AssemblyName System.IO.Compression.FileSystem
       if (!(Test-Path -Path "C:\maven" )) {
@@ -32,7 +28,7 @@ install:
   - cmd: SET PATH=C:\tools\apache-maven-3.3.9\bin;%JAVA_HOME%\bin;%PATH%
 
 build_script:
-  - mvn clean package -DskipTests -Dmaven.javadoc.skip=true -Djna.nosys=true
+  - mvn clean compile test-compile -Dmaven.javadoc.skip=true -Djna.nosys=true
 test_script:
   - mvn test -Dmaven.javadoc.skip=true -Djna.nosys=true
 
@@ -43,6 +39,5 @@ after_test:
       bash codecov.sh
 
 cache:
-#  - C:\tools\PhantomJS\
 #  - C:\tools\apache-maven-3.3.9\
   - C:\Users\appveyor\.m2
