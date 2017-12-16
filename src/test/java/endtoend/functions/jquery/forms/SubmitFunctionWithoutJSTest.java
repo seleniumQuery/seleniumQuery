@@ -56,6 +56,7 @@ public class SubmitFunctionWithoutJSTest {
     @Test
     public void submit_function_without_js__div_b() {
         $("#div-b").submit();
+        $.pause(1000);
         assertThat($.url(), endsWith("WithoutJSTest_3.html?bName=bValue"));
     }
 
