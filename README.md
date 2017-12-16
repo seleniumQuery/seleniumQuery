@@ -87,11 +87,15 @@ import static io.github.seleniumquery.SeleniumQuery.$; // this will allow the sh
 
 public class SeleniumQueryExample {
   public static void main(String[] args) {
-    // sets Chrome as the driver (this is optional, if omitted, will default to HtmlUnit)
-    $.driver().useChrome(); // The WebDriver will be instantiated only when first used
+    // The WebDriver will be instantiated only when first used
+    $.driver()
+        .useChrome() // sets Chrome as the driver (this is optional, if omitted, will default to HtmlUnit)
+        .headless() // configures chrome to be headless
+        .autoDriverDownload() // automatically downloads and configures chromedriver.exe
+        .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
 
-    // or use any previously existing driver
-    // $.driver().use(new FirefoxDriver());
+    // or, instead, use any previously existing driver
+    // $.driver().use(myExistingInstanceOfWebDriver);
 
     // starts the driver (if not started already) and opens the URL
     $.url("http://www.google.com/?hl=en");
@@ -104,15 +108,18 @@ public class SeleniumQueryExample {
     // handy for dealing with user-waiting actions (specially in Ajax enabled pages):
 
     // the command below waits until the button is visible and then performs a real user click (not just the JS event)
-    $(":button[value='Google Search']").waitUntil().is(":visible").then().click();
+    $(":button[value='Google Search']").waitUntil().isVisible().then().click();
 
-    // this waits for the #resultStats to be visible and, when it is visible, returns its text content
+    // this waits for the #resultStats to be visible using a selector and, when it is visible, returns its text content
     String resultsText = $("#resultStats").waitUntil().is(":visible").then().text();
 
-    System.out.println(resultsText);
-    // should print something like: About 1,080 results (0.26 seconds)
+    // .assertThat() functions: fluently asserts that the text contains the string "seconds", ignoring case
+    $("#resultStats").assertThat().text().containsIgnoreCase("seconds");
 
-    $.quit(); // quits the currently used driver (chrome)
+    System.out.println(resultsText);
+    // should print something like: About 4,100 results (0.42 seconds)
+
+    // $.quit(); // would quit the driver, but it is not needed as .autoQuitDriver() was used
   }
 }
 ```
@@ -225,13 +232,6 @@ How to setup the `WebDriver`? Simply use our builder. The driver will be instant
 ```java
 $.driver().useFirefox(); // Will set up firefox as driver
 $.url("http://seleniumquery.github.io"); //the driver will be instantiated when this executes
-```
-
-##### Firefox driver with disabled JavaScript
-
-Want `FirefoxDriver` without JavaScript? Just:
-```java
-$.driver().useFirefox().withoutJavaScript(); // when started, Firefox will have JS OFF
 ```
 
 ##### Chrome, InternetExplorer, PhantomJS drivers
