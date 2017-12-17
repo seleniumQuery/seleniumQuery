@@ -16,18 +16,19 @@
 
 package io.github.seleniumquery.by.common.elementfilter;
 
-import io.github.seleniumquery.by.SeleniumQueryBy;
-import io.github.seleniumquery.by.firstgen.FirstGenEnhancedElementFinder;
-import io.github.seleniumquery.utils.SelectorUtils;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import io.github.seleniumquery.by.SeleniumQueryBy;
+import io.github.seleniumquery.by.firstgen.FirstGenEnhancedElementFinder;
+import io.github.seleniumquery.utils.SelectorUtils;
 
 /**
  * This class should be IMMUTABLE.
@@ -38,7 +39,7 @@ import static java.util.Arrays.asList;
  */
 public class ElementFilterList {
 
-    public static final ElementFilterList FILTER_NOTHING_LIST = new ElementFilterList(Collections.<ElementFilter>emptyList()) {
+    public static final ElementFilterList FILTER_NOTHING_LIST = new ElementFilterList(Collections.emptyList()) {
         @Override
         public List<WebElement> filter(WebDriver driver, List<WebElement> elements) {
             return elements;
@@ -58,11 +59,6 @@ public class ElementFilterList {
 	public ElementFilterList(List<ElementFilter> elementFilters) {
 		this.elementFilters = Collections.unmodifiableList(elementFilters);
 	}
-
-
-    public static ElementFilterList asFilterList(ElementFilter... filters) {
-        return new ElementFilterList(asList(filters));
-    }
 
 	public List<WebElement> filter(SearchContext context, List<WebElement> elements) {
 		WebDriver driver = SelectorUtils.getWebDriver(context);
