@@ -209,36 +209,195 @@ You can assert directly into the seleniumQuery object:
 
 ```java
 $("#modalDiv :button:contains('OK')").assertThat().is(":not(:visible)");
-// .is() functions
-$(".myInput").assertThat().is(":disabled");
-$(".myInput").assertThat().is(":visible:enabled");
-// functions such as .val(), .text() and others are also available
-$(".myInput").assertThat().val().isEqualTo("expectedValue");
-$(".aDivDiv").assertThat().text().contains("expectedText");
-// and more...
-$(".myInput").assertThat().val().matches(".*\d{10}\*");
-$(".myInput").assertThat().size().isGreaterThan(7);
-$(".aDivDiv").assertThat().html().contains("<div>expected</div>");
-// more...
-$("...").assertThat().text().matches(<Hamcrest Matcher>);
-$("...").assertThat().html().matches("my[0-9]regex.*?");
-$("...").assertThat().val().matches(java.util.Pattern);
-$("...").assertThat().val().matches(value -> value.length() > 99); // lambda!
-$("...").assertThat().isEmpty()
-$("...").assertThat().isNotEmpty()
-$("...").assertThat().isPresent()
-$("...").assertThat().isVisible()
-$("...").assertThat().isDisplayed()
-$("...").assertThat().isHidden()
-$("...").assertThat().isNotVisible()
 
 // Or, fluently:
 $("#modalDivOkButton").click().assertThat().is(":not(:visible)");
-
-// any
 ```
 
+<table>
+<tr>
+    <th>$(). function</th>
+    <th>Property/ Evaluation Function</th>
+    <th>Evaluation Function</th>
+</tr>
+<tr>
+<td rowspan="2">
+<details><summary><code>.waitUntil()</code></summary>
+
+In order to handle interactions with Ajax-enabled pages, you can use the `.waitUntil()` function:
+
+- The `.waitUntil()` functions will *requery* the DOM for the elements until the given condition is met, returning a **new** seleniumQuery object when that happens.
+
+```java
+// .waitUntil() will requery the DOM every time until the matched set fulfills the requirements
+
+// .is() functions
+$(".aDivDiv").waitUntil().is(":present");
+$(".myInput").waitUntil().is(":enabled");
+$(".aDivDiv").waitUntil().is(":visible");
+$(".myInput").waitUntil().is(":visible:enabled");
+// functions such as .val(), .text() and others are also available
+$(".myInput").waitUntil().val().isEqualTo("expectedValue");
+$(".aDivDiv").waitUntil().text().contains("expectedText");
+// and more...
+$(".myInput").waitUntil().val().matches(".*\d{10}\*");
+$(".myInput").waitUntil().size().isGreaterThan(7);
+$(".aDivDiv").waitUntil().html().contains("<div>expected</div>");
+```
+
+</details>
+<details><summary><code>.assertThat()</code></summary>
+
+Asserts, fluently, that the function has a specified value or matches a specified condition.
+
+```java
+$(".myInput").assertThat().val().isEqualTo("expectedValue");
+$(".myInput").assertThat().attr("attrName").isEqualTo("expectedValue");
+$(".myInput").assertThat().size().isGreaterThan(7);
+$(".myInput").assertThat().val().matches(".*\d{10}\*");
+$("#ipt").waitUntil().val().matches(value -> value.length() > 50)
+```
+
+</details>
+</td>
+<td>
+<details><summary><code>.val()</code></summary>
+
+    $(".myInput").assertThat().val().isEqualTo("expectedValue");
+
+</details>
+<details><summary><code>.text()</code></summary>
+
+    $(".div").assertThat().text().isEqualTo("expectedValue");
+
+</details>
+<details><summary><code>.attr("attrName")</code></summary>
+
+    $(".myInput").assertThat().attr("attrName").isEqualTo("expectedValue");
+
+</details>
+<details><summary><code>.prop("propName")</code></summary>
+
+    $(".myInput").assertThat().prop("propName").isEqualTo("expectedValue");
+
+</details>
+<details><summary><code>.html()</code></summary>
+
+    $(".div").assertThat().html().isEqualTo("expectedValue");
+
+</details>
+<details><summary><code>.size()</code></summary>
+
+    $(".div").assertThat().size().isEqualTo(0);
+
+</details>
+</td>
+<td>
+<details><summary><code>.isEqualTo("string" | &lt;number> | other)</code></summary>
+
+    $(".myInput").assertThat().val().isEqualTo("expectedValue");
+
+</details>
+<details><summary><code>.isGreaterThan(&lt;number>)</code></summary>
+
+    $(".myInput").assertThat().size().isGreaterThan(7);
+
+</details>
+<details><summary><code>.isLessThan(&lt;number>)</code></summary>
+
+`// TODO`
+
+</details>
+<details><summary><code>.contains("string")</code></summary>
+
+    $(".aDivDiv").waitUntil().html().contains("<div>expected</div>");
+    $(".aDivDiv").assertThat().text().contains("expectedText");
+
+</details>
+<details><summary><code>.containsIgnoreCase("string")</code></summary>
+
+`// TODO`
+
+</details>
+<details><summary><code>.matches("string regex")</code></summary>
+
+    $(".myInput").assertThat().val().matches(".*\d{10}\*");
+    $("...").waitUntil().html().matches("my[0-9]regex.*?");
+
+</details>
+<details><summary><code>.matches(java.util.Pattern)</code></summary>
+
+    $("...").assertThat().val().matches(java.util.Pattern);
+
+</details>
+<details><summary><code>.matches(&lt;Hamcrest Matcher>)</code></summary>
+
+    $("#myDiv").waitUntil().text().matches(Matchers.containsString("John"));
+
+</details>
+<details><summary><code>.matches(&lt;lambda predicate>)</code></summary>
+
+```java
+$("#ipt").waitUntil().val().matches(value -> value.length() > 50)
+```
+
+</details>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<details><summary><code>.is("selector")</code></summary>
+
+    $(".myInput").assertThat().is(":disabled");
+    $(".myInput").assertThat().is(":visible:enabled");
+
+</details>
+<details><summary><code>.isBlank()</code></summary>
+
+`// TODO`
+
+</details>
+<details><summary><code>.isEmpty()</code></summary>
+
+`// TODO`
+
+</details>
+<details><summary><code>.isNotEmpty()</code></summary>
+
+`// TODO`
+
+</details>
+<details><summary><code>.isPresent()</code></summary>
+
+`// TODO`
+
+</details>
+<details><summary><code>.isVisible()</code></summary>
+
+`// TODO`
+
+</details>
+<details><summary><code>.isDisplayed()</code></summary>
+
+`// TODO`
+
+</details>
+<details><summary><code>.isHidden()</code></summary>
+
+`// TODO`
+
+</details>
+<details><summary><code>.isNotVisible()</code></summary>
+
+`// TODO`
+
+</details>
+</td>
+</tr>
+</table>
+
 Don't forget that *any function* that can be used with `$().waitUntil()` can also be used with `$().assertThat()` and vice-versa.
+
 
 <br>
 
