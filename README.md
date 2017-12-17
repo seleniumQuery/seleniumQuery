@@ -27,11 +27,19 @@ to make some cases simpler when needed.
 ### Example snippet:
 
 ```java
+// Selenium
+WebElement el  = driver.findElement(By.cssSelector(".street"));
+String oldStreet = element.getAttribute("value"); // what if ".street" is a <select>? this won't work
+element.setAttribute("value", "4th St!")
+
+// seleniumQuery
 // getting the value
-String oldStreet = $("input.street").val();
+String oldStreet = $(".street").val(); // works even if it is a <select>, <textarea>, etc.
 // setting the value
-$("input.street").val("4th St!");
+$("input.street").val("4th St!"); // also would work for a <select>
 ```
+
+And much more. The example above is of something that has an equivalent in Selenium. Not everything does (many things would require tons of boilerplate in vanilla Selenium).
 
 ### No special configuration needed - use it in your project right now:
 
@@ -162,32 +170,12 @@ $("#mySelect").val("ford");
 
 Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
-### Powerful selector system
 
-Let the tool do the hard work and find elements easily:
+### Waiting (Ajax testing) and asserting
 
-- CSS3 Selectors - `$(".myClass")`, `$("#table tr:nth-child(3n+1)")`
-- jQuery/Sizzle enhancements - `$(".claz:eq(3)")`, `$(".claz:contains('My Text!')")`
-- XPath - `$("//div/*/label/preceding::*")`
-- and even some own seleniumQuery selectors: `$("#myOldDiv").is(":not(:present)")`.
-
-You pick your style. Whatever is more interesting at the moment. Mixing is OK:
+`WebDriver`'s `FluentWait` is great, but it requires too much boilerplate code. Enters the `.waitUntil()` function:
 
 ```java
-$("#tab tr:nth-child(3n+1)").find("/img[@alt='calendar']/preceding::input").val("2014-11-12")
-```
-Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
-
-<br>
-
-### Waiting capabilities for improved Ajax testing
-
-Other important feature is the leverage of `WebDriver`'s `FluentWait` capabilities **directly** in the element (no boilerplate code!) through the use of the `.waitUntil()` function:
-
-```java
-// WebDriver cannot natively detect the end of an Ajax call.
-// To test your application's behavior, you can and should always work with the
-// Ajax's expected effects, visible for the end user.
 // Below is an example of a <div> that should be hidden as effect of an Ajax call.
 // The code will hold until the modal is gone. If it is never gone, seleniumQuery
 // will throw a timeout exception.
@@ -198,14 +186,7 @@ $("#modalDiv :button:contains('OK')").waitUntil().is(":not(:visible)");  // is()
 $("#modalDivOkButton").click().waitUntil().is(":not(:visible)");
 ```
 
-**Any function** that can be used with `$().waitUntil()` can also be used with `$().assertThat()` and vice-versa.
-
-
-<br>
-
-### Simplified assertions
-
-You can assert directly into the seleniumQuery object:
+You can **assert** directly into the seleniumQuery object using `.assertThat()`:
 
 ```java
 $("#modalDiv :button:contains('OK')").assertThat().is(":not(:visible)");
@@ -214,10 +195,13 @@ $("#modalDiv :button:contains('OK')").assertThat().is(":not(:visible)");
 $("#modalDivOkButton").click().assertThat().is(":not(:visible)");
 ```
 
+*Any* function that can be used with `$().waitUntil()` can also be used with `$().assertThat()` and vice-versa.
+See below, expand (click on the arrow) each item for more details.
+
 <table>
 <tr>
     <th>$(). function</th>
-    <th>Property/ Evaluation Function</th>
+    <th>Property/Evaluation Function</th>
     <th>Evaluation Function</th>
 </tr>
 <tr>
@@ -298,6 +282,21 @@ $("#ipt").waitUntil().val().matches(value -> value.length() > 50)
     $(".myInput").assertThat().val().isEqualTo("expectedValue");
 
 </details>
+<details><summary><code>.isBlank()</code></summary>
+
+Tests if the result of the preceding function <b>is empty (`""`), `null` or whitespace only</b>:
+
+    (null).isBlank()      = true
+    ("").isBlank()        = true
+    (" ").isBlank()       = true
+    ("bob").isBlank()     = false
+    ("  bob  ").isBlank() = false
+
+Example:
+
+    $(".myInput").assertThat().text().isBlank();
+
+</details>
 <details><summary><code>.isGreaterThan(&lt;number>)</code></summary>
 
     $(".myInput").assertThat().size().isGreaterThan(7);
@@ -305,7 +304,7 @@ $("#ipt").waitUntil().val().matches(value -> value.length() > 50)
 </details>
 <details><summary><code>.isLessThan(&lt;number>)</code></summary>
 
-`// TODO`
+    $(".myInput").assertThat().size().isGreaterThan(7);
 
 </details>
 <details><summary><code>.contains("string")</code></summary>
@@ -316,7 +315,7 @@ $("#ipt").waitUntil().val().matches(value -> value.length() > 50)
 </details>
 <details><summary><code>.containsIgnoreCase("string")</code></summary>
 
-`// TODO`
+    $(".aDivDiv").assertThat().text().containsIgnoreCase("eXpeCTedText");
 
 </details>
 <details><summary><code>.matches("string regex")</code></summary>
@@ -352,51 +351,81 @@ $("#ipt").waitUntil().val().matches(value -> value.length() > 50)
     $(".myInput").assertThat().is(":visible:enabled");
 
 </details>
-<details><summary><code>.isBlank()</code></summary>
-
-`// TODO`
-
-</details>
 <details><summary><code>.isEmpty()</code></summary>
 
-`// TODO`
+Evaluates if the size of this seleniumQuery is equal to zero.
+     
+     $("div").waitUntil().isEmpty();
+     $("div").assertThat().isEmpty();
 
 </details>
 <details><summary><code>.isNotEmpty()</code></summary>
 
-`// TODO`
+Evaluates if the size of this seleniumQuery is greated than zero.
+     
+     $("div").waitUntil().isNotEmpty();
+     $("div").assertThat().isNotEmpty();
 
 </details>
 <details><summary><code>.isPresent()</code></summary>
 
-`// TODO`
+Evaluates if this seleniumQuery object has elements (is not empty).
+
+Note: this is an alias to `.isNotEmpty()`.
+     
+     $("div").waitUntil().isPresent();
+     $("div").assertThat().isPresent();
 
 </details>
 <details><summary><code>.isVisible()</code></summary>
 
-`// TODO`
+Evaluates if this seleniumQuery object has <b>only visible</b> elements.
+
+Note: this is different from `.is(":visible")` because `.is()` requires only one
+    element to match the selector (to be visible), whereas this `.isVisible()` method
+    requires <b>all</b> matched elements to be visible.
+
+    $("span.all-visible").waitUntil().isVisible();
+    $("span.all-visible").assertThat().isVisible();
 
 </details>
 <details><summary><code>.isDisplayed()</code></summary>
 
-`// TODO`
+Evaluates if this seleniumQuery object has <b>only visible</b> elements.
+
+Note: this is different from `.is(":visible")` because `.is()` requires only one
+    element to match the selector (to be visible), whereas this `.isVisible()` method
+    requires <b>all</b> matched elements to be visible.
+
+This is an alias to `.isVisible()`.
+
+    $("span.all-visible").waitUntil().isDisplayed();
+    $("span.all-visible").assertThat().isDisplayed();
 
 </details>
 <details><summary><code>.isHidden()</code></summary>
 
-`// TODO`
+Evaluates if this seleniumQuery object is <b>not empty</b> and has <b>only hidden</b> elements.
+
+Note: while `.isNotVisible()` considers an empty set a success, this method doesn't.
+
+    $("span.non-empty-and-all-hidden").waitUntil().isHidden();
+    $("span.non-empty-and-all-hidden").assertThat().isHidden();
 
 </details>
 <details><summary><code>.isNotVisible()</code></summary>
 
-`// TODO`
+Evaluates if this seleniumQuery object is <b>empty</b> or has <b>only hidden</b> elements.
+
+Note: while `.isHidden()` considers an empty set a failure, this method doesn't.
+
+    $("span.empty-or-all-hidden").waitUntil().isNotVisible();
+    $("span.empty-or-all-hidden").assertThat().isNotVisible();
 
 </details>
 </td>
 </tr>
 </table>
-
-Don't forget that *any function* that can be used with `$().waitUntil()` can also be used with `$().assertThat()` and vice-versa.
 
 
 <br>
@@ -1019,6 +1048,24 @@ $.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer
 </td>
 </tr>
 </table>
+
+<br>
+
+### Powerful selector system
+
+Let the tool do the hard work and find elements easily:
+
+- CSS3 Selectors - `$(".myClass")`, `$("#table tr:nth-child(3n+1)")`
+- jQuery/Sizzle enhancements - `$(".claz:eq(3)")`, `$(".claz:contains('My Text!')")`
+- XPath - `$("//div/*/label/preceding::*")`
+- and even some own seleniumQuery selectors: `$("#myOldDiv").is(":not(:present)")`.
+
+You pick your style. Whatever is more interesting at the moment. Mixing is OK:
+
+```java
+$("#tab tr:nth-child(3n+1)").find("/img[@alt='calendar']/preceding::input").val("2014-11-12")
+```
+Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Selectors)
 
 <br>
 <br>
