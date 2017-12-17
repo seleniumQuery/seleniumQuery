@@ -249,10 +249,16 @@ How to setup the `WebDriver`? Simply use our builder. The driver will be instant
 
 Supported drivers (and those that are -- or can be -- headless):
 
-| Chrome | Firefox | Opera | Edge | Internet<br>Explorer | PhantomJS | HtmlUnit |
-| ------ | ------- | ----- | ---- | ----------------- | --------- | -------- |
-| ![chrome](https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_64x64.png?raw=true) | ![firefox](https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_64x64.png?raw=true) | ![opera](https://github.com/alrra/browser-logos/blob/master/src/opera/opera_64x64.png?raw=true) | ![edge](https://github.com/alrra/browser-logos/blob/master/src/edge/edge_64x64.png?raw=true) | ![internet explorer](doc/ie.png) | ![PhantomJS](doc/phantomjs.png) | ![HtmlUnit](doc/htmlunit.png)
-| Headless | Headless | - | - | - | Headless | Headless |
+| Chrome | Firefox | Opera | PhantomJS | HtmlUnit | Safari | Edge | Internet<br>Explorer |
+| ------ | ------- | ----- | --------- | ----------------- | --------- | -------- | -------- |
+| ![chrome](https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_64x64.png?raw=true) | ![firefox](https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_64x64.png?raw=true) | ![opera](https://github.com/alrra/browser-logos/blob/master/src/opera/opera_64x64.png?raw=true) | ![PhantomJS](doc/phantomjs.png) | ![HtmlUnit](doc/htmlunit.png) | ![safari](https://github.com/alrra/browser-logos/blob/master/src/safari/safari_64x64.png?raw=true) | ![edge](https://github.com/alrra/browser-logos/blob/master/src/edge/edge_64x64.png?raw=true) | ![internet explorer](doc/ie.png)
+| `.useChrome()`          | `.useFirefox()`         | `.useOpera()`           | `.usePhantomJS()`       | `.useHtmlUnit()`    | -                   | `.useEdge()`            | `.useInternetExplorer()` |
+| `.headless()`           | `.headless()`           | N/A                     | Always                  | Always              | N/A                 | N/A                     | N/A |
+| `.autoQuitDriver()`     | `.autoQuitDriver()`     | `.autoQuitDriver()`     | `.autoQuitDriver()`     | `.autoQuitDriver()` | `.autoQuitDriver()` | `.autoQuitDriver()`     | `.autoQuitDriver()` |
+| `.autoDriverDownload()` | `.autoDriverDownload()` | `.autoDriverDownload()` | `.autoDriverDownload()` | -                   | -                   | `.autoDriverDownload()` | `.autoDriverDownload()` |
+| `.withOptions()`        | `.withOptions()`        | `.withOptions()`        | -                       | -                   | -                   | `.withOptions()`        | - |
+| -                       | `.withBinary()`         | `.withBinary()`         | -                       | -                   | -                   | -                       | - |
+| -                       | `.withProfile()`        | -                       | -                       | -                   | -                   | -                       | - |
 
 #### How to use a driver
 
