@@ -406,24 +406,45 @@ Don't forget that *any function* that can be used with `$().waitUntil()` can als
 
 How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only when first used.
 
-Supported drivers (and those that are -- or can be -- headless):
-
-| Chrome | Firefox | Opera | PhantomJS | HtmlUnit | Safari | Edge | Internet<br>Explorer |
-| ------ | ------- | ----- | --------- | ----------------- | --------- | -------- | -------- |
-| ![chrome](https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_64x64.png?raw=true) | ![firefox](https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_64x64.png?raw=true) | ![opera](https://github.com/alrra/browser-logos/blob/master/src/opera/opera_64x64.png?raw=true) | ![PhantomJS](doc/phantomjs.png) | ![HtmlUnit](doc/htmlunit.png) | ![safari](https://github.com/alrra/browser-logos/blob/master/src/safari/safari_64x64.png?raw=true) | ![edge](https://github.com/alrra/browser-logos/blob/master/src/edge/edge_64x64.png?raw=true) | ![internet explorer](doc/ie.png)
-| `.useChrome()`          | `.useFirefox()`         | `.useOpera()`           | `.usePhantomJS()`       | `.useHtmlUnit()`    | -                   | `.useEdge()`            | `.useInternetExplorer()` |
-| `.headless()`           | `.headless()`           | N/A                     | Always                  | Always              | N/A                 | N/A                     | N/A |
-| `.autoQuitDriver()`     | `.autoQuitDriver()`     | `.autoQuitDriver()`     | `.autoQuitDriver()`     | `.autoQuitDriver()` | `.autoQuitDriver()` | `.autoQuitDriver()`     | `.autoQuitDriver()` |
-| `.autoDriverDownload()` | `.autoDriverDownload()` | `.autoDriverDownload()` | `.autoDriverDownload()` | -                   | -                   | `.autoDriverDownload()` | `.autoDriverDownload()` |
-| `.withOptions()`        | `.withOptions()`        | `.withOptions()`        | -                       | -                   | -                   | `.withOptions()`        | - |
-| -                       | `.withBinary()`         | `.withBinary()`         | -                       | -                   | -                   | -                       | - |
-| -                       | `.withProfile()`        | -                       | -                       | -                   | -                   | -                       | - |
+Supported drivers (and those that are -- or can be -- headless).
 
 #### How to use a driver
 
 You can download [their executables](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) before or you can
 let seleniumQuery automatically download and configure them (powered by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager)).
  Setting them up in seleniumQuery is all too easy:
+ 
+```java
+// Using Chrome, general example:
+$.driver()
+    .useChrome() // sets Chrome as the driver (this is optional, if omitted, will default to HtmlUnit)
+    .headless() // configures chrome to be headless
+    .autoDriverDownload() // automatically downloads and configures chromedriver.exe
+    .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
+
+// Using Firefox
+$.driver()
+    .useFirefox() // sets Firefox as the driver
+    .headless() // configures Firefox to be headless
+    .autoDriverDownload() // automatically downloads and configures geckodriver.exe
+    .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
+
+// for more examples, options and all supported drivers, see table below
+```
+
+<table>
+<tr>
+<td>![chrome](https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_64x64.png?raw=true)</td><td>
+
+### Chrome
+
+**Headless** mode available.
+
+`.useChrome()`<br>
+`.headless()`<br>
+`.autoQuitDriver()`<br>
+`.autoDriverDownload()`<br>
+`.withOptions()`
 
 ```java
 // Using Chrome
@@ -442,8 +463,26 @@ $.driver()
 $.driver()
     .useChrome()
     .withOptions(<some ChromeOptions instance>)
+```
 
+</td>
+</tr>
+<tr>
+<td>![firefox](https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_64x64.png?raw=true)</td><td>
 
+### Firefox
+
+**Headless** mode available.
+
+`.useFirefox()`<br>
+`.headless()`<br>
+`.autoQuitDriver()`<br>
+`.autoDriverDownload()`<br>
+`.withOptions()`<br>
+`.withBinary()`<br>
+`.withProfile()`
+
+```java
 // Using Firefox
 $.driver()
     .useFirefox() // sets Firefox as the driver
@@ -456,8 +495,22 @@ $.driver()
     .withProfile(<an instance of FirefoxProfile>)
     .withOptions(<an instance of FirefoxOptions>)
     .withBinary(<an instance of FirefoxBinary>);
+```
 
+</td>
+</tr>
+<tr>
+<td>![opera](https://github.com/alrra/browser-logos/blob/master/src/opera/opera_64x64.png?raw=true)</td><td>
 
+### Opera
+
+`.useOpera()`<br>
+`.autoQuitDriver()`<br>
+`.autoDriverDownload()`<br>
+`.withOptions()`<br>
+`.withBinary()`
+
+```java
 // Opera
 // we'll download the driver for you
 $.driver().useOpera().autoDriverDownload();
@@ -467,22 +520,22 @@ $.driver()
     .withOptions(<an instance of OperaOptions>)
     .withBinary("C:/Program Files/Opera/49.0.2725.47/opera.exe")
     .autoDriverDownload();
+```
 
+</td>
+</tr>
+<tr>
+<td> ![PhantomJS](doc/phantomjs.png)</td><td>
 
-// Edge
-// we'll download the driver for you
-$.driver().useEdge().autoDriverDownload();
-// simplified setting of options
-$.driver()
-    .useEdge()
-    .withOptions(<an instance of EdgeOptions>);
+### PhantomJS
 
-// InternetExplorerDriver
-$.driver().useInternetExplorer(); // we search IEDriverServer.exe for you
-// Or you set the path yourself
-$.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer.exe");
+**Always headless**, webkit-based.
 
+`.usePhantomJS()`<br>
+`.autoQuitDriver()`<br>
+`.autoDriverDownload()`
 
+```java
 // PhantomJS (GhostDriver)
 // we'll download phantomjs.exe for you
 $.driver().usePhantomJS().autoDriverDownload();
@@ -490,8 +543,20 @@ $.driver().usePhantomJS().autoDriverDownload();
 $.driver().usePhantomJS();  
 // Or you may set the path yourself
 $.driver().usePhantomJS().withPathToPhantomJS("path/to/phantomjs.exe");
+```
 
+</td>
+</tr>
+<tr>
+<td>![HtmlUnit](doc/htmlunit.png)</td><td>
 
+### HmtlUnit
+
+**Always headless**, java-based.<br>
+`.useHtmlUnit()`<br>
+`.autoQuitDriver()`
+
+```java
 // HtmlUnit
 // So many possibilities to set up HtmlUnitDriver... If only there was a simple way to use them. Oh, wait:
 // HtmlUnit default (Chrome/JavaScript ON)
@@ -507,9 +572,67 @@ $.driver().useHtmlUnit().emulatingFirefox(); // could disable JS here as well
 // And IE
 $.driver().useHtmlUnit().emulatingInternetExplorer11(); // JS is disableable as well
 $.driver().useHtmlUnit().emulatingInternetExplorer(); // will pick latest IE
-````
+```
 
-#### But there is more
+</td>
+</tr>
+<tr>
+<td>![safari](https://github.com/alrra/browser-logos/blob/master/src/safari/safari_64x64.png?raw=true)</td><td>
+
+### Safari
+
+`.autoQuitDriver()`<br>
+Tested as a remote driver.
+
+```java
+
+```
+
+</td>
+</tr>
+<tr>
+<td>![edge](https://github.com/alrra/browser-logos/blob/master/src/edge/edge_64x64.png?raw=true)</td><td>
+
+### Edge
+
+`.useEdge()`<br>
+`.autoQuitDriver()`<br>
+`.autoDriverDownload()`<br>
+`.withOptions()`
+
+```java
+// Edge
+// we'll download the driver for you
+$.driver().useEdge().autoDriverDownload();
+// simplified setting of options
+$.driver()
+    .useEdge()
+    .withOptions(<an instance of EdgeOptions>);
+```
+
+</td>
+</tr>
+<tr>
+<td>![internet explorer](doc/ie.png)</td><td>
+
+### Internet Explorer
+
+`.useInternetExplorer()`<br>
+`.autoQuitDriver()`<br>
+`.autoDriverDownload()`
+
+```java
+// InternetExplorerDriver
+$.driver().useInternetExplorer(); // we search IEDriverServer.exe for you
+// Or you set the path yourself
+$.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer.exe");
+```
+
+</td>
+</tr>
+</table>
+
+### But there is more...
 
 Explore the auto-complete. There are additional options to every driver, such as `.withCapabilities(DesiredCapabilities)` or some specific, such as `.withProfile(FirefoxProfile)` or `.withOptions(ChromeOptions)`.
 
@@ -627,5 +750,5 @@ See [releases](https://github.com/seleniumQuery/seleniumQuery/releases).
 # Contributing
 
 The tool quite simple, so there's a lot of room for improvement. If you think something would be useful for you, it
- would probably be useful to us all, [tell us what you want](https://github.com/seleniumQuery/seleniumQuery/issues/new)!
+ would probably be useful to us all, [tell us what you're thinking](https://github.com/seleniumQuery/seleniumQuery/issues/new)!
 
