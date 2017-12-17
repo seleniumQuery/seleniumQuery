@@ -8,8 +8,8 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/seleniumQuery/seleniumQuery/master/LICENSE.txt)
 [![Join the chat at https://gitter.im/seleniumQuery/seleniumQuery](https://badges.gitter.im/seleniumQuery/seleniumQuery.svg)](https://gitter.im/seleniumQuery/seleniumQuery?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Linux Build Status](https://img.shields.io/travis/seleniumQuery/seleniumQuery/master.svg?label=Linux+Build)](https://travis-ci.org/seleniumQuery/seleniumQuery)
-[![Windows Build Status](https://img.shields.io/appveyor/ci/acdcjunior/seleniumQuery/master.svg?label=Windows+Build)](https://ci.appveyor.com/project/acdcjunior/seleniumQuery/branch/master)
+[![Build Status](https://travis-ci.org/seleniumQuery/seleniumQuery.svg?branch=master)](https://travis-ci.org/seleniumQuery/seleniumQuery)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/mwvctg5o8ws7l7jg?svg=true)](https://ci.appveyor.com/project/acdcjunior/seleniumQuery/branch/master)
 [![Build status](https://codeship.com/projects/7b37d0c0-d5b4-0133-1efe-62329e93051f/status?branch=master)](https://codeship.com/projects/142644)
 [![wercker status](https://app.wercker.com/status/b772beb5c952865d659e548bf7d64f48/s "wercker status")](https://app.wercker.com/project/bykey/b772beb5c952865d659e548bf7d64f48)
 [![Circle CI](https://circleci.com/gh/seleniumQuery/seleniumQuery.svg?style=svg)](https://circleci.com/gh/seleniumQuery/seleniumQuery)
@@ -17,9 +17,9 @@
 
 [![Sauce Test Status](https://saucelabs.com/open_sauce/build_matrix/acdcjunior.svg)](https://saucelabs.com/u/acdcjunior)
 
-### *Cross-Driver* jQuery-like Java interface for Selenium WebDriver
+### Feature-rich jQuery-like Java interface for Selenium WebDriver
 
-seleniumQuery is a feature-rich Java library that brings a *cross-driver* **jQuery-like** interface for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
+seleniumQuery is a feature-rich *cross-driver* Java library that brings a **jQuery-like** interface for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
 It is designed to be a **thin** layer over Selenium. You can use seleniumQuery to manage the WebDriver for you, or you can use seleniumQuery on top of your favorire selenium framework just
 to make some cases simpler when needed.
@@ -66,17 +66,11 @@ for (WebElement e: $(".myClass:contains('My Text!'):not(:button)")) {
 Allows querying elements by:
 
 - **CSS3 Selectors** - `$(".myClass")`, `$("#table tr:nth-child(3n+1)")`;
-- **jQuery/Sizzle enhancements** - `$(":text:eq(3)")`, `$(".myClass:contains('My Text!')")`;
+- **jQuery enhanced selectors** - `$(":text:eq(3)")`, `$(".myClass:contains('My Text!')")`;
 - **XPath** - `$("//div/*/label/preceding::*")`;
 - and even some own **seleniumQuery selectors**: `$("#myOldDiv").is(":not(:present)")`.
 
-Built using Selenium WebDriver's native capabilities **only**:
-
-- No `jQuery.js` is embedded at the page, no side-effects are generated;
-    - Doesn't matter if the page uses jQuery or not (or even if the JavaScript global variable `$` is other library like `Prototype.js`).
-- Capable of handling/testing JavaScript-disabled pages
-    - Test pages that use [Unobtrusive JavaScript](http://en.wikipedia.org/wiki/Unobtrusive_JavaScript).
-    - Most functions don't even require the browser/driver to have JavaScript enabled!
+Built using Selenium WebDriver's capabilities, no `jQuery.js` is embedded at the page, no side-effects are generated.
 
 ## Quickstart: A running example
 
@@ -124,10 +118,6 @@ public class SeleniumQueryExample {
 }
 ```
 
-## Download and execute the [seleniumQuery showcase project](https://github.com/acdcjunior/seleniumQuery-showcase)
-
-...and see it in action [right now](https://github.com/acdcjunior/seleniumQuery-showcase).
-
 To get the latest version of seleniumQuery, add to your **`pom.xml`**:
 
 ```xml
@@ -138,11 +128,23 @@ To get the latest version of seleniumQuery, add to your **`pom.xml`**:
 </dependency>
 ```
 
+
+
+<br><br>
+
+## Looking for more examples?
+
+Download and execute the **[seleniumQuery showcase project](https://github.com/acdcjunior/seleniumQuery-showcase)**.
+ It contains many demonstrations of what seleniumQuery is capable of.
+
 <br>
 
 # Features
 
-seleniumQuery aims to implement all relevant jQuery functions, as well as adding some of our own. Our main goal is to make emulating user actions and reading the state of pages easier than ever, with a consistent behavior across drivers.
+seleniumQuery implements all jQuery functions that are useful to browser manipulation.
+On top of it, we add many other useful functions (see `$("selector").waitUntil()` and `$("selector").assertThat()` below).
+ 
+Our main goal is to make emulating user actions and reading the state of pages easier than ever, with a consistent behavior across drivers.
 
 
 ### Readable jQuery syntax you already know
@@ -227,19 +229,14 @@ For an example of how to create your own plugin, check the [seleniumQuery Plugin
 
 How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only when first used.
 
-Supported drivers:
+Supported drivers (and those that are -- or can be -- headless):
 
-| Chrome | Firefox | Opera | Edge | Internet Explorer | PhantomJS | HtmlUnit |
+| Chrome | Firefox | Opera | Edge | Internet<br>Explorer | PhantomJS | HtmlUnit |
 | ------ | ------- | ----- | ---- | ----------------- | --------- | -------- |
 | ![chrome](https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_64x64.png?raw=true) | ![firefox](https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_64x64.png?raw=true) | ![opera](https://github.com/alrra/browser-logos/blob/master/src/opera/opera_64x64.png?raw=true) | ![edge](https://github.com/alrra/browser-logos/blob/master/src/edge/edge_64x64.png?raw=true) | ![internet explorer](doc/ie.png) | ![PhantomJS](doc/phantomjs.png) | ![HtmlUnit](doc/htmlunit.png)
 | Headless | Headless | - | - | - | Headless | Headless |
 
-```java
-$.driver().useFirefox(); // Will set up firefox as driver
-$.url("http://seleniumquery.github.io"); //the driver will be instantiated when this executes
-```
-
-##### How to use a driver
+#### How to use a driver
 
 You can download [their executables](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) before or you can
 let seleniumQuery automatically download and configure them (powered by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager)).
@@ -397,41 +394,6 @@ See [releases](https://github.com/seleniumQuery/seleniumQuery/releases).
 
 # Contributing
 
-The tool quite simple, so there's a lot of room for improvement. If you come up with an idea of something that could
-be useful, [tell us](https://github.com/seleniumQuery/seleniumQuery/issues/new)!
+The tool quite simple, so there's a lot of room for improvement. If you think something would be useful for you, it
+ would probably be useful to us all, [tell us what you want](https://github.com/seleniumQuery/seleniumQuery/issues/new)!
 
-## Goals and non-goals
-
-Goals:
-- Have a uniform behavior thoughout targeted WebDriver implementations
-    - A given code should behave as similar as possible in all WebDrivers.
-        - Selenium itself takes care of that, but it does leave some room for improvement
-        - This is important to our functions as well, they should behave the same regardless of WebDriver implementation (browser) used
-- Mimic jQuery's interface and behavior, but...
-    - Do it all, when possible, from the user's perspective
-        - e.g. `$().val("")` types content instead of setting the `value` attribute.
-    - Improve it a little (e.g. throw exception when invalid selectors, such as `"div:file"` are used)
-- Add functions that tackle common problems when dealing with web (testing) automation, such as waiting (`$().waitUntil()`)
-- Add quick commands for common usage patterns (such as driver builder does)
-- Simplify overall usage with convention over configuration
-
-Non-goals:
-- Add all jQuery's functions
-- Replace WebDriver
-
-
-## History
-- What went bad?
-    - Since the selector system supports not only pure CSS (it allows the extended CSS supported by jQuery- and implemented by Sizzle), its implementation is a challenge by itself.
-        - The first version used regexes, didn't work so well and never made it into a release
-        - The second version (released as 0.9.0) converts every CSS selector into a XPath expression and executes it.
-            - The advantage is that this makes Selenium bring every element the user wanted already, without the need to iterate over them or anything.
-            - The problem with this approach is that not every CSS can be translated into an equivalent XPath expression (e.g. `:selected` or `:visible`)
-        - The third version (currently under development, called "secondgen") will parse the selector and...
-            - If the selector is plain CSS or XPath, use it directly
-            - If the selector is an extended CSS that can be translated fully to an XPath expression, than translate it and use it
-            - Otherwise, translate the CSS to the XPath expression that brings the smallest numbers of element possible and then iteratively filter the results before returning
-
-## What else?
-
-Feel free to [request, suggest](https://github.com/seleniumQuery/seleniumQuery/issues/new), create pull requests. As said, any opinions/help are more than welcome!
