@@ -192,38 +192,56 @@ Other important feature is the leverage of `WebDriver`'s `FluentWait` capabiliti
 // The code will hold until the modal is gone. If it is never gone, seleniumQuery
 // will throw a timeout exception.
 $("#modalDiv :button:contains('OK')").click();
-$("#modalDiv :button:contains('OK')").waitUntil().is(":not(:visible)");
+$("#modalDiv :button:contains('OK')").waitUntil().is(":not(:visible)");  // is() is your old-time friend that takes a selector as argument!
 
 // Or, fluently:
 $("#modalDivOkButton").click().waitUntil().is(":not(:visible)");
 ```
 
-And, that's right, the `.is()` function above is your old-time friend that takes a selector as argument!
-
-Check out what else `.waitUntil()` can do in the [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
-
-<br>
-
-### Plugin System
-
-seleniumQuery supports plugins through the `.as(PLUGIN)` function, such as:
-
-```java
-$("div").as(YOURPLUGIN).someMethodFromYourPlugin();
-```
-
-There are some default plugins. To check them out, call `.as()` without arguments. Example:
-
-```java
-// the .select() plugin
-$("#citiesSelect").as().select().selectByVisibleText("New York");
-// picks an <option> in the <select> based in the <option>'s visible text
-```
-
-For an example of how to create your own plugin, check the [seleniumQuery Plugin wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Plugin-Support---.as()-function).
+**Any function** that can be used with `$().waitUntil()` can also be used with `$().assertThat()` and vice-versa.
 
 
 <br>
+
+### Simplified assertions
+
+You can assert directly into the seleniumQuery object:
+
+```java
+$("#modalDiv :button:contains('OK')").assertThat().is(":not(:visible)");
+// .is() functions
+$(".myInput").assertThat().is(":disabled");
+$(".myInput").assertThat().is(":visible:enabled");
+// functions such as .val(), .text() and others are also available
+$(".myInput").assertThat().val().isEqualTo("expectedValue");
+$(".aDivDiv").assertThat().text().contains("expectedText");
+// and more...
+$(".myInput").assertThat().val().matches(".*\d{10}\*");
+$(".myInput").assertThat().size().isGreaterThan(7);
+$(".aDivDiv").assertThat().html().contains("<div>expected</div>");
+// more...
+$("...").assertThat().text().matches(<Hamcrest Matcher>);
+$("...").assertThat().html().matches("my[0-9]regex.*?");
+$("...").assertThat().val().matches(java.util.Pattern);
+$("...").assertThat().val().matches(value -> value.length() > 99); // lambda!
+$("...").assertThat().isEmpty()
+$("...").assertThat().isNotEmpty()
+$("...").assertThat().isPresent()
+$("...").assertThat().isVisible()
+$("...").assertThat().isDisplayed()
+$("...").assertThat().isHidden()
+$("...").assertThat().isNotVisible()
+
+// Or, fluently:
+$("#modalDivOkButton").click().assertThat().is(":not(:visible)");
+
+// any
+```
+
+Don't forget that *any function* that can be used with `$().waitUntil()` can also be used with `$().assertThat()` and vice-versa.
+
+<br>
+
 
 ### Flexible WebDriver builder system
 
@@ -260,29 +278,57 @@ $.driver()
     .useChrome()
     .withOptions(<some ChromeOptions instance>)
 
-// Using firefox
+
+// Using Firefox
 $.driver()
     .useFirefox() // sets Firefox as the driver
     .headless() // configures Firefox to be headless
     .autoDriverDownload() // automatically downloads and configures geckodriver.exe
     .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
+// simplified setting of profile, options and binary
+$.driver()
+    .useFirefox()
+    .withProfile(<an instance of FirefoxProfile>)
+    .withOptions(<an instance of FirefoxOptions>)
+    .withBinary(<an instance of FirefoxBinary>);
+
+
+// Opera
+// we'll download the driver for you
+$.driver().useOpera().autoDriverDownload();
+// simplified setting of options and binary
+$.driver()
+    .useOpera()
+    .withOptions(<an instance of OperaOptions>)
+    .withBinary("C:/Program Files/Opera/49.0.2725.47/opera.exe")
+    .autoDriverDownload();
+
+
+// Edge
+// we'll download the driver for you
+$.driver().useEdge().autoDriverDownload();
+// simplified setting of options
+$.driver()
+    .useEdge()
+    .withOptions(<an instance of EdgeOptions>);
 
 // InternetExplorerDriver
 $.driver().useInternetExplorer(); // we search IEDriverServer.exe for you
 // Or you set the path yourself
 $.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer.exe");
 
+
 // PhantomJS (GhostDriver)
-$.driver().usePhantomJS(); // again, we'll find phantomjs[.exe] to you
+// we'll download phantomjs.exe for you
+$.driver().usePhantomJS().autoDriverDownload();
+// or, we may find phantomjs[.exe] for you, throwing an error if not present
+$.driver().usePhantomJS();  
 // Or you may set the path yourself
 $.driver().usePhantomJS().withPathToPhantomJS("path/to/phantomjs.exe");
-````
 
-##### HtmlUnit
 
-So many possibilities to set up `HtmlUnitDriver`... If only there was a simple way to use them. Oh, wait:
-
-```java
+// HtmlUnit
+// So many possibilities to set up HtmlUnitDriver... If only there was a simple way to use them. Oh, wait:
 // HtmlUnit default (Chrome/JavaScript ON)
 $.driver().useHtmlUnit();
 // Want disabled JavaScript, just call .withoutJavaScript()
@@ -336,31 +382,13 @@ Do as an user would: call `.click()`! Or, better yet, use seleniumQuery's `.as()
 
 <br><br>
 
-### Alternate symbols
-
-If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field). Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same goodies:
-
-```java
-import static io.github.seleniumquery.SeleniumQuery.sQ;
-import static io.github.seleniumquery.SeleniumQuery.jQuery;
-...
-String oldStreet = sQ("input.street").val();
-sQ("input.street").val("4th St!");
-
-String oldStreetz = jQuery("input.street").val();
-jQuery("input.street").val("5th St!");
-```
-
-<br>
-
-
 # Using multiple browsers/drivers simultaneously
 
 Typically, the `$` is a static variable, thus every command you issue only affects the one same instance of WebDriver.
 
 But... what if you want/need to use two WebDrivers at the same time?
 
-We've got your back, see the [example](src/test/java/endtoend/browser/SeleniumQueryBrowserTest.java):
+We've got your back, see the [example](https://github.com/seleniumQuery/seleniumQuery-showcase/blob/master/src/main/java/browser/MultipleBrowsersExample.java#L27-L39):
 
 ```java
 public static void main(String[] args) {
@@ -381,6 +409,45 @@ public static void main(String[] args) {
 ```
 
 <br>
+
+### Plugin System
+
+seleniumQuery supports plugins through the `.as(PLUGIN)` function, such as:
+
+```java
+$("div").as(YOURPLUGIN).someMethodFromYourPlugin();
+```
+
+There are some default plugins. To check them out, call `.as()` without arguments. Example:
+
+```java
+// the .select() plugin
+$("#citiesSelect").as().select().selectByVisibleText("New York");
+// picks an <option> in the <select> based in the <option>'s visible text
+```
+
+For an example of how to create your own plugin, check the [seleniumQuery Plugin wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-Plugin-Support---.as()-function).
+
+
+<br>
+
+### Alternate symbols
+
+If the dollar symbol, `$`, gives you the yikes -- we know, it is used for internal class names --, it is important to notice that the `$` symbol in seleniumQuery is not a class name, but a `static` method (and field). Still, if you don't feel like using it, you can resort to `sQ()` or good ol' `jQuery()` and benefit from all the same goodies:
+
+```java
+import static io.github.seleniumquery.SeleniumQuery.sQ;
+import static io.github.seleniumquery.SeleniumQuery.jQuery;
+...
+String oldStreet = sQ("input.street").val();
+sQ("input.street").val("4th St!");
+
+String oldStreetz = jQuery("input.street").val();
+jQuery("input.street").val("5th St!");
+```
+
+<br>
+
 
 # More
 
