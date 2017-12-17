@@ -27,7 +27,7 @@ to make some cases simpler when needed.
 ### Example snippet:
 
 ```java
-// Selenium
+// Regular Selenium
 WebElement el  = driver.findElement(By.cssSelector(".street"));
 String oldStreet = element.getAttribute("value"); // what if ".street" is a <select>? this won't work
 element.setAttribute("value", "4th St!")
@@ -41,7 +41,7 @@ $("input.street").val("4th St!"); // also would work for a <select>
 
 And much more. The example above is of something that has an equivalent in Selenium. Not everything does (many things would require tons of boilerplate in vanilla Selenium).
 
-### No special configuration needed - use it in your project right now:
+### No special configuration needed - use seleniumQuery's goodies in your project right now:
 
 On a regular `WebElement`...
 
@@ -80,7 +80,9 @@ Allows querying elements by:
 
 Built using Selenium WebDriver's capabilities, no `jQuery.js` is embedded at the page, no side-effects are generated.
 
-## Quickstart: A running example
+<br><br>
+
+# Quickstart: A running example
 
 Try it out now with the running example below:
 
@@ -181,17 +183,15 @@ Get to know what jQuery functions seleniumQuery supports and what else it brings
 // The code will hold until the modal is gone. If it is never gone, seleniumQuery will throw a timeout exception
 $("#modalDiv :button:contains('OK')").click();
 $("#modalDiv :button:contains('OK')").waitUntil().is(":not(:visible)");
-// Or, fluently:
+// Or the two commands above, fluently:
 $("#modalDivOkButton").click().waitUntil().is(":not(:visible)");
 ```
 
-You can **assert** directly into the seleniumQuery object using `.assertThat()`:
+You can also **assert** directly into the seleniumQuery object using `.assertThat()`:
 
 ```java
 $("#modalDiv :button:contains('OK')").assertThat().is(":not(:visible)");
-
-// Or, fluently:
-$("#modalDivOkButton").click().assertThat().is(":not(:visible)");
+$("#myInput").assertThat().val().isBlank();
 ```
 
 *Any* function that can be used with `$().waitUntil()` can also be used with `$().assertThat()` and vice-versa.
@@ -426,8 +426,15 @@ Note: while `.isHidden()` considers an empty set a failure, this method doesn't.
 </tr>
 </table>
 
+You can also chain calls using `.and()`:
 
-<br>
+    $("span").assertThat().size().isGreaterThan(5).and().text().isEqualTo("a b c d e");
+    
+Or use functions after waiting/asserting using `.then()`:
+
+    $("#div").waitUntil().isVisible().then().click();
+
+<br><br>
 
 
 ## Flexible WebDriver builder system
@@ -439,14 +446,14 @@ let seleniumQuery automatically download and configure them. Setup in seleniumQu
 // Using Chrome, general example:
 $.driver()
     .useChrome() // configures Chrome as the driver
-    .headless() // configures chrome to be headless
+    .headless() // configures Chrome to run in headless mode
     .autoDriverDownload() // automatically downloads and configures chromedriver.exe
     .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
 
 // Using Firefox
 $.driver()
     .useFirefox() // configures Firefox as the driver
-    .headless() // configures Firefox to be headless
+    .headless() // configures Firefox to run in headless mode
     .autoDriverDownload() // automatically downloads and configures geckodriver.exe
     .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
 ```
@@ -459,7 +466,7 @@ For more examples, options and all supported drivers, see table below.
 
 ![Existing WebDriver Instance](doc/webdriver.png)</td><td>
 
-### Using seleniumQuery in an existing `WebDriver` instance
+### Using seleniumQuery in an ***existing*** `WebDriver` instance
 
 The driver builder functions are a bonus, you don't *have* to use them. For seleniumQuery, it makes no difference.
 
@@ -483,7 +490,7 @@ $("#phone").assertThat().val().isEqualTo("99887766");
 
 ### Chrome
 
-Here's how seleniumQuery can simplify `ChromeDriver` instantiation.
+Here's how seleniumQuery can simplify a `ChromeDriver` instantiation.
 
 **Headless** mode available. **Automatic driver download** available.
 
@@ -559,8 +566,8 @@ $.driver().useChrome().headless().autoDriverDownload();
 $.driver().useChrome().withPathToChromeDriver("path/to/chromedriver.exe")
 // General example:
 $.driver()
-    .useChrome() // sets Chrome as the driver
-    .headless() // configures chrome to be headless
+    .useChrome() // configures Chrome as the driver
+    .headless() // configures Chrome to run in headless mode
     .autoDriverDownload() // automatically downloads and configures chromedriver.exe
     .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
 // using options
@@ -577,6 +584,8 @@ $.driver()
 ![firefox](doc/firefox.png)</td><td>
 
 ### Firefox
+
+Easy `FirefoxDriver` instantiation and configuration with seleniumQuery.
 
 **Headless** mode available. **Automatic driver download** available.
 
@@ -643,8 +652,8 @@ Configures the given `DesiredCapabilities` in the driver to be instantiated. Pre
 ```java
 // Using Firefox
 $.driver()
-    .useFirefox() // sets Firefox as the driver
-    .headless() // configures Firefox to be headless
+    .useFirefox() // configures Firefox as the driver
+    .headless() // configures Firefox to run in headless mode
     .autoDriverDownload() // automatically downloads and configures geckodriver.exe
     .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
 // simplified setting of profile, options and binary
@@ -729,7 +738,7 @@ $.driver().useOpera().autoDriverDownload();
 $.driver()
     .useOpera()
     .withOptions(<an instance of OperaOptions>)
-    .withBinary("C:/Program Files/Opera/49.0.2725.47/opera.exe")
+    .withBinary("C:/Program Files/Opera/49.0.2725.47/opera.exe") // example path
     .autoDriverDownload();
 ```
 
@@ -866,7 +875,7 @@ Configures the given `DesiredCapabilities` in the driver to be instantiated.
 <br>
 
 ```java
-// HtmlUnit has many possibilities to set up HtmlUnitDriver
+// There are many possibilities to set up HtmlUnitDriver
 // HtmlUnit default (Chrome/JavaScript ON)
 $.driver().useHtmlUnit();
 // Want disabled JavaScript, just call .withoutJavaScript()
@@ -1049,6 +1058,8 @@ Check the [javadocs for our `$().functions`](https://static.javadoc.io/io.github
 
 More info also in our [API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
+<br>
+
 ### Available `$.functions()`
 
 Check the [javadocs for our `$.functions`](https://static.javadoc.io/io.github.seleniumquery/seleniumquery/0.18.0/index.html?io/github/seleniumquery/browser/BrowserFunctions.html).
@@ -1099,7 +1110,8 @@ And we go the *extra mile* whenever possible:
 On the same tone, when selecting/checking `<option>`s or checkboxes or radios, try not to use `$().prop("selected", true)` directly to them (which to work, of course, would need JS to be enabled on the driver).
 Do as an user would: call `.click()`! Or, better yet, use seleniumQuery's `.as().select()` functions: `$().as().select().selectByVisibleText("My Option")` or `$().as().select().selectByValue("123")`.
 
-<br><br>
+<br>
+<br>
 
 # Using multiple browsers/drivers simultaneously
 
