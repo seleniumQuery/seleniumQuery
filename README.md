@@ -417,7 +417,7 @@ let seleniumQuery automatically download and configure them (powered by [webdriv
 ```java
 // Using Chrome, general example:
 $.driver()
-    .useChrome() // sets Chrome as the driver (this is optional, if omitted, will default to HtmlUnit)
+    .useChrome() // configures Chrome as the driver
     .headless() // configures chrome to be headless
     .autoDriverDownload() // automatically downloads and configures chromedriver.exe
     .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
@@ -432,7 +432,31 @@ $.driver()
 // for more examples, options and all supported drivers, see table below
 ```
 
+
 <table>
+<tr>
+<td>
+Existing<br>Instance
+</td>
+<td>
+
+### Existing instance
+
+The driver builder functions are a bonus, you don't *have* to use them.
+
+If you want to create the `WebDriver` yourself or **add seleniumQuery to an existing `WebDriver` instance** just:
+
+```java
+WebDriver myExistingDriverInstance = ...; // created elsewhere by whoever
+
+$.driver().use(myExistingDriverInstance);
+
+// now you can use all of seleniumQuery's power! 
+$("#phone").assertThat().val().isEqualTo("99887766");
+```
+
+</td>
+</tr>
 <tr>
 <td>
 
@@ -490,25 +514,31 @@ If you don't want seleniumQuery to automatically download the executable for you
 specify the location of `chromedriver.exe`/`chromedriver` yourself:
 
 ```java
-$.driver().usePhantomJS().withPathToChromeDriver("path/to/chromedriver.exe");
+$.driver().useChrome().withPathToChromeDriver("path/to/chromedriver.exe");
 ```
 
 If you use neither `.autoDriverDownload()` nor `.withPathToChromeDriver()`, seleniumQuery will attempt to find the executable
 on your PATH or classpath. If it doesn't find it anywhere, an exception will be thrown.
 
 </details>
+<details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+
+</details>
+
+<br>
 
 ```java
 // Using Chrome
 $.driver().useChrome(); // will look for chromedriver/exe to you, including in the classpath!
-// if you don't have chromedriver.exe and want seleniumQuery to automatically download and configure it
+// if you don't have chromedriver.exe and want seleniumQuery to auto download and configure it
 $.driver().useChrome().headless().autoDriverDownload();
 // If you want to set the path to chromedriver.exe yourself
 $.driver().useChrome().withPathToChromeDriver("path/to/chromedriver.exe")
 // General example:
 $.driver()
-    .useChrome() // sets Chrome as the driver (this is optional, if omitted, will default to HtmlUnit)
+    .useChrome() // sets Chrome as the driver
     .headless() // configures chrome to be headless
     .autoDriverDownload() // automatically downloads and configures chromedriver.exe
     .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
@@ -581,7 +611,13 @@ Enables additional configuration through a `FirefoxBinary` instance.
 Enables additional configuration through a `FirefoxProfile` instance.
 
 </details>
+<details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+
+</details>
+
+<br>
 
 ```java
 // Using Firefox
@@ -656,6 +692,13 @@ $.driver().useOpera().autoDriverDownload()
 ```
 
 </details>
+<details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
+
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+
+</details>
+
+<br>
 
 ```java
 // Opera
@@ -725,7 +768,13 @@ If you use neither `.autoDriverDownload()` nor `.withPathToPhantomJS()`, seleniu
 on your PATH or classpath. If it doesn't find it anywhere, an exception will be thrown.
 
 </details>
+<details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+
+</details>
+
+<br>
 
 ```java
 // PhantomJS (GhostDriver)
@@ -787,7 +836,13 @@ Configures HtmlUnit to emulate Firefox.
 Configures HtmlUnit to emulate Internet Explorer.
 
 </details>
+<details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+
+</details>
+
+<br>
 
 ```java
 // HtmlUnit has many possibilities to set up HtmlUnitDriver
@@ -817,18 +872,8 @@ $.driver().useHtmlUnit().emulatingInternetExplorer(); // will pick latest IE
 
 seleniumQuery tests Safari as a **remote driver**.
 
-<details><summary><code>.autoQuitDriver()</code></summary>
-
-Automatically quits the driver upon JVM shutdown.
-
-If you don't use `.autoQuitDriver()`, you can quit the driver calling `$.quit()`.
-
-Having `.autoQuitDriver()` on and still calling `$.quit()` makes no harm, so quit at will. 
-
-</details>
-
 ```java
-
+$.driver().useDriver(new SafariDriver());
 ```
 
 </td>
@@ -879,6 +924,13 @@ $.driver().useEdge().autoDriverDownload((BrowserManager configurer) -> {
 Enables additional configuration through a `EdgeOptions` instance.
 
 </details>
+<details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
+
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+
+</details>
+
+<br>
 
 ```java
 // Edge
@@ -946,6 +998,13 @@ If you use neither `.autoDriverDownload()` nor `.withPathToIEDriverServerExe()`,
 on your PATH or classpath. If it doesn't find it anywhere, an exception will be thrown.
 
 </details>
+<details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
+
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+
+</details>
+
+<br>
 
 ```java
 // InternetExplorerDriver
@@ -961,17 +1020,7 @@ $.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer
 </tr>
 </table>
 
-### But there is more...
-
-Explore the auto-complete. There are additional options to every driver, such as `.withCapabilities(DesiredCapabilities)` or some specific, such as `.withProfile(FirefoxProfile)` or `.withOptions(ChromeOptions)`.
-
-Finally, if you want to create the `WebDriver` yourself:
-
-```java
-WebDriver myDriver = ...;
-$.driver().use(myDriver);
-```
-
+<br>
 <br>
 
 ## seleniumQuery still is Selenium - with "just" a jQuery interface
