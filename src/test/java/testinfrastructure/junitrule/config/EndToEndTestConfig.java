@@ -7,7 +7,7 @@ public class EndToEndTestConfig {
     public static DriverToRunTestsIn whatDriversShouldTestsRun() {
         if (EnvironmentTestUtils.isRunningAtShippable()) {
             banner("shippable");
-            return DriverToRunTestsIn.CHROME;
+            return DriverToRunTestsIn.CHROME_NO_AUTODOWNLOAD;
         }
         if (EnvironmentTestUtils.isRunningAtTravis()) {
             banner("travis");

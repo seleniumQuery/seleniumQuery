@@ -61,6 +61,7 @@ public class TestClassInConfiguredDriversStatement extends Statement {
 	public void evaluate() throws Throwable {
 		executeTestOnHtmlUnits();
 		executeTestOnChrome();
+		executeTestOnChromeNoAutoDriverDownload();
 		executeTestOnFirefox();
 		executeTestOnEdge();
 		executeTestOnOpera();
@@ -103,6 +104,10 @@ public class TestClassInConfiguredDriversStatement extends Statement {
 	}
 
     private void executeTestOnChrome() {
+        executeTestOn(driverToRunTestsIn == DriverToRunTestsIn.CHROME_NO_AUTODOWNLOAD, DriverInstantiator.CHROME_NO_AUTODOWNLOAD, YES);
+    }
+
+    private void executeTestOnChromeNoAutoDriverDownload() {
         executeTestOn(driverToRunTestsIn.canRunChrome(), DriverInstantiator.CHROME, YES);
         executeTestOn(driverToRunTestsIn.canRunChromeHeadless(), DriverInstantiator.CHROME_HEADLESS, YES);
     }

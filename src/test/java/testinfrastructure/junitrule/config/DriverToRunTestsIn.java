@@ -46,6 +46,7 @@ public enum DriverToRunTestsIn {
 	FIREFOX_HEADLESS                    (_FIREFOX_HEADLESS, _JAVASCRIPT_ON),
 
 	CHROME                              (_CHROME, _JAVASCRIPT_ON),
+	CHROME_NO_AUTODOWNLOAD              (),
 	CHROME_HEADLESS                     (_CHROME_HEADLESS, _JAVASCRIPT_ON),
 
     FIREFOX_AND_CHROME_HEADLESS         (_FIREFOX_HEADLESS, _CHROME_HEADLESS, _JAVASCRIPT_ON),

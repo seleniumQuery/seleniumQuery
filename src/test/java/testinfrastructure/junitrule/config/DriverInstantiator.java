@@ -49,6 +49,7 @@ public abstract class DriverInstantiator {
     public static DriverInstantiator IE = create("IE", IEOnly.class,                                                     $ -> $.driver().useInternetExplorer().autoDriverDownload());
     public static DriverInstantiator CHROME = create("Chrome", ChromeOnly.class,                                         $ -> $.driver().useChrome().autoDriverDownload());
     public static DriverInstantiator CHROME_HEADLESS = create("Chrome Headless", ChromeOnly.class,                       $ -> $.driver().useChrome().autoDriverDownload().headless());
+    public static DriverInstantiator CHROME_NO_AUTODOWNLOAD = create("Chrome (no AutoDriveDownload)", ChromeOnly.class,  $ -> $.driver().useChrome());
     public static DriverInstantiator HTMLUNIT_CHROME_JS_ON = create("HtmlUnit (Chrome) - JS ON", HtmlUnitOnly.class,     $ -> $.driver().useHtmlUnit().emulatingChrome());
     public static DriverInstantiator HTMLUNIT_CHROME_JS_OFF = create("HtmlUnit (Chrome) - JS OFF", HtmlUnitOnly.class,   $ -> $.driver().useHtmlUnit().emulatingChrome().withoutJavaScript());
     public static DriverInstantiator HTMLUNIT_FIREFOX_JS_ON = create("HtmlUnit (Firefox) - JS ON", HtmlUnitOnly.class,   $ -> $.driver().useHtmlUnit().emulatingFirefox());
