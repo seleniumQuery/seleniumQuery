@@ -434,17 +434,70 @@ $.driver()
 
 <table>
 <tr>
-<td>![chrome](https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_64x64.png?raw=true)</td><td>
+<td>
+
+![chrome](https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_64x64.png?raw=true)</td><td>
 
 ### Chrome
 
-**Headless** mode available.
+**Headless** mode available. **Automatic driver download** available.
 
-`.useChrome()`<br>
-`.headless()`<br>
-`.autoQuitDriver()`<br>
-`.autoDriverDownload()`<br>
-`.withOptions()`
+<details><summary><code>.useChrome()</code></summary>
+
+Configures Chrome as the driver to be used. Provides additional configuration options that can be chained.
+
+Calling `$.driver().useChrome()` does not instantiate the driver right away, it merely configures it.
+The driver will be instantiated when first used only (e.g. when `$.url("http://somepage")` is called).
+
+</details>
+<details><summary><code>.headless()</code></summary>
+
+Runs Chrome in headless mode.
+
+</details>
+<details><summary><code>.autoQuitDriver()</code></summary>
+
+Automatically quits the driver upon JVM shutdown.
+
+If you don't use `.autoQuitDriver()`, you can quit the driver calling `$.quit()`.
+
+Having `.autoQuitDriver()` on and still calling `$.quit()` makes no harm, so quit at will. 
+
+</details>
+<details><summary><code>.autoDriverDownload()</code></summary>
+
+seleniumQuery automatically downloads and configures the driver. The download is managed by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager).
+Additional options are available, pass a lambda to `.autoDriverDownload(<labda>)` to be able to configure:
+
+```java
+$.driver().useChrome().autoDriverDownload((BrowserManager configurer) -> {
+    // se more options at https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api
+    configurer.proxy("http://corpproxy:8182");
+    configurer.proxyUser("myUser");
+    configurer.proxyPass("myPass")
+});
+```
+
+</details>
+<details><summary><code>.withOptions(ChromeOptions)</code></summary>
+
+Enables additional configuration through a `ChromeOptions` instance.
+
+</details>
+<details><summary><code>.withPathToChromeDriver(String)</code></summary>
+
+If you don't want seleniumQuery to automatically download the executable for you (using `.autoDriverDownload()`) you can
+specify the location of `chromedriver.exe`/`chromedriver` yourself:
+
+```java
+$.driver().usePhantomJS().withPathToChromeDriver("path/to/chromedriver.exe");
+```
+
+If you use neither `.autoDriverDownload()` nor `.withPathToChromeDriver()`, seleniumQuery will attempt to find the executable
+on your PATH or classpath. If it doesn't find it anywhere, an exception will be thrown.
+
+</details>
+
 
 ```java
 // Using Chrome
@@ -468,19 +521,67 @@ $.driver()
 </td>
 </tr>
 <tr>
-<td>![firefox](https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_64x64.png?raw=true)</td><td>
+<td>
+
+![firefox](https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_64x64.png?raw=true)</td><td>
 
 ### Firefox
 
-**Headless** mode available.
+**Headless** mode available. **Automatic driver download** available.
 
-`.useFirefox()`<br>
-`.headless()`<br>
-`.autoQuitDriver()`<br>
-`.autoDriverDownload()`<br>
-`.withOptions()`<br>
-`.withBinary()`<br>
-`.withProfile()`
+<details><summary><code>.useFirefox()</code></summary>
+
+Configures Firefox as the driver to be used. Provides additional configuration options that can be chained.
+
+Calling `$.driver().useFirefox()` does not instantiate the driver right away, it merely configures it.
+The driver will be instantiated when first used only (e.g. when `$.url("http://somepage")` is called).
+
+</details>
+<details><summary><code>.headless()</code></summary>
+
+Runs Firefox in headless mode.
+
+</details>
+<details><summary><code>.autoQuitDriver()</code></summary>
+
+Automatically quits the driver upon JVM shutdown.
+
+If you don't use `.autoQuitDriver()`, you can quit the driver calling `$.quit()`.
+
+Having `.autoQuitDriver()` on and still calling `$.quit()` makes no harm, so quit at will. 
+
+</details>
+<details><summary><code>.autoDriverDownload()</code></summary>
+
+seleniumQuery automatically downloads and configures the driver. The download is managed by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager).
+Additional options are available, pass a lambda to `.autoDriverDownload(<labda>)` to be able to configure:
+
+```java
+$.driver().useFirefox().autoDriverDownload((BrowserManager configurer) -> {
+    // se more options at https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api
+    configurer.proxy("http://corpproxy:8182");
+    configurer.proxyUser("myUser");
+    configurer.proxyPass("myPass")
+});
+```
+
+</details>
+<details><summary><code>.withOptions(FirefoxOptions)</code></summary>
+
+Enables additional configuration through a `FirefoxOptions` instance.
+
+</details>
+<details><summary><code>.withBinary(FirefoxBinary)</code></summary>
+
+Enables additional configuration through a `FirefoxBinary` instance.
+
+</details>
+<details><summary><code>.withProfile(FirefoxProfile)</code></summary>
+
+Enables additional configuration through a `FirefoxProfile` instance.
+
+</details>
+
 
 ```java
 // Using Firefox
@@ -500,15 +601,61 @@ $.driver()
 </td>
 </tr>
 <tr>
-<td>![opera](https://github.com/alrra/browser-logos/blob/master/src/opera/opera_64x64.png?raw=true)</td><td>
+<td>
+
+![opera](https://github.com/alrra/browser-logos/blob/master/src/opera/opera_64x64.png?raw=true)</td><td>
 
 ### Opera
 
-`.useOpera()`<br>
-`.autoQuitDriver()`<br>
-`.autoDriverDownload()`<br>
-`.withOptions()`<br>
-`.withBinary()`
+ **Automatic driver download** available.
+
+<details><summary><code>.useOpera()</code></summary>
+
+Configures Opera as the driver to be used. Provides additional configuration options that can be chained.
+
+Calling `$.driver().useOpera()` does not instantiate the driver right away, it merely configures it.
+The driver will be instantiated when first used only (e.g. when `$.url("http://somepage")` is called).
+
+</details>
+<details><summary><code>.autoQuitDriver()</code></summary>
+
+Automatically quits the driver upon JVM shutdown.
+
+If you don't use `.autoQuitDriver()`, you can quit the driver calling `$.quit()`.
+
+Having `.autoQuitDriver()` on and still calling `$.quit()` makes no harm, so quit at will. 
+
+</details>
+<details><summary><code>.autoDriverDownload()</code></summary>
+
+seleniumQuery automatically downloads and configures the driver. The download is managed by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager).
+Additional options are available, pass a lambda to `.autoDriverDownload(<labda>)` to be able to configure:
+
+```java
+$.driver().useOpera().autoDriverDownload((BrowserManager configurer) -> {
+    // se more options at https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api
+    configurer.proxy("http://corpproxy:8182");
+    configurer.proxyUser("myUser");
+    configurer.proxyPass("myPass")
+});
+```
+
+</details>
+<details><summary><code>.withOptions(OperaOptions)</code></summary>
+
+Enables additional configuration through a `OperaOptions` instance.
+
+</details>
+<details><summary><code>.withBinary(string | File)</code></summary>
+
+Configures the Opera browser binary location. Example:
+
+```java
+$.driver().useOpera().autoDriverDownload()
+    .withBinary("C:/Program Files/Opera/49.0.2725.47/opera.exe");
+```
+
+</details>
 
 ```java
 // Opera
@@ -525,15 +672,60 @@ $.driver()
 </td>
 </tr>
 <tr>
-<td> ![PhantomJS](doc/phantomjs.png)</td><td>
+<td>
+
+![PhantomJS](doc/phantomjs.png)</td><td>
 
 ### PhantomJS
 
-**Always headless**, webkit-based.
+**Always headless**, webkit-based. **Automatic executable download** available.
 
-`.usePhantomJS()`<br>
-`.autoQuitDriver()`<br>
-`.autoDriverDownload()`
+<details><summary><code>.usePhantomJS()</code></summary>
+
+Configures PhantomJS as the driver to be used. Provides additional configuration options that can be chained.
+
+Calling `$.driver().usePhantomJS()` does not instantiate the driver right away, it merely configures it.
+The driver will be instantiated when first used only (e.g. when `$.url("http://somepage")` is called).
+
+</details>
+<details><summary><code>.autoQuitDriver()</code></summary>
+
+Automatically quits the driver upon JVM shutdown.
+
+If you don't use `.autoQuitDriver()`, you can quit the driver calling `$.quit()`.
+
+Having `.autoQuitDriver()` on and still calling `$.quit()` makes no harm, so quit at will. 
+
+</details>
+<details><summary><code>.autoDriverDownload()</code></summary>
+
+seleniumQuery automatically downloads and configures the driver. The download is managed by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager).
+Additional options are available, pass a lambda to `.autoDriverDownload(<labda>)` to be able to configure:
+
+```java
+$.driver().usePhantomJS().autoDriverDownload((BrowserManager configurer) -> {
+    // se more options at https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api
+    configurer.proxy("http://corpproxy:8182");
+    configurer.proxyUser("myUser");
+    configurer.proxyPass("myPass")
+});
+```
+
+</details>
+<details><summary><code>.withPathToPhantomJS(String)</code></summary>
+
+If you don't want seleniumQuery to automatically download the executable for you (using `.autoDriverDownload()`) you can
+specify the location of `phantomjs.exe`/`phantomjs` yourself:
+
+```java
+$.driver().usePhantomJS().withPathToPhantomJS("path/to/phantomjs.exe");
+```
+
+If you use neither `.autoDriverDownload()` nor `.withPathToPhantomJS()`, seleniumQuery will attempt to find the executable
+on your PATH or classpath. If it doesn't find it anywhere, an exception will be thrown.
+
+</details>
+
 
 ```java
 // PhantomJS (GhostDriver)
@@ -548,17 +740,57 @@ $.driver().usePhantomJS().withPathToPhantomJS("path/to/phantomjs.exe");
 </td>
 </tr>
 <tr>
-<td>![HtmlUnit](doc/htmlunit.png)</td><td>
+<td>
+
+![HtmlUnit](doc/htmlunit.png)</td><td>
 
 ### HmtlUnit
 
-**Always headless**, java-based.<br>
-`.useHtmlUnit()`<br>
-`.autoQuitDriver()`
+**Always headless**, java-based. No need to download anything.
+
+<details><summary><code>.useHtmlUnit()</code></summary>
+
+Configures HmtlUnit as the driver to be used. Provides additional configuration options that can be chained.
+
+Calling `$.driver().useHtmlUnit()` does not instantiate the driver right away, it merely configures it.
+The driver will be instantiated when first used only (e.g. when `$.url("http://somepage")` is called).
+
+</details>
+<details><summary><code>.autoQuitDriver()</code></summary>
+
+Automatically quits the driver upon JVM shutdown.
+
+If you don't use `.autoQuitDriver()`, you can quit the driver calling `$.quit()`.
+
+Having `.autoQuitDriver()` on and still calling `$.quit()` makes no harm, so quit at will.
+
+**Note:** Since HtmlUnit is a java-based driver, it will quit upon JVM shutdown anyway. 
+
+</details>
+<details><summary><code>.withoutJavaScript()</code></summary>
+
+Runs HtmlUnit with disabled JavaScript.
+
+</details>
+<details><summary><code>.emulatingChrome()</code></summary>
+
+Configures HtmlUnit to emulate Chrome.
+
+</details>
+<details><summary><code>.emulatingFirefox()</code></summary>
+
+Configures HtmlUnit to emulate Firefox.
+
+</details>
+<details><summary><code>.emulatingInternetExplorer()</code></summary>
+
+Configures HtmlUnit to emulate Internet Explorer.
+
+</details>
+
 
 ```java
-// HtmlUnit
-// So many possibilities to set up HtmlUnitDriver... If only there was a simple way to use them. Oh, wait:
+// HtmlUnit has many possibilities to set up HtmlUnitDriver
 // HtmlUnit default (Chrome/JavaScript ON)
 $.driver().useHtmlUnit();
 // Want disabled JavaScript, just call .withoutJavaScript()
@@ -577,12 +809,23 @@ $.driver().useHtmlUnit().emulatingInternetExplorer(); // will pick latest IE
 </td>
 </tr>
 <tr>
-<td>![safari](https://github.com/alrra/browser-logos/blob/master/src/safari/safari_64x64.png?raw=true)</td><td>
+<td>
+
+![safari](https://github.com/alrra/browser-logos/blob/master/src/safari/safari_64x64.png?raw=true)</td><td>
 
 ### Safari
 
-`.autoQuitDriver()`<br>
-Tested as a remote driver.
+seleniumQuery tests Safari as a **remote driver**.
+
+<details><summary><code>.autoQuitDriver()</code></summary>
+
+Automatically quits the driver upon JVM shutdown.
+
+If you don't use `.autoQuitDriver()`, you can quit the driver calling `$.quit()`.
+
+Having `.autoQuitDriver()` on and still calling `$.quit()` makes no harm, so quit at will. 
+
+</details>
 
 ```java
 
@@ -591,14 +834,51 @@ Tested as a remote driver.
 </td>
 </tr>
 <tr>
-<td>![edge](https://github.com/alrra/browser-logos/blob/master/src/edge/edge_64x64.png?raw=true)</td><td>
+<td>
+
+![edge](https://github.com/alrra/browser-logos/blob/master/src/edge/edge_64x64.png?raw=true)</td><td>
 
 ### Edge
 
-`.useEdge()`<br>
-`.autoQuitDriver()`<br>
-`.autoDriverDownload()`<br>
-`.withOptions()`
+**Automatic driver download** available.
+
+<details><summary><code>.useEdge()</code></summary>
+
+Configures Edge as the driver to be used. Provides additional configuration options that can be chained.
+
+Calling `$.driver().useEdge()` does not instantiate the driver right away, it merely configures it.
+The driver will be instantiated when first used only (e.g. when `$.url("http://somepage")` is called).
+
+</details>
+<details><summary><code>.autoQuitDriver()</code></summary>
+
+Automatically quits the driver upon JVM shutdown.
+
+If you don't use `.autoQuitDriver()`, you can quit the driver calling `$.quit()`.
+
+Having `.autoQuitDriver()` on and still calling `$.quit()` makes no harm, so quit at will. 
+
+</details>
+<details><summary><code>.autoDriverDownload()</code></summary>
+
+seleniumQuery automatically downloads and configures the driver. The download is managed by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager).
+Additional options are available, pass a lambda to `.autoDriverDownload(<labda>)` to be able to configure:
+
+```java
+$.driver().useEdge().autoDriverDownload((BrowserManager configurer) -> {
+    // se more options at https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api
+    configurer.proxy("http://corpproxy:8182");
+    configurer.proxyUser("myUser");
+    configurer.proxyPass("myPass")
+});
+```
+
+</details>
+<details><summary><code>.withOptions(EdgeOptions)</code></summary>
+
+Enables additional configuration through a `EdgeOptions` instance.
+
+</details>
 
 ```java
 // Edge
@@ -613,17 +893,66 @@ $.driver()
 </td>
 </tr>
 <tr>
-<td>![internet explorer](doc/ie.png)</td><td>
+<td>
+
+![internet explorer](doc/ie.png)</td><td>
 
 ### Internet Explorer
 
-`.useInternetExplorer()`<br>
-`.autoQuitDriver()`<br>
-`.autoDriverDownload()`
+**Automatic driver download** available. Additional info about configuration [can be found in our IE Driver wiki](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-IE-Driver).
+
+<details><summary><code>.useInternetExplorer()</code></summary>
+
+Configures Internet Explorer as the driver to be used. Provides additional configuration options that can be chained.
+
+Calling `$.driver().useInternetExplorer()` does not instantiate the driver right away, it merely configures it.
+The driver will be instantiated when first used only (e.g. when `$.url("http://somepage")` is called).
+
+</details>
+<details><summary><code>.autoQuitDriver()</code></summary>
+
+Automatically quits the driver upon JVM shutdown.
+
+If you don't use `.autoQuitDriver()`, you can quit the driver calling `$.quit()`.
+
+Having `.autoQuitDriver()` on and still calling `$.quit()` makes no harm, so quit at will. 
+
+</details>
+<details><summary><code>.autoDriverDownload()</code></summary>
+
+seleniumQuery automatically downloads and configures the driver. The download is managed by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager).
+Additional options are available, pass a lambda to `.autoDriverDownload(<labda>)` to be able to configure:
+
+```java
+$.driver().useInternetExplorer().autoDriverDownload((BrowserManager configurer) -> {
+    // se more options at https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api
+    configurer.proxy("http://corpproxy:8182");
+    configurer.proxyUser("myUser");
+    configurer.proxyPass("myPass")
+});
+```
+
+</details>
+<details><summary><code>.withPathToIEDriverServerExe(String)</code></summary>
+
+If you don't want seleniumQuery to automatically download the executable for you (using `.autoDriverDownload()`) you can
+specify the location of `IEDriverServer.exe` yourself:
+
+```java
+$.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer.exe");
+```
+
+If you use neither `.autoDriverDownload()` nor `.withPathToIEDriverServerExe()`, seleniumQuery will attempt to find `IEDriverServer.exe`
+on your PATH or classpath. If it doesn't find it anywhere, an exception will be thrown.
+
+</details>
 
 ```java
 // InternetExplorerDriver
-$.driver().useInternetExplorer(); // we search IEDriverServer.exe for you
+// we'll download the driver for you
+$.driver().useInternetExplorer().autoDriverDownload();
+// or we search IEDriverServer.exe on your computer (path and classpash) for you
+$.driver().useInternetExplorer();
 // Or you set the path yourself
 $.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer.exe");
 ```
