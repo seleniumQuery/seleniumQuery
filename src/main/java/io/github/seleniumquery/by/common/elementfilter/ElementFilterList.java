@@ -60,6 +60,10 @@ public class ElementFilterList {
 		this.elementFilters = Collections.unmodifiableList(elementFilters);
 	}
 
+    public static ElementFilterList asFilterList(ElementFilter... filters) {
+        return new ElementFilterList(asList(filters));
+    }
+
 	public List<WebElement> filter(SearchContext context, List<WebElement> elements) {
 		WebDriver driver = SelectorUtils.getWebDriver(context);
 		return filter(driver, elements);
