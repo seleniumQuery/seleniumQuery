@@ -37,38 +37,37 @@ public class SubmitFunctionWithoutJSTest {
 
     @Test
     public void submit_function_without_js__input_a() {
-        $("#input-a").submit();
+        $("#input-a").submit().waitUntil().isEmpty();
         assertThat($.url(), endsWith("WithoutJSTest_2.html?aName=aValue"));
     }
 
     @Test
     public void submit_function_without_js__div_a() {
-        $("#div-a").submit();
+        $("#div-a").submit().waitUntil().isEmpty();
         assertThat($.url(), endsWith("WithoutJSTest_2.html?aName=aValue"));
     }
 
     @Test
     public void submit_function_without_js__input_b() {
-        $("#input-b").submit();
+        $("#input-b").submit().waitUntil().isEmpty();
         assertThat($.url(), endsWith("WithoutJSTest_3.html?bName=bValue"));
     }
 
     @Test
     public void submit_function_without_js__div_b() {
-        $("#div-b").submit();
-        $.pause(1000);
+        $("#div-b").submit().waitUntil().isEmpty();
         assertThat($.url(), endsWith("WithoutJSTest_3.html?bName=bValue"));
     }
 
     @Test
     public void submit_function_without_js__input() {
-        $("input").submit();
+        $("input").submit().waitUntil().isEmpty();
         assertThat($.url(), endsWith("WithoutJSTest_2.html?aName=aValue"));
     }
 
     @Test
     public void submit_function_without_js__div() {
-        $("div").submit();
+        $("div").submit().waitUntil().isEmpty();
         assertThat($.url(), endsWith("WithoutJSTest_2.html?aName=aValue"));
     }
 
