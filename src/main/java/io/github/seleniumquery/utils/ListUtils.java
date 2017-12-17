@@ -27,8 +27,6 @@ import java.util.List;
  * @since 0.10.0
  */
 public class ListUtils {
-	
-	private ListUtils() {}
 
     public static <T> List<T> toImmutableRandomAccessList(List<T> els) {
         return Collections.unmodifiableList(new ArrayList<>(els));

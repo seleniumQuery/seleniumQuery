@@ -69,8 +69,6 @@ public class SelectorUtils {
 	 */
 	public static final String ESCAPED_SLASHES = "(?<!(?:^|[^\\\\])\\\\)";
 
-	private SelectorUtils() {}
-
 	public static WebElement parent(WebElement element) {
 	    if (DriverVersionUtils.isHtmlUnitWithDisabledJavaScript(element) || !(element instanceof WrapsDriver)) {
             return parentByXPath(element);
