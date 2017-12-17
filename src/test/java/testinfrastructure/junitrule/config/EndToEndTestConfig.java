@@ -5,6 +5,10 @@ import testinfrastructure.testutils.EnvironmentTestUtils;
 public class EndToEndTestConfig {
 
     public static DriverToRunTestsIn whatDriversShouldTestsRun() {
+        if (EnvironmentTestUtils.isRunningAtShippable()) {
+            banner("shippable");
+            return DriverToRunTestsIn.CHROME;
+        }
         if (EnvironmentTestUtils.isRunningAtTravis()) {
             banner("travis");
             return DriverToRunTestsIn.PHANTOMJS;
@@ -16,10 +20,6 @@ public class EndToEndTestConfig {
         if (EnvironmentTestUtils.isRunningAtCircleCi()) {
             banner("circleci");
             return DriverToRunTestsIn.HTMLUNIT_ALL_JS_OFF_ONLY;
-        }
-        if (EnvironmentTestUtils.isRunningAtShippable()) {
-            banner("shippable");
-            return DriverToRunTestsIn.CHROME;
         }
         if (EnvironmentTestUtils.isRunningAtCodeShip()) {
             banner("codeship");
@@ -34,7 +34,7 @@ public class EndToEndTestConfig {
             banner("any other CI");
             return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_AND_OFF;
         }
-        return DriverToRunTestsIn.HEADLESS_DRIVERS_JS_ON_ONLY;
+        return DriverToRunTestsIn.HTMLUNIT_CHROME_JS_ON_ONLY;
     }
 
     private static void banner(String environment) {
