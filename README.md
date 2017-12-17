@@ -170,18 +170,17 @@ $("#mySelect").val("ford");
 
 Get to know what jQuery functions seleniumQuery supports and what else it brings to the table on our [seleniumQuery API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
+<br>
 
-### Waiting (Ajax testing) and asserting
+## Waiting (ajax testing) and asserting
 
 `WebDriver`'s `FluentWait` is great, but it requires too much boilerplate code. Enters the `.waitUntil()` function:
 
 ```java
 // Below is an example of a <div> that should be hidden as effect of an Ajax call.
-// The code will hold until the modal is gone. If it is never gone, seleniumQuery
-// will throw a timeout exception.
+// The code will hold until the modal is gone. If it is never gone, seleniumQuery will throw a timeout exception
 $("#modalDiv :button:contains('OK')").click();
-$("#modalDiv :button:contains('OK')").waitUntil().is(":not(:visible)");  // is() is your old-time friend that takes a selector as argument!
-
+$("#modalDiv :button:contains('OK')").waitUntil().is(":not(:visible)");
 // Or, fluently:
 $("#modalDivOkButton").click().waitUntil().is(":not(:visible)");
 ```
@@ -235,11 +234,11 @@ $(".aDivDiv").waitUntil().html().contains("<div>expected</div>");
 Asserts, fluently, that the function has a specified value or matches a specified condition.
 
 ```java
-$(".myInput").assertThat().val().isEqualTo("expectedValue");
-$(".myInput").assertThat().attr("attrName").isEqualTo("expectedValue");
-$(".myInput").assertThat().size().isGreaterThan(7);
-$(".myInput").assertThat().val().matches(".*\d{10}\*");
-$("#ipt").waitUntil().val().matches(value -> value.length() > 50)
+$("#stuff").assertThat().val().isEqualTo("expectedValue");
+$(".m-e").assertThat().attr("attrName").isEqualTo("expectedValue");
+$("span").assertThat().size().isGreaterThan(7);
+$("#age").assertThat().val().matches(".*\d{10}\*");
+$("#ipt").assertThat().val().matches(value -> value.length() > 50)
 ```
 
 </details>
@@ -431,17 +430,10 @@ Note: while `.isHidden()` considers an empty set a failure, this method doesn't.
 <br>
 
 
-### Flexible WebDriver builder system
+## Flexible WebDriver builder system
 
-How to setup the `WebDriver`? Simply use our builder. The driver will be instantiated only when first used.
-
-Supported drivers (and those that are -- or can be -- headless).
-
-#### How to use a driver
-
-You can download [their executables](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) before or you can
-let seleniumQuery automatically download and configure them (powered by [webdrivermanager](https://github.com/bonigarcia/webdrivermanager)).
- Setting them up in seleniumQuery is all too easy:
+How to setup the `WebDriver`? Simply use our builder. You can download [their executables](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver) before or you can
+let seleniumQuery automatically download and configure them. Setup in seleniumQuery is all too easy:
  
 ```java
 // Using Chrome, general example:
@@ -453,34 +445,32 @@ $.driver()
 
 // Using Firefox
 $.driver()
-    .useFirefox() // sets Firefox as the driver
+    .useFirefox() // configures Firefox as the driver
     .headless() // configures Firefox to be headless
     .autoDriverDownload() // automatically downloads and configures geckodriver.exe
     .autoQuitDriver(); // automatically quits the driver when the JVM shuts down
-
-// for more examples, options and all supported drivers, see table below
 ```
 
+For more examples, options and all supported drivers, see table below.
 
 <table>
 <tr>
 <td>
-Existing<br>Instance
-</td>
-<td>
 
-### Existing instance
+![Existing WebDriver Instance](doc/webdriver.png)</td><td>
 
-The driver builder functions are a bonus, you don't *have* to use them.
+### Using seleniumQuery in an existing `WebDriver` instance
+
+The driver builder functions are a bonus, you don't *have* to use them. For seleniumQuery, it makes no difference.
 
 If you want to create the `WebDriver` yourself or **add seleniumQuery to an existing `WebDriver` instance** just:
 
 ```java
 WebDriver myExistingDriverInstance = ...; // created elsewhere by whoever
 
-$.driver().use(myExistingDriverInstance);
+$.driver().use(myExistingDriverInstance); // from now on, $ will work on myExistingDriverInstance
 
-// now you can use all of seleniumQuery's power! 
+// now you can use all of seleniumQuery's power!
 $("#phone").assertThat().val().isEqualTo("99887766");
 ```
 
@@ -489,9 +479,11 @@ $("#phone").assertThat().val().isEqualTo("99887766");
 <tr>
 <td>
 
-![chrome](https://github.com/alrra/browser-logos/blob/master/src/chrome/chrome_64x64.png?raw=true)</td><td>
+![chrome](doc/chrome.png)</td><td>
 
 ### Chrome
+
+Here's how seleniumQuery can simplify `ChromeDriver` instantiation.
 
 **Headless** mode available. **Automatic driver download** available.
 
@@ -552,7 +544,7 @@ on your PATH or classpath. If it doesn't find it anywhere, an exception will be 
 </details>
 <details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
-Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer `ChromeOptions` when possible.
 
 </details>
 
@@ -582,7 +574,7 @@ $.driver()
 <tr>
 <td>
 
-![firefox](https://github.com/alrra/browser-logos/blob/master/src/firefox/firefox_64x64.png?raw=true)</td><td>
+![firefox](doc/firefox.png)</td><td>
 
 ### Firefox
 
@@ -642,7 +634,7 @@ Enables additional configuration through a `FirefoxProfile` instance.
 </details>
 <details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
-Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer `FirefoxOptions` when possible.
 
 </details>
 
@@ -668,7 +660,7 @@ $.driver()
 <tr>
 <td>
 
-![opera](https://github.com/alrra/browser-logos/blob/master/src/opera/opera_64x64.png?raw=true)</td><td>
+![opera](doc/opera.png)</td><td>
 
 ### Opera
 
@@ -723,7 +715,7 @@ $.driver().useOpera().autoDriverDownload()
 </details>
 <details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
-Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer `OperaOptions` when possible.
 
 </details>
 
@@ -799,7 +791,7 @@ on your PATH or classpath. If it doesn't find it anywhere, an exception will be 
 </details>
 <details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
-Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+Configures the given `DesiredCapabilities` in the driver to be instantiated.
 
 </details>
 
@@ -867,7 +859,7 @@ Configures HtmlUnit to emulate Internet Explorer.
 </details>
 <details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
-Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+Configures the given `DesiredCapabilities` in the driver to be instantiated.
 
 </details>
 
@@ -895,7 +887,7 @@ $.driver().useHtmlUnit().emulatingInternetExplorer(); // will pick latest IE
 <tr>
 <td>
 
-![safari](https://github.com/alrra/browser-logos/blob/master/src/safari/safari_64x64.png?raw=true)</td><td>
+![safari](doc/safari.png)</td><td>
 
 ### Safari
 
@@ -910,7 +902,7 @@ $.driver().useDriver(new SafariDriver());
 <tr>
 <td>
 
-![edge](https://github.com/alrra/browser-logos/blob/master/src/edge/edge_64x64.png?raw=true)</td><td>
+![edge](doc/edge.png)</td><td>
 
 ### Edge
 
@@ -955,7 +947,7 @@ Enables additional configuration through a `EdgeOptions` instance.
 </details>
 <details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
-Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer `EdgeOptions` when possible.
 
 </details>
 
@@ -1029,7 +1021,7 @@ on your PATH or classpath. If it doesn't find it anywhere, an exception will be 
 </details>
 <details><summary><code>.withCapabilities(DesiredCapabilities)</code></summary>
 
-Configures the given `DesiredCapabilities` in the driver to be instantiated. Prefer other possibilities (`Options` objects) when available.
+Configures the given `DesiredCapabilities` in the driver to be instantiated.
 
 </details>
 
@@ -1048,6 +1040,20 @@ $.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer
 </td>
 </tr>
 </table>
+
+<br>
+
+### Available `$("selector").functions()`
+
+Check the [javadocs for our `$().functions`](https://static.javadoc.io/io.github.seleniumquery/seleniumquery/0.18.0/index.html?io/github/seleniumquery/SeleniumQueryObject.html).
+
+More info also in our [API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
+
+### Available `$.functions()`
+
+Check the [javadocs for our `$.functions`](https://static.javadoc.io/io.github.seleniumquery/seleniumquery/0.18.0/index.html?io/github/seleniumquery/browser/BrowserFunctions.html).
+
+Read about our global functions in the [API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
 <br>
 
@@ -1172,7 +1178,7 @@ Find more on our [wiki](https://github.com/seleniumQuery/seleniumQuery/wiki).
 
 See [releases](https://github.com/seleniumQuery/seleniumQuery/releases).
 
-# Contributing
+# Contributing or Requesting Features
 
 The tool quite simple, so there's a lot of room for improvement. If you think something would be useful for you, it
  would probably be useful to us all, [tell us what you're thinking](https://github.com/seleniumQuery/seleniumQuery/issues/new)!
