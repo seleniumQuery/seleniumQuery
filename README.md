@@ -21,7 +21,7 @@
 
 seleniumQuery is a feature-rich *cross-driver* Java library that brings a **jQuery-like** interface for [Selenium WebDriver](http://docs.seleniumhq.org/projects/webdriver/).
 
-It is designed to be a **thin** layer over Selenium. You can use seleniumQuery to manage the WebDriver for you, or you can use seleniumQuery on top of your favorire selenium framework just
+It is designed to be a **thin** layer over Selenium. You can use seleniumQuery to manage the WebDriver for you, or you can use seleniumQuery on top of your favorite selenium framework just
 to make some cases simpler when needed.
 
 ### Example snippet:
