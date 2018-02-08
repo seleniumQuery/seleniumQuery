@@ -19,7 +19,6 @@ package io.github.seleniumquery.internal.fluentfunctions;
 import io.github.seleniumquery.SeleniumQueryFluentAndOrThen;
 import io.github.seleniumquery.SeleniumQueryFluentFunction;
 import io.github.seleniumquery.SeleniumQueryObject;
-import io.github.seleniumquery.SeleniumQueryWaitUntil;
 
 /**
  * A builder class that allows to specify the next step after waiting for some condition: to wait for more
