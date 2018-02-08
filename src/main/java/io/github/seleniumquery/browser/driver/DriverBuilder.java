@@ -22,7 +22,6 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import io.github.bonigarcia.wdm.BrowserManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
@@ -39,7 +38,7 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
 
     private boolean capabilitiesManuallySet = false;
 
-    private Consumer<BrowserManager> autoDriverDownloadConfigurer;
+    private Consumer<WebDriverManager> autoDriverDownloadConfigurer;
 
     private boolean autoQuitAskedFor = false;
 
@@ -91,9 +90,9 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
 
     protected void autoDownloadDriverIfAskedFor(Class<? extends WebDriver> driverClass) {
         if (this.autoDriverDownloadConfigurer != null) {
-            BrowserManager browserManager = WebDriverManager.getInstance(driverClass);
-            this.autoDriverDownloadConfigurer.accept(browserManager);
-            browserManager.setup();
+            WebDriverManager webDriverManager = WebDriverManager.getInstance(driverClass);
+            this.autoDriverDownloadConfigurer.accept(webDriverManager);
+            webDriverManager.setup();
         }
     }
 
@@ -110,12 +109,12 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
     /**
      * Automatically downloads and configures the chromedriver.exe executable using
      * <a href="https://github.com/bonigarcia/webdrivermanager">webdrivermanager</a>.
-     * @param configurer A function that allows <a href="https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api">additional configuration</a> of the {@link BrowserManager}.
+     * @param configurer A function that allows <a href="https://github.com/bonigarcia/webdrivermanager#webdrivermanager-api">additional configuration</a> of the {@link WebDriverManager}.
      * @return A self reference, allowing further configuration of the driver builder.
      * @since 0.18.0
      */
     @SuppressWarnings("unchecked")
-    public T autoDriverDownload(Consumer<BrowserManager> configurer) {
+    public T autoDriverDownload(Consumer<WebDriverManager> configurer) {
         if (this.autoDriverDownloadConfigurer != null) {
             LOGGER.warn(".autoDriverDownload() has already been called. Overwriting previous calls.");
         }
