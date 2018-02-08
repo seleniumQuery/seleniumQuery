@@ -16,10 +16,14 @@
 
 package endtoend.browser;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static testinfrastructure.EndToEndTestUtils.classNameToTestFileUrl;
 
 import java.util.List;
 
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -49,8 +53,8 @@ public class SeleniumQueryBrowserTest {
         BrowserAgentTestUtils.openBrowserAgentTestHelperUrl(firefox);
 
         // then
-        BrowserAgentTestUtils.assertBrowserAgent(chrome, HtmlUnitDriverBuilderTest.HTMLUNIT_CHROME_AGENT_STRING);
-        BrowserAgentTestUtils.assertBrowserAgent(firefox, HtmlUnitDriverBuilderTest.HTMLUNIT_FF_AGENT_STRING);
+        BrowserAgentTestUtils.assertBrowserAgent(chrome, allOf(containsString("Chrome"), not(containsString("Firefox"))));
+        BrowserAgentTestUtils.assertBrowserAgent(firefox, allOf(containsString("Firefox"), not(containsString("Chrome"))));
     }
 
     @Test

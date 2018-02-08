@@ -19,8 +19,11 @@ package endtoend.browser.driver.builders;
 import static endtoend.browser.util.JsOnOffTestUtils.assertJavaScriptIsOff;
 import static endtoend.browser.util.JsOnOffTestUtils.assertJavaScriptIsOn;
 import static io.github.seleniumquery.SeleniumQuery.$;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
 import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
+import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -31,8 +34,8 @@ import endtoend.browser.util.BrowserAgentTestUtils;
 public class HtmlUnitDriverBuilderTest {
 
     private static final String HTMLUNIT_IE_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
-    public static final String HTMLUNIT_CHROME_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36";
-    public static final String HTMLUNIT_FF_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0";
+    private static final String HTMLUNIT_FF_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0";
+    private static final Matcher<String> HTMLUNIT_CHROME_AGENT_MATCHER = allOf(containsString("Chrome"), containsString("Mozilla"), containsString("AppleWebKit"), containsString("Safari"));
 
     @After
     public void tearDown() {
@@ -54,7 +57,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit();
         // then
-        BrowserAgentTestUtils.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestUtils.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_MATCHER);
     }
 
     @Test
@@ -92,7 +95,7 @@ public class HtmlUnitDriverBuilderTest {
         // when
         $.driver().useHtmlUnit().emulatingChrome();
         // then
-        BrowserAgentTestUtils.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_STRING);
+        BrowserAgentTestUtils.assertBrowserAgent(HTMLUNIT_CHROME_AGENT_MATCHER);
     }
 
     @Test
