@@ -1089,9 +1089,7 @@ Find more about them in [seleniumQuery Selectors wiki page.](https://github.com/
 
 ## seleniumQuery still is Selenium - with "just" a jQuery interface
 
-That's why it can work with disabled JavaScript!
-
-But there is a more important aspect to it: Although our functions yield the same result as if you were using jQuery, remember we always execute them from the user perspective.
+So there is a important aspect of it: Although our functions yield the same result as if you were using jQuery, remember we always execute them from the user perspective.
 In other words, when you call:
 ```java
 $(":input[name='email']").val("seleniumQuery@example.com");
