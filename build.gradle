@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 seleniumQuery authors
+ * Copyright (c) 2018 seleniumQuery authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,9 @@ version = '0.18.0'
 description = "seleniumQuery"
 
 ext {
-    seleniumVersion = "3.8.1"
+    seleniumVersion = "3.9.1"
+    htmlUnitDriverVersion = '2.29.1'
+    webDriverManagerVersion = '2.1.0'
 }
 
 sourceCompatibility = 1.8
@@ -47,9 +49,9 @@ repositories {
 
 dependencies {
     compile('net.sourceforge.cssparser:cssparser:0.9.24')
-    compile('org.apache.commons:commons-text:1.1')
+    compile('org.apache.commons:commons-text:1.2')
     compile('org.apache.commons:commons-lang3:3.7')
-    compile("org.seleniumhq.selenium:htmlunit-driver:2.28.4")
+    compile("org.seleniumhq.selenium:htmlunit-driver:${htmlUnitDriverVersion}")
     compile("org.seleniumhq.selenium:selenium-api:${seleniumVersion}")
     compile("org.seleniumhq.selenium:selenium-java:${seleniumVersion}")
     compile("org.seleniumhq.selenium:selenium-remote-driver:${seleniumVersion}")
@@ -61,7 +63,7 @@ dependencies {
     compile('org.unbescape:unbescape:1.1.5.RELEASE')
 
     // used by driverbuilders in the .autoDriverDownload() methods
-    compile("io.github.bonigarcia:webdrivermanager:2.0.1")
+    compile("io.github.bonigarcia:webdrivermanager:${webDriverManagerVersion}")
 
     // used by .waitUntil().text().that(<hamcrest matcher>)
     compile("org.hamcrest:hamcrest-library:1.3")
