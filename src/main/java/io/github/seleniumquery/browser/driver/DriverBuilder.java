@@ -16,12 +16,12 @@
 package io.github.seleniumquery.browser.driver;
 
 import java.util.function.Consumer;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
@@ -41,6 +41,8 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
     private Consumer<WebDriverManager> autoDriverDownloadConfigurer;
 
     private boolean autoQuitAskedFor = false;
+
+    private WebDriverEventListener webDriverEventListener;
 
     /**
      * Configures the driver with the given capabilities.
@@ -141,6 +143,29 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
                     driver.quit();
                 }
             }));
+        }
+    }
+
+    /**
+     * Configures the driver with the given WebDriverEventListener.
+     *
+     * @param webDriverEventListener The webDriverEventListener to be set.
+     * @return A self reference for further configuration.
+     * @since 0.18.0
+     */
+    @SuppressWarnings("unchecked")
+    public T withWebDriverEventListener(WebDriverEventListener webDriverEventListener) {
+        this.webDriverEventListener = webDriverEventListener;
+        return (T) this;
+    }
+
+    protected WebDriver attatchEventListner(WebDriver webDriver) {
+        if (webDriverEventListener != null) {
+            EventFiringWebDriver efwd = new EventFiringWebDriver(webDriver);
+            efwd.register(webDriverEventListener);
+            return efwd;
+        } else {
+            return webDriver;
         }
     }
 

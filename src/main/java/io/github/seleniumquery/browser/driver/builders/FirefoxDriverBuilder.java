@@ -126,7 +126,7 @@ public class FirefoxDriverBuilder extends DriverBuilder<FirefoxDriverBuilder> {
         autoDownloadDriverIfAskedFor(FirefoxDriver.class);
         WebDriver webDriver = buildFirefox();
         autoQuitDriverIfAskedFor(webDriver);
-        return webDriver;
+        return attatchEventListner(webDriver);
     }
 
     private WebDriver buildFirefox() {

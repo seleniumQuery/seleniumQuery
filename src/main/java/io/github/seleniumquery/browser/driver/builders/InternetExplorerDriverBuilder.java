@@ -75,7 +75,7 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
         autoDownloadDriverIfAskedFor(InternetExplorerDriver.class);
         WebDriver webDriver = buildIE();
         autoQuitDriverIfAskedFor(webDriver);
-        return webDriver;
+        return attatchEventListner(webDriver);
     }
 
     private WebDriver buildIE() {
