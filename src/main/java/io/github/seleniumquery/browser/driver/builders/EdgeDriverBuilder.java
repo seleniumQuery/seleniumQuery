@@ -65,7 +65,7 @@ public class EdgeDriverBuilder extends DriverBuilder<EdgeDriverBuilder> {
         autoDownloadDriverIfAskedFor(EdgeDriver.class);
         WebDriver webDriver = buildEdge();
         autoQuitDriverIfAskedFor(webDriver);
-        return webDriver;
+        return attatchEventListner(webDriver);
     }
 
     private WebDriver buildEdge() {

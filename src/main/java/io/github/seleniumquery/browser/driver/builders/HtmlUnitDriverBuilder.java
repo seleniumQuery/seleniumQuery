@@ -104,7 +104,7 @@ public class HtmlUnitDriverBuilder extends DriverBuilder<HtmlUnitDriverBuilder> 
     protected WebDriver build() {
         WebDriver webDriver = buildHtmlUnit();
         autoQuitDriverIfAskedFor(webDriver);
-        return webDriver;
+        return attatchEventListner(webDriver);
     }
 
     private WebDriver buildHtmlUnit() {

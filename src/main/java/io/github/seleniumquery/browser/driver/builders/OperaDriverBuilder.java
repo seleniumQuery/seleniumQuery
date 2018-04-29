@@ -117,7 +117,7 @@ public class OperaDriverBuilder extends DriverBuilder<OperaDriverBuilder> {
         autoDownloadDriverIfAskedFor(OperaDriver.class);
         WebDriver webDriver = buildOpera();
         autoQuitDriverIfAskedFor(webDriver);
-        return webDriver;
+        return attatchEventListner(webDriver);
     }
 
     private WebDriver buildOpera() {

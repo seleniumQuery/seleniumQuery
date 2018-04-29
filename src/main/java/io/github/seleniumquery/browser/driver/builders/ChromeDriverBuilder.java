@@ -124,7 +124,7 @@ public class ChromeDriverBuilder extends DriverBuilder<ChromeDriverBuilder> {
         autoDownloadDriverIfAskedFor(ChromeDriver.class);
         WebDriver webDriver = buildChrome();
         autoQuitDriverIfAskedFor(webDriver);
-        return webDriver;
+        return attatchEventListner(webDriver);
     }
 
     private WebDriver buildChrome() {

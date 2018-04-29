@@ -88,7 +88,7 @@ public class PhantomJSDriverBuilder extends DriverBuilder<PhantomJSDriverBuilder
         autoDownloadDriverIfAskedFor(PhantomJSDriver.class);
         WebDriver webDriver = buildPhantomJS();
         autoQuitDriverIfAskedFor(webDriver);
-        return webDriver;
+        return attatchEventListner(webDriver);
     }
 
     private WebDriver buildPhantomJS() {
