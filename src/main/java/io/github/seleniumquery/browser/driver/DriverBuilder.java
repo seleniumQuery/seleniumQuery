@@ -147,11 +147,11 @@ public abstract class DriverBuilder<T extends DriverBuilder<T>> {
     }
 
     /**
-     * Configures the driver with the given WebDriverEventListener.
+     * Configures the driver with the given {@link WebDriverEventListener}.
      *
      * @param webDriverEventListener The webDriverEventListener to be set.
      * @return A self reference for further configuration.
-     * @since 0.18.0
+     * @since 0.19.0
      */
     @SuppressWarnings("unchecked")
     public T withWebDriverEventListener(WebDriverEventListener webDriverEventListener) {
