@@ -27,7 +27,7 @@ import io.github.seleniumquery.SeleniumQueryBrowser;
 
 public class BrowserAgentTestUtils {
 
-    private static final String AGENT_TEST_URL = classNameToTestFileUrl(BrowserAgentTestUtils.class);
+    public static final String AGENT_TEST_URL = classNameToTestFileUrl(BrowserAgentTestUtils.class);
 
     public static void assertBrowserAgent(String agentString) {
         openBrowserAgentTestHelperUrl();

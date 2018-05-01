@@ -16,9 +16,13 @@
 
 package endtoend.browser.driver;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+
+import endtoend.browser.util.BrowserAgentTestUtils;
 import testinfrastructure.testdouble.org.openqa.selenium.WebDriverQuitSpy;
 
 import static io.github.seleniumquery.SeleniumQuery.$;
@@ -26,6 +30,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
 import static testinfrastructure.testdouble.org.openqa.selenium.WebDriverQuitSpy.createWebDriverQuitSpy;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SeleniumQueryDriverTest {
 
@@ -102,6 +108,22 @@ public class SeleniumQueryDriverTest {
         $.driver().useHtmlUnit();
         // then
         previousDriver.assertDriverWasQuit();
+    }
+
+    @Test
+    public void withWebDriverEventListener() {
+        // given
+        AtomicReference<String> openedUrl = new AtomicReference<>(null);
+        $.driver().useHtmlUnit().withWebDriverEventListener(new AbstractWebDriverEventListener() {
+            @Override
+            public void beforeNavigateTo(String url, WebDriver driver) {
+                openedUrl.set(url);
+            }
+        });
+        // when
+        $.url(BrowserAgentTestUtils.AGENT_TEST_URL);
+        // then
+        Assert.assertEquals(BrowserAgentTestUtils.AGENT_TEST_URL, openedUrl.get());
     }
 
 }
