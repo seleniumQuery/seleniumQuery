@@ -79,7 +79,7 @@ public class InternetExplorerDriverBuilder extends DriverBuilder<InternetExplore
     }
 
     private WebDriver buildIE() {
-        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.chrome());
+        DesiredCapabilities capabilities = capabilities(DesiredCapabilities.internetExplorer());
 
         configureIEServerExecutablePath();
         try {
