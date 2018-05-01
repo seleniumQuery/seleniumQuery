@@ -58,6 +58,7 @@ public class ValFunction_ContentEditableTest {
 
     @Test
     @ChromeShouldBeSkipped("chrome can't focus, see test below")
+    @FirefoxSkip("firefox can't focus either, see also text below")
     @JavaScriptEnabledOnly
     @EdgeSkip("NoSuchWindowException -- TODO add tests for positive case")
     public void val_write__divWithoutContentEditableAttribute___hasNoEffect() {
@@ -66,9 +67,12 @@ public class ValFunction_ContentEditableTest {
 
     @Test
     @FirefoxOnly
-    @JavaScriptDisabledOnly
-    public void val_write__divWithoutContentEditableAttribute___hasNoEffect__Firefox_JS_OFF() {
-        verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
+    public void val_write__divWithoutContentEditableAttribute___throws_exception__FIREFOX() {
+        try {
+            verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
+        } catch (org.openqa.selenium.WebDriverException e) {
+            assertThat(e.getMessage(), startsWith(" Element <div id=\"div-without-contenteditable-but-with-text\"> is not reachable by keyboard"));
+        }
     }
 
     @Test
@@ -136,6 +140,7 @@ public class ValFunction_ContentEditableTest {
         assertThat($(editableDivId).html(), is(addCharsDependingOnDriver("TYPED &lt;a&gt;&amp; STUFF")));
 	}
 
+    @SuppressWarnings("SameParameterValue")
     private String addCharsDependingOnDriver(String resultingHtml) {
         WebDriver driver = $.driver().get();
         if (isIEDriver(driver)) {
