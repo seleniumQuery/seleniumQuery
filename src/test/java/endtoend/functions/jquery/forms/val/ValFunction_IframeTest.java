@@ -63,9 +63,9 @@ public class ValFunction_IframeTest {
     }
 
     /**
-     * IE simply dies when we try to FETCH an element from the iframe. If gives no stacktrace info.
+     * IE simply dies when we try to FETCH an element from the iframe. It gives no stacktrace info.
      * This had to be done for IE to work: $.driver().get().switchTo().frame(0);
-     * They suggested, but didnt have effect: WebElement editable =  $.driver().get().switchTo().activeElement();
+     * They suggested, but didn't have effect: WebElement editable =  $.driver().get().switchTo().activeElement();
      * Also suggested $.driver().get().switchTo().defaultContent(); before switching to frame. No use.
      *
      *
@@ -73,7 +73,7 @@ public class ValFunction_IframeTest {
      * Firefox reads correctly, but edition only works if click before typing (it is as if it doesn't properly focus the iframe body using sendkeys only).
      * Edge only types when clicking before (if not clicking, the value ends up empty)
      * Chrome works 100%.
-     * HtmlUnit reads, but doesnt type.
+     * HtmlUnit reads, but doesn't type.
      * PhantomJS same as Edge.
      */
     @Test
@@ -86,14 +86,14 @@ public class ValFunction_IframeTest {
     @FirefoxOnly
     public void iframe_with_DesignMode_ON___values_are_CHANGED_correctly__FIREFOX__NOT_CLICKING() {
         // see comments above
-        verifyTypingAtIframeChangesValueAsExpected(is("iframe-body-content"), false);
+        verifyTypingAtIframeChangesValueAsExpected(is(""), false);
     }
 
     @Test
     @FirefoxOnly
     public void iframe_with_DesignMode_ON___values_are_CHANGED_correctly__FIREFOX__CLICKING() {
         // see comments above
-        verifyTypingAtIframeChangesValueAsExpected(is("iframe-body-content[typed-value]"), true);
+        verifyTypingAtIframeChangesValueAsExpected(is("[typed-value]"), true);
     }
 
     @Test

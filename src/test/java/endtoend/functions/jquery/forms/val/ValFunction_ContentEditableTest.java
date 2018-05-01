@@ -140,8 +140,10 @@ public class ValFunction_ContentEditableTest {
         WebDriver driver = $.driver().get();
         if (isIEDriver(driver)) {
             return " " + resultingHtml;
-		} else if (isFirefoxDriver(driver) || isOperaDriver(driver)) {
+		} else if (isOperaDriver(driver)) {
             return resultingHtml + " ";
+        } else if (isFirefoxDriver(driver)) {
+            return resultingHtml + "<br>";
         }
         return resultingHtml;
     }
