@@ -71,7 +71,7 @@ public class ValFunction_ContentEditableTest {
         try {
             verifyAttemptToChangeValOfDivWithoutContentEditableHasNoEffect();
         } catch (org.openqa.selenium.WebDriverException e) {
-            assertThat(e.getMessage(), startsWith(" Element <div id=\"div-without-contenteditable-but-with-text\"> is not reachable by keyboard"));
+            assertThat(e.getMessage(), startsWith("Element <div id=\"div-without-contenteditable-but-with-text\"> is not reachable by keyboard"));
         }
     }
 
