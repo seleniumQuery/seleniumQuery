@@ -133,7 +133,7 @@ To get the latest version of seleniumQuery, add to your **`pom.xml`**:
 <dependency>
     <groupId>io.github.seleniumquery</groupId>
     <artifactId>seleniumquery</artifactId>
-    <version>0.19.0</version>
+    <version>0.19.1</version>
 </dependency>
 ```
 
@@ -1053,7 +1053,7 @@ $.driver().useInternetExplorer().withPathToIEDriverServerExe("C:\\IEDriverServer
 
 ### Available `$("selector").functions()`
 
-Check the [javadocs for our `$().functions`](https://static.javadoc.io/io.github.seleniumquery/seleniumquery/0.19.0/index.html?io/github/seleniumquery/SeleniumQueryObject.html).
+Check the [javadocs for our `$().functions`](https://static.javadoc.io/io.github.seleniumquery/seleniumquery/0.19.1/index.html?io/github/seleniumquery/SeleniumQueryObject.html).
 
 More info also in our [API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
@@ -1061,7 +1061,7 @@ More info also in our [API wiki page](https://github.com/seleniumQuery/seleniumQ
 
 ### Available `$.functions()`
 
-Check the [javadocs for our `$.functions`](https://static.javadoc.io/io.github.seleniumquery/seleniumquery/0.19.0/index.html?io/github/seleniumquery/browser/BrowserFunctions.html).
+Check the [javadocs for our `$.functions`](https://static.javadoc.io/io.github.seleniumquery/seleniumquery/0.19.1/index.html?io/github/seleniumquery/browser/BrowserFunctions.html).
 
 Read about our global functions in the [API wiki page](https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-API).
 
