@@ -20,7 +20,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.seleniumquery</groupId>
 	<artifactId>seleniumquery</artifactId>
-	<version>0.19.0</version>
+	<version>0.19.1</version>
 
 	<name>seleniumQuery</name>
 	<url>http://seleniumquery.github.io/</url>
@@ -31,9 +31,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <selenium-java.version>3.11.0</selenium-java.version>
+        <selenium-java.version>3.14.0</selenium-java.version>
         <htmlunit-driver.version>2.30.0</htmlunit-driver.version>
-        <webdrivermanager.version>2.2.1</webdrivermanager.version>
+        <webdrivermanager.version>2.2.5</webdrivermanager.version>
     </properties>
 
 	<dependencies>
