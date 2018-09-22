@@ -34,7 +34,7 @@ import endtoend.browser.util.BrowserAgentTestUtils;
 public class HtmlUnitDriverBuilderTest {
 
     private static final String HTMLUNIT_IE_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
-    private static final String HTMLUNIT_FF_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0";
+    private static final String HTMLUNIT_FF_AGENT_STRING = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0";
     private static final Matcher<String> HTMLUNIT_CHROME_AGENT_MATCHER = allOf(containsString("Chrome"), containsString("Mozilla"), containsString("AppleWebKit"), containsString("Safari"));
 
     @After
@@ -81,7 +81,7 @@ public class HtmlUnitDriverBuilderTest {
     }
 
     @Test
-    public void emulatingFirefox__should_emulate_latest_firefox__that_is__FIREFOX_45() {
+    public void emulatingFirefox__should_emulate_latest_firefox() {
         // given
         // when
         $.driver().useHtmlUnit().emulatingFirefox();
