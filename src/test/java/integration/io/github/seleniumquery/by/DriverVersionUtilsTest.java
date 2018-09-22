@@ -54,7 +54,7 @@ public class DriverVersionUtilsTest {
 
 	@Test
 	public void isHtmlUnitDriverEmulatingIE__firefox_non_deprecated_versions() {
-		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_45));
+		assertDriverIsNotHtmlUnitDriverEmulatingIE(new HtmlUnitDriver(BrowserVersion.FIREFOX_52));
 	}
 
     @Test
