@@ -31,7 +31,7 @@ description = "seleniumQuery"
 
 ext {
     seleniumVersion = "3.14.0"
-    htmlUnitDriverVersion = '2.32.1'
+    htmlUnitDriverVersion = '2.33.3'
     webDriverManagerVersion = '2.2.5'
 }
 

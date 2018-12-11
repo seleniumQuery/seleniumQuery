@@ -32,7 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <selenium-java.version>3.14.0</selenium-java.version>
-        <htmlunit-driver.version>2.32.1</htmlunit-driver.version>
+        <htmlunit-driver.version>2.33.3</htmlunit-driver.version>
         <webdrivermanager.version>2.2.5</webdrivermanager.version>
     </properties>
 
