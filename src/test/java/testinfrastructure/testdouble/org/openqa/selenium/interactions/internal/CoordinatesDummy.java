@@ -17,7 +17,7 @@
 package testinfrastructure.testdouble.org.openqa.selenium.interactions.internal;
 
 import org.openqa.selenium.Point;
-import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.interactions.Coordinates;
 import testinfrastructure.testdouble.PseudoTestDoubleException;
 
 public class CoordinatesDummy implements Coordinates {

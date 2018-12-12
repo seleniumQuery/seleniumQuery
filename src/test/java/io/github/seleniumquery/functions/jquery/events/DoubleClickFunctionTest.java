@@ -27,7 +27,7 @@ import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
-import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.interactions.Coordinates;
 import testinfrastructure.testdouble.org.apache.commons.logging.LogInjector;
 import testinfrastructure.testdouble.org.apache.commons.logging.LogSpy;
 import testinfrastructure.testdouble.org.openqa.selenium.WebDriverDummy;

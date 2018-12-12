@@ -17,7 +17,7 @@
 package testinfrastructure.testdouble.org.openqa.selenium.interactions;
 
 import org.openqa.selenium.interactions.Mouse;
-import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.interactions.Coordinates;
 import testinfrastructure.testdouble.PseudoTestDoubleException;
 
 public class MouseDummy implements Mouse {
