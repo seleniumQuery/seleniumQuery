@@ -69,7 +69,17 @@ public class EnvironmentTestUtils {
     }
 
     public static boolean gitLastCommitMessageContains(String expected) {
-        return getGitLastCommitMessageIfAvailable().contains(expected);
+        String gitLastCommitMessageIfAvailable = getGitLastCommitMessageIfAvailable();
+        banner(gitLastCommitMessageIfAvailable);
+        return gitLastCommitMessageIfAvailable.contains(expected);
+    }
+
+    private static void banner(String gitLastCommitMessageIfAvailable) {
+        System.out.println("###############################################################################################");
+        System.out.println("###############################################################################################");
+        System.out.println("### gitLastCommitMessageIfAvailable: " + gitLastCommitMessageIfAvailable);
+        System.out.println("###############################################################################################");
+        System.out.println("###############################################################################################");
     }
 
 }
