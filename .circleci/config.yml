@@ -1,18 +1,23 @@
 version: 2
 
 jobs:
-    big_integer_test:
+    build:
         docker:
         - image: gradle:jdk8
         steps:
         - checkout
         - restore_cache:
               keys:
-              - gradle-{{ checksum "~/project/build.gradle" }}
-              - gradle-
+              - gradle-{{ checksum "build.gradle" }}
         - run:
-              command: gradle test
+              command: ./gradlew check jacocoTestReport && bash <(curl -s https://codecov.io/bash)
         - save_cache:
-              key: gradle-{{ checksum "~/project/build.gradle" }}
               paths:
-              - ~/project/.gradle
+              - ~/.gradle
+              key: gradle-{{ checksum "build.gradle" }}
+        - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+              path: build/reports
+              destination: reports
+        - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+              path: build/test-results
+        # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
