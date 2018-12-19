@@ -20,7 +20,7 @@
     # Steps make up the actions in your pipeline
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
-box: java
+box: maven:3-jdk-8
 
 build:
   steps:
