@@ -1,0 +1,18 @@
+version: 2
+
+jobs:
+    big_integer_test:
+        docker:
+        - image: gradle:jdk8
+        steps:
+        - checkout
+        - restore_cache:
+              keys:
+              - gradle-{{ checksum "~/project/build.gradle" }}
+              - gradle-
+        - run:
+              command: gradle test
+        - save_cache:
+              key: gradle-{{ checksum "~/project/build.gradle" }}
+              paths:
+              - ~/project/.gradle
