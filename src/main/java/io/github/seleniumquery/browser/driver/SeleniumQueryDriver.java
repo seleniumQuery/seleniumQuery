@@ -61,6 +61,23 @@ public class SeleniumQueryDriver {
     }
 
     /**
+     * <p>
+     *     Sets the argument as the current WebDriver instance, <b>quitting the current one, if exists.</b>
+     * </p>
+     *
+     * @param driver The WebDriver instante to be set as current.
+     * @param clear either clear the current webdriver or not
+     */
+    public void use(WebDriver driver,boolean clear) {
+        if(clear){
+            quitAndClearCurrentWebDriver();
+        }
+        this.webDriver = driver;
+    }
+
+
+
+    /**
      * <p>Returns the {@link WebDriver} currently set.</p>
      * <ul>
      *     <li>
