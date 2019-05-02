@@ -50,15 +50,29 @@ public class SeleniumQueryDriver {
 
     /**
      * <p>
-     *     Sets the argument as the current WebDriver instance, <b>quitting the current one, if exists.</b>
+     *     Sets the argument as the current WebDriver instance, <b>quitting the current one, if exists.</b>.
+     *     If you do not want to quit the current driver then you can use {@link #switchTo(WebDriver driver) switchTo} instead.
      * </p>
      *
-     * @param driver The WebDriver instante to be set as current.
+     * @param driver The WebDriver instance to be set as current.
      */
     public void use(WebDriver driver) {
         quitAndClearCurrentWebDriver();
+        switchTo(driver);
+    }
+
+    /**
+     * <p>
+     *     Sets the argument as the current WebDriver instance, <b>leaving the current driver state open, if exists.</b>
+     * </p>
+     *
+     * @param driver The WebDriver instance to be set as current.
+     */
+    public void switchTo(WebDriver driver) {
         this.webDriver = driver;
     }
+
+
 
     /**
      * <p>Returns the {@link WebDriver} currently set.</p>
