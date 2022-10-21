@@ -19,9 +19,9 @@
 
 <!--
 [![Run Status](https://api.shippable.com/projects/58b5bc1b1304cc0500e0c7b0/badge?branch=master)](https://app.shippable.com/github/seleniumQuery/seleniumQuery)
--->
 
 [![Sauce Test Status](https://saucelabs.com/open_sauce/build_matrix/acdcjunior.svg)](https://saucelabs.com/u/acdcjunior)
+-->
 
 ### Feature-rich jQuery-like Java interface for Selenium WebDriver
 
